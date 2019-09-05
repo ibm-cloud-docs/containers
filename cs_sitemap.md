@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-05"
 
 ---
 
@@ -830,17 +830,33 @@ lastupdated: "2019-08-30"
 
 [Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
 * [Using the beta command structure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta)
-* [API commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_commands)
-* [CLI plug-in usage commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_plug-in_commands)
-* [Cluster commands: Management](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_mgmt_commands)
-* [Cluster commands: Services and integrations](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_services_commands)
-* [Cluster commands: Subnets](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_subnets_commands)
-* [Ingress application load balancer (ALB) commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb_commands)
-* [Infrastructure commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infrastructure_commands)
-* [Logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
-* [Region commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#region_commands)
-* [Worker node commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-node-commands)
-* [Worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
+* [Comparison of Classic and VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
+* [`ibmcloud ks` commands](docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#map)
+* [cluster commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster)
+* [worker commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#-worker-commands)
+* [worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
+* [zone commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#zone)
+* [alb commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb)
+* [Beta: `key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_key_protect)
+* [logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
+* [nlb-dns commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)
+* [va command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_va)
+* [webhook-create command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)
+* [api-key commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_key)
+* [credential commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#credential)
+* [infra-permissions commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra)
+* [subnets command](docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)
+* [vlan commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#vlan)
+* [vpcs command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vpcs)
+* [addon-versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
+* [flavors command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)
+* [messages command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)
+* [supported-locations command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)
+* [versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)
+* [api command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)
+* [init command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)
+* [Deprecated: region commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#region)
+* [script commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script)
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 

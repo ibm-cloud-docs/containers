@@ -5094,7 +5094,7 @@ ibmcloud ks messages
 
 <br />
 
-### `ibmcloud ks supported-locations`
+## supported-locations command
 {: #cs_supported-locations}
 
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
