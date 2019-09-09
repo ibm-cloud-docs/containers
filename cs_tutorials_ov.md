@@ -175,7 +175,7 @@ subcollection: containers
                   </br> <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution2/Architecture.png" alt="Architecture diagram for deploying web apps with {{site.data.keyword.containerlong_notm}}" />
+                    <img class="architectureDiagram" src="https://raw.githubusercontent.com/ibm-cloud-docs/tutorials/master/images/solution2/Architecture.png" alt="Architecture diagram for deploying web apps with {{site.data.keyword.containerlong_notm}}" />
                 </div>
             </div>
         </div>
