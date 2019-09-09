@@ -39,7 +39,7 @@ The following icons are used to indicate if a release note applies only to a cer
 {: #sept19}
 
 <table summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
-<caption>Documentation updates in August 2019</caption>
+<caption>Documentation updates in September 2019</caption>
 <thead>
 <th>Date</th>
 <th>Description</th>
