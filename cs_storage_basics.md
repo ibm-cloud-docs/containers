@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-10"
 
 keywords: kubernetes, iks
 
@@ -216,6 +216,5 @@ When you dynamically provision persistent storage by using a storage class, you 
 </tr>
 </tbody>
 </table>
-
 
 
