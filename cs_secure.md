@@ -309,9 +309,8 @@ By default, {{site.data.keyword.containerlong_notm}} automatically colllects log
 - **Containers**: Logs that are written to `STDOUT` or `STDERR`. 
 - **Apps**: Logs that are written to a specific path inside your app.
 - **Workers**: Logs from the Ubuntu operating system that are sent to `/var/log/syslog` and `/var/log/auth.log`.
-- **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/). You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started).
--**Ingress**: Logs for an Ingress application load balancer (ALB) that manages inbound network traffic.
-
+- **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/). You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). 
+- **Ingress**: Logs for an Ingress application load balancer (ALB) that manages inbound network traffic.
 - **Kubernetes system components**: Logs from the `kubelet`, the `kube-proxy`, and other components that run in the `kube-system` namespace.
 
 To access cluster component logs, you can choose to forward your logs to {{site.data.keyword.la_full_notm}}, an external server, or a third-party logging solution. For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview). 
