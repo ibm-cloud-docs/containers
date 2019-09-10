@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-10"
 
 keywords: kubernetes, iks, containers
 
@@ -120,7 +120,7 @@ Kubernetes is an open source platform for managing containerized workloads and s
 **What container platform can I choose from?** </br>
 With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. In community Kubernetes clusters, you get access to community Kubernetes API features that are considered beta or higher by the community. Your worker nodes are set up with an Ubuntu operating system and you can use native Kubernetes commands or APIs to work with your cluster and the cluster resources. Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
 
-In this getting started tutorial, you create a community Kubernetes cluster. If you want to create an OpenShift instead, see [Getting started with {{site.data.keyword.openshiftlong}}](/docs/openshift?topic=openshift-getting-started).
+In this getting started tutorial, you create a community Kubernetes cluster. If you want to create an OpenShift cluster instead, see [Getting started with {{site.data.keyword.openshiftlong}}](/docs/openshift?topic=openshift-getting-started).
 {: note}
 
 **What compute host infrastructure does the service offer?** </br>
