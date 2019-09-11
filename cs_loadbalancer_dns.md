@@ -309,7 +309,7 @@ ibmcloud ks nlb-dns add --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_
 
 You can also remove IP addresses of NLBs that you no longer want to be registered with a subdomain. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it.
 ```
-ibmcloud ks nlb-dns rm classic --cluster <cluster_name_or_id> --ip <ip1,ip2> --nlb-host <host_name>
+ibmcloud ks nlb-dns rm --cluster <cluster_name_or_id> --ip <ip> --nlb-host <host_name>
 ```
 {: pre}
 
