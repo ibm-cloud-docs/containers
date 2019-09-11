@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-10"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks, containers
 
@@ -90,7 +90,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#clusters_gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support, and choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support. Choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
     </div>
     </a>
 </div>
