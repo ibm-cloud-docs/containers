@@ -1491,7 +1491,7 @@ spec:
 </tr>
 <tr>
 <td><code>proxy-ssl-verify-depth</code></td>
-<td>Optional: If you specify a secret in the `ssl-secret` parameter, replace <code>&lt;<em>verification_depth</em>&gt;</code> with the number of certificates that are expected in the proxied HTTPS server certificates chain. This value indicates the maximum number of HTTPS server certificate that the ALB verifies. The size of your server certificates chain can vary based on which kinds of authentication you set up. For example, if you use a one-way authentication secret, the trusted certificate is sent by the upstream server to the client for verification. However, if you use a mutual authentication secret, the server certificate is sent for verification in addition to the trusted certificate, which increases the depth of the certificates chain by one certificate. By default, the depth is set to `5`, which is sufficient for most cases. If you have a larger certificate chain, you can change the value of this parameter. The value must be an integer from `0` to `10`.</p></td>
+<td>Optional: If you specify a secret in the `ssl-secret` parameter, replace <code>&lt;<em>verification_depth</em>&gt;</code> with the maximum number of certificates that are expected in the proxied HTTPS server certificates chain. This value indicates the maximum number of HTTPS server certificates in the chain that the ALB verifies. The size of your server certificates chain can vary based on which kinds of authentication you set up. By default, the depth is set to `5`, which is sufficient for most cases. If you have a larger certificate chain, you can change the value of this parameter. The value must be an integer from `1` to `10`.</p></td>
 </tr>
 </tbody></table>
 

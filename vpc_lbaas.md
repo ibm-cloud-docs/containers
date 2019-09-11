@@ -31,7 +31,6 @@ Set up a Load Balancer for VPC to expose your app on the public or private netwo
 {: shortdesc}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC on Classic clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
-{: note}
 
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
