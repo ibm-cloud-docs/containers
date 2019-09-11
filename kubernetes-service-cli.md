@@ -2112,7 +2112,6 @@ ibmcloud ks worker replace --cluster my_cluster --worker kube-dal10-cr18a61a63a6
 
 </br>
 
-
 ### `ibmcloud ks worker rm`
 {: #cs_worker_rm}
 
