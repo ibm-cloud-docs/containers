@@ -30,7 +30,7 @@ After you set up network load balancers (NLBs), you can create DNS entries for t
 {: shortdesc}
 
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters. For VPC on Classic clusters, see [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters.
 {: note}
 
 
@@ -83,7 +83,7 @@ To create a subdomain for one or more NLB IP addresses:
 
 2. Register the IP by creating a DNS subdomain. To specify multiple IP addresses, use multiple `--ip` flags.
   ```
-  ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
+  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
   ```
   {: pre}
 
