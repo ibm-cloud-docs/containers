@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -277,10 +277,10 @@ To optimize performance of your Ingress ALBs, you can change the default setting
 ### Adding ALB socket listeners to every worker node
 {: #reuse-port}
 
-Increase the number of ALB socket listeners from one per cluster to one per worker node by using the `reuse-port` Ingress directive.
+Increase the number of socket listeners from one socket listener for each ALB to one socket listener for each NGINX worker process on the worker node by using the `reuse-port` Ingress directive.
 {: shortdesc}
 
-When the `reuse-port` option is disabled, a single listening socket notifies workers about incoming connections and all worker nodes attempt to take the connection. But when `reuse-port` is enabled, one socket listener exists per worker node for each ALB IP address and port combination. Instead of each worker node attempting to take the connection, the Linux kernel determines which available socket listener gets the connection. Lock contention between workers is reduced, which can improve performance. For more information about the benefits and drawbacks of the `reuse-port` directive, see [this NGINX blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nginx.com/blog/socket-sharding-nginx-release-1-9-1/).
+When the `reuse-port` option is disabled, a single listening socket notifies ALBs about incoming connections and all worker nodes attempt to take the connection. But when `reuse-port` is enabled, one socket listener exists for each ALB IP address and port combination. Instead of each ALB attempting to take the connection, the Linux kernel determines which available socket listener gets the connection. Lock contention between workers is reduced, which can improve performance. For more information about the benefits and drawbacks of the `reuse-port` directive, see [this NGINX blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nginx.com/blog/socket-sharding-nginx-release-1-9-1/).
 
 You can scale the listeners by editing the `ibm-cloud-provider-ingress-cm` Ingress configmap.
 
