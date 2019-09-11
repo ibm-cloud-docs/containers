@@ -2023,7 +2023,6 @@ ibmcloud ks worker reload --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 
 </br>
 
-
 ### `ibmcloud ks worker replace`
 {: #cli_worker_replace}
 
@@ -2295,7 +2294,6 @@ ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --mac
 {: pre}
 
 </br>
-
 
 ### `ibmcloud ks worker-pool create vpc-classic`
 {: #cli_worker_pool_create_vpc_classic}
@@ -2647,7 +2645,6 @@ ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -w pool1 -w pool2
 {: pre}
 
 </br>
-
 
 ### `ibmcloud ks zone add vpc-classic`
 {: #cli_zone-add-vpc-classic}
