@@ -227,8 +227,6 @@ Create, view, and modify clusters and cluster settings, such as add-on, subnet, 
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> These commands work for both classic and VPC clusters.
-
 
 
 #### `ibmcloud ks cluster addon disable istio`
@@ -241,6 +239,10 @@ Disable the managed Istio add-on. Removes all Istio core components from the clu
 ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -264,6 +266,10 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -286,6 +292,10 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -304,6 +314,10 @@ Disable the managed Knative add-on to remove the Knative serverless framework fr
 ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -327,6 +341,10 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -349,6 +367,10 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -362,26 +384,28 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 
 </br>
 
-### `ibmcloud ks cluster-addon-enable`
+### `ibmcloud ks cluster addon enable`
 {: #cs_cluster_addon_enable}
 
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> These commands work for both classic and VPC clusters.
 
 
-
-#### `ibmcloud ks cluster-addon-enable istio`
+#### `ibmcloud ks cluster addon enable istio`
 {: #cs_cluster_addon_enable_istio}
 
 Enable the managed [Istio add-on](/docs/containers?topic=containers-istio). Installs the core components of Istio, including Prometheus.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
+ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -394,16 +418,20 @@ ibmcloud ks cluster-addon-enable istio --cluster CLUSTER [--version VERSION]
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
 
-#### `ibmcloud ks cluster-addon-enable istio-extras`
+#### `ibmcloud ks cluster addon enable istio-extras`
 {: #cs_cluster_addon_enable_istio_extras}
 
 Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to provide extra monitoring, tracing, and visualization for Istio.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
+ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -419,16 +447,20 @@ ibmcloud ks cluster-addon-enable istio-extras --cluster CLUSTER [--version VERSI
 <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
-#### `ibmcloud ks cluster-addon-enable istio-sample-bookinfo`
+#### `ibmcloud ks cluster addon enable istio-sample-bookinfo`
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
 
 Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the <code>default</code> namespace.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
+ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -444,16 +476,20 @@ ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster CLUSTER [--vers
 <dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
 </dl>
 
-#### `ibmcloud ks cluster-addon-enable knative`
+#### `ibmcloud ks cluster addon enable knative`
 {: #cs_cluster_addon_enable_knative}
 
 Enable the managed [Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) to install the Knative serverless framework.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [-y]
+ibmcloud ks cluster addon enable knative --cluster CLUSTER [--version VERSION] [-y]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -469,16 +505,20 @@ ibmcloud ks cluster-addon-enable knative --cluster CLUSTER [--version VERSION] [
 <dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
-#### `ibmcloud ks cluster-addon-enable kube-terminal`
+#### `ibmcloud ks cluster addon enable kube-terminal`
 {: #cs_cluster_addon_enable_kube-terminal}
 
 Enable the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on to use the Kubernetes Terminal in the {{site.data.keyword.containerlong_notm}} cluster console.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster-addon-enable kube-terminal --cluster CLUSTER [--version VERSION]
+ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERSION]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -502,6 +542,10 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -521,12 +565,14 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 List managed add-ons that are enabled in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster addons --cluster CLUSTER
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -549,12 +595,14 @@ ibmcloud ks cluster addons --cluster CLUSTER
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>`.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster config --cluster CLUSTER [--admin] [--export] [--network] [--powershell] [--skip-rbac] [-s] [--yaml]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
 * **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers?topic=containers-users#platform) or a [custom RBAC policy](/docs/containers?topic=containers-users#role-binding) to perform Kubernetes actions in the cluster.
@@ -601,12 +649,12 @@ ibmcloud ks cluster config --cluster my_cluster
 Create a cluster with worker nodes on classic infrastructure. For free clusters, you specify the cluster name; everything else is set to a default value. A free cluster is automatically deleted after 30 days. You can have one free cluster at a time. To take advantage of the full capabilities of Kubernetes, create a standard cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To create a VPC on Classic cluster, use the [`ibmcloud ks cluster create vpc-classic` command](#cli_cluster-create-vpc-classic) instead.
-
 ```
 ibmcloud ks cluster create classic [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type FLAVOR --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a VPC on Classic cluster, use the [`ibmcloud ks cluster create vpc-classic` command](#cli_cluster-create-vpc-classic) instead.
 
 **Minimum required permissions**:
 * **Administrator** platform role for {{site.data.keyword.containerlong_notm}} at the account level
@@ -751,12 +799,12 @@ ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID 
 Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: Free clusters are not available in VPC.
 {: shortdesc}
 
-<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To create a classic cluster, use the [`ibmcloud ks cluster create classic` command](#cs_cluster_create) instead.</p>
-
 ```
 ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --provider VPC-CLASSIC --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. To create a classic cluster, use the [`ibmcloud ks cluster create classic` command](#cs_cluster_create) instead.
 
 **Minimum required permissions**:
 * [**Administrator** platform role for VPC Infrastructure](/docs/vpc-on-classic?topic=vpc-on-classic-managing-user-permissions-for-vpc-resources).
@@ -835,8 +883,6 @@ ibmcloud ks cluster create vpc-classic --name mycluster --zone us-east-1 --vpc-i
 Disable the public service endpoint for a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 **Important**: Before you disable the public endpoint, you first must complete the following steps to enable the private service endpoint:
 1. Enable the private service endpoint by running `ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name>`.
 2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
@@ -846,6 +892,10 @@ Disable the public service endpoint for a cluster.
 ibmcloud ks cluster feature disable public-service-endpoint --cluster CLUSTER [-s] [-f]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -895,6 +945,8 @@ ibmcloud ks cluster feature enable private-service-endpoint --cluster CLUSTER [-
 ```
 {: pre}
 
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. The private service endpoint is permanently enabled by default for VPC clusters.
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -928,6 +980,10 @@ ibmcloud ks cluster feature enable public-service-endpoint --cluster CLUSTER [-s
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -956,12 +1012,14 @@ ibmcloud ks cluster feature enable public-service-endpoint --cluster my_cluster
 View the details of a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster get --cluster CLUSTER [--show-resources] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -994,14 +1052,16 @@ ibmcloud ks cluster get --cluster my_cluster --show-resources
 List all clusters in your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 Clusters in all locations are returned. To filter clusters by a specific location, include the `--location` flag. For example, if you filter clusters for the `dal` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `dal10` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. You can pass one location or a comma-separated list of locations.
 
 ```
 ibmcloud ks cluster ls [--provider classic|vpc-classic] [--location LOCATION] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1034,8 +1094,6 @@ ibmcloud ks cluster ls -l ams03 -l wdc -l ap
 Modify the webhook back end that forwards API server audit logs to a remote server.
 {: shprtdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> These commands work for both classic and VPC clusters.
-
 The `apiserver-config-get|set|unset audit-webhook` aliases for these commands are deprecated.
 {: deprecated}
 
@@ -1049,6 +1107,10 @@ View the URL for the remote logging service that you are sending API server audi
 ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1077,6 +1139,10 @@ Set the webhook back end for the API server configuration. The webhook back end 
 ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1120,6 +1186,10 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-s]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -1139,8 +1209,6 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-s]
 Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks cluster master audit-webhook set`, `cluster master audit-webhook unset`, `cluster feature enable`, or `cluster feature disable` commands. The highly available Kubernetes master components are restarted in a rolling restart. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The `apiserver-refresh` and `cluster-refresh` aliases for this command are deprecated.
 {: deprecated}
 
@@ -1148,6 +1216,10 @@ The `apiserver-refresh` and `cluster-refresh` aliases for this command are depre
 ibmcloud ks cluster master refresh --cluster CLUSTER [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1170,8 +1242,6 @@ Update the Kubernetes master to the default API version. During the update, you 
 
 You might need to change your YAML files for future deployments. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The `cluster-update` alias for this command is deprecated.
 {: deprecated}
 
@@ -1179,6 +1249,10 @@ The `cluster-update` alias for this command is deprecated.
 ibmcloud ks cluster master update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1218,14 +1292,16 @@ This API key method replaces the previous method of authorizing a cluster to acc
 
 For more information, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#cluster_registry_auth).
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 <p class="important">When you run this command, the creation of IAM credentials and image pull secrets is initiated and can take some time to complete. You cannot deploy containers that pull an image from the {{site.data.keyword.registrylong_notm}} `icr.io` domains until the image pull secrets are created. To check the image pull secrets, run `kubectl get secrets | grep icr`.</br></br>If you added IAM policies to an existing service ID, such as to restrict access to a regional registry, the service ID, IAM policies, and API key for the image pull secret are reset by this command.</p>
 
 ```
 ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**:
 *  **Operator or Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -1246,12 +1322,14 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 Delete a cluster. All worker nodes, apps, and containers are permanently deleted. This action cannot be undone.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1286,12 +1364,14 @@ Add an IBM Cloud service to a cluster by binding the service instance to a Kuber
 
 To view available {{site.data.keyword.cloud_notm}} services from the {{site.data.keyword.cloud_notm}} catalog, run `ibmcloud service offerings`. **Note**: You can add only {{site.data.keyword.cloud_notm}} services that support service keys. For more information about service binding and what services you can add to your cluster, see [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding).
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE [--key SERVICE_INSTANCE_KEY] [--role IAM_SERVICE_ROLE] --service SERVICE_INSTANCE [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1331,12 +1411,14 @@ ibmcloud ks cluster service bind --cluster my_cluster --namespace my_namespace -
 List the services that are bound to one or all of the Kubernetes namespace in a cluster. If no options are specified, the services for the default namespace are displayed.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPACE] [--all-namespaces] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1372,8 +1454,6 @@ ibmcloud ks cluster service ls --cluster my_cluster --namespace my_namespace
 Remove an {{site.data.keyword.cloud_notm}} service from a cluster by unbinding it from a Kubernetes namespace.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 When you remove an {{site.data.keyword.cloud_notm}} service, the service credentials are removed from the cluster. If a pod is still using the service, it fails because the service credentials cannot be found.
 {: tip}
 
@@ -1381,6 +1461,10 @@ When you remove an {{site.data.keyword.cloud_notm}} service, the service credent
 ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAMESPACE --service SERVICE_INSTANCE [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1410,10 +1494,8 @@ ibmcloud ks cluster service unbind --cluster my_cluster --namespace my_namespace
 ### `ibmcloud ks cluster subnet add`
 {: #cs_cluster_subnet_add}
 
-Make an existing portable public or private subnet in your IBM Cloud infrastructure account available to a cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
+Make an existing portable public or private classic subnet in your IBM Cloud infrastructure account available to a cluster or reuse subnets from a deleted cluster instead of using the automatically provisioned subnets.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
 
 <p class="important">Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.</br>
 </br>When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
@@ -1423,6 +1505,8 @@ Make an existing portable public or private subnet in your IBM Cloud infrastruct
 ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id SUBNET [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1449,10 +1533,8 @@ ibmcloud ks cluster subnet add --cluster my_cluster --subnet-id 1643389
 ### `ibmcloud ks cluster subnet create`
 {: #cs_cluster_subnet_create}
 
-Create a portable subnet in an IBM Cloud infrastructure account on your public or private VLAN and make it available to a cluster.
+Create a portable classic subnet in an IBM Cloud infrastructure account on your public or private VLAN and make it available to a cluster.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
 
 <p class="important">When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
 </br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
@@ -1461,6 +1543,8 @@ Create a portable subnet in an IBM Cloud infrastructure account on your public o
 ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1493,12 +1577,12 @@ ibmcloud ks cluster subnet create --cluster my_cluster --size 8 --vlan 1764905
 Detach a public or private portable subnet in an IBM Cloud infrastructure account from a cluster. The subnet remains available in your IBM Cloud infrastructure account. **Note**: Any services that were deployed to an IP address from the subnet remain active after the subnet is removed.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks cluster subnet detach --cluster CLUSTER --subent-id SUBNET_ID [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1531,8 +1615,6 @@ ibmcloud ks cluster subnet detach --cluster my_cluster --subnet-id 1602829
 Bring your own private subnet to your {{site.data.keyword.containerlong_notm}} clusters.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 This private subnet is not one provided by IBM Cloud infrastructure. As such, you must configure any inbound and outbound network traffic routing for the subnet. To add an IBM Cloud infrastructure subnet, use the `ibmcloud ks cluster subnet add` [command](#cs_cluster_subnet_add).
 
 <p class="important">When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
@@ -1542,6 +1624,8 @@ This private subnet is not one provided by IBM Cloud infrastructure. As such, yo
 ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1571,12 +1655,13 @@ ibmcloud ks cluster user-subnet add --cluster my_cluster --subnet-cidr 169.xx.xx
 Remove your own private subnet from a specified cluster. Any service that was deployed with an IP address from your own private subnet remains active after the subnet is removed.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks cluster user-subnet rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -1619,6 +1704,10 @@ This command is deprecated. Create a worker pool by running [`ibmcloud ks worker
 ibmcloud ks worker add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type FLAVOR --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1678,12 +1767,14 @@ ibmcloud ks worker add --cluster my_cluster --workers 3 --public-vlan my_public_
 View the details of a worker node.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1716,12 +1807,14 @@ ibmcloud ks worker get --cluster my_cluster --worker kube-dal10-cr18a61a63a6a94b
 List all worker nodes in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--show-deleted] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1759,8 +1852,6 @@ ibmcloud ks worker ls --cluster my_cluster
 
 Reboot a worker node in a cluster.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
 During the reboot, the state of your worker node does not change. For example, you might use a reboot if the worker node status in IBM Cloud infrastructure is `Powered Off` and you need to turn on the worker node. A reboot clears temporary directories, but does not clear the entire file system or reformat the disks. The worker node IP address remains the same after the reboot operation.
 
@@ -1814,6 +1905,10 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -1850,8 +1945,6 @@ ibmcloud ks worker reboot --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 
 Reload the configurations for a worker node.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To reload a worker node in a VPC on Classic cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
 
 A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. During the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). The worker node public and private IP address remain the same after the reload operation.
 
@@ -1900,6 +1993,8 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 ```
 {: pre}
 
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To reload a worker node in a VPC on Classic cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
+
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -1934,8 +2029,6 @@ ibmcloud ks worker reload --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 
 Delete a worker node and replace it with a new worker node in the same worker pool.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.</p>
 
 The replacement worker node is created in the same zone and has the same flavor as the old worker node, but is assigned new public or private IP addresses. You might replace a worker node if you cannot reload or update the worker node, such as if it enters a troubled state.
 
@@ -1988,6 +2081,10 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
 **Command options**
@@ -2022,8 +2119,6 @@ ibmcloud ks worker replace --cluster my_cluster --worker kube-dal10-cr18a61a63a6
 
 Remove one or more worker nodes from a cluster. If you remove a worker node, your cluster becomes unbalanced. You can automatically rebalance your worker pool by running the `ibmcloud ks worker-pool rebalance` [command](#cs_rebalance).
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
 Before you remove your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
 {: tip}
@@ -2069,6 +2164,10 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-s]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
@@ -2100,8 +2199,6 @@ ibmcloud ks worker rm --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596a
 Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). The worker node IP address remains the same after the update operation.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To update a worker node in a VPC on Classic cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
-
 Running `ibmcloud ks worker update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes, the worker node is reimaged, and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](/docs/containers?topic=containers-update#worker_node).
 {: important}
 
@@ -2111,6 +2208,8 @@ You might need to change your YAML files for deployments before you update. Revi
 ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To update a worker node in a VPC on Classic cluster, use the [`ibmcloud ks worker replace` command](#cli_worker_replace) instead.
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2150,12 +2249,12 @@ View and modify worker pools for a cluster.
 You can create a worker pool in your cluster. When you add a worker pool, it is not assigned a zone by default. You specify the number of workers that you want in each zone and the flavors for the workers. The worker pool is given the default Kubernetes versions. To finish creating the workers, [add a zone or zones](#cs_zone_add) to your pool.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker_pool_create_vpc_classic) instead.
-
 ```
 ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1] [-s] [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a worker pool in a VPC on Classic cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker_pool_create_vpc_classic) instead.
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2204,12 +2303,12 @@ ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --mac
 Add a worker pool to a VPC on Classic cluster. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool.
 {: shortdesc}
 
-<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To create a worker pool in a classic cluster, use the [`ibmcloud ks worker-pool create classic` command](#cs_worker_pool_create) instead.</p>
-
 ```
 ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <cluster_name_or_ID> --flavor <flavor> --vpc-id <VPC ID> --size-per-zone <number_of_workers_per_zone> [--hardware (public|private)] [--label KEY1=VALUE1] [--disable-disk-encrypt] [-s] [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. To create a worker pool in a classic cluster, use the [`ibmcloud ks worker-pool create classic` command](#cs_worker_pool_create) instead.
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
@@ -2262,12 +2361,14 @@ ibmcloud ks worker-pool create vpc-classic --name my_pool --cluster my_cluster -
 View the details of a worker pool.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2300,12 +2401,14 @@ ibmcloud ks worker-pool get --worker-pool pool1 --cluster my_cluster
 List all worker pools in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2335,12 +2438,14 @@ ibmcloud ks worker-pool ls --cluster my_cluster
 Rebalance a worker pool in a cluster after you delete a worker node. When you run this command, a new worker or workers are added to your worker pool so that the worker pool has the same number of nodes per zone that you specified.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2369,12 +2474,14 @@ ibmcloud ks worker-pool rebalance --cluster my_cluster --worker-pool my_pool
 Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster. Your worker pool must have at least one worker node.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool resize --cluster CLUSTER --worker-pool WORKER_POOL --size-per-zone WORKERS_PER_ZONE [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2408,12 +2515,14 @@ ibmcloud ks worker-pool resize --cluster my_cluster --worker-pool my_pool --size
 Remove a worker pool from your cluster. All worker nodes in the pool are deleted. Your pods are rescheduled when you delete. To avoid downtime, be sure that you have enough workers to run your workload.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-s] [-f]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2446,12 +2555,14 @@ ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 View the zones attached to a worker pool.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-s] [-f]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2488,12 +2599,12 @@ ibmcloud ks worker-pool zones --cluster my_cluster --worker-pool pool1
 After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. To add a zone to worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone add vpc-classic` command](#cli_zone-add-vpc-classic) instead.
-
 ```
 ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_POOL --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To add a zone to worker pools in a VPC on Classic cluster, use the [`ibmcloud ks zone add vpc-classic` command](#cli_zone-add-vpc-classic) instead.
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2544,12 +2655,12 @@ ibmcloud ks zone add classic --zone dal10 --cluster my_cluster -w pool1 -w pool2
 After you create a cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
 {: shortdesc}
 
-<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. To add a zone to worker pools in a classic cluster, use the [`ibmcloud ks zone add classic` command](#cs_zone_add) instead.</p>
-
 ```
 ibmcloud ks zone add vpc-classic --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CLUSTER --worker-pool WORKER_POOL [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. To add a zone to worker pools in a classic cluster, use the [`ibmcloud ks zone add classic` command](#cs_zone_add) instead.
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2633,12 +2744,12 @@ ibmcloud ks zone ls -l ap
 **Multizone classic clusters only**: Set the network metadata for a worker pool to use a different public or private VLAN for the zone than it previously used. Worker nodes that were already created in the pool continue to use the previous public or private VLAN, but new worker nodes in the pool use the new network data.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_POOL --private-vlan PRIVATE_VLAN [--public-vlan PUBLIC_VLAN] [--private-only] [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2695,8 +2806,6 @@ ibmcloud ks zone network-set --zone dal10 --cluster my_cluster --worker-pools po
 **Multizone clusters only**: Remove a zone from all the worker pools in your cluster. All worker nodes in the worker pool for this zone are deleted.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 Before you remove a zone, make sure that you have enough worker nodes in other zones in the cluster so that your pods can reschedule. Rescheduling your pods can avoid a downtime for your app or data corruption on your worker node.
 {: tip}
 
@@ -2704,6 +2813,10 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [-f] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2743,8 +2856,6 @@ View and configure an Ingress application load balancer (ALB).
 Disable automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 By default, automatic updates to the Ingress application load balancer (ALB) add-on are enabled. ALB pods are automatically updated when a new build version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb update` command](#cs_alb_update).
 
 When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
@@ -2753,6 +2864,10 @@ When you update the major or minor Kubernetes version of your cluster, IBM autom
 ibmcloud ks alb autoupdate disable --cluster CLUSTER [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2781,12 +2896,14 @@ Enable automatic updates of all Ingress ALB pods in a cluster.
 
 If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next build version becomes available, the ALBs are automatically updated to the latest build.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2799,8 +2916,6 @@ ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
 </br>
 
 ### `ibmcloud ks alb autoupdate get`
@@ -2809,12 +2924,14 @@ ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
 Check whether automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest build version.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb autoupdate get --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2830,8 +2947,6 @@ ibmcloud ks alb autoupdate get --cluster CLUSTER [--json] [-s]
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
 </br>
 
 ### Beta: `ibmcloud ks alb cert deploy`
@@ -2839,8 +2954,6 @@ ibmcloud ks alb autoupdate get --cluster CLUSTER [--json] [-s]
 
 Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
 
@@ -2853,6 +2966,10 @@ To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manag
 ibmcloud ks alb cert deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2897,12 +3014,14 @@ ibmcloud ks alb cert deploy --update --secret-name my_alb_secret --cluster my_cl
 If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, view information about the TLS certificate, such as the secrets that are associated with it.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb cert get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2947,12 +3066,14 @@ ibmcloud ks alb cert get --cluster my_cluster --cert-crn  crn:v1:staging:public:
 List the certificates that you imported from your {{site.data.keyword.cloudcerts_long_notm}} instance to ALBs in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb cert ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2983,8 +3104,6 @@ ibmcloud ks alb cert ls --cluster my_cluster
 If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, remove the secret from the cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb cert rm` commands.
 {: note}
 
@@ -2992,6 +3111,10 @@ To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manag
 ibmcloud ks alb cert rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3034,8 +3157,6 @@ ibmcloud ks alb cert rm --cluster my_cluster --cert-crn crn:v1:staging:public:cl
 Enable or disable an ALB in your standard cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For VPC on Classic clusters, use the [`ibmcloud ks alb configure vpc-classic` command](#cli_alb_configure_vpc_classic) instead.
-
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
 * Enable an ALB that you previously disabled.
@@ -3046,6 +3167,8 @@ You can use this command to:
 ibmcloud ks alb configure classic --alb-id ALB_ID --disable|--enable [--user-ip USER_IP]|--disable-deployment [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC on Classic clusters, use the [`ibmcloud ks alb configure vpc-classic` command](#cli_alb_configure_vpc_classic) instead.
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3098,8 +3221,6 @@ ibmcloud ks alb configure classic --alb-id public-cr18a61a63a6a94b658596aa93a087
 Enable or disable an ALB in a VPC on Classic cluster.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. For classic clusters, use the [`ibmcloud ks alb configure classic` command](#cs_alb_configure) instead.
-
 You can use this command to:
 * Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled.
 * Enable an ALB that you previously disabled.
@@ -3110,6 +3231,8 @@ You can use this command to:
 ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable|--disable-deployment [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. For classic clusters, use the [`ibmcloud ks alb configure classic` command](#cs_alb_configure) instead.
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3153,12 +3276,14 @@ ibmcloud ks alb configure vpc-classic --alb-id public-cr18a61a63a6a94b658596aa93
 View the details of an Ingress ALB in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb get --alb-id ALB_ID [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3188,8 +3313,6 @@ ibmcloud ks alb get --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
 List all Ingress ALB IDs in a cluster and view whether an update for the ALB pods is available.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
 {: tip}
 
@@ -3197,6 +3320,10 @@ If no ALB IDs are returned, then the cluster does not have a portable subnet. Yo
 ibmcloud ks alb ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3228,12 +3355,14 @@ If your ALB pods were recently updated, but a custom configuration for your ALBs
 
 After you roll back an update, automatic updates for ALB pods are disabled. To re-enable automatic updates, use the [`alb autoupdate enable` command](#cs_alb_autoupdate_enable).
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb rollback --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3257,12 +3386,14 @@ ibmcloud ks alb rollback --cluster CLUSTER [--json] [-s]
 List Ingress ALB types that are supported.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks alb types [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3283,8 +3414,6 @@ ibmcloud ks alb types [--json] [-s]
 Force an update of the Ingress ALB pods in the cluster to the latest version.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
 
 When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
@@ -3293,6 +3422,10 @@ When you update the major or minor Kubernetes version of your cluster, IBM autom
 ibmcloud ks alb update --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3320,12 +3453,14 @@ Encrypt your Kubernetes secrets by using [{{site.data.keyword.keymanagementservi
 Do not delete root keys in your {{site.data.keyword.keymanagementserviceshort}} instance. Do not delete keys even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.
 {: important}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks key-protect-enable --cluster CLUSTER_NAME_OR_ID --key-protect-url ENDPOINT --key-protect-instance INSTANCE_GUID --crk ROOT_KEY_ID [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3445,12 +3580,14 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER [--json] [-s]
 Make a request for a snapshot of your logs at a specific point in time and then store the logs in an {{site.data.keyword.cos_full_notm}} bucket.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-endpoint ENDPOINT --hmac-key-id HMAC_KEY_ID --hmac-key HMAC_KEY --type LOG_TYPE [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3492,12 +3629,14 @@ ibmcloud ks logging collect --cluster mycluster --cos-bucket mybucket --cos-endp
 Check the status of the log collection snapshot request for your cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging collect-status --cluster CLUSTER [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3523,13 +3662,14 @@ ibmcloud ks logging collect-status --cluster mycluster
 
 Create a logging configuration. You can use this command to forward logs for containers, applications, worker nodes, Kubernetes clusters, and Ingress application load balancers to {{site.data.keyword.loganalysisshort_notm}} or to an external syslog server.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --type LOG_TYPE [--namespace KUBERNETES_NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-containers CONTAINERS] [--app-paths PATHS_TO_LOGS] [--syslog-protocol PROTOCOL] [--skip-validation] [--force-update] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
 
@@ -3603,12 +3743,14 @@ ibmcloud ks logging config create --cluster my_cluster --logsource container --h
 View all log forwarding configurations for a cluster, or filter logging configurations based on log source.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3643,12 +3785,14 @@ ibmcloud ks logging config get --cluster my_cluster --logsource worker
 Delete one log forwarding configuration or all logging configurations for a cluster. Deleting the log configuration stops log forwarding to a remote syslog server or to {{site.data.keyword.loganalysisshort_notm}}.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_CONFIG_ID] [--all] [--force-update] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
 
@@ -3687,12 +3831,14 @@ ibmcloud ks logging config rm --cluster my_cluster --id f4bc77c0-ee7d-422d-aabf-
 Update the details of a log forwarding configuration.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LOG_TYPE  [--namespace NAMESPACE] [--hostname LOG_SERVER_HOSTNAME_OR_IP] [--port LOG_SERVER_PORT] [--space CLUSTER_SPACE] [--org CLUSTER_ORG] [--app-paths PATH] [--app-containers PATH] [--json] [--skipValidation] [--force-update] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3763,12 +3909,14 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 Filter out logs that are forwarded by your logging configuration.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-config CONFIG] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3830,12 +3978,14 @@ ibmcloud ks logging filter create --cluster example-cluster --type all --level i
 View a logging filter configuration.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matching-configs] [--show-covering-filters] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3874,12 +4024,14 @@ ibmcloud ks logging filter get --cluster mycluster --id 885732 --show-matching-c
 Delete a logging filter.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--force-update] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3915,12 +4067,14 @@ ibmcloud ks logging filter rm --cluster mycluster --id 885732
 Update a logging filter.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TYPE [--logging-config CONFIG] [--namespace KUBERNETES_NAMESPACE] [--container CONTAINER_NAME] [--level LOGGING_LEVEL] [--message MESSAGE] [--regex-message MESSAGE] [--force-update] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3985,14 +4139,16 @@ ibmcloud ks logging filter update --cluster example-cluster --id 274885 --type a
 Refresh the logging configuration for the cluster. This action refreshes the logging token for any logging configuration that is forwarding to the space level in your cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The `logging config refresh` alias for this command is deprecated.
 {: deprecated}
 
 ```
 ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-s]
 ```
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4029,14 +4185,14 @@ Create and manage subdomains for network load balancer (NLB) IP addresses and he
 Add one or more network load balancer (NLB) IP addresses to an existing subdomain that you created with the [`ibmcloud ks nlb-dns create classic` command](#cs_nlb-dns-create).
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 For example, in a multizone cluster, you might create an NLB in each zone to expose an app. You register the NLB IPs with a subdomain by running `ibmcloud ks nlb-dns create classic`. Later, you add another zone to your cluster and another NLB for that zone. You can use this command to add the new NLB IP to this existing subdomain. When a user accesses your app subdomain, the client accesses one of these IPs at random, and the request is sent to that NLB.
 
 ```
 ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_IP ...] --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4071,12 +4227,12 @@ ibmcloud ks nlb-dns add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1
 Publicly expose your app by creating a DNS subdomain to register a network load balancer (NLB) IP.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For the VPC command, see [`ibmcloud ks nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc).
-
 ```
 ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4109,18 +4265,18 @@ ibmcloud ks nlb-dns create classic --cluster mycluster --ip 1.1.1.1
 Create a DNS entry for a VPC load balancer hostname.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. For the classic command, see [`ibmcloud ks nlb-dns create classic`](#cs_nlb-dns-create).
-
-When you create a VPC load balancer, the load balancer is assigned a hostname instead of an external IP address. Additionally, a default public VPC load balancer provides a hostname for all public ALBs in your cluster, and a default private VPC load balancer provides a hostname for all private ALBs in your cluster. If you created a VPC load balancer, you can use this hostname to access you apps. If you are using Ingress, you can use this hostname in your Ingress resource files to register your app with Ingress.
+When you create a VPC load balancer, the load balancer is assigned a hostname instead of an external IP address. Additionally, a default public VPC load balancer provides a hostname for all public ALBs in your cluster, and a default private VPC load balancer provides a hostname for all private ALBs in your cluster. If you created a VPC load balancer, you can use this hostname to access you app directly. If you use Ingress, you can specify this hostname in your Ingress resource files to register your app with Ingress.
 
 However, this VPC load balancer hostname does not support TLS termination. If you want an SSL certificate for your app domain, you can use the `ibmcloud ks nlb-dns create vpc-classic` command to create a DNS subdomain for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
 
-You can also use this command to create a DNS entry for the hostname for your private ALBs, which is a required step for setting up a private Ingress service in a VPC cluster. For more information, see the [private Ingress setup documentation](/docs/containers?topic=containers-ingress#vpc_private_3).
+You can also use this command to create a DNS entry for the hostname for your private ALBs, which is a required step for setting up a private Ingress service in a VPC cluster. For more information, see the [private Ingress setup documentation](/docs/containers?topic=containers-ingress#vpc_private_3).</br>
 
 ```
 ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-hostname VPC_LB_HOSTNAME [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. For classic clusters, see [`ibmcloud ks nlb-dns create classic`](#cs_nlb-dns-create).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4150,13 +4306,17 @@ ibmcloud ks nlb-dns create vpc-classic --cluster mycluster --lb-hostname 1234abc
 ### `ibmcloud ks nlb-dns ls`
 {: #cs_nlb-dns-ls}
 
-List the network load balancer subdomains and IP addresses that are registered in a classic cluster.
+In a classic cluster, list the network load balancer (NLB) IP addresses that are registered to DNS subdomains. In a VPC cluster, list the VPC load balancer hostnames that are registered to DNS subdomains.
 {: shortdesc}
 
 ```
 ibmcloud ks nlb-dns ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4180,18 +4340,18 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 
 </br>
 
-### ibmcloud ks nlb-dns replace`
+### `ibmcloud ks nlb-dns replace`
 {: #cs_nlb-dns-replace}
 
 Replace the load balancer hostname that is registered with a DNS subdomain. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command.
-
 ```
 ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-hostname NEW_LB_HOSTNAME --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4224,15 +4384,15 @@ ibmcloud ks nlb-dns replace --cluster mycluster --lb-hostname 1234abcd-us-south.
 ### `ibmcloud ks nlb-dns rm classic`
 {: #cs_nlb-dns-rm}
 
-Remove a network load balancer IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
+Remove a network load balancer (NLB) IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command. For the VPC command, see [`ibmcloud ks nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc).
 
 ```
 ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4265,15 +4425,15 @@ ibmcloud ks nlb-dns rm classic --cluster mycluster --ip 1.1.1.1 --nlb-host myclu
 ### `ibmcloud ks nlb-dns rm vpc-classic`
 {: #cs_nlb-dns-rm-vpc}
 
-Remove the load balancer hostname that is registered with a DNS subdomain. After you remove the load balancer hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
+Remove the VPC load balancer hostname that is registered with a DNS subdomain. After you remove the hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
 {: shortdesc}
-
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command. For the classic command, see [`ibmcloud ks nlb-dns rm classic`](#cs_nlb-dns-rm).
 
 ```
 ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. For classic clusters, see [`ibmcloud ks nlb-dns rm classic`](#cs_nlb-dns-rm).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4308,12 +4468,12 @@ Configure and optionally enable a health check monitor for an existing NLB subdo
 
 You can use this command to create and enable a new health check monitor, or to update the settings for an existing health check monitor. To create a new monitor, include the `--enable` flag and the flags for all settings that you want to configure. To update an existing monitor, include only the flags for the settings that you want to change.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--enable] [--desc DESCRIPTION] [--type TYPE] [--method METHOD] [--path PATH] [--timeout TIMEOUT] [--retries RETRIES] [--interval INTERVAL] [--port PORT] [--header HEADER] [--expected-body BODY STRING] [--expected-codes HTTP CODES] [--follows-redirects TRUE] [--allows-insecure TRUE] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4387,12 +4547,12 @@ ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a
 Disable an existing health check monitor for a subdomain in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4426,12 +4586,12 @@ Enable a health check monitor that you configured.
 
 The first time that you create a health check monitor, you must configure and enable it with the `ibmcloud ks nlb-dns monitor configure` command. Use the `ibmcloud ks nlb-dns monitor enable` command only to enable a monitor that you configured but did not yet enable, or to re-enable a monitor that you previously disabled.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4464,12 +4624,12 @@ ibmcloud ks nlb-dns monitor enable --cluster mycluster --nlb-host mycluster-a1b2
 View the settings for an existing health check monitor.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4501,12 +4661,12 @@ ibmcloud ks nlb-dns monitor get --cluster mycluster --nlb-host mycluster-a1b2cde
 List the health check monitor settings for each NLB subdomain in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4536,12 +4696,12 @@ ibmcloud ks nlb-dns monitor ls --cluster mycluster
 List the health check status for the IPs behind NLB subdomains in a cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host SUBDOMAIN] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4577,12 +4737,14 @@ ibmcloud ks nlb-dns monitor status --cluster mycluster
 After you [install the container scanner](/docs/services/va?topic=va-va_index#va_install_container_scanner), view a detailed vulnerability assessment report for a container in your cluster.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks va --container CONTAINER_ID [--extended] [--vulnerabilities] [--configuration-issues] [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Reader** service access role for {{site.data.keyword.registrylong_notm}}. **Note**: Do not assign policies for {{site.data.keyword.registryshort_notm}} at the resource group level.
 
@@ -4621,12 +4783,14 @@ ibmcloud ks va --container 1a11a1aa2b2b22223333c44444ccc555667d7dd777888e8ef99f1
 Register a webhook.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url URL  [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4669,8 +4833,6 @@ View information about the API key for a cluster or reset it to a new key.
 View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The {{site.data.keyword.cloud_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.cloud_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure, such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
 
 When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** infrastructure access policy. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
@@ -4683,6 +4845,10 @@ If you find that you need to update the API key that is stored for a resource gr
 ibmcloud ks api-key info --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4713,8 +4879,6 @@ ibmcloud ks api-key info --cluster my_cluster
 Replace the current {{site.data.keyword.cloud_notm}} IAM API key in an {{site.data.keyword.cloud_notm}} resource group and {{site.data.keyword.containershort_notm}} region.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.cloud_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.cloud_notm}} IAM API keys work, see the [`ibmcloud ks api-key info` command](#cs_api_key_info).
 
 Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#users). Target the resource group and region that you want to set the API key for.
@@ -4724,6 +4888,10 @@ Before you use this command, make sure that the user who executes this command h
 ibmcloud ks api-key reset --region REGION [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4759,12 +4927,12 @@ Set and unset credentials that allow you to access the IBM Cloud infrastructure 
 If you set up your {{site.data.keyword.cloud_notm}} account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can manually set infrastructure credentials to a different account only for classic clusters, not for VPC on Classic clusters.
-
 ```
 ibmcloud ks credential get --region REGION [-s] [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4794,8 +4962,6 @@ ibmcloud ks credential get --region us-south
 Set credentials for a resource group and region so that you can access the IBM Cloud infrastructure portfolio through your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 If you have an {{site.data.keyword.cloud_notm}} Pay-As-You-Go account, you have access to the IBM Cloud infrastructure portfolio by default. However, you might want to use a different IBM Cloud infrastructure account that you already have to order infrastructure. You can link this infrastructure account to your {{site.data.keyword.cloud_notm}} account by using this command.
 
 If IBM Cloud infrastructure credentials are manually set for a region and a resource group, these credentials are used to order infrastructure for all clusters within that region in the resource group. These credentials are used to determine infrastructure permissions, even if an [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) exists for the resource group and region. If the user whose credentials are stored does not have the required permissions to order infrastructure, then infrastructure-related actions, such as creating a cluster or reloading a worker node can fail.
@@ -4809,6 +4975,8 @@ Before you use this command, make sure that the user whose credentials are used 
 ibmcloud ks credential set --infrastructure-api-key API_KEY --infrastructure-username USERNAME --region REGION [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4843,12 +5011,12 @@ Remove the credentials for a resource group and region to remove access to the I
 
 After you remove the credentials, the [{{site.data.keyword.cloud_notm}} IAM API key](#cs_api_key_info) is used to order resources in IBM Cloud infrastructure.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks credential unset --region REGION [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4879,8 +5047,6 @@ ibmcloud ks credential unset --region us-south
 Check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command applies to infrastructure permissions for classic resources only.
-
 **What do `required` and `suggested` infrastructure permissions mean?**<br>
 If the infrastructure credentials for the region and resource group are missing any permissions, the output of this command returns a list of `required` and `suggested` permissions.
 *   **Required**: These permissions are needed to successfully order and manage infrastructure resources such as worker nodes. If the infrastructure credentials are missing one of these permissions, common actions such as `worker reload` can fail for all clusters in the region and resource group.
@@ -4903,6 +5069,8 @@ After infrastructure credentials are set up, you can control what actions your u
 ibmcloud ks infra-permissions get --region REGION [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4953,15 +5121,17 @@ Manage Storage    required
 ## `subnets` command
 {: #cs_subnets}
 
-List available portable subnets in your IBM Cloud infrastructure account.
+List available subnets in your IBM Cloud infrastructure account.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
 ```
 ibmcloud ks subnets [--provider (CLASSIC|VPC-CLASSIC)] [--vpc-id <VPC_ID> --zone <VPC_ZONE>] [--location LOCATION] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5008,12 +5178,12 @@ List public and private VLANs for a zone and view the VLAN spanning status.
 List the public and private VLANs that are available for a zone in your classic IBM Cloud infrastructure account. To list available VLANs, you must have a paid account.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.
-
 ```
 ibmcloud ks vlan ls --zone ZONE [--all] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**:
 * To view the VLANs that the cluster is connected to in a zone: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -5048,12 +5218,15 @@ ibmcloud ks vlan ls --zone dal10
 View the VLAN spanning status for an IBM Cloud infrastructure account. VLAN spanning enables all devices on an account to communicate with each other through the private network, regardless of its assigned VLAN.
 {: shortdesc}
 
-<p class="note"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</br></br>The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. To check whether a VRF is enabled, use the `ibmcloud account show` command. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).</p>
+The VLAN spanning option is disabled for clusters that are created in a VRF-enabled account. When VRF is enabled, all VLANs in the account can automatically communicate with each other over the private network. To check whether a VRF is enabled, use the `ibmcloud account show` command. For more information, see [Planning your cluster network setup: Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker).
+{: note}
 
 ```
 ibmcloud ks vlan spanning get --region REGION [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5085,12 +5258,12 @@ ibmcloud ks vlan spanning get --region us-south
 List all VPCs in the targeted resource group. If no resource group is targeted, then all VPCs in the account are listed.
 {: shortdesc}
 
-<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC-only command.</p>
-
 ```
 ibmcloud ks vpcs [--provider vpc-classic] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**:
 * **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
@@ -5123,12 +5296,14 @@ ibmcloud ks vpcs
 View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5160,8 +5335,6 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
 View a list of available worker node flavors. Flavors vary by zone.
 {:shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The `machine-types` alias for this command is deprecated.
 {: deprecated}
 
@@ -5173,6 +5346,10 @@ You can provision your worker node as a virtual machine on shared or dedicated h
 ibmcloud ks flavors --zone ZONE [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5215,9 +5392,16 @@ ibmcloud ks messages
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: None
 
+**Command options**: None
+
 <br />
+
 
 ## supported-locations command
 {: #cs_supported-locations}
@@ -5225,12 +5409,14 @@ ibmcloud ks messages
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 ```
 ibmcloud ks supported-locations [--json]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5249,8 +5435,6 @@ ibmcloud ks supported-locations [--json]
 List all the container platform versions that are available for {{site.data.keyword.containerlong_notm}} clusters. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
-
 The `kube-versions` alias for this command is deprecated.
 {: deprecated}
 
@@ -5258,6 +5442,10 @@ The `kube-versions` alias for this command is deprecated.
 ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5305,6 +5493,10 @@ To use the global functionality, you can use the `ibmcloud ks api` command again
 ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-version VALUE] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5370,6 +5562,10 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: None
 
 **Command options**:
@@ -5427,6 +5623,10 @@ ibmcloud ks region get
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: None
 
 </br>
@@ -5439,6 +5639,10 @@ List the available regions. The `Region Name` is the {{site.data.keyword.contain
 
 Region-specific endpoints are deprecated. Use the [global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint) instead.
 {: deprecated}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: None
 
@@ -5478,6 +5682,10 @@ ibmcloud ks region set --region REGION
 ```
 {: pre}
 
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
 **Minimum required permissions**: None
 
 **Command options**:
@@ -5505,7 +5713,27 @@ ibmcloud ks region set --region eu-central
 Rewrite scripts that call kubernetes-service commands. Legacy-structured commands are replaced with beta-structured commands. For a list of all changes between the legacy and beta formats, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](#cs_beta).
 {: shortdesc}
 
-<p class="note">Most command behavior and syntax changes in version 1.0. These changes are not backwards compatible. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run. Do not change the `IKS_BETA_VERSION` environment variable to a different version.</p>
+<p class="important">Most command behavior and syntax changes in version 1.0. These changes are not backwards compatible. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run. Do not change the `IKS_BETA_VERSION` environment variable to a different version.</p>
+
+```
+ibmcloud ks script update [--in-place] FILE [FILE ...]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
+**Minimum required permissions**: None
+
+**Command options**:
+<dl>
+<dt><code>--in-place</code></dt>
+<dd>Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.</dd>
+
+<dt><code><em>FILE [FILE ...]</em></code></dt>
+<dd>The file that contains the scripts that you want to update.</dd>
+</dl>
 
 To use this command to prepare your automation scripts for the release of version 1.0 of the kubernetes-service:
 1. Run the command on a test script without the `--in-place` flag.
@@ -5544,28 +5772,6 @@ To use this command to prepare your automation scripts for the release of versio
   {: pre}
 6. Test your automation with the updated script. Note that you might incur charges if your automation includes creating clusters.
 7. Update all of your scripts.
-
-```
-ibmcloud ks script update [--in-place] FILE [FILE ...]
-```
-{: pre}
-
-**Minimum required permissions**: None
-
-**Command options**:
-<dl>
-<dt><code>--in-place</code></dt>
-<dd>Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.</dd>
-
-<dt><code><em>FILE [FILE ...]</em></code></dt>
-<dd>The file that contains the scripts that you want to update.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks script update ./myscript.sh
-```
-{: pre}
 
 <br />
 
