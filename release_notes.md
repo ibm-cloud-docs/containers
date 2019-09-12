@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-09"
+lastupdated: "2019-09-12"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,12 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>12 September 2019</td>
+  <td><ul>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 554](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
+</tr>
 <tr>
   <td>06 September 2019</td>
   <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Chennai, India `che01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</td>
