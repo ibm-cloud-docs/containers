@@ -59,7 +59,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
-<td>556 / 340</td>
+<td>557 / 340</td>
 <td>12 Sept 2019</td>
 <td><ul>
 <li>Adds support for TLS 1.3. To enable TLS 1.3, [edit the `ibm-cloud-provider-ingress-cm` configmap](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers).</li>
