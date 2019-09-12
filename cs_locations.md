@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-12"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -130,7 +130,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | Europe | Germany | Frankfurt | fra02, fra04, fra05 | EU Central (`eu-central`, `eu-de`) |
 | Europe | Italy | Milan | mil01 | EU Central (`eu-central`, `eu-de`) |
 | Europe | The Netherlands | Amsterdam | ams03 | EU Central (`eu-central`, `eu-de`) |
-| Europe | Norway | Oslo | osl | EU Central (`eu-central`, `eu-de`) |
+| Europe | Norway | Oslo | osl01 | EU Central (`eu-central`, `eu-de`) |
 | Europe | United Kingdom | London | lon02`*`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | Canada | Montreal | mon01 | US East (`us-east`) |
 | North America | Canada | Toronto | tor01 | US East (`us-east`) |
