@@ -59,6 +59,16 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
+<td>554 / 340</td>
+<td>12 Sept 2019</td>
+<td><ul>
+<li>Adds support for TLS 1.3, which is enabled by default.</li>
+<li>Adds the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li>
+<li>Fixes a bug so that when traffic is routed to a host that does not exist, a default server now successfully returns a `404 Not Found` error message.</li>
+</ul></td>
+<td>-</td>
+</tr>
+<tr>
 <td>524 / 340</td>
 <td>05 Sept 2019</td>
 <td>Fixes HTTP/2 vulnerabilities for [CVE-2019-9511 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9511) and [CVE-2019-9513 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9513).</td>

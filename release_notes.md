@@ -46,6 +46,12 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
+  <td>12 September 2019</td>
+  <td><ul>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 554](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
+</tr>
+<tr>
   <td>05 September 2019</td>
   <td><strong>Ingress ALB changelog</strong>: Updated the ALB [`ingress-auth` image to build 340](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
 </tr>
@@ -448,5 +454,3 @@ The following icons are used to indicate if a release note applies only to a cer
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
-
-
