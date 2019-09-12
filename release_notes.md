@@ -458,5 +458,3 @@ The following icons are used to indicate if a release note applies only to a cer
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
-
-

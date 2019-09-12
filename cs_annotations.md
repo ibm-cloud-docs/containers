@@ -2656,5 +2656,3 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
   {: pre}
 
 5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
-
-
