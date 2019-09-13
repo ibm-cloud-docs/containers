@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-12"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2836,7 +2836,7 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 
 
 ## `alb` commands
-{: #alb}
+{: #alb-commands}
 
 View and configure an Ingress application load balancer (ALB).
 {: shortdesc}
