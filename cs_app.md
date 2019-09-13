@@ -280,7 +280,7 @@ template:
   <p>Specify the image that you want to use for your containers, the location of the image, and the image pull policy. If you do not specify an image tag, by default it pulls the image that is tagged `latest`.</p>
   <p>**Attention**: Avoid using the latest tag for production workloads. You might not have tested your workload with the latest image if you are using a public or shared repository, such as Docker Hub or {{site.data.keyword.registryshort_notm}}.</p>
   <p>For example, to list the tags of public IBM images:</p>
-  <ol><li>Switch to the global registry region.<pre class="pre"><code>ibmcloud cr region set global</code></pre></li>
+  <ol><li>Switch to the global registry region.<pre class="pre"><code>ibmcloud cr region-set global</code></pre></li>
   <li>List the IBM images.<pre class="pre"><code>ibmcloud cr images --include-ibm</code></pre></li></ol>
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
   <p><pre class="codeblock"><code>containers:
