@@ -59,7 +59,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
-<td>557 / 340</td>
+<td>552 / 340</td>
 <td>12 Sept 2019</td>
 <td><ul>
 <li>Adds the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li>
