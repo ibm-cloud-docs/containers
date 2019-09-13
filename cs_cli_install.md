@@ -30,6 +30,7 @@ subcollection: containers
 You can use the {{site.data.keyword.containerlong}} CLI to create and manage your Kubernetes clusters. To use the API, see [Setting up the API](/docs/containers?topic=containers-cs_api_install).
 {:shortdesc}
 
+
 ## Installing the IBM Cloud CLI and plug-ins
 {: #cs_cli_install_steps}
 
