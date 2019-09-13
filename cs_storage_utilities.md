@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -561,7 +561,7 @@ To attach the block storage device to a non-SDS worker node, you must create a p
       	</tr>
         <tr>
         <td><code>ibm.io/iqn</code></td>
-        <td>Enter the IQN host name that you retrieved earlier. </td>
+        <td>Enter the IQN hostname that you retrieved earlier. </td>
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>

@@ -148,7 +148,6 @@ IBM Cloud Kubernetes Service
 
     cs_locations.md
     cs_hybrid.md
-    cs_dedicated.md
     cs_integrations_overview.md
     cs_at_events.md
     cs_access_reference.md
@@ -172,3 +171,4 @@ IBM Cloud Kubernetes Service
     {: .navgroup-end}
 
     cs_tutorials_apps.md
+    cs_dedicated.md

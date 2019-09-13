@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, vpc
 
@@ -36,7 +36,7 @@ Review some known issues or common error messages that you might encounter when 
 {: #vpc_ts_lb}
 
 {: tsSymptoms}
-You publicly exposed your app by creating a Kubernetes `LoadBalancer` service in your VPC cluster. When you try to connect to your app by using the host name that is assigned to the Kubernetes `LoadBalancer`, the connection fails or times out.
+You publicly exposed your app by creating a Kubernetes `LoadBalancer` service in your VPC cluster. When you try to connect to your app by using the hostname that is assigned to the Kubernetes `LoadBalancer`, the connection fails or times out.
 
 When you run `kubectl describe svc <kubernetes_lb_service_name>`, you see a warning message similar to one of the following in the **Events** section:
 ```
@@ -78,7 +78,7 @@ The subnet with ID(s) '<subnet_id>' has insufficient available ipv4 addresses.
 {: screen}
 
 {: tsCauses}
-When you create a Kubernetes `LoadBalancer` service in your cluster, a VPC load balancer is automatically created in your VPC. The VPC load balancer puts a floating IP address for your Kubernetes `LoadBalancer` service behind a host name that you can access your app through.
+When you create a Kubernetes `LoadBalancer` service in your cluster, a VPC load balancer is automatically created in your VPC. The VPC load balancer puts a floating IP address for your Kubernetes `LoadBalancer` service behind a hostname that you can access your app through.
 
 In VPC clusters, both worker nodes and services are assigned IP addresses from the same subnets. Traffic routing is enabled between subnets, so when all IP addresses in a subnet for a zone are used by worker nodes or services, you can still create new worker nodes or services in that zone because they use IP addresses from subnets in other zones. However, if all IP addresses on all subnets are in use, a new Kubernetes `LoadBalancer` service cannot be successfully provisioned.
 
@@ -121,11 +121,11 @@ When you create a VPC cluster, one public and one private VPC load balancer is a
 * The VPC load balancer's DNS entry is still registering.
 
 {: tsResolve}
-Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the host names for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
+Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
   ```
   ibmcloud is load-balancers
   ```
   {: pre}
 
-* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To recreate the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's host name by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
+* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To recreate the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's hostname by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
 * If the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using. You can either wait for the hostname to be registered in your DNS, or access the VPC load balancer directly by using one of its IP addresses. To find the VPC load balancer IP addresses, look for the **Public IP** column in the output of `ibmcloud is load-balancers`. If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.

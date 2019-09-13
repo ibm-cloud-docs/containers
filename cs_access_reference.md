@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -124,16 +124,16 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Delete a log filtering configuration. | [`ibmcloud ks logging filter rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_delete) | [`DELETE /v1/logging/{idOrName}/filterconfigs/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfig) |
 | Delete all logging filter configurations for the Kubernetes cluster. | - | [`DELETE /v1/logging/{idOrName}/filterconfigs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/DeleteFilterConfigs) |
 | Update a log filtering configuration. | [`ibmcloud ks logging filter update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_update) | [`PUT /v1/logging/{idOrName}/filterconfigs/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/UpdateFilterConfig) |
-| Add one NLB IP address to an existing NLB host name. | [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add) | [`PUT /clusters/{idOrName}/add`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/UpdateDNSWithIP) |
-| Create a DNS host name to register an NLB IP address. | [`ibmcloud ks nlb-dns create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create) | [`POST /clusters/{idOrName}/register`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/RegisterDNSWithIP) |
-| List the NLB host names and IP addresses that are registered in a cluster. | [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls) | [`GET /clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/ListNLBIPsForSubdomain) |
-| Remove an NLB IP address from a host name. | [`ibmcloud ks nlb-dns rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm) | [`DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/UnregisterDNSWithIP) |
-| Configure and optionally enable a health check monitor for an existing NLB host name in a cluster. | [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure) | [`POST /health/clusters/{idOrName}/config`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/AddNlbDNSHealthMonitor) |
+| Add one NLB IP address to an existing NLB subdomain. | [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add) | [`PUT /clusters/{idOrName}/add`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/UpdateDNSWithIP) |
+| Create a DNS subdomain to register an NLB IP address. | [`ibmcloud ks nlb-dns create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create) | [`POST /clusters/{idOrName}/register`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/RegisterDNSWithIP) |
+| List the NLB subdomains and IP addresses that are registered in a cluster. | [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls) | [`GET /clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/ListNLBIPsForSubdomain) |
+| Remove an NLB IP address from a subdomain. | [`ibmcloud ks nlb-dns rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm) | [`DELETE /clusters/{idOrName}/host/{nlbHost}/ip/{nlbIP}/remove`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/UnregisterDNSWithIP) |
+| Configure and optionally enable a health check monitor for an existing NLB subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor configure`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-configure) | [`POST /health/clusters/{idOrName}/config`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/AddNlbDNSHealthMonitor) |
 | View the settings for an existing health check monitor. | [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-get) | [`GET /health/clusters/{idOrName}/host/{nlbHost}/config`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/GetNlbDNSHealthMonitor) |
-| Disable an existing health check monitor for a host name in a cluster. | [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable) | [`PUT /clusters/{idOrName}/health`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/UpdateNlbDNSHealthMonitor) |
+| Disable an existing health check monitor for a subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable) | [`PUT /clusters/{idOrName}/health`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/UpdateNlbDNSHealthMonitor) |
 | Enable a health check monitor that you configured. | [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable) | [`PUT /clusters/{idOrName}/health`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/UpdateNlbDNSHealthMonitor) |
-| List the health check monitor settings for each NLB host name in a cluster. | [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls) | [`GET /health/clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitors) |
-| List the health check status of each IP address that is registered with an NLB host name in a cluster. | [`ibmcloud ks nlb-dns monitor status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status) | [`GET /health/clusters/{idOrName}/status`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitorStatus) |
+| List the health check monitor settings for each NLB subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls) | [`GET /health/clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitors) |
+| List the health check status of each IP address that is registered with an NLB subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status) | [`GET /health/clusters/{idOrName}/status`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitorStatus) |
 | Create a webhook in a cluster. | [`ibmcloud ks webhook-create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create) | [`POST /v1/clusters/{idOrName}/webhooks`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWebhooks) |
 {: class="simple-tab-table"}
 {: caption="Overview of permissions required for CLI commands and API calls in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
@@ -579,7 +579,7 @@ A user with the **Super User** infrastructure access role [sets the API key for 
 {: shortdesc}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 {: note}
 
 

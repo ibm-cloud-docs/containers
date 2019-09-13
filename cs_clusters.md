@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -39,31 +39,36 @@ Have you created a cluster before and are just looking for quick example command
    ibmcloud ks cluster create classic --name my_cluster
    ```
    {: pre}
-*  **Standard cluster, shared virtual machine**:
+*  **Classic cluster, shared virtual machine**:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **Standard cluster, bare metal**:
+*  **Classic cluster, bare metal**:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **Standard cluster, virtual machine with public and private service endpoints in a VRF-enabled account**:
-   ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-service-endpoint --private-service-endpoint --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-   ```
-   {: pre}
-*  **Standard cluster that uses private VLANs and the private service endpoint only**:
+*  **Classic cluster that uses private VLANs and the private service endpoint only**:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
    ```
    {: pre}
-*   **For a multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
-    ```
-    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-    ```
-    {: pre}
+*  **For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
+   ```
+   ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+   ```
+   {: pre}
+* **VPC on Classic cluster**:
+   ```
+   ibmcloud ks cluster create vpc-classic --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
+   ```
+   {: pre}
+*  **For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
+   ```
+   ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
+   ```
+   {: pre}
 
 <br />
 
@@ -465,13 +470,13 @@ To create a VPC on Classic cluster:
     {: pre}
 
     <table>
-    <caption>cluster create classic components</caption>
+    <caption>Cluster create components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
     </thead>
     <tbody>
     <tr>
-    <td><code>cluster-create-vpc-classic</code></td>
+    <td><code>cluster create vpc-classic</code></td>
     <td>The command to create a standard VPC on Classic cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
     </tr>
     <tr>

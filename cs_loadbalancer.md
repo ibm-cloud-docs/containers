@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-05"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -187,7 +187,7 @@ To set up an NLB 1.0 service in a multizone cluster:
 
 7. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using an NLB service, see [Controlling inbound traffic to network load balancer (NLB) or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
-Next, you can [register an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname).
+Next, you can [register an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname).
 
 <br />
 
@@ -329,7 +329,7 @@ To create an NLB 1.0 service in a single-zone cluster:
 
 6. Optional: A load balancer service also makes your app available over the service's NodePorts. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address for every node within the cluster. To block traffic to NodePorts while you are using an NLB service, see [Controlling inbound traffic to network load balancer (NLB) or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
-Next, you can [register an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname).
+Next, you can [register an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname).
 
 <br />
 

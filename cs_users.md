@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -28,6 +28,7 @@ subcollection: containers
 
 As a cluster administrator, you can define access policies for your {{site.data.keyword.containerlong}} clusters to create different levels of access for different users. For example, you can authorize certain users to work with cluster infrastructure resources and others to deploy only containers.
 {: shortdesc}
+
 
 ## Understanding access policies and roles
 {: #access_policies}
@@ -201,7 +202,7 @@ For VPC clusters, you must have the {{site.data.keyword.cloud_notm}} IAM **Admin
 
 For both [classic and VPC clusters](/docs/containers?topic=containers-infrastructure_providers), these infrastructure credentials are stored in an API key for the region and resource group of the cluster. To create and manage clusters after the infrastructure permissions are set, assign users IAM access roles to the {{site.data.keyword.containerlong_notm}}.
 
-Unlike classic, VPC does not support manually setting infrastructure credentials (`ibmcloud ks credential set`) to use another IBM Cloud infrastructure account to provision worker nodes. You must use you {{site.data.keyword.cloud_notm}} account's linked infrastructure portfolio.
+Unlike classic, VPC does not support manually setting infrastructure credentials (`ibmcloud ks credential set`) to use another IBM Cloud infrastructure account to provision worker nodes. You must use your {{site.data.keyword.cloud_notm}} account's linked infrastructure portfolio.
 {: important}
 
 
@@ -1086,7 +1087,7 @@ When you assign the **Super User** infrastructure role to the admin who sets the
 {: shortdesc}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 {: note}
 
 
@@ -1104,7 +1105,7 @@ You can grant classic infrastructure access through the [console](#infra_console
 {: #infra_console}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 {: note}
 
 
@@ -1137,7 +1138,7 @@ Downgrading permissions? The action can take a few minutes to complete.
 {: #infra_cli}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 {: note}
 
 
@@ -1354,7 +1355,7 @@ You can remove IBM Cloud infrastructure permissions for a user by using the {{si
 {: shortdesc}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-assigning-role-based-access-to-vpc-resources).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 {: note}
 
 
@@ -1365,3 +1366,4 @@ Classic infrastructure permissions apply only to classic clusters. For VPC clust
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
 
 
+ 

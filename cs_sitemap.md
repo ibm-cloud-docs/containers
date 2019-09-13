@@ -368,7 +368,7 @@ lastupdated: "2019-09-05"
     * [Installing managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_install_cli)
 * [Trying out the BookInfo sample app](/docs/containers?topic=containers-istio#istio_bookinfo)
   * [Publicly accessing BookInfo](/docs/containers?topic=containers-istio#istio_access_bookinfo)
-  * [Exposing BookInfo by using an IBM-provided host name](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
+  * [Exposing BookInfo by using an IBM-provided subdomain](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
   * [Understanding what happened](/docs/containers?topic=containers-istio#istio_bookinfo_understanding)
 * [Logging, monitoring, tracing, and visualizing Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_health)
   * [Launching the Grafana, Jaeger, and Kiali dashboards](/docs/containers?topic=containers-istio#istio_health_extras)
@@ -377,7 +377,7 @@ lastupdated: "2019-09-05"
 * [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio#istio_sidecar)
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio#istio_sidecar_automatic)
   * [Manually injecting sidecars](/docs/containers?topic=containers-istio#istio_sidecar_manual)
-* [Exposing Istio-managed apps by using an IBM-provided host name](/docs/containers?topic=containers-istio#istio_expose)
+* [Exposing Istio-managed apps by using an IBM-provided subdomain](/docs/containers?topic=containers-istio#istio_expose)
 * [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update)
 * [Uninstalling Istio](/docs/containers?topic=containers-istio#istio_uninstall)
   * [Uninstalling managed Istio add-ons from the console](/docs/containers?topic=containers-istio#istio_uninstall_ui)
@@ -535,11 +535,11 @@ lastupdated: "2019-09-05"
   * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
   * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
-[Registering an NLB host name](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
-* [Registering load balancer IPs with a DNS host name](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
-* [Understanding the host name format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
-* [Enable health checks on a host name by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
-  * [Updating and removing IPs and monitors from host names](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+[Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+* [Registering load balancer IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
+* [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
+* [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
+  * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
 ## HTTPS load balancing with Ingress application load balancers (ALB)
 {: #sitemap-ingress}
@@ -639,7 +639,7 @@ lastupdated: "2019-09-05"
 * [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
-* [Expose your Ingress controller by creating an NLB and a host name](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [Expose your Ingress controller by creating an NLB and a subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

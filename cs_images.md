@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -684,6 +684,45 @@ Every namespace has a Kubernetes service account that is named `default`. You ca
 <br />
 
 
+## Setting up a cluster to pull entitled software
+{: #secret_entitled_software}
+
+You can set up your {{site.data.keyword.containerlong_notm}} cluster to pull entitled software, which is a collection of protected container images that are packaged in Helm charts that you are licensed to use by IBM. Entitled software is stored in a special {{site.data.keyword.registrylong_notm}} `cp.icr.io` domain. To access this domain, you must create an image pull secret with an entitlement key for your cluster and add this image pull secret to the Kubernetes service account of each namespace where you want to deploy this entitled software.
+{: shortdesc}
+
+Do you have older entitled software from Passport Advantage? Use the [PPA importer tool](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer) instead to deploy this software in your cluster.
+{: tip}
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Get the entitlement key for your entitled software library.
+    1.  Log in to [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) and scroll to the **Container software library** section. Click **View library**.
+    2.  From the **Access your container software > Entitlement keys** page, click **Copy key**. This key authorizes access to all the entitled software in your container software library.
+2.  In the namespace that you want to deploy your entitled containers, create an image pull secret so that you can access the `cp.icr.io` entitled registry. For more information, see [Accessing images that are stored in other private registries](/docs/containers?topic=containers-images#private_images).
+    ```
+    kubectl create secret docker-registry entitled-cp-icr-io --docker-server=cp.icr.io --docker-username=cp --docker-password=<entitlement_key> --docker-email=<docker_email> -n <namespace>
+    ```
+    {: pre}
+3.  Add the image to the service account of the namespace so that any container in the namespace can use the entitlement key to pull entitled images. For more information, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
+    ```
+    kubectl patch -n <namespace> serviceaccount/default --type='json' p='[{"op":"add","path":"/imagePullSecrets/","value":{"name":"entitled-cp-icr-io"}}]'
+    ```
+    {: pre}
+4.  Create a pod in the namespace that builds a container from an image in the entitled registry.
+    ```
+    kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace>
+    ```
+    {: pre}
+5.  Check that your container was able to successfully build from the entitled image by verifying that the pod is in a **Running** status.
+    ```
+    kubectl get pod <pod_name> -n <namespace>
+    ```
+    {: pre}
+
+Wondering what to do next? You can [set up the **ibm-marketplace** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add ibm-marketplace https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
+{: tip}
+
+<br />
 
 
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-06"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -47,11 +47,11 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 {: shortdesc}
 
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-helm).
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `iks-charts` repository to your Helm instance](/docs/containers?topic=containers-helm).
 
 2. Install the Helm chart to your cluster.
   ```
-  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool --namespace kube-system
   ```
   {: pre}
 
@@ -62,7 +62,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   ```
   {: pre}
 
-4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
 
 5. Select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
 
@@ -226,7 +226,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-4. Ensure that the IPs for each public ALB that you got in step 2 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same host name.
+4. Ensure that the IPs for each public ALB that you got in step 2 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same subdomain.
 
     ```
     kubectl get ingress -o wide
@@ -329,7 +329,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
         ```
         {: pre}
 
-        Example output that confirms the ALB pod is configured with the correct health check host name, `albhealth.<domain>`:
+        Example output that confirms the ALB pod is configured with the correct health check subdomain, `albhealth.<domain>`:
         ```
         server_name albhealth.mycluster-12345.us-south.containers.appdomain.cloud;
         ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,17 +39,38 @@ The following icons are used to indicate if a release note applies only to a cer
 {: #sept19}
 
 <table summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
-<caption>Documentation updates in August 2019</caption>
+<caption>Documentation updates in September 2019</caption>
 <thead>
 <th>Date</th>
 <th>Description</th>
 </thead>
 <tbody>
 <tr>
+  <td>13 September 2019</td>
+  <td><ul>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
+    <li>[Security information for OpenShift clusters](/docs/openshift?topic=openshift-security). 
+    <li>[Accessing clusters](/docs/openshift?topic=openshift-openshift_access_cluster).</li>
+    <li>[App networking options](/docs/openshift?topic=openshift-openshift_routes) with comparisons of routes, NodePort, load balancers, and Ingress.</li>
+    <li>[Common app modification scenarios](/docs/openshift?topic=openshift-openshift_apps#common-app-modification-scenarios) for moving apps from community Kubernetes to OpenShift.</li>
+    <li>Updated [pricing FAQ](/docs/openshift?topic=openshift-faqs#openshift_charges) to explain the monthly license in more detail.</li>
+    <li>[Resizing and externally exposing the internal registry](/docs/openshift?topic=openshift-openshift-images#openshift_internal_registry).</li>
+    <li>[Tutorial overview](/docs/openshift?topic=openshift-tutorials-ov) with links to tutorials.</li>
+    <li>[Using the internal registry in OpenShift](/docs/openshift?topic=openshift-openshift-images#openshift_internal_registry)</ul>
+  </li>
+    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</li>
+  <li><strong>`script update` command</strong>: Added [steps for using the `script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in.</li>
+  </ul></td>
+</tr>
+<tr>
   <td>12 September 2019</td>
   <td><ul>
   <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 552](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
+</tr>
+<tr>
+  <td>06 September 2019</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Chennai, India `che01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</td>
 </tr>
 <tr>
   <td>05 September 2019</td>
@@ -59,7 +80,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>04 September 2019</td>
   <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.3](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>IAM whitelisting</strong>: If you use an IAM whitelist, you must [whitelist the CIDRs of the {{site.data.keyword.containerlong_notm}} control plane](/docs/containers?topic=containers-firewall#iam_whitelist) for the zones in the region where your cluster is located so that {{site.data.keyword.containerlong_notm}} can create Ingress ALBs and `LoadBalancers` in your cluster.</li>
-  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Montreal `mon01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li></ul></td>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Montreal, Canada `mon01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li></ul></td>
 </tr>
 <tr>
   <td>03 September 2019</td>
@@ -83,7 +104,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>30 August 2019</td>
-  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Paris `par01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Paris, France `par01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</td>
 </tr>
 <tr>
   <td>29 August 2019</td>
@@ -102,12 +123,12 @@ The following icons are used to indicate if a release note applies only to a cer
   <td><ul>
   <li><strong>Cluster autoscaler</strong>: With the latest version of the cluster autoscaler, you can [enable autoscaling for worker pools during the Helm chart installation](/docs/containers?topic=containers-ca#ca_helm) instead of modifying the config map after installation.</li>
     <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 524 and `ingress-auth` image to build 337](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Seoul `seo01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li></ul></td>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Seoul, Korea `seo01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li></ul></td>
 </tr>
 <tr>
   <td>23 August 2019</td>
   <td><ul>
-  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone locations for OpenShift clusters</strong>: You can create OpenShift clusters in Toronto `tor01` and Singapore `sng01` single zone locations. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone locations for OpenShift clusters</strong>: You can create OpenShift clusters in Toronto, Canada `tor01` and Singapore `sng01` single zone locations. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li>
   <li><strong>App networking in VPC</strong>: Updated the [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning) topic with information for planning app networking in a VPC on Classic cluster.</li>
   <li><strong>Istio in VPC</strong>: Updated the [managed Istio add-on](/docs/containers?topic=containers-istio) topic with information for using Istio in a VPC on Classic cluster.</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Remove bound services from cluster</strong>: Added instructions for how to remove an {{site.data.keyword.cloud_notm}} service that you added to a cluster by using service binding. For more information, see [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service).</li>
@@ -454,3 +475,5 @@ The following icons are used to indicate if a release note applies only to a cer
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
+
+

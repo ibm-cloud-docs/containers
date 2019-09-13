@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks, containers
 
@@ -90,7 +90,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#clusters_gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support, and choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support. Choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
     </div>
     </a>
 </div>
@@ -120,13 +120,13 @@ Kubernetes is an open source platform for managing containerized workloads and s
 **What container platform can I choose from?** </br>
 With {{site.data.keyword.containerlong_notm}}, you can select from two container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. In community Kubernetes clusters, you get access to community Kubernetes API features that are considered beta or higher by the community. Your worker nodes are set up with an Ubuntu operating system and you can use native Kubernetes commands or APIs to work with your cluster and the cluster resources. Red Hat OpenShift on IBM Cloud is a Kubernetes-based platform that is designed especially to accelerate your containerized app delivery processes that run on a Red Hat Enterprise Linux 7 operating system. For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
 
-In this getting started tutorial, you create a community Kubernetes cluster. If you want to create an OpenShift instead, see [Getting started with {{site.data.keyword.openshiftlong}}](/docs/openshift?topic=openshift-getting-started).
+In this getting started tutorial, you create a community Kubernetes cluster. If you want to create an OpenShift cluster instead, see [Getting started with {{site.data.keyword.openshiftlong}}](/docs/openshift?topic=openshift-getting-started).
 {: note}
 
 **What compute host infrastructure does the service offer?** </br>
 With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure., or VPC on Classic infrastructure. 
 
-[Classic clusters](#clusters_gs) are created on virtual or bare metal worker nodes that are connected to VLANs. In a classic cluster, you can choose from a variety of virtual and bare metal worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
+[Classic clusters](#clusters_gs) are created on your choice of virtual or bare metal worker nodes that are connected to VLANs. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
 
 [VPC on Classic clusters](#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use security groups as your virtual firewalls for instance-level protection, and network access control lists to protect the subnets that your worker nodes are connected to. VPC on Classic clusters can be provisioned on shared virtual infrastructure only.

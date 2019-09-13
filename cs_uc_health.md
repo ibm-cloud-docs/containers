@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-09-12"
 
 keywords: kubernetes, iks
 
@@ -53,7 +53,6 @@ Accelerated development is a key win for the IT Exec. With the move to public cl
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive patient workloads now have familiar isolation but within the flexibility of public cloud. From that core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
 * Policy scanning based on ISO 27k
-* Live container scanning
 * Package scanning for known malware
 
 Secure patient data leads to happier patients.
@@ -165,7 +164,6 @@ Developers started by deploying their research-sharing SaaS apps in containers w
 Security first: The Development Exec chose bare metal to host the research clusters. With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive research workloads now have familiar isolation but within the flexibility of public cloud. Because this nonprofit also has a partnership with pharmaceutical companies, app security is crucial. Competition is fierce, and corporate espionage is possible. From that secure core, Vulnerability Advisor provides scanning:
 * Image vulnerability scanning
 * Policy scanning based on ISO 27k
-* Live container scanning
 * Package scanning for known malware
 
 Secured research apps lead to increased clinical trial participation.

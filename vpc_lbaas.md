@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -31,7 +31,6 @@ Set up a Load Balancer for VPC to expose your app on the public or private netwo
 {: shortdesc}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC on Classic clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
-{: note}
 
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
@@ -40,14 +39,14 @@ When you create a Kubernetes `LoadBalancer` service for an app in your cluster, 
 {: shortdesc}
 
 The VPC load balancer serves as the external entry point for incoming requests for the app.
-* If you create a public Kubernetes `LoadBalancer` service, you can access your app from the internet through the host name that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
-* If you create a private Kubernetes `LoadBalancer` service, your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the host name that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`.
+* If you create a public Kubernetes `LoadBalancer` service, you can access your app from the internet through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
+* If you create a private Kubernetes `LoadBalancer` service, your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`.
 
 The following diagram illustrates how a user accesses an app from the internet through the VPC load balancer.
 
 <img src="images/vpc_tutorial_lesson4_lb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
 
-A request to your app uses the host name that is assigned to the Kubernetes `LoadBalancer` service by the VPC load balancer. The request is automatically forwarded by the VPC load balancer to one of the node ports on the worker, and further to the private IP address of the app pod. If app instances are deployed to multiple worker nodes in the cluster, the load balancer routes the requests between the app pods on various worker nodes. Additionally, if you have a multizone cluster, the VPC load balancer routes requests to worker nodes across all subnets and zones in your cluster.
+A request to your app uses the hostname that is assigned to the Kubernetes `LoadBalancer` service by the VPC load balancer. The request is automatically forwarded by the VPC load balancer to one of the node ports on the worker, and further to the private IP address of the app pod. If app instances are deployed to multiple worker nodes in the cluster, the load balancer routes the requests between the app pods on various worker nodes. Additionally, if you have a multizone cluster, the VPC load balancer routes requests to worker nodes across all subnets and zones in your cluster.
 
 <br />
 
@@ -130,9 +129,9 @@ Expose your app to the public or to the private network by setting up a Kubernet
   ```
   {: pre}
 
-4. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the service is created, the **LoadBalancer Ingress** field is populated with a host name that is assigned by the VPC load balancer.
+4. Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the service is created, the **LoadBalancer Ingress** field is populated with a hostname that is assigned by the VPC load balancer.
 
-  **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access your app by using the host name of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
+  **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access your app by using the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
   {: note}
   ```
   kubectl describe svc myloadbalancer
@@ -181,7 +180,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
   ```
   {: screen}
 
-5. If you created a public `LoadBalancer` service, curl the host name of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer.
+5. If you created a public `LoadBalancer` service, curl the hostname of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer.
   Example:
   ```
   curl 06496f64-us-south.lb.appdomain.cloud:8080
@@ -194,7 +193,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
   ```
   {: screen}
 
-  If you created a private `LoadBalancer` service, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to curl the host name.
+  If you created a private `LoadBalancer` service, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to curl the hostname.
   {: tip}
 
 <br />

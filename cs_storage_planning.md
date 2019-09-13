@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-28"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks
 
@@ -295,6 +295,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 <img src="images/cs_storage_options_multizone.png" alt="High availability options for persistent storage in a multizone cluster"/>
 
+
 <table>
 <thead>
 <th style="text-align:left">Characteristics</th>
@@ -336,7 +337,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <tr>
 <td style="text-align:left">Supported Kubernetes access writes</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">ReadWriteMany (RWX)</li><li style="margin:0px; padding:0px"> ReadOnlyMany (ROX)</li><li style="margin:0px; padding:0px">ReadWriteOnce (RWO)</li></ul></td>
-<td style="text-align:left">All</td>
+   <td style="text-align:left">All</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">N/A as accessed from the app directly</li></ul></td>
 </tr>
 <tr>
@@ -348,7 +349,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <tr>
 <td style="text-align:left">Consistency</td>
 <td style="text-align:left">Eventual</td>
-<td style="text-align:left">Strong</td>
+   <td style="text-align:left">Strong</td>
 <td style="text-align:left">Depends on the DBaaS</td>
 </tr>
 <tr>
@@ -397,7 +398,7 @@ nodes. Every node stores only a part of the data. </td>
 <tr>
 <td style="text-align:left">Non-ideal use cases</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">Write-intensive workloads</li><li style="margin:0px; padding:0px">Random write operations</li><li style="margin:0px; padding:0px">Incremental data updates</li><li style="margin:0px; padding:0px">Transaction databases</li></ul></td>
-<td style="text-align:left">N/A</td>
+   <td style="text-align:left">N/A</td>
 <td style="text-align:left"><ul style="margin:0px 0px 0px 20px; padding:0px"><li style="margin:0px; padding:0px">App that is designed to write to a file system</li></ul></td>
 </tr>
 </tbody>

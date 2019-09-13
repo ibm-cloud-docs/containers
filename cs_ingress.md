@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -149,7 +149,7 @@ If the apps in your cluster are all in the same namespace, one Ingress resource 
 If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there.
 {: shortdesc}
 
-However, you can define a host name in only one resource. You cannot define the same host name in multiple resources. To register multiple Ingress resources with the same host name, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
+However, you can define a hostname in only one resource. You cannot define the same hostname in multiple resources. To register multiple Ingress resources with the same hostname, you must use a wildcard domain. When a wildcard domain such as `*.domain.net` is registered, multiple subdomains can all resolve to the same host. Then, you can create an Ingress resource in each namespace and specify a different subdomain in each Ingress resource.
 
 For example, consider the following scenario:
 * You have two versions of the same app, `app1` and `app3`, for testing purposes.
@@ -441,8 +441,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <td>Replace <em>&lt;app_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to the IBM-provided or your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
     </br></br>
     Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://domain/app1_path</code>, enter <code>/app1_path</code> as the path.</li></ul>
-    </br>
-    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</td>
+    <p class="tip">To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</p></td>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
@@ -610,17 +609,17 @@ To expose apps that are outside your cluster to the public:
 <br />
 
 
-## Exposing apps to a private network
+## Classic clusters: Exposing apps to a private network
 {: #ingress_expose_private}
 
-Expose apps to a private network by using the private Ingress ALB.
+Expose apps to a private network by using the private Ingress ALBs in a classic cluster.
 {:shortdesc}
 
-To use a private ALB, you must first enable the private ALB. Because private VLAN-only clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
+To use a private ALB, you must first enable the private ALB. Because private VLAN-only classic clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
 
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
-* If you have a classic cluster with worker nodes that are connected to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan), or if you have VPC cluster, you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+* If you have a classic cluster with worker nodes that are connected to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 
 ### Step 1: Deploy apps and create app services
 {: #private_1}
@@ -694,30 +693,18 @@ When you create a standard cluster, a private ALB is created in each zone that y
     ```
     {: screen}
 
-2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
-  * Classic clusters: If you want to specify an IP address for the ALB, include the IP address in the `--user-ip` flag.
-    ```
-    ibmcloud ks alb configure classic --alb-id <private_ALB_ID> --enable [--user-ip <user_IP>]
-    ```
-    {: pre}
-  * VPC clusters:
-    ```
-    ibmcloud ks alb configure vpc-classic --alb-id <private_ALB_ID> --enable
-    ```
-    {: pre}
-    </br>
+2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--user-ip` flag.
+  ```
+  ibmcloud ks alb configure vpc-classic --alb-id <private_ALB_ID> --enable
+  ```
+  {: pre}
+  </br>
 
 ### Step 3: Map your custom domain
 {: #private_3}
 
 When you configure the private ALBs, you must expose your apps by using a custom domain.
 {: shortdesc}
-
-**VPC clusters:**
-
-1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
-2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
-3. Using your private DNS service, define an alias for your custom domain by specifying the VPC load balancer-assigned private host name as a Canonical Name record (CNAME). To find the host name assigned by your cluster's VPC load balancer for your private ALBs, run `ibmcloud ks alb ls --cluster <cluster_name_or_ID>`. In the output, look for the **Load Balancer Hostname** field of your private ALBs. </br>
 
 **Private VLAN-only classic clusters:**
 
@@ -846,8 +833,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <td>Replace <em>&lt;app_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app is running.
     </br></br>
     Many apps do not listen on a specific path, but use the root path and a specific port. In this case, define the root path as <code>/</code> and do not specify an individual path for your app. Examples: <ul><li>For <code>http://domain/</code>, enter <code>/</code> as the path.</li><li>For <code>http://domain/app1_path</code>, enter <code>/app1_path</code> as the path.</li></ul>
-    </br>
-    <strong>Tip:</strong> To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</td>
+    <p class="tip">To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</p>
     </tr>
     <tr>
     <td><code>serviceName</code></td>
@@ -914,3 +900,5 @@ http://<subdomain2>.<domain>/<app1_path>
 
 For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2).
 {: tip}
+
+
