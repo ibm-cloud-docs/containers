@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-12"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,22 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>13 September 2019</td>
+  <td><ul>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
+    <li>[Security information for OpenShift clusters](/docs/openshift?topic=openshift-security). 
+    <li>[Accessing clusters](/docs/openshift?topic=openshift-openshift_access_cluster).</li>
+    <li>[App networking options](/docs/openshift?topic=openshift-openshift_routes) with comparisons of routes, NodePort, load balancers, and Ingress.</li>
+    <li>[Common app modification scenarios](/docs/openshift?topic=openshift-openshift_apps#common-app-modification-scenarios) for moving apps from community Kubernetes to OpenShift.</li>
+    <li>Updated [pricing FAQ](/docs/openshift?topic=openshift-faqs#openshift_charges) to explain the monthly license in more detail.</li>
+    <li>[Resizing and externally exposing the internal registry](/docs/openshift?topic=openshift-openshift-images#openshift_internal_registry).</li>
+    <li>[Tutorial overview](/docs/openshift?topic=openshift-tutorials-ov) with links to tutorials.</li>
+    <li>[Using the internal registry in OpenShift](/docs/openshift?topic=openshift-openshift-images#openshift_internal_registry)</ul>
+  </li>
+  <li><strong>`script update` command</strong>: Added [steps for using the `script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in.</li>
+  </ul></td>
+</tr>
 <tr>
   <td>12 September 2019</td>
   <td><ul>
