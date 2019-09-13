@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-10"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, containers
 
@@ -56,7 +56,7 @@ These components include:
 ##Kubernetes API server and etcd
 {: #apiserver}
 
-The Kubernetes API server and etcd data store are the most vulnerable components that run in your Kubernetes master. If an unauthorized user or system gets access to your Kubernetes API server, the user or system can change settings, manipulate, or take control of your cluster, which puts your cluster at risk for malicious attacks.
+The Kubernetes API server and etcd data store are the most sensitive components that run in your Kubernetes master. If an unauthorized user or system gets access to your Kubernetes API server, the user or system can change settings, manipulate, or take control of your cluster, which puts your cluster at risk for malicious attacks.
 {: shortdesc}
 
 To protect your Kubernetes API server and etcd data store, you must secure and limit the access to your Kubernetes API server for both human users and Kubernetes service accounts.
@@ -87,7 +87,7 @@ The following image shows the default cluster security settings that address aut
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
           
-          <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet.  </li></ul></td>
+          <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.  </li></ul></td>
     </tr>
     <tr>
     <td>Continuous monitoring by IBM Site Reliability Engineers (SREs)</td>
@@ -131,7 +131,7 @@ The following image shows the default cluster security settings that address aut
 </table>
 
 **What else can I do to secure my Kubernetes API server?**</br>
-You can decide how you want your master and worker nodes to communicate and how your cluster users can access the Kubernetes API server by enabling the public service endpoint only, public and private service endpoints, or the private service endpoint only. 
+You can decide how you want your master and worker nodes to communicate and how your cluster users can access the Kubernetes API server by enabling the private service endpoint only, the public service endpoint only, or the public and private service endpoints. 
 
 For more information about service endpoints, see worker-to-master and user-to-master communication in [classic clusters](/docs/containers?topic=containers-plan_clusters#workeruser-master) and [VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master).
 
@@ -152,6 +152,8 @@ The ownership of a worker node depends on the type of cluster that you create an
 - **Standard VPC clusters**: Worker nodes are provisioned in to an {{site.data.keyword.cloud_notm}} account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You cannot access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the {{site.data.keyword.containerlong_notm}} console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.  
 
 
+
+For more information, see [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks).
 
 Use the `ibmcloud ks worker update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) regularly (such as monthly) to deploy updates and security patches to the operating system and to update the Kubernetes version that your worker nodes run. When updates are available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the `ibmcloud ks clusters ls` or `ibmcloud ks workers ls --cluster <cluster_name>` commands. Worker node updates are provided by IBM as a full worker node image that includes the latest security patches. To apply the updates, the worker node must be reimaged and reloaded with the new image. Keys for the root user are automatically rotated when the worker node is reloaded.
 {: important}
@@ -214,7 +216,10 @@ The classic approach to protect a company's network is to set up a firewall and 
 To protect your network and limit the range of damage that a user can do when access to a network is granted, you must make sure that your workloads are as isolated as possible and that you limit the number of apps and worker nodes that are publicly exposed.
 
 **What network traffic is allowed for my cluster by default?**</br>
-All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked, except a few ports that are opened so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master. Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions: 
+- **NodePort**: The [Kubernetes NodePort range ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport) is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress). 
+- **IBM monitoring ports**: By default, IBM opens a few ports on your cluster so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master.
+Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
 **What is network segmentation and how can I set it up for a cluster?** </br>
 Network segmentation describes the approach to divide a network into multiple subnetworks. You can group apps and related data to be accessed by a specific group in your organization. Apps that run in one subnetwork cannot see or access apps in another subnetwork. Network segmentation also limits the access that is provided to an insider or third-party software and can limit the range of malicious activities.   
@@ -238,7 +243,7 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 |Security feature|Description|
 |-------|----------------------------------|
 |Limit the number of exposed apps|By default, your apps and services that run within the cluster are not reachable over the public internet. You can choose if you want to expose your apps to the public, or if you want your apps and services be reachable on the private network only. When you keep your apps and services private, you can leverage the built-in security features to assure secured communication between worker nodes and pods. To expose services and apps to the public internet, you can leverage the [NLB and Ingress ALB support](/docs/containers?topic=containers-cs_network_planning#external) to securely make your services publicly available. Ensure that only necessary services are exposed, and revisit the list of exposed apps regularly to ensure that they are still valid. |
-|Keep worker nodes private|When you create a cluster, every cluster is automatically connected to a private VLAN. The private VLAN determines the private IP address that is assigned to a worker node. You can choose to keep your worker nodes private by connecting them to a private VLAN only. Private VLANs in free clusters are managed by IBM, and private VLANs in standard clusters are managed by you in your {{site.data.keyword.cloud_notm}} account. </br></br><strong>Attention:</strong> Keep in mind that in order to communicate with the Kubernetes master and for {{site.data.keyword.containerlong_notm}} to properly function, you must configure public connectivity to [specific URLs and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound). To set up this public connectivity, you can configure a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), in front of your worker nodes and enable network traffic to these URLs and IP addresses.|
+|Keep worker nodes private|When you create a cluster, every cluster is automatically connected to a private VLAN. The private VLAN determines the private IP address that is assigned to a worker node. You can choose to keep your worker nodes private by connecting them to a private VLAN only. Private VLANs in free clusters are managed by IBM, and private VLANs in standard clusters are managed by you in your {{site.data.keyword.cloud_notm}} account. </br></br><strong>Attention:</strong> Keep in mind that in order to communicate with the Kubernetes master from your local machine and for {{site.data.keyword.containerlong_notm}} to connect to {{site.data.keyword.cloud_notm}} services that do not support a private service endpoint, you must configure public connectivity to [specific URLs and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound). If the {{site.data.keyword.cloud_notm}} services that you want to connect to have a private service endpoint and your account is enabled for VRF, network traffic to and from these services is automatically routed over the private network and no public network connection is required. To set up public connectivity for cluster that is connected to a private VLAN only, you can configure a firewall, such as a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra), in front of your worker nodes and enable network traffic to these URLs and IP addresses.|
 |Limit public internet connectivity with edge nodes|By default, every worker node is configured to accept app pods and associated load balancer or ingress pods. You can label worker nodes as [edge nodes](/docs/containers?topic=containers-edge#edge) to force load balancer and ingress pods to be deployed to these worker nodes only. In addition, you can [taint your worker nodes](/docs/containers?topic=containers-edge#edge_workloads) so that app pods cannot schedule onto the edge nodes. With edge nodes, you can isolate the networking workload on fewer worker nodes in your cluster and keep other worker nodes in the cluster private.|
 {: caption="Private services and worker node options" caption-side="top"}
 
@@ -261,7 +266,7 @@ In version 2.0 NLBs, the source IP address of the client request is preserved by
 
 Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies. To preserve the original source IP address of the client request, you can enable source IP preservation for [version 1.0 NLBs](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) or [Ingress ALBs](/docs/containers?topic=containers-ingress-settings#preserve_source_ip).
 
-**How can I encrypt traffic with TLS?** </br>
+**How can I do TLS termination with LoadBalancer and Ingress services?** </br>
 The Ingress service offers TLS termination at two points in the traffic flow:
 * [Decrypt package upon arrival](/docs/containers?topic=containers-ingress#public_inside_2): By default, the Ingress ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. If you use a custom domain, you can use your own TLS certificate to manage TLS termination.
 * [Re-encrypt package before you forward it to upstream apps](/docs/containers?topic=containers-ingress_annotation#ssl-services): The ALB decrypts HTTPS requests before forwarding traffic to your apps. If you have apps that require HTTPS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a one-way or mutual-authentication TLS secret.
