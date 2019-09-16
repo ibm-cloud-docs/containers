@@ -49,8 +49,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>16 September 2019</td>
   <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.23](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>{{site.data.keyword.at_full_notm}} events</strong>: Added information about [which {{site.data.keyword.at_short}} location your events are sent to](/docs/containers?topic=containers-at_events#at-ui) based on the {{site.data.keyword.containerlong_notm}} location where the cluster is located.</li>
-  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.15.3_1517](/docs/containers?topic=containers-changelog#1153_1517_worker), [1.14.6_1533](/docs/containers?topic=containers-changelog#1146_1533_worker), [1.13.10_1536](/docs/containers?topic=containers-changelog#11310_1536_worker), and [1.12.10_1567](/docs/containers?topic=containers-changelog#11210_1567_worker). Master fix pack updates are available for OpenShift [3.11.141_1524](/docs/openshift?topic=openshift-openshift_changelog#311141_1524).</li></ul>
-  </ul></td>
+  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.15.3_1517](/docs/containers?topic=containers-changelog#1153_1517_worker), [1.14.6_1533](/docs/containers?topic=containers-changelog#1146_1533_worker), [1.13.10_1536](/docs/containers?topic=containers-changelog#11310_1536_worker), and [1.12.10_1567](/docs/containers?topic=containers-changelog#11210_1567_worker). Master fix pack updates are available for OpenShift [3.11.141_1524](/docs/openshift?topic=openshift-openshift_changelog#311141_1524).</li></td>
 </tr>
 <tr>
   <td>13 September 2019</td>
