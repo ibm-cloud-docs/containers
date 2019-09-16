@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-16"
 
 keywords: kubernetes, iks, versions, update
 
@@ -22,6 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+{:external: target="_blank" .external}
 
 
 
@@ -48,6 +49,44 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+### Changelog for worker node fix pack 1.15.3_1517, released 16 September 2019
+{: #1153_1517_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.15.3_1517.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.3_1516">
+<caption>Changes since version 1.15.3_1516</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.8</td>
+<td>v1.2.9</td>
+<td>See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.2.9){:external}. Update resolves [CVE-2019-9515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-159-generic</td>
+<td>4.4.0-161-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2015-9383](https://nvd.nist.gov/vuln/detail/CVE-2015-9383){:external}, [CVE-2019-10638](https://nvd.nist.gov/vuln/detail/CVE-2019-10638){:external}, [CVE-2019-3900](https://nvd.nist.gov/vuln/detail/CVE-2019-3900){:external}, [CVE-2019-13648](https://nvd.nist.gov/vuln/detail/CVE-2019-13648){:external}, [CVE-2018-20856](https://nvd.nist.gov/vuln/detail/CVE-2018-20856){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external},    [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2018-20406](https://nvd.nist.gov/vuln/detail/CVE-2018-20406){:external}, and [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-58-generic</td>
+<td>4.15.0-62-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}, and [CVE-2019-15718](https://nvd.nist.gov/vuln/detail/CVE-2019-15718){:external}.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.15.3_1516, released 3 September 2019
 {: #1153_1516_worker}
@@ -381,6 +420,44 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
+{: #1146_1533_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.6_1533.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.6_1532">
+<caption>Changes since version 1.14.6_1532</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.8</td>
+<td>v1.2.9</td>
+<td>See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.2.9){:external}. Update resolves [CVE-2019-9515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-159-generic</td>
+<td>4.4.0-161-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2015-9383](https://nvd.nist.gov/vuln/detail/CVE-2015-9383){:external}, [CVE-2019-10638](https://nvd.nist.gov/vuln/detail/CVE-2019-10638){:external}, [CVE-2019-3900](https://nvd.nist.gov/vuln/detail/CVE-2019-3900){:external}, [CVE-2019-13648](https://nvd.nist.gov/vuln/detail/CVE-2019-13648){:external}, [CVE-2018-20856](https://nvd.nist.gov/vuln/detail/CVE-2018-20856){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external},    [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2018-20406](https://nvd.nist.gov/vuln/detail/CVE-2018-20406){:external}, and [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-58-generic</td>
+<td>4.15.0-62-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}, and [CVE-2019-15718](https://nvd.nist.gov/vuln/detail/CVE-2019-15718){:external}.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019
 {: #1146_1532_worker}
@@ -1128,6 +1205,44 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019
+{: #11310_1536_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.10_1536.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.10_1535">
+<caption>Changes since version 1.13.10_1535</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>containerd</td>
+<td>v1.2.8</td>
+<td>v1.2.9</td>
+<td>See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.2.9){:external}. Update resolves [CVE-2019-9515](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9515){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-159-generic</td>
+<td>4.4.0-161-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2015-9383](https://nvd.nist.gov/vuln/detail/CVE-2015-9383){:external}, [CVE-2019-10638](https://nvd.nist.gov/vuln/detail/CVE-2019-10638){:external}, [CVE-2019-3900](https://nvd.nist.gov/vuln/detail/CVE-2019-3900){:external}, [CVE-2019-13648](https://nvd.nist.gov/vuln/detail/CVE-2019-13648){:external}, [CVE-2018-20856](https://nvd.nist.gov/vuln/detail/CVE-2018-20856){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external},    [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2018-20406](https://nvd.nist.gov/vuln/detail/CVE-2018-20406){:external}, and [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-58-generic</td>
+<td>4.15.0-62-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}, and [CVE-2019-15718](https://nvd.nist.gov/vuln/detail/CVE-2019-15718){:external}.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.13.10_1535, released 3 September 2019
 {: #11310_1535_worker}
@@ -2309,6 +2424,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1567, released 16 September 2019
+{: #11210_1567_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.10_1567.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1566">
+<caption>Changes since version 1.12.10_1566</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-159-generic</td>
+<td>4.4.0-161-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2015-9383](https://nvd.nist.gov/vuln/detail/CVE-2015-9383){:external}, [CVE-2019-10638](https://nvd.nist.gov/vuln/detail/CVE-2019-10638){:external}, [CVE-2019-3900](https://nvd.nist.gov/vuln/detail/CVE-2019-3900){:external}, [CVE-2019-13648](https://nvd.nist.gov/vuln/detail/CVE-2019-13648){:external}, [CVE-2018-20856](https://nvd.nist.gov/vuln/detail/CVE-2018-20856){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external},    [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2018-20406](https://nvd.nist.gov/vuln/detail/CVE-2018-20406){:external}, and [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}.</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-58-generic</td>
+<td>4.15.0-62-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5481](https://nvd.nist.gov/vuln/detail/CVE-2019-5481){:external}, [CVE-2019-5482](https://nvd.nist.gov/vuln/detail/CVE-2019-5482){:external}, [CVE-2019-15903](https://nvd.nist.gov/vuln/detail/CVE-2019-15903){:external}, [CVE-2019-14283](https://nvd.nist.gov/vuln/detail/CVE-2019-14283){:external}, [CVE-2019-14284](https://nvd.nist.gov/vuln/detail/CVE-2019-14284){:external}, [CVE-2018-20852](https://nvd.nist.gov/vuln/detail/CVE-2018-20852){:external}, [CVE-2019-5010](https://nvd.nist.gov/vuln/detail/CVE-2019-5010){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-9740](https://nvd.nist.gov/vuln/detail/CVE-2019-9740){:external}, [CVE-2019-9947](https://nvd.nist.gov/vuln/detail/CVE-2019-9947){:external}, [CVE-2019-9948](https://nvd.nist.gov/vuln/detail/CVE-2019-9948){:external}, [CVE-2019-9636](https://nvd.nist.gov/vuln/detail/CVE-2019-9636){:external}, [CVE-2019-10160](https://nvd.nist.gov/vuln/detail/CVE-2019-10160){:external}, and [CVE-2019-15718](https://nvd.nist.gov/vuln/detail/CVE-2019-15718){:external}.</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.10_1566, released 3 September 2019
 {: #11210_1566_worker}
