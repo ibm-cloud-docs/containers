@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-13"
 
 ---
 
@@ -836,15 +836,14 @@ lastupdated: "2019-09-05"
 * [worker commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#-worker-commands)
 * [worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
 * [zone commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#zone)
-* [alb commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb)
+* [alb commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb-commands)
 * [Beta: `key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_key_protect)
 * [logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
 * [nlb-dns commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)
-* [va command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_va)
 * [webhook-create command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)
-* [api-key commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_key)
+* [api-key commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_key-commands)
 * [credential commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#credential)
-* [infra-permissions commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra)
+* [infra-permissions commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra-commands)
 * [subnets command](docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)
 * [vlan commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#vlan)
 * [vpcs command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vpcs)

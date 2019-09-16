@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-16"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,19 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.23</td>
+<td>16 Sept 2019</td>
+<td>
+<ul>
+<li>Decreases startup time for the plug-in.</li>
+<li>Fixes a Go version issue for macOS users.</li>
+<li>Improves debug tracing.</li>
+<li>In `ibmcloud ks logging filter` commands, changes the `--logging-config` flag from accepting multiple values in a comma-separated list to requiring repeated flags.</li>
+<li>Minor bug and security fixes.</li>
+<li>Updates message, warning, and help text.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.3</td>
 <td>04 Sept 2019</td>

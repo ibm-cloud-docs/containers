@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -108,7 +108,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
   ```
-  ibmcloud cr region set global
+  ibmcloud cr region-set global
   ```
   {: pre}
 
@@ -195,15 +195,15 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   ```
   {: screen}
 
-7. Create the audit webhook to collect Kubernetes API server event logs.
+7. Create the audit webhook to collect Kubernetes API server event logs. Prepend `http://` to the **CLUSTER_IP**.
   ```
-  ibmcloud ks apiserver-config-set audit-webhook --cluster <cluster_name_or_ID> --remoteServer <172.21.xxx.xxx>
+  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <http://172.21.xxx.xxx>
   ```
   {: pre}
 
 8. Verify that the audit webhook is created in your cluster.
   ```
-  ibmcloud ks apiserver-config-get audit-webhook --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster master audit-webhook get --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -216,7 +216,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 9. Apply the webhook to your Kubernetes API server by refreshing the cluster master. It might take several minutes for the master to refresh.
   ```
-  ibmcloud ks apiserver-refresh --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
   ```
   {: pre}
 

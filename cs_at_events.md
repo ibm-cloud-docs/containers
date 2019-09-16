@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-08-29"
+lastupdated: "2019-09-13"
 
 keywords: kubernetes, iks, audit
 
@@ -118,3 +118,33 @@ The following list of the cluster management events are sent to {{site.data.keyw
 <td><code>containers-kubernetes.worker.update</code></td>
 <td>A worker node is updated.</td></tr>
 </table>
+
+## Viewing your cluster events
+{: #at-ui}
+
+To [view events](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events) that are sent to {{site.data.keyword.at_full_notm}}, you select the {{site.data.keyword.at_short}} instance that matches with the location of your {{site.data.keyword.containerlong_notm}} cluster. You must first have an instance of {{site.data.keyword.at_short}} in each of the locations where your cluster is. Use the following table to find which {{site.data.keyword.at_short}} location your events are sent to based on the {{site.data.keyword.containerlong_notm}} location where the cluster is located. Note that clusters in the Montreal, Toronto, and Washington, D.C. locations are available in Dallas.
+{: shortdesc}
+
+| {{site.data.keyword.containerlong_notm}} metro | {{site.data.keyword.containerlong_notm}} data center | {{site.data.keyword.at_short}} event location |
+|-----|-----|-----|
+| Dallas | dal10, dal12, dal13 | Dallas |
+| Mexico City | mex01 | Dallas |
+| Montreal | mon01 | Dallas |
+| San Jose | sjc03, sjc04 | Dallas |
+| São Paulo | sao01 | Dallas |
+| Toronto | tor01 | Dallas |
+| Washington, D.C. | wdc04, wdc06, wdc07 | Dallas |
+| Amsterdam | ams03 | Frankfurt |
+| Frankfurt | fra02, fra04, fra05 | Frankfurt |
+| Milan | mil01 | Frankfurt |
+| Oslo | osl01 | Frankfurt |
+| Paris | par01 | Frankfurt |
+| London | lon02,lon04, lon05, lon06 | London |
+| Sydney | syd01, syd04, syd05 | Sydney |
+| Melbourne | mel01 | Sydney |
+| Chennai | che01 | Tokyo |
+| Hong Kong<br>SAR of the PRC | hkg02 | Tokyo |
+| Seoul | seo01 | Tokyo |
+| Singapore | sng01 | Tokyo |
+| Tokyo | tok02, tok04, tok05 | Tokyo |
+{: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
