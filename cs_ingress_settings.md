@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -262,6 +262,44 @@ If you have very large Ingress resource files, it might take longer than 5 minut
 4. Verify that the configmap changes were applied.
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+   ```
+   {: pre}
+
+<br />
+
+
+## Sending your custom certificate to legacy clients
+{: #default_server_cert}
+
+If you have legacy devices that do not support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress#public_inside_3), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
+{: shortdesc}
+
+When you create a classic cluster, a Let's Encrypt certificate is generated for the default Ingress secret that IBM provides. If you create a custom secret in your cluster and specify this custom secret for TLS termination in your Ingress resources, the Ingress ALB sends the certificate for your custom secret to the client instead of the default Let's Encrypt certificate. However, if a client does not support SNI (Server Name Indication), the Ingress ALB defaults to the Let's Encrypt certificate because the default secret is listed in the ALB's default server settings. To send your custom certificate to devices that do not support SNI, complete the following steps to change the ALB's default server settings to your custom secret.
+
+1. Edit the `alb-default-server` Ingress resource.
+    ```
+    kubectl edit ingress alb-default-server -n kube-system
+    ```
+    {: pre}
+
+2. In the `spec.tls` section, change the value of the `hosts.secretName` setting to the name of your custom secret that contains your custom certificate.
+   Example:
+   ```
+   spec:
+     rules:
+     ...
+     tls:
+     - hosts:
+       - invalid.mycluster.us-south.containers.appdomain.cloud
+       secretName: <custom_secret_name>
+   ```
+   {: codeblock}
+
+3. Save the resource file.
+
+4. Verify that the resource now points to your custom secret name.
+   ```
+   kubectl get ingress alb-default-server -n kube-system -o yaml
    ```
    {: pre}
 
