@@ -46,6 +46,12 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
+  <td>XX September 2019</td>
+  <td><ul>
+  <li>Added [steps](/docs/containers?topic=containers-ingress-settings#default_server_cert) for ensuring that your custom certificate, instead of the default IBM-provided certificate, is sent by the Ingress ALB to legacy clients that do not support SNI.</li>
+  </ul></td>
+</tr>
+<tr>
   <td>16 September 2019</td>
   <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.23](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>{{site.data.keyword.at_full_notm}} events</strong>: Added information about [which {{site.data.keyword.at_short}} location your events are sent to](/docs/containers?topic=containers-at_events#at-ui) based on the {{site.data.keyword.containerlong_notm}} location where the cluster is located.</li>
