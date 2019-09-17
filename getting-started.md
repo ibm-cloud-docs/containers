@@ -98,7 +98,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#vpc-classic-gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Use security groups, and network access control lists to control network traffic.   </p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Control network traffic with security groups and network access control lists.   </p>
      </div>
     </a>
 </div>
