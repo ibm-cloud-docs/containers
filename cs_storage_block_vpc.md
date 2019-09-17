@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-04"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, vpc
 
@@ -77,7 +77,7 @@ Before you install the VPC Block Storage add-on, make sure that your cluster's V
 
 3. If the add-on is not installed, enable the add-on in your cluster.
    ```
-   ibmcloud ks cluster-addon-enable vpc-block-csi-driver --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster <cluster_name_or_ID>
    ```
    {: pre}
 

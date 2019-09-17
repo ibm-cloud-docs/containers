@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-16"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks
 
@@ -193,7 +193,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td><ul>
 <li>Adds versioning support for managed cluster add-ons.</li>
 <ul><li>Adds the [<code>ibmcloud ks addon-versions</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions) command.</li>
-<li>Adds the <code>--version</code> flag to [ibmcloud ks cluster-addon-enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) commands.</li></ul>
+<li>Adds the <code>--version</code> flag to [ibmcloud ks cluster addon enable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) commands.</li></ul>
 <li>Updates translations of help text.</li>
 <li>Updates short links to documentation in help text.</li>
 <li>Fixes a bug where JSON error messages printed in an incorrect format.</li>
@@ -237,7 +237,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>19 Feb 2019</td>
 <td><ul><li>Fixes a bug where the region was ignored for `ibmcloud ks api-key reset`, `ibmcloud ks credential get/set`, and `ibmcloud ks vlan spanning get`.</li>
 <li>Improves performance for `ibmcloud ks worker update`.</li>
-<li>Adds the version of the add-on in `ibmcloud ks cluster-addon-enable` prompts.</li>
+<li>Adds the version of the add-on in `ibmcloud ks cluster addon enable` prompts.</li>
 </ul></td>
 </tr>
 <tr>
@@ -252,7 +252,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.40</td>
 <td>06 Feb 2019</td>
 <td><ul>
-<li>Adds the [<code>ibmcloud ks cluster addons</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [<code>ibmcloud ks cluster-addon-enable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster addon disable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
+<li>Adds the [<code>ibmcloud ks cluster addons</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster addon disable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
 <li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the <code>ibmcloud ks vlan ls</code> command.</li></ul></td>
 </tr>
 <tr>

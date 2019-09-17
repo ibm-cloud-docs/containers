@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, knative
 
@@ -67,7 +67,7 @@ To install Knative in your cluster:
 
 1. Enable the managed Knative add-on in your cluster. When you enable Knative in your cluster, Istio and all Knative components are installed in your cluster.
    ```
-   ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID> -y
+   ibmcloud ks cluster addon enable knative --cluster <cluster_name_or_ID> -y
    ```
    {: pre}
 
@@ -201,7 +201,7 @@ Update your Knative add-on to the latest versions.
 
 7. Re-enable the add-on. 
    ```
-   ibmcloud ks cluster-addon-enable knative --cluster <cluster_name_or_ID> --version <version>
+   ibmcloud ks cluster addon enable knative --cluster <cluster_name_or_ID> --version <version>
    ```
    {: pre}
 
