@@ -231,7 +231,7 @@ To create a standard VPC on Classic cluster:
 1. [Create a Virtual Private Cloud (VPC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/vpc) with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from DockerHub.
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
 3. Configure your cluster environment.
-   1. Select **Kubernetes** as your container platform and select the Kubernetes version 1.15 or higher.
+   1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.15 or later**.
    2. Select **VPC infrastructure**.
    3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
    4. Fill out the cluster name, resouce group, and geography.
