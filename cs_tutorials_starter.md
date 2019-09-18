@@ -98,7 +98,7 @@ With your toolchain set up, explore how you can use each tool to automate the de
 2. Configure your Gitlab repo.
    1. From the toolchain overview page, select the **Git** card.
    2. From your project overview page, select **Repository** > **Files** to review your app code and dependencies.
-   3. From your project overview page, select **Issues** to find an overview or create issues. 
+   3. From your project overview page, select **Issues** to find or create your issues. . 
    4. Optional. Configure SSH on your desktop by following the on-screen instructions so that you can push and pull code changes by using the CLI.
    5. Optional. To allow apps to access the Git API, create a personal access token for your account.
       1. From your user profile, click **Settings**.
