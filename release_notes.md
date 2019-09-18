@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-09-18"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,15 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>17 September 2019</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone location for OpenShift clusters</strong>: The following locations are now supported. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).<ul>
+    <li>Amsterdam, the Netherlands</li>
+    <li>Hong Kong SAR of the PRC, China</li>
+    <li>Mexico City, Mexico</li>
+    <li>Milan, Italy</li>
+    </ul></td>
+</tr>
 <tr>
   <td>16 September 2019</td>
   <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.23](/docs/containers?topic=containers-cs_cli_changelog).</li>
