@@ -229,7 +229,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <br />
 
- 
+
 
 ### Scenario: Extend your on-premises data center to a VPC cluster
 {: #vpc-vpn}
@@ -507,7 +507,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 ### Scenario: Extend your on-premises data center to a classic cluster
 {: #private_clusters}
 
-In this scenario, you want to run workloads in a classic luster. However, you want these workloads to be accessible only to services, databases, or other resources in your on-premises data center, such as {{site.data.keyword.icpfull_notm}}. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network, such as {{site.data.keyword.cos_full_notm}}.
+In this scenario, you want to run workloads in a classic cluster. However, you want these workloads to be accessible only to services, databases, or other resources in your on-premises data center, such as {{site.data.keyword.icpfull_notm}}. Your cluster workloads might need to access a few other {{site.data.keyword.cloud_notm}} services that support communication over the private network, such as {{site.data.keyword.cos_full_notm}}.
 {: shortdesc}
 
 <p>
@@ -536,7 +536,6 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
-
 
 
 
