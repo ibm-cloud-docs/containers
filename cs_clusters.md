@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-18"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -413,7 +413,7 @@ Create your single zone or multizone VPC on Classic cluster by using the {{site.
 4. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
 5. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
-   2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster. To create a VPC on Classic cluster, you must select Kubernetes version 1.15 or higher.
+   2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster. To create a VPC on Classic cluster, you must select **Kubernetes version 1.15 or later**.
    3. Select **VPC infrastructure**.
    4. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.

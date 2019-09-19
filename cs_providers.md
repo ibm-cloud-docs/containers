@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-18"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -99,7 +99,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  <tr>
    <td>Integrations</td>
    <td>You can extend your cluster and app capabilities with a variety of {{site.data.keyword.cloud_notm}} services, add-ons, and third-party integrations. For a list, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-supported_integrations).</td>
-   <td>Unless otherwise noted, integrations are not verified to run on VPC clusters.</td>
+   <td>VPC on Classic supports a select list of supported {{site.data.keyword.cloud_notm}} services, add-ons, and third-party integrations. For a list, see [Supported {{site.data.keyword.cloud_notm}} and third-party integrations](/docs/containers?topic=containers-supported_integrations).</td>
  </tr>
  <tr>
    <td>Available locations and versions</td>

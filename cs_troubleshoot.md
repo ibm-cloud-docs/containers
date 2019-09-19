@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-06"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, help, debug
 
@@ -45,11 +45,11 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 {: shortdesc}
 
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `ibm` repository to your Helm instance](/docs/containers?topic=containers-helm).
+1. [Set up Helm in your cluster, create a service account for Tiller, and add the `iks-charts` repository to your Helm instance](/docs/containers?topic=containers-helm).
 
-2. Install the Helm chart to your cluster.
+2. Install the Helm chart to the `kube-system` namespace.
   ```
-  helm install iks-charts/ibmcloud-iks-debug --name debug-tool
+  helm install iks-charts/ibmcloud-iks-debug --name debug-tool --namespace kube-system
   ```
   {: pre}
 
@@ -59,7 +59,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   ```
   {: pre}
 
-4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/default/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
 
 5. Select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
 

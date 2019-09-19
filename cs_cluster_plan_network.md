@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-06"
+lastupdated: "2019-09-19"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -230,6 +230,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
+
 ### Scenario: Extend your on-premises data center to a VPC cluster
 {: #vpc-vpn}
 
@@ -264,7 +265,7 @@ After you test your app, you can expose it to the private network by creating a 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC on Classic clusters](/docs/containers?topic=containers-clusters).
 
 <br />
-
+ 
 
 
 
@@ -502,6 +503,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
+
 ### Scenario: Extend your on-premises data center to a classic cluster
 {: #private_clusters}
 
@@ -534,6 +536,7 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters#cluster_prepare).
+
 
 
 

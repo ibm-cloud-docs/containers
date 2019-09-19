@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -143,17 +143,17 @@ Install Istio managed add-ons in an existing cluster.
 2. Enable the `istio` add-on and optionally the `istio-extras` and `istio-sample-bookinfo` add-ons.
   * `istio`:
     ```
-    ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
     ```
     {: pre}
   * `istio-extras`:
     ```
-    ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio-extras --cluster <cluster_name_or_ID>
     ```
     {: pre}
   * `istio-sample-bookinfo`:
     ```
-    ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
@@ -1114,7 +1114,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
 
 9. Re-enable Istio. Use the `--version` flag to specify the version that you want to install. If no version is specified, the default version is installed.
    ```
-   ibmcloud ks cluster-addon-enable istio --cluster <cluster_name_or_ID> --version <version>
+   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID> --version <version>
    ```
    {: pre}
 
@@ -1129,13 +1129,13 @@ During the update, any traffic that is sent to Istio-managed services is interru
 12. Optional: Re-enable the `istio-extras` and `istio-sample-bookinfo` add-ons. Use the same version for these add-ons as for the `istio` add-on.
     1. Enable the `istio-extras` add-on.
        ```
-       ibmcloud ks cluster-addon-enable istio-extras --cluster <cluster_name_or_ID> --version <version>
+       ibmcloud ks cluster addon enable istio-extras --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
 
     2. Enable the `istio-sample-bookinfo` add-on.
        ```
-       ibmcloud ks cluster-addon-enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
+       ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
        ```
        {: pre}
 

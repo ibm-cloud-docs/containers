@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-17"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -180,7 +180,7 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | List all ALB secrets in a cluster. | [`ibmcloud ks alb cert ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs) | - |
 | Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure portfolio. | [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) | [`POST /v1/keys`](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey) |
 | Disable a managed add-on, such Istio or Knative, in a cluster. | [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
-| Enable a managed add-on, such Istio or Knative, in a cluster. | [`ibmcloud ks cluster-addon-enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
+| Enable a managed add-on, such Istio or Knative, in a cluster. | [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
 | List managed add-ons, such as Istio or Knative, that are enabled in a cluster. | [`ibmcloud ks cluster addons`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons) | [`GET /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons) |
 | Create a free or standard cluster on classic infrastructure. **Note**: The Administrator platform role for {{site.data.keyword.registrylong_notm}} and the Super User infrastructure role are also required. | [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) | [`POST /v1/clusters`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateCluster) |
 | Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: The Administrator platform role for VPC Infrastructure, the Administrator platform role for {{site.data.keyword.registrylong_notm}} at the account level, and the Writer or Manager service role for {{site.data.keyword.containerlong_notm}} are also required. | [`ibmcloud ks cluster create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) | [`POST /v2/vpc/createCluster`](https://containers.cloud.ibm.com/swagger-api/#/vpc/vpcCreateCluster) |

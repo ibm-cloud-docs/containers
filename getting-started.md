@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-18"
 
 keywords: kubernetes, iks, containers
 
@@ -90,7 +90,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#clusters_gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support. Choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure worker nodes with classic subnet and VLAN networking support. Choose between a variety of virtual, bare metal, GPU, or software-defined storage flavors. </br></p>
     </div>
     </a>
 </div>
@@ -98,7 +98,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#vpc-classic-gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. Use security groups, and network access control lists to control network traffic.   </p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud. Control network traffic with security groups and access control lists.   </p>
      </div>
     </a>
 </div>
@@ -231,7 +231,7 @@ To create a standard VPC on Classic cluster:
 1. [Create a Virtual Private Cloud (VPC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/vpc) with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from DockerHub.
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
 3. Configure your cluster environment.
-   1. Select **Kubernetes** as your container platform and select the Kubernetes version 1.15 or higher.
+   1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.15 or later**.
    2. Select **VPC infrastructure**.
    3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
    4. Fill out the cluster name, resouce group, and geography.
