@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-09-19"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -66,7 +66,7 @@ When you install the Istio add-on, the Istio control and data planes use the net
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/install/platform/ibm/).
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
 {: tip}
 
 **Are there any limitations?** </br>
