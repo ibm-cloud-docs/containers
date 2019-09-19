@@ -625,7 +625,6 @@ Remove a subnet that is in your IBM Cloud infrastructure account from a cluster.
   ```
   {: pre}
 
-
 4. Verify that the subnet is no longer bound to your cluster.
   ```
   ibmcloud ks cluster get --show-resources <cluster_name>
