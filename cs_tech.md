@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-19"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -379,6 +379,8 @@ VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released 
 **Load balancing for apps**: See [Exposing apps with VPC load balancers: Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 **Location**: VPC clusters are available in the following [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones): Dallas, Frankfurt, London, Sydney, and Tokyo.
+
+**Security groups** You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) to control traffic for your cluster. VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard. You cannot attach a security group to your worker nodes instances.
 
 **Storage**:
 * You can set up only block persistent storage. VPC block storage is available as a cluster add-on. For more information, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block).
