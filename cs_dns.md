@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-20"
 
-keywords: kubernetes, iks, coredns, kubedns
+keywords: kubernetes, iks, coredns, kubedns, dns
 
 subcollection: containers
 
@@ -24,8 +24,11 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Configure the cluster DNS provider
+# Configuring the DNS provider for classic clusters
 {: #cluster_dns}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to classic clusters. For DNS provider information for VPC on Classic clusters, see [Configuring CoreDNS](/docs/containers?topic=containers-vpc_dns).
+{: note}
 
 Each service in your {{site.data.keyword.containerlong}} cluster is assigned a Domain Name System (DNS) name that the cluster DNS provider registers to resolve DNS requests. Depending on the Kubernetes version of your cluster, you might choose between Kubernetes DNS (KubeDNS) or [CoreDNS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/). For more information about DNS for services and pods, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
 {: shortdesc}
