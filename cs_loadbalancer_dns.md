@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-20"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
@@ -26,13 +26,13 @@ subcollection: containers
 # Classic: Registering a DNS subdomain for an NLB
 {: #loadbalancer_hostname}
 
-After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
-{: shortdesc}
-
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters.
 {: note}
 
+
+After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
+{: shortdesc}
 
 <dl>
 <dt>Subdomain</dt>

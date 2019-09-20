@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-20"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -26,10 +26,10 @@ subcollection: containers
 # Setting up VPN connectivity
 {: #vpn}
 
+
+
 With VPN connectivity, you can securely connect apps in a Kubernetes cluster on {{site.data.keyword.containerlong}} to an on-premises network. You can also connect apps that are external to your cluster to an app that is running inside your cluster.
 {:shortdesc}
-
-
 
 To connect your worker nodes and apps to an on-premises data center, you can configure one of the following options.
 
