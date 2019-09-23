@@ -51,11 +51,11 @@ You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=
 Improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to have external access through a VPC subnet public gateway.
 {:shortdesc}
 
-If pods on your worker nodes need to connect to a public external endpoint, you can attach a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/resources?topic=resources-private-network-endpoints), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet through so that your pods can send requests over the public network.
+If pods on your worker nodes need to connect to a public external endpoint, you can attach a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/resources?topic=resources-private-network-endpoints), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
 
-You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to ensure that app pods that require access to external endpoints are deployed only to the subnet with an attached public gateway.
+You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to deploy app pods that require access to external endpoints to only the subnet with an attached public gateway.
 
-In VPC clusters, only one subnet exists per zone. When you attach a public gateway to only one subnet and schedule app pods that require public access to worker nodes on that subnet, these pods are isolated to one zone in your cluster.
+In VPC clusters, only one subnet exists per zone. When you attach a public gateway to only one subnet, and schedule app pods that require public access to only worker nodes on that subnet, these pods are isolated to one zone in your cluster.
 {: note}
 
 1. Target the region of the VPC that your cluster is deployed to.
