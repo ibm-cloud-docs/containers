@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-23"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -946,7 +946,7 @@ If your pod configuration has an image pull secret that uses an API key, check t
 The following steps assume that the API key stores the credentials of a service ID. If you set up your image pull secret to use an API key of an individual user, you must verify that user's {{site.data.keyword.cloud_notm}} IAM permissions and credentials.
 {: note}
 
-1.  Find the service ID that API key uses for the image pull secret by reviewing the **Description**. The service ID that is created with the cluster says `ID for <cluster_name>` and is used in the `default` Kubernetes namespace. If you created another service ID such as to access a different Kubernetes namespace or to modify {{site.data.keyword.cloud_notm}} IAM permissions, you customized the description.
+1.  Find the service ID that API key uses for the image pull secret by reviewing the **Description**. The service ID that is created with the cluster is named `cluster-<cluster_ID>` and is used in the `default` Kubernetes namespace. If you created another service ID such as to access a different Kubernetes namespace or to modify {{site.data.keyword.cloud_notm}} IAM permissions, you customized the description.
     ```
     ibmcloud iam service-ids
     ```
@@ -983,12 +983,12 @@ The following steps assume that the API key stores the credentials of a service 
         kubectl get secret <image_pull_secret_name> -o yaml [-n <namespace>]
         ```
         {: pre}
-    2.  In the output, copy the base64 encoded value of the `.dockercfg` field.
+    2.  In the output, copy the base64 encoded value of the `.dockerconfigjson` field.
         ```
         apiVersion: v1
         kind: Secret
         data:
-          .dockercfg: eyJyZWdp...==
+          .dockerconfigjson: eyJyZWdp...==
         ...
         ```
         {: screen}
