@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-09-23"
 
 keywords: kubernetes, iks, vpc
 
@@ -800,6 +800,316 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
        {: screen}
 
 
+## Customizing the default storage settings
+{: #vpc-customize-default}
+
+You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create VPC Block Storage with your customized settings.
+{: shortdesc}
+
+**What is the benefit of using a secret versus a specifying my parameters in a customized storage class?**
+
+
+
+[Create a customized storage class](#vpc-customize-storage-class) when you want all of the PVCs to have a single, specific configuration. However, when multiple configurations are required, rather than creating a customized storage class for every possible combination of PVC parameters, you can create one customized storage class that references a [Kubernetes secret](#vpc-block-storageclass-secret). Every user in your cluster can create a PVC from that storage class to provision VPC Block Storage with the default settings that you defined. If users must change the default settings, they can create a Kubernetes secret that includes custom user settings. The values in this secret override the default values that are set in the storage class. 
+
+### Customizing a storage class
+{: #vpc-customize-storage-class}
+
+Use one of the IBM-provided storage classes as a basis to create your own customized storage class with the preferred settings for your VPC Block Storage.
+{: shortdesc}
+
+1. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
+   ```
+   kubectl get storageclass ibmc-vpc-block-5iops-tier -o yaml
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     annotations:
+       armada-service: addon-vpc-block-csi-driver
+       kubectl.kubernetes.io/last-applied-configuration: |
+         {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{"armada-service":"addon-vpc-block-csi-driver","version":"0.0.1_57"},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app":"ibm-vpc-block-csi-driver"},"name":"ibmc-vpc-block-5iops-tier"},"parameters":{"billingType":"hourly","classVersion":"1","csi.storage.k8s.io/fstype":"ext4","encrypted":"false","encryptionKey":"","generation":"gc","profile":"5iops-tier","resourceGroup":"","sizeRange":"[10-2000]GiB","tags":"","zone":""},"provisioner":"vpc.block.csi.ibm.io","reclaimPolicy":"Delete"}
+       version: 0.0.1_57
+     creationTimestamp: "2019-08-02T20:29:29Z"
+     labels:
+       addonmanager.kubernetes.io/mode: Reconcile
+       app: ibm-vpc-block-csi-driver
+     name: ibmc-vpc-block-5iops-tier
+     resourceVersion: "458548"
+     selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-vpc-block-5iops-tier
+     uid: 94a920c6-cfda-4a57-9332-1f9b78881d50
+   parameters:
+     billingType: hourly
+     classVersion: "1"
+     csi.storage.k8s.io/fstype: ext4
+     encrypted: "false"
+     encryptionKey: ""
+     generation: gc
+     profile: 5iops-tier
+     resourceGroup: ""
+     sizeRange: '[10-2000]GiB'
+     tags: ""
+     zone: ""
+   provisioner: vpc.block.csi.ibm.io
+   reclaimPolicy: Delete
+   volumeBindingMode: Immediate
+   ```
+   {: screen}
+
+2. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
+   ```
+   apiVersion: storage.k8s.io/v1
+   kind: StorageClass
+   metadata:
+     name: <storage_class_name>
+   provisioner: vpc.block.csi.ibm.io
+   parameters:
+     profile: "5iops-tier"
+     sizeRange: "<size_range>"
+     csi.storage.k8s.io/fstype: "<file_system_type>"
+     billingType: "hourly"
+     encrypted: "<encrypted_true_false>"
+     encryptionKey: "<encryption_key>"
+     resourceGroup: ""
+     zone: "<zone>"
+     tags: "<tags>"
+     generation: "gc"
+     classVersion: "1"
+   reclaimPolicy: "<reclaim_policy>"
+   volumeBindingMode: <volume_binding_mode>
+   ```
+   {: codeblock}
+
+    <table>
+    <caption>Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+        <tr>
+           <td><code>metadata.name</code></td>
+           <td>Enter a name for your storage class.</td>
+       </tr>
+       <tr>
+          <td><code>parameters.sizeRange</code></td>
+          <td>Enter the size range for your storage in gigabytes (GiB), such as <code>[10-2000]GiB</code>. The size range must match the VPC Block Storage profile that you specify in <code>parameters.profile</code>. To find supported storage sizes for a specific profile, see [Tiered IOPs profiles](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles). Any PVC that uses this storage class must specify a size value that is within this range. </td>
+       </tr>
+       <tr>
+          <td><code>parameters.csi.storage.k8s.io/fstype</code></td>
+          <td>Enter the file system for your VPC Block Storage instance. Choose `xfs`, `ext3`, or `ext4`. The default value is `ext4` and is used if you do not specify a file system.</td>
+       </tr>
+       <tr>
+          <td><code>parameters.encrypted</code></td>
+          <td>Enter <strong>true</strong> to create a storage class that sets up encryption for VPC Block Storage. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       <tr>
+          <td><code>parameters.encryptionKey</code></td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       </tr>
+       <tr>
+          <td><code>parameters.zone</code></td>
+          <td>Enter the VPC zone where you want to create the VPC Block Storage instance. Make sure that you use a zone that your worker nodes are connected to. To list VPC zones that your worker nodes use, run <code>ibmcloud ks cluster-get --cluster <cluster_name_or_ID></code> and look at the <strong>Worker Zones</strong> field in your CLI output. If you do not specify a zone, one of the worker node zones is automatically selected for your VPC Block Storage instance.</td>
+       </tr>
+       <tr>
+          <td><code>parameters.tags</code></td>
+          <td>Enter a comma-separated list of tags to apply to your VPC Block Storage instance. Tags can help you find VPC Block Storage instances more easily or group your instances based on common characteristics, such as the app or the environment that it is used for. </td>
+       </tr>
+       <tr>
+          <td><code>reclaimPolicy</code></td>
+          <td>Enter the reclaim policy for your storage class. If you want to keep the PV, the physical storage device and your data when you remove the PVC, enter `Retain`. If you want to delete the PV, the physical storage device and your data when you remove the PVC, enter `Delete`.</td>
+       </tr>
+       <tr>
+          <td><code>volumeBindingMode</code></td>
+          <td>Choose if you want to delay the creation of the VPC Block Storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, enter `WaitForFirstConsumer`. To create the VPC Block Storage instance when you create the PVC, enter `Immediate`.</td>
+       </tr>
+   </tbody>
+   </table>
+
+3. Create the customized storage class in your cluster.
+   ```
+   kubectl apply -f custom_storageclass.yaml
+   ```
+   {: pre}
+
+4. Verify that your storage class is available in the cluster.
+   ```
+   kubectl get storageclasses
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   NAME                                    PROVISIONER            AGE
+   ibmc-vpc-block-10iops-tier              vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-5iops-tier               vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-custom                   vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-general-purpose          vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-retain-10iops-tier       vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-retain-5iops-tier        vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-retain-custom            vpc.block.csi.ibm.io   4d21h
+   ibmc-vpc-block-retain-general-purpose   vpc.block.csi.ibm.io   4d21h
+   custom_storageclass                     vpc.block.csi.ibm.io   4m26s
+   ```
+   {: screen}
+   
+5. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage. Then, mount this storage to a sample app.
+
+### Storing your customized storage settings in a Kubernetes secret
+{: #vpc-block-storageclass-secret}
+
+Specify your PVC settings in a Kubernetes secret and reference this secret in a customized storage class. Then, use the customized storage class to create a PVC with the custom parameters that you set in your secret. 
+{: shortdesc}
+
+As a cluster admin, you can choose if you want to give each individual cluster user the option to customize the settings of a storage class, or if you want to use one secret with the PVC settings that everyone in your cluster must use.
+
+- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a Kubernetes secret. Your users can override the default settings of the storage class by creating a Kubernetes secret with the desired PVC settings. In order for the customized settings in the secret to get applied to your VPC Block Storage, you must create a PVC with the same name as your Kubernetes secret. 
+
+- **[Enable base64 encoding for {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides the custom settings of the storage class. Use this method if you want to encode the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance to base64 instead of putting the key into the customized storage class directly without base64 encoding. 
+
+
+#### Enabling every user to customize the default PVC settings
+{: #customize-with-secret}
+
+1. As the cluster admin, follow the steps to [create a customized storage class](#vpc-customize-storage-class). In the customized storage class YAML file, reference the Kubernetes secret in the `metadata.annotation` section as follows. Make sure to add the code as-is and not to change variables names. 
+   ```
+   csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
+   csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
+   ```
+   {: pre} 
+   
+2. As the cluster user, create a Kubernetes secret that customizes the default settings of the storage class. 
+   ```
+   apiVersion: v1
+   kind: Secret
+   type: vpc.block.csi.ibm.io
+   metadata:
+     name: <secret_name>
+     namespace: <namespace_name>
+   stringData:
+     iops: "<IOPS_value>"
+     zone: "<zone>"
+     tags: "<tags>"
+     encrypted: <true_or_false>
+     resourceGroup: "<resource_group>"
+   data
+     encryptionKey: <encryption_key>
+   ```
+   {: codeblock}
+     
+    <table>
+    <caption>Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+        <tr>
+           <td><code>metadata.name</code></td>
+           <td>Enter a name for your Kubernetes secret. </td>
+       </tr>
+       <tr>
+           <td><code>metadata.namespace</code></td>
+           <td>Enter the namespace where you want to create your secret. To reference the secret in your PVC, the PVC must be created in the same namespace. </td>
+       </tr>
+       <tr>
+          <td><code>stringData.iops</code></td>
+          <td>Enter the range of IOPS that you want to allow for your VPC Block Storage instance. The range that you enter must match with the VPC Block Storage tier that you plan to use. </td>
+       </tr>
+       <tr>
+          <td><code>stringData.zone</code></td>
+          <td>Enter the VPC zone where you want to create the VPC Block Storage instance. Make sure that you use a zone that your worker nodes are connected to. To list VPC zones that your worker nodes use, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look at the <strong>Worker Zones</strong> field in your CLI output. If you do not specify a zone, one of the worker node zones is automatically selected for your VPC Block Storage instance.</td>
+       </tr>
+       <tr>
+          <td><code>stringData.tags</code></td>
+          <td>Enter a comma-separated list of tags to use when the PVC is created. Tags can help you search for a specific secret, making it easier to locate the secret that you want to use.</td>
+       </tr>
+       <tr>
+          <td><code>stringData.resourceGroup</code></td>
+          <td>Enter the resource group that you want your VPC Block Storage to get access to. If you do not enter a resource group, the VPC Block Storage instance is automatically authorized to access resources of the resource group that your cluster belongs to. </td>
+       </tr>
+       <tr>
+          <td><code>stringData.encrypted</code></td>
+          <td>Enter <strong>true</strong> to create a secret that sets up encryption for VPC Block Storage. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       <tr>
+          <td><code>data.encryptionKey</code></td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. To use your root key CRN in a secret, you must first convert it to base 64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       </tbody>
+       </table>
+   
+3. Create your Kubernetes secret in your namespace.
+   ```
+   kubectl apply -f secret.yaml
+   ```
+   {: pre}
+   
+4. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized settings. Make sure to create the PVC with the customized storage class that the cluster admin created and name your PVC with the same name as your Kubernetes secret to apply your customized settings. 
+
+
+#### Enabling base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN
+{: #static-secret}
+
+1. Create a Kubernetes secret that includes the base64 encoded value for your {{site.data.keyword.keymanagementserviceshort}} root key CRN.
+   ```
+   apiVersion: v1
+   kind: Secret
+   type: vpc.block.csi.ibm.io
+   metadata:
+     name: <secret_name>
+     namespace: <namespace_name>
+   stringData:
+     encrypted: <true_or_false>
+     resourceGroup: "<resource_group>"
+   data
+     encryptionKey: <encryption_key>
+   ```
+   {: codeblock}
+     
+    <table>
+    <caption>Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+        <tr>
+           <td><code>metadata.name</code></td>
+           <td>Enter a name for your Kubernetes secret. </td>
+       </tr>
+       <tr>
+           <td><code>metadata.namespace</code></td>
+           <td>Enter the namespace where you want to create your secret. To reference the secret in your PVC, the PVC must be created in the same namespace. </td>
+       </tr>
+       <tr>
+          <td><code>stringData.encrypted</code></td>
+          <td>Enter <strong>true</strong> to create a secret that sets up encryption for VPC Block Storage. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       <tr>
+          <td><code>data.encryptionKey</code></td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. To use your root key CRN in a secret, you must first convert it to base 64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+       </tr>
+       </tbody>
+       </table>
+   
+2. Create your Kubernetes secret in your namespace.
+   ```
+   kubectl apply -f secret.yaml
+   ```
+   {: pre}
+
+3. Follow the steps to [create a customized storage class](#vpc-customize-storage-class). In the customized storage class YAML file, reference the Kubernetes secret in the `metadata.annotation` section as follows. Make sure to enter the name of the Kubernetes secret that you created earlier and the namespace where you created the secret. 
+   ```
+   csi.storage.k8s.io/provisioner-secret-name: <secret_name>
+   csi.storage.k8s.io/provisioner-secret-namespace: <secret_namespace>
+   ```
+   {: pre} 
+   
+4. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC from your customized storage class. 
+ 
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
 
@@ -829,7 +1139,6 @@ To back up or restore data, choose between the following options:
   kubectl cp <local_filepath>/<filename> <namespace>/<pod>:<pod_filepath> -c <container>
   ```
   {: pre}
-
 
 ## Storage class reference
 {: #vpc-block-reference}
