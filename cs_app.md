@@ -2,6 +2,7 @@
 
 copyright:
   years: 2014, 2019
+lastupdated: "2019-09-23"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -1288,6 +1289,9 @@ To execute a workload on a GPU machine:
     {: screen}
 
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
+
+<br />
+
 
 ## Scaling apps
 {: #app_scaling}
