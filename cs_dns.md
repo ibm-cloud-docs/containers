@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-23"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -114,7 +114,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 2.  Edit the default settings for the CoreDNS or KubeDNS configmap.
 
-    *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize `stubdomains` and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
+    *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize `stubdomains` and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).<p class="tip">Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).</p>
         ```
         kubectl edit configmap -n kube-system coredns
         ```
@@ -129,11 +129,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             namespace: kube-system
           data:
             Corefile: |
-              abc.com:53 {
-                  errors
-                  cache 30
-                  proxy . 1.2.3.4
-              }
+              import <MyCorefile>
               .:53 {
                   errors
                   health
@@ -149,11 +145,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                   reload
                   loadbalance
               }
+            <MyCorefile>: |
+              abc.com:53 {
+                errors
+                cache 30
+                loop
+                proxy . 1.2.3.4
+              }
           ```
           {: screen}
-
-          Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
-          {: tip}
 
     *   **For KubeDNS**: Configure `stubdomains` and upstream nameservers in the `data` section of the configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns).
         ```
