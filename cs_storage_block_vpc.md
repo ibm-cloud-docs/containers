@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, vpc
 
@@ -806,11 +806,13 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create VPC Block Storage with your customized settings.
 {: shortdesc}
 
-**What is the benefit of using a secret versus a specifying my parameters in a customized storage class?**
+**What is the benefit of using a secret and specifying my parameters in a customized storage class?**</br>
+As a cluster admin, [create a customized storage class](#vpc-customize-storage-class) when you want all of the PVCs that your cluster users create to be provisioned with a specific configuration and you don't want to enable your cluster users to override the default configuration. 
 
+However, when multiple configurations are required and you don't want to create a customized storage class for every possible PVC configuration, you can create one customized storage class with the default PVC settings and a reference to a generic [Kubernetes secret](#vpc-block-storageclass-secret). If your cluster users must override the default settings of your customized storage class, they can do so by creating a Kubernetes secret that holds their custom settings. 
 
+When you want to set up encryption for your VPC Block Storage instance, you can also use a Kubernetes secret if you want to encode the {{site.data.keyword.keymanagementserviceshort}} root key CRN to base64 instead of providing the key directly in the customized storage class.  
 
-[Create a customized storage class](#vpc-customize-storage-class) when you want all of the PVCs to have a single, specific configuration. However, when multiple configurations are required, rather than creating a customized storage class for every possible combination of PVC parameters, you can create one customized storage class that references a [Kubernetes secret](#vpc-block-storageclass-secret). Every user in your cluster can create a PVC from that storage class to provision VPC Block Storage with the default settings that you defined. If users must change the default settings, they can create a Kubernetes secret that includes custom user settings. The values in this secret override the default values that are set in the storage class. 
 
 ### Customizing a storage class
 {: #vpc-customize-storage-class}
@@ -959,18 +961,21 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    
 5. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage. Then, mount this storage to a sample app.
 
-### Storing your customized storage settings in a Kubernetes secret
+### Storing your custom PVC settings in a Kubernetes secret
 {: #vpc-block-storageclass-secret}
 
 Specify your PVC settings in a Kubernetes secret and reference this secret in a customized storage class. Then, use the customized storage class to create a PVC with the custom parameters that you set in your secret. 
 {: shortdesc}
 
-As a cluster admin, you can choose if you want to give each individual cluster user the option to customize the settings of a storage class, or if you want to use one secret with the PVC settings that everyone in your cluster must use.
+**What options do I have to use the Kubernetes secret?** </br>
+As a cluster admin, you can choose if you want to allow each cluster user to override the default settings of a storage class, or if you want to create one secret that everyone in your cluster must use and that enforces base64 encoding for your {{site.data.keyword.keymanagementserviceshort}} root key CRN.
 
-- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a Kubernetes secret. Your users can override the default settings of the storage class by creating a Kubernetes secret with the desired PVC settings. In order for the customized settings in the secret to get applied to your VPC Block Storage, you must create a PVC with the same name as your Kubernetes secret. 
+- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a generic Kubernetes secret. Cluster users can override the default settings of the storage class by creating a Kubernetes secret with the desired PVC settings. In order for the customized settings in the secret to get applied to your VPC Block Storage, you must create a PVC with the same name as your Kubernetes secret. 
 
-- **[Enable base64 encoding for {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides the custom settings of the storage class. Use this method if you want to encode the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance to base64 instead of putting the key into the customized storage class directly without base64 encoding. 
+- **[Enforce base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides or enhances the default settings of the customized storage class. Your cluster users cannot override the default settings by creating their own Kubernetes secret. Instead, cluster users must provision VPC Block Storage with the configuration that you chose in your customized storage class and secret. The benefit of using this method over creating a [customized storage class](#vpc-customize-storage-class) only is that you can enforce base64 encoding for the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance when you want to encrypt the data in your VPC Block Storage instance.  
 
+**What do I need to be aware of before I start using the Kubernetes secret for my PVC settings?** </br>
+Some of the PVC settings, such as the `reclaimPolicy` or the `volumeBindingMode` cannot be set in the Kubernetes secret and must be set in the storage class. As the cluster admin, if you want to enable your cluster users to override your default settings, you must ensure that you set up enough customized storage classes that reference a generic Kubernetes secret so that your users can provision VPC Block Storage with different `reclaimPolicy` and `volumeBindingMode` settings. 
 
 #### Enabling every user to customize the default PVC settings
 {: #customize-with-secret}
@@ -980,7 +985,7 @@ As a cluster admin, you can choose if you want to give each individual cluster u
    csi.storage.k8s.io/provisioner-secret-name: ${pvc.name}
    csi.storage.k8s.io/provisioner-secret-namespace: ${pvc.namespace}
    ```
-   {: pre} 
+   {: codeblock} 
    
 2. As the cluster user, create a Kubernetes secret that customizes the default settings of the storage class. 
    ```
@@ -1025,7 +1030,7 @@ As a cluster admin, you can choose if you want to give each individual cluster u
        </tr>
        <tr>
           <td><code>stringData.tags</code></td>
-          <td>Enter a comma-separated list of tags to use when the PVC is created. Tags can help you search for a specific secret, making it easier to locate the secret that you want to use.</td>
+          <td>Enter a comma-separated list of tags to use when the PVC is created. Tags can help you find your storage instance more easily after it is created.</td>
        </tr>
        <tr>
           <td><code>stringData.resourceGroup</code></td>
@@ -1037,24 +1042,24 @@ As a cluster admin, you can choose if you want to give each individual cluster u
        </tr>
        <tr>
           <td><code>data.encryptionKey</code></td>
-          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. To use your root key CRN in a secret, you must first convert it to base 64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your VPC Block Storage](#vpc-block-encryption).</td>
        </tr>
        </tbody>
        </table>
    
-3. Create your Kubernetes secret in your namespace.
+3. Create your Kubernetes secret.
    ```
    kubectl apply -f secret.yaml
    ```
    {: pre}
    
-4. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized settings. Make sure to create the PVC with the customized storage class that the cluster admin created and name your PVC with the same name as your Kubernetes secret to apply your customized settings. 
+4. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your custom settings. Make sure to create the PVC with the customized storage class that the cluster admin created and use the same name for your PVC that you used for your secret. Using the same name for the secret and the PVC triggers the storage provider to apply the settings of the secret in your PVC. 
 
 
-#### Enabling base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN
+#### Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN
 {: #static-secret}
 
-1. Create a Kubernetes secret that includes the base64 encoded value for your {{site.data.keyword.keymanagementserviceshort}} root key CRN.
+1. As the cluster admin, create a Kubernetes secret that includes the base64 encoded value for your {{site.data.keyword.keymanagementserviceshort}} root key CRN. To retrieve the root key CRN, see [Setting up encryption for your VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-encryption). 
    ```
    apiVersion: v1
    kind: Secret
@@ -1095,7 +1100,7 @@ As a cluster admin, you can choose if you want to give each individual cluster u
        </tbody>
        </table>
    
-2. Create your Kubernetes secret in your namespace.
+2. Create the Kubernetes secret.
    ```
    kubectl apply -f secret.yaml
    ```
@@ -1106,9 +1111,9 @@ As a cluster admin, you can choose if you want to give each individual cluster u
    csi.storage.k8s.io/provisioner-secret-name: <secret_name>
    csi.storage.k8s.io/provisioner-secret-namespace: <secret_namespace>
    ```
-   {: pre} 
+   {: codeblock} 
    
-4. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC from your customized storage class. 
+4. As the cluster user, follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC from your customized storage class. 
  
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
