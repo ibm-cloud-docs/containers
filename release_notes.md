@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -54,7 +54,7 @@ The following icons are used to indicate if a release note applies only to a cer
     <li>[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)</li>
     <li>[Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)</li></ul>
   </li>
-  <li><strong></strong>: </li>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 560](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   </ul></td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-12"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -58,6 +58,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>560 / 340</td>
+<td>24 Sept 2019</td>
+<td>In Kubernetes version 1.14 and later clusters, adds support for `apiVersion: networking.k8s.io/v1beta1` in Ingress resource YAML files. Note that `apiVersion: extensions/v1beta1` is still supported for all versions, and version 1.13 clusters must continue to use `apiVersion: extensions/v1beta1`. </td>
+<td>-</td>
+</tr>
 <tr>
 <td>552 / 340</td>
 <td>12 Sept 2019</td>
