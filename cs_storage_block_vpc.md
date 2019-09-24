@@ -546,7 +546,7 @@ You can create a customized storage class to provision VPC Block Storage with a 
 ## Setting up encryption for your VPC Block Storage
 {: #vpc-block-encryption}
 
-Use {{site.data.keyword.keymanagementservicelong}} to create a private root key that you use in your VPC Block Storage instance to encrypt data as it is written to the storage. After you create the private root key, create a custom storage class with your root key and then use this storage class to provision your VPC Block Storage instance.
+Use {{site.data.keyword.keymanagementservicelong}} to create a private root key that you use in your VPC Block Storage instance to encrypt data as it is written to the storage. After you create the private root key, create a custom storage class or a Kubernetes secret with your root key and then use this storage class or secret to provision your VPC Block Storage instance.
 {: shortdesc}
 
 1.  [Create a {{site.data.keyword.keymanagementserviceshort}} service instance](/docs/services/key-protect?topic=key-protect-provision#provision).
@@ -566,51 +566,9 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
    5. Select **Key Protect** as your target service.
    6. Select the **Reader** service access role and click **Authorize**.
 
-5. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
+5. [Decide if you want to store the {{site.data.keyword.keymanagementserviceshort}} root key CRN in a customized storage class or in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-customize-default). Then, follow the steps to create a customized storage class or a Kubernetes secret. 
 
-6. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-vpc-block-5iops-tier` storage class.
-   ```
-   kubectl get storageclass ibmc-vpc-block-5iops-tier -o yaml
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     annotations:
-       armada-service: addon-vpc-block-csi-driver
-       kubectl.kubernetes.io/last-applied-configuration: |
-         {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{"armada-service":"addon-vpc-block-csi-driver","version":"0.0.1_57"},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app":"ibm-vpc-block-csi-driver"},"name":"ibmc-vpc-block-5iops-tier"},"parameters":{"billingType":"hourly","classVersion":"1","csi.storage.k8s.io/fstype":"ext4","encrypted":"false","encryptionKey":"","generation":"gc","profile":"5iops-tier","resourceGroup":"","sizeRange":"[10-2000]GiB","tags":"","zone":""},"provisioner":"vpc.block.csi.ibm.io","reclaimPolicy":"Delete"}
-       version: 0.0.1_57
-     creationTimestamp: "2019-08-02T20:29:29Z"
-     labels:
-       addonmanager.kubernetes.io/mode: Reconcile
-       app: ibm-vpc-block-csi-driver
-     name: ibmc-vpc-block-5iops-tier
-     resourceVersion: "458548"
-     selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-vpc-block-5iops-tier
-     uid: 94a920c6-cfda-4a57-9332-1f9b78881d50
-   parameters:
-     billingType: hourly
-     classVersion: "1"
-     csi.storage.k8s.io/fstype: ext4
-     encrypted: "false"
-     encryptionKey: ""
-     generation: gc
-     profile: 5iops-tier
-     resourceGroup: ""
-     sizeRange: '[10-2000]GiB'
-     tags: ""
-     zone: ""
-   provisioner: vpc.block.csi.ibm.io
-   reclaimPolicy: Delete
-   volumeBindingMode: Immediate
-   ```
-   {: screen}
-
-7. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
+   **Example customized storage class**: 
    ```
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
@@ -632,8 +590,8 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
    reclaimPolicy: "Delete"
    ```
    {: codeblock}
-
-    <table>
+   
+   <table>
     <caption>Understanding the YAML file components</caption>
     <thead>
     <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
@@ -654,74 +612,87 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     </tbody>
     </table>
 
-8. Create the customized storage class in your cluster.
+    **Example Kubernetes secret**: 
     ```
-    kubectl apply -f storageclass.yaml
+    apiVersion: v1
+    kind: Secret
+    type: vpc.block.csi.ibm.io
+    metadata:
+      name: <secret_name>
+      namespace: <namespace_name>
+    stringData:
+      encrypted: <true_or_false>
+    data
+      encryptionKey: <encryption_key>
     ```
-    {: pre}
+    {: codeblock}
 
-9. Verify that your storage class is available in the cluster.
-   ```
-   kubectl get storageclasses
-   ```
-   {: pre}
+    <table>
+    <caption>Understanding the YAML file components</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>metadata.name</code></td>
+    <td>Enter a name for your secret.</td>
+    </tr>
+    <tr>
+    <td><code>metadata.name</code></td>
+    <td>Enter the namespace where you want to create your secret.</td>
+    </tr>
+    <tr>
+    <td><code>parameters.encrypted</code></td>
+    <td>Enter <strong>true</strong> set up encryption for VPC Block Storage. </td>
+    </tr>
+    <tr>
+    <td><code>parameters.encryptionKey</code></td>
+    <td>Enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your VPC Block Storage. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. </td>
+    </tr>
+    </tbody>
+    </table>
 
-   Example output:
-   ```
-   NAME                                    PROVISIONER            AGE
-   ibmc-vpc-block-10iops-tier              vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-5iops-tier               vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-custom                   vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-general-purpose          vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-10iops-tier       vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-5iops-tier        vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-custom            vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-general-purpose   vpc.block.csi.ibm.io   4d21h
-   encryption_storageclass                 vpc.block.csi.ibm.io   4m26s
-   ```
-   {: screen}
-
-10. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage that is configured for encryption with your {{site.data.keyword.keymanagementserviceshort}} root key. Then, mount this storage to a sample app.
+6. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage that is configured for encryption with your {{site.data.keyword.keymanagementserviceshort}} root key. Then, mount this storage to a sample app.
 
     Your app might take a few minutes to mount the storage and get into a **Running** state.
     {: note}
 
-11. Verify that your data is encrypted.
-    1. List your VPC Block Storage volumes and note the **ID** of the VPC Block Storage instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC.
-       ```
-       ibmcloud is vols
-       ```
-       {: pre}
+7. Verify that your data is encrypted.
+   1. List your VPC Block Storage volumes and note the **ID** of the VPC Block Storage instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC.
+      ```
+      ibmcloud is vols
+      ```
+      {: pre}
 
-       Example output:
-       ```
-       ID                                     Name                                       Status      Capacity   IOPS   Profile           Attachment type   Created                     Zone         Resource group
-       a395b603-74bf-4703-8fcb-b68e0b4d6960   pvc-479d590f-ca72-4df2-a30a-0941fceeca42   available   10         3000   5iops-tier        data              2019-08-17T12:29:18-05:00   us-south-1   a8a12accd63b437bbd6d58fb6a462ca7
-       ```
-       {: screen}
+      Example output:
+      ```
+      ID                                     Name                                       Status      Capacity   IOPS   Profile           Attachment type   Created                     Zone         Resource group
+      a395b603-74bf-4703-8fcb-b68e0b4d6960   pvc-479d590f-ca72-4df2-a30a-0941fceeca42   available   10         3000   5iops-tier        data              2019-08-17T12:29:18-05:00   us-south-1   a8a12accd63b437bbd6d58fb6a462ca7
+      ```
+      {: screen}
 
-    2. Using the volume **ID**, list the details for your VPC Block Storage instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output.
-       ```
-       ibmcloud is vol <volume_ID>
-       ```
-       {: codeblock}
+   2. Using the volume **ID**, list the details for your VPC Block Storage instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output.
+      ```
+      ibmcloud is vol <volume_ID>
+      ```
+      {: codeblock}
 
-       Example output:
-       ```
-       ID                                     a395b603-74bf-4703-8fcb-b68e0b4d6960   
-       Name                                   pvc-479d590f-ca72-4df2-a30a-0941fceeca42   
-       Status                                 available   
-       Capacity                               10   
-       IOPS                                   3000   
-       Profile                                5iops-tier   
-       Encryption key                         crn:v1:bluemix:public:kms:us-south:a/6ef045fd2b43266cfe8e6388dd2ec098:53369322-958b-421c-911a-c9ae8d5156d1:key:47a985d1-5f5e-4477-93fc-12ce9bae343f   
-       Encryption                             user_managed   
-       Resource group                         a8a12accd63b437bbd6d58fb6a462ca7
-       Created                                2019-08-17T12:29:18-05:00
-       Zone                                   us-south-1   
-       Volume Attachment Instance Reference
-       ```
-       {: screen}
+      Example output:
+      ```
+      ID                                     a395b603-74bf-4703-8fcb-b68e0b4d6960   
+      Name                                   pvc-479d590f-ca72-4df2-a30a-0941fceeca42   
+      Status                                 available   
+      Capacity                               10   
+      IOPS                                   3000   
+      Profile                                5iops-tier   
+      Encryption key                         crn:v1:bluemix:public:kms:us-south:a/6ef045fd2b43266cfe8e6388dd2ec098:53369322-958b-421c-911a-c9ae8d5156d1:key:47a985d1-5f5e-4477-93fc-12ce9bae343f   
+      Encryption                             user_managed   
+      Resource group                         a8a12accd63b437bbd6d58fb6a462ca7
+      Created                                2019-08-17T12:29:18-05:00
+      Zone                                   us-south-1   
+      Volume Attachment Instance Reference
+      ```
+      {: screen}
 
 
 ## Customizing the default storage settings
