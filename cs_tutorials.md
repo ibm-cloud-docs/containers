@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks
 
@@ -477,11 +477,11 @@ If you took a break from the last lesson and started a new terminal, make sure t
     3.  Note the HTTP liveness probe that checks the health of the container every 5 seconds.
         ```
         livenessProbe:
-                    httpGet:
-                      path: /healthz
-                      port: 8080
-                    initialDelaySeconds: 5
-                    periodSeconds: 5
+          httpGet:
+            path: /healthz
+            port: 8080
+          initialDelaySeconds: 5
+          periodSeconds: 5
         ```
         {: codeblock}
     4.  In the **Service** section, note the `NodePort`. Rather than generating a random NodePort like you did in the previous lesson, you can specify a port in the 30000 - 32767 range. This example uses 30072.
@@ -526,13 +526,14 @@ If you took a break from the last lesson and started a new terminal, make sure t
         {: pre}
     *   **From the Kubernetes dashboard**:
         1.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
-        2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it few minutes and refresh again. You see the number of restarts changes for each pod.
-        ```
-        Liveness probe failed: HTTP probe failed with statuscode: 500
-        Back-off restarting failed docker container
-        Error syncing pod, skipping: failed to "StartContainer" for "hw-container" w      CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-d     deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
-        ```
-        {: screen}
+        2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
+
+            ```
+            Liveness probe failed: HTTP probe failed with statuscode: 500
+            Back-off restarting failed docker container
+            Error syncing pod, skipping: failed to "StartContainer" for "hw-container" w      CrashLoopBackOff: "Back-off 1m20s restarting failed container=hw-container pod=hw-d     deployment-3090568676-3s8v1_default(458320e7-059b-11e7-8941-56171be20503)"
+            ```
+            {: screen}
 
 Nice, you deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
@@ -641,10 +642,10 @@ If you took a break from the last lesson and started a new terminal, make sure t
     2.  In the volumes section of the `watson-pod` deployment, update the name of the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} secret that you created in [Lesson 2](#cs_cluster_tutorial_lesson2). By mounting the Kubernetes secret as a volume to your deployment, you make the {{site.data.keyword.Bluemix_notm}} Identity and Access Management (IAM) API key available to the container that is running in your pod. The {{site.data.keyword.watson}} app components in this tutorial are configured to look up the API key by using the volume mount path.
         ```
         volumes:
-                - name: service-bind-volume
-                  secret:
-                    defaultMode: 420
-                    secretName: binding-mytoneanalyzer
+        - name: service-bind-volume
+          secret:
+            defaultMode: 420
+            secretName: binding-mytoneanalyzer
         ```
         {: codeblock}
 
@@ -739,8 +740,8 @@ Change the name of the image:
 2.  Change the name of the image to `ibmliberty`.
     ```
     spec:
-          containers:
-          - image: <region>.icr.io/ibmliberty:latest
+      containers:
+      - image: icr.io/ibm/liberty:latest
     ```
     {: codeblock}
 3.  Save your changes and exit the editor.

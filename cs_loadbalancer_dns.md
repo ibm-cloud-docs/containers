@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
@@ -26,13 +26,13 @@ subcollection: containers
 # Classic: Registering a DNS subdomain for an NLB
 {: #loadbalancer_hostname}
 
-After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
-{: shortdesc}
 
-
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters. For VPC on Classic clusters, see [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns).
 {: note}
 
+
+After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
+{: shortdesc}
 
 <dl>
 <dt>Subdomain</dt>
@@ -83,7 +83,7 @@ To create a subdomain for one or more NLB IP addresses:
 
 2. Register the IP by creating a DNS subdomain. To specify multiple IP addresses, use multiple `--ip` flags.
   ```
-  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
+  ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_IP> ...
   ```
   {: pre}
 
@@ -309,7 +309,7 @@ ibmcloud ks nlb-dns add --cluster <cluster_name_or_id> --ip <NLB_IP> --ip <NLB2_
 
 You can also remove IP addresses of NLBs that you no longer want to be registered with a subdomain. Note that you must run the following command for each IP address that you want to remove. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it.
 ```
-ibmcloud ks nlb-dns rm --cluster <cluster_name_or_id> --ip <ip> --nlb-host <host_name>
+ibmcloud ks nlb-dns rm classic --cluster <cluster_name_or_id> --ip <ip> --nlb-host <host_name>
 ```
 {: pre}
 

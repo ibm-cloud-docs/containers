@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -63,7 +63,7 @@ You can build containers from trusted images that are signed and stored in {{sit
 {:shortdesc}
 
 1.  [Sign images for trusted content](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
-2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement (beta)](/docs/services/Registry?topic=registry-security_enforce#security_enforce).
+2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce).
 3.  Deploy your app.
     1. [Deploy to the `default` Kubernetes namespace](#namespace).
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).

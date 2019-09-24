@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -27,10 +27,10 @@ subcollection: containers
 # VPC: Exposing apps with VPC load balancers
 {: #vpc-lbaas}
 
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC on Classic clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
+
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
-
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC on Classic clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
 
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
@@ -199,6 +199,69 @@ Expose your app to the public or to the private network by setting up a Kubernet
 <br />
 
 
+## Registering a VPC load balancer hostname with a DNS subdomain
+{: #vpc_dns}
+
+After you set up a VPC load balancer, you can create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
+{: shortdesc}
+
+The VPC load balancer provides a default hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain, you can use `nlb-dns` commands to generate a subdomain with an SSL certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
+
+After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#health-checks).
+{: note}
+
+Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
+
+1. Get the hostname for your VPC load balancer. In the output, look for the hostname in the **EXTERNAL-IP** column.
+  ```
+  kubectl get svc -o wide
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAME            TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)                AGE       SELECTOR
+  ...
+  webserver-lb    LoadBalancer   172.21.xxx.xxx   1234abcd-us-south.lb.appdomain.cloud   8080:30532/TCP   1d       run=webserver
+  ```
+  {: screen}
+
+2. Create a DNS subdomain for the load balancer hostname.
+  ```
+  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-hostname <vpc_lb_hostname>
+  ```
+  {: pre}
+
+3. Verify that the subdomain is created. For more information, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format).
+  ```
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Hostname                                                                                IP(s)                                         Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+4. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain that you created. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access your subdomain.
+
+If you later need to replace the load balancer hostname that is registered with a DNS subdomain, you can run the following command. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
+```
+ibmcloud ks nlb-dns replace vpc-classic --cluster <cluster_name_or_id> --lb-hostname <new_lb_hostname> --nlb-host <existing_dns_subdomain>
+```
+{: pre}
+
+If you later want to remove the load balancer hostname that is registered with a DNS subdomain, you can run the following command. After you remove the load balancer hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
+```
+ibmcloud ks nlb-dns remove vpc-classic --cluster <cluster_name_or_id> --nlb-host <dns_subdomain>
+```
+{: pre}
+
+<br />
+
+
 ## Limitations
 {: #lbaas_limitations}
 
@@ -214,5 +277,6 @@ Expose your app to the public or to the private network by setting up a Kubernet
     * The `externalTrafficPolicy: Local` setting is supported, but the setting does not preserve the source IP of the request.
 * Source IP preservation for requests is not supported in VPC.
 * When you delete a VPC cluster, any VPC load balancers that were automatically created by {{site.data.keyword.containerlong_notm}} for the Kubernetes `LoadBalancer` services in that cluster are also automatically deleted. However, any VPC load balancers that you manually created in your VPC are not deleted.
+* You can register up to 128 subdomains for VPC load balancer hostnames. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 
 

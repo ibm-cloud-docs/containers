@@ -153,7 +153,7 @@ subcollection: containers
                   </br><p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/roks_tutorial2.png" alt="OpenShift tutorial diagram flow" /></br>
+                    <img class="architectureDiagram" src="images/roks_tutorial2.png" alt="OpenShift tutorial flow diagram" /></br>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,18 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.31</td>
+<td>24 Sept 2019</td>
+<td>
+<ul><li>Adds the [`ibmcloud ks nlb-dns create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create-vpc), [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-replace), and [`ibmcloud ks nlb-dns rm vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm-vpc) commands to create and manage DNS subdomains for VPC load balancers in VPC clusters.</li>
+<li>Removes the deprecated `region get`, `region set`, and `region ls` commands from help output.</li>
+<li>Updates command structure to the new spaced format in help output.</li>
+<li>Adds a warning to the output of legacy `cluster config` behavior. For more information, see the [version plug-in 1.0 documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
+<li>Fixes a bug so that `worker reload` and `messages` commands now fail if the command errors.</li>
+<li>Updates translations of help text.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.23</td>
 <td>16 Sept 2019</td>

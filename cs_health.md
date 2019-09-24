@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-23"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -59,7 +59,7 @@ You can choose your logging solution based on which cluster components you need 
 </dd>
 
 <dt>Deprecated: Fluentd with {{site.data.keyword.loganalysisfull}}</dt>
-<dd><p class="deprecated">Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting logs for your cluster, you must set up {{site.data.keyword.la_full_notm}} or change your configuration to forward logs to an external server.</p>
+<dd><p class="deprecated">Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. On 30 September 2019, {{site.data.keyword.containerlong_notm}} is disabling log forwarding from the Fluentd cluster component to {{site.data.keyword.loganalysisshort_notm}} for existing premium plan instances. To continue collecting logs for your cluster, you must set up {{site.data.keyword.la_full_notm}} or change your configuration to forward logs to an external server.</p>
 </dd>
 
 <dt>Deprecated: {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis</dt>

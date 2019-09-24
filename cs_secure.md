@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-19"
+lastupdated: "2019-09-20"
 
 keywords: kubernetes, iks, containers
 
@@ -83,7 +83,7 @@ The following image shows the default cluster security settings that address aut
       <td>Fully managed and dedicated Kubernetes master</td>
       <td>Every cluster in {{site.data.keyword.containerlong_notm}} is controlled by a dedicated Kubernetes master that is managed by IBM in an IBM-owned {{site.data.keyword.cloud_notm}} account. The Kubernetes master is set up with the following dedicated components that are not shared with other IBM customers.
         <ul><li><strong>etcd data store:</strong> Stores all Kubernetes resources of a cluster, such as `Services`, `Deployments`, and `Pods`. Kubernetes `ConfigMaps` and `Secrets` are app data that is stored as key value pairs so that they can be used by an app that runs in a pod. Data in etcd is stored on the local disk of the Kubernetes master and is backed up to {{site.data.keyword.cos_full_notm}}. Data is encrypted during transit to {{site.data.keyword.cos_full_notm}} and at rest. You can choose to enable encryption for your etcd data on the local disk of your Kubernetes master by [enabling {{site.data.keyword.keymanagementservicelong_notm}} encryption](/docs/containers?topic=containers-encryption#encryption) for your cluster. When etcd data is sent to a pod, data is encrypted via TLS to ensure data protection and integrity.</li>
-          <li><strong>kube-apiserver:</strong> Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The API server validates and processes requests that change the state of cluster resources, such as pods or services, and stores this state in the etcd data store.</li> 
+          <li><strong>kube-apiserver:</strong> Serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The API server validates and processes requests that change the state of cluster resources, such as pods or services, and stores this state in the etcd data store.</li>
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
           
@@ -135,7 +135,7 @@ The following image shows the default cluster security settings that address aut
 </table>
 
 **What else can I do to secure my Kubernetes API server?**</br>
-You can decide how you want your master and worker nodes to communicate and how your cluster users can access the Kubernetes API server by enabling the private service endpoint only, the public service endpoint only, or the public and private service endpoints. 
+You can decide how you want your master and worker nodes to communicate and how your cluster users can access the Kubernetes API server by enabling the private service endpoint only, the public service endpoint only, or the public and private service endpoints.
 
 For more information about service endpoints, see worker-to-master and user-to-master communication in [classic clusters](/docs/containers?topic=containers-plan_clusters#workeruser-master) and [VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master).
 
@@ -149,8 +149,8 @@ Worker nodes carry the deployments and services that make up your app. When you 
 {: shortdesc}
 
 **Who owns the worker node and am I responsible to secure it?** </br>
-The ownership of a worker node depends on the type of cluster that you create and the infrastructure provider that you choose. 
-  
+The ownership of a worker node depends on the type of cluster that you create and the infrastructure provider that you choose.
+
 - **Free classic clusters**: Worker nodes are provisioned in to the {{site.data.keyword.cloud_notm}} account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containerlong_notm}} features, do not run production workloads on free classic clusters. Consider using standard classic or standard VPC clusters for your production workloads.
 - **Standard classic clusters**: Worker nodes are provisioned in to your {{site.data.keyword.cloud_notm}} account. The worker nodes are dedicated to you and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
 - **Standard VPC clusters**: Worker nodes are provisioned in to an {{site.data.keyword.cloud_notm}} account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You cannot access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the {{site.data.keyword.containerlong_notm}} console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.  
@@ -178,7 +178,7 @@ The image does not include components that ensure secure end-to-end communicatio
   <th>Description</th>
   </thead>
   <tbody>
-    <tr><td>CIS-compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure.<p class="important">{{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Check with your container image vendor to verify that your container images can be run on an Ubuntu kernel.</p></td></tr> 
+    <tr><td>CIS-compliant Linux image</td><td>Every worker node is set up with an Ubuntu operating system that implements the benchmarks that are published by the Center of Internet Security (CIS). The operating system cannot be changed by the user or the owner of the machine. To review the current Ubuntu version, run <code>kubectl get nodes -o wide</code>. IBM works with internal and external security advisory teams to address potential security compliance vulnerabilities. Security updates and patches for the operating system are made available through {{site.data.keyword.containerlong_notm}} and must be installed by the user to keep the worker node secure.<p class="important">{{site.data.keyword.containerlong_notm}} uses an Ubuntu Linux kernel for worker nodes. You can run containers based on any Linux distribution in {{site.data.keyword.containerlong_notm}}. Check with your container image vendor to verify that your container images can be run on an Ubuntu kernel.</p></td></tr>
     <tr>
     <td>Continuous monitoring by Site Reliability Engineers (SREs) </td>
     <td>The image that is installed on your worker nodes is continuously monitored by IBM Site Reliability Engineers (SREs) to detect vulnerabilities and security compliance issues. To address vulnerabilities, SREs create security patches and fix packs for your worker nodes. Make sure to apply these patches when they are available to ensure a secure environment for your worker nodes and the apps that you run on top of them.</td>
@@ -224,8 +224,8 @@ The classic approach to protect a company's network is to set up a firewall and 
 To protect your network and limit the range of damage that a user can do when access to a network is granted, you must make sure that your workloads are as isolated as possible and that you limit the number of apps and worker nodes that are publicly exposed.
 
 **What network traffic is allowed for my cluster by default?**</br>
-All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions: 
-- **NodePort**: The [Kubernetes NodePort range ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport) is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress). 
+All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions:
+- **NodePort**: The [Kubernetes NodePort range ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport) is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 - **IBM monitoring ports**: By default, IBM opens a few ports on your cluster so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master.
 Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
 
@@ -267,7 +267,9 @@ You can use network load balancer (NLB) and Ingress application load balancer (A
 {: shortdesc}
 
 **Can I use security groups to manage my cluster's network traffic?** </br>
-To use NLB and Ingress ALB services, use [Calico and Kubernetes policies](/docs/containers?topic=containers-network_policies) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure [security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups). IBM Cloud infrastructure security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the NLB IP address. If the VRRP protocol is not present to manage the NLB IP, NLB and Ingress ALB services do not work properly. If you are not using NLB and Ingress ALB services and want to completely isolate your worker node from the public, you can use security groups.
+Classic clusters: Use [Calico and Kubernetes policies](/docs/containers?topic=containers-network_policies) to manage network traffic into and out of your cluster. Do not use IBM Cloud infrastructure [security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups). IBM Cloud infrastructure security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, security groups do not support the VRRP protocol, which {{site.data.keyword.containerlong_notm}} uses to manage the NLB IP address. If the VRRP protocol is not present to manage the NLB IP, NLB and Ingress ALB services do not work properly. If you are not using NLB and Ingress ALB services and want to completely isolate your worker node from the public, you can use security groups.
+
+VPC on Classic clusters: Use [access control lists (ACLs) and Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy) to manage network traffic into and out of your cluster. You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) to control traffic for your cluster. VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard. You cannot attach a security group to your worker nodes instances.
 
 **How can I secure the source IP within the cluster?** </br>
 In version 2.0 NLBs, the source IP address of the client request is preserved by default. However, in version 1.0 NLBs and in all Ingress ALBs, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the NLB 1.0 or ALB. If no app pod exists on the same worker node as the load balancer service pod, the NLB or ALB forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
@@ -290,9 +292,9 @@ To secure the service-to-service communication, you can use [Istio's mutual TLS 
 Review supported options for encrypting and protecting your data on persistent storage in {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
 
-By default, all {{site.data.keyword.cloud_notm}} storage solutions automatically encrypt your data at rest with an IBM-managed encryption key at no additional cost. For more information, see the following links. 
+By default, all {{site.data.keyword.cloud_notm}} storage solutions automatically encrypt your data at rest with an IBM-managed encryption key at no additional cost. For more information, see the following links.
 - [Classic NFS File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-encryption#encryption)
-- [Classic Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest) 
+- [Classic Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest)
 - [VPC Block Storage](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#encryption)
 - [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-encryption)
 
@@ -317,9 +319,9 @@ The key to detect malicious attacks in your cluster is the proper monitoring and
 Every cluster master is continuously monitored by IBM to control and remediate process level Denial-Of-Service (DOS) attacks. {{site.data.keyword.containerlong_notm}} automatically scans every node where the master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection.  
 
 **What information is logged?**</br>
-By default, {{site.data.keyword.containerlong_notm}} automatically colllects logs for the following cluster components: 
+By default, {{site.data.keyword.containerlong_notm}} automatically colllects logs for the following cluster components:
 
-- **Containers**: Logs that are written to `STDOUT` or `STDERR`. 
+- **Containers**: Logs that are written to `STDOUT` or `STDERR`.
 - **Apps**: Logs that are written to a specific path inside your app.
 - **Workers**: Logs from the Ubuntu operating system that are sent to `/var/log/syslog` and `/var/log/auth.log`.
 - **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/). You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). 
@@ -361,7 +363,7 @@ Every deployment is based on an image that holds the instructions for how to spi
 {: shortdesc}
 
 **Should I use a public or a private registry to store my images?** </br>
-Public registries, such as Docker Hub, can be used to get started with Docker images and Kubernetes to create your first containerized app in a cluster. But when it comes to enterprise applications, avoid registries that you don't know or don't trust to protect your cluster from malicious images. Keep your images in a private registry, like the one provided in {{site.data.keyword.registryshort_notm}} and make sure to control access to the registry and the image content that can be pushed. 
+Public registries, such as Docker Hub, can be used to get started with Docker images and Kubernetes to create your first containerized app in a cluster. But when it comes to enterprise applications, avoid registries that you don't know or don't trust to protect your cluster from malicious images. Keep your images in a private registry, like the one provided in {{site.data.keyword.registryshort_notm}} and make sure to control access to the registry and the image content that can be pushed.
 
 **Why is it important to check images against vulnerabilities?** </br>
 Research shows that most malicious attacks leverage known software vulnerabilities and weak system configurations. When you deploy a container from an image, the container spins up with the OS and extra binaries that you described in the image. Just like you protect your virtual or physical machine, you must eliminate known vulnerabilities in the OS and binaries that you use inside the container to protect your app from being accessed by unauthorized users. </br>
@@ -370,7 +372,7 @@ Research shows that most malicious attacks leverage known software vulnerabiliti
 To protect your apps, consider to address the following areas:
 
 1. **Automate the build process and limit permissions**: </br>
-Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process. 
+Automate the process to build your container image from your source code to eliminate source code variations and defects. By integrating the build process into your CI/CD pipeline, you can ensure that your image is scanned and built only if the image passes the security checks that you specified. To avoid that developers apply hot fixes to sensitive images, limit the number of people in your organization who have access to the build process.
 
 2. **Scan images before they deploy into production:** </br>
 Make sure to scan every image before you deploy a container from it. For example, if you use {{site.data.keyword.registryshort_notm}}, all images are automatically scanned for vulnerabilities when you push the image to your namespace. If vulnerabilities are found, consider eliminating the vulnerabilities or block deployment for those images. Find a person or team in your organization who is responsible for monitoring and removing vulnerabilities. Depending on your organizational structure, this person might be part of a security, operations, or deployment team. Use admission controllers, such as the [Container Image Security Enforcement](/docs/services/Registry?topic=registry-security_enforce#security_enforce) to block deployments from images that did not pass vulnerability checks and enable [content trust](/docs/services/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent) so that images must be approved by a trusted signer before they can be pushed to the container registry.
@@ -411,9 +413,9 @@ Even if you deployed a container from an image that passes the vulnerability che
   </tbody>
   </table>
   </br>
-  
+
 **What options do I have to scan running containers for vulnerabilities?** </br>
-You can install third-party solutions in your cluster, such as [Twistlock ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.twistlock.com/) or [StackRox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.stackrox.com) to scan running containers and block malicious activities when they are detected. 
+You can install third-party solutions in your cluster, such as [Twistlock ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.twistlock.com/) or [StackRox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.stackrox.com) to scan running containers and block malicious activities when they are detected.
 
 <br />
 
@@ -421,7 +423,7 @@ You can install third-party solutions in your cluster, such as [Twistlock ![Exte
 ## Container isolation and security
 {: #container}
 
-When you run multiple apps in your cluster, you want to make sure that your workloads run isolated from each other and that you restrict the permissions of your pods within the cluster to avoid noisy neighbors or denial-of-service attacks. 
+When you run multiple apps in your cluster, you want to make sure that your workloads run isolated from each other and that you restrict the permissions of your pods within the cluster to avoid noisy neighbors or denial-of-service attacks.
 {: shortdesc}
 
 **What is a Kubernetes namespace and why should I use it?** </br>
@@ -443,7 +445,7 @@ A single-tenant cluster might be your option if you have many teams with complex
 
 Multi-tenant clusters use Kubernetes namespaces to isolate tenants and are usually managed by a separate team that does not belong to one of the tenants. A multi-tenant cluster might be your option if you have multiple teams that must run small workloads in a cluster, and where creating a single-tenant cluster that is highly available across multiple zones does not bring the cost benefits that you want. While multi-tenant clusters usually require fewer people to manage and administer the cluster, they might not provide the level of isolation that you need and add more complexity in the following areas:
 
-- **Access:** When you set up multiple namespaces, you must configure proper RBAC policies for each namespace to ensure resource isolation. RBAC policies are complex and require in-depth Kubernetes knowledge. 
+- **Access:** When you set up multiple namespaces, you must configure proper RBAC policies for each namespace to ensure resource isolation. RBAC policies are complex and require in-depth Kubernetes knowledge.
 - **Privileged pods:** If one tenant in a multi-tenant cluster requires to run privileged pods, this pod can access other namespaces in the cluster or damage the shared compute host. Controlling privileged pods is a complex task that requires effort and deep technical expertise. Use [pod security policies](/docs/containers?topic=containers-psp) to control what resources your tenants can deploy in the cluster.
 - **Network policies:** Because your worker nodes are connected to the same private network, you must make sure that you have strict firewall policies in place to prevent pods from accessing pods in other namespaces.
 - **Compute resource limitation:** To ensure that every team has the necessary resources to deploy services and run apps in the cluster, you must set up [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for every namespace. Resource quotas determine the deployment constraints for a namespace, such as the number of Kubernetes resources that you can deploy, and the amount of CPU and memory that can be consumed by those resources. After you set a quota, users must include resource requests and limits in their deployments.

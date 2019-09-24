@@ -70,7 +70,7 @@ IBM Cloud Kubernetes Service
         cs_remove.md
 
     {: .topicgroup}
-    Managing cluster network traffic
+    Managing cluster network traffic for classic clusters
         cs_firewall.md
         cs_network_policy.md
         cs_edge.md
@@ -79,6 +79,14 @@ IBM Cloud Kubernetes Service
         cs_subnets.md
         cs_network_cluster.md
         cs_dns.md
+
+    {: .topicgroup}
+    Managing network traffic for VPC clusters
+        vpc_firewall.md
+        vpc_network_policy.md
+        vpc_vpn.md
+        cs_istio.md
+        vpc_dns.md
 
     {: .topicgroup}
     Deploying apps
