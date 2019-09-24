@@ -156,12 +156,16 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <td>Uses the v1 API.<ul>
    <li>[`alb configure classic`](#cs_alb_configure)</li>
    <li>[`cluster create classic`](#cs_cluster_create)</li>
+   <li>[`nlb-dns create classic`](#cs_nlb-dns-create)</li>
+   <li>[`nlb-dns rm classic`](#cs_nlb-dns-rm)</li>
    <li>[`worker-pool create classic`](#cs_worker_pool_create)</li>
    <li>[`zone add classic`](#cs_zone_add)</li></ul>
    </td>
    <td>Uses the v2 API.<ul>
    <li>[`alb configure vpc-classic`](#cli_alb_configure_vpc_classic)</li>
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
+   <li>[`nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc)</li>
+   <li>[`nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc)</li>
    <li>[`worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic)</li>
    <li>[`zone add vpc-classic`](#cli_zone-add-vpc-classic)</li></ul></ul></td>
  </tr>
@@ -183,7 +187,8 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[All `nlb-dns monitor` commands](#cs_nlb-dns-monitor-configure)</li></ul>
    </td>
    <td>Uses the v2 API.<ul>
-   <li>[`vpcs`](#cs_vpcs)</li></ul></td>
+   <li>[`vpcs`](#cs_vpcs)</li>
+   <li>[`nlb-dns replace`](#cs_nlb-dns-replace)</li></ul></td>
  </tr>
  <tr>
    <td>**VPC provider flags**: You can specify a `--provider` flag for these commands to return results that are specific to the infrastructure provider.</td>
@@ -4213,18 +4218,18 @@ ibmcloud ks nlb-dns add --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1
 
 </br>
 
-### `ibmcloud ks nlb-dns create`
+### `ibmcloud ks nlb-dns create classic`
 {: #cs_nlb-dns-create}
 
 Publicly expose your app by creating a DNS subdomain to register a network load balancer (NLB) IP.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
-
 ```
-ibmcloud ks nlb-dns create --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--json] [-s]
+ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4245,23 +4250,70 @@ ibmcloud ks nlb-dns create --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3
 
 **Example**:
 ```
-ibmcloud ks nlb-dns create --cluster mycluster --ip 1.1.1.1
+ibmcloud ks nlb-dns create classic --cluster mycluster --ip 1.1.1.1
 ```
 {: pre}
 
 </br>
+
+### `ibmcloud ks nlb-dns create vpc-classic`
+{: #cs_nlb-dns-create-vpc}
+
+Create a DNS entry for a VPC load balancer hostname.
+{: shortdesc}
+
+When you create a VPC load balancer, the load balancer is assigned a hostname instead of an external IP address. Additionally, a default public VPC load balancer provides a hostname for all public ALBs in your cluster, and a default private VPC load balancer provides a hostname for all private ALBs in your cluster. If you created a VPC load balancer, you can use this hostname to access you app directly. If you use Ingress, you can specify this hostname in your Ingress resource files to register your app with Ingress.
+
+However, this VPC load balancer hostname does not support TLS termination. If you want an SSL certificate for your app domain, you can use the `ibmcloud ks nlb-dns create vpc-classic` command to create a DNS subdomain for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
+
+You can also use this command to create a DNS entry for the hostname for your private ALBs, which is a required step for setting up a private Ingress service in a VPC cluster. For more information, see the [private Ingress setup documentation](/docs/containers?topic=containers-ingress#vpc_private_3).</br>
+
+```
+ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-hostname VPC_LB_HOSTNAME [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. For classic clusters, see [`ibmcloud ks nlb-dns create classic`](#cs_nlb-dns-create).
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--lb-hostname <em>VPC_LB_HOSTNAME</em></code></dt>
+<dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns create vpc-classic --cluster mycluster --lb-hostname 1234abcd-us-south.lb.appdomain.cloud
+```
+{: pre}
+
+</br>
+
 ### `ibmcloud ks nlb-dns ls`
 {: #cs_nlb-dns-ls}
 
-List the network load balancer subdomains and IP addresses that are registered in a cluster.
+In a classic cluster, list the network load balancer (NLB) IP addresses that are registered to DNS subdomains. In a VPC cluster, list the VPC load balancer hostnames that are registered to DNS subdomains.
 {: shortdesc}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
 
 ```
 ibmcloud ks nlb-dns ls --cluster CLUSTER [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4285,18 +4337,59 @@ ibmcloud ks nlb-dns ls --cluster mycluster
 
 </br>
 
-### `ibmcloud ks nlb-dns rm`
-{: #cs_nlb-dns-rm}
+### `ibmcloud ks nlb-dns replace`
+{: #cs_nlb-dns-replace}
 
-Remove a network load balancer IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
+Replace the load balancer hostname that is registered with a DNS subdomain. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic-only command.</p>
-
 ```
-ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [-s]
+ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-hostname NEW_LB_HOSTNAME --nlb-host SUBDOMAIN [--json] [-s]
 ```
 {: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--lb-hostname <em>NEW_LB_HOSTNAME</em></code></dt>
+<dd>The hostname of the new VPC load balancer to update the subdomain with. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
+
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The DNS subdomain that you want to replace the load balancer hostname for. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns replace --cluster mycluster --lb-hostname 1234abcd-us-south.lb.appdomain.cloud --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks nlb-dns rm classic`
+{: #cs_nlb-dns-rm}
+
+Remove a network load balancer (NLB) IP address from a subdomain. If you remove all IPs from a subdomain, the subdomain still exists but no IPs are associated with it. <strong>Note</strong>: You must run this command for each IP address that you want to remove.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc).
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4320,13 +4413,49 @@ ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [
 
 **Example**:
 ```
-ibmcloud ks nlb-dns rm --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns rm classic --cluster mycluster --ip 1.1.1.1 --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
 </br>
 
+### `ibmcloud ks nlb-dns rm vpc-classic`
+{: #cs_nlb-dns-rm-vpc}
 
+Remove the VPC load balancer hostname that is registered with a DNS subdomain. After you remove the hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic. For classic clusters, see [`ibmcloud ks nlb-dns rm classic`](#cs_nlb-dns-rm).
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that you want to remove the VPC load balancer hostname from. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns rm vpc-classic --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+</br>
 
 ### `ibmcloud ks nlb-dns monitor configure`
 {: #cs_nlb-dns-monitor-configure}
