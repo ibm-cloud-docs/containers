@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -899,7 +899,12 @@ For clusters that were created before **1 July 2019**, the cluster might have an
     ibmcloud cr images
     ```
     {: pre}
-2.  Get the pod configuration file of a failing pod, and look for the `imagePullSecrets` section.
+2.  Check your [pull traffic and storage quota](/docs/services/Registry?topic=registry-registry_quota). If the limit is reached, free up used storage or ask your registry administrator to increase the quota.
+    ```
+    ibmcloud cr quota
+    ```
+    {: pre}
+3.  Get the pod configuration file of a failing pod, and look for the `imagePullSecrets` section.
     ```
     kubectl get pod <pod_name> -o yaml
     ```
@@ -921,7 +926,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
     ...
     ```
     {: screen}
-3.  If no image pull secrets are listed, set up the image pull secret in your namespace.
+4.  If no image pull secrets are listed, set up the image pull secret in your namespace.
     1.  Verify that the `default` namespace has `icr-io` image pull secrets for each regional registry that you want to use. If no `icr-io` secrets are listed in the namespace, [use the `ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) to create the image pull secrets in the `default` namespace.
         ```
         kubectl get secrets -n default | grep "icr-io"
@@ -929,7 +934,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
         {: pre}
     2.  [Copy the image pull secrets from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-images#copy_imagePullSecret).
     3.  [Add the image pull secret to the service account for this Kubernetes namespace](/docs/containers?topic=containers-images#store_imagePullSecret) so that all pods in the namespace can use the image pull secret credentials.
-4.  If image pull secrets are listed in the pod, determine what type of credentials you use to access {{site.data.keyword.registrylong_notm}}.
+5.  If image pull secrets are listed in the pod, determine what type of credentials you use to access {{site.data.keyword.registrylong_notm}}.
     *   **Deprecated**: If the secret has `bluemix` in the name, you use a registry token to authenticate with the deprecated `registry.<region>.bluemix.net` domain names. Continue with [Troubleshooting image pull secrets that use tokens](#ts_image_pull_token).
     *   If the secret has `icr` in the name, you use an API key to authenticate with the `icr.io` domain names. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
     *   If you have both types of secrets, then you use both authentication methods. Going forward, use the `icr.io` domain names in your deployment YAMLs for the container image. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
@@ -1014,8 +1019,8 @@ The following steps assume that the API key stores the credentials of a service 
             ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
             ```
             {: pre}
-        2.  Re-create your deployment in the `default` Kubernetes namespace. If you still see an authorization error message, repeat Steps 1-5 with the new image pull secrets. If you still cannot log in, [contact the IBM team on Slack, or open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
-    6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#other_registry_accounts). If you can pull an image to your local machine, then your API key has the right permissions, but the API setup in your cluster is not correct. You cannot resolve this issue. [Contact the IBM team on Slack, or open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
+        2.  Re-create your deployment in the `default` Kubernetes namespace. If you still see an authorization error message, repeat Steps 1-5 with the new image pull secrets. If you still cannot log in, [open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
+    6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#other_registry_accounts). If you can pull an image to your local machine, then your API key has the right permissions, but the API setup in your cluster is not correct. You cannot resolve this issue. [Open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
         ```
         docker pull <region>icr.io/<namespace>/<image>:<tag>
         ```
@@ -1059,12 +1064,12 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
     ```
     {: screen}
 4.  Compare the registry domain name with the domain name that you specified in the container image. For example, if the image pull secret authorizes access to the `registry.ng.bluemix.net` domain but you specified an image that is stored in `registry.eu-de.bluemix.net`, you must [create a token to use in an image pull secret](/docs/containers?topic=containers-images#token_other_regions_accounts) for `registry.eu-de.bluemix.net`.
-5.  Log in to the registry from your local machine by using the `username` and `password` from the image pull secret. If you cannot log in, the token has an issue that you cannot resolve. [Contact the IBM team on Slack, or open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
+5.  Log in to the registry from your local machine by using the `username` and `password` from the image pull secret. If you cannot log in, the token has an issue that you cannot resolve. [Open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
     ```
     docker login -u token -p <password_string> registry.<region>.bluemix.net
     ```
     {: pre}
-6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#token_other_regions_accounts). If the command succeeds, [contact the IBM team on Slack, or open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
+6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#token_other_regions_accounts). If the command succeeds, [open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
     ```
     docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
     ```
