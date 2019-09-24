@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-30"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -121,7 +121,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
    3. Enter a name for your service credentials and click **Add**.
 4. {: #databases_credentials}Retrieve your service credentials and certificate.
    1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**.
+   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. You need this information when you install Portworx. 
+      
       Example output for user name and password:
       ```
       "grpc": {
@@ -132,7 +133,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       }
       ```
       {: screen}
-   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**.  
+   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx.  
+   
       Example output for `--endpoints`:
       ```
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
@@ -140,7 +142,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       {: screen}
 
    4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**.
-      Example output for `certificate`
+   
+      Example output for `certificate`: 
       ```
       "certificate": {
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
