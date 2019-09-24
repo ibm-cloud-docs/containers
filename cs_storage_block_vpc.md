@@ -464,50 +464,9 @@ If you have an existing physical VPC Block Storage device that you want to use i
 You can create a customized storage class to provision VPC Block Storage with a different file system, such as `xfs` or `ext3`. By default, all VPC Block Storage instances are provisioned with an `ext4` file system.
 {: shortdesc}
 
-1. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
-2. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-vpc-block-retain-general-purpose` storage class.
-   ```
-   kubectl get storageclass ibmc-vpc-block-retain-general-purpose -o yaml
-   ```
-   {: pre}
+1. Follow the steps to [create a customized storage class](#vpc-customize-storage-class) with the file system that you want to use.
 
-   Example output:
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     annotations:
-        armada-service: addon-vpc-block-csi-driver
-        kubectl.kubernetes.io/last-applied-configuration: |
-          {"apiVersion":"storage.k8s.io/v1","kind":"StorageClass","metadata":{"annotations":{"armada-service":"addon-vpc-block-csi-driver","version":"0.0.1_57"},"labels":{"addonmanager.kubernetes.io/mode":"Reconcile","app":"ibm-vpc-block-csi-driver"},"name":"ibmc-vpc-block-retain-general-purpose"},"parameters":{"billingType":"hourly","classVersion":"1","csi.storage.k8s.io/fstype":"ext4","encrypted":"false","encryptionKey":"","generation":"gc","profile":"general-purpose","resourceGroup":"","sizeRange":"[10-2000]GiB","tags":"","zone":""},"provisioner":"vpc.block.csi.ibm.io","reclaimPolicy":"Retain"}
-       version: 0.0.1_57
-     creationTimestamp: "2019-08-02T20:29:30Z"
-     labels:
-       addonmanager.kubernetes.io/mode: Reconcile
-       app: ibm-vpc-block-csi-driver
-     name: ibmc-vpc-block-retain-general-purpose
-     resourceVersion: "458555"
-     selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-vpc-block-retain-general-purpose
-     uid: 7d56b74a-a5b6-8736-7b95-2140701c2c4d
-   parameters:
-     billingType: hourly
-     classVersion: "1"
-     csi.storage.k8s.io/fstype: ext4
-     encrypted: "false"
-     encryptionKey: ""
-     generation: gc
-     profile: general-purpose
-     resourceGroup: ""
-     sizeRange: '[10-2000]GiB'
-     tags: ""
-     zone: ""
-   provisioner: vpc.block.csi.ibm.io
-   reclaimPolicy: Retain
-   volumeBindingMode: Immediate
-   ```
-   {: screen}
-
-2. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
+   Example storage class: 
    ```
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
@@ -545,45 +504,10 @@ You can create a customized storage class to provision VPC Block Storage with a 
     <td><code>parameters.cs.storage.k8s.io/fstype</code></td>
     <td>Enter the file system for your VPC Block Storage instance. Choose `xfs` or `ext3`.</td>
     </tr>
-    <tr>
-    <td><code>reclaimPolicy</code></td>
-    <td>Enter the reclaim policy for your storage class. Choose `Retain` or `Delete`.</td>
-    </tr>
-    <tr>
-    <td><code>volumeBindingMode</code></td>
-    <td>Choose if you want to delay the creation of the VPC Block Storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, enter `WaitForFirstConsumer`. To create the VPC Block Storage instance when you create the PVC, enter `Immediate`.</td>
-    </tr>
     </tbody>
     </table>
 
-3. Create the customized storage class in your cluster.
-   ```
-   kubectl apply -f storageclass.yaml
-   ```
-   {: pre}
-
-4. Verify that your storage class is available in the cluster.
-   ```
-   kubectl get storageclasses
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   NAME                                    PROVISIONER            AGE
-   ibmc-vpc-block-10iops-tier              vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-5iops-tier               vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-custom                   vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-general-purpose          vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-10iops-tier       vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-5iops-tier        vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-custom            vpc.block.csi.ibm.io   4d21h
-   ibmc-vpc-block-retain-general-purpose   vpc.block.csi.ibm.io   4d21h
-   xfs-storageclass                        vpc.block.csi.ibm.io   4m26s
-   ```
-   {: screen}
-
-5. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage with a different file system. Then, mount this storage to a sample app.
+2. Follow step 4-9 in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage with a different file system. Then, mount this storage to a sample app.
 
    Your app might take a few minutes to mount the storage and get into a **Running** state.
    {: note}
@@ -821,6 +745,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
 {: shortdesc}
 
 1. Review step 1 and 2 in [Adding VPC Block Storage to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
+2. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-vpc-block-5iops-tier` storage class.
    ```
    kubectl get storageclass ibmc-vpc-block-5iops-tier -o yaml
    ```
@@ -862,7 +787,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    ```
    {: screen}
 
-2. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
+3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
    ```
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
@@ -932,13 +857,13 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    </tbody>
    </table>
 
-3. Create the customized storage class in your cluster.
+4. Create the customized storage class in your cluster.
    ```
    kubectl apply -f custom_storageclass.yaml
    ```
    {: pre}
 
-4. Verify that your storage class is available in the cluster.
+5. Verify that your storage class is available in the cluster.
    ```
    kubectl get storageclasses
    ```
@@ -959,7 +884,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    ```
    {: screen}
    
-5. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage. Then, mount this storage to a sample app.
+6. Follow the steps in [Adding VPC Block Storage to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision VPC Block Storage. Then, mount this storage to a sample app.
 
 ### Storing your custom PVC settings in a Kubernetes secret
 {: #vpc-block-storageclass-secret}
