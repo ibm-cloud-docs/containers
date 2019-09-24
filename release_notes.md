@@ -54,7 +54,8 @@ The following icons are used to indicate if a release note applies only to a cer
     <li>[Opening required ports and IP addresses in your firewall for VPC clusters](/docs/containers?topic=containers-vpc-firewall)</li>
     <li>[Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)</li>
     <li>[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)</li>
-    <li>[Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)</li></ul>
+    <li>[Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)</li>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Customizing PVC settings for VPC Block Storage</strong>: You can create a customized storage class or use a Kubernetes secret to create VPC Block Storage with your desired configuration. For more information, see [Customizing the default settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default). </li></ul>
   </li>
   </ul></td>
 </tr>
