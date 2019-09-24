@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks
 
@@ -224,7 +224,7 @@ To assign priority to your pods:
         spec:
           containers:
           - name: ibmliberty
-            image: icr.io/ibmliberty:latest
+            image: icr.io/ibm/liberty:latest
             ports:
             - containerPort: 9080
           priorityClassName: <priorityclass_name>

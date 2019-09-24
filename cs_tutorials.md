@@ -741,7 +741,7 @@ Change the name of the image:
     ```
     spec:
       containers:
-      - image: <region>.icr.io/ibmliberty:latest
+      - image: icr.io/ibm/liberty:latest
     ```
     {: codeblock}
 3.  Save your changes and exit the editor.

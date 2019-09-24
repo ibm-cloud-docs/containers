@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-09-24"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -286,7 +286,7 @@ template:
   <p>The default `imagePullPolicy` is set to `IfNotPresent`, which pulls the image only if it does not exist locally. If you want the image to be pulled every time that the container starts, specify the `imagePullPolicy: Always`.</p>
   <p><pre class="codeblock"><code>containers:
 - name: wasliberty
-  image: icr.io/ibmliberty:webProfile8
+  image: icr.io/ibm/liberty:webProfile8
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port for the app's service</dt>
@@ -517,7 +517,7 @@ spec:
               topologyKey: kubernetes.io/hostname
       containers:
       - name: wasliberty
-        image: icr.io/ibmliberty
+        image: icr.io/ibm/liberty:latest
         env:
           - name: VERSION
             valueFrom:
