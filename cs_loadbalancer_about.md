@@ -76,7 +76,7 @@ The TCP/UDP network load balancer (NLB) 1.0 uses Iptables, a Linux kernel featur
 The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a single-zone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning.png" width="410" alt="Expose an app in a single-zone cluster by using an NLB 1.0" style="width:410px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning.png" alt="Expose an app in a single-zone cluster by using an NLB 1.0"/>
 
 1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
 
@@ -90,11 +90,11 @@ The following diagram shows how an NLB 1.0 directs communication from the intern
 The following diagram shows how a network load balancer (NLB) 1.0 directs communication from the internet to an app in a multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning_multizone.png" width="500" alt="Use an NLB 1.0 to load balance apps in a multizone cluster" style="width:500px; border-style: none"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" alt="Use an NLB 1.0 to load balance apps in a multizone cluster"/>
 
-1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs.
+1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 1.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 1.0 in every zone where you have app instances.
 
-2. A DNS system service resolves the subdomain to the portable public IP address of one of the NLBs and its assigned port on the worker node. By default, each NLB 1.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 1.0 in every zone where you have app instances. Requests are handled by the NLBs in various zones in a round-robin cycle.
+2. A DNS system service resolves the subdomain to the portable public IP address of one of the NLBs and its assigned port on the worker node. Requests are handled by the NLBs in various zones in a round-robin cycle.
 
 3. The NLB receives the request and forwards it to the private IP address of the app pod over the private network. The source IP address of the request package is changed to the public IP address of the worker node where the app pod is running. Each NLB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the NLB routes the requests between the app pods in the zone.
 
@@ -120,7 +120,7 @@ Want more details about the load-balancing deployment patterns that are availabl
 The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a single zone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_ipvs_planning.png" width="600" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 NLB" style="width:600px; border-style: none"/>
+<img src="images/cs_loadbalancer_ipvs_planning.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 NLB"/>
 
 1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130, which is currently on worker 10.73.14.25. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
 
@@ -135,9 +135,13 @@ The following diagram shows how an NLB 2.0 directs communication from the intern
 ### Traffic flow in a multizone cluster
 {: #ipvs_multi}
 
-The traffic flow through a multizone cluster follows the same path as [traffic through a single zone cluster](#ipvs_single). In a multizone cluster, the NLB routes requests to the app instances in its own zone and to app instances in other zones. The following diagram shows how version 2.0 NLBs in each zone direct traffic from the internet to an app in a multizone cluster.
+The following diagram shows how version 2.0 NLBs in each zone direct traffic from the internet to an app in a multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_ipvs_multizone.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using an NLB 2.0" style="width:500px; border-style: none"/>
+<img src="images/cs_loadbalancer_ipvs_multizone.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using an NLB 2.0"/>
 
-By default, each version 2.0 NLB is set up in one zone only. You can achieve higher availability by deploying a version 2.0 NLB in every zone where you have app instances.
+1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 2.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 2.0 in every zone where you have app instances.
+
+2. A DNS system service resolves the subdomain to the portable public IP address of one of the NLBs and its assigned port on the worker node. Requests are handled by the NLBs in various zones in a round-robin cycle.
+
+3. The traffic flow through a multizone cluster follows the same path and IPIP method as [traffic through a single zone cluster](#ipvs_single). In a multizone cluster, the NLB routes requests to the app instances in its own zone and to app instances in other zones.
