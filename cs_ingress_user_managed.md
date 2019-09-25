@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers
 
@@ -90,7 +90,7 @@ Create a network load balancer (NLB) to expose your custom Ingress controller de
 
 6. Register the load balancer IP address by creating a DNS hostname.
     ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+    ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
 

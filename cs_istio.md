@@ -340,7 +340,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
   ```
-  ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip $INGRESS_IP
+  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip $INGRESS_IP
   ```
   {: pre}
 
@@ -772,7 +772,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
       2. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
         ```
-        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+        ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
         ```
         {: pre}
 
@@ -939,7 +939,7 @@ In the following steps, you set up a subdomain through which your users can acce
 6. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
   * Classic clusters:
     ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+    ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
   * VPC clusters:

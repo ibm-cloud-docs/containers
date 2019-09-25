@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, release notes
 
@@ -49,7 +49,6 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>24 September 2019</td>
   <td><ul>
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.31](/docs/containers?topic=containers-cs_cli_changelog).</li>
-  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Creating DNS subdomains for VPC load balancers and private Ingress ALBs</strong>: Added steps for [registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns) and for [exposing apps to a private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private) in VPC clusters.</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 566](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Managing cluster network traffic for VPC clusters</strong>: Includes the following new content:<ul>
     <li>[Opening required ports and IP addresses in your firewall for VPC clusters](/docs/containers?topic=containers-vpc-firewall)</li>
