@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -4269,7 +4269,7 @@ However, this VPC load balancer hostname does not support TLS termination. If yo
 You can also use this command to create a DNS entry for the hostname for your private ALBs, which is a required step for setting up a private Ingress service in a VPC cluster. For more information, see the [private Ingress setup documentation](/docs/containers?topic=containers-ingress#vpc_private_3).</br>
 
 ```
-ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-hostname VPC_LB_HOSTNAME [--json] [-s]
+ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNAME [--json] [-s]
 ```
 {: pre}
 
@@ -4282,7 +4282,7 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-hostname VPC_LB_HO
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--lb-hostname <em>VPC_LB_HOSTNAME</em></code></dt>
+<dt><code>--lb-host <em>VPC_LB_HOSTNAME</em></code></dt>
 <dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
 
 <dt><code>--json</code></dt>
@@ -4294,7 +4294,7 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-hostname VPC_LB_HO
 
 **Example**:
 ```
-ibmcloud ks nlb-dns create vpc-classic --cluster mycluster --lb-hostname 1234abcd-us-south.lb.appdomain.cloud
+ibmcloud ks nlb-dns create vpc-classic --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud
 ```
 {: pre}
 
@@ -4344,7 +4344,7 @@ Replace the load balancer hostname that is registered with a DNS subdomain. For 
 {: shortdesc}
 
 ```
-ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-hostname NEW_LB_HOSTNAME --nlb-host SUBDOMAIN [--json] [-s]
+ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host NEW_LB_HOSTNAME --nlb-subdomain SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4357,10 +4357,10 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-hostname NEW_LB_HOSTNAME --nl
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--lb-hostname <em>NEW_LB_HOSTNAME</em></code></dt>
+<dt><code>--lb-host <em>NEW_LB_HOSTNAME</em></code></dt>
 <dd>The hostname of the new VPC load balancer to update the subdomain with. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
 
-<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dt><code>nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The DNS subdomain that you want to replace the load balancer hostname for. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
 <dt><code>--json</code></dt>
@@ -4372,7 +4372,7 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-hostname NEW_LB_HOSTNAME --nl
 
 **Example**:
 ```
-ibmcloud ks nlb-dns replace --cluster mycluster --lb-hostname 1234abcd-us-south.lb.appdomain.cloud --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns replace --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 
@@ -4426,7 +4426,7 @@ Remove the VPC load balancer hostname that is registered with a DNS subdomain. A
 {: shortdesc}
 
 ```
-ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-host SUBDOMAIN [--json] [-s]
+ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--json] [-s]
 ```
 {: pre}
 
@@ -4439,7 +4439,7 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-host SUBDOMAIN [--jso
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
+<dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that you want to remove the VPC load balancer hostname from. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
 <dt><code>--json</code></dt>
@@ -4451,7 +4451,7 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-host SUBDOMAIN [--jso
 
 **Example**:
 ```
-ibmcloud ks nlb-dns rm vpc-classic --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+ibmcloud ks nlb-dns rm vpc-classic --cluster mycluster --nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
 ```
 {: pre}
 

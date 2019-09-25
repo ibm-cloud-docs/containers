@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -687,9 +687,9 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
     The field **Status** for private ALBs is _disabled_.
     ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   2234945
+    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:411/ingress-auth:315   2234947       -
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315   2234945       -
     ```
     {: screen}
 
@@ -1017,7 +1017,7 @@ When you enable the private ALBs, one private VPC load balancer is automatically
 
 2. Create a DNS subdomain for the private ALB hostname.
   ```
-  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-hostname <vpc_lb_hostname>
+  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname>
   ```
   {: pre}
 
@@ -1029,7 +1029,7 @@ When you enable the private ALBs, one private VPC load balancer is automatically
 
   Example output:
   ```
-  Hostname                                                                                IP(s)                                         Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
   mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
   ```
   {: screen}

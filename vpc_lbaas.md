@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -228,7 +228,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 
 2. Create a DNS subdomain for the load balancer hostname.
   ```
-  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-hostname <vpc_lb_hostname>
+  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname>
   ```
   {: pre}
 
@@ -240,7 +240,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 
   Example output:
   ```
-  Hostname                                                                                IP(s)                                         Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
   mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
   ```
   {: screen}
@@ -249,7 +249,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 
 If you later need to replace the load balancer hostname that is registered with a DNS subdomain, you can run the following command. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
 ```
-ibmcloud ks nlb-dns replace vpc-classic --cluster <cluster_name_or_id> --lb-hostname <new_lb_hostname> --nlb-host <existing_dns_subdomain>
+ibmcloud ks nlb-dns replace vpc-classic --cluster <cluster_name_or_id> --lb-host <new_lb_hostname> --nlb-subdomain <existing_dns_subdomain>
 ```
 {: pre}
 
