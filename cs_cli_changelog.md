@@ -127,7 +127,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.3.58</td>
 <td>02 Jul 2019</td>
 <td><ul>
-<li>Fixes a bug so that a worker-pool rebalance message is not returned when the cluster autoscaler is enabled.</li>
+<li>Fixes a bug so that a worker pool rebalance message is not returned when the cluster autoscaler is enabled.</li>
 <li>Fixes a bug to support the default OpenShift cluster version.</li>
 <li>Updates help text for the `cluster feature enable private-service-endpoint` and `nlb-dns monitor configure` commands.</li>
 <li>Updates translations of help text.</li>

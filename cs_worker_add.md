@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -140,7 +140,7 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
    ```
    {: pre}
 
-6. By default, adding a worker-pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
    ```
    ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_subnet_ID>
    ```
@@ -197,16 +197,10 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
     {: pre}
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
-   * Classic clusters:
-     ```
-     ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
-     ```
-     {: pre}
-   * VPC clusters:
-     ```
-     ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --vpc-id <VPC_ID>
-     ```
-     {: pre}
+   ```
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ```
+   {: pre}
 
 5. Verify that the worker pool is created.
    ```
@@ -214,17 +208,11 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
    ```
    {: pre}
 
-6. By default, adding a worker-pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-  * Classic clusters:
-    ```
-    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-    ```
-    {: pre}
-  * VPC clusters:
-    ```
-    ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
-    ```
-    {: pre}
+6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+  ```
+  {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
    ```
@@ -483,7 +471,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             kubectl describe node <worker_node_private_IP>
             ```
             {: pre}
-            
+
             Example output for an added label:
             ```
             Labels:   app=test

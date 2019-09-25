@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, vpc
 
@@ -95,7 +95,7 @@ After you create a VPC subnet, you cannot resize it or change its IP range. Inst
 
 3. Using the ID for the larger subnets that you created in step 1, add the zones to the worker pool. Repeat the following command for each zone and subnet.
   ```
-  ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pools <worker_pool_name>
+  ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
   ```
   {: pre}
 

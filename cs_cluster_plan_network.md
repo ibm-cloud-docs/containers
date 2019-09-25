@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -366,13 +366,10 @@ Allow public or private traffic requests from outside the cluster to your apps t
 When you deploy an app in your cluster, you might want to make the app accessible to only users and services that are on the same private network as your cluster. Private load balancing is ideal for making your app available to requests from outside the cluster without exposing the app to the general public. You can also use private load balancing to test access, request routing, and other configurations for your app before you later expose your app to the public with public network services. To allow private traffic requests from outside the cluster to your apps, you can create private Kubernetes networking services, such as private NodePorts, NLBs, and Ingress ALBs. You can then use Calico pre-DNAT policies to block traffic to public NodePorts of private networking services. For more information, see [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
 
 **Public traffic to cluster apps**</br>
-To make your apps externally accessible from the public internet, you can create public NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). Public networking services connect to this public network interface by providing your app with a public IP address and optionally, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. You can then use Calico pre-DNAT policies to control traffic to public networking services, such as whitelisting traffic from only certain source IP addresses or CIDRs and blocking all other traffic. For more information, see [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
+To make your apps externally accessible from the public internet, you can create public NodePorts, network load balancers (NLBs), and Ingress application load balancers (ALBs). Public networking services connect to this public network interface by providing your app with a public IP address and, depending on the service, a public URL. When an app is publicly exposed, anyone that has the public service IP address or the URL that you set up for your app can send a request to your app. You can then use Calico pre-DNAT policies to control traffic to public networking services, such as whitelisting traffic from only certain source IP addresses or CIDRs and blocking all other traffic. For more information, see [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access).
 
 For additional security, isolate networking workloads to edge worker nodes. Edge worker nodes can improve the security of your cluster by allowing fewer worker nodes that are connected to public VLANs to be accessed externally and by isolating the networking workload. When you [label worker nodes as edge nodes](/docs/containers?topic=containers-edge#edge_nodes), NLB and ALB pods are deployed to only those specified worker nodes. To also prevent other workloads from running on edge nodes, you can [taint the edge nodes](/docs/containers?topic=containers-edge#edge_workloads). In Kubernetes version 1.14 and later, you can deploy both public and private NLBs and ALBs to edge nodes.
 For example, if your worker nodes are connected to a private VLAN only, but you need to permit public access to an app in your cluster, you can create an edge worker pool in which the edge nodes are connected to public and private VLANs. You can deploy public NLBs and ALBs to these edge nodes to ensure that only those workers handle public connections.
-
-If your worker nodes are connected to a private VLAN only and you use a gateway device to provide communication between worker nodes and the cluster master, you can also configure the device as a public or private firewall. To allow public or private traffic requests from outside the cluster to your apps, you can create public or private NodePorts, NLBs, and Ingress ALBs. Then, you must [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to these services over the public or private network.
-{: note}
 
 <br />
 
@@ -430,17 +427,17 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 In this scenario, you want to run workloads in a classic cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.cloud_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
 {: shortdesc}
 
-To achieve this cluster setup, you can create a firewall by [using edge nodes and Calico network policies](#calico-pc) or [using a gateway device](#vyatta-gateway).
+To achieve this cluster setup, you can create a firewall by creating a [gateway-enabled cluster (beta)](#calico-pc) or [using a gateway device](#vyatta-gateway).
 
 #### Using edge nodes and Calico network policies
 {: #calico-pc}
 
-Allow limited public connectivity to your classic cluster by using edge nodes as a public gateway and Calico network policies as a public firewall.
+Allow limited public connectivity to your classic cluster by using edge nodes to isolate networking workloads and Calico network policies to act as a public firewall.
 {: shortdesc}
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_calico.png" alt="Architecture image for a cluster that uses edge nodes and Calico network policies for secure public access"/>
+ <img src="images/cs_clusters_planning_calico.png" width="700" style="width:700px; border-style: none" alt="Architecture image for a cluster that uses edge nodes and Calico network policies for secure public access"/>
  <figcaption>Network setup for a cluster that uses edge nodes and Calico network policies for secure public access</figcaption>
 </figure>
 </p>
@@ -477,7 +474,7 @@ Allow limited public connectivity to your classic cluster by configuring a gatew
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_gateway.png" alt="Architecture image for a cluster that uses a gateway device for secure public access"/>
+ <img src="images/cs_clusters_planning_gateway.png" width="700" style="width:700px; border-style: none" alt="Architecture image for a cluster that uses a gateway device for secure public access"/>
  <figcaption>Network setup for a cluster that uses a gateway device for secure public access</figcaption>
 </figure>
 </p>
@@ -512,7 +509,7 @@ In this scenario, you want to run workloads in a classic cluster. However, you w
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_extend.png" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
+ <img src="images/cs_clusters_planning_extend.png" width="700" style="width:700px; border-style: none" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
  <figcaption>Network setup for a cluster that connects to an on-premises data center on the private network</figcaption>
 </figure>
 </p>
