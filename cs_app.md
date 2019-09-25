@@ -1554,7 +1554,7 @@ Before you begin, you need two clusters and the **Manager** [service role](/docs
     kubectl get all -o yaml --export > myconfigs.yaml
     ```
     {: pre}
-4.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resoruces to, such as a production-ready standard cluster.
+4.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resources to, such as a production-ready standard cluster.
 5.  Optional: If your free cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
 6.  Deploy the copied configuration files to your cluster. If a configuration file has specific information that cannot be applied, you might need to update the configuration file and reapply.
     ```
