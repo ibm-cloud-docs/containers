@@ -265,7 +265,7 @@ After you test your app, you can expose it to the private network by creating a 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC on Classic clusters](/docs/containers?topic=containers-clusters).
 
 <br />
- 
+
 
 
 
