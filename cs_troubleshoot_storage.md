@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, help, debug
 
@@ -220,22 +220,22 @@ During the PVC creation and binding, many different tasks are executed by the fi
     <tr>
       <td><code>Unable to find the exact ItemPriceIds(type|size|iops) for the specified storage</code> </br></br><code>Failed to place storage order with the storage provider</code></td>
       <td>The storage size and IOPS that you specified in your PVC are not supported by the storage type that you chose and cannot be used with the specified storage class. </td>
-      <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class that you want to use. Correct the size and IOPS, and recreate the PVC. </td>
+      <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class that you want to use. Correct the size and IOPS, and re-create the PVC. </td>
     </tr>
     <tr>
   <td><code>Failed to find the datacenter name in configuration file</code></td>
       <td>The data center that you specified in your PVC does not exist. </td>
-  <td>Run <code>ibmcloud ks locations</code> to list available data centers. Correct the data center in your PVC and recreate the PVC.</td>
+  <td>Run <code>ibmcloud ks locations</code> to list available data centers. Correct the data center in your PVC and re-create the PVC.</td>
     </tr>
     <tr>
   <td><code>Failed to place storage order with the storage provider</code></br></br><code>Storage with the order ID 12345 could not be created after retrying for xx seconds. </code></br></br><code>Failed to do subnet authorizations for the storage 12345.</code><code>Storage 12345 has ongoing active transactions and could not be completed after retrying for xx seconds.</code></td>
   <td>The storage size, IOPS, and storage type might be incompatible with the storage class that you chose, or the {{site.data.keyword.cloud_notm}} infrastructure API endpoint is currently unavailable. </td>
-  <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class and storage type that you want to use. Then, delete the PVC and recreate the PVC. </td>
+  <td>Review [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass) and [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass) to find supported storage sizes and IOPS for the storage class and storage type that you want to use. Then, delete the PVC and re-create the PVC. </td>
   </tr>
   <tr>
   <td><code>Failed to find the storage with storage id 12345. </code></td>
   <td>You want to create a PVC for an existing storage instance by using Kubernetes static provisioning, but the storage instance that you specified could not be found. </td>
-  <td>Follow the instructions to provision existing [file storage](/docs/containers?topic=containers-file_storage#existing_file) or [block storage](/docs/containers?topic=containers-block_storage#existing_block) in your cluster and make sure to retrieve the correct information for your existing storage instance. Then, delete the PVC and recreate the PVC.  </td>
+  <td>Follow the instructions to provision existing [file storage](/docs/containers?topic=containers-file_storage#existing_file) or [block storage](/docs/containers?topic=containers-block_storage#existing_block) in your cluster and make sure to retrieve the correct information for your existing storage instance. Then, delete the PVC and re-create the PVC.  </td>
   </tr>
   <tr>
   <td><code>Storage type not provided, expected storage type is `Endurance` or `Performance`. </code></td>
