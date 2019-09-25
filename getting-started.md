@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, containers
 
@@ -234,7 +234,7 @@ To create a standard VPC on Classic cluster:
    1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.15 or later**.
    2. Select **VPC infrastructure**.
    3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
-   4. Fill out the cluster name, resouce group, and geography.
+   4. Fill out the cluster name, resource group, and geography.
    5. For the **Location**, select the zone for which you created a VPC subnet earlier.
 4. Select the **2 vCPUs 4GB RAM** worker node flavor.
 5. For the number of worker nodes, enter **1**.
