@@ -105,7 +105,7 @@ Note that the VPC load balancer health checks only public ALBs and updates DNS l
 The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
 {: shortdesc}
 
-<img src="images/cs_ingress_singlezone.png" width="800" alt="Expose an app in a single-zone cluster by using Ingress" style="width:800px; border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" width="600" alt="Expose an app in a single-zone cluster by using Ingress" style="width:600px; border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 

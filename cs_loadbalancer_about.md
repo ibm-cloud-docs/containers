@@ -76,7 +76,7 @@ The TCP/UDP network load balancer (NLB) 1.0 uses Iptables, a Linux kernel featur
 The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a single-zone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning.png" alt="Expose an app in a single-zone cluster by using an NLB 1.0"/>
+<img src="images/cs_loadbalancer_planning.png" alt="Expose an app in a single-zone cluster by using an NLB 1.0" width="550" style="width:550px; border-style: none"/>
 
 1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
 
@@ -90,7 +90,7 @@ The following diagram shows how an NLB 1.0 directs communication from the intern
 The following diagram shows how a network load balancer (NLB) 1.0 directs communication from the internet to an app in a multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning_multizone.png" alt="Use an NLB 1.0 to load balance apps in a multizone cluster"/>
+<img src="images/cs_loadbalancer_planning_multizone.png" alt="Use an NLB 1.0 to load balance apps in a multizone cluster width="600" style="width:600px; border-style: none""/>
 
 1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 1.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 1.0 in every zone where you have app instances.
 
@@ -120,7 +120,7 @@ Want more details about the load-balancing deployment patterns that are availabl
 The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a single zone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_ipvs_planning.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 NLB"/>
+<img src="images/cs_loadbalancer_ipvs_planning.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 NLB" width="700" style="width:700px; border-style: none"/>
 
 1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130, which is currently on worker 10.73.14.25. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
 
@@ -138,7 +138,7 @@ The following diagram shows how an NLB 2.0 directs communication from the intern
 The following diagram shows how version 2.0 NLBs in each zone direct traffic from the internet to an app in a multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_ipvs_multizone.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using an NLB 2.0"/>
+<img src="images/cs_loadbalancer_ipvs_multizone.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using an NLB 2.0" width="600" style="width:600px; border-style: none"/>
 
 1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 2.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 2.0 in every zone where you have app instances.
 
