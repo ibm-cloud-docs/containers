@@ -4226,7 +4226,7 @@ ibmcloud ks nlb-dns create --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic.
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4301,7 +4301,7 @@ ibmcloud ks nlb-dns rm --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [--json] [
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic.
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 

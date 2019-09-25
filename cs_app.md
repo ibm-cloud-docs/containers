@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -29,7 +29,7 @@ subcollection: containers
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users. Because Kubernetes is an extensible container orchestration platform that does not mandate a specific language or app, you can run various workloads such as stateless, stateful, and data-processing apps that are written in the language of your choice.
 {: shortdesc}
 
-Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers?topic=containers-cs_apps_tutorial#cs_apps_tutorial).
+Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers?topic=containers-cs_apps_tutorial).
 
 <img usemap="#d62e18" border="0" class="image" id="basic_app_deployment_process" src="images/basic_app_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
 <map name="d62e18" id="d62e18">
