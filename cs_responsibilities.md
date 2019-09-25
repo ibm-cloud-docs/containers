@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks
 
@@ -24,14 +24,11 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Your responsibilities by using {{site.data.keyword.containerlong_notm}}
+# Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}
 
-Learn about cluster management responsibilities and terms and conditions that you have when you use {{site.data.keyword.containerlong}}.
+Learn about cluster management responsibilities that you have when you use {{site.data.keyword.containerlong}}. For overall terms of use, see [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms).
 {:shortdesc}
-
-## Cluster management responsibilities
-{: #responsibilities}
 
 IBM provides you with an enterprise cloud platform for you to deploy apps alongside {{site.data.keyword.cloud_notm}} DevOps, AI, data, and security services. You choose how you set up, integrate, and operate your apps and services in the cloud.
 {:shortdesc}
@@ -127,26 +124,5 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         </tr>
   </tbody>
   </table>
-
-<br />
-
-
-## Abuse of {{site.data.keyword.containerlong_notm}}
-{: #terms}
-
-Clients cannot misuse {{site.data.keyword.containerlong_notm}}.
-{:shortdesc}
-
-Misuse includes:
-
-*   Any illegal activity
-*   Distribution or execution of malware
-*   Harming {{site.data.keyword.containerlong_notm}} or interfering with anyone's use of {{site.data.keyword.containerlong_notm}}
-*   Harming or interfering with anyone's use of any other service or system
-*   Unauthorized access to any service or system
-*   Unauthorized modification of any service or system
-*   Violation of the rights of others
-
-See [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms) for overall terms of use.
 
 
