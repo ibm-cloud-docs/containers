@@ -1135,7 +1135,7 @@ Set the webhook back end for the API server configuration. The webhook back end 
 {: shortdesc}
 
 ```
-ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server SERVER_URL_OR_IP] [--ca-cert CA_CERT_PATH] [--client-cert CLIENT_CERT_PATH] [--client-key CLIENT_KEY_PATH] [-s]
+ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remoteServer SERVER_URL_OR_IP] [--caCert CA_CERT_PATH] [--clientCert CLIENT_CERT_PATH] [--clientKey CLIENT_KEY_PATH] [-s]
 ```
 {: pre}
 
@@ -1150,16 +1150,16 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--remote-server <em>SERVER_URL</em></code></dt>
+<dt><code>--remoteServer <em>SERVER_URL</em></code></dt>
 <dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, prepend `http://` to the IP. This value is optional.</dd>
 
-<dt><code>--ca-cert <em>CA_CERT_PATH</em></code></dt>
+<dt><code>--caCert <em>CA_CERT_PATH</em></code></dt>
 <dd>The file path for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
 
-<dt><code>--client-cert <em>CLIENT_CERT_PATH</em></code></dt>
+<dt><code>--clientCert <em>CLIENT_CERT_PATH</em></code></dt>
 <dd>The file path for the client certificate that is used to authenticate against the remote logging service. This value is optional.</dd>
 
-<dt><code>--client-key <em> CLIENT_KEY_PATH</em></code></dt>
+<dt><code>--clientKey <em> CLIENT_KEY_PATH</em></code></dt>
 <dd>The file path for the corresponding client key that is used to connect to the remote logging service. This value is optional.</dd>
 
 <dt><code>-s</code></dt>
@@ -1168,7 +1168,7 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 
 **Example**:
 ```
-ibmcloud ks cluster master audit-webhook set --cluster my_cluster --remote-server https://audit.example.com/audit --ca-cert /mnt/etc/kubernetes/apiserver audit/ca.pem --client-cert /mnt/etc/kubernetes/apiserver audit/cert.pem --client-key /mnt/etc/kubernetes/apiserver audit/key.pem
+ibmcloud ks cluster master audit-webhook set --cluster my_cluster --remoteServer https://audit.example.com/audit --caCert /mnt/etc/kubernetes/apiserver audit/ca.pem --clientCert /mnt/etc/kubernetes/apiserver audit/cert.pem --clientKey /mnt/etc/kubernetes/apiserver audit/key.pem
 ```
 {: pre}
 
