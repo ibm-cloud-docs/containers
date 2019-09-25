@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, audit
 
@@ -55,8 +55,6 @@ The following list of the cluster management events are sent to {{site.data.keyw
 <td>An Ingress ALB is created.</td></tr><tr>
 <td><code>containers-kubernetes.alb.delete</code></td>
 <td>An Ingress ALB is deleted.</td></tr><tr>
-<td><code>containers-kubernetes.alb.get</code></td>
-<td>Ingress ALB information is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.apikey.reset</code></td>
 <td>An API key is reset for a region and resource group.</td></tr><tr>
 <td><code>containers-kubernetes.cluster.create</code></td>
@@ -65,14 +63,10 @@ The following list of the cluster management events are sent to {{site.data.keyw
 <td>A cluster is deleted.</td></tr><tr>
 <td><code>containers-kubernetes.cluster-feature.enable</code></td>
 <td>A feature, such as the public or private service endpoint, is enabled on a cluster.</td></tr><tr>
-<td><code>containers-kubernetes.cluster.get</code></td>
-<td>Cluster information is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.create</code></td>
 <td>A log forwarding configuration is created.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.delete</code></td>
 <td>A log forwarding configuration is deleted.</td></tr><tr>
-<td><code>containers-kubernetes.logging-config.get</code></td>
-<td>Information for a log forwarding configuration is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.update</code></td>
 <td>A log forwarding configuration is updated.</td></tr><tr>
 <td><code>containers-kubernetes.logging-config.refresh</code></td>
@@ -81,8 +75,6 @@ The following list of the cluster management events are sent to {{site.data.keyw
 <td>A logging filter is created.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.delete</code></td>
 <td>A logging filter is deleted.</td></tr><tr>
-<td><code>containers-kubernetes.logging-filter.get</code></td>
-<td>Information for a logging filter is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.logging-filter.update</code></td>
 <td>A logging filter is updated.</td></tr><tr>
 <td><code>containers-kubernetes.logging-autoupdate.changed</code></td>
@@ -109,8 +101,6 @@ The following list of the cluster management events are sent to {{site.data.keyw
 <td>A worker node is created.</td></tr><tr>
 <td><code>containers-kubernetes.worker.delete</code></td>
 <td>A worker node is deleted.</td></tr><tr>
-<td><code>containers-kubernetes.worker.get</code></td>
-<td>Information for a worker node is viewed.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reboot</code></td>
 <td>A worker node is rebooted.</td></tr><tr>
 <td><code>containers-kubernetes.worker.reload</code></td>
