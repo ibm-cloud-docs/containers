@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks
 
@@ -312,7 +312,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 </tr>
 <tr>
 <td style="text-align:left">Supported in VPC on Classic clusters</td>
-<td style="text-align:left">No</td>
+<td style="text-align:left">Yes</td>
 <td style="text-align:left">No</td>
 <td style="text-align:left">Yes</td>
 </tr>
