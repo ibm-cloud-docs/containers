@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-19"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -383,9 +383,10 @@ VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released 
 **Security groups** You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) to control traffic for your cluster. VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard. You cannot attach a security group to your worker nodes instances.
 
 **Storage**:
-* You can set up only block persistent storage. VPC block storage is available as a cluster add-on. For more information, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block).
-* To use VPC block storage, you must [attach a public gateway to all the VPC subnets](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-5-attach-a-public-gateway) that the cluster uses.
-* File, object, and Portworx software-defined storage (SDS) are not available.
+* You can set up VPC Block Storage and {{site.data.keyword.cos_full_notm}} only. 
+* VPC Block Storage is available as a cluster add-on. For more information, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block). Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-5-attach-a-public-gateway) that the cluster uses so that you can provision VPC Block Storage.
+* {{site.data.keyword.cos_full_notm}} is available as a Helm chart. For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-object_storage). 
+* File storage and Portworx software-defined storage (SDS) are not available.
 
 **strongSwan VPN service**: Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established. Additionally, because VPC on Classic clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC on Classic clusters:
   * `enableServiceSourceIP`
