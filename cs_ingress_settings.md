@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -91,10 +91,8 @@ For more information about configmap resources, see the [Kubernetes documentatio
 ## Preserving the source IP address
 {: #preserve_source_ip}
 
-
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC on Classic clusters.
 {: note}
-
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running.
 {: shortdesc}
@@ -326,21 +324,14 @@ When the `reuse-port` option is disabled, a single listening socket notifies ALB
     ```
     {: pre}
 
-2. In the `metadata` section, add `reuse-port: "true"`. Example:
+2. In the `data` section, add `reuse-port: "true"`. Example:
    ```
    apiVersion: v1
    data:
      private-ports: 80;443;9443
      public-ports: 80;443
-   kind: ConfigMap
-   metadata:
-     creationTimestamp: "2018-09-28T15:53:59Z"
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-     resourceVersion: "24648820"
-     selfLink: /api/v1/namespaces/kube-system/configmaps/ibm-cloud-provider-ingress-cm
-     uid: b6ca0c36-c336-11e8-bf8c-bee252897df5
      reuse-port: "true"
+   ...
    ```
    {: codeblock}
 
