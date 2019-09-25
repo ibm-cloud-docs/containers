@@ -433,7 +433,7 @@ To forward Kubernetes API audit logs:
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>
     ```
     {: pre}
 
