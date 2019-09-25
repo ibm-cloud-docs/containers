@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -197,7 +197,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 7. Create the audit webhook to collect Kubernetes API server event logs. Prepend `http://` to the **CLUSTER_IP**.
   ```
-  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <http://172.21.xxx.xxx>
+  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <http://172.21.xxx.xxx>
   ```
   {: pre}
 
