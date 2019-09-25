@@ -501,6 +501,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 
 
+
 ### Scenario: Extend your on-premises data center to a classic cluster
 {: #private_clusters}
 
