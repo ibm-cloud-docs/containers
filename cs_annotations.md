@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-11"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, ingress
 
@@ -1555,7 +1555,7 @@ Access an app via a non-standard TCP port.
 {:shortdesc}
 
 **Description**</br>
-Use this annotation for an app that is running a TCP streams workload.
+Use this annotation for an app that runs a TCP streams workload.
 
 <p class="note">The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL termination is not supported in this case. The TLS connection is not terminated and passes through untouched.</p>
 
@@ -2656,3 +2656,5 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
   {: pre}
 
 5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
+
+

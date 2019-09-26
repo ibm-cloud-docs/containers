@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -1457,7 +1457,7 @@ To manage rolling updates to your apps:
         ```
         {: pre}
 
-    3.  Get the name of the container that is running in the pod.
+    3.  Get the name of the container that runs in the pod.
 
         ```
         kubectl describe pod <pod_name>
