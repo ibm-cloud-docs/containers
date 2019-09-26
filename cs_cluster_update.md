@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -88,6 +88,7 @@ When the master update is complete, you can update your worker nodes, depending 
 *  [Updating VPC worker nodes](#vpc_worker_node)
 
 <br />
+
 
 
 ## Updating classic worker nodes
