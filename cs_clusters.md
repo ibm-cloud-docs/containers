@@ -289,7 +289,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
      {: pre}
 
    <table>
-   <caption>cluster create classic components</caption>
+   <caption>`cluster create classic` command components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
    </thead>
@@ -356,14 +356,14 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    ```
    {: pre}
 
-   When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
+   When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
    Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-   mycluster    blrs3b1d0p0p2f7haq0g       deployed   20170201162433   3          dal10     1.14.6      Default             classic
+   mycluster    blrs3b1d0p0p2f7haq0g       normal     20170201162433   3          dal10     1.14.6      Default             classic
    ```
    {: screen}
 
-   Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
+   Is your cluster not in a `normal` state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
    {: tip}
 
 7. Check the status of the worker nodes.
