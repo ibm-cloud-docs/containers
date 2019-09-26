@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, vpc
 
@@ -1014,7 +1014,7 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
 
-Data that is stored on VPC Block Storage Block is secured across redundant fault zones in your region. To manually back up your data, use the Kubernetes `kubectl cp` command.
+Data that is stored on VPC Block Storage is secured across redundant fault zones in your region. To manually back up your data, use the Kubernetes `kubectl cp` command.
 {: shortdesc}
 
 You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster
