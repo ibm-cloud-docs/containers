@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-09-26"
 
 ---
 
@@ -202,7 +202,7 @@ lastupdated: "2019-09-13"
 * [Scenario: Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
 * [Scenario: Extend your on-premises datacenter to a cluster on the private network and add limited public access](/docs/containers?topic=containers-plan_clusters#internet-facing)
   * [Using edge nodes and Calico network policies](/docs/containers?topic=containers-plan_clusters#internet-facing)
-  * [Using a gateway device](/docs/containers?topic=containers-plan_clusters#internet-facing)
+  * [Using a gateway appliance](/docs/containers?topic=containers-plan_clusters#internet-facing)
 * [Scenario: Extend your on-premises datacenter to a cluster on the private network](/docs/containers?topic=containers-plan_clusters#internet-facing)
 
 [Planning your cluster for high availability](/docs/containers?topic=containers-ha_clusters)
@@ -229,7 +229,7 @@ lastupdated: "2019-09-13"
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
   * [Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-clusters#next_steps_internet)
   * [Extend your on-premises datacenter to a cluster and allow limited public access using edge nodes and Calico network policies](/docs/containers?topic=containers-clusters#next_steps_calico)
-  * [Extend your on-premises datacenter to a cluster and allow limited public access using a gateway device](/docs/containers?topic=containers-clusters#next_steps_gateway)
+  * [Extend your on-premises datacenter to a cluster and allow limited public access using a gateway appliance](/docs/containers?topic=containers-clusters#next_steps_gateway)
   * [Extend your on-premises datacenter to a cluster on the private network only](/docs/containers?topic=containers-clusters#next_steps_extend)
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
@@ -400,7 +400,7 @@ lastupdated: "2019-09-13"
   * [Adding portable private IPs by using user-managed subnets](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
-  * [Managing subnet routing for gateway devices](/docs/containers?topic=containers-subnets#vra-routing)
+  * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
   * [Removing a subnet in an IBM Cloud infrastructure account from a cluster](/docs/containers?topic=containers-subnets#remove-sl-subnets)
   * [Removing a subnet in an on-premises network from a cluster](/docs/containers?topic=containers-subnets#remove-user-subnets)
@@ -516,7 +516,7 @@ lastupdated: "2019-09-13"
 * [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
-* [Components and architecture  of an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+* [Components and architecture of an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
 

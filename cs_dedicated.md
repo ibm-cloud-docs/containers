@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks
 
@@ -292,7 +292,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     6. Choose the **Number of worker nodes** that you need. Select `3` to ensure high availability of your cluster.
 
     7. Select a **Public VLAN** (optional) and **Private VLAN** (required). The available public and private VLANs are pre-defined when the {{site.data.keyword.Bluemix_dedicated_notm}} environment is set up. Both VLANs communicate between worker nodes but the public VLAN also communicates with the IBM-managed Kubernetes master. You can use the same VLAN for multiple clusters.
-        If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).
+        If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).
         {: note}
 
     8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
@@ -358,7 +358,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     </tr>
     <tr>
     <td><code>--public-vlan <em>&lt;flavor&gt;</em></code></td>
-    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway device](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></td>
+    <td>Enter the ID of the public VLAN that your Dedicated environment is configured to use. If you want to connect your worker nodes to a private VLAN only, do not specify this option.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></td>
     </tr>
     <tr>
     <td><code>--private-vlan <em>&lt;flavor&gt;</em></code></td>

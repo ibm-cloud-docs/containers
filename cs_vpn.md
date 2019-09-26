@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -48,7 +48,7 @@ To connect your worker nodes and apps to an on-premises data center, you can con
 Use a Helm chart to configure and deploy the strongSwan IPSec VPN service inside of a Kubernetes pod.
 {:shortdesc}
 
-Because strongSwan is integrated within your cluster, you don't need an external gateway device. When VPN connectivity is established, routes are automatically configured on all of the worker nodes in the cluster. These routes allow two-way connectivity through the VPN tunnel between pods on any worker node and the remote system. For example, the following diagram shows how an app in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a strongSwan VPN connection:
+Because strongSwan is integrated within your cluster, you don't need an external gateway appliance. When VPN connectivity is established, routes are automatically configured on all of the worker nodes in the cluster. These routes allow two-way connectivity through the VPN tunnel between pods on any worker node and the remote system. For example, the following diagram shows how an app in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a strongSwan VPN connection:
 
 <img src="images/cs_vpn_strongswan.png" width="700" alt="Flow of traffic between your cluster and an on-premises data center through the strongSwan VPN service" style="width:700px; border-style: none"/>
 
