@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -117,6 +117,8 @@ The following diagram shows how Ingress directs communication from the internet 
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
 
+6. When the app returns a response packet, it uses the IP address of the worker node where the ALB that forwarded the client request exists. The ALB then sends the response packet to the client.
+
 ### Multizone cluster
 {: #classic-multi}
 
@@ -135,6 +137,8 @@ The following diagram shows how Ingress directs communication from the internet 
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
+6. When the app returns a response packet, it uses the IP address of the worker node where the ALB that forwarded the client request exists. The ALB then sends the response packet to the client.
+
 <br />
 
 
@@ -152,6 +156,6 @@ image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a V
 
 3. Based on the resolved IP address, the client sends the request to the VPC load balancer that exposes your cluster's ALBs.
 
-4. The VPC load balancer service routes the request to an ALB.
+4. The VPC load balancer service routes the request to an ALB. Each ALB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the ALB routes the requests between the app pods in the zone.
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
