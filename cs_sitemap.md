@@ -104,7 +104,7 @@ lastupdated: "2019-09-27"
   * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#app_types)
   * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-strategy#12factor)
   * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#migrate_containerize)
-  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](#knowledge)
+  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
 * [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
   * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
   * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
