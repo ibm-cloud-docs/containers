@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,10 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>27 September 2019</td>
+  <td><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>{{site.data.keyword.cos_full_notm}} supported in VPC clusters</strong>: You can now provision {{site.data.keyword.cos_full_notm}} for your apps that run in a VPC cluster. For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage).</td>
+  </tr>
 <tr>
   <td>24 September 2019</td>
   <td><ul>
