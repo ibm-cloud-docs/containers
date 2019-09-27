@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2789,7 +2789,7 @@ VLAN ID   Subnet CIDR         Public   User-managed
 
 **Example**:
 ```
-ibmcloud ks zone network-set --zone dal10 --cluster my_cluster --worker-pool pool1,pool2,pool3 --private-vlan 2294021
+ibmcloud ks zone network-set --zone dal10 -c my_cluster -p pool1 -p pool2 --private-vlan 2294021
 ```
 {: pre}
 
