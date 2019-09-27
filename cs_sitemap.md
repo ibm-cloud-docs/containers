@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-09-27"
 
 ---
 
@@ -80,7 +80,6 @@ lastupdated: "2019-09-26"
 
 [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
 * [Cluster management responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
-* [Abuse of {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#terms)
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
@@ -105,7 +104,7 @@ lastupdated: "2019-09-26"
   * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#app_types)
   * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-strategy#12factor)
   * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#migrate_containerize)
-  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?]()
+  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](#knowledge)
 * [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
   * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
   * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
@@ -167,7 +166,7 @@ lastupdated: "2019-09-26"
 * [Lesson 3: Setting up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
-[Deploy a starter kit app to a Kubernetes cluster]
+[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
 * [Time required](/docs/containers?topic=containers-tutorial-starterkit-kube#time-starterkit-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
@@ -273,10 +272,6 @@ lastupdated: "2019-09-26"
   * [Accessing clusters through the public service endpoint](/docs/containers?topic=containers-clusters#access_internet)
   * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem)
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
-  * [Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-clusters#next_steps_internet)
-  * [Extend your on-premises data center to a cluster and allow limited public access using edge nodes and Calico network policies](/docs/containers?topic=containers-clusters#next_steps_calico)
-  * [Extend your on-premises data center to a cluster and allow limited public access using a gateway appliance](/docs/containers?topic=containers-clusters#next_steps_gateway)
-  * [Extend your on-premises data center to a cluster on the private network only](/docs/containers?topic=containers-clusters#next_steps_extend)
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
@@ -299,8 +294,8 @@ lastupdated: "2019-09-26"
   * [Can I scale down a worker pool to zero (0) nodes?](/docs/containers?topic=containers-ca#scalable-practices-zero)
   * [Can I optimize my deployments for autoscaling?](/docs/containers?topic=containers-ca#scalable-practices-apps)
   * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
-  * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced#scalable-practices-resize)
-  * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca)
+  * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
+  * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
 * [Deploying the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap](/docs/containers?topic=containers-ca#ca_cm)
 * [Customizing the cluster autoscaler Helm chart configuration values](/docs/containers?topic=containers-ca#ca_chart_values)

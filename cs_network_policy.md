@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -100,7 +100,7 @@ Review the following default Calico host policies that are automatically applied
   </tbody>
 </table>
 
-A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to all  classic clusters.
+A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to all classic clusters.
 
 <table>
 <caption>Default Kubernetes policies for each cluster</caption>
