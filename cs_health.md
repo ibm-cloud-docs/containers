@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -197,7 +197,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 7. Create the audit webhook to collect Kubernetes API server event logs. Prepend `http://` to the **CLUSTER_IP**.
   ```
-  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <http://172.21.xxx.xxx>
+  ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <http://172.21.xxx.xxx>
   ```
   {: pre}
 
@@ -369,7 +369,7 @@ The following table shows the different options that you have when you configure
 
   * Run syslog from a container. For example, you can use this [deployment .yaml file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml) to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host.
 
-  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server is running: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
+  You can see your logs as valid JSON by removing syslog prefixes. To do so, add the following code to the top of your <code>etc/rsyslog.conf</code> file where your rsyslog server runs: <code>$template customFormat,"%msg%\n"</br>$ActionFileDefaultTemplate customFormat</code>
   {: tip}
 
 4. Create a log forwarding configuration.
@@ -433,7 +433,7 @@ To forward Kubernetes API audit logs:
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 
     ```
-    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remoteServer <server_URL_or_IP> --caCert <CA_cert_path> --clientCert <client_cert_path> --clientKey <client_key_path>
+    ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server <server_URL_or_IP> --ca-cert <CA_cert_path> --client-cert <client_cert_path> --client-key <client_key_path>
     ```
     {: pre}
 
@@ -1156,7 +1156,7 @@ To configure Autorecovery:
    </tr>
    <tr>
    <td><code>Route</code></td>
-   <td>When the check type is <code>HTTP</code>, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that is running on all of the worker nodes.</td>
+   <td>When the check type is <code>HTTP</code>, enter the path that is requested from the HTTP server. This value is typically the metrics path for the server that runs on all of the worker nodes.</td>
    </tr>
    <tr>
    <td><code>Enabled</code></td>

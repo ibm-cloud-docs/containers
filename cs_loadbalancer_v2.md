@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -96,12 +96,11 @@ Next, you can follow the steps in [Setting up an NLB 2.0 in a multizone cluster]
 
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * To create public NLBs in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private NLBs in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
-* If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-
+* If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
 
 To set up an NLB 2.0 in a multizone cluster:
-1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This custom label identifies all pods where your app is running to include them in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This custom label identifies all pods where your app runs to include them in the load balancing.
 
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
   1. Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
@@ -266,7 +265,7 @@ Next, you can [register an NLB subdomain](/docs/containers?topic=containers-load
 
 To create an NLB 2.0 service in a single-zone cluster:
 
-1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app is running so that they can be included in the load balancing.
+1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This label is needed to identify all pods where your app runs so that they can be included in the load balancing.
 2.  Create a load balancer service for the app that you want to expose to the public internet or a private network.
     1.  Create a service configuration file that is named, for example, `myloadbalancer.yaml`.
 

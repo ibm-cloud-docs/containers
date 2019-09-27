@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-18"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -34,37 +34,42 @@ Still getting started? Try out the [creating a Kubernetes cluster tutorial](/doc
 {: tip}
 
 Have you created a cluster before and are just looking for quick example commands? Try these examples.
-*  **Free cluster**:
-   ```
-   ibmcloud ks cluster create classic --name my_cluster
-   ```
-   {: pre}
-*  **Classic cluster, shared virtual machine**:
+
+**Free cluster**:
+```
+ibmcloud ks cluster create classic --name my_cluster
+```
+{: pre}
+
+**Classic clusters**:
+* Classic cluster, shared virtual machine:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **Classic cluster, bare metal**:
+*  Classic cluster, bare metal:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
-*  **Classic cluster that uses private VLANs and the private service endpoint only**:
+*  Classic cluster that uses private VLANs and the private service endpoint only:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-service-endpoint --private-vlan <private_VLAN_ID> --private-only
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
    ```
    {: pre}
-*  **For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
+*  For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
    ```
    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
    ```
    {: pre}
-* **VPC on Classic cluster**:
+
+**VPC clusters**:
+*  VPC on Classic cluster:
    ```
    ibmcloud ks cluster create vpc-classic --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
    ```
    {: pre}
-*  **For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone)**:
+*  For a VPC on Classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
    ```
    ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
    ```
@@ -113,14 +118,13 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
     1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
     2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/resources?topic=resources-private-network-endpoints#getting-started).
     3. **Optional, private service endpoint only**: Set up connectivity to the private network. The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPN connection](/docs/infrastructure/iaas-vpn?topic=VPN-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.cloud_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.cloud_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB. For more information, see [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
-    4. **Optional, VPC clusters only**: If you want your VPC clusters to communicate with classic clusters over the private network interface, you can choose to set up classic infrastructure access from the VPC that your cluster is in. Note that you can set up classic infrastructure access for only one VPC per region. For more information, see [Setting up access to your Classic Infrastructure from VPC](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
 
   * **Classic clusters only, non-VRF and non-service endpoint accounts**: If you do not set up your account to use VRF and service endpoints, you can create only classic clusters that use VLAN spanning to communicate with each other on the public and private network.
     * To use the public service endpoint only (run internet-facing workloads):
       1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
-    * To use a gateway device (extend your on-premises data center):
+    * To use a gateway appliance (extend your on-premises data center):
       1. Enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
-      2. Configure a gateway device to connect your cluster to the on-premises network. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow required network traffic and to block unwanted network traffic.
+      2. Configure a gateway appliance to connect your cluster to the on-premises network. For example, you might choose to set up a [Virtual Router Appliance](/docs/infrastructure/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations) to act as your firewall to allow required network traffic and to block unwanted network traffic.
       3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
 <br />
@@ -185,7 +189,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
 6. For each of the selected zones, choose your public and private VLANs.
   * To create a cluster in which you can run internet-facing workloads:
     1. Select a public VLAN and a private VLAN from your IBM Cloud infrastructure account for each zone. Worker nodes communicate with each other by using the private VLAN, and can communicate with the Kubernetes master by using the public or the private VLAN. If you do not have a public or private VLAN in this zone, a public and a private VLAN are automatically created for you. You can use the same VLAN for multiple clusters.
-  * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later, or that extends your on-premises data center and provides limited public access through a gateway device:
+  * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later, or that extends your on-premises data center and provides limited public access through a gateway appliance:
     1. Select a private VLAN from your IBM Cloud infrastructure account for each zone. Worker nodes communicate with each other by using the private VLAN. If you do not have a private VLAN in a zone, a private VLAN is automatically created for you. You can use the same VLAN for multiple clusters.
     2. For the public VLAN, select **None**.
 7. For **Master service endpoint**, choose how your Kubernetes master and worker nodes communicate.
@@ -193,7 +197,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
     * If VRF and service endpoints are enabled in your {{site.data.keyword.cloud_notm}} account, select **Both private & public endpoints**.
     * If you cannot or do not want to enable VRF, select **Public endpoint only**.
   * To create a cluster that extends your on-premises data center only, or a cluster that extends your on-premises data center and provides limited public access with edge worker nodes, select **Both private & public endpoints** or **Private endpoint only**. Ensure that you have enabled VRF and service endpoints in your {{site.data.keyword.cloud_notm}} account. Note that if you enable the private service endpoint only, you must [expose the master endpoint through a private network load balancer](#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
-  * To create a cluster that extends your on-premises data center and provides limited public access with a gateway device, select **Public endpoint only**.
+  * To create a cluster that extends your on-premises data center and provides limited public access with a gateway appliance, select **Public endpoint only**.
 8. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
    1. Filter the worker flavors by selecting a machine type. Virtual is billed hourly and bare metal is billed monthly.
       - **Bare metal**: Billed monthly, bare metal servers are provisioned manually by IBM Cloud infrastructure after you order, and can take more than one business day to complete. Bare metal is best suited for high-performance applications that need more resources and host control. Be sure that you want to provision a bare metal machine. Because it is billed monthly, if you cancel it immediately after an order by mistake, you are still charged the full month.
@@ -203,7 +207,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. For example, if you selected two zones and want to create three worker nodes, a total of six worker nodes are provisioned in your cluster with three worker nodes in each zone.
 9. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab.
     *   When the Kubernetes master and all worker nodes are fully provisioned, the state of your cluster changes to **Normal**. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
-    *   Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **Normal** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway device, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
+    *   Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **Normal** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 ### Creating a standard classic cluster in the CLI
@@ -229,10 +233,11 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    3. To create clusters in a resource group other than default, target that resource group.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+
       ```
       ibmcloud target -g <resource_group_name>
       ```
-      {: pre}
+      {: pre} 
 
 3. Review the zones that are available. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). Multizone-capable zones have a metro value in the **Multizone Metro** column.
     ```
@@ -252,7 +257,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    ```
    {: pre}
 
-5. Check if you have existing VLANs in the zones that you want to include in your cluster, and note the ID of the VLAN. If you do not have a public or private VLAN in one of the zones that you want to use in your cluster, {{site.data.keyword.containerlong_notm}} automatically creates these VLAN for you when you create the cluster.
+5. Check if you have existing VLANs in the zones that you want to include in your cluster, and note the ID of the VLAN. If you do not have a public or private VLAN in one of the zones that you want to use in your cluster, {{site.data.keyword.containerlong_notm}} automatically creates these VLANs for you when you create the cluster.
    ```
    ibmcloud ks vlan ls --zone <zone>
    ```
@@ -267,8 +272,8 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    1518888   vlan   1254     public    fcr02a.dal10
    ```
    {: screen}
-   * To create a cluster in which you can run internet-facing workloads, check to see whether a public and private VLAN exist. If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any of the private VLANs can be used with any of public VLANs because the routers all include `02a.dal10`.
-   * To create a cluster that extends your on-premises data center on the private network only, that extends your on-premises data center with the option of adding limited public access later through edge worker nodes, or that extends your on-premises data center and provides limited public access through a gateway device, check to see whether a private VLAN exists. If you have a private VLAN, note the ID.
+   * To create a cluster in which you can run internet-facing workloads, check to see whether a public and private VLAN exist. If a public and private VLAN already exist, note the matching routers. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match. In the example output, any private VLAN can be used with any public VLAN because the routers all include `02a.dal10`.
+   * To create a cluster that extends your on-premises data center on the private network only or provides limited public access through a gateway appliance, check to see whether a private VLAN exists. If you have a private VLAN, note the ID.
 
 6. Run the `cluster create classic` command. By default, the worker node disks are AES 256-bit encrypted.
    * To create a cluster in which you can run internet-facing workloads:
@@ -277,19 +282,14 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
      ```
      {: pre}
 
-   * To create a cluster that extends your on-premises data center on the private network, with the option of adding limited public access later through edge worker nodes:
-     ```
-     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --private-service-endpoint [--public-service-endpoint] [--disable-disk-encrypt]
-     ```
-     {: pre}
-   * To create a cluster that extends your on-premises data center and provides limited public access through a gateway device:
+   * To create a cluster with private network connectivity only, such as to extend your on-premises data center:
      ```
      ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt]
      ```
      {: pre}
 
    <table>
-   <caption>cluster create classic components</caption>
+   <caption>`cluster create classic` command components</caption>
    <thead>
    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
    </thead>
@@ -356,14 +356,14 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    ```
    {: pre}
 
-   When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
+   When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `normal`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
-   Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-   mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          dal10     1.14.6      Default             classic
+   Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
+   mycluster    blrs3b1d0p0p2f7haq0g       normal     20170201162433   3          dal10     1.14.6      Default             classic
    ```
    {: screen}
 
-   Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway device, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
+   Is your cluster not in a `normal` state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
    {: tip}
 
 7. Check the status of the worker nodes.
@@ -374,8 +374,8 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
 
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
    ```
-   ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
-   kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.14.6      Default
+   ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.6
    ```
    {: screen}
 
@@ -383,11 +383,6 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    {: important}
 
 8. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
-
-<br />
-
-
-
 
 ## Creating a standard VPC on Classic cluster
 {: #clusters_vpc_standard}
@@ -433,7 +428,7 @@ Create your single zone or multizone VPC on Classic cluster by using the {{site.
    3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. For example, if you selected two zones and want to create three worker nodes, a total of six worker nodes are provisioned in your cluster with three worker nodes in each zone.
 9. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab.
    - When the deployment is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
-   - Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway device, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
+   - Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
 ### Creating standard VPC on Classic clusters from the CLI
@@ -503,7 +498,7 @@ To create a VPC on Classic cluster:
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.
-</td>
+ Note that VPC on Classic clusters are supported for Kubernetes versions 1.15 and later only.</td>
     </tr>  
     <tr>
     <td><code>--provider <em>&lt;vpc-classic&gt;</em></code></td>
@@ -531,7 +526,7 @@ To create a VPC on Classic cluster:
     ```
     {: screen}
 
-    Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway device, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
+    Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).
     {: tip}
 
 8. Check the status of the worker nodes.
@@ -540,7 +535,7 @@ To create a VPC on Classic cluster:
    ```
    {: pre}
 
-   When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the worker node status is **Ready**, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
+   When the worker nodes are ready, the worker node **State** changes to `normal` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    ```
    ID                                                 Public IP       Private IP      Machine Type   State    Status   Zone        Version     Resource Group Name
    kube-mil01-paf97e8843e29941b49c598f516de72101-w1   169.xx.xxx.xxx  10.xxx.xx.xxx   standard       normal   Ready    mil01       1.14.6      Default
@@ -551,8 +546,6 @@ To create a VPC on Classic cluster:
    {: important}
 
 9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
-
-
 
 ## Accessing your cluster
 {: #access_cluster}
@@ -790,7 +783,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 ## Next steps
 {: #next_steps}
 
-When the cluster is up and running, you can check out the following tasks:
+When the cluster is up and running, you can check out the following cluster administration tasks:
 - If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers).
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 - [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
@@ -799,34 +792,13 @@ When the cluster is up and running, you can check out the following tasks:
 - Enable the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons to extend your cluster capabilities.
 
 Then, you can check out the following network configuration steps for your cluster setup:
-
-### Run internet-facing app workloads in a cluster
-{: #next_steps_internet}
-
-* Isolate networking workloads to [edge worker nodes](/docs/containers?topic=containers-edge).
-* Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access).
-* Control public traffic to the network services that expose your apps by creating [Calico pre-DNAT policies](/docs/containers?topic=containers-network_policies#block_ingress), such as whitelist and blacklist policies.
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up a [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
-
-### Extend your on-premises data center to a cluster and allow limited public access using edge nodes and Calico network policies
-{: #next_steps_calico}
-
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup). {{site.data.keyword.cloud_notm}} Direct Link allows communication between apps and services in your cluster and an on-premises network over the private network, while strongSwan allows communication through an encrypted VPN tunnel over the public network.
-* Isolate public networking workloads by creating an [edge worker pool](/docs/containers?topic=containers-edge) of worker nodes that are connected to public and private VLANs.
-* Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-* Create Calico host network policies to isolate your cluster on the [public network](/docs/containers?topic=containers-network_policies#isolate_workers_public) and on the [private network](/docs/containers?topic=containers-network_policies#isolate_workers).
-
-### Extend your on-premises data center to a cluster and allow limited public access using a gateway device
-{: #next_steps_gateway}
-
-* If you also configure your gateway firewall for the private network, you must [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* To securely connect your worker nodes and apps to private networks outside of your {{site.data.keyword.cloud_notm}} account, set up an IPSec VPN endpoint on your gateway device. Then, [configure the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) in your cluster to use the VPN endpoint on your gateway or [set up VPN connectivity directly with VRA](/docs/containers?topic=containers-vpn#vyatta).
-* Expose your apps with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
-* [Open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in your gateway device firewall to permit inbound traffic to networking services.
-
-### Extend your on-premises data center to a cluster on the private network only
-{: #next_steps_extend}
-
-* If you have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
-* Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link).
-* Expose your apps on the private network with [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
+* Classic clusters:
+  * Isolate networking workloads to [edge worker nodes](/docs/containers?topic=containers-edge).
+  * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
+  * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account by setting up [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) or the [strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn).
+  * Create Calico host network policies to isolate your cluster on the [public network](/docs/containers?topic=containers-network_policies#isolate_workers_public) and on the [private network](/docs/containers?topic=containers-network_policies#isolate_workers).
+  * If you use a gateway appliance, such as a Virtual Router Appliance (VRA), [open up the required ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_inbound) in the public firewall to permit inbound traffic to networking services. If you also have a firewall on the private network, [allow communication between worker nodes and let your cluster access infrastructure resources over the private network](/docs/containers?topic=containers-firewall#firewall_private).
+* VPC clusters:
+  * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
+  * [Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account](/docs/containers?topic=containers-vpc-vpnaas) by setting up the {{site.data.keyword.cloud_notm}} VPC VPN or the strongSwan IPSec VPN service.
+  * [Create access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) to control ingress and egress traffic to your VPC subnets.

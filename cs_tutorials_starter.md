@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-19"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks
 
@@ -37,7 +37,7 @@ Create an app in {{site.data.keyword.cloud}} by using a blank starter kit, and s
 - Create a Java + Spring app by using an {{site.data.keyword.cloud_notm}} starter kit.
 - Add an {{site.data.keyword.cloudant_short_notm}} service instance to your app.
 - Set up a continuous integration and continuous delivery pipeline for your app and connect the pipeline to a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
-- Explore the DevOps tools, such as Gitlab or the DevOps delivery pipeline.
+- Explore the DevOps tools, such as GitLab or the DevOps delivery pipeline.
 - View deployment information and verify that your app is up and running.
 
 ![Starter kit flow diagram](images/starterkit-app.png)
@@ -91,11 +91,11 @@ With your toolchain set up, explore how you can use each tool to automate the de
 {: shortdesc}
 
 1. On the **App details** page, click **View toolchain**. The **Overview** tab of the toolchain page is displayed, which shows the tools that are included with the toolchain. This example includes the following tools that were preselected in the starter kit when the toolchain was created:
-  * An issues tracker in Gitlab to track project updates and changes.
-  * A Gitlab repo that contains the source code of your app.
+  * An issues tracker in GitLab to track project updates and changes.
+  * A GitLab repo that contains the source code of your app.
   * An Eclipse Orion instance, which is a web-based IDE to edit your app.
   * A Delivery Pipeline that consists of a customizable **BUILD** and **DEPLOY** stage.
-2. Configure your Gitlab repo.
+2. Configure your GitLab repo.
    1. From the toolchain overview page, select the **Git** card.
    2. From your project overview page, select **Repository** > **Files** to review your app code and dependencies.
    3. From your project overview page, select **Issues** to find or create your issues.
@@ -106,7 +106,7 @@ With your toolchain set up, explore how you can use each tool to automate the de
       3. Follow the on-screen instructions to set up your personal access token.
 3. Review your **Delivery Pipeline** stages.
    1. From the toolchain overview page, select **Delivery Pipeline**. The pipeline stages are displayed.
-      - The **BUILD** stage clones your Gitlab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registryshort_notm}}.
+      - The **BUILD** stage clones your GitLab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registryshort_notm}}.
       - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registryshort_notm}} and deploys your app to your Kubernetes cluster.
    2. To find the details of what happened in each deployment stage, click **View logs and history**.
 

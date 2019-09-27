@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -29,7 +29,7 @@ subcollection: containers
 You can use Kubernetes techniques in {{site.data.keyword.containerlong}} to deploy apps in containers and ensure that those apps are up and running at all times. For example, you can perform rolling updates and rollbacks without downtime for your users. Because Kubernetes is an extensible container orchestration platform that does not mandate a specific language or app, you can run various workloads such as stateless, stateful, and data-processing apps that are written in the language of your choice.
 {: shortdesc}
 
-Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers?topic=containers-cs_apps_tutorial).
+Learn the general steps for deploying apps by clicking an area of the following image. Want to learn the basics first? Try out the [deploying apps tutorial](/docs/containers?topic=containers-tutorial-starterkit-kube).
 
 <img usemap="#d62e18" border="0" class="image" id="basic_app_deployment_process" src="images/basic_app_deployment_process.png" width="780" style="width:780px;" alt="Basic deployment process"/>
 <map name="d62e18" id="d62e18">
@@ -1457,7 +1457,7 @@ To manage rolling updates to your apps:
         ```
         {: pre}
 
-    3.  Get the name of the container that is running in the pod.
+    3.  Get the name of the container that runs in the pod.
 
         ```
         kubectl describe pod <pod_name>
@@ -1554,7 +1554,7 @@ Before you begin, you need two clusters and the **Manager** [service role](/docs
     kubectl get all -o yaml --export > myconfigs.yaml
     ```
     {: pre}
-4.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resoruces to, such as a production-ready standard cluster.
+4.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy the resources to, such as a production-ready standard cluster.
 5.  Optional: If your free cluster used multiple namespaces, create the same namespaces in the standard cluster and [copy the image pull secret to each namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
 6.  Deploy the copied configuration files to your cluster. If a configuration file has specific information that cannot be applied, you might need to update the configuration file and reapply.
     ```

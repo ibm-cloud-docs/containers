@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -30,7 +30,7 @@ subcollection: containers
 [Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
 
-Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters. 
+Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
 {: important}
 
 **What is software-defined storage (SDS)?** </br>
@@ -121,8 +121,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
    3. Enter a name for your service credentials and click **Add**.
 4. {: #databases_credentials}Retrieve your service credentials and certificate.
    1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. You need this information when you install Portworx. 
-      
+   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. You need this information when you install Portworx.
+
       Example output for user name and password:
       ```
       "grpc": {
@@ -134,7 +134,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       ```
       {: screen}
    3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx.  
-   
+
       Example output for `--endpoints`:
       ```
       --endpoints=https://1ab234c5-12a1-1234-a123-123abc45cde1.123456ab78cd9ab1234a456740ab123c.databases.appdomain.cloud:32059
@@ -142,8 +142,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       {: screen}
 
    4. Find the `certificate` section of your service credentials and note the **`certificate_base64`**.
-   
-      Example output for `certificate`: 
+
+      Example output for `certificate`:
       ```
       "certificate": {
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
@@ -209,7 +209,7 @@ To install Portworx:
     ```
     {: screen}
 
-3. [Retrieve the etcd endpoint, user name, and password of the Databases for etcd service instance that you set up earlier](#databases_credentials). 
+3. [Retrieve the etcd endpoint, user name, and password of the Databases for etcd service instance that you set up earlier](#databases_credentials).
 
 4. Download the Portworx Helm chart.
    ```
@@ -444,7 +444,7 @@ To install Portworx:
 
    2. Verify that all worker nodes that you wanted to include into your Portworx cluster are included by reviewing the **`StorageNode`** column in the **Cluster Summary** section of your CLI output. If a worker node is included as a storage node in the Portworx cluster, this worker node displays **Yes** in the **`StorageNode`** column. If a worker node is not included in the Portworx cluster, then Portworx could not find the raw and unformatted block storage device that is attached to your worker node.
 
-      Because Portworx is running as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
+      Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
       {: note}
 
    3. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.

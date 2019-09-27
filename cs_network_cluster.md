@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-18"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, vlan
 
@@ -37,7 +37,7 @@ After you initially set up your network when you [create a cluster](/docs/contai
 ## Setting up the private service endpoint
 {: #set-up-private-se}
 
-In clusters that run Kubernetes version 1.11 or later, enable or disable the private service endpoint for your cluster.
+Enable or disable the private service endpoint for your cluster.
 {: shortdesc}
 
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
@@ -131,7 +131,7 @@ To disable the public service endpoint, you must first enable the private servic
 ## Switching from the public service endpoint to the private service endpoint
 {: #migrate-to-private-se}
 
-In clusters that run Kubernetes version 1.11 or later, enable worker nodes to communicate with the master over the private network instead of the public network by enabling the private service endpoint.
+Enable worker nodes to communicate with the master over the private network instead of the public network by enabling the private service endpoint.
 {: shortdesc}
 
 All clusters that are connected to a public and a private VLAN use the public service endpoint by default. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. To enable worker nodes to communicate with the Kubernetes master over the private network instead of the public network, you can enable the private service endpoint. Then, you can optionally disable the public service endpoint.
@@ -236,13 +236,13 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 
     * Example to add both public and private VLANs, such as if you change from private-only to both private and public:
       ```
-      ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
+      ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --public-vlan <public_vlan_id>
       ```
       {: pre}
 
     * Example to add only a private VLAN, such as if you change from public and private VLANs to private-only when you have a [VRF-enabled account that uses service endpoints](/docs/resources?topic=resources-private-network-endpoints#getting-started):
       ```
-      ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pools <pool_name> --private-vlan <private_vlan_id> --private-only
+      ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --private-only
       ```
       {: pre}
 

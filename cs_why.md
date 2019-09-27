@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, containers
 
@@ -38,10 +38,12 @@ subcollection: containers
 Clusters are deployed on compute hosts that provide native Kubernetes and {{site.data.keyword.IBM_notm}}-specific capabilities.
 {:shortdesc}
 
+Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
+
 |Benefit|Description|
 |-------|-----------|
-|Choice of container platform provider | <ul><li>Deploy clusters with **OpenShift** or community **Kubernetes** installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both OpenShift or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.containerlong_notm}} console to the Kubernetes dashboard or OpenShift web console.</li><li>Single view and management experience of all your OpenShift or community Kubernetes clusters from {{site.data.keyword.containerlong_notm}}.</li><li>For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).</li></ul>
-|Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers for compute-intensive workloads such as GPU.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
+|Choice of container platform provider | <ul><li>Deploy clusters with **OpenShift** or community **Kubernetes** installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both OpenShift or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.containerlong_notm}} console to the Kubernetes dashboard or OpenShift web console.</li><li>Single view and management experience of all your OpenShift or community Kubernetes clusters from {{site.data.keyword.containerlong_notm}}.</li><li>For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).</li></ul>|
+|Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Choose between [{{site.data.keyword.cloud_notm}} Classic or VPC on Classic infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers for compute-intensive workloads such as GPU.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
 | Multizone clusters to increase high availability | <ul><li>Easily manage worker nodes of the same flavor (CPU, memory, virtual or physical) with worker pools.</li><li>Guard against zone failure by spreading nodes evenly across select multizones and by using anti-affinity pod deployments for your apps.</li><li>Decrease your costs by using multizone clusters instead of duplicating the resources in a separate cluster.</li><li>Benefit from automatic load balancing across apps with the multizone load balancer (MZLB) that is set up automatically for you in each zone of the cluster.</li></ul>|
 | Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) to protect your cluster from zonal failures.</li></ul> |
 |Image security compliance with Vulnerability Advisor|<ul><li>Set up your own repo in our secured Docker private image registry where images are stored and shared by all users in the organization.</li><li>Benefit from automatic scanning of images in your private {{site.data.keyword.cloud_notm}} registry.</li><li>Review recommendations specific to the operating system used in the image to fix potential vulnerabilities.</li></ul>|
@@ -49,8 +51,6 @@ Clusters are deployed on compute hosts that provide native Kubernetes and {{site
 |Secure exposure of apps to the public|<ul><li>Choose between a public IP address, an {{site.data.keyword.IBM_notm}} provided route, or your own custom domain to access services in your cluster from the internet.</li></ul>|
 |{{site.data.keyword.cloud_notm}} service integration|<ul><li>Add extra capabilities to your app through the integration of {{site.data.keyword.cloud_notm}} services, such as Watson APIs, Blockchain, data services, or Internet of Things.</li></ul>|
 {: caption="Benefits of the {{site.data.keyword.containerlong_notm}}" caption-side="top"}
-
-Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
 
 <br />
 
@@ -74,6 +74,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
  <tr>
  <td>{{site.data.keyword.cloud_notm}} Public, off-premises</td>
  <td>With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+ <p class="tip">You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</p>
  </td>
  </tr>
  <tr>
@@ -108,6 +109,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[{{site.data.keyword.cloud_notm}} service access from the cluster and apps](/docs/containers?topic=containers-service-binding#bind-services)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Disk space on worker node for non-persistent storage](/docs/containers?topic=containers-storage_planning#non_persistent_overview)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 | [Provision OpenShift clusters](/docs/openshift?topic=openshift-getting-started) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
+| [Create clusters in a Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial) | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Replicated masters for higher availability| | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |

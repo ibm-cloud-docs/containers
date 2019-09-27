@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -67,10 +67,11 @@ To remove a cluster:
         {: pre}
 
     3.  Follow the prompts and choose whether to delete cluster resources, which include containers, pods, bound services, persistent storage, and secrets.
-      - **Persistent storage**: Persistent storage provides high availability for your data. If you created a persistent volume claim by using an [existing file share](/docs/containers?topic=containers-file_storage#existing_file), then you cannot delete the file share when you delete the cluster. You must manually delete the file share later from your IBM Cloud infrastructure portfolio.
-
-          Due to the monthly billing cycle, a persistent volume claim cannot be deleted on the last day of a month. If you delete the persistent volume claim on the last day of the month, the deletion remains pending until the beginning of the next month.
-          {: note}
+        - **Persistent storage**: If you [dynamically provisioned](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) storage with a storage class that sets `reclaimPolicy: Delete`, your persistent volume claim (PVC), persistent volume (PV), and the storage instance are automatically deleted when you delete the cluster. However, depending on when you delete the cluster, you might still see your storage instance in the {{site.data.keyword.cloud_notm}} console for up to 72 hours or until the new billing cycle begins. VPC Block Storage is not removed automatically, even if you used a `Delete` storage class.  
+      
+          For storage that was [statically provisioned](/docs/containers?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, the PVC and the PV are removed when you delete the cluster, but your storage instance and your data remain. You are still charged for your storage instance. 
+      
+          To manually remove the storage and find frequently asked questions about storage removal, see [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup). 
 
 Next steps:
 - After it is no longer listed in the available clusters list when you run the `ibmcloud ks cluster ls` command, you can reuse the name of a removed cluster.

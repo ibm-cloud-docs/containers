@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -96,17 +96,16 @@ Note that the VPC load balancer health checks only public ALBs and updates DNS l
 <br />
 
 
-
-
 ## How does a request get to my app with Ingress in a classic cluster?
 {: #architecture-classic}
 
 ### Single-zone cluster
 {: #classic-single}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster:
+The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
+{: shortdesc}
 
-<img src="images/cs_ingress_singlezone.png" width="800" alt="Expose an app in a single-zone cluster by using Ingress" style="width:800px; border-style: none"/>
+<img src="images/cs_ingress_singlezone.png" width="600" alt="Expose an app in a single-zone cluster by using Ingress" style="width:600px; border-style: none"/>
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
 
@@ -116,12 +115,15 @@ The following diagram shows how Ingress directs communication from the internet 
 
 4. The load balancer service routes the request to the ALB.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between the app pods.
+
+6. When the app returns a response packet, it uses the IP address of the worker node where the ALB that forwarded the client request exists. The ALB then sends the response packet to the client.
 
 ### Multizone cluster
 {: #classic-multi}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster:
+The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
+{: shortdesc}
 
 <img src="images/cs_ingress_multizone.png" width="800" alt="Expose an app in a multizone cluster by using Ingress" style="width:800px; border-style: none"/>
 
@@ -133,7 +135,9 @@ The following diagram shows how Ingress directs communication from the internet 
 
 4. The load balancer service routes the request to the ALB.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
+
+6. When the app returns a response packet, it uses the IP address of the worker node where the ALB that forwarded the client request exists. The ALB then sends the response packet to the client.
 
 <br />
 
@@ -141,7 +145,8 @@ The following diagram shows how Ingress directs communication from the internet 
 ## How does a request get to my app with Ingress in a VPC cluster?
 {: #architecture-vpc}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster:
+The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
+{: shortdesc}
 
 image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a VPC cluster by using Ingress" style="width:830px; border-style: none"/>
 
@@ -151,6 +156,6 @@ image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a V
 
 3. Based on the resolved IP address, the client sends the request to the VPC load balancer that exposes your cluster's ALBs.
 
-4. The VPC load balancer service routes the request to an ALB.
+4. The VPC load balancer service routes the request to an ALB. Each ALB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the ALB routes the requests between the app pods in the zone.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is forwarded according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod is running. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.

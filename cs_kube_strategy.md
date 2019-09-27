@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-10"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, containers
 
@@ -246,7 +246,7 @@ The number of clusters that you create depends on your workload, company policie
   <dd><p>Namespaces are kind of like a cluster within the cluster. They are a way to divide up cluster resources by using [resource quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/) and [default limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/manage-resources/memory-default-namespace/). When you make new namespaces, be sure to set up proper [RBAC policies](/docs/containers?topic=containers-users#rbac) to control access. For more information, see [Share a cluster with namespaces ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/namespaces/) in the Kubernetes documentation.</p>
   <p>If you have a small cluster, a couple dozen users, and resources that are similar (such as different versions of the same software), you probably don't need multiple namespaces. You can use labels instead.</p></dd>
 <dt>Set resource quotas so that users in your cluster must use resource requests and limits</dt>
-  <dd>To ensure that every team has the necessary resources to deploy services and run apps in the cluster, you must set up [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for every namespace. Resource quotas determine the deployment constraints for a namespace</dd>
+  <dd>To ensure that every team has the necessary resources to deploy services and run apps in the cluster, you must set up [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for every namespace. Resource quotas determine the deployment constraints for a namespace, such as the number of Kubernetes resources that you can deploy, and the amount of CPU and memory that can be consumed by those resources. After you set a quota, users must include resource requests and limits in their deployments.</dd>
 <dt>Organize your Kubernetes objects with labels</dt>
   <dd><p>To organize and select your Kubernetes resources such as `pods` or `nodes`, [use Kubernetes labels ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/). By default, {{site.data.keyword.containerlong_notm}} applies some labels, including `arch`, `os`, `region`, `zone`, and `machine-type`.</p>
   <p>Example use cases for labels include [limiting network traffic to edge worker nodes](/docs/containers?topic=containers-edge), [deploying an app to a GPU machine](/docs/containers?topic=containers-app#gpu_app), and [restricting your app workloads![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) to run on worker nodes that meet certain flavor or SDS capabilities, such as bare metal worker nodes. To see what labels are already applied to a resource, use the <code>kubectl get</code> command with the <code>--show-labels</code> flag. For example:</p>
@@ -452,7 +452,7 @@ If you want to run your app in multiple clusters, public and private environment
 ## Keeping your app up-to-date
 {: #updating}
 
-You put in a lot of effort preparing for the next version of your app. You can use {{site.data.keyword.cloud_notm}} and Kubernetes update tools to make sure that your app is running in a secured cluster environment, as well as to roll out different versions of your app.
+You put in a lot of effort preparing for the next version of your app. You can use {{site.data.keyword.cloud_notm}} and Kubernetes update tools to make sure that your app runs in a secured cluster environment, as well as to roll out different versions of your app.
 {: shortdesc}
 
 ### How can I keep my cluster in a supported state?

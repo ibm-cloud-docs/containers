@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-24"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks, vpc
 
@@ -33,6 +33,9 @@ subcollection: containers
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if VPC Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for Block Storage for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
 
 VPC Block Storage is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use block storage in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage). VPC Block Storage is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{: important}
+
+VPC Block Storage is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove VPC Block Storage from your cluster. 
 {: important}
 
 ## Installing the VPC Block Storage add-on
@@ -871,7 +874,7 @@ As a cluster admin, you can choose if you want to allow each cluster user to ove
 - **[Enforce base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides or enhances the default settings of the customized storage class. Your cluster users cannot override the default settings by creating their own Kubernetes secret. Instead, cluster users must provision VPC Block Storage with the configuration that you chose in your customized storage class and secret. The benefit of using this method over creating a [customized storage class](#vpc-customize-storage-class) only is that you can enforce base64 encoding for the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance when you want to encrypt the data in your VPC Block Storage instance.  
 
 **What do I need to be aware of before I start using the Kubernetes secret for my PVC settings?** </br>
-Some of the PVC settings, such as the `reclaimPolicy` or the `volumeBindingMode` cannot be set in the Kubernetes secret and must be set in the storage class. As the cluster admin, if you want to enable your cluster users to override your default settings, you must ensure that you set up enough customized storage classes that reference a generic Kubernetes secret so that your users can provision VPC Block Storage with different `reclaimPolicy` and `volumeBindingMode` settings. 
+Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeBindingMode` cannot be set in the Kubernetes secret and must be set in the storage class. As the cluster admin, if you want to enable your cluster users to override your default settings, you must ensure that you set up enough customized storage classes that reference a generic Kubernetes secret so that your users can provision VPC Block Storage with different `reclaimPolicy`, `fstype`, and `volumeBindingMode` settings. 
 
 #### Enabling every user to customize the default PVC settings
 {: #customize-with-secret}
@@ -1014,7 +1017,7 @@ Some of the PVC settings, such as the `reclaimPolicy` or the `volumeBindingMode`
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
 
-Data that is stored on VPC Block Storage Block is secured across redundant fault zones in your region. To manually back up your data, use the Kubernetes `kubectl cp` command.
+Data that is stored on VPC Block Storage is secured across redundant fault zones in your region. To manually back up your data, use the Kubernetes `kubectl cp` command.
 {: shortdesc}
 
 You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster

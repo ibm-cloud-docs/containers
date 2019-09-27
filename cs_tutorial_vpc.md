@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-09-25"
 
 keywords: kubernetes, iks, vpc
 
@@ -67,7 +67,7 @@ Install the command-line tools.
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
-*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches theKubernetes version of your VPC cluster. This tutorial creates a cluster that runs version 1.15.
+*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version 1.15.
 
 <br />
 

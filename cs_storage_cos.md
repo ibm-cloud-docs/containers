@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-09-27"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started) is persistent, highly available storage that you can mount to your apps. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
 {: shortdesc}
 
-{{site.data.keyword.cos_full_notm}} is supported in classic {{site.data.keyword.containerlong_notm}} clusters or classic {{site.data.keyword.openshiftlong}} clusters, and is not supported in VPC on Classic clusters. To connect to {{site.data.keyword.cos_full_notm}}, your cluster requires public network access to authenticate with {{site.data.keyword.cloud_notm}} Identity and Access Management. If you have a private-only cluster, you can communicate with the {{site.data.keyword.cos_full_notm}} private service endpoint if you install the plug-in version `1.0.3` or later, and set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
+If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster without public network access, you must set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
 {: important}
 
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [reinstall the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
@@ -73,6 +73,7 @@ To access your {{site.data.keyword.cos_full_notm}} service instance to read and 
 Follow these steps to create a Kubernetes secret for the credentials of an {{site.data.keyword.cos_full_notm}} service instance. If you plan to use a local Cloud Object Storage server or a different s3 API endpoint, create a Kubernetes secret with the appropriate credentials.
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
 
 1. Retrieve the **apikey**, or the **access_key_id** and the **secret_access_key** of your [{{site.data.keyword.cos_full_notm}} service credentials](#service_credentials).
 
@@ -138,9 +139,18 @@ Install the {{site.data.keyword.cos_full_notm}} plug-in with a Helm chart to set
 Looking for instructions for how to update or remove the {{site.data.keyword.cos_full_notm}} plug-in? See [Updating the plug-in](#update_cos_plugin) and [Removing the plug-in](#remove_cos_plugin).
 {: tip}
 
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. Make sure that your worker node applies the latest patch for your minor version.
+Before you begin: 
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+- If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
+
+
+To install the plug-in: 
+
+1. Make sure that your worker node applies the latest patch for your minor version to run your worker node with the latest security settings. The patch version also ensures that the root password on the worker node is renewed. 
+   
+   If you did not apply updates or reload your worker node within the last 90 days, your root password on the worker node expires and the installation of the storage plug-in might fail. 
+   {: note}
    1. List the current patch version of your worker nodes.
       ```
       ibmcloud ks worker ls --cluster <cluster_name_or_ID>
@@ -413,8 +423,94 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
     ```
     {: screen}
+    
+    If you want to set one of the {{site.data.keyword.cos_full_notm}} storage classes as your default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`. Replace `<storageclass>` with the name of the {{site.data.keyword.cos_full_notm}} storage class.
+    {: tip}
 
-12. Repeat the steps for all clusters where you want to access {{site.data.keyword.cos_full_notm}} buckets.
+12. **VPC clusters only**: If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance. To work with the plug-in in a VPC cluster, you must create a customized storage class that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
+    1. Review the steps in [Deciding on your Object Storage configuration](/docs/containers?topic=containers-object_storage#configure_cos) to find the storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
+    2. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-s3fs-cold-cross-region` storage class.
+       ```
+       kubectl get storageclass ibmc-s3fs-cold-cross-region -o yaml
+       ```
+        
+       Example output:
+       ```
+       apiVersion: storage.k8s.io/v1
+       kind: StorageClass
+       metadata:
+         creationTimestamp: "2019-09-25T18:17:26Z"
+         labels:
+           app: ibmcloud-object-storage-plugin
+           chart: ibm-object-storage-plugin-1.0.9
+           heritage: Tiller
+           release: ibm-object-storage-plugin
+         name: ibmc-s3fs-cold-cross-region
+         resourceVersion: "7347835"
+         selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-s3fs-cold-cross-region
+         uid: fd24749f-29fa-4b4c-85cf-63b3ad0d89bf
+       parameters:
+          ibm.io/chunk-size-mb: "16"
+          ibm.io/curl-debug: "false"
+          ibm.io/debug-level: warn
+          ibm.io/iam-endpoint: https://iam.bluemix.net
+          ibm.io/kernel-cache: "false"
+          ibm.io/multireq-max: "20"
+          ibm.io/object-store-endpoint: https://s3.private.dal.us.cloud-object-storage.appdomain.cloud
+          ibm.io/object-store-storage-class: us-cold
+          ibm.io/parallel-count: "2"
+          ibm.io/s3fs-fuse-retry-count: "5"
+          ibm.io/stat-cache-size: "100000"
+          ibm.io/tls-cipher-suite: AESGCM
+       provisioner: ibm.io/ibmc-s3fs
+       reclaimPolicy: Delete
+       volumeBindingMode: Immediate
+       ```
+       {: screen}
+    3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. 
+       ```
+       apiVersion: storage.k8s.io/v1
+       kind: StorageClass
+       metadata:
+         name: cos-vpc
+       parameters:
+          ibm.io/chunk-size-mb: "16"
+          ibm.io/curl-debug: "false"
+          ibm.io/debug-level: warn
+          ibm.io/iam-endpoint: https://iam.bluemix.net
+          ibm.io/kernel-cache: "false"
+          ibm.io/multireq-max: "20"
+          ibm.io/object-store-endpoint: https://s3.direct.dal.us.cloud-object-storage.appdomain.cloud
+          ibm.io/object-store-storage-class: us-cold
+          ibm.io/parallel-count: "2"
+          ibm.io/s3fs-fuse-retry-count: "5"
+          ibm.io/stat-cache-size: "100000"
+          ibm.io/tls-cipher-suite: AESGCM
+       provisioner: ibm.io/ibmc-s3fs
+       reclaimPolicy: Delete
+       volumeBindingMode: Immediate
+       ```
+       {: codeblock}
+       
+    4. Create the storage class in your cluster. 
+       ```
+       kubectl apply -f custom_storageclass.yaml
+       ```
+       {: pre}
+   
+    5. Verify that your storage class is available in the cluster.
+       ```
+       kubectl get storageclasses
+       ```
+       {: pre}
+       
+    6. Set the customized storage class as the default one for your cluster. 
+       ```
+       kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+       ```
+       {: pre}
+13. Follow the instructions to [add object storage to your apps](#add_cos).        
+
 
 ### Updating the IBM Cloud Object Storage plug-in
 {: #update_cos_plugin}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-20"
+lastupdated: "2019-09-26"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -31,7 +31,7 @@ subcollection: containers
 {: note}
 
 
-With VPN connectivity, you can securely connect apps in a Kubernetes cluster on {{site.data.keyword.containerlong}} to an on-premises network. You can also connect apps that are external to your cluster to an app that is running inside your cluster.
+With VPN connectivity, you can securely connect apps in a Kubernetes cluster on {{site.data.keyword.containerlong}} to an on-premises network. You can also connect apps that are external to your cluster to an app that runs inside your cluster.
 {:shortdesc}
 
 To connect your worker nodes and apps to an on-premises data center, you can configure one of the following options.
@@ -48,7 +48,7 @@ To connect your worker nodes and apps to an on-premises data center, you can con
 Use a Helm chart to configure and deploy the strongSwan IPSec VPN service inside of a Kubernetes pod.
 {:shortdesc}
 
-Because strongSwan is integrated within your cluster, you don't need an external gateway device. When VPN connectivity is established, routes are automatically configured on all of the worker nodes in the cluster. These routes allow two-way connectivity through the VPN tunnel between pods on any worker node and the remote system. For example, the following diagram shows how an app in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a strongSwan VPN connection:
+Because strongSwan is integrated within your cluster, you don't need an external gateway appliance. When VPN connectivity is established, routes are automatically configured on all of the worker nodes in the cluster. These routes allow two-way connectivity through the VPN tunnel between pods on any worker node and the remote system. For example, the following diagram shows how an app in {{site.data.keyword.containerlong_notm}} can communicate with an on-premises server via a strongSwan VPN connection:
 
 <img src="images/cs_vpn_strongswan.png" width="700" alt="Flow of traffic between your cluster and an on-premises data center through the strongSwan VPN service" style="width:700px; border-style: none"/>
 
@@ -258,7 +258,7 @@ To establish an outbound VPN connection, modify the following settings:
 2. Set `remote.gateway` to the public IP address for the on-premises VPN endpoint in the remote network.
 3. Choose one of the following options for the IP address for the cluster VPN endpoint:
     * **Public IP address of the cluster's private gateway**: If your worker nodes are connected to a private VLAN only, then the outbound VPN request is routed through the private gateway in order to reach the internet. The public IP address of the private gateway is used for the VPN connection.
-    * **Public IP address of the worker node where the strongSwan pod is running**: If the worker node where the strongSwan pod is running is connected to a public VLAN, then the worker node's public IP address is used for the VPN connection.
+    * **Public IP address of the worker node where the strongSwan pod runs**: If the worker node where the strongSwan pod runs is connected to a public VLAN, then the worker node's public IP address is used for the VPN connection.
         <br>
         * If the strongSwan pod is deleted and rescheduled onto a different worker node in the cluster, then the public IP address of the VPN changes. The on-premises VPN endpoint of the remote network must allow the VPN connection to be established from the public IP address of any of the cluster worker nodes.
         * If the remote VPN endpoint cannot handle VPN connections from multiple public IP addresses, limit the nodes that the strongSwan VPN pod deploys to. Set `nodeSelector` to the IP addresses of specific worker nodes or a worker node label. For example, the value `kubernetes.io/hostname: 10.232.xx.xx` allows the VPN pod to deploy to that worker node only. The value `strongswan: vpn` restricts the VPN pod to running on any worker nodes with that label. You can use any worker node label. To allow different worker nodes to be used with different helm chart deployments, use `strongswan: <release_name>`. For high availability, select at least two worker nodes.
