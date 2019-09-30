@@ -523,7 +523,7 @@ Note that during cluster creation the gateway worker nodes in the `gateway` work
    ```
    {: screen}
 
-8. Delete the old `gateway` worker pool.
+8. Optional: If you created a gateway worker pool to replace the default `gateway` worker pool, delete the `gateway` worker pool.
   ```
   ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
   ```
