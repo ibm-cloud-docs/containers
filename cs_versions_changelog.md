@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-16"
+lastupdated: "2019-09-30"
 
 keywords: kubernetes, iks, versions, update
 
@@ -49,6 +49,8 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+
 
 ### Changelog for worker node fix pack 1.15.3_1517, released 16 September 2019
 {: #1153_1517_worker}
@@ -329,6 +331,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>2.4.6-r3-IKS-116</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
 </tbody>
 </table>
 
@@ -420,6 +428,8 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+
 
 ### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
 {: #1146_1533_worker}
@@ -698,6 +708,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>
@@ -1206,6 +1222,8 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 Review the version 1.13 changelog.
 {: shortdesc}
 
+
+
 ### Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019
 {: #11310_1536_worker}
 
@@ -1484,6 +1502,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>
@@ -2425,6 +2449,8 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+
+
 ### Changelog for worker node fix pack 1.12.10_1567, released 16 September 2019
 {: #11210_1567_worker}
 
@@ -2660,6 +2686,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>
