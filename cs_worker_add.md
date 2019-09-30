@@ -530,7 +530,7 @@ Note that during cluster creation the gateway worker nodes in the `gateway` work
   {: pre}
 
 ### Adding a zone to compute and gateway worker pools
-{: #add_zone}
+{: #add_gateway_zone}
 
 You can span your classic gateway-enabled cluster across multiple zones within one region by adding a zone to your existing worker pools.
 {:shortdesc}
