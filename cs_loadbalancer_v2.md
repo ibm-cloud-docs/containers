@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-27"
+lastupdated: "2019-09-30"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -50,7 +50,7 @@ Before you create an NLB 2.0, you must complete the following prerequisite steps
     2. From the menu bar, click **Support**, click the **Manage cases** tab, and click **Create new case**.
     3. In the case fields, enter the following:
        * For type of support, select **Technical**.
-       * For category, select **VLAN Spanning**.
+       * For offering, select **Containers**.
        * For subject, enter **Public and private VLAN network question**
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public and private VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Note that if you want to allow capacity aggregation on specific VLANs, such as the public VLANs for one cluster only, you can specify those VLAN IDs in the description.
     5. Click **Submit**.
