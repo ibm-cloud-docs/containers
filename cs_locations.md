@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-12"
+lastupdated: "2019-09-30"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -198,22 +198,19 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 ### Free clusters
 {: #regions_free}
 
-Free clusters are limited to specific locations and are available for only classic infrastructure, not VPC infrastructure.
+Free clusters are limited to specific locations and are available for only classic infrastructure, not VPC infrastructure. For more information about free clusters, see [the FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
-**Creating a free cluster in the CLI**: Before you create a free cluster, you must target a region by running `ibmcloud ks region set`. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
-* Sydney metro in `ap-south`
-* Frankfurt metro in `eu-central`
-* London metro in `uk-south`
-* Dallas metro in `us-south`
+**Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
+* Sydney metro in `ibmcloud ks init --host https://au-syd.containers.cloud.ibm.com`
+* Frankfurt metro in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
+* London metro in `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`
+* Dallas metro in ``ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
 
-**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you can select a **Geography** and a **Metro** location in the geography. Your cluster is created in a data center within the region that your metro corresponds to. You cannot specify the data center. The following geographies and metros are available.
+**Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you cannot select a location. Your cluster is created in one of the following locations.
 * Dallas metro in North America
 * Frankfurt or London metros in Europe
 * Sydney metro in Asia Pacific
-
-To work with a free cluster in the London metro, you must target the EU Central regional API by running `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`.
-{: important}
 
 <br />
 
