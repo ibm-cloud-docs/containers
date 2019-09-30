@@ -166,9 +166,6 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
    ```
    {: screen}
 
-<br />
-
-
 ### Adding a zone to a worker pool
 {: #vpc_add_zone}
 
@@ -239,14 +236,14 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 <br />
 
 
-
 ## Adding worker nodes in classic clusters
 {: #classic_pools}
 
 Add worker nodes to your classic cluster.
 {: shortdesc}
 
-### Classic: Adding worker nodes by creating a new worker pool
+### Creating a new worker pool
+
 {: #add_pool}
 
 You can add worker nodes to your classic cluster by creating a new worker pool.
@@ -313,7 +310,8 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
 <br />
 
 
-### Classic: Adding worker nodes by adding a zone to a worker pool
+### Adding a zone to a worker pool
+
 {: #add_zone}
 
 You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
@@ -400,7 +398,7 @@ Add worker nodes to your gateway-enabled classic cluster.
 ### Creating a new compute worker pool
 {: #gateway_compute}
 
-By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new ompute worker pool.
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
 {:shortdesc}
 
 1. Retrieve all of the existing **Worker Zones** of your cluster.
@@ -460,8 +458,76 @@ By default, gateway-enabled classic clusters are created with a `default` pool o
    ```
    {: screen}
 
-<br />
+### Creating a new gateway worker pool
+{: #gateway_replace}
 
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more gateway worker nodes by creating a new gateway worker pool.
+{:shortdesc}
+
+Note that during cluster creation the gateway worker nodes in the `gateway` worker pool are created on shared virtual machines with the `u2c.2x4` flavor by default. If you want to change the isolation and flavor of the gateway worker nodes, you can use the following steps to create a new gateway worker pool to replace the gateway worker pool that is created by default.
+
+1. Retrieve all of the existing **Worker Zones** of your cluster.
+   ```
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ...
+   Worker Zones: dal10, dal12
+   ```
+   {: screen}
+
+2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+   ```
+   ibmcloud ks vlan ls --zone <zone>
+   ```
+   {: pre}
+
+3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+   ```
+   ibmcloud ks flavors --zone <zone>
+   ```
+   {: pre}
+
+4. Create a worker pool. Ensure that you include the values listed in the `--label` option of following command to create a worker pool with gateway functionality. If you provision a bare metal worker pool, specify `--hardware dedicated`.
+   ```
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+   ```
+   {: pre}
+
+5. Verify that the worker pool is created.
+   ```
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+6. By default, adding a worker pool creates a pool with no zones. To deploy gateway worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+  ```
+  {: pre}
+
+7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
+   ```
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.6
+   ```
+   {: screen}
+
+8. Delete the old `gateway` worker pool.
+  ```
+  ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
 
 ### Adding a zone to compute and gateway worker pools
 {: #add_zone}
@@ -530,78 +596,6 @@ Before you begin: To add a zone to your worker pools, your compute and gateway w
   ...
   ```
   {: screen}
-
-<br />
-
-
-### Changing the flavor of gateway worker nodes
-{: #gateway_replace}
-
-Gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. During cluster creation you can specify the isolation and flavor for the compute worker nodes, but by default the gateway worker nodes are created on shared virtual machines with the `u2c.2x4` flavor. If you want to change the isolation and flavor of the gateway worker nodes, you can create a new gateway worker pool to replace the gateway worker pool that is created by default.
-{:shortdesc}
-
-1. Retrieve all of the existing **Worker Zones** of your cluster.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12
-   ```
-   {: screen}
-
-2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
-
-3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-   ```
-   ibmcloud ks flavors --zone <zone>
-   ```
-   {: pre}
-
-4. Create a worker pool. Ensure that you include the values listed in the `--label` option of following command to create a worker pool with gateway functionality. If you provision a bare metal worker pool, specify `--hardware dedicated`.
-   ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
-   ```
-   {: pre}
-
-5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-6. By default, adding a worker pool creates a pool with no zones. To deploy gateway worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-  ```
-  {: pre}
-
-7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.6
-   ```
-   {: screen}
-
-8. Delete the old `gateway` worker pool.
-  ```
-  ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
 
 <br />
 
