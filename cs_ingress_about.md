@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-30"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -140,6 +140,28 @@ The following diagram shows how Ingress directs communication from the internet 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
 6. When the app returns a response packet, it uses the IP address of the worker node where the ALB that forwarded the client request exists. The ALB then sends the response packet to the client.
+
+### Gateway-enabled cluster
+{: #classic-gateway}
+
+The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+{: shortdesc}
+
+<img src="images/cs_ingress_gateway.png" width="800" alt="Expose an app in a gateway-enabled cluster by using Ingress" style="width:800px; border-style: none"/>
+
+This diagram shows the traffic flow through a single-zone, gateway-enabled cluster. If your gateway-enabled cluster is multizone, one public ALB and one private ALB is created in each zone. Each ALB routes requests to the app instances in its own zone and to app instances in other zones.
+
+1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster appended with the Ingress resource path for your exposed app, such as `mycluster.us-south.containers.appdomain.cloud/myapp`.
+
+2. A DNS system service resolves the subdomain in the URL to the portable public IP address the ALB.
+
+3. Based on the resolved IP address, the client sends the request to the NLB 2.0 that exposes the ALB. The NLB 2.0 is created automatically for your ALB and is scheduled to a worker node in the `gateway` worker pool, which has public network connectivity.
+
+4. The load balancer service routes the request to the ALB over the private network. If you created an edge worker pool, the ALB pods are scheduled to a worker node in the edge pool, which has only private network connectivity. Otherwise, the ALB pods are scheduled to a worker in the `gateway` worker pool, which has public network connectivity.
+
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the request package is changed to the public IP address of the gateway worker node where the NLB is deployed. If multiple app instances are deployed in the zone, the ALB load balances the requests between the app pods.
+
+6. The app returns a response to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.
 
 <br />
 

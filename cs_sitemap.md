@@ -243,7 +243,7 @@ lastupdated: "2019-10-01"
 * [Example scenarios for classic cluster network setups](/docs/containers?topic=containers-plan_clusters#classic-scenarios)
   * [Scenario: Run internet-facing app workloads in a cluster](/docs/containers?topic=containers-plan_clusters#internet-facing)
   * [Scenario: Extend your on-premises data center to a cluster on the private network and add limited public access](/docs/containers?topic=containers-plan_clusters#internet-facing)
-    * [Using edge nodes and Calico network policies](/docs/containers?topic=containers-plan_clusters#internet-facing)
+    * [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)
     * [Using a gateway appliance](/docs/containers?topic=containers-plan_clusters#internet-facing)
   * [Scenario: Extend your on-premises data center to a cluster on the private network](/docs/containers?topic=containers-plan_clusters#internet-facing)
 
@@ -265,6 +265,7 @@ lastupdated: "2019-10-01"
 * [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
+  * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
 * [Creating a standard VPC on Classic cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard)
   * [/docs/containers?topic=containers-clusters#clusters_vpc_ui](/docs/containers?topic=containers-clusters#clusters_vpc_ui)
   * [Creating standard VPC on Classic clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpc_cli)
@@ -420,6 +421,7 @@ lastupdated: "2019-10-01"
 [Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge#edge)
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
 * [Preventing workloads from running on edge worker nodes](/docs/containers?topic=containers-edge#edge_workloads)
+* [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
 
 [Setting up VPN connectivity](/docs/containers?topic=containers-vpn#vpn)
 * [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)

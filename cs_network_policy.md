@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-27"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -61,6 +61,9 @@ When a cluster with a public VLAN is created, a `HostEndpoint` resource with the
 {:shortdesc}
 
 These default Calico host policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
+
+Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)? The default Calico host policies are applied to the worker nodes in the gateway worker pool because they are the only worker nodes that are attached to the public network.
+{: tip}
 
 Do not remove policies that are applied to a host endpoint unless you fully understand the policy. Be sure that you do not need the traffic that is being allowed by the policy.
 {: important}
@@ -447,6 +450,9 @@ This set of Calico policies work in conjunction with the [default Calico policie
 
 When you apply the egress pod policies that are included in this policy set, only network traffic to the subnets and ports that are specified in the pod policies is permitted. All traffic to any subnets or ports that are not specified in the policies is blocked for all pods in all namespaces. Because only the ports and subnets that are necessary for the pods to function in {{site.data.keyword.containerlong_notm}} are specified in these policies, your pods cannot send network traffic over the internet until you add or change the Calico policy to allow them to.
 {: important}
+
+Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)? These Calico policies are applied only to the worker nodes in the `gateway` worker pool because they are the only worker nodes that have a host endpoint with the `ibm.role: worker_public` label.
+{: tip}
 
 Before you begin:
 1. [Install and configure the Calico CLI.](#cli_install)
