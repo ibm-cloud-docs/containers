@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-09"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -57,6 +57,9 @@ For a detailed overview of capabilities and benefits, see [Why {{site.data.keywo
 {: faq}
 
 You can have 1 free cluster at a time in {{site.data.keyword.containerlong_notm}}, and each free cluster expires in 30 days. Free clusters have [select capabilities](/docs/containers?topic=containers-cs_ov#cluster_types), minimal 2x4 compute resources, select single zone [locations](/docs/containers?topic=containers-regions-and-zones#regions_free), and support only the Kubernetes container platform and {{site.data.keyword.cloud_notm}} classic infrastructure provider. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the {{site.data.keyword.containerlong_notm}} API, CLI, and console tools. After you are done playing around with your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](/docs/containers?topic=containers-app#copy_apps_cluster).
+
+To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account. Free clusters cannot be created in Lite accounts. 
+{: note}
 
 ## What container platforms are available for my cluster?
 {: #container_platforms}
