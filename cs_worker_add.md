@@ -71,10 +71,10 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.6
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.6
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.6
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.6
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.7
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.7
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.7
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.7
     ```
     {: screen}
 
@@ -289,8 +289,8 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
    Example output:
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
    ```
    {: screen}
 
@@ -444,8 +444,8 @@ By default, gateway-enabled classic clusters are created with a `default` pool o
    Example output:
    ```
    ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.6
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.7
    ```
    {: screen}
 
@@ -509,8 +509,8 @@ Note that during cluster creation the gateway worker nodes in the `gateway` work
    Example output:
    ```
    ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.6
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.6
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.7
    ```
    {: screen}
 
