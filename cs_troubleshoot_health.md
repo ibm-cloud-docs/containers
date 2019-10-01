@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -36,87 +36,6 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
 
-## Logs do not appear
-{: #cs_no_logs}
-
-{: tsSymptoms}
-When you access the Kibana dashboard, your logs do not display.
-
-{: tsResolve}
-Review the following reasons why your cluster logs are not appearing and the corresponding troubleshooting steps:
-
-<table>
-<caption>Troubleshooting logs that do not display</caption>
-  <col width="40%">
-  <col width="60%">
-  <thead>
-    <tr>
-      <th>Why it's happening</th>
-      <th>How to fix it</th>
-    </tr>
- </thead>
- <tbody>
-  <tr>
-    <td>No logging configuration is set up.</td>
-    <td>In order for logs to be sent, you must create a logging configuration. To do so, see <a href="/docs/containers?topic=containers-health#logging">Configuring cluster logging</a>.</td>
-  </tr>
-  <tr>
-    <td>The cluster is not in a <code>Normal</code> state.</td>
-    <td>To check the state of your cluster, see <a href="/docs/containers?topic=containers-cs_troubleshoot#debug_clusters">Debugging clusters</a>.</td>
-  </tr>
-  <tr>
-    <td>The log storage quota was met.</td>
-    <td>To increase your log storage limits, see the <a href="/docs/services/CloudLogAnalysis/troubleshooting?topic=cloudloganalysis-error_msgs">{{site.data.keyword.loganalysislong_notm}} documentation</a>.</td>
-  </tr>
-  <tr>
-    <td>If you specified a space at cluster creation, the account owner does not have Manager, Developer, or Auditor permissions to that space.</td>
-      <td>To change access permissions for the account owner:
-      <ol><li>To find out who the account owner for the cluster is, run <code>ibmcloud ks api-key info --cluster &lt;cluster_name_or_ID&gt;</code>.</li>
-      <li>To grant that account owner Manager, Developer, or Auditor {{site.data.keyword.containerlong_notm}} access permissions to the space, see <a href="/docs/containers?topic=containers-users">Managing cluster access</a>.</li>
-      <li>To refresh the logging token after permissions are changed, run <code>ibmcloud ks logging refresh --cluster &lt;cluster_name_or_ID&gt;</code>.</li></ol></td>
-    </tr>
-    <tr>
-      <td>You have a logging configuration for your app with a symlink in your app path.</td>
-      <td><p>In order for logs to be sent, you must use an absolute path in your logging configuration or the logs cannot be read. If your path is mounted to your worker node, it might create a symlink.</p> <p>Example: If the specified path is <code>/usr/local/<b>spark</b>/work/app-0546/0/stderr</code> but the logs go to <code>/usr/local/<b>spark-1.0-hadoop-1.2</b>/work/app-0546/0/stderr</code>, then the logs cannot be read.</p></td>
-    </tr>
-  </tbody>
-</table>
-
-To test changes you made during troubleshooting, you can deploy *Noisy*, a sample pod that produces several log events, to a worker node in your cluster.
-
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-1. Create the `deploy-noisy.yaml` configuration file.
-    ```
-    apiVersion: v1
-    kind: Pod
-    metadata:
-      name: noisy
-    spec:
-      containers:
-      - name: noisy
-        image: ubuntu:16.04
-        command: ["/bin/sh"]
-        args: ["-c", "while true; do sleep 10; echo 'Hello world!'; done"]
-        imagePullPolicy: "Always"
-      ```
-      {: codeblock}
-
-2. Run the configuration file in the cluster's context.
-    ```
-    kubectl apply -f noisy.yaml
-    ```
-    {:pre}
-
-3. After a few minutes, you can view your logs in the Kibana dashboard. To access the Kibana dashboard, go to one of the following URLs and select the {{site.data.keyword.cloud_notm}} account where you created the cluster. If you specified a space at cluster creation, go to that space instead.
-    - US-South and US-East: `https://logging.ng.bluemix.net`
-    - UK-South: `https://logging.eu-gb.bluemix.net`
-    - EU-Central: `https://logging.eu-fra.bluemix.net`
-    - AP-South: `https://logging.au-syd.bluemix.net`
-
-<br />
-
-
 ## Kubernetes dashboard does not display utilization graphs
 {: #cs_dashboard_graphs}
 
@@ -137,57 +56,14 @@ Delete the `kube-dashboard` pod to force a restart. The pod is re-created with R
 <br />
 
 
-## Log quota is too low
-{: #quota}
-
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull}}. When you view logs, you see an error message that is similar to the following:
-
-```
-You have reached the daily quota that is allocated to the Bluemix space {Space GUID} for the IBM® Cloud Log Analysis instance {Instance GUID}. Your current daily allotment is XXX for Log Search storage, which is retained for a period of 3 days, during which it can be searched for in Kibana. This does not affect your log retention policy in Log Collection storage. To upgrade your plan so that you can store more data in Log Search storage per day, upgrade the Log Analysis service plan for this space. For more information about service plans and how to upgrade your plan, see Plans.
-```
-{: screen}
-
-{: tsResolve}
-Review the following reasons why you are hitting your log quota and the corresponding troubleshooting steps:
-
-<table>
-<caption>Troubleshooting log storage issues</caption>
-  <col width="40%">
-  <col width="60%">
-  <thead>
-    <tr>
-      <th>Why it's happening</th>
-      <th>How to fix it</th>
-    </tr>
- </thead>
- <tbody>
-  <tr>
-    <td>One or more pods produces a high number of logs.</td>
-    <td>You can free up log storage space by preventing the logs from specific pods from being forwarded. Create a [logging filter](/docs/containers?topic=containers-health#filter-logs) for these pods.</td>
-  </tr>
-  <tr>
-    <td>You exceed the 500 MB daily allotment for log storage for the Lite plan.</td>
-    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
-  </tr>
-  <tr>
-    <td>You are exceeding the log storage quota for your current paid plan.</td>
-    <td>First, [calculate the search quota and daily usage](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-quota) of your logs domain. Then, you can increase your log storage quota by [upgrading your {{site.data.keyword.loganalysisshort_notm}} service plan](/docs/services/CloudLogAnalysis/how-to?topic=cloudloganalysis-change_plan#change_plan).</td>
-  </tr>
-  </tbody>
-</table>
-
-<br />
-
-
 ## Log lines are too long
 {: #long_lines}
 
 {: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to {{site.data.keyword.loganalysisfull_notm}}. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
 
 {: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to {{site.data.keyword.loganalysisshort_notm}}.
+A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
 
 {: tsResolve}
 To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout` ![External link icon](../icons/launch-glyph.svg "External link icon")](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html) to limit the `stack_trace` to 15KB.

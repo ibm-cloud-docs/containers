@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -42,7 +42,7 @@ You can choose your logging solution based on which cluster components you need 
 <dl>
 
 <dt>{{site.data.keyword.la_full}}</dt>
-<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
 
 <dt>{{site.data.keyword.at_full}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</dd>
@@ -56,14 +56,6 @@ You can choose your logging solution based on which cluster components you need 
 
 <dt>Third-party services or configure your own logging</dt>
 <dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). To check the logs of an individual Kubernetes pod or other resource, you can run `kubectl logs <resource_name>`. By default, logs are stored in `/var/log` for the namespace. For example, you can collect container logs from the `/var/log/pods/` path. You might write a script to export logs to a persistent storage device that you can use to analyze with your own logging solution.<p class="important">To check the logs for individual app pods, run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</p></dd>
-</dd>
-
-<dt>Deprecated: Fluentd with {{site.data.keyword.loganalysisfull}}</dt>
-<dd><p class="deprecated">Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. On 30 September 2019, {{site.data.keyword.containerlong_notm}} is disabling log forwarding from the Fluentd cluster component to {{site.data.keyword.loganalysisshort_notm}} for existing premium plan instances. To continue collecting logs for your cluster, you must set up {{site.data.keyword.la_full_notm}} or change your configuration to forward logs to an external server.</p>
-</dd>
-
-<dt>Deprecated: {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis</dt>
-<dd><p class="deprecated">Previously, you could collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.at_full_notm}}.</p>
 </dd>
 
 </dl>
@@ -83,7 +75,7 @@ Manage logs by deploying LogDNA as a third-party service to your cluster.
 To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster.
 {: shortdesc}
 
-This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
 
 ### Forwarding Kubernetes API audit logs
 {: #webhook_logdna}
@@ -323,8 +315,7 @@ The following table shows the different options that you have when you configure
     </tr>
     <tr>
       <td><code><em>--hostname</em></code></td>
-      <td><p>For {{site.data.keyword.loganalysisshort_notm}}, use the [ingestion URL](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-log_ingestion#log_ingestion_urls). If you do not specify an ingestion URL, the endpoint for the region in which you created your cluster is used.</p>
-      <p>For syslog, specify the hostname or IP address of the log collector service.</p></td>
+      <td>Specify the hostname or IP address of the log collector service.</td>
     </tr>
     <tr>
       <td><code><em>--port</em></code></td>
@@ -719,31 +710,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 <br />
 
 
-## Deprecated: Forwarding logs to {{site.data.keyword.loganalysisfull_notm}}
-{: #loga}
-
-Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, {{site.data.keyword.loganalysisfull_notm}} is deprecated. You cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019.
-{: deprecated}
-
-To continue collecting logs for your cluster, you have the following options:
-* Set up {{site.data.keyword.la_full_notm}}. For more information, see [Transitioning to {{site.data.keyword.la_full_notm}}](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-transition).
-* [Change your configuration to forward logs to an external server](#configuring).
-
-For more information about existing {{site.data.keyword.loganalysisshort_notm}} instances, see the [{{site.data.keyword.loganalysisshort_notm}} documentation](/docs/services/CloudLogAnalysis?topic=cloudloganalysis-containers_kube_other_logs).
-
-<br />
-
-
-## Deprecated: Forwarding Kubernetes API audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis
-{: #api_forward}
-
-<p class="deprecated">Previously, you could collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019.</p>
-
-To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.at_full_notm}}. For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events). For more information about the service, see the [{{site.data.keyword.at_full_notm}}](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started) documentation.
-
-<br />
-
-
 ## Choosing a monitoring solution
 {: #view_metrics}
 
@@ -758,8 +724,8 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 <dl>
-  <dt>{{site.data.keyword.mon_full_notm}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
+  <dt>{{site.data.keyword.mon_full}}</dt>
+  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full_notm}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-app#cli_dashboard).</dd>

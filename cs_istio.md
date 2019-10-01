@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -452,7 +452,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}
 
-Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.loganalysislong}}.
+Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.la_full}}.
 {: shortdesc}
 
 To use [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.

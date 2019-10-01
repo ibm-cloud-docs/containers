@@ -1190,9 +1190,7 @@ lastupdated: "2019-10-01"
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_storage#storage_getting_help)
 
 [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health)
-* [Logs do not appear](/docs/containers?topic=containers-cs_troubleshoot_health#cs_no_logs)
 * [Kubernetes dashboard does not display utilization graphs](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)
-* [Log quota is too low](/docs/containers?topic=containers-cs_troubleshoot_health#quota)
 * [Log lines are too long](/docs/containers?topic=containers-cs_troubleshoot_health#long_lines)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_health#health_getting_help)
 

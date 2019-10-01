@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-23"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, helm
 
@@ -118,7 +118,7 @@ You can use various external services and catalog services with a standard Kuber
 <tr>
 <td>{{site.data.keyword.la_full}}</td>
 <td>Cluster and app logs</td>
-<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -304,7 +304,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.loganalysisfull_notm}} with LogDNA](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
