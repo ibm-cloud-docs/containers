@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-30"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -231,7 +231,6 @@ Add worker nodes to your classic cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
-
 {: #add_pool}
 
 You can add worker nodes to your classic cluster by creating a new worker pool.
@@ -299,8 +298,9 @@ You can add worker nodes to your classic cluster by creating a new worker pool.
 
 
 ### Adding a zone to a worker pool
-
 {: #add_zone}
+
+
 
 You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {:shortdesc}

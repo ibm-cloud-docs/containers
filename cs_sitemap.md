@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-09-27"
+lastupdated: "2019-10-01"
 
 ---
 
@@ -596,6 +596,7 @@ lastupdated: "2019-09-27"
 * [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret)
   * [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
   * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-images#store_imagePullSecret)
+* [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software)
 * [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registryshort_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the default Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
@@ -626,8 +627,11 @@ lastupdated: "2019-09-27"
 
 [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
+  * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
 * [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
 * [Setting up custom domain names and certificates](/docs/containers?topic=containers-serverless-apps-knative#knative-custom-domain-tls)
+* [Using volumes to access Kubernetes secrets and config maps](/docs/containers?topic=containers-serverless-apps-knative#knative-access-volume)
+* [Pulling images from a private container registry](/docs/containers?topic=containers-serverless-apps-knative#knative-private-registry)
 * [Accessing a Knative service from another Knative service](/docs/containers?topic=containers-serverless-apps-knative#knative-access-service)
 * [Common Knative service settings](/docs/containers?topic=containers-serverless-apps-knative#knative-service-settings)
   * [Setting minimum and maximum number of pods](/docs/containers?topic=containers-serverless-apps-knative#knative-min-max-pods)
@@ -637,36 +641,46 @@ lastupdated: "2019-09-27"
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
 [Planning to expose your apps with in-cluster and external networking](/docs/containers?topic=containers-cs_network_planning#cs_network_planning)
-* [Exposing apps to traffic inside the cluster through Kubernetes services](/docs/containers?topic=containers-cs_network_planning#in-cluster)
-* [Choosing a NodePort, LoadBalancer, or Ingress service to expose apps to traffic outside the cluster](/docs/containers?topic=containers-cs_network_planning#external)
-* [Planning public external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#public_access)
-* [Planning private external networking for a public and private VLAN setup](/docs/containers?topic=containers-cs_network_planning#private_both_vlans)
-* [Planning private external networking for a private VLAN only setup](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan)
+* [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
+* [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
+* [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
+  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
+  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
+* [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
+  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
+  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
 
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport#nodeport)
 * [Managing network traffic by using NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-## Basic and DSR load balancing with network load balancers (NLB)
+## Exposing apps with load balancers
 {: #sitemap-nlb}
 
-[About NLBs](/docs/containers?topic=containers-loadbalancer-about)
+[VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas)
+* [About VPC load balancing in IBM Cloud Kubernetes Service](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
+* [Setting up a Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
+* [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
+
+[Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
 * [Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs](/docs/containers?topic=containers-loadbalancer-about#comparison)
 * [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
+  * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v1_gateway)
 * [Components and architecture of an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
+  * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v2_gateway)
 
-[Setting up an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
+[Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
 * [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
 * [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
-[Setting up an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-v2)
+[Classic: Setting up DSR load balancing with an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-v2)
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
@@ -674,7 +688,7 @@ lastupdated: "2019-09-27"
   * [Supported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_supported)
   * [Unsupported scheduling algorithms](/docs/containers?topic=containers-loadbalancer-v2#scheduling_unsupported)
 
-[Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
+[Classic: Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname)
 * [Registering load balancer IPs with a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)
 * [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
@@ -688,8 +702,11 @@ lastupdated: "2019-09-27"
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
-* [How does a request get to my app with Ingress in a single zone cluster?](/docs/containers?topic=containers-ingress-about#classic-single)
-* [How does a request get to my app with Ingress in a multizone cluster?](/docs/containers?topic=containers-ingress-about#classic-multi)
+* [How does a request get to my app with Ingress in a classic cluster?]()
+  * [Single-zone cluster](/docs/containers?topic=containers-ingress-about#classic-single)
+  * [Multizone cluster](/docs/containers?topic=containers-ingress-about#classic-multi)
+  * [Gateway-enabled cluster](/docs/containers?topic=containers-ingress-about#classic-gateway)
+* [How does a request get to my app with Ingress in a VPC cluster?](/docs/containers?topic=containers-ingress-about#architecture-vpc)
 
 [Setting up Ingress](/docs/containers?topic=containers-ingress)
 * [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)
@@ -760,11 +777,14 @@ lastupdated: "2019-09-27"
 * [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
 * [Preserving the source IP address](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)
+* [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check)
+* [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-ingress-settings#default_server_cert)
 * [Tuning ALB performance](/docs/containers?topic=containers-ingress-settings#perf_tuning)
-* [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress-settings#access-log)
-* [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress-settings#keepalive_time)
-* [Changing the pending connections backlog](/docs/containers?topic=containers-ingress-settings#backlog)
-* [Tuning kernel performance](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
+  * [Adding ALB socket listeners for each NGINX worker process](/docs/containers?topic=containers-ingress-settings#reuse-port)
+  * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress-settings#access-log)
+  * [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress-settings#keepalive_time)
+  * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress-settings#backlog)
+  * [Tuning kernel performance](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
 
 [Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)
@@ -778,7 +798,7 @@ lastupdated: "2019-09-27"
 * [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
-* [Expose your Ingress controller by creating an NLB and a subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [Expose your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}
@@ -797,7 +817,7 @@ lastupdated: "2019-09-27"
   * [Customizing a storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass)
   * [Changing or updating to a different storage class](/docs/containers?topic=containers-kube_concepts#update_storageclass)
 
-[Storing data on {{site.data.keyword.filestorage_full_notm}}](/docs/containers?topic=containers-file_storage#file_storage)
+[Storing data on classic {{site.data.keyword.filestorage_full_notm}}](/docs/containers?topic=containers-file_storage#file_storage)
 * [Deciding on the file storage configuration](/docs/containers?topic=containers-file_storage#file_predefined_storageclass)
 * [Adding file storage to apps](/docs/containers?topic=containers-file_storage#add_file)
 * [Using existing file storage in your cluster](/docs/containers?topic=containers-file_storage#existing_file)
@@ -815,7 +835,7 @@ lastupdated: "2019-09-27"
   * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
   * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
 
-[Storing data on {{site.data.keyword.blockstoragefull}}](/docs/containers?topic=containers-block_storage#block_storage)
+[Storing data on classic {{site.data.keyword.blockstoragefull}}](/docs/containers?topic=containers-block_storage#block_storage)
 * [Installing the {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
   * [Updating the {{site.data.keyword.blockstorageshort}} plug-in](/docs/containers?topic=containers-block_storage#updating-the-ibm-cloud-block-storage-plug-in)
   * [Removing the {{site.data.keyword.blockstorageshort}} plug-in](/docs/containers?topic=containers-block_storage#removing-the-ibm-cloud-block-storage-plug-in)
@@ -830,14 +850,22 @@ lastupdated: "2019-09-27"
 * [Changing the size and IOPS of your existing storage device](/docs/containers?topic=containers-block_storage#block_change_storage_configuration)
 * [Backing up and restoring data](/docs/containers?topic=containers-block_storage#block_backup_restore)
 * [Storage class reference](/docs/containers?topic=containers-block_storage#block_storageclass_reference)
-  * [Bronze](/docs/containers?topic=containers-block_storage#block_bronze)
-  * [Silver](/docs/containers?topic=containers-block_storage#block_silver)
-  * [Gold](/docs/containers?topic=containers-block_storage#block_gold)
-  * [Custom](/docs/containers?topic=containers-block_storage#block_custom)
 * [Sample customized storage classes](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
   * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
   * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
   * [Mounting block storage with an XFS file system](/docs/containers?topic=containers-block_storage#xfs)
+
+[Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block)
+* [Installing the VPC Block Storage add-on](/docs/containers?topic=containers-vpc-block#vpc-block-addon)
+* [Adding VPC Block Storage to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
+* [Using an existing VPC Block Storage instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
+* [Creating VPC Block Storage with a different file system](/docs/containers?topic=containers-vpc-block#vpc-block-xfs)
+* [Setting up encryption for your VPC Block Storage](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
+* [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
+  * [Customizing a storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
+  * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
+* [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
+* [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 
 [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#object_storage)
 * [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
@@ -885,6 +913,7 @@ lastupdated: "2019-09-27"
 * [Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
 
 [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
+* [Understanding your storage removal options](/docs/containers?topic=containers-cleanup#storage_delete_options)
 * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 ## Enhancing cluster capabilities with integrations
@@ -907,7 +936,8 @@ lastupdated: "2019-09-27"
 [{{site.data.keyword.cloud_notm}} services and third-party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations)
 * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
   * [{{site.data.keyword.cloud_notm}} platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
-  * [{{site.data.keyword.cloud_notm}} infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+  * [{{site.data.keyword.cloud_notm}} classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
+  * [{{site.data.keyword.cloud_notm}} VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
 * [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
   * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
   * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
@@ -926,43 +956,9 @@ lastupdated: "2019-09-27"
 [Adding services by using {{site.data.keyword.cloud_notm}} service binding](/docs/containers?topic=containers-service-binding#service-binding)
 * [Adding {{site.data.keyword.cloud_notm}} services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
-    * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
-    * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
-
-## Activity Tracker events
-{: #sitemap-at}
-
-[Activity Tracker events](/docs/containers?topic=containers-at_events#at_events)
-* [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
-
-## Deprecated: Dedicated cloud
-{: #sitemap-dedicated}
-
-[Deprecated: Dedicated cloud](/docs/containers?topic=containers-dedicated#dedicated)
-* [About the Dedicated cloud environment](/docs/containers?topic=containers-dedicated#dedicated_environment)
-* [Differences in cluster management between the cloud environments](/docs/containers?topic=containers-dedicated#dedicated_env_differences)
-  * [Service architecture](/docs/containers?topic=containers-dedicated#dedicated_ov_architecture)
-* [Setting up {{site.data.keyword.containerlong_notm}} on Dedicated](/docs/containers?topic=containers-dedicated#dedicated_setup)
-* [Creating clusters](/docs/containers?topic=containers-dedicated#dedicated_administering)
-  * [Creating clusters with the {{site.data.keyword.cloud_notm}} console](/docs/containers?topic=containers-dedicated#dedicated_creating_ui)
-  * [Creating clusters with the CLI](/docs/containers?topic=containers-dedicated#dedicated_creating_cli)
-  * [Adding worker nodes](/docs/containers?topic=containers-dedicated#add_workers_dedicated)
-  * [Using private and public image registries](/docs/containers?topic=containers-dedicated#dedicated_images)
-  * [Adding subnets to clusters](/docs/containers?topic=containers-dedicated#dedicated_cluster_subnet)
-      * [Adding more user-managed subnets and IP addresses to your clusters](/docs/containers?topic=containers-dedicated#dedicated_byoip_subnets)
-  * [Other cluster configurations](/docs/containers?topic=containers-dedicated#dedicated_other)
-* [Deploying apps in clusters](/docs/containers?topic=containers-dedicated#dedicated_apps)
-  * [Allowing public access to apps](/docs/containers?topic=containers-dedicated#dedicated_apps_public)
-  * [Configuring access to an app by using the load balancer service type](/docs/containers?topic=containers-dedicated#dedicated_apps_public_load_balancer)
-      * [Configuring public access to an app by using Ingress](/docs/containers?topic=containers-dedicated#dedicated_apps_public_ingress)
-  * [Creating persistent storage](/docs/containers?topic=containers-dedicated#dedicated_apps_volume_claim)
-
-## Hybrid cloud
-{: #sitemap-hybrid}
-
-[Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
-* [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
-* [Running {{site.data.keyword.icpfull_notm}} images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
+  * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
+  * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
+* [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 ## CLI plug-in reference
 {: #sitemap-cli-plugin}
@@ -998,6 +994,15 @@ lastupdated: "2019-09-27"
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
 
+## API reference
+{: #sitemap-apis}
+
+* [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+* [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
+* [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
+* [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
+* [Community Kubernetes API](https://kubernetes.io/docs/reference/)
+
 ## Version history
 {: #sitemap-versions}
 
@@ -1005,11 +1010,19 @@ lastupdated: "2019-09-27"
 * [Kubernetes version types](/docs/containers?topic=containers-cs_versions#version_types)
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
+* [Version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#115_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#115_after)
+  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#115_after_workers)
+* [Version 1.14](/docs/containers?topic=containers-cs_versions#cs_v114)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#114_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#114_after)
+  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#114_after_workers)
 * [Version 1.13](/docs/containers?topic=containers-cs_versions#cs_v113)
   * [Update before master](/docs/containers?topic=containers-cs_versions#113_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#113_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#113_after_workers)
-* [Version 1.12](/docs/containers?topic=containers-cs_versions#cs_v112)
+* [Deprecated: Version 1.12](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [Update before master](/docs/containers?topic=containers-cs_versions#112_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#112_after)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
@@ -1021,138 +1034,28 @@ lastupdated: "2019-09-27"
   * [Version 1.5 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v1-5)
 
 [Version changelog](/docs/containers?topic=containers-changelog#changelog)
+* [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+* [Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
 * [Version 1.13 changelog](/docs/containers?topic=containers-changelog#113_changelog)
-  * [Changelog for 1.13.4_1513, released 20 March 2019](/docs/containers?topic=containers-changelog#1134_1513)
-  * [Changelog for 1.13.4_1510, released 4 March 2019](/docs/containers?topic=containers-changelog#1134_1510)
-    * [Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019](/docs/containers?topic=containers-changelog#1132_1509)
-    * [Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019](/docs/containers?topic=containers-changelog#1132_1508)
-  * [Changelog for 1.13.2_1507, released 5 February 2019](/docs/containers?topic=containers-changelog#1124_1534)
 * [Version 1.12 changelog](/docs/containers?topic=containers-changelog#112_changelog)
-  * [Changelog for 1.12.6_1544, released 20 March 2019](/docs/containers?topic=containers-changelog#1126_1544)
-  * [Changelog for 1.12.6_1541, released 4 March 2019](/docs/containers?topic=containers-changelog#1126_1541)
-    * [Changelog for worker node fix pack 1.12.5_1540, released 27 February 2019](/docs/containers?topic=containers-changelog#1125_1540)
-    * [Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019](/docs/containers?topic=containers-changelog#1125_1538)
-  * [Changelog for 1.12.5_1537, released 5 February 2019](/docs/containers?topic=containers-changelog#1125_1537)
-    * [Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019](/docs/containers?topic=containers-changelog#1124_1535)
-  * [Changelog for 1.12.4_1534, released 21 January 2019](/docs/containers?topic=containers-changelog#1124_1534)
-    * [Changelog for worker node fix pack 1.12.3_1533, released 7 January 2019](/docs/containers?topic=containers-changelog#1123_1533)
-    * [Changelog for worker node fix pack 1.12.3_1532, released 17 December 2018](/docs/containers?topic=containers-changelog#1123_1532)
-  * [Changelog for 1.12.3_1531, released 5 December 2018](/docs/containers?topic=containers-changelog#1123_1531)
-    * [Changelog for worker node fix pack 1.12.2_1530, released 4 December 2018](/docs/containers?topic=containers-changelog#1122_1530)
-  * [Changelog for 1.12.2_1529, released 27 November 2018](/docs/containers?topic=containers-changelog#1122_1529)
-    * [Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018](/docs/containers?topic=containers-changelog#1122_1528)
-  * [Changelog for 1.12.2_1527, released 7 November 2018](/docs/containers?topic=containers-changelog#1122_1527)
-* [Version 1.11 changelog](/docs/containers?topic=containers-changelog#111_changelog)
-  * [Changelog for 1.11.8_1550, released 20 March 2019](/docs/containers?topic=containers-changelog#1118_1550)
-  * [Changelog for 1.11.8_1547, released 4 March 2019](/docs/containers?topic=containers-changelog#1118_1547)
-    * [Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019](/docs/containers?topic=containers-changelog#1117_1546)
-    * [Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019](/docs/containers?topic=containers-changelog#1117_1544)
-  * [Changelog for 1.11.7_1543, released 5 February 2019](/docs/containers?topic=containers-changelog#1117_1543)
-    * [Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019](/docs/containers?topic=containers-changelog#1116_1541)
-  * [Changelog for 1.11.6_1540, released 21 January 2019](/docs/containers?topic=containers-changelog#1116_1540)
-    * [Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019](/docs/containers?topic=containers-changelog#1115_1539)
-    * [Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018](/docs/containers?topic=containers-changelog#1115_1538)
-  * [Changelog for 1.11.5_1537, released 5 December 2018](/docs/containers?topic=containers-changelog#1115_1537)
-    * [Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018](/docs/containers?topic=containers-changelog#1114_1536)
-  * [Changelog for 1.11.4_1535, released 27 November 2018](/docs/containers?topic=containers-changelog#1114_1535)
-    * [Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018](/docs/containers?topic=containers-changelog#1113_1534)
-  * [Changelog for 1.11.3_1533, released 7 November 2018](/docs/containers?topic=containers-changelog#1113_1533)
-    * [Changelog for master fix pack 1.11.3_1531, released 1 November 2018](/docs/containers?topic=containers-changelog#1113_1531_ha-master)
-    * [Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018](/docs/containers?topic=containers-changelog#1113_1531)
-    * [Changelog for master fix pack 1.11.3_1527, released 15 October 2018](/docs/containers?topic=containers-changelog#1113_1527)
-    * [Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018](/docs/containers?topic=containers-changelog#1113_1525)
-  * [Changelog for 1.11.3_1524, released 2 October 2018](/docs/containers?topic=containers-changelog#1113_1524)
-  * [Changelog for 1.11.3_1521, released 20 September 2018](/docs/containers?topic=containers-changelog#1113_1521)
-  * [Changelog for 1.11.2_1516, released 4 September 2018](/docs/containers?topic=containers-changelog#1112_1516)
-    * [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](/docs/containers?topic=containers-changelog#1112_1514)
-  * [Changelog for 1.11.2_1513, released 14 August 2018](/docs/containers?topic=containers-changelog#1112_1513)
 * [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
-* [Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-changelog#110_changelog)
-  * [Changelog for 1.10.13_1551, released 20 March 2019](/docs/containers?topic=containers-changelog#11013_1551)
-  * [Changelog for 1.10.13_1548, released 4 March 2019](/docs/containers?topic=containers-changelog#11013_1548)
-    * [Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019](/docs/containers?topic=containers-changelog#11012_1546)
-    * [Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019](/docs/containers?topic=containers-changelog#11012_1544)
-  * [Changelog for 1.10.12_1543, released 5 February 2019](/docs/containers?topic=containers-changelog#1117_1543)
-    * [Changelog for worker node fix pack 1.10.12_1541, released January 2019](/docs/containers?topic=containers-changelog#11012_1541)
-  * [Changelog for 1.10.12_1540, released 21 January 2019](/docs/containers?topic=containers-changelog#11012_1540)
-    * [Changelog for worker node fix pack 1.10.11_1538, released 7 January 2019](/docs/containers?topic=containers-changelog#11011_1538)
-    * [Changelog for worker node fix pack 1.10.11_1537, released 17 December 2018](/docs/containers?topic=containers-changelog#11011_1537)
-  * [Changelog for 1.10.11_1536, released 4 December 2018](/docs/containers?topic=containers-changelog#11011_1536)
-    * [Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018](/docs/containers?topic=containers-changelog#1108_1532)
-    * [Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018](/docs/containers?topic=containers-changelog#1108_1531)
-  * [Changelog for 1.10.8_1530, released 7 November 2018](/docs/containers?topic=containers-changelog#1108_1530_ha-master)
-    * [Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018](/docs/containers?topic=containers-changelog#1108_1528)
-    * [Changelog for master fix pack 1.10.8_1527, released 15 October 2018](/docs/containers?topic=containers-changelog#1108_1527)
-    * [Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018](/docs/containers?topic=containers-changelog#1108_1525)
-  * [Changelog for 1.10.8_1524, released 2 October 2018](/docs/containers?topic=containers-changelog#1108_1524)
-    * [Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018](/docs/containers?topic=containers-changelog#1107_1521)
-  * [Changelog for 1.10.7_1520, released 4 September 2018](/docs/containers?topic=containers-changelog#1107_1520)
-    * [Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018](/docs/containers?topic=containers-changelog#1105_1519)
-    * [Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018](/docs/containers?topic=containers-changelog#1105_1518)
-  * [Changelog for 1.10.5_1517, released 27 July 2018](/docs/containers?topic=containers-changelog#1105_1517)
-    * [Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018](/docs/containers?topic=containers-changelog#1103_1514)
-    * [Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018](/docs/containers?topic=containers-changelog#1103_1513)
-  * [Changelog for 1.10.3_1512, released 12 June 2018](/docs/containers?topic=containers-changelog#1103_1512)
-    * [Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018](/docs/containers?topic=containers-changelog#1101_1510)
-    * [Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018](/docs/containers?topic=containers-changelog#1101_1509)
-  * [Changelog for 1.10.1_1508, released 01 May 2018](/docs/containers?topic=containers-changelog#1101_1508)
+  * [Version 1.11 changelog (unsupported as of 20 July 2019)](/docs/containers?topic=containers-changelog#111_changelog)
+  * [Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-changelog#110_changelog)
   * [Version 1.9 changelog (unsupported as of 27 December 2018)](/docs/containers?topic=containers-changelog#19_changelog)
-    * [Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018](/docs/containers?topic=containers-changelog#1911_1539)
-    * [Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018](/docs/containers?topic=containers-changelog#1911_1538)
-    * [Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018](/docs/containers?topic=containers-changelog#1911_1537)
-  * [Changelog for 1.9.11_1536, released 19 November 2018](/docs/containers?topic=containers-changelog#1911_1536)
-    * [Changelog for worker node fix 1.9.10_1532, released 7 November 2018](/docs/containers?topic=containers-changelog#1910_1532)
-    * [Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018](/docs/containers?topic=containers-changelog#1910_1531)
-    * [Changelog for master fix pack 1.9.10_1530 released 15 October 2018](/docs/containers?topic=containers-changelog#1910_1530)
-    * [Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018](/docs/containers?topic=containers-changelog#1910_1528)
-  * [Changelog for 1.9.10_1527, released 2 October 2018](/docs/containers?topic=containers-changelog#1910_1527)
-    * [Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018](/docs/containers?topic=containers-changelog#1910_1524)
-  * [Changelog for 1.9.10_1523, released 4 September 2018](/docs/containers?topic=containers-changelog#1910_1523)
-    * [Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018](/docs/containers?topic=containers-changelog#199_1522)
-    * [Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018](/docs/containers?topic=containers-changelog#199_1521)
-  * [Changelog for 1.9.9_1520, released 27 July 2018](/docs/containers?topic=containers-changelog#199_1520)
-    * [Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018](/docs/containers?topic=containers-changelog#198_1517)
-    * [Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018](/docs/containers?topic=containers-changelog#198_1516)
-  * [Changelog for 1.9.8_1515, released 19 June 2018](/docs/containers?topic=containers-changelog#198_1515)
-    * [Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018](/docs/containers?topic=containers-changelog#197_1513)
-    * [Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018](/docs/containers?topic=containers-changelog#197_1512)
-    * [Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018](/docs/containers?topic=containers-changelog#197_1511)
-  * [Changelog for 1.9.7_1510, released 30 April 2018](/docs/containers?topic=containers-changelog#197_1510)
   * [Version 1.8 changelog (Unsupported)](/docs/containers?topic=containers-changelog#18_changelog)
-    * [Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018](/docs/containers?topic=containers-changelog#1815_1521)
-    * [Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018](/docs/containers?topic=containers-changelog#1815_1520)
-    * [Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018](/docs/containers?topic=containers-changelog#1815_1519)
-  * [Changelog for 1.8.15_1518, released 27 July 2018](/docs/containers?topic=containers-changelog#1815_1518)
-    * [Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018](/docs/containers?topic=containers-changelog#1813_1516)
-    * [Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018](/docs/containers?topic=containers-changelog#1813_1515)
-  * [Changelog 1.8.13_1514, released 19 June 2018](/docs/containers?topic=containers-changelog#1813_1514)
-    * [Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018](/docs/containers?topic=containers-changelog#1811_1512)
-    * [Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018](/docs/containers?topic=containers-changelog#1811_1511)
-    * [Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018](/docs/containers?topic=containers-changelog#1811_1510)
-  * [Changelog for 1.8.11_1509, released 19 April 2018](/docs/containers?topic=containers-changelog#1811_1509)
   * [Version 1.7 changelog (Unsupported)](/docs/containers?topic=containers-changelog#17_changelog)
-    * [Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018](/docs/containers?topic=containers-changelog#1716_1514)
-    * [Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018](/docs/containers?topic=containers-changelog#1716_1513)
-    * [Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018](/docs/containers?topic=containers-changelog#1716_1512)
-    * [Changelog for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-changelog#1716_1511)
 
 [Fluentd and Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#cluster-add-ons-changelog)
-* [Fluentd add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
-* [Ingress ALB add-on changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
-
-## API reference
-{: #sitemap-apis}
-
-* [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
-* [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
-* [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
-* [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
+* [Ingress ALBs changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
+* [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 ## Locations
 {: #sitemap-locations}
 
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+  * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
   * [Available locations](/docs/containers?topic=containers-regions-and-zones#available-locations)
   * [Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
   * [Single-zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
@@ -1162,6 +1065,33 @@ lastupdated: "2019-09-27"
   * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
 * [Deprecated: Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
+## Hybrid cloud
+{: #sitemap-hybrid}
+
+[Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp)
+* [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
+* [Connecting your public and private cloud with IBM Cloud Direct Link](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
+* [Running {{site.data.keyword.icpfull_notm}} images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
+
+## Supported integrations
+{: #sitemap-supported-integrations}
+
+[Supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
+* [Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
+* [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
+* [Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
+* [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
+* [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
+* [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
+
+## Activity Tracker events
+{: #sitemap-at}
+
+[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events#at_events)
+* [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
+
 ## User access permissions
 {: #sitemap-user-access}
 
@@ -1170,18 +1100,7 @@ lastupdated: "2019-09-27"
 * [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
-* [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
-
-## Supported integrations
-{: #sitemap-supported-integrations}
-
-[Supported integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations)
-* [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
-* [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
-* [Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
-* [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
-* [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
-* [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
+* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 ## FAQs
 {: #sitemap-faqs}
@@ -1190,9 +1109,12 @@ lastupdated: "2019-09-27"
 * [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
 * [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
 * [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
+* [Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
+* [What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
 * [Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
 * [Are the Kubernetes master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
 * [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
+* [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
 * [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
 * [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
 * [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
@@ -1201,6 +1123,7 @@ lastupdated: "2019-09-27"
 * [Can I use {{site.data.keyword.cloud_notm}} and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 * [Can I connect my cluster in {{site.data.keyword.cloud_notm}} Public with apps that run in my on-prem data center?](/docs/containers?topic=containers-faqs#hybrid)
 * [Can I deploy {{site.data.keyword.containerlong_notm}} in my own data center?](/docs/containers?topic=containers-faqs#private)
+* [Where can I find more information about IBM Cloud Kubernetes Service pricing models?](/docs/containers?topic=containers-faqs#pricing)
 * [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
 * [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
 * [Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
@@ -1214,11 +1137,13 @@ lastupdated: "2019-09-27"
 * [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues)
+* [Reviewing master health](/docs/containers?topic=containers-cs_troubleshoot#debug_master)
 * [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot#debug_apps)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help)
 
 [Troubleshooting clusters and worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_troubleshoot_clusters)
 * [Unable to create a cluster due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
+* [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Firewall prevents running CLI commands](/docs/containers?topic=containers-cs_troubleshoot_clusters#ts_firewall_clis)
 * [Cannot access resources in my cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_firewall)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_cluster_access)
@@ -1246,6 +1171,7 @@ lastupdated: "2019-09-27"
 [Troubleshooting cluster storage](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
 * [Debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
 * [File storage and block storage: PVC remains in a pending state](/docs/containers?topic=containers-cs_troubleshoot_storage#file_pvc_pending)
+* [File storage: App cannot access or write to PVC](/docs/containers?topic=containers-cs_troubleshoot_storage#file_app_failures)
   * [File storage: File systems for worker nodes change to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_nodes)
   * [File storage: App fails when a non-root user owns the NFS file storage mount path](/docs/containers?topic=containers-cs_troubleshoot_storage#nonroot)
   * [File storage: Adding non-root user access to persistent storage fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot)
@@ -1258,6 +1184,7 @@ lastupdated: "2019-09-27"
   * [Object storage: PVC creation fails due to wrong credentials or access denied](/docs/containers?topic=containers-cs_troubleshoot_storage#cred_failure)
   * [Object storage: PVC creation fails due to wrong s3fs or IAM API endpoint](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_api_endpoint_failure)
   * [Object storage: Cannot access an existing bucket](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
+* [Object storage: Changing the ownership of the mount path fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_mountpath_error)
 * [Object storage: Accessing files with a non-root user fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
 * [PVC creation fails because of missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_storage#storage_getting_help)
@@ -1290,3 +1217,16 @@ lastupdated: "2019-09-27"
 * [Cannot retrieve Calico network policies](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
 * [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_network#network_getting_help)
+
+[Troubleshooting VPC clusters](/docs/containers?topic=containers-vpc_troubleshoot)
+* [Cannot connect to an app via load balancer](/docs/containers?topic=containers-vpc_troubleshoot#vpc_ts_lb)
+* [Kubernetes `LoadBalancer` service fails because no IPs are available](/docs/containers?topic=containers-vpc_troubleshoot#vpc_no_lb)
+* [Cannot connect to an app via Ingress](/docs/containers?topic=containers-vpc_troubleshoot#vpc_ts_alb)
+
+[Release notes](/docs/containers?topic=containers-iks-release)
+* [October 2019](/docs/containers?topic=containers-iks-release#oct19)
+* [September 2019](/docs/containers?topic=containers-iks-release#sept19)
+* [August 2019](/docs/containers?topic=containers-iks-release#aug19)
+* [July 2019](/docs/containers?topic=containers-iks-release#jul19)
+* [June 2019](/docs/containers?topic=containers-iks-release#jun19)
+* [May 2019](/docs/containers?topic=containers-iks-release#may19)
