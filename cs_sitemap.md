@@ -704,7 +704,7 @@ lastupdated: "2019-10-01"
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
   * [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#mzlb)
-* [How does a request get to my app with Ingress in a classic cluster?]()
+* [How does a request get to my app with Ingress in a classic cluster?](/docs/containers?topic=containers-ingress-about#architecture-classic)
   * [Single-zone cluster](/docs/containers?topic=containers-ingress-about#classic-single)
   * [Multizone cluster](/docs/containers?topic=containers-ingress-about#classic-multi)
   * [Gateway-enabled cluster](/docs/containers?topic=containers-ingress-about#classic-gateway)
