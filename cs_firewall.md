@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -347,71 +347,10 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.bluemix.net`
     - `TCP port 443 FROM <each_worker_node_publicIP> TO https://iam.cloud.ibm.com`
 
-5. Optional: Allow outgoing network traffic from the worker nodes to {{site.data.keyword.monitoringlong_notm}}, {{site.data.keyword.loganalysislong_notm}}, Sysdig, and LogDNA services:
-    *   **{{site.data.keyword.monitoringlong_notm}}**:
-        <pre class="screen">TCP port 443, port 9095 FROM &lt;each_worker_node_public_IP&gt; TO &lt;monitoring_subnet&gt;</pre>
-        Replace <em>&lt;monitoring_subnet&gt;</em> with the subnets for the monitoring regions to which you want to allow traffic:
-        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-          <caption>IP addresses to open for monitoring traffic</caption>
-                <thead>
-                <th>{{site.data.keyword.containerlong_notm}} region</th>
-                <th>Monitoring address</th>
-                <th>Monitoring subnets</th>
-                </thead>
-              <tbody>
-                <tr>
-                 <td>EU Central</td>
-                 <td><code>metrics.eu-de.bluemix.net</code></td>
-                 <td><code>158.177.65.80/30</code></td>
-                </tr>
-                <tr>
-                 <td>UK South</td>
-                 <td><code>metrics.eu-gb.bluemix.net</code></td>
-                 <td><code>169.50.196.136/29</code></td>
-                </tr>
-                <tr>
-                  <td>US East, US South, AP North, AP South</td>
-                  <td><code>metrics.ng.bluemix.net</code></td>
-                  <td><code>169.47.204.128/29</code></td>
-                 </tr>
-                </tbody>
-              </table></p>
+5. Optional: Allow outgoing network traffic from the worker nodes to Sysdig and LogDNA services:
     *   **{{site.data.keyword.mon_full_notm}}**:
         <pre class="screen">TCP port 443, port 6443 FROM &lt;each_worker_node_public_IP&gt; TO &lt;sysdig_public_IP&gt;</pre>
         Replace <em>&lt;sysdig_public_IP&gt;</em> with the [Sysdig IP addresses](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-network#network).
-    *   **{{site.data.keyword.loganalysislong_notm}}**:
-        <pre class="screen">TCP port 443, port 9091 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
-        Replace <em>&lt;logging_public_IP&gt;</em> with all of the addresses for the logging regions to which you want to allow traffic:
-        <p><table summary="The first row in the table spans both columns. The rest of the rows should be read left to right, with the server zone in column one and IP addresses to match in column two.">
-        <caption>IP addresses to open for logging traffic</caption>
-                <thead>
-                <th>{{site.data.keyword.containerlong_notm}} region</th>
-                <th>Logging address</th>
-                <th>Logging IP addresses</th>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>US East, US South</td>
-                    <td><code>ingest.logging.ng.bluemix.net</code></td>
-                    <td><code>169.48.79.236</code><br><code>169.46.186.113</code></td>
-                  </tr>
-                  <tr>
-                   <td>UK South</td>
-                   <td><code>ingest.logging.eu-gb.bluemix.net</code></td>
-                   <td><code>169.50.115.113</code></td>
-                  </tr>
-                  <tr>
-                   <td>EU Central</td>
-                   <td><code>ingest-eu-fra.logging.bluemix.net</code></td>
-                   <td><code>158.177.88.43</code><br><code>159.122.87.107</code></td>
-                  </tr>
-                  <tr>
-                   <td>AP South, AP North</td>
-                   <td><code>ingest-au-syd.logging.bluemix.net</code></td>
-                   <td><code>130.198.76.125</code><br><code>168.1.209.20</code></td>
-                  </tr>
-                 </tbody>
-               </table></p>
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace &gt;<em>logDNA_public_IP&gt;</em> with the [LogDNA IP addresses](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-network#network).
@@ -620,10 +559,10 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.6   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.6  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.14.6   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.14.6  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.14.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.14.7  
         ```
         {: screen}
     3.  List the VLAN subnets for each unique network ID.

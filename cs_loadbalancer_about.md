@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -78,7 +78,7 @@ The following diagram shows how an NLB 1.0 directs communication from the intern
 
 <img src="images/cs_loadbalancer_planning.png" alt="Expose an app in a single-zone cluster by using an NLB 1.0" width="550" style="width:550px; border-style: none"/>
 
-1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
+1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
 
 2. The NLB receives the request and forwards it to the private IP address of the app pod over the private network. The source IP address of the request package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the NLB routes the requests between the app pods.
 
@@ -90,7 +90,7 @@ The following diagram shows how an NLB 1.0 directs communication from the intern
 The following diagram shows how a network load balancer (NLB) 1.0 directs communication from the internet to an app in a multizone cluster.
 {: shortdesc}
 
-<img src="images/cs_loadbalancer_planning_multizone.png" alt="Use an NLB 1.0 to load balance apps in a multizone cluster width="600" style="width:600px; border-style: none""/>
+<img src="images/cs_loadbalancer_planning_multizone.png" alt="Use an NLB 1.0 to load balance apps in a multizone cluster" width="600" style="width:600px; border-style: none"/>
 
 1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 1.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 1.0 in every zone where you have app instances.
 
@@ -99,6 +99,22 @@ The following diagram shows how a network load balancer (NLB) 1.0 directs commun
 3. The NLB receives the request and forwards it to the private IP address of the app pod over the private network. The source IP address of the request package is changed to the public IP address of the worker node where the app pod runs. Each NLB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the NLB routes the requests between the app pods in the zone.
 
 4. When the app returns a response packet, it uses the IP address of the worker node where the NLB that forwarded the client request exists. The NLB then sends the response packet to the client.
+
+### Traffic flow in a gateway-enabled cluster
+{: #v1_gateway}
+
+The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+{: shortdesc}
+
+<img src="images/cs_loadbalancer_gateway1.png" alt="Expose an app in a gateway-enabled cluster by using an NLB 1.0" width="600" style="width:600px; border-style: none"/>
+
+1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
+
+2. The NLB receives the request. The NLB is able to receive the request because the NLB pods are scheduled to a worker in the `gateway` worker pool, which has public network connectivity.
+
+3. The NLB forwards the request to the private IP address of the app pod over the private network. The source IP address of the request package is changed to the public IP address of the gateway worker node where the NLB is deployed. If multiple app instances are deployed in the cluster, the NLB routes the requests between the app pods.
+
+4. When the app returns a response, it uses the IP address of the gateway worker node where the NLB that forwarded the client request exists. The NLB then sends the response packet through the gateway to the client.
 
 <br />
 
@@ -122,11 +138,11 @@ The following diagram shows how an NLB 2.0 directs communication from the intern
 
 <img src="images/cs_loadbalancer_ipvs_planning.png" alt="Expose an app in {{site.data.keyword.containerlong_notm}} by using a version 2.0 NLB" width="700" style="width:700px; border-style: none"/>
 
-1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130, which is currently on worker 10.73.14.25. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the load balancer.
+1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130 and runs on the worker node that has the 10.73.13.25 private IP address. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
 
-2. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker 10.73.14.25 IP as its source IP address.
+2. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker node 10.73.14.25 IP as its source IP address.
 
-3. The NLB routes the IPIP packet to a worker that an app pod is on, 10.73.14.26. If multiple app instances are deployed in the cluster, the NLB routes the requests between the workers where app pods are deployed.
+3. The NLB routes the IPIP packet to a worker that an app pod is on and that has the private IP address 10.73.13.26. If multiple app instances are deployed in the cluster, the NLB routes the requests between the workers where app pods are deployed.
 
 4. Worker 10.73.14.26 unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
 
@@ -142,12 +158,32 @@ The following diagram shows how version 2.0 NLBs in each zone direct traffic fro
 
 1. A request to your app uses the [DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLBs. You can also access the NLB in each zone by using its public IP address and port on the worker node. Note that by default, each NLB 2.0 is set up in one zone only. To achieve high availability, you must deploy an NLB 2.0 in every zone where you have app instances.
 
-2. A DNS system service resolves the subdomain to the portable public IP address of one of the NLBs and its assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130, which is currently on worker 10.73.14.25. Requests are handled by the NLBs in various zones in a round-robin cycle.
+2. A DNS system service resolves the subdomain to the portable public IP address of one of the NLBs and its assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130 and runs on the worker node that has the 10.73.13.25 private IP address. Requests are handled by the NLBs in various zones in a round-robin cycle.
 
-2. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker 10.73.14.25 IP as its source IP address.
+3. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker 10.73.14.25 IP as its source IP address.
 
-3. The NLB routes the IPIP packet to a worker that an app pod is on, 10.73.14.26. Note that each NLB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the NLB routes the requests between the app pods in the zone.
+5. The NLB routes the IPIP packet to a worker that an app pod is on and that has the private IP address 10.73.13.26. Note that each NLB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the NLB routes the requests between the app pods in the zone.
 
-4. Worker 10.73.14.26 unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
+5. Worker 10.73.14.26 unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
 
-5. Worker 10.73.14.26 then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client.
+6. Worker 10.73.14.26 then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client.
+
+### Traffic flow in a gateway-enabled cluster
+{: #v2_gateway}
+
+The following diagram shows how an NLB 2.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+{: shortdesc}
+
+<img src="images/cs_loadbalancer_gateway2.png" alt="Expose an app in a gateway-enabled cluster by using an NLB 2.0" width="700" style="width:700px; border-style: none"/>
+
+This diagram shows the traffic flow through a single-zone, gateway-enabled cluster. If your gateway-enabled cluster is multizone, you must deploy an NLB 2.0 in every zone where you have app instances. Each NLB routes requests to the app instances in its own zone and to app instances in other zones.
+
+1. A client request to your app uses the public IP address of your NLB and the assigned port on the worker node. In this example, the NLB has a virtual IP address of 169.61.23.130 and runs on the worker node that has the 10.73.13.25 private IP address. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.
+
+2. The NLB encapsulates the client request packet (labeled as "CR" in the image) inside an IPIP packet (labeled as "IPIP"). The client request packet retains the client IP as its source IP address. The IPIP encapsulating packet uses the worker node 10.73.14.25 IP as its source IP address. Note that the NLB is able to receive the request because the NLB pods are scheduled to a worker node in the `gateway` worker pool, which has public network connectivity.
+
+3. The NLB routes the IPIP packet to a compute worker node that an app pod is on and that has the private IP address 10.73.13.26. If multiple app instances are deployed in the zone, the NLB routes the requests in a round-robin style between the workers where app pods are deployed.
+
+4. The compute worker node, 10.73.13.26, unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
+
+5. The compute worker node, 10.73.13.26, then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.

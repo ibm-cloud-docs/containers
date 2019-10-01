@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -166,9 +166,9 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.2.5
-  istio-extras              1.2.5
-  istio-sample-bookinfo     1.2.5
+  istio                     1.3.0
+  istio-extras              1.3.0
+  istio-sample-bookinfo     1.3.0
   ```
   {: screen}
 
@@ -452,7 +452,7 @@ Before you begin, [install the `istio` and `istio-extras` managed add-ons](#isti
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}
 
-Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.loganalysislong}}.
+Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.la_full}}.
 {: shortdesc}
 
 To use [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-about), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
@@ -573,13 +573,13 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.2.5 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.0 sh -
   ```
   {: pre}
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.2.5
+  cd istio-1.3.0
   ```
   {: pre}
 
@@ -663,7 +663,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.2.5
+    cd istio-1.3.0
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -824,7 +824,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.2.5
+    cd istio-1.3.0
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -1060,7 +1060,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
    ```
    OK
    Name      Version
-   istio     1.2.5
+   istio     1.3.0
    knative   0.7.1
    ```
    {: screen}
@@ -1237,7 +1237,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.2.5
+    cd <filepath>/istio-1.3.0
     ```
     {: pre}
 

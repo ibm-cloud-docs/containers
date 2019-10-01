@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-27"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -50,7 +50,7 @@ Before you create an NLB 2.0, you must complete the following prerequisite steps
     2. From the menu bar, click **Support**, click the **Manage cases** tab, and click **Create new case**.
     3. In the case fields, enter the following:
        * For type of support, select **Technical**.
-       * For category, select **VLAN Spanning**.
+       * For offering, select **Containers**.
        * For subject, enter **Public and private VLAN network question**
     4. Add the following information to the description: "Please set up the network to allow capacity aggregation on the public and private VLANs associated with my account. The reference ticket for this request is: https://control.softlayer.com/support/tickets/63859145". Note that if you want to allow capacity aggregation on specific VLANs, such as the public VLANs for one cluster only, you can specify those VLAN IDs in the description.
     5. Click **Submit**.
@@ -97,7 +97,9 @@ Next, you can follow the steps in [Setting up an NLB 2.0 in a multizone cluster]
 * **Important**: Complete the [NLB 2.0 prerequisites](#ipvs_provision).
 * To create public NLBs in multiple zones, at least one public VLAN must have portable subnets available in each zone. To create private NLBs in multiple zones, at least one private VLAN must have portable subnets available in each zone. You can add subnets by following the steps in [Configuring subnets for clusters](/docs/containers?topic=containers-subnets).
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-* If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
+* Ensure you have the required number of worker nodes:
+  * Classic clusters: If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
+  * Gateway-enabled classic clusters: Ensure that at least two gateway worker nodes in the `gateway` worker pool are enabled in each zone so that NLBs deploy uniformly.
 
 To set up an NLB 2.0 in a multizone cluster:
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file. This custom label identifies all pods where your app runs to include them in the load balancing.

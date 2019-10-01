@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -32,20 +32,8 @@ To increase the availability of your apps, you can add worker nodes to an existi
 
 When you create a cluster, the worker nodes are provisioned in a worker pool. After cluster creation, you can add more worker nodes to a pool by resizing it or by adding more worker pools. By default, the worker pool exists in one zone. Clusters that have a worker pool in only one zone are called single zone clusters. When you add more zones to the cluster, the worker pool exists across the zones. Clusters that have a worker pool that is spread across more than one zone are called multizone clusters.
 
-If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.
-{: tip}
-
-Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform). Then, add worker nodes by choosing one of the following methods:
-  * [Add worker nodes by resizing an existing worker pool in your cluster](#resize_pool)
-  * Add worker nodes by adding a worker pool to your [classic](#add_pool) or [VPC](#vpc_add_pool) cluster
-  * Add a zone to your [classic](#add_zone) or [VPC](#vpc_add_zone) cluster and replicate the worker nodes in your worker pools across multiple zones
-  * [Deprecated: Add a stand-alone worker node to a cluster](#standalone)
-
-After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
-{:tip}
-
-<br />
-
+<p class="tip">If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.</br></br>
+After you set up your worker pool, you can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.</p>
 
 ## Adding worker nodes by resizing an existing worker pool
 {: #resize_pool}
@@ -59,6 +47,8 @@ For example, consider a cluster with one worker pool that has three worker nodes
 
 For bare metal worker pools, keep in mind that billing is monthly. If you resize up or down, it impacts your costs for the month.
 {: tip}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 To resize the worker pool, change the number of worker nodes that the worker pool deploys in each zone:
 
@@ -83,10 +73,10 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.8.6_1504
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.7
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.14.7
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.7
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.14.7
     ```
     {: screen}
 
@@ -94,11 +84,19 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 
 
 
-## VPC: Adding worker nodes by creating a new worker pool
+## Adding worker nodes in VPC clusters
+{: #vpc_pools}
+
+Add worker nodes to your VPC cluster.
+{: shortdesc}
+
+### Creating a new worker pool
 {: #vpc_add_pool}
 
 You can add worker nodes to your VPC cluster by creating a new worker pool.
 {:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-classic`.
    ```
@@ -160,80 +158,7 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
    ```
    {: screen}
 
-<br />
-
-
-
-## Classic: Adding worker nodes by creating a new worker pool
-{: #add_pool}
-
-You can add worker nodes to your classic cluster by creating a new worker pool.
-{:shortdesc}
-
-1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls`.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12, dal13
-   ```
-   {: screen}
-
-2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
-
-3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-
-    ```
-    ibmcloud ks flavors --zone <zone>
-    ```
-    {: pre}
-
-4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
-   ```
-   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
-   ```
-   {: pre}
-
-5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-  ```
-  {: pre}
-
-7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.8.6_1504
-   ```
-   {: screen}
-
-<br />
-
-
-
-
-## VPC: Adding worker nodes by adding a zone to a worker pool
+### Adding a zone to a worker pool
 {: #vpc_add_zone}
 
 You can span your VPC cluster across multiple zones within one region by adding a zone to your existing worker pool.
@@ -242,6 +167,8 @@ You can span your VPC cluster across multiple zones within one region by adding 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
 If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Get the **Location** of your cluster, and note the existing **Worker Zones** and **VPC ID**.
    ```
@@ -303,10 +230,85 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 <br />
 
 
+## Adding worker nodes in classic clusters
+{: #classic_pools}
+
+Add worker nodes to your classic cluster.
+{: shortdesc}
+
+### Creating a new worker pool
+{: #add_pool}
+
+You can add worker nodes to your classic cluster by creating a new worker pool.
+{:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
+1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls`.
+   ```
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ...
+   Worker Zones: dal10, dal12, dal13
+   ```
+   {: screen}
+
+2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+   ```
+   ibmcloud ks vlan ls --zone <zone>
+   ```
+   {: pre}
+
+3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+
+    ```
+    ibmcloud ks flavors --zone <zone>
+    ```
+    {: pre}
+
+4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal worker pool, specify `--hardware dedicated`.
+   ```
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ```
+   {: pre}
+
+5. Verify that the worker pool is created.
+   ```
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+  ```
+  {: pre}
+
+7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
+   ```
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   ```
+   {: screen}
+
+<br />
 
 
-## Classic: Adding worker nodes by adding a zone to a worker pool
+### Adding a zone to a worker pool
 {: #add_zone}
+
+
 
 You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {:shortdesc}
@@ -317,6 +319,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
+*  Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 *  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 To add a zone with worker nodes to your worker pool:
@@ -381,6 +384,227 @@ To add a zone with worker nodes to your worker pool:
   {: screen}
 
 <br />
+
+
+## Adding worker nodes in gateway-enabled classic clusters
+{: #gateway_pools}
+
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for their respective compute or gateway functionality. Add compute or gateway worker nodes depending on your use case.
+{: shortdesc}
+
+* Compute: If you need more compute resources to run your app workloads, [resize]#resize_pool) or [add zones](#add_gateway_zone) to the `default` compute worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.
+* Gateway: If you need more network throughput for your cluster, you can [resize]#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u2c.2x4` flavor by default.
+
+### Creating a new compute worker pool
+{: #gateway_compute}
+
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
+{:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
+1. Retrieve all of the existing **Worker Zones** of your cluster.
+   ```
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ...
+   Worker Zones: dal10, dal12
+   ```
+   {: screen}
+
+2. For each zone, list available private VLANs. Note the private VLAN that you want to use. If you do not have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+   ```
+   ibmcloud ks vlan ls --zone <zone>
+   ```
+   {: pre}
+
+3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+   ```
+   ibmcloud ks flavors --zone <zone>
+   ```
+   {: pre}
+
+4. Create a worker pool. Ensure that you include the `--labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker` option to create a worker pool with compute functionality. If you provision a bare metal worker pool, specify `--hardware dedicated`.
+   ```
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+   ```
+   {: pre}
+
+5. Verify that the worker pool is created.
+   ```
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+6. By default, adding a worker pool creates a pool with no zones. To deploy compute worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --private-only
+  ```
+  {: pre}
+
+7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
+   ```
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.7
+   ```
+   {: screen}
+
+### Creating a new gateway worker pool
+{: #gateway_replace}
+
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize]#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u2c.2x4` flavor by default.
+{:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
+1. Retrieve all of the existing **Worker Zones** of your cluster.
+   ```
+   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ...
+   Worker Zones: dal10, dal12
+   ```
+   {: screen}
+
+2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+   ```
+   ibmcloud ks vlan ls --zone <zone>
+   ```
+   {: pre}
+
+3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+   ```
+   ibmcloud ks flavors --zone <zone>
+   ```
+   {: pre}
+
+4. Create a worker pool. Ensure that you include the `--labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway` option of following command to create a worker pool with gateway functionality. If you provision a bare metal worker pool, specify `--hardware dedicated`.
+   ```
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+   ```
+   {: pre}
+
+5. Verify that the worker pool is created.
+   ```
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+6. By default, adding a worker pool creates a pool with no zones. To deploy gateway worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+  ```
+  {: pre}
+
+7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
+   ```
+   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.14.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.14.7
+   ```
+   {: screen}
+
+8. Optional: If you created a gateway worker pool to replace the default `gateway` worker pool, delete the `gateway` worker pool.
+  ```
+  ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+### Adding a zone to compute and gateway worker pools
+{: #add_gateway_zone}
+
+You can span your classic gateway-enabled cluster across multiple zones within one region by adding a zone to your existing worker pools.
+{:shortdesc}
+
+When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
+
+If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
+
+Before you begin:
+* To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
+* Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
+1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
+   ```
+   ibmcloud ks zone ls
+   ```
+   {: pre}
+
+2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
+   ```
+   ibmcloud ks vlan ls --zone <zone>
+   ```
+   {: pre}
+
+3. List the worker pools in your cluster and note their names.
+   ```
+   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+   ```
+   {: pre}
+
+4. Add the zone to your compute and gateway worker pools. Compute worker pools are connected to a private VLAN only, but gateway worker pools are connected to both a public and a private VLAN.
+  1. Add the zone to your compute worker pools. If you have multiple compute worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
+
+      A private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other compute worker pools by specifying the private VLAN that was created for you.
+      {: note}
+
+     If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLAN that you specify, but the VLAN for any existing worker nodes are not changed.
+     {: tip}
+     ```
+     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p <compute_pool_name> [-p <compute_pool2_name>] --private-vlan <private_VLAN_ID> --private-only
+     ```
+     {: pre}
+
+  2. Add the zone to your gateway worker pools. If you have multiple gateway worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
+
+      A public VLAN and private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a public VLAN and private VLAN in that zone, add the zone to one worker pool first so that public and private VLANs are created for you. Then, you can add the zone to other compute worker pools by specifying the public VLAN and private VLAN that was created for you.
+      {: note}
+
+     If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
+     {: tip}
+     ```
+     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p <gateway_pool_name> [-p <gateway_pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+     ```
+     {: pre}
+
+5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
+  ```
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ...
+  Worker Zones:                   dal10, dal12
+  ...
+  ```
+  {: screen}
+
+<br />
+
+
 
 
 ## Deprecated: Adding stand-alone worker nodes

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-27"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -34,6 +34,42 @@ The following icons are used to indicate if a release note applies only to a cer
 <img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> Applies to only community Kubernetes clusters.<br>
 <img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters, which released as a beta on 5 June 2019.
 {: note}
+
+## October 2019
+{: #oct19}
+
+<table summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Documentation updates in October 2019</caption>
+<thead>
+<th>Date</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+  <td>01 October 2019</td>
+  <td><ul>
+    <li><strong>End of service of {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}}</strong>: Removed steps for using {{site.data.keyword.loganalysislong_notm}} and {{site.data.keyword.monitoringlong_notm}} to work with cluster logs and metrics. You can collect logs and metrics for your cluster by setting up [{{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna) and [{{site.data.keyword.mon_full_notm}}](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster) instead.</li>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! Gateway-enabled classic clusters</strong>: Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway. You can enable a gateway only on standard, Kubernetes clusters during cluster creation.<br><br>
+    When you enable a gateway on a classic cluster, the cluster is created with a `default` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Traffic into or out of the cluster is routed through the gateway worker nodes, which provide your cluster with limited public access. For more information, check out the following links:<ul>
+      <li>[Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway)</li>
+      <li>[Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)</li>
+      <li>Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)</li></ul>
+      Ready to get started? [Create a standard classic cluster with a gateway in the CLI.](/docs/containers?topic=containers-clusters#gateway_cluster_cli)</li></ul></li>
+    <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>OpenShift options</strong>: To help you decide whether to use built-in OpenShift capabilities or integration with {{site.data.keyword.cloud_notm}} services, the following topics are added:<ul>
+    <li>[Choosing an image registry solution](/docs/openshift?topic=openshift-openshift-images#openshift_registry_options)</li>
+    <li>[Choosing among load balancing solutions](/docs/openshift?topic=openshift-openshift_routes#routes-vs-ingress) like router or Ingress</li>
+    <li>[Understanding options for logging and monitoring](/docs/openshift?topic=openshift-openshift_health#oc_logmet_options)</li></ul></li>
+    <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone location for OpenShift clusters</strong>: The following locations are now supported. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).<ul>
+    <li>Oslo, Norway</li>
+    <li>San Jose, California, US</li></ul></li>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Patch updates are available for Kubernetes [1.15.4_1518](/docs/containers?topic=containers-changelog#1154_1518), [1.14.7_1534](/docs/containers?topic=containers-changelog#1147_1534), [1.13.11_1537](/docs/containers?topic=containers-changelog#11311_1537), and [1.12.10_1568](/docs/containers?topic=containers-changelog#11210_1568_worker).</li>
+  </ul>
+  </td>
+</tr>
+</tbody></table>
+
+<br />
+
 
 ## September 2019
 {: #sept19}
@@ -82,7 +118,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <li><strong>{{site.data.keyword.at_full_notm}} events</strong>: Added information about [which {{site.data.keyword.at_short}} location your events are sent to](/docs/containers?topic=containers-at_events#at-ui) based on the {{site.data.keyword.containerlong_notm}} location where the cluster is located.</li>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Melbourne, Australia `mel01` single zone location for OpenShift clusters</strong>: For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Worker node patch updates are available for Kubernetes [1.15.3_1517](/docs/containers?topic=containers-changelog#1153_1517_worker), [1.14.6_1533](/docs/containers?topic=containers-changelog#1146_1533_worker), [1.13.10_1536](/docs/containers?topic=containers-changelog#11310_1536_worker), and [1.12.10_1567](/docs/containers?topic=containers-changelog#11210_1567_worker).</li>
-  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.141_1524](/docs/openshift?topic=openshift-openshift_changelog#311141_1524).</li></ul>
+  <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.141_1524_openshift](/docs/openshift?topic=openshift-openshift_changelog#311141_1524).</li></ul>
   </td>
 </tr>
 <tr>
@@ -154,7 +190,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>28 August 2019</td>
   <td><ul>
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.112](/docs/containers?topic=containers-cs_cli_changelog).</li>
-  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.3_1515](/docs/containers?topic=containers-changelog##1153_1515), [1.14.6_1531](/docs/containers?topic=containers-changelog#1146_1531), [1.13.10_1534](/docs/containers?topic=containers-changelog#11310_1534), and [1.12.10_1565](/docs/containers?topic=containers-changelog#11210_1565) master fix pack updates.</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for [1.15.3_1515](/docs/containers?topic=containers-changelog#1153_1515), [1.14.6_1531](/docs/containers?topic=containers-changelog#1146_1531), [1.13.10_1534](/docs/containers?topic=containers-changelog#11310_1534), and [1.12.10_1565](/docs/containers?topic=containers-changelog#11210_1565) master fix pack updates.</li>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Changelog added for master fix pack [3.11.135_1522_openshift](/docs/openshift?topic=openshift-openshift_changelog#311135_1522).</li>
   </ul></td>
 </tr>

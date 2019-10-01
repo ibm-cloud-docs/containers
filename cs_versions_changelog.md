@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-16"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, versions, update
 
@@ -49,6 +49,104 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+### Changelog for 1.15.4_1518, released 1 October 2019
+{: #1154_1518}
+
+The following table shows the changes that are included in the patch 1.15.4_1518.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.3_1517">
+<caption>Changes since version 1.15.3_1517</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.8.1</td>
+<td>v3.8.2</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.8/release-notes/).</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to improve performance of master update operations.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>v1.2.9</td>
+<td>v1.2.10</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+</tr>
+<tr>
+<td>Default IBM file storage class</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class.</td>
+</tr>
+<tr>
+<td>Gateway-enabled cluster controller</td>
+<td>N/A</td>
+<td>844</td>
+<td>New! For [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli), a `DaemonSet` is installed to configure settings for routing network traffic to worker nodes.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.15.3-112</td>
+<td>v1.15.4-136</td>
+<td>Updated to support the Kubernetes 1.15.4 release. In addition, version 1.0 and 2.0 network load balancers (NLBs) were updated to support [classic clusters with a gateway enabled](/docs/containers?topic=containers-clusters#gateway_cluster_cli).</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>212</td>
+<td>221</td>
+<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.15.3</td>
+<td>v1.15.4</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.4).</td>
+</tr>
+<tr>
+<td>Kubernetes Metrics Server</td>
+<td>v0.3.3</td>
+<td>v0.3.4</td>
+<td>See the [Kubernetes Metrics Server release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.4).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} provider</td>
+<td>148</td>
+<td>153</td>
+<td>Fixed issues with version 2.0 network load balancers (NLBs) that might cause all network traffic to drop or to be sent only to pods on one worker node.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-115</td>
+<td>2.4.6-r3-IKS-121</td>
+<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-62-generic</td>
+<td>4.15.0-64-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-161-generic</td>
+<td>4.4.0-164-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.15.3_1517, released 16 September 2019
 {: #1153_1517_worker}
@@ -329,6 +427,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>2.4.6-r3-IKS-116</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
 </tbody>
 </table>
 
@@ -420,6 +524,92 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+### Changelog for 1.14.7_1534, released 1 October 2019
+{: #1147_1534}
+
+The following table shows the changes that are included in the patch 1.14.7_1534.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.6_1533">
+<caption>Changes since version 1.14.6_1533</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.6.4</td>
+<td>v3.6.5</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to improve performance of master update operations.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>v1.2.9</td>
+<td>v1.2.10</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+</tr>
+<tr>
+<td>Default IBM file storage class</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.14.6-172</td>
+<td>v1.14.7-199</td>
+<td>Updated to support the Kubernetes 1.14.7 release.</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>212</td>
+<td>221</td>
+<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.14.6</td>
+<td>v1.14.7</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.7).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} provider</td>
+<td>148</td>
+<td>153</td>
+<td>Fixed issues with version 2.0 network load balancers (NLBs) that might cause all network traffic to drop or to be sent only to pods on one worker node.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-115</td>
+<td>2.4.6-r3-IKS-121</td>
+<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-62-generic</td>
+<td>4.15.0-64-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-161-generic</td>
+<td>4.4.0-164-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
 {: #1146_1533_worker}
@@ -698,6 +888,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>
@@ -1206,6 +1402,92 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 Review the version 1.13 changelog.
 {: shortdesc}
 
+### Changelog for 1.13.11_1537, released 1 October 2019
+{: #11311_1537}
+
+The following table shows the changes that are included in the patch 1.13.11_1537.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.10_1536">
+<caption>Changes since version 1.13.10_1536</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Calico</td>
+<td>v3.6.4</td>
+<td>v3.6.5</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.6/release-notes/).</td>
+</tr>
+<tr>
+<td>Cluster master HA configuration</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Updated configuration to improve performance of master update operations.</td>
+</tr>
+<tr>
+<td>containerd</td>
+<td>v1.2.9</td>
+<td>v1.2.10</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.10). Update resolves [CVE-2019-16884 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16884) and [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+</tr>
+<tr>
+<td>Default IBM file storage class</td>
+<td>N/A</td>
+<td>N/A</td>
+<td>Fixed a bug that might cause cluster master operations such as patch updates to clear the default IBM file storage class.</td>
+</tr>
+<tr>
+<td>{{site.data.keyword.cloud_notm}} Provider</td>
+<td>v1.13.10-221</td>
+<td>v1.13.11-248</td>
+<td>Updated to support the Kubernetes 1.13.11 release.</td>
+</tr>
+<tr>
+<td>Key Management Service provider</td>
+<td>212</td>
+<td>221</td>
+<td>Improved Kubernetes [key management service provider](/docs/containers?topic=containers-encryption#keyprotect) caching of {{site.data.keyword.cloud_notm}} IAM tokens. In addition, fixed a problem with Kubernetes secret decryption when the cluster's root key is rotated.</td>
+</tr>
+<tr>
+<td>Kubernetes</td>
+<td>v1.13.10</td>
+<td>v1.13.11</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.11).</td>
+</tr>
+<tr>
+<td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} provider</td>
+<td>148</td>
+<td>153</td>
+<td>Fixed issues with version 2.0 network load balancers (NLBs) that might cause all network traffic to drop or to be sent only to pods on one worker node.</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-115</td>
+<td>2.4.6-r3-IKS-121</td>
+<td>Updated images for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547) and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-62-generic</td>
+<td>4.15.0-64-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-161-generic</td>
+<td>4.4.0-164-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019
 {: #11310_1536_worker}
 
@@ -1484,6 +1766,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>
@@ -2425,6 +2713,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Review the version 1.12 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.12.10_1568, released 1 October 2019
+{: #11210_1568_worker}
+
+The following table shows the changes that are included in the patch 1.12.10_1568.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1567">
+<caption>Changes since version 1.12.10_1567</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 18.04 kernel and packages</td>
+<td>4.15.0-62-generic</td>
+<td>4.15.0-64-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-15031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15031), [CVE-2019-15030 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-15030), and [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+<tr>
+<td>Ubuntu 16.04 kernel and packages</td>
+<td>4.4.0-161-generic</td>
+<td>4.4.0-164-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-14835 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-14835).</td>
+</tr>
+</tbody>
+</table>
+
 ### Changelog for worker node fix pack 1.12.10_1567, released 16 September 2019
 {: #11210_1567_worker}
 
@@ -2660,6 +2980,12 @@ The following table shows the changes that are included in the master fix pack 1
 <td>OpenVPN client</td>
 <td>2.4.6-r3-IKS-13</td>
 <td>2.4.6-r3-IKS-116</td>
+<td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+</tr>
+<tr>
+<td>OpenVPN server</td>
+<td>2.4.6-r3-IKS-25</td>
+<td>2.4.6-r3-IKS-115</td>
 <td>Image updated for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
 </tr>
 </tbody>

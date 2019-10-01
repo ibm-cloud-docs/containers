@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-01"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -44,6 +44,8 @@ In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy t
 {: note}
 
 
+Trying out a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
+{: tip}
 
 Before you begin:
 
@@ -190,6 +192,8 @@ A benefit of edge worker nodes is that they can be specified to run networking s
 Using the `dedicated=edge` toleration means that all network load balancer (NLB) and Ingress application load balancer (ALB) services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
 
 
+Trying out a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
+{: tip}
 
 Before you begin:
 - Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
@@ -226,6 +230,141 @@ Before you begin:
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
     ```
     {: pre}
+
+## Isolating networking workloads to edge nodes in classic gateway-enabled clusters
+{: #edge_gateway}
+
+Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
+{:shortdesc}
+
+When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_clusters#gateway), the cluster is created with a `default` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.
+
+If you want to provide another level of network separation between the public network and workloads in your compute worker nodes, you can optionally create a worker pool of edge nodes. As opposed to gateway nodes, the edge nodes have only private network connectivity and cannot be accessed directly from the public network. NLB pods remain deployed to the gateway worker nodes, but ALB pods are deployed to only edge nodes. By deploying only ALBs to edge nodes, all layer 7 proxy management is kept separate from the gateway worker nodes so that TLS termination and HTTP request routing is completed by the ALBs on the private network only. The edge nodes are also tainted so that no compute workloads can be scheduled onto them.
+
+If you use Ingress ALBs to expose your apps, requests to the path for your app are first routed to the load balancer that exposes your ALBs in the gateway worker pool. The traffic is then load balanced over the private network to one of the ALB pods that is deployed in the edge worker pool. Finally, the ALB in the edge worker pool proxies the request to one of your app pods in your worker pools of compute worker nodes. For more information about the flow of traffic through Ingress ALBs in gateway-enabled clusters, see the [Ingress architecture diagram](/docs/containers?topic=containers-ingress-about#classic-gateway).
+
+**Before you begin**:
+
+* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}:
+  * Any platform role for the cluster
+  * **Writer** or **Manager** service role for all namespaces
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+</br>To create an edge node worker pool in a gateway-enabled classic cluster:
+
+1. Retrieve all of the **Worker Zones** that your existing worker nodes are connected to.
+  ```
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ...
+  Worker Zones:                   dal10, dal12
+  ```
+  {: screen}
+
+2. For each zone, list available private VLANs. Note the private VLAN ID that you want to use.
+  ```
+  ibmcloud ks vlan ls --zone <zone>
+  ```
+
+3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+  ```
+  ibmcloud ks flavors --zone <zone>
+  ```
+  {: pre}
+
+4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
+  ```
+  ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --machine-type <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+  ```
+  {: pre}
+
+5. Deploy worker nodes in the `edge` worker pool by adding the zones that you previously retrieved to the worker pool. Repeat this command for each zone. All worker nodes in this `edge` pool are connected to a private VLAN only.
+  ```
+  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge --private-vlan <private_VLAN_ID>
+  ```
+  {: pre}
+
+6. Verify that the worker pool and worker nodes are provisioned and have the `dedicated=edge` label.
+  * To check the worker pool:
+    ```
+    ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+    ```
+    {: pre}
+
+  * To check individual worker nodes, review the **Labels** field of the output of the following command. Your edge nodes are ready when the **Status** is `Ready`.
+    ```
+    kubectl describe node <worker_node_private_IP>
+    ```
+    {: pre}
+
+7. Retrieve all existing ALBs in the cluster. In the output, note the **Namespace** and **Name** of each ALB.
+  ```
+  kubectl get services --all-namespaces | grep alb
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
+  kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.xxx.xx.xxx   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
+  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.xx.xxx.xx   80:30286/TCP,443:31363/TCP                  25d
+  ```
+  {: screen}
+
+8. Using the output from the previous step, run the following command for each ALB. This command redeploys the ALB to an edge worker node.
+  ```
+  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  service "private-crdf253b6025d64944ab99ed63bb4567b6-alb1" configured
+  ```
+  {: screen}
+
+9. Verify that ALB pods are scheduled onto edge nodes and are not scheduled onto compute nodes.
+  1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
+    ```
+    kubectl describe nodes -l dedicated=edge | grep alb
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+    kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-7p9q6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+    kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+    kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-kvs9f    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+    ```
+    {: screen}
+
+  2. Confirm that no ALB pods are deployed to non-edge nodes.
+    ```
+    kubectl describe nodes -l dedicated!=edge | grep alb
+    ```
+    {: pre}
+    * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
+    * If ALB pods are returned, continue to the next step.
+
+10. If ALB pods are still deployed to non-edge nodes, you can delete the pods so that they redeploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
+  1. Delete a pod.
+    ```
+    kubectl delete pod <pod_name>
+    ```
+    {: pre}
+
+  2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes.
+    ```
+    kubectl describe nodes -l dedicated=edge | grep "<pod_name>"
+    ```
+    {: pre}
+
+</br>You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in the cluster are also deployed to an edge node in your edge worker pool.
 
 
 
