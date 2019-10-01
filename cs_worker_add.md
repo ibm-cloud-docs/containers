@@ -48,6 +48,8 @@ For example, consider a cluster with one worker pool that has three worker nodes
 For bare metal worker pools, keep in mind that billing is monthly. If you resize up or down, it impacts your costs for the month.
 {: tip}
 
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
 To resize the worker pool, change the number of worker nodes that the worker pool deploys in each zone:
 
 1. Get the name of the worker pool that you want to resize.
@@ -93,6 +95,8 @@ Add worker nodes to your VPC cluster.
 
 You can add worker nodes to your VPC cluster by creating a new worker pool.
 {:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-classic`.
    ```
@@ -163,6 +167,8 @@ You can span your VPC cluster across multiple zones within one region by adding 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
 
 If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Get the **Location** of your cluster, and note the existing **Worker Zones** and **VPC ID**.
    ```
@@ -235,6 +241,8 @@ Add worker nodes to your classic cluster.
 
 You can add worker nodes to your classic cluster by creating a new worker pool.
 {:shortdesc}
+
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls`.
    ```
@@ -311,6 +319,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
+*  Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 *  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 To add a zone with worker nodes to your worker pool:
@@ -392,6 +401,8 @@ By default, gateway-enabled classic clusters are created with a `default` pool o
 By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
 {:shortdesc}
 
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
+
 1. Retrieve all of the existing **Worker Zones** of your cluster.
    ```
    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
@@ -452,10 +463,10 @@ By default, gateway-enabled classic clusters are created with a `default` pool o
 ### Creating a new gateway worker pool
 {: #gateway_replace}
 
-By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more gateway worker nodes by creating a new gateway worker pool.
+By default, gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize]#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u2c.2x4` flavor by default.
 {:shortdesc}
 
-Note that during cluster creation the gateway worker nodes in the `gateway` worker pool are created on shared virtual machines with the `u2c.2x4` flavor by default. If you want to change the isolation and flavor of the gateway worker nodes, you can use the following steps to create a new gateway worker pool to replace the gateway worker pool that is created by default.
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. Retrieve all of the existing **Worker Zones** of your cluster.
    ```
@@ -530,7 +541,9 @@ When you add a zone to a worker pool, the worker nodes that are defined in your 
 
 If you have multiple worker pools in your cluster, add the zone to all of them so that worker nodes are spread evenly across your cluster.
 
-Before you begin: To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
+Before you begin:
+* To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
+* Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
 1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
    ```
