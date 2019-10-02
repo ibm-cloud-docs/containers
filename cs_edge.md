@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-02"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -231,7 +231,7 @@ Before you begin:
     ```
     {: pre}
 
-## Isolating networking workloads to edge nodes in classic gateway-enabled clusters
+## Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters
 {: #edge_gateway}
 
 Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
