@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-02"
 
 ---
 
@@ -86,7 +86,8 @@ lastupdated: "2019-10-01"
 * [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
 * [Network](/docs/containers?topic=containers-security#network)
-  * [Network segmentation and privacy](/docs/containers?topic=containers-security#network_segmentation)
+  * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
+  * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
   * [LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 * [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
@@ -442,8 +443,7 @@ lastupdated: "2019-10-01"
 * [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpn#limit)
   * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpn#limit_namespace)
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
-* [Upgrading the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
-* [Disabling the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#disabling-the-strongswan-ipsec-vpn-service)
+* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
 [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio#istio)
@@ -530,6 +530,9 @@ lastupdated: "2019-10-01"
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
 * [Choosing a VPN solution](/docs/containers?topic=containers-vpc-vpnaas#options)
+  * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
+  * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
+  * [Communication with IBM Cloud classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
 * [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpn-setup)
   * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpc-vpnaas#strongswan_limitations)
   * [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpc-vpnaas#vpn_multizone)
@@ -888,18 +891,18 @@ lastupdated: "2019-10-01"
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 * [Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Getting a Portworx license](/docs/containers?topic=containers-portworx#portworx_license)
-* [Setting up a database for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
+* [Setting up a Databases for etcd service instance for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
+* [Setting up volume encryption with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
+  * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
+  * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
+  * [Enabling per-volume encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-* [Encrypting Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
-  * [Portworx volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
-  * [Portworx volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
-  * [Setting up encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
-* [Adding storage from your Portworx cluster to apps](/docs/containers?topic=containers-portworx#add_portworx_storage)
-  * [Step 1: Creating or using an existing storage class for your PVC](/docs/containers?topic=containers-portworx#create_storageclass)
-  * [Step 2: Creating your persistent volume claim (PVC)](/docs/containers?topic=containers-portworx#create_dynamic_pvc)
-  * [Step 3: Mounting the PVC to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+* [Getting started with Portworx](/docs/containers?topic=containers-portworx#getting-started)
+  * [Verifying your Portworx installation](/docs/containers?topic=containers-portworx#verify_installation)
+  * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
+  * [Mounting the PVC to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
