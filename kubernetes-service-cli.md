@@ -2303,7 +2303,7 @@ Add a worker pool to a VPC on Classic cluster. No worker nodes are created until
 {: shortdesc}
 
 ```
-ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <cluster_name_or_ID> --flavor <flavor> --vpc-id <VPC ID> --size-per-zone <number_of_workers_per_zone> [--hardware (public|private)] [--label KEY1=VALUE1] [--disable-disk-encrypt] [-s] [--json]
+ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <cluster_name_or_ID> --flavor <flavor> --vpc-id <VPC ID> --size-per-zone <number_of_workers_per_zone> [--label KEY1=VALUE1] [-s] [--json]
 ```
 {: pre}
 
@@ -2329,13 +2329,8 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
 
-<dt><code>--hardware <em>PUBLIC|PRIVATE</em></code></dt>
-
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
 <dd>Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`. This value is optional.</ul></dd>
-
-<dt><code>--disable-disk-encrypt</code></dt>
-<dd>Include this flag if you want to remove disk encryption from the worker nodes. By default, worker node disks are AES 256-bit encrypted. This value is optional.</dd>
 
 <dt><code>-s</code>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
