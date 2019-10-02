@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-02"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -650,7 +650,7 @@ To limit VPN traffic to tainted nodes for each tenant:
 <br />
 
 
-## Upgrading the strongSwan Helm chart
+## Upgrading or disabling the strongSwan Helm chart
 {: #vpn_upgrade}
 
 Make sure your strongSwan Helm chart is up-to-date by upgrading it.
@@ -663,11 +663,7 @@ To upgrade your strongSwan Helm chart to the latest version:
   ```
   {: pre}
 
-## Disabling the strongSwan IPSec VPN service
-{: vpn_disable}
-
 You can disable the VPN connection by deleting the Helm chart.
-{:shortdesc}
 
   ```
   helm delete --purge <release_name>
