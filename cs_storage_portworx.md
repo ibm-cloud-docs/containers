@@ -730,7 +730,7 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
    The removal of the pods is successful if no pods are displayed in your CLI output.
 
 ## Getting started with Portworx
-{: #getting-started}
+{: #px-getting-started}
 
 With your Portworx cluster all set up, hit the ground running by adding highly available local persistent storage to your containerized apps that run in Kubernetes clusters. 
 {: shortdesc}
