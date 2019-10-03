@@ -129,9 +129,8 @@ If you want to expose your app publicly, you have different options that depend 
 *  **Cluster that is made private by using Calico**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#private_both_vlans). You also must use a Calico preDNAT network policy to block the public node ports.
 *  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). You also must open the port for the service's private IP address in your firewall.
 
-
 ### How can I automate my app deployment?
-After your cluster is fully deployed, you can set up a continuous delivery and continuous integration pipeline for your cluster to automate the deployment and testing of your containerized apps. With {{site.data.keyword.deliverypipelinelong}}, you can choose between pre-defined DevOps templates that help you deploy Kubernetes-native apps and Helm charts, run vulnerability tests, A/B tests, and set up automatic health checks and alerting. For more information, see [Setting up a continuous delivery pipeline for a cluster](#continuous-delivery-pipeline).  
+After your cluster is fully deployed, you can set up a continuous delivery and continuous integration pipeline for your cluster to automate the deployment and testing of your containerized apps. With {{site.data.keyword.deliverypipelinelong}}, you can choose between pre-defined DevOps templates that help you deploy Kubernetes-native apps and Helm charts, run vulnerability tests, A/B tests, and set up automatic health checks and alerting. For more information, see [Setting up a continuous delivery pipeline for a cluster](#continuous-delivery-pipeline). 
 
 ### After I deploy my app, how can I monitor its health?
 You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
@@ -1519,8 +1518,6 @@ To manage rolling updates to your apps:
 <br />
 
 
-
-
 ## Setting up a continuous delivery pipeline for a cluster
 {: #continuous-delivery-pipeline}
 
@@ -1543,7 +1540,7 @@ Adopt a DevOps approach by using {{site.data.keyword.deliverypipelinelong}}, whi
    {: tip}
 
 <br />
- 
+
 
 ## Copying deployments to another cluster
 {: #copy_apps_cluster}
