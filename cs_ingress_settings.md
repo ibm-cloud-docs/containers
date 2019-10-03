@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -73,7 +73,7 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
   ```
   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
   ```
@@ -217,7 +217,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -257,7 +257,7 @@ If you have very large Ingress resource files, it might take longer than 5 minut
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
@@ -295,7 +295,7 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
 
 3. Save the resource file.
 
-4. Verify that the resource now points to your custom secret name.
+4. Verify that the resource now points to your custom secret name. The changes are applied to your ALBs automatically.
    ```
    kubectl get ingress alb-default-server -n kube-system -o yaml
    ```
@@ -337,7 +337,7 @@ When the `reuse-port` option is disabled, a single listening socket notifies ALB
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -380,7 +380,7 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
 
 3. Save the configuration file.
 
-4. Verify that your ALB is configured with the access log changes.
+4. Verify that an ALB is configured with the access log changes. The changes are applied to your ALBs automatically.
 
    ```
    kubectl logs -n kube-system <ALB_ID> -c nginx-ingress
@@ -417,7 +417,7 @@ Keepalive connections can have a major impact on performance by reducing the CPU
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
@@ -454,7 +454,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 
 3. Save the configuration file.
 
-4. Verify that the configmap changes were applied.
+4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
    ```
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-02"
 
 keywords: kubernetes, iks
 
@@ -50,9 +50,10 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>24 Sept 2019</td>
 <td>
 <ul>
+<li>Adds the `--gateway-enabled` flag to the `ibmcloud ks cluster create classic` command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation. For more information, see [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).</li>
 <li>Removes the deprecated `region get`, `region set`, and `region ls` commands from help output.</li>
 <li>Updates command structure to the new spaced format in help output.</li>
-<li>Adds a warning to the output of legacy `cluster config` behavior. For more information, see the [version plug-in 1.0 documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
+<li>Adds a warning to the output of legacy `cluster config` behavior. For more information, see the [version 1.0 plug-in documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
 <li>Fixes a bug so that `worker reload` and `messages` commands now fail if the command errors.</li>
 <li>Updates translations of help text.</li></ul>
 </td>

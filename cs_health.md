@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-02"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -63,7 +63,7 @@ You can choose your logging solution based on which cluster components you need 
 </dd>
 
 <dt>Deprecated: {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis</dt>
-<dd><p class="deprecated">Previously, you could collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.at_full_notm}}.</p>	
+<dd><p class="deprecated">Previously, you could collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.at_full_notm}}.</p>
 </dd>
 
 </dl>
@@ -236,7 +236,7 @@ Configure log forwarding for {{site.data.keyword.containerlong_notm}} standard c
 ### Understanding log forwarding to an external server
 {: #logging}
 
-When you create a logging configuration for a source in your cluster to forward to an external server, a [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) component is created in your cluster. Fluentd collects the logs from that source's paths and forwards the logs to an external server. The traffic from the source to the logging service on the ingestion port is encrypted.
+When you create a logging configuration for a source in your cluster to forward to an external server, the [Fluentd ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.fluentd.org/) component in your cluster collects the logs from that source's paths and forwards the logs to an external server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
 
 **What are the sources that I can configure log forwarding for?**
