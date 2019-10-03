@@ -25,13 +25,13 @@ subcollection: containers
 
 
 # Getting started with Portworx
-{: #px-getting-started}
+{: #getting-started-with-portworx}
 
 With your Portworx cluster all set up, hit the ground running by adding highly available local persistent storage to your containerized apps that run in Kubernetes clusters. 
 {: shortdesc}
 
 ## Verifying your Portworx installation
-{: #verify_installation}
+{: #px-verify-installation}
 
 Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
 {: shortdesc}
@@ -119,7 +119,7 @@ To verify your installation:
    {: screen}
 
 ## Creating a Portworx volume
-{: #add_portworx_storage}
+{: #px-add-storage}
 
 Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
 {: shortdesc}
@@ -245,7 +245,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       {: pre}
       
 ## Mounting the PVC to your app
-{: #mount_pvc}
+{: #px-mount-pvc}
 
 To access the storage from your app, you must mount the PVC to your app.
 {: shortdesc}
