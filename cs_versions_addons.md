@@ -59,7 +59,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
-<td>579 / 340</td>
+<td>579 / 341</td>
 <td>03 Oct 2019</td>
 <td>Fixes `e2fsprogs` vulnerabilities for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094).</td>
 <td>-</td>
