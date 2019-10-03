@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-03"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -928,7 +928,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       </tr>
       <tr>
       <td><code>resources.requests.storage</code></td>
-      <td>Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter `2Gi`. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your [storage class](#create_storageclass) that is higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.   </td>
+      <td>Enter the amount of storage in gigabytes that you want to assign from your Portworx cluster. For example, to assign 2 gigabytes from your Portworx cluster, enter `2Gi`. The amount of storage that you can specify is limited by the amount of storage that is available in your Portworx cluster. If you specified a replication factor in your storage class that is higher than 1, then the amount of storage that you specify in your PVC is reserved on multiple worker nodes.   </td>
       </tr>
       <tr>
       <td><code>spec.storageClassName</code></td>
