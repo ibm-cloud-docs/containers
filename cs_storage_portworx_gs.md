@@ -1,3 +1,29 @@
+---
+
+copyright:
+  years: 2014, 2019
+lastupdated: "2019-10-03"
+
+keywords: kubernetes, iks, local persistent storage
+
+subcollection: containers
+
+---
+
+{:new_window: target="_blank"}
+{:shortdesc: .shortdesc}
+{:screen: .screen}
+{:pre: .pre}
+{:table: .aria-labeledby="caption"}
+{:codeblock: .codeblock}
+{:tip: .tip}
+{:note: .note}
+{:important: .important}
+{:deprecated: .deprecated}
+{:download: .download}
+{:preview: .preview}
+
+
 # Getting started with Portworx
 {: #px-getting-started}
 
