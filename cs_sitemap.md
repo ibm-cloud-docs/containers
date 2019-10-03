@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-03"
 
 ---
 
@@ -899,7 +899,7 @@ lastupdated: "2019-10-02"
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-* [Getting started with Portworx](/docs/containers?topic=containers-portworx#getting-started)
+* [Getting started with Portworx](/docs/containers?topic=containers-portworx#px-getting-started)
   * [Verifying your Portworx installation](/docs/containers?topic=containers-portworx#verify_installation)
   * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
   * [Mounting the PVC to your app](/docs/containers?topic=containers-portworx#mount_pvc)
