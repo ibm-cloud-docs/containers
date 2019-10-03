@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,14 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>03 October 2019</td>
+  <td><ul>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 579](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Security for VPC clusters</strong>: Added information for how to achieve [network segmentation and privacy in VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc).</li>
+  </ul>
+  </td>
+</tr>
 <tr>
   <td>01 October 2019</td>
   <td><ul>
