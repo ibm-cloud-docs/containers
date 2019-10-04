@@ -121,25 +121,10 @@ Databases for etcd is a managed etcd service that securely stores and replicates
    6. Choose if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own.
    5. Review the pricing plan.
    6. Click **Create** to start setting up your service instance. The setup might take a few minutes to complete.
-3. Create service credentials for your Databases for etcd service instance. If you have a private cluster, you must create credentials that use the private service endpoint. 
-   - **To use the public service endpoint:**
-     1. In the navigation on the service details page, click **Service Credentials**.
-     2. Click **New credentials**.
-     3. Enter a name for your service credentials and click **Add**.
-   - **To use the private service endpoint:**
-     1. In the navigation on the service details page, click **Manage**. 
-     2. Select the **Settings** tab. 
-     3. Find the **Service Endpoints** section, and use the toggle to enable to private service endpoint for your service instance. 
-     4. List all IAM-enabled {{site.data.keyword.cloud_notm}} services in your account and find the name of your service instance. 
-        ```
-	ibmcloud resource service-instances
-        ```
-	{: pre}
-     5. Create service credentials that use the private service endpoint. 
-        ```
-	ibmcloud resource service-key-create <key_name> Administrator --instance-name <service_instance_name>  --service-endpoint private
-	```
-	{: pre}
+3. Create service credentials for your Databases for etcd service instance. 
+   1. In the navigation on the service details page, click **Service Credentials**.
+   2. Click **New credentials**.
+   3. Enter a name for your service credentials and click **Add**.
 
 4. {: #databases_credentials}Retrieve your service credentials and certificate.
    1. From the navigation on the service details page, select **Service credentials**. 
