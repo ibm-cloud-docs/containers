@@ -538,7 +538,7 @@ To install Portworx:
    ```
    # Please uncomment and specify values for these options as per your requirements.
 
-   kvdb:                                 # The KVDB endpoint. Should be in the format etcd:http://<your-kvdb-endpoint>:2379. 
+   kvdb: <etcd_endpoint>                                # The KVDB endpoint. Should be in the format etcd:http://<your-kvdb-endpoint>:2379. 
                                       # If there are multiple endpoints they need to be ";" seperated.
                                       # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
    clusterName: <cluster_name>                # This is the default. please change it to your cluster name.
