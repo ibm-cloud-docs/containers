@@ -295,7 +295,6 @@ The following image shows the options that you have in {{site.data.keyword.conta
 
 <img src="images/cs_storage_options_multizone.png" alt="High availability options for persistent storage in a multizone cluster"/>
 
-
 <table>
 <thead>
 <th style="text-align:left">Characteristics</th>
