@@ -33,6 +33,11 @@ subcollection: containers
 Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
 {: important}
 
+## About Portworx
+
+Review frequently asked questions to learn more about Portworx and how Portworx provides highly available persistent storage management for your containerized apps. 
+{: shortdesc}
+
 **What is software-defined storage (SDS)?** </br>
 An SDS solution abstracts storage devices of various types, sizes, or from different vendors that are attached to the worker nodes in your cluster. Worker nodes with available storage on hard disks are added as a node to a storage cluster. In this cluster, the physical storage is virtualized and presented as a virtual storage pool to the user. The storage cluster is managed by the SDS software. If data must be stored on the storage cluster, the SDS software decides where to store the data for highest availability. Your virtual storage comes with a common set of capabilities and services that you can leverage without caring about the actual underlying storage architecture.
 
