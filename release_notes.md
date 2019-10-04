@@ -47,7 +47,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>04 October 2019</td>
-  <td><ul><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</li><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Software-defined storage with Portworx</strong>: You can now install Portworx on your OpenShift cluster as a highly available data management platform for your containerized apps. For more information, see [Storing data software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx). </li></ul></td>
+  <td><ul><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</li><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Software-defined storage with Portworx</strong>: You can now install Portworx on your OpenShift cluster as a highly available data management platform for your containerized apps. For more information, see [Storing data software-defined storage (SDS) with Portworx](/docs/openshift?topic=openshift-portworx). </li></ul></td>
   </tr>
 <tr>
   <td>03 October 2019</td>
