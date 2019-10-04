@@ -47,7 +47,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>04 October 2019</td>
-  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Patch updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</td>
+  <td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</td>
   </tr>
 <tr>
   <td>03 October 2019</td>
