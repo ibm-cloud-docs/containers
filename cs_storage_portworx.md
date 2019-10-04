@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-03"
+lastupdated: "2019-10-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -32,6 +32,11 @@ subcollection: containers
 
 Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
 {: important}
+
+## About Portworx
+
+Review frequently asked questions to learn more about Portworx and how Portworx provides highly available persistent storage management for your containerized apps. 
+{: shortdesc}
 
 **What is software-defined storage (SDS)?** </br>
 An SDS solution abstracts storage devices of various types, sizes, or from different vendors that are attached to the worker nodes in your cluster. Worker nodes with available storage on hard disks are added as a node to a storage cluster. In this cluster, the physical storage is virtualized and presented as a virtual storage pool to the user. The storage cluster is managed by the SDS software. If data must be stored on the storage cluster, the SDS software decides where to store the data for highest availability. Your virtual storage comes with a common set of capabilities and services that you can leverage without caring about the actual underlying storage architecture.
@@ -67,6 +72,7 @@ You can also choose to use only a subset of worker nodes for your Portworx stora
 
 **What limitations must I plan for?** </br>
 Portworx is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is  enabled, you cannot use Portworx in your cluster, unless you open up all egress network traffic on TCP port 443, or enable the public service endpoint.
+
 
 
 All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx) in your cluster and creating your first hyper-converged storage cluster.  
@@ -115,13 +121,15 @@ Databases for etcd is a managed etcd service that securely stores and replicates
    6. Choose if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own.
    5. Review the pricing plan.
    6. Click **Create** to start setting up your service instance. The setup might take a few minutes to complete.
-3. Create service credentials for your Databases for etcd service instance.
+3. Create service credentials for your Databases for etcd service instance. 
    1. In the navigation on the service details page, click **Service Credentials**.
    2. Click **New credentials**.
    3. Enter a name for your service credentials and click **Add**.
+
 4. {: #databases_credentials}Retrieve your service credentials and certificate.
-   1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. You need this information when you install Portworx.
+   1. From the navigation on the service details page, select **Service credentials**. 
+   2. Find the credentials that you want to use, and from the **Actions** column in the service credentials table, click **View credentials**.
+   3. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. 
 
       Example output for user name and password:
       ```
@@ -133,7 +141,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       }
       ```
       {: screen}
-   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx.  
+   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx. 
 
       Example output for `--endpoints`:
       ```
@@ -149,8 +157,14 @@ Databases for etcd is a managed etcd service that securely stores and replicates
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
       ```
       {: screen}
+      
+5. Encode your user name and password to base64. 
+   ```
+   echo -n "<username_or_password>" | base64
+   ```
+   {: pre}
 
-5. Create a Kubernetes secret for your certificate.
+6. Create a Kubernetes secret for your certificate.
    1. Create a configuration file for your secret.
       ```
       apiVersion: v1
@@ -161,8 +175,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       type: Opaque
       data:
         ca.pem: <certificate_base64>
-        client-key.pem: ""
-        client.pem: ""
+        username: <username_base64>
+        password: <password_base64>
       ```
       {: codeblock}
 
@@ -279,40 +293,11 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
    ```
    {: pre}
 
-10. Create a namespace in your cluster that is called `portworx` and allow Portworx to access all Kubernetes secrets that are stored in this namespace.
+10. Create a namespace in your cluster that is called `portworx`. 
     ```
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: portworx
-    ---
-    # Role to access Kubernetes secrets in the portworx namespace only
-    kind: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: px-role
-      namespace: portworx
-    rules:
-    - apiGroups: [""]
-      resources: ["secrets"]
-      verbs: ["get", "list", "create", "update", "patch"]
-    ---
-    # Allow portworx service account to access the secrets in the portworx namespace
-    kind: RoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: px-role-binding
-      namespace: portworx
-    subjects:
-    - kind: ServiceAccount
-      name: px-account
-      namespace: kube-system
-    roleRef:
-      kind: Role
-      name: px-role
-      apiGroup: rbac.authorization.k8s.io
+    kubectl create ns portworx
     ```
-    {: codeblock}
+    {: pre}
 
 11. Create a Kubernetes secret that is named `px-ibm` in the `portworx` namespace of your cluster to store your {{site.data.keyword.keymanagementservicelong_notm}} information.
    1. Create a configuration file for your Kubernetes secret with the following content.
@@ -468,10 +453,12 @@ Looking for instructions about how to update or remove Portworx? See [Updating P
 {: tip}
 
 Before you begin:
+- Make sure that you have the right [permissions](/docs/containers?topic=containers-clusters#cluster_prepare) to create a an {{site.data.keyword.containerlong_notm}} cluster. 
 - [Create or use an existing cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#create_block_storage).
 - Create a [Databases for etcd service instance](#portworx_database) to store the Portworx configuration and metadata.
 - Decide whether you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes).
+- Make sure that you [copied the image pull secrets from the `default` to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret) so that you can pull images from {{site.data.keyword.registryshort}}. Make sure that you [add the image pull secrets to the Kubernetes service account](/docs/containers?topic=containers-images#store_imagePullSecret) of the `kube-system` namespace. 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To install Portworx:
@@ -508,15 +495,13 @@ To install Portworx:
    {: pre}
 
 6. Update the following values and save your changes.
-   - **`etcdEndPoint`**: Add the etcd endpoint of your Databases for etcd service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`kvdb`**: Add the etcd endpoint of your Databases for etcd service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`etcd.secret`**: Enter the name of your Kubernetes secret where you stored the credentials to access your Databases for etcd instance. 
     - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
    - **`clusterName`**: Enter the name of the cluster where you want to install Portworx.
    - **`usedrivesAndPartitions`**: Enter `true` to let Portworx find unmounted hard drives and partitions.
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
-   - **`etcd.credentials`**: Enter the user name and password of your Databases for etcd service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter `/etc/pwx/etcdcerts` for the path where the certificate of your Databases for etcd service instance is stored.
-   - **`etcd.ca`**: Enter `/etc/pwx/etcdcerts/ca.pem` for the path to the Certificate Authority (CA) file.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
@@ -524,48 +509,43 @@ To install Portworx:
    ```
    # Please uncomment and specify values for these options as per your requirements.
 
-   deploymentType: oci                     # accepts "oci" or "docker"
-   imageType: none                         #
-   imageVersion: 2.0.2                   # Version of the PX Image.
-
-   openshiftInstall: false                 # Defaults to false for installing Portworx on Openshift .
-   isTargetOSCoreOS: false                 # Is your target OS CoreOS? Defaults to false.
-   pksInstall: false                       # installation on PKS (Pivotal Container Service)
-   AKSorEKSInstall: false                  # installation on AKS or EKS.
-   etcdEndPoint: "etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"
-                                         # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
+   kvdb: <etcd_endpoint>                                # The KVDB endpoint. Should be in the format etcd:http://<your-kvdb-endpoint>:2379. 
+                                      # If there are multiple endpoints they need to be ";" seperated.
+                                      # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
    clusterName: <cluster_name>                # This is the default. please change it to your cluster name.
-   usefileSystemDrive: true             # true/false Instructs PX to use an unmounted Drive even if it has a file system.
-   usedrivesAndPartitions: true          # Defaults to false. Change to true and PX will use unmounted drives and partitions.
-   secretType: none                      # Defaults to None, but can be AWS / KVDB / Vault.
-   drives: none                          # NOTE: This is a ";" seperated list of drives. For eg: "/dev/sda;/dev/sdb;/dev/sdc" Defaults to use -A switch.
-   dataInterface: none                   # Name of the interface <ethX>
-   managementInterface: none             # Name of the interface <ethX>
+
+   storage:
+     usefileSystemDrive: false             # true/false Instructs PX to use an unmounted Drive even if it has a filesystem.
+     usedrivesAndPartitions: false         # Defaults to false. Change to true and PX will use unmounted drives and partitions.
+     drives: none                          # NOTE: This is a ";" seperated list of drives. For eg: "/dev/sda;/dev/sdb;/dev/sdc" Defaults to use -A switch.
+     journalDevice: none
+     metadataSize: 0
+
+   network:
+     dataInterface: none                   # Name of the interface <ethX>
+     managementInterface: none             # Name of the interface <ethX>
+
+   secretType: none                      # Defaults to None, but can be aws-kms/vault/k8s/kvdb/ibm-kp
    envVars: none                         # NOTE: This is a ";" seperated list of environment variables. For eg: MYENV1=myvalue1;MYENV2=myvalue2
 
-   stork: true                           # Use Stork https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/ for hyperconvergence.
-   storkVersion: 1.1.3
+   storkVersion: 2.2.5
 
-   customRegistryURL:
-   registrySecret:
+   customRegistryURL: 
+   registrySecret: 
+   imagePullSecrets:
 
-   lighthouse: false
-   lighthouseVersion: 1.4.0
+   lighthouse: true
+   lighthouseVersion: 2.0.4
+   lighthouseSyncVersion: 0.4
+   lighthouseStorkConnectorVersion: 0.2
 
-   journalDevice:
-
-   deployOnMaster:  false                # For POC only
    csi: false                            # Enable CSI
 
    internalKVDB: false                   # internal KVDB
+
    etcd:
-     credentials: <username>:<password>  # Username and password for ETCD authentication in the form user:password
-     certPath: /etc/pwx/etcdcerts                      # Base path where the certificates are placed. (example: if the certificates ca,crt and the key are in /etc/pwx/etcdcerts the value should be provided as /etc/pwx/$
-     ca: /etc/pwx/etcdcerts/ca.pem                            # Location of CA file for ETCD authentication. Should be /path/to/server.ca
-     cert: none                          # Location of certificate for ETCD authentication. Should be /path/to/server.crt
-     key: none                           # Location of certificate key for ETCD authentication Should be /path/to/servery.key
-   consul:
-     token: none                           # ACL token value used for Consul authentication. (example: 398073a8-5091-4d9c-871a-bbbeb030d1f6)
+     secret: <secret_name>                       # Secret name where the username, password and CA cert for ETCD authentication is stored
+   imageVersion: 2.1.4                   # Version of the PX Image.
 
    serviceAccount:
      hook:
@@ -668,8 +648,82 @@ To install Portworx:
    ```
    {: screen}
 
-8. [Verify your Portworx installation](#verify_installation). 
+8. Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
+   1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
+      ```
+      kubectl get pods -n kube-system | grep 'portworx\|stork'
+      ```
+      {: pre}
+   
+      Example output:
+      ```
+      portworx-594rw                          1/1       Running     0          20h
+      portworx-rn6wk                          1/1       Running     0          20h
+      portworx-rx9vf                          1/1       Running     0          20h
+      stork-6b99cf5579-5q6x4                  1/1       Running     0          20h
+      stork-6b99cf5579-slqlr                  1/1       Running     0          20h
+      stork-6b99cf5579-vz9j4                  1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-bl75b         1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-j4rc9         1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-knjwt         1/1       Running     0          20h
+      ```
+      {: screen}
+   
+   2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
+      ```
+      kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
+      ```
+      {: pre}
+   
+      Example output:
+      ```
+      Status: PX is operational
+      License: Trial (expires in 30 days)
+      Node ID: 10.176.48.67
+      IP: 10.176.48.67
+ 	   Local Storage Pool: 1 pool
+	   POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
+      	0	LOW		raid0		20 GiB	3.0 GiB	Online	dal10	us-south
+       Local Storage Devices: 1 device
+       Device	Path						Media Type		Size		Last-Scan
+     	   0:1	/dev/mapper/3600a09803830445455244c4a38754c66	STORAGE_MEDIUM_MAGNETIC	20 GiB		17 Sep 18 20:36 UTC
+      	   total							-			20 GiB
+       Cluster Summary
+	   Cluster ID: mycluster
+           Cluster UUID: a0d287ba-be82-4aac-b81c-7e22ac49faf5
+	   Scheduler: kubernetes
+	   Nodes: 2 node(s) with storage (2 online), 1 node(s) without storage (1 online)
+	      IP		ID		StorageNode	Used	Capacity	Status	StorageStatus	Version		Kernel			OS
+	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
+	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
+	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
+       Global Storage Pool
+	      Total Used    	:  6.0 GiB
+	      Total Capacity	:  40 GiB
+      ```
+      {: screen}
 
+   3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
+
+      Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
+      {: note}
+
+   4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
+
+   5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
+      ```
+      kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
+      10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
+      10.176.48.67	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal10	us-south	default
+      10.176.48.83	Up		0	Online		HIGH		3.5 TiB	3.5 TiB		10 GiB	0 B		0		dal10	us-south	default
+      ```
+      {: screen}
 
 ### Updating Portworx in your cluster
 {: #update_portworx}
@@ -729,101 +783,7 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 
    The removal of the pods is successful if no pods are displayed in your CLI output.
 
-## Getting started with Portworx
-{: #px-getting-started}
-
-With your Portworx cluster all set up, hit the ground running by adding highly available local persistent storage to your containerized apps that run in Kubernetes clusters. 
-{: shortdesc}
-
-### Verifying your Portworx installation
-{: #verify_installation}
-
-Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
-{: shortdesc}
-
-Before you begin: 
-- Make sure that you [installed the latest version of the {{site.data.keyword.cloud_notm}} CLI and the {{site.data.keyword.containerlong_notm}} CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade). 
-- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-To verify your installation: 
-
-1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
-   ```
-   kubectl get pods -n kube-system | grep 'portworx\|stork'
-   ```
-   {: pre}
-   
-   Example output:
-   ```
-   portworx-594rw                          1/1       Running     0          20h
-   portworx-rn6wk                          1/1       Running     0          20h
-   portworx-rx9vf                          1/1       Running     0          20h
-   stork-6b99cf5579-5q6x4                  1/1       Running     0          20h
-   stork-6b99cf5579-slqlr                  1/1       Running     0          20h
-   stork-6b99cf5579-vz9j4                  1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-bl75b         1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-j4rc9         1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-knjwt         1/1       Running     0          20h
-   ```
-   {: screen}
-   
-2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
-   ```
-   kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
-   ```
-   {: pre}
-   
-   Example output:
-   ```
-   Status: PX is operational
-   License: Trial (expires in 30 days)
-   Node ID: 10.176.48.67
-   IP: 10.176.48.67
- 	   Local Storage Pool: 1 pool
-	   POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
-      	0	LOW		raid0		20 GiB	3.0 GiB	Online	dal10	us-south
-    Local Storage Devices: 1 device
-    Device	Path						Media Type		Size		Last-Scan
-     	0:1	/dev/mapper/3600a09803830445455244c4a38754c66	STORAGE_MEDIUM_MAGNETIC	20 GiB		17 Sep 18 20:36 UTC
-      	total							-			20 GiB
-    Cluster Summary
-	   Cluster ID: mycluster
-           Cluster UUID: a0d287ba-be82-4aac-b81c-7e22ac49faf5
-	   Scheduler: kubernetes
-	   Nodes: 2 node(s) with storage (2 online), 1 node(s) without storage (1 online)
-	      IP		ID		StorageNode	Used	Capacity	Status	StorageStatus	Version		Kernel			OS
-	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-      Global Storage Pool
-	      Total Used    	:  6.0 GiB
-	      Total Capacity	:  40 GiB
-   ```
-   {: screen}
-
-3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
-
-   Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
-   {: note}
-
-4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
-
-5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
-   ```
-   kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
-   10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
-   10.176.48.67	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal10	us-south	default
-   10.176.48.83	Up		0	Online		HIGH		3.5 TiB	3.5 TiB		10 GiB	0 B		0		dal10	us-south	default
-   ```
-   {: screen}
-
-### Creating a Portworx volume
+## Creating a Portworx volume
 {: #add_portworx_storage}
 
 Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning).
@@ -949,7 +909,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       ```
       {: pre}
       
-### Mounting the PVC to your app
+## Mounting the volume to your app
 {: #mount_pvc}
 
 To access the storage from your app, you must mount the PVC to your app.
