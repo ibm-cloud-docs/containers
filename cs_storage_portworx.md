@@ -909,7 +909,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       ```
       {: pre}
       
-## Mounting the PVC to your app
+## Mounting the volume to your app
 {: #mount_pvc}
 
 To access the storage from your app, you must mount the PVC to your app.
