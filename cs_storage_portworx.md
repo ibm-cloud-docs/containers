@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-03"
+lastupdated: "2019-10-04"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -69,6 +69,7 @@ You can also choose to use only a subset of worker nodes for your Portworx stora
 Portworx is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is  enabled, you cannot use Portworx in your cluster, unless you open up all egress network traffic on TCP port 443, or enable the public service endpoint.
 
 
+
 All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters#clusters_ui). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, then [install the Portworx Helm chart](#install_portworx) in your cluster and creating your first hyper-converged storage cluster.  
 
 ## Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes
@@ -115,13 +116,30 @@ Databases for etcd is a managed etcd service that securely stores and replicates
    6. Choose if you want to use the default {{site.data.keyword.keymanagementserviceshort}} service instance or your own.
    5. Review the pricing plan.
    6. Click **Create** to start setting up your service instance. The setup might take a few minutes to complete.
-3. Create service credentials for your Databases for etcd service instance.
-   1. In the navigation on the service details page, click **Service Credentials**.
-   2. Click **New credentials**.
-   3. Enter a name for your service credentials and click **Add**.
+3. Create service credentials for your Databases for etcd service instance. If you have a private cluster, you must create credentials that use the private service endpoint. 
+   - **To use the public service endpoint:**
+     1. In the navigation on the service details page, click **Service Credentials**.
+     2. Click **New credentials**.
+     3. Enter a name for your service credentials and click **Add**.
+   - **To use the private service endpoint:**
+     1. In the navigation on the service details page, click **Manage**. 
+     2. Select the **Settings** tab. 
+     3. Find the **Service Endpoints** section, and use the toggle to enable to private service endpoint for your service instance. 
+     4. List all IAM-enabled {{site.data.keyword.cloud_notm}} services in your account and find the name of your service instance. 
+        ```
+	ibmcloud resource service-instances
+        ```
+	{: pre}
+     5. Create service credentials that use the private service endpoint. 
+        ```
+	ibmcloud resource service-key-create <key_name> Administrator --instance-name <service_instance_name>  --service-endpoint private
+	```
+	{: pre}
+
 4. {: #databases_credentials}Retrieve your service credentials and certificate.
-   1. From the **Actions** column in the service credentials table, click **View credentials**.
-   2. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. You need this information when you install Portworx.
+   1. From the navigation on the service details page, select **Service credentials**. 
+   2. Find the credentials that you want to use, and from the **Actions** column in the service credentials table, click **View credentials**.
+   3. Find the `grp.authentication` section of your service credentials and note the **`username`** and **`password`**. 
 
       Example output for user name and password:
       ```
@@ -133,7 +151,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       }
       ```
       {: screen}
-   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx.  
+   3. Find the `composed` section of your service credentials and note the etcd **`--endpoints`**. You need this information when you install Portworx. 
 
       Example output for `--endpoints`:
       ```
@@ -149,8 +167,14 @@ Databases for etcd is a managed etcd service that securely stores and replicates
         "certificate_base64": "AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2AB0cAB1CDEaABcCEFABCDEF1ACB3ABCD1ab2..."
       ```
       {: screen}
+      
+5. Encode your user name and password to base64. 
+   ```
+   echo -n "<username_or_password>" | base64
+   ```
+   {: pre}
 
-5. Create a Kubernetes secret for your certificate.
+6. Create a Kubernetes secret for your certificate.
    1. Create a configuration file for your secret.
       ```
       apiVersion: v1
@@ -161,8 +185,8 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       type: Opaque
       data:
         ca.pem: <certificate_base64>
-        client-key.pem: ""
-        client.pem: ""
+        username: <username_base64>
+        password: <password_base64>
       ```
       {: codeblock}
 
@@ -472,6 +496,7 @@ Before you begin:
 - If you want to use non-SDS worker nodes for your Portworx storage layer, [add an unformatted block storage device to your non-SDS worker node](#create_block_storage).
 - Create a [Databases for etcd service instance](#portworx_database) to store the Portworx configuration and metadata.
 - Decide whether you want to encrypt your Portworx volumes with {{site.data.keyword.keymanagementservicelong_notm}}. To encrypt your volumes, you must [set up an {{site.data.keyword.keymanagementservicelong_notm}} service instance and store your service information in a Kubernetes secret](#encrypt_volumes).
+- Make sure that you [copied the image pull secrets from the `default` to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret) so that you can pull images from {{site.data.keyword.registryshort}}. Make sure that you [add the image pull secrets to the Kubernetes service account](/docs/containers?topic=containers-images#store_imagePullSecret) of the `kube-system` namespace. 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To install Portworx:
@@ -508,15 +533,13 @@ To install Portworx:
    {: pre}
 
 6. Update the following values and save your changes.
-   - **`etcdEndPoint`**: Add the etcd endpoint of your Databases for etcd service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`kvdb`**: Add the etcd endpoint of your Databases for etcd service instance that you retrieved earlier in the format `"etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
+   - **`etcd.secret`**: Enter the name of your Kubernetes secret where you stored the credentials to access your Databases for etcd instance. 
     - **`imageVersion`**: Enter the latest version of the Portworx Helm chart. To find the latest version, refer to the Portworx [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/release-notes/).
    - **`clusterName`**: Enter the name of the cluster where you want to install Portworx.
    - **`usedrivesAndPartitions`**: Enter `true` to let Portworx find unmounted hard drives and partitions.
    - **`usefileSystemDrive`**: Enter `true` to let Portworx find unmounted hard drives, even if they are formatted.
    - **`drives`**: Enter `none` to let Portworx find unmounted and unformatted hard drives.
-   - **`etcd.credentials`**: Enter the user name and password of your Databases for etcd service instance that you retrieved earlier in the format `<user_name>:<password>`.
-   - **`etcd.certPath`**: Enter `/etc/pwx/etcdcerts` for the path where the certificate of your Databases for etcd service instance is stored.
-   - **`etcd.ca`**: Enter `/etc/pwx/etcdcerts/ca.pem` for the path to the Certificate Authority (CA) file.
 
    For a full list of supported parameters, see the [Portworx Helm chart documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/blob/master/charts/portworx/README.md#configuration).
 
@@ -524,48 +547,43 @@ To install Portworx:
    ```
    # Please uncomment and specify values for these options as per your requirements.
 
-   deploymentType: oci                     # accepts "oci" or "docker"
-   imageType: none                         #
-   imageVersion: 2.0.2                   # Version of the PX Image.
-
-   openshiftInstall: false                 # Defaults to false for installing Portworx on Openshift .
-   isTargetOSCoreOS: false                 # Is your target OS CoreOS? Defaults to false.
-   pksInstall: false                       # installation on PKS (Pivotal Container Service)
-   AKSorEKSInstall: false                  # installation on AKS or EKS.
-   etcdEndPoint: "etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>"
-                                         # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
+   kvdb:                                 # The KVDB endpoint. Should be in the format etcd:http://<your-kvdb-endpoint>:2379. 
+                                      # If there are multiple endpoints they need to be ";" seperated.
+                                      # the default value is empty since it requires to be explicity set using either the --set option of -f values.yaml.
    clusterName: <cluster_name>                # This is the default. please change it to your cluster name.
-   usefileSystemDrive: true             # true/false Instructs PX to use an unmounted Drive even if it has a file system.
-   usedrivesAndPartitions: true          # Defaults to false. Change to true and PX will use unmounted drives and partitions.
-   secretType: none                      # Defaults to None, but can be AWS / KVDB / Vault.
-   drives: none                          # NOTE: This is a ";" seperated list of drives. For eg: "/dev/sda;/dev/sdb;/dev/sdc" Defaults to use -A switch.
-   dataInterface: none                   # Name of the interface <ethX>
-   managementInterface: none             # Name of the interface <ethX>
+
+   storage:
+     usefileSystemDrive: false             # true/false Instructs PX to use an unmounted Drive even if it has a filesystem.
+     usedrivesAndPartitions: false         # Defaults to false. Change to true and PX will use unmounted drives and partitions.
+     drives: none                          # NOTE: This is a ";" seperated list of drives. For eg: "/dev/sda;/dev/sdb;/dev/sdc" Defaults to use -A switch.
+     journalDevice: none
+     metadataSize: 0
+
+   network:
+     dataInterface: none                   # Name of the interface <ethX>
+     managementInterface: none             # Name of the interface <ethX>
+
+   secretType: none                      # Defaults to None, but can be aws-kms/vault/k8s/kvdb/ibm-kp
    envVars: none                         # NOTE: This is a ";" seperated list of environment variables. For eg: MYENV1=myvalue1;MYENV2=myvalue2
 
-   stork: true                           # Use Stork https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/stork/ for hyperconvergence.
-   storkVersion: 1.1.3
+   storkVersion: 2.2.5
 
-   customRegistryURL:
-   registrySecret:
+   customRegistryURL: 
+   registrySecret: 
+   imagePullSecrets:
 
-   lighthouse: false
-   lighthouseVersion: 1.4.0
+   lighthouse: true
+   lighthouseVersion: 2.0.4
+   lighthouseSyncVersion: 0.4
+   lighthouseStorkConnectorVersion: 0.2
 
-   journalDevice:
-
-   deployOnMaster:  false                # For POC only
    csi: false                            # Enable CSI
 
    internalKVDB: false                   # internal KVDB
+
    etcd:
-     credentials: <username>:<password>  # Username and password for ETCD authentication in the form user:password
-     certPath: /etc/pwx/etcdcerts                      # Base path where the certificates are placed. (example: if the certificates ca,crt and the key are in /etc/pwx/etcdcerts the value should be provided as /etc/pwx/$
-     ca: /etc/pwx/etcdcerts/ca.pem                            # Location of CA file for ETCD authentication. Should be /path/to/server.ca
-     cert: none                          # Location of certificate for ETCD authentication. Should be /path/to/server.crt
-     key: none                           # Location of certificate key for ETCD authentication Should be /path/to/servery.key
-   consul:
-     token: none                           # ACL token value used for Consul authentication. (example: 398073a8-5091-4d9c-871a-bbbeb030d1f6)
+     secret: <secret_name>                       # Secret name where the username, password and CA cert for ETCD authentication is stored
+   imageVersion: 2.1.4                   # Version of the PX Image.
 
    serviceAccount:
      hook:
