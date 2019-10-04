@@ -293,40 +293,11 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
    ```
    {: pre}
 
-10. Create a namespace in your cluster that is called `portworx` and allow Portworx to access all Kubernetes secrets that are stored in this namespace.
+10. Create a namespace in your cluster that is called `portworx`. 
     ```
-    apiVersion: v1
-    kind: Namespace
-    metadata:
-      name: portworx
-    ---
-    # Role to access Kubernetes secrets in the portworx namespace only
-    kind: Role
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: px-role
-      namespace: portworx
-    rules:
-    - apiGroups: [""]
-      resources: ["secrets"]
-      verbs: ["get", "list", "create", "update", "patch"]
-    ---
-    # Allow portworx service account to access the secrets in the portworx namespace
-    kind: RoleBinding
-    apiVersion: rbac.authorization.k8s.io/v1
-    metadata:
-      name: px-role-binding
-      namespace: portworx
-    subjects:
-    - kind: ServiceAccount
-      name: px-account
-      namespace: kube-system
-    roleRef:
-      kind: Role
-      name: px-role
-      apiGroup: rbac.authorization.k8s.io
+    kubectl create ns portworx
     ```
-    {: codeblock}
+    {: pre}
 
 11. Create a Kubernetes secret that is named `px-ibm` in the `portworx` namespace of your cluster to store your {{site.data.keyword.keymanagementservicelong_notm}} information.
    1. Create a configuration file for your Kubernetes secret with the following content.
