@@ -19,7 +19,7 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:important: .important}
-{:deprecated: .deprecated}
+{:deprecated: .deprecated} 
 {:download: .download}
 {:preview: .preview}
 
@@ -216,5 +216,6 @@ When you dynamically provision persistent storage by using a storage class, you 
    </tr>
 </tbody>
 </table>
+
 
 
