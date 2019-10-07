@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-04"
+lastupdated: "2019-10-07"
 
 keywords: kubernetes, iks
 
@@ -19,7 +19,7 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:important: .important}
-{:deprecated: .deprecated}
+{:deprecated: .deprecated} 
 {:download: .download}
 {:preview: .preview}
 
@@ -27,7 +27,7 @@ subcollection: containers
 {: #storage_planning}
 
 
-## Choosing a storage solution
+## Choosing a storage solution 
 {: #choose_storage_solution}
 
 Before you can decide what type of storage is the right solution for your {{site.data.keyword.containerlong}} clusters, you must understand the {{site.data.keyword.cloud_notm}} infrastructure provider, your app requirements, the type of data that you want to store, and how often you want to access this data.
