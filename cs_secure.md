@@ -20,7 +20,7 @@ subcollection: containers
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
-{:download: .download}
+{:download: .download} 
 {:preview: .preview}
 
 
