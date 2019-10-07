@@ -19,7 +19,7 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:important: .important}
-{:deprecated: .deprecated}
+{:deprecated: .deprecated} 
 {:download: .download}
 {:preview: .preview}
 
