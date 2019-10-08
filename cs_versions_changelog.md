@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-08"
 
-keywords: kubernetes, iks, versions, update
+keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
 subcollection: containers
 
