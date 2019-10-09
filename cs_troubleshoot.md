@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, help, debug
 
@@ -41,9 +41,9 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
+
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
-
 
 1. [Set up Helm in your cluster, create a service account for Tiller, and add the `iks-charts` repository to your Helm instance](/docs/containers?topic=containers-helm).
 
