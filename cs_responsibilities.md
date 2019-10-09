@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks
 
@@ -124,5 +124,6 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         </tr>
   </tbody>
   </table>
+
 
 
