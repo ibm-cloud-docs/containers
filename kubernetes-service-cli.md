@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -109,7 +109,7 @@ Check out the following changes between each version of the CLI plug-in:
   <td>Legacy and beta</td>
   <td>Beta</td>
   </tr>
-  <tr><td>Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current KUBECONFIG environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: Appends the new `kubeconfig` file to your existing `kubeconfig` in `~/.kube/config` or the first file in the KUBECONFIG environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul></td>
+  <tr><td>Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: Appends the new `kubeconfig` file to your existing `kubeconfig` file in the `~/.kube/config` directory or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul></td>
   <td>Legacy</td>
   <td>Legacy</td>
   <td>Legacy</td>
@@ -591,6 +591,9 @@ ibmcloud ks cluster addons --cluster CLUSTER
 
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>`.
 {: shortdesc}
+
+In [CLI plug-in version 1.0](#cs_beta), `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in the `~/.kube/config` directory or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately. Note that any pre-existing `kubeconfig` files are not merged automatically.</br></br>When version 1.0 releases on 14 March 2020, the permanent behavior changes to this command are not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
+{: important}
 
 ```
 ibmcloud ks cluster config --cluster CLUSTER [--admin] [--export] [--network] [--powershell] [--skip-rbac] [-s] [--yaml]
@@ -5233,6 +5236,9 @@ ibmcloud ks messages
 
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
+
+In [CLI plug-in version 1.0](#cs_beta), `supported-locations` is replaced by the `locations` command. When version 1.0 releases on 14 March 2020, the permanent syntax change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
+{: important}
 
 ```
 ibmcloud ks supported-locations [--json]
