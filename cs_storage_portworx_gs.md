@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-03"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -27,8 +27,12 @@ subcollection: containers
 # Getting started with Portworx
 {: #getting-started-with-portworx}
 
-With your Portworx cluster all set up, hit the ground running by adding highly available local persistent storage to your containerized apps that run in Kubernetes clusters. 
+Review the following information to verify your Portworx installation and get started with adding highly available local persistent storage to your containerized apps. 
 {: shortdesc}
+
+- [Verifying your Portworx installation](#px-verify-installation)
+- [Creating a Portworx volume](#px-add-storage)
+- [Mounting the volume to your app](#px-mount-pvc)
 
 ## Verifying your Portworx installation
 {: #px-verify-installation}
@@ -42,46 +46,50 @@ Before you begin:
 
 To verify your installation: 
 
-1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
-   ```
-   kubectl get pods -n kube-system | grep 'portworx\|stork'
-   ```
-   {: pre}
+1. From the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources), find the Portworx service that you created. 
+2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update. 
+3. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx) to start troubleshooting why your installation failed. 
+4. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
+   1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
+      ```
+      kubectl get pods -n kube-system | grep 'portworx\|stork'
+      ```
+      {: pre}
    
-   Example output:
-   ```
-   portworx-594rw                          1/1       Running     0          20h
-   portworx-rn6wk                          1/1       Running     0          20h
-   portworx-rx9vf                          1/1       Running     0          20h
-   stork-6b99cf5579-5q6x4                  1/1       Running     0          20h
-   stork-6b99cf5579-slqlr                  1/1       Running     0          20h
-   stork-6b99cf5579-vz9j4                  1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-bl75b         1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-j4rc9         1/1       Running     0          20h
-   stork-scheduler-7dd8799cc-knjwt         1/1       Running     0          20h
-   ```
-   {: screen}
+      Example output:
+      ```
+      portworx-594rw                          1/1       Running     0          20h
+      portworx-rn6wk                          1/1       Running     0          20h
+      portworx-rx9vf                          1/1       Running     0          20h
+      stork-6b99cf5579-5q6x4                  1/1       Running     0          20h
+      stork-6b99cf5579-slqlr                  1/1       Running     0          20h
+      stork-6b99cf5579-vz9j4                  1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-bl75b         1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-j4rc9         1/1       Running     0          20h
+      stork-scheduler-7dd8799cc-knjwt         1/1       Running     0          20h
+      ```
+      {: screen}
    
-2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
-   ```
-   kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
-   ```
-   {: pre}
+   2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
+      ```
+      kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
+      ```
+      {: pre}
    
-   Example output:
-   ```
-   Status: PX is operational
-   License: Trial (expires in 30 days)
-   Node ID: 10.176.48.67
-   IP: 10.176.48.67
+      Example output:
+      ```
+      Status: PX is operational
+      License: Enterprise
+      Node ID: 10.176.48.67
+      IP: 10.176.48.67
  	   Local Storage Pool: 1 pool
 	   POOL	IO_PRIORITY	RAID_LEVEL	USABLE	USED	STATUS	ZONE	REGION
       	0	LOW		raid0		20 GiB	3.0 GiB	Online	dal10	us-south
-    Local Storage Devices: 1 device
-    Device	Path						Media Type		Size		Last-Scan
-     	0:1	/dev/mapper/3600a09803830445455244c4a38754c66	STORAGE_MEDIUM_MAGNETIC	20 GiB		17 Sep 18 20:36 UTC
-      	total							-			20 GiB
-    Cluster Summary
+       Local Storage Devices: 1 device
+       Device	Path						Media Type		Size		Last-Scan
+     	   0:1	/dev/mapper/3600a09803830445455244c4a38754c66	STORAGE_MEDIUM_MAGNETIC	20 GiB		17 Sep 18 20:36 UTC
+      	   total							-			20 GiB
+       Cluster Summary
 	   Cluster ID: mycluster
            Cluster UUID: a0d287ba-be82-4aac-b81c-7e22ac49faf5
 	   Scheduler: kubernetes
@@ -90,33 +98,33 @@ To verify your installation:
 	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
 	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
 	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-      Global Storage Pool
+       Global Storage Pool
 	      Total Used    	:  6.0 GiB
 	      Total Capacity	:  40 GiB
-   ```
-   {: screen}
+      ```
+      {: screen}
 
-3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
+   3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
 
-   Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
-   {: note}
+      Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
+      {: note}
 
-4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
+   4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
 
-5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
-   ```
-   kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
-   ```
-   {: pre}
+   5. Review the Portworx I/O classification that was assigned to the disks that are part of the Portworx cluster. During the setup of your Portworx cluster, every disk is inspected to determine the performance profile of the device. The profile classification depends on how fast the network is that your worker node is connected to and the type of storage device that you have. Disks of SDS worker nodes are classified as `high`. If you manually attach disks to a virtual worker node, then these disks are classified as `low` due to the lower network speed that comes with virtual worker nodes.
+      ```
+      kubectl exec -it <portworx_pod> -n kube-system -- /opt/pwx/bin/pxctl cluster provision-status
+      ```
+      {: pre}
 
-   Example output:
-   ```
-   NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
-   10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
-   10.176.48.67	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal10	us-south	default
-   10.176.48.83	Up		0	Online		HIGH		3.5 TiB	3.5 TiB		10 GiB	0 B		0		dal10	us-south	default
-   ```
-   {: screen}
+      Example output:
+      ```
+      NODE		NODE STATUS	POOL	POOL STATUS	IO_PRIORITY	SIZE	AVAILABLE	USED	PROVISIONED	RESERVEFACTOR	ZONE	REGION		RACK
+      10.184.58.11	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal12	us-south	default
+      10.176.48.67	Up		0	Online		LOW		20 GiB	17 GiB		3.0 GiB	0 B		0		dal10	us-south	default
+      10.176.48.83	Up		0	Online		HIGH		3.5 TiB	3.5 TiB		10 GiB	0 B		0		dal10	us-south	default
+      ```
+      {: screen}
 
 ## Creating a Portworx volume
 {: #px-add-storage}
@@ -244,7 +252,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       ```
       {: pre}
       
-## Mounting the PVC to your app
+## Mounting the volume to your app
 {: #px-mount-pvc}
 
 To access the storage from your app, you must mount the PVC to your app.
