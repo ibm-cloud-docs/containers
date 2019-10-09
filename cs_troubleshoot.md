@@ -41,7 +41,6 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
-
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
 {: shortdesc}
 
@@ -52,7 +51,6 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   helm install iks-charts/ibmcloud-iks-debug --name debug-tool --namespace kube-system
   ```
   {: pre}
-
 3. Start a proxy server to display the debug tool interface.
   ```
   kubectl proxy --port 8080
