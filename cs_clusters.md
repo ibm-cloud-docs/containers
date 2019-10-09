@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -455,7 +455,7 @@ Before you begin, install the [{{site.data.keyword.cloud_notm}} CLI and the {{si
 
 6. Create your gateway-enabled cluster.
    ```
-  ibmcloud ks cluster create classic --gateway-enabled --zone <single_zone> --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.15.4 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
+  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.15.4 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
    ```
    {: pre}
 
@@ -470,12 +470,12 @@ Before you begin, install the [{{site.data.keyword.cloud_notm}} CLI and the {{si
    <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
    </tr>
    <tr>
-   <td><code>--gateway-enabled</code></td>
-   <td>Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `default` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `default` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command.</td>
-   </tr>
-   <tr>
    <td><code>--zone <em>&lt;zone&gt;</em></code></td>
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID that you chose earlier and that you want to use to create your cluster.</td>
+   </tr>
+   <tr>
+   <td><code>--gateway-enabled</code></td>
+   <td>Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `default` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `default` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command.</td>
    </tr>
    <tr>
    <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
