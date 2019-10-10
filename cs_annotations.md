@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-09"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks, ingress
 
@@ -1491,7 +1491,7 @@ spec:
 </tr>
 <tr>
 <td><code>proxy-ssl-verify-depth</code></td>
-<td>Optional: If you specify a secret in the `ssl-secret` parameter, replace <code>&lt;<em>verification_depth</em>&gt;</code> with the maximum number of certificates that are expected in the proxied HTTPS server certificates chain. This value indicates the maximum number of HTTPS server certificates in the chain that the ALB verifies. The size of your server certificates chain can vary based on which kinds of authentication you set up. By default, the depth is set to `5`, which is sufficient for most cases. If you have a larger certificate chain, you can change the value of this parameter. The value must be an integer from `1` to `10`.</p></td>
+<td>Optional: If you specify a secret in the `ssl-secret` parameter, replace <code>&lt;<em>verification_depth</em>&gt;</code> with the maximum number of certificates that are expected in the proxied HTTPS server certificates chain. This value indicates the maximum number of HTTPS server certificates in the chain that the ALB verifies. The size of your server certificates chain can vary based on which kinds of authentication you set up. By default, the depth is set to `5`, which is sufficient for most cases. If you have a larger certificate chain, you can change the value of this parameter. The value must be an integer from `1` to `10`.</td>
 </tr>
 </tbody></table>
 
