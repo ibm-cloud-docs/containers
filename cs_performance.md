@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks
 
@@ -230,3 +230,115 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) for more ideas.
 {: tip}
+
+<br />
+
+
+## Changing the Calico maximum transmission unit (MTU)
+{: #calico-mtu}
+
+Increase or decrease the Calico plug-in maximum transmission unit (MTU) to meet the network throughput requirements of your environment.
+{: shortdesc}
+
+By default, the Calico network plug-in in your {{site.data.keyword.containerlong_notm}} cluster has an MTU of 1480 bytes. For most cases, this default MTU value provides sufficient throughput for packets that are sent and received in your network workloads. Review the following cases in which you might need to modify the default Calico MTU:
+
+* If your cluster uses bare metal worker nodes, and you use jumbo frames on the bare metal worker nodes, the jumbo frames have an MTU value in the range of 1500 to 9000. To ensure that Calico can handle this throughput, you can increase the Calico MTU to match the MTU of the jumbo frames. Note that all worker nodes in the cluster must use the same Calico MTU, so to increase the Calico MTU, all worker nodes in the cluster must be bare metal and use jumbo frames.
+* If you have a VPN connection set up for your cluster, some VPN connections require a smaller Calico MTU than the default. Check with the VPN service to determine whether a smaller Calico MTU is required.
+
+You can change the MTU on the tunnel interface `tunl0`, which is used for pod to pod communication, and the MTU on the `caliXXXXXXXX` `veth` interface of each worker node.
+
+1. Edit the configuration file for the `calico-config` configmap resource.
+  ```
+  kubectl edit cm calico-config -n kube-system
+  ```
+  {: pre}
+
+2. In the `data` section, add a `calico_mtu_override: "<new_MTU>"` field and specify the new MTU value for Calico. Note that the quotation marks (`"`) around the new MTU value are required.
+
+    Do not change the values of `mtu` or `veth_mtu`.
+    {: important}
+
+    ```
+    apiVersion: v1
+    data:
+      calico_backend: bird
+      calico_mtu_override: "1600"
+      cni_network_config: |-
+        {
+          "name": "k8s-pod-network",
+          "cniVersion": "0.3.1",
+          "plugins": [
+            {
+              "type": "calico",
+              "log_level": "info",
+              "etcd_endpoints": "__ETCD_ENDPOINTS__",
+              "etcd_key_file": "__ETCD_KEY_FILE__",
+              "etcd_cert_file": "__ETCD_CERT_FILE__",
+              "etcd_ca_cert_file": "__ETCD_CA_CERT_FILE__",
+              "mtu": __CNI_MTU__,
+              "ipam": {
+                  "type": "calico-ipam"
+              },
+              "container_settings": {
+                  "allow_ip_forwarding": true
+              },
+              "policy": {
+                  "type": "k8s"
+              },
+              "kubernetes": {
+                  "kubeconfig": "__KUBECONFIG_FILEPATH__"
+              }
+            },
+            {
+              "type": "portmap",
+              "snat": true,
+              "capabilities": {"portMappings": true}
+            }
+          ]
+        }
+      etcd_ca: /calico-secrets/etcd-ca
+      etcd_cert: /calico-secrets/etcd-cert
+      etcd_endpoints: https://172.20.0.1:2041
+      etcd_key: /calico-secrets/etcd-key
+      typha_service_name: none
+      veth_mtu: "1480"
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+3. Apply the MTU changes to your cluster master by refreshing the master API server. It might take several minutes for the master to refresh.
+  ```
+  ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+4. Verify that the master refresh is completed. When the refresh is complete, the **Master Status** changes to `Ready`.
+  ```
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+5. In the `data` section of the output, verify that the `veth_mtu` field shows the new MTU value for Calico that you specified in step 2.
+  ```
+  kubectl get cm -n kube-system calico-config -o yaml
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  apiVersion: v1
+  data:
+    ...
+    etcd_ca: /calico-secrets/etcd-ca
+    etcd_cert: /calico-secrets/etcd-cert
+    etcd_endpoints: https://172.20.0.1:2041
+    etcd_key: /calico-secrets/etcd-key
+    typha_service_name: none
+    veth_mtu: "1600"
+  kind: ConfigMap
+  ...
+  ```
+  {: codeblock}
+
+6. Apply the MTU changes to your worker nodes by [rebooting all worker nodes in your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot).
