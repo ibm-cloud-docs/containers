@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-13"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -42,9 +42,9 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 - **ibm-community**: Helm charts that originated outside IBM, such as from [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners). These charts are supported and maintained by the community partners.
 - **kubernetes**: Helm charts that are provided by the Kubernetes community and considered `stable` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
 - **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
-- **ibm-marketplace**: Helm charts of licensed software that you must purchase and for which you must set up cluster access with an entitlement key. For more information, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
+- **entitled**: Helm charts of licensed software that you must purchase and for which you must set up cluster access with an entitlement key. For more information, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
 
-Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **ibm-marketplace**repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitled**repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
 To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller), or [install Helm charts without using Tiller](#private_install_without_tiller).
@@ -167,7 +167,7 @@ To install Helm in a cluster with public network access:
    {: pre}
    
    ```
-   helm repo add ibm-marketplace https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
+   helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
    {: pre}
 
@@ -194,7 +194,7 @@ To install Helm in a cluster with public network access:
    {: pre}
    
    ```
-   helm search ibm-marketplace
+   helm search entitled
    ```
    {: pre}
 
@@ -275,7 +275,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    {: pre}
    
    ```
-   helm repo add ibm-marketplace https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
+   helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
    {: pre}
 
@@ -302,7 +302,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
     {: pre}
     
     ```
-    helm search ibm-marketplace
+    helm search entitled
     ```
     {: pre}
 
@@ -337,7 +337,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
    {: pre}
    
    ```
-   helm repo add ibm-marketplace https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
+   helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
    {: pre}
 
@@ -364,7 +364,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
    {: pre}
    
    ```
-   helm search ibm-marketplace
+   helm search entitled
    ```
    {: pre}
 
