@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -465,7 +465,7 @@ To get started, set up LogDNA for your cluster by following the steps in [Managi
 ### Setting up monitoring with {{site.data.keyword.mon_full_notm}}
 {: #istio_health_sysdig}
 
-Gain operational visibility into the performance and health of your Istio-managed apps by deploying Sysdig to your worker nodes to forward metrics to {{site.data.keyword.monitoringlong}}.
+Gain operational visibility into the performance and health of your Istio-managed apps by deploying Sysdig to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}.
 {: shortdesc}
 
 With Istio on {{site.data.keyword.containerlong_notm}}, the managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a Sysdig agent to every worker node in your cluster, Sysdig is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.

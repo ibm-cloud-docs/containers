@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-09"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -111,7 +111,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
   * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group but are still an **Administrator** for the service within the resource group, your cluster is created in the default resource group.
   * You cannot change a cluster's resource group. Furthermore, if you need to use the `ibmcloud ks cluster service bind` [command](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) to [integrate with an {{site.data.keyword.cloud_notm}} service](/docs/containers?topic=containers-service-binding#bind-services), that service must be in the same resource group as the cluster. Services that do not use resource groups like {{site.data.keyword.registrylong_notm}} or that do not need service binding like {{site.data.keyword.la_full_notm}} work even if the cluster is in a different resource group.
   * For VPC clusters, your cluster must be created in the same resource group as the VPC.
-  * If you plan to use [{{site.data.keyword.monitoringlong_notm}} for metrics](/docs/containers?topic=containers-health#view_metrics), plan to give your cluster a name that is unique across all resource groups and regions in your account to avoid metrics naming conflicts.
+  * Consider giving clusters unique names across resource groups and regions in your account to avoid naming conflicts. You cannot rename a cluster.
   * Free clusters are created in the `default` resource group.
 
 5. **Standard clusters**: Plan your cluster network setup so that your cluster meets the needs of your workloads and environment. Then, set up your IBM Cloud infrastructure networking to allow worker-to-master and user-to-master communication. Your cluster network setup varies with the infrastructure provider that you choose (classic or VPC). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
