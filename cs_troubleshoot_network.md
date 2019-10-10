@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-10"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -345,6 +345,28 @@ If you complete one of the above options but the `keepalived` pods are still not
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted
+{: #coredns_lameduck}
+
+{: tsSymptoms}
+Your app sometimes fails to resolve DNS names for cluster services around the same time that one or more CoreDNS pods are restarted, such as during a worker reload or patch update.
+
+{: tsCauses}
+Your app's DNS request was sent to a CoreDNS pod that was in the process of terminating.
+
+{: tsResolve}
+To help the CoreDNS pods terminate more gracefully, you can edit the `coredns` configmap in the `kube-system` namespace. In the `health` plug-in configuration of the main Corefile, add `lameduck 10s`. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). The resulting customization looks like the following example.
+
+```
+health {
+    lameduck 10s
+}
+```
+{: screen}
 
 <br />
 
