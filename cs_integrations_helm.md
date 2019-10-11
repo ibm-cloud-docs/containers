@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -419,7 +419,44 @@ The steps in this example show how to install Helm charts from the {{site.data.k
     ```
     {: pre}
 
+## Installing Tiller with a different version than your cluster
+{: #tiller_version}
 
+By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kuberentes version 1.11, the Tiller version is 2.11. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
+{: shortdesc}
+
+Some Helm charts might not be compatible with an older Tiller version. For example, if you have an OpenShift cluster that runs version 3.11, the default corresponding Helm and Tiller version is 2.11. However, if you install the `ibm-iks-cluster-autoscaler` Helm chart at version 1.0.8 or later, the Helm chart is not compatible with Tiller 2.11. You see an error similar to the following: 
+
+```
+Error: Chart incompatible with Tiller v2.11.0
+```
+{: screen}
+
+To change your version of Tiller:
+1.  Follow the instructions to install the Helm server Tiller for your [public](#public_helm_install) or [private](#private_local_tiller) cluster.
+2.  [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that is required by the Helm chart that you want to install. Hover over the digest image and click the **Copy full image name** icon.
+3. Update your Tiller deployment to use the image that you previously copied.
+   ```
+   kubectl --namespace=kube-system set image deployments/tiller-deploy tiller=<tiller_image>
+   ```
+   {: pre}
+
+   Example command to change the Tiller image version to `2.12.3`:
+   ```
+   kubectl --namespace=kube-system set image deployments/tiller-deploy tiller=gcr.io/kubernetes-helm/tiller@sha256:cab750b402d24dd7b24756858c31eae6a007cd0ee91ea802b3891e2e940d214d
+   ```
+   {: pre}
+4. Confirm that the server version of Tiller that runs in your cluster is updated to the version that you set.
+   ```
+   helm version --server
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   Server: &version.Version{SemVer:"v2.12.3", GitCommit:"eecf22f77df5f65c823aacd2dbd30ae6c65f186e", GitTreeState:"clean"}
+   ```
+   {: screen}
 
 ## Related Helm links
 {: #helm_links}

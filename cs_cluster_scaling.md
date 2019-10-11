@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -162,6 +162,8 @@ The cluster autoscaler scales your cluster in response to your workload [resourc
 
 No, you cannot set the cluster autoscaler `minSize` to `0`. Additionally, unless you [disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) all public application load balancers (ALBs) in each zone of your cluster, you must change the `minSize` to `2` worker nodes per zone so that the ALB pods can be spread for high availability.
 {: shortdesc}
+
+If your worker pool has zero (0) worker nodes, the worker pool cannot be scaled. [Disable cluster autoscaling](/docs/containers?topic=containers-ca#ca_cm) for the worker pool, [manually resize the worker pool](/docs/containers?topic=containers-add_workers#resize_pool) to at least one, and [re-enable cluster autoscaling](/docs/containers?topic=containers-ca#ca_cm).
 
 ### Can I optimize my deployments for autoscaling?
 {: #scalable-practices-apps}
