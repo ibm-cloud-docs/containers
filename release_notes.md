@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-04"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,9 +46,16 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
+  <td>1X October 2019</td>
+  <td><ul>
+  <li><strong>Calico MTU</strong>: Added [steps](/docs/containers?topic=containers-kernel#calico-mtu) for changing the Calico plug-in maximum transmission unit (MTU) to meet the network throughput requirements of your environment.</li>
+  <li><strong>Let's Encrypt rate limits for Ingress</strong>: Added [troubleshooting steps] for when no subdomain or secret is generated for the Ingress ALB when you create or delete clusters of the same name.</li>
+  </ul></td>
+</tr>
+<tr>
   <td>04 October 2019</td>
-  <td><ul><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</li><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Software-defined storage with Portworx</strong>: You can now install Portworx on your OpenShift cluster as a highly available data management platform for your containerized apps. For more information, see [Storing data software-defined storage (SDS) with Portworx](/docs/openshift?topic=openshift-portworx). </li></ul></td>
-  </tr>
+  <td><ul><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelog</strong>: Master fix pack updates are available for OpenShift [3.11.146_1526_openshift](/docs/openshift?topic=openshift-openshift_changelog#311146_1526).</li><li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Software-defined storage with Portworx</strong>: You can now install Portworx on your OpenShift cluster as a highly available data management platform for your containerized apps. For more information, see [Storing data software-defined storage (SDS) with Portworx](/docs/openshift?topic=openshift-portworx).</li></ul></td>
+</tr>
 <tr>
   <td>03 October 2019</td>
   <td><ul>
