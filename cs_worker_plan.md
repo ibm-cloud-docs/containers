@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -118,7 +118,7 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: tab-group="vm-worker-flavors"}
 
 
-| Name and use case | Cores/ Memory | Primary disk | Network speed |
+| Name and use case | Cores/ Memory | Primary disk | Network speed `*` |
 |:-----------------|:-----------------|:------------------|:-------------|
 | **Virtual, b2.4x16**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for testing, development, and other light workloads. | 4 / 16 GB | 100 GB | 1000 Mbps |
 | **Virtual, b2.8x32**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for light to mid-sized workloads. | 8 / 32 GB | 100 GB | 1000 Mbps
@@ -134,6 +134,9 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: #vpc-classic-worker-vm-flavors}
 {: tab-title="VPC on Classic clusters"}
 {: tab-group="vm-worker-flavors"}
+
+`*` For more information about network performance caps for VPC virtual machines, see [Profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
+{: note}
 
 
 
