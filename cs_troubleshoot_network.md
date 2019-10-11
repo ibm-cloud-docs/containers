@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -275,6 +275,21 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
   * No Ingress subdomain: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
   * An ALB does not deploy in a zone: Run `ibmcloud ks alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
   * Cannot deploy a load balancer: Run `kubectl get svc -n kube-system` to verify that the load balancer has an **EXTERNAL-IP**.
+
+<br />
+
+
+## Cannot get a subdomain or secret for the Ingress ALB when you create or delete clusters of the same name
+{: #cs_rate_limit}
+
+{: tsSymptoms}
+You create and delete a cluster multiple times, such as for automation purposes, and you use the same name for the cluster every time that you create it. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
+
+{: tsCauses}
+When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 50 times or more within 7 days, you might reach the Let's Encrypt [Certificates per Registered Domain rate limit ![External link icon](../icons/launch-glyph.svg "External link icon")](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N), because the same Ingress subdomain and certificate are registered every time that you create the cluster.
+
+{: tsResolve}
+If you need to continue testing, you can change the name of the cluster so that when you create the new cluster a new, different Ingress subdomain and secret are registered.
 
 <br />
 
