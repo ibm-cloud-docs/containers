@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -340,7 +340,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
   ```
-  ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip $INGRESS_IP
+  ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip $INGRESS_IP
   ```
   {: pre}
 
@@ -772,7 +772,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
       2. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
         ```
-        ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
+        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
         ```
         {: pre}
 
@@ -918,23 +918,36 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-5. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
+5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` load balancer.
   ```
   kubectl get svc -n istio-system
   ```
   {: pre}
 
-  Example output:
+  Example output for classic clusters:
   ```
   NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
   ...
   istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
   ```
   {: screen}
+  Example output for VPC clusters:
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
 
 6. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
+  * Classic clusters:
     ```
-    ibmcloud ks nlb-dns create --cluster <cluster_name_or_id> --ip <LB_IP>
+    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+    ```
+    {: pre}
+  * VPC clusters:
+    ```
+    ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
     {: pre}
 
@@ -944,10 +957,16 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-  Example output:
+  Example output for classic clusters:
   ```
   Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
   mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+  Example output for VPC clusters:
+  ```
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
   ```
   {: screen}
 
