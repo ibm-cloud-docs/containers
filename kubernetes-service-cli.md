@@ -4297,7 +4297,7 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNA
 <dt><code>--secret-namespace <em>NAMESPACE</em></code></dt>
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
-<dt><code>--type <em>public</em></code></dt>
+<dt><code>--type <em>(public|private}</em></code></dt>
 <dd>The subdomain type. </dd>
 
 <dt><code>--json</code></dt>
