@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-17"
+lastupdated: "2019-10-14"
 
 keywords: kubernetes, iks, knative
 
@@ -333,30 +333,13 @@ To deploy your serverless app as a Knative service:
 
 4. Try out your `Hello World` app by sending a request to the public URL that is assigned to your app.
    ```
-   curl -v <public_app_url>
+   curl <public_app_url>
    ```
    {: pre}
 
    Example output:
    ```
-   * Rebuilt URL to: kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud/
-   *   Trying 169.46.XX.XX...
-   * TCP_NODELAY set
-   * Connected to kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud (169.46.XX.XX) port 80 (#0)
-   > GET / HTTP/1.1
-   > Host: kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud
-   > User-Agent: curl/7.54.0
-   > Accept: */*
-   >
-   < HTTP/1.1 200 OK
-   < Date: Thu, 21 Mar 2019 01:12:48 GMT
-   < Content-Type: text/plain; charset=utf-8
-   < Content-Length: 20
-   < Connection: keep-alive
-   < x-envoy-upstream-service-time: 17
-   <
    Hello Go Sample v1!
-   * Connection #0 to host kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud left intact
    ```
    {: screen}
 
@@ -425,12 +408,11 @@ To deploy your serverless app as a Knative service:
 
 9. Make a new request to your app to verify that your change was applied.
    ```
-   curl -v <service_domain>
+   curl <public_app_url>
    ```
 
    Example output:
    ```
-   ...
    Hello Mr. Smith!
    ```
    {: screen}
