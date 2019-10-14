@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-08"
+lastupdated: "2019-10-14"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -49,6 +49,41 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 ## Version 1.15 changelog
 {: #115_changelog}
+
+Review the version 1.15 changelog.
+{: shortdesc}
+
+### Changelog for worker node fix pack 1.15.4_1519, released 14 October 2019
+{: #1154_1519_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.15.4_1519.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.15.4_1518">
+<caption>Changes since version 1.15.4_1518</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-164-generic</td>
+<td>4.4.0-165-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-64-generic</td>
+<td>4.15.0-65-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.15.4_1518, released 1 October 2019
 {: #1154_1518}
@@ -524,6 +559,41 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 ## Version 1.14 changelog
 {: #114_changelog}
+
+Review the version 1.14 changelog.
+{: shortdesc}
+
+### Changelog for worker node fix pack 1.14.7_1535, released 14 October 2019
+{: #1147_1535_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.7_1535.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.14.7_1534">
+<caption>Changes since version 1.14.7_1534</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-164-generic</td>
+<td>4.4.0-165-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-64-generic</td>
+<td>4.15.0-65-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.14.7_1534, released 1 October 2019
 {: #1147_1534}
@@ -1401,6 +1471,38 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.11_1538, released 14 October 2019
+{: #11311_1538_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.13.11_1538.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.13.11_1537">
+<caption>Changes since version 1.13.11_1537</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-164-generic</td>
+<td>4.4.0-165-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-64-generic</td>
+<td>4.15.0-65-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for 1.13.11_1537, released 1 October 2019
 {: #11311_1537}
@@ -2712,6 +2814,38 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1569, released 14 October 2019
+{: #11210_1569_worker}
+
+The following table shows the changes that are included in the worker node fix pack 1.12.10_1569.
+{: shortdesc}
+
+<table summary="Changes that were made since version 1.12.10_1568">
+<caption>Changes since version 1.12.10_1568</caption>
+<thead>
+<tr>
+<th>Component</th>
+<th>Previous</th>
+<th>Current</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Ubuntu 16.04 packages and kernel</td>
+<td>4.4.0-164-generic</td>
+<td>4.4.0-165-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-0136 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-0136), [CVE-2018-20961 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20961), [CVE-2019-11487 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-11487), [CVE-2016-10905 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2016-10905), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+<tr>
+<td>Ubuntu 18.04 packages and kernel</td>
+<td>4.15.0-64-generic</td>
+<td>4.15.0-65-generic</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-5094 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-5094), [CVE-2018-20976 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2018-20976), [CVE-2019-16056 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16056), and [CVE-2019-16935 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://nvd.nist.gov/vuln/detail/CVE-2019-16935).</td>
+</tr>
+</tbody>
+</table>
 
 ### Changelog for worker node fix pack 1.12.10_1568, released 1 October 2019
 {: #11210_1568_worker}
