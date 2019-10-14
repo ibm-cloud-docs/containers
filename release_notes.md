@@ -11,7 +11,7 @@ subcollection: containers
 ---
 
 {:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
+{:shortdesc: .shortdesc} 
 {:screen: .screen}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
