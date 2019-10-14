@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, vlan
 
@@ -52,7 +52,7 @@ Did you create a cluster with only a private service endpoint before you enabled
    ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
-4. Refresh the Kubernetes master API server to use the private service endpoint. You can follow the prompt in the CLI, or manually run the following command.
+4. Refresh the Kubernetes master API server to use the private service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
@@ -94,7 +94,7 @@ If you previously disabled the public endpoint, you can re-enable it.
    ibmcloud ks cluster feature enable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
-2. Refresh the Kubernetes master API server to use the public service endpoint. You can follow the prompt in the CLI, or manually run the following command.
+2. Refresh the Kubernetes master API server to use the public service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
@@ -116,7 +116,7 @@ To disable the public service endpoint, you must first enable the private servic
    ibmcloud ks cluster feature disable public-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
-3. Refresh the Kubernetes master API server to remove the public service endpoint by following the CLI prompt or by manually running the following command.
+3. Refresh the Kubernetes master API server to remove the public service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
@@ -147,7 +147,7 @@ Note that you cannot disable the private service endpoint after you enable it.
    ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name_or_ID>
    ```
    {: pre}
-4. Refresh the Kubernetes master API server to use the private service endpoint by following the CLI prompt or by manually running the following command.
+4. Refresh the Kubernetes master API server to use the private service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```

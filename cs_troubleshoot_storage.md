@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, help, debug
 
@@ -26,11 +26,10 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 
-
-# Troubleshooting cluster storage
+# Troubleshooting persistent storage
 {: #cs_troubleshoot_storage}
 
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting cluster storage.
+As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting persistent storage.
 {: shortdesc}
 
 If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
@@ -54,7 +53,7 @@ Review the options to debug persistent storage and find the root causes for fail
    ```
    {: pre}
 
-2. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster.
+2. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. If you use a `kubectl` CLI version that does not match at least the major.minor version of your cluster, you might experience unexpected results. For example, [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg “External link icon”)](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). 
    1. Show the `kubectl` CLI version that is installed in your cluster and your local machine.
       ```
       kubectl version
@@ -73,7 +72,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
 3. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install).
 
-4. For block storage, object storage, and Portworx only: Make sure that you installed the latest Helm chart version for the plug-in.
+4. For classic block storage, object storage, and Portworx only: Make sure that you installed the latest Helm chart version for the plug-in.
 
    **Block and object storage**:
 
@@ -83,21 +82,31 @@ Review the options to debug persistent storage and find the root causes for fail
       ```
       {: pre}
 
-   2. List the Helm charts in the `iks-charts` repository.
-      ```
-      helm search iks-charts
-      ```
-      {: pre}
+   2. List the Helm charts in the repository.
+      **For classic block storage**: 
+        ```
+        helm search iks-charts | grep block-storage-plugin
+        ```
+        {: pre}
 
-      Example output:
-      ```
-      iks-charts/ibm-block-storage-attacher          	1.0.2        A Helm chart for installing ibmcloud block storage attach...
-      iks-charts/ibm-iks-cluster-autoscaler          	1.0.5        A Helm chart for installing the IBM Cloud cluster autoscaler
-      iks-charts/ibm-object-storage-plugin           	1.0.6        A Helm chart for installing ibmcloud object storage plugin  
-      iks-charts/ibm-worker-recovery                 	1.10.46      IBM Autorecovery system allows automatic recovery of unhe...
-      ...
-      ```
-      {: screen}
+        Example output:
+        ```
+        iks-charts-stage/ibmcloud-block-storage-plugin	1.5.0        	                                        	A Helm chart for installing ibmcloud block storage plugin   
+        iks-charts/ibmcloud-block-storage-plugin      	1.5.0        	                                        	A Helm chart for installing ibmcloud block storage plugin   
+        ```
+        {: screen}
+        
+      **For object storage**: 
+        ```
+        helm search ibm-charts | grep object-storage-plugin
+        ```
+        {: pre}
+        
+        Example output: 
+        ```
+        ibm-charts/ibm-object-storage-plugin         	1.0.9        	1.0.9                         	A Helm chart for installing ibmcloud object storage plugin  
+        ```
+        {: screen}
 
    3. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available.
       ```
@@ -109,7 +118,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    **Portworx**:
 
-   1. Find the [latest Helm chart version ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/portworx/helm/tree/master/charts/portworx) that is available.
+   1. Find the [latest Helm chart version ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/charts/tree/master/community/portworx) that is available.
 
    2. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available.
       ```
@@ -153,7 +162,7 @@ Review the options to debug persistent storage and find the root causes for fail
       {: pre}
 
    3. Review common errors that can occur during the PVC creation.
-      - [File storage and block storage: PVC remains in a pending state](#file_pvc_pending)
+      - [File storage and classic block storage: PVC remains in a pending state](#file_pvc_pending)
       - [Object storage: PVC remains in a pending state](#cos_pvc_pending)
 
 7. Check whether the pod that mounts your storage instance is successfully deployed.
@@ -177,7 +186,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    4. Review common errors that can occur when you mount a PVC to your app.
       - [File storage: App cannot access or write to PVC](#file_app_failures)
-      - [Block storage: App cannot access or write to PVC](#block_app_failures)
+      - [Classic Block storage: App cannot access or write to PVC](#block_app_failures)
       - [Object storage: Accessing files with a non-root user fails](#cos_nonroot_access)
 
 
@@ -463,74 +472,69 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
 6. Verify that the volume is successfully mounted to your pod. Note the pod name and **Containers/Mounts** path.
+   ```
+   kubectl describe pod <my_pod>
+   ```
+   {: pre}
 
-    ```
-    kubectl describe pod <my_pod>
-    ```
-    {: pre}
+   **Example output**:
+   ```
+   Name:       mypod-123456789
+   Namespace:	default
+   ...
+   Init Containers:
+   ...
+   Mounts:
+     /mount from volume (rw)
+     /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
+   ...
+   Containers:
+     jenkins:
+       Container ID:
+       Image:		jenkins
+       Image ID:
+       Port:		  <none>
+       State:		Waiting
+         Reason:		PodInitializing
+       Ready:		False
+       Restart Count:	0
+       Environment:	<none>
+       Mounts:
+         /var/jenkins_home from volume (rw)
+         /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
+   ...
+   Volumes:
+     myvol:
+       Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
+       ClaimName:	mypvc
+       ReadOnly:	  false
 
-    **Example output**:
-
-    ```
-    Name:       mypod-123456789
-    Namespace:	default
-    ...
-    Init Containers:
-    ...
-    Mounts:
-      /mount from volume (rw)
-      /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
-    ...
-    Containers:
-      jenkins:
-        Container ID:
-        Image:		jenkins
-        Image ID:
-        Port:		  <none>
-        State:		Waiting
-          Reason:		PodInitializing
-        Ready:		False
-        Restart Count:	0
-        Environment:	<none>
-        Mounts:
-          /var/jenkins_home from volume (rw)
-          /var/run/secrets/kubernetes.io/serviceaccount from default-token-cp9f0 (ro)
-    ...
-    Volumes:
-      myvol:
-        Type:	PersistentVolumeClaim (a reference to a PersistentVolumeClaim in the same namespace)
-        ClaimName:	mypvc
-        ReadOnly:	  false
-
-    ```
-    {: screen}
+   ```
+   {: screen}
 
 7.  Log in to the pod by using the pod name that you previously noted.
-
     ```
     kubectl exec -it <my_pod-123456789> /bin/bash
     ```
     {: pre}
 
 8. Verify the permissions of your container's mount path. In the example, the mount path is `/var/jenkins_home`.
+   ```
+   ls -ln /var/jenkins_home
+   ```
+   {: pre}
 
-    ```
-    ls -ln /var/jenkins_home
-    ```
-    {: pre}
+   **Example output**:
+   ```
+   jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
+   total 12
+   -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
+   drwxr-xr-x 2 1000 1000 4096 Mar  9 19:58 init.groovy.d
+   drwxr-xr-x 9 1000 1000 4096 Mar  9 20:16 war
+   ```
+   {: screen}
 
-    **Example output**:
-
-    ```
-    jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
-    total 12
-    -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
-    drwxr-xr-x 2 1000 1000 4096 Mar  9 19:58 init.groovy.d
-    drwxr-xr-x 9 1000 1000 4096 Mar  9 20:16 war
-    ```
-    {: screen}
-
-    This output shows that the GID and UID from your Dockerfile (in this example, `1000` and `1000`) own the mount path inside the container.
+   This output shows that the GID and UID from your Dockerfile (in this example, `1000` and `1000`) own the mount path inside the container.
 
 <br />
 
@@ -552,7 +556,7 @@ Remove the configuration's `securityContext` fields for `fsGroup` and `runAsUser
 
 
 
-## Block storage: App cannot access or write to PVC
+## Block Storage: App cannot access or write to PVC
 {: #block_app_failures}
 
 When you mount a PVC to your pod, you might experience errors when accessing or writing to the PVC.
@@ -1267,7 +1271,7 @@ The IAM API key or the IBM Cloud infrastructure API key that is stored in the `s
    kubectl apply -f pvc.yaml
    ```
    {: pre}
-
+   
 
 ## Getting help and support
 {: #storage_getting_help}
@@ -1288,3 +1292,7 @@ Still having issues with your cluster?
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
 
+
+
+
+ 

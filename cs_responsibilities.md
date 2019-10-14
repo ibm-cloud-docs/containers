@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-10"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
 subcollection: containers
 
@@ -124,5 +124,6 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         </tr>
   </tbody>
   </table>
+
 
 

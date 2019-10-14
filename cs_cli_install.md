@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -184,10 +184,17 @@ Before you can run `kubectl` commands:
 * [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 * Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service role but no platform role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform role to list clusters.
 
-To use `kubectl` commands:
+Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you must follow different steps to use `kubectl` commands.
+* Version 0.4 (default) or earlier: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. Then, see [Configuring the CLI to run `kubectl` for kubernetes-service version 0.4 or earlier](#cs_cli_configure_0.4).
+* Version 1.0 (beta): To use `1.0`, set the `IKS_BETA_VERSION` environment variable by running `export IKS_BETA_VERSION=1.0`. Then, see [Configuring the CLI to run `kubectl` for kubernetes-service version 1.0](#cs_cli_configure_1.0).
+
+### Configuring the CLI to run `kubectl` for kubernetes-service version 0.4 or earlier
+{: #cs_cli_configure_0.4}
+
+In CLI plug-in version 0.4 and earlier, `cluster config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.
+{: shortdesc}
 
 1.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
-
     ```
     ibmcloud login
     ```
@@ -205,13 +212,12 @@ To use `kubectl` commands:
     {: pre}
 
 4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
-
     ```
     ibmcloud ks cluster ls
     ```
     {: pre}
 
-5.  Set the cluster you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
+5.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster.
     1.  Get the command to set the environment variable and download the Kubernetes configuration files. <p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
         ```
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
@@ -221,7 +227,6 @@ To use `kubectl` commands:
         After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
 
         Example:
-
         ```
         export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
         ```
@@ -235,7 +240,6 @@ To use `kubectl` commands:
     3.  Verify that the `KUBECONFIG` environment variable is set properly.
 
         Example:
-
         ```
         echo $KUBECONFIG
         ```
@@ -248,14 +252,12 @@ To use `kubectl` commands:
         {: screen}
 
 6.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-
     ```
     kubectl version  --short
     ```
     {: pre}
 
     Example output:
-
     ```
     Client Version: v1.14.7
     Server Version: v1.14.7
@@ -264,8 +266,75 @@ To use `kubectl` commands:
 
 Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 
-**Tip:** If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
+If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
+{: tip}
 
+### Configuring the CLI to run `kubectl` for kubernetes-service version 1.0
+{: #cs_cli_configure_1.0}
+
+In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in the `~/.kube/config` directory or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately. Note that any pre-existing `kubeconfig` files are not merged automatically.
+{: shortdesc}
+
+1.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
+    ```
+    ibmcloud login
+    ```
+    {: pre}
+
+    If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    {: tip}
+
+2.  Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
+
+3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
+    ```
+    ibmcloud target -g <resource_group_name>
+    ```
+    {: pre}
+
+4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
+    ```
+    ibmcloud ks cluster ls
+    ```
+    {: pre}
+
+5.  Set the cluster as the context for this session. This command appends the new `kubeconfig` configuration file to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable. Complete this configuration step every time that you work with your cluster.
+    ```
+    ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+6.  Verify that the `KUBECONFIG` environment variable is set properly.
+
+    Example:
+    ```
+    echo $KUBECONFIG
+    ```
+    {: pre}
+
+    Output:
+    ```
+    /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+    ```
+    {: screen}
+
+7.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
+    ```
+    kubectl version  --short
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    Client Version: v1.14.7
+    Server Version: v1.14.7
+    ```
+    {: screen}
+
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
+
+If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
+{: tip}
 
 <br />
 
@@ -385,13 +454,13 @@ To uninstall the CLIs:
 <br />
 
 
-## Using the Kubernetes Terminal in your web browser (beta)
+## Using the Kubernetes Terminal in your web browser
 {: #cli_web}
 
 The Kubernetes Terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-The Kubernetes Terminal is released as a beta {{site.data.keyword.containerlong_notm}} add-on and might change due to user feedback and further tests. Do not use this feature in production clusters to avoid unexpected side effects.
+You can use the Kubernetes Terminal for quick access and testing of your cluster. Do not use it for production workloads.
 {: important}
 
 If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes Terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.

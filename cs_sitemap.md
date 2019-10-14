@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-10-03"
+lastupdated: "2019-10-14"
 
 ---
 
@@ -665,6 +665,7 @@ lastupdated: "2019-10-03"
 [VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas)
 * [About VPC load balancing in IBM Cloud Kubernetes Service](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
 * [Setting up a Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
+* [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
@@ -727,13 +728,19 @@ lastupdated: "2019-10-03"
   * [Step 4: Create the Ingress resource](/docs/containers?topic=containers-ingress#public_inside_4)
   * [Step 5: Access your app from the internet](/docs/containers?topic=containers-ingress#public_inside_5)
 * [Exposing apps that are outside your cluster to the public](/docs/containers?topic=containers-ingress#external_endpoint)
-* [Exposing apps to a private network](/docs/containers?topic=containers-ingress#ingress_expose_private)
+* [Classic clusters: Exposing apps to a private network](/docs/containers?topic=containers-ingress#ingress_expose_private)
   * [Step 1: Deploy apps and create app services](/docs/containers?topic=containers-ingress#private_1)
   * [Step 2: Enable the default private ALB](/docs/containers?topic=containers-ingress#private_ingress)
   * [Step 3: Map your custom domain](/docs/containers?topic=containers-ingress#private_3)
   * [Step 4: Select TLS termination](/docs/containers?topic=containers-ingress#private_4)
   * [Step 5: Create the Ingress resource](/docs/containers?topic=containers-ingress#private_5)
   * [Step 6: Access your app from your private network](/docs/containers?topic=containers-ingress#private_6)
+* [VPC clusters: Exposing apps to a private network](/docs/containers?topic=containers-ingress#ingress_expose_private)
+  * [Step 1: Deploy apps and create app services](/docs/containers?topic=containers-ingress#vpc_private_1)
+  * [Step 2: Enable the default private ALB](/docs/containers?topic=containers-ingress#vpc_private_2)
+  * [Step 3: Create a subdomain to register the ALBs with a DNS entry and create an SSL certificate](/docs/containers?topic=containers-ingress#vpc_private_3)
+  * [Step 4: Create the Ingress resource](/docs/containers?topic=containers-ingress#vpc_private_4)
+  * [Step 5: Access your app from your private network](/docs/containers?topic=containers-ingress#vpc_private_5)
 
 [Customizing Ingress routing with annotations](/docs/containers?topic=containers-ingress_annotation)
 * [General annotations](/docs/containers?topic=containers-ingress_annotation#general)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-02"
+lastupdated: "2019-10-14"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,16 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.38</td>
+<td>14 Oct 2019</td>
+<td>
+<ul><li>Adds the [`ibmcloud ks nlb-dns create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create-vpc), [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-replace), and [`ibmcloud ks nlb-dns rm vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-rm-vpc) commands to create and manage DNS subdomains for VPC load balancers in VPC clusters.</li>
+<li>Adds the `--secret-namespace` flag to the `ibmcloud ks nlb-dns create classic` and `ibmcloud ks nlb-dns create vpc-classic` commands to specify the Kubernetes namespace that you want the SSL secret for the DNS subdomain to be created in.</li>
+<li>Updates status information of worker nodes for VPC clusters.</li>
+<li>Updates translations of CLI help text.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.31</td>
 <td>24 Sept 2019</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-11"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -279,6 +279,21 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
 <br />
 
 
+## Cannot get a subdomain or secret for the Ingress ALB when you create or delete clusters of the same name
+{: #cs_rate_limit}
+
+{: tsSymptoms}
+You create and delete a cluster multiple times, such as for automation purposes, and you use the same name for the cluster every time that you create it. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
+
+{: tsCauses}
+When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 50 times or more within 7 days, you might reach the Let's Encrypt [Certificates per Registered Domain rate limit ![External link icon](../icons/launch-glyph.svg "External link icon")](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N), because the same Ingress subdomain and certificate are registered every time that you create the cluster.
+
+{: tsResolve}
+If you need to continue testing, you can change the name of the cluster so that when you create the new cluster a new, different Ingress subdomain and secret are registered.
+
+<br />
+
+
 ## Connection via WebSocket closes after 60 seconds
 {: #cs_ingress_websocket}
 
@@ -345,6 +360,28 @@ If you complete one of the above options but the `keepalived` pods are still not
     kubectl describe pod ibm-cloud-provider-ip-169-61-XX-XX-55967b5b8c-7zv9t -n ibm-system
     ```
     {: pre}
+
+<br />
+
+
+## Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted
+{: #coredns_lameduck}
+
+{: tsSymptoms}
+Your app sometimes fails to resolve DNS names for cluster services around the same time that one or more CoreDNS pods are restarted, such as during a worker reload or patch update.
+
+{: tsCauses}
+Your app's DNS request was sent to a CoreDNS pod that was in the process of terminating.
+
+{: tsResolve}
+To help the CoreDNS pods terminate more gracefully, you can edit the `coredns` configmap in the `kube-system` namespace. In the `health` plug-in configuration of the main Corefile, add `lameduck 10s`. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). The resulting customization looks like the following example.
+
+```
+health {
+    lameduck 10s
+}
+```
+{: screen}
 
 <br />
 
