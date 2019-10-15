@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-11"
+lastupdated: "2019-10-15"
 
 keywords: kubernetes, iks, help, debug
 
@@ -34,7 +34,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
-
+<br>
 
 ## Debugging persistent storage failures
 {: #debug_storage}
