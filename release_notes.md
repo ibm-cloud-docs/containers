@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -11,7 +11,7 @@ subcollection: containers
 ---
 
 {:new_window: target="_blank"}
-{:shortdesc: .shortdesc} 
+{:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
@@ -45,6 +45,10 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>17 October 2019</td>
+  <td><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 582 and `ingress-auth` image build to 343](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
+</tr>
 <tr>
   <td>14 October 2019</td>
   <td><ul>
