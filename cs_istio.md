@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-15"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -809,9 +809,6 @@ In the following steps, you set up a subdomain through which your users can acce
 
 ### Exposing Istio-managed apps with TLS termination
 {: #tls}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can assign a subdomain with TLS to apps only in classic clusters. To expose an app with an IBM-provided hostname in a VPC cluster, see [Exposing Istio-managed apps without TLS termination](#no-tls).
-{: note}
 
 **Before you begin:**
 
