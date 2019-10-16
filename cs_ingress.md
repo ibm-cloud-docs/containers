@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-16"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -280,7 +280,7 @@ After you choose the app domain, you choose whether to use TLS termination.
 
 The ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
 
-* If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 37 days before they expire. For more information about wildcard TLS certification, see [this note](#wildcard_tls).
+* If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate, which is stored as a Kubernetes secret in the `default` namespace. IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by IBM. The certificates expire every 90 days and are automatically renewed 37 days before they expire. For more information about wildcard TLS certification, see [this note](#wildcard_tls).
 * If you use a custom domain, you can use your own TLS certificate to manage TLS termination. The ALB first checks for a secret in the namespace that the app is in, then in `default`, and finally in `ibm-cert-store`. If you have apps in one namespace only, you can import or create a TLS secret for the certificate in that same namespace. If you have apps in multiple namespaces, import or create a TLS secret for the certificate in the `default` namespace so that the ALB can access and use the certificate in every namespace. In the Ingress resources that you define for each namespace, specify the name of the secret that is in the default namespace. For more information about wildcard TLS certification, see [this note](#wildcard_tls). **Note**: TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
 
 **If you use the IBM-provided Ingress domain:**
@@ -1190,5 +1190,4 @@ http://<subdomain1>.<domain>/<app1_path>
 http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
-
 
