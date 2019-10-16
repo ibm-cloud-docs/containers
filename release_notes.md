@@ -47,7 +47,9 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>17 October 2019</td>
-  <td><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 582 and `ingress-auth` image build to 343](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
+  <td><ul>
+  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 582 and `ingress-auth` image build to 343](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+  <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
 </tr>
 <tr>
   <td>14 October 2019</td>
@@ -172,9 +174,7 @@ The following icons are used to indicate if a release note applies only to a cer
 </tr>
 <tr>
   <td>12 September 2019</td>
-  <td><ul>
-  <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 552](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
+  <td><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 552](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</td>
 </tr>
 <tr>
   <td>06 September 2019</td>
