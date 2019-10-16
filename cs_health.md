@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-11"
+lastupdated: "2019-10-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -742,7 +742,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
   <dd>You can configure other tools for more monitoring capabilities, such as Prometheus. Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For more information about the setup, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
 
   <dt>Deprecated: {{site.data.keyword.monitoringlong_notm}}</dt>
-  <dd><p class="deprecated">Previously, you could collect metrics by using {{site.data.keyword.monitoringlong_notm}}. As of 30 June 2019, you cannot provision new {{site.data.keyword.monitoringlong_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 October 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.mon_full_notm}}.</p>
+  <dd><p class="deprecated">Previously, you could collect metrics by using {{site.data.keyword.monitoringlong_notm}}. As of 30 June 2019, you cannot provision new {{site.data.keyword.monitoringlong_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 October 2019. To continue collecting metrics for your cluster, set up {{site.data.keyword.mon_full_notm}}.</p>
   </dd>
 
   <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.cloud_notm}} console and output of <code>ibmcloud ks cluster get</code></dt>
