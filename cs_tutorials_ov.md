@@ -361,6 +361,22 @@ subcollection: containers
         </div>
     </div>
     </a>
+    <a href = "/docs/containers?topic=containers-tutorial-byoc-kube">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Set up a DevOps delivery pipeline for your app
+          <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br>  <p>Set up a DevOps pipeline for your app that is stored in GitHub and learn how to configure delivery pipline stages to build an image from your Dockerfile, push it to a container registry, and deploy your app to a cluster.
+             </p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src="images/byoc.png" alt="Continuous delivery pipeline stages in a DevOps toolchain" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
     <a href = "https://github.com/razee-io/Razee">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
