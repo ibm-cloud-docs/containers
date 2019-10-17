@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ This tutorial is intended for software developers and network administrators who
 ## Prerequisites
 {: #policies_prereqs}
 
-- [Create a classic cluster](/docs/containers?topic=containers-clusters#clusters_ui). This tutorial is not available for VPC on Classic clusters.
+- [Create a classic cluster](/docs/containers?topic=containers-clusters#clusters_ui). This tutorial is not available for VPC clusters.
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -69,12 +69,12 @@ ibmcloud ks cluster create classic --name my_cluster
    {: pre}
 
 **VPC clusters**:
-*  VPC on Classic cluster:
+*  VPC Gen 1 compute cluster:
    ```
    ibmcloud ks cluster create vpc-classic --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
    ```
    {: pre}
-*  For a VPC on Classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
+*  For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
    ```
    ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
    ```
@@ -562,16 +562,16 @@ Before you begin, install the [{{site.data.keyword.cloud_notm}} CLI and the {{si
 <br />
 
 
-## Creating a standard VPC on Classic cluster
+## Creating a standard VPC Gen 1 compute cluster
 {: #clusters_vpc_standard}
 
-Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC on Classic cluster, and customize your cluster to meet the high availability and security requirements of your apps.
+Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC Generation 1 compute cluster, and customize your cluster to meet the high availability and security requirements of your apps.
 {: shortdesc}
 
-### Creating a standard VPC on Classic cluster in the console
+### Creating a standard VPC Gen 1 compute cluster in the console
 {: #clusters_vpc_ui}
 
-Create your single zone or multizone VPC on Classic cluster by using the {{site.data.keyword.cloud_notm}} console.
+Create your single zone or multizone VPC Generation 1 compute cluster by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
 
 1. Make sure that you decided on your [cluster setup](#prepare_cluster_level).
@@ -586,7 +586,7 @@ Create your single zone or multizone VPC on Classic cluster by using the {{site.
 4. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
 5. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
-   2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster. To create a VPC on Classic cluster, you must select **Kubernetes version 1.15 or later**.
+   2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster. To create a VPC cluster, you must select **Kubernetes version 1.15 or later**.
    3. Select **VPC infrastructure**.
    4. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
@@ -602,27 +602,27 @@ Create your single zone or multizone VPC on Classic cluster by using the {{site.
 7. Configure your cluster with a private, or a public and a private service endpoint by setting the **Master service endpoint**. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-pgw).
 8. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
    1. Use the filter options to limit the number of flavors that are displayed to you.
-   2. Select a flavor. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in VPC on Classic clusters can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.
+   2. Select a flavor. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.
    3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. For example, if you selected two zones and want to create three worker nodes, a total of six worker nodes are provisioned in your cluster with three worker nodes in each zone.
 9. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab.
    - When the deployment is done, you can see that your cluster is ready in the **Overview** tab. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    - Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.<p class="tip">Is your cluster not in a **deployed** state? Check out the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</p>
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](#access_cluster).
 
-### Creating standard VPC on Classic clusters from the CLI
+### Creating standard VPC Gen 1 compute clusters from the CLI
 {: #cluster_vpc_cli}
 
-Create your single zone or multizone VPC on Classic cluster by using the {{site.data.keyword.cloud_notm}} CLI.
+Create your single zone or multizone VPC Generation 1 compute cluster by using the {{site.data.keyword.cloud_notm}} CLI.
 {: shortdesc}
 
 Before you begin:
 - [Install the {{site.data.keyword.cloud_notm}} CLI and the {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
 - [Install the VPC CLI plug-in](/docs/vpc-on-classic?topic=vpc-infrastructure-cli-plugin-vpc-reference#prerequisites-).
 
-To create a VPC on Classic cluster:
+To create a VPC cluster:
 
 1. Make sure that you decided on your [cluster setup](#prepare_cluster_level).
-2. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region where you want to create your VPC on Classic cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
+2. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
    ibmcloud login -r <region> [--sso]
    ```
@@ -650,7 +650,7 @@ To create a VPC on Classic cluster:
     <tbody>
     <tr>
     <td><code>cluster create vpc-classic</code></td>
-    <td>The command to create a standard VPC on Classic cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
+    <td>The command to create a standard VPC Gen 1 compute cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
     </tr>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
@@ -659,7 +659,7 @@ To create a VPC on Classic cluster:
     </tr>
     <tr>
     <td><code>--zone <em>&lt;zone&gt;</em></code></td>
-    <td>Specify the {{site.data.keyword.cloud_notm}} zone where you want to create your cluster. Make sure that you use a zone that matches the metro city location that you selected when you created your VPC and that you have an existing VPC subnet for that zone. For example, if you created your VPC in the Dallas metro city, your zone must be set to <code>us-south-1</code>, <code>us-south-2</code>, or <code>us-south-3</code>. To list available VPC on Classic cluster zones, run <code>ibmcloud ks zone ls --provider vpc-classic</code>. Note that when you select a zone outside of your country, you might require legal authorization before data can be physically stored in a foreign country.</td>
+    <td>Specify the {{site.data.keyword.cloud_notm}} zone where you want to create your cluster. Make sure that you use a zone that matches the metro city location that you selected when you created your VPC and that you have an existing VPC subnet for that zone. For example, if you created your VPC in the Dallas metro city, your zone must be set to <code>us-south-1</code>, <code>us-south-2</code>, or <code>us-south-3</code>. To list available VPC cluster zones, run <code>ibmcloud ks zone ls --provider vpc-classic</code>. Note that when you select a zone outside of your country, you might require legal authorization before data can be physically stored in a foreign country.</td>
     </tr>
     <tr>
     <td><code>--vpc-id <em>&lt;vpc_ID&gt;</em></code></td>
@@ -667,20 +667,20 @@ To create a VPC on Classic cluster:
     </tr>
     <tr>
     <td><code>--subnet-id <em>&lt;subnet_ID&gt;</em></code></td>
-    <td>Enter the ID of the VPC subnet that you created earlier. When you create a VPC on Classic cluster from the CLI, you can initially create your cluster in one zone with one subnet only. To create a multizone cluster, [add more zones](/docs/containers?topic=containers-add_workers) with the subnets that you created earlier to your cluster after the cluster is created. To list the IDs of your subnets, run <code> ibmcloud ks subnets --provider vpc-classic --vpc-id &lt,VPC_ID&gt; --zone &lt;subnet_zone&gt; </code>.  </td>
+    <td>Enter the ID of the VPC subnet that you created earlier. When you create a VPC cluster from the CLI, you can initially create your cluster in one zone with one subnet only. To create a multizone cluster, [add more zones](/docs/containers?topic=containers-add_workers) with the subnets that you created earlier to your cluster after the cluster is created. To list the IDs of your subnets, run <code> ibmcloud ks subnets --provider vpc-classic --vpc-id &lt,VPC_ID&gt; --zone &lt;subnet_zone&gt; </code>.  </td>
     </tr>
     <tr>
     <td><code>--flavor <em>&lt;worker_flavor&gt;</em></code></td>
-    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in VPC on Classic clusters can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt;</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
+    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt;</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
- Note that VPC on Classic clusters are supported for Kubernetes versions 1.15 and later only.</td>
+ Note that VPC clusters are supported for Kubernetes versions 1.15 and later only.</td>
     </tr>  
     <tr>
     <td><code>--provider <em>&lt;vpc-classic&gt;</em></code></td>
-    <td>Enter the generation of {{site.data.keyword.cloud_notm}} infrastructure that you want to use. To create a VPC on Classic cluster, you must enter <strong>vpc-classic</strong>.</td>
+    <td>Enter the generation of {{site.data.keyword.cloud_notm}} infrastructure that you want to use. To create a VPC Generation 1 compute cluster, you must enter <strong>vpc-classic</strong>.</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>
@@ -688,7 +688,7 @@ To create a VPC on Classic cluster:
     </tr>
     <tr>
     <td><code>--disable-public-service-endpoint</code></td>
-    <td>Include this option in your command to create your VPC on Classic cluster with a private service endpoint only. If you do not include this option, your cluster is set up with a public and a private service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-pgw). </td>
+    <td>Include this option in your command to create your VPC cluster with a private service endpoint only. If you do not include this option, your cluster is set up with a public and a private service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-pgw). </td>
     </tr>
     </tbody></table>
 7. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.

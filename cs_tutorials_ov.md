@@ -138,7 +138,7 @@ subcollection: containers
                   </br><p>Create a classic cluster in your Virtual Private Cloud (VPC). </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC on Classic cluster tutorial diagram" /></br>
+                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC cluster tutorial diagram" /></br>
                 </div>
             </div>
         </div>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-08-22"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, helm
 
@@ -57,7 +57,7 @@ Review the following table to find a list of key benefits that you can get by us
 LogDNA is provided by {{site.data.keyword.la_full_notm}}, an {{site.data.keyword.cloud_notm}} platform service that you can use with your cluster. {{site.data.keyword.la_full_notm}} is operated by LogDNA in partnership with IBM.
 {: shortdesc}
 
-To use LogDNA in your classic or VPC on Classic cluster, you must provision an instance of {{site.data.keyword.la_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your Kubernetes clusters as a log source. After the cluster is configured, logs are automatically collected and forwarded to your {{site.data.keyword.la_full_notm}} service instance. You can use the {{site.data.keyword.la_full_notm}} dashboard to access your logs.   
+To use LogDNA in your classic or VPC cluster, you must provision an instance of {{site.data.keyword.la_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your Kubernetes clusters as a log source. After the cluster is configured, logs are automatically collected and forwarded to your {{site.data.keyword.la_full_notm}} service instance. You can use the {{site.data.keyword.la_full_notm}} dashboard to access your logs.   
 
 If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the public LogDNA API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound). 
 {: important}
@@ -95,7 +95,7 @@ Review the following table to find a list of key benefits that you can get by us
 Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, an {{site.data.keyword.cloud_notm}} platform service that you can use with your cluster. {{site.data.keyword.mon_full_notm}} is operated by Sysdig in partnership with IBM.
 {: shortdesc}
 
-To use Sysdig Monitor in your classic or VPC on Classic cluster, you must provision an instance of {{site.data.keyword.mon_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your cluster as a metrics source. After the cluster is configured, metrics are automatically collected and forwarded to your {{site.data.keyword.mon_full_notm}} service instance. You can use the {{site.data.keyword.mon_full_notm}} dashboard to access your metrics.   
+To use Sysdig Monitor in your classic or VPC cluster, you must provision an instance of {{site.data.keyword.mon_full_notm}} in your {{site.data.keyword.cloud_notm}} account and configure your cluster as a metrics source. After the cluster is configured, metrics are automatically collected and forwarded to your {{site.data.keyword.mon_full_notm}} service instance. You can use the {{site.data.keyword.mon_full_notm}} dashboard to access your metrics.   
 
 If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the Sysdig API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound). 
 {: important}
@@ -115,7 +115,7 @@ Because Sysdig Monitor is provided by {{site.data.keyword.mon_full_notm}}, your 
 [Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://portworx.com/products/introduction/) is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
 
-Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic or {{site.data.keyword.openshiftlong}} clusters.
+Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC or {{site.data.keyword.openshiftlong}} clusters.
 {: important}
 
 **What is software-defined storage (SDS)?** </br>

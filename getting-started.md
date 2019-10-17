@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, containers
 
@@ -97,8 +97,8 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
   <div class="solutionBox">
    <a href = "#vpc-classic-gs">
     <div>
-         <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC on Classic</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud. Control network traffic with security groups and access control lists.   </p>
+         <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC</h2>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in the first generation of compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud. Control network traffic with security groups and access control lists.   </p>
      </div>
     </a>
 </div>
@@ -124,12 +124,12 @@ In this getting started tutorial, you create a community Kubernetes cluster. If 
 {: note}
 
 **What compute host infrastructure does the service offer?** </br>
-With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure., or VPC on Classic infrastructure. 
+With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure., or VPC Gen 1 compute infrastructure. 
 
 [Classic clusters](#clusters_gs) are created on your choice of virtual or bare metal worker nodes that are connected to VLANs. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
 
-[VPC on Classic clusters](#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use security groups as your virtual firewalls for instance-level protection, and network access control lists to protect the subnets that your worker nodes are connected to. VPC on Classic clusters can be provisioned on shared virtual infrastructure only.
+[VPC clusters](#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use security groups as your virtual firewalls for instance-level protection, and network access control lists to protect the subnets that your worker nodes are connected to. VPC clusters can be provisioned on shared virtual infrastructure only.
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
 
@@ -203,19 +203,19 @@ Congratulations! You just deployed your first app in your Kubernetes classic clu
 <br />
 
 
-## Getting started with VPC on Classic clusters
+## Getting started with VPC Gen 1 compute clusters
 {: #vpc-classic-gs}
 
-Create a Virtual Private Cloud (VPC), provision your standard VPC on Classic cluster, and deploy your first app by using the {{site.data.keyword.cloud_notm}} console.
+Create a Virtual Private Cloud (VPC), provision your standard VPC Generation 1 compute cluster, and deploy your first app by using the {{site.data.keyword.cloud_notm}} console.
 {:shortdesc}
 
-### Creating a standard VPC on Classic cluster
+### Creating a standard VPC Gen 1 compute cluster
 {: #vpc-classic-cluster-create}
 
-Create a standard VPC on Classic cluster in a [single zone](/docs/containers?topic=containers-ha_clusters#single_zone) by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC on Classic cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
+Create a standard VPC Generation 1 compute cluster in a [single zone](/docs/containers?topic=containers-ha_clusters#single_zone) by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
 {: shortdesc}
 
-VPC on Classic clusters can be created as a standard cluster only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
+VPC clusters can be created as a standard cluster only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
 {: important}
 
 Before you begin:
@@ -226,7 +226,7 @@ Before you begin:
   * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
   * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry at the account level.
 
-To create a standard VPC on Classic cluster:
+To create a standard VPC cluster:
 
 1. [Create a Virtual Private Cloud (VPC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/vpc) with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from DockerHub.
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
@@ -243,10 +243,10 @@ To create a standard VPC on Classic cluster:
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster!
 
-### Deploying an app to your VPC cluster
+### Deploying an app to your VPC Gen 1 compute cluster
 {: #vpc-deploy-app}
 
-With your VPC on Classic cluster all set up, deploy your first `nginx` app by using the Kubernetes dashboard. The [Kubernetes dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard) is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
+With your VPC cluster all set up, deploy your first `nginx` app by using the Kubernetes dashboard. The [Kubernetes dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard) is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
 {: shortdesc}
 
 1. From the cluster details page, click **Kubernetes dashboard**.
@@ -263,8 +263,8 @@ Congratulations! You just deployed your first app in your Kubernetes VPC cluster
 ### What's next
 {: #vpc-classic-whats-next}
 
-- Go through the [VPC on Classic cluster tutorial](/docs/containers?topic=containers-vpc_ks_tutorial) for installing the CLI, setting up your cluster environment, and deploying an app with a VPC load balancer that exposes your app on the internet.
-- Explore other capabilities, such as creating a [multizone VPC on Classic cluster](/docs/containers?topic=containers-ha_clusters#multizone), controlling network access with [VPC access control lists](/docs/containers?topic=containers-vpc-network-policy), and [adding VPC Block Storage](/docs/containers?topic=containers-vpc-block) to your apps.
+- Go through the [VPC cluster tutorial](/docs/containers?topic=containers-vpc_ks_tutorial) for installing the CLI, setting up your cluster environment, and deploying an app with a VPC load balancer that exposes your app on the internet.
+- Explore other capabilities, such as creating a [multizone VPC cluster](/docs/containers?topic=containers-ha_clusters#multizone), controlling network access with [VPC access control lists](/docs/containers?topic=containers-vpc-network-policy), and [adding VPC Block Storage](/docs/containers?topic=containers-vpc-block) to your apps.
 
 
 

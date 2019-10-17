@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
@@ -27,7 +27,7 @@ subcollection: containers
 {: #loadbalancer_hostname}
 
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters. For VPC on Classic clusters, see [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters. For VPC clusters, see [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns).
 {: note}
 
 
@@ -59,7 +59,7 @@ Expose your app to the public internet by creating a subdomain for the network l
 
 Before you begin:
 * Review the following considerations and limitations.
-  * You can create subdomains for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC on Classic clusters
+  * You can create subdomains for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC clusters
   .
   * You currently cannot create subdomains for private NLBs.
   * You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).

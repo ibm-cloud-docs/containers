@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks
 
@@ -57,7 +57,7 @@ This tutorial is intended for software developers who want to learn how to creat
 
 * Create a **Java + Spring** app by using a [starter kit](/docs/apps/tutorials?topic=creating-apps-tutorial-starterkit).
 * Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started#idt-prereq).
-* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC on Classic](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster.
+* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster.
 
 ## Lesson 1: Add services to your app
 {: #resources-starterkit-kube}
@@ -80,7 +80,7 @@ Attach a DevOps toolchain to your starter kit app, and configure a delivery pipe
 
 1. On the **App details** page, click **Configure continuous delivery**.
 2. On the **Select a deployment target** page, select **Deploy to IBM Kubernetes Service**.
-3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC on Classic cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
+3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
 4. Click **Next**. The **Configure toolchain** page is displayed.
 5. On the **Configure toolchain** page, enter a toolchain name, select the region and the resource group that your cluster is in, and then click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.
 

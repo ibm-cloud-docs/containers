@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -27,7 +27,7 @@ subcollection: containers
 {: #network_policies}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This network policy information is specific to classic clusters. For network policy information for VPC on Classic clusters, see [Controlling traffic with VPC access control lists](/docs/containers?topic=containers-vpc-network-policy).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This network policy information is specific to classic clusters. For network policy information for VPC clusters, see [Controlling traffic with VPC access control lists](/docs/containers?topic=containers-vpc-network-policy).
 {: note}
 
 
