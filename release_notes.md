@@ -47,7 +47,8 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
   <td>17 October 2019</td>
-  <td><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for [private network-only clusters](/docs/containers?topic=containers-ca#ca_private_cluster). To get started, [update to the latest Helm chart version](/docs/containers?topic=containers-ca#ca_helm_up).</td>
+  <td><ul><li><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for [private network-only clusters](/docs/containers?topic=containers-ca#ca_private_cluster). To get started, [update to the latest Helm chart version](/docs/containers?topic=containers-ca#ca_helm_up).</li>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New DevOps tutorial</strong>: Learn how to [set up your own DevOps toolchain](/docs/containers?topic=containers-tutorial-byoc-kube) and configure continuous delivery pipeline stages to deploy your containerized app that is stored in GitHub to a cluster in {{site.data.keyword.containerlong_notm}}. </li></ul></td>
 </tr>
 <tr>
   <td>17 October 2019</td>
