@@ -5,9 +5,8 @@
 IBM Cloud Kubernetes Service
 
     {: .navgroup id="learn"}
-    getting-started.md
-     
-
+    getting-started.md 
+        
     {: .topicgroup}
     About
         cs_why.md
