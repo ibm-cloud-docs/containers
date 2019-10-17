@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-16"
 
 keywords: kubernetes, iks, ingress
 
@@ -1498,7 +1498,7 @@ spec:
 <td>Optional: Specify a server name for the back-end server that is protected by the SSL certificate. The ALB uses this server name as the Common Name (CN), instead of the CN in the certificate of the back-end server, to check the certificate of the back-end HTTPS server. This server name is also passed to the back-end server in the Server Name Indication (SNI) extension during the TLS handshake.</br></br>
 Specifying an override CN for each service is helpful when you create two or more Ingress resource files, and the resources share the same wildcard trusted certificate for the secret. In this case, the resource share the same CN for the certificate. Because the ALB generates the back-end server name based on the CN in the certificate, the ALB configuration is invalid because the two services in the separate resources have the same back-end server name. You must use `proxy-ssl-name` to provide an override CN that is unique to each services' back-end server.</br></br>
 For example, you might want the hostname to be `foo.mydomain.com` for Ingress resource A, and `mydomain.com` for Ingress resource B. You create one trusted certificate for both resources by using a wildcard CN. In the `ssl-services` annotation for resource A, you specify the CN as `proxy-ssl-name=foo.mydomain.com`. In the `ssl-services` annotation for resource B, you specify the CN as `proxy-ssl-name=mydomain.com`. The ALB can now generate two distinct back-end server names for the services in each resource.</br></br>
-The CN must exactly match the name of the back-end HTTPS server where the certificate is installed. If the certificate is issued for a subdomain, specify the full subdomain, such as `test.example.com`. If you use a wildcard certificate, specify the wildcard hostname, such as `*.example.com`.
+The CN must exactly match the name of the back-end HTTPS server where the certificate is installed. If the certificate is issued for a subdomain, specify the full subdomain, such as `test.example.com`. If you use a wildcard certificate, you can specify the full hostname, such as `test.example.com` or `foo.example.com`, so that each hostname can use the same certificate.
 </td>
 </tr>
 </tbody></table>

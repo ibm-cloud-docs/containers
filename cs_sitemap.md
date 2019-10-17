@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-17"
 
 ---
 
@@ -235,7 +235,7 @@ lastupdated: "2019-10-14"
 * [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
   * [Scenario: Run internet-facing app workloads in a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-no-pgw)
   * [Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress](/docs/containers?topic=containers-plan_clusters#vpc-pgw)
-  * [Scenario: Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters##vpc-vpn)
+  * [Scenario: Extend your on-premises data center to a VPC cluster](/docs/containers?topic=containers-plan_clusters#vpc-vpn)
 * [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics)
   * [Worker-to-worker communication](/docs/containers?topic=containers-plan_clusters#worker-worker)
   * [Master-to-worker communication](/docs/containers?topic=containers-plan_clusters#workeruser-master)

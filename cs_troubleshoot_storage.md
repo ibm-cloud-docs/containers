@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-16"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, help, debug
 
@@ -36,7 +36,7 @@ If you have a more general issue, try out [cluster debugging](/docs/containers?t
 {: tip}
 <br>
 
-## Debugging persistent storage failures
+## Debugging persistent storage failures 
 {: #debug_storage}
 
 Review the options to debug persistent storage and find the root causes for failures.
