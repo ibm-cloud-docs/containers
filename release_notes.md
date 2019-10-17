@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-16"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, release notes
 
@@ -45,6 +45,10 @@ The following icons are used to indicate if a release note applies only to a cer
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+  <td>17 October 2019</td>
+  <td><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for [private network-only clusters](/docs/containers?topic=containers-ca#ca_private_cluster). To get started, [update to the latest Helm chart version](/docs/containers?topic=containers-ca#ca_helm_up), 1.0.9.</td>
+</tr>
 <tr>
   <td>17 October 2019</td>
   <td><ul>
