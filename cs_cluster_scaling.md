@@ -957,7 +957,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         ```
         {: screen}
     3.  Verify that the `containers_api_route_private` field includes the `private` service endpoint address. 
-    4.  If the ``containers_api_route_private` field is not in the secret, add it to the string by appending `private.` to the `containers_api_route` address. For example:
+    4.  If the `containers_api_route_private` field is not in the secret, add it to the string by appending `private.` to the `containers_api_route` address. For example:
         ```
         containers_api_route = "https://us-south.containers.cloud.ibm.com"
         containers_api_route_private = "https://private.us-south.containers.cloud.ibm.com"
