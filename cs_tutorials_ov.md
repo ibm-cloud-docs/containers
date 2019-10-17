@@ -367,7 +367,7 @@ subcollection: containers
                 Set up a DevOps delivery pipeline for your app
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br>  <p>Set up a DevOps pipeline for your app that is stored in GitHub and learn how to configure delivery pipline stages to build an image from your Dockerfile, push it to a container registry, and deploy your app to a cluster.
+                  </br>  <p>Set up a DevOps toolchain for your GitHub app and learn how to configure pipline stages to build an image from a Dockerfile, push it to a container registry, and deploy the app to a cluster.
              </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
