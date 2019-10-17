@@ -48,9 +48,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tr>
   <td>17 October 2019</td>
   <td><ul><li><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for [private network-only clusters](/docs/containers?topic=containers-ca#ca_private_cluster). To get started, [update to the latest Helm chart version](/docs/containers?topic=containers-ca#ca_helm_up).</li>
-    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New DevOps tutorial</strong>: Learn how to [set up your own DevOps toolchain](/docs/containers?topic=containers-tutorial-byoc-kube) and configure continuous delivery pipeline stages to deploy your containerized app that is stored in GitHub to a cluster in {{site.data.keyword.containerlong_notm}}. </li>
-    <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 582 and `ingress-auth` image build to 343](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>Ingress annotations</strong>: Added the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li></ul></td>
+    <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New DevOps tutorial</strong>: Learn how to [set up your own DevOps toolchain](/docs/containers?topic=containers-tutorial-byoc-kube) and configure continuous delivery pipeline stages to deploy your containerized app that is stored in GitHub to a cluster in {{site.data.keyword.containerlong_notm}}. </li></ul></td>
 </tr>
 <tr>
   <td>14 October 2019</td>
