@@ -98,7 +98,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
    <a href = "#vpc-classic-gs">
     <div>
          <h2 style="margin: 10px 10px 10px 10px;"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC</h2>
-         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in a Virtual Private Cloud (VPC) for Gen 1 compute resources that gives you the security of a private cloud with the dynamic scalability of a public cloud.  </p>
+         <p class="bx--type-caption" style="margin: 10px 10px 10px 10px;">Create your cluster in the first generation of compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud.  </p>
      </div>
     </a>
 </div>
