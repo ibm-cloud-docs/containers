@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-18"
 
 keywords: kubernetes, iks, vpc
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Storing data on {{site.data.keyword.block_storage_is_full}} (Gen 1 compute)
+# Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)
 {: #vpc-block}
 
 [{{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.

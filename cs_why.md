@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-18"
 
 keywords: kubernetes, iks, containers
 
@@ -31,6 +31,7 @@ subcollection: containers
 {{site.data.keyword.containerlong}} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For more information about certification, see [Compliance on the {{site.data.keyword.cloud_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/compliance).
 {:shortdesc}
 
+Check out the following <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a> to learn more about how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps.
 
 ## Benefits of using the service
 {: #benefits}

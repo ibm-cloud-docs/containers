@@ -2697,6 +2697,7 @@ ibmcloud ks zone add vpc-classic --zone us-south-3 --cluster my_cluster -w pool1
 </br>
 
 
+
 ### `ibmcloud ks zone ls`
 {: #cs_datacenters}
 
@@ -2802,6 +2803,7 @@ ibmcloud ks zone network-set --zone dal10 -c my_cluster -p pool1 -p pool2 --priv
 {: pre}
 
 </br>
+
 
 ### `ibmcloud ks zone rm`
 {: #cs_zone_rm}
@@ -3782,6 +3784,7 @@ ibmcloud ks logging config get --cluster my_cluster --logsource worker
 {: pre}
 
 </br>
+
 ### `ibmcloud ks logging config rm`
 {: #cs_logging_rm}
 
