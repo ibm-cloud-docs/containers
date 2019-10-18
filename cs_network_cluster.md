@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-09"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, vlan
 
@@ -30,7 +30,7 @@ After you initially set up your network when you [create a cluster](/docs/contai
 {: shortdesc}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC on Classic clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
 {: note}
 
 
@@ -67,7 +67,7 @@ Did you create a cluster with only a private service endpoint before you enabled
    ```
    {: pre}
 
-8. If the cluster is in an environment behind a firewall:
+7. If the cluster is in an environment behind a firewall:
   * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
   * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 

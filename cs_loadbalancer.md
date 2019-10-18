@@ -27,7 +27,7 @@ subcollection: containers
 {: #loadbalancer}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 1.0 NLBs can be created in classic clusters only, and cannot be created in VPC on Classic clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 1.0 NLBs can be created in classic clusters only, and cannot be created in VPC clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
 
 

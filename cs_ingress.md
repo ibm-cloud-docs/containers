@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-16"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -907,7 +907,7 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 ## VPC clusters: Exposing apps to a private network
 {: #ingress_expose_vpc_private}
 
-Expose apps to a private network by using the private Ingress ALBs in a VPC on Classic cluster.
+Expose apps to a private network by using the private Ingress ALBs in a VPC cluster.
 {:shortdesc}
 
 To use a private ALB, you must first enable the private ALB. Then, to expose your apps to the private network, you must create a DNS entry for your private ALB hostname.

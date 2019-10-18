@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -281,12 +281,12 @@ The following diagram and table describe the default components that are set up 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the VPC infrastructure provider. For an architectural overview for the classic infrastructure provider, see [Classic cluster architecture](#architecture_classic).
 {: note}
 
-![Kubernetes cluster in VPC on Classic](images/cs_org_ov_vpc.png)
+![Kubernetes cluster in a VPC](images/cs_org_ov_vpc.png)
 
 | Component | Description |
 |:-----------------|:-----------------|
 | Master |  Master components, including the API server and etcd, have three replicas and are spread across zones for even higher availability. Masters include the same components as described in the community Kubernetes architecture. |
-| Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes belong to you, and you manage them through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC on Classic worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.<br><br>Worker nodes include the same components as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 16.64, 18.64. |
+| Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes belong to you, and you manage them through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC Gen 1 compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.<br><br>Worker nodes include the same components as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 16.64, 18.64. |
 | Cluster networking | Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run `kubectl` commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPN gateway appliance on the private network. |
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas).<br><br>Calico is used as the cluster networking policy fabric. |
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Storing data on IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
@@ -364,7 +364,7 @@ The following diagram and table describe the default components that are set up 
 ## VPC cluster limitations
 {: #vpc_ks_limits}
 
-VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released with the following limitations.
+VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} is released with the following limitations.
 {: shortdesc}
 
 **Compute**:
@@ -388,7 +388,7 @@ VPC on Classic clusters in {{site.data.keyword.containerlong_notm}} is released 
 * {{site.data.keyword.cos_full_notm}} is available as a Helm chart. For more information, see [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-object_storage).
 * File storage and Portworx software-defined storage (SDS) are not available.
 
-**strongSwan VPN service**: Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established. Additionally, because VPC on Classic clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC on Classic clusters:
+**strongSwan VPN service**: Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established. Additionally, because VPC clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC clusters:
   * `enableServiceSourceIP`
   * `loadBalancerIP`
   * `zoneLoadBalancer`

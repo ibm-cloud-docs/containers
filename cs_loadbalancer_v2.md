@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -28,7 +28,7 @@ subcollection: containers
 {: #loadbalancer-v2}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 2.0 NLBs can be created in classic clusters only, and cannot be created in VPC on Classic clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 2.0 NLBs can be created in classic clusters only, and cannot be created in VPC clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
 
 

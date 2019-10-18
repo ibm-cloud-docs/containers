@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-03"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -27,7 +27,7 @@ subcollection: containers
 {: #vpn}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to classic clusters. For VPN information for VPC on Classic clusters, see [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to classic clusters. For VPN information for VPC clusters, see [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas).
 {: note}
 
 

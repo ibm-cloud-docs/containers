@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-16"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas
 
@@ -26,10 +26,10 @@ subcollection: containers
 # Setting up VPC VPN connectivity
 {: #vpc-vpnaas}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to VPC on Classic clusters. For VPN information for classic clusters, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to VPC clusters. For VPN information for classic clusters, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 {: note}
 
-With VPN connectivity, you can securely connect apps and services in a VPC on Classic cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster.
+With VPN connectivity, you can securely connect apps and services in a VPC cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster.
 {: shortdesc}
 
 ## Choosing a VPN solution
@@ -115,9 +115,9 @@ Before using the strongSwan Helm chart, review the following considerations and 
 * The strongSwan Helm chart runs as a Kubernetes pod inside of the cluster. The VPN performance is affected by the memory and network usage of Kubernetes and other pods that are running in the cluster. If you have a performance-critical environment, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
 * The strongSwan Helm chart runs a single VPN pod as the IPSec tunnel endpoint. If the pod fails, the cluster restarts the pod. However, you might experience a short down time while the new pod starts and the VPN connection is re-established. If you require faster error recovery or a more elaborate high availability solution, consider using a VPN solution that runs outside of the cluster on dedicated hardware.
 * The strongSwan Helm chart does not provide metrics or monitoring of the network traffic flowing over the VPN connection. For a list of supported monitoring tools, see [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services).
-* **Limitations specific to VPC on Classic clusters**:
+* **Limitations specific to VPC clusters**:
   * Only outbound VPN connections from the cluster can be established.
-  * Because VPC on Classic clusters do not support UDP load balancers, the following `config.yaml` options are not supported:
+  * Because VPC clusters do not support UDP load balancers, the following `config.yaml` options are not supported:
     * `enableServiceSourceIP`
     * `loadBalancerIP`
     * `zoneLoadBalancer`
@@ -154,9 +154,9 @@ Before you begin:
 ### Step 1: Enable a public gateway on the subnet
 {: #vpc_ss_1}
 
-In VPC on Classic cluster, only outbound VPN connections are permitted. The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection. To allow worker nodes to access the on-premises VPN endpoint, you must enable a public gateway on the VPC subnet that the worker nodes are deployed to. The outbound VPN request is routed through the public gateway in order to reach the internet. The public IP address of the public gateway is used for the cluster VPN endpoint.
+In VPC cluster, only outbound VPN connections are permitted. The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection. To allow worker nodes to access the on-premises VPN endpoint, you must enable a public gateway on the VPC subnet that the worker nodes are deployed to. The outbound VPN request is routed through the public gateway in order to reach the internet. The public IP address of the public gateway is used for the cluster VPN endpoint.
 
-1. From the [VPC on Classic **Subnets** dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the subnet that your worker nodes are attached to.
+1. From the [VPC **Subnets** dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the subnet that your worker nodes are attached to.
 2. Under **Public Gateway**, select **Attached**.
 
 ### Step 2: Get the strongSwan Helm chart
@@ -212,7 +212,7 @@ For more information about each setting, read the documentation provided within 
 4. Change the value of `local.id` to any string that you want to use to identify the local Kubernetes cluster side that your VPN tunnel endpoint uses. The default is `ibm-cloud`. Some VPN implementations require that you use the public IP address for the local endpoint.
 5. Change the value of `remote.id` to any string that you want to use to identify the remote on-premises side that your VPN tunnel endpoint uses. The default is `on-prem`. Some VPN implementations require that you use the public IP address for the remote endpoint.
 6. Change the value of `preshared.secret` to the pre-shared secret that your on-premises VPN tunnel endpoint gateway uses for the connection. This value is stored in `ipsec.secrets`.
-7. Change `ipsec.auto` to `start`. In VPC on Classic cluster, only outbound VPN connections are permitted. The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection. The outbound VPN request is routed through the public gateway in order to reach the internet. The public IP address of the public gateway is used for the cluster VPN endpoint.
+7. Change `ipsec.auto` to `start`. In VPC cluster, only outbound VPN connections are permitted. The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection. The outbound VPN request is routed through the public gateway in order to reach the internet. The public IP address of the public gateway is used for the cluster VPN endpoint.
 8. Set `remote.gateway` to the public IP address for the on-premises VPN endpoint in the remote network.
 9. Optional: Set `remote.privateIPtoPing` to any private IP address in the remote subnet to ping as part of the Helm connectivity validation test.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, helm
 
@@ -41,7 +41,7 @@ You can use various external services and catalog services with a standard Kuber
 <th>Category</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic</th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -67,9 +67,9 @@ You can use various external services and catalog services with a standard Kuber
 <td></td>
 </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix}} VPC Block Storage</td>
+<td> {{site.data.keyword.block_storage_is_short}}</td>
 <td>Block storage</td>
-<td>[Block Storage for VPC](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC on Classic cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block)</td>
+<td>[{{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)</td>
 <td></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -180,7 +180,7 @@ You can use various external services and catalog services with a standard Kuber
 <th>Service</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic </th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -249,7 +249,7 @@ You can use various external services and catalog services with a standard Kuber
 <th>Service</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic </th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -280,7 +280,7 @@ You can use various external services and catalog services with a standard Kuber
 <th>Service</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic </th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -367,7 +367,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <th>Service</th>
 <th>Description</th>
   <th>Classic</th>
-  <th>VPC on Classic </th>
+  <th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -435,7 +435,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <th>Service</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic </th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>
@@ -452,8 +452,8 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <td></td>
   </tr>
 <tr>
-<td>{{site.data.keyword.Bluemix}} VPC Block Storage</td>
-<td>[Block Storage for VPC](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC on Classic cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on VPC Block Storage](/docs/containers?topic=containers-vpc-block)</td>
+<td> {{site.data.keyword.block_storage_is_short}}</td>
+<td>[{{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)</td>
 <td></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -491,7 +491,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <th>Service</th>
 <th>Description</th>
 <th>Classic</th>
-<th>VPC on Classic</th>
+<th>VPC</th>
 </tr>
 </thead>
 <tbody>

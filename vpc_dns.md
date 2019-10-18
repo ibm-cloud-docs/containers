@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-23"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -27,10 +27,10 @@ subcollection: containers
 # Configuring CoreDNS for VPC clusters
 {: #vpc_dns}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to VPC on Classic clusters. For DNS provider information for classic clusters, see [Configuring the DNS provider for classic clusters](/docs/containers?topic=containers-cluster_dns).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to VPC clusters. For DNS provider information for classic clusters, see [Configuring the DNS provider for classic clusters](/docs/containers?topic=containers-cluster_dns).
 {: note}
 
-Each service in your {{site.data.keyword.containerlong}} cluster is assigned a Domain Name System (DNS) name that the cluster DNS provider registers to resolve DNS requests. All VPC on Classic clusters use [CoreDNS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/) as the DNS provider. For more information about DNS for services and pods, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
+Each service in your {{site.data.keyword.containerlong}} cluster is assigned a Domain Name System (DNS) name that the cluster DNS provider registers to resolve DNS requests. All VPC clusters use [CoreDNS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/) as the DNS provider. For more information about DNS for services and pods, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/).
 {: shortdesc}
 
 ## Autoscaling CoreDNS

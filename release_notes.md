@@ -236,8 +236,8 @@ The following icons are used to indicate if a release note applies only to a cer
   <td>23 August 2019</td>
   <td><ul>
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone locations for OpenShift clusters</strong>: You can create OpenShift clusters in Toronto, Canada `tor01` and Singapore `sng01` single zone locations. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).</li>
-  <li><strong>App networking in VPC</strong>: Updated the [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning) topic with information for planning app networking in a VPC on Classic cluster.</li>
-  <li><strong>Istio in VPC</strong>: Updated the [managed Istio add-on](/docs/containers?topic=containers-istio) topic with information for using Istio in a VPC on Classic cluster.</li>
+  <li><strong>App networking in VPC</strong>: Updated the [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning) topic with information for planning app networking in a VPC cluster.</li>
+  <li><strong>Istio in VPC</strong>: Updated the [managed Istio add-on](/docs/containers?topic=containers-istio) topic with information for using Istio in a VPC cluster.</li>
   <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Remove bound services from cluster</strong>: Added instructions for how to remove an {{site.data.keyword.cloud_notm}} service that you added to a cluster by using service binding. For more information, see [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service).</li>
   </ul></td>
 </tr>

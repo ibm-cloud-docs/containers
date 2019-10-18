@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-11"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -41,7 +41,7 @@ The worker node flavors and isolation levels that are available to you depend on
 **What flavors are available to me?** </br>
 Classic standard clusters can be created on [virtual](#vm) and [bare metal](#bm) worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for [software-defined storage](#sds) solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes. If you create a free classic cluster, your cluster is provisioned with the smallest virtual worker node flavor on shared infrastructure.
 
-VPC on Classic clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone-capable metro cities](/docs/containers?topic=containers-regions-and-zones#zones). Free VPC on Classic clusters are not supported.
+VPC Gen 1 compute clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone-capable metro cities](/docs/containers?topic=containers-regions-and-zones#zones). Free VPC clusters are not supported.
 
 Gateway-enabled classic clusters are created with a `default` pool of compute worker nodes and a `gateway` pool of gateway worker nodes by default. During cluster creation you can specify the isolation and flavor for the compute worker nodes, but by default the gateway worker nodes are created on shared virtual machines with the `u3c.2x4` flavor. If you want to change the isolation and flavor of the gateway worker nodes, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the `gateway` worker pool.
 
@@ -54,7 +54,7 @@ See [updating flavors](/docs/containers?topic=containers-update#machine_type).
 **How do I manage my worker nodes?** </br>
 Worker nodes in classic clusters are provisioned into your {{site.data.keyword.cloud_notm}} account. You can manage your worker nodes by using {{site.data.keyword.containerlong_notm}}, but you can also use the [classic infrastructure dashboard](https://cloud.ibm.com/classic/) in the {{site.data.keyword.cloud_notm}} console to work with your worker node directly.  
 
-Unlike classic clusters, the worker nodes of your VPC on Classic cluster are not listed in the [VPC infrastructure dashboard](https://cloud.ibm.com/vpc/overview). Instead, you manage your worker nodes with {{site.data.keyword.containerlong_notm}} only. However, your worker nodes might be connected to other VPC infrastructure resources, such as VPC subnets or VPC Block Storage. These resources are included in the VPC infrastructure dashboard and can be managed separately from there. 
+Unlike classic clusters, the worker nodes of your VPC Gen 1 compute cluster are not listed in the [VPC infrastructure dashboard](https://cloud.ibm.com/vpc/overview). Instead, you manage your worker nodes with {{site.data.keyword.containerlong_notm}} only. However, your worker nodes might be connected to other VPC infrastructure resources, such as VPC subnets or VPC Block Storage. These resources are included in the VPC infrastructure dashboard and can be managed separately from there. 
 
 **What limitations do I need to be aware of?** </br>
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/best-practices/cluster-large/) for more information.
@@ -71,7 +71,7 @@ With VMs, you get greater flexibility, quicker provisioning times, and more auto
 {: shortdesc}
 
 **Do I want to use shared or dedicated hardware?**</br>
-When you create a standard classic cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy). VPC on Classic standard clusters can be provisioned on shared infrastructure (multi tenancy) only.
+When you create a standard classic cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy). VPC standard clusters can be provisioned on shared infrastructure (multi tenancy) only.
 
 * **In a multi-tenant, shared hardware setup**: Physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
 * **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant setup, the hypervisor assures that every worker node gets its share of the available physical resources.
@@ -87,10 +87,10 @@ Every VM comes with an attached disk for storage of information that the VM need
  Additionally, classic and VPC infrastructure differ in the disk setup.
 
 * **Classic VMs**: Classic VMs have two attached disks. The primary storage disk has 25 GB for the OS file system, and the secondary storage disk has 100 GB for data such as the container runtime and the `kubelet`. For reliability, the primary and secondary storage volumes are local disks instead of storage area networking (SAN). Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. The secondary disk is encrypted by default.
-* **VPC on Classic VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. To account for network latency, the storage disks have a maximum of up to 3000 IOPS. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#encryption).
+* **VPC Gen 1 compute VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. To account for network latency, the storage disks have a maximum of up to 3000 IOPS. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#encryption).
 
 **What virtual machine flavors are available?**</br>
-The following table shows available worker node flavors for classic and VPC on Classic clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
+The following table shows available worker node flavors for classic and VPC Gen 1 compute clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
 
 If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
@@ -130,9 +130,9 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 | **Virtual, m2.8x64**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for light to mid-sized workloads that require more memory. | 8 / 64 GB | 100 GB | 1000 Mbps |
 | **Virtual, m2.16x128**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for mid to large-sized workloads that require more memory. | 16 / 128 GB | 100 GB | 1000 Mbps |
 {: class="simple-tab-table"}
-{: caption="Available worker node flavors for VPC on Classic clusters" caption-side="top"}
+{: caption="Available worker node flavors for VPC Gen 1 compute clusters" caption-side="top"}
 {: #vpc-classic-worker-vm-flavors}
-{: tab-title="VPC on Classic clusters"}
+{: tab-title="VPC Gen 1 compute"}
 {: tab-group="vm-worker-flavors"}
 
 `*` For more information about network performance caps for VPC virtual machines, see [Profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
@@ -148,7 +148,7 @@ You can provision your worker node as a single-tenant physical server, also refe
 {: shortdesc}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Physical machines are available for classic clusters only and are not supported in VPC on Classic clusters.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Physical machines are available for classic clusters only and are not supported in VPC Gen 1 compute clusters.
 {: note}
 
 
@@ -242,7 +242,7 @@ Software-defined storage (SDS) flavors are physical machines that are provisione
 {: shortdesc}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Software-defined storage flavor are available for classic clusters only and are not supported in VPC on Classic clusters.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Software-defined storage flavor are available for classic clusters only and are not supported in VPC Gen 1 compute clusters.
 {: note}
 
 

@@ -95,7 +95,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>519 / 335</td>
 <td>20 Aug 2019</td>
-<td>Fixes a bug so that [specifying custom ports](/docs/containers?topic=containers-ingress_annotation#custom-port) is now functional for VPC on Classic clusters.</td>
+<td>Fixes a bug so that [specifying custom ports](/docs/containers?topic=containers-ingress_annotation#custom-port) is now functional for VPC clusters.</td>
 <td>-</td>
 </tr>
 <tr>

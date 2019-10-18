@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-03"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -38,7 +38,7 @@ The {{site.data.keyword.containerlong_notm}} API automates the provisioning and 
 
 The API is versioned to support the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
 
-You can use the version two (`v2`) API to manage both classic and VPC on Classic clusters. The `v2` API is designed to avoid breaking existing functionality when possible. However, make sure that you review the following differences between the `v1` and `v2` API.
+You can use the version two (`v2`) API to manage both classic and VPC clusters. The `v2` API is designed to avoid breaking existing functionality when possible. However, make sure that you review the following differences between the `v1` and `v2` API.
 
 <table summary="The rows are read from left to right, with the area of comparison in column one, version 1 API in column two, and version 2 API in column three.">
 <caption>{{site.data.keyword.containerlong_notm}} API versions</caption>
@@ -78,7 +78,7 @@ You can use the version two (`v2`) API to manage both classic and VPC on Classic
    <td>Supported infrastructure providers</td>
    <td>`classic`</td>
    <td>`vpc` and `classic`<ul>
-   <li>The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subprovider is `vpc-classic`, which corresponds to a VPC on Classic cluster.</li>
+   <li>The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subprovider is `vpc-classic`, which corresponds to a VPC cluster for Generation 1 compute resources.</li>
    <li>Provider-specific requests have a path parameter in the URL, such as `v2/vpc/createCluster`. Some APIs are only available to a particular provider, such as `GET vlan` for classic or `GET vpcs` for VPC.</li>
    <li>Provider-agnostic requests can include a provider-specific body parameter that you specify, usually in JSON, such as `{"provider": "vpc"}`, if you want to return responses for only the specified provider.</li></ul></td>
  </tr>

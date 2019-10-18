@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-01"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, vpc
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Creating a classic cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 
-With the **{{site.data.keyword.containerlong}} clusters in VPC on Classic**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC on Classic.
+With the **{{site.data.keyword.containerlong}} clusters in VPC Generation 1 compute**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 {: shortdesc}
 
 ## Objectives
@@ -42,14 +42,14 @@ In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} 
 ## Audience
 {: #vpc_ks_audience}
 
-This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC on Classic for the first time.
+This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC Generation 1 compute for the first time.
 {: shortdesc}
 
 ## Prerequisites
 {: #vpc_ks_prereqs}
 
 Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
-* VPC on Classic clusters: [**Administrator** platform role for VPC Infrastructure](/docs/vpc-on-classic?topic=vpc-on-classic-managing-user-permissions-for-vpc-resources).
+* VPC clusters: [**Administrator** platform role for VPC Infrastructure](/docs/vpc-on-classic?topic=vpc-on-classic-managing-user-permissions-for-vpc-resources).
 * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry.
@@ -75,7 +75,7 @@ Install the command-line tools.
 ## Lesson 1: Creating a cluster in VPC
 {: #vpc_ks_create_vpc_cluster}
 
-Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with VPC on Classic](/docs/vpc-on-classic?topic=vpc-on-classic-getting-started).
+Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud (Gen 1 compute)](/docs/vpc-on-classic?topic=vpc-on-classic-getting-started).
 {:shortdesc}
 
 1.  Log in to the {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). If you have a federated ID, include the `--sso` flag.
@@ -84,7 +84,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     ```
     {: pre}
 2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli).
-    1.  Target the VPC on Classic infrastructure generation.
+    1.  Target the VPC infrastructure generation 1.
         ```
         ibmcloud is target --gen 1
         ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-26"
+lastupdated: "2019-10-17"
 
 keywords: kubernetes, iks, networking
 
@@ -193,7 +193,7 @@ Still want more details about the load-balancing deployment patterns that are av
 ### Choosing a deployment pattern for VPC clusters
 {: #pattern_public_vpc}
 
-To make an app publicly available to the internet in a VPC on Classic cluster, choose a load-balancing deployment pattern that uses public `LoadBalancer` or `Ingress` services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
+To make an app publicly available to the internet in a VPC cluster, choose a load-balancing deployment pattern that uses public `LoadBalancer` or `Ingress` services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 {: shortdesc}
 
 <table summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns.">
