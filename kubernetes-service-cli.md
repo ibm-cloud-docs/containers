@@ -3783,6 +3783,7 @@ ibmcloud ks logging config get --cluster my_cluster --logsource worker
 {: pre}
 
 </br>
+
 ### `ibmcloud ks logging config rm`
 {: #cs_logging_rm}
 
