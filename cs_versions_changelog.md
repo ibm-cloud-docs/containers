@@ -109,6 +109,9 @@ The following table shows the changes that are included in the worker node fix p
 The following table shows the changes that are included in the patch 1.15.4_1518.
 {: shortdesc}
 
+
+
+
 <table summary="Changes that were made since version 1.15.3_1517">
 <caption>Changes since version 1.15.3_1517</caption>
 <thead>
@@ -200,6 +203,7 @@ The following table shows the changes that are included in the patch 1.15.4_1518
 </tr>
 </tbody>
 </table>
+
 
 ### Changelog for worker node fix pack 1.15.3_1517, released 16 September 2019
 {: #1153_1517_worker}
@@ -637,6 +641,9 @@ The following table shows the changes that are included in the worker node fix p
 The following table shows the changes that are included in the patch 1.14.7_1534.
 {: shortdesc}
 
+
+
+
 <table summary="Changes that were made since version 1.14.6_1533">
 <caption>Changes since version 1.14.6_1533</caption>
 <thead>
@@ -716,6 +723,7 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 </tr>
 </tbody>
 </table>
+
 
 ### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
 {: #1146_1533_worker}
@@ -1563,6 +1571,10 @@ The following table shows the changes that are included in the worker node fix p
 The following table shows the changes that are included in the patch 1.13.11_1537.
 {: shortdesc}
 
+
+
+
+
 <table summary="Changes that were made since version 1.13.10_1536">
 <caption>Changes since version 1.13.10_1536</caption>
 <thead>
@@ -1642,6 +1654,7 @@ The following table shows the changes that are included in the patch 1.13.11_153
 </tr>
 </tbody>
 </table>
+
 
 ### Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019
 {: #11310_1536_worker}
