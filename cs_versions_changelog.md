@@ -51,7 +51,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.15 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.15.5_1520, released 21 October 2019
+### Changelog for master fix pack 1.15.5_1520, released 22 October 2019
 {: #1155_1520}
 
 The following table shows the changes that are included in the master fix pack `1.15.5_1520`.
@@ -585,7 +585,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 Review the version 1.14 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.14.8_1536, released 21 October 2019
+### Changelog for master fix pack 1.14.8_1536, released 22 October 2019
 {: #1148_1536}
 
 The following table shows the changes that are included in the master fix pack `1.14.8_1536`.
@@ -1516,7 +1516,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 Review the version 1.13 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.13.12_1539, released 21 October 2019
+### Changelog for master fix pack 1.13.12_1539, released 22 October 2019
 {: #11312_1539}
 
 The following table shows the changes that are included in the master fix pack `1.13.12_1539`.
