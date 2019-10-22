@@ -29,7 +29,7 @@ subcollection: containers
 [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started) is persistent, highly available storage that you can mount to your apps. The plug-in is a Kubernetes Flex-Volume plug-in that connects Cloud {{site.data.keyword.cos_short}} buckets to pods in your cluster. Information that is stored with {{site.data.keyword.cos_full_notm}} is encrypted in transit and at rest, dispersed across multiple geographic locations, and accessed over HTTP by using a REST API.
 {: shortdesc}
 
-If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster without public network access, you must set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster. 
+If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster without public network access, you must set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
 {: important}
 
 If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
@@ -143,12 +143,12 @@ Looking for instructions for how to update or remove the {{site.data.keyword.cos
 {: tip}
 
 
-Before you begin: 
+Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
 
 
-To install the plug-in: 
+To install the plug-in:
 
 
 2.  Choose if you want to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller. Then, [follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and optionally Tiller with a service account in your cluster. **Note**: If you use Windows, you must install Tiller.
@@ -295,10 +295,10 @@ To install the plug-in:
    - **For Windows:**
      1. Retrieve the **datacenter** where your cluster is deployed.  
         ```
-        kubectl get cm cluster-info -n kube-system
+        kubectl get cm cluster-info -n kube-system -o yaml
         ```
         {: pre}
-     2. Store the data center in an environment variable. 
+     2. Store the data center in an environment variable.
         ```
         SET DC_NAME=<datacenter>
         ```
@@ -402,12 +402,12 @@ To install the plug-in:
     ibmc-s3fs-vault-regional               ibm.io/ibmc-s3fs   8m
     ```
     {: screen}
-    
+
     If you want to set one of the {{site.data.keyword.cos_full_notm}} storage classes as your default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`. Replace `<storageclass>` with the name of the {{site.data.keyword.cos_full_notm}} storage class.
     {: tip}
 
 12. **VPC clusters only**: If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
-   
+
 13. Follow the instructions to [add object storage to your apps](#add_cos).        
 
 
@@ -593,7 +593,7 @@ To remove the plug-in:
 
 1. List available storage classes in {{site.data.keyword.containerlong_notm}}. 
 
-   If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. However, you can follow the steps in this topic to understand the {{site.data.keyword.cos_full_notm}} settings that you can include in your storage class. 
+   If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. However, you can follow the steps in this topic to understand the {{site.data.keyword.cos_full_notm}} settings that you can include in your storage class.
    {: note} 
    ```
    kubectl get storageclasses | grep s3
@@ -1176,7 +1176,7 @@ To deploy a stateful set that uses object storage:
 ## Creating a customized storage class for VPC
 {: #customized_storageclass_vpc}
 
-If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance. To work with the plug-in in a VPC cluster, you must create a customized storage class that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
+If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance. To work with the plug-in in a VPC cluster, you must create a customized storage class that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance.
 {: shortdesc}
 
 1. Review the steps in [Deciding on your Object Storage configuration](/docs/containers?topic=containers-object_storage#configure_cos) to find the storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
@@ -1184,7 +1184,7 @@ If you installed the plug-in in a VPC cluster, the storage classes that were aut
    ```
    kubectl get storageclass ibmc-s3fs-cold-cross-region -o yaml
    ```
-        
+
    Example output:
    ```
    apiVersion: storage.k8s.io/v1
@@ -1218,7 +1218,7 @@ If you installed the plug-in in a VPC cluster, the storage classes that were aut
    volumeBindingMode: Immediate
    ```
    {: screen}
-3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connectign to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc-on-classic?topic=vpc-on-classic-connecting-to-ibm-cloud-object-storage-from-a-vpc). 
+3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connectign to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc-on-classic?topic=vpc-on-classic-connecting-to-ibm-cloud-object-storage-from-a-vpc).
    ```
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
@@ -1242,20 +1242,20 @@ If you installed the plug-in in a VPC cluster, the storage classes that were aut
    volumeBindingMode: Immediate
    ```
    {: codeblock}
-       
-4. Create the storage class in your cluster. 
+
+4. Create the storage class in your cluster.
    ```
    kubectl apply -f custom_storageclass.yaml
    ```
    {: pre}
-   
+
 5. Verify that your storage class is available in the cluster.
    ```
    kubectl get storageclasses
    ```
    {: pre}
-       
-6. Optional: Set the customized storage class as the default one for your cluster. 
+
+6. Optional: Set the customized storage class as the default one for your cluster.
    ```
    kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
    ```
