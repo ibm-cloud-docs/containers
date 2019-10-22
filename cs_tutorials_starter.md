@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-22"
 
 keywords: kubernetes, iks
 
@@ -29,7 +29,7 @@ subcollection: containers
 Create an app in {{site.data.keyword.cloud}} by using a blank starter kit, and set up a continuous integration/ continuous delivery DevOps pipeline to automate the deployment of the app to your Kubernetes cluster.
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} offers starter kits that help you build the foundation of an app that runs on Kubernetes. When you use a starter kit, it's easy to follow a cloud native programming model that uses {{site.data.keyword.cloud_notm}} best practices for app development. Starter kits generate apps that follow the cloud native programming model, and they include test cases, health check, and metrics in each programming language. You can also provision {{site.data.keyword.cloud_notm}} services to add extra capabilities to your app.
+{{site.data.keyword.cloud_notm}} offers starter kits that help you build the foundation of an app that runs on Kubernetes. When you use a starter kit, it's easy to follow a cloud native programming model that uses {{site.data.keyword.cloud_notm}} best practices for app development. Starter kits generate apps that follow the cloud native programming model, and they include test cases and a health check in each programming language. You can also provision {{site.data.keyword.cloud_notm}} services to add extra capabilities to your app.
 
 ## Objectives
 {: #objectives-starterkit-kube}
