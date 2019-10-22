@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-22"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -308,7 +308,8 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
 {: #perf_tuning}
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
-{: shortdesc}</br>
+{: shortdesc}
+</br>
 
 ### Adding ALB socket listeners for each NGINX worker process
 {: #reuse-port}
