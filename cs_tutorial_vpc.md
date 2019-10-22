@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-21"
 
 keywords: kubernetes, iks, vpc
 
@@ -144,8 +144,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         Example output:
 
         ```
-        Client Version: v1.14.7
-        Server Version: v1.14.7+IKS
+        Client Version: v1.14.8
+        Server Version: v1.14.8+IKS
         ```
         {: screen}
 
