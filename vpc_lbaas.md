@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-23"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -257,7 +257,7 @@ ibmcloud ks nlb-dns replace vpc-classic --cluster <cluster_name_or_id> --lb-host
 
 If you later want to remove the load balancer hostname that is registered with a DNS subdomain, you can run the following command. After you remove the load balancer hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
 ```
-ibmcloud ks nlb-dns remove vpc-classic --cluster <cluster_name_or_id> --nlb-host <dns_subdomain>
+ibmcloud ks nlb-dns rm vpc-classic --cluster <cluster_name_or_id> --nlb-subdomain <dns_subdomain>
 ```
 {: pre}
 

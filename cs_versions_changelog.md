@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-22"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -106,11 +106,11 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.15.4_1518, released 1 October 2019
 {: #1154_1518}
 
+
+
+
 The following table shows the changes that are included in the patch 1.15.4_1518.
 {: shortdesc}
-
-
-
 
 <table summary="Changes that were made since version 1.15.3_1517">
 <caption>Changes since version 1.15.3_1517</caption>
