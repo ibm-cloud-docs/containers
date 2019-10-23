@@ -61,7 +61,9 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>584 / 344</td>
 <td>23 Oct 2019</td>
-<td>Fixes `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</td>
+<td><ul>
+<li>Adds the [`proxy-ssl-name` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li>
+<li>Fixes `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li></td>
 <td>-</td>
 </tr>
 <tr>
