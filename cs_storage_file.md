@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-10"
+lastupdated: "2019-10-23"
 
 keywords: kubernetes, iks
 
@@ -1193,6 +1193,50 @@ To apply the latest security updates and for a better performance, use the defau
    {: screen}
 
 <br />
+
+
+
+## Scaling down the default file storage plug-in
+{: #file_scaledown_plugin}
+
+By default, your classic {{site.data.keyword.containerlong_notm}} clusters include the file storage plug-in. If you do not need to use file storage in your cluster, you can scale down the pod replicas to zero to conserve cluster resources. Later, you can scale back up to one replica if you need file storage. You cannot change other settings or remove the deployment entirely. Because the plug-in is still installed, it is updated along with the cluster version updates even if you scaled the plug-in down.
+{: shortdesc}
+
+Before you begin:
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* Update your cluster to run Kubernetes version [1.15.5_1520](/docs/containers?topic=containers-changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-changelog#1148_1536), [1.13.12_1539](/docs/containers?topic=containers-changelog#11312_1539), or later.
+* Make sure that you have the **Manager** IAM service role for the cluster, so that you can make changes to deployments in the `kube-system` namespace.
+
+To scale down the file storage plug-in:
+1.  Scale down the file storage plug-in deployment to `0` replicas.
+    ```
+    kubectl scale deployment -n kube-system --replicas=0 ibm-file-plugin
+    ```
+    {: pre}
+
+    If you need file storage later, you can scale the plug-in back up.<pre class="pre"><code>kubectl scale deployment -n kube-system --replicas=1 ibm-file-plugin</code></pre>
+    {: tip}
+
+2.  Optional: Confirm that the plug-in is scaled down. The scale-down is succesful when the pods are removed and remain removed even after the master state is changed, such as by a cluster refresh or update.
+    
+    1.  Confirm that the pods are removed.
+        ```
+        kubectl get pods -n kube-system -l app=ibm-file-plugin
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        No resources found.
+        ```
+        {: screen}
+    2.  Refresh the cluster master.
+        ```
+        ibmcloud ks cluster refresh -c <cluster_name_or_ID>
+        ```
+        {: pre}
+    3.  Wait a few minutes for the refresh to complete, then repeat substep `2.a` to check that the pods are removed. If the pods are rescheduled, the changes that you made to the file storage plug-in configuration file were not properly saved. Make sure that your cluster runs the correct Kubernetes version, and try again.
+
 
 
 ## Backing up and restoring data
