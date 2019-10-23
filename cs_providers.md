@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-23"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -58,7 +58,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  <tr>
    <td>Security</td>
    <td>Classic clusters have many built-in security features that help you protect your cluster infrastructure, isolate resources, and ensure security compliance. For more information, see [Security in your Virtual Private Cloud](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-security-in-your-ibm-cloud-vpc).</td>
-   <td>With VPC, your cluster runs in an isolated environment in the public cloud. Security groups act as virtual firewalls for instance-level protection, and network access control lists protect the subnets that provide the floating IPs for your worker nodes. For more information, see [About Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about) in the VPC docs.</td>
+   <td>With VPC, your cluster runs in an isolated environment in the public cloud. Network access control lists protect the subnets that provide the floating IPs for your worker nodes. For more information, see [About Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about).</td>
  </tr>
  <tr>
    <td>High availability</td>
