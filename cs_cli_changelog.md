@@ -51,7 +51,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>
 <ul><li>Adds health state and health status columns to the output of `ibmcloud ks cluster addon ls`.</li>
 <li>Adds the cluster ID to the output of `ibmcloud ks cluster create`.</li>
-<li>Fixes `golang` vulnerabilitie for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li>
+<li>Fixes `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li>
 <li>Updates the Go version to 1.12.10.</li></ul>
 </td>
 </tr>
