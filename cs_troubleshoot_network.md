@@ -398,29 +398,34 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
   * If a public ALB is listed and is assigned an IP address, continue to the next step.
   * If no ALBs are created after several minutes, [contact us](#network_getting_help).
-  ```
-  ibmcloud ks alb ls -c <cluster_name_or_ID>
-  ```
-  {: pre}
-  Example output:
-  ```
-  ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-  private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
-  public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
-  ```
-  {: screen}
+
+    ```
+    ibmcloud ks alb ls -c <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
+    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
+    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
+    ```
+    {: screen}
 
 4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address as the public ALB.
   * If a `LoadBalancer` service is listed and is assigned an IP address, continue to the next step.
   * If no `LoadBalancer` services are created after several minutes, [contact us](#network_getting_help).
-  ```
-  kubectl get svc -n kube-system | grep LoadBalancer
-  ```
-  Example output:
-  ```
-  public-crbmnj1b1d09lpvv3oof0g-alb1   LoadBalancer   172.21.XXX.XXX   169.XX.XXX.XX   80:30723/TCP,443:31241/TCP   1d
-  ```
-  {: screen}
+
+    ```
+    kubectl get svc -n kube-system | grep LoadBalancer
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    public-crbmnj1b1d09lpvv3oof0g-alb1   LoadBalancer   172.21.XXX.XXX   169.XX.XXX.XX   80:30723/TCP,443:31241/TCP   1d
+    ```
+    {: screen}
 
 5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [contact us](#network_getting_help).
   ```
@@ -431,7 +436,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 <br />
 
 
-## Cannot get a subdomain or secret for the Ingress ALB when you create or delete clusters of the same name
+## No Ingress subdomain exists after you create clusters of the same name
 {: #cs_rate_limit}
 
 {: tsSymptoms}
