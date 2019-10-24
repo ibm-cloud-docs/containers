@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-24"
 
 keywords: kubernetes, iks, knative
 
@@ -132,7 +132,7 @@ Update your Knative add-on to the latest versions.
 
 1. Check whether your add-on is at the latest version. If your add-on is denoted with `* (<version> latest)`, you can update the add-on. 
    ```
-   ibmcloud ks cluster addons --cluster <mycluster> | grep knative
+   ibmcloud ks cluster addon ls --cluster <mycluster> | grep knative
    ```
    {: pre}
 
@@ -231,7 +231,7 @@ Update your Knative add-on to the latest versions.
     
 11. Verify that your cluster uses the latest version of the Knative managed add-on. 
     ```
-    ibmcloud ks cluster addons --cluster <mycluster> | grep knative
+    ibmcloud ks cluster addon ls --cluster <mycluster> | grep knative
     ```
     {: pre}
     

@@ -102,7 +102,7 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 <br>
 You can always see which Istio add-ons are enabled in your cluster by running the following command:
 ```
-ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
 ```
 {: pre}
 
@@ -159,7 +159,7 @@ Install Istio managed add-ons in an existing cluster.
 
 3. Verify that the managed Istio add-ons that you installed are enabled in this cluster.
   ```
-  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -1068,7 +1068,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
 
 1. Check whether your add-ons are at the latest version. Any addons that are denoted with `* (<version> latest)` can be updated.
    ```
-   ibmcloud ks cluster addons --cluster <mycluster>
+   ibmcloud ks cluster addon ls --cluster <mycluster>
    ```
    {: pre}
 
@@ -1223,7 +1223,7 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 
 4. Verify that all managed Istio add-ons are disabled in this cluster. No Istio add-ons are returned in the output.
   ```
-  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
 

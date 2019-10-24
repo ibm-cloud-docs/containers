@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-18"
+lastupdated: "2019-10-24"
 
 keywords: kubernetes, iks, vpc
 
@@ -72,7 +72,7 @@ Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make
 
 2. List the add-ons that are installed in your cluster to verify that the **vpc-block-csi-driver** add-on is not yet enabled.
    ```
-   ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-24"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -563,14 +563,14 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 
 </br>
 
-### `ibmcloud ks cluster addons`
+### `ibmcloud ks cluster addon ls`
 {: #cs_cluster_addons}
 
 List managed add-ons that are enabled in a cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks cluster addons --cluster CLUSTER
+ibmcloud ks cluster addon ls --cluster CLUSTER
 ```
 {: pre}
 
