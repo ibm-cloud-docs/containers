@@ -1219,7 +1219,7 @@ To scale down the file storage plug-in:
     ```
     {: pre}
 
-    If you need file storage later, you can scale the plug-in back up.<pre class="pre"><code>kubectl scale deployment -n kube-system --replicas=1 ibm-file-plugin</code></pre><br><pre class="pre"><code>kubectl scale deployment -n kube-system --replicas=1 ibm-storage-watcher</code></pre>
+    If you need file storage later, you can scale the plug-in back up.<ul><li><code>kubectl scale deployment -n kube-system --replicas=1 ibm-file-plugin</code></li><li><code>kubectl scale deployment -n kube-system --replicas=1 ibm-storage-watcher</code></li></ul>
     {: tip}
 
 2.  Optional: Confirm that the plug-in is scaled down. The scale-down is succesful when the pods are removed and remain removed even after the master state is changed, such as by a cluster refresh or update.
