@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-14"
+lastupdated: "2019-10-24"
 
 keywords: kubernetes, iks
 
@@ -45,6 +45,14 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.42</td>
+<td>24 Oct 2019</td>
+<td>
+<ul><li>Adds the cluster ID to the output of `ibmcloud ks cluster create`.</li>
+<li>Updates the Go version to 1.12.10 to fix `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.38</td>
 <td>14 Oct 2019</td>
@@ -275,7 +283,7 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 <td>0.2.40</td>
 <td>06 Feb 2019</td>
 <td><ul>
-<li>Adds the [<code>ibmcloud ks cluster addons</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster addon disable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
+<li>Adds the [<code>ibmcloud ks cluster addon ls</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [<code>ibmcloud ks cluster addon disable</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li>
 <li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the <code>ibmcloud ks vlan ls</code> command.</li></ul></td>
 </tr>
 <tr>
