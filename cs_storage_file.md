@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks
 
@@ -31,6 +31,7 @@ subcollection: containers
 
 {{site.data.keyword.cloud_notm}} File Storage is available only in classic {{site.data.keyword.containerlong_notm}} clusters or classic {{site.data.keyword.openshiftlong}} clusters, and is not supported for VPC on Classic clusters. To use file storage in a private cluster that is set up without public network access, your cluster must run Kubernetes version 1.13 or higher.  NFS file storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
+
 
 ## Deciding on the file storage configuration
 {: #file_predefined_storageclass}
