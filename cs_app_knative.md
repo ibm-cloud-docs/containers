@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks, knative
 
@@ -250,7 +250,7 @@ After you set up Knative in your cluster, you can deploy your serverless app as 
 {: shortdesc}
 
 **What is a Knative service?** </br>
-To deploy an app with Knative, you must specify a Knative `Service` resource. A Knative service is managed by the Knative `Serving` primitive and is responsible to manage the entire lifecycle of the workload. When you create the service, the Knative `Serving` primitive automatically creates a version for your serverless app and adds this version to the revision history of the service. Your serverless app is assigned a public URL from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster.
+To deploy an app with Knative, you must specify a Knative `Service` resource. A Knative service is managed by the Knative `Serving` primitive and is responsible to manage the entire lifecycle of the workload. When you create the service, the Knative `Serving` primitive automatically creates a version for your serverless app and adds this version to the revision history of the service. Your serverless app is assigned a public URL from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>.<namespace>.cluster.local` that you can use to access your app from within the cluster.
 
 **What happens behind the scenes when I create the Knative service?**</br>
 When you create a Knative service, your app is automatically deployed as a Kubernetes pod in your cluster and exposed by using a Kubernetes service. To assign the public hostname, Knative uses the IBM-provided Ingress subdomain and TLS certificate. Incoming network traffic is routed based on the default IBM-provided Ingress routing rules.
@@ -442,7 +442,7 @@ To deploy your serverless app as a Knative service:
 You can configure Knative to assign hostnames from your own custom domain that you configured with TLS.
 {: shortdesc}
 
-By default, every app is assigned a public subdomain from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the Internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>-<namespace>.cluster.local` that you can use to access your app from within the cluster. If you want to assign hostnames from a custom domain that you own, you can change the Knative configmap to use the custom domain instead.
+By default, every app is assigned a public subdomain from your Ingress subdomain in the format `<knative_service_name>-<namespace>.<ingress_subdomain>` that you can use to access the app from the Internet. In addition, a private hostname is assigned to your app in the format `<knative_service_name>.<namespace>.cluster.local` that you can use to access your app from within the cluster. If you want to assign hostnames from a custom domain that you own, you can change the Knative configmap to use the custom domain instead.
 
 1. Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [IBM Cloud DNS](/docs/infrastructure/dns?topic=dns-getting-started).
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
@@ -733,7 +733,7 @@ You can access your Knative service from another Knative service by using a REST
    ```
    {: screen}
 
-3. Use the domain name to implement a REST API call to access your Knative service. This REST API call must be part of the app for which you create a Knative service. If the Knative service that you want to access is assigned a local URL in the format `<service_name>-<namespace>.svc.cluster.local`, Knative keeps the REST API request within the cluster-internal network.
+3. Use the domain name to implement a REST API call to access your Knative service. This REST API call must be part of the app for which you create a Knative service. If the Knative service that you want to access is assigned a local URL in the format `<service_name>.<namespace>.svc.cluster.local`, Knative keeps the REST API request within the cluster-internal network.
 
    Example code snippet in Go:
    ```go
