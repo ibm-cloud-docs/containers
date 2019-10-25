@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -222,30 +222,31 @@ Set up CoreDNS instead of KubeDNS as the cluster DNS provider.
     kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
     ```
     {: pre}
-4.  Scale down the KubeDNS deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
-    ```
-    {: pre}
-5.  Scale up the CoreDNS autoscaler deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
-    ```
-    {: pre}
-6.  Label and annotate the cluster DNS service for CoreDNS.
-    ```
-    kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
-    ```
-    {: pre}
-    ```
-    kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
-    ```
-    {: pre}
-    ```
-    kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
-    ```
-    {: pre}
-7.  **Optional**: If you plan to use Prometheus to collect metrics from the CoreDNS pods, you must add a metrics port to the `kube-dns` service that you are switching from.
+4.  Switch the cluster DNS provider to CoreDNS from KubeDNS.<p class="important">When you run both cluster DNS providers at the same time, you might experience intermittent DNS failures. Be sure to scale down the KubeDNS deployment so that you do not keep both DNS providers running at the same time.</p>
+    1.  Scale up the CoreDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
+        ```
+        {: pre}
+    2.  Label and annotate the cluster DNS service for CoreDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
+        ```
+        {: pre}
+    3.  Scale down the KubeDNS deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
+        ```
+        {: pre}
+5.  **Optional**: If you plan to use Prometheus to collect metrics from the CoreDNS pods, you must add a metrics port to the `kube-dns` service that you are switching from.
     ```
     kubectl -n kube-system patch svc kube-dns --patch '{"spec": {"ports": [{"name":"metrics","port":9153,"protocol":"TCP"}]}}' --type strategic
     ```
@@ -272,30 +273,31 @@ Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
     kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
     ```
     {: pre}
-4.  Scale down the CoreDNS deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=0 coredns
-    ```
-    {: pre}
-5.  Scale up the KubeDNS autoscaler deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
-    ```
-    {: pre}
-6.  Label and annotate the cluster DNS service for KubeDNS.
-    ```
-    kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
-    ```
-    {: pre}
-    ```
-    kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
-    ```
-    {: pre}
-    ```
-    kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
-    ```
-    {: pre}
-7.  **Optional**: If you used Prometheus to collect metrics from the CoreDNS pods, your `kube-dns` service had a metrics port. However, KubeDNS does not need to include this metrics port so you can remove the port from the service.
+4.  Switch the cluster DNS provider to KubeDNS from CoreDNS.<p class="important">When you run both cluster DNS providers at the same time, you might experience intermittent DNS failures. Be sure to scale down the CoreDNS deployment so that you do not keep both DNS providers running at the same time.</p>
+    1.  Scale up the KubeDNS autoscaler deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
+        ```
+        {: pre}
+    2.  Label and annotate the cluster DNS service for KubeDNS.
+        ```
+        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
+        ```
+        {: pre}
+        ```
+        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
+        ```
+        {: pre}
+    3.  Scale down the CoreDNS deployment.
+        ```
+        kubectl scale deployment -n kube-system --replicas=0 coredns
+        ```
+        {: pre}
+5.  **Optional**: If you used Prometheus to collect metrics from the CoreDNS pods, your `kube-dns` service had a metrics port. However, KubeDNS does not need to include this metrics port so you can remove the port from the service.
     ```
     kubectl -n kube-system patch svc kube-dns --patch '{"spec": {"ports": [{"name":"dns","port":53,"protocol":"UDP"},{"name":"dns-tcp","port":53,"protocol":"TCP"}]}}' --type merge
     ```
