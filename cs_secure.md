@@ -30,6 +30,7 @@ subcollection: containers
 You can use built-in security features in {{site.data.keyword.containerlong}} for risk analysis and security protection. These features help you to protect your cluster infrastructure and network communication, isolate your compute resources, and ensure security compliance across your infrastructure components and container deployments.
 {: shortdesc}
 
+
 ## Overview of security threats for your cluster
 {: #threats}
 
