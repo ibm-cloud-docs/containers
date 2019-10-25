@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -266,6 +266,7 @@ After you test your app, you can expose it to the private network by creating a 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC Gen 1 compute clusters](/docs/containers?topic=containers-clusters).
 
 <br />
+
 
 
 
