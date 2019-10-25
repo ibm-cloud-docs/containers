@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks, containers
 
@@ -61,7 +61,8 @@ The Kubernetes API server and etcd data store are the most sensitive components 
 
 To protect your Kubernetes API server and etcd data store, you must secure and limit the access to your Kubernetes API server for both human users and Kubernetes service accounts.
 
-**How is access to my Kubernetes API server granted?** </br>
+**How is access to my Kubernetes API server granted?**
+
 By default, Kubernetes requires every request to go through several stages before access to the API server is granted:
 
 <ol><li><strong>Authentication: </strong>Validates the identity of a registered user or service account.</li><li><strong>Authorization: </strong>Limits the permissions of authenticated users and service accounts to ensure that they can access and operate only the cluster components that you want them to.</li><li><strong>Admission control: </strong>Validates or mutates requests before they are processed by the Kubernetes API server. Many Kubernetes features require admission controllers in order to properly function.</li></ol>
