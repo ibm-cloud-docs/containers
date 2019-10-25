@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-10-25"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -705,7 +705,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 3.  Add the image to the service account of the namespace so that any container in the namespace can use the entitlement key to pull entitled images. For more information, see [Using the image pull secret to deploy containers](/docs/containers?topic=containers-images#use_imagePullSecret).
     ```
-    kubectl patch -n <namespace> serviceaccount/default --type='json' p='[{"op":"add","path":"/imagePullSecrets/","value":{"name":"entitled-cp-icr-io"}}]'
+    kubectl patch -n <namespace> serviceaccount/default --type='json' -p='[{"op":"add","path":"/imagePullSecrets/","value":{"name":"entitled-cp-icr-io"}}]'
     ```
     {: pre}
 4.  Create a pod in the namespace that builds a container from an image in the entitled registry.
