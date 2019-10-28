@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -50,6 +50,19 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.15 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.15.5_1521, released 28 October 2019
+{: #1155_1521}
+
+The following table shows the changes that are included in the worker node fix pack `1.15.5_1521`.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes |	v1.15.4 |	v1.15.5	| See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.5){: external}. Update resolves [CVE-2019-11253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11253){: external} (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://supportcontent.ibm.com/support/pages/node/1098759)) and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
+| Ubuntu 18.04 packages and kernel | 4.15.0-65-generic | 4.15.0-66-generic	| Updated worker node images with kernel and package updates for [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+| Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+{: caption="Changes since version 1.15.5_1520" caption-side="top"}
 
 ### Changelog for master fix pack 1.15.5_1520, released 22 October 2019
 {: #1155_1520}
@@ -584,6 +597,19 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 Review the version 1.14 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.14.8_1537, released 28 October 2019
+{: #1148_1537}
+
+The following table shows the changes that are included in the worker node fix pack `1.14.8_1537`.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes |	v1.14.7 |	v1.14.8	| See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.8){: external}. Update resolves [CVE-2019-11253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11253){: external} (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://supportcontent.ibm.com/support/pages/node/1098759)) and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
+| Ubuntu 18.04 packages and kernel | 4.15.0-65-generic | 4.15.0-66-generic	| Updated worker node images with kernel and package updates for [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+| Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+{: caption="Changes since version 1.14.8_1536" caption-side="top"}
 
 ### Changelog for master fix pack 1.14.8_1536, released 22 October 2019
 {: #1148_1536}
@@ -1515,6 +1541,19 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.13.12_1540, released 28 October 2019
+{: #11312_1540}
+
+The following table shows the changes that are included in the worker node fix pack `1.13.12_1540`.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes |	v1.13.11 |	v1.13.12	| See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.12){: external}. Update resolves [CVE-2019-11253](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11253){: external} (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://supportcontent.ibm.com/support/pages/node/1098759)) and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
+| Ubuntu 18.04 packages and kernel | 4.15.0-65-generic | 4.15.0-66-generic	| Updated worker node images with kernel and package updates for [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+| Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+{: caption="Changes since version 1.13.12_1539" caption-side="top"}
 
 ### Changelog for master fix pack 1.13.12_1539, released 22 October 2019
 {: #11312_1539}
@@ -2880,6 +2919,18 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 
 Review the version 1.12 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.12.10_1570, released 28 October 2019
+{: #11210_1570}
+
+The following table shows the changes that are included in the worker node fix pack `1.12.10_1570`.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 18.04 packages and kernel | 4.15.0-65-generic | 4.15.0-66-generic	| Updated worker node images with kernel and package updates for [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+| Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
+{: caption="Changes since version 1.12.10_1569" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.12.10_1569, released 14 October 2019
 {: #11210_1569_worker}
