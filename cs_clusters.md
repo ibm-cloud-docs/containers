@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -594,6 +594,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    6. Select a resource group in which to create your cluster.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+      * The cluster can be in a different resource group than the VPC.
    7. Select a geography in which to deploy your cluster.
 6. Select the location to deploy your cluster and set up your cluster for high availability.
    1. Select the metro city location where you want to create your cluster. For the best performance, select the location that is physically closest to you. Your choices might be limited by the geography that you selected.
@@ -622,7 +623,7 @@ Before you begin:
 To create a VPC cluster:
 
 1. Make sure that you decided on your [cluster setup](#prepare_cluster_level).
-2. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
+2. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
    ibmcloud login -r <region> [--sso]
    ```

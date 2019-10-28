@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks
 
@@ -248,18 +248,8 @@ To deploy the app:
     cd 'container-service-getting-started-wt/Lab 1'
     ```
     {: pre}
-3.  Log in to the {{site.data.keyword.registryshort_notm}} CLI.
-    ```
-    ibmcloud cr login
-    ```
-    {: pre}
 
-    If you forgot your namespace in {{site.data.keyword.registryshort_notm}}, run the following command.
-    ```
-    ibmcloud cr namespace-list
-    ```
-    {: pre}
-4.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+3.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/services/Registry?topic=registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
@@ -283,7 +273,7 @@ To deploy the app:
     1: digest: sha256:f824e99435a29e55c25eea2ffcbb84be4b01345e0a3efbd7d9f238880d63d4a5 size: 1576
     ```
     {: screen}
-5.  Create a deployment. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod by referring to the image that you built in your private registry. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
+4.  Create a deployment. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod by referring to the image that you built in your private registry. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
     ```
     kubectl create deployment hello-world-deployment --image=<region>.icr.io/<namespace>/hello-world:1
     ```
@@ -296,7 +286,7 @@ To deploy the app:
     {: screen}
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
-6.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
+5.  Make the app accessible to the world by exposing the deployment as a NodePort service. Just as you might expose a port for a Cloud Foundry app, the NodePort that you expose is the port on which the worker node listens for traffic.
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --port=8080 --name=hello-world-service --target-port=8080
     ```
@@ -339,7 +329,7 @@ To deploy the app:
     <td>The port to which the service directs traffic. In this instance, the target-port is the same as the port, but other apps you create might differ.</td>
     </tr>
     </tbody></table>
-7. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
+6. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
     1.  Get information about the service to see which NodePort was assigned.
         ```
         kubectl describe service hello-world-service
@@ -378,7 +368,7 @@ To deploy the app:
         kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.14.8
         ```
         {: screen}
-8. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
+7. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
     ```
     Hello world! Your app is up and running in a cluster!
     ```
@@ -386,11 +376,11 @@ To deploy the app:
 
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
-9. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
+8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.Bluemix_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
-10. In the **Workloads** tab, you can see the resources that you created.
+9. In the **Workloads** tab, you can see the resources that you created.
 
 Good job! You deployed your first version of the app.
 

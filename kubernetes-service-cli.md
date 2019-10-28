@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -36,6 +36,7 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 
 Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_notm}} CLI reference](/docs/services/Registry?topic=container-registry-cli-plugin-containerregcli). Looking for `kubectl` commands? See the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
 {:tip}
+
 
 ## Using the beta {{site.data.keyword.containerlong_notm}} plug-in
 {: #cs_beta}
@@ -808,8 +809,11 @@ ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID 
 ### `ibmcloud ks cluster create vpc-classic`
 {: #cli_cluster-create-vpc-classic}
 
-Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: Free clusters are not available in VPC.
+Create a classic cluster in your Virtual Private Cloud (VPC). When you log in to your {{site.data.keyword.cloud_notm}} account, target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group.
 {: shortdesc}
+
+Free clusters are not available in VPC.
+{: note}
 
 ```
 ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [-s]
@@ -1744,7 +1748,7 @@ diskEncryption: <em>false</em></code></pre></dd>
 <dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd>
 
 <dt><code>--machine-type <em>FLAVOR</em></code></dt>
-<dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
+<dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
 <dd>An integer that represents the number of worker nodes to create in the cluster. The default value is 1. This value is optional.</dd>
@@ -1957,7 +1961,7 @@ Reload the configurations for a worker node.
 
 A reload can be useful if your worker node experiences problems, such as slow performance or if your worker node is stuck in an unhealthy state. During the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). The worker node public and private IP address remain the same after the reload operation.
 
-Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog#changelog) documentation.
+Reloading a worker node applies patch version updates to your worker node, but not major or minor updates. To see the changes from one patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog) documentation.
 {: tip}
 
 Before you reload your worker node, make sure that pods are rescheduled on other worker nodes to help avoid a downtime for your app or data corruption on your worker node.
@@ -2040,7 +2044,7 @@ Delete a worker node and replace it with a new worker node in the same worker po
 
 The replacement worker node is created in the same zone and has the same flavor as the old worker node, but is assigned new public or private IP addresses. You might replace a worker node if you cannot reload or update the worker node, such as if it enters a troubled state.
 
-You can also use this command to update the Kubernetes version of the worker node to match the major and minor version of the Kubernetes master by including the `--update` flag. If you do not include the `--update` flag, patch version updates are applied to your worker node, but not major or minor updates. To see the changes from one major, minor, or patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog#changelog) documentation.
+You can also use this command to update the Kubernetes version of the worker node to match the major and minor version of the Kubernetes master by including the `--update` flag. If you do not include the `--update` flag, patch version updates are applied to your worker node, but not major or minor updates. To see the changes from one major, minor, or patch version to the next, review the [Version changelog](/docs/containers?topic=containers-changelog) documentation.
 
 Any custom labels that you applied at the individual worker node level are not applied to the replacement worker node. However, any labels that you applied at the worker pool level are applied to the replacement worker node.
 {: note}
@@ -2203,7 +2207,7 @@ ibmcloud ks worker rm --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658596a
 ### `ibmcloud ks worker update`
 {: #cs_worker_update}
 
-Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update). The worker node IP address remains the same after the update operation.
+Update worker nodes to apply the latest security updates and patches to the operating system, and to update the Kubernetes version to match the version of the Kubernetes master. You can update the master Kubernetes version with the `ibmcloud ks cluster master update` [command](#cs_cluster_update). The worker node IP address remains the same after the update operation.
 {: shortdesc}
 
 Running `ibmcloud ks worker update` can cause downtime for your apps and services. During the update, all pods are rescheduled onto other worker nodes, the worker node is reimaged, and data is deleted if not stored outside the pod. To avoid downtime, [ensure that you have enough worker nodes to handle your workload while the selected worker nodes are updating](/docs/containers?topic=containers-update#worker_node).
@@ -2632,7 +2636,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
     <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
 
 <dt><code>--private-only</code></dt>
-<dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
+<dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway appliance.For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -5405,7 +5409,7 @@ ibmcloud ks supported-locations [--json]
 ## `versions` command
 {: #cs_versions_command}
 
-List all the container platform versions that are available for {{site.data.keyword.containerlong_notm}} clusters. Update your [cluster master](#cs_cluster_update) and [worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) to the default version for the latest, stable capabilities.
+List all the container platform versions that are available for {{site.data.keyword.containerlong_notm}} clusters. Update your [cluster master](#cs_cluster_update) and [worker nodes](#cs_worker_update) to the default version for the latest, stable capabilities.
 {: shortdesc}
 
 The `kube-versions` alias for this command is deprecated.
@@ -5589,7 +5593,7 @@ Find the {{site.data.keyword.containerlong_notm}} region that you are currently 
 
 You can work with resources that you have access to in any location, even if you set a region by running `ibmcloud ks region set` and the resource that you want to work with is in another region. If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region set` command and use the cluster name when you run commands.
 
-<p class="deprecated">Legacy behavior:</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.2</code> (deprecated), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</p>
+<p class="deprecated">Legacy behavior:</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.3</code> or later and need to list and work with resources from one region only, you can use the <code>ibmcloud ks init</code> [command](#cs_init) to target a regional endpoint instead of the global endpoint.</br>If you use the {{site.data.keyword.containerlong_notm}} plug-in version <code>0.2</code> (deprecated), you create and manage clusters specific to the region. Use the <code>ibmcloud ks region set</code> command to change regions.</p>
 
 ```
 ibmcloud ks region get

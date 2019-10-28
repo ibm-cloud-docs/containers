@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-25"
 
-keywords: kubernetes, iks, encrypt, security
+keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
 subcollection: containers
 
@@ -22,6 +22,8 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+{:external: target="_blank" .external}
+
 
 # Protecting sensitive information in your cluster
 {: #encryption}
@@ -178,3 +180,5 @@ When it comes to protecting your data, encryption is one of the most popular and
 If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example solutions include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
 To get started, provision an SGX-enabled bare metal worker cluster with a [supported flavor for {{site.data.keyword.datashield_short}}](/docs/services/data-shield?topic=data-shield-getting-started).
+
+
