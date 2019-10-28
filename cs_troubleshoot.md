@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, help, debug
 
@@ -57,9 +57,9 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   ```
   {: pre}
 
-4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+4. In a web browser, open the debug tool dashboard URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
 
-5. Select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+5. In the debug tool dashboard, select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
 
 6. Click **Run**.
 
