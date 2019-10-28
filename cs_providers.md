@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -94,7 +94,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  <tr>
    <td>User access</td>
    <td>To create classic infrastructure clusters, you must set up [infrastructure credentials](/docs/containers?topic=containers-users#api_key) for each region and resource group. To let users manage the cluster, use [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform). To grant users access to Kubernetes resources within the cluster, use [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service), which correspond with Kubernetes RBAC roles.</td>
-   <td>Unlike for classic infrastructure, with VPC, you can use only [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc) to authorize users to create infrastructure, manage your cluster, and access Kubernetes resources.</td>
+   <td>Unlike for classic infrastructure, with VPC, you can use only [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc) to authorize users to create infrastructure, manage your cluster, and access Kubernetes resources. The cluster can be in a different resource group than the VPC.</td>
  </tr>
  <tr>
    <td>Integrations</td>
