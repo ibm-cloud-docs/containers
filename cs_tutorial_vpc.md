@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-28"
 
 keywords: kubernetes, iks, vpc
 
@@ -181,19 +181,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Log in to the {{site.data.keyword.registryshort_notm}} CLI and note the registry region that you are in, such as `us.icr.io`.
-
-    ```
-    ibmcloud cr login
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    Logged in to 'us.icr.io'.
-    ```
-    {: screen}
-4.  Use an existing registry namespace or create one, such as `vpc`.
+3.  Use an existing registry namespace or create one, such as `vpc`.
     ```
     ibmcloud cr namespace-list
     ```
@@ -203,7 +191,7 @@ To deploy the app:
     ```
     {: pre}
 
-5.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+4.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous tutorial. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
@@ -228,7 +216,7 @@ To deploy the app:
     ```
     {: screen}
 
-6.  Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
+5.  Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
     kubectl create deployment hello-world-deployment --image=us.icr.io/vpc/hello-world:1
@@ -244,7 +232,7 @@ To deploy the app:
 
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
 
-7.  Make the app accessible by exposing the deployment as a NodePort service. Because your VPC worker nodes are connected to a private subnet only, the NodePort is assigned only a private IP address and is not exposed on the public network. Other services that run on the private network can access your app by using the private IP address of the NodePort service.
+6.  Make the app accessible by exposing the deployment as a NodePort service. Because your VPC worker nodes are connected to a private subnet only, the NodePort is assigned only a private IP address and is not exposed on the public network. Other services that run on the private network can access your app by using the private IP address of the NodePort service.
 
     ```
     kubectl expose deployment/hello-world-deployment --type=NodePort --name=hello-world-service --port=8080 --target-port=8080
@@ -290,7 +278,7 @@ To deploy the app:
     </tr>
     </tbody></table>
 
-8. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
+7. Now that all the deployment work is done, you can test your app from within the cluster. Get the details to form the private IP address that you can use to access your app.
     1.  Get information about the service to see which NodePort was assigned. The NodePorts are randomly assigned when they are generated with the `expose` command, but within 30000-32767. In this example, the **NodePort** is 30872.
 
         ```
@@ -351,12 +339,12 @@ To deploy the app:
         ```
         {: screen}
 
-9.  Log in to the pod so that you can make a request to your app from within the cluster.
+8.  Log in to the pod so that you can make a request to your app from within the cluster.
     ```
     kubectl exec -it hello-world-deployment-d99cddb45-lmj2v /bin/sh
     ```
     {: pre}
-10. Make a request to the NodePort service by using the worker node private IP address and the node port that you previously retrieved.
+9. Make a request to the NodePort service by using the worker node private IP address and the node port that you previously retrieved.
     ```
     wget -O - 10.xxx.xx.xxx:30872
     ```
