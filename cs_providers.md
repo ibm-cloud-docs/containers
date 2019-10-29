@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-28"
+lastupdated: "2019-10-29"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -24,7 +24,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Overview of Classic and VPC infrastructure providers
+# Supported infrastructure providers
 {: #infrastructure_providers}
 
 With {{site.data.keyword.containerlong}}, you can create a cluster from a variety of infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, {{site.data.keyword.containerlong_notm}} provisioned your worker nodes in a single provider, classic infrastructure. As of **19 August 2019**, you can choose from Classic or Virtual Private Cloud (VPC) Generation 1 compute infrastructure providers.
@@ -78,8 +78,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
    <td>Apps and container platform</td>
   <td>You can choose to create [community Kubernetes or OpenShift clusters](/docs/containers?topic=containers-faqs#container_platforms) to manage your containerized apps. Your app build processes do not differ because of the infrastructure provider, but how you expose the app does, as described in the next _App networking_ entry.</td>
   <td>You can create only community Kubernetes clusters, not OpenShift clusters.</td>
-   
-   <td></td>
+   </td>
  </tr>
  <tr>
    <td>App networking</td>
