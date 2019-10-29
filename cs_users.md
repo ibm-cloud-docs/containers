@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-10-29"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -423,7 +423,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
 2. Select users individually or create an access group of users.
     * **To assign roles to an individual user**:
       1. In the left navigation, click the **Users** page, and then click the name of the user that you want to set permissions for. If the user isn't shown, click **Invite users** to add them to the account.
-      2. Click the **Access policies** tab, and then click **Assign access**.
+      2. Click the **Access policies** tab, and then click **Assign access**. Now, the breadcrumbs on the page are **Users / Manage User**.
     * **To assign roles to multiple users in an access group**:
       1. In the left navigation, click the **Access groups** page.
       2. Click **Create** and give your group a **Name** and **Description**. Click **Create**.
@@ -431,11 +431,11 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
       4. Check the box next to the users that you want to add to the group. A dialog box displays.
       5. Click **Add to group**.
       6. Click the **Access policies** tab.
-      7. Click **Assign access**.
+      7. Click **Assign access**. Now, the breadcrumbs on the page are **Groups / Manage Group**.
 
 3. Assign a policy, either for resource groups or for resource instances. If you want to scope the policy to a namespace, you must assign the policy to resource instances (not resource groups).
   * **For resource groups**:
-    1. Click **Assign access within a resource group**.
+    1. From the **Manager User** or **Manage Group** page, click **Assign access within a resource group**.
     2. Select the resource group name.
     3. In the **Assign access to a resource group** drop-down list, choose what level of permission to give the user to the resource group itself (not the resources within the group). For example, to let users see clusters that they have access to in multiple resource groups, give them the **Viewer** role for each resource group.
     4. From the **Services** list, select **Kubernetes Cluster**.
@@ -446,7 +446,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     7. Click **Assign**.
     8. **Optional**: If you assigned only a service role to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
   * **For resource instances within or across resource groups**:
-    1. Click **Assign access to resources**.
+    1. From the **Manager User** or **Manage Group** page, click **Assign access to resources**.
     2. From the **Services** list, select **Kubernetes Cluster**.
     3. From the **Region** list, select one or all regions.
     4. From the **Cluster** list, select one or all cluster instances.

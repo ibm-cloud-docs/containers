@@ -470,8 +470,8 @@ Any files that you download and edit locally, such as YAML files, are stored tem
 
 To install and launch the Kubernetes web terminal:
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the debug tool add-on.
-2.  From the cluster detail page, click the **Web Terminal** button.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the web terminal.
+2.  From the upper right of the cluster detail page, click the **Web terminal** button.
 3.  Click **Install**. It might take a few minutes for the terminal add-on to install.
 4.  Click the **Web terminal** button again. The terminal opens in your browser.
 
