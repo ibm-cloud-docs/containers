@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-07"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Understanding Kubernetes storage basics
 {: #kube_concepts}
 
-## Persistent volumes and persistent volume claims 
+## Persistent volumes and persistent volume claims
 {: #pvc_pv}
 
 Before you get started with provisioning storage, it is important to understand the Kubernetes concepts of a persistent volume and a persistent volume claim and how they work together in a cluster.
