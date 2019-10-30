@@ -9,9 +9,11 @@ IBM Cloud Kubernetes Service
         
     {: .topicgroup}
     About
+        cs_overview.md
         cs_why.md
         cs_providers.md
         cs_tech.md
+        cs_limitations.md
 
     {: .topicgroup}
     Use cases
