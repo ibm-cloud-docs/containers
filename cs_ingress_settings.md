@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-22"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -469,4 +469,7 @@ To optimize performance of your Ingress ALBs, you can also [change the Linux ker
 {: shortdesc}
 
 <br />
+
+
+
 

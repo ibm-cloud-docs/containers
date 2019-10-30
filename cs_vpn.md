@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -156,7 +156,7 @@ After you deploy each Helm chart, each strongSwan VPN deployment starts up as a 
     * If pods in the cluster must access services on the remote on-premises network:
       - `zoneSpecificRoutes`: Set to `true`. This setting restricts the VPN connection to a single zone in the cluster. Pods in a specific zone use only the VPN connection that is set up for that specific zone. This solution reduces the number of strongSwan pods that are required to support multiple VPNs in a multizone cluster, improves VPN performance because the VPN traffic only flows to worker nodes located in the current zone, and ensures that VPN connectivity for each zone is unaffected by VPN connectivity, crashed pods, or zone outages in other zones. Note that you do not need to configure `remoteSubnetNAT`. Multiple VPNs that use the `zoneSpecificRoutes` setting can have the same `remote.subnet` because the routing is setup on a per-zone basis.
       - `enableSingleSourceIP`: Set to `true` and set the `local.subnet` to a single /32 IP address. This combination of settings hides all of the cluster private IP addresses behind a single /32 IP address. This unique /32 IP address allows the remote on-premises network to send replies back over the correct VPN connection to the correct pod in the cluster that initiated the request. Note that the single /32 IP address that is configured for the `local.subnet` option must be unique in each strongSwan VPN configuration.
-    * If applications in the remote on-premises network must access services in the cluster:    
+    * If applications in the remote on-premises network must access services in the cluster:
       - `localSubnetNAT`: Ensure that an application in the on-premises remote network can select a specific VPN connection to send and receive traffic to the cluster. In each strongSwan Helm configuration, use `localSubnetNAT` to uniquely identify the cluster resources that can be accessed by the remote on-premises application. Because multiple VPNs are established from the remote on-premises network to the cluster, you must add logic to the application on the on-premise network so that it can select which VPN to use when it accesses services in the cluster. Note that the services in the cluster are accessible through multiple different subnets depending on what you configured for `localSubnetNAT` in each strongSwan VPN configuration.
       - `remoteSubnetNAT`: Ensure that a pod in your cluster uses the same VPN connection to return traffic to the remote network. In each strongSwan deployment file, map the remote on-premises subnet to a unique subnet using the `remoteSubnetNAT` setting. Traffic that is received by a pod in the cluster from a VPN-specific `remoteSubnetNAT` is sent back to that same VPN-specific `remoteSubnetNAT` and then over that same VPN connection.
 
@@ -274,7 +274,7 @@ To establish an outbound VPN connection, modify the following settings:
 Determine which cluster resources must be accessible by the remote network over the VPN connection.
 {: shortdesc}
 
-1. Add the CIDRs of one or more cluster subnets to the `local.subnet` setting. You must configure the local subnet CIDRs on the on-premises VPN endpoint. This list can include the following subnets:  
+1. Add the CIDRs of one or more cluster subnets to the `local.subnet` setting. You must configure the local subnet CIDRs on the on-premises VPN endpoint. This list can include the following subnets:
     * The Kubernetes pod subnet CIDR: `172.30.0.0/16`. Bidirectional communication is enabled between all cluster pods and any of the hosts in the remote network subnets that you list in the `remote.subnet` setting. If you must prevent any `remote.subnet` hosts from accessing cluster pods for security reasons, do not add the Kubernetes pod subnet to the `local.subnet` setting.
     * The Kubernetes service subnet CIDR: `172.21.0.0/16`. Service IP addresses provide a way to expose multiple app pods that are deployed on several worker nodes behind a single IP.
     * If your apps are exposed by a NodePort service on the private network or a private Ingress ALB, add the worker node's private subnet CIDR. Retrieve the first three octets of your worker's private IP address by running `ibmcloud ks worker <cluster_name>`. For example, if it is `10.176.48.xx` then note `10.176.48`. Next, get the worker private subnet CIDR by running the following command, replacing `<xxx.yyy.zz>` with the octet that you previously retrieved: `ibmcloud sl subnet list | grep <xxx.yyy.zzz>`. **Note**: If a worker node is added on a new private subnet, you must add the new private subnet CIDR to the `local.subnet` setting and the on-premises VPN endpoint. Then, the VPN connection must be restarted.
@@ -703,3 +703,4 @@ To set up a Virtual Router Appliance:
 
 If you have an existing router appliance and then add a cluster, the new portable subnets that are ordered for the cluster are not configured on the router appliance. In order to use networking services, you must enable routing between the subnets on the same VLAN by [enabling VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing). To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 {: important}
+

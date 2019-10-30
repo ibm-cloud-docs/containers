@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -181,9 +181,9 @@ To set up an NLB 1.0 service in a multizone cluster:
         ```
         http://169.xx.xxx.xxx:8080
         ```
-        {: codeblock}    
+        {: codeblock}
 
-5. Repeat the steps 2 - 4 to add a version 1.0 NLB in each zone.    
+5. Repeat the steps 2 - 4 to add a version 1.0 NLB in each zone.
 
 6. If you choose to [enable source IP preservation for an NLB 1.0](#node_affinity_tolerations), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
@@ -513,3 +513,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         {: screen}
 
     4. In the **Labels** section of the output, verify that the public or private VLAN is the VLAN that you designated in previous steps.
+
+
+
+</staging components>

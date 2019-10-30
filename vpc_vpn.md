@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-30"
 
-keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas
+keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
 subcollection: containers
 
@@ -620,5 +620,4 @@ You can disable the VPN connection by deleting the Helm chart.
   helm delete --purge <release_name>
   ```
   {: pre}
-
 

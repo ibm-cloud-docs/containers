@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, ingress
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 # Customizing Ingress routing with annotations
 {: #ingress_annotation}
@@ -1882,7 +1881,7 @@ spec:
 ## Proxy buffer annotations
 {: #proxy-buffer}
 
-The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when you send or receive data packets.  
+The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when you send or receive data packets.
 {: shortdesc}
 
 ### Large client header buffers (`large-client-header-buffers`)
@@ -2663,5 +2662,8 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
   {: pre}
 
 5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
+
+
+
 
 
