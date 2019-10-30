@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-28"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -602,7 +602,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    3. For each of the selected zones, choose the VPC subnet that you want to use for your worker nodes. The VPC subnets that you created earlier are automatically loaded for the selected worker node zones.
 7. Configure your cluster with a private, or a public and a private service endpoint by setting the **Master service endpoint**. For more information about what setup is required to run internet-facing apps, or to keep your cluster private, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-pgw).
 8. Configure your default worker pool. Worker pools are groups of worker nodes that share the same configuration. You can always add more worker pools to your cluster later.
-   1. Use the filter options to limit the number of flavors that are displayed to you.
+   1. Use the filter options to limit the number of shared virtual server flavors that are displayed to you.
    2. Select a flavor. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.
    3. Specify the number of worker nodes that you need in the cluster. The number of workers that you enter is replicated across the number of zones that you selected. For example, if you selected two zones and want to create three worker nodes, a total of six worker nodes are provisioned in your cluster with three worker nodes in each zone.
 9. Click **Create cluster**. A worker pool is created with the number of workers that you specified. You can see the progress of the worker node deployment in the **Worker nodes** tab.
