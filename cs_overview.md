@@ -63,7 +63,7 @@ Review the following links to find out more about the benefits and responsibilit
 - [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 - [Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy)
 - [Limitations](/docs/containers?topic=container-limitations)
-- 
+- Learn how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps in these <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a>.
 
 <br />
 
