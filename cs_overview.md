@@ -29,6 +29,12 @@ subcollection: containers
 Learn more about {{site.data.keyword.containerlong}}, its capabilities and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
+## Understanding {{site.data.keyword.containerlong_notm}}
+{: #service-concepts}
+
+Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses. 
+{: shortdesc}
+
 **What is {{site.data.keyword.containerlong_notm}} and how does it work?** </br>
 {{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
 
@@ -57,6 +63,7 @@ Review the following links to find out more about the benefits and responsibilit
 - [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 - [Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy)
 - [Limitations](/docs/containers?topic=container-limitations)
+- 
 
 <br />
 
@@ -68,7 +75,11 @@ Review the following links to find out more about the benefits and responsibilit
 Built on existing Linux container technology (LXC), the open source project that is named Docker defined templates for how to package software into standardized units, called containers, that include all of the elements that an app needs to run. {{site.data.keyword.containerlong_notm}} uses `containerd` as the container runtime to deploy containers from Docker container images into your cluster.
 {:shortdesc}
 
-**What are the basic Docker concepts?** </br>
+### Key concepts
+{: #docker-concepts} 
+
+Learn more about the key concepts of Docker. 
+{: shortdesc}
 
 <dl>
 <dt>Image</dt>
@@ -80,7 +91,11 @@ Built on existing Linux container technology (LXC), the open source project that
 <dd>Every container is created from an image. A container is a packaged app with all of its dependencies so that the app can be moved between environments and run without changes. Unlike virtual machines, containers do not virtualize a device, its operating system, and the underlying hardware. Only the app code, run time, system tools, libraries, and settings are packaged inside the container. Containers run as isolated processes on Ubuntu compute hosts and share the host operating system and its hardware resources. This approach makes a container more lightweight, portable, and efficient than a virtual machine.</dd>
 </dl>
 
-**What are the key benefits of using containers?**</br>
+### Benefits
+{: #docker-benefits}
+
+Review the key benefits of using containers to run your workloads in the cloud. 
+{: shortdesc}
 
 <dl>
 <dt>Containers are agile</dt>
@@ -96,8 +111,6 @@ Built on existing Linux container technology (LXC), the open source project that
   </ul>
   </dd>
 
-<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.</p>
-
 <p>Ready to gain deeper knowledge of Docker? <a href="https://cognitiveclass.ai/courses/docker-essentials" target="_blank">Learn how Docker and {{site.data.keyword.containerlong_notm}} work together by completing this course.</a></p>
 
 </dl>
@@ -111,7 +124,11 @@ Built on existing Linux container technology (LXC), the open source project that
 <img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project that is named Kubernetes combines running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
 {:shortdesc}
 
-**What are the basic Kubernetes concepts?** </br>
+### Key concepts
+{: #kubernetes-concepts}
+
+Learn more about the key concepts of Kubernetes as illustrated in the following image. 
+{: shortdesc}
 
 ![Deployment setup](images/cs_app_tutorial_mz-components1.png)
 
@@ -137,8 +154,11 @@ Define update strategies for your app, including the number of pods that you wan
 <dt>App</dt>
 <dd>An app might refer to a complete app or a component of an app. You might deploy components of an app in separate pods or separate worker nodes.</dd>
 
+### Related resources
+{: #kubernetes-resources}
 
-**How can I learn more about Kubernetes?** </br>
+Review how you can learn about Kubernetes concepts and the terminology. 
+{: shortdesc}
 
 * Expand your terminology knowledge with the [Creating Kubernetes clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
 * Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course). 
