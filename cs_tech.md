@@ -64,11 +64,13 @@ The following image shows the components of your cluster and how they interact i
 </figure>
 </p>
 
-What's the difference between the Kubernetes master and a worker node? Glad you asked.
+### Kubernetes master components
+{: #master-components}
 
-<dl>
-  <dt>Kubernetes master</dt>
-    <dd>The Kubernetes master is tasked with managing all compute, network, and storage resources in the cluster. The Kubernetes master ensures that your containerized apps and services are equally deployed to the worker nodes in the cluster. Depending on how you configure your app and services the master determines the worker node that has sufficient resources to fulfill the app's requirements.</br></br>The following table describes the components of the Kubernetes master.
+The Kubernetes master is tasked with managing all compute, network, and storage resources in the cluster, and ensures that your containerized apps and services are equally deployed to the worker nodes in the cluster. Depending on how you configure your app and services the master determines the worker node that has sufficient resources to fulfill the app's requirements.
+{: shortdesc}
+
+The following table describes the components of the Kubernetes master.
     <table>
     <caption>Components of the Kubernetes master</caption>
     <thead>
@@ -96,9 +98,18 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>`kube-controller-manager`</td>
     <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
     </tr>
-    </tbody></table></dd>
-  <dt>Worker node</dt>
-    <dd>Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}}-managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.</br></br><p class="note">Modifying default worker node components such as `kubelet` is not supported and might cause unexpected results.</p>The following table describes the components of a worker node.
+    </tbody></table>
+    
+### Worker node components
+{: #worker-components}
+
+Each worker node is a physical machine (bare metal) or a virtual machine that runs on physical hardware in the cloud environment. When you provision a worker node, you determine the resources that are available to the containers that are hosted on that worker node. Out of the box, your worker nodes are set up with an {{site.data.keyword.IBM_notm}}-managed Docker Engine, separate compute resources, networking, and a volume service. The built-in security features provide isolation, resource management capabilities, and worker node security compliance.
+{: shortdesc}
+
+Modifying default worker node components such as `kubelet` is not supported and might cause unexpected results.
+{: note} 
+
+The following table describes the components of a worker node.
     <table>
     <caption>Components of worker nodes</caption>
     <thead>
@@ -177,11 +188,7 @@ What's the difference between the Kubernetes master and a worker node? Glad you 
     <td>`default`</td>
     <td>In the <code>default</code> namespace or in namespaces that you create, you can deploy apps in pods and services to communicate with those pods.</td>
     </tr>
-    </tbody></table></dd>
-</dl>
-
-Want to see how {{site.data.keyword.containerlong_notm}} can be used with other products and services? Check out some of the [integrations](/docs/containers?topic=containers-supported_integrations#supported_integrations).
-{: tip}
+    </tbody></table>
 
 
 ## VPC cluster 
@@ -197,7 +204,7 @@ The following diagram and table describe the default components that are set up 
 
 | Component | Description |
 |:-----------------|:-----------------|
-| Master |  Master components, including the API server and etcd, have three replicas and are spread across zones for even higher availability. Masters include the same components as described in the community Kubernetes architecture. |
+| Master |  [Master components](#master-components), including the API server and etcd, have three replicas and are spread across zones for even higher availability. Masters include the same components as described in the community Kubernetes architecture. |
 | Worker node |  With {{site.data.keyword.containerlong_notm}}, the virtual machines that your cluster manages are instances that are called worker nodes. These worker nodes belong to you, and you manage them through the automation tools that are provided by {{site.data.keyword.containerlong_notm}}, such as the API, CLI, or console. Unlike classic clusters, you do not see VPC Gen 1 compute worker nodes in your infrastructure portal or separate infrastructure bill, but instead manage all maintenance and billing activity for the worker nodes from {{site.data.keyword.containerlong_notm}}.<br><br>Worker nodes include the same components as described in the Classic architecture. Community Kubernetes worker nodes run on Ubuntu 16.64, 18.64. |
 | Cluster networking | Your worker nodes are created in a VPC subnet in the zone that you specify. By default, the public and private service endpoints for your cluster are enabled. Communication between the master and worker nodes is over the private network. Authenticated external users can communicate with the master over the public network, such as to run `kubectl` commands. You can optionally set up your cluster to communicate with on-prem services by setting up a VPN gateway appliance on the private network. |
 | App networking | You can create a Kubernetes `LoadBalancer` service for your apps in the cluster, which automatically provisions a VPC load balancer in your VPC outside the cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. For more information, see [Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas).<br><br>Calico is used as the cluster networking policy fabric. |
