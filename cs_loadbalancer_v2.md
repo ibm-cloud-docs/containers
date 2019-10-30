@@ -442,4 +442,3 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 
 
 
-</staging components>

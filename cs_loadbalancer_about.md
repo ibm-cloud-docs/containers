@@ -188,4 +188,3 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 
 
 
-</staging components>

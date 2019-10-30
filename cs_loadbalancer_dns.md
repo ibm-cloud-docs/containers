@@ -335,4 +335,3 @@ ibmcloud ks nlb-dns monitor enable --cluster <cluster_name_or_id> --nlb-host <ho
 
 
 
-</staging components>
