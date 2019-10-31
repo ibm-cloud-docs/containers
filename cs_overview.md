@@ -124,6 +124,8 @@ Review the key benefits of using containers to run your workloads in the cloud.
 <img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project that is named Kubernetes combines running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
 {:shortdesc}
 
+</br></br>
+
 ### Key concepts
 {: #kubernetes-concepts}
 
