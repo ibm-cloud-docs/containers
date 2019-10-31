@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
@@ -29,7 +29,6 @@ subcollection: containers
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This content is specific to NLBs in classic clusters. For VPC clusters, see [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns).
 {: note}
-
 
 After you set up network load balancers (NLBs), you can create DNS entries for the NLB IPs by creating subdomains. You can also set up TCP/HTTP(S) monitors to health check the NLB IP addresses behind each subdomain.
 {: shortdesc}
@@ -59,8 +58,7 @@ Expose your app to the public internet by creating a subdomain for the network l
 
 Before you begin:
 * Review the following considerations and limitations.
-  * You can create subdomains for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC clusters
-  .
+  * You can create subdomains for public version 1.0 and 2.0 NLBs in classic clusters only, but not for NLBs in VPC clusters.
   * You currently cannot create subdomains for private NLBs.
   * You can register up to 128 subdomains. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 * [Create an NLB for your app in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config) or [create NLBs in each zone of a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
@@ -334,3 +332,6 @@ To re-enable a monitor for a subdomain, run the following command:
 ibmcloud ks nlb-dns monitor enable --cluster <cluster_name_or_id> --nlb-host <host_name>
 ```
 {: pre}
+
+
+

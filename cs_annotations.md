@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, ingress
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 # Customizing Ingress routing with annotations
 {: #ingress_annotation}
@@ -1882,7 +1881,7 @@ spec:
 ## Proxy buffer annotations
 {: #proxy-buffer}
 
-The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when you send or receive data packets.  
+The Ingress ALB acts as a proxy between your back-end app and the client web browser. With proxy buffer annotations, you can configure how data is buffered on your ALB when you send or receive data packets.
 {: shortdesc}
 
 ### Large client header buffers (`large-client-header-buffers`)
@@ -2614,7 +2613,7 @@ spec:
 </tr>
 <tr>
 <td><code>serviceName</code></td>
-<td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services.  If a service name is included, then the annotation is enabled only for that service. Separate multiple services with a comma (,).</td>
+<td>Replace <code><em>&lt;myservice&gt;</em></code> with the name of the Kubernetes service that you created for your app. This field is required. If a service name is not included, then the annotation is enabled for all services. If a service name is included, then the annotation is enabled only for that service. Specify only one service name per service path that you define in the resource file.</td>
 </tr>
 <tr>
 <td><code>idToken=false</code></td>
@@ -2663,5 +2662,8 @@ Because the app uses {{site.data.keyword.appid_short_notm}} for authentication, 
   {: pre}
 
 5. Use the bind secret and the cluster namespace to add the `appid-auth` annotation to your Ingress resource.
+
+
+
 
 

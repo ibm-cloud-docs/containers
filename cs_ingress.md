@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -22,7 +22,6 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-
 
 # Setting up Ingress
 {: #ingress}
@@ -695,7 +694,7 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--user-ip` flag.
   ```
-  ibmcloud ks alb configure vpc-classic --alb-id <private_ALB_ID> --enable
+  ibmcloud ks alb configure classic --alb-id <private_ALB_ID> --enable
   ```
   {: pre}
   </br>
@@ -1190,4 +1189,8 @@ http://<subdomain1>.<domain>/<app1_path>
 http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
+
+
+
+
 

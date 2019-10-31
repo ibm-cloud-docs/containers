@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # VPC: Exposing apps with VPC load balancers
 {: #vpc-lbaas}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](/docs/containers?topic=containers-loadbalancer-about).
 
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
@@ -72,8 +71,8 @@ Expose your app to the public or to the private network by setting up a Kubernet
     {: pre}
     Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
     ```
-    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group   
-    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment   4       -                           2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3  
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment   4       -                           2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
     ```
     {: screen}
   3. For any other security groups for your VPC, add a rule to allow inbound TCP traffic on ports 30000-32767 to the private IP addresses of your worker nodes. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc-on-classic?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
@@ -177,7 +176,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
   In the following example CLI output, the VPC load balancer that is named `kube-bh077ne10vqpekt0domg-046e0f754d624dca8b287a033d55f96e` is created for the Kubernetes `LoadBalancer` service:
   ```
-  ID                                     Name                                                         Created          Host Name                                  Is Public   Listeners                               Operating Status   Pools                                   Private IPs              Provision Status   Public IPs                    Subnets                                Resource Group   
+  ID                                     Name                                                         Created          Host Name                                  Is Public   Listeners                               Operating Status   Pools                                   Private IPs              Provision Status   Public IPs                    Subnets                                Resource Group
   06496f64-a689-4693-ba23-320959b7b677   kube-bh077ne10vqpekt0domg-046e0f754d624dca8b287a033d55f96e   8 minutes ago    1234abcd-us-south.lb.appdomain.cloud       yes         95482dcf-6b9b-4c6a-be54-04d3c46cf017    online             717f2122-5431-403c-b21d-630a12fc3a5a    10.241.0.7,10.241.0.13   active             169.63.99.184,169.63.99.124   c6540331-1c1c-40f4-9c35-aa42a98fe0d9   00809211b934565df546a95f86160f62
   ```
   {: screen}
@@ -282,3 +281,5 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster <cluster_name_or_id> --nlb-subdomai
 * You can register up to 128 subdomains for VPC load balancer hostnames. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-getting-customer-support).
 
 
+
+</staging components>

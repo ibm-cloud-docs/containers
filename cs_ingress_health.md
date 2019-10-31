@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-10-30"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, ingress, alb, health, prometheus
 
 subcollection: containers
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Logging and monitoring Ingress
 {: #ingress_health}
 
@@ -38,7 +36,7 @@ If you want to troubleshoot your Ingress or monitor Ingress activity, you can re
 {: shortdesc}
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
-* [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health#configuring) in your cluster.
+* [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health) in your cluster.
 * Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
     1. Get the ID of a pod for an ALB.
         ```
@@ -726,3 +724,6 @@ Before you begin, ensure that you have the [**Writer** or **Manager** {{site.dat
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
+
+
+

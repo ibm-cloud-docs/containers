@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-29"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -454,31 +454,28 @@ To uninstall the CLIs:
 <br />
 
 
-## Using the Kubernetes Terminal in your web browser
+## Using the Kubernetes web terminal in your web browser
 {: #cli_web}
 
-The Kubernetes Terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
+The Kubernetes web terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-You can use the Kubernetes Terminal for quick access and testing of your cluster. Do not use it for production workloads.
+You can use the Kubernetes web terminal for quick access and testing of your cluster. Do not use it for production workloads.
 {: important}
 
-If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes Terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
+If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
 
 Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and do not persist across sessions.
 {: note}
 
-To install and launch the Kubernetes Terminal:
+To install and launch the Kubernetes web terminal:
 
-1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
-2.  From the menu bar, select the account that you want to use.
-3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
-4.  On the **Clusters** page, click the cluster that you want to access.
-5.  From the cluster detail page, click the **Terminal** button.
-6.  Click **Install**. It might take a few minutes for the terminal add-on to install.
-7.  Click the **Terminal** button again. The terminal opens in your browser.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the web terminal.
+2.  From the upper right of the cluster detail page, click the **Web terminal** button.
+3.  Click **Install**. It might take a few minutes for the terminal add-on to install.
+4.  Click the **Web terminal** button again. The terminal opens in your browser.
 
-Next time, you can launch the Kubernetes Terminal simply by clicking the **Terminal** button.
+Next time, you can launch the Kubernetes Terminal simply by clicking the **Web terminal** button.
 
 <br />
 

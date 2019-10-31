@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-30"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -23,14 +23,12 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Classic: About network load balancers (NLBs)
 {: #loadbalancer-about}
 
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
-
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 {: shortdesc}
@@ -127,9 +125,6 @@ Network load balancer (NLB) 2.0 capabilities are in beta. To use an NLB 2.0, you
 
 The NLB 2.0 is a Layer 4 load balancer that uses the Linux kernel's IP Virtual Server (IPVS). The NLB 2.0 supports TCP and UDP, runs in front of multiple worker nodes, and uses IP over IP (IPIP) tunneling to distribute traffic that arrives to a single NLB IP address across those worker nodes.
 
-Want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/new-builders/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability).
-{: tip}
-
 ### Traffic flow in a single-zone cluster
 {: #ipvs_single}
 
@@ -187,3 +182,6 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 4. The compute worker node, 10.73.13.26, unpacks the IPIP encapsulating packet, and then unpacks the client request packet. The client request packet is forwarded to the app pod on that worker node.
 
 5. The compute worker node, 10.73.13.26, then uses the source IP address from the original request packet, the client IP, to return the app pod's response packet directly to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.
+
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-10-29"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -1305,7 +1305,6 @@ Looking for information about scaling Cloud Foundry applications? Check out [IBM
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- Heapster monitoring must be deployed in the cluster that you want to autoscale.
 - Make sure that you are assigned a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 Steps:
