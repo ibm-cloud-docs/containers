@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -27,13 +27,11 @@ subcollection: containers
 # Service architecture
 {: #ibm-cloud-kubernetes-service-technology}
 
-Review sample cluster architectures and the components that are created in your [classic](#architecture_classsic) or [VPC](#architecture_vpc) cluster. 
+Review sample cluster architectures and the components that are created in your [classic](#architecture_classic) or [VPC](#architecture_vpc) cluster. 
 {: shortdesc}
 
 ## Classic cluster
 {: #architecture_classic}
-
-
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following architectural overviews are specific to the classic infrastructure provider. For an architectural overview for the VPC infrastructure provider, see [VPC cluster architecture](#architecture_vpc).
 {: note}
