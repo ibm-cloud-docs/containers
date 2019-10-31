@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -898,7 +898,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 The cluster autoscaler is available for standard, classic clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint.
 {: shortdesc}
 
-If your account is not enabled for VRF and service endpoints, you can [open the required ports](https://cloud.ibm.com/docs/containers?topic=containers-firewall#vyatta_firewall) to allow public network connectivity in your cluster. 
+If your account is not enabled for VRF and service endpoints, you can [open the required ports](/docs/containers?topic=containers-firewall#vyatta_firewall) to allow public network connectivity in your cluster. 
 {: tip}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
