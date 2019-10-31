@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -26,7 +26,7 @@ subcollection: containers
 # VPC: Exposing apps with VPC load balancers
 {: #vpc-lbaas}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](https://cloud.ibm.com/docs/containers?topic=containers-loadbalancer-about).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](/docs/containers?topic=containers-loadbalancer-about).
 
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
