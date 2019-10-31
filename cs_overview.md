@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -62,7 +62,7 @@ Review the following links to find out more about the benefits and responsibilit
 - [Use cases](/docs/containers?topic=containers-cs_uc_intro)
 - [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 - [Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy)
-- [Limitations](/docs/containers?topic=container-limitations)
+- [Limitations](/docs/containers?topic=containers-limitations)
 - Learn how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps in these <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a>.
 
 <br />
