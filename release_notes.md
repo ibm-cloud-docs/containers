@@ -47,7 +47,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
 <td>01 November 2019</td>
-<td><strong>New! Keep your own key (KYOK) support</strong>: You can now [enable several key management service (KMS) providers](/docs/containers?topic=containers-encryption#kms), so that you can use your own root key to encrypt the secrets in your cluster.</td>
+<td><strong>New! Keep your own key (KYOK) support (beta)</strong>: You can now [enable several key management service (KMS) providers](/docs/containers?topic=containers-encryption#kms), so that you can use your own root key to encrypt the secrets in your cluster.</td>
 </tr>
 </tbody>
 </table>
