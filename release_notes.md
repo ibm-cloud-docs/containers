@@ -153,7 +153,7 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 </tr>
 <tr>
   <td>19 September 2019</td>
-  <td>Added [steps](/docs/containers?topic=containers-ingress-settings#default_server_cert) for ensuring that your custom certificate, instead of the default IBM-provided certificate, is sent by the Ingress ALB to legacy clients that do not support SNI.</td>
+  <td><strong>Sending custom Ingress certificates to legacy clients</strong>: Added [steps](/docs/containers?topic=containers-ingress-settings#default_server_cert) for ensuring that your custom certificate, instead of the default IBM-provided certificate, is sent by the Ingress ALB to legacy clients that do not support SNI.</td>
 </tr>
 <tr>
   <td>16 September 2019</td>
@@ -411,13 +411,11 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 </tr>
 <tr>
   <td>05 June 2019</td>
-  <td><ul>
-  <li><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) to reflect multiple changes for the [release of version 0.3.34](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li>
-  </ul></td>
+  <td><strong>CLI reference</strong>: Updated the [CLI reference page](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) to reflect multiple changes for the [release of version 0.3.34](/docs/containers?topic=containers-cs_cli_changelog) of the {{site.data.keyword.containerlong_notm}} CLI plug-in.</td>
 </tr>
 <tr>
   <td>04 June 2019</td>
-  <td><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Version changelogs</strong>: Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-changelog#11110_1561) patch releases.
+  <td><strong>Version changelogs</strong>: Updated the changelogs for the [1.14.2_1521](/docs/containers?topic=containers-changelog#1142_1521), [1.13.6_1524](/docs/containers?topic=containers-changelog#1136_1524), [1.12.9_1555](/docs/containers?topic=containers-changelog#1129_1555), and [1.11.10_1561](/docs/containers?topic=containers-changelog#11110_1561) patch releases.
   </td>
 </tr>
 <tr>
@@ -487,9 +485,7 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 </tr>
 <tr>
   <td>20 May 2019</td>
-  <td><ul>
-  <li><strong>Version changelogs</strong>: Added [worker node fix pack changelogs](/docs/containers?topic=containers-changelog).</li>
-  </ul></td>
+  <td><strong>Version changelogs</strong>: Added [worker node fix pack changelogs](/docs/containers?topic=containers-changelog).</td>
 </tr>
 <tr>
   <td>16 May 2019</td>
