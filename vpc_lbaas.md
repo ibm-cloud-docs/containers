@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -266,7 +266,11 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster <cluster_name_or_id> --nlb-subdomai
 ## Limitations
 {: #lbaas_limitations}
 
+For more information about using load balancers for VPC, see the VPC docs for [public and private](/docs/infrastructure/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#private-load-balancer) load balancers.
+{: shortdesc}
+
 * VPC load balancers do not currently support UDP.
+* Private VPC load balancers do not accept all traffic, only RFC 1918 traffic.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.
 * The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster.
 * When you define the configuration YAML file for a Kubernetes `LoadBalancer` service, the following annotations and settings are not supported:
@@ -282,4 +286,3 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster <cluster_name_or_id> --nlb-subdomai
 
 
 
-</staging components>
