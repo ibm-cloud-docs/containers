@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-23"
+lastupdated: "2019-10-31"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -63,7 +63,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>23 Oct 2019</td>
 <td><ul>
 <li>Adds the [`proxy-ssl-name` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li>
-<li>Fixes `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li></td>
+<li>Fixes `golang` vulnerabilities for [CVE-2019-16276 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276).</li></ul></td>
 <td>-</td>
 </tr>
 <tr>

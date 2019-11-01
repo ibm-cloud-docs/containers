@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-11-01"
 
 ---
 
@@ -33,22 +33,34 @@ lastupdated: "2019-10-17"
 ## About
 {: #sitemap-about}
 
-[Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov)
+[Overview](/docs/containers?topic=containers-overview)
+* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#service-concepts)
+* [Docker containers](/docs/containers?topic=containers-overview#docker_containers)
+  * [Key concepts](/docs/containers?topic=containers-overview#docker-concepts)
+  * [Benefits](/docs/containers?topic=containers-overview#docker-benefits)
+* [Kubernetes clusters](/docs/containers?topic=containers-overview#kubernetes_basics)
+  * [Key concepts](/docs/containers?topic=containers-overview#kubernetes-concepts)
+  * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
+  
+[Benefits and service offerings](/docs/containers?topic=containers-cs_ov)
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
 * [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation)
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
 
-[Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
+[Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
-[{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#ibm-cloud-kubernetes-service-technology)
-* [Docker containers](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#docker_containers)
-  * [Key benefits of using containers](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#container_benefits)
-* [Kubernetes clusters](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#kubernetes_basics)
-* [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
-  * [Classic cluster architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_classic)
-  * [VPC cluster architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_vpc)
-* [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits)
-* [VPC cluster limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vpc_ks_limits)
+[Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)
+* [Classic cluster](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_classic)
+  * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#no-vrf-public-endpoint)
+  * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vrf-both-endpoints)
+  * [Kubernetes master components](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#master-components)
+  * [Worker node components](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#worker-components)
+* [VPC cluster](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_vpc)
+
+[Limitations](/docs/containers?topic=containers-limitations)
+* [Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
+* [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
+* [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
 
 ## Use cases
 {: #sitemap-usecases}

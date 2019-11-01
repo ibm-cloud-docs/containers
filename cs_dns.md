@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -37,7 +37,7 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 
 | Kubernetes Version | Default for new clusters | Description |
 |---|---|---|
-| 1.14 and later | CoreDNS | If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS. |
+| 1.14 and later | CoreDNS | If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS.|
 | 1.13 | CoreDNS | Clusters that are updated to 1.13 from an earlier version keep whichever DNS provider they used at the time of the update. If you want to use a different one, [switch the DNS provider](#dns_set). |
 | 1.12 | KubeDNS | To use CoreDNS instead, [switch the DNS provider](#set_coredns). |
 | 1.11 and earlier | KubeDNS | You cannot switch the DNS provider to CoreDNS. |
@@ -94,7 +94,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Customizing the cluster DNS provider
 {: #dns_customize}
 
-You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS provider by editing the DNS configmap. For example, you might want to configure `stubdomains` and upstream nameservers to resolve services that point to external hosts. Additionally, if you use CoreDNS, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+You can customize your {{site.data.keyword.containerlong_notm}} cluster DNS provider by editing the DNS configmap. For example, you might want to configure `stubdomains` to resolve services that point to external hosts. Additionally, if you use CoreDNS, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -114,7 +114,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 2.  Edit the default settings for the CoreDNS or KubeDNS configmap.
 
-    *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize `stubdomains` and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).<p class="tip">Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).</p>
+    *   **For CoreDNS**: Use a Corefile in the `data` section of the configmap to customize `stubdomains`. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).<p class="tip">Do you have many customizations that you want to organize? In Kubernetes version 1.12.6_1543 and later, you can add multiple Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).</p>
 
         ```
         kubectl edit configmap -n kube-system coredns
@@ -133,14 +133,17 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
               import <MyCorefile>
               .:53 {
                   errors
-                  health
+                  health {
+                    lameduck 10s
+                  }
+                  ready
                   kubernetes cluster.local in-addr.arpa ip6.arpa {
                      pods insecure
-                     upstream 172.16.0.1
                      fallthrough in-addr.arpa ip6.arpa
+                     ttl 30
                   }
                   prometheus :9153
-                  proxy . /etc/resolv.conf
+                  forward . /etc/resolv.conf
                   cache 30
                   loop
                   reload
@@ -151,7 +154,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
                 errors
                 cache 30
                 loop
-                proxy . 1.2.3.4
+                forward . 1.2.3.4
               }
           ```
           {: screen}

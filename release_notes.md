@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-28"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -35,6 +35,23 @@ The following icons are used to indicate if a release note applies only to a cer
 <img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> Applies to only OpenShift clusters, which released as a beta on 5 June 2019.
 {: note}
 
+## November 2019
+{: #nov19}
+
+<table summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three.">
+<caption>Documentation updates in November 2019</caption>
+<thead>
+<th>Date</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>01 November 2019</td>
+<td><strong>New! Keep your own key (KYOK) support (beta)</strong>: You can now [enable several key management service (KMS) providers](/docs/containers?topic=containers-encryption#kms), so that you can use your own root key to encrypt the secrets in your cluster.</td>
+</tr>
+</tbody>
+</table>
+
 ## October 2019
 {: #oct19}
 
@@ -46,7 +63,17 @@ The following icons are used to indicate if a release note applies only to a cer
 </thead>
 <tbody>
 <tr>
-<td>24 October 2019</td>
+<td>31 October 2019</td>
+<td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
+  <li>[Setting up VPN connectivity](/docs/openshift?topic=openshift-vpn)</li>
+  <li>[Changing service endpoints or VLAN connections for OpenShift clusters](/docs/openshift?topic=openshift-openshift_access_cluster)</li>
+  <li>[Exposing apps with routes](/docs/openshift?topic=openshift-openshift_routes)</li>
+  <li>[Exposing apps with network load balancers (NLBs)](/docs/openshift?topic=openshift-loadbalancer-about)</li>
+  <li>[Exposing apps with Ingress application load balancers (ALBs)](/docs/openshift?topic=openshift-ingress-about)</li></ul>
+</td>
+</tr>
+<tr>
+<td>28 October 2019</td>
 <td><ul>
 <li><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>New! Resource groups for VPC clusters</strong>: You can now [create Kubernetes clusters](/docs/containers?topic=containers-vpc_ks_tutorial) in different resource groups than the resource group of the Virtual Private Cloud (VPC).</li>
 <li><strong>Version changelogs</strong>: Worker node patch updates are available for Kubernetes [1.15.5_1521](/docs/containers?topic=containers-changelog#1155_1521), [1.14.8_1537](/docs/containers?topic=containers-changelog#1148_1537), [1.13.12_1540](/docs/containers?topic=containers-changelog#11312_15409), [1.12.10_1570](/docs/containers?topic=containers-changelog#11210_1570), and OpenShift [3.11.153_1529_openshift](/docs/openshift?topic=openshift-openshift_changelog#311153_1528).</li></td>
@@ -112,7 +139,7 @@ The following icons are used to indicate if a release note applies only to a cer
     Ready to get started? [Create a standard classic cluster with a gateway in the CLI.](/docs/containers?topic=containers-clusters#gateway_cluster_cli)</li>
     <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>OpenShift options</strong>: To help you decide whether to use built-in OpenShift capabilities or integration with {{site.data.keyword.cloud_notm}} services, the following topics are added:<ul>
       <li>[Choosing an image registry solution](/docs/openshift?topic=openshift-openshift-images#openshift_registry_options)</li>
-      <li>[Choosing among load balancing solutions](/docs/openshift?topic=openshift-openshift_routes#routes-vs-ingress) like router or Ingress</li>
+      <li>[Choosing among load balancing solutions](/docs/openshift?topic=openshift-network_planning#routes-vs-ingress) like router or Ingress</li>
       <li>[Understanding options for logging and monitoring](/docs/openshift?topic=openshift-openshift_health#oc_logmet_options)</li></ul></li>
     <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>New! Single zone location for OpenShift clusters</strong>: The following locations are now supported. For more locations, see [Single and multizone locations in Red Hat OpenShift on IBM Cloud](/docs/openshift?topic=openshift-regions-and-zones#zones).<ul>
       <li>Oslo, Norway</li>
@@ -183,7 +210,7 @@ The following icons are used to indicate if a release note applies only to a cer
   <li><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
     <li>[Security information for OpenShift clusters](/docs/openshift?topic=openshift-security).
     <li>[Accessing clusters](/docs/openshift?topic=openshift-openshift_access_cluster).</li>
-    <li>[App networking options](/docs/openshift?topic=openshift-openshift_routes) with comparisons of routes, NodePort, load balancers, and Ingress.</li>
+    <li>[App networking options](/docs/openshift?topic=openshift-network_planning) with comparisons of routes, NodePort, load balancers, and Ingress.</li>
     <li>[Common app modification scenarios](/docs/openshift?topic=openshift-openshift_apps#common-app-modification-scenarios) for moving apps from community Kubernetes to OpenShift.</li>
     <li>Updated [pricing FAQ](/docs/openshift?topic=openshift-faqs#openshift_charges) to explain the monthly license in more detail.</li>
     <li>[Resizing and externally exposing the internal registry](/docs/openshift?topic=openshift-openshift-images#openshift_internal_registry).</li>

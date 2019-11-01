@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -547,7 +547,7 @@ health {
 {: #coredns_issues}
 
 {: tsSymptoms}
-Your app sometimes fails to resolve DNS names for cluster services. The failures occur only when CoreDNS, not KubeDNS, is the [configured cluster DNS provider](/docs/containers?topic=containers-cluster_dns). You might see error messages similar to the following.
+In your cluster that runs Kubernetes version 1.15 or earlier, your app sometimes fails to resolve DNS names for cluster services. The failures occur only when CoreDNS, not KubeDNS, is the [configured cluster DNS provider](/docs/containers?topic=containers-cluster_dns). You might see error messages similar to the following.
 
 ```
 Name or service not known
