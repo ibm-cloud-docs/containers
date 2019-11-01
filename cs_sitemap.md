@@ -52,7 +52,7 @@ lastupdated: "2019-11-01"
 [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology)
 * [Classic cluster](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_classic)
   * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#no-vrf-public-endpoint)
-  * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vrf-both-endpoints]
+  * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vrf-both-endpoints)
   * [Kubernetes master components](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#master-components)
   * [Worker node components](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#worker-components)
 * [VPC cluster](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture_vpc)
