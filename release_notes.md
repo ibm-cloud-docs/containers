@@ -64,7 +64,7 @@ The following icons are used to indicate if a release note applies only to a cer
 <tbody>
 <tr>
 <td>31 October 2019</td>
-<td><img src="images/logo_kubernetes.svg" alt="Kubernetes icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
+<td><img src="images/logo_openshift.svg" alt="OpenShift icon" width="15" style="width:15px; border-style: none"/> <strong>Refreshed Red Hat OpenShift on IBM Cloud docs</strong>: Includes the following new content:<ul>
   <li>[Setting up VPN connectivity](/docs/openshift?topic=openshift-vpn)</li>
   <li>[Changing service endpoints or VLAN connections for OpenShift clusters](/docs/openshift?topic=openshift-openshift_access_cluster)</li>
   <li>[Exposing apps with routes](/docs/openshift?topic=openshift-openshift_routes)</li>
