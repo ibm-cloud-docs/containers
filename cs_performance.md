@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-10"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks
 
@@ -166,23 +166,22 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 ## Adjusting cluster metrics provider resources
 {: #metrics}
 
-Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later, or `heapster` in earlier versions) configurations are optimized for clusters with 30 or less pods per worker node. If your cluster has more pods per worker node, the metrics provider `metrics-server` or `heapster` main container for the pod might restart frequently with an error message such as `OOMKilled`.
+Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later) configurations are optimized for clusters with 30 or less pods per worker node. If your cluster has more pods per worker node, the metrics provider `metrics-server` container for the pod might restart frequently with an error message such as `OOMKilled`.
+{: shortdesc}
 
-The metrics provider pod also has a `nanny` container that scales the `metrics-server` or `heapster` main container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
+The metrics provider pod also has a `nanny` container that scales the `metrics-server` container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
+
+**Kubernetes 1.16 limitation**: In clusters that run Kubernetes version 1.16, the `nanny` container is removed from the `metrics-server` pod because it uses unsupported Kubernetes APIs. As a result, your `NannyConfiguration` is ignored and the `metrics-server` pod no longer has the limits set. Update your configuration to handle this `nanny` limitation. If the `nanny` container limitation is resolved in a future patch update, you can reconfigure your cluster metrics provider resources.
+{: note}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  Open the cluster metrics provider configmap YAML.
-    *  For `metrics-server`:
-       ```
-       kubectl get configmap metrics-server-config -n kube-system -o yaml
-       ```
-       {: pre}
-    *  For `heapster`:
-       ```
-       kubectl get configmap heapster-config -n kube-system -o yaml
-       ```
-       {: pre}
+1.  Open the `metrics-server` configmap YAML.
+    ```
+    kubectl get configmap metrics-server-config -n kube-system -o yaml
+    ```
+    {: pre}
+
     Example output:
     ```
     apiVersion: v1
@@ -199,15 +198,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       labels:
         addonmanager.kubernetes.io/mode: EnsureExists
         kubernetes.io/cluster-service: "true"
-      name: heapster-config
+      name: metrics-server-config
       namespace: kube-system
-      resourceVersion: "526"
-      selfLink: /api/v1/namespaces/kube-system/configmaps/heapster-config
+      resourceVersion: "1424"
+      selfLink: /api/v1/namespaces/kube-system/configmaps/metrics-server-config
       uid: 11a1aaaa-bb22-33c3-4444-5e55e555e555
     ```
     {: screen}
 
-2.  Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value for both `metrics-server` and `heapster` is set to `4Mi`.
+2.  Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value is set to `4Mi`.
     ```
     apiVersion: v1
     data:
@@ -222,7 +221,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 3.  Apply your changes.
     ```
-    kubectl apply -f heapster-config.yaml
+    kubectl apply -f metrics-server-config.yaml
     ```
     {: pre}
 

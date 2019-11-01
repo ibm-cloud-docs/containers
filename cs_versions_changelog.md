@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -44,6 +44,8 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: note}
 
 </br>
+
+
 
 ## Version 1.15 changelog
 {: #115_changelog}

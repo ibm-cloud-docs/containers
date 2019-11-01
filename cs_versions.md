@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-21"
+lastupdated: "2019-11-01"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -21,6 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:note: .note}
+{:external: target="_blank" .external}
 
 
 # Version information and update actions   
@@ -31,7 +32,7 @@ subcollection: containers
 
 {{site.data.keyword.containerlong}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported.
 {:shortdesc}
-  
+
 **Supported Kubernetes versions**:
 *   Latest: 1.15.5
 *   Default: 1.14.8
@@ -132,26 +133,26 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.15](#cs_v115)</td>
-  <td>5 Aug 2019</td>
-  <td>July 2020 `†`</td>
+  <td>05 Aug 2019</td>
+  <td>Aug 2020 `†`</td>
 </tr>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.14](#cs_v114)</td>
   <td>07 May 2019</td>
-  <td>Apr 2020 `†`</td>
+  <td>May 2020 `†`</td>
 </tr>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.13](#cs_v113)</td>
   <td>05 Feb 2019</td>
-  <td>Jan 2020 `†`</td>
+  <td>19 Feb 2020 `†`</td>
 </tr>
   <tr>
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.12](#cs_v112)</td>
   <td>07 Nov 2018</td>
-  <td>03 Nov 2019 `†`</td>
+  <td>03 Nov 2019</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -199,6 +200,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </table>
 
 <br />
+
+
 
 
 ## Version 1.15
