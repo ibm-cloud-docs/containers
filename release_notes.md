@@ -164,7 +164,8 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 </tr>
 <tr>
   <td>13 September 2019</td>
-  <td><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</li>
+  <td><ul>
+    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</li>
   <li><strong>`script update` command</strong>: Added [steps for using the `script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in.</td>
 </tr>
 <tr>
