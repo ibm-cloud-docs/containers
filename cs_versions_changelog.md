@@ -4492,6 +4492,7 @@ Unsupported Kubernetes versions:
 *  [Version 1.8](#18_changelog)
 *  [Version 1.7](#17_changelog)
 
+
 ### Version 1.11 changelog (unsupported as of 20 July 2019)
 {: #111_changelog}
 
