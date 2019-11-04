@@ -15,7 +15,7 @@ subcollection: containers
 {:screen: .screen}
 {:pre: .pre}
 {:table: .aria-labeledby="caption"}
-{:codeblock: .codeblock}
+{:codeblock: .codeblock} 
 {:tip: .tip}
 {:note: .note}
 {:important: .important}
