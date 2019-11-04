@@ -22,7 +22,7 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
-{:external: target="_blank" .external}
+{:external: target="_blank" .external} 
 
 # Version changelog
 {: #changelog}
