@@ -17,7 +17,7 @@ subcollection: containers
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
-{:note: .note}
+{:note: .note} 
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
