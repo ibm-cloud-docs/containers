@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
