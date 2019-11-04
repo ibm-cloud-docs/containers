@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Updating clusters, worker nodes, and cluster components
 {: #update}
@@ -41,7 +41,7 @@ You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when up
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
 
-For example, if your current Kubernetes API server version is 1.11 and you want to update to 1.14, you must first update to 1.12.
+For example, if your current Kubernetes API server version is 1.13 and you want to update to 1.16, you must first update to 1.14.
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
@@ -361,7 +361,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     ```
     {: screen}
 5.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.14.8 to 1.15.5, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.14.8 to 1.16.2, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -212,6 +212,7 @@ The default `PodSecurityPolicy` resources refer to the pod security policies tha
 | `ibm-anyuid-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-anyuid-psp` pod security policy. |
 | `ibm-privileged-psp` | All | `PodSecurityPolicy` | Policy for privileged pod creation. |
 | `ibm-privileged-psp-user` | All | `ClusterRole` | Cluster role that allows the use of `ibm-privileged-psp` pod security policy. |
+| `ibm-privileged-psp-user` | `ibm-operators` | `RoleBinding` |  Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp pod` security policy in the `ibm-operators` namespace.|
 | `ibm-privileged-psp-user` | `ibm-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `ibm-system` namespace. |
 | `ibm-privileged-psp-user` | `kube-system` | `RoleBinding` | Enables cluster administrators, service accounts, and nodes to use `ibm-privileged-psp` pod security policy in the `kube-system` namespace. |
 | `ibm-restricted-psp` | All | `PodSecurityPolicy` | Policy for unprivileged, or restricted, pod creation. |

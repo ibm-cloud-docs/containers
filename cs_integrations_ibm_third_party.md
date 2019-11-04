@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks, helm
 
@@ -17,7 +17,7 @@ subcollection: containers
 {:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
-{:note: .note}
+{:note: .note} 
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -113,4 +113,10 @@ Any costs that incur by using a third-party open source integration are not incl
 Installing third-party open source integrations or Helm charts from the Kubernetes community might change the default cluster configuration and can bring your cluster into an unsupported state. If you run into an issue with using any of these tools, consult the Kubernetes community or the service provider directly.
 {: important}
 
+### Extending Kubernetes API and software with CRDs and Operators
+{: #kube-crd-operators}
 
+You might use custom resource defintions (CRDs) to extend the Kubernetes API to create and orchestrate custom objects in your cluster. Operators combine custom resources and controllers to automate the life cycle of app, such as developing a catalog to deploy and update customized apps in your cluster. Custom resources are generally available in [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) and later.
+{: shortdesc}
+
+To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.

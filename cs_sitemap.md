@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-04"
 
 ---
 
@@ -10,7 +10,7 @@ lastupdated: "2019-11-01"
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"}
+{:table: .aria-labeledby="caption"} 
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -1045,10 +1045,8 @@ lastupdated: "2019-11-01"
   * [Update before master](/docs/containers?topic=containers-cs_versions#113_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#113_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#113_after_workers)
-* [Deprecated: Version 1.12](/docs/containers?topic=containers-cs_versions#cs_v112)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#112_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#112_after)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.12 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
   * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
   * [Version 1.9 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v19)
@@ -1061,8 +1059,8 @@ lastupdated: "2019-11-01"
 * [Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
 * [Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
 * [Version 1.13 changelog](/docs/containers?topic=containers-changelog#113_changelog)
-* [Version 1.12 changelog](/docs/containers?topic=containers-changelog#112_changelog)
 * [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
+  * [Version 1.12 changelog (unsupported as of 3 November 2019)](/docs/containers?topic=containers-changelog#112_changelog)
   * [Version 1.11 changelog (unsupported as of 20 July 2019)](/docs/containers?topic=containers-changelog#111_changelog)
   * [Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-changelog#110_changelog)
   * [Version 1.9 changelog (unsupported as of 27 December 2018)](/docs/containers?topic=containers-changelog#19_changelog)
