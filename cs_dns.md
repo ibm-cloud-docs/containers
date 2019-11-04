@@ -25,7 +25,7 @@ subcollection: containers
 
 
 # Configuring the cluster DNS provider for classic clusters
-{: #cluster_dns}
+{: #cluster_dns} 
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to classic clusters. For DNS provider information for VPC clusters, see [Configuring CoreDNS](/docs/containers?topic=containers-vpc_dns).
 {: note}
