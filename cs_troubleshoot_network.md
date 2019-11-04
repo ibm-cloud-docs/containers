@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -436,14 +436,14 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 <br />
 
 
-## No Ingress subdomain exists after you create clusters of the same name
+## No Ingress subdomain exists after you create clusters of the same or similar name
 {: #cs_rate_limit}
 
 {: tsSymptoms}
-You create and delete a cluster multiple times, such as for automation purposes, and you use the same name for the cluster every time that you create it. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
+You create and delete a cluster multiple times, such as for automation purposes, and you either use the same name for the cluster every time that you create it, or a name that is very similar to previous names that you used. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
 
 {: tsCauses}
-When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 5 times or more within 7 days, you might reach the Let's Encrypt [Duplicate Certificate rate limit ![External link icon](../icons/launch-glyph.svg "External link icon")](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N), because the same Ingress subdomain and certificate are registered every time that you create the cluster.
+When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 5 times or more within 7 days, you might reach the Let's Encrypt [Duplicate Certificate rate limit ![External link icon](../icons/launch-glyph.svg "External link icon")](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N), because the same Ingress subdomain and certificate are registered every time that you create the cluster. Because very long cluster names are truncated to 24 characters in the Ingress subdomain for the cluster, you can also reach the rate limit if you use multiple cluster names that have the same first 24 characters.
 
 {: tsResolve}
 If you need to continue testing, you can change the name of the cluster so that when you create the new cluster a new, different Ingress subdomain and secret are registered.
