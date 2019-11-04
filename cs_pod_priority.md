@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Setting pod priority
 {: #pod_priority}
 
-With Kubernetes pod priority and preemption, you can configure priority classes to indicate the relative priority of a pod. The Kubernetes scheduler takes into consideration the priority of a pod and can even preempt (remove) pods with lower priority to make room on a worker node for higher priority pods. Your {{site.data.keyword.containerlong}} clusters that run Kubernetes version 1.11.2 or later support the `Priority` admission controller that enforces these classes.
+With Kubernetes pod priority and preemption, you can configure priority classes to indicate the relative priority of a pod. The Kubernetes scheduler takes into consideration the priority of a pod and can even preempt (remove) pods with lower priority to make room on a worker node for higher priority pods.
 {: shortdesc}
 
 **Why do I set pod priority?**</br>
@@ -170,7 +170,7 @@ Great! You created a priority class. Let your team know about the priority class
 ## Assigning priority to your pods
 {: #prioritize}
 
-Assign a priority class to your pod spec to set the pod's priority within your {{site.data.keyword.containerlong_notm}} cluster. If your pods existed before priority classes became available with Kubernetes version 1.11, you must edit the pod YAML files to assign the pods a priority.
+Assign a priority class to your pod spec to set the pod's priority within your {{site.data.keyword.containerlong_notm}} cluster.
 {: shortdesc}
 
 Before you begin:

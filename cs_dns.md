@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-04"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -37,7 +37,7 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 
 | Kubernetes Version | Default for new clusters | Description |
 |---|---|---|
-| 1.14 and later | CoreDNS | If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS.|
+| 1.14 and later | CoreDNS | If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS. Additionally, any remaining KubeDNS components are removed and no longer exist in clusters that run version 1.16 or later.|
 | 1.13 | CoreDNS | Clusters that are updated to 1.13 from an earlier version keep whichever DNS provider they used at the time of the update. If you want to use a different one, [switch the DNS provider](#dns_set). |
 | 1.12 | KubeDNS | To use CoreDNS instead, [switch the DNS provider](#set_coredns). |
 | 1.11 and earlier | KubeDNS | You cannot switch the DNS provider to CoreDNS. |
