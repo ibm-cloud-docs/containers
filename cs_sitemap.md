@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-05"
 
 ---
 
@@ -10,7 +10,7 @@ lastupdated: "2019-11-04"
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"} 
+{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -41,7 +41,7 @@ lastupdated: "2019-11-04"
 * [Kubernetes clusters](/docs/containers?topic=containers-overview#kubernetes_basics)
   * [Key concepts](/docs/containers?topic=containers-overview#kubernetes-concepts)
   * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
-  
+
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov)
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
 * [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation)
@@ -289,10 +289,17 @@ lastupdated: "2019-11-04"
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
-* [VPC: Adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool)
-* [Classic: Adding worker nodes by creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool)
-* [VPC: Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone)
-* [Classic: Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
+* [Adding worker nodes in VPC clusters](/docs/containers?topic=containers-add_workers#vpc_pools)
+  * [Creating a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool)
+  * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone)
+* [Adding worker nodes in classic clusters](/docs/containers?topic=containers-add_workers#classic_pools)
+  * [Creating a new worker pool](/docs/containers?topic=containers-add_workers#add_pool)
+  * [Adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone)
+* [Adding worker nodes in gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_pools)
+  * [Adding a zone to compute and gateway worker pools](/docs/containers?topic=containers-add_workers#add_gateway_zone)
+  * [Creating a new compute worker pool](/docs/containers?topic=containers-add_workers#gateway_compute)
+  * [Creating a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace)
+* [Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)](/docs/containers?topic=containers-add_workers#gateway_vsi)
 * [Deprecated: Adding stand-alone worker nodes](/docs/containers?topic=containers-add_workers#standalone)
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
 * [Autorecovery for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
