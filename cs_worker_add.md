@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -603,7 +603,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
   {: pre}
 
 <br />
- 
+
 
 ## Deprecated: Adding stand-alone worker nodes
 {: #standalone}
