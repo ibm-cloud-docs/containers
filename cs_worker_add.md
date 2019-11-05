@@ -605,6 +605,499 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 <br />
 
 
+## Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
+{: #gateway_vsi}
+
+If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
+{: shortdesc}
+
+Adding a classic virtual or bare metal server to a gateway-enabled cluster is a beta feature and might be unstable or change frequently. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment.
+{: preview}
+
+The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.
+
+To connect your cluster and the server instance, you create an `ibm-external-compute-config` config map that provides the necessary information to access and configure the connection to the server instance. Then, you create a Kubernetes job, which uses the config map and an SSH connection to deploy a pod and a service into your gateway-enabled cluster. The pod provides the Calico network `etcd` endpoint for your cluster so that services on the server instance can access the workload in the cluster. The service creates a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
+
+Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
+{: note}
+
+### Step 1: Create the virtual or bare metal server
+{: #vsi_1}
+
+Set up a virtual or bare metal server that can be added to the private network of your gateway-enabled cluster.
+{: shortdesc}
+
+**Before you begin**:
+
+The server instance that you attach to your cluster's network must have the following characteristics:
+* Deployed in one of the zones that your cluster is deployed to
+* Deployed onto one of the VLANs and subnets that your worker nodes are attached to
+* Accessible on the private network only
+* Stores the public key of an SSH key for the root user
+
+If you have an existing virtual or bare metal server that meets all of these requirements, you can skip steps 2 - 6. Otherwise, follow steps 2 - 6 to create a new virtual or bare metal server.
+
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio. `--network` downloads the Calico network configuration file for your cluster.
+
+  ```
+  ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+2. List the worker nodes for your cluster and note the **ID** of any worker node.
+  ```
+  ibmcloud ks worker ls -c <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. Get the **Private VLAN** and **Zone** for that worker node ID.
+  ```
+  ibmcloud ks worker get -w <worker_node_ID> -c <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ...
+  Private VLAN:   2625667
+  ...
+  Zone:           dal10
+  ```
+  {: screen}
+
+4. Using the zone for the worker node, get the **Router** for the private VLAN ID.
+  ```
+  ibmcloud ks ks vlans --zone <zone>
+  ```
+  {: pre}
+
+  In this example output, the router for private VLAN `2625667` is `bcr01a.dal10`.
+  ```
+  ID        Name   Number   Type      Router         Supports Virtual Workers
+  2625667          1813     private   bcr01a.dal10   true
+  2650233          1488     public    fcr03a.dal10   true
+  ```
+  {: screen}
+
+5. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm). The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
+  * For **Location**, select the same zone that you found in step 2.
+  * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you do not have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
+  * For **Image**, select CentOS 7.x, RedHat 7.x, or Ubuntu 18.04.
+  * Select private-only networking.
+    * Virtual: For **Uplink port speeds**, select a **Private only** option.
+    * Bare metal: For **Interface**, select **Private**.
+  * Virtual only: For **Private security group**, select at least **allow_outbound** and **allow_ssh**.
+  * For **Private VLAN**, select the router that you found in step 4. Note that the options are formatted like `dal10.bcr01a.1813`.
+
+  To further customize your server, see the [virtual server documentation](/docs/vsi?topic=virtual-servers-getting-started-tutorial) or [bare metal server documentation](/docs/bare-metal?topic=bare-metal-about-bm).
+  {: tip}
+
+6. To add multiple server instances to your cluster network, repeat step 5. Ensure that you specify the same SSH key and operating system image for each server instance.
+
+7. After you order the server, a series of emails is sent to your administrator: acknowledgment of the provisioning order, provisioning order approval and processing, and provisioning complete. The provisioning complete email indicates that your server is available to use. When you receive this email, you can continue to the next step. Note that the process for ordering a bare metal server is completed manually in your IBM Cloud infrastructure account, so it can take more than one business day to complete.
+
+8. Get the server instance's **private_ip** address.
+    * Virtual:
+      ```
+      ibmcloud sl vs list
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      id         hostname                                                 domain        cpu   memory   public_ip        private_ip      datacenter   action
+      91639324   myvsi                                                    example.com   4     4096     -                10.XXX.XX.XX    dal10
+      ```
+      {: screen}
+    * Bare metal:
+      ```
+      ibmcloud sl hardware list
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      id        hostname      domain      public_ip   private_ip     datacenter   status
+      1624411   baremetal01   ibm.cloud   -           10.XXX.XX.XX   dal10        ACTIVE
+      ```
+      {: screen}
+
+
+### Step 2: Create the config map for the server instance connection
+{: #vsi_2}
+
+Create an `ibm-external-compute-config` config map that provides the necessary information for the cluster to access the server instance and configure the connection to the server instance.
+{: shortdesc}
+
+1. Create an inventory file and add the server instance private IP address that you found in the previous step. Your cluster uses this inventory file to establish a connection to the server instance.
+  1. Create a file that contains the following line and name the file `inventory`. If you want to add multiple server instances to your cluster network, specify each server instance IP address in a different line.
+    ```
+    <server_private_IP>:22 ansible_user=root ansible_connection=ssh
+    ```
+    {: codeblock}
+  2. Export the file as an `INVENTORY` environment variable.
+    ```
+    export INVENTORY=./inventory
+    ```
+    {: pre}
+
+2. Create a Kubernetes secret that is named `ibm-external-compute-pk` in the `kube-system` namespace. This secret stores the private key of the SSH key that you used for the virtual or bare metal server.
+  ```
+  kubectl create secret -n kube-system generic ibm-external-compute-pk --from-file=./id_rsa
+  ```
+  {: pre}
+
+3. Set the {{site.data.keyword.registryshort_notm}} domain for the zone that your virtual or bare metal server is deployed in. In subsequent steps, you create a manifest file for a Kubernetes job. When the job runs to add the server instance to your cluster network, container images are pulled from this {{site.data.keyword.registryshort_notm}} domain to configure the server instance.
+  ```
+  export REPO_NAME=<registry_domain>
+  ```
+  {: pre}
+
+  <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registryshort_notm}} domain in Column 2.">
+  <caption>{{site.data.keyword.registryshort_notm}} domains</caption>
+  <thead>
+  <th>Zone</th>
+  <th>{{site.data.keyword.registryshort_notm}} domain</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td>mel01, syd01, syd04, syd05</td>
+  <td>`au.icr.io`</td>
+  </tr>
+  <tr>
+  <td>ams03, fra02, fra04, fra05, par01, mil01, osl01</td>
+  <td>`de.icr.io`</td>
+  </tr>
+  <tr>
+  <td>che01, hkg02, seo01, sng01, tok02, tok04, tok05</td>
+  <td>`jp.icr.io`</td>
+  </tr>
+  <tr>
+  <td>lon04, lon05, lon06</td>
+  <td>`uk.icr.io`</td>
+  </tr>
+  <tr>
+  <td>dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07</td>
+  <td>`us.icr.io`</td>
+  </tr>
+  </tbody></table>
+
+4. Set the namespace in your cluster where you want the Kubernetes job to create a headless Kubernetes service. This service provides a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
+  ```
+  export SERVICE_K8S_NS=<namespace>
+  ```
+  {: pre}
+
+5. When the virtual or bare metal server instance accesses services in your cluster, you can configure the cluster DNS provider to resolve the services' DNS hostnames.
+  * To enable DNS resolution, set the `CLUSTERDNS_SETUP` environment variable as `true`.
+    ```
+    export CLUSTERDNS_SETUP=true
+    ```
+    {: pre}
+  * Otherwise, set the `CLUSTERDNS_SETUP` environment variable as `false`.
+    ```
+    export CLUSTERDNS_SETUP=false
+    ```
+    {: pre}
+
+6. Create the `ibm-external-compute-config` config map, which provides the necessary information to access and configure the connection to the server instance. This config map provides the server IP address, {{site.data.keyword.registryshort_notm}} domain, Kubernetes service namespace, and DNS resolution option that you set in the previous steps.
+  ```
+  kubectl create configmap -n kube-system ibm-external-compute-config --from-file="inventory=$INVENTORY" --from-literal="repo_name=$REPO_NAME" --from-literal="service_k8s_ns=$SERVICE_K8S_NS" --from-literal="clusterdns_setup=$CLUSTERDNS_SETUP"
+  ```
+  {: pre}
+
+7. Verify that the config map is created with the correct values.
+  ```
+  kubectl describe configmap ibm-external-compute-config -n kube-system
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Name:         ibm-external-compute-config
+  Namespace:    kube-system
+  Labels:       <none>
+  Annotations:  <none>
+
+  Data
+  ====
+  repo_name:
+  ----
+  us.icr.io
+  service_k8s_ns:
+  ----
+  default
+  inventory:
+  ----
+  10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
+  clusterdns_setup:
+  ----
+  true
+  Events:  <none>
+  ```
+  {: screen}
+
+8. Copy the `default-us-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
+  ```
+  kubectl get secret default-us-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/default-us-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
+  ```
+  {: pre}
+
+
+### Step 3: Create the server instance connection job
+{: #vsi_3}
+
+Create a manifest file to mount the `ibm-external-compute-config` config map and the `ibm-external-compute-pk` secret into a Kubernetes job. When you create the manifest file, the Kubernetes job deploys a pod and a service into your cluster. The pod provides the Calico network `etcd` endpoint for your cluster so that services on the server instance can access the workload in the cluster. The service creates a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
+{: shortdesc}
+
+1.  Create the manifest file and save it as `ibm-external-compute-job.yaml`.
+    ```
+    apiVersion: v1
+    kind: ServiceAccount
+    metadata:
+      name: ibm-external-compute-job
+      namespace: kube-system
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRole
+    metadata:
+      name: ibm-external-compute-job
+    rules:
+    - apiGroups: [""]
+      resources: ["services"]
+      verbs: ["get", "create", "update", "patch"]
+    - apiGroups: [""]
+      resources: ["endpoints"]
+      verbs: ["get", "create", "update", "patch"]
+    - apiGroups: [""]
+      resources: ["nodes"]
+      verbs: ["list"]
+    ---
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: ClusterRoleBinding
+    metadata:
+      name: ibm-external-compute-job
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: ibm-external-compute-job
+    subjects:
+    - kind: ServiceAccount
+      namespace: kube-system
+      name: ibm-external-compute-job
+    ---
+    apiVersion: batch/v1
+    kind: Job
+    metadata:
+      name: ibm-external-compute-job
+      namespace: kube-system
+    spec:
+      template:
+        spec:
+          imagePullSecrets:
+          - name: ibm-external-compute-image-pull
+          containers:
+          - name: provision
+            image: us.icr.io/armada-master/stranger:512
+            env:
+            - name: ETCD_HOST
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: etcd_host
+            - name: ETCD_PORT
+              valueFrom:
+                configMapKeyRef:
+                  name: cluster-info
+                  key: etcd_port
+            - name: REPO_NAME
+              valueFrom:
+                configMapKeyRef:
+                  name: ibm-external-compute-config
+                  key: repo_name
+            - name: ANSIBLE_HOST_KEY_CHECKING
+              value: "false"
+            - name: SERVICE_K8S_NS
+              valueFrom:
+                configMapKeyRef:
+                  name: ibm-external-compute-config
+                  key: service_k8s_ns
+            - name: CLUSTERDNS_SETUP
+              valueFrom:
+                configMapKeyRef:
+                  name: ibm-external-compute-config
+                  key: clusterdns_setup
+            command: ["ansible-playbook"]
+            args:
+            - "-i"
+            - "/config/inventory"
+            - "setup.yml"
+            - "-e etcd_host=$(ETCD_HOST)"
+            - "-e etcd_port=$(ETCD_PORT)"
+            - "-e repo_name=$(REPO_NAME)"
+            - "-e service_k8s_ns=$(SERVICE_K8S_NS)"
+            - "-e clusterdns_setup=$(CLUSTERDNS_SETUP)"
+            volumeMounts:
+            - name: calico-etcd-secrets
+              mountPath: /ansible/roles/calico-node/files
+              readOnly: true
+            - name: ibm-external-compute-pk
+              mountPath: /root/.ssh
+              readOnly: true
+            - name: ibm-external-compute-config
+              mountPath: /config
+              readOnly: true
+            - name: cluster-info
+              mountPath: /ansible/roles/ibm-gateway-controller/files
+              readOnly: true
+          restartPolicy: Never
+          volumes:
+          - name: calico-etcd-secrets
+            secret:
+              secretName: calico-etcd-secrets
+          - name: ibm-external-compute-pk
+            secret:
+              secretName: ibm-external-compute-pk
+              defaultMode: 0400
+          - name: ibm-external-compute-config
+            configMap:
+              name: ibm-external-compute-config
+          - name: cluster-info
+            configMap:
+              name: cluster-info
+          serviceAccountName: ibm-external-compute-job
+      backoffLimit: 0
+    ```
+    {: codeblock}
+
+2. Create the manifest in the `kube-system` namespace. When you create the manifest, the Kubernetes job starts to run automatically.
+  ```
+  kubectl create -f ibm-external-compute-job.yaml
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  serviceaccount/ibm-external-compute-job created
+  clusterrole.rbac.authorization.k8s.io/ibm-external-compute-job created
+  clusterrolebinding.rbac.authorization.k8s.io/ibm-external-compute-job created
+  job.batch/ibm-external-compute-job created
+  ```
+  {: screen}
+
+3. Verify that the pod that is created by the job is `Running`.
+  ```
+  kubectl get pod -n kube-system | grep ibm-external-compute-job
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAME                                                  READY     STATUS    RESTARTS   AGE
+  ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
+  ```
+  {: screen}
+
+4. Verify that the job is completed.
+  ```
+  kubectl get job -n kube-system ibm-external-compute-job
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAME                       COMPLETIONS   DURATION   AGE
+  ibm-external-compute-job   1/1           20m        20m
+  ```
+  {: screen}
+
+5. Test the connection from your server instance to your cluster's pods.
+  1. Find the private IP address of one of your app pods in your cluster. In the output, look for the **IP:** field.
+    ```
+    kubectl describe pod <pod_name>
+    ```
+    {: pre}
+
+  2. Log in to your server instance. For example, you might use SSH to access a VSI.
+
+  3. Ping the private IP address of the pod from the server instance.
+    ```
+    ping <pod_private_IP>
+    ```
+    {: pre}
+
+  4. If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
+    ```
+    ping <service_hostname>
+    ```
+    {: pre}
+
+5. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
+  1. Get the IP address for your server.
+    ```
+    kubectl get ep -n <namespace> <server_hostname>
+    ```
+    {: pre}
+
+  2. Log in to a pod in your cluster.
+    ```
+    kubectl exec <pod_name> -it bash
+    ```
+    {: pre}
+
+  3. Ping the private IP address of the server instance from the pod.
+    ```
+    ping <server_IP>
+    ```
+    {: pre}
+
+### Removing the server instance from your cluster network
+{: #vsi_4}
+
+If you no longer need your cluster to communicate with the virtual or bare metal server instance, you can remove the server instance from your cluster network.
+{: shortdesc}
+
+Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic=containers-network_policies#cli_install)
+
+1. Log in to your server instance. For example, you might use SSH to access a VSI.
+
+2. Find the Calico node name for the server instance.
+  ```
+  cat /var/lib/calico/nodename
+  ```
+  {: pre}
+
+3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance.
+  ```
+  systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
+  ```
+  {: pre}
+
+4. Log out of your server instance.
+
+5. Set the context for your cluster. Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio. `--network` downloads the Calico network configuration file for your cluster and allows you to run `calicoctl` commands.
+  ```
+  ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
+  ```
+  {: pre}
+
+6. Using the Calico node name that you found in step 2, remove the server instance from your cluster's private pod network.
+  ```
+  calicoctl delete node <node_name>
+  ```
+  {: pre}
+
+7. Remove the service that was created for the server instance. Replace `<namespace>` with the namespace that you selected for the service and `<service_name>` with the name of the service. The service name is identical to the hostname of the server instance.
+  ```
+  kubectl delete service -n <namespace> <service_name>
+  ```
+  {: pre}
+
+<br />
+
+
+
+
 ## Deprecated: Adding stand-alone worker nodes
 {: #standalone}
 
