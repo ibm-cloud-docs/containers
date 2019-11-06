@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-05"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -41,7 +41,7 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 <tbody>
 <tr>
 <td>05 November 2019</td>
-<td><strong>Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)</strong>: If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).</td>
+<td><strong>New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)</strong>: If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).</td>
 </tr>
 <tr>
 <td>04 November 2019</td>
