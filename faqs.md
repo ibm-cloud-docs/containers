@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -249,7 +249,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p><br>
     <p>**VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc)</dd>
   <dt id="subnet_ips">Subnet IP addresses</dt>
-    <dd><p>**Classic clusters**: When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly.</p><p>If you already have available subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).<br><br>
+    <dd><p>**Classic clusters**: When you create a standard cluster, a portable public subnet with 8 public IP addresses is ordered and charged to your account monthly. For pricing information, see the [Subnets and IPs](/docs/infrastructure/subnets?topic=subnets-getting-started) documentation or estimate your costs in the [classic subnets console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/classic/network/subnet/provision)</p><p>If you already have available portable public subnets in your infrastructure account, you can use these subnets instead. Create the cluster with the `--no-subnets` [flag](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create), and then [reuse your subnets](/docs/containers?topic=containers-subnets#subnets_custom).<br><br>
     <p>**VPC clusters**: For more information about charges for floating IPs and other networking costs, see [Pricing for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc)</p>
     </dd>
   <dt id="persistent_storage">Storage</dt>
