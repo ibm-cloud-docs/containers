@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -211,7 +211,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 ## Version 1.16
 {: #cs_v116}
 
-
+<p><img src="images/certified_kubernetes_1x16.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.16 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.16 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.16.
 {: shortdesc}
