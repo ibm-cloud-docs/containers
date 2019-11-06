@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks
 
@@ -33,10 +33,10 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 * **OpenShift**: [Install the CLI plug-in](/docs/openshift?topic=openshift-openshift-cli), which uses the `ibmcloud oc` alias.
 
 <br>
-Refer to the following table for a summary of changes for each {{site.data.keyword.containerlong_notm}} CLI plug-in version.
+Refer to the following table for a summary of changes for each CLI plug-in version.
 
 <table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
-<caption>Changelog for the {{site.data.keyword.containerlong_notm}} CLI plug-in</caption>
+<caption>Changelog for the `kubernetes-service` CLI plug-in</caption>
 <thead>
 <tr>
 <th>Version</th>

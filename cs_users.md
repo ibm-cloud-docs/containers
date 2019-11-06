@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -39,7 +39,7 @@ Access policies determine the level of access that users in your {{site.data.key
 As you develop your plan to manage user access, consider the following general steps:
 1.  [Pick the right access policy and role for your users](#access_roles)
 2.  [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](#iam_individuals_groups)
-3.  [Scope user access to cluster instances, Kubernetes namespaces (projects in OpenShift), or resource groups](#resource_groups)
+3.  [Scope user access to cluster instances, Kubernetes namespaces, or resource groups](#resource_groups)
 
 After you understand how roles, users, and resources in your account can be managed, check out [Setting up access to your cluster](#access-checklist) for a checklist of how to configure access.
 
@@ -47,12 +47,12 @@ After you understand how roles, users, and resources in your account can be mana
 ### Pick the right access policy and role for your users
 {: #access_roles}
 
-You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions that the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.containerlong_notm}} console or through the CLI, even when the actions are completed in IBM Cloud infrastructure.
+You must define access policies for every user that works with {{site.data.keyword.containerlong_notm}}. The scope of an access policy is based on a user's defined role or roles, which determine the actions that the user can perform. Some policies are pre-defined but others can be customized. The same policy is enforced whether the user makes the request from the {{site.data.keyword.cloud_notm}} console or through the CLI, even when the actions are completed in IBM Cloud infrastructure.
 {: shortdesc}
 
 The following image shows the different types of permissions and roles, which role can perform which kinds of actions, and how the roles relate to each other.
 
-<img src="images/user_access.png" alt="In {{site.data.keyword.containerlong_notm}}, you can assign IAM platform, IAM service, Cloud Foundry, and infrastructure roles." style="border-style: none"/>
+<img src="images/user_access.png" alt="In {{site.data.keyword.cloud_notm}}, you can assign IAM platform, IAM service, Cloud Foundry, and infrastructure roles." style="border-style: none"/>
 
 To see the specific {{site.data.keyword.containerlong_notm}} permissions by each role, check out the [User access permissions](/docs/containers?topic=containers-access_reference) reference topic.
 {: tip}
@@ -61,7 +61,7 @@ To see the specific {{site.data.keyword.containerlong_notm}} permissions by each
 <dt><a href="#platform">{{site.data.keyword.cloud_notm}} IAM platform and service roles</a></dt>
 <dd>{{site.data.keyword.containerlong_notm}} uses {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) platform and service roles to grant users access to the cluster.
 <ul><li>**Platform**: Platform roles determine the actions that users can perform on cluster infrastructure by using the {{site.data.keyword.containerlong_notm}} API, console, and CLI (`ibmcloud ks`). Platform roles do not grant access to the Kubernetes API. Although platform roles authorize you to perform infrastructure actions on the cluster, they do not grant access to the IBM Cloud infrastructure resources. Access to the IBM Cloud infrastructure resources is determined by the [API key that is set for the region](#api_key). Example actions that are permitted by platform roles are creating or removing clusters, binding services to a cluster, managing networking and storage resources, or adding extra worker nodes.<br><br>You can set the policies for these roles by resource group, region, or cluster instance. You cannot scope a platform role by namespace within a cluster.<br><br>If you assign only platform roles to users, they cannot interact with Kubernetes resources within the cluster. They can, however, still perform the `ibmcloud ks cluster config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config). Then, you can authorize the users to perform select Kubernetes actions by using [custom RBAC policies](/docs/containers?topic=containers-users#role-binding). You might do this if your organization currently uses custom RBAC policies to control Kubernetes access and plans to continue using custom RBAC instead of service roles.</li>
-<li>**Service**: Service roles grant corresponding Kubernetes RBAC policies that a user is given within a cluster. As such, service roles grant access to the Kubernetes API, dashboard, and CLI (`kubectl`).  Example actions that are permitted by service roles are creating app deployments, adding namespaces, or setting up configmaps.<br><br> You can scope the policy for service roles by resource group, region, or cluster instance. Further, you can also scope service roles to Kubernetes namespaces that are in all, individual, or region-wide clusters. When you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time.<br><br>If you assign only service roles to users, they cannot view or interact with any {{site.data.keyword.containerlong_notm}} resources. For the users to access the cluster and use the cluster's Kubernetes resources, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli). If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, give the users the platform **Viewer** role.</li></ul></dd>
+<li>**Service**: Service roles grant corresponding Kubernetes RBAC policies that a user is given within a cluster. As such, service roles grant access to the Kubernetes API, dashboard, and CLI (`kubectl`).  Example actions that are permitted by service roles are creating app deployments, adding namespaces, or setting up configmaps.<br><br> You can scope the policy for service roles by resource group, region, or cluster instance. Further, you can also scope service roles to Kubernetes namespaces that are in all, individual, or region-wide clusters. When you scope a service role to a namespace, you cannot apply the policy to a resource group or assign a platform role at the same time.<br><br>If you assign only service roles to users, they cannot view or interact with any {{site.data.keyword.containerlong_notm}} resources. For the users to access the cluster and use the cluster's Kubernetes resources, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli). If you want these users to still be able to access the clusters console and list clusters and other infrastructure resources from the CLI, give the users the platform **Viewer** role.</li></ul><p class="note">When you configure permissions for {{site.data.keyword.containerlong_notm}} in IAM, use the name **containers-kubernetes** for the API or CLI, and **Kubernetes Service** for the console.</p></dd>
 <dt><a href="#role-binding">RBAC</a></dt>
 <dd>In Kubernetes, role-based access control (RBAC) is a way of securing the resources inside your cluster. RBAC roles determine the Kubernetes actions that users can perform on those resources. Every user who is assigned a service role is automatically assigned a corresponding RBAC cluster role. This RBAC cluster role is applied either in a specific namespace or in all namespaces, depending on whether you scope the policy to a namespace.</br></br>
 Example actions that are permitted by RBAC roles are creating objects such as pods or reading pod logs.</dd>
@@ -104,7 +104,7 @@ When you create your {{site.data.keyword.cloud_notm}} account, the default resou
 
 <dl>
 <dt>Resource instance</dt>
-  <dd><p>Each {{site.data.keyword.cloud_notm}} service in your account is a resource that has instances. The instance differs by service. For example, in {{site.data.keyword.containerlong_notm}}, the instance is a cluster, but in {{site.data.keyword.cloudcerts_long_notm}}, the instance is a certificate. By default, resources also belong to the default resource group in your account. You can assign users an access role to a resource instance for the following scenarios.
+  <dd><p>Each {{site.data.keyword.cloud_notm}} service in your account is a resource that has instances. The instance differs by service. For example, in {{site.data.keyword.containerlong_notm}}}, the instance is a cluster, but in {{site.data.keyword.cloudcerts_long_notm}}, the instance is a certificate. By default, resources also belong to the default resource group in your account. You can assign users an access role to a resource instance for the following scenarios.
   <ul><li>All {{site.data.keyword.cloud_notm}} IAM services in your account, including all clusters in {{site.data.keyword.containerlong_notm}} and images in {{site.data.keyword.registrylong_notm}}.</li>
   <li>All instances within a service, such as all the clusters in {{site.data.keyword.containerlong_notm}}.</li>
   <li>All instances within a region of a service, such as all the clusters in the **US South** region of {{site.data.keyword.containerlong_notm}}.</li>
@@ -135,7 +135,7 @@ After you [understand how roles, users, and resources in your account](#access_p
 <p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
 
 1. [Set the API key](#api_key) for all the regions and resource groups that you want to create clusters in.
-2. Invite users to your account and [assign them {{site.data.keyword.cloud_notm}} IAM roles](#platform) for the {{site.data.keyword.containerlong_notm}}. 
+2. Invite users to your account and [assign them {{site.data.keyword.cloud_notm}} IAM roles](#platform) for the service (**containers-kubernetes** in the API or CLI, and **Kubernetes Service** in the console). 
 3. To allow users to bind services to the cluster or to view logs that are forwarded from cluster logging configurations, [grant users Cloud Foundry roles](/docs/iam?topic=iam-mngcf) for the org and space that the services are deployed to or where logs are collected.
 4. If you use Kubernetes namespaces to isolate resources within the cluster, grant access to namespaces by [assigning users {{site.data.keyword.cloud_notm}} IAM service roles for the namespaces](#platform).
 5. For any automation tooling such as in your CI/CD pipeline, set up service accounts and [assign the service accounts Kubernetes RBAC permissions](#rbac).
@@ -155,7 +155,7 @@ For more information about setting up your account and resources, try out this t
 To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.cloud_notm}} account is correctly set up to access the IBM Cloud infrastructure portfolio in each resource group and region that your clusters are in.
 {: shortdesc}
 
-**Most cases**: Your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure portfolio. To set up {{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
+**Most cases**: Your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account already has access to the IBM Cloud infrastructure portfolio. To set up {{{site.data.keyword.containerlong_notm}} to access the portfolio, the **account owner** must set the API key for the region and resource group.
 
 1. Log in to the terminal as the account owner.
     ```
@@ -392,7 +392,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 3. [Create a cluster](/docs/containers?topic=containers-clusters). To create the cluster, the infrastructure credentials that you set for the region and resource group are used.
 
 4. Verify that your cluster uses the infrastructure account credentials that you set.
-  1. Open the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters) and select your cluster. 
+  1. Open the [{{site.data.keyword.cloud_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters) and select your cluster. 
   2. In the Overview tab, look for an **Infrastructure User** field. 
   3. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
 
@@ -438,7 +438,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     1. From the **Manager User** or **Manage Group** page, click **Assign access within a resource group**.
     2. Select the resource group name.
     3. In the **Assign access to a resource group** drop-down list, choose what level of permission to give the user to the resource group itself (not the resources within the group). For example, to let users see clusters that they have access to in multiple resource groups, give them the **Viewer** role for each resource group.
-    4. From the **Services** list, select **Kubernetes Cluster**.
+    4. From the **Services** list, select **Kubernetes Service**.
     5. From the **Region** list, select one or all regions.
     6. Select a role for the policy.
        * **Platform access role**: Grants access to {{site.data.keyword.containerlong_notm}} so that users can manage infrastructure resources such as clusters, worker nodes, worker pools, Ingress application load balancers, and storage. To find a list of supported actions per role, see [platform roles reference page](/docs/containers?topic=containers-access_reference#iam_platform).
@@ -447,7 +447,7 @@ Before you begin, verify that you're assigned the **Administrator** platform rol
     8. **Optional**: If you assigned only a service role to users, you must give users the cluster name and ID so that they can perform the `ibmcloud ks cluster config` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config), and then [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-app#db_cli) or otherwise interact with the Kubernetes API. If you want these users to still be able to access the {{site.data.keyword.containerlong_notm}} clusters console and list clusters and other infrastructure resources from the CLI, repeat these steps to give the users the platform **Viewer** role.
   * **For resource instances within or across resource groups**:
     1. From the **Manager User** or **Manage Group** page, click **Assign access to resources**.
-    2. From the **Services** list, select **Kubernetes Cluster**.
+    2. From the **Services** list, select **Kubernetes Service**.
     3. From the **Region** list, select one or all regions.
     4. From the **Cluster** list, select one or all cluster instances.
     5. In the **Namespace** field, enter the name of the Kubernetes namespace that you want to scope the _service access_ policy to. Note that you cannot scope a _platform access_ policy to a namespace. The policy grants access to namespaces in all clusters that you previously selected, such as all clusters within a region. If you want to grant access to all namespaces, you can leave the namespace field blank.
@@ -1261,7 +1261,7 @@ Before you begin:
 Before the user leaves, the {{site.data.keyword.cloud_notm}} account owner must complete the following steps to prevent breaking changes in {{site.data.keyword.containerlong_notm}}.
 
 1. Determine which clusters the user created.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.cloud_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, look for the **Owner** field.
 
