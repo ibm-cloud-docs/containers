@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks, containers
 
@@ -23,8 +23,6 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-
 # Benefits and service offerings
 {: #cs_ov}
 
@@ -43,7 +41,7 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 
 |Benefit|Description|
 |-------|-----------|
-|Choice of container platform provider | <ul><li>Deploy clusters with **OpenShift** or community **Kubernetes** installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both OpenShift or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.containerlong_notm}} console to the Kubernetes dashboard or OpenShift web console.</li><li>Single view and management experience of all your OpenShift or community Kubernetes clusters from {{site.data.keyword.containerlong_notm}}.</li><li>For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).</li></ul>|
+|Choice of container platform provider | <ul><li>Deploy clusters with **OpenShift** or community **Kubernetes** installed as the container platform orchestrator.</li><li>Choose the developer experience that fits your company, or run workloads across both OpenShift or community Kubernetes clusters.</li><li>Built-in integrations from the {{site.data.keyword.cloud_notm}} console to the Kubernetes dashboard or OpenShift web console.</li><li>Single view and management experience of all your OpenShift or community Kubernetes clusters from {{site.data.keyword.cloud_notm}}.</li><li>For more information, see [Comparison between OpenShift and community Kubernetes clusters](#openshift_kubernetes).</li></ul>|
 |Single-tenant Kubernetes clusters with compute, network, and storage infrastructure isolation|<ul><li>Create your own customized infrastructure that meets the requirements of your organization.</li><li>Choose between [{{site.data.keyword.cloud_notm}} Classic or VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</li><li>Provision a dedicated and secured Kubernetes master, worker nodes, virtual networks, and storage by using the resources provided by IBM Cloud infrastructure.</li><li>Fully managed Kubernetes master that is continuously monitored and updated by {{site.data.keyword.IBM_notm}} to keep your cluster available.</li><li>Option to provision worker nodes as bare metal servers for compute-intensive workloads such as GPU.</li><li>Store persistent data, share data between Kubernetes pods, and restore data when needed with the integrated and secure volume service.</li><li>Benefit from full support for all native Kubernetes APIs.</li></ul>|
 | Multizone clusters to increase high availability | <ul><li>Easily manage worker nodes of the same flavor (CPU, memory, virtual or physical) with worker pools.</li><li>Guard against zone failure by spreading nodes evenly across select multizones and by using anti-affinity pod deployments for your apps.</li><li>Decrease your costs by using multizone clusters instead of duplicating the resources in a separate cluster.</li><li>Benefit from automatic load balancing across apps with the multizone load balancer (MZLB) that is set up automatically for you in each zone of the cluster.</li></ul>|
 | Highly available masters | <ul><li>Reduce cluster downtime such as during master updates with highly available masters that are provisioned automatically when you create a cluster.</li><li>Spread your masters across zones in a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) to protect your cluster from zonal failures.</li></ul> |
@@ -54,6 +52,7 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 {: caption="Benefits of the {{site.data.keyword.containerlong_notm}}" caption-side="top"}
 
 <br />
+
 
 
 ## Comparison of offerings and their combinations
@@ -122,3 +121,34 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Logging and monitoring](/docs/containers?topic=containers-health#logging)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Option to provision your worker nodes on physical (bare metal) servers](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of free and standard clusters" caption-side="top"}
+
+<br />
+
+
+
+## Comparison between OpenShift and community Kubernetes clusters
+{: #openshift_kubernetes}
+
+Both OpenShift and community Kubernetes clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
+{: shortdesc}
+
+|Characteristics|Community Kubernetes clusters|OpenShift clusters|
+|---------------|-------------|-----------------|
+|Complete cluster management experience through the {{site.data.keyword.containerlong_notm}} automation tools (API, CLI, console)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Worldwide availability in single and multizones|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Consistent container orchestration across hybrid cloud providers|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Access to {{site.data.keyword.cloud_notm}} services such as AI|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Software-defined storage Portworx solution available for multizone data use cases|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Ability to create free clusters|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |
+|Create a cluster in an IBM Virtual Private Cloud (VPC)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |
+|Latest community Kubernetes distribution|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |
+|Cluster on only the private network|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />| |
+|Integrated IBM Cloud Paks and middleware| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Built-in container image streams, builds, and tooling| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Integrated CI/CD with Jenkins| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Stricter app security context set up by default| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Simplified Kubernetes developer experience, with an app console that is suited for beginners| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Supported operating system| Ubuntu 16.64, 18.64 |Red Hat Enterprise Linux 7|
+|Preferred external traffic networking| Ingress | Router |
+{: caption="Characteristics of community Kubernetes and OpenShift clusters" caption-side="top"}
+
