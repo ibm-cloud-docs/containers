@@ -57,6 +57,7 @@ IBM Cloud Kubernetes Service
         cs_cluster_plan_ha.md
         cs_worker_plan.md
         cs_clusters.md
+        cs_cluster_access.md
         cs_worker_add.md
 
     {: .topicgroup}
