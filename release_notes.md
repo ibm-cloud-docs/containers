@@ -49,10 +49,6 @@ Use the release notes to learn about the latest changes to the {{product_name_tm
 <td><strong>New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)</strong>: If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).</td>
 </tr>
 <tr>
-<td>05 November 2019</td>
-<td><strong>New! Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)</strong>: If you have non-containerized workloads on a classic IBM Cloud infrastructure virtual server or bare metal server, you can connect those workloads to the workloads in your gateway-enabled classic cluster by [adding the server instance to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi).</td>
-</tr>
-<tr>
 <td>04 November 2019</td>
 <td><ul><li><strong>New! Kubernetes version 1.16</strong>: You can now create clusters that run Kubernetes version 1.16. To update an existing cluster, see the [Version 1.16 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v116).</li>
 <li><strong>Deprecated: Kubernetes version 1.13</strong>: With the release of version 1.16, clusters that run version 1.13 are deprecated. Consider [updating to 1.14](/docs/containers?topic=containers-cs_versions#cs_v114) today.</li>
