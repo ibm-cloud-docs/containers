@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Setting up the API
 {: #cs_api_install}
 
-You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or OpenShift clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
+You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or {{site.data.keyword.openshiftshort}} clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
 {:shortdesc}
 
 
@@ -67,7 +67,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  </tr>
  <tr>
     <td>Supported container platforms</td>
-    <td>Use the {[proudct_name_notm]} API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and OpenShift clusters**.</td>
+    <td>Use the {{site.data.keyword.containerlong_notm}} API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and OpenShift clusters**.</td>
     <td>VPC clusters are available for **only community Kubernetes clusters**, not OpenShift clusters. As such, provider-specific `v2` API calls against OpenShift clusters fail.</td>
  </tr>
  <tr>
@@ -105,7 +105,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
 You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
 {:shortdesc}
 
-The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{[proudct_name_notm]} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-api).
+The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-api).
 
 To authenticate with {{site.data.keyword.containerlong_notm}}, you must provide an {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) token that is generated with your {{site.data.keyword.cloud_notm}} credentials and that includes the {{site.data.keyword.cloud_notm}} account ID where the cluster was created. Depending on the way you authenticate with {{site.data.keyword.cloud_notm}}, you can choose between the following options to automate the creation of your {{site.data.keyword.cloud_notm}} IAM token.
 
@@ -409,13 +409,13 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
 ## Working with your cluster by using the Kubernetes API
 {: #kube_api}
 
-You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/) to interact with your cluster in {[proudct_name_notm]}.
+You can use the [Kubernetes API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/using-api/api-overview/) to interact with your cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 The following instructions require public network access in your cluster to connect to the public service endpoint of your Kubernetes master.
 {: note}
 
-1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.cloud_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {[proudct_name_notm]} region where your cluster is located.
+1. Follow the steps in [Automating cluster deployments with the API](#cs_api) to retrieve your {{site.data.keyword.cloud_notm}} IAM access token, refresh token, the ID of the cluster where you want to run Kubernetes API requests, and the {{site.data.keyword.containerlong_notm}} region where your cluster is located.
 
 2. Retrieve an {{site.data.keyword.cloud_notm}} IAM delegated refresh token.
    ```
@@ -494,7 +494,7 @@ The following instructions require public network access in your cluster to conn
    ```
    {: screen}
 
-4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token, and the {[proudct_name_notm]} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output.
+4. Retrieve the public URL of your Kubernetes master by using the IAM access token, the IAM ID token, the IAM refresh token, and the {{site.data.keyword.containerlong_notm}} region that your cluster is in. You can find the URL in the **`publicServiceEndpointURL`** of your API output.
    ```
    GET https://containers.cloud.ibm.com/v1/clusters/<cluster_ID>
    ```
@@ -509,7 +509,7 @@ The following instructions require public network access in your cluster to conn
    <tbody>
    <tr>
    <td>Header</td>
-     <td><ul><li>`Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.</li><li>`X-Region`: The {[proudct_name_notm]} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
+     <td><ul><li>`Authorization`: Your {{site.data.keyword.cloud_notm}} IAM access token.</li><li>`X-Auth-Refresh-Token`: Your {{site.data.keyword.cloud_notm}} IAM refresh token.</li><li>`X-Region`: The {{site.data.keyword.containerlong_notm}} region of your cluster that you retrieved with the `GET https://containers.cloud.ibm.com/v1/clusters` API in [Automating cluster deployments with the API](#cs_api). </li></ul>
    </td>
    </tr>
    <tr>
@@ -660,7 +660,7 @@ Use the following steps if you want to create an {{site.data.keyword.cloud_notm}
 
     You can find your new {{site.data.keyword.cloud_notm}} IAM token in the **access_token**, and the refresh token in the **refresh_token** field of your API output.
 
-2.  Continue working with the [{[proudct_name_notm]} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api) by using the token from the previous step.
+2.  Continue working with the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api) by using the token from the previous step.
 
 <br />
 
