@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, containers
 
@@ -125,7 +125,7 @@ Before you begin:
 
 To create a free classic cluster:
 
-1.  In the [{{site.data.keyword.cloud_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **Kubernetes Cluster** and click **Create**. A cluster configuration page opens. Select the **free** cluster option. 
+1.  In the [{{site.data.keyword.cloud_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **Kubernetes Service** and click **Create**. A cluster configuration page opens. Select the **free** cluster option. 
 
 2.  Give your cluster a unique name.
 

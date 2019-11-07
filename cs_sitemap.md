@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-05"
+lastupdated: "2019-11-06"
 
 ---
 
@@ -865,6 +865,9 @@ lastupdated: "2019-11-05"
   * [Creating topology-aware storage](/docs/containers?topic=containers-file_storage#file-topology)
   * [Specifying the zone for multizone clusters](/docs/containers?topic=containers-file_storage#file_multizone_yaml)
   * [Changing the default NFS version](/docs/containers?topic=containers-file_storage#nfs_version_class)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
+  * [Understanding your storage removal options](/docs/containers?topic=containers-cleanup#storage_delete_options)
+  * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 [Storing data on classic {{site.data.keyword.blockstoragefull}}](/docs/containers?topic=containers-block_storage#block_storage)
 * [Installing the {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
@@ -885,6 +888,9 @@ lastupdated: "2019-11-05"
   * [Creating topology-aware storage](/docs/containers?topic=containers-block_storage#topology_yaml)
   * [Specifying the zone and region](/docs/containers?topic=containers-block_storage#block_multizone_yaml)
   * [Mounting block storage with an XFS file system](/docs/containers?topic=containers-block_storage#xfs)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
+  * [Understanding your storage removal options](/docs/containers?topic=containers-cleanup#storage_delete_options)
+  * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 [Storing data on {{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)
 * [Installing the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-block-addon)
@@ -897,6 +903,9 @@ lastupdated: "2019-11-05"
   * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
+* [Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
+  * [Understanding your storage removal options](/docs/containers?topic=containers-cleanup#storage_delete_options)
+  * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 [Storing data on {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#object_storage)
 * [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
@@ -942,10 +951,6 @@ lastupdated: "2019-11-05"
 * [Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage](/docs/containers?topic=containers-utilities#automatic_block)
 * [Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
-
-[Removing persistent storage from a cluster](/docs/containers?topic=containers-cleanup#cleanup)
-* [Understanding your storage removal options](/docs/containers?topic=containers-cleanup#storage_delete_options)
-* [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 ## Enhancing cluster capabilities with integrations
 {: #sitemap-integrations}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Setting up the API
 {: #cs_api_install}
 
-You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or OpenShift clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
+You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or {{site.data.keyword.openshiftshort}} clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
 {:shortdesc}
 
 
@@ -36,7 +36,7 @@ You can use the {{site.data.keyword.containerlong}} API to create and manage you
 The {{site.data.keyword.containerlong_notm}} API automates the provisioning and management of {{site.data.keyword.cloud_notm}} infrastructure resources for your [Kubernetes or OpenShift clusters](/docs/containers?topic=containers-faqs#container_platforms) so that your apps have the compute, networking, and storage resources that they need to serve your users.
 {:shortdesc}
 
-The API is versioned to support the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
+The API is versioned to support the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 You can use the version two (`v2`) API to manage both classic and VPC clusters. The `v2` API is designed to avoid breaking existing functionality when possible. However, make sure that you review the following differences between the `v1` and `v2` API.
 
@@ -85,7 +85,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  <tr>
    <td>`GET` responses</td>
    <td>The `GET` method for a collection of resources (such as `GET v1/clusters`) returns the same details for each resource in the list as a `GET` method for an individual resource (such as `GET v1/clusters/{idOrName}`).</td>
-   <td>To return responses faster, the v2 `GET` method for a collection of resources (such as `GET v2/clusters`) returns only a subset of information that is detailed in a `GET` method for an individual resource (such as `GET v2/clusters/{idOrName}`). 
+   <td>To return responses faster, the v2 `GET` method for a collection of resources (such as `GET v2/clusters`) returns only a subset of information that is detailed in a `GET` method for an individual resource (such as `GET v2/clusters/{idOrName}`).
    <br><br>Some list responses include a providers property to identify whether the returned item applies to classic or VPC infrastructure. For example, the `GET zones` list returns some results such as `mon01` that are available only in the classic infrastructure provider, while other results such as `us-south-01` are available only in the VPC infrastructure provider.</td>
  </tr>
  <tr>
@@ -674,3 +674,4 @@ When you start a new CLI session, or if 24 hours has expired in your current CLI
 **ID token**: Every IAM ID token that is issued via the CLI expires after one hour. When the ID token expires, the refresh token is sent to the token provider to refresh the ID token. Your authentication is refreshed, and you can continue to run commands against your cluster.
 
 **Refresh token**: Refresh tokens expire every 30 days. If the refresh token is expired, the ID token cannot be refreshed, and you are not able to continue running commands in the CLI. You can get a new refresh token by running `ibmcloud ks cluster config --cluster <cluster_name>`. This command also refreshes your ID token.
+

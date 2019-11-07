@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -58,6 +58,14 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>584 / 345</td>
+<td>07 Nov 2019</td>
+<td><ul>
+<li>Fixes `libssh2` vulnerabilities for [CVE-2019-17498 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17498).</li>
+<li>Adds a liveness probe to the `nginx-ingress` container so that the container is restarted if it is not healthy. The ALB pod requires the `nginx-ingress` container resources to be available before the pod can be scheduled to a worker node.</li></ul></td>
+<td>-</td>
+</tr>
 <tr>
 <td>584 / 344</td>
 <td>23 Oct 2019</td>

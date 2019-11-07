@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-06"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Scaling classic clusters
 {: #ca}
 
-With the {{site.data.keyword.containerlong_notm}} `ibm-iks-cluster-autoscaler` plug-in, you can scale the worker pools in your cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. The `ibm-iks-cluster-autoscaler` plug-in is based on the [Kubernetes Cluster-Autoscaler project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler).
+With the `ibm-iks-cluster-autoscaler` plug-in, you can scale the worker pools in your {{site.data.keyword.containerlong}} cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. The `ibm-iks-cluster-autoscaler` plug-in is based on the [Kubernetes Cluster-Autoscaler project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler).
 {: shortdesc}
 
 Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
@@ -200,7 +200,7 @@ Further, if you do not disable the worker pools before you uninstall the `ibm-ik
 ## Deploying the cluster autoscaler Helm chart to your cluster
 {: #ca_helm}
 
-Install the {{site.data.keyword.containerlong_notm}} cluster autoscaler plug-in with a Helm chart to autoscale worker pools in your cluster.
+Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a Helm chart to autoscale worker pools in your cluster.
 {: shortdesc}
 
 **Before you begin**:

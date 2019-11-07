@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks
 
@@ -14,7 +14,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"} 
+{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
@@ -33,10 +33,10 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 * **OpenShift**: [Install the CLI plug-in](/docs/openshift?topic=openshift-openshift-cli), which uses the `ibmcloud oc` alias.
 
 <br>
-Refer to the following table for a summary of changes for each {{site.data.keyword.containerlong_notm}} CLI plug-in version.
+Refer to the following table for a summary of changes for each CLI plug-in version.
 
 <table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
-<caption>Changelog for the {{site.data.keyword.containerlong_notm}} CLI plug-in</caption>
+<caption>Changelog for the `kubernetes-service` CLI plug-in</caption>
 <thead>
 <tr>
 <th>Version</th>
@@ -45,6 +45,19 @@ Refer to the following table for a summary of changes for each {{site.data.keywo
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.51</td>
+<td>07 Nov 2019</td>
+<td><ul>
+<li>Adds the [`ibmcloud ks kms crk ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms_crk_ls), [`ibmcloud ks kms enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms_enable), and [`ibmcloud ks kms instance ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms_instance_ls) commands to create and manage key management service (KMS) providers in a cluster.</li>
+<li>Adds the optional `--skip-advance-permissions-check` flag to `ibmcloud ks cluster create` and `ibmcloud ks cluster rm`.</li>
+<li>Changes the `--vpc-id` flag to be optional for `ibmcloud ks worker-pool create vpc-classic`.</li>
+<li>Fixes the error message for when no cluster name or ID is specified for `ibmcloud ks worker get` or `ibmcloud ks worker-pool get`.</li>
+<li>Adds `public` and `private` as supported values for the `--hardware` flag of `ibmcloud ks worker-pool create classic`.</li>
+<li>When the `--admin` flag is included in `ibmcloud ks cluster config`, removes `-admin` from the cluster name in the `KUBECONFIG` file path.</li>
+<li>Updates all command help to use the new space-separated syntax.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.42</td>
 <td>24 Oct 2019</td>
