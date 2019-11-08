@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -78,7 +78,7 @@ When you create a VPC with classic infrastructure access, you can set up an [{{s
 
 
 ## Using the strongSwan IPSec VPN service Helm chart
-{: #vpn-setup}
+{: #vpc-vpn-setup}
 
 Use a Helm chart to configure and deploy the strongSwan IPSec VPN service inside of a Kubernetes pod.
 {:shortdesc}
@@ -103,7 +103,7 @@ For example, the following diagram shows how an app in {{site.data.keyword.conta
 
 
 ### strongSwan VPN service considerations
-{: #strongswan_limitations}
+{: #vpc-strongswan_limitations}
 
 Before using the strongSwan Helm chart, review the following considerations and limitations.
 {: shortdesc}
@@ -128,7 +128,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 
 
 ### Using the strongSwan VPN in a multizone cluster
-{: #vpn_multizone}
+{: #vpc-vpn_multizone}
 
 Multizone clusters provide high availability for apps in the event of an outage by making app instances available on worker nodes in multiple zones. You can deploy a single outbound VPN connection that floats between different worker nodes across all availability zones in your cluster. If a worker node is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
 {: shortdesc}
@@ -141,7 +141,7 @@ Because the `zoneLoadBalancer` and `connectUsingLoadBalancerIP`, you cannot use 
 {: note}
 
 ## Configuring the strongSwan Helm chart
-{: #vpn_configure}
+{: #vpc-vpn_configure}
 
 Before you install the strongSwan Helm chart, you must decide on your strongSwan configuration.
 {: shortdesc}
@@ -325,7 +325,7 @@ Deploy the strongSwan Helm chart in your cluster with the configurations that yo
     {: pre}
 
 ## Testing and verifying strongSwan VPN connectivity
-{: #vpn_test}
+{: #vpc-vpn_test}
 
 After you deploy your Helm chart, test the VPN connectivity.
 {:shortdesc}
@@ -388,7 +388,7 @@ After you deploy your Helm chart, test the VPN connectivity.
     Some of the tests have requirements that are optional settings in the VPN configuration. If some of the tests fail, the failures might be acceptable depending on whether you specified these optional settings. Refer to the following table for information about each test and why it might fail.
     {: note}
 
-    {: #vpn_tests_table}
+    {: #vpc-vpn_tests_table}
     <table>
     <caption>Understanding the Helm VPN connectivity tests</caption>
     <thead>
@@ -472,13 +472,13 @@ After you deploy your Helm chart, test the VPN connectivity.
 
 
 ## Limiting strongSwan VPN traffic by namespace or worker node
-{: #limit}
+{: #vpc-limit}
 
 If you have a single-tenant cluster, or if you have a multi-tenant cluster in which cluster resources are shared among the tenants, you can [limit VPN traffic for each strongSwan deployment to pods in certain namespaces](#limit_namespace). If you have a multi-tenant cluster in which cluster resources are dedicated to tenants, you can [limit VPN traffic for each strongSwan deployment to the worker nodes dedicated to each tenant](#limit_worker).
 {: shortdesc}
 
 ### Limiting strongSwan VPN traffic by namespace
-{: #limit_namespace}
+{: #vpc-limit_namespace}
 
 When you have a single-tenant or multi-tenant cluster, you can limit VPN traffic to pods in only certain namespaces.
 {: shortdesc}
@@ -555,7 +555,7 @@ To limit VPN traffic to a certain namespace:
     {: pre}
 
 ### Limiting strongSwan VPN traffic by worker node
-{: #limit_worker}
+{: #vpc-limit_worker}
 
 When you have multiple strongSwan VPN deployments in a multi-tenant cluster, you can limit VPN traffic for each deployment to specific worker nodes that are dedicated to each tenant.
 {: shortdesc}
@@ -601,7 +601,7 @@ To limit VPN traffic to tainted nodes for each tenant:
 
 
 ## Upgrading or disabling the strongSwan Helm chart
-{: #vpn_upgrade}
+{: #vpc-vpn_upgrade}
 
 Make sure your strongSwan Helm chart is up-to-date by upgrading it.
 {:shortdesc}

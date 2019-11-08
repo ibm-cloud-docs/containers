@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, clusters
 
@@ -266,6 +266,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   {: screen}
 
 <br />
+
 
 
 

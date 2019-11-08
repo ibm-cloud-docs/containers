@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -40,13 +40,13 @@ Review these situations in which you might need to open specific ports and IP ad
 
 
 ## Opening ports in a corporate firewall
-{: #corporate}
+{: #vpc-corporate}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#firewall_bx), [`kubectl` commands](#firewall_kubectl), and [`calicoctl` commands](#firewall_calicoctl) from your local system.
 {: shortdesc}
 
 ### Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall
-{: #firewall_bx}
+{: #vpc-firewall_bx}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud`, `ibmcloud ks` and `ibmcloud cr` commands, you must allow TCP access for {{site.data.keyword.cloud_notm}}, {{site.data.keyword.containerlong_notm}}, and {{site.data.keyword.registrylong_notm}}.
 {:shortdesc}
@@ -94,7 +94,7 @@ If corporate network policies prevent access from your local system to public en
 </br>
 
 ### Running `kubectl` commands from behind a firewall
-{: #firewall_kubectl}
+{: #vpc-firewall_kubectl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
 {:shortdesc}
@@ -207,7 +207,7 @@ To allow access for a specific cluster:
 </br>
 
 ### Running `calicoctl` commands from behind a firewall
-{: #firewall_calicoctl}
+{: #vpc-firewall_calicoctl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
 {:shortdesc}
@@ -238,7 +238,7 @@ You can use access control lists (ACLs) on your VPC subnets to act as a firewall
 
 
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
-{: #whitelist_workers}
+{: #vpc-whitelist_workers}
 
 If you want to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.cloud_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
 {:shortdesc}

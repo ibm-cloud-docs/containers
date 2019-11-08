@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-01"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -201,7 +201,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
 
 ## Registering a VPC load balancer hostname with a DNS subdomain
-{: #vpc_dns}
+{: #vpc_lb_dns}
 
 After you set up a VPC load balancer, you can create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
 {: shortdesc}
