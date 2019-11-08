@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -50,7 +50,6 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 * Ensure you have the required number of worker nodes:
   * Classic clusters: If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge#edge) are enabled in each zone so that NLBs deploy uniformly.
   * Gateway-enabled classic clusters: Ensure that at least two gateway worker nodes in the `gateway` worker pool are enabled in each zone so that NLBs deploy uniformly.
-
 
 To set up an NLB 1.0 service in a multizone cluster:
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label in the metadata section of your deployment configuration file. This custom label identifies all pods where your app runs to include them in the load balancing.
@@ -479,7 +478,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         Example output:
         ```
         NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
-        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.176.48.78
+        cf-py-d7b7d94db-vp8pq  1/1       Running             0          10d       172.30.xxx.xxx   10.176.48.78
         ```
         {: screen}
 

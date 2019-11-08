@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -50,7 +50,7 @@ Create a network load balancer (NLB) to expose your custom Ingress controller de
     ```
     {: pre}
 
-3. Define a load balancer to expose your custom Ingress deployment.
+3. Define a load balancer service to expose your custom Ingress deployment.
     ```
     apiVersion: v1
     kind: Service

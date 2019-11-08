@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-29"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -45,7 +45,7 @@ Single zone clusters can be created in one of the supported [single zone cities 
 {: shortdesc}
 
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters are supported in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) only. If your cluster must reside in one of the single zone cities, create a classic cluster instead.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters are supported only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). If your cluster must reside in one of the single zone cities, create a classic cluster instead.
 {: note}
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, audit
 
@@ -135,5 +135,6 @@ To [view events](/docs/services/Activity-Tracker-with-LogDNA?topic=logdnaat-view
 | Singapore | sng01 | Tokyo |
 | Tokyo | tok02, tok04, tok05 | Tokyo |
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
+
 
 

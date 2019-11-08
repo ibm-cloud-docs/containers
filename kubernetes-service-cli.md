@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -136,7 +136,7 @@ Check out the following changes between each version of the CLI plug-in:
 With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API](/docs/containers?topic=containers-cs_api_install#api_about), the {{site.data.keyword.cloud_notm}} CLI `kubernetes-service` plug-in supports both classic and VPC infrastructure providers. Some `ibmcloud ks` commands support only one type of infrastructure, whereas other commands include additional names or options as described in the following table.
 {: shortdesc}
 
-<table summary="The rows are read from left to right, with the area of comparison in column one, Classic clusters CLI in column two, and VPC clusters CLI in column three.">
+<table summary="The rows are read from left to right, with the area of comparison in column one, classic clusters CLI in column two, and VPC clusters CLI in column three.">
 <caption>{{site.data.keyword.containerlong_notm}} CLI differences between classic and VPC</caption>
 <col width="40%">
 <col width="30%">
