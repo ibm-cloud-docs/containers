@@ -32,9 +32,9 @@ subcollection: containers
 Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your {{site.data.keyword.containerlong}} clusters.
 {:shortdesc}
 
-* [Corporate firewalls](#corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
+* [Corporate firewalls](#vpc-corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
 * [Access control lists](#firewall_acls): If you use ACLs on your VPC subnets to act as a firewall to restrict all worker node egress, you must allow your worker nodes to access the resources that are required for the cluster to function.
-* [Other services or network firewalls](#whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
+* [Other services or network firewalls](#vpc-whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
 
 <br />
 
@@ -42,7 +42,7 @@ Review these situations in which you might need to open specific ports and IP ad
 ## Opening ports in a corporate firewall
 {: #vpc-corporate}
 
-If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#firewall_bx), [`kubectl` commands](#firewall_kubectl), and [`calicoctl` commands](#firewall_calicoctl) from your local system.
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#vpc-firewall_bx), [`kubectl` commands](#vpc-firewall_kubectl), and [`calicoctl` commands](#vpc-firewall_calicoctl) from your local system.
 {: shortdesc}
 
 ### Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall
@@ -101,7 +101,7 @@ If corporate network policies prevent access from your local system to public en
 
 When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
-Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
+Before you begin, allow access to [run `ibmcloud ks` commands](#vpc-firewall_bx).
 
 To allow access for a specific cluster:
 
@@ -212,9 +212,9 @@ To allow access for a specific cluster:
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
 {:shortdesc}
 
-Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
+Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) and [`kubectl` commands](#vpc-firewall_kubectl).
 
-1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
+1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#vpc-firewall_kubectl).
 
 2. Get the port for etcd.
 

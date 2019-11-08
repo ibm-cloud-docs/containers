@@ -133,7 +133,7 @@ Before using the strongSwan Helm chart, review the following considerations and 
 Multizone clusters provide high availability for apps in the event of an outage by making app instances available on worker nodes in multiple zones. You can deploy a single outbound VPN connection that floats between different worker nodes across all availability zones in your cluster. If a worker node is removed or experiences downtime, `kubelet` reschedules the VPN pod onto a new worker node. If an availability zone experiences an outage, `kubelet` reschedules the VPN pod onto a new worker node in a different zone.
 {: shortdesc}
 
-Only one strongSwan Helm chart deployment is required. When you [configure the Helm chart](#vpn_configure), ensure that you specify the following settings:
+Only one strongSwan Helm chart deployment is required. When you [configure the Helm chart](#vpc-vpn_configure), ensure that you specify the following settings:
 - `local.id`: Specify a fixed value that is supported by your remote VPN endpoint. Some remote VPN endpoints have settings such as `leftid` or `rightid` in the `ipsec.conf` file. If you have these settings, check whether you must set the `leftid` to the IP address of the VPN IPSec tunnel. If the remote VPN endpoint requires you to set the `local.id` option (`leftid` value in `ipsec.conf`) to the public IP address of the VPN IPSec tunnel, set `local.id` to `%loadBalancerIP`. This value automatically configures the `leftid` value in `ipsec.conf` to the load balancer IP address that is used for the connection.
 - Optional: Hide all of the cluster IP addresses behind a single IP address in each zone by setting `enableSingleSourceIP` to `true`. This option provides one of the most secure configurations for the VPN connection because no connections from the remote network back into the cluster are permitted. You must also set `local.subnet` to the `%zoneSubnet` variable, and use the `local.zoneSubnet` to specify an IP address as a /32 subnet for each zone of the cluster.
 
@@ -474,7 +474,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 ## Limiting strongSwan VPN traffic by namespace or worker node
 {: #vpc-limit}
 
-If you have a single-tenant cluster, or if you have a multi-tenant cluster in which cluster resources are shared among the tenants, you can [limit VPN traffic for each strongSwan deployment to pods in certain namespaces](#limit_namespace). If you have a multi-tenant cluster in which cluster resources are dedicated to tenants, you can [limit VPN traffic for each strongSwan deployment to the worker nodes dedicated to each tenant](#limit_worker).
+If you have a single-tenant cluster, or if you have a multi-tenant cluster in which cluster resources are shared among the tenants, you can [limit VPN traffic for each strongSwan deployment to pods in certain namespaces](#vpc-limit_namespace). If you have a multi-tenant cluster in which cluster resources are dedicated to tenants, you can [limit VPN traffic for each strongSwan deployment to the worker nodes dedicated to each tenant](#vpc-limit_worker).
 {: shortdesc}
 
 ### Limiting strongSwan VPN traffic by namespace
@@ -491,7 +491,7 @@ Before you use this solution, review the following considerations and limitation
 * The Calico global network policies in the following steps do not prevent Kubernetes pods that use host networking from sending and receiving data over the VPN. When a pod is configured with host networking, the app running in the pod can listen on the network interfaces of the worker node that it is on. These host networking pods can exist in any namespace. To determine which pods have host networking, run `kubectl get pods --all-namespaces -o wide` and look for any pods that do not have a `172.30.0.0/16` pod IP address. If you want to prevent host networking pods from sending and receiving data over the VPN, you can set the following options in your `values.yaml` deployment file: `local.subnet: 172.30.0.0/16` and `enablePodSNAT: false`. These configuration settings expose all of the Kubernetes pods over the VPN connection to the remote network. However, only the pods that are located in the specified secure namespace are reachable over the VPN.
 
 Before you begin:
-* [Deploy the strongSwan Helm chart](#vpn_configure) and [ensure that VPN connectivity is working correctly](#vpn_test).
+* [Deploy the strongSwan Helm chart](#vpc-vpn_configure) and [ensure that VPN connectivity is working correctly](#vpc-vpn_test).
 * [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 
 To limit VPN traffic to a certain namespace:
