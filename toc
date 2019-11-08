@@ -13,7 +13,6 @@ IBM Cloud Kubernetes Service
         cs_why.md
         cs_providers.md
         cs_tech.md
-        cs_limitations.md
 
     {: .topicgroup}
     Use cases
@@ -177,6 +176,7 @@ IBM Cloud Kubernetes Service
         vpc_ts.md
 
     release_notes.md
+    cs_limitations.md
     cs_sitemap.md
     {: .navgroup-end}
 

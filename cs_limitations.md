@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Limitations
+# Service limitations
 {: #limitations}
 
 {{site.data.keyword.containerlong}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted.
