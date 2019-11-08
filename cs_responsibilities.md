@@ -50,7 +50,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
     <li>Integrate ordered infrastructure resources to work automatically with your cluster architecture and become available to your deployed apps and workloads.</li></ul>
     <br><br>
     **Your responsibilities**:
-    <ul><li>Use the provided API, CLI, or console tools to adjust [compute](/docs/containers?topic=containers-clusters#clusters) and [storage](/docs/containers?topic=containers-storage_planning#storage_planning) capacity, and to adjust [networking configuration](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster) to meet the needs of your workload.</li></ul><br><br>
+    <ul><li>Use the provided API, CLI, or console tools to adjust [compute](/docs/containers?topic=containers-add_workers) and [storage](/docs/containers?topic=containers-storage_planning#storage_planning) capacity, and to adjust [networking configuration](/docs/containers?topic=containers-cs_network_cluster#cs_network_cluster) to meet the needs of your workload.</li></ul><br><br>
     </td>
      </tr>
      <tr>

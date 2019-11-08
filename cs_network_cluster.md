@@ -72,7 +72,7 @@ Did you create a cluster with only a private service endpoint before you enabled
 
 9.  Optional: To use the private service endpoint only:
     1.  [Disable the public service endpoint](#disable-public-se).
-    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
+    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
 
 <br />
@@ -167,7 +167,7 @@ Note that you cannot disable the private service endpoint after you enable it.
         ibmcloud ks cluster feature disable public-service-endpoint --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem).
+    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
 <br />
 
