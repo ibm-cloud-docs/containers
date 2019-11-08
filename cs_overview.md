@@ -32,7 +32,7 @@ Learn more about {{site.data.keyword.containerlong}}, its capabilities and the o
 ## Understanding {{site.data.keyword.containerlong_notm}}
 {: #service-concepts}
 
-Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses. 
+Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses.
 {: shortdesc}
 
 **What is {{site.data.keyword.containerlong_notm}} and how does it work?** </br>
@@ -76,9 +76,9 @@ Built on existing Linux container technology (LXC), the open source project that
 {:shortdesc}
 
 ### Key concepts
-{: #docker-concepts} 
+{: #docker-concepts}
 
-Learn more about the key concepts of Docker. 
+Learn more about the key concepts of Docker.
 {: shortdesc}
 
 <dl>
@@ -94,7 +94,7 @@ Learn more about the key concepts of Docker.
 ### Benefits
 {: #docker-benefits}
 
-Review the key benefits of using containers to run your workloads in the cloud. 
+Review the key benefits of using containers to run your workloads in the cloud.
 {: shortdesc}
 
 <dl>
@@ -129,7 +129,7 @@ Review the key benefits of using containers to run your workloads in the cloud.
 ### Key concepts
 {: #kubernetes-concepts}
 
-Learn more about the key concepts of Kubernetes as illustrated in the following image. 
+Learn more about the key concepts of Kubernetes as illustrated in the following image.
 {: shortdesc}
 
 ![Deployment setup](images/cs_app_tutorial_mz-components1.png)
@@ -159,10 +159,10 @@ Define update strategies for your app, including the number of pods that you wan
 ### Related resources
 {: #kubernetes-resources}
 
-Review how you can learn about Kubernetes concepts and the terminology. 
+Review how you can learn about Kubernetes concepts and the terminology.
 {: shortdesc}
 
 * Familiarize yourself with the product by completing the [Creating clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
-* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course). 
+* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).
 
 

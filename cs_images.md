@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -724,6 +724,7 @@ Wondering what to do next? You can [set up the **entitled** Helm chart repositor
 {: tip}
 
 <br />
+
 
 
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
