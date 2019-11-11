@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -274,7 +274,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   ```
   {: pre}
 
-  In this example output, the ID for the subnet in `us-south-1` is `e3c19786-1c54-4248-86ca-e60aab74ed62` and the CIDR is `10.240.0.0/24`:
+  In this example output, the ID for the subnet in `us-south-1` is `a1b2c3d4-f560-471b-b6ce-20067ac93439` and the CIDR is `10.240.0.0/24`:
   ```
   Retrieving worker kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623...
   OK
