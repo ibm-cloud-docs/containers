@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -32,21 +32,21 @@ subcollection: containers
 Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your {{site.data.keyword.containerlong}} clusters.
 {:shortdesc}
 
-* [Corporate firewalls](#corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
+* [Corporate firewalls](#vpc-corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
 * [Access control lists](#firewall_acls): If you use ACLs on your VPC subnets to act as a firewall to restrict all worker node egress, you must allow your worker nodes to access the resources that are required for the cluster to function.
-* [Other services or network firewalls](#whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
+* [Other services or network firewalls](#vpc-whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
 
 <br />
 
 
 ## Opening ports in a corporate firewall
-{: #corporate}
+{: #vpc-corporate}
 
-If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#firewall_bx), [`kubectl` commands](#firewall_kubectl), and [`calicoctl` commands](#firewall_calicoctl) from your local system.
+If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run [`ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands](#vpc-firewall_bx), [`kubectl` commands](#vpc-firewall_kubectl), and [`calicoctl` commands](#vpc-firewall_calicoctl) from your local system.
 {: shortdesc}
 
 ### Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall
-{: #firewall_bx}
+{: #vpc-firewall_bx}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud`, `ibmcloud ks` and `ibmcloud cr` commands, you must allow TCP access for {{site.data.keyword.cloud_notm}}, {{site.data.keyword.containerlong_notm}}, and {{site.data.keyword.registrylong_notm}}.
 {:shortdesc}
@@ -94,14 +94,14 @@ If corporate network policies prevent access from your local system to public en
 </br>
 
 ### Running `kubectl` commands from behind a firewall
-{: #firewall_kubectl}
+{: #vpc-firewall_kubectl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
 {:shortdesc}
 
 When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
-Before you begin, allow access to [run `ibmcloud ks` commands](#firewall_bx).
+Before you begin, allow access to [run `ibmcloud ks` commands](#vpc-firewall_bx).
 
 To allow access for a specific cluster:
 
@@ -174,7 +174,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -207,14 +207,14 @@ To allow access for a specific cluster:
 </br>
 
 ### Running `calicoctl` commands from behind a firewall
-{: #firewall_calicoctl}
+{: #vpc-firewall_calicoctl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
 {:shortdesc}
 
-Before you begin, allow access to run [`ibmcloud` commands](#firewall_bx) and [`kubectl` commands](#firewall_kubectl).
+Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) and [`kubectl` commands](#vpc-firewall_kubectl).
 
-1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#firewall_kubectl).
+1. Retrieve the IP address from the master URL that you used to allow the [`kubectl` commands](#vpc-firewall_kubectl).
 
 2. Get the port for etcd.
 
@@ -238,7 +238,7 @@ You can use access control lists (ACLs) on your VPC subnets to act as a firewall
 
 
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
-{: #whitelist_workers}
+{: #vpc-whitelist_workers}
 
 If you want to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.cloud_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
 {:shortdesc}

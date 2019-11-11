@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -34,7 +34,7 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 {: shortdesc}
 
 ## Autoscaling CoreDNS
-{: #dns_autoscale}
+{: #vpc_dns_autoscale}
 
 By default, CoreDNS includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/).
 {: shortdesc}
@@ -76,7 +76,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 ## Customizing CoreDNS
-{: #dns_customize}
+{: #vpc_dns_customize}
 
 You can customize CoreDNS by editing the DNS configmap. For example, you might want to configure `stubdomains` and upstream nameservers to resolve services that point to external hosts. Additionally, you can configure multiple [Corefiles ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2017/07/23/corefile-explained/) within the CoreDNS configmap. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
 {: shortdesc}

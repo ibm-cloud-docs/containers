@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-08"
 
 ---
 
@@ -282,10 +282,12 @@ lastupdated: "2019-11-06"
 * [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard)
   * [/docs/containers?topic=containers-clusters#clusters_vpc_ui](/docs/containers?topic=containers-clusters#clusters_vpc_ui)
   * [Creating standard VPC Gen 1 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpc_cli)
-* [Accessing your cluster](/docs/containers?topic=containers-clusters#access_cluster)
-  * [Accessing clusters through the public service endpoint](/docs/containers?topic=containers-clusters#access_internet)
-  * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-clusters#access_on_prem)
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
+
+[Accessing your cluster](/docs/containers?topic=containers-access_cluster)
+* [Prerequisites](/docs/containers?topic=containers-access_cluster#prereqs)
+* [Accessing clusters through the public service endpoint](/docs/containers?topic=containers-access_cluster#access_public_se)
+* [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
@@ -533,29 +535,29 @@ lastupdated: "2019-11-06"
 {: #sitemap-clusters-vpc-networking}
 
 [Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-vpc-firewall)
-* [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#corporate)
-  * [Running ibmcloud, ibmcloud ks, and ibmcloud cr commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#firewall_bx)
-  * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#firewall_kubectl)
-  * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#firewall_calicoctl)
+* [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
+  * [Running ibmcloud, ibmcloud ks, and ibmcloud cr commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
+  * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
+  * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
 * [Allowing the cluster to access resources through ACLs](/docs/containers?topic=containers-vpc-firewall#firewall_acls)
-* [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#whitelist_workers)
+* [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
 [Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
-* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-network-policy#gateway)
+* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-network-policy#vpc-gateway)
 * [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
 * [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
-  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
-  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
+  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
+  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
 * [Choosing a VPN solution](/docs/containers?topic=containers-vpc-vpnaas#options)
   * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
   * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
   * [Communication with IBM Cloud classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
-* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpn-setup)
-  * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpc-vpnaas#strongswan_limitations)
-  * [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpc-vpnaas#vpn_multizone)
-* [Configuring the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpn_configure)
+* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-setup)
+  * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpc-vpnaas#vpc-strongswan_limitations)
+  * [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_multizone)
+* [Configuring the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_configure)
   * [Step 1: Enable a public gateway on the subnet](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_1)
   * [Step 2: Get the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_2)
   * [Step 3: Configure basic IPSec settings](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_3)
@@ -563,11 +565,11 @@ lastupdated: "2019-11-06"
   * [Step 5: Access remote network resources over the VPN connection](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_5)
   * [Step 6 (optional): Enable monitoring with the Slack webhook integration](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_6)
   * [Step 7: Deploy the Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_7)
-* [Testing and verifying strongSwan VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas#vpn_test)
-* [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpc-vpnaas#limit)
-  * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpc-vpnaas#limit_namespace)
-  * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpc-vpnaas#limit_worker)
-* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpn_upgrade)
+* [Testing and verifying strongSwan VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_test)
+* [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit)
+  * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_namespace)
+  * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_worker)
+* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_upgrade)
 
 [Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio#istio)
 * [Understanding Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_ov)
@@ -601,8 +603,8 @@ lastupdated: "2019-11-06"
 * [What's next?](/docs/containers?topic=containers-istio#istio_next)
 
 [Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)
-* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#dns_autoscale)
-* [Customizing the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#dns_customize)
+* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#vpc_dns_autoscale)
+* [Customizing the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#vpc_dns_customize)
 
 ## Deploying apps
 {: #sitemap-images}
@@ -684,7 +686,7 @@ lastupdated: "2019-11-06"
 [VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas)
 * [About VPC load balancing in IBM Cloud Kubernetes Service](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
 * [Setting up a Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-* [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_dns)
+* [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)

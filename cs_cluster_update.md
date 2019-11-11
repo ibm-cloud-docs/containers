@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -122,8 +122,8 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
-- Make any changes that are marked with _Update after master_ in the [Kubernetes clusters](/docs/containers?topic=containers-cs_versions) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version preparation guides.
-- If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version changelog.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
+- If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog).
 - Consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) so that your cluster has enough capacity to rescheduling your workloads during the update.
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
@@ -671,12 +671,12 @@ You can manage automatic updates of the Ingress ALB component in the following w
     {: pre}
 
 <br />
-
+ 
 
 ## Updating managed add-ons
 {: #addons}
 
-Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio or Knative. The version of the open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio or Knative. The version of the open-source tool that you add to your cluster is tested by IBM and approved for use in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
 
 

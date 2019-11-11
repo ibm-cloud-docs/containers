@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -35,7 +35,6 @@ subcollection: containers
 
 Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your {{site.data.keyword.containerlong}} clusters.
 {:shortdesc}
-
 
 * [Corporate firewalls](#corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
 * [Gateway appliance firewalls](#vyatta_firewall): If you have firewalls set up on the public or private network in your IBM Cloud infrastructure account, such as a VRA, you must open IP ranges, ports, and protocols to allow worker nodes to communicate with the master, with infrastructure resources, and with other {{site.data.keyword.cloud_notm}} services. You can also open ports to allow incoming traffic to services exposing apps in your cluster.
@@ -180,7 +179,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-clusters#access_on_prem) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```

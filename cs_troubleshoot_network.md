@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -184,8 +184,8 @@ Review the following reasons why the ALB secret might fail and the corresponding
  </thead>
  <tbody>
  <tr>
- <td>You do not have the required access roles to download and update certificate data.</td>
- <td>Check with your account Administrator to assign you the following {{site.data.keyword.cloud_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</li><li>The <a href="/docs/containers?topic=containers-users#platform">**Administrator** platform role</a> for the cluster.</li></ul></td>
+ <td>The owner of the cluster's API Key does not have the required access roles to download and update certificate data.</td>
+ <td>Check with your account Administrator to assign the owner of the cluster's API Key, the following {{site.data.keyword.cloud_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/services/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</li><li>The <a href="/docs/containers?topic=containers-users#platform">**Administrator** platform role</a> for the cluster.</li></ul></td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>

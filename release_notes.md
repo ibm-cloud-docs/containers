@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,6 +39,13 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>11 November 2019</td>
+<td><ul>
+<li><strong>Accessing your cluster</strong>: Added an [Accessing Kubernetes clusters page](/docs/containers?topic=containers-access_cluster).</li>
+<li><strong>Exposing apps that are external to your cluster by using Ingress</strong>: Added information for how to use the [`proxy-external-service` Ingress annotation](/docs/containers?topic=containers-ingress#proxy-external) to include an app that is external to your cluster in Ingress application load balancing.</li>
+</ul></td>
+</tr>
 <tr>
 <td>07 November 2019</td>
 <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.51](/docs/containers?topic=containers-cs_cli_changelog).</li>
@@ -383,7 +390,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>21 June 2019</td>
   <td>
-  <strong>Accessing the Kubernetes master through the private service endpoint</strong>: Added steps for [editing the local Kubernetes configuration file](/docs/containers?topic=containers-clusters#access_on_prem) when both the public and private service endpoints are enabled, but you want to access the Kubernetes master through the private service endpoint only.
+  <strong>Accessing the Kubernetes master through the private service endpoint</strong>: Added steps for [editing the local Kubernetes configuration file](/docs/containers?topic=containers-access_cluster#access_private_se) when both the public and private service endpoints are enabled, but you want to access the Kubernetes master through the private service endpoint only.
   </td>
 </tr>
 <tr>
@@ -413,7 +420,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>07 June 2019</td>
   <td><ul>
-  <li><strong>Access to the Kubernetes master through the private service endpoint</strong>: Added [steps](/docs/containers?topic=containers-clusters#access_on_prem) to expose the private service endpoint through a private load balancer. After you complete these steps, your authorized cluster users can access the Kubernetes master from a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.</li>
+  <li><strong>Access to the Kubernetes master through the private service endpoint</strong>: Added [steps](/docs/containers?topic=containers-access_cluster#access_private_se) to expose the private service endpoint through a private load balancer. After you complete these steps, your authorized cluster users can access the Kubernetes master from a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.</li>
   <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.cloud_notm}} Direct Link to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `ingress-auth` image to build 330](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   </ul></td>

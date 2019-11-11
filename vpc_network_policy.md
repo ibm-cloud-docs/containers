@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -46,7 +46,7 @@ You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=
 
 
 ## Restricting public network traffic to a subnet with a public gateway
-{: #gateway}
+{: #vpc-gateway}
 
 Improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to have external access through a VPC subnet public gateway.
 {:shortdesc}
@@ -274,7 +274,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   ```
   {: pre}
 
-  In this example output, the ID for the subnet in `us-south-1` is `e3c19786-1c54-4248-86ca-e60aab74ed62` and the CIDR is `10.240.0.0/24`:
+  In this example output, the ID for the subnet in `us-south-1` is `a1b2c3d4-f560-471b-b6ce-20067ac93439` and the CIDR is `10.240.0.0/24`:
   ```
   Retrieving worker kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623...
   OK
@@ -428,7 +428,7 @@ For more information about how Kubernetes network policies control pod-to-pod tr
 {: tip}
 
 ### Isolate app services within a namespace
-{: #services_one_ns}
+{: #vpc-services_one_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices within one namespace.
 
@@ -487,7 +487,7 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 databas
 Traffic can now flow from the front end to the back end, and from the back end to the database. The database can respond to the back end, and the back end can respond to the front end, but no reverse traffic connections can be established.
 
 ### Isolate app services between namespaces
-{: #services_across_ns}
+{: #vpc-services_across_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 

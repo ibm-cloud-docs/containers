@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-04"
+lastupdated: "2019-11-07"
 
 keywords: kubernetes, iks
 
@@ -27,11 +27,11 @@ subcollection: containers
 # Setting pod priority
 {: #pod_priority}
 
-With Kubernetes pod priority and preemption, you can configure priority classes to indicate the relative priority of a pod. The Kubernetes scheduler takes into consideration the priority of a pod and can even preempt (remove) pods with lower priority to make room on a worker node for higher priority pods.
+With pod priority and preemption, you can configure priority classes to indicate the relative priority of the pods that make up your Kubernetes cluster's workload. The Kubernetes scheduler takes into consideration the priority of a pod and can even preempt (remove) pods with lower priority to make room on a worker node for higher priority pods.
 {: shortdesc}
 
 **Why do I set pod priority?**</br>
-As a cluster administrator, you want to control which pods are more critical to your cluster workload. Priority classes can help you control the Kubernetes scheduler decisions to favor higher priority pods over lower priority pods. The scheduler can even preempt (remove) lower priority pods that are running so that pending higher priority pods can be scheduled.
+As a cluster administrator, you want to control which pods are more critical to your cluster workload. Priority classes can help you control the Kubernetes scheduler decisions to favor higher priority pods over lower priority pods. The Kubernetes scheduler can even preempt (remove) lower priority pods that are running so that pending higher priority pods can be scheduled.
 
 By setting pod priority, you can help prevent lower priority workloads from impacting critical workloads in your cluster, especially in cases where the cluster starts to reach its resource capacity.
 
@@ -40,18 +40,18 @@ Make sure that you have [set up proper user access](/docs/containers?topic=conta
 
 {: #priority_scheduling}
 **How does priority scheduling and preemption work?**</br>
-In general, pending pods that have a higher priority are scheduled before lower prioritized pods. If you do not have enough resources left in your worker nodes, the scheduler can preempt (remove) pods to free up enough resources for the higher prioritized pods to be scheduled. Preemption is also affected by graceful termination periods, pod disruption budgets, and worker node affinity.
+In general, pending pods that have a higher priority are scheduled before lower prioritized pods. If you do not have enough resources left in your worker nodes, the Kubernetes scheduler can preempt (remove) pods to free up enough resources for the higher prioritized pods to be scheduled. Preemption is also affected by graceful termination periods, pod disruption budgets, and worker node affinity.
 
 If you do not specify a priority for your pod deployment, the default is set to the priority class that is set as the `globalDefault` . If you do not have a `globalDefault` priority class, the default priority for all pods is zero (`0`). By default, {{site.data.keyword.containerlong_notm}} does not set a `globalDefault`, so the pod default priority is zero.
 
-To understand how pod priority and scheduler work together, consider the scenarios in the following figure. You must place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending at the same time that existing pods are removed, such as in Scenario 3.
+To understand how pod priority and Kubernetes scheduler work together, consider the scenarios in the following figure. You must place prioritized pods on worker nodes with available resources. Otherwise, high priority pods in your cluster can remain in pending at the same time that existing pods are removed, such as in Scenario 3.
 
 _Figure: Pod priority scenarios_
 <img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
 
-1.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
-2.  Three pods with high, medium, and low priority are pending scheduling. The scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
-3.  Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the scheduler schedules the medium priority pod.
+1.  Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
+2.  Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
+3.  Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The Kubernetes scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the Kubernetes scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the Kubernetes scheduler schedules the medium priority pod.
 
 **For more information**: See the Kubernetes documentation on [pod priority and preemption ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/pod-priority-preemption/).
 
@@ -61,10 +61,13 @@ No. If you don't want to use pod priority, don't set a `globalDefault` or includ
 **How do resource quotas affect pod priority?**</br>
 You can use pod priority in combination with resource quotas, including [quota scopes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes) for clusters that run Kubernetes 1.12 or later. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
 
+<br />
+
+
 ## Understanding default priority classes
 {: #default_priority_class}
 
-Your {{site.data.keyword.containerlong_notm}} clusters come with some priority classes by default.
+Your {[product_name_tm}} clusters come with some priority classes by default.
 {: shortdesc}
 
 Do not modify the default classes, which are used to properly manage your cluster. You can use these classes in your app deployments, or [create your own priority classes](#create_priority_class).
@@ -235,3 +238,5 @@ To assign priority to your pods:
     kubectl apply -f filepath/pod-deployment.yaml
     ```
     {: pre}
+
+

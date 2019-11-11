@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-29"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -130,7 +130,7 @@ If you want to expose your app publicly, you have different options that depend 
 *  **Private VLAN-only standard cluster**: You can expose your app by using a [NodePort, load balancer, or Ingress service](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan). You also must open the port for the service's private IP address in your firewall.
 
 ### How can I automate my app deployment?
-After your cluster is fully deployed, you can set up a continuous delivery and continuous integration pipeline for your cluster to automate the deployment and testing of your containerized apps. With {{site.data.keyword.deliverypipelinelong}}, you can choose between pre-defined DevOps templates that help you deploy Kubernetes-native apps and Helm charts, run vulnerability tests, A/B tests, and set up automatic health checks and alerting. For more information, see [Setting up a continuous delivery pipeline for a cluster](#continuous-delivery-pipeline). 
+After your cluster is fully deployed, you can set up a continuous delivery and continuous integration pipeline for your cluster to automate the deployment and testing of your containerized apps. With {{site.data.keyword.deliverypipelinelong}}, you can choose between pre-defined DevOps templates that help you deploy Kubernetes-native apps and Helm charts, run vulnerability tests, A/B tests, and set up automatic health checks and alerting. For more information, see [Setting up a continuous delivery pipeline for a cluster](#continuous-delivery-pipeline).
 
 ### After I deploy my app, how can I monitor its health?
 You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health#health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
@@ -291,7 +291,7 @@ template:
   imagePullPolicy: Always</pre></code></p></dd>
 
 <dt id="port">Port for the app's service</dt>
-  <dd><p>Select a container port to open the app's services on. To see which port needs to be opened, refer to your app specs or Dockerfile. The port is accessible from the private network, but not from a public network connection. To expose the app publicly, you must create a NodePort, load balancer, or Ingress service. You use this same port number when you [create a `Service` object](#app-service).</p>
+  <dd><p>Select a container port to open the app's services on. To see which port needs to be opened, refer to your app specs or Dockerfile. The port is accessible from the private network, but not from a public network connection. To expose the app publicly, you must create a NodePort, load balancer, or Ingress service. You use this same port number when you [create a `Service` object](#app-service).</p><p class="note">Port 25 is blocked for all services in {{site.data.keyword.cloud_notm}}.</p>
   <p><pre class="codeblock"><code>ports:
 - containerPort: 9080</pre></code></p></dd>
 
@@ -1522,6 +1522,9 @@ To manage rolling updates to your apps:
 
 Adopt a DevOps approach by using {{site.data.keyword.deliverypipelinelong}}, which includes open toolchains that automate the building and deployment of containerized apps.
 {: shortdesc}
+
+Check out this [blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/announcements/connecting-ibm-cloud-kubernetes-service-and-ibm-continuous-delivery) to see how you can use DevOps toolchains to integrate services and streamline your cluster workflow.
+{: tip}
 
 1. From the [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters), select the cluster for which you want to set up a continuous delivery pipeline.
 2. Select the **DevOps** tab.

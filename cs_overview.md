@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-08"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -32,17 +32,17 @@ Learn more about {{site.data.keyword.containerlong}}, its capabilities and the o
 ## Understanding {{site.data.keyword.containerlong_notm}}
 {: #service-concepts}
 
-Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses. 
+Review frequently asked questions and key technologies that {{site.data.keyword.containerlong_notm}} uses.
 {: shortdesc}
 
 **What is {{site.data.keyword.containerlong_notm}} and how does it work?** </br>
-{{site.data.keyword.containerlong_notm}} is a managed Kubernetes offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
+{{site.data.keyword.containerlong_notm}} is a managed offering to create your own Kubernetes cluster of compute hosts to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. As a certified Kubernetes provider, {{site.data.keyword.containerlong_notm}} provides intelligent scheduling, self-healing, horizontal scaling, service discovery and load balancing, automated rollouts and rollbacks, and secret and configuration management for your apps. Combined with an intuitive user experience, built-in security and isolation, and advanced tools to secure, manage, and monitor your cluster workloads, you can rapidly deliver highly available and secure containerized apps in the public cloud.
 
 **What is Kubernetes?** </br>
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers management tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. For an overview of key Kubernetes concepts, see [Kubernetes clusters](#kubernetes_basics). To dive deeper into Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational).
 
 **What are containers?** </br>
-Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app in Kubernetes on {{site.data.keyword.containerlong_notm}}, you must first containerize your app by creating a container image that you store in a container registry. For an overview of key Docker concepts and benefits, see [Docker containers](#docker_containers). To dive deeper into Docker, see the [Docker documentation](https://docs.docker.com/). 
+Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app in Kubernetes on {{site.data.keyword.containerlong_notm}}, you must first containerize your app by creating a container image that you store in a container registry. For an overview of key Docker concepts and benefits, see [Docker containers](#docker_containers). To dive deeper into Docker, see the [Docker documentation](https://docs.docker.com/).
 
 **What compute host infrastructure does the service offer?** </br>
 With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure, or VPC Gen 1 compute infrastructure.
@@ -51,7 +51,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create your cluster of co
 
 [VPC clusters](/docs/containers?topic=containers-getting-started#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. VPC clusters can be provisioned on shared virtual infrastructure only.
 
-For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
+For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
 
 **Where can I learn more about the service?** </br>
 Review the following links to find out more about the benefits and responsibilities when you use {{site.data.keyword.containerlong_notm}}.
@@ -76,16 +76,16 @@ Built on existing Linux container technology (LXC), the open source project that
 {:shortdesc}
 
 ### Key concepts
-{: #docker-concepts} 
+{: #docker-concepts}
 
-Learn more about the key concepts of Docker. 
+Learn more about the key concepts of Docker.
 {: shortdesc}
 
 <dl>
 <dt>Image</dt>
 <dd>A container image is the base for every container that you want to run. Container images are built from a Dockerfile, a text file that defines how to build the image and which build artifacts to include in it, such as the app, the app's configuration, and its dependencies. Images are always built from other images, making them quick to configure. Let someone else do the bulk of the work on an image and then tweak it for your use.</dd>
 <dt>Registry</dt>
-<dd>An image registry is a place to store, retrieve, and share container images. Images that are stored in a registry can either be publicly available (public registry) or accessible by a small group of users (private registry). {{site.data.keyword.containerlong_notm}} offers public images, such as ibmliberty, that you can use to create your first containerized app. When it comes to enterprise applications, use a private registry like the one that is provided in {{site.data.keyword.cloud_notm}} to protect your images from being used by unauthorized users.
+<dd>An image registry is a place to store, retrieve, and share container images. Images that are stored in a registry can either be publicly available (public registry) or accessible by a small group of users (private registry). {{site.data.keyword.containerlong_notm}} offers public images, such as `ibmliberty`, that you can use to create your first containerized app. When it comes to enterprise applications, use a private registry like the one that is provided in {{site.data.keyword.cloud_notm}} to protect your images from being used by unauthorized users.
 </dd>
 <dt>Container</dt>
 <dd>Every container is created from an image. A container is a packaged app with all of its dependencies so that the app can be moved between environments and run without changes. Unlike virtual machines, containers do not virtualize a device, its operating system, and the underlying hardware. Only the app code, run time, system tools, libraries, and settings are packaged inside the container. Containers run as isolated processes on Ubuntu compute hosts and share the host operating system and its hardware resources. This approach makes a container more lightweight, portable, and efficient than a virtual machine.</dd>
@@ -94,7 +94,7 @@ Learn more about the key concepts of Docker.
 ### Benefits
 {: #docker-benefits}
 
-Review the key benefits of using containers to run your workloads in the cloud. 
+Review the key benefits of using containers to run your workloads in the cloud.
 {: shortdesc}
 
 <dl>
@@ -121,7 +121,7 @@ Review the key benefits of using containers to run your workloads in the cloud.
 ## Kubernetes clusters
 {: #kubernetes_basics}
 
-<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project that is named Kubernetes combines running a containerized infrastructure with production work loads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
+<img src="images/certified-kubernetes-resized.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes certification for IBM Cloud Container Service."/>The open source project that is named Kubernetes combines running a containerized infrastructure with production workloads, open source contributions, and Docker container management tools. The Kubernetes infrastructure provides an isolated and secure app platform for managing containers that is portable, extensible, and self-healing in case of failovers.
 {:shortdesc}
 
 </br></br>
@@ -129,7 +129,7 @@ Review the key benefits of using containers to run your workloads in the cloud.
 ### Key concepts
 {: #kubernetes-concepts}
 
-Learn more about the key concepts of Kubernetes as illustrated in the following image. 
+Learn more about the key concepts of Kubernetes as illustrated in the following image.
 {: shortdesc}
 
 ![Deployment setup](images/cs_app_tutorial_mz-components1.png)
@@ -159,12 +159,10 @@ Define update strategies for your app, including the number of pods that you wan
 ### Related resources
 {: #kubernetes-resources}
 
-Review how you can learn about Kubernetes concepts and the terminology. 
+Review how you can learn about Kubernetes concepts and the terminology.
 {: shortdesc}
 
-* Expand your terminology knowledge with the [Creating Kubernetes clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
-* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course). 
+* Familiarize yourself with the product by completing the [Creating clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial)
+* Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).
 
-
-<br />
 
