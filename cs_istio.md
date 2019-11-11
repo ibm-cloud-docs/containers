@@ -1187,18 +1187,18 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 
    2. Save any resources created from these CRDs.
 
- ### Uninstalling managed Istio add-ons from the console
- {: #istio_uninstall_ui}
+### Uninstalling managed Istio add-ons from the console
+{: #istio_uninstall_ui}
 
- 1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
 
- 2. Click the **Add-ons** tab.
+2. Click the **Add-ons** tab.
 
- 3. On the Managed Istio card, click the Action menu icon.
+3. On the Managed Istio card, click the Action menu icon.
 
- 4. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
+4. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
 
- 5. On the Managed Istio card, verify that the add-ons you uninstalled are no longer listed.
+5. On the Managed Istio card, verify that the add-ons you uninstalled are no longer listed.
 
 ### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
