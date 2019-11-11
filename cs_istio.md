@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -24,8 +24,9 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Using the managed Istio add-on (beta)
+# Using the managed Istio add-on
 {: #istio}
+
 
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
@@ -166,9 +167,9 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.3.3
-  istio-extras              1.3.3
-  istio-sample-bookinfo     1.3.3
+  istio                     1.4
+  istio-extras              1.4
+  istio-sample-bookinfo     1.4
   ```
   {: screen}
 
@@ -573,13 +574,13 @@ To manually inject sidecars into a deployment:
 
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.3 sh -
+  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.4 sh -
   ```
   {: pre}
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.3.3
+  cd istio-1.4
   ```
   {: pre}
 
@@ -663,7 +664,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.3.3
+    cd istio-1.4
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -821,7 +822,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.3.3
+    cd istio-1.4
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -1076,8 +1077,8 @@ During the update, any traffic that is sent to Istio-managed services is interru
    ```
    OK
    Name      Version
-   istio     1.3.3
-   knative   0.7.1
+   istio     1.4
+   knative   0.8
    ```
    {: screen}
 
@@ -1253,7 +1254,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.3.3
+    cd <filepath>/istio-1.4
     ```
     {: pre}
 
@@ -1272,3 +1273,4 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
 * Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
 * Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
+

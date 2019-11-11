@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, knative
 
@@ -140,7 +140,7 @@ Update your Knative add-on to the latest versions.
    ```
    OK
    Name      Version              
-   knative   0.7.1* (<version> latest)
+   knative   0.8* (<version> latest)
    ```
    {: screen}
 
@@ -239,7 +239,7 @@ Update your Knative add-on to the latest versions.
     ```
     OK
     Name      Version              
-    knative   0.7.1
+    knative   0.8
     ```
     {: screen}
 
