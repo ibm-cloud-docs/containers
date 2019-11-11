@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-25"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, containers
 
@@ -127,7 +127,7 @@ The following image shows the default cluster security settings that address aut
       <li>`DefaultTolerationSeconds`</li>
       <li>`StorageObjectInUseProtection`</li>
       <li>`PersistentVolumeClaimResize`</li>
-      <li>[`Priority`](/docs/containers?topic=containers-pod_priority#pod_priority) (Kubernetes 1.11 or later)</li>
+      <li>[`Priority`](/docs/containers?topic=containers-pod_priority) (Kubernetes 1.11 or later)</li>
       <li>`NodeRestriction` (Kubernetes 1.14 or later)</li>
       <li>`TaintNodesByCondition` (Kubernetes 1.14 or later)</li></ul>
 </br>
