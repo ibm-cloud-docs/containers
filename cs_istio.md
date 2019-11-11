@@ -24,9 +24,8 @@ subcollection: containers
 {:preview: .preview}
 
 
-# Using the managed Istio add-on
+# Using the managed Istio add-on (beta)
 {: #istio}
-
 
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
