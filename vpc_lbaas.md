@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -167,7 +167,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
   The VPC load balancer name has a format `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. To see your cluster ID, run `ibmcloud ks cluster get --cluster <cluster_name>`. To see the Kubernetes `LoadBalancer` service UID, run `kubectl get svc myloadbalancer -o yaml` and look for the **metadata.uid** field in the output. The dashes (-) are removed from the Kubernetes `LoadBalancer` service UID in the VPC load balancer name.
   {: tip}
-  Do not rename any VPC load balancers that are created automatically for `LoadBalancer` services. If you rename a VPC load balancer, {{site.data.ketyword.containerlong_notm}} automatically creates another VPC load balancer for the `LoadBalancer` service.
+  Do not rename any VPC load balancers that are created automatically for `LoadBalancer` services. If you rename a VPC load balancer, {{site.data.keyword.containerlong_notm}} automatically creates another VPC load balancer for the `LoadBalancer` service.
   {: important}
   ```
   ibmcloud is load-balancers
