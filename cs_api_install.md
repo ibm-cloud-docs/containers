@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -402,6 +402,9 @@ You can also use the [API swagger JSON file ![External link icon](../icons/launc
      </table>
 
 5.  Review the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api) to find a list of supported APIs.
+
+When you use the API for automation, be sure to rely on the responses from the API, not files within those responses. For example, the Kubernetes configuration file for your cluster context is subject to change, so do not build automation based on specific contents of this file when you use the `GET /v1/clusters/{idOrName}/config` call.
+{: note}
 
 <br />
 
