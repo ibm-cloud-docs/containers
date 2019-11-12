@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-12"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -780,10 +780,6 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
 </dl>
-
-
-<code><strong>-s</strong></code></br>
-Do not show the message of the day or update reminders. This value is optional.
 
 **Examples**:
 
