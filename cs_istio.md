@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-11-11"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -1077,7 +1077,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
    OK
    Name      Version
    istio     1.3.3
-   knative   0.7.1
+   knative   0.8
    ```
    {: screen}
 
@@ -1187,18 +1187,18 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 
    2. Save any resources created from these CRDs.
 
- ### Uninstalling managed Istio add-ons from the console
- {: #istio_uninstall_ui}
+### Uninstalling managed Istio add-ons from the console
+{: #istio_uninstall_ui}
 
- 1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
 
- 2. Click the **Add-ons** tab.
+2. Click the **Add-ons** tab.
 
- 3. On the Managed Istio card, click the Action menu icon.
+3. On the Managed Istio card, click the Action menu icon.
 
- 4. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
+4. Click **Uninstall**. All managed Istio add-ons are disabled in this cluster and all Istio resources in this cluster are removed.
 
- 5. On the Managed Istio card, verify that the add-ons you uninstalled are no longer listed.
+5. On the Managed Istio card, verify that the add-ons you uninstalled are no longer listed.
 
 ### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
@@ -1272,3 +1272,4 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
 * Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
 * Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
+

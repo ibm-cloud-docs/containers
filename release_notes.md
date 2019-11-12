@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-12"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <td><ul>
 <li><strong>Accessing your cluster</strong>: Added an [Accessing Kubernetes clusters page](/docs/containers?topic=containers-access_cluster).</li>
 <li><strong>Exposing apps that are external to your cluster by using Ingress</strong>: Added information for how to use the [`proxy-external-service` Ingress annotation](/docs/containers?topic=containers-ingress#proxy-external) to include an app that is external to your cluster in Ingress application load balancing.</li>
+<li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.2_1515](/docs/containers?topic=containers-changelog#1162_1515_worker), [1.15.5_1522](/docs/containers?topic=containers-changelog#1155_1522_worker), [1.14.8_1538](/docs/containers?topic=containers-changelog#1148_1538_worker), and [1.13.12_1541](/docs/containers?topic=containers-changelog#11312_1541_worker).</li>
 </ul></td>
 </tr>
 <tr>

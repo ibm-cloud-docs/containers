@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-11"
 
 ---
 
@@ -467,7 +467,7 @@ lastupdated: "2019-11-08"
 * [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
 
-[Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio#istio)
+[Using the managed Istio add-on](/docs/containers?topic=containers-istio#istio)
 * [Understanding Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_ov)
   * [What is Istio?](/docs/containers?topic=containers-istio#istio_ov_what_is)
   * [What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?](/docs/containers?topic=containers-istio#istio_ov_addon)
@@ -571,7 +571,7 @@ lastupdated: "2019-11-08"
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_worker)
 * [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_upgrade)
 
-[Using the managed Istio add-on (beta)](/docs/containers?topic=containers-istio#istio)
+[Using the managed Istio add-on](/docs/containers?topic=containers-istio#istio)
 * [Understanding Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_ov)
   * [What is Istio?](/docs/containers?topic=containers-istio#istio_ov_what_is)
   * [What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?](/docs/containers?topic=containers-istio#istio_ov_addon)
