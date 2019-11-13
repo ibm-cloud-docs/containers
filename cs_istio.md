@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-13"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -569,8 +569,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 
 If you do not want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
 
-To manually inject sidecars into a deployment:
-
+**Before you begin**:
 1. Download the `istioctl` client.
   ```
   curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.3 sh -
@@ -583,19 +582,21 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-3. Inject the Envoy sidecar into your app deployment YAML.
+To manually inject sidecars into a deployment:
+
+1. Inject the Envoy sidecar into your app deployment YAML.
   ```
   istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
   ```
   {: pre}
 
-4. Deploy your app.
+2. Deploy your app.
   ```
   kubectl apply <myapp>.yaml
   ```
   {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
+3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
     ```
