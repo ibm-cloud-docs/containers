@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-13"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -398,6 +398,7 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
 
 <br />
 
+<br>
 
 ## Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM
 {: #platform}
