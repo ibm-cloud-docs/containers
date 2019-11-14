@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-25"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -42,29 +42,22 @@ Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}
   - **Writer** or **Manager** service role
 
 ## Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
+{: #debug-tool-ingress}
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
 {: shortdesc}
 
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the debug tool add-on.
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `iks-charts` repository to your Helm instance](/docs/containers?topic=containers-helm).
+2. Click the **Add-ons** tab.
 
-2. Install the Helm chart to your cluster.
-  ```
-  helm install iks-charts/ibmcloud-iks-debug --name debug-tool --namespace kube-system
-  ```
-  {: pre}
+3. On the Diagnostics and Debug Tool card, click **Install**.
 
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
 
-3. Start a proxy server to display the debug tool interface.
-  ```
-  kubectl proxy --port 8080
-  ```
-  {: pre}
+5. On the Diagnostics and Debug Tool card, click **Dashboard**.
 
-4. In a web browser, open the debug tool interface URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
-
-5. Select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+5. In the debug tool dashboard, select the **ingress** group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
 
 6. Click **Run**.
 
