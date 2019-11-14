@@ -41,29 +41,52 @@ You can take these general steps to ensure that your clusters are up-to-date:
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
 
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster. To use the debug tool, install the [`ibmcloud-iks-debug` Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibmcloud-iks-debug):
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster.
 {: shortdesc}
 
-1. [Set up Helm in your cluster, create a service account for Tiller, and add the `iks-charts` repository to your Helm instance](/docs/containers?topic=containers-helm).
-
-2. Install the Helm chart to the `kube-system` namespace.
+**Before you begin**:
+If you previously installed the debug tool by using Helm, first uninstall the `ibmcloud-iks-debug` Helm chart.
+1. Find the installation name of your Helm chart.
   ```
-  helm install iks-charts/ibmcloud-iks-debug --name debug-tool --namespace kube-system
-  ```
-  {: pre}
-3. Start a proxy server to display the debug tool interface.
-  ```
-  kubectl proxy --port 8080
+  helm ls | grep ibmcloud-iks-debug
   ```
   {: pre}
 
-4. In a web browser, open the debug tool dashboard URL: http://localhost:8080/api/v1/namespaces/kube-system/services/debug-tool-ibmcloud-iks-debug:8822/proxy/page
+  Example output:
+  ```
+  <helm_chart_name> 1 Thu Sep 13 16:41:44 2019 DEPLOYED ibmcloud-iks-debug-1.0.0 default
+  ```
+  {: screen}
 
-5. In the debug tool dashboard, select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+2. Uninstall the debug tool installation by deleting the Helm chart.
+  ```
+  helm delete --purge <helm_chart_name>
+  ```
+  {: pre}
 
-6. Click **Run**.
+3. Verify that the debug tool pods are removed. When the uninstallation is complete, no pods are returned by the following command.
+  ```
+  kubectl get pod --all-namespaces | grep ibmcloud-iks-debug
+  ```
+  {: pre}
 
-7. Check the results of each test.
+</br>**To enable and use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool add-on:**
+
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the debug tool add-on.
+
+2. Click the **Add-ons** tab.
+
+3. On the Diagnostics and Debug Tool card, click **Install**.
+
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
+
+5. On the Diagnostics and Debug Tool card, click **Dashboard**.
+
+6. In the debug tool dashboard, select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+
+7. Click **Run**.
+
+8. Check the results of each test.
   * If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
   * You can also use the results of tests to gather information, such as complete YAMLs, that can help you debug your cluster in the following sections.
 
