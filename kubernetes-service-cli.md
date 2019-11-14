@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-12"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -202,7 +202,9 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`zone ls`](#cs_datacenters)</li></ul></td>
  </tr>
  <tr>
-   <td colspan="3">**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** The commands use and return the v1 API responses.</td>
+   <td>**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** </td>
+   <td>The commands use and return the v1 API responses.</td>
+   <td>The commands use and return the v1 API responses.</td>
  </tr>
 </tbody>
 </table>
@@ -1170,7 +1172,7 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--remote-server <em>SERVER_URL</em></code></dt>
-<dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, prepend `http://` to the IP. This value is optional.</dd>
+<dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, add the `http://` prefix to the IP. This value is optional.</dd>
 
 <dt><code>--ca-cert <em>CA_CERT_PATH</em></code></dt>
 <dd>The file path for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
@@ -3467,7 +3469,7 @@ Enable a [key management service (KMS) provider](/docs/containers?topic=containe
 ### `ibmcloud ks kms crk ls`
 {: #ks_kms_crk_ls}
 
-List available customer root keys (CRKs) in a key management service instance. Root keys wrap and unwrap the local data enryption keys (DEKs) that the cluster uses to encrypt its secrets. For more information, see [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms).
+List available customer root keys (CRKs) in a key management service instance. Root keys wrap and unwrap the local data encryption keys (DEKs) that the cluster uses to encrypt its secrets. For more information, see [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms).
 {: shortdesc}
 
 Do not delete root keys in your KMS instance, even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.

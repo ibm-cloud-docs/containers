@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -389,7 +389,7 @@ To add a zone with worker nodes to your worker pool:
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
 
-By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for their respective compute or gateway functionality. Add compute or gateway worker nodes depending on your use case.
+By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes depending on your use case.
 {: shortdesc}
 
 * Compute: If you need more compute resources to run your app workloads, [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `compute` worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.

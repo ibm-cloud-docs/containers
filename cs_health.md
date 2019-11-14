@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-13"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -198,7 +198,7 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   ```
   {: screen}
 
-7. Create the audit webhook to collect Kubernetes API server event logs. Prepend `http://` to the **CLUSTER_IP**.
+7. Create the audit webhook to collect Kubernetes API server event logs. Add the `http://` prefix to the **CLUSTER_IP**.
   ```
   ibmcloud ks cluster master audit-webhook set --cluster <cluster_name_or_ID> --remote-server http://172.21.xxx.xxx
   ```
@@ -890,7 +890,7 @@ The **Master Status** provides details of what operation from the master state i
     </tr>
     <tr>
        <td>`update_cancelled`</td>
-       <td>The master update is cancelled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).<p class="note">If you do not want to update the master to the default `major.minor` version during the update, include the `--kube-version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.14.8`. To list available versions, run `ibmcloud ks versions`.</p></td>
+       <td>The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).<p class="note">If you do not want to update the master to the default `major.minor` version during the update, include the `--kube-version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.14.8`. To list available versions, run `ibmcloud ks versions`.</p></td>
     </tr>
     <tr>
        <td>`update_failed`</td>

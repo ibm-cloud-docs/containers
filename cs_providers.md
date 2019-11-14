@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-29"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -62,7 +62,8 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  <tr>
    <td>High availability</td>
-   <td colspan="2">For both classic and VPC clusters, the master includes three replicas for high availability. Further, if you create your cluster in a multizone metro, the master replicas are spread across zones and you can also spread your worker pools across zones. For more information, see [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha).</td>
+   <td>For both classic and VPC clusters, the master includes three replicas for high availability. Further, if you create your cluster in a multizone metro, the master replicas are spread across zones and you can also spread your worker pools across zones. For more information, see [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha).</td>
+   <td>Same as Classic; see [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha).</td>
  </tr>
  <tr>
    <td>Cluster administration</td>
@@ -112,7 +113,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  <tr>
    <td>Service limitations</td>
-   <td>See [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). Feature-specific limitations are documented in their respective sections.</td>
+   <td>See [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). Feature-specific limitations are documented by section.</td>
    <td>See [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). For VPC cluster limitations, see [VPC cluster limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vpc_ks_limits). For VPC-specific limitations, see [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations).</td>
  </tr>
  <tr>

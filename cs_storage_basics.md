@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks
 
@@ -154,7 +154,7 @@ If you cannot use one of the provided storage classes, you can create your own c
      - [Classic File Storage](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
      - [Classic Block Storage](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
      - [VPC Block Storage with an `xfs` file system](/docs/containers?topic=containers-vpc-block#vpc-block-xfs)
-     - [VPC Block Storage with encyrption](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
+     - [VPC Block Storage with encryption](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
 2. Create the customized storage class.
    ```

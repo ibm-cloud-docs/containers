@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, help, debug
 
@@ -1258,7 +1258,7 @@ The IAM API key or the IBM Cloud infrastructure API key that is stored in the `s
    3. Select **Users** and find the user whose API key you want to use.
    4. From the actions menu, select **Manage user details**.
    5. Go to the **Classic infrastructure** tab.
-   6. Expand the **Account** category and verify that the **Add/ Upgrade Storage (StorageLayer)** permission is assigned.
+   6. Expand the **Account** category and verify that the **Add/ Upgrade Storage (Storage Layer)** permission is assigned.
    7. Expand the **Services** category and verify that the **Storage Manage** permission is assigned.
 4. Remove the PVC that failed.
    ```

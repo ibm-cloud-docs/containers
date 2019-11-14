@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-13"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -531,7 +531,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was cancelled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -1078,7 +1078,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was cancelled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>

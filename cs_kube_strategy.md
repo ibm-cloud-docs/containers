@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-24"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, containers
 
@@ -149,8 +149,8 @@ As a developer, you design, create, secure, deploy, test, run, and monitor cloud
 
 Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported Ubuntu 16.64, 18.64 operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 
-**Do cluster admins and developers interact with each other?** </br>
-Yes. Cluster admins and developers must interact frequently so that cluster admins understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
+**Do cluster administrators and developers interact with each other?** </br>
+Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
 
 ## Sizing your Kubernetes cluster to support your workload
 {: #sizing}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -199,7 +199,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1.  Install the etcd CLI (`etcdctl`) version 3 or higher.
     1.  Download the release package for your operating system from the [etcd project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/etcd-io/etcd/releases).
-    2.  Unzip and move the `etcdctl` binary file to the location of your binary files, such as the following example.
+    2.  Extract and move the `etcdctl` binary file to the location of your binary files, such as the following example.
         ```
         mv Downloads/etcd-v3.3.13-darwin-amd64/etcdctl /usr/local/bin/etcdctl
         ```

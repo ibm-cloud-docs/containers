@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, containers
 
@@ -152,7 +152,7 @@ Looking to have more control over what and how you deploy resources to the clust
 6. Click **Deploy**. During the deployment, the cluster downloads the `nginx` container image from Docker Hub and deploys the app in your cluster. Your app is not exposed by a Kubernetes service and as such cannot be accessed by other workloads internally or externally. If you plan to make this app available to other workloads or to users on the internet, review ways to expose your app in [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning). 
 7. From the **Workloads** > **Deployments** menu, select your `nginx` deployment and review the details for your deployment.
 
-Congratulations! You just deployed your first app in your Kubernetes classic cluster.
+Great job! You just deployed your first app in your Kubernetes classic cluster.
 
 ### What's next
 {: #classic-whats-next}
@@ -219,7 +219,7 @@ With your VPC cluster all set up, deploy your first `nginx` app by using the Kub
 6. Click **Deploy**. During the deployment, the cluster downloads the `nginx` container image from Docker Hub and deploys the app in your cluster. Your app is not exposed by a Kubernetes service and as such cannot be accessed by other workloads internally or externally. If you plan to make this app available to other workloads or to users on the internet, review ways to expose your app in [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning). 
 7. From the **Workloads** > **Deployments** menu, select your `nginx` deployment and review the details for your deployment.
 
-Congratulations! You just deployed your first app in your Kubernetes VPC cluster.
+Great job! You just deployed your first app in your Kubernetes VPC cluster.
 
 ### What's next
 {: #vpc-classic-whats-next}

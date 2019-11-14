@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, containers
 
@@ -356,7 +356,7 @@ The key to detect malicious attacks in your cluster is the proper monitoring and
 Every cluster master is continuously monitored by IBM to control and remediate process level Denial-Of-Service (DOS) attacks. {{site.data.keyword.containerlong_notm}} automatically scans every node where the master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection.  
 
 **What information is logged?**</br>
-By default, {{site.data.keyword.containerlong_notm}} automatically colllects logs for the following cluster components:
+By default, {{site.data.keyword.containerlong_notm}} automatically collects logs for the following cluster components:
 
 - **Containers**: Logs that are written to `STDOUT` or `STDERR`.
 - **Apps**: Logs that are written to a specific path inside your app.
