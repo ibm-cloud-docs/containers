@@ -248,7 +248,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>0.2.80</td>
 <td>19 Mar 2019</td>
 <td><ul>
-<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master) in standard clusters in [VRF-enabled accounts](/docs/resources?topic=resources-private-network-endpoints#getting-started).<ul>
+<li>Adds support for enabling [master-to-worker communication with service endpoints](/docs/containers?topic=containers-plan_clusters#workeruser-master) in standard clusters in [VRF-enabled accounts](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).<ul>
 <li>Adds the `--private-service-endpoint` and `--public-service-endpoint` flags to the [<code>ibmcloud ks cluster-create</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) command.</li>
 <li>Adds the **Public Service Endpoint URL** and **Private Service Endpoint URL** fields to the output of <code>ibmcloud ks cluster get</code>.</li>
 <li>Adds the [<code>ibmcloud ks cluster feature enable private-service-endpoint</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable_private_service_endpoint) command.</li>
