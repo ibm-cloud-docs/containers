@@ -820,14 +820,14 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, `192.18.0.0/15`, is permitted.</li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt id="service-subnet"><code><strong>--service-subnet <em>SUBNET</em></strong></code></br>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, `192.18.0.0/15`, is permitted.</li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
@@ -925,14 +925,14 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, `192.18.0.0/15`, is permitted.</li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code>--service-subnet <em>SUBNET</em></code></dt>
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, `192.18.0.0/15`, is permitted.</li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
