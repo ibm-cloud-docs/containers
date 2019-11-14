@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-12"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,6 +39,10 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>14 November 2019</td>
+<td><strong>New! Diagnostics and Debug Tool add-on</strong>: The [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) is now available as a cluster add-on.</td>
+</tr>
 <tr>
 <td>11 November 2019</td>
 <td><ul>
@@ -171,7 +175,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
     <li>[Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)</li>
     <li>[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)</li>
     <li>[Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)</li></ul></li>
-  <li><strong>Customizing PVC settings for VPC Block Storage</strong>: You can create a customized storage class or use a Kubernetes secret to create VPC Block Storage with your desired configuration. For more information, see [Customizing the default settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default).</li>
+  <li><strong>Customizing PVC settings for VPC Block Storage</strong>: You can create a customized storage class or use a Kubernetes secret to create VPC Block Storage with the configuration that you want. For more information, see [Customizing the default settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default).</li>
   </ul></td>
 </tr>
 <tr>

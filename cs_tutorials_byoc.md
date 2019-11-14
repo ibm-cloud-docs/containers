@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-17"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Set up a DevOps delivery pipeline for your app
 {: #tutorial-byoc-kube}
 
-Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerized app that is stored in GitHub. Learn how you create a DevOps toolchain in {{site.data.keyword.cloud_notm}}, integrate it with your GitHub repository and configure delivery pipline stages that automatically build a container image from your Dockerfile, push it to {{site.data.keyword.registrylong_notm}}, and deploy your app to a cluster in {{site.data.keyword.containerlong_notm}}. 
+Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerized app that is stored in GitHub. Learn how you create a DevOps toolchain in {{site.data.keyword.cloud_notm}}, integrate it with your GitHub repository and configure delivery pipeline stages that automatically build a container image from your Dockerfile, push it to {{site.data.keyword.registrylong_notm}}, and deploy your app to a cluster in {{site.data.keyword.containerlong_notm}}. 
 {: shortdesc}
 
 ## Objectives
@@ -161,7 +161,7 @@ To set up your delivery pipeline:
    ```
    {: codeblock}
    
-Congratulations! You successfully automated the deployment of an app from your source code in GitHub to a Kubernetes cluster by using a {{site.data.keyword.contdelivery_short}} pipeline in {{site.data.keyword.cloud_notm}}. 
+Great job! You successfully automated the deployment of an app from your source code in GitHub to a Kubernetes cluster by using a {{site.data.keyword.contdelivery_short}} pipeline in {{site.data.keyword.cloud_notm}}. 
 
 ## Lesson 4: Verify the deployment and health of your app in the cluster
 {: #verify-byoc-kube}

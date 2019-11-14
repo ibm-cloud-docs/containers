@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, vpc
 
@@ -61,7 +61,7 @@ Verify that the VPC load balancer for the Kubernetes `LoadBalancer` service exis
   ```
   {: pre}
 
-* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To recreate the VPC load balancer for your Kubernetes `LoadBalancer` service, restart the Kubernetes master by running `ibmcloud ks cluster master refresh --cluster <cluster_name_or_id>`. <p class="tip">If you want to remove the load-balancing setup for an app in your VPC cluster, delete the Kubernetes `LoadBalancer` service by running `kubectl delete svc <kubernetes_lb_service_name>`. The VPC load balancer that is associated with the Kubernetes `LoadBalancer` service is automatically deleted from your VPC.</p>
+* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To re-create the VPC load balancer for your Kubernetes `LoadBalancer` service, restart the Kubernetes master by running `ibmcloud ks cluster master refresh --cluster <cluster_name_or_id>`. <p class="tip">If you want to remove the load-balancing setup for an app in your VPC cluster, delete the Kubernetes `LoadBalancer` service by running `kubectl delete svc <kubernetes_lb_service_name>`. The VPC load balancer that is associated with the Kubernetes `LoadBalancer` service is automatically deleted from your VPC.</p>
 * If the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using. You can either wait for the hostname to be registered in your DNS, or access the VPC load balancer directly by using one of its IP addresses. To find the VPC load balancer IP addresses, look for the **Public IP** column in the output of `ibmcloud is load-balancers`. If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.
 
 <br />
@@ -127,7 +127,7 @@ Verify that the VPC load balancer for your ALBs exists. In the output, look for 
   ```
   {: pre}
 
-* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To recreate the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's hostname by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
+* If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To re-create the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's hostname by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
 * If the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using. You can either wait for the hostname to be registered in your DNS, or access the VPC load balancer directly by using one of its IP addresses. To find the VPC load balancer IP addresses, look for the **Public IP** column in the output of `ibmcloud is load-balancers`. If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.
 
 

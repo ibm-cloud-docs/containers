@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -58,7 +58,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  </tr>
  <tr>
    <td>API reference docs</td>
-   <td colspan="2">[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)</td>
+   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)</td>
+   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)</td>
  </tr>
  <tr>
    <td>API architectural style</td>
@@ -72,7 +73,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  </tr>
  <tr>
   <td>Kubernetes API</td>
-  <td colspan="2">To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see [Working with your cluster by using the Kubernetes API](#kube_api).</td>
+  <td>To use the Kubernetes API to manage Kubernetes resources within the cluster, such as pods or namespaces, see [Working with your cluster by using the Kubernetes API](#kube_api).</td>
+  <td>Same as `v1`; see [Working with your cluster by using the Kubernetes API](#kube_api).</td>
  </tr>
  <tr>
    <td>Supported infrastructure providers</td>

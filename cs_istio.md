@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -1053,7 +1053,7 @@ Destination rules are also used for non-authentication reasons, such as routing 
 ## Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}
 {: #app-id}
 
-By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including frontend and backend applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/services/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
+By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including front-end and back-end applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/services/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
 
 <br />
 
@@ -1066,7 +1066,7 @@ Update your Istio add-ons to the latest versions, which are tested by {{site.dat
 
 During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterrupted.
 
-1. Check whether your add-ons are at the latest version. Any addons that are denoted with `* (<version> latest)` can be updated.
+1. Check whether your add-ons are at the latest version. Any add-ons that are denoted with `* (<version> latest)` can be updated.
    ```
    ibmcloud ks cluster addon ls --cluster <mycluster>
    ```
@@ -1154,7 +1154,7 @@ During the update, any traffic that is sent to Istio-managed services is interru
        ```
        {: pre}
 
-13. Optional: If you use TLS sections in your gateway configuration files, you must delete and recreate the gateways so that Envoy can access the secrets.
+13. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
   ```
   kubectl delete gateway mygateway
   kubectl apply -f mygateway.yaml

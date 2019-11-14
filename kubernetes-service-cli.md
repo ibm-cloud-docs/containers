@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -202,7 +202,9 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`zone ls`](#cs_datacenters)</li></ul></td>
  </tr>
  <tr>
-   <td colspan="3">**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** The commands use and return the v1 API responses.</td>
+   <td>**Agnostic**: **You do not need to specify an infrastructure provider for the remaining commands.** </td>
+   <td>The commands use and return the v1 API responses.</td>
+   <td>The commands use and return the v1 API responses.</td>
  </tr>
 </tbody>
 </table>
@@ -231,7 +233,31 @@ Create, view, and modify clusters and cluster settings, such as add-on, subnet, 
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
+#### `ibmcloud ks cluster addon disable debug-tool`
+{: #cs_cluster_addon_disable_debug}
 
+Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>-f</code>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
 
 #### `ibmcloud ks cluster addon disable istio`
 {: #cs_cluster_addon_disable_istio}
@@ -396,7 +422,37 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
 
+#### `ibmcloud ks cluster addon enable debug-tool`
+{: #cs_cluster_addon_enable_debug}
 
+Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+**Example**:
+  ```
+  ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
+  ```
+  {: pre}
 
 #### `ibmcloud ks cluster addon enable istio`
 {: #cs_cluster_addon_enable_istio}
@@ -745,10 +801,10 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `compute` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `compute` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command. For more information about gateway-enabled clusters, see [Using a gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).</dd>
 
 <dt><code>--private-service-endpoint</code></dt>
-<dd>**Standard clusters in [VRF-enabled accounts](/docs/resources?topic=resources-private-network-endpoints#getting-started)**: Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</dd>
+<dd>**Standard clusters in [accounts that are enabled with VRF and service endpoints](/docs/resources?topic=resources-private-network-endpoints)**: Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master and the worker nodes communicate over the private VLAN. In addition, you can choose to enable the public service endpoint by using the `--public-service-endpoint` flag to access your cluster over the internet. If you enable the private service endpoint only, you must be connected to the private VLAN to communicate with your Kubernetes master. After you enable a private service endpoint, you cannot later disable it.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>--public-service-endpoint</code></dt>
-<dd>Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal. If you have a [VRF-enabled account](/docs/resources?topic=resources-private-network-endpoints#getting-started) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</dd>
+<dd>Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal. If you have an [account that is enabled with VRF and service endpoints](/docs/resources?topic=resources-private-network-endpoints) and also include the `--private-service-endpoint` flag, master-worker node communication goes over the private and the public network. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>--workers WORKER</code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with one worker node is created. This value is optional for standard clusters and is not available for free clusters.
@@ -764,14 +820,14 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt id="service-subnet"><code><strong>--service-subnet <em>SUBNET</em></strong></code></br>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
@@ -780,10 +836,6 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 
 </dl>
-
-
-<code><strong>-s</strong></code></br>
-Do not show the message of the day or update reminders. This value is optional.
 
 **Examples**:
 
@@ -873,14 +925,14 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code>--service-subnet <em>SUBNET</em></code></dt>
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code></li></ul></p></dd>
+<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
@@ -956,8 +1008,8 @@ Enable the [private service endpoint](/docs/containers?topic=containers-plan_clu
 {: shortdesc}
 
 To run this command:
-1. Enable [VRF](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
-2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/resources?topic=resources-private-network-endpoints#getting-started).
+1. Enable [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Run `ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name>`.
 4. Follow the prompt in the CLI to refresh the Kubernetes master API server.
 5. [Reload all the worker nodes](#cs_worker_reload) in your cluster to pick up the private endpoint configuration.
@@ -1174,7 +1226,7 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--remote-server <em>SERVER_URL</em></code></dt>
-<dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, prepend `http://` to the IP. This value is optional.</dd>
+<dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, add the `http://` prefix to the IP. This value is optional.</dd>
 
 <dt><code>--ca-cert <em>CA_CERT_PATH</em></code></dt>
 <dd>The file path for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
@@ -1562,7 +1614,7 @@ Create a portable classic subnet in an IBM Cloud infrastructure account on your 
 
 <p class="important">Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.</br>
 </br>When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
-</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
+</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
 
 ```
 ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-s]
@@ -1643,7 +1695,7 @@ Bring your own private subnet to your {{site.data.keyword.containerlong_notm}} c
 This private subnet is not one provided by IBM Cloud infrastructure. As such, you must configure any inbound and outbound network traffic routing for the subnet. To add an IBM Cloud infrastructure subnet, use the `ibmcloud ks cluster subnet add` [command](#cs_cluster_subnet_add).
 
 <p class="important">When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
-</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
+</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
 
 ```
 ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
@@ -2640,12 +2692,12 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 <dd><p>The ID of the private VLAN. This value is conditional.</p>
     <p>If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code>. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.</p>
     <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.</p>
-    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
+    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd><p>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code>. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.</p>
     <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.</p>
-    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
+    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
 
 <dt><code>--private-only</code></dt>
 <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway appliance.For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
@@ -3471,10 +3523,10 @@ Enable a [key management service (KMS) provider](/docs/containers?topic=containe
 ### `ibmcloud ks kms crk ls`
 {: #ks_kms_crk_ls}
 
-List available customer root keys (CRKs) in a key management service instance. Root keys wrap and unwrap the local data enryption keys (DEKs) that the cluster uses to encrypt its secrets. For more information, see [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms).
+List available customer root keys (CRKs) in a key management service instance. Root keys wrap and unwrap the local data encryption keys (DEKs) that the cluster uses to encrypt its secrets. For more information, see [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms).
 {: shortdesc}
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered.
 {: important}
 
 ```
@@ -3512,7 +3564,7 @@ ibmcloud ks kms crk ls --instance-id 1aa1a111-1111-1111-a111-a1aaaa1a1a1a
 Encrypt your Kubernetes secrets by [enabling a key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster. To rotate a key in a cluster with existing key encryption, rerun this command with a new root key ID.
 {: shortdesc}
 
-Do not delete root keys in your KMS instance, even if you rotate to use a new key. You cannot access or remove the data in etcd or the data from the secrets in your cluster if you delete a root key.
+Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered.
 {: important}
 
 ```

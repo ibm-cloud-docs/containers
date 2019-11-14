@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-13"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -23,9 +23,10 @@ subcollection: containers
 {:note: .note}
 {:external: target="_blank" .external}
 
-
 # Version information and update actions   
 {: #cs_versions}
+
+
 
 ## Kubernetes version types
 {: #version_types}
@@ -206,6 +207,8 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </table>
 
 <br />
+
+
 
 
 ## Version 1.16

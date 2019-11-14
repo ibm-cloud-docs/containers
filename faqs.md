@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-06"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -65,7 +65,7 @@ To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.d
 {: #container_platforms}
 {: faq}
 
-With {{site.data.keyword.cloud_notm}}, you can create clusters for your containzered workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
+With {{site.data.keyword.cloud_notm}}, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
 
 For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
 

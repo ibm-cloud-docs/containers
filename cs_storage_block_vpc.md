@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, vpc
 
@@ -869,7 +869,7 @@ Specify your PVC settings in a Kubernetes secret and reference this secret in a 
 **What options do I have to use the Kubernetes secret?** </br>
 As a cluster admin, you can choose if you want to allow each cluster user to override the default settings of a storage class, or if you want to create one secret that everyone in your cluster must use and that enforces base64 encoding for your {{site.data.keyword.keymanagementserviceshort}} root key CRN.
 
-- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a generic Kubernetes secret. Cluster users can override the default settings of the storage class by creating a Kubernetes secret with the desired PVC settings. In order for the customized settings in the secret to get applied to your block storage instance, you must create a PVC with the same name as your Kubernetes secret.
+- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a generic Kubernetes secret. Cluster users can override the default settings of the storage class by creating a Kubernetes secret with the PVC settings that they want. In order for the customized settings in the secret to get applied to your block storage instance, you must create a PVC with the same name as your Kubernetes secret.
 
 - **[Enforce base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides or enhances the default settings of the customized storage class. Your cluster users cannot override the default settings by creating their own Kubernetes secret. Instead, cluster users must provision {{site.data.keyword.block_storage_is_short}} with the configuration that you chose in your customized storage class and secret. The benefit of using this method over creating a [customized storage class](#vpc-customize-storage-class) only is that you can enforce base64 encoding for the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance when you want to encrypt the data in your block storage instance.  
 
@@ -1114,12 +1114,12 @@ Removing persistent storage from your {{site.data.keyword.cloud_notm}} account v
 **Is my persistent storage deleted when I delete my cluster?**</br>
 During cluster deletion, you have the option to remove your persistent storage. However, depending on how your storage was provisioned, the removal of your storage might not include all storage components.
 
-If you [dynamically provisioned](/docs/openshift?topic=containers-kube_concepts#dynamic_provisioning) storage with a storage class that sets `reclaimPolicy: Delete`, your PVC, PV, and the storage instance are automatically deleted when you delete the cluster. For storage that was [statically provisioned](/docs/openshift?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, the PVC and the PV are removed when you delete the cluster, but your storage instance and your data remain. You are still charged for your storage instance. Also, if you deleted your cluster in an unhealthy state, the storage might still exist even if you chose to remove it.
+If you [dynamically provisioned](/docs/containers?topic=containers-kube_concepts#dynamic_provisioning) storage with a storage class that sets `reclaimPolicy: Delete`, your PVC, PV, and the storage instance are automatically deleted when you delete the cluster. For storage that was [statically provisioned](/docs/containers?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, the PVC and the PV are removed when you delete the cluster, but your storage instance and your data remain. You are still charged for your storage instance. Also, if you deleted your cluster in an unhealthy state, the storage might still exist even if you chose to remove it.
 
 **How do I delete the storage when I want to keep my cluster?** </br>
 When you dynamically provisioned the storage with a storage class that sets `reclaimPolicy: Delete`, you can remove the PVC to start the deletion process of your persistent storage. Your PVC, PV, and storage instance are automatically removed.
 
-For storage that was [statically provisioned](/docs/openshift?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, you must manually remove the PVC, PV, and the storage instance to avoid further charges.
+For storage that was [statically provisioned](/docs/containers?topic=containers-kube_concepts#static_provisioning), VPC Block Storage, or storage that you provisioned with a storage class that sets `reclaimPolicy: Retain`, you must manually remove the PVC, PV, and the storage instance to avoid further charges.
 
 **How does the billing stop after I delete my storage?**</br>
 Depending on what storage components you delete and when, the billing cycle might not stop immediately. If you delete the PVC and PV, but not the storage instance in your {{site.data.keyword.cloud_notm}} account, that instance still exists and you are charged for it.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -123,7 +123,7 @@ Before you get started with Ingress, review the following prerequisites.
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 - If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
-* Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the NLB 2.0 can route packets to various subnets in the account.
+* Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the NLB 2.0 can route packets to various subnets in the account.
 
 <br />
 
@@ -1125,7 +1125,7 @@ When you enable the private ALBs, one private VPC load balancer is automatically
 Ingress resources define the routing rules that the ALB uses to route traffic to your app service.
 {: shortdesc}
 
-If your cluster has multiple namespaces where apps are exposed, one Ingress resource is required for each namespace. The Ingress resource determines the host that is appended to your app and that builds the URL to access your app. The Ingress host must be unique in each Ingress resource that you create. The DNS subdomain that you created in the previous step is registered as a wildcard domain. You can use this domain to build multiple Ingress hosts for your Ingress resource. For example, if your subdomain is `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`, you can build multiple Ingress hosts by prepending a custom value to the subdomain, such as `example1.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`.
+If your cluster has multiple namespaces where apps are exposed, one Ingress resource is required for each namespace. The Ingress resource determines the host that is appended to your app and that builds the URL to access your app. The Ingress host must be unique in each Ingress resource that you create. The DNS subdomain that you created in the previous step is registered as a wildcard domain. You can use this domain to build multiple Ingress hosts for your Ingress resource. For example, if your subdomain is `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`, you can build multiple Ingress hosts by adding a custom value as a prefix to the subdomain, such as `example1.mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud`.
 {: note}
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
