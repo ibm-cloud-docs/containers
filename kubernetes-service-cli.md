@@ -233,7 +233,31 @@ Create, view, and modify clusters and cluster settings, such as add-on, subnet, 
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
+#### `ibmcloud ks cluster addon disable debug-tool`
+{: #cs_cluster_addon_disable_debug}
 
+Disable the add-on for the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>-f</code>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
 
 #### `ibmcloud ks cluster addon disable istio`
 {: #cs_cluster_addon_disable_istio}
@@ -398,7 +422,37 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
 
+#### `ibmcloud ks cluster addon enable debug-tool`
+{: #cs_cluster_addon_enable_debug}
 
+Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+**Example**:
+  ```
+  ibmcloud ks cluster addon enable debug-tool --cluster my_cluster
+  ```
+  {: pre}
 
 #### `ibmcloud ks cluster addon enable istio`
 {: #cs_cluster_addon_enable_istio}

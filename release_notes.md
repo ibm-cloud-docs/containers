@@ -40,6 +40,10 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 </thead>
 <tbody>
 <tr>
+<td>14 November 2019</td>
+<td><strong>New! Diagnostics and Debug Tool add-on</strong>: The [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) is now available as a cluster add-on.</td>
+</tr>
+<tr>
 <td>11 November 2019</td>
 <td><ul>
 <li><strong>Accessing your cluster</strong>: Added an [Accessing Kubernetes clusters page](/docs/containers?topic=containers-access_cluster).</li>
