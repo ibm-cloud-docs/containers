@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-07-31"
+lastupdated: "2019-11-15"
 
 keywords: kubernetes, iks
 
@@ -160,7 +160,7 @@ Also, logging and monitoring for the tools, especially where they used {{site.da
 Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, the sensitive payment tools now have familiar isolation but within the flexibility of public cloud. Scans for vulnerabilities and malware are run continuously.
 
 **Step 1: Lift and shift to secure compute**
-* Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.Bluemix_notm}}. 
+* Migrate virtual machine images to container images that run in {{site.data.keyword.containerlong_notm}} in the public {{site.data.keyword.cloud_notm}}. 
 * From that core, Vulnerability Advisor provides image, policy, container, and packaging vulnerability scanning, for known malware.
 * Private data center / on-premises capital costs are greatly reduced and replaced with a utility computing model that scales based on workload demand.
 * Consistently enforce policy-driven authentication to your services and APIs with a simple Ingress annotation. With declarative security you can ensure user authentication and token validation by using {{site.data.keyword.appid_short_notm}}.
