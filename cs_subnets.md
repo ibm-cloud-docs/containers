@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-15"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -397,7 +397,7 @@ You can get more portable IPs for NLB services by making an existing subnet in a
 {:shortdesc}
 
 Before you begin:
--  Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.Bluemix_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+-  Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To make a subnet available to your cluster:
