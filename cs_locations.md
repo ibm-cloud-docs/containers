@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-30"
+lastupdated: "2019-11-15"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -23,11 +23,10 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Locations
 {: #regions-and-zones}
 
-You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you create a cluster, its resources remain in the location that you deploy the cluster to. To work with your cluster, you can access the Kubernetes Service via a global API endpoint.
+You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you create a cluster, its resources remain in the location that you deploy the cluster to. To work with your cluster, you can access the service via a global API endpoint.
 {:shortdesc}
 
 ![{{site.data.keyword.containerlong_notm}} locations](images/locations.png)
@@ -40,7 +39,7 @@ _{{site.data.keyword.containerlong_notm}} locations_
 ## {{site.data.keyword.containerlong_notm}} locations
 {: #locations}
 
-{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions. Free clusters are available in only select locations. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location. To list available {{site.data.keyword.containerlong_notm}} locations, use the following command.
+{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions and select single zone regions. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
 {: shortdesc}
 
 ```
@@ -48,7 +47,7 @@ ibmcloud ks supported-locations
 ```
 {: pre}
 
-### How locations are organized
+## How locations are organized
 {: #example_locations_org}
 
 The following image is used as an example to explain how {{site.data.keyword.containerlong_notm}} locations are organized.
@@ -87,7 +86,7 @@ The following image is used as an example to explain how {{site.data.keyword.con
   </tbody>
   </table>
 
-### Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}
+### Single and multizone locations in {{site.data.keyword.containerlong_notm}}
 {: #zones}
 
 The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node. Classic clusters are available in both multizone metros and single zones, but VPC clusters are available only in select multizone metros.
@@ -158,8 +157,6 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 {: tab-title="Multizone metros for VPC clusters"}
 {: tab-group="location-multi-single"}
 
-
-
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
@@ -195,6 +192,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
 
+
 ### Free clusters
 {: #regions_free}
 
@@ -212,13 +210,14 @@ Free clusters are limited to specific locations and are available for only class
 * Frankfurt or London metros in Europe
 * Sydney metro in Asia Pacific
 
+
 <br />
 
 
 ## Accessing the global endpoint
 {: #endpoint}
 
-You can organize your resources across {{site.data.keyword.cloud_notm}} services by using {{site.data.keyword.cloud_notm}} locations (formerly called regions). For example, you can create a Kubernetes cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location. To access these resources, you can use the global endpoints and filter by location.
+You can organize your resources across {{site.data.keyword.cloud_notm}} services by using {{site.data.keyword.cloud_notm}} locations (formerly called regions). For example, you can deploy an app to a cluster by using a private Docker image that is stored in your {{site.data.keyword.registryshort_notm}} of the same location. To access these resources, you can use the global endpoints and filter by location.
 {:shortdesc}
 
 ### Logging in to {{site.data.keyword.cloud_notm}}
@@ -239,19 +238,19 @@ ibmcloud login -a https://cloud.ibm.com -g <nondefault_resource_group_name>
 When you log in to {{site.data.keyword.cloud_notm}}, you can access the {{site.data.keyword.containershort_notm}}. To help you get started, check out the following resources for using the {{site.data.keyword.containerlong_notm}} CLI and API.
 {: shortdesc}
 
+
 **{{site.data.keyword.containerlong_notm}} CLI**:
 * [Set up your CLI to use the `ibmcloud ks` plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 * [Configure your CLI to connect to a particular cluster and run `kubectl` commands](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-
 By default, you are logged in to the global {{site.data.keyword.containerlong_notm}} endpoint, `https://containers.cloud.ibm.com`.
 
 When you use the new global functionality in the {{site.data.keyword.containerlong_notm}} CLI, consider the following changes from the legacy region-based functionality.
 
 * Listing resources:
-  * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` (or `-l`) flag. For example, if you filter clusters for the `dal` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `dal10` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned.
+  * When you list resources, such as with the `ibmcloud ks cluster ls`, `ibmcloud ks subnets`, or `ibmcloud ks zone ls` commands, resources in all locations are returned. To filter resources by a specific location, certain commands include a `--location` flag. For example, if you filter clusters for the `wdc` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `wdc06` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned.
     Example to filter by location:
     ```
-    ibmcloud ks cluster ls -l dal -l seo
+    ibmcloud ks cluster ls --location dal --location seo
     ```
     {: pre}
   * Other commands do not return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
@@ -261,7 +260,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
   * If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region set` command and use the cluster name when you run commands.
 
 * Legacy functionality:
-  * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
+  * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
     Example to target the US South regional endpoint:
     ```
     ibmcloud ks init --host https://us-south.containers.cloud.ibm.com
@@ -298,7 +297,7 @@ If you need to specify a region in an API call, remove the `/global` parameter f
 ## Deprecated: Previous {{site.data.keyword.cloud_notm}} region and zone structure
 {: #bluemix_regions}
 
-Previously, your {{site.data.keyword.cloud_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.cloud_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zone ls. Multizone-capable zones are in bold.
+Previously, your {{site.data.keyword.cloud_notm}} resources were organized into regions. Regions are a conceptual tool to organize zones, and can include zones (data centers) in different countries and geographies. The following table maps the previous {{site.data.keyword.cloud_notm}} regions, {{site.data.keyword.containerlong_notm}} regions, and {{site.data.keyword.containerlong_notm}} zones. Multizone-capable zones are in bold.
 {: shortdesc}
 
 Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) instead. If you must use regional endpoints, [set the `IKS_BETA_VERSION` environment variable in the {{site.data.keyword.containerlong_notm}} plug-in to `0.2`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).
@@ -312,7 +311,7 @@ Region-specific endpoints are deprecated. Use the [global endpoint](#endpoint) i
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
-{: caption="Corresponding {{site.data.keyword.containershort_notm}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
+{: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
 
 By using {{site.data.keyword.containerlong_notm}} regions, you can create or access Kubernetes clusters in a region other than the {{site.data.keyword.cloud_notm}} region that you are logged in to. {{site.data.keyword.containerlong_notm}} region endpoints refer specifically to the {{site.data.keyword.containerlong_notm}}, not {{site.data.keyword.cloud_notm}} as a whole.
 
@@ -321,3 +320,6 @@ You might want to log in to another {{site.data.keyword.containerlong_notm}} reg
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.cloud_notm}} region that you are logged in to.
 
 To quickly switch regions, use the `ibmcloud ks region set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set).
+
+
+
