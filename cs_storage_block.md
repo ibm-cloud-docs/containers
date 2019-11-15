@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-13"
+lastupdated: "2019-11-15"
 
 keywords: kubernetes, iks
 
@@ -31,6 +31,7 @@ subcollection: containers
 
 {{site.data.keyword.cloud_notm}} Block Storage is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
+
 
 ## Installing the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster
 {: #install_block}
@@ -255,10 +256,12 @@ To remove the plug-in:
 
 
 
+
+
 ## Deciding on the block storage configuration
 {: #block_predefined_storageclass}
 
-{{site.data.keyword.containerlong}} provides pre-defined storage classes for block storage that you can use to provision block storage with a specific configuration.
+{{site.data.keyword.containerlong_notm}} provides pre-defined storage classes for block storage that you can use to provision block storage with a specific configuration.
 {: shortdesc}
 
 Every storage class specifies the type of block storage that you provision, including available size, IOPS, file system, and the retention policy.  
