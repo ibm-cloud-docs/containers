@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-18"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -50,6 +50,24 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.16.3_1516, released 18 November 2019
+{: #1163_1516}
+
+The following table shows the changes that are included in the master fix pack 1.16.3_1516.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico | v3.9.2 | v3.9.3 | See the [Calico release notes](https://docs.projectcalico.org/v3.9/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| GPU device plug-in and installer | 9cd3df7 |	f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 351 | 352 | Updated to use `Go` version 1.13.4. |
+| {{site.data.keyword.cloud_notm}} Provider	| v1.16.2-77 | v1.16.3-94 | Updated to support the Kubernetes 1.16.3 release. `calicoctl` version is updated to v3.9.3. |
+| Key Management Service provider | 237 | 251 | Updated to use `Go` version 1.12.11. |
+| Kubernetes | v1.16.2 | v1.16.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.3){: external}. |
+| Kubernetes Dashboard | v2.0.0-beta5 | v2.0.0-beta6 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-beta6){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.2_1515" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019
 {: #1162_1515_worker}
@@ -108,6 +126,23 @@ The following scrollable table shows the changes that are included in the patch 
 
 Review the version 1.15 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.15.6_1523, released 18 November 2019
+{: #1156_1523}
+
+The following table shows the changes that are included in the master fix pack 1.15.6_1523.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico | v3.8.2 | v3.8.4 | See the [Calico release notes](https://docs.projectcalico.org/v3.8/release-notes/){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}, and [DSA-4539-3](https://lists.debian.org/debian-security-announce/2019/msg00193.html){: external}. |
+| GPU device plug-in and installer | 9cd3df7 | f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 350 | 352 | Updated to use the `distroless/static` base image and to use `Go` version 1.13.4. |
+| {{site.data.keyword.cloud_notm}} Provider	| v1.15.5-159 | v1.15.6-180 | Updated to support the Kubernetes 1.15.6 release. |
+| Key Management Service provider | 237 | 251 | Updated to use `Go` version 1.12.11. |
+| Kubernetes | v1.15.5 | v1.15.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.6){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.5_1522" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.5_1522, released 11 November 2019
 {: #1155_1522_worker}
@@ -669,6 +704,22 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 Review the version 1.14 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.14.9_1539, released 18 November 2019
+{: #1149_1539}
+
+The following table shows the changes that are included in the master fix pack 1.14.9_1539.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| GPU device plug-in and installer | 9cd3df7 | f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 350 | 352 | Updated to use the `distroless/static` base image and to use `Go` version 1.13.4. |
+| {{site.data.keyword.cloud_notm}} Provider	| v1.14.8-219 | v1.14.9-239 | Updated to support the Kubernetes 1.14.9 release. |
+| Key Management Service provider | 237 | 251 | Updated to use `Go` version 1.12.11. |
+| Kubernetes | v1.14.8 | v1.14.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.9){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.14.8_1538" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.14.8_1538, released 11 November 2019
 {: #1148_1538_worker}
@@ -1627,6 +1678,20 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.13.12_1542, released 18 November 2019
+{: #11312_1542}
+
+The following table shows the changes that are included in the master fix pack 1.13.12_1542.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| GPU device plug-in and installer | 9cd3df7 | f2e7bd7 | Updated image for [CVE-2019-17596](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596){: external}. Updated the GPU drivers to version [440.31](https://www.nvidia.com/Download/driverResults.aspx/153226/){: external}. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 350 | 352 | Updated to use the `distroless/static` base image and to use `Go` version 1.13.4. |
+| Key Management Service provider | 237 | 251 | Updated to use `Go` version 1.12.11. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.13.12_1541" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.13.12_1541, released 11 November 2019
 {: #11312_1541_worker}

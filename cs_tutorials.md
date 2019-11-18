@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-15"
+lastupdated: "2019-11-18"
 
 keywords: kubernetes, iks
 
@@ -113,7 +113,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.14.8
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.14.9
     ```
     {: screen}
 8.  Set the context for your Kubernetes cluster in your CLI.
@@ -155,8 +155,8 @@ Because it can take a few minutes to provision, create your cluster before you s
         Example output:
 
         ```
-        Client Version: v1.14.8
-        Server Version: v1.14.8
+        Client Version: v1.14.9
+        Server Version: v1.14.9
         ```
         {: screen}
 
@@ -365,7 +365,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.14.8
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.14.9
         ```
         {: screen}
 7. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
