@@ -24,4 +24,4 @@ https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-a
 https://kustomize.io/,
 https://neuvector.com/,
 /docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#pod-subnet,
-/docs/openshift?topic=openshift-changelog#311129_1518_worker,
+/docs/openshift?topic=openshift-openshift_changelog#311129_1518_worker,
