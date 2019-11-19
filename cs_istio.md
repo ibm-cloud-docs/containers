@@ -618,22 +618,22 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Grafana !
     ```
     {: pre}
   3. Create a file to store the credentials in a Kubernetes secret. Name the file `kiali-secret.yaml`.
-    ```
-    cat <<EOF | kubectl apply -f -
-    apiVersion: v1
-    kind: Secret
-    metadata:
-      name: kiali
-      namespace: istio-system
-      labels:
-        app: kiali
-    type: Opaque
-    data:
-      username: $KIALI_USERNAME
-      passphrase: $KIALI_PASSPHRASE
-    EOF
-    ```
-    {: pre}
+      ```
+      cat <<EOF | kubectl apply -f -
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: kiali
+        namespace: istio-system
+        labels:
+          app: kiali
+      type: Opaque
+      data:
+        username: $KIALI_USERNAME
+        passphrase: $KIALI_PASSPHRASE
+      EOF
+      ```
+      {: pre}
 
 2. Access the Kiali dashboard.
   ```
