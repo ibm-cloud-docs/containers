@@ -292,7 +292,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 View build version changes for the Fluentd component for logging in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
+As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
 {: important}
 
 Refer to the following table for a summary of changes for each build of the Fluentd component.
@@ -315,7 +315,7 @@ Refer to the following table for a summary of changes for each build of the Flue
 <td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
 <td>14 Nov 2019</td>
 <td>-</td>
-<td>The Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).</td>
+<td>The Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).</td>
 </tr>
 <tr>
 <td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
