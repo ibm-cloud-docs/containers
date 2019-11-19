@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -246,7 +246,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
   ```
   {: screen}
 
-4. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain that you created. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access your subdomain.
+4. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain that you created. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access to your subdomain.
 
 If you later need to replace the load balancer hostname that is registered with a DNS subdomain, you can run the following command. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
 ```

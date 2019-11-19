@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-19"
 
 ---
 
@@ -471,11 +471,11 @@ lastupdated: "2019-11-11"
 * [Understanding Istio on {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-istio#istio_ov)
   * [What is Istio?](/docs/containers?topic=containers-istio#istio_ov_what_is)
   * [What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?](/docs/containers?topic=containers-istio#istio_ov_addon)
-* [What can I install?](/docs/containers?topic=containers-istio#istio_components)
 * [Installing the Istio add-ons](/docs/containers?topic=containers-istio#istio_install)
-  * [Installing managed Istio add-ons from the console](/docs/containers?topic=containers-istio#istio_install_ui)
-  * [Installing managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_install_cli)
+  * [Kubernetes version 1.16 and later clusters](/docs/containers?topic=containers-istio#install_116)
+  * [Kubernetes version 1.15 and earlier clusters](/docs/containers?topic=containers-istio#install_115)
 * [Trying out the BookInfo sample app](/docs/containers?topic=containers-istio#istio_bookinfo)
+  * [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio#bookinfo_setup)
   * [Publicly accessing BookInfo](/docs/containers?topic=containers-istio#istio_access_bookinfo)
   * [Exposing BookInfo by using an IBM-provided subdomain](/docs/containers?topic=containers-istio#istio_expose_bookinfo)
   * [Understanding what happened](/docs/containers?topic=containers-istio#istio_bookinfo_understanding)
@@ -492,10 +492,14 @@ lastupdated: "2019-11-11"
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio#mtls)
 * [Securing Istio-managed apps with App ID](/docs/containers?topic=containers-istio#app-id)
 * [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update)
+  * [Updating your add-on from beta versions to the generally available version](/docs/containers?topic=containers-istio#istio-ga)
+  * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio#update_client_sidecar)
 * [Uninstalling Istio](/docs/containers?topic=containers-istio#istio_uninstall)
   * [Uninstalling managed Istio add-ons from the console](/docs/containers?topic=containers-istio#istio_uninstall_ui)
   * [Uninstalling managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
+* [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
+  * [Istio components are missing](/docs/containers?topic=containers-istio#control_plane)
 * [What's next?](/docs/containers?topic=containers-istio#istio_next)
 
 [Configuring subnets for classic clusters](/docs/containers?topic=containers-subnets#subnets)
@@ -831,7 +835,8 @@ lastupdated: "2019-11-11"
 * [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
-* [Expose your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [Classic clusters: Expose your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

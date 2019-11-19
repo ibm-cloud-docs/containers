@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -23,14 +23,16 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
-# Using the managed Istio add-on (beta)
+# Using the managed Istio add-on
 {: #istio}
 
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
-With one click, you can get all Istio core components, additional tracing, monitoring, and visualization, and the BookInfo sample app up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
+With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
+
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+{: important}
 
 ## Understanding Istio on {{site.data.keyword.containerlong_notm}}
 {: #istio_ov}
@@ -43,42 +45,162 @@ With one click, you can get all Istio core components, additional tracing, monit
 
 When you shift monolith applications to a distributed microservice architecture, a set of new challenges arises such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by so that you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
 
-For example, by using Istio in your microservice mesh can help you:
-- Achieve better visibility into the apps that run in your cluster
-- Deploy canary versions of apps and control the traffic that is sent to them
-- Enable automatic encryption of data that is transferred between microservices
-- Enforce rate limiting and attribute-based whitelist and blacklist policies
+For example, using Istio in your microservice mesh can help you:
+- Achieve better visibility into the apps that run in your cluster.
+- Deploy canary versions of apps and control the traffic that is sent to them.
+- Enable automatic encryption of data that is transferred between microservices.
+- Enforce rate limiting and attribute-based whitelist and blacklist policies.
 
-An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_components).
+An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_install).
 
-### What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?
+### What is Istio on {{site.data.keyword.containerlong_notm}}?
 {: #istio_ov_addon}
 
 Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on that integrates Istio directly with your Kubernetes cluster.
 {: shortdesc}
 
-The managed Istio add-on is classified as beta and might be unstable or change frequently. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment.
-{: note}
-
 **What does this look like in my cluster?**</br>
 When you install the Istio add-on, the Istio control and data planes use the network interfaces that your cluster is already connected to. Configuration traffic flows over the private network within your cluster, and does not require you to open any additional ports or IP addresses in your firewall. If you expose your Istio-managed apps with an Istio Gateway, external traffic requests to the apps flow over the public network interface.
 
 **How does the update process work?**</br>
-The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. To update your Istio components to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}, you can follow the steps in [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).  
+The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
+
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+{: important}
 
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
 {: tip}
 
-**Are there any limitations?** </br>
-You cannot enable the managed Istio add-on in your cluster if you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
+### Limitations
+{: #istio_limitations}
+
+Before you install the managed Istio add-on, review the following limitations.
+{: shortdesc}
+
+* You cannot enable the managed Istio add-on in your cluster if you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
+* When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
+* You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 
 <br />
 
 
-## What can I install?
-{: #istio_components}
+## Installing the Istio add-on
+{: #istio_install}
 
-Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed add-ons in your cluster.
+Install the Istio managed add-on in an existing cluster.
+{: shortdesc}
+
+### Kubernetes version 1.16 and later clusters
+{: #install_116}
+
+In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4.
+{: shortdesc}
+
+The Istio add-on installs the core components of Istio, including Prometheus. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/).
+* `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
+* `Mixer` provides telemetry collection and policy controls.
+  * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
+  * Policy pods enforce access control, including rate limiting and applying whitelist and blacklist policies.
+* `Pilot` provides service discovery for the Envoy sidecars and configures the traffic management routing rules for sidecars.
+* `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
+* `Galley` validates configuration changes for the other Istio control plane components.
+
+To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/).
+
+**Before you begin**</br>
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* [Create a standard Kubernetes version 1.16 or later cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). To use an existing cluster, you must update both the [cluster master to version 1.16](/docs/containers?topic=containers-update#master) and the [worker nodes to version 1.16](/docs/containers?topic=containers-update#worker_node).
+* If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+
+**To use the {{site.data.keyword.cloud_notm}} console:**
+
+1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the Istio add-ons.
+
+2. Click the **Add-ons** tab.
+
+3. On the Managed Istio card, click **Install**.
+
+4. Click **Install** again.
+
+5. On the Managed Istio card, verify that the add-on is listed.
+
+**To use the CLI:**
+
+1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.4, is installed.
+  ```
+  ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. Verify that the managed Istio add-on is enabled in this cluster.
+  ```
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Name                      Version
+  istio                     1.4.0
+  ```
+  {: screen}
+
+4. You can also check out the individual components of the add-on to ensure that the Istio services and their corresponding pods are deployed.
+    ```
+    kubectl get svc -n istio-system
+    ```
+    {: pre}
+
+    ```
+    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
+    grafana                  ClusterIP      172.21.98.154    <none>          3000/TCP                                                       2m
+    istio-citadel            ClusterIP      172.21.221.65    <none>          8060/TCP,9093/TCP                                              2m
+    istio-egressgateway      ClusterIP      172.21.46.253    <none>          80/TCP,443/TCP                                                 2m
+    istio-galley             ClusterIP      172.21.125.77    <none>          443/TCP,9093/TCP                                               2m
+    istio-ingressgateway     LoadBalancer   172.21.230.230   169.46.56.125   80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
+                                                                              8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  2m
+    istio-pilot              ClusterIP      172.21.171.29    <none>          15010/TCP,15011/TCP,8080/TCP,9093/TCP                          2m
+    istio-policy             ClusterIP      172.21.140.180   <none>          9091/TCP,15004/TCP,9093/TCP                                    2m
+    istio-sidecar-injector   ClusterIP      172.21.248.36    <none>          443/TCP                                                        2m
+    istio-telemetry          ClusterIP      172.21.204.173   <none>          9091/TCP,15004/TCP,9093/TCP,42422/TCP                          2m
+    jaeger-agent             ClusterIP      None             <none>          5775/UDP,6831/UDP,6832/UDP                                     2m
+    jaeger-collector         ClusterIP      172.21.65.195    <none>          14267/TCP,14268/TCP                                            2m
+    jaeger-query             ClusterIP      172.21.171.199   <none>          16686/TCP                                                      2m
+    kiali                    ClusterIP      172.21.13.35     <none>          20001/TCP                                                      2m
+    prometheus               ClusterIP      172.21.105.229   <none>          9090/TCP                                                       2m
+    tracing                  ClusterIP      172.21.125.177   <none>          80/TCP                                                         2m
+    zipkin                   ClusterIP      172.21.1.77      <none>          9411/TCP                                                       2m
+    ```
+    {: screen}
+
+    ```
+    kubectl get pods -n istio-system
+    ```
+    {: pre}
+
+    ```
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    grafana-76dcdfc987-94ldq                  1/1     Running   0          2m
+    istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
+    istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
+    istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
+    istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
+    istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
+    istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
+    istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
+    istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
+    istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
+    kiali-77566cc66c-kh6lm                    1/1     Running   0          2m
+    prometheus-5d5cb44877-lwrqx               1/1     Running   0          2m
+    ```
+    {: screen}
+
+### Kubernetes version 1.15 and earlier clusters
+{: #install_115}
+
+In Kubernetes version 1.15 and earlier clusters, you can use only the CLI to install the three beta managed Istio add-ons, which run Istio version 1.3 or earlier.
 {: shortdesc}
 
 <dl>
@@ -88,7 +210,6 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
   <li>`Mixer` provides telemetry collection and policy controls.<ul>
     <li>Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.</li>
     <li>Policy pods enforce access control, including rate limiting and applying whitelist and blacklist policies.</li></ul>
-  </li>
   <li>`Pilot` provides service discovery for the Envoy sidecars and configures the traffic management routing rules for sidecars.</li>
   <li>`Citadel` uses identity and credential management to provide service-to-service and end-user authentication.</li>
   <li>`Galley` validates configuration changes for the other Istio control plane components.</li>
@@ -99,51 +220,17 @@ Istio on {{site.data.keyword.containerlong_notm}} is offered as three managed ad
 <dd>Optional: Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/). This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.</dd>
 </dl>
 
-<br>
-You can always see which Istio add-ons are enabled in your cluster by running the following command:
-```
-ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-```
-{: pre}
-
-<br />
-
-
-## Installing the Istio add-ons
-{: #istio_install}
-
-Install Istio managed add-ons in an existing cluster.
-{: shortdesc}
-
 **Before you begin**</br>
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [Create or use an existing standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
+* [Create or use an existing standard Kubernetes version 1.15 or earlier cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
 * If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
-
-### Installing managed Istio add-ons from the console
-{: #istio_install_ui}
-
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the Istio add-ons.
-
-2. Click the **Add-ons** tab.
-
-3. On the Managed Istio card, click **Install**.
-
-4. Select the **Istio** check box, and optionally the **Istio Extras** and the **Istio Sample** check boxes.
-
-5. Click **Install**.
-
-6. On the Managed Istio card, verify that the add-ons you enabled are listed.
-
-### Installing managed Istio add-ons from the CLI
-{: #istio_install_cli}
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. Enable the `istio` add-on and optionally the `istio-extras` and `istio-sample-bookinfo` add-ons.
   * `istio`:
     ```
-    ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster addon enable istio --version 1.3.4 --cluster <cluster_name_or_ID>
     ```
     {: pre}
   * `istio-extras`:
@@ -166,9 +253,9 @@ Install Istio managed add-ons in an existing cluster.
   Example output:
   ```
   Name                      Version
-  istio                     1.3.3
-  istio-extras              1.3.3
-  istio-sample-bookinfo     1.3.3
+  istio                     1.3.4* (1.4 latest)
+  istio-extras              1.3.4
+  istio-sample-bookinfo     1.3.4
   ```
   {: screen}
 
@@ -260,8 +347,11 @@ Install Istio managed add-ons in an existing cluster.
 ## Trying out the BookInfo sample app
 {: #istio_bookinfo}
 
-The BookInfo add-on (`istio-sample-bookinfo`) deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the `default` namespace. This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
+The [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
 {: shortdesc}
+
+In Istio version 1.4 and later, BookInfo is not offered as a managed add-on and must be installed separately. To install BookInfo, see [Setting up the BookInfo sample app](#bookinfo_setup).
+{: note}
 
 The four BookInfo microservices include:
 * `productpage` calls the `details` and `reviews` microservices to populate the page.
@@ -276,10 +366,75 @@ The `reviews` microservice has multiple versions:
 
 The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/). The BookInfo app is also already exposed on a public IP address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
 
+### Setting up the BookInfo sample app
+{: #bookinfo_setup}
+
+1. Install BookInfo in your cluster.
+  * **Kubernetes version 1.16 and later clusters**:
+    1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
+      ```
+      curl -L https://istio.io/downloadIstio | sh -
+      ```
+      {: pre}
+
+    2. Navigate to the Istio package directory.
+      ```
+      cd istio-1.4.0
+      ```
+      {: pre}
+    3. Label the `default` namespace for automatic sidecar injection.
+      ```
+      kubectl label namespace default istio-injection=enabled
+      ```
+      {: pre}
+    4. Deploy the BookInfo application, gateway, and destination rules.
+      ```
+      kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+      kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+      kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
+      ```
+      {: pre}
+  * **Kubernetes version 1.15 and earlier clusters**: Install the `istio-sample-bookinfo` managed add-on.
+    ```
+    ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+2. Ensure that the BookInfo microservices and their corresponding pods are deployed.
+  ```
+  kubectl get svc
+  ```
+  {: pre}
+
+  ```
+  NAME                      TYPE           CLUSTER-IP       EXTERNAL-IP    PORT(S)          AGE
+  details                   ClusterIP      172.21.19.104    <none>         9080/TCP         2m
+  kubernetes                ClusterIP      172.21.0.1       <none>         443/TCP          1d
+  productpage               ClusterIP      172.21.168.196   <none>         9080/TCP         2m
+  ratings                   ClusterIP      172.21.11.131    <none>         9080/TCP         2m
+  reviews                   ClusterIP      172.21.117.164   <none>         9080/TCP         2m
+  ```
+  {: screen}
+
+  ```
+  kubectl get pods
+  ```
+  {: pre}
+
+  ```
+  NAME                                     READY     STATUS      RESTARTS   AGE
+  details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
+  productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
+  ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
+  reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
+  reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
+  reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
+  ```
+  {: screen}
+
+
 ### Publicly accessing BookInfo
 {: #istio_access_bookinfo}
-
-Before you begin, [install the `istio`, `istio-extras`, and `istio-sample-bookinfo` managed add-ons](#istio_install) in a cluster.
 
 1. Get the public address for your cluster.
     * **Classic clusters**:
@@ -397,57 +552,96 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 ## Logging, monitoring, tracing, and visualizing Istio
 {: #istio_health}
 
-To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards that are installed in the `istio-extras` add-on or deploy LogDNA and Sysdig as third-party services to your worker nodes.
+To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards or deploy LogDNA and Sysdig as third-party services to your worker nodes.
 {: shortdesc}
 
 ### Launching the Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
-The Istio extras add-on (`istio-extras`) installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/). Launch the dashboards for each of these services to provide extra monitoring, tracing, and visualization for Istio.
+For extra monitoring, tracing, and visualization of Istio, launch the [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) dashboards.
 {: shortdesc}
 
-Before you begin, [install the `istio` and `istio-extras` managed add-ons](#istio_install) in a cluster.
+**Before you begin**
+* [Install the `istio` managed add-on](#istio_install) in a cluster. If your cluster runs Kubernetes version 1.15 or earlier, you must also [install the `istio-extras` add-on](#install_115).
+* Install the `istioctl` client.
+  1. Download the `istioctl` client.
+    ```
+    curl -L https://istio.io/downloadIstio | sh -
+    ```
+    {: pre}
+
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.4.0
+    ```
+    {: pre}
 
 **Grafana**</br>
-1. Start Kubernetes port forwarding for the Grafana dashboard.
+
+1. Access the Grafana dashboard.
   ```
-  kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=grafana -o jsonpath='{.items[0].metadata.name}') 3000:3000 &
+  istioctl dashboard grafana
   ```
   {: pre}
 
-2. To open the Istio Grafana dashboard, go to the following URL: http://localhost:3000/dashboard/db/istio-mesh-dashboard. If you installed the [BookInfo add-on](#istio_bookinfo), the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/) in the Istio open source documentation.
+2. If you installed BookInfo, the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/) in the Istio open source documentation.
 
 </br>
 **Jaeger**</br>
 
-1. By default, Istio generates trace spans for 1 out of every 100 requests, which is a sampling rate of 1%. You must send at least 100 requests before the first trace is visible. To send 100 requests to the `productpage` service of the [BookInfo add-on](#istio_bookinfo), run the following command.
+1. By default, Istio generates trace spans for 1 out of every 100 requests, which is a sampling rate of 1%. You must send at least 100 requests before the first trace is visible. To send 100 requests to the `productpage` service of BookInfo, run the following command.
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
   ```
   {: pre}
 
-2. Start Kubernetes port forwarding for the Jaeger dashboard.
+2. Access the Jaeger dashboard.
   ```
-  kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=jaeger -o jsonpath='{.items[0].metadata.name}') 16686:16686 &
+  istioctl dashboard jaeger
   ```
   {: pre}
 
-3. To open the Jaeger UI, go to the following URL: http://localhost:16686.
-
-4. If you installed the BookInfo add-on, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
+3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
 
 </br>
 **Kiali**</br>
 
-1. Start Kubernetes port forwarding for the Kiali dashboard.
+1. Define the credentials that you want to use to access Kiali.
+  1. Copy and paste the following command. This command starts a text entry for you to enter a user name, which is then encoded in base64 and stored in the `KIALI_USERNAME` environment variable.
+    ```
+    KIALI_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)
+    ```
+    {: pre}
+  2. Copy and paste the following command. This command starts a text entry for you to enter a passphrase, which is then encoded in base64 and stored in the `KIALI_PASSPHRASE` environment variable.
+    ```
+    KIALI_PASSPHRASE=$(read -p 'Kiali Passphrase: ' pval && echo -n $pval | base64)
+    ```
+    {: pre}
+  3. Create a file to store the credentials in a Kubernetes secret. Name the file `kiali-secret.yaml`.
+    ```
+    cat <<EOF | kubectl apply -f -
+    apiVersion: v1
+    kind: Secret
+    metadata:
+      name: kiali
+      namespace: istio-system
+      labels:
+        app: kiali
+    type: Opaque
+    data:
+      username: $KIALI_USERNAME
+      passphrase: $KIALI_PASSPHRASE
+    EOF
+    ```
+    {: pre}
+
+2. Access the Kiali dashboard.
   ```
-  kubectl -n istio-system port-forward $(kubectl -n istio-system get pod -l app=kiali -o jsonpath='{.items[0].metadata.name}') 20001:20001 &
+  istioctl dashboard kiali
   ```
   {: pre}
 
-2. To open the Kiali UI, go to the following URL: http://localhost:20001/kiali/console.
-
-3. Enter `admin` for both the user name and passphrase. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+3. Enter the user name and passphrase that you defined in step 1. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
 
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}
@@ -569,33 +763,34 @@ The app pods are now integrated into your Istio service mesh because they have t
 
 If you do not want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
 
-To manually inject sidecars into a deployment:
-
+**Before you begin**:
 1. Download the `istioctl` client.
   ```
-  curl -L https://git.io/getLatestIstio | ISTIO_VERSION=1.3.3 sh -
+  curl -L https://istio.io/downloadIstio | sh -
   ```
   {: pre}
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.3.3
+  cd istio-1.4.0
   ```
   {: pre}
 
-3. Inject the Envoy sidecar into your app deployment YAML.
+To manually inject sidecars into a deployment:
+
+1. Inject the Envoy sidecar into your app deployment YAML.
   ```
   istioctl kube-inject -f <myapp>.yaml | kubectl apply -f -
   ```
   {: pre}
 
-4. Deploy your app.
+2. Deploy your app.
   ```
   kubectl apply <myapp>.yaml
   ```
   {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
+3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
     ```
@@ -658,12 +853,12 @@ In the following steps, you set up a subdomain through which your users can acce
 2. Install the `istioctl` client.
   1. Download `istioctl`.
     ```
-    curl -L https://git.io/getLatestIstio | sh -
+    curl -L https://istio.io/downloadIstio | sh -
     ```
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.3.3
+    cd istio-1.4.0
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -816,12 +1011,12 @@ In the following steps, you set up a subdomain through which your users can acce
 2. Install the `istioctl` client.
   1. Download `istioctl`.
     ```
-    curl -L https://git.io/getLatestIstio | sh -
+    curl -L https://istio.io/downloadIstio | sh -
     ```
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.3.3
+    cd istio-1.4.0
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -1053,7 +1248,7 @@ Destination rules are also used for non-authentication reasons, such as routing 
 ## Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}
 {: #app-id}
 
-By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including front-end and back-end applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/services/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
+By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including frontend and backend applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/services/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
 
 <br />
 
@@ -1064,39 +1259,30 @@ By using the App Identity and Access adapter, you can centralize all of your ide
 Update your Istio add-ons to the latest versions, which are tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterrupted.
+### Updating your add-on from beta versions to the generally available version
+{: #istio-ga}
 
-1. Check whether your add-ons are at the latest version. Any add-ons that are denoted with `* (<version> latest)` can be updated.
-   ```
-   ibmcloud ks cluster addon ls --cluster <mycluster>
-   ```
-   {: pre}
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+{: shortdesc}
 
-   Example output:
-   ```
-   OK
-   Name      Version
-   istio     1.3.3
-   knative   0.8
-   ```
-   {: screen}
+During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterruptedly. After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
 
-2. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
+1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
    ```
    kubectl get pod <pod_name> -o yaml -n istio-system
    ```
    {: pre}
 
-3. Save the Kubernetes resources that were automatically generated in the namespace of the managed add-on to a YAML file on your local machine. These resources are generated by using custom resource definitions (CRDs).
+2. Save the Kubernetes resources that were automatically generated in the namespace of the managed add-on to a YAML file on your local machine. These resources are generated by using custom resource definitions (CRDs).
    1. Get the CRDs for your add-on.
       ```
-      kubectl get crd -n istio-system
+      kubectl get crd
       ```
       {: pre}
 
    2. Save any resources created from these CRDs.
 
-5. If you enabled the `istio-sample-bookinfo` and `istio-extras` add-ons, disable them.
+3. If you enabled the `istio-sample-bookinfo` and `istio-extras` add-ons, disable them.
    1. Disable the `istio-sample-bookinfo` add-on.
       ```
       ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
@@ -1109,57 +1295,95 @@ During the update, any traffic that is sent to Istio-managed services is interru
       ```
       {: pre}
 
-6. Disable the Istio add-on.
+4. Disable the Istio add-on.
    ```
    ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
    ```
    {: pre}
 
-7. Before you continue to the next step, verify that add-on resources and namespaces are removed. For example, for the `istio-extras` add-on, you might verify that the `grafana`, `kiali`, and `jaeger-*` services are removed from the `istio-system` namespace.
+5. Before you continue to the next step, verify that all add-on resources are removed.
+  1. Verify that the beta Istio add-ons are removed.
+     ```
+     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+     ```
+     {: pre}
+  2. Verify that the `istio-system` namespace is removed.
+    ```
+    kubectl get namespaces
+    ```
+    {: pre}
+
+6. Re-enable Istio. The default version of the generally available Istio managed add-on, 1.4, is installed.
    ```
-   kubectl get svc -n istio-system
+   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-8. Choose the Istio version that you want to update to.
-   ```
-   ibmcloud ks addon-versions
-   ```
-   {: pre}
-
-9. Re-enable Istio. Use the `--version` flag to specify the version that you want to install. If no version is specified, the default version is installed.
-   ```
-   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID> --version <version>
-   ```
-   {: pre}
-
-10. Apply the CRD resources that you saved in step 2.
+7. Apply the CRD resources that you saved in step 2.
     ```
     kubectl apply -f <file_name> -n <namespace>
     ```
     {: pre}
 
-11. If you automatically or manually injected Envoy proxy sidecars, [upgrade your sidecars ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
+9. Optional: [Install the BookInfo sample app.](#bookinfo_setup) In version 1.4 and later of the managed Istio add-on, the Grafana, Jaeger, and Kiali components that were previously installed by the `istio-extras` add-on are now included in the `istio` add-on. However, the BookInfo sample app that was previously installed by the `istio-sample-bookinfo` add-on is not included in the `istio` add-on and must be installed separately.
 
-12. Optional: Re-enable the `istio-extras` and `istio-sample-bookinfo` add-ons. Use the same version for these add-ons as for the `istio` add-on.
-    1. Enable the `istio-extras` add-on.
-       ```
-       ibmcloud ks cluster addon enable istio-extras --cluster <cluster_name_or_ID> --version <version>
-       ```
-       {: pre}
-
-    2. Enable the `istio-sample-bookinfo` add-on.
-       ```
-       ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster <cluster_name_or_ID> --version <version>
-       ```
-       {: pre}
-
-13. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
+10. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
   ```
   kubectl delete gateway mygateway
   kubectl apply -f mygateway.yaml
   ```
   {: pre}
+
+8. Next, [update your `istioctl` client and sidecars](#update_client_sidecar).
+
+### Updating the `istioctl` client and sidecars
+{: #update_client_sidecar}
+
+Whenever the Istio managed add-on is updated, update your `istioctl` client and your app's Istio sidecars.
+{: shortdesc}
+
+For example, the patch version of your add-on might be updated automatically by {{site.data.keyword.containerlong_notm}}, or you might [manually update your add-on](#istio_update) from older beta versions to a generally available version. In either case, update your `istioctl` client and your app's existing Istio sidecars to match the Istio version of the add-on.
+
+1. Check the version of your `istioctl` client and the Istio add-on control plane.
+  ```
+  istioctl version
+  ```
+  {: pre}
+  Example output:
+  ```
+  client version: 1.3.3
+  control plane version: 1.4.0
+  ```
+  {: screen}
+  * If the `client version` (`istioctl`) matches the `control plane version` (Istio add-on control plane), including the patch version, continue to the next step.
+  * If the `client version` does not match the `control plane version`:
+    1. Download the `istioctl` client of the same version as the control plane.
+      ```
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.0 sh -
+      ```
+      {: pre}
+    2. Navigate to the Istio package directory.
+      ```
+      cd istio-1.4.0
+      ```
+      {: pre}
+
+2. Check the version of your sidecar injector component.
+  ```
+  istioctl version --short=false | grep sidecar
+  ```
+  {: pre}
+  Example output:
+  ```
+  sidecar-injector version: version.BuildInfo{Version:"1.3.3", GitRevision:"c562694ea6e554c2b60d12c9876d2641cfdd917d-dirty", User:"root", Host:"ccdab576-c621-11e9-abca-26bcb80ec4e0", GolangVersion:"go1.12.9", DockerHub:"docker.io/istio", BuildStatus:"Modified", GitTag:"1.2.3"}
+  ```
+  {: screen}
+  * If the `Version` matches the control plane version that you found in the previous step, no further updates are required.
+  * If the `Version` does not match the control plane version, [update your sidecars ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
+
+
+<br />
+
 
 ## Uninstalling Istio
 {: #istio_uninstall}
@@ -1233,7 +1457,7 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
 
-If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-ons in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
+If you previously installed Istio in the cluster by using the IBM Helm chart or through another method, clean up that Istio installation before you enable the managed Istio add-on in the cluster. To check whether Istio is already in a cluster, run `kubectl get namespaces` and look for the `istio-system` namespace in the output.
 {: shortdesc}
 
 - If you installed Istio by using the {{site.data.keyword.cloud_notm}} Istio Helm chart:
@@ -1249,11 +1473,13 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
     ```
     {: pre}
 
+  3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
+
 - If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/install/kubernetes/#uninstall-istio-core-components).
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.3.3
+    cd <filepath>/istio-1.4.0
     ```
     {: pre}
 
@@ -1263,8 +1489,33 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
     ```
     {: pre}
 
+  3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
+
 <br />
 
+
+## Troubleshooting
+{: #istio-ts}
+
+Resolve some common issues that you might encounter when you use the managed Istio add-on.
+{: shortdesc}
+
+### Istio components are missing
+{: #control_plane}
+
+{: tsSymptoms}
+One or more of the Istio control plane components, such as `istio-citadel` or `istio-telemetry`, does not exist in your cluster.
+
+{: tsCauses}
+* You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
+* You changed the default `IstioControlPlane` resource. When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane. Only the `IstioControlPlane` resources that are managed by IBM are supported. Changing the control plane settings might result in an unsupported control plane state.
+
+{: tsResolve}
+Refresh your `IstioControlPlane` resource. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
+```
+kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
+```
+{: pre}
 
 ## What's next?
 {: #istio_next}
@@ -1272,4 +1523,3 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * To explore Istio further, you can find more guides in the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/).
 * Take the [Cognitive Class: Getting started with Microservices with Istio and IBM Cloud Kubernetes Service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cognitiveclass.ai/courses/get-started-with-microservices-istio-and-ibm-cloud-container-service/). **Note**: You can skip the Istio installation section of this course.
 * Check out this blog post on using [Vistio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://itnext.io/vistio-visualize-your-istio-mesh-using-netflixs-vizceral-b075c402e18e) to visualize your Istio service mesh.
-
