@@ -57,7 +57,7 @@ This tutorial is intended for Cloud Foundry app developers.
 - Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers?topic=containers-users#platform)
     - The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
-- [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+- [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-service-arch).
 
 
 <br />

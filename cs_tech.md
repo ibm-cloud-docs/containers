@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-31"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -25,9 +25,9 @@ subcollection: containers
 
 
 # Service architecture
-{: #ibm-cloud-kubernetes-service-technology}
+{: #service-arch}
 
-Review sample cluster architectures and the components that are created in your [classic](#architecture_classic) or [VPC](#architecture_vpc) cluster. 
+Review sample cluster architectures and the components that are created in your [classic](#architecture_classic) or [VPC](#architecture_vpc) cluster.
 {: shortdesc}
 
 ## Classic cluster
@@ -97,7 +97,7 @@ The following table describes the components of the Kubernetes master.
     <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
     </tr>
     </tbody></table>
-    
+
 ### Worker node components
 {: #worker-components}
 
@@ -105,7 +105,7 @@ Each worker node is a physical machine (bare metal) or a virtual machine that ru
 {: shortdesc}
 
 Modifying default worker node components such as `kubelet` is not supported and might cause unexpected results.
-{: note} 
+{: note}
 
 The following table describes the components of a worker node.
     <table>
@@ -189,7 +189,7 @@ The following table describes the components of a worker node.
     </tbody></table>
 
 
-## VPC cluster 
+## VPC cluster
 {: #architecture_vpc}
 
 The following diagram and table describe the default components that are set up in an {{site.data.keyword.containerlong_notm}} VPC cluster architecture.
@@ -209,8 +209,4 @@ The following diagram and table describe the default components that are set up 
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Storing data on IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
 
 <br />
-
-
-
-
 

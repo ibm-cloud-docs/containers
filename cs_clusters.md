@@ -145,7 +145,7 @@ After you set up your account to create clusters, decide on the setup for your c
 <img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt.png" alt="This image walks you through choosing the setup that you want for your cluster."/>
 <map name="cluster-plan-map">
     <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="43,9,361,106" shape="rect">
-    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes" coords="110,128,467,224" shape="rect">
+    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/containers?topic=containers-cs_ov#openshift_kubernetes" coords="110,128,467,224" shape="rect">
     <area target="" alt="VPC and classic infrastructure comparison" title="VPC and classic infrastructure comparison" href="/docs/containers?topic=containers-infrastructure_providers" coords="60,252,398,352" shape="rect">
     <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="101,377,564,456" shape="rect">
     <area target="" alt="Virtual Machines" title="Virtual Machines" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="105,488,564,538" shape="rect">
@@ -734,7 +734,7 @@ When the cluster is up and running, you can check out the following cluster admi
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 - [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
-- Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
+- Control who can create pods in your cluster with [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 - Enable the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons to extend your cluster capabilities.
 
 Then, you can check out the following network configuration steps for your cluster setup:

@@ -328,7 +328,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
-- Make any changes that are marked with _Update after master_ in the [Kubernetes clusters](/docs/containers?topic=containers-cs_versions) or [OpenShift clusters](/docs/openshift?topic=openshift-openshift_versions) version preparation guides.
+- Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog) version changelog.
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 

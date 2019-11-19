@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, containers
 
@@ -73,7 +73,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
  <tbody>
  <tr>
  <td>{{site.data.keyword.cloud_notm}} Public, off-premises</td>
- <td>With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+ <td>With {{site.data.keyword.cloud_notm}} Public on [shared or dedicated hardware or on bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes), you can host your apps in clusters on the cloud by using {{site.data.keyword.containerlong_notm}}. You can also create a cluster with worker pools in multiple zones to increase high availability for your apps. {{site.data.keyword.containerlong_notm}} on {{site.data.keyword.cloud_notm}} Public delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts.<br><br>For more information, see [{{site.data.keyword.containerlong_notm}} technology](/docs/containers?topic=containers-service-arch).
  <p class="tip">You can also create your cluster in a Virtual Private Cloud (VPC), which gives you the security of a private cloud environment with isolated networking features along with the dynamic scalability of the public cloud. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).</p>
  </td>
  </tr>
@@ -151,5 +151,6 @@ Both OpenShift and community Kubernetes clusters are production-ready container 
 |Supported operating system| Ubuntu 16.64, 18.64 |Red Hat Enterprise Linux 7|
 |Preferred external traffic networking| Ingress | Router |
 {: caption="Characteristics of community Kubernetes and OpenShift clusters" caption-side="top"}
+
 
 

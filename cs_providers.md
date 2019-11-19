@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -113,8 +113,8 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  <tr>
    <td>Service limitations</td>
-   <td>See [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). Feature-specific limitations are documented by section.</td>
-   <td>See [Service limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). For VPC cluster limitations, see [VPC cluster limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vpc_ks_limits). For VPC-specific limitations, see [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations).</td>
+   <td>See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). Feature-specific limitations are documented by section.</td>
+   <td>See [Service limitations](/docs/containers?topic=containers-limitations#tech_limits). For VPC cluster limitations, see [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits). For VPC-specific limitations, see [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations).</td>
  </tr>
  <tr>
    <td>Troubleshooting and support</td>
