@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -292,7 +292,8 @@ Refer to the following table for a summary of changes for each build of the Ingr
 View build version changes for the Fluentd component for logging in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-By default, automatic updates to the component are enabled, but you can disable automatic updates and manually update the component. For more information, see [Managing automatic updates for Fluentd](/docs/containers?topic=containers-update#logging-up).
+As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
+{: important}
 
 Refer to the following table for a summary of changes for each build of the Fluentd component.
 
@@ -310,6 +311,48 @@ Refer to the following table for a summary of changes for each build of the Flue
 <th>Disruptive changes</th>
 </tr>
 </thead>
+<tr>
+<td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
+<td>14 Nov 2019</td>
+<td>-</td>
+<td>The Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).</td>
+</tr>
+<tr>
+<td>c7901bf0d1323806d44ce5f92bce5085f9b6c791</td>
+<td>06 Nov 2019</td>
+<td>Fixes `LibSass` vulnerabilities for [CVE-2018-19218 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19218).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>ee01ba3471cadbb9925269183acd724f4bf0e5bd</td>
+<td>28 Oct 2019</td>
+<td>Fixes Ruby vulnerabilities for [CVE-2019-15845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ruby-lang.org/en/news/2019/10/01/nul-injection-file-fnmatch-cve-2019-15845/), [CVE-2019-16201 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ruby-lang.org/en/news/2019/10/01/webrick-regexp-digestauth-dos-cve-2019-16201/), [CVE-2019-16254 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ruby-lang.org/en/news/2019/10/01/http-response-splitting-in-webrick-cve-2019-16254/), and [CVE-2019-16255 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ruby-lang.org/en/news/2019/10/01/code-injection-shell-test-cve-2019-16255/).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>58c604236080f142f35d14fe3b6c4b4484290121</td>
+<td>24 Sep 2019</td>
+<td>Fixes OpenSSL vulnerabilities for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547), [CVE-2019-1549 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549), and [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>7c94e41a34ff1b7a56b9163471ff740a9585e053</td>
+<td>18 Sep 2019</td>
+<td>Updates the Kubernetes API version in the Fluentd deployment from `extensions/v1beta1` to `apps/v1`.</td>
+<td>-</td>
+</tr>
+<tr>
+<td>e7e944a8279deee0c3a8743e2fa69696ed71b6f5</td>
+<td>15 Aug 2019</td>
+<td>Fixes GNU binary utilities (`binutils`) vulnerabilities for [CVE-2018-6543 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6543), [CVE-2018-6759 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6759), [CVE-2018-6872 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-6872), [CVE-2018-7208 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7208), [CVE-2018-7568 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7568), [CVE-2018-7569 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7569), [CVE-2018-7570 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7570), [CVE-2018-7642 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7642), [CVE-2018-7643 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7643), and [CVE-2018-8945 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-8945).</td>
+<td>-</td>
+</tr>
+<tr>
+<td>d24b1afcc004ec9745dc3f9ef1328d3ed4b495f8</td>
+<td>09 Aug 2019</td>
+<td>Fixes `musl libc` vulnerabilities for [CVE-2019-14697 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-14697).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>96f399cdea1c86c63a4ca4e043180f81f3559676</td>
 <td>22 Jul 2019</td>
