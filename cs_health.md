@@ -59,14 +59,6 @@ You can choose your logging solution based on which cluster components you need 
 <dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). To check the logs of an individual Kubernetes pod or other resource, you can run `kubectl logs <resource_name>`. By default, logs are stored in `/var/log` for the namespace. For example, you can collect container logs from the `/var/log/pods/` path. You might write a script to export logs to a persistent storage device that you can use to analyze with your own logging solution.<p class="important">To check the logs for individual app pods, run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</p></dd>
 </dd>
 
-<dt>Deprecated: Fluentd with {{site.data.keyword.loganalysisfull}}</dt>
-<dd><p class="deprecated">Previously, you could create a logging configuration to forward logs that are collected by the Fluentd cluster component to {{site.data.keyword.loganalysisfull_notm}}. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. On 30 September 2019, {{site.data.keyword.containerlong_notm}} is disabling log forwarding from the Fluentd cluster component to {{site.data.keyword.loganalysisshort_notm}} for existing premium plan instances. To continue collecting logs for your cluster, you must set up {{site.data.keyword.la_full_notm}} or change your configuration to forward logs to an external server.</p>
-</dd>
-
-<dt>Deprecated: {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis</dt>
-<dd><p class="deprecated">Previously, you could collect and forward audit logs to {{site.data.keyword.cloudaccesstrailfull_notm}} with LogAnalysis. As of 30 April 2019, you cannot provision new {{site.data.keyword.loganalysisshort_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 September 2019. To continue collecting audit logs for your cluster, you must set up {{site.data.keyword.at_full_notm}}.</p>
-</dd>
-
 </dl>
 
 <br />
@@ -749,14 +741,6 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
   <dt>Third-party services</dt>
   <dd>You can configure other tools for more monitoring capabilities, such as Prometheus. Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For more information about the setup, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
-
-  <dt>Deprecated: {{site.data.keyword.monitoringlong_notm}}</dt>
-  <dd><p class="deprecated">Previously, you could collect metrics by using {{site.data.keyword.monitoringlong_notm}}. As of 30 June 2019, you cannot provision new {{site.data.keyword.monitoringlong_notm}} instances, and all Lite plan instances are deleted. Existing premium plan instances are supported until 30 October 2019. To continue collecting metrics for your cluster, set up {{site.data.keyword.mon_full_notm}}.</p>
-  </dd>
-
-  <dt>Deprecated: Metrics dashboard in cluster overview page of {{site.data.keyword.cloud_notm}} console and output of <code>ibmcloud ks cluster get</code></dt>
-  <dd>{{site.data.keyword.containerlong_notm}} provides information about the health and capacity of your cluster and the usage of your cluster resources. You can use this console to scale out your cluster, work with your persistent storage, and add more capabilities to your cluster through {{site.data.keyword.cloud_notm}} service binding. To view metrics, go to the **Kubernetes** > **Clusters** dashboard, select a cluster, and click the **Metrics** link.
-  <p class="deprecated">The link to the metrics dashboard in the cluster overview page of the {{site.data.keyword.cloud_notm}} console and in the output of `ibmcloud ks cluster get` is deprecated. Clusters that are created after 03 May 2019 are not created with the metrics dashboard link. Clusters that are created on or before 03 May 2019 continue to have the link to the metrics dashboard.</p></dd>
 
 </dl>
 
