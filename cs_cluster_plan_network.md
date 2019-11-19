@@ -37,6 +37,8 @@ Get started by planning your setup for a VPC or a classic cluster.
 First time creating a cluster? First, try out the [tutorial for creating a VPC cluster](/docs/containers?topic=containers-cs_cluster_tutorial) or the [tutorial for creating a classic cluster](/docs/containers?topic=containers-cs_cluster_tutorial). Then, come back here when you’re ready to plan out your production-ready clusters.
 {: tip}
 
+
+
 ## Understanding network basics of VPC clusters
 {: #vpc_basics}
 
