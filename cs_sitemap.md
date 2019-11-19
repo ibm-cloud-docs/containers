@@ -835,7 +835,8 @@ lastupdated: "2019-11-19"
 * [Increasing the shared memory zone size for Ingress metrics collection](/docs/containers?topic=containers-ingress_health#vts_zone_size)
 
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
-* [Expose your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [Classic clusters: Expose your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
+* [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
 
 ## Storing data on persistent storage
 {: #sitemap-storage}

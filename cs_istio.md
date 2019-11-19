@@ -31,7 +31,7 @@ Istio on {{site.data.keyword.containerlong}} provides a seamless installation of
 
 With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
 
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of `<date>`. All beta installations of the managed add-on, which run Istio version 1.3 or earlier, are deprecated on `<date>`. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: important}
 
 ## Understanding Istio on {{site.data.keyword.containerlong_notm}}
@@ -65,7 +65,7 @@ When you install the Istio add-on, the Istio control and data planes use the net
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
 
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of `<date>`. All beta installations of the managed add-on, which run Istio version 1.3 or earlier, are deprecated on `<date>`. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: important}
 
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
@@ -1262,7 +1262,7 @@ Update your Istio add-ons to the latest versions, which are tested by {{site.dat
 ### Updating your add-on from beta versions to the generally available version
 {: #istio-ga}
 
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of `<date>`. All beta installations of the managed add-on, which run Istio version 1.3 or earlier, are deprecated on `<date>`. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: shortdesc}
 
 During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterruptedly. After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
