@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-20"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -850,127 +850,19 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
 Create a manifest file to mount the `ibm-external-compute-config` config map and the `ibm-external-compute-pk` secret into a Kubernetes job. When you create the manifest file, the Kubernetes job deploys a pod and a service into your cluster. The pod provides the Calico network `etcd` endpoint for your cluster so that services on the server instance can access the workload in the cluster. The service creates a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
 {: shortdesc}
 
-1.  Create the manifest file and save it as `ibm-external-compute-job.yaml`.
-    ```
-    apiVersion: v1
-    kind: ServiceAccount
-    metadata:
-      name: ibm-external-compute-job
-      namespace: kube-system
-    ---
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRole
-    metadata:
-      name: ibm-external-compute-job
-    rules:
-    - apiGroups: [""]
-      resources: ["services"]
-      verbs: ["get", "create", "update", "patch"]
-    - apiGroups: [""]
-      resources: ["endpoints"]
-      verbs: ["get", "create", "update", "patch"]
-    - apiGroups: [""]
-      resources: ["nodes"]
-      verbs: ["list"]
-    ---
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: ClusterRoleBinding
-    metadata:
-      name: ibm-external-compute-job
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: ibm-external-compute-job
-    subjects:
-    - kind: ServiceAccount
-      namespace: kube-system
-      name: ibm-external-compute-job
-    ---
-    apiVersion: batch/v1
-    kind: Job
-    metadata:
-      name: ibm-external-compute-job
-      namespace: kube-system
-    spec:
-      template:
-        spec:
-          imagePullSecrets:
-          - name: ibm-external-compute-image-pull
-          containers:
-          - name: provision
-            image: us.icr.io/armada-master/stranger:512
-            env:
-            - name: ETCD_HOST
-              valueFrom:
-                configMapKeyRef:
-                  name: cluster-info
-                  key: etcd_host
-            - name: ETCD_PORT
-              valueFrom:
-                configMapKeyRef:
-                  name: cluster-info
-                  key: etcd_port
-            - name: REPO_NAME
-              valueFrom:
-                configMapKeyRef:
-                  name: ibm-external-compute-config
-                  key: repo_name
-            - name: ANSIBLE_HOST_KEY_CHECKING
-              value: "false"
-            - name: SERVICE_K8S_NS
-              valueFrom:
-                configMapKeyRef:
-                  name: ibm-external-compute-config
-                  key: service_k8s_ns
-            - name: CLUSTERDNS_SETUP
-              valueFrom:
-                configMapKeyRef:
-                  name: ibm-external-compute-config
-                  key: clusterdns_setup
-            command: ["ansible-playbook"]
-            args:
-            - "-i"
-            - "/config/inventory"
-            - "setup.yml"
-            - "-e etcd_host=$(ETCD_HOST)"
-            - "-e etcd_port=$(ETCD_PORT)"
-            - "-e repo_name=$(REPO_NAME)"
-            - "-e service_k8s_ns=$(SERVICE_K8S_NS)"
-            - "-e clusterdns_setup=$(CLUSTERDNS_SETUP)"
-            volumeMounts:
-            - name: calico-etcd-secrets
-              mountPath: /ansible/roles/calico-node/files
-              readOnly: true
-            - name: ibm-external-compute-pk
-              mountPath: /root/.ssh
-              readOnly: true
-            - name: ibm-external-compute-config
-              mountPath: /config
-              readOnly: true
-            - name: cluster-info
-              mountPath: /ansible/roles/ibm-gateway-controller/files
-              readOnly: true
-          restartPolicy: Never
-          volumes:
-          - name: calico-etcd-secrets
-            secret:
-              secretName: calico-etcd-secrets
-          - name: ibm-external-compute-pk
-            secret:
-              secretName: ibm-external-compute-pk
-              defaultMode: 0400
-          - name: ibm-external-compute-config
-            configMap:
-              name: ibm-external-compute-config
-          - name: cluster-info
-            configMap:
-              name: cluster-info
-          serviceAccountName: ibm-external-compute-job
-      backoffLimit: 0
-    ```
-    {: codeblock}
+1. Clone the `IBM-Cloud/kube-samples` repository.
+  ```
+  git clone https://github.com/IBM-Cloud/kube-samples.git
+  ```
+  {: pre}
 
-2. Create the manifest in the `kube-system` namespace. When you create the manifest, the Kubernetes job starts to run automatically.
+2. Navigate to the `gateway-clusters` directory.
+  ```
+  cd <filepath>/IBM-Cloud/kube-samples/gateway-clusters
+  ```
+  {: pre}
+
+3. Create the manifest in the `kube-system` namespace. When you create the manifest, the Kubernetes job starts to run automatically.
   ```
   kubectl create -f ibm-external-compute-job.yaml
   ```
@@ -985,7 +877,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
   ```
   {: screen}
 
-3. Verify that the pod that is created by the job is `Running`.
+4. Verify that the pod that is created by the job is `Running`.
   ```
   kubectl get pod -n kube-system | grep ibm-external-compute-job
   ```
@@ -998,7 +890,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
   ```
   {: screen}
 
-4. Verify that the job is completed.
+5. Verify that the job is completed.
   ```
   kubectl get job -n kube-system ibm-external-compute-job
   ```
@@ -1011,7 +903,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
   ```
   {: screen}
 
-5. Test the connection from your server instance to your cluster's pods.
+6. Test the connection from your server instance to your cluster's pods.
   1. Find the private IP address of one of your app pods in your cluster. In the output, look for the **IP:** field.
     ```
     kubectl describe pod <pod_name>
@@ -1032,7 +924,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-5. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
+7. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
   1. Get the IP address for your server.
     ```
     kubectl get ep -n <namespace> <server_hostname>
