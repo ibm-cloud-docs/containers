@@ -43,7 +43,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <td>21 November 2019</td>
 <td><ul>
 <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to 597 and the `ingress-auth` image to build 353](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-<li><strong></strong>: </li>
+<li><strong>Version changelog</strong>: Master patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544).</li>
 </ul></td>
 </tr>
 <tr>
