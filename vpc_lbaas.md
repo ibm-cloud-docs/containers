@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -203,10 +203,10 @@ Expose your app to the public or to the private network by setting up a Kubernet
 ## Registering a VPC load balancer hostname with a DNS subdomain
 {: #vpc_lb_dns}
 
-After you set up a VPC load balancer, you can create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
+After you set up a VPC load balancer, you can create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
 {: shortdesc}
 
-The VPC load balancer provides a default hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain, you can use `nlb-dns` commands to generate a subdomain with an SSL certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
+The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain.
 
 After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#health-checks).
 {: note}
@@ -228,37 +228,31 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
   {: screen}
 
 2. Create a DNS subdomain for the load balancer hostname.
-  ```
-  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-  ```
-  {: pre}
+  * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with an SSL certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you.
+    1. Create a DNS subdomain and SSL certificate.
+      ```
+      ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
+      ```
+      {: pre}
 
-3. Verify that the subdomain is created. For more information, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format).
-  ```
-  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
-  ```
-  {: pre}
+    2. Verify that the subdomain is created. For more information, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format).
+      ```
+      ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+      ```
+      {: pre}
 
-  Example output:
-  ```
-  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
-  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
-  ```
-  {: screen}
+      Example output:
+      ```
+      Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+      mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+      ```
+      {: screen}
 
-4. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain that you created. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access to your subdomain.
+  * **Custom domain**: Provide your own custom domain and give it an alias by specifying the VPC load balancer hostname as a Canonical Name record (CNAME).
+    1. Register a custom domain by working with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
+    2. Define an alias for your custom domain by specifying the VPC load balancer hostname as a Canonical Name record (CNAME).
 
-If you later need to replace the load balancer hostname that is registered with a DNS subdomain, you can run the following command. For example, if you create a new VPC load balancer for your app, but you do not want to create a new DNS subdomain through which users can access your app, you can simply replace the hostname of the old load balancer with the hostname of the new load balancer.
-```
-ibmcloud ks nlb-dns replace vpc-classic --cluster <cluster_name_or_id> --lb-host <new_lb_hostname> --nlb-subdomain <existing_dns_subdomain>
-```
-{: pre}
-
-If you later want to remove the load balancer hostname that is registered with a DNS subdomain, you can run the following command. After you remove the load balancer hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
-```
-ibmcloud ks nlb-dns rm vpc-classic --cluster <cluster_name_or_id> --nlb-subdomain <dns_subdomain>
-```
-{: pre}
+3. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access to your subdomain.
 
 <br />
 
