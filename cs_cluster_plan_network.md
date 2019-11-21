@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -73,6 +73,7 @@ When you create VPC subnets for your clusters, keep in mind the following featur
 * VPC subnets are bound to a single zone and cannot span multiple zones or regions.
 * After you create a subnet, you cannot move it to a different zone, region, or VPC.
 * If you have worker nodes that are attached to an existing subnet in a zone, you cannot change the subnet for that zone in the cluster.
+* The `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16` ranges are prohibited.
 
 </br>
 
