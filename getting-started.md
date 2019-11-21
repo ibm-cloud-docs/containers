@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-20"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, containers
 
@@ -22,6 +22,8 @@ subcollection: containers
 {:deprecated: .deprecated}
 {:download: .download}
 {:preview: .preview}
+
+
 
 <style>
 <!--
@@ -77,7 +79,6 @@ subcollection: containers
     }
 -->
 </style>
-
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
