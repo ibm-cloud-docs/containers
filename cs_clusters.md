@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -54,7 +54,7 @@ ibmcloud ks cluster create classic --name my_cluster
    {: pre}
 *  Classic cluster with a gateway enabled:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --gateway-enabled --kube-version 1.16.2 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --gateway-enabled --kube-version 1.16.3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
    ```
    {: pre}
 *  Classic cluster that uses private VLANs and the private service endpoint only:
@@ -145,7 +145,7 @@ After you set up your account to create clusters, decide on the setup for your c
 <img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt.png" alt="This image walks you through choosing the setup that you want for your cluster."/>
 <map name="cluster-plan-map">
     <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="43,9,361,106" shape="rect">
-    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes" coords="110,128,467,224" shape="rect">
+    <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/containers?topic=containers-cs_ov#openshift_kubernetes" coords="110,128,467,224" shape="rect">
     <area target="" alt="VPC and classic infrastructure comparison" title="VPC and classic infrastructure comparison" href="/docs/containers?topic=containers-infrastructure_providers" coords="60,252,398,352" shape="rect">
     <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="101,377,564,456" shape="rect">
     <area target="" alt="Virtual Machines" title="Virtual Machines" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="105,488,564,538" shape="rect">
@@ -364,7 +364,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `deployed`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
    Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-   mycluster    blrs3b1d0p0p2f7haq0g       deployed     20170201162433   3          dal10     1.14.8      Default             classic
+   mycluster    blrs3b1d0p0p2f7haq0g       deployed     20170201162433   3          dal10     1.14.9      Default             classic
    ```
    {: screen}
 
@@ -380,7 +380,7 @@ Before you begin, install the {{site.data.keyword.cloud_notm}} CLI and the [{{si
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.9
    ```
    {: screen}
 
@@ -455,7 +455,7 @@ Before you begin, install the [{{site.data.keyword.cloud_notm}} CLI and the {{si
 
 6. Create your gateway-enabled cluster.
    ```
-  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.16.2 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
+  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.16.3 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
    ```
    {: pre}
 
@@ -546,11 +546,11 @@ Before you begin, install the [{{site.data.keyword.cloud_notm}} CLI and the {{si
    In the output, verify that the number of compute worker nodes that you specified in the `--workers` flag and two gateway worker nodes are provisioned. In the following example output, three compute and two gateway worker nodes are provisioned.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.14.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.9
    ```
    {: screen}
 
@@ -701,7 +701,7 @@ To create a VPC cluster:
     When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After the Kubernetes master is ready, your worker nodes are set up.
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.14.8      Default             classic
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.14.9      Default             classic
     ```
     {: screen}
 
@@ -717,7 +717,7 @@ To create a VPC cluster:
    When the worker nodes are ready, the worker node **State** changes to `deployed` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.9
    ```
    {: screen}
 
@@ -734,7 +734,7 @@ When the cluster is up and running, you can check out the following cluster admi
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
 - [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/services/Registry?topic=registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
-- Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
+- Control who can create pods in your cluster with [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 - Enable the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons to extend your cluster capabilities.
 
 Then, you can check out the following network configuration steps for your cluster setup:

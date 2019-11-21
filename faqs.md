@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -42,7 +42,7 @@ For more information about Kubernetes, see the [Kubernetes documentation ![Exter
 
 With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
 
-For more information about how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
+For more information about how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-service-arch#architecture). To find a list of capabilities and benefits, see [Why {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov#cs_ov).
 
 ## Why should I use IBM Cloud Kubernetes Service?
 {: #faq_benefits}
@@ -67,7 +67,7 @@ To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.d
 
 With {{site.data.keyword.cloud_notm}}, you can create clusters for your containerized workloads from two different container management platforms: the IBM version of community Kubernetes and Red Hat OpenShift on IBM Cloud. The container platform that you select is installed on your cluster master and worker nodes. Later, you can [update the version](/docs/containers?topic=containers-update#update) but cannot roll back to a previous version or switch to a different container platform. If you want to use multiple container platforms, create a separate cluster for each.
 
-For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/openshift?topic=openshift-why_openshift#openshift_kubernetes).
+For more information, see [Comparison between OpenShift and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes).
 
 <dl>
   <dt>Kubernetes</dt>
@@ -153,9 +153,9 @@ For more information about available bare metal flavors and how bare metal is di
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
   
 **Supported Kubernetes versions**:
-*   Latest: 1.16.2
-*   Default: 1.14.8
-*   Other: 1.15.5
+*   Latest: 1.16.3
+*   Default: 1.14.9
+*   Other: 1.15.6
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

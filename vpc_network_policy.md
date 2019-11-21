@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -106,8 +106,8 @@ In VPC clusters, only one subnet exists per zone. When you attach a public gatew
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.3
   ```
   {: screen}
 
@@ -225,8 +225,8 @@ In VPC clusters, only one subnet exists per zone. When you attach a public gatew
         Example output:
         ```
         ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.2
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.2
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.3
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.3
         ```
         {: screen}
 
@@ -263,8 +263,8 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.16.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.16.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.16.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.16.3
   ```
   {: screen}
 
@@ -284,7 +284,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
   Worker Pool Name:   default
   Flavor:             c2.2x4
-  Version:            1.16.2
+  Version:            1.16.3
 
   Health
   State:     normal

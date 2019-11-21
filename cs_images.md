@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-11"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -80,7 +80,7 @@ You can deploy containers to your cluster from an IBM-provided public image or a
 
 Before you begin:
 1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+2. [Create a cluster](/docs/containers?topic=containers-clusters).
 3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](#imagePullSecret_migrate_api_key).
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -243,7 +243,7 @@ Image pull secrets are valid only for the Kubernetes namespaces that they were c
 Before you begin:
 
 1.  [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_namespace_add).
-2.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+2.  [Create a cluster](/docs/containers?topic=containers-clusters).
 3.  If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key image pull secret](#imagePullSecret_migrate_api_key).
 4.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -477,7 +477,7 @@ If you already have a private registry, you must store the registry credentials 
 
 Before you begin:
 
-1.  [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
+1.  [Create a cluster](/docs/containers?topic=containers-clusters).
 2.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To create an image pull secret:

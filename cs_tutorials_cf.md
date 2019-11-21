@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks
 
@@ -57,7 +57,7 @@ This tutorial is intended for Cloud Foundry app developers.
 - Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
     - [Any platform role](/docs/containers?topic=containers-users#platform)
     - The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
-- [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology).
+- [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-service-arch).
 
 
 <br />
@@ -277,7 +277,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.8
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.14.9
     ```
     {: screen}
 

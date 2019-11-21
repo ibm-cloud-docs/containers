@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, vpc
 
@@ -144,8 +144,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         Example output:
 
         ```
-        Client Version: v1.14.8
-        Server Version: v1.14.8+IKS
+        Client Version: v1.14.9
+        Server Version: v1.14.9+IKS
         ```
         {: screen}
 
@@ -488,7 +488,7 @@ Now that you have a VPC cluster, learn more about what you can do.
 
 * [Setting up block storage for your apps](/docs/containers?topic=containers-vpc-block)
 * [Overview of the differences between classic and VPC clusters](/docs/containers?topic=containers-infrastructure_providers)
-* [VPC cluster limitations](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#vpc_ks_limits)
+* [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
 * [Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
 

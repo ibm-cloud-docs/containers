@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-15"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -23,15 +23,13 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-
 # Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}
 
 Learn about cluster management responsibilities that you have when you use {{site.data.keyword.containerlong}}. For overall terms of use, see [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms).
-{:shortdesc}
+{: shortdesc}
 
 IBM provides you with an enterprise cloud platform for you to deploy apps alongside {{site.data.keyword.cloud_notm}} DevOps, AI, data, and security services. You choose how you set up, integrate, and operate your apps and services in the cloud.
-{:shortdesc}
 
 <table summary="The table shows the responsibilities of IBM and you. Rows are to be read from the left to right, with icons representing each responsibility in column one the description in column two.">
 <caption>Responsibilities of IBM and you</caption>
@@ -118,12 +116,13 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         <br><br>
         **Your responsibilities**:
         <ul>
-        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app#app); [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning); [monitor the health](/docs/containers?topic=containers-health); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
+        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app); [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning); [monitor the health](/docs/containers?topic=containers-health); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
         </ul>
         </td>
         </tr>
   </tbody>
   </table>
+
 
 
 

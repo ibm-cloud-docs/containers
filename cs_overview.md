@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-18"
+lastupdated: "2019-11-19"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -58,7 +58,7 @@ Review the following links to find out more about the benefits and responsibilit
 
 - [Benefits of using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-cs_ov)
 - [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
-- [{{site.data.keyword.containerlong_notm}} service architecture](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#architecture)
+- [{{site.data.keyword.containerlong_notm}} service architecture](/docs/containers?topic=containers-service-arch#architecture)
 - [Use cases](/docs/containers?topic=containers-cs_uc_intro)
 - [Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 - [Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy)

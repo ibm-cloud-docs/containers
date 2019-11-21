@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -148,7 +148,7 @@ The account and cluster administrators can control access on many different leve
 
 With {{site.data.keyword.cloud_notm}} IAM, you can assign permissions to individual users, groups, or service accounts at the cluster-instance level.  You can scope cluster access down further by restricting users to particular namespaces within the cluster. For more information, see [Assigning cluster access](/docs/containers?topic=containers-users#users).
 
-To control access at the pod level, you can [configure pod security policies with Kubernetes RBAC](/docs/containers?topic=containers-psp#psp).
+To control access at the pod level, you can configure [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/).
 
@@ -1036,7 +1036,7 @@ To deploy apps to specific worker nodes:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.14.8_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.14.9_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321

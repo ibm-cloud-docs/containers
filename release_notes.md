@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,6 +39,13 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <th>Description</th>
 </thead>
 <tbody>
+<tr>
+<td>21 November 2019</td>
+<td><ul>
+<li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to 597 and the `ingress-auth` image to build 353](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
+<li><strong>Version changelog</strong>: Master patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544).</li>
+</ul></td>
+</tr>
 <tr>
 <td>19 November 2019</td>
 <td><ul>
@@ -396,7 +403,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td><ul>
   <li><strong>Calico network policies</strong>: Added a set of [public Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers_public) and expanded the set of [private Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to protect your cluster on public and private networks.</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 477](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>Service limitations</strong>: Updated the [maximum number of pods per worker node limitation](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits). For worker nodes that run Kubernetes 1.13.7_1527, 1.14.3_1524, or later and that have more than 11 CPU cores, the worker nodes can support 10 pods per core, up to a limit of 250 pods per worker node.</li>
+  <li><strong>Service limitations</strong>: Updated the [maximum number of pods per worker node limitation](/docs/containers?topic=containers-limitations#tech_limits). For worker nodes that run Kubernetes 1.13.7_1527, 1.14.3_1524, or later and that have more than 11 CPU cores, the worker nodes can support 10 pods per core, up to a limit of 250 pods per worker node.</li>
   <li><strong>Version changelogs</strong>: Added changelogs for [1.14.3_1524](/docs/containers?topic=containers-changelog#1143_1524), [1.13.7_1527](/docs/containers?topic=containers-changelog#1137_1527), [1.12.9_1558](/docs/containers?topic=containers-changelog#1129_1558), and [1.11.10_1563](/docs/containers?topic=containers-changelog#11110_1563) worker node patch updates.</li>
   </ul></td>
 </tr>
@@ -534,7 +541,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td>15 May 2019</td>
   <td><ul>
   <li><strong>Default Kubernetes version</strong>: The default Kubernetes version is now 1.13.6.</li>
-  <li><strong>Service limits</strong>: Added a [service limitations topic](/docs/containers?topic=containers-ibm-cloud-kubernetes-service-technology#tech_limits).</li>
+  <li><strong>Service limits</strong>: Added a [service limitations topic](/docs/containers?topic=containers-limitations#tech_limits).</li>
   </ul></td>
 </tr>
 <tr>
