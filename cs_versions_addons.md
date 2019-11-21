@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-21"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -58,6 +58,15 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>597 / 353</td>
+<td>21 Nov 2019</td>
+<td><ul>
+<li>Supports TLS 1.3 by default.</li>
+<li>Fixes a bug so that the [`client-max-body-size` annotation](/docs/containers?topic=containers-ingress_annotation#client-max-body-size) can now work in conjunction with the [`app-id` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</li>
+<li>Fixes `golang` vulnerabilities for [CVE-2019-17596 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596).</li></ul></td>
+<td>-</td>
+</tr>
 <tr>
 <td>584 / 345</td>
 <td>07 Nov 2019</td>
