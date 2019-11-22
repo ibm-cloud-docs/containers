@@ -266,7 +266,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
           <tr>
             <td>AP North</td>
             <td>che01<br>hkg02<br>seo01<br>sng01<br><br>tok02, tok04, tok05</td>
-            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>161.202.126.210, 128.168.71.117, 165.192.69.69</code></td>
+            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>128.168.71.117, 135.90.69.66, 135.90.69.82, 161.202.126.210, 165.192.69.69</code></td>
            </tr>
           <tr>
              <td>AP South</td>
@@ -276,7 +276,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
           <tr>
              <td>EU Central</td>
              <td>ams03<br>mil01<br>osl01<br>par01<br><br>fra02, fra04, fra05</td>
-             <td><code>169.50.169.110, 169.50.154.194</code><br><code>159.122.190.98, 159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149, 159.8.98.170</code><br><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
+             <td><code>169.50.169.110</code><br><code>159.122.141.69</code><br><code>169.51.73.50</code><br><code>159.8.86.149</code><br><br><code>169.50.56.174, 161.156.65.42, 149.81.78.114</code></td>
             </tr>
           <tr>
             <td>UK South</td>
@@ -290,8 +290,8 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
           </tr>
           <tr>
             <td>US South</td>
-            <td>hou02<br>mex01<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
-            <td><code>184.173.44.62</code><br><code>169.57.100.18</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
+            <td>mex01<br>sao01<br>sjc03<br>sjc04<br><br>dal10,dal12,dal13</td>
+            <td><code>169.57.100.18</code><br><code>169.57.151.10</code><br><code>169.45.67.210</code><br><code>169.62.82.197</code><br><br><code>169.46.7.238, 169.48.230.146, 169.61.29.194, 169.46.110.218, 169.47.70.10, 169.62.166.98, 169.48.143.218, 169.61.177.2, 169.60.128.2</code></td>
           </tr>
           </tbody>
         </table>

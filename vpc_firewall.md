@@ -237,6 +237,15 @@ You can use access control lists (ACLs) on your VPC subnets to act as a firewall
 <br />
 
 
+## Allowing the cluster to access resources through Calico policies
+{: #firewall_calico}
+
+Although Calico policies are supported in VPC clusters, you can remain VPC-native by using [VPC ACLs](/docs/containers?topic=containers-vpc-network-policy#acls) for your subnets instead. However, if you create multiple clusters that use the same subnets in one VPC, you cannot use ACLs to control traffic between the clusters because they share the same subnets. You can use [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.
+{: shortdesc}
+
+<br />
+
+
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #vpc-whitelist_workers}
 

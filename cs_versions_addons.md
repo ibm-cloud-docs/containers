@@ -63,7 +63,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>21 Nov 2019</td>
 <td><ul>
 <li>Supports TLS 1.3 by default.</li>
-<li>Updates the SSL cipher list to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20`. This updated cipher list is applied only to clusters that are created on or after 21 November 2019.</li>
+<li>Updates the SSL cipher list to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20`. This updated cipher list is applied only to clusters that are created on or after 21 November 2019. Existing clusters continue to use the `HIGH:!aNULL:!MD5;` SSL cipher list. If you have an existing cluster, you can [update its `ssl-ciphers` list](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers) to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20` instead.</li>
 <li>Fixes a bug so that the [`client-max-body-size` annotation](/docs/containers?topic=containers-ingress_annotation#client-max-body-size) can now work in conjunction with the [`app-id` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</li>
 <li>Fixes `golang` vulnerabilities for [CVE-2019-17596 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596).</li></ul></td>
 <td>-</td>

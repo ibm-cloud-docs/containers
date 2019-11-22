@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-22"
 
 keywords: kubernetes, iks, knative
 
@@ -327,7 +327,7 @@ To deploy your serverless app as a Knative service:
    Example output:
    ```
    NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
-   kn-helloworld   kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
+   kn-helloworld   kn-helloworld-default.mycluster-<hash>-0001.us-south.containers.appdomain.cloud   kn-helloworld-rjmwt   kn-helloworld-rjmwt   True
    ```
    {: screen}
 
@@ -402,7 +402,7 @@ To deploy your serverless app as a Knative service:
    Example output:
    ```
    NAME            DOMAIN                                                                LATESTCREATED         LATESTREADY           READY   REASON
-   kn-helloworld   kn-helloworld-default.mycluster.us-south.containers.appdomain.cloud   kn-helloworld-ghyei   kn-helloworld-ghyei   True
+   kn-helloworld   kn-helloworld-default.mycluster-<hash>-0001.us-south.containers.appdomain.cloud   kn-helloworld-ghyei   kn-helloworld-ghyei   True
    ```
    {: screen}
 
@@ -547,14 +547,14 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
           <custom_domain>: |
             selector:
               app: sample
-          mycluster.us-south.containers.appdomain.cloud: ""
+          mycluster-<hash>-0001.us-south.containers.appdomain.cloud: ""
         metadata:
           name: config-domain
           namespace: knative-serving
         ```
         {: codeblock}
 
-        To assign a hostname from your custom domain for select Knative services only, add a `data.selector` label key and value to your configmap. In this example, all services with the label `app: sample` are assigned a hostname from your custom domain. Make sure to also have a domain name that you want to assign to all other apps that do not have the `app: sample` label. In this example, the default IBM-provided domain `mycluster.us-south.containers.appdomain.cloud` is used.
+        To assign a hostname from your custom domain for select Knative services only, add a `data.selector` label key and value to your configmap. In this example, all services with the label `app: sample` are assigned a hostname from your custom domain. Make sure to also have a domain name that you want to assign to all other apps that do not have the `app: sample` label. In this example, the default IBM-provided domain `mycluster-<hash>-0001.us-south.containers.appdomain.cloud` is used.
     3. Save your changes.
 
 With your Ingress routing rules and Knative configmaps all set up, you can create Knative services with your custom domain and TLS certificate.
@@ -729,7 +729,7 @@ You can access your Knative service from another Knative service by using a REST
    Example output:
    ```
    NAME        DOMAIN                                                            LATESTCREATED     LATESTREADY       READY   REASON
-   myservice   myservice-default.mycluster.us-south.containers.appdomain.cloud   myservice-rjmwt   myservice-rjmwt   True
+   myservice   myservice-default.mycluster-<hash>-0001.us-south.containers.appdomain.cloud   myservice-rjmwt   myservice-rjmwt   True
    ```
    {: screen}
 
