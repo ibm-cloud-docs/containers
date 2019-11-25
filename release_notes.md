@@ -41,8 +41,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tbody>
 <tr>
   <td>25 November 2019</td>
-  <td><ul><li><strong>Cluster autoscaling for VPC clusters</strong>: You can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca_helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).</li>
-  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544_worker).</li></td>
+  <td><strong>Cluster autoscaling for VPC clusters</strong>: You can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca_helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).</td>
 </tr>
 <tr>
 <td>22 November 2019</td>
