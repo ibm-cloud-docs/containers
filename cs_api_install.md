@@ -29,9 +29,6 @@ subcollection: containers
 You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or OpenShift clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
 {:shortdesc}
 
-## About the API
-{: #api_about}
-
 The {{site.data.keyword.containerlong_notm}} API automates the provisioning and management of {{site.data.keyword.cloud_notm}} infrastructure resources for your clusters so that your apps have the compute, networking, and storage resources that they need to serve your users.
 {:shortdesc}
 

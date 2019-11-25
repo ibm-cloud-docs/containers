@@ -24,7 +24,7 @@ subcollection: containers
 {:preview: .preview}
 {:gif: data-image-type='gif'}
 
-# Creating clusters
+# Creating  clusters
 {: #clusters}
 
 Create a cluster in {{site.data.keyword.containerlong}}.
