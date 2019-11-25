@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -172,5 +172,3 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         }
     ```
     {: screen}
-
-

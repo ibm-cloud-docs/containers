@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -84,11 +84,10 @@ To update the Kubernetes master _major_ or _minor_ version:
 4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
-*  [Updating classic worker nodes](#worker_node)
-*  [Updating VPC worker nodes](#vpc_worker_node)
+*  [Updating classic worker nodes](#worker_node).
+*  [Updating VPC worker nodes](#vpc_worker_node).
 
 <br />
-
 
 
 ## Updating classic worker nodes
@@ -296,7 +295,6 @@ To update worker nodes from the console:
 <br />
 
 
-
 ## Updating VPC worker nodes
 {: #vpc_worker_node}
 
@@ -387,7 +385,6 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 5.  From the action bar, click **Update**.
 
 <br />
-
 
 
 ## Updating flavors (machine types)

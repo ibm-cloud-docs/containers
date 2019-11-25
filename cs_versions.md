@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -40,7 +40,7 @@ subcollection: containers
 *   Other: 1.15.6
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.13.12
+*   Deprecated: 1.13
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12
 
 </br>

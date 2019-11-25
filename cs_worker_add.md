@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-22"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -307,8 +307,6 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 ### Adding a zone to a worker pool
 {: #add_zone}
-
-
 
 You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {:shortdesc}

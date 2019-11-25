@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -29,10 +29,8 @@ subcollection: containers
 Change the pool of available portable public or private IP addresses for network load balancer (NLB) services by adding subnets to your {{site.data.keyword.containerlong}} cluster.
 {:shortdesc}
 
-
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
 {: note}
-
 
 ## Overview of networking in {{site.data.keyword.containerlong_notm}}
 {: #basics}

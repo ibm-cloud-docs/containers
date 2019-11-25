@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, containers
 
@@ -228,6 +228,7 @@ Great job! You just deployed your first app in your Kubernetes VPC cluster.
 
 - Go through the [VPC cluster tutorial](/docs/containers?topic=containers-vpc_ks_tutorial) for installing the CLI, setting up your cluster environment, and deploying an app with a VPC load balancer that exposes your app on the internet.
 - Explore other capabilities, such as creating a [multizone VPC cluster](/docs/containers?topic=containers-ha_clusters#multizone), controlling network access with [VPC access control lists](/docs/containers?topic=containers-vpc-network-policy), and [adding VPC Block Storage](/docs/containers?topic=containers-vpc-block) to your apps.
+
 
 
 

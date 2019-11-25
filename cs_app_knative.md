@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-22"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, knative
 
@@ -797,7 +797,7 @@ spec:
 </tr>
 <tr>
 <td><code>autoscaling.knative.dev/maxScale</code></td>
-<td>Enter the maximum number of pods that you want to run in your cluster. Knative cannot scale up your app higher than the number that you set, even if you have more requests that your current app instances can handle.</td>
+<td>Enter the maximum number of pods that you want to run in your cluster. Knative cannot scale up your app higher than the number that you set, even if you have more requests that your current app instances can handle. You can enter any number that you want up to the [maximum number of pods that you can run per worker node](/docs/containers?topic=containers-limitations#classic_limits).</td>
 </tr>
 </tbody>
 </table>

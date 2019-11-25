@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-09-05"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -289,11 +289,11 @@ To add different block storage configurations, add block storage to a subset of 
    </table>  
 
 5. Retrieve your IBM Cloud infrastructure user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
-   1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/).
-   2. From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), select **Infrastructure**.
-   3. From the menu bar, select **Account** > **Users** > **User List**.
-   4. Find the user whose user name and API key you want to retrieve.
-   5. Click **Generate** to generate an API key or **View** to view your existing API key. A pop-up window opens that shows the infrastructure user name and API key.
+   1.  Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
+   2.  From the menu bar, select **Manage > Access (IAM)**.
+   3.  Select the **Users** tab and then click on your user name.
+   4.  In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Actions menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**.
+   5.  Copy the API user name and API key.
 
 6. Store the credentials in an environment variable.
    1. Add the environment variables.

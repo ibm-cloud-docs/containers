@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-07"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -25,7 +25,6 @@ subcollection: containers
 
 # Classic: About network load balancers (NLBs)
 {: #loadbalancer-about}
-
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}

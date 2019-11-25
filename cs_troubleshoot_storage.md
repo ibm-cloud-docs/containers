@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-20"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, help, debug
 
@@ -223,7 +223,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
     </tr>
     <tr>
       <td><code>Your order will exceed the maximum number of storage volumes allowed. Please contact Sales</code></td>
-      <td>Every {{site.data.keyword.cloud_notm}} account is set up with a maximum number of file and block storage instances that can be created. By creating the PVC, you exceed the maximum number of storage instances. For more information about the maximum number of volumes that you can create and how to retrieve the number of volumes in your account, see the documentation for [file](/docs/infrastructure/FileStorage?topic=FileStorage-managinglimits) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-managingstoragelimits) storage.</td>
+      <td>Every {{site.data.keyword.cloud_notm}} account is set up with a maximum number of storage instances that can be created. By creating the PVC, you exceed the maximum number of storage instances. For more information about the maximum number of volumes that you can create and how to retrieve the number of volumes in your account, see the documentation for [file](/docs/infrastructure/FileStorage?topic=FileStorage-managinglimits) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-managingstoragelimits) storage.</td>
       <td>To create a PVC, choose from the following options. <ul><li>Remove any unused PVCs.</li><li>Ask the {{site.data.keyword.cloud_notm}} account owner to increase your storage quota by [opening a support case](/docs/get-support?topic=get-support-getting-customer-support).</li></ul> </td>
     </tr>
     <tr>
@@ -1325,7 +1325,7 @@ Start by verifying that the information that you entered in the {{site.data.keyw
 If you entered the correct information on the {{site.data.keyword.cloud_notm}} catalog page, verify that your cluster is correctly set up for Portworx.
 {: shortdesc}
 
-1. Verify that you selected a classic {{site.data.keyword.containerlong_notm}} cluster. VPC on Classic clusters are not supported in Portworx. 
+1. Verify that you selected a classic {{site.data.keyword.containerlong_notm}} cluster. VPC on Classic clusters are not supported in Portworx.
 2. Verify that the cluster that you want to use meets the [minimum hardware requirements for Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/start-here-installation/).
 3. If you want to use a virtual machine cluster, make sure that you [added raw, unformatted, and unmounted block storage](/docs/containers?topic=containers-portworx#create_block_storage) to your cluster so that Portworx can include the disks into the Portworx storage layer.
 4. Verify that your cluster is set up with public network connectivity. For more information, see [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics).
