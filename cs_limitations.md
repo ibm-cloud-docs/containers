@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-25"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -112,7 +112,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
   <tbody>
     <tr>
       <td>Compute</td>
-      <td><ul><li>You can have up to 100 worker nodes across all VPC clusters per account.</li><li>Only certain flavors are available for worker node virtual machines.</li><li>Bare metal machines are not supported.</li><li>You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the <code>ibmcloud ks worker replace</code> command.</li><li>Cluster autoscaling is not supported.</li></ul>
+      <td><ul><li>You can have up to 100 worker nodes across all VPC clusters per account.</li><li>Only certain flavors are available for worker node virtual machines.</li><li>Bare metal machines are not supported.</li><li>You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the <code>ibmcloud ks worker replace</code> command.</li></ul>
         </td>
     </tr>
     <tr>
