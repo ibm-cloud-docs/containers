@@ -101,8 +101,10 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.16.2_1514, released 4 November 2019
 {: #1162_1514}
 
-The following scrollable table shows the changes that are included in the patch `1.16.2_1514`. If you update to this version from an earlier version, you choose when to update your cluster master and worker nodes. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types) and [Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116).
+The following tables show the changes that are included in the patch `1.16.2_1514`. If you update to this version from an earlier version, you choose when to update your cluster master and worker nodes. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types) and [Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116).
 {: shortdesc}
+
+**Master patch**
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
@@ -118,11 +120,9 @@ The following scrollable table shows the changes that are included in the patch 
 | Operator Lifecycle Manager Catalog |	N/A |	v1.4.0 |	See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.4.0){: external}. |
 | Operator Lifecycle Manager |	N/A |	0.12.0 |	See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.12.0){: external}.|
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
-{: class="simple-tab-table"}
-{: caption="Changes since version 1.15.5_1520" caption-side="top"}
-{: #1162_1514_master}
-{: tab-title="Master"}
-{: tab-group="1.16.2_1514"}
+{: caption="Master patch: Changes since version 1.15.5_1520" caption-side="top"}
+
+**Worker node patch**
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
@@ -130,11 +130,7 @@ The following scrollable table shows the changes that are included in the patch 
 | `kubelet` configuration | N/A | N/A | Updated the `--pod-max-pids` option and the `pid` resource under the `--kube-reserved` and `--system-reserved` options to scale the available and reserved PIDs based on worker node flavor. |
 | Kubernetes | v1.15.5 | v1.16.2 | See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.2).|
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
-{: class="simple-tab-table"}
-{: caption="Changes since version 1.15.5_1521" caption-side="top"}
-{: #1162_1514_worker}
-{: tab-title="Worker nodes"}
-{: tab-group="1.16.2_1514"}
+{: caption="Worker node patch: Changes since version 1.15.5_1521" caption-side="top"}
 
 ## Version 1.15 changelog
 {: #115_changelog}
