@@ -34,6 +34,7 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 
 ## Service limitations
 {: #tech_limits}
+<br>
 
 {{site.data.keyword.containerlong_notm}} comes with the following service limitations<roks311-vpc> that apply to all clusters, independent of what infrastructure provider you plan to use</roks311-vpc>.
 {: shortdesc}
