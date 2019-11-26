@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-25"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, vlan
 
@@ -23,14 +23,14 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview}
 
-# Changing service endpoints or VLAN connections for classic clusters
+# Changing service endpoints or VLAN connections<roks311-vpc> for classic clusters</roks311-vpc>
 {: #cs_network_cluster}
 
 After you initially set up your network when you [create a cluster](/docs/containers?topic=containers-clusters), you can change the service endpoints that your Kubernetes master is accessible through or change the VLAN connections for your worker nodes.
-{: shortdesc}
+{: shortdesc}<roks311-vpc>
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
-{: note}
+{: note}</roks311-vpc>
 
 ## Setting up the private service endpoint
 {: #set-up-private-se}
