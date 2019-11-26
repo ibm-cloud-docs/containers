@@ -362,7 +362,8 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    </tr>
    <tr>
    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-   <td></td>
+   <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
+</td>
    </tr>
    <tr>
    <td><code>--private-service-endpoint</code></td>
@@ -538,7 +539,8 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    </tr>
    <tr>
    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-   <td> Note that gateway-enabled clusters are supported for Kubernetes versions 1.15 and later only.</td>
+   <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
+ Note that gateway-enabled clusters are supported for Kubernetes versions 1.15 and later only.</td>
    </tr>
    <tr>
    <td><code>--private-service-endpoint</code></td>
@@ -718,7 +720,8 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
-    <td> Note that VPC clusters are supported for Kubernetes versions 1.15 and later only.</td>
+    <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
+ Note that VPC clusters are supported for Kubernetes versions 1.15 and later only.</td>
     </tr>  
     <tr>
     <td><code>--provider <em>&lt;vpc-classic&gt;</em></code></td>
