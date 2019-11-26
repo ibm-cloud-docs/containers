@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -40,7 +40,7 @@ subcollection: containers
 *   Other: 1.15.6
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.13.12
+*   Deprecated: 1.13
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12
 
 </br>
@@ -459,6 +459,10 @@ The following table shows the actions that you must take after you update the Ku
 <tr>
 <td>Kubernetes default RBAC policies for unauthenticated users</td>
 <td>The Kubernetes default role-based access control (RBAC) policies no longer grant access to [discovery and permission-checking APIs to unauthenticated users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs. If you want to update to the more secure default for unauthenticated users, remove the `system:unauthenticated` group from the `system:basic-user` and `system:discovery` cluster role bindings.</td>
+</tr>
+<tr>
+<td>Process ID (PID) reservations and limits</td>
+<td>Worker nodes now reserve PIDs for the `kubelet` and other {{site.data.keyword.containerlong_notm}} system components. Similarly, worker nodes now limit the number of PIDs that are available to pods. These reservations and limits help prevent malicious or runaway apps from consuming all available PIDs on a worker node. The values for these reservations and limits are based on the [worker node flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
 </tr>
 <tr>
 <td>Deprecated: Prometheus queries that use `pod_name` and `container_name` labels</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -21,19 +21,21 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 {:gif: data-image-type='gif'}
 
-# Scaling classic clusters
+# Autoscaling clusters
 {: #ca}
 
 With the `ibm-iks-cluster-autoscaler` plug-in, you can scale the worker pools in your {{site.data.keyword.containerlong}} cluster automatically to increase or decrease the number of worker nodes in the worker pool based on the sizing needs of your scheduled workloads. The `ibm-iks-cluster-autoscaler` plug-in is based on the [Kubernetes Cluster-Autoscaler project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/cluster-autoscaler).
 {: shortdesc}
 
+
 Want to autoscale your pods instead? Check out [Scaling apps](/docs/containers?topic=containers-app#app_scaling).
 {: tip}
 
-The cluster autoscaler is available for standard, classic clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, see [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster).
+
+The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, see [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster).
 {: important}
 
 ## Understanding scale-up and scale-down
@@ -231,13 +233,12 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
         ```
         {: screen}
     2.  If your worker pool does not have the required label, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) and use this worker pool with the cluster autoscaler.
-
 6. **Private clusters only**: See [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster).
 
 <br>
 **To install the `ibm-iks-cluster-autoscaler` plug-in in your cluster**:
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the **Helm version 2.12 or later** client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the **Helm version 2.15 or later** client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
 2.  Verify that tiller is installed with a service account.
 
     ```
@@ -252,6 +253,17 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
     tiller                               1         2m
     ```
     {: screen}
+3.  Make sure that Tiller is set up with version 2.15 or later.
+    1.  Check what version of Tiller is installed in your cluster.
+        ```
+        helm version --server
+        ```
+        {: pre}
+    2.  If Tiller does not run version 2.15 or later, [change the Tiller version](/docs/containers?topic=containers-helm#tiller_version). The following example installs Tiller version 2.15.0.
+        ```
+        kubectl --namespace=kube-system set image deployments/tiller-deploy tiller=gcr.io/kubernetes-helm/tiller@sha256:561afe83feaec2999bdf6a2824d52ca5e94e226753a8f25cdf6343679836986a
+        ```
+        {: pre}
 4.  Add and update the Helm repo where the cluster autoscaler Helm chart is.
     ```
     helm repo add iks-charts https://icr.io/helm/iks-charts
@@ -685,10 +697,17 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 **To limit pods to run on certain autoscaled worker pools**:
 
 1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
+    **For classic clusters**:
     ```
     ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
+    **For VPC clusters**:
+    ```
+    ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+    ```
+    {: pre}
+    
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
 3.  In your pod spec template, match the `nodeSelector` or `nodeAffinity` to the label that you used in your worker pool.
 
@@ -895,7 +914,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Using the cluster autoscaler for a private network-only cluster
 {: #ca_private_cluster}
 
-The cluster autoscaler is available for standard, classic clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint.
+The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint. 
 {: shortdesc}
 
 If your account is not enabled for VRF and service endpoints, you can [open the required ports](/docs/containers?topic=containers-firewall#vyatta_firewall) to allow public network connectivity in your cluster.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-15"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -21,20 +21,19 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Controlling traffic with network policies
 {: #network_policies}
 
-
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This network policy information is specific to classic clusters. For network policy information for VPC clusters, see [Controlling traffic with VPC access control lists](/docs/containers?topic=containers-vpc-network-policy).
 {: note}
-
 
 Every {{site.data.keyword.containerlong}} cluster is set up with a network plug-in called Calico. Default network policies are set up to secure the public network interface of every worker node in the cluster.
 {: shortdesc}
 
 If you have unique security requirements or you have a multizone cluster with VLAN spanning enabled, you can use Calico and Kubernetes to create network policies for a cluster. With Kubernetes network policies, you can specify the network traffic that you want to allow or block to and from a pod within a cluster. To set more advanced network policies such as blocking inbound (ingress) traffic to network load balancer (NLB) services, use Calico network policies.
+
 
 <dl>
 <dt>[Kubernetes network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)</dt>
@@ -422,8 +421,7 @@ To create a pre-DNAT policy:
         ```
         {: codeblock}
 
-2. Apply the Calico preDNAT network policy. It takes about 1 minute for the
-policy changes to be applied throughout the cluster.
+2. Apply the Calico preDNAT network policy. It takes about 1 minute for the policy changes to be applied throughout the cluster.
 
   - Linux and OS X:
 
@@ -508,7 +506,7 @@ To protect your cluster on the public network by using Calico policies:
 You can isolate your cluster from other systems on the private network by applying [Calico private network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3).
 {: shortdesc}
 
-This set of Calico policies and host endpoints can isolate the private network traffic of a cluster from other resources in the account's private network, while allowing communication on the private network that is necessary for the cluster to function. For example, when you enable [VRF or VLAN spanning](/docs/containers?topic=containers-plan_clusters#worker-worker) to allow worker nodes to communicate with each other on the private network, any instance that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with your worker nodes.
+This set of Calico policies and host endpoints can isolate the private network traffic of a cluster from other resources in the account's private network, while allowing communication on the private network that is necessary for the cluster to function. For example, when you enable [VRF or VLAN spanning](/docs/containers?topic=containers-plan_clusters#worker-worker) to allow worker nodes to communicate with each other on the private network, any instance that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with your worker nodes. 
 
 To see a list of the ports that are opened by these policies and a list of the policies that are included, see the [README for the Calico public network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM-Cloud/kube-samples/blob/master/calico-policies/private-network-isolation/README.md).
 

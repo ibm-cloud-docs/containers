@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}  
 
 # Updating clusters, worker nodes, and cluster components
 {: #update}
@@ -49,6 +49,7 @@ If your cluster runs an unsupported Kubernetes version, follow the [version arch
 Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
 
 Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
+<br>
 
 **How are patch updates applied?**</br>
 By default, patch updates for the master are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can [check the versions changelog](/docs/containers?topic=containers-changelog) for any potential impact and choose to safely use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.
@@ -84,11 +85,10 @@ To update the Kubernetes master _major_ or _minor_ version:
 4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
-*  [Updating classic worker nodes](#worker_node)
-*  [Updating VPC worker nodes](#vpc_worker_node)
+*  [Updating classic worker nodes](#worker_node).
+*  [Updating VPC worker nodes](#vpc_worker_node).
 
 <br />
-
 
 
 ## Updating classic worker nodes
@@ -296,7 +296,6 @@ To update worker nodes from the console:
 <br />
 
 
-
 ## Updating VPC worker nodes
 {: #vpc_worker_node}
 
@@ -387,7 +386,6 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 5.  From the action bar, click **Update**.
 
 <br />
-
 
 
 ## Updating flavors (machine types)
@@ -570,7 +568,7 @@ When you create a logging configuration for a source in your cluster to forward 
 As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, automatic updates to Fluentd must be enabled.
 {: important}
 
-You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster. 
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging autoupdate get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging autoupdate disable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable).
@@ -674,7 +672,7 @@ You can manage automatic updates of the Ingress ALB component in the following w
     {: pre}
 
 <br />
- 
+
 
 ## Updating managed add-ons
 {: #addons}

@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, vpc
 
@@ -22,7 +22,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Creating a classic cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}

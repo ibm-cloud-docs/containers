@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated} 
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
@@ -386,7 +386,6 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 <dd>Force the command to run with no user prompts. This value is optional.</dd>
 </dl>
 
-
 #### `ibmcloud ks cluster addon disable vpc-block-csi-driver`
 {: #cs_cluster_addon_disable_vpc-block-csi-driver}
 
@@ -412,7 +411,6 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 <dt><code>-f</code>
 <dd>Force the command to run with no user prompts. This value is optional.</dd>
 </dl>
-
 
 </br>
 
@@ -477,7 +475,7 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio version 1.4 is supported only in Kubernetes version 1.16 and later clusters.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon enable istio-extras`
@@ -485,6 +483,9 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to provide extra monitoring, tracing, and visualization for Istio.
 {: shortdesc}
+
+This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, the Istio extras are included in the main `istio` add-on.
+{: note}
 
 ```
 ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
@@ -514,6 +515,9 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSI
 
 Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the <code>default</code> namespace.
 {: shortdesc}
+
+This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio#bookinfo_setup).
+{: note}
 
 ```
 ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
@@ -592,7 +596,6 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
-
 
 #### `ibmcloud ks cluster addon enable vpc-block-csi-driver`
 {: #cs_cluster_addon_enable_vpc-block-csi-driver}
@@ -683,7 +686,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--export] [--network] [-
 <dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
 
 <dt><code>--network</code></dt>
-<dd>Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: To get the export command for the downloaded Kubernetes configuration data and certificates, you must run this command without this flag.</dd>
+<dd>Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: This option cannot be used in conjunction with the <code>--yaml</code> option.</dd>
 
 <dt><code>--export</code></dt>
 <dd>Download Kubernetes configuration data and certificates without any messages other than the export command. Because no messages are displayed, you can use this flag when you create automated scripts. This value is optional.</dd>
@@ -1809,7 +1812,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd>
+<dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd> 
 
 <dt><code>--machine-type <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
@@ -2738,7 +2741,7 @@ ibmcloud ks zone add vpc-classic --zone ZONE --subnet-id VPC_SUBNET_ID --cluster
 <dd>The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`. This value is required.</dd>
 
 <dt><code>--subnet-id <em>SUBNET_ID</em></code></dt>
-<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic --vpc-d <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a VPC subnet with enough IP addresses, such as 256. This value is required.</dd>
+<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a VPC subnet with enough IP addresses, such as 256. This value is required.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-classic`. This value is required.</dd>
@@ -3814,7 +3817,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
 
-**Minimum required permissions**: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
+**Minimum required permissions**: **Editor** platform role for the cluster
 
 **Command options**:
 <dl>
@@ -3822,7 +3825,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 <dd>The name or ID of the cluster.</dd>
 
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply for the configuration. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>storage</code>, and <code>ingress</code>, and <code>kube-audit</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
+<dd>The log source to enable log forwarding for. This argument supports a comma-separated list of log sources to apply for the configuration. Accepted values are <code>container</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>storage</code>, and <code>ingress</code>. If you do not provide a log source, configurations are created for <code>container</code> and <code>ingress</code>.</dd>
 
 <dt><code>--type <em>syslog</em></code></dt>
 <dd>Enter <code>syslog</code> to forward logs to an external server.</dd>
@@ -3903,7 +3906,7 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--jso
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>The kind of log source for which you want to filter. Logging configurations of only this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, <code>ingress</code>, and <code>kube-audit</code>. This value is optional.</dd>
+<dd>The kind of log source for which you want to filter. Logging configurations of only this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is optional.</dd>
 
 <dt><code>--show-covering-filters</code></dt>
 <dd>Shows the logging filters that render previous filters obsolete.</dd>
@@ -3938,7 +3941,7 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 1 compute
 
-**Minimum required permissions**: **Editor** platform role for the cluster for all log sources except `kube-audit` and **Administrator** platform role for the cluster for the `kube-audit` log source
+**Minimum required permissions**: **Editor** platform role for the cluster
 
 **Command options**:
 <dl>

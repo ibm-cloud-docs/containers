@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -21,21 +21,23 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated} 
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Service limitations
 {: #limitations}
 
 {{site.data.keyword.containerlong}} and the Kubernetes open source project come with default service settings and limitations to ensure security, convenience, and basic functionality. Some of the limitations you might be able to change where noted.
 {: shortdesc}
+<br>
 
 If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, contact the IBM team in the [internal ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com).
 {: tip}
 
 ## Service limitations
 {: #tech_limits}
+<br>
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use. 
 {: shortdesc}
 
 In addition to the service limitations, make sure to also review the limitations for [classic](#classic_limits) or [VPC](#vpc_ks_limits) clusters.
@@ -112,7 +114,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
   <tbody>
     <tr>
       <td>Compute</td>
-      <td><ul><li>You can have up to 100 worker nodes across all VPC clusters per account.</li><li>Only certain flavors are available for worker node virtual machines.</li><li>Bare metal machines are not supported.</li><li>You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the <code>ibmcloud ks worker replace</code> command.</li><li>Cluster autoscaling is not supported.</li></ul>
+      <td><ul><li>You can have up to 100 worker nodes across all VPC clusters per account.</li><li>Only certain flavors are available for worker node virtual machines.</li><li>Bare metal machines are not supported.</li><li>You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the <code>ibmcloud ks worker replace</code> command.</li></ul>
         </td>
     </tr>
     <tr>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, clusters
 
@@ -19,7 +19,7 @@ subcollection: containers
 {:tip: .tip}
 {:note: .note}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Accessing Kubernetes clusters

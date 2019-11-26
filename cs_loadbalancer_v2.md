@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -21,11 +21,10 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Classic: Setting up DSR load balancing with an NLB 2.0 (beta)
 {: #loadbalancer-v2}
-
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 2.0 NLBs can be created in classic clusters only, and cannot be created in VPC clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
@@ -439,6 +438,3 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 <dd>The following algorithms depend on weighted app pods. However, in {{site.data.keyword.containerlong_notm}}, all app pods are assigned equal weight for load balancing.<ul>
 <li>Weighted Least Connection (<code>wlc</code>)</li>
 <li>Weighted Round Robin (<code>wrr</code>)</li></ul></dd></dl>
-
-
-

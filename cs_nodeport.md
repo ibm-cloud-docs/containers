@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-10-30"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, app access
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Testing access to apps with NodePorts
 {: #nodeport}
@@ -32,8 +32,9 @@ Make your containerized app available to internet access by using the public IP 
 ## Managing network traffic by using NodePorts
 {: #nodeport_planning}
 
-Expose a public port on your worker node and use the public IP address of the worker node to access your service in the cluster publicly from the internet.
+Expose a public port on your worker node and use the public IP address of the worker node to access your service in the cluster publicly from the internet. 
 {:shortdesc}
+
 
 When you expose your app by creating a Kubernetes service of type NodePort, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. The NodePort service serves as the external entry point for incoming requests for your app. The assigned NodePort is publicly exposed in the `kubeproxy` settings of each worker node in the cluster. Every worker node starts listening on the assigned NodePort for incoming requests for the service. To access the service from the internet, you can use the public IP address of any worker node that was assigned during cluster creation and the NodePort in the format `<IP_address>:<nodeport>`. If you want to access the service on the private network, use the private IP address of any worker node instead of the public IP address.
 

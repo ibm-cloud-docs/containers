@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, vlan
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Changing service endpoints or VLAN connections for classic clusters
 {: #cs_network_cluster}
@@ -29,15 +29,15 @@ subcollection: containers
 After you initially set up your network when you [create a cluster](/docs/containers?topic=containers-clusters), you can change the service endpoints that your Kubernetes master is accessible through or change the VLAN connections for your worker nodes.
 {: shortdesc}
 
-
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to classic clusters. For information about VPC clusters, see [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics).
 {: note}
 
 ## Setting up the private service endpoint
 {: #set-up-private-se}
 
-Enable or disable the private service endpoint for your cluster.
+Enable or disable the private service endpoint for your cluster. 
 {: shortdesc}
+
 
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-22"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # About Ingress ALBs
 {: #ingress-about}
@@ -38,7 +38,7 @@ Ingress consists of three components: Ingress resources, application load balanc
 ### Ingress resource
 {: #ingress-resource}
 
-To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with Ingress by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for apps.
+To expose an app by using Ingress, you must create a Kubernetes service for your app and register this service with Ingress by defining an Ingress resource. The Ingress resource is a Kubernetes resource that defines the rules for how to route incoming requests for apps. 
 {: shortdesc}
 
 The Ingress resource also specifies the path to your app services. When you create a standard cluster, an Ingress subdomain is registered by default for your cluster in the format `<cluster_name>.<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud`. The paths to your app services are appended to the public route to form a unique app URL such as `mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud/myapp1`.
@@ -48,6 +48,7 @@ One Ingress resource is required per namespace where you have apps that you want
 * If the apps in your cluster are in different namespaces, you must create one resource per namespace to define rules for the apps that are exposed there. You must use a wildcard domain and specify a different subdomain in each Ingress resource.
 
 For more information, see [Planning networking for single or multiple namespaces](/docs/containers?topic=containers-ingress#multiple_namespaces).
+
 
 <p class="important">As of 22 November 2019, the following changes are made to the Ingress subdomain:</br></br>All new clusters are assigned an Ingress subdomain in the format <code>&lt;cluster_name&gt;.&lt;globally_unique_account_HASH&gt;-0001.&lt;region&gt;.containers.appdomain.cloud</code> and an Ingress secret in the format <code>&lt;cluster_name&gt;.&lt;globally_unique_account_HASH&gt;-0001</code>. For more information about this format, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format). If you have pipeline dependencies on consistent app domain names, you can use your own custom domain instead of the IBM-provided Ingress subdomain.</br></br>If you have a cluster that is still assigned an Ingress subdomain in the format <code>&lt;cluster_name&gt;.&lt;region&gt;.containers.mybluemix.net</code>, that subdomain is migrated to Cloudflare. An A record that maps to a <code>&lt;cluster_name&gt;.&lt;region_or_zone&gt;.containers.appdomain.cloud</code> subdomain is assigned during migration and is replaced with a CNAME record after migration. The <code>appdomain.cloud</code> subdomain is created and assigned to your cluster for you if it did not exist in your cluster. Either subdomain can still be used.</p>
 

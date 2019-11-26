@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated} 
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # User access permissions
 {: #access_reference}
@@ -32,7 +32,7 @@ When you [assign cluster permissions](/docs/containers?topic=containers-users), 
 ## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform). 
 {: shortdesc}
 
 <p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
@@ -114,9 +114,9 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Delete an API server audit webhook. | [`ibmcloud ks cluster master audit-webhook unset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_unset) | [`DELETE /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook`](https://containers.cloud.ibm.com/global/swagger-global-api/#/apiserverconfigs/DeleteAuditWebhook) |
 | Bind a service to a cluster. **Note**: You must have the Cloud Foundry Developer role for the space that you service instance is in. | [`ibmcloud ks cluster service bind`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_bind) | [`POST /v1/clusters/{idOrName}/services`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/BindServiceToNamespace) |
 | Unbind a service from a cluster. **Note**: You must have the Cloud Foundry Developer role for the space that you service instance is in. | [`ibmcloud ks cluster service unbind`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_service_unbind) | [`DELETE /v1/clusters/{idOrName}/services/{namespace}/{serviceInstanceId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UnbindServiceFromNamespace) |
-| Create a log forwarding configuration for all log sources except kube-audit. | [`ibmcloud ks logging config create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create) | [`POST /v1/logging/{idOrName}/loggingconfig/{logSource}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig) |
+| Create a log forwarding configuration. | [`ibmcloud ks logging config create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create) | [`POST /v1/logging/{idOrName}/loggingconfig/{logSource}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig) |
 | Refresh a log forwarding configuration. | [`ibmcloud ks logging refresh`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_refresh) | [`PUT /v1/logging/{idOrName}/refresh`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/RefreshLoggingConfig) |
-| Delete a log forwarding configuration for all log sources except kube-audit. | [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm) | [`DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig) |
+| Delete a log forwarding configuration. | [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm) | [`DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig) |
 | Delete all log forwarding configurations for a cluster. | - | [`DELETE /v1/logging/{idOrName}/loggingconfig`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfigs) |
 | Update a log forwarding configuration. | [`ibmcloud ks logging config update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_update) | [`PUT /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/UpdateLoggingConfig) |
 | Create a log filtering configuration. | [`ibmcloud ks logging filter create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_filter_create) | [`POST /v1/logging/{idOrName}/filterconfigs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/filter/CreateFilterConfig) |
@@ -196,8 +196,6 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Enable automatic updates for the Fluentd cluster add-on. | [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_enable) | [`PUT /v1/logging/{idOrName}/updatepolicy`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy) |
 | Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket. | [`ibmcloud ks logging collect`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect) | [`POST /v1/log-collector/{idOrName}/masterlogs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/CreateMasterLogCollection) |
 | See the status of the API server logs snapshot request. | [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status) | [`GET /v1/log-collector/{idOrName}/masterlogs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/GetMasterLogCollectionStatus) |
-| Create a log forwarding configuration for the kube-audit log source. | [`ibmcloud ks logging config create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create) | [`POST /v1/logging/{idOrName}/loggingconfig/{logSource}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/CreateLoggingConfig) |
-| Delete a log forwarding configuration for the kube-audit log source. | [`ibmcloud ks logging config rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_rm) | [`DELETE /v1/logging/{idOrName}/loggingconfig/{logSource}/{id}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/DeleteLoggingConfig) |
 {: class="simple-tab-table"}
 {: caption="Overview of permissions required for CLI commands and API calls in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #accessreftabtableadmin}

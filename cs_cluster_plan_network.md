@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -21,23 +21,22 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Planning your cluster network setup
 {: #plan_clusters}
 
-Design a network setup for your Kubernetes clusters in {{site.data.keyword.containerlong}} that meets the needs of your workloads and environment.
+Design a network setup for your {[product_name]} cluster that meets the needs of your workloads and environment.
 {: shortdesc}
 
+
 Get started by planning your setup for a VPC or a classic cluster.
-* With [**{{site.data.keyword.containerlong}} clusters in VPC**](#vpc_basics), you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in [Virtual Private Cloud](/docs/infrastructure/vpc?topic=vpc-about-vpc) for Generation 1 compute resources. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
-* With [{{site.data.keyword.containerlong}} classic clusters](#plan_basics), you can create your cluster on IBM Cloud infrastructure Classic infrastructure. Classic cluster include all of the {{site.data.keyword.containerlong_notm}} mature and robust features for compute, networking, and storage.
+* With [{[product_name]} clusters in VPC](#vpc_basics), you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in [Virtual Private Cloud](/docs/infrastructure/vpc?topic=vpc-about-vpc) for Generation 1 compute resources. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
+* With [{[product_name]} classic clusters](#plan_basics), you can create your cluster on classic infrastructure. Classic clusters include all of the {[product_name]} mature and robust features for compute, networking, and storage.
 
 First time creating a cluster? First, try out the [tutorial for creating a VPC cluster](/docs/containers?topic=containers-cs_cluster_tutorial) or the [tutorial for creating a classic cluster](/docs/containers?topic=containers-cs_cluster_tutorial). Then, come back here when you’re ready to plan out your production-ready clusters.
 {: tip}
-
-
 
 ## Understanding network basics of VPC clusters
 {: #vpc_basics}
@@ -269,9 +268,6 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-
-
-
 ## Understanding network basics of classic clusters
 {: #plan_basics}
 
@@ -283,7 +279,7 @@ When you create a classic cluster, you must choose a networking setup so that ce
 * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](#worker-services-onprem): Allow your worker nodes to securely communicate with other {{site.data.keyword.cloud_notm}} services, such as {{site.data.keyword.registrylong}}, and to an on-premises network.
 * [External communication to apps that run on worker nodes](#external-workers): Allow public or private requests into the cluster as well as requests out of the cluster to a public endpoint.
 
-### Worker-to-worker communication: Classic VLANs and subnets
+### Worker-to-worker communication: classic VLANs and subnets
 {: #worker-worker}
 
 When you create a classic cluster, the cluster's worker nodes are connected automatically to a private VLAN and optionally connected to a public VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers.
@@ -536,7 +532,7 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 
 **External communication to apps that run on worker nodes**
 
-To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
+To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app. 
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Setting up the CLI
 {: #cs_cli_install}
@@ -476,6 +476,3 @@ To install and launch the Kubernetes web terminal:
 4.  Click the **Web terminal** button again. The terminal opens in your browser.
 
 Next time, you can launch the Kubernetes Terminal simply by clicking the **Web terminal** button.
-
-<br />
-

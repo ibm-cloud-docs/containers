@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 {:external: target="_blank" .external}
 
 # Protecting sensitive information in your cluster
@@ -35,7 +35,6 @@ You can create sensitive data on different levels in your cluster that each requ
 - **App-level:** When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/secret/), such as an `imagePullSecret` for registry credentials. You can also [encrypt data in Kubernetes secrets](#keyprotect) to prevent unauthorized users from accessing sensitive app information.
 
 For more information about securing your cluster and personal information, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security) and [Storing personal information](/docs/containers?topic=containers-security#pi).
-
 
 ## Overview of cluster encryption
 {: #encrypt_ov}
@@ -245,7 +244,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       etcdCACertFile: '/Users/<user>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/ca-<location>-<cluster_name>.pem'
     ```
     {: screen}
-5.  Confirm that the Kubernetes secrets for the cluster are encrypted. Replace the `cluster_name`, `etcdEndpoints`, `etcdCACertFile`, `etcdKeyFile`, and `etcdCertFile` fields with the values that you previously retrieved. The output is unreadable and scrambled, indicating that the secrets are encrypted.
+5.  Confirm that the Kubernetes secrets for the cluster are encrypted. Replace the `cluster_name`, `etcdEndpoints`, `etcdCACertFile`, `etcdKeyFile`, and `etcdCertFile` fields with the values that you previously retrieved. The output is unreadable and scrambled, indicating that the secrets are encrypted. 
     ```
     etcdctl get /registry/secrets/default/<cluster_name> --endpoints <etcdEndpoints> --cacert="<etcdCACertFile>" --key="<etcdKeyFile>" --cert="<etcdCertFile>"
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Planning your cluster for high availability
 {: #ha_clusters}
@@ -35,8 +35,7 @@ Your users are less likely to experience downtime when you distribute your apps 
 
 1. A [single zone cluster](#single_zone) with multiple worker nodes in a worker pool.
 2. A [multizone cluster](#multizone) that spreads worker nodes across zones within one region.
-3. **Clusters with public network connectivity**: [Multiple clusters](#multiple_clusters) that are set up across zones or regions and that are connected via a global load balancer.
-
+3. **Clusters with public network connectivity**: [Multiple clusters](#multiple_clusters) that are set up across zones or regions and that are connected via a global load balancer. 
 
 ## Single zone cluster
 {: #single_zone}
@@ -44,10 +43,8 @@ Your users are less likely to experience downtime when you distribute your apps 
 Single zone clusters can be created in one of the supported [single zone cities or multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). To improve availability for your app and to allow failover for the case that one worker node is not available in your cluster, add additional worker nodes to your single zone cluster.
 {: shortdesc}
 
-
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters are supported only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). If your cluster must reside in one of the single zone cities, create a classic cluster instead.
 {: note}
-
 
 <img src="images/cs_cluster_singlezone.png" alt="High availability for clusters in a single zone" width="230" style="width:230px; border-style: none"/>
 

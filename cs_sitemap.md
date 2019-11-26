@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-26"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2019-11-19"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Site map
@@ -654,6 +654,8 @@ lastupdated: "2019-11-19"
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-app#gpu_app)
 * [Scaling apps](/docs/containers?topic=containers-app#app_scaling)
 * [Managing rolling deployments to update your apps](/docs/containers?topic=containers-app#app_rolling)
+* [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-app#continuous-delivery-pipeline)
+* [Copying deployments to another cluster](/docs/containers?topic=containers-app#copy_apps_cluster)
 
 [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
@@ -994,6 +996,7 @@ lastupdated: "2019-11-19"
 * [Setting up Helm in a cluster with public access](/docs/containers?topic=containers-helm#public_helm_install)
 * [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
 * [Private clusters: Installing Helm charts without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
+* [Installing Tiller with a different version than your cluster](/docs/containers?topic=containers-helm#tiller_version)
 * [Related Helm links](/docs/containers?topic=containers-helm#helm_links)
 
 [Adding services by using {{site.data.keyword.cloud_notm}} service binding](/docs/containers?topic=containers-service-binding#service-binding)

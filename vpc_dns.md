@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-08"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Configuring CoreDNS for VPC clusters
@@ -172,5 +172,3 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         }
     ```
     {: screen}
-
-

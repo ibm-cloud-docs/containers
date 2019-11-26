@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-14"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -21,19 +21,18 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Setting up the API
 {: #cs_api_install}
 
-You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or {{site.data.keyword.openshiftshort}} clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
+You can use the {{site.data.keyword.containerlong}} API to create and manage your community Kubernetes or OpenShift clusters. To use the CLI, see [Setting up the CLI](/docs/containers?topic=containers-cs_cli_install).
 {:shortdesc}
-
 
 ## About the API
 {: #api_about}
 
-The {{site.data.keyword.containerlong_notm}} API automates the provisioning and management of {{site.data.keyword.cloud_notm}} infrastructure resources for your [Kubernetes or OpenShift clusters](/docs/containers?topic=containers-faqs#container_platforms) so that your apps have the compute, networking, and storage resources that they need to serve your users.
+The {{site.data.keyword.containerlong_notm}} API automates the provisioning and management of {{site.data.keyword.cloud_notm}} infrastructure resources for your clusters so that your apps have the compute, networking, and storage resources that they need to serve your users.
 {:shortdesc}
 
 The API is versioned to support the different infrastructure providers that are available for you to create clusters. For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers).
@@ -104,7 +103,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
 ## Automating cluster deployments with the API
 {: #cs_api}
 
-You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
+You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters. 
 {:shortdesc}
 
 The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://us-south.containers.cloud.ibm.com/swagger-api).

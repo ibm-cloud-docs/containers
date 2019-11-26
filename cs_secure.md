@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-19"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, containers
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download} 
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Security for {{site.data.keyword.containerlong_notm}}
@@ -34,7 +34,7 @@ You can use built-in security features in {{site.data.keyword.containerlong}} fo
 ## Overview of security threats for your cluster
 {: #threats}
 
-To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities.
+To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities. 
 {: shortdesc}
 
 <img src="images/cs_security_threats.png" width="400" alt="Security threats for your cluster" style="width:400px; border-style: none"/>
@@ -52,6 +52,7 @@ These components include:
 - [Personal information](#pi)
 
 <br />
+
 
 
 ##Kubernetes API server and etcd
@@ -156,7 +157,7 @@ The ownership of a worker node depends on the type of cluster that you create an
 
 - **Free classic clusters**: Worker nodes are provisioned in to the {{site.data.keyword.cloud_notm}} account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containerlong_notm}} features, do not run production workloads on free classic clusters. Consider using standard classic or standard VPC clusters for your production workloads.
 - **Standard classic clusters**: Worker nodes are provisioned in to your {{site.data.keyword.cloud_notm}} account. The worker nodes are dedicated to you and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
-- **Standard VPC clusters**: Worker nodes are provisioned in to an {{site.data.keyword.cloud_notm}} account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You cannot access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the {{site.data.keyword.containerlong_notm}} console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.  
+- **Standard VPC clusters**: Worker nodes are provisioned in to an {{site.data.keyword.cloud_notm}} account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You cannot access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the {{site.data.keyword.containerlong_notm}} console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
 
 
 
@@ -192,11 +193,11 @@ The image does not include components that ensure secure end-to-end communicatio
     </tr>
     <tr>
   <td>Compute isolation</td>
-  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a free classic cluster or in a standard VPC Gen 1 compute cluster can be provisioned as virtual machines on shared infrastructure only.  </td>
+  <td>Worker nodes are dedicated to a cluster and do not host workloads of other clusters. When you create a standard classic cluster, you can choose to provision your worker nodes as [physical machines (bare metal) or as virtual machines](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes) that run on shared or dedicated physical hardware. Worker nodes in a free classic cluster or in a standard VPC Gen 1 compute cluster can be provisioned as virtual machines on shared infrastructure only.</td>
 </tr>
 <tr>
   <td>Option to deploy bare metal on classic</td>
-  <td>If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage. </br></br><p class="note">Bare metal machines are not supported in VPC Gen 1 compute clusters. </p></td>
+  <td>If you create a standard classic cluster, you can choose to provision your worker nodes on bare metal physical servers (instead of virtual server instances). With bare metal machines, you have additional control over the compute host, such as the memory or CPU. This setup eliminates the virtual machine hypervisor that allocates physical resources to virtual machines that run on the host. Instead, all of a bare metal machine's resources are dedicated exclusively to the worker, so you don't need to worry about "noisy neighbors" sharing resources or slowing down performance. Bare metal servers are dedicated to you, with all its resources available for cluster usage.</br></br><p class="note">Bare metal machines are not supported in VPC Gen 1 compute clusters.</p></td>
 </tr>
 <tr>
   <td id="encrypted_disk">Encrypted disks</td>
