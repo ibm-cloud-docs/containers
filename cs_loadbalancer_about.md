@@ -103,6 +103,7 @@ The following diagram shows how a network load balancer (NLB) 1.0 directs commun
 The following diagram shows how an NLB 1.0 directs communication from the internet to an app in a [gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
 {: shortdesc}
 
+
 <img src="images/cs_loadbalancer_gateway1.png" alt="Expose an app in a gateway-enabled cluster by using an NLB 1.0" width="600" style="width:600px; border-style: none"/>
 
 1. A request to your app uses the public IP address of your NLB and the assigned port on the worker node. Note that if you [create a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname) for your NLB, users can access your app through the NLB's subdomain instead. A DNS system service resolves the subdomain to the portable public IP address of the NLB.

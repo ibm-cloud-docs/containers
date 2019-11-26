@@ -31,6 +31,7 @@ subcollection: containers
 
 Check out the following <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a> to learn more about how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps.
 
+
 ## Benefits of using the service
 {: #benefits}
 

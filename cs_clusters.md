@@ -96,6 +96,7 @@ ibmcloud ks cluster create classic --name my_cluster
 <br />
 
 
+
 ## Prepare to create clusters at the account level
 {: #cluster_prepare}
 

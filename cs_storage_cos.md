@@ -35,6 +35,7 @@ If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster with
 If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
 {: important}
 
+
 With version 1.0.5, the {{site.data.keyword.cos_full_notm}} plug-in is renamed from `ibmcloud-object-storage-plugin` to `ibm-object-storage-plugin`. To install the new version of the plug-in, you must [uninstall the old Helm chart installation](#remove_cos_plugin) and [reinstall the Helm chart with the new {{site.data.keyword.cos_full_notm}} plug-in version](#install_cos).
 {: note}
 
@@ -322,9 +323,9 @@ To install the plug-in:
         SET DC_NAME=dal13
         ```
         {: pre}
-    
+
     3. Retrieve the infrastructure provider that your cluster uses and store it in an environment variable.
-      
+
       a. Retrieve the infrastructure provider.
         ```
         kubectl get nodes -o jsonpath="{.items[*].metadata.labels.ibm-cloud\.kubernetes\.io\/iaas-provider}{'\n'}"
@@ -341,7 +342,7 @@ To install the plug-in:
             {: pre}
 
         * If the output contains `gc`, then set the `CLUSTER_PROVIDER` to `"VPC-CLASSIC"`.
-        
+
             ```
             SET CLUSTER_PROVIDER="VPC-CLASSIC"
             ```
@@ -380,7 +381,7 @@ To install the plug-in:
 
       - Install the plug-in with a limitation to specific Kubernetes secrets.</br>
         ```
-        cd ../.. 
+        cd ../..
         helm install --set dcname="${DC_NAME}" --set provider="${CLUSTER_PROVIDER}" --set workerOS="${WORKER_OS}" ./ibm-object-storage-plugin --name ibm-object-storage-plugin
         ```
         {: pre}

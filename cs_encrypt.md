@@ -36,7 +36,6 @@ You can create sensitive data on different levels in your cluster that each requ
 
 For more information about securing your cluster and personal information, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security) and [Storing personal information](/docs/containers?topic=containers-security#pi).
 
-
 ## Overview of cluster encryption
 {: #encrypt_ov}
 
