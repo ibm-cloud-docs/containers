@@ -84,7 +84,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 <br />
 
 
-<roks311-vpc>
+
 ## Adding worker nodes in VPC clusters
 {: #vpc_pools}
 
@@ -238,7 +238,7 @@ Add worker nodes to your classic cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
-{: #add_pool}</roks311-vpc>
+{: #add_pool}
 
 You can add worker nodes to your classic cluster by creating a new worker pool.
 {:shortdesc}
@@ -304,12 +304,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    {: screen}
 
 <br />
-<roks311-vpc>
+
 
 ### Adding a zone to a worker pool
-{: #add_zone}</roks311-vpc>
+{: #add_zone}
 
-You can span your<roks311-vpc> classic</roks311-vpc> cluster across multiple zones within one region by adding a zone to your existing worker pool.
+You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {:shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.

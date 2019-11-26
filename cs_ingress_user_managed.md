@@ -31,7 +31,7 @@ Bring your own Ingress controller to run on {{site.data.keyword.cloud_notm}} and
 
 The IBM-provided Ingress application load balancers (ALBs) are based on NGINX controllers that you can configure by using [custom {{site.data.keyword.cloud_notm}} annotations](/docs/containers?topic=containers-ingress_annotation). Depending on what your app requires, you might want to configure your own custom Ingress controller. When you bring your own Ingress controller instead of using the IBM-provided Ingress ALB, you are responsible for supplying the controller image, maintaining the controller, updating the controller, and any security-related updates to keep your Ingress controller free from vulnerabilities.
 
-## <roks311-vpc>Classic clusters: </roks311-vpc>Exposing your Ingress controller by creating an NLB and a hostname
+## Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname
 {: #user_managed_nlb}
 
 Create a network load balancer (NLB) to expose your custom Ingress controller deployment, and then create a hostname for the NLB IP address. 
@@ -116,7 +116,7 @@ In classic clusters, bringing your own Ingress controller is supported only for 
   ```
   https://<load_balancer_host_name>/<app_path>
   ```
-  {: codeblock}<roks311-vpc>
+  {: codeblock}
 
 ## VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain
 {: #user_managed_vpc}
@@ -221,7 +221,7 @@ Expose your custom Ingress controller deployment to the public or to the private
   ```
   https://<load_balancer_subdomain>/<app_path>
   ```
-  {: codeblock}</roks311-vpc>
+  {: codeblock}
 
 
 

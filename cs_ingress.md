@@ -122,7 +122,7 @@ Before you get started with Ingress, review the following prerequisites.
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 - If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
-* <roks311-vpc>Classic clusters: </roks311-vpc>Enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
+* Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
 
 <br />
 
@@ -525,8 +525,8 @@ Forward requests directly to the IP address of your external service by setting 
 Before you begin:
 
 * Review the Ingress [prerequisites](#config_prereqs).
-* Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.<roks311-vpc>
-* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.</roks311-vpc>
+* Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
+* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside of your cluster to the public:
@@ -622,8 +622,8 @@ Route requests through the Ingress ALB to your external service by using the `pr
 
 Before you begin:
 
-* Review the Ingress [prerequisites](#config_prereqs).<roks311-vpc>
-* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.</roks311-vpc>
+* Review the Ingress [prerequisites](#config_prereqs).
+* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside of your cluster to the public:
@@ -690,13 +690,13 @@ To expose apps that are outside of your cluster to the public:
 <br />
 
 
-## <roks311-vpc>Classic clusters: </roks311-vpc>Exposing apps to a private network
+## Classic clusters: Exposing apps to a private network
 {: #ingress_expose_private}
 
-Expose apps to a private network by using the private Ingress ALBs<roks311-vpc> in a classic cluster</roks311-vpc>.
+Expose apps to a private network by using the private Ingress ALBs in a classic cluster.
 {:shortdesc}
 
-To use a private ALB, you must first enable the private ALB. Because private VLAN-only<roks311-vpc> classic</roks311-vpc> clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
+To use a private ALB, you must first enable the private ALB. Because private VLAN-only classic clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
 
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
@@ -983,7 +983,7 @@ For a comprehensive tutorial on how to secure microservice-to-microservice commu
 {: tip}
 
 <br />
-<roks311-vpc>
+
 
 ## VPC clusters: Exposing apps to a private network
 {: #ingress_expose_vpc_private}
@@ -1272,7 +1272,7 @@ http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
 
-</roks311-vpc>
+
 
 
 

@@ -32,7 +32,7 @@ Ingress is a Kubernetes service that balances network traffic workloads in your 
 ## What comes with Ingress?
 {: #ingress_components}
 
-Ingress consists of three components: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB)<roks311-vpc> for classic clusters or the VPC load balancer for VPC clusters</roks311-vpc>.
+Ingress consists of three components: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters.
 {: shortdesc}
 
 ### Ingress resource
@@ -58,23 +58,23 @@ For more information, see [Planning networking for single or multiple namespaces
 The application load balancer (ALB) is an external load balancer that listens for incoming HTTP, HTTPS, or TCP service requests. The ALB then forwards requests to the appropriate app pod according to the rules defined in the Ingress resource.
 {: shortdesc}
 
-When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public route which all public ALBs share. You can find the public route for your cluster by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster-<hash>-0001.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and do not use the Ingress subdomain. Note that<roks311-vpc> classic</roks311-vpc> clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.<roks311-vpc>
+When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public route which all public ALBs share. You can find the public route for your cluster by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster-<hash>-0001.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and do not use the Ingress subdomain. Note that classic clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.
 
-**Classic clusters: ALB IP addresses**</roks311-vpc>
+**Classic clusters: ALB IP addresses**
 
-In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.<roks311-vpc>
+In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, a `Keepalived` daemon that constantly monitors the IP automatically reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
 **VPC clusters: ALB hostnames**
 
-When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time. You can find the hostname that is assigned to your public ALBs and the hostname that is assigned to your private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts four private ALBs behind one hostname is created only when you enable your private ALBs.</roks311-vpc>
+When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time. You can find the hostname that is assigned to your public ALBs and the hostname that is assigned to your private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts four private ALBs behind one hostname is created only when you enable your private ALBs.
 
-### Multizone load balancer (MZLB)<roks311-vpc> or Load Balancer for VPC</roks311-vpc>
+### Multizone load balancer (MZLB) or Load Balancer for VPC
 {: #mzlb}
 
-<roks311-vpc>Depending on whether you have a classic or VPC cluster, a</roks311-vpc> Cloudflare multizone load balancer (MZLB)<roks311-vpc> or a Load Balancer for VPC</roks311-vpc> health checks your ALBs.
-{: shortdesc}<roks311-vpc>
+Depending on whether you have a classic or VPC cluster, a Cloudflare multizone load balancer (MZLB) or a Load Balancer for VPC health checks your ALBs.
+{: shortdesc}
 
-**Classic clusters: Multizone load balancer (MZLB)**</roks311-vpc>
+**Classic clusters: Multizone load balancer (MZLB)**
 
 Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers?topic=containers-add_workers#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same subdomain and enables health checks on these IP addresses to determine whether they are available or not.
 
@@ -85,7 +85,7 @@ In rare cases, some DNS resolvers or client apps might continue to use the unhea
 The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.
 
 If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see [Lesson 3 of the Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
-{: note}<roks311-vpc>
+{: note}
 
 **VPC clusters: Load Balancer for VPC**
 
@@ -95,12 +95,12 @@ The Ingress subdomain for your cluster is automatically linked to the VPC load b
 
 Before forwarding traffic to ALBs, the VPC load balancer also health checks the public ALB IP addresses that are behind the hostname to determine whether the ALBs are available or not. Every 5 seconds, the VPC load balancer health checks the floating public ALB IPs for your cluster and keeps the DNS lookup results updated based on these health checks. When a user sends a request to your app by using the cluster's Ingress subdomain and app route, such as `mycluster-<hash>-0001.us-south.containers.appdomain.cloud/myapp`, the VPC load balancer receives the request. If all ALBs are healthy, a normal operation DNS lookup of your Ingress subdomain returns all of the floating IPs, 1 of which the client accesses at random. However, if one IP becomes unavailable for any reason, then the health check for that IP fails after 2 retries. The VPC load balancer removes the failed IP from the subdomain, and the DNS lookup returns only the healthy IPs while a new floating IP address is generated.
 
-Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually health check them and update DNS lookup results.</roks311-vpc>
+Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually health check them and update DNS lookup results.
 
 <br />
 
 
-## How does a request get to my app with Ingress<roks311-vpc> in a classic cluster</roks311-vpc>?
+## How does a request get to my app with Ingress in a classic cluster?
 {: #architecture-classic}
 
 ### Single-zone cluster
@@ -166,7 +166,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 6. The app returns a response to the client. Equal Cost Multipath (ECMP) routing is used to balance the response traffic through a gateway on one of the gateway worker nodes to the client.
 
 <br />
-<roks311-vpc>
+
 
 ## How does a request get to my app with Ingress in a VPC cluster?
 {: #architecture-vpc}
@@ -184,7 +184,7 @@ image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a V
 
 4. The VPC load balancer service routes the request to an ALB. Each ALB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the ALB routes the requests between the app pods in the zone.
 
-5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.</roks311-vpc>
+5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
 
 

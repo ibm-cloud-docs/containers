@@ -71,7 +71,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
 3. For block storage, object storage, and Portworx only: Make sure that you [installed the Helm server Tiller with a Kubernetes services account](/docs/containers?topic=containers-helm#public_helm_install).
 
-4. For<roks311-vpc> classic</roks311-vpc> block storage, object storage, and Portworx only: Make sure that you installed the latest Helm chart version for the plug-in.
+4. For classic block storage, object storage, and Portworx only: Make sure that you installed the latest Helm chart version for the plug-in.
 
    **Block and object storage**:
 
@@ -82,7 +82,7 @@ Review the options to debug persistent storage and find the root causes for fail
       {: pre}
 
    2. List the Helm charts in the repository.
-      **For<roks311-vpc> classic</roks311-vpc> block storage**:
+      **For classic block storage**:
         ```
         helm search iks-charts | grep block-storage-plugin
         ```
@@ -161,7 +161,7 @@ Review the options to debug persistent storage and find the root causes for fail
       {: pre}
 
    3. Review common errors that can occur during the PVC creation.
-      - [File storage and<roks311-vpc> classic</roks311-vpc> block storage: PVC remains in a pending state](#file_pvc_pending)
+      - [File storage and classic block storage: PVC remains in a pending state](#file_pvc_pending)
       - [Object storage: PVC remains in a pending state](#cos_pvc_pending)
 
 7. Check whether the pod that mounts your storage instance is successfully deployed.
@@ -1324,7 +1324,7 @@ Start by verifying that the information that you entered in the {{site.data.keyw
 If you entered the correct information on the {{site.data.keyword.cloud_notm}} catalog page, verify that your cluster is correctly set up for Portworx.
 {: shortdesc}
 
-<roks311-vpc>1. Verify that you selected a classic {{site.data.keyword.containerlong_notm}} cluster. VPC on Classic clusters are not supported in Portworx.</roks311-vpc>
+1. Verify that you selected a classic {{site.data.keyword.containerlong_notm}} cluster. VPC on Classic clusters are not supported in Portworx.
 2. Verify that the cluster that you want to use meets the [minimum hardware requirements for Portworx ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/start-here-installation/).
 3. If you want to use a virtual machine cluster, make sure that you [added raw, unformatted, and unmounted block storage](/docs/containers?topic=containers-portworx#create_block_storage) to your cluster so that Portworx can include the disks into the Portworx storage layer.
 4. Verify that your cluster is set up with public network connectivity. For more information, see [Understanding network basics of classic clusters](/docs/containers?topic=containers-plan_clusters#plan_basics).

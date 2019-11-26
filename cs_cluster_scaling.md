@@ -696,18 +696,18 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 
 **To limit pods to run on certain autoscaled worker pools**:
 
-1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.<roks311-vpc>
-    **For classic clusters**:</roks311-vpc>
+1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
+    **For classic clusters**:
     ```
     ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
-    {: pre}<roks311-vpc>
+    {: pre}
     **For VPC clusters**:
     ```
     ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
-    </roks311-vpc>
+    
 2.  [Add the worker pool to the cluster autoscaler configuration](#ca_cm).
 3.  In your pod spec template, match the `nodeSelector` or `nodeAffinity` to the label that you used in your worker pool.
 
