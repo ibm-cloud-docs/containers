@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-21"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -27,17 +27,15 @@ subcollection: containers
 # Planning your cluster network setup
 {: #plan_clusters}
 
-Design a network setup for your Kubernetes clusters in {{site.data.keyword.containerlong}} that meets the needs of your workloads and environment.
-{: shortdesc}
+Design a network setup for your {[product_name]} cluster that meets the needs of your workloads and environment.
+{: shortdesc}<roks311-vpc>
 
 Get started by planning your setup for a VPC or a classic cluster.
-* With [**{{site.data.keyword.containerlong}} clusters in VPC**](#vpc_basics), you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in [Virtual Private Cloud](/docs/infrastructure/vpc?topic=vpc-about-vpc) for Generation 1 compute resources. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
-* With [{{site.data.keyword.containerlong}} classic clusters](#plan_basics), you can create your cluster on IBM Cloud infrastructure Classic infrastructure. Classic cluster include all of the {{site.data.keyword.containerlong_notm}} mature and robust features for compute, networking, and storage.
+* With [{[product_name]} clusters in VPC](#vpc_basics), you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in [Virtual Private Cloud](/docs/infrastructure/vpc?topic=vpc-about-vpc) for Generation 1 compute resources. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
+* With [{[product_name]} classic clusters](#plan_basics), you can create your cluster on classic infrastructure. Classic clusters include all of the {[product_name]} mature and robust features for compute, networking, and storage.</roks311-vpc>
 
 First time creating a cluster? First, try out the [tutorial for creating a VPC cluster](/docs/containers?topic=containers-cs_cluster_tutorial) or the [tutorial for creating a classic cluster](/docs/containers?topic=containers-cs_cluster_tutorial). Then, come back here when you’re ready to plan out your production-ready clusters.
-{: tip}
-
-
+{: tip}<roks311-vpc>
 
 ## Understanding network basics of VPC clusters
 {: #vpc_basics}
@@ -267,15 +265,12 @@ After you test your app, you can expose it to the private network by creating a 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC Gen 1 compute clusters](/docs/containers?topic=containers-clusters).
 
 <br />
+</roks311-vpc>
 
-
-
-
-
-## Understanding network basics of classic clusters
+## Understanding network basics of<roks311-vpc> classic</roks311-vpc> clusters
 {: #plan_basics}
 
-When you create a classic cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
+When you create a<roks311-vpc> classic</roks311-vpc> cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
 {: shortdesc}
 
 * [Worker-to-worker communication](#worker-worker): All worker nodes must be able to communicate with each other on the private network. In many cases, communication must be permitted across multiple private VLANs to allow workers on different VLANs and in different zones to connect with each other.
@@ -283,10 +278,10 @@ When you create a classic cluster, you must choose a networking setup so that ce
 * [Worker communication to other {{site.data.keyword.cloud_notm}} services or on-premises networks](#worker-services-onprem): Allow your worker nodes to securely communicate with other {{site.data.keyword.cloud_notm}} services, such as {{site.data.keyword.registrylong}}, and to an on-premises network.
 * [External communication to apps that run on worker nodes](#external-workers): Allow public or private requests into the cluster as well as requests out of the cluster to a public endpoint.
 
-### Worker-to-worker communication: Classic VLANs and subnets
+### Worker-to-worker communication:<roks311-vpc> classic</roks311-vpc> VLANs and subnets
 {: #worker-worker}
 
-When you create a classic cluster, the cluster's worker nodes are connected automatically to a private VLAN and optionally connected to a public VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers.
+When you create a<roks311-vpc> classic</roks311-vpc> cluster, the cluster's worker nodes are connected automatically to a private VLAN and optionally connected to a public VLAN. A VLAN configures a group of worker nodes and pods as if they were attached to the same physical wire and provides a channel for connectivity among the workers.
 {: shortdesc}
 
 **VLAN connections for worker nodes**</br>
@@ -380,16 +375,16 @@ For example, if your worker nodes are connected to a private VLAN only, but you 
 <br />
 
 
-## Example scenarios for classic cluster network setups
+## Example scenarios for<roks311-vpc> classic</roks311-vpc> cluster network setups
 {: #classic-scenarios}
 
-Now that you understand the basics of cluster networking, check out some example scenarios in which various classic cluster network setups can meet your workload needs.
+Now that you understand the basics of cluster networking, check out some example scenarios in which various<roks311-vpc> classic</roks311-vpc> cluster network setups can meet your workload needs.
 {: shortdesc}
 
-### Scenario: Run internet-facing app workloads in a classic cluster
+### Scenario: Run internet-facing app workloads in a<roks311-vpc> classic</roks311-vpc> cluster
 {: #internet-facing}
 
-In this scenario, you want to run workloads in a classic cluster that are accessible to requests from the Internet so that end users can access your apps. You want the option of isolating public access in your cluster and of controlling what public requests are permitted to your cluster. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that you want to connect with your cluster.
+In this scenario, you want to run workloads in a<roks311-vpc> classic</roks311-vpc> cluster that are accessible to requests from the Internet so that end users can access your apps. You want the option of isolating public access in your cluster and of controlling what public requests are permitted to your cluster. Additionally, your workers have automatic access to any {{site.data.keyword.cloud_notm}} services that you want to connect with your cluster.
 {: shortdesc}
 
 <p>
@@ -427,10 +422,10 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-### Scenario: Extend your on-premises data center to a classic cluster and add limited public access
+### Scenario: Extend your on-premises data center to a<roks311-vpc> classic</roks311-vpc> cluster and add limited public access
 {: #limited-public}
 
-In this scenario, you want to run workloads in a classic cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.cloud_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
+In this scenario, you want to run workloads in a<roks311-vpc> classic</roks311-vpc> cluster that are accessible to services, databases, or other resources in your on-premises data center. However, you might need to provide limited public access to your cluster, and want to ensure that any public access is controlled and isolated in your cluster. For example, you might need your workers to access an {{site.data.keyword.cloud_notm}} service that does not support private service endpoints, and must be accessed over the public network. Or, you might need to provide limited public access to an app that runs in your cluster.
 {: shortdesc}
 
 To achieve this cluster setup, you can create a firewall by creating a [gateway-enabled cluster](#gateway) or [using a gateway appliance](#vyatta-gateway).
@@ -475,7 +470,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 #### Using a gateway appliance
 {: #vyatta-gateway}
 
-Allow limited public connectivity to your classic cluster by configuring a gateway appliance, such as a Virtual Router Appliance (Vyatta), as a public gateway and firewall.
+Allow limited public connectivity to your<roks311-vpc> classic</roks311-vpc> cluster by configuring a gateway appliance, such as a Virtual Router Appliance (Vyatta), as a public gateway and firewall.
 {: shortdesc}
 
 <p>
