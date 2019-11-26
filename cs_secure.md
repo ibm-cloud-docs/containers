@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download} 
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Security for {{site.data.keyword.containerlong_notm}}
@@ -34,7 +34,7 @@ You can use built-in security features in {{site.data.keyword.containerlong}} fo
 ## Overview of security threats for your cluster
 {: #threats}
 
-To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities.
+To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities. 
 {: shortdesc}
 
 <img src="images/cs_security_threats.png" width="400" alt="Security threats for your cluster" style="width:400px; border-style: none"/>

@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}

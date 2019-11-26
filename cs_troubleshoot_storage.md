@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -470,7 +470,7 @@ When you include an [init container![External link icon](../icons/launch-glyph.s
     ```
     {: pre}
 
-6. Verify that the volume is successfully mounted to your pod. Note the pod name and **Containers/Mounts** path.
+6. Verify that the volume is successfully mounted to your pod. Note the pod name and **Containers/Mounts** path. 
    ```
    kubectl describe pod <my_pod>
    ```

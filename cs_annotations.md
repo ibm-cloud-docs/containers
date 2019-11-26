@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-25"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, ingress
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Customizing Ingress routing with annotations
 {: #ingress_annotation}
@@ -411,7 +411,7 @@ metadata:
 ### Location snippets (`location-snippets`)
 {: #location-snippets}
 
-Add a custom location block configuration for a service.
+Add a custom location block configuration for a service. 
 {:shortdesc}
 
 **Description**</br>

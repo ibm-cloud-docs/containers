@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-15"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Locations
 {: #regions-and-zones}
@@ -33,7 +33,7 @@ You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you 
 
 _{{site.data.keyword.containerlong_notm}} locations_
 
-{{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). Use the [global endpoint](#endpoint) instead.
+{{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). Use the [global endpoint](#endpoint) instead. 
 {: deprecated}
 
 ## {{site.data.keyword.containerlong_notm}} locations

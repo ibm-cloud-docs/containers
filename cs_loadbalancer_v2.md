@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-25"
+lastupdated: "2019-11-26"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Classic: Setting up DSR load balancing with an NLB 2.0 (beta)
 {: #loadbalancer-v2}

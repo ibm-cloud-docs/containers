@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 # Storing data on classic IBM Cloud Block Storage
 {: #block_storage}
@@ -41,29 +41,6 @@ Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in with a Helm c
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. Make sure that your worker node applies the latest patch for your minor version to run your worker node with the latest security settings. The patch version also ensures that the root password on the worker node is renewed. 
-   
-   If you did not apply updates or reload your worker node within the last 90 days, your root password on the worker node expires and the installation of the storage plug-in might fail. 
-   {: note}
-   1. List the current patch version of your worker nodes.
-      ```
-      ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-
-      Example output:
-      ```
-      OK
-      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.14.9_1523*
-      ```
-      {: screen}
-
-      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output.
-
-   2. Review the [version changelog](/docs/containers?topic=containers-changelog) to find the changes that are included in the latest patch version.
-
-   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install){: new_window} to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
@@ -205,7 +182,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: pre}
 
-3. Find the name of the block storage Helm chart that you installed in your cluster.
+3. Find the name of the block storage Helm chart that you installed in your cluster. 
    ```
    helm ls | grep ibmcloud-block-storage-plugin
    ```
@@ -1593,7 +1570,7 @@ The following examples create a storage class that provisions block storage with
 ## Removing persistent storage from a cluster
 {: #cleanup}
 
-When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure instance, such as classic file or block storage. Depending on how you created your storage, you might need to delete all three components separately.
+When you set up persistent storage in your cluster, you have three main components: the Kubernetes persistent volume claim (PVC) that requests storage, the Kubernetes persistent volume (PV) that is mounted to a pod and described in the PVC, and the IBM Cloud infrastructure instance, such as classic file or block storage. Depending on how you created your storage, you might need to delete all three components separately. 
 {:shortdesc}
 
 ### Understanding your storage removal options
