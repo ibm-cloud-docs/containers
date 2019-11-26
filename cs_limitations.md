@@ -36,10 +36,10 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 {: #tech_limits}
 <br>
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations<roks311-vpc> that apply to all clusters, independent of what infrastructure provider you plan to use</roks311-vpc>.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use.
 {: shortdesc}
 
-In addition to the service limitations, make sure to also review the limitations for [classic](#classic_limits)<roks311-vpc> or [VPC](#vpc_ks_limits)</roks311-vpc> clusters.
+In addition to the service limitations, make sure to also review the limitations for [classic](#classic_limits) or [VPC](#vpc_ks_limits) clusters.
 {: note}
 
 <table summary="This table contains information on the {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation.">
@@ -96,7 +96,7 @@ Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are 
       <td>You can have a total of 250 IBM Cloud infrastructure file and block storage volumes per account. If you mount more than this amount, you might see an "out of capacity" message when you provision persistent volumes and need to contact your IBM Cloud infrastructure representative. For more FAQs, see the [file](/docs/infrastructure/FileStorage?topic=FileStorage-file-storage-faqs#how-many-volumes-can-i-provision-) and [block](/docs/infrastructure/BlockStorage?topic=BlockStorage-block-storage-faqs#how-many-instances-can-share-the-use-of-a-block-storage-volume-) storage docs.</td>
     </tr>
   </tbody>
-  </table><roks311-vpc>
+  </table>
 
 ## VPC cluster limitations
 {: #vpc_ks_limits}
@@ -153,6 +153,6 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
       <td>VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about).</td>
     </tr>
   </tbody>
-  </table></roks311-vpc>
+  </table>
 
 
