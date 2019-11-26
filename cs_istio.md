@@ -96,7 +96,7 @@ Install the Istio managed add-on in an existing cluster.
 In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4.
 {: shortdesc}
 
-The Istio add-on installs the core components of Istio, including Prometheus. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/).
+The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/).
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `Mixer` provides telemetry collection and policy controls.
   * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
@@ -105,12 +105,13 @@ The Istio add-on installs the core components of Istio, including Prometheus. Fo
 * `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
 * `Galley` validates configuration changes for the other Istio control plane components.
 
-To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/).
+To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://prometheus.io/), [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/).
 
 **Before you begin**</br>
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create a standard Kubernetes version 1.16 or later cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). To use an existing cluster, you must update both the [cluster master to version 1.16](/docs/containers?topic=containers-update#master) and the [worker nodes to version 1.16](/docs/containers?topic=containers-update#worker_node).
 * If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+* In multizone clusters, ensure that you enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 **To use the {{site.data.keyword.cloud_notm}} console:**
 
@@ -224,6 +225,7 @@ In Kubernetes version 1.15 and earlier clusters, you can use only the CLI to ins
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create or use an existing standard Kubernetes version 1.15 or earlier cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon istio`.
 * If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
+* In multizone clusters, ensure that you enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
@@ -552,13 +554,13 @@ The BookInfo sample demonstrates how three of Istio's traffic management compone
 ## Logging, monitoring, tracing, and visualizing Istio
 {: #istio_health}
 
-To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards or deploy LogDNA and Sysdig as third-party services to your worker nodes.
+To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards or deploy LogDNA and Sysdig as third-party services to your worker nodes. You can also launch ControlZ and Envoy dashboards to inspect the performance of the core Istio components, such as Galley, Pilot, Mixer, and Envoy.
 {: shortdesc}
 
-### Launching the Grafana, Jaeger, and Kiali dashboards
+### Launching the Prometheus, Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
-For extra monitoring, tracing, and visualization of Istio, launch the [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) dashboards.
+For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://prometheus.io/), [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) dashboards.
 {: shortdesc}
 
 **Before you begin**
@@ -576,6 +578,27 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Grafana !
     ```
     {: pre}
 
+**Promethueus**</br>
+
+1. Send traffic to your service. For example, if you installed BookInfo, curl the product page microservice.
+  ```
+  curl http://$GATEWAY_URL/productpage
+  ```
+  {: pre}
+
+2. Access the Prometheus dashboard.
+  ```
+  istioctl dashboard prometheus
+  ```
+  {: pre}
+
+3. In Prometheus UI, click **Graph**.
+
+4. In the **Expression** field, enter `istio_requests_total`.
+
+5. Run the query by clicking **Execute**.
+
+</br>
 **Grafana**</br>
 
 1. Access the Grafana dashboard.
@@ -642,6 +665,74 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Grafana !
   {: pre}
 
 3. Enter the user name and passphrase that you defined in step 1. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+
+### Launching the ControlZ component inspection and Envoy sidecar dashboards
+{: #istio_inspect}
+
+To inspect specific components of Istio, launch the [ControlZ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/ops/diagnostic-tools/controlz/) and [Envoy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/commands/istioctl/#istioctl-dashboard-envoy) dashboards.
+{: shortdesc}
+
+The ControlZ dashboard accesses the Istio component ports to provide an interactive view into the internal state of each component. The Envoy dashboard provides configuration information and metrics for an Envoy sidecar proxy that runs in an app pod.
+
+**Before you begin**
+* [Install the `istio` managed add-on](#istio_install) in a cluster.
+* Install the `istioctl` client.
+  1. Download the `istioctl` client.
+    ```
+    curl -L https://istio.io/downloadIstio | sh -
+    ```
+    {: pre}
+
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.4.0
+    ```
+    {: pre}
+
+**ControlZ**</br>
+
+1. Get the pod name for the Istio component that you want to inspect. You can inspect the component pods for `istio-citadel`, `istio-galley`, `istio-pilot`, `istio-policy`, and `istio-telemetry`.
+  ```
+  kubectl get pods -n istio-system | grep istio
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAME                                      READY   STATUS    RESTARTS   AGE
+  istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
+  istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
+  istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
+  istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
+  istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
+  istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
+  istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
+  istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
+  istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
+  ```
+  {: screen}
+
+2. Access the ControlZ dashboard for that component.
+  ```
+  istioctl dashboard controlz <component_pod_name>.istio-system
+  ```
+  {: pre}
+
+</br>
+**Envoy**</br>
+
+1. Get the name of the app pod where you want to inspect the Envoy sidecar container.
+  ```
+  kubectl get pods -n <namespace>
+  ```
+  {: pre}
+
+2. Access the Envoy dashboard for that pod.
+  ```
+  istioctl dashboard envoy <pod-name>.<namespace>
+  ```
+  {: pre}
+
 
 ### Setting up logging with {{site.data.keyword.la_full_notm}}
 {: #istio_health_logdna}

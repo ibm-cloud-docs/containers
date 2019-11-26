@@ -72,7 +72,7 @@ IBM Cloud Kubernetes Service
         cs_remove.md
 
     {: .topicgroup}
-    Managing cluster network traffic for classic clusters
+    Classic: Managing the cluster network
         cs_firewall.md
         cs_network_policy.md
         cs_edge.md
@@ -83,7 +83,7 @@ IBM Cloud Kubernetes Service
         cs_dns.md
 
     {: .topicgroup}
-    Managing network traffic for VPC clusters
+    VPC: Managing the cluster network
         vpc_firewall.md
         vpc_network_policy.md
         vpc_vpn.md
@@ -95,8 +95,9 @@ IBM Cloud Kubernetes Service
         cs_images.md
         cs_app.md
         cs_app_knative.md
-        cs_network_planning.md
-        cs_nodeport.md
+
+    cs_network_planning.md
+    cs_nodeport.md
 
     {: .topicgroup}
     Exposing apps with load balancers
@@ -107,7 +108,7 @@ IBM Cloud Kubernetes Service
         cs_loadbalancer_dns.md
 
     {: .topicgroup}
-    HTTPS load balancing with Ingress application load balancers (ALB)
+    HTTPS load balancing with Ingress application load balancers (ALBs)
         cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md

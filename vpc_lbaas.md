@@ -110,7 +110,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
   <tbody>
   <tr>
   <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type`</td>
-  <td>Annotation to specify a service that accepts public or private requests.  If you do not include this annotation, a public `LoadBalancer` is created.</td>
+  <td>Annotation to specify a service that accepts public or private requests. If you do not include this annotation, a public `LoadBalancer` is created.</td>
   </tr>
   <tr>
   <td>`selector`</td>

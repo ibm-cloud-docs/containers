@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview} 
 
-# Planning in-cluster and external networking for apps
+# Choosing an app exposure service
 {: #cs_network_planning}
 
 With {{site.data.keyword.containerlong}}, you can manage in-cluster and external networking by making apps publicly or privately accessible.
