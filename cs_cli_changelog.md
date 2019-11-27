@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # CLI changelog
 {: #cs_cli_changelog}
@@ -51,7 +51,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td><ul>
 <li>Removes the `kube-audit` log source option from `ibmcloud ks logging config` commands.</li>
 <li>Adds a column to the output of `ibmcloud ks addon-versions` for the minimum required OpenShift version.</li>
-<li>Adds a check to verify that you are logged in to the {{site.data.cloud_notm}} CLI before the command request is issued.</li>
+<li>Adds a check to verify that you are logged in to the {{site.data.keyword.cloud_notm}} CLI before the command request is issued.</li>
 <li>Updates the help text in various languages.</li></ul>
 </td>
 </tr>
