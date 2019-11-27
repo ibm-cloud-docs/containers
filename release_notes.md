@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-11-27"
 
 keywords: kubernetes, iks, release notes
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Release notes
 {: #iks-release}
 
-Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month. 
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
 ## November 2019
@@ -41,15 +41,16 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tbody>
 <tr>
   <td>26 November 2019</td>
-  <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.61](/docs/containers?topic=containers-cs_cli_changelog).</li>
-  <li><strong>Cluster autoscaling for VPC clusters</strong>: You can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca_helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).</li>
-  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544_worker).</li>
-  <li><strong>New! Reservations and limits for PIDs</strong>: Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.</li></ul></td>
+  <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.61](/docs/containers?topic=containers-cs_cli_changelog).</li><roks311-vpc>
+  <li><strong>Cluster add-ons for OpenShift clusters</strong>: The [Kubernetes web terminal](/docs/openshift?topic=openshift-openshift-cli#cli_web) and the [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) add-ons are now available for OpenShift clusters.
+  <li><strong>Cluster autoscaling for VPC clusters</strong>: You can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca_helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).</li></roks311-vpc>
+  <li><strong>New! Reservations and limits for PIDs</strong>: Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.</li>
+  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544_worker).</li></ul></td>
 </tr>
 <tr>
 <td>22 November 2019</td>
 <td><ul>
-<li><strong>Bring your own DNS for load balancers</strong>: Added steps for bringing your own custom domain for [NLBs](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns) in classic clusters and [VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) in VPC clusters.</li>
+<li><strong>Bring your own DNS for load balancers</strong>: Added steps for bringing your own custom domain for [NLBs](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_dns)<roks311-vpc> in classic clusters and [VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns) in VPC clusters.</roks311-vpc></li>
 <li><strong>Gateway appliance firewalls</strong>: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#vyatta_firewall) that you must open in a public gateway device firewall</li>
 <li><strong>Ingress ALB subdomain format</strong>: [Changes are made to the Ingress subdomain](/docs/containers?topic=containers-ingress-about#ingress-resource). New clusters are assigned an Ingress subdomain in the format `<cluster_name>.<globally_unique_account_HASH>-0001.<region>.containers.appdomain.cloud` and an Ingress secret in the format `<cluster_name>.<globally_unique_account_HASH>-0001`. Any existing clusters that use the `<cluster_name>.<region>.containers.mybluemix.net` subdomain are assigned a CNAME record that maps to a `<cluster_name>.<region_or_zone>.containers.appdomain.cloud` subdomain.</li>
 </ul></td>
@@ -60,7 +61,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to 597 and the `ingress-auth` image to build 353](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
 <li><strong>Version changelog</strong>: Master patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544).</li>
 </ul></td>
-</tr>
+</tr><roks311-vpc>
 <tr>
 <td>19 November 2019</td>
 <td><ul>
@@ -68,7 +69,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <li><strong>Fluentd component changes</strong>: The Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).</li>
 <li><strong>Bringing your own Ingress controller in VPC clusters</strong>: Added [steps](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc) for exposing your Ingress controller by creating a VPC load balancer and subdomain.</li>
 </ul></td>
-</tr>
+</tr></roks311-vpc>
 <tr>
 <td>14 November 2019</td>
 <td><strong>New! Diagnostics and Debug Tool add-on</strong>: The [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) is now available as a cluster add-on.</td>

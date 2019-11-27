@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-11-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # Using the managed Istio add-on
 {: #istio}
@@ -29,7 +29,7 @@ subcollection: containers
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
-With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
+With one click, you can get all Istio core components and additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
 
 The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: important}
@@ -64,9 +64,6 @@ When you install the Istio add-on, the Istio control and data planes use the net
 
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
-
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
-{: important}
 
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
 {: tip}
@@ -227,6 +224,8 @@ In Kubernetes version 1.15 and earlier clusters, you can use only the CLI to ins
 * If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
 * In multizone clusters, ensure that you enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
+To enable the Istio add-on:
+
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
 2. Enable the `istio` add-on and optionally the `istio-extras` and `istio-sample-bookinfo` add-ons.
@@ -358,13 +357,11 @@ In Istio version 1.4 and later, BookInfo is not offered as a managed add-on and 
 The four BookInfo microservices include:
 * `productpage` calls the `details` and `reviews` microservices to populate the page.
 * `details` contains book information.
-* `reviews` contains book reviews and calls the `ratings` microservice.
 * `ratings` contains book ranking information that accompanies a book review.
-
-The `reviews` microservice has multiple versions:
-* `v1` does not call the `ratings` microservice.
-* `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
-* `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
+* `reviews` contains book reviews and calls the `ratings` microservice. The `reviews` microservice has multiple versions:
+  * `v1` does not call the `ratings` microservice.
+  * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
+  * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
 The deployment YAMLs for each of these microservices are modified so that Envoy sidecar proxies are pre-injected as containers into the microservices' pods before they are deployed. For more information about manual sidecar injection, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/sidecar-injection/). The BookInfo app is also already exposed on a public IP address by an Istio Gateway. Although the BookInfo app can help you get started, the app is not meant for production use.
 
@@ -489,17 +486,20 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 ### Exposing BookInfo by using an IBM-provided subdomain
 {: #istio_expose_bookinfo}
 
-When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a subdomain for the `istio-ingressgateway` load balancer IP address through which you can publicly access BookInfo.
+When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a subdomain for the `istio-ingressgateway` load balancer IP address in classic clusters or the hostname in VPC clusters through which you can publicly access BookInfo.
 {: shortdesc}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following steps are supported for classic clusters only. In VPC clusters, the `istio-ingressgateway` is already assigned a hostname instead of an IP address by the VPC load balancer for your cluster. You can see the hostname by running `kubectl -n istio-system get service istio-ingressgateway -o wide` and looking for the **EXTERNAL-IP** in the output. Then, access BookInfo by opening `http://<host_name>/productpage` in a browser.
-{: note}
-
-1. Register the IP address for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
-  ```
-  ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip $INGRESS_IP
-  ```
-  {: pre}
+1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
+  * Classic:
+    ```
+    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip $INGRESS_IP
+    ```
+    {: pre}
+  * VPC:
+    ```
+    ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host $GATEWAY_URL
+    ```
+    {: pre}
 
 2. Verify that the subdomain is created.
   ```
@@ -516,11 +516,11 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 
 3. In a web browser, open the BookInfo product page.
   ```
-  http://<host_name>/productpage
+  https://<subdomain>/productpage
   ```
   {: codeblock}
 
-4. Try refreshing the page several times. The requests to `http://<host_name>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+4. Try refreshing the page several times. The requests to `https://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
 
 
 ### Understanding what happened
