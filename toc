@@ -101,6 +101,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Exposing apps with load balancers
+        cs_loadbalancer_qs.md
         vpc_lbaas.md
         cs_loadbalancer_about.md
         cs_loadbalancer.md
@@ -109,6 +110,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     HTTPS load balancing with Ingress application load balancers (ALBs)
+        cs_ingress_qs.md
         cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md

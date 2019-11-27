@@ -492,12 +492,12 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
   * Classic:
     ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip $INGRESS_IP
+    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
     ```
     {: pre}
   * VPC:
     ```
-    ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host $GATEWAY_URL
+    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
     ```
     {: pre}
 
