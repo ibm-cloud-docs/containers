@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # Setting up the CLI
 {: #cs_cli_install}
@@ -474,5 +474,17 @@ To install and launch the Kubernetes web terminal:
 2.  From the upper right of the cluster detail page, click the **Web terminal** button.
 3.  Click **Install**. It might take a few minutes for the terminal add-on to install.
 4.  Click the **Web terminal** button again. The terminal opens in your browser.
+5.  VPC clusters: Configure access to external endpoints, such as the {{site.data.keyword.containerlong_notm}} API, from the web terminal. Choose between the following options:
+    * Enable a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) on each VPC subnet that your worker nodes are attached to. This ensures that the `kube-terminal` pod in your cluster is always deployed to a worker node on a subnet that has external access.
+    * Edit the `KUBECONFIG` file to use the private service endpoint for your cluster.
+      1. In the web terminal, edit the `KUBECONFIG` file.
+        ```
+        vim $KUBECONFIG
+        ```
+        {: pre}
+      2. Type `i` to switch to insert mode so that you can edit the file.
+      3. In the service endpoint URL for the `server` field, add `private.` before the region. For example, if the service endpoint URL is `https://c1.us-south.containers.cloud.ibm.com:20267`, change it to `https://c1.private.us-south.containers.cloud.ibm.com:20267`.
+      4. Type `Esc` (escape key) to exit insert mode.
+      5. Type `:wq` to save and exit your file.
 
 Next time, you can launch the Kubernetes Terminal simply by clicking the **Web terminal** button.
