@@ -1152,7 +1152,7 @@ ibmcloud ks cluster ls [--provider classic|vpc-classic] [--location LOCATION] [-
 <dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks supported-locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
+<dd>Prints the command output in JSON format. This value is optional. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>

@@ -50,7 +50,7 @@ Quickly expose your app to the Internet by creating a layer 4 load balancer.
   my-lb-svc   LoadBalancer   172.XX.XXX.XX   169.XX.XXX.XX   80:31224/TCP   23s
   ```
   {: screen}
-  
+
 
 3. Curl your app's IP address.
   ```
