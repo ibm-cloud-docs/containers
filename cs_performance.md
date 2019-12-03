@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-27"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks
 
@@ -341,3 +341,81 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
   {: codeblock}
 
 6. Apply the MTU changes to your worker nodes by [rebooting all worker nodes in your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot).
+
+<br />
+
+
+## Disabling the portmap plug-in
+{: #calico-portmap}
+
+The `portmap` plug-in for the Calico container network interface (CNI) enables you to use a `hostPort` to expose your app pods on a specific port on the worker node. Prevent Iptables performance issues by removing the portmap plug-in from your cluster's Calico CNI configuration.
+{: shortdesc}
+
+When you have a large number of services in your cluster, such as more than 500 services, or a large number of ports on services, such as more than 50 ports per service for 10 or more services, a large number of Iptables rules are generated for the Calico and Kubernetes network policies for these services. A large number of Iptables rules can lead to performance issues for the portmap plug-in, and might prevent future updates of Iptables rules or cause the `calico-node` container to restart when no lock is received to make Iptables rules updates within a specified time. To prevent these performance issues, you can disable the portmap plug-in by removing it from your cluster's Calico CNI configuration.
+
+If you must use `hostPorts`, do not disable the portmap plug-in.
+{: note}
+
+To disable the portmap plug-in:
+
+1. Edit the configuration for the `calico-config` configmap resource.
+  ```
+  kubectl edit cm calico-config -n kube-system
+  ```
+  {: pre}
+
+2. In the `data.cni_network_config.plugins` section after the `kubernetes` plug-in, remove the `portmap` plug-in section. After you remove the `portmap` section, the configuration looks like the following:
+  ```
+  apiVersion: v1
+  data:
+    calico_backend: bird
+    cni_network_config: |-
+      {
+        "name": "k8s-pod-network",
+        "cniVersion": "0.3.1",
+        "plugins": [
+          {
+            "type": "calico",
+            "log_level": "info",
+            "etcd_endpoints": "__ETCD_ENDPOINTS__",
+            "etcd_key_file": "__ETCD_KEY_FILE__",
+            "etcd_cert_file": "__ETCD_CERT_FILE__",
+            "etcd_ca_cert_file": "__ETCD_CA_CERT_FILE__",
+            "mtu": __CNI_MTU__,
+            "ipam": {
+                "type": "calico-ipam"
+            },
+            "container_settings": {
+                "allow_ip_forwarding": true
+            },
+            "policy": {
+                "type": "k8s"
+            },
+            "kubernetes": {
+                "kubeconfig": "__KUBECONFIG_FILEPATH__"
+            }
+          }
+        ]
+      }
+    etcd_ca: /calico-secrets/etcd-ca
+    ...
+  ```
+  {: codeblock}
+
+3. Apply the change to your cluster by restarting all `calico-node` pods.
+  * Clusters that run Kubernetes version 1.15 or later:
+    ```
+    kubectl rollout restart daemonset -n kube-system calico-node
+    ```
+    {: pre}
+  * Clusters that run Kubernetes version 1.14 or earlier:
+    1. Get the names of the `calico-node` pods in your cluster.
+      ```
+      kubectl get pods -n kube-system | grep calico-node
+      ```
+      {: pre}
+    2. Restart all `calico-node` pods by manually deleting them. Separate each pod name with one space.
+      ```
+      kubectl delete pods -n kube-system <pod1> <pod2> ...
+      ```
+      {: pre}
