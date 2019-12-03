@@ -26,7 +26,7 @@ subcollection: containers
 # Planning your worker node setup
 {: #planning_worker_nodes}
 
-{{site.data.keyword.containerlong}} provides different worker node flavors and isolation levels so that you can choose the flavor and isolation that best meet the requirements of the workloads that you want to run in the cloud. 
+{{site.data.keyword.containerlong}} provides different worker node flavors and isolation levels so that you can choose the flavor and isolation that best meet the requirements of the workloads that you want to run in the cloud.
 {:shortdesc}
 
 A worker node flavor describes the compute resources, such as CPU, memory, and disk capacity that you get when you provision your worker node. Worker nodes of the same flavor are grouped in worker node pools. The total number of worker nodes in a cluster determine the compute capacity that is available to your apps in the cluster.
@@ -353,7 +353,7 @@ To review how much compute resources are currently used on your worker node, run
 
 | Total PIDs | % reserved | % available to pod |
 |:-----------------|:-----------------|:-----------------|
-| < 200,000 | 20% PIDs | 35% PIDs | 
+| < 200,000 | 20% PIDs | 35% PIDs |
 | 200,000 - 499,999 | 10% PIDs  | 40% PIDs |
 | ≥ 500,000 | 5% PIDs  | 45% PIDs  |
 | <code>b3c.4x16</code> worker node: 126,878 PIDs | 25,376 PIDs (20%) | 44,407 PIDS (35%)  |
@@ -367,5 +367,6 @@ To review how much compute resources are currently used on your worker node, run
 
 Sample worker node values are provided for example only. Your actual usage might vary slightly.
 {: note}
+
 
 
