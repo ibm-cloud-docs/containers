@@ -186,5 +186,6 @@ image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a V
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 
+<br>
 
 

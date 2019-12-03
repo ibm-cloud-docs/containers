@@ -69,7 +69,6 @@ Quickly expose your app to the Internet by creating a layer 4 load balancer.
   NLB hostname was created as mycluster-35366fb2d3d90fd50548180f69e7d12a-0001.us-south.containers.appdomain.cloud
   ```
   {: screen}
-  
 
 For more information, see:
 * [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)

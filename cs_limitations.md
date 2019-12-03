@@ -35,7 +35,6 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 
 ## Service limitations
 {: #tech_limits}
-<br>
 
 {{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use. 
 {: shortdesc}

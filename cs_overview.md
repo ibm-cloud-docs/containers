@@ -53,7 +53,6 @@ With {{site.data.keyword.containerlong_notm}}, you can create your cluster of co
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
 
-
 **Where can I learn more about the service?** </br>
 Review the following links to find out more about the benefits and responsibilities when you use {{site.data.keyword.containerlong_notm}}.
 

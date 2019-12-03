@@ -41,6 +41,7 @@ Your users are less likely to experience downtime when you distribute your apps 
 {: #single_zone}
 
 
+
 Single zone clusters can be created in one of the supported [single zone cities or multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). To improve availability for your app and to allow failover for the case that one worker node is not available in your cluster, add additional worker nodes to your single zone cluster.
 {: shortdesc}
 
@@ -87,6 +88,8 @@ If you created a VPC multizone cluster, the subnets in each zone are automatical
 **Can I convert my single zone cluster to a multizone cluster?**</br>
 
 To convert a single zone cluster to a multizone cluster, your cluster must be set up in one of the supported [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). VPC clusters can be set up only in multizone metro locations, and as such can always be converted from a single zone cluster to a multizone cluster. Classic clusters that are set up in a single zone data center cannot be converted to a multizone cluster. To convert a single zone cluster to a multizone cluster, see [Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone).
+
+
 
 
 

@@ -38,6 +38,7 @@ kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --
 ```
 {: pre}
 
+
 ## Setting up an NLB 1.0 in a multizone cluster
 {: #multi_zone_config}
 

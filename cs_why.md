@@ -56,7 +56,6 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 
 
 
-
 ## Comparison of offerings and their combinations
 {: #differentiation}
 

@@ -40,7 +40,6 @@ After [getting started](/docs/containers?topic=containers-getting-started), you 
 <br />
 
 
-
 ## Sample commands
 {: #cluster_create_samples}
 

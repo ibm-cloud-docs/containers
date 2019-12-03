@@ -41,7 +41,6 @@ First time creating a cluster? First, try out the [tutorial for creating a VPC c
 ## Understanding network basics of VPC clusters
 {: #vpc_basics}
 
-
 When you create your cluster, you must choose a networking setup so that certain cluster components can communicate with each other and with networks or services outside of the cluster.
 {: shortdesc}
 

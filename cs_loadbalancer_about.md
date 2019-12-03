@@ -42,6 +42,8 @@ When you expose an app with an NLB service, your app is automatically made avail
 <br />
 
 
+
+
 ## Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs
 {: #comparison}
 
