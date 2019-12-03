@@ -69,12 +69,13 @@ Quickly expose your app to the Internet by creating a layer 4 load balancer.
   NLB hostname was created as mycluster-35366fb2d3d90fd50548180f69e7d12a-0001.us-south.containers.appdomain.cloud
   ```
   {: screen}
+  
 
 For more information, see:
-* [<ff-roks311-vpc>Classic: </ff-roks311-vpc>About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
-* [<ff-roks311-vpc>Classic: </ff-roks311-vpc>Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
+* [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
+* [Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
 * [Classic: Setting up DSR load balancing with an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-v2)
-* [<ff-roks311-vpc>Classic: </ff-roks311-vpc>Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname)
+* [Classic: Registering a DNS subdomain for an NLB](/docs/containers?topic=containers-loadbalancer_hostname)
 
 ## Exposing an app by using a VPC load balancer in a VPC cluster
 {: #lb_qs_vpc}

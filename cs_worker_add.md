@@ -30,6 +30,7 @@ subcollection: containers
 To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster. 
 {:shortdesc}
 
+
 When you create a cluster, the worker nodes are provisioned in a worker pool. After cluster creation, you can add more worker nodes to a pool by resizing it or by adding more worker pools. By default, the worker pool exists in one zone. Clusters that have a worker pool in only one zone are called single zone clusters. When you add more zones to the cluster, the worker pool exists across the zones. Clusters that have a worker pool that is spread across more than one zone are called multizone clusters.
 
 <p class="tip">If you have a multizone cluster, keep its worker node resources balanced. Make sure that all the worker pools are spread across the same zones, and add or remove workers by resizing the pools instead of adding individual nodes.</br></br>
@@ -84,7 +85,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 <br />
 
 
-<ff-roks311-vpc>
+
 ## Adding worker nodes in VPC clusters
 {: #vpc_pools}
 
@@ -238,7 +239,7 @@ Add worker nodes to your classic cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
-{: #add_pool}</ff-roks311-vpc>
+{: #add_pool}
 
 You can add worker nodes to your classic cluster by creating a new worker pool.
 {:shortdesc}
@@ -304,12 +305,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    {: screen}
 
 <br />
-<ff-roks311-vpc>
+
 
 ### Adding a zone to a worker pool
-{: #add_zone}</ff-roks311-vpc>
+{: #add_zone}
 
-You can span your<ff-roks311-vpc> classic</ff-roks311-vpc> cluster across multiple zones within one region by adding a zone to your existing worker pool.
+You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {:shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.

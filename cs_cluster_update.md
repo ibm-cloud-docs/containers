@@ -73,6 +73,7 @@ The following diagram shows the process that you can take to update your master.
 Figure 1. Updating Kubernetes master process diagram
 
 {: #update_master}
+
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
 To update the Kubernetes master _major_ or _minor_ version:
@@ -85,21 +86,21 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 4.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
-When the master update is complete, you can update your worker nodes<ff-roks311-vpc>, depending on the type of cluster infrastructure provider that you have.
+When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
 *  [Updating classic worker nodes](#worker_node).
-*  [Updating VPC worker nodes](#vpc_worker_node)</ff-roks311-vpc>.
+*  [Updating VPC worker nodes](#vpc_worker_node).
 
 <br />
 
 
-## Updating<ff-roks311-vpc> classic</ff-roks311-vpc> worker nodes
+## Updating classic worker nodes
 {: #worker_node}
 
-You received a notification to update your worker nodes<ff-roks311-vpc> in a [classic infrastructure](/docs/containers?topic=containers-infrastructure_providers) cluster</ff-roks311-vpc>. What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync.
-{: shortdesc}<ff-roks311-vpc>
+You received a notification to update your worker nodes in a [classic infrastructure](/docs/containers?topic=containers-infrastructure_providers) cluster. What does that mean? As security updates and patches are put in place for the API server and other master components, you must be sure that the worker nodes remain in sync.
+{: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Applies to only classic clusters. Have a VPC cluster? See [Updating VPC worker nodes](#vpc_worker_node) instead.
-{: note}</ff-roks311-vpc>
+{: note}
 
 **What happens to my apps during an update?**</br>
 If you run apps as part of a deployment on worker nodes that you update, the apps are rescheduled onto other worker nodes in the cluster. These worker nodes might be in a different worker pool, or if you have stand-alone worker nodes, apps might be scheduled onto stand-alone worker nodes. To avoid downtime for your app, you must ensure that you have enough capacity in the cluster to carry the workload.
@@ -115,7 +116,7 @@ When the config map is not defined, the default is used. By default, a maximum o
 ### Prerequisites
 {: #worker-up-prereqs}
 
-Before you update your<ff-roks311-vpc> classic infrastructure</ff-roks311-vpc> worker nodes, review the prerequisite steps.
+Before you update your classic infrastructure worker nodes, review the prerequisite steps.
 {: shortdesc}
 
 Updates to worker nodes can cause downtime for your apps and services. Your worker node machine is reimaged, and data is deleted if not [stored outside the pod](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
@@ -128,10 +129,10 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - Consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) so that your cluster has enough capacity to rescheduling your workloads during the update.
 - Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
 
-### Updating<ff-roks311-vpc> classic</ff-roks311-vpc> worker nodes in the CLI with a configmap
+### Updating classic worker nodes in the CLI with a configmap
 {: #worker-up-configmap}
 
-Set up a configmap to perform a rolling update of your<ff-roks311-vpc> classic</ff-roks311-vpc> worker nodes.
+Set up a configmap to perform a rolling update of your classic worker nodes.
 {: shortdesc}
 
 1.  Complete the [prerequisite steps](#worker-up-prereqs).
@@ -281,7 +282,7 @@ Next steps:
 -   Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
 -   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
 
-### Updating<ff-roks311-vpc> classic</ff-roks311-vpc> worker nodes in the console
+### Updating classic worker nodes in the console
 {: #worker_up_console}
 
 After you set up the config map for the first time, you can then update worker nodes by using the {{site.data.keyword.cloud_notm}} console.
@@ -295,7 +296,7 @@ To update worker nodes from the console:
 5.  From the action bar, click **Update**.
 
 <br />
-<ff-roks311-vpc>
+
 
 ## Updating VPC worker nodes
 {: #vpc_worker_node}
@@ -387,7 +388,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 5.  From the action bar, click **Update**.
 
 <br />
-</ff-roks311-vpc>
+
 
 ## Updating flavors (machine types)
 {: #machine_type}
@@ -443,17 +444,17 @@ To update flavors:
 
 3. Create a worker node with the new machine type.
    - **For worker nodes in a worker pool**:
-     1. Create a worker pool with the number of worker nodes that you want to replace.<ff-roks311-vpc>
-        * Classic clusters:</ff-roks311-vpc>
+     1. Create a worker pool with the number of worker nodes that you want to replace.
+        * Classic clusters:
           ```
           ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
           ```
-          {: pre}<ff-roks311-vpc>
+          {: pre}
         * VPC clusters:
           ```
           ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
           ```
-          {: pre}</ff-roks311-vpc>
+          {: pre}
 
      2. Verify that the worker pool is created.
         ```
@@ -461,17 +462,17 @@ To update flavors:
         ```
         {: pre}
 
-     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).<ff-roks311-vpc>
-       * Classic clusters:</ff-roks311-vpc>
+     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
+       * Classic clusters:
          ```
          ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
          ```
-         {: pre}<ff-roks311-vpc>
+         {: pre}
        * VPC clusters:
          ```
          ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
          ```
-         {: pre}</ff-roks311-vpc>
+         {: pre}
 
    - **Deprecated: For stand-alone worker nodes**:
        ```

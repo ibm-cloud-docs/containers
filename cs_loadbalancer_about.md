@@ -23,11 +23,11 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview} 
 
-# <ff-roks311-vpc>Classic: </ff-roks311-vpc>About network load balancers (NLBs)
-{: #loadbalancer-about}<ff-roks311-vpc>
+# Classic: About network load balancers (NLBs)
+{: #loadbalancer-about}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Network load balancers can be created in classic clusters only. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
-{: note}</ff-roks311-vpc>
+{: note}
 
 When you create a standard cluster, {{site.data.keyword.containerlong}} automatically provisions a portable public subnet and a portable private subnet.
 {: shortdesc}
@@ -40,7 +40,6 @@ To make an app accessible through both a portable public and a portable private 
 When you expose an app with an NLB service, your app is automatically made available over the service's NodePorts too. [NodePorts](/docs/containers?topic=containers-nodeport) are accessible on every public and private IP address of every worker node within the cluster. To block traffic to NodePorts while you are using an NLB, see [Controlling inbound traffic to network load balancer (NLB) or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 
 <br />
-
 
 
 ## Comparison of basic and DSR load balancing in version 1.0 and 2.0 NLBs
