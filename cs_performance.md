@@ -246,7 +246,7 @@ By default, the Calico network plug-in in your {{site.data.keyword.containerlong
 
 You can change the MTU on the tunnel interface `tunl0`, which is used for pod to pod communication, and the MTU on the `caliXXXXXXXX` `veth` interface of each worker node.
 
-1. Edit the configuration file for the `calico-config` configmap resource.
+1. Edit the `calico-config` configmap resource.
   ```
   kubectl edit cm calico-config -n kube-system
   ```
@@ -358,7 +358,7 @@ If you must use `hostPorts`, do not disable the portmap plug-in.
 
 To disable the portmap plug-in:
 
-1. Edit the configuration for the `calico-config` configmap resource.
+1. Edit the `calico-config` configmap resource.
   ```
   kubectl edit cm calico-config -n kube-system
   ```
