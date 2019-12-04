@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -43,7 +43,6 @@ Add the `dedicated=edge` label to two or more worker nodes on each public or pri
 In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy to edge worker nodes. In Kubernetes 1.13 and earlier, public and private ALBs and public NLBs can deploy to edge nodes, but private NLBs must deploy to non-edge worker nodes in your cluster only.
 {: note}
 
-
 Trying out a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
 {: tip}
 
@@ -63,6 +62,7 @@ Before you begin:
         "labels": {"dedicated":"edge"},
         "state": "labels"
       }</pre></p>
+  <p class="important">If you want to ensure that ALB pods are never scheduled to non-edge worker nodes under any circumstances, you must create or use an existing worker pool that has at least three worker nodes per zone. During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. However, ALB pods have anti-affinity rules that do not permit a pod to deploy to a worker node where another ALB pod already exists. If you have only two worker nodes per zone, both ALB pod replicas already exist on those worker nodes, so the new ALB pod must be scheduled on a non-edge worker node. When three worker nodes are present in a zone, the new ALB pod can be scheduled to the third worker node. Then, the old ALB pod is removed.</p>
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
   * To check the worker pool:
@@ -183,7 +183,7 @@ Before you begin:
 <br />
 
 
-## Preventing workloads from running on edge worker nodes
+## Preventing app workloads from running on edge worker nodes
 {: #edge_workloads}
 
 A benefit of edge worker nodes is that they can be specified to run networking services only.
@@ -196,7 +196,7 @@ Trying out a gateway-enabled cluster? See [Isolating networking workloads to edg
 {: tip}
 
 Before you begin:
-- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform). 
+- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To prevent other workloads from running on edge worker nodes:
