@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, help, debug
 
@@ -249,7 +249,7 @@ Review the options to debug your worker nodes and find the root causes for failu
   </tbody>
 </table>
 </p></li>
-<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre">ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id></p></li>
+<li>List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.<p class="pre"><code>ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id></code></p></li>
 </ol>
 
 <br />
