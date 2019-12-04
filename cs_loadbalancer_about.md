@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -110,7 +110,7 @@ The following diagram shows how an NLB 1.0 directs communication from the intern
 
 2. The NLB receives the request. The NLB is able to receive the request because the NLB pods are scheduled to a worker in the `gateway` worker pool, which has public network connectivity.
 
-3. The NLB forwards the request to the private IP address of the app pod over the private network. The source IP address of the request package is changed to the public IP address of the gateway worker node where the NLB is deployed. If multiple app instances are deployed in the cluster, the NLB routes the requests between the app pods.
+3. The NLB forwards the request to the IP address of the worker node where an app pod is deployed over the private network. The source IP address of the request package is changed to the public IP address of the gateway worker node where the NLB is deployed. If multiple app instances are deployed in the cluster, the NLB routes the requests between the app pods.
 
 4. When the app returns a response, it uses the IP address of the gateway worker node where the NLB that forwarded the client request exists. The NLB then sends the response packet through the gateway to the client.
 
