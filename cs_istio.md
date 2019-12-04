@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-27"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -67,16 +67,6 @@ The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_n
 
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
 {: tip}
-
-### Limitations
-{: #istio_limitations}
-
-Before you install the managed Istio add-on, review the following limitations.
-{: shortdesc}
-
-* You cannot enable the managed Istio add-on in your cluster if you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
-* When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
-* You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 
 <br />
 
@@ -1607,6 +1597,20 @@ Refresh your `IstioControlPlane` resource. The Istio operator reconciles the ins
 kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
 ```
 {: pre}
+
+## Limitations
+{: #istio_limitations}
+
+Review the following limitations for the managed Istio add-on.
+{: shortdesc}
+
+* You cannot enable the managed Istio add-on in your cluster if you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster.
+* When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
+* You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
+* The following features are not supported in the managed Istio add-on:
+  * [Policy enforcement](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/)
+  * [Secret discovery service (SDS)](https://istio.io/docs/tasks/security/citadel-config/auth-sds/)
+  * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/)
 
 ## What's next?
 {: #istio_next}
