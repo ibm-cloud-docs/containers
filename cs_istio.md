@@ -1608,9 +1608,9 @@ Review the following limitations for the managed Istio add-on.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
-  * [Policy enforcement](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/)
-  * [Secret discovery service (SDS)](https://istio.io/docs/tasks/security/citadel-config/auth-sds/)
-  * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/)
+  * [Policy enforcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/)
+  * [Secret discovery service (SDS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/security/citadel-config/auth-sds/)
+  * [Any features by the community that are in alpha or beta release stages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/about/feature-stages/)
 
 ## What's next?
 {: #istio_next}
