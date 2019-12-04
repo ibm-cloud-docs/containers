@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -34,12 +34,12 @@ Set up a Load Balancer for VPC to expose your app on the public or private netwo
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
 
-When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc) is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. 
+When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc) is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes.
 {: shortdesc}
 
 The VPC load balancer serves as the external entry point for incoming requests for the app.
-* If you create a public Kubernetes `LoadBalancer` service, you can access your app from the internet through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
-* If you create a private Kubernetes `LoadBalancer` service, your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`.
+* If you create a **public** Kubernetes `LoadBalancer` service, you can access your app from the internet through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
+* If you create a **private** Kubernetes `LoadBalancer` service, your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`.
 
 The following diagram illustrates how a user accesses an app from the internet through the VPC load balancer.
 
@@ -266,7 +266,7 @@ For more information about using load balancers for VPC, see the VPC docs for [p
 * VPC load balancers do not currently support UDP.
 * Private VPC load balancers do not accept all traffic, only RFC 1918 traffic.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.
-* The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster.
+* The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster. If your cluster has more than 50 worker nodes, create one load balancer per zone. In the YAML file for each load balancer, add the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"` annotation. Each load balancer can forward requests to apps on the worker nodes in that zone only.
 * When you define the configuration YAML file for a Kubernetes `LoadBalancer` service, the following annotations and settings are not supported:
     * `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"`
     * `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`
