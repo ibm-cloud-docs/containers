@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -1093,7 +1093,7 @@ Before you begin:
 *   Make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 *   Review the [required and suggested classic infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
 
-You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli). 
+You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli).
 
 ### Assigning infrastructure access through the console
 {: #infra_console}
