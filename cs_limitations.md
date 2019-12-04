@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -35,9 +35,8 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 
 ## Service limitations
 {: #tech_limits}
-<br>
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use. 
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use.
 {: shortdesc}
 
 In addition to the service limitations, make sure to also review the limitations for [classic](#classic_limits) or [VPC](#vpc_ks_limits) clusters.
@@ -155,5 +154,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
     </tr>
   </tbody>
   </table>
+
+
 
 

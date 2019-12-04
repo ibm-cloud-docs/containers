@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -69,6 +69,7 @@ You can build containers from trusted images that are signed and stored in {{sit
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
+
 
 
 

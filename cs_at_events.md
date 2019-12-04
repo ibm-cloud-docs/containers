@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, audit
 
@@ -33,6 +33,7 @@ You can view, manage, and audit user-initiated activities in your {{site.data.ke
 
 You can also collect Kubernetes API audit logs from your cluster and forward them to {{site.data.keyword.la_full_notm}}. To access Kubernetes audit logs, you must [create an audit webhook in your cluster](/docs/containers?topic=containers-health#webhook_logdna).
 {: tip}
+
 
 ## Tracking cluster management events
 {: #cluster-events}

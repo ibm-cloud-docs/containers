@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -25,6 +25,7 @@ subcollection: containers
 
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
+
 
 Refer to these commands to create and manage **both community Kubernetes or OpenShift clusters** in {{site.data.keyword.containerlong}}.
 {:shortdesc}
@@ -126,7 +127,7 @@ Check out the following changes between each version of the CLI plug-in:
 
 <br />
 
-
+<br>
 
 
 
@@ -1151,7 +1152,7 @@ ibmcloud ks cluster ls [--provider classic|vpc-classic] [--location LOCATION] [-
 <dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks supported-locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
+<dd>Prints the command output in JSON format. This value is optional. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -1812,7 +1813,7 @@ workerNum: <em>&lt;number_workers&gt;</em>
 diskEncryption: <em>false</em></code></pre></dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd> 
+<dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd>
 
 <dt><code>--machine-type <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
@@ -4292,6 +4293,7 @@ The `logging config refresh` alias for this command is deprecated.
 ```
 ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-s]
 ```
+{: pre}
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic

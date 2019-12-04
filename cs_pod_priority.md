@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks
 
@@ -34,6 +34,7 @@ With pod priority and preemption, you can configure priority classes to indicate
 As a cluster administrator, you want to control which pods are more critical to your cluster workload. Priority classes can help you control the Kubernetes scheduler decisions to favor higher priority pods over lower priority pods. The Kubernetes scheduler can even preempt (remove) lower priority pods that are running so that pending higher priority pods can be scheduled. 
 
 By setting pod priority, you can help prevent lower priority workloads from impacting critical workloads in your cluster, especially in cases where the cluster starts to reach its resource capacity.
+
 
 Make sure that you have [set up proper user access](/docs/containers?topic=containers-users#users) to your cluster, and if applicable, [pod security policies (PSPs)](/docs/containers?topic=containers-psp). Access policies and PSPs can help prevent untrusted users from deploying high priority pods that prevent other pods from scheduling.
 {: tip}

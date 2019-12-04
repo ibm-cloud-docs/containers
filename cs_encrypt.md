@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -266,6 +266,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that the app code and data of your containerized workloads are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.
 {: shortdesc}
 
+
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Applies to only classic clusters. VPC clusters cannot have bare metal worker nodes, which are required to use {{site.data.keyword.datashield_short}}.
 {: note}
 
@@ -273,7 +274,9 @@ When it comes to protecting your data, encryption is one of the most popular and
 
 If you or your company require data sensitivity due to internal policies, government regulations, or industry compliance requirements, this solution might help you to move to the cloud. Example solutions include financial and healthcare institutions, or countries with government policies that require on-premises cloud solutions.
 
+
 To get started, provision an SGX-enabled bare metal worker cluster with a [supported flavor for {{site.data.keyword.datashield_short}}](/docs/services/data-shield?topic=data-shield-getting-started).
 
+<br>
 
 

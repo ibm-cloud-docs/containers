@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -72,7 +72,6 @@ Example actions that are permitted by infrastructure roles are viewing the detai
 Example actions that are permitted by Cloud Foundry roles are creating a new Cloud Foundry service instance or binding a Cloud Foundry service instance to a cluster. To learn more, see the available [org and space roles](/docs/iam?topic=iam-cfaccess) or the steps for [managing Cloud Foundry access](/docs/iam?topic=iam-mngcf) in the {{site.data.keyword.cloud_notm}} IAM documentation.</dd>
 </dl>
 </br>
-
 
 ### Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM
 {: #iam_individuals_groups}
@@ -1094,7 +1093,7 @@ Before you begin:
 *   Make sure that you are the account owner or have **Super User** and all device access. You can't grant a user access that you don't have.
 *   Review the [required and suggested classic infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
 
-You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli). 
+You can grant classic infrastructure access through the [console](#infra_console) or [CLI](#infra_cli).
 
 ### Assigning infrastructure access through the console
 {: #infra_console}

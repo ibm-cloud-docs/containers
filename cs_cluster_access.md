@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, clusters
 
@@ -24,6 +24,7 @@ subcollection: containers
 
 # Accessing Kubernetes clusters
 {: #access_cluster}
+
 
 After your {{site.data.keyword.containerlong}} cluster is created, you can begin working with your cluster by accessing the cluster.
 {: shortdesc}

@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -28,6 +28,7 @@ subcollection: containers
 {: #infrastructure_providers}
 
 With {{site.data.keyword.containerlong}}, you can create a cluster from a variety of infrastructure providers. All the worker nodes in a cluster must be from the same provider. Originally, {{site.data.keyword.containerlong_notm}} provisioned your worker nodes in a single provider, classic infrastructure. As of **19 August 2019**, you can choose from Classic or Virtual Private Cloud (VPC) Generation 1 compute infrastructure providers.
+
 
 <table summary="The rows are read from left to right, with the area of comparison in column one, classic infrastructure provider in column two, and VPC Generation 1 compute infrastructure provider in column three.">
 <caption>Infrastructure providers for {{site.data.keyword.containerlong_notm}} clusters</caption>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-02"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -260,7 +260,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
   <dt id="services">{{site.data.keyword.cloud_notm}} services</dt>
     <dd>Each service that you integrate with your cluster has its own pricing model. Review each product documentation and use the {{site.data.keyword.cloud_notm}} console to [estimate costs](/docs/billing-usage?topic=billing-usage-cost#cost).</dd>
   <dt id="roks_charges">Red Hat OpenShift on IBM Cloud</dt>
-    <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system, which increases the price of the [worker node machines](#nodes). An OpenShift license is also included, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. Each OpenShift cluster has an internal registry that includes a file storage volume to store the images in. For more information, see [What am I charged for when I use an OpenShift cluster?](/docs/openshift?topic=openshift-faqs#openshift_charges). </dd>
+    <dd>If you create a [Red Hat OpenShift on IBM Cloud cluster](/docs/openshift?topic=openshift-openshift_tutorial), your worker nodes are installed with the Red Hat Enterprise Linux operating system. An OpenShift license is also included, which incurs monthly costs in addition to the hourly VM costs or monthly bare metal costs. Each OpenShift cluster has an internal registry that includes a file storage volume to store the images in. For more information, see [What am I charged for when I use an OpenShift cluster?](/docs/openshift?topic=openshift-faqs#openshift_charges). </dd>
 </dl>
 <br><br>
 

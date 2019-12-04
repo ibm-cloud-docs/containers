@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -26,8 +26,18 @@ subcollection: containers
 # Release notes
 {: #iks-release}
 
-Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month. 
+Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
+
+
+## December 2019
+{: #dec19}
+
+| Date | Description |
+| ---- | ----------- |
+| 04 December 2019 | <ul><li>**Exposing apps with load balancers or Ingress ALBs**: Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-ingress-qs).</li><li>**Kubernetes web terminal for VPC clusters**: To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cs_cli_install#cli_web).</li><li>**Monitoring Istio**: Added [steps](/docs/containers?topic=containers-istio#istio_inspect) to launch the ControlZ component inspection and Envoy sidecar dashboards for the Istio managed add-on.</li><li>**Tuning network performance**: Added [steps](/docs/containers?topic=containers-kernel#calico-portmap) for disabling the `portmap` plugin for for the Calico container network interface (CNI).</li><li>**Use the internal KVDB in Portworx**: Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb).</li></ul>|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in December 2019"}
 
 ## November 2019
 {: #nov19}
@@ -43,8 +53,8 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td>26 November 2019</td>
   <td><ul><li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.61](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>Cluster autoscaling for VPC clusters</strong>: You can [set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca_helm) on clusters that run on the first generation of compute for Virtual Private Cloud (VPC).</li>
-  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544_worker).</li>
-  <li><strong>New! Reservations and limits for PIDs</strong>: Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.</li></ul></td>
+  <li><strong>New! Reservations and limits for PIDs</strong>: Worker nodes that run Kubernetes version 1.14 or later set [process ID (PID) reservations and limits that vary by flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node), to help prevent malicious or runaway apps from consuming all available PIDs.</li>
+  <li><strong>Version changelog</strong>: Worker node patch updates are available for Kubernetes [1.16.3_1518](/docs/containers?topic=containers-changelog#1163_1518_worker), [1.15.6_1525](/docs/containers?topic=containers-changelog#1156_1525_worker), [1.14.9_1541](/docs/containers?topic=containers-changelog#1149_1541_worker), and [1.13.12_1544](/docs/containers?topic=containers-changelog#11312_1544_worker).</li></ul></td>
 </tr>
 <tr>
 <td>22 November 2019</td>

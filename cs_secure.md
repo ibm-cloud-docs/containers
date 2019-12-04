@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, containers
 
@@ -29,6 +29,7 @@ subcollection: containers
 
 You can use built-in security features in {{site.data.keyword.containerlong}} for risk analysis and security protection. These features help you to protect your cluster infrastructure and network communication, isolate your compute resources, and ensure security compliance across your infrastructure components and container deployments.
 {: shortdesc}
+
 
 
 ## Overview of security threats for your cluster
@@ -145,7 +146,6 @@ For more information about service endpoints, see worker-to-master and user-to-m
 <br />
 
 
-
 ## Worker node
 {: #workernodes}
 
@@ -158,6 +158,7 @@ The ownership of a worker node depends on the type of cluster that you create an
 - **Free classic clusters**: Worker nodes are provisioned in to the {{site.data.keyword.cloud_notm}} account that is owned by IBM. You can deploy apps to the worker node but cannot change settings or install extra software on the worker node. Due to limited capacity and limited {{site.data.keyword.containerlong_notm}} features, do not run production workloads on free classic clusters. Consider using standard classic or standard VPC clusters for your production workloads.
 - **Standard classic clusters**: Worker nodes are provisioned in to your {{site.data.keyword.cloud_notm}} account. The worker nodes are dedicated to you and you are responsible to request timely updates to the worker nodes to ensure that the worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
 - **Standard VPC clusters**: Worker nodes are provisioned in to an {{site.data.keyword.cloud_notm}} account that is owned by IBM to enable monitoring of malicious activities and apply security updates. You cannot access your worker nodes by using the VPC dashboard. However, you can manage your worker nodes by using the {{site.data.keyword.containerlong_notm}} console, CLI, or API. The virtual machines that make up your worker nodes are dedicated to you and you are responsible to request timely updates so that your worker node OS and {{site.data.keyword.containerlong_notm}} components apply the latest security updates and patches.
+
 
 
 

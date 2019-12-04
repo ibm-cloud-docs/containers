@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview}
+{:preview: .preview} 
 
 
 # Planning your cluster network setup
@@ -30,13 +30,13 @@ subcollection: containers
 Design a network setup for your {{site.data.keyword.containerlong}} cluster that meets the needs of your workloads and environment.
 {: shortdesc}
 
-
 Get started by planning your setup for a VPC or a classic cluster.
 * With [{{site.data.keyword.containerlong_notm}} clusters in VPC](#vpc_basics), you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in [Virtual Private Cloud](/docs/infrastructure/vpc?topic=vpc-about-vpc) for Generation 1 compute resources. VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
 * With [{{site.data.keyword.containerlong_notm}} classic clusters](#plan_basics), you can create your cluster on classic infrastructure. Classic clusters include all of the {{site.data.keyword.containerlong_notm}} mature and robust features for compute, networking, and storage.
 
 First time creating a cluster? First, try out the [tutorial for creating a VPC cluster](/docs/containers?topic=containers-cs_cluster_tutorial) or the [tutorial for creating a classic cluster](/docs/containers?topic=containers-cs_cluster_tutorial). Then, come back here when you’re ready to plan out your production-ready clusters.
 {: tip}
+
 
 ## Understanding network basics of VPC clusters
 {: #vpc_basics}
@@ -322,6 +322,7 @@ To make your master publicly or privately accessible to cluster users, you can e
 * If worker nodes are connected to public and private VLANs, communication between worker nodes and master is established over both the private network through the private service endpoint and the public network through the public service endpoint. By routing half of the worker-to-master traffic over the public endpoint and half over the private endpoint, your master-to-worker communication is protected from potential outages of the public or private network. If worker nodes are connected to private VLANs only, communication between worker nodes and master is established over the private network through the private service endpoint only.
 * The master is publicly accessible to authorized cluster users through the public service endpoint. The master is privately accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a VPN connection or {{site.data.keyword.cloud_notm}} Direct Link. Note that you must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.
 
+
 **Private service endpoint only**</br>
 To make your master only privately accessible, you can enable the private service endpoint. VRF is required in your {{site.data.keyword.cloud_notm}} account, and you must enable your account to use service endpoints. To enable VRF and service endpoints, run `ibmcloud account update --service-endpoint-enable true`. Note that using private service endpoint only incurs no billed or metered bandwidth charges.
 * Communication between worker nodes and master is established over the private network through the private service endpoint.
@@ -535,3 +536,9 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
+
+
+
+
+
+

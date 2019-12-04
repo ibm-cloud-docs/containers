@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, lb1.0, nlb
 
@@ -29,7 +29,7 @@ subcollection: containers
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Version 1.0 NLBs can be created in classic clusters only, and cannot be created in VPC clusters. To load balance in VPC clusters, see [Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas).
 {: note}
 
-Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 1.0 NLBs, see [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning). 
+Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 1.0 NLBs, see [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning).
 {:shortdesc}
 
 To quickly get started, you can run the following command to create a load balancer 1.0:
@@ -337,7 +337,7 @@ Next, you can [register an NLB subdomain](/docs/containers?topic=containers-load
 This feature is for version 1.0 network load balancers (NLBs) only. The source IP address of client requests is preserved by default in version 2.0 NLBs.
 {: note}
 
-When a client request to your app is sent to your cluster, a load balancer service pod receives the request. If no app pod exists on the same worker node as the load balancer service pod, the NLB forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the load balancer service pod runs.
+When a client request to your app is sent to your cluster, a load balancer service pod receives the request. If no app pod exists on the same worker node as the load balancer service pod, the NLB forwards the request to a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the load balancer service pod runs.
 {: shortdesc}
 
 To preserve the original source IP address of the client request, you can [enable source IP ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/access-application-cluster/create-external-load-balancer/#preserving-the-client-source-ip) for load balancer services. The TCP connection continues all the way to the app pods so that the app can see the actual source IP address of the initiator. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.

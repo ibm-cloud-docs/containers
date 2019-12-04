@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-11-27"
 
 keywords: kubernetes, iks
 
@@ -34,6 +34,7 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 
 <br>
 Refer to the following table for a summary of changes for each CLI plug-in version.
+
 
 <table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
 <caption>Changelog for the `kubernetes-service` CLI plug-in</caption>

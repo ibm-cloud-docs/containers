@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -26,7 +26,7 @@ subcollection: containers
 # Planning your worker node setup
 {: #planning_worker_nodes}
 
-{{site.data.keyword.containerlong}} provides different worker node flavors and isolation levels so that you can choose the flavor and isolation that best meet the requirements of the workloads that you want to run in the cloud. 
+{{site.data.keyword.containerlong}} provides different worker node flavors and isolation levels so that you can choose the flavor and isolation that best meet the requirements of the workloads that you want to run in the cloud.
 {:shortdesc}
 
 A worker node flavor describes the compute resources, such as CPU, memory, and disk capacity that you get when you provision your worker node. Worker nodes of the same flavor are grouped in worker node pools. The total number of worker nodes in a cluster determine the compute capacity that is available to your apps in the cluster.
@@ -316,7 +316,7 @@ Choose a flavor, or machine type, with the right storage configuration to suppor
 
 If less PIDs, CPU or memory is available than the worker node reserves, Kubernetes starts to evict pods to restore sufficient compute resources  and PIDs. The pods reschedule onto another worker node if a worker node is available. If your pods are evicted frequently, add more worker nodes to your cluster or set [resource limits ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/#resource-requests-and-limits-of-pod-and-container) on your pods.
 
-The resources that are reserved on your worker node depend on the amount of PIDs, CPU and memory that your worker node comes with. {{site.data.keyword.containerlong_notm}} defines PIDs,  CPU and memory tiers as shown in the following tables. If your worker node comes with compute resources in multiple tiers, a percentage of your PIDs, CPU and memory resources is reserved for each tier.
+The resources that are reserved on your worker node depend on the amount of PIDs, CPU and memory that your worker node comes with. {{site.data.keyword.containerlong_notm}} defines PIDs, CPU and memory tiers as shown in the following tables. If your worker node comes with compute resources in multiple tiers, a percentage of your PIDs, CPU and memory resources is reserved for each tier.
 
 Clusters that run Kubernetes version 1.14 or later have process ID (PID) reservations and limits, to prevent a pod from using too many PIDs or ensure that enough PIDs exist for the `kubelet` and other {{site.data.keyword.containerlong_notm}} system components. If the PID reservations or limits are reached, Kubernetes does not create or assign new PIDs until enough processes are removed to free up existing PIDs. The total amount of PIDs on a worker node approximately corresponds to 8,000 PIDs per GB of memory on the worker node. For example, a worker node with 16 GB of memory has approximately 128,000 PIDs (`16 × 8,000 = 128,000`).
 
@@ -353,7 +353,7 @@ To review how much compute resources are currently used on your worker node, run
 
 | Total PIDs | % reserved | % available to pod |
 |:-----------------|:-----------------|:-----------------|
-| < 200,000 | 20% PIDs | 35% PIDs | 
+| < 200,000 | 20% PIDs | 35% PIDs |
 | 200,000 - 499,999 | 10% PIDs  | 40% PIDs |
 | ≥ 500,000 | 5% PIDs  | 45% PIDs  |
 | <code>b3c.4x16</code> worker node: 126,878 PIDs | 25,376 PIDs (20%) | 44,407 PIDS (35%)  |
@@ -367,5 +367,6 @@ To review how much compute resources are currently used on your worker node, run
 
 Sample worker node values are provided for example only. Your actual usage might vary slightly.
 {: note}
+
 
 

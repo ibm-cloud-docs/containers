@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -29,6 +29,7 @@ subcollection: containers
 
 Create a cluster in {{site.data.keyword.containerlong}}.
 {: shortdesc}
+
 
 After [getting started](/docs/containers?topic=containers-getting-started), you might want to create a cluster that is customized to your use case and different public and private cloud environments. Consider the following steps to create the right cluster each time.
 

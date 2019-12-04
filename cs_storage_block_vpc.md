@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-03"
 
 keywords: kubernetes, iks, vpc
 
@@ -351,6 +351,7 @@ If you have an existing physical {{site.data.keyword.block_storage_is_short}} de
 1. From the [{{site.data.keyword.block_storage_is_short}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/storage/storageVolumes){: new_window}, select the block storage device that you want to add to your cluster.
 2. From the volumes details page, note the **ID**, **Size**, **Location**, and **Max IOPS** of your {{site.data.keyword.block_storage_is_short}} device.
 3. Optional: If you provisioned your physical {{site.data.keyword.block_storage_is_short}} instance by using a `retain` storage class, the PV and the physical storage is not removed when you remove the PVC. To use your physical {{site.data.keyword.block_storage_is_short}} device in your cluster, you must remove the existing PV first.  
+
    1. List the PVs in your cluster and look for the PV that belongs to your {{site.data.keyword.block_storage_is_short}} device. The PV is in a `released` state.
       ```
       kubectl get pv
@@ -1231,6 +1232,8 @@ To clean up persistent data:
    kubectl get pv
    ```
    {: pre}
+
+   
 
 
 
