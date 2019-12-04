@@ -32,13 +32,6 @@ subcollection: containers
 Expose a port and use a portable IP address for a Layer 4 network load balancer (NLB) to expose a containerized app. For information about version 1.0 NLBs, see [Components and architecture of an NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_planning).
 {:shortdesc}
 
-To quickly get started, you can run the following command to create a load balancer 1.0:
-```
-kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --name my-lb-svc
-```
-{: pre}
-
-
 ## Setting up an NLB 1.0 in a multizone cluster
 {: #multi_zone_config}
 

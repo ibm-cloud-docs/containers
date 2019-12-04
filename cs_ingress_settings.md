@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -36,7 +36,7 @@ After you expose your apps by creating an Ingress resource, you can further conf
 By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose other ports, you can edit the `ibm-cloud-provider-ingress-cm` configmap resource.
 {: shortdesc}
 
-1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource. 
+1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
   ```
   kubectl edit cm ibm-cloud-provider-ingress-cm -n kube-system
   ```
@@ -46,7 +46,6 @@ By default, only ports 80 and 443 are exposed in the Ingress ALB. To expose othe
 
     By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, you must also include them in addition to any other ports you specify in the `public-ports` field. Any port that is not specified is closed. If you enabled a private ALB, you must also specify any ports that you want to keep open in the `private-ports` field.
     {: important}
-    
 
     ```
     apiVersion: v1
@@ -473,5 +472,6 @@ To optimize performance of your Ingress ALBs, you can also [change the Linux ker
 
 
 <br>
+
 
 
