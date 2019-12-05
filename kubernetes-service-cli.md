@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-05"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -130,6 +130,8 @@ Check out the following changes between each version of the CLI plug-in:
 <br>
 
 
+
+<br>
 
 ## Comparison of Classic and VPC commands
 {: #cli_classic_vpc_about}
