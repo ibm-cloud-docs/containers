@@ -38,6 +38,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 <br />
 
 
+
 ## Accessing Kubernetes clusters through the public service endpoint
 {: #access_public_se}
 
