@@ -605,7 +605,7 @@ lastupdated: "2019-12-09"
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [What's next?](/docs/containers?topic=containers-istio#istio_next)
 
-[Configuring subnets for VPC clusters](/docs/containers?topic=containers-vpc-subnets)
+[Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
   * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
   * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
