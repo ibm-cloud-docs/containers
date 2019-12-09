@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-09"
 
 keywords: openshift, roks, rhoks, rhos
 
@@ -32,6 +32,8 @@ subcollection: openshift
 
 Portworx is supported only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not available in VPC on Classic clusters.
 {: important}
+
+
 
 
 ## About Portworx

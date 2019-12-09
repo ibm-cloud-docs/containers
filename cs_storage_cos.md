@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-05"
+lastupdated: "2019-12-09"
 
 keywords: kubernetes, iks
 
@@ -31,6 +31,8 @@ subcollection: containers
 
 If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster without public network access, you must set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
 {: important}
+
+
 
 If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
 {: important}

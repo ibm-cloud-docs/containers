@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-09"
 
 keywords: kubernetes, iks
 
@@ -26,10 +26,10 @@ subcollection: containers
 # Storing data on classic IBM Cloud Block Storage
 {: #block_storage}
 
-{{site.data.keyword.cloud_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} Block Storage is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 
