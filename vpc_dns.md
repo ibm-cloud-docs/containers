@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-09"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -96,12 +96,16 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 2.  Edit the default settings for the CoreDNS configmap. Use a Corefile in the `data` section of the configmap to customize `stubdomains` and upstream nameservers. For more information, see [the Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns).
+
+    In Kubernetes version 1.16 and later, the CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`. 
+    {: note}
+
     ```
     kubectl edit configmap -n kube-system coredns
     ```
     {: pre}
 
-    **CoreDNS example output**:
+    **CoreDNS example output for Kubernetes version 1.15 and earlier**:
       ```
       apiVersion: v1
       kind: ConfigMap
@@ -133,12 +137,16 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       ```
       {: screen}
 3.  Optional: Add custom Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/import/).
+
+    In Kubernetes version 1.16 and later, the CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`. 
+    {: note}
+    
     ```
     kubectl edit configmap -n kube-system coredns
     ```
     {: pre}
 
-    **Custom Corefile example output**:
+    **Custom Corefile example output for Kubernetes version 1.15 and earlier**:
     ```
     apiVersion: v1
     kind: ConfigMap
