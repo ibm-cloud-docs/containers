@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-09"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -29,7 +29,7 @@ subcollection: containers
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This ACL information is specific to VPC clusters. For network policy information for classic clusters, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}
 
-If you have unique security requirements, you can control traffic to and from your cluster with VPC access control lists (ACLs) and traffic between pods in your cluster with Kubernetes network policies. 
+If you have unique security requirements, you can control traffic to and from your cluster with VPC access control lists (ACLs) and traffic between pods in your cluster with Kubernetes network policies.
 {: shortdesc}
 
 <dl>
@@ -41,196 +41,6 @@ If you have unique security requirements, you can control traffic to and from yo
 
 You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) to control traffic for your worker nodes. VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard. You cannot attach a security group to your worker nodes instances.
 {: note}
-
-<br />
-
-
-## Restricting public network traffic to a subnet with a public gateway
-{: #vpc-gateway}
-
-Improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to have external access through a VPC subnet public gateway.
-{:shortdesc}
-
-If pods on your worker nodes need to connect to a public external endpoint, you can attach a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/resources?topic=resources-private-network-endpoints), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
-
-You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to deploy app pods that require access to external endpoints to only the subnet with an attached public gateway.
-
-In VPC clusters, only one subnet exists per zone. When you attach a public gateway to only one subnet, and schedule app pods that require public access to only worker nodes on that subnet, these pods are isolated to one zone in your cluster.
-{: note}
-
-1. Target the region of the VPC that your cluster is deployed to.
-  ```
-  ibmcloud target -r <region>
-  ```
-  {: pre}
-
-2. Check whether you have a public gateway in a zone where you have worker nodes. Within one VPC, you can create only one public gateway per zone.
-  ```
-  ibmcloud is public-gateways
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  ID                                     Name                                       VPC                          Zone         Floating IP                  Created                     Status      Resource group
-  26426426-6065-4716-a90b-ac7ed7917c63   test-pgw                                   testvpc(36c8f522-.)          us-south-1   169.xx.xxx.xxx(26466378-.)   2019-09-20T16:27:32-05:00   available   -
-  2ba2ba2b-fffa-4b0c-bdca-7970f09f9b8a   pgw-73b62bc0-b53a-11e9-9838-f3f4efa02374   team3(ff537d43-.)            us-south-2   169.xx.xxx.xxx(2ba9a280-.)   2019-08-02T10:30:29-05:00   available   -
-  ```
-  {: screen}
-  * If you already have a public gateway in a zone where you have workers and in the VPC that your cluster is in, note the gateway's **ID**.
-  * If you do not have a public gateway in a zone where you have workers and in the VPC that your cluster is in, create a public gateway. Consider naming the public gateway in the format `<cluster>-<zone>-gateway`. In the output, note the public gateway's **ID**.
-    ```
-    ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ID               26466378-6065-4716-a90b-ac7ed7917c63
-    Name             mycluster-us-south-1-gateway
-    Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
-    Status           pending
-    Created          2019-09-20T16:27:32-05:00
-    Zone             us-south-1
-    VPC              myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
-    Resource group   -
-    ```
-    {: screen}
-
-3. List the worker nodes in your cluster. For the zone where you enabled the public gateway, note the **Primary IP** of one worker node.
-  ```
-  ibmcloud ks worker ls -c <cluster_name_or_ID>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.3
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.3
-  ```
-  {: screen}
-
-4. Describe the worker node. In the **Labels output**, note the subnet ID in the label `ibm-cloud.kubernetes.io/subnet-id`, such as `5f5787a4-f560-471b-b6ce-20067ac93439` in the following example.
-  ```
-  kubectl describe node <worker_primary_ip>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  Name:               10.240.01.00
-  Roles:              <none>
-  Labels:             arch=amd64
-                      beta.kubernetes.io/arch=amd64
-                      beta.kubernetes.io/instance-type=c2.2x4
-                      beta.kubernetes.io/os=linux
-                      failure-domain.beta.kubernetes.io/region=us-south
-                      failure-domain.beta.kubernetes.io/zone=us-south-1
-                      ibm-cloud.kubernetes.io/ha-worker=true
-                      ibm-cloud.kubernetes.io/iaas-provider=gc
-                      ibm-cloud.kubernetes.io/internal-ip=10.240.0.77
-                      ibm-cloud.kubernetes.io/machine-type=c2.2x4
-                      ibm-cloud.kubernetes.io/os=UBUNTU_18_64
-                      ibm-cloud.kubernetes.io/region=us-south
-                      ibm-cloud.kubernetes.io/sgx-enabled=false
-                      ibm-cloud.kubernetes.io/subnet-id=5f5787a4-f560-471b-b6ce-20067ac93439
-                      ibm-cloud.kubernetes.io/worker-id=kube-bl25g33d0if1cmfn0p8g-vpcprod-default-00001093
-                      ibm-cloud.kubernetes.io/worker-pool-id=bl25g33d0if1cmfn0p8g-5aa474f
-                      ibm-cloud.kubernetes.io/worker-pool-name=default
-                      ibm-cloud.kubernetes.io/worker-version=1.15.3_1517
-                      ibm-cloud.kubernetes.io/zone=us-south-1
-                      kubernetes.io/arch=amd64
-                      kubernetes.io/hostname=10.240.0.77
-                      kubernetes.io/os=linux
-  Annotations:        node.alpha.kubernetes.io/ttl: 0
-  ...
-  ```
-  {: screen}
-
-5. Using the IDs of the public gateway and the subnet, attach the public gateway to the subnet. The worker nodes that are deployed to this subnet in this zone now have access to external endpoints.
-  ```
-  ibmcloud is subnet-update <subnet_ID> --public-gateway-id <gateway_ID>
-  ```
-  {: pre}
-
-  Example output:
-  ```
-  ID                  91e946b4-7094-46d0-9223-5c2dea2e5023
-  Name                mysubnet1
-  IPv4 CIDR           10.240.xx.xx/24
-  Address available   250
-  Address total       256
-  ACL                 allow-all-network-acl-36c8f522-4f0d-400c-8226-299f0b8198cf(585bc142-5392-45d4-afdd-d9b59ef2d906)
-  Gateway             mycluster-us-south-1-gateway(26466378-6065-4716-a90b-ac7ed7917c63)
-  Created             2019-08-21T09:43:11-05:00
-  Status              available
-  Zone                us-south-1
-  VPC                 myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
-  ```
-  {: screen}
-
-6. In the deployment file for your app, [add an affinity rule ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature) for the subnet ID label that you found in step 4.
-
-    In the **affinity** section of this example YAML, `ibm-cloud.kubernetes.io/subnet-id` is the `key` and `<subnet_ID>` is the `value`.
-    ```
-    apiVersion: apps/v1
-    kind: Deployment
-    metadata:
-      name: with-node-affinity
-    spec:
-      template:
-        spec:
-          affinity:
-            nodeAffinity:
-              requiredDuringSchedulingIgnoredDuringExecution:
-                nodeSelectorTerms:
-                - matchExpressions:
-                  - key: ibm-cloud.kubernetes.io/subnet-id
-                    operator: In
-                    values:
-                    - <subnet_ID>
-    ...
-    ```
-    {: codeblock}
-
-7. Apply the updated deployment configuration file.
-    ```
-    kubectl apply -f with-node-affinity.yaml
-    ```
-    {: pre}
-
-8. Verify that the app pods deployed to the correct worker nodes.
-
-    1. List the pods in your cluster. In the output, identify a pod for your app. Note the **NODE** private IP address of the worker node that the pod is on.
-        ```
-        kubectl get pods -o wide
-        ```
-        {: pre}
-
-        In this example output, the app pod `cf-py-d7b7d94db-vp8pq` is on a worker node with the IP address `10.240.01.00`.
-        ```
-        NAME                   READY     STATUS              RESTARTS   AGE       IP               NODE
-        cf-py-d7b7d94db-vp8pq  1/1       Running             0          15d       172.30.xxx.xxx   10.240.01.00
-        ```
-        {: screen}
-
-    2. List the worker nodes in your cluster. In the output, look for the worker nodes in the zone where you attached the public gateway. Verify that the worker node with the private IP address that you identified in the previous step is deployed in this zone.
-
-        ```
-        ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.16.3
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.16.3
-        ```
-        {: screen}
-
-9. Optional: If you use [access control lists (ACLs)](#acls) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
 
 <br />
 

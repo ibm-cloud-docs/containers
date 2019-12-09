@@ -88,6 +88,7 @@ IBM Cloud Kubernetes Service
         vpc_network_policy.md
         vpc_vpn.md
         cs_istio.md
+        vpc_subnets.md
         vpc_dns.md
 
     {: .topicgroup}

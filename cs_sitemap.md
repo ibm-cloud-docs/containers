@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-09"
 
 ---
 
@@ -17,7 +17,7 @@ lastupdated: "2019-11-26"
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 
 # Site map
@@ -547,7 +547,6 @@ lastupdated: "2019-11-26"
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
 [Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
-* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-network-policy#vpc-gateway)
 * [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
 * [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
@@ -605,6 +604,17 @@ lastupdated: "2019-11-26"
   * [Uninstalling managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [What's next?](/docs/containers?topic=containers-istio#istio_next)
+
+[Configuring subnets for VPC clusters](/docs/containers?topic=containers-vpc-subnets)
+* [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
+  * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
+  * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
+  * [Network segmentation](/docs/containers?topic=containers-vpc-subnets#vpc_basics_segmentation)
+  * [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations)
+* [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
+  * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
+  * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
+* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-network-policy#vpc-restrict-gateway)
 
 [Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#vpc_dns_autoscale)
