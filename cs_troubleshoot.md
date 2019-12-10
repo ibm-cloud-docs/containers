@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, help, debug
 
@@ -274,7 +274,7 @@ Review common error messages and learn how to resolve them.
       <tr>
       <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order.<br><br>
       {{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
-      <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or, you might have exceeded a limit in your IBM Cloud infrastructure account. To resolve, try one of the following options:
+      <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or you might have exceeded a limit in your IBM Cloud infrastructure account. To resolve, try one of the following options:
       <ul><li>Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.</li>
       <li>For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.</li>
       <li>Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the <code>ibmcloud ks zone network-set</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set).</li>
