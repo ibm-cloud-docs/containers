@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-09"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -140,7 +140,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
 
   2. Export the ACL ID as an environment variable.
     ```
-    export acl_id=<ACL_ID>
+    export ACL_ID=<acl_id>
     ```
     {: pre}
 
