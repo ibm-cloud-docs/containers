@@ -453,7 +453,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    Name                       Value   
    ID                         1234567890   
-   username                  IBM123A4567890-1   
+   User name                  IBM123A4567890-1   
    Type                       performance_block_storage   
    Capacity (GB)              20   
    LUN Id                     0   
