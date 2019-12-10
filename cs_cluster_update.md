@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -291,7 +291,7 @@ To update worker nodes from the console:
 1.  Complete the [prerequisite steps](#worker-up-prereqs) and [set up a config map](#worker_node) to control how your worker nodes are updated.
 2.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 3.  From the **Clusters** page, click your cluster.
-4.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
+4.  From the **Worker Nodes** tab, select the checkbox for each worker node that you want to update. An action bar is displayed over the table header row.
 5.  From the action bar, click **Update**.
 
 <br />
@@ -383,7 +383,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 1.  Complete the [prerequisite steps](#vpc_worker_prereqs).
 2.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 3.  From the **Clusters** page, click your cluster.
-4.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
+4.  From the **Worker Nodes** tab, select the checkbox for each worker node that you want to update. An action bar is displayed over the table header row.
 5.  From the action bar, click **Update**.
 
 <br />

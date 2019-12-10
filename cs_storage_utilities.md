@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -288,12 +288,12 @@ To add different block storage configurations, add block storage to a subset of 
    </tbody>
    </table>  
 
-5. Retrieve your IBM Cloud infrastructure user name and API key. The user name and API key are used by the `mkpvyaml` script to access the cluster.
+5. Retrieve your IBM Cloud infrastructure username and API key. The username and API key are used by the `mkpvyaml` script to access the cluster.
    1.  Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com).
    2.  From the menu bar, select **Manage > Access (IAM)**.
-   3.  Select the **Users** tab and then click on your user name.
+   3.  Select the **Users** tab and then click on your username.
    4.  In the **API keys** pane, find the entry **Classic infrastructure API key** and click the **Actions menu** ![Action menu icon](../icons/action-menu-icon.svg "Action menu icon") **> Details**.
-   5.  Copy the API user name and API key.
+   5.  Copy the API username and API key.
 
 6. Store the credentials in an environment variable.
    1. Add the environment variables.
@@ -453,7 +453,7 @@ Use this option if you want to add different block storage configurations, add b
    ```
    Name                       Value   
    ID                         1234567890   
-   User name                  IBM123A4567890-1   
+   username                  IBM123A4567890-1   
    Type                       performance_block_storage   
    Capacity (GB)              20   
    LUN Id                     0   
@@ -565,7 +565,7 @@ To attach the block storage device to a non-SDS worker node, you must create a p
         </tr>
         <tr>
         <td><code>ibm.io/username</code></td>
-        <td>Enter the IBM Cloud infrastructure user name that you retrieved earlier. </td>
+        <td>Enter the IBM Cloud infrastructure username that you retrieved earlier. </td>
         </tr>
         <tr>
         <td><code>ibm.io/password</code></td>
