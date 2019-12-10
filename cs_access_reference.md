@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -32,7 +32,7 @@ When you [assign cluster permissions](/docs/containers?topic=containers-users), 
 ## {{site.data.keyword.cloud_notm}} IAM platform roles
 {: #iam_platform}
 
-{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform). 
+{{site.data.keyword.containerlong_notm}} is configured to use {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) roles. {{site.data.keyword.cloud_notm}} IAM platform roles determine the actions that users can perform on {{site.data.keyword.cloud_notm}} resources such as clusters, worker nodes, and Ingress application load balancers (ALBs). {{site.data.keyword.cloud_notm}} IAM platform roles also automatically set basic infrastructure permissions for users. To set platform roles, see [Assigning {{site.data.keyword.cloud_notm}} IAM platform permissions](/docs/containers?topic=containers-users#platform).
 {: shortdesc}
 
 <p class="tip">Do not assign {{site.data.keyword.cloud_notm}} IAM platform roles at the same time as a service role. You must assign platform and service roles separately.</p>
@@ -181,9 +181,9 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Beta: Remove an ALB secret from a cluster. | [`ibmcloud ks alb cert rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm) | [`DELETE /v1/clusters/{idOrName}/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets) |
 | List all ALB secrets in a cluster. | [`ibmcloud ks alb cert ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs) | - |
 | Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure portfolio. | [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) | [`POST /v1/keys`](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey) |
-| Disable a managed add-on, such Istio or Knative, in a cluster. | [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
-| Enable a managed add-on, such Istio or Knative, in a cluster. | [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
-| List managed add-ons, such as Istio or Knative, that are enabled in a cluster. | [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons) | [`GET /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons) |
+| Disable a managed add-on, such the Kubernetes web terminal, in a cluster. | [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
+| Enable a managed add-on, such the Kubernetes web terminal, in a cluster. | [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
+| List managed add-ons, such as the Kubernetes web terminal, that are enabled in a cluster. | [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons) | [`GET /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/GetClusterAddons) |
 | Create a free or standard cluster on classic infrastructure. **Note**: The Administrator platform role for {{site.data.keyword.registrylong_notm}} and the Super User infrastructure role are also required. | [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) | [`POST /v1/clusters`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateCluster) |
 | Create a classic cluster in your Virtual Private Cloud (VPC). **Note**: The Administrator platform role for VPC Infrastructure, the Administrator platform role for {{site.data.keyword.registrylong_notm}} at the account level, and the Writer or Manager service role for {{site.data.keyword.containerlong_notm}} are also required. | [`ibmcloud ks cluster create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) | [`POST /v2/vpc/createCluster`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcCreateCluster) |
 | Disable a specified feature for a cluster, such as the public service endpoint for the cluster master. | [`ibmcloud ks cluster feature disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable) | - |
