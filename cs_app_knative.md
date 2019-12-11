@@ -30,12 +30,14 @@ subcollection: containers
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-**What is Knative and why I want use it?**</br>
+**What is Knative and why I want use it?**
+
 [Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others. The goal is to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.  
 
 Knative uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying, and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. You can use proven build processes that you are already familiar with, such as Kaniko, Dockerfile, Bazel, and others. By integrating with Istio, Knative ensures that your serverless and containerized workloads can be easily exposed on the internet, monitored, and controlled, and that your data is encrypted during transit.
 
-**How does Knative work?**</br>
+**How does Knative work?**
+
 Knative comes with two key components, or _primitives_, that help you to deploy and manage your serverless apps in your Kubernetes cluster:
 
 - **Serving:** The `Serving` primitive helps to deploy serverless apps as Knative services and to automatically scale them, even down to zero instances. To expose your serverless and containerized workloads, Knative uses Istio. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. By using the traffic management and intelligent routing capabilities of Istio, you can control what traffic is routed to a specific version of your service, which makes it easy for a developer to test and roll out a new app version or do A-B testing.
@@ -44,7 +46,8 @@ Knative comes with two key components, or _primitives_, that help you to deploy 
 The Knative open-source project deprecated the **Build** primitive in favor of the Tekton open-source project. The Build primitive provided you with tools to automate the build process for your app from source code to a container image. The Tekton project originated from the Knative project and provides advanced CI/CD features on top of the deprecated Knative Build primitive. For more information, see the [Tekton open-source project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://tekton.dev).
 {: note}
 
-**What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?** </br>
+**What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?**
+
 Managed Knative on {{site.data.keyword.containerlong_notm}} is a [managed add-on](/docs/containers?topic=containers-managed-addons#managed-addons) that integrates Knative and Istio directly with your Kubernetes cluster. The Knative and Istio versions in the add-on are tested by IBM and supported for the use in {{site.data.keyword.containerlong_notm}}. For more information about managed add-ons, see [Adding services by using managed add-ons](/docs/containers?topic=containers-managed-addons#managed-addons).
 
 **Are there any limitations?**
