@@ -65,7 +65,7 @@ Before you begin:
 -  [Create a standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon knative`.
 -  Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 -  [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
--  If you already have the managed Istio add-on installed, [check that the version is 1.3 or uninstall Istio](#kn_limitations). When you install the managed Knative add-on, Istio 1.3 is installed with the add-on.
+-  If you already have the managed Istio add-on installed, [check that the version is 1.3 or uninstall Istio](#knative_limitations). When you install the managed Knative add-on, Istio 1.3 is installed with the add-on.
 </br>
 
 To install Knative in your cluster:
