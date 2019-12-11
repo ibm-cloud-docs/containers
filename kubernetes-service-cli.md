@@ -41,7 +41,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 ## Using the beta plug-in
 {: #cs_beta}
 
-A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure. 
+A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure.
 {: shortdesc}
 
 The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available.
@@ -519,7 +519,7 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSI
 Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/) into the <code>default</code> namespace.
 {: shortdesc}
 
-This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio#bookinfo_setup).
+This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio-mesh#bookinfo_setup).
 {: note}
 
 ```
