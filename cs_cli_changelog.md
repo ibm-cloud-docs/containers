@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-27"
+lastupdated: "2019-12-11"
 
 keywords: kubernetes, iks
 
@@ -46,6 +46,15 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>0.4.64</td>
+<td>11 Dec 2019</td>
+<td><ul>
+<li>Adds the `--entitlement` flag to the `ibmcloud ks cluster create` and `ibmcloud ks worker-pool create` commands. Include this flag only if you use this cluster with an [IBM Cloud Pak&trade;](/docs/openshift?topic=openshift-openshift_cloud_paks) that has an OpenShift entitlement.</li>
+<li>Updates the Go version to 1.12.11.</li>
+<li>Updates the help text in various languages.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.61</td>
 <td>26 Nov 2019</td>

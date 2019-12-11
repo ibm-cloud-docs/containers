@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -41,7 +41,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registryshort_n
 ## Using the beta plug-in
 {: #cs_beta}
 
-A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure.
+A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure. 
 {: shortdesc}
 
 The following beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in are available.
@@ -130,6 +130,8 @@ Check out the following changes between each version of the CLI plug-in:
 <br>
 
 
+
+<br>
 
 ## Comparison of Classic and VPC commands
 {: #cli_classic_vpc_about}
@@ -2329,7 +2331,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
 {: shortdesc}
 
 ```
-ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1] [-s] [--json]
+ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1]  [-s] [--json]
 ```
 {: pre}
 
@@ -5040,7 +5042,7 @@ Set and unset credentials that allow you to access the IBM Cloud infrastructure 
 ### `ibmcloud ks credential get`
 {: #cs_credential_get}
 
-If you set up your {{site.data.keyword.cloud_notm}} account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure user name for the region and resource group that you are currently targeted to.
+If you set up your {{site.data.keyword.cloud_notm}} account to use different credentials to access the IBM Cloud infrastructure portfolio, get the infrastructure username for the region and resource group that you are currently targeted to.
 {: shortdesc}
 
 ```
@@ -5072,7 +5074,7 @@ ibmcloud ks credential get --region us-south
 
 </br>
 
-### `ibmcloud ks credential set`
+### `ibmcloud ks credential set classic`
 {: #cs_credentials_set}
 
 Set credentials for a resource group and region so that you can access the IBM Cloud infrastructure portfolio through your {{site.data.keyword.cloud_notm}} account.
@@ -5088,7 +5090,7 @@ Before you use this command, make sure that the user whose credentials are used 
 {: important}
 
 ```
-ibmcloud ks credential set --infrastructure-api-key API_KEY --infrastructure-username USERNAME --region REGION [-s]
+ibmcloud ks credential set classic --infrastructure-api-key API_KEY --infrastructure-username USERNAME [--region REGION] [-s]
 ```
 {: pre}
 
@@ -5099,7 +5101,7 @@ ibmcloud ks credential set --infrastructure-api-key API_KEY --infrastructure-use
 **Command options**:
 <dl>
 <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-<dd>IBM Cloud infrastructure account API username. This value is required. The infrastructure API username is not the same as the IBMid. To view the infrastructure API user name, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).</dd>
+<dd>IBM Cloud infrastructure account API username. This value is required. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).</dd>
 
 <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
 <dd>IBM Cloud infrastructure account API key. This value is required. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/iam?topic=iam-classic_keys).</dd>
@@ -5113,7 +5115,7 @@ ibmcloud ks credential set --infrastructure-api-key API_KEY --infrastructure-use
 
 **Example**:
 ```
-ibmcloud ks credential set --infrastructure-api-key <api_key> --infrastructure-username dbmanager --region us-south
+ibmcloud ks credential set classic --infrastructure-api-key <api_key> --infrastructure-username dbmanager --region us-south
 ```
 {: pre}
 

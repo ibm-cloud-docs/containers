@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-04"
 
 keywords: kubernetes, iks, networking
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # Choosing an app exposure service
 {: #cs_network_planning}
@@ -119,7 +119,7 @@ The following table compares the features of each network service type.
 |Multiple apps per service| | | | |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Characteristics of Kubernetes network service types" caption-side="top"}
 
-* SSL termination is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
+`*` SSL termination is provided by `ibmcloud ks nlb-dns` commands. In classic clusters, these commands are supported for public NLBs only.
 {: note}
 
 <br />

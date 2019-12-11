@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-02"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -244,7 +244,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <p>**Classic clusters**: Public bandwidth is charged per GB. You can review your current bandwidth summary by logging into the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), from the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon") selecting **Classic Infrastructure**, and then selecting the **Network > Bandwidth > Summary** page.</p>
     <p>Review the following factors that impact public bandwidth charges:</p>
     <ul><li><strong>Location</strong>: As with worker nodes, charges vary depending on the zone that your resources are deployed in.</li>
-    <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250 GB for VMs or 500 GB for bare metal. Or, the allocation might be Pay-As-You-Go, based on GB usage.</li>
+    <li><strong>Included bandwidth or Pay-As-You-Go</strong>: Your worker node machines might come with a certain allocation of outbound networking per month, such as 250 GB for VMs or 500 GB for bare metal. Or the allocation might be Pay-As-You-Go, based on GB usage.</li>
     <li><strong>Tiered packages</strong>: After you exceed any included bandwidth, you are charged according to a tiered usage scheme that varies by location. If you exceed a tier allotment, you might also be charged a standard data transfer fee.</li></ul>
     <p>For more information, see [Bandwidth packages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/bandwidth).</p><br>
     <p>**VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc)</dd>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -620,7 +620,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 **Kiali**</br>
 
 1. Define the credentials that you want to use to access Kiali.
-  1. Copy and paste the following command. This command starts a text entry for you to enter a user name, which is then encoded in base64 and stored in the `KIALI_USERNAME` environment variable.
+  1. Copy and paste the following command. This command starts a text entry for you to enter a username, which is then encoded in base64 and stored in the `KIALI_USERNAME` environment variable.
     ```
     KIALI_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)
     ```
@@ -654,7 +654,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-3. Enter the user name and passphrase that you defined in step 1. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+3. Enter the username and passphrase that you defined in step 1. For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
 
 ### Launching the ControlZ component inspection and Envoy sidecar dashboards
 {: #istio_inspect}

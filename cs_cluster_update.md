@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -291,7 +291,7 @@ To update worker nodes from the console:
 1.  Complete the [prerequisite steps](#worker-up-prereqs) and [set up a config map](#worker_node) to control how your worker nodes are updated.
 2.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 3.  From the **Clusters** page, click your cluster.
-4.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
+4.  From the **Worker Nodes** tab, select the checkbox for each worker node that you want to update. An action bar is displayed over the table header row.
 5.  From the action bar, click **Update**.
 
 <br />
@@ -383,7 +383,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 1.  Complete the [prerequisite steps](#vpc_worker_prereqs).
 2.  From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/) menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
 3.  From the **Clusters** page, click your cluster.
-4.  From the **Worker Nodes** tab, select the check box for each worker node that you want to update. An action bar is displayed over the table header row.
+4.  From the **Worker Nodes** tab, select the checkbox for each worker node that you want to update. An action bar is displayed over the table header row.
 5.  From the action bar, click **Update**.
 
 <br />
@@ -558,7 +558,7 @@ Yes. Your cluster is deployed with the following managed components and associat
 * In gateway-enabled classic clusters, `ibm-gateway-controller`
 
 **Can I install other plug-ins or add-ons than the default components?**</br>
-Yes. {{site.data.keyword.containerlong_notm}} provides other plugin-ins and add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-helm#public_helm_install) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block) or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Or, you might want to enable IBM-managed add-ons in your cluster, such as [Istio](/docs/containers?topic=containers-istio) or [Knative](/docs/containers?topic=containers-serverless-apps-knative). You must update these Helm charts and add-ons separately by following the instructions in the Helm chart readme files or by following the steps to [update managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
+Yes. {{site.data.keyword.containerlong_notm}} provides other plugin-ins and add-ons that you can choose from to add capabilities to your cluster. For example, you might want to [use Helm charts](/docs/containers?topic=containers-helm#public_helm_install) to install the [block storage plug-in](/docs/containers?topic=containers-block_storage#install_block) or [strongSwan VPN](/docs/containers?topic=containers-vpn#vpn-setup). Or you might want to enable IBM-managed add-ons in your cluster, such as [Istio](/docs/containers?topic=containers-istio) or [Knative](/docs/containers?topic=containers-serverless-apps-knative). You must update these Helm charts and add-ons separately by following the instructions in the Helm chart readme files or by following the steps to [update managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
 
 ### Managing automatic updates for Fluentd
 {: #logging-up}

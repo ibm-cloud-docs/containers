@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks
 
@@ -26,10 +26,10 @@ subcollection: containers
 # Storing data on classic IBM Cloud Block Storage
 {: #block_storage}
 
-{{site.data.keyword.cloud_notm}} Block Storage is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} Block Storage is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/infrastructure/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} Block Storage is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} Block Storage plug-in version 1.3.0 or later to connect to your block storage instance over the private network. Block storage instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 
@@ -45,7 +45,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install){: new_window} to install the Helm client on your local machine, and install the Helm server (Tiller) with a service account in your cluster.
 
-    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine](/docs/containers?topic=containers-helm#private_local_tiller), [tag the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), and [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing){: new_window}. Or, you can [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller){: new_window}.
+    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine](/docs/containers?topic=containers-helm#private_local_tiller), [tag the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), and [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing){: new_window}. Or you can [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller){: new_window}.
     {: note}
 
 2.  Verify that Tiller is installed with a service account.
@@ -657,7 +657,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
     2. Select **Account**, then **Users**, and then **User List**.
     3. Find your user ID.
     4. In the **API KEY** column, click **Generate** to generate an API key or **View** to view your existing API key.
-2.  Retrieve the API user name for your IBM Cloud infrastructure account.
+2.  Retrieve the API username for your IBM Cloud infrastructure account.
     1. From the **User List** menu, select your user ID.
     2. In the **API Access Information** section, find your **API Username**.
 3.  Log in to the IBM Cloud infrastructure CLI plug-in.
@@ -666,8 +666,8 @@ Before you can start to mount your existing storage to an app, you must retrieve
     ```
     {: pre}
 
-4.  Choose to authenticate by using the user name and API key for your IBM Cloud infrastructure account.
-5.  Enter the user name and API key that you retrieved in the previous steps.
+4.  Choose to authenticate by using the username and API key for your IBM Cloud infrastructure account.
+5.  Enter the username and API key that you retrieved in the previous steps.
 6.  List available block storage devices.
     ```
     ibmcloud sl block volume-list

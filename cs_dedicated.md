@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks
 
@@ -146,7 +146,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  Generate an API key for inviting users to the public account. Note the API key value, which the Dedicated account administrator must use in the next step.
@@ -171,7 +171,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  Invite the users to the public account.
@@ -228,7 +228,7 @@ To allow {{site.data.keyword.Bluemix_dedicated_notm}} users to access clusters:
         ```
         {: pre}
 
-        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+        If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
         {: tip}
 
     2.  If you are logging in for the first time, provide your Dedicated user ID and password when prompted. Your Dedicated account is authenticated, and the Dedicated and public accounts are linked together. Every time you log in after this first time, you use only your IBMid to log in. For more information, see [Connecting a dedicated ID to your public IBMid](/docs/iam?topic=iam-connect_dedicated_id#connect_dedicated_id).
@@ -264,7 +264,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
 
 1. Open your Dedicated console: `https://<my-dedicated-cloud-instance>.bluemix.net`.
 
-2. Select the **Also log in to {{site.data.keyword.cloud_notm}} Public** check box and click **Log in**.
+2. Select the **Also log in to {{site.data.keyword.cloud_notm}} Public** checkbox and click **Log in**.
 
 3. Follow the prompts to log in with your IBMid. If you are logging in to your Dedicated account for the first time, then follow the prompts to log in to {{site.data.keyword.Bluemix_dedicated_notm}}.
 
@@ -295,7 +295,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
         If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).
         {: note}
 
-    8. By default, **Encrypt local disk** is selected. If you choose to clear the check box, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
+    8. By default, **Encrypt local disk** is selected. If you choose to clear the checkbox, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
 
 6. Click **Create cluster**. You can see the progress of the worker node deployment in the **Worker nodes** tab. When the deployment is done, you can see that your cluster is ready in the **Overview** tab.
     Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
@@ -312,7 +312,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     ```
     {: pre}
 
-    If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your user name and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
+    If you have a federated ID, use `ibmcloud login -a api.<my-dedicated-cloud-instance>.<region>.bluemix.net --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know that you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
 3.  Target a regional endpoint. The following regional endpoints are supported:

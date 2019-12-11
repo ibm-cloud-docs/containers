@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-10"
 
 keywords: kubernetes, iks, containers
 
@@ -35,7 +35,7 @@ You can use built-in security features in {{site.data.keyword.containerlong}} fo
 ## Overview of security threats for your cluster
 {: #threats}
 
-To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities. 
+To protect your cluster from being compromised, you must understand potential security threats for your cluster and what you can do to reduce the exposure to vulnerabilities.
 {: shortdesc}
 
 <img src="images/cs_security_threats.png" width="400" alt="Security threats for your cluster" style="width:400px; border-style: none"/>

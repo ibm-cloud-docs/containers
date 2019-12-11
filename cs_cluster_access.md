@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-05"
 
 keywords: kubernetes, iks, clusters
 
@@ -21,10 +21,8 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview} 
 
-
 # Accessing Kubernetes clusters
 {: #access_cluster}
-
 
 After your {{site.data.keyword.containerlong}} cluster is created, you can begin working with your cluster by accessing the cluster.
 {: shortdesc}
@@ -38,6 +36,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
 
 <br />
+
 
 
 ## Accessing Kubernetes clusters through the public service endpoint

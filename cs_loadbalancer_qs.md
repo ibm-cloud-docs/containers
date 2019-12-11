@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-11"
 
 keywords: kubernetes, iks, nlb, lbaas
 
@@ -32,7 +32,7 @@ Quickly expose your app to the Internet by creating a layer 4 load balancer.
 ## Exposing an app by using an NLB in a classic cluster
 {: #lb_qs_classic}
 
-1. Expose you app by creating a version 1.0 network load balancer (NLB 1.0).
+1. Expose your app by creating a version 1.0 network load balancer (NLB 1.0).
   ```
   kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --name my-lb-svc
   ```
@@ -51,10 +51,9 @@ Quickly expose your app to the Internet by creating a layer 4 load balancer.
   ```
   {: screen}
 
-
 3. Curl your app's IP address.
   ```
-  curl 169.48.228.75
+  curl <external-ip>
   ```
   {: pre}
 
@@ -79,7 +78,7 @@ For more information, see:
 ## Exposing an app by using a VPC load balancer in a VPC cluster
 {: #lb_qs_vpc}
 
-1. Expose you app by creating a Kubernetes `LoadBalancer` service.
+1. Expose your app by creating a Kubernetes `LoadBalancer` service.
   ```
   kubectl expose deploy my-app --port=80 --target-port=8080 --type=LoadBalancer --name my-lb-svc
   ```
