@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-10"
+lastupdated: "2019-12-11"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2331,7 +2331,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
 {: shortdesc}
 
 ```
-ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1] [-s] [--json]
+ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1]  [-s] [--json]
 ```
 {: pre}
 

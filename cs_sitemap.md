@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-12-09"
+lastupdated: "2019-12-11"
 
 ---
 
@@ -60,7 +60,13 @@ lastupdated: "2019-12-09"
 [Limitations](/docs/containers?topic=containers-limitations)
 * [Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
 * [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
+  * [Compute](/docs/openshift?topic=openshift-openshift_limitations#classic_compute_limit)
+  * [Networking](/docs/openshift?topic=openshift-openshift_limitations#classic_networking_limit)
+  * [Storage](/docs/openshift?topic=openshift-openshift_limitations#classic_storage_limit)
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
+  * [Compute](/docs/openshift?topic=openshift-openshift_limitations#vpc_compute_limit)
+  * [Networking](/docs/openshift?topic=openshift-openshift_limitations#vpc_networking_limit)
+  * [Storage](/docs/openshift?topic=openshift-openshift_limitations#vpc_storage_limit)
 
 ## Use cases
 {: #sitemap-usecases}
