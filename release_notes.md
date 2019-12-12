@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-12"
 
 keywords: kubernetes, iks, release notes
 
@@ -35,6 +35,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 12 December 2019 | **Setting up a service mesh with Istio**: Includes the following new pages:<ul><li>[About the managed Istio add-on](/docs/containers?topic=containers-istio-about)</li><li>[Setting up Istio](/docs/containers?topic=containers-istio)</li><li>[Managing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)</li><li>[Observing Istio traffic](/docs/containers?topic=containers-istio-health)</li></ul>|
 | 11 December 2019 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.64](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Configuring VPC subnets**: [Added information](/docs/containers?topic=containers-vpc-subnets) about configuring VPC subnets, public gateways, and network segmentation for your VPC clusters.</li><li>**Kubernetes version lifecyles**: Added information about [the release lifecycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).</li><li>**Managed Knative add-on**: Added information about [Istio version support](/docs/containers?topic=containers-serverless-apps-knative#kn_limitations).</li></ul>|
 | 09 December 2019 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1519](/docs/containers?topic=containers-changelog#1163_1519_worker), [1.15.6_1526](/docs/containers?topic=containers-changelog#1156_1526_worker), [1.14.9_1542](/docs/containers?topic=containers-changelog#1149_1542_worker), and [1.13.12_1545](/docs/containers?topic=containers-changelog#11312_1545_worker). |
 | 04 December 2019 | <ul><li>**Exposing apps with load balancers or Ingress ALBs**: Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-ingress-qs).</li><li>**Kubernetes web terminal for VPC clusters**: To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cs_cli_install#cli_web).</li><li>**Monitoring Istio**: Added [steps](/docs/containers?topic=containers-istio-health#istio_inspect) to launch the ControlZ component inspection and Envoy sidecar dashboards for the Istio managed add-on.</li><li>**Tuning network performance**: Added [steps](/docs/containers?topic=containers-kernel#calico-portmap) for disabling the `portmap` plugin for for the Calico container network interface (CNI).</li><li>**Use the internal KVDB in Portworx**: Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb).</li></ul>|
