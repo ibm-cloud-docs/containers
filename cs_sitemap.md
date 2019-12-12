@@ -1,8 +1,8 @@
-istio-health#---
+---
 
 copyright:
 years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-12"
 
 ---
 
@@ -650,7 +650,7 @@ lastupdated: "2019-12-11"
   * [Kubernetes version 1.15 and earlier clusters](/docs/containers?topic=containers-istio-about#istio_ov_115)
 * [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)
 
-[Setting up Istio]](/docs/containers?topic=containers-istio)
+[Setting up Istio](/docs/containers?topic=containers-istio)
 * [Installing the Istio add-ons](/docs/containers?topic=containers-istio#istio_install)
   * [Kubernetes version 1.16 and later clusters](/docs/containers?topic=containers-istio#install_116)
   * [Kubernetes version 1.15 and earlier clusters](/docs/containers?topic=containers-istio#install_115)

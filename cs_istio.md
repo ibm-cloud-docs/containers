@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-12"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -346,16 +346,16 @@ During the update, any traffic that is sent to Istio-managed services is interru
     ```
     {: pre}
 
-9. Optional: [Install the BookInfo sample app.](#bookinfo_setup) In version 1.4 and later of the managed Istio add-on, the Grafana, Jaeger, and Kiali components that were previously installed by the `istio-extras` add-on are now included in the `istio` add-on. However, the BookInfo sample app that was previously installed by the `istio-sample-bookinfo` add-on is not included in the `istio` add-on and must be installed separately.
+8. Optional: [Install the BookInfo sample app.](/docs/containers?topic=containers-istio-mesh#bookinfo_setup) In version 1.4 and later of the managed Istio add-on, the Grafana, Jaeger, and Kiali components that were previously installed by the `istio-extras` add-on are now included in the `istio` add-on. However, the BookInfo sample app that was previously installed by the `istio-sample-bookinfo` add-on is not included in the `istio` add-on and must be installed separately.
 
-10. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
+9. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
   ```
   kubectl delete gateway mygateway
   kubectl apply -f mygateway.yaml
   ```
   {: pre}
 
-8. Next, [update your `istioctl` client and sidecars](#update_client_sidecar).
+10. Next, [update your `istioctl` client and sidecars](#update_client_sidecar).
 
 ### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
