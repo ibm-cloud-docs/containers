@@ -23,5 +23,6 @@ https://medium.com/@jakekitchener/kubernetes-serviceaccounts-for-use-in-automate
 https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2,
 https://kustomize.io/,
 https://neuvector.com/,
+https://prometheus.io/,
 /docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#pod-subnet,
 /docs/openshift?topic=openshift-openshift_changelog#311129_1518_worker,
