@@ -688,6 +688,10 @@ lastupdated: "2019-12-12"
 ## Exposing apps with load balancers
 {: #sitemap-nlb}
 
+[Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs)
+* [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
+* [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
+
 [VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas)
 * [About VPC load balancing in IBM Cloud Kubernetes Service](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
 * [Setting up a Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
@@ -726,10 +730,12 @@ lastupdated: "2019-12-12"
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
   * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
 
-## HTTPS load balancing with Ingress application load balancers (ALB)
+## HTTPS load balancing with Ingress
 {: #sitemap-ingress}
 
-[About Ingress and ALBs](/docs/containers?topic=containers-ingress-about)
+[Quick start for Ingress](https://cloud.ibm.com/docs/containers?topic=containers-ingress-qs)
+
+[About Ingress ALBs](/docs/containers?topic=containers-ingress-about)
 * [What comes with Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
   * [Application load balancer (ALB)](/docs/containers?topic=containers-ingress-about#alb-about)
