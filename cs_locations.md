@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-12"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -257,8 +257,8 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
   * Other commands do not return resources in all locations. To run `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands, you must specify a region in the `--region`.
 
 * Working with resources:
-  * When you use the global endpoint, you can work with resources that you have access permissions to in any location, even if you set a region by running `ibmcloud ks region set` and the resource that you want to work with is in another region.
-  * If you have clusters with the same name in different regions, you can either use the cluster ID when you run commands or set a region with the `ibmcloud ks region set` command and use the cluster name when you run commands.
+  * When you use the global endpoint, you can work with resources that you have access permissions to in any location, even if you target one region and the resource that you want to work with is in another region.
+  * If you have clusters with the same name in different regions, use the cluster ID when you run commands or set a region with the `ibmcloud ks init` command and use the cluster name when you run commands.
 
 * Legacy functionality:
   * If you need to list and work with resources from one region only, you can use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init) to target a regional endpoint instead of the global endpoint.
@@ -289,7 +289,7 @@ GET https://containers.cloud.ibm.com/global/v1/clusters
 
 </br>
 
-If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, run `ibmcloud ks region ls`.
+If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, review the [Deprecated region](#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.
 
 <br />
 
@@ -320,7 +320,7 @@ You might want to log in to another {{site.data.keyword.containerlong_notm}} reg
   * You created {{site.data.keyword.cloud_notm}} services or private Docker images in one region and want to use them with {{site.data.keyword.containerlong_notm}} in another region.
   * You want to access a cluster in a region that is different from the default {{site.data.keyword.cloud_notm}} region that you are logged in to.
 
-To quickly switch regions, use the `ibmcloud ks region set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set).
+To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init).
 
 
 
