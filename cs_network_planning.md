@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-11"
 
 keywords: kubernetes, iks, networking
 
@@ -175,7 +175,7 @@ To make an app publicly available to the internet in a classic cluster, choose a
 <td>Istio + NLB subdomain</td>
 <td>Basic load balancing that exposes the app with a subdomain and uses Istio routing rules</td>
 <td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
+<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).</li><li>Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).</li></ol></td>
 </tr><tr>
 <td>Ingress ALB</td>
 <td>HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules</td>

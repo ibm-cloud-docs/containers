@@ -77,7 +77,6 @@ IBM Cloud Kubernetes Service
         cs_network_policy.md
         cs_edge.md
         cs_vpn.md
-        cs_istio.md
         cs_subnets.md
         cs_network_cluster.md
         cs_dns.md
@@ -87,7 +86,6 @@ IBM Cloud Kubernetes Service
         vpc_firewall.md
         vpc_network_policy.md
         vpc_vpn.md
-        cs_istio.md
         vpc_subnets.md
         vpc_dns.md
 
@@ -98,6 +96,14 @@ IBM Cloud Kubernetes Service
         cs_app_knative.md
 
     cs_network_planning.md
+
+    {: .topicgroup}
+    Setting up a service mesh with Istio
+        cs_istio_about.md
+        cs_istio.md
+        cs_istio_mesh.md
+        cs_istio_health.md
+
     cs_nodeport.md
 
     {: .topicgroup}
