@@ -23,7 +23,7 @@ subcollection: containers
 {:download: .download}
 {:preview: .preview} 
 
-# About Ingress ALBs
+# About Ingress
 {: #ingress-about}
 
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
