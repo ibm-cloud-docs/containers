@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-10"
+lastupdated: "2019-12-12"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -510,7 +510,7 @@ Grant users access to your clusters by assigning {{site.data.keyword.cloud_notm}
         <tr>
         <td>Region</td>
         <td>`--region`</td>
-        <td>You can scope the policy to apply to clusters within a particular region. If you do not specify a region or specific cluster ID, the policy applies to all clusters for all regions. To list available regions, run `ibmcloud ks region ls` and use the value in the **Region Alias** column.</td>
+        <td>You can scope the policy to apply to clusters within a particular region. If you do not specify a region or specific cluster ID, the policy applies to all clusters for all regions. To list available regions, review the [Deprecated region](/docs/containers?topic=containers-regions-and-zones#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.</td>
         </tr>
         <tr>
         <td>Role</td>

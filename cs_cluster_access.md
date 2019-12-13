@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-05"
+lastupdated: "2019-12-13"
 
 keywords: kubernetes, iks, clusters
 
@@ -226,7 +226,9 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: codeblock}
 
-6. Verify that you are connected to the private network through a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.
+6. Verify that you are connected to the private network through one of the following methods:
+  * Classic clusters: Use a [VPN](/docs/infrastructure/iaas-vpn?topic=VPN-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection.
+  * VPC clusters: Use a [VPC VPN](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) connection.
 
 7. Get the command to set the environment variable and download the Kubernetes configuration files.
     ```
