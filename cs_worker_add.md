@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-16"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Adding worker nodes and zones to clusters
 {: #add_workers}
 
-To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster. 
+To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster.
 {:shortdesc}
 
 When you create a cluster, the worker nodes are provisioned in a worker pool. After cluster creation, you can add more worker nodes to a pool by resizing it or by adding more worker pools. By default, the worker pool exists in one zone. Clusters that have a worker pool in only one zone are called single zone clusters. When you add more zones to the cluster, the worker pool exists across the zones. Clusters that have a worker pool that is spread across more than one zone are called multizone clusters.
@@ -604,14 +604,11 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 <br />
 
 
-## Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
+## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
 If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
-
-Adding a classic virtual or bare metal server to a gateway-enabled cluster is a beta feature and might be unstable or change frequently. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment.
-{: preview}
 
 The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.
 

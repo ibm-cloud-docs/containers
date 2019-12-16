@@ -498,9 +498,7 @@ When you apply the egress pod policies that are included in this policy set, onl
 {: important}
 
 Before you begin:
-1. If your cluster runs Kubernetes version 1.16:
-  1. See [this topic](/docs/containers?topic=containers-cs_versions#116_networkpolicies) for information about updating Calico private host endpoints and network policies in version 1.16.
-  2. Update your worker node patch version to [1.16.3_1520](/docs/containers?topic=containers-changelog#1163_1520_worker).
+1. If your cluster runs Kubernetes version 1.16, see [this topic](/docs/containers?topic=containers-cs_versions#116_networkpolicies) for information about updating Calico private host endpoints and network policies in version 1.16.
 2. [Install and configure the Calico CLI.](#cli_install)
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. `--network` downloads the Calico configuration file to run all Calico commands.
