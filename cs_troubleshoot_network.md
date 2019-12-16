@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-16"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -171,7 +171,9 @@ If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/
 {: tsSymptoms}
 After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks alb cert deploy` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
 
-When you list information about the ALB secret, the status says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
+When you list information about the ALB secret, the state says `*_failed`. For example, `create_failed`, `update_failed`, `delete_failed`.
+
+List the ALB secret details (`ibmcloud ks alb cert get`) and view the ALB secret `status` to get more information on the reason for failure.
 
 {: tsResolve}
 Review the following reasons why the ALB secret might fail and the corresponding troubleshooting steps:
