@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-16"
+lastupdated: "2019-12-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -51,7 +51,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.16 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.16.3_1520, released 16 December 2019
+### Changelog for master fix pack 1.16.3_1520, released 17 December 2019
 {: #1163_1520}
 
 The following table shows the changes that are included in the master fix pack 1.16.3_1520.
@@ -173,7 +173,7 @@ The following tables show the changes that are included in the patch `1.16.2_151
 Review the version 1.15 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.15.6_1527, released 16 December 2019
+### Changelog for master fix pack 1.15.6_1527, released 17 December 2019
 {: #1156_1527}
 
 The following table shows the changes that are included in the master fix pack 1.15.6_1527.
@@ -794,7 +794,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 Review the version 1.14 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.14.9_1543, released 16 December 2019
+### Changelog for master fix pack 1.14.9_1543, released 17 December 2019
 {: #1149_1543}
 
 The following table shows the changes that are included in the master fix pack 1.14.9_1543.
@@ -1809,7 +1809,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 Review the version 1.13 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.13.12_1546, released 16 December 2019
+### Changelog for master fix pack 1.13.12_1546, released 17 December 2019
 {: #11312_1546}
 
 The following table shows the changes that are included in the master fix pack 1.13.12_1546.
