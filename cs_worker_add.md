@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-16"
+lastupdated: "2019-12-17"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -914,11 +914,37 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-  4. If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
+  4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
     ```
     ping <service_hostname>
     ```
     {: pre}
+
+  5. Optional: While you are logged into your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
+    ```
+    cat /etc/ibm-external-compute-provision.yml
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    start_time: "Tue Dec 17 15:19:23 UTC 2019"
+    config:
+      kubernetes_version: 1.15
+      pod_name: ibm-external-compute-job-wk9xc
+      image_url: us.icr.io/armada-master/stranger:v1.0.0
+      prepare_host: True
+      configure_gateway: True
+      calico_node_version: v3.8.4
+      ibm_gateway_controller_version: 1027
+      service_k8s_ns: default
+      repo_name: us.icr.io
+      clusterdns_setup: True
+      etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
+      etcd_port: 28649
+    end_time: "Tue Dec 17 15:21:12 UTC 2019"
+    ```
+    {: screen}
 
 7. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
   1. Get the IP address for your server.
@@ -955,11 +981,17 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
   ```
   {: pre}
 
-3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance.
-  ```
-  systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
-  ```
-  {: pre}
+3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance. If you cluster runs Kubernetes version 1.16 or later, also stop the `create-host-endpoint` service.
+  * Kubernetes 1.15:
+    ```
+    systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
+    ```
+    {: pre}
+  * Kubernetes 1.16 and later:
+    ```
+    systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service create-host-endpoint.service
+    ```
+    {: pre}
 
 4. Log out of your server instance.
 
