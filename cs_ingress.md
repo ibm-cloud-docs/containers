@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-04"
+lastupdated: "2019-12-13"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -46,8 +46,6 @@ Before you get started with Ingress, review the following prerequisites.
 <br />
 
 
-
-
 ## Planning networking for single or multiple namespaces
 {: #multiple_namespaces}
 
@@ -57,8 +55,10 @@ One Ingress resource is required per namespace where you have apps that you want
 ### All apps are in one namespace
 {: #one-ns}
 
-If the apps in your cluster are all in the same namespace, one Ingress resource is required to define routing rules for the apps that are exposed there. For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
+If the apps in your cluster are all in the same namespace, one Ingress resource is required to define routing rules for the apps that are exposed there.
 {: shortdesc}
+
+For example, if you have `app1` and `app2` exposed by services in a development namespace, you can create an Ingress resource in the namespace. The resource specifies `domain.net` as the host and registers the paths that each app listens on with `domain.net`.
 
 <img src="images/cs_ingress_single_ns.png" width="270" alt="One resource is required per namespace." style="width:270px; border-style: none"/>
 
@@ -121,46 +121,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
 
-2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
-      2.  Define a service for the app that the ALB will expose.
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment YAML.</td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>The port that the service listens on.</td>
-           </tr>
-           </tbody></table>
-      3.  Save your changes.
-      4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
-
-          ```
-          kubectl apply -f myappservice.yaml [-n <namespace>]
-          ```
-          {: pre}
-      5.  Repeat these steps for every app that you want to expose.
+2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
+      ```
+      kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+      ```
+      {: pre}
 
 
 ### Step 2: Select an app domain
@@ -373,7 +338,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tbody></table>
 
 3.  Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
-
     ```
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
@@ -408,7 +372,7 @@ https://<domain>/<app2_path>
 ```
 {: codeblock}
 
-If you use a wildcard domain to expose apps in different namespaces, access those apps with their own subdomains.
+If you use a wildcard domain, access those apps with their own subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
@@ -451,89 +415,65 @@ Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside of your cluster to the public:
+1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service that forwards incoming requests to an external endpoint that you create in subsequent steps.
+    ```
+    apiVersion: v1
+    kind: Service
+    metadata:
+      name: myexternalservice
+    spec:
+      ports:
+       - protocol: TCP
+         port: <app_port>
+    ```
+    {: codeblock}
 
-1.  Create a Kubernetes service for your cluster that will forward incoming requests to an external endpoint that you will create.
-    1.  Open your preferred editor and create a service configuration file that is named, for example, `myexternalservice.yaml`.
-    2.  Define a service for the app that the ALB will expose.
+2.  Create the service in your cluster.
+    ```
+    oc apply -f myexternalservice.yaml
+    ```
+    {: pre}
 
-        ```
-        apiVersion: v1
-        kind: Service
-        metadata:
-          name: myexternalservice
-        spec:
-          ports:
-           - protocol: TCP
-             port: 8080
-        ```
-        {: codeblock}
+3.  Define an external endpoint configuration file. Include all public IP addresses and ports that you can use to access your external app. Note that the name of the endpoint must be the same as the name of the service that you defined in the previous step, `myexternalservice`.
 
-        <table>
-        <caption>Understanding the ALB service file components</caption>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>metadata.name</code></td>
-        <td>Replace <em><code>&lt;myexternalservice&gt;</code></em> with a name for your service.<p>Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.</p></td>
-        </tr>
-        <tr>
-        <td><code>port</code></td>
-        <td>The port that the service listens on.</td>
-        </tr></tbody></table>
+    ```
+    kind: Endpoints
+    apiVersion: v1
+    metadata:
+      name: myexternalservice
+    subsets:
+      - addresses:
+          - ip: <external_IP1>
+          - ip: <external_IP2>
+        ports:
+          - port: <external_port>
+    ```
+    {: codeblock}
 
-    3.  Save your changes.
-    4.  Create the Kubernetes service for your cluster.
+    <table>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>name</code></td>
+    <td>Replace <em><code>&lt;myexternalendpoint&gt;</code></em> with the name of the Kubernetes service that you created earlier.</td>
+    </tr>
+    <tr>
+    <td><code>ip</code></td>
+    <td>Replace <em>&lt;external_IP&gt;</em> with the public IP addresses to connect to your external app.</td>
+     </tr>
+     <td><code>port</code></td>
+     <td>Replace <em>&lt;external_port&gt;</em> with the port that your external app listens to.</td>
+     </tbody></table>
 
-        ```
-        kubectl apply -f myexternalservice.yaml
-        ```
-        {: pre}
-2.  Configure a Kubernetes endpoint that defines the external location of the app that you want to include into the cluster load balancing.
-    1.  Open your preferred editor and create an endpoint configuration file that is named, for example, `myexternalendpoint.yaml`.
-    2.  Define your external endpoint. Include all public IP addresses and ports that you can use to access your external app. Note that the name of the endpoint must be the same as the name of the service that you defined in the previous step, `myexternalservice`.
+4.  Create the endpoint in your cluster.
+    ```
+    oc apply -f myexternalendpoint.yaml
+    ```
+    {: pre}
 
-        ```
-        kind: Endpoints
-        apiVersion: v1
-        metadata:
-          name: myexternalservice
-        subsets:
-          - addresses:
-              - ip: <external_IP1>
-              - ip: <external_IP2>
-            ports:
-              - port: <external_port>
-        ```
-        {: codeblock}
-
-        <table>
-        <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
-        </thead>
-        <tbody>
-        <tr>
-        <td><code>name</code></td>
-        <td>Replace <em><code>&lt;myexternalendpoint&gt;</code></em> with the name of the Kubernetes service that you created earlier.</td>
-        </tr>
-        <tr>
-        <td><code>ip</code></td>
-        <td>Replace <em>&lt;external_IP&gt;</em> with the public IP addresses to connect to your external app.</td>
-         </tr>
-         <td><code>port</code></td>
-         <td>Replace <em>&lt;external_port&gt;</em> with the port that your external app listens to.</td>
-         </tbody></table>
-
-    3.  Save your changes.
-    4.  Create the Kubernetes endpoint for your cluster.
-
-        ```
-        kubectl apply -f myexternalendpoint.yaml
-        ```
-        {: pre}
-
-3. Continue with the steps in "Exposing apps that are inside your cluster to the public", [Step 2: Select an app domain](#public_inside_2).
+5. Continue with the steps in "Exposing apps that are inside your cluster to the public", [Step 2: Select an app domain](#public_inside_2).
 
 ### Exposing external apps through the `proxy-external-service` Ingress annotation
 {: #proxy-external}
@@ -631,46 +571,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
 
-2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
-      2.  Define a service for the app that the ALB will expose.
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment YAML.</td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>The port that the service listens on.</td>
-           </tr>
-           </tbody></table>
-      3.  Save your changes.
-      4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
-
-          ```
-          kubectl apply -f myappservice.yaml [-n <namespace>]
-          ```
-          {: pre}
-      5.  Repeat these steps for every app that you want to expose.
+2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
+      ```
+      kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+      ```
+      {: pre}
 
 
 </br>
@@ -848,7 +753,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tbody></table>
 
 3.  Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
-
     ```
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
@@ -887,7 +791,7 @@ https://<domain>/<app2_path>
 ```
 {: codeblock}
 
-If you use a wildcard domain to expose apps in different namespaces, access those apps with their own subdomains.
+If you use a wildcard domain, access those apps with their own subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>
@@ -924,46 +828,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
 
-2.   Create a Kubernetes service for each app that you want to expose. Your app must be exposed by a Kubernetes service to be included by the cluster ALB in the Ingress load balancing.
-      1.  Open your preferred editor and create a service configuration file that is named, for example, `myappservice.yaml`.
-      2.  Define a service for the app that the ALB will expose.
-
-          ```
-          apiVersion: v1
-          kind: Service
-          metadata:
-            name: myappservice
-          spec:
-            selector:
-              <selector_key>: <selector_value>
-            ports:
-             - protocol: TCP
-               port: 8080
-          ```
-          {: codeblock}
-
-          <table>
-          <thead>
-          <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the ALB service YAML file components</th>
-          </thead>
-          <tbody>
-          <tr>
-          <td><code>selector</code></td>
-          <td>Enter the label key (<em>&lt;selector_key&gt;</em>) and value (<em>&lt;selector_value&gt;</em>) pair that you want to use to target the pods where your app runs. To target your pods and include them in the service load balancing, ensure that the <em>&lt;selector_key&gt;</em> and <em>&lt;selector_value&gt;</em> are the same as the key/value pair in the <code>spec.template.metadata.labels</code> section of your deployment YAML.</td>
-           </tr>
-           <tr>
-           <td><code>port</code></td>
-           <td>The port that the service listens on.</td>
-           </tr>
-           </tbody></table>
-      3.  Save your changes.
-      4.  Create the service in your cluster. If apps are deployed in multiple namespaces in your cluster, ensure that the service deploys into the same namespace as the app that you want to expose.
-
-          ```
-          kubectl apply -f myappservice.yaml [-n <namespace>]
-          ```
-          {: pre}
-      5.  Repeat these steps for every app that you want to expose.
+2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
+      ```
+      kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+      ```
+      {: pre}
 
 
 </br>
@@ -1146,7 +1015,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tbody></table>
 
 3.  Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
-
     ```
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
@@ -1181,7 +1049,7 @@ https://<domain>/<app2_path>
 ```
 {: codeblock}
 
-If you use a wildcard domain to expose apps in different namespaces, access those apps with their own subdomains.
+If you use a wildcard domain, access those apps with their own subdomains.
 
 ```
 http://<subdomain1>.<domain>/<app1_path>

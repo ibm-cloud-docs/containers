@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-16"
 
 keywords: kubernetes, iks
 
@@ -170,9 +170,6 @@ Your cluster's metrics provider (`metrics-server` in Kubernetes 1.12 and later) 
 {: shortdesc}
 
 The metrics provider pod also has a `nanny` container that scales the `metrics-server` container's resource requests and limits in response to the number of worker nodes in the cluster. You can change the default resources by editing the metrics provider's configmap.
-
-**Kubernetes 1.16 limitation**: In clusters that run Kubernetes version 1.16, the `nanny` container is removed from the `metrics-server` pod because it uses unsupported Kubernetes APIs. As a result, your `NannyConfiguration` is ignored and the `metrics-server` pod no longer has the limits set. Update your configuration to handle this `nanny` limitation. If the `nanny` container limitation is resolved in a future patch update, you can reconfigure your cluster metrics provider resources.
-{: note}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 

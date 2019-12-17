@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-17"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -27,7 +27,7 @@ subcollection: containers
 # Adding worker nodes and zones to clusters
 {: #add_workers}
 
-To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster. 
+To increase the availability of your apps, you can add worker nodes to an existing zone or multiple existing zones in your cluster. To help protect your apps from zone failures, you can add zones to your cluster.
 {:shortdesc}
 
 When you create a cluster, the worker nodes are provisioned in a worker pool. After cluster creation, you can add more worker nodes to a pool by resizing it or by adding more worker pools. By default, the worker pool exists in one zone. Clusters that have a worker pool in only one zone are called single zone clusters. When you add more zones to the cluster, the worker pool exists across the zones. Clusters that have a worker pool that is spread across more than one zone are called multizone clusters.
@@ -604,14 +604,11 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 <br />
 
 
-## Adding classic infrastructure servers to gateway-enabled classic clusters (Beta)
+## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
 If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
-
-Adding a classic virtual or bare metal server to a gateway-enabled cluster is a beta feature and might be unstable or change frequently. Beta features also might not provide the same level of performance or compatibility that generally available features provide and are not intended for use in a production environment.
-{: preview}
 
 The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.
 
@@ -917,11 +914,37 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-  4. If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
+  4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
     ```
     ping <service_hostname>
     ```
     {: pre}
+
+  5. Optional: While you are logged into your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
+    ```
+    cat /etc/ibm-external-compute-provision.yml
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    start_time: "Tue Dec 17 15:19:23 UTC 2019"
+    config:
+      kubernetes_version: 1.15
+      pod_name: ibm-external-compute-job-wk9xc
+      image_url: us.icr.io/armada-master/stranger:v1.0.0
+      prepare_host: True
+      configure_gateway: True
+      calico_node_version: v3.8.4
+      ibm_gateway_controller_version: 1027
+      service_k8s_ns: default
+      repo_name: us.icr.io
+      clusterdns_setup: True
+      etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
+      etcd_port: 28649
+    end_time: "Tue Dec 17 15:21:12 UTC 2019"
+    ```
+    {: screen}
 
 7. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
   1. Get the IP address for your server.
@@ -958,11 +981,17 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
   ```
   {: pre}
 
-3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance.
-  ```
-  systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
-  ```
-  {: pre}
+3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance. If you cluster runs Kubernetes version 1.16 or later, also stop the `create-host-endpoint` service.
+  * Kubernetes 1.15:
+    ```
+    systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
+    ```
+    {: pre}
+  * Kubernetes 1.16 and later:
+    ```
+    systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service create-host-endpoint.service
+    ```
+    {: pre}
 
 4. Log out of your server instance.
 

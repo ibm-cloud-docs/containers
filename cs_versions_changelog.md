@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-09"
+lastupdated: "2019-12-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -50,6 +50,27 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.16.3_1520, released 17 December 2019
+{: #1163_1520}
+
+The following table shows the changes that are included in the master fix pack 1.16.3_1520.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Gateway-enabled cluster controller | 924 | 1032 | Support for [Adding classic infrastructure servers to gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available (GA). In addition, the controller is updated to use Alpine base image version 3.10 and to use Go version 1.12.11. |
+| IBM Calico extension | N/A | 130 | **New!**: Added a Calico node init container that creates Calico private host endpoints for worker nodes. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
+| {{site.data.keyword.cloud_notm}} Provider	| v1.16.3-94 | v1.16.3-115 | Updated version 1.0 and 2.0 network load balancers (NLBs) to prefer scheduling NLB pods on worker nodes that do not currently run any NLB pods. In addition, the Virtual Private Cloud (VPC) load balancer plug-in is updated to use Go version 1.12.11. |
+| Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
+| Kubernetes addon resizer | 1.8.5 | 1.8.7 | See the [Kubernetes addon resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.7){: external}. |
+| Kubernetes Metrics Server | N/A | N/A | The `nanny` container is fixed (see Kubernetes addon resizer component) and added back to the `metrics-server` pod, which removes the Kubernetes 1.16 limitation to [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics). |
+| Kubernetes Dashboard | v2.0.0-beta6 | v2.0.0-beta8 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-beta8){: external}.|
+| Operator Lifecycle Manager Catalog | v1.4.0 | v1.5.4 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.4){: external}. |
+| Operator Lifecycle Manager | 0.12.0 | 0.13.0 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.13.0){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.3_1519" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.3_1519, released 9 December 2019
 {: #1163_1519_worker}
@@ -151,6 +172,21 @@ The following tables show the changes that are included in the patch `1.16.2_151
 
 Review the version 1.15 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.15.6_1527, released 17 December 2019
+{: #1156_1527}
+
+The following table shows the changes that are included in the master fix pack 1.15.6_1527.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Gateway-enabled cluster controller | 924 | 1032 | Support for [Adding classic infrastructure servers to gateway-enabled classic clusters](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available (GA). In addition, the controller is updated to use Alpine base image version 3.10 and to use Go version 1.12.11. |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
+| {{site.data.keyword.cloud_notm}} Provider	| v1.15.6-182 | v1.15.6-200 | Updated version 1.0 and 2.0 network load balancers (NLBs) to prefer scheduling NLB pods on worker nodes that do not currently run any NLB pods. In addition, the Virtual Private Cloud (VPC) load balancer plug-in is updated to use Go version 1.12.11. |
+| Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.6_1526" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.6_1526, released 9 December 2019
 {: #1156_1526_worker}
@@ -757,6 +793,19 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 Review the version 1.14 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.14.9_1543, released 17 December 2019
+{: #1149_1543}
+
+The following table shows the changes that are included in the master fix pack 1.14.9_1543.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
+| Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.14.9_1542" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.14.9_1542, released 9 December 2019
 {: #1149_1542_worker}
@@ -1759,6 +1808,19 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.13.12_1546, released 17 December 2019
+{: #11312_1546}
+
+The following table shows the changes that are included in the master fix pack 1.13.12_1546.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
+| Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.13.12_1545" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.13.12_1545, released 9 December 2019
 {: #11312_1545_worker}
