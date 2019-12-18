@@ -416,7 +416,7 @@ To update flavors:
         ```
         {: pre}
 
-     3. Get the details for a worker node and note the zone and the private and the public VLAN ID for classic clusters or the subnet ID for VPC clusters.
+     3. Get the details for a worker node. In the output, note the zone and  eitherthe private and public VLAN ID for classic clusters or the subnet ID for VPC clusters.
         ```
         ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```
