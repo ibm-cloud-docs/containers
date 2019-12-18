@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-17"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -408,6 +408,8 @@ Before you begin:
 * To add a zone to your worker pools, your compute and gateway worker pools must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pools are not in a multizone-capable zone, consider [creating a new compute worker pool](#gateway_compute) and [creating a new gateway worker pool](#gateway_replace).
 * Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
+To add a zone to your worker pool:
+
 1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
    ```
    ibmcloud ks zone ls
@@ -614,8 +616,14 @@ The server instance is added to your cluster's private 172.30.X.X pod network so
 
 To connect your cluster and the server instance, you create an `ibm-external-compute-config` config map that provides the necessary information to access and configure the connection to the server instance. Then, you create a Kubernetes job, which uses the config map and an SSH connection to deploy a pod and a service into your gateway-enabled cluster. The pod provides the Calico network `etcd` endpoint for your cluster so that services on the server instance can access the workload in the cluster. The service creates a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
 
-Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
-{: note}
+### Before you begin
+{: #byb}
+
+Before you begin, review the following limitations and considerations.
+
+* Although the virtual or bare metal server instance is added to your cluster's private pod network, the server instance is not managed by the cluster master and is not schedulable for workloads by the cluster master. You must continue to manage your server instance separately from your cluster's worker nodes by using the classic infrastructure [console](https://cloud.ibm.com/classic/devices), `ibmcloud sl` CLI, or API.
+* Every time that your cluster master is updated, including both minor version updates that you apply manually and master patches that are applied automatically, you must also update your server instance connection by following the steps in [Updating the server instance connection](#update_connection).
+* You can add virtual or bare metal server to only one gateway-enabled classic cluster per private VLAN.
 
 ### Step 1: Create the virtual or bare metal server
 {: #vsi_1}
@@ -920,7 +928,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     {: pre}
 
-  5. Optional: While you are logged into your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
+  5. Optional: While you are logged in to your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
     ```
     cat /etc/ibm-external-compute-provision.yml
     ```
@@ -964,6 +972,39 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ping <server_IP>
     ```
     {: pre}
+
+### Updating the server instance connection
+{: #update_connection}
+
+Every time that your cluster master is updated, including both minor version updates that you apply manually and master patches that are applied automatically, you must also update your server instance connection.
+{: shortdesc}
+
+1. Delete the existing server connection job.
+  ```
+  kubectl delete job -n kube-system ibm-external-compute-job
+  ```
+  {: pre}
+
+2. Get the name of the existing server connection pod.  
+  ```
+  kubectl get pod -n kube-system | grep ibm-external-compute-job
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  NAME                                                  READY     STATUS    RESTARTS   AGE
+  ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
+  ```
+  {: screen}
+
+3. Delete the existing server connection pod.
+  ```
+  kubectl delete pod -n kube-system <pod_name>
+  ```
+  {: pre}
+
+4. Re-deploy the server connection job by following the steps in [Create the server instance connection job](#vsi_3). Ensure that you use the latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository.
 
 ### Removing the server instance from your cluster network
 {: #vsi_4}

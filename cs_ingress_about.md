@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-13"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -83,7 +83,7 @@ For example, if your cluster has worker nodes in 3 zones in the US-East region, 
 
 In rare cases, some DNS resolvers or client apps might continue to use the unhealthy ALB IP after the 30-second TTL. These client apps might experience a longer load time until the client app abandons the `3.3.3.3` IP and tries to connect to `1.1.1.1` or `2.2.2.2`. Depending on the client browser or client app settings, the delay can range from a few seconds to a full TCP timeout.
 
-The MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.
+Because Cloudflare is a public service, the MZLB load balances for public ALBs that use the IBM-provided Ingress subdomain only. If you use only private ALBs, you must manually check the health of the ALBs and update DNS lookup results. If you use public ALBs that use a custom domain, you can include the ALBs in MZLB load balancing by creating a CNAME in your DNS entry to forward requests from your custom domain to the IBM-provided Ingress subdomain for your cluster.
 
 If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also whitelist [Cloudflare's IPv4 IPs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/) that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to whitelist these IPs, see [Lesson 3 of the Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
 {: note}
@@ -92,7 +92,7 @@ If you use Calico pre-DNAT network policies to block all incoming traffic to Ing
 
 When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname, and the private VPC load balancer puts the private IP addresses of your private ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time.
 
-The Ingress subdomain for your cluster is automatically linked to the VPC load balancer hostname for your public ALBs. Note that the Ingress subdomain for your cluster is different than the VPC load balancer-assigned hostname for your public ALBs. The Ingress subdomain is the public route through which users access your app from the internet, and can be configured to use TLS termination. The assigned hostname for your public ALBs is what the VPC load balancer uses to forward the user requests to your ALBs. You can also use the hostname for your public ALBs to access your apps, but the hostname cannot be configured to use TLS termination.
+The Ingress subdomain for your cluster is automatically linked to the VPC load balancer hostname for your public ALBs. Note that the Ingress subdomain for your cluster, which looks like `<cluster_name>.<hash>-0001.<region>.containers.appdomain.cloud`, is different than the VPC load balancer-assigned hostname for your public ALBs, which looks like `01ab23cd-<region>.lb.appdomain.cloud`. The Ingress subdomain is the public route through which users access your app from the internet, and can be configured to use TLS termination. The assigned hostname for your public ALBs is what the VPC load balancer uses to manages your ALB IPs.
 
 Before forwarding traffic to ALBs, the VPC load balancer also health checks the public ALB IP addresses that are behind the hostname to determine whether the ALBs are available or not. Every 5 seconds, the VPC load balancer health checks the floating public ALB IPs for your cluster and keeps the DNS lookup results updated based on these health checks. When a user sends a request to your app by using the cluster's Ingress subdomain and app route, such as `mycluster-<hash>-0001.us-south.containers.appdomain.cloud/myapp`, the VPC load balancer receives the request. If all ALBs are healthy, a normal operation DNS lookup of your Ingress subdomain returns all of the floating IPs, 1 of which the client accesses at random. However, if one IP becomes unavailable for any reason, then the health check for that IP fails after 2 retries. The VPC load balancer removes the failed IP from the subdomain, and the DNS lookup returns only the healthy IPs while a new floating IP address is generated.
 

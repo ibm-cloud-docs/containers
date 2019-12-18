@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-10"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -416,7 +416,7 @@ To update flavors:
         ```
         {: pre}
 
-     3. Get the details for a worker node and note the zone, the private and the public VLAN ID.
+     3. Get the details for a worker node. In the output, note the zone and either the private and public VLAN ID for classic clusters or the subnet ID for VPC clusters.
         ```
         ibmcloud ks worker get --cluster <cluster_name_or_ID> --worker <worker_ID>
         ```

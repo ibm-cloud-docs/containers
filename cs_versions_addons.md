@@ -60,7 +60,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </thead>
 <tbody>
 <tr>
-<td>615 / 365</td>
+<td>615 / 372</td>
 <td>18 Dec 2019</td>
 <td><ul>
 <li>Fixes minor bugs for the [`app-id` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</li>
