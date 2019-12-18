@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-03"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # Fluentd and Ingress ALB changelog
 {: #cluster-add-ons-changelog}
@@ -59,6 +59,14 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>615 / 365</td>
+<td>18 Dec 2019</td>
+<td><ul>
+<li>Fixes minor bugs for the [`app-id` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</li>
+<li>Removes the dependency of the `ingress-auth` container on the Kubernetes API server. The container previously made a `getSecret` call to the API for every cookie generation. Now, it caches the secret data for the life of the container.</li></ul></td>
+<td>-</td>
+</tr>
 <tr>
 <td>597 / 353</td>
 <td>21 Nov 2019</td>

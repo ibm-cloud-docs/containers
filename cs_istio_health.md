@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -46,7 +46,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.0
+    cd istio-1.4.2
     ```
     {: pre}
 
@@ -161,7 +161,7 @@ The ControlZ dashboard accesses the Istio component ports to provide an interact
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.0
+    cd istio-1.4.2
     ```
     {: pre}
 
