@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-12"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -83,7 +83,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
   Example output:
   ```
   Name                      Version
-  istio                     1.4.0
+  istio                     1.4.2
   ```
   {: screen}
 
@@ -373,19 +373,19 @@ For example, the patch version of your add-on might be updated automatically by 
   Example output:
   ```
   client version: 1.3.3
-  control plane version: 1.4.0
+  control plane version: 1.4.2
   ```
   {: screen}
   * If the `client version` (`istioctl`) matches the `control plane version` (Istio add-on control plane), including the patch version, continue to the next step.
   * If the `client version` does not match the `control plane version`:
     1. Download the `istioctl` client of the same version as the control plane.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.0 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.2 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.4.0
+      cd istio-1.4.2
       ```
       {: pre}
 
@@ -500,7 +500,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.4.0
+    cd <filepath>/istio-1.4.2
     ```
     {: pre}
 

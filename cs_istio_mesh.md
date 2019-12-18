@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -61,7 +61,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.4.0
+      cd istio-1.4.2
       ```
       {: pre}
     3. Label the `default` namespace for automatic sidecar injection.
@@ -326,7 +326,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.4.0
+  cd istio-1.4.2
   ```
   {: pre}
 
@@ -412,7 +412,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.0
+    cd istio-1.4.2
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
@@ -570,7 +570,7 @@ In the following steps, you set up a subdomain through which your users can acce
     {: pre}
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.0
+    cd istio-1.4.2
     ```
     {: pre}
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
