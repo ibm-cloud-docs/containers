@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-11-26"
+lastupdated: "2019-12-19"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 {:tsSymptoms: .tsSymptoms}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
@@ -87,7 +87,7 @@ Start by checking for error messages in the Ingress resource deployment events a
     Rules:
       Host                                             Path  Backends
       ----                                             ----  --------
-      mycluster-<hash>-0001.us-south.containers.appdomain.cloud
+      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
                                                        /tea      myservice1:80 (<none>)
                                                        /coffee   myservice2:80 (<none>)
     Annotations:
@@ -195,7 +195,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
         ```
-        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud"
+        curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
         ```
         {: pre}
 
@@ -214,8 +214,8 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
     Example output:
     ```
-    Ingress Subdomain:      mycluster-<hash>-0001.us-south.containers.appdomain.cloud
-    Ingress Secret:         mycluster-<hash>-0001
+    Ingress Subdomain:      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+    Ingress Secret:         mycluster-<hash>-0000
     ```
     {: screen}
 
@@ -229,7 +229,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     Example output:
     ```
     NAME                HOSTS                                                    ADDRESS                        PORTS     AGE
-    myingressresource   mycluster-<hash>-0001.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
+    myingressresource   mycluster-<hash>-0000.us-south.containers.appdomain.cloud      169.46.52.222,169.62.196.238   80        1h
     ```
     {: screen}
 
@@ -245,9 +245,9 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
 
         Example output:
         ```
-        www.my-domain.com is an alias for mycluster-<hash>-0001.us-south.containers.appdomain.cloud
-        mycluster-<hash>-0001.us-south.containers.appdomain.cloud has address 169.46.52.222
-        mycluster-<hash>-0001.us-south.containers.appdomain.cloud has address 169.62.196.238
+        www.my-domain.com is an alias for mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+        mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
+        mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
         ```
         {: screen}
 
@@ -324,11 +324,11 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
         Example output that confirms the ALB pod is configured with the correct health check subdomain, `albhealth.<domain>`:
         ```
-        server_name albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud;
+        server_name albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud;
         ```
         {: screen}
 
-    2. To remove the IP by disabling the health check, insert `#` in front of the `server_name`. When the `albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud` virtual host is disabled for the ALB, the automated health check automatically removes the IP from the DNS response.
+    2. To remove the IP by disabling the health check, insert `#` in front of the `server_name`. When the `albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud` virtual host is disabled for the ALB, the automated health check automatically removes the IP from the DNS response.
         ```
         kubectl exec -ti public-cr24a9f2caf6554648836337d240064935-alb1-7f78686c9d-8rvtq -n kube-system -c nginx-ingress -- sed -i -e 's*server_name*#server_name*g' /etc/nginx/conf.d/kube-system-alb-health.conf
         ```
@@ -342,7 +342,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
         Example output:
         ```
-        #server_name albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud
+        #server_name albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud
         ```
         {: screen}
 
@@ -356,7 +356,7 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 4. Now, when you attempt to cURL the `albhealth` host to health check the ALB IP, the check fails.
     ```
-    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud"
+    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
 
@@ -375,19 +375,19 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Cloudflare server. Note that the DNS registration might take a few minutes to update.
     ```
-    host mycluster-<hash>-0001.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
+    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
     ```
     {: pre}
 
     Example output that confirms that only the healthy ALB IP, `169.46.52.222`, remains in the DNS registration and that the unhealthy ALB IP, `169.62.196.238`, has been removed:
     ```
-    mycluster-<hash>-0001.us-south.containers.appdomain.cloud has address 169.46.52.222
+    mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
     ```
     {: screen}
 
 6. Now that the ALB IP has been removed from production, you can run debugging tests against your app through it. To test communication to your app through this IP, you can run the following cURL command, replacing the example values with your own values:
     ```
-    curl -X GET --resolve mycluster-<hash>-0001.us-south.containers.appdomain.cloud:443:169.62.196.238 https://mycluster-<hash>-0001.us-south.containers.appdomain.cloud/
+    curl -X GET --resolve mycluster-<hash>-0000.us-south.containers.appdomain.cloud:443:169.62.196.238 https://mycluster-<hash>-0000.us-south.containers.appdomain.cloud/
     ```
     {: pre}
 
@@ -409,20 +409,20 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 
 9. Now, when you cURL the `albhealth` host to health check the ALB IP, the check returns `healthy`.
     ```
-    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0001.us-south.containers.appdomain.cloud"
+    curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
     ```
     {: pre}
 
 10. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Cloudflare server. Note that the DNS registration might take a few minutes to update.
     ```
-    host mycluster-<hash>-0001.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
+    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
     ```
     {: pre}
 
     Example output:
     ```
-    mycluster-<hash>-0001.us-south.containers.appdomain.cloud has address 169.46.52.222
-    mycluster-<hash>-0001.us-south.containers.appdomain.cloud has address 169.62.196.238
+    mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.46.52.222
+    mycluster-<hash>-0000.us-south.containers.appdomain.cloud has address 169.62.196.238
     ```
     {: screen}
 

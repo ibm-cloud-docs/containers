@@ -118,7 +118,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 ### Publicly accessing BookInfo
 {: #istio_access_bookinfo}
 
-1. Get the public address for your cluster.
+1. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
     * **Classic clusters**:
       1. Set the Istio ingress host.
          ```
@@ -798,6 +798,7 @@ Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS)
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
+
 
 <br />
 

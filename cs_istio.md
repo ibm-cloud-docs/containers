@@ -68,13 +68,13 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.4, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.4.2, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-3. Verify that the managed Istio add-on is enabled in this cluster.
+3. Verify that the managed Istio add-on has a status of `Addon Ready`.
   ```
   ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
@@ -82,8 +82,8 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
   Example output:
   ```
-  Name                      Version
-  istio                     1.4.2
+  Name            Version     Health State   Health Status
+  istio           1.4.2       normal         Addon Ready
   ```
   {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-11"
+lastupdated: "2019-12-19"
 
 keywords: kubernetes, iks
 
@@ -45,7 +45,14 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <th>Changes</th>
 </tr>
 </thead>
-<tbody>
+<tbody><tr>
+<td>0.4.66</td>
+<td>19 Dec 2019</td>
+<td><ul>
+<li>Adds a **Status** field to the [`ibmcloud ks alb cert get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get) command. The previous **Status** field is now called **State**.</li>
+<li>Fixes a bug so that help text is now properly displayed for top-level commands, such as `ibmcloud ks flavors` and `ibmcloud ks subnets`.</li></ul>
+</td>
+</tr>
 <tr>
 <td>0.4.64</td>
 <td>11 Dec 2019</td>

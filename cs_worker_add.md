@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-18"
+lastupdated: "2019-12-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -371,8 +371,8 @@ To add a zone with worker nodes to your worker pool:
   Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
   Master Location:                Dallas
   Master Status:                  Ready (21 hours ago)
-  Ingress Subdomain:              mycluster-<hash>-0001.us-south.containers.appdomain.cloud
-  Ingress Secret:                 mycluster-<hash>-0001
+  Ingress Subdomain:              mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+  Ingress Secret:                 mycluster-<hash>-0000
   Workers:                        6
   Worker Zones:                   dal10, dal12
   Version:                        1.14.9_1524
@@ -985,26 +985,13 @@ Every time that your cluster master is updated, including both minor version upd
   ```
   {: pre}
 
-2. Get the name of the existing server connection pod.  
+2. Verify that the server connection pod is removed. When the pod is successfully removed, no output is returned.
   ```
   kubectl get pod -n kube-system | grep ibm-external-compute-job
   ```
   {: pre}
 
-  Example output:
-  ```
-  NAME                                                  READY     STATUS    RESTARTS   AGE
-  ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
-  ```
-  {: screen}
-
-3. Delete the existing server connection pod.
-  ```
-  kubectl delete pod -n kube-system <pod_name>
-  ```
-  {: pre}
-
-4. Re-deploy the server connection job by following the steps in [Create the server instance connection job](#vsi_3). Ensure that you use the latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository.
+3. Re-deploy the server connection job by following the steps in [Create the server instance connection job](#vsi_3). Ensure that you use the latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository.
 
 ### Removing the server instance from your cluster network
 {: #vsi_4}
