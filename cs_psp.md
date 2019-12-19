@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2019
-lastupdated: "2019-12-17"
+lastupdated: "2019-12-19"
 
 keywords: kubernetes, iks
 
@@ -14,14 +14,14 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:screen: .screen}
 {:pre: .pre}
-{:table: .aria-labeledby="caption"} 
+{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
 {:tip: .tip}
 {:note: .note}
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 
 # Configuring pod security policies
@@ -200,7 +200,8 @@ pod security policies and related RBAC resources to allow {{site.data.keyword.IB
 
 The default `PodSecurityPolicy` resources refer to the pod security policies that are set by {{site.data.keyword.IBM_notm}}.
 
-**Attention**: You must not delete or modify these resources.
+You must not delete or modify these resources.
+{: important}
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|
