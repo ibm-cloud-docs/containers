@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-10"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -253,7 +253,8 @@ The following table shows the Kubernetes resource permissions that are granted b
         <li>Create RBAC roles and role bindings in a namespace or cluster roles and cluster role bindings in all namespaces</li>
         <li>Access the Kubernetes dashboard</li>
         <li>Create an Ingress resource that makes apps publicly available</li>
-        <li>Review cluster metrics such as with the <code>kubectl top pods</code>, <code>kubectl top nodes</code>, or <code>kubectl get nodes</code> commands</li></ul>
+        <li>Review cluster metrics such as with the <code>kubectl top pods</code>, <code>kubectl top nodes</code>, or <code>kubectl get nodes</code> commands</li>
+        <li>[Create and update privileged and unprivileged (restricted) pods](/docs/containers?topic=containers-psp#customize_psp)</li></ul>
     </td>
   </tr>
   </tr>
