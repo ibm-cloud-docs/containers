@@ -274,7 +274,7 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 
 3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
   ```
-  ibmcloud ks flavors --zone <zone> --provider classic
+  ibmcloud ks flavors --zone <zone>
   ```
   {: pre}
 

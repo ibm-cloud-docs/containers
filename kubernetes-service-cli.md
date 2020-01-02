@@ -916,7 +916,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 </dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
-<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
 
 <dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with one worker node is created. This value is optional.
@@ -2405,7 +2405,7 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 <dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool. This value is required, and must be 1 or greater.</dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
-<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
 <dd>Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is is. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. This value is optional. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>

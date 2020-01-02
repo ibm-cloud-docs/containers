@@ -283,7 +283,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    {:tip}
 
    ```
-   ibmcloud ks flavors --zone <zone> --provider classic
+   ibmcloud ks flavors --zone <zone>
    ```
    {: pre}
 
@@ -469,7 +469,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    {:tip}
 
    ```
-   ibmcloud ks flavors --zone <zone> --provider classic
+   ibmcloud ks flavors --zone <zone>
    ```
    {: pre}
 
