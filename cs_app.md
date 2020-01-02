@@ -204,7 +204,7 @@ Consider the following options to increase availability of your app.
   <p><strong>Tip</strong>: In multizone clusters, try to keep your worker node capacity at 50% per zone so that enough capacity is left to protect your cluster against a zonal failure.</p>
   <p><strong>What if I want to spread my app across regions?</strong></br>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with [pod anti-affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) for your app.</p>
   <p><strong>What if my apps need persistent storage?</strong></p>
-  <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](https://cloud.ibm.com/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started).</p></dd>
+  <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started).</p></dd>
 </dl>
 
 ## Specifying your app requirements in your YAML file
