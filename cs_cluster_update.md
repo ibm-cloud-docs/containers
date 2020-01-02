@@ -437,7 +437,7 @@ To update flavors:
 
 2. List available flavors in the zone.
    ```
-   ibmcloud ks flavors --zone <zone> --provider <infrastructure_provider>
+   ibmcloud ks flavors --zone <zone>
    ```
    {: pre}
 
