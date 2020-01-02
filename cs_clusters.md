@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-18"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -81,7 +81,7 @@ ibmcloud ks cluster create classic --name my_cluster
 
 
 **VPC clusters**:
-*  VPC Gen 1 compute cluster:
+*  VPC Generation 1 compute cluster:
    ```
    ibmcloud ks cluster create vpc-classic --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
    ```
@@ -283,7 +283,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    {:tip}
 
    ```
-   ibmcloud ks flavors --zone <zone>
+   ibmcloud ks flavors --zone <zone> --provider classic
    ```
    {: pre}
 
@@ -469,7 +469,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    {:tip}
 
    ```
-   ibmcloud ks flavors --zone <zone>
+   ibmcloud ks flavors --zone <zone> --provider classic
    ```
    {: pre}
 
@@ -717,7 +717,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     </tr>
     <tr>
     <td><code>--flavor <em>&lt;worker_flavor&gt;</em></code></td>
-    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt;</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
+    <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt; --provider vpc-classic</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
     </tr>
     <tr>
     <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>

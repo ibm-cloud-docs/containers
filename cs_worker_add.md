@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-19"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -123,15 +123,15 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
 
     ```
-    ibmcloud ks flavors --zone <zone>
+    ibmcloud ks flavors --zone <zone> --provider vpc-classic
     ```
     {: pre}
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster.
-   ```
-   ibmcloud ks worker-pool create vpc-classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--vpc-id <VPC_ID>] [--label <key=value>]
-   ```
-   {: pre}
+     ```
+     ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+     ```
+     {: pre}
 
 5. Verify that the worker pool is created.
    ```
@@ -141,7 +141,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
    ```
-   ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_subnet_ID>
+   ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
    ```
    {: pre}
 
@@ -210,10 +210,10 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
    If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
    {: tip}
-   ```
-   ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name> [-w <pool2_name>] --subnet-id
-   ```
-   {: pre}
+     ```
+     ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+     ```
+     {: pre}
 
 6. Verify that the zone is added to your cluster. Look for the added zone in the **Worker Zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
   ```
@@ -267,7 +267,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
     ```
-    ibmcloud ks flavors --zone <zone>
+    ibmcloud ks flavors --zone <zone> --provider classic
     ```
     {: pre}
 
@@ -496,7 +496,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
    ```
-   ibmcloud ks flavors --zone <zone>
+   ibmcloud ks flavors --zone <zone> --provider classic
    ```
    {: pre}
 
@@ -561,7 +561,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
    ```
-   ibmcloud ks flavors --zone <zone>
+   ibmcloud ks flavors --zone <zone> --provider classic
    ```
    {: pre}
 

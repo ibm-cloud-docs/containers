@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-26"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, vpc
 
@@ -36,7 +36,7 @@ Review some known issues or common error messages that you might encounter when 
 {: #vpc_ts_lb}
 
 {: tsSymptoms}
-You publicly exposed your app by creating a Kubernetes `LoadBalancer` service in your VPC cluster. When you try to connect to your app by using the hostname that is assigned to the Kubernetes `LoadBalancer`, the connection fails or times out. 
+You publicly exposed your app by creating a Kubernetes `LoadBalancer` service in your VPC cluster. When you try to connect to your app by using the hostname that is assigned to the Kubernetes `LoadBalancer`, the connection fails or times out.
 
 When you run `kubectl describe svc <kubernetes_lb_service_name>`, you see a warning message similar to one of the following in the **Events** section:
 ```
@@ -88,16 +88,16 @@ After you create a VPC subnet, you cannot resize it or change its IP range. Inst
 1. [Create a new VPC subnet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/network) in the same VPC and in one or more zones where your cluster has worker nodes. Make sure that you create a subnet that can support both the number of worker nodes and services that you plan to create in your cluster. The default CIDR size of each VPC subnet is `/24`, which can support up to 253 worker nodes and services. To check your cluster's VPC and zones, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 2. Create a new worker pool in your cluster.
-   ```
-   ibmcloud ks worker-pool create vpc-classic --name <worker_pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
-   ```
-   {: pre}
+     ```
+     ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+     ```
+     {: pre}
 
 3. Using the ID for the larger subnets that you created in step 1, add the zones to the worker pool. Repeat the following command for each zone and subnet.
-  ```
-  ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+    ```
+    {: pre}
 
 4. After a few minutes, verify that your `LoadBalancer` service is successfully provisioned onto one of the new subnets. If the service is provisioned successfully, no `Warning` or `Error` events are displayed.
   ```

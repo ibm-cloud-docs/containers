@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-18"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -437,7 +437,7 @@ To update flavors:
 
 2. List available flavors in the zone.
    ```
-   ibmcloud ks flavors --zone <zone>
+   ibmcloud ks flavors --zone <zone> --provider <infrastructure_provider>
    ```
    {: pre}
 
@@ -449,9 +449,9 @@ To update flavors:
           ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
           ```
           {: pre}
-        * VPC clusters:
+        * VPC Generation 1 clusters:
           ```
-          ibmcloud ks worker-pool create vpc-classic <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
+          ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
           ```
           {: pre}
 
@@ -467,7 +467,7 @@ To update flavors:
          ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
          ```
          {: pre}
-       * VPC clusters:
+       * VPC Generation 1 clusters:
          ```
          ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
          ```

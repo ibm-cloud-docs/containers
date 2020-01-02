@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-18"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -274,7 +274,7 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 
 3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
   ```
-  ibmcloud ks flavors --zone <zone>
+  ibmcloud ks flavors --zone <zone> --provider classic
   ```
   {: pre}
 
