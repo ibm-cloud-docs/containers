@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-26"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks
 
@@ -78,11 +78,12 @@ Provision an {{site.data.keyword.cloudant_short_notm}} service instance, create 
 Attach a DevOps toolchain to your starter kit app, and configure a delivery pipeline to automatically deploy your app to your cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-1. On the **App details** page, click **Configure continuous delivery**.
-2. On the **Select a deployment target** page, select **Deploy to IBM Kubernetes Service**.
+1. On the **App details** page, click **Deploy your app**.
+2. On the **Deploy your app** page, select **IBM Cloud Kubernetes Service**.
 3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
-4. Click **Next**. The **Configure toolchain** page is displayed.
-5. On the **Configure toolchain** page, enter a toolchain name, select the region and the resource group that your cluster is in, and then click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.
+4. Provide a name for your toolchain.
+5. Select the region to create your toolchain in, and then select the [resource group](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains-iam-security) that provides access to your new toolchain.
+6. Click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.
 
 ## Lesson 3: Explore the toolchain tools, logs, and history
 {: #view-logs-starterkit-kube}
@@ -90,7 +91,7 @@ Attach a DevOps toolchain to your starter kit app, and configure a delivery pipe
 With your toolchain set up, explore how you can use each tool to automate the deployment of your app.
 {: shortdesc}
 
-1. On the **App details** page, click **View toolchain**. The **Overview** tab of the toolchain page is displayed, which shows the tools that are included with the toolchain. This example includes the following tools that were preselected in the starter kit when the toolchain was created:
+1. On the **App details** page, click the toolchain name. The **Overview** tab of the toolchain page is displayed, which shows the tools that are included with the toolchain. This example includes the following tools that were preselected in the starter kit when the toolchain was created:
   * An issues tracker in GitLab to track project updates and changes.
   * A GitLab repo that contains the source code of your app.
   * An Eclipse Orion instance, which is a web-based IDE to edit your app.
