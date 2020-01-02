@@ -137,7 +137,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-3. Enter the username and passphrase that you defined in step 1.
+3. Enter the username and passphrase that you previously defined.
 
 4. In the menu, click **Graph**.
 
