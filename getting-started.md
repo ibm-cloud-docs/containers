@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-27"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, containers
 
@@ -86,7 +86,7 @@ Deploy highly available containerized apps in Kubernetes clusters and use the po
 
 First, create a free classic cluster or a paid cluster on the first generation of compute infrastructure in a Virtual Private Cloud (VPC). Then, deploy a `websphere-liberty` Java application server to your cluster.
 
-To complete the getting started tutorial, use a [Pay-As-You-Go IBM Cloud account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/iam?topic=iam-iammanidaccser).
+To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/iam?topic=iam-iammanidaccser).
 {: note}
 
   <div class=solutionBoxContainer>
