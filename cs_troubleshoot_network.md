@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-19"
+  years: 2014, 2020
+lastupdated: "2020-01-03"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -209,6 +209,10 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <td>Your imported secret has the same name as the IBM-provided Ingress secret.</td>
  <td>Rename your secret. You can check the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.</td>
  </tr>
+  <tr>
+  <td>The description for the certificate is not updated with the secret name when you view the certificate in {{site.data.keyword.cloudcerts_full_notm}}.</td>
+  <td>Check whether the length of the certificate description reached the <a href="/apidocs/certificate-manager#update-a-certificate-s-metadata">upper limit of 1024 characters</a>.</td>
+  </tr>
  </tbody></table>
 
 <br />
