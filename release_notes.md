@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-19"
+  years: 2014, 2020
+lastupdated: "2020-01-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -28,6 +28,13 @@ subcollection: containers
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
+
+## January 2020
+{: #jan20}
+
+| Date | Description | 
+| ---- | ----------- |
+| 3 January 2020 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1521](/docs/containers?topic=containers-changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-changelog#11312_1547).|
 
 
 ## December 2019

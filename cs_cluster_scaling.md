@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-03"
+  years: 2014, 2020
+lastupdated: "2020-01-02"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -702,12 +702,12 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 **To limit pods to run on certain autoscaled worker pools**:
 
 1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
-    **For classic clusters**:
+  * Classic clusters:
     ```
     ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
-    **For VPC clusters**:
+  * VPC Generation 1 clusters:
     ```
     ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
@@ -919,7 +919,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Using the cluster autoscaler for a private network-only cluster
 {: #ca_private_cluster}
 
-The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint. 
+The cluster autoscaler is available for standard clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint.
 {: shortdesc}
 
 If your account is not enabled for VRF and service endpoints, you can [open the required ports](/docs/containers?topic=containers-firewall#vyatta_firewall) to allow public network connectivity in your cluster.

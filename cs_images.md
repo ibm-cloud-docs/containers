@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-10"
+  years: 2014, 2020
+lastupdated: "2020-01-03"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -230,7 +230,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
 <br />
 
 
-## Using an image pull secret to access other cluster Kubernetes namespaces, other {{site.data.keyword.cloud_notm}} accounts, or external private registries
+## Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces
 {: #other}
 
 Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.cloud_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
@@ -301,27 +301,27 @@ You can copy an image pull secret, such as the one that is automatically created
     {: screen}
 3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.
     ```
-    kubectl get secret default-us-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-us-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -   
     ```
     {: pre}
     ```
-    kubectl get secret default-uk-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-uk-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-de-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-de-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-au-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-au-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-jp-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-jp-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
     ```
-    kubectl get secret default-icr-io -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
+    kubectl get secret default-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl -n <new-namespace> create -f -
     ```
     {: pre}
 4.  Verify that the secrets are created successfully.

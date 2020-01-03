@@ -95,7 +95,7 @@ IBM Cloud Kubernetes Service
         cs_app.md
         cs_app_knative.md
 
-    cs_network_planning.md
+    cs_nodeport.md
 
     {: .topicgroup}
     Setting up a service mesh with Istio
@@ -104,7 +104,7 @@ IBM Cloud Kubernetes Service
         cs_istio_mesh.md
         cs_istio_health.md
 
-    cs_nodeport.md
+    cs_network_planning.md
 
     {: .topicgroup}
     Exposing apps with load balancers
