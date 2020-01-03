@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-13"
+  years: 2014, 2020
+lastupdated: "2020-01-03"
 
 keywords: kubernetes, iks, clusters
 
