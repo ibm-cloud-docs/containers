@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-26"
+  years: 2014, 2020
+lastupdated: "2020-01-06"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -21,7 +21,7 @@ subcollection: containers
 {:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:preview: .preview}
 
 # Classic: Setting up DSR load balancing with an NLB 2.0 (beta)
 {: #loadbalancer-v2}
@@ -438,3 +438,4 @@ You can find the complete example in [this IBM Cloud deployment pattern blog ![E
 <dd>The following algorithms depend on weighted app pods. However, in {{site.data.keyword.containerlong_notm}}, all app pods are assigned equal weight for load balancing.<ul>
 <li>Weighted Least Connection (<code>wlc</code>)</li>
 <li>Weighted Round Robin (<code>wrr</code>)</li></ul></dd></dl>
+
