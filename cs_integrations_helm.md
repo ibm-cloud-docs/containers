@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-10"
+  years: 2014, 2020
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -10,19 +10,27 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
-
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
 
 
 # Adding services by using Helm charts
@@ -160,12 +168,12 @@ To install Helm in a cluster with public network access:
    helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
    ```
    {: pre}
-   
+
    ```
    helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
-   
+
    ```
    helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
@@ -187,12 +195,12 @@ To install Helm in a cluster with public network access:
    helm search ibm-charts
    ```
    {: pre}
-   
+
    ```
    helm search ibm-community
    ```
    {: pre}
-   
+
    ```
    helm search entitled
    ```
@@ -218,7 +226,7 @@ Before you begin:
 To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
-2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
+2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc).
 3. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that you want to install in your cluster. If you do not need a specific version, use the latest one. In the digest image row, click the vertical ellipsis action menu, and then click **Show Pull Command** to copy the pull command.
 4. Pull the Tiller image from the public Google Container Registry to your local machine. Include the image tag that you copied in the previous step.
    ```
@@ -264,12 +272,12 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
    ```
    {: pre}
-   
+
    ```
    helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
-   
+
    ```
    helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
@@ -291,12 +299,12 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
     helm search ibm-charts
     ```
     {: pre}
-    
+
     ```
     helm search ibm-community
     ```
     {: pre}
-    
+
     ```
     helm search entitled
     ```
@@ -315,7 +323,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 {: note}
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
-2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). 
+2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc).
 3. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
@@ -326,12 +334,12 @@ The steps in this example show how to install Helm charts from the {{site.data.k
    helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
    ```
    {: pre}
-   
+
    ```
    helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
    ```
    {: pre}
-   
+
    ```
    helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
    ```
@@ -353,12 +361,12 @@ The steps in this example show how to install Helm charts from the {{site.data.k
    helm search ibm-charts
    ```
    {: pre}
-   
+
    ```
    helm search ibm-community
    ```
    {: pre}
-   
+
    ```
    helm search entitled
    ```
@@ -421,7 +429,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kubernetes version 1.11, the Tiller version is 2.11. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
 {: shortdesc}
 
-Some Helm charts might not be compatible with an older Tiller version. For example, if you have an OpenShift cluster that runs version 3.11, the default corresponding Helm and Tiller version is 2.11. However, if you install the `ibm-iks-cluster-autoscaler` Helm chart at version 1.0.8 or later, the Helm chart is not compatible with Tiller 2.11. You see an error similar to the following: 
+Some Helm charts might not be compatible with an older Tiller version. For example, if you have an OpenShift cluster that runs version 3.11, the default corresponding Helm and Tiller version is 2.11. However, if you install the `ibm-iks-cluster-autoscaler` Helm chart at version 1.0.8 or later, the Helm chart is not compatible with Tiller 2.11. You see an error similar to the following:
 
 ```
 Error: Chart incompatible with Tiller v2.11.0

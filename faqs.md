@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-10"
+  years: 2014, 2020
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -10,18 +10,27 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
+{:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
 
 
 # FAQs
@@ -58,7 +67,7 @@ For a detailed overview of capabilities and benefits, see [Why {{site.data.keywo
 
 You can have 1 free cluster at a time in {{site.data.keyword.containerlong_notm}}, and each free cluster expires in 30 days. Free clusters have [select capabilities](/docs/containers?topic=containers-cs_ov#cluster_types), minimal 2x4 compute resources, select single zone [locations](/docs/containers?topic=containers-regions-and-zones#regions_free), and support only the Kubernetes container platform and {{site.data.keyword.cloud_notm}} classic infrastructure provider. Free clusters are ideal for testing out Kubernetes deployments and getting familiar with the {{site.data.keyword.containerlong_notm}} API, CLI, and console tools. After you are done playing around with your free cluster, you can [copy your configuration files and redeploy them to a standard cluster](/docs/containers?topic=containers-app#copy_apps_cluster).
 
-To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account. Free clusters cannot be created in Lite accounts. 
+To create a free cluster, you must have a Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account. Free clusters cannot be created in Lite accounts.
 {: note}
 
 ## What container platforms are available for my cluster?
@@ -151,7 +160,7 @@ For more information about available bare metal flavors and how bare metal is di
 {: faq}
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
-  
+
 **Supported Kubernetes versions**:
 *   Latest: 1.16.3
 *   Default: 1.14.9
@@ -210,11 +219,11 @@ If you do not want to move your apps into {{site.data.keyword.cloud_notm}} Publi
 
 For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
 
-## Where can I find more information about IBM Cloud Kubernetes Service pricing models? 
+## Where can I find more information about IBM Cloud Kubernetes Service pricing models?
 {: #pricing}
-{: faq} 
+{: faq}
 
-To find detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/container-service/pricing). You can also review what components you are [charged for when you use {{site.data.keyword.containerlong_notm}}](#charges) or [estimate your costs](#cost_estimate). 
+To find detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/container-service/pricing). You can also review what components you are [charged for when you use {{site.data.keyword.containerlong_notm}}](#charges) or [estimate your costs](#cost_estimate).
 
 ## What am I charged for when I use IBM Cloud Kubernetes Service?
 {: #charges}

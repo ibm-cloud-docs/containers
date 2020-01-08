@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-26"
+  years: 2014, 2020
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -10,19 +10,27 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
-
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
 
 
 # Adding services by using IBM Cloud service binding
@@ -43,19 +51,19 @@ Want to make your secrets even more secured? Ask your cluster admin to [enable {
 {: tip}
 
 **I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?**</br>
-Yes, you can use services that meet naming requirements and reuse the service credentials. 
+Yes, you can use services that meet naming requirements and reuse the service credentials.
 
 * **Naming**: Make sure that the service name is in the following regex format. Example permitted names are `myservice` or `example.com`. Unallowed characters include spaces and underscores.
   ```
   [a-z0-9]([-a-z0-9]*[a-z0-9])?(\.[a-z0-9]([-a-z0-9]*[a-z0-9])?)*
   ```
   {: screen}
-* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster service bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials. 
+* **Service credentials**: To use your existing service credentials, specify the `--key` flag in the `ibmcloud ks cluster service bind` command and provide the name of your service credentials. {{site.data.keyword.cloud_notm}} service binding automatically creates a Kubernetes secret with your existing service credentials.
 
 **What if I want to use service credentials that use the private service endpoint?**</br>
 By default, the `ibmcloud ks cluster service bind` command creates service credentials with the public service endpoint. To use the private service endpoint, you must manually create service credentials for your service that use the private service endpoint, and then use the `--key` option to specify the name of the existing service credentials.  
 
-Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service. 
+Your service might not yet support private service endpoints. If you have a private-only cluster, you must use service credentials that use the private service endpoint, or open up the public IP address and port to connect to your service.
 
 **Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?**</br>
 You can use service binding only for services that support service keys so that the service credentials can automatically be created and stored in a Kubernetes secret. To find a list of services that support service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
@@ -123,9 +131,9 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 
 4. Bind the service to your cluster to create service credentials for your service that use the public service endpoint and store the credentials in a Kubernetes secret. If you have existing service credentials, use the `--key` flag to specify the name of the credentials. For IAM-enabled services, the credentials are automatically created with the **Writer** service access role, but you can use the `--role` flag to specify a different service access role. If you use the `--key` flag, do not include the `--role` flag.
 
-   If your service supports private service endpoints, you can manually create the service credentials with the private service endpoint, and then use the `--key` flag to specify the name of your credentials. 
+   If your service supports private service endpoints, you can manually create the service credentials with the private service endpoint, and then use the `--key` flag to specify the name of your credentials.
    {: tip}
-   
+
    ```
    ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <service_instance_name> [--key <service_instance_key>] [--role <IAM_service_role>]
    ```
@@ -493,113 +501,113 @@ You can add the service credentials and other key value pairs from your Kubernet
    }
    ```
    {: codeblock}
-   
+
 ## Removing a service from a cluster
 {: #unbind-service}
 
-If you do not want to use an {{site.data.keyword.cloud_notm}} service that you bound to your cluster, you can manually remove the Kubernetes secret and the pods that access the secret from your cluster. 
+If you do not want to use an {{site.data.keyword.cloud_notm}} service that you bound to your cluster, you can manually remove the Kubernetes secret and the pods that access the secret from your cluster.
 {: shortdesc}
 
-1. List the services that are bound to your cluster and note the name of your service and the namespace that the service is bound to. 
+1. List the services that are bound to your cluster and note the name of your service and the namespace that the service is bound to.
    ```
-   ibmcloud ks cluster service ls --cluster 
+   ibmcloud ks cluster service ls --cluster
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    OK
    Service   Instance GUID                          Key                                                                  Namespace   
    myservice 12345ab1-1234-1abc-a12b-12abc12a12ab   kube-a1a12abcd12a123abc1a12ab1a1234ab7.abcdefg0p1abcd123lgg.default   default  
    ```
    {: screen}
-   
-2. List the Kubernetes secrets in the namespace that your service is bound to and look for the secret with a name that follows the `binding-<service_name>` format. 
+
+2. List the Kubernetes secrets in the namespace that your service is bound to and look for the secret with a name that follows the `binding-<service_name>` format.
    ```
    kubectl get secrets -n <namespace> | grep Opaque
    ```
    {: pre}
-   
-   Example output: 
+
+   Example output:
    ```
    binding-myservice   Opaque     1      3d23h
    ```
    {: screen}
-   
-3. Retrieve all the pods that access the secret. 
+
+3. Retrieve all the pods that access the secret.
    ```
    kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.secret.secretName}{" "}{end}{end}' | grep "<secret_name>"
    ```
    {: pre}
-   
-   If your CLI output is empty, no pods exist in your cluster that mount the secret. 
-   
-4. If you have pods that mount the secret, either remove the pod or the deployment that manages the pod, or update the pod and deployment YAML to use a different secret instead. 
-   - **To remove a pod or deployment**: 
+
+   If your CLI output is empty, no pods exist in your cluster that mount the secret.
+
+4. If you have pods that mount the secret, either remove the pod or the deployment that manages the pod, or update the pod and deployment YAML to use a different secret instead.
+   - **To remove a pod or deployment**:
      ```
      kubectl delete pod <pod_name> -n <namespace>
      ```
      {: pre}
-     
+
      ```
      kubectl delete deployment <deployment_name> -n <namespace>
      ```
      {: pre}
-     
-   - **To update an existing pod or deployment**: 
-     1. Get the pod or deployment YAML file. 
+
+   - **To update an existing pod or deployment**:
+     1. Get the pod or deployment YAML file.
         ```
         kubectl get pod <pod_name> -o yaml
         ```
         {: pre}
-        
+
         ```
         kubectl get deployment <deployment_name> -o yaml
         ```
         {: pre}
-        
-     2. Copy the YAML file and in the `spec.volumes` section, change the name of the secret that you want to use. 
-     3. Apply the change in your cluster. 
+
+     2. Copy the YAML file and in the `spec.volumes` section, change the name of the secret that you want to use.
+     3. Apply the change in your cluster.
         ```
         kubectl apply -f pod.yaml
         ```
         {: pre}
-        
+
         ```
         kubectl apply -f deployment.yaml
         ```
         {: pre}
-        
-     4. Verify that a new pod is created with the updated volume specification. 
+
+     4. Verify that a new pod is created with the updated volume specification.
         ```
         kubectl get pods
         ```
         {: pre}
-        
+
         ```
         kubectl describe pod <pod_name>
         ```
         {: pre}
-   
-5. Remove the secret. 
+
+5. Remove the secret.
    ```
    kubectl delete secret <secret_name> -n <namespace>
    ```
    {: pre}
-   
-6. Verify that your secret is removed. 
+
+6. Verify that your secret is removed.
    ```
    kubectl get secrets -n <namespace>
    ```
    {: pre}
-   
-7. Optional. Remove the {{site.data.keyword.cloud_notm}} service instance. 
+
+7. Optional. Remove the {{site.data.keyword.cloud_notm}} service instance.
    - **{{site.data.keyword.cloud_notm}} IAM-enabled services:**
      ```
      ibmcloud resource service-instance-delete <service_name>
      ```
      {: pre}
-     
+
    - **Cloud Foundry services:**
      ```
      ibmcloud service delete <service_name>

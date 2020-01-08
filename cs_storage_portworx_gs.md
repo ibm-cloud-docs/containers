@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-11-26"
+  years: 2014, 2020
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -10,24 +10,33 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
 
 
 # Getting started with Portworx
 {: #getting-started-with-portworx}
 
-Review the following information to verify your Portworx installation and get started with adding highly available local persistent storage to your containerized apps. 
+Review the following information to verify your Portworx installation and get started with adding highly available local persistent storage to your containerized apps.
 {: shortdesc}
 
 - [Verifying your Portworx installation](#px-verify-installation)
@@ -37,25 +46,25 @@ Review the following information to verify your Portworx installation and get st
 ## Verifying your Portworx installation
 {: #px-verify-installation}
 
-Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
+Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
 {: shortdesc}
 
-Before you begin: 
-- Make sure that you [installed the latest version of the {{site.data.keyword.cloud_notm}} CLI and the {{site.data.keyword.containerlong_notm}} CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade). 
+Before you begin:
+- Make sure that you [installed the latest version of the {{site.data.keyword.cloud_notm}} CLI and the {{site.data.keyword.containerlong_notm}} CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-To verify your installation: 
+To verify your installation:
 
-1. From the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources), find the Portworx service that you created. 
-2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update. 
-3. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx) to start troubleshooting why your installation failed. 
-4. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer. 
+1. From the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources), find the Portworx service that you created.
+2. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
+3. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx) to start troubleshooting why your installation failed.
+4. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
    1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
       ```
       kubectl get pods -n kube-system | grep 'portworx\|stork'
       ```
       {: pre}
-   
+
       Example output:
       ```
       portworx-594rw                          1/1       Running     0          20h
@@ -69,13 +78,13 @@ To verify your installation:
       stork-scheduler-7dd8799cc-knjwt         1/1       Running     0          20h
       ```
       {: screen}
-   
+
    2. Log in to one of your `portworx` pods and list the status of your Portworx cluster.
       ```
       kubectl exec <portworx_pod> -it -n kube-system -- /opt/pwx/bin/pxctl status
       ```
       {: pre}
-   
+
       Example output:
       ```
       Status: PX is operational
@@ -141,8 +150,8 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
    To view the details of a storage class, run `kubectl describe storageclass <storageclass_name>`.
    {: tip}
 
-2. If you don't want to use an existing storage class, create a customized storage class. For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning). 
-   1. Create a configuration file for your storage class. 
+2. If you don't want to use an existing storage class, create a customized storage class. For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning).
+   1. Create a configuration file for your storage class.
       ```
       kind: StorageClass
       apiVersion: storage.k8s.io/v1
@@ -198,7 +207,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       ```
       {: pre}
 
-2. Create a persistent volume claim (PVC). 
+2. Create a persistent volume claim (PVC).
    1. Create a configuration file for your PVC.
       ```
       kind: PersistentVolumeClaim
@@ -251,7 +260,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       kubectl get pvc
       ```
       {: pre}
-      
+
 ## Mounting the volume to your app
 {: #px-mount-pvc}
 
