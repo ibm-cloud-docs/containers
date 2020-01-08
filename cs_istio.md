@@ -547,3 +547,25 @@ Refresh your `IstioControlPlane` resource. The Istio operator reconciles the ins
 kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
 ```
 {: pre}
+
+### Debugging Istio
+{: #istio_debug_tool}
+
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
+{: shortdesc}
+
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){:external}, click the name of the cluster where you want to install the debug tool add-on.
+
+2. Click the **Add-ons** tab.
+
+3. On the Diagnostics and Debug Tool card, click **Install**.
+
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
+
+5. On the Diagnostics and Debug Tool card, click **Dashboard**.
+
+5. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+
+6. Click **Run**.
+
+7. Check the results of each test. If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
