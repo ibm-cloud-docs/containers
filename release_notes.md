@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-03"
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, release notes
 
@@ -32,9 +32,10 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 ## January 2020
 {: #jan20}
 
-| Date | Description | 
+| Date | Description |
 | ---- | ----------- |
-| 3 January 2020 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1521](/docs/containers?topic=containers-changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-changelog#11312_1547).|
+| 06 January 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|
+| 03 January 2020 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1521](/docs/containers?topic=containers-changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-changelog#11312_1547).|
 
 
 ## December 2019
@@ -42,6 +43,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 18 December 2019 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 615 and the `ingress-auth` image to build 372](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 17 December 2019 | <ul><li>**Version changelog**: Master patch updates are available for Kubernetes [1.16.3_1520](/docs/containers?topic=containers-changelog#1163_1520), [1.15.6_1527](/docs/containers?topic=containers-changelog#1156_1527), [1.14.9_1543](/docs/containers?topic=containers-changelog#1149_1543), and [1.13.12_1546](/docs/containers?topic=containers-changelog#11312_1546).</li><li>**Adding classic infrastructure servers to gateway-enabled clusters**: [Adding classic IBM Cloud infrastructure server instances to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available for classic gateway-enabled clusters.</li><li>**Assigning access**: Updated the steps to [assign access to your clusters through the {{site.data.keyword.cloud_notm}} IAM console](/docs/containers?topic=containers-users#add_users).</li></ul>|
 | 12 December 2019 | **Setting up a service mesh with Istio**: Includes the following new pages:<ul><li>[About the managed Istio add-on](/docs/containers?topic=containers-istio-about)</li><li>[Setting up Istio](/docs/containers?topic=containers-istio)</li><li>[Managing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)</li><li>[Observing Istio traffic](/docs/containers?topic=containers-istio-health)</li></ul>|
 | 11 December 2019 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.64](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Configuring VPC subnets**: [Added information](/docs/containers?topic=containers-vpc-subnets) about configuring VPC subnets, public gateways, and network segmentation for your VPC clusters.</li><li>**Kubernetes version lifecyles**: Added information about [the release lifecycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).</li><li>**Managed Knative add-on**: Added information about [Istio version support](/docs/containers?topic=containers-serverless-apps-knative#kn_limitations).</li></ul>|
