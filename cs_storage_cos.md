@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-09"
 
 keywords: kubernetes, iks
 
@@ -800,7 +800,7 @@ To remove the plug-in:
 
 Now that you decided on the configuration that you want, you are ready to [create a PVC](#add_cos) to provision {{site.data.keyword.cos_full_notm}}.
 
-## Adding object storage to apps in classic clusters
+## Adding object storage to apps
 {: #add_cos}
 
 Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full_notm}} for your cluster.
