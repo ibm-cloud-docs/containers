@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -292,6 +292,8 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
 
 ## No Ingress subdomain exists after cluster creation
 {: #ingress_subdomain}
+{: troubleshoot}
+{: support}
 
 {: tsSymptoms}
 You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to check its status. The cluster **State** is `normal`, but the **Ingress Subdomain** and **Ingress Secret** are not available.
