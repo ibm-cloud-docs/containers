@@ -368,7 +368,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
   ```
   {: pre}
 
-2. List the details of your volume. Note the **Size**, **Location**, and **Max IOPS**. These values are used to create your PV.
+2. List the details of your volume. Note the **Size**, **Zone**, and **IOPS**. These values are used to create your PV.
   ```
   ibmcloud volume <volume_id>
   ```
@@ -394,7 +394,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
       ```
       {: pre}
 
-5. Create a configuration file for your PV. Include the **ID**, **Size**, **Location**, **Max IOPS**, and **Worker Node Primary IP** that you retrieved earlier.
+5. Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, **IOPS**, and **Worker Node Primary IP** that you retrieved earlier.
     ```yaml
     apiVersion: v1
     kind: PersistentVolume
@@ -411,7 +411,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
         volumeAttributes:
           iops: "<vpc_block_storage_iops>" # example: "3000"
           volumeId: <vpc_block_storage_ID> # example: a1a11a1a-a111-1111-1a11-1111a11a1a11
-          zone: "<vpc_block_location>" # example: "eu-de-1"
+          zone: "<vpc_block_zone>" # example: "eu-de-1"
         volumeHandle: <vpc_block_storage_ID>
       nodeAffinity:
         required:
