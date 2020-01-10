@@ -765,14 +765,14 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
   ```
   {: pre}
 
-7. Delete the PV and PVC.
+7. Delete the PVC and PV.
   ```
-  kubectl delete pv <pv_name>
+  kubectl delete pvc <pvc_name>
   ```
   {: pre}
 
   ```
-  kubectl delete <pvc_name>
+  kubectl delete pv <pv_name>
   ```
   {: pre}
 
