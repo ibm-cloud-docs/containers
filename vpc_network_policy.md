@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -55,8 +55,10 @@ You cannot use [VPC security groups](/docs/infrastructure/security-groups?topic=
 <br />
 
 
-## Creating access control lists (ACLs) to control traffic to and from your cluster
+## Creating access control lists (ACLs) to control traffic to and from your VPC cluster
 {: #acls}
+{: help}
+{: support}
 
 Control inbound and outbound traffic to your cluster by creating and applying ACLs to each subnet that your cluster is attached to.
 {: shortdesc}
