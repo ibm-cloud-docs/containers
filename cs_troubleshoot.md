@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, help, debug
 
@@ -45,6 +45,8 @@ You can take these general steps to ensure that your clusters are up-to-date:
 
 ## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
 {: #debug_utility}
+{: troubleshoot}
+{: support}
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster.
 {: shortdesc}
@@ -97,6 +99,8 @@ If you previously installed the debug tool by using Helm, first uninstall the `i
 
 ## Debugging clusters
 {: #debug_clusters}
+{: troubleshoot}
+{: support}
 
 Review the options to debug your clusters and find the root causes for failures.
 
@@ -186,6 +190,8 @@ Review the options to debug your clusters and find the root causes for failures.
 
 ## Debugging worker nodes
 {: #debug_worker_nodes}
+{: troubleshoot}
+{: support}
 
 Review the options to debug your worker nodes and find the root causes for failures.
 
