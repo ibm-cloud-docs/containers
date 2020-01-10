@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -43,6 +43,8 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
+{: troubleshoot}
+{: support}
 
 {: tsSymptoms}
 You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
@@ -224,6 +226,8 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 
 ## Firewall prevents running CLI commands
 {: #ts_firewall_clis}
+{: troubleshoot}
+{: support}
 
 {: tsSymptoms}
 When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
