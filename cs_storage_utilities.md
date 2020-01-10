@@ -686,7 +686,7 @@ Before you begin:
   ```
   {: pre}
 
-5. Retrieve the ID of the worker node that you want to attach to the {{site.data.keyword.blockstorageshort}} instance. Make sure to select a worker node that is located in the same zone as your {{site.data.keyword.blockstorageshort}} instance. 
+5. Retrieve the ID of the worker node that you want to attach to the {{site.data.keyword.blockstorageshort}} instance. Make sure to select a worker node that is located in the same zone as your {{site.data.keyword.blockstorageshort}} volume. 
   ```
   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
   ```
