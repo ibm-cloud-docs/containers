@@ -659,7 +659,7 @@ If you want to detach a volume, delete the PV. Detached volumes are still author
 ## Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
 {: #vpc_api_attach}
 
-You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}]((https://containers.cloud.ibm.com/swagger-storage-api/)) to a worker node in your VPC cluster.
+You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}]((https://containers.cloud.ibm.com/swagger-storage-api/) to a worker node in your VPC cluster.
 {: shortdesc} 
 
 You can attach a volume to one worker node only. Make sure that the volume is in the same zone as the worker node for the attachment to succeed.
@@ -695,7 +695,7 @@ Before you begin:
 6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node.
 
   Example request:
-  ```
+  ```sh
   curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
   ```
   {: codeblock}
@@ -786,7 +786,7 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
 
   Example request:
 
-  ```
+  ```sh
   curl -X DELETE -H "Authorization: <IAM_token>" "https://<region>containers.cloud.ibm.com/v2/storage/vpc/deleteAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
   ```
   {: codeblock}
@@ -836,7 +836,7 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
   {: codeblock}
 
 5. Retrieve the details for a specific attachment.
-  ```
+  ```sh
   curl -X GET -H "Authorization: <IAM_token>" -H "Content-Type: application/json" -H "X-Auth-Resource-Group-ID: <resource_group_ID>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/getAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
   ```
   {: codeblock}
