@@ -699,6 +699,7 @@ Before you begin:
   curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
   ```
   {: codeblock}
+  
 
   **Understanding the create attachment `POST` request**
 
@@ -791,6 +792,7 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
   curl -X DELETE -H "Authorization: <IAM_token>" "https://<region>containers.cloud.ibm.com/v2/storage/vpc/deleteAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
   ```
   {: codeblock}
+
 
   **Understanding the detach volume `DELETE` request**
 
