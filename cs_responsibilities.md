@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -35,6 +35,8 @@ subcollection: containers
 
 # Your responsibilities with using {{site.data.keyword.containerlong_notm}}
 {: #responsibilities_iks}
+{: help}
+{: support}
 
 Learn about cluster management responsibilities that you have when you use {{site.data.keyword.containerlong}}. For overall terms of use, see [Cloud Services terms](/docs/overview/terms-of-use?topic=overview-terms#terms).
 {: shortdesc}
