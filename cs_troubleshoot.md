@@ -340,6 +340,8 @@ Review common error messages and learn how to resolve them.
 
 ## Reviewing master health
 {: #debug_master}
+{: troubleshoot}
+{: support}
 
 Your {{site.data.keyword.containerlong_notm}} includes an IBM-managed master with highly available replicas, automatic security patch updates applied for you, and automation in place to recover in case of an incident. You can check the health, status, and state of the cluster master by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 {: shortdesc}
