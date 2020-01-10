@@ -180,7 +180,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
       - If you want the PV, the data, and your physical {{site.data.keyword.block_storage_is_short}} device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 4. Create a configuration file to define your persistent volume claim and save the configuration as a YAML file.
-   ```
+   ```yaml
    apiVersion: v1
    kind: PersistentVolumeClaim
    metadata:
@@ -256,7 +256,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    {: screen}
 
 7. Create a deployment configuration file for your app and mount the PVC to your app.
-   ```
+   ```yaml
    apiVersion: apps/v1
    kind: Deployment
    metadata:
@@ -516,7 +516,7 @@ You can create a customized storage class to provision {{site.data.keyword.block
 1. Follow the steps to [create a customized storage class](#vpc-customize-storage-class) with the file system that you want to use.
 
    Example storage class:
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -618,7 +618,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 5. [Decide if you want to store the {{site.data.keyword.keymanagementserviceshort}} root key CRN in a customized storage class or in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-customize-default). Then, follow the steps to create a customized storage class or a Kubernetes secret.
 
    **Example customized storage class**:
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -662,7 +662,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     </table>
 
     **Example Kubernetes secret**:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Secret
     type: vpc.block.csi.ibm.io
@@ -808,7 +808,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    {: screen}
 
 3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -933,7 +933,7 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
    {: codeblock}
 
 2. As the cluster user, create a Kubernetes secret that customizes the default settings of the storage class.
-   ```
+   ```yaml
    apiVersion: v1
    kind: Secret
    type: vpc.block.csi.ibm.io
@@ -1005,7 +1005,7 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
 {: #static-secret}
 
 1. As the cluster admin, create a Kubernetes secret that includes the base64 encoded value for your {{site.data.keyword.keymanagementserviceshort}} root key CRN. To retrieve the root key CRN, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption).
-   ```
+   ```yaml
    apiVersion: v1
    kind: Secret
    type: vpc.block.csi.ibm.io
