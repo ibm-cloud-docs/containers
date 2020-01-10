@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, knative
 
@@ -61,8 +61,6 @@ Managed Knative on {{site.data.keyword.containerlong_notm}} is a [managed add-on
 
 **Are there any limitations?**
 {: #knative_limitations}
-
-If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable the managed Knative add-on in your cluster.
 
 The managed Knative add-on version 0.8.0 requires and installs Istio 1.3 with the add-on. You cannot use the Knative add-on with Istio 1.4. Before you install Knative, you can check your Istio version by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`. If you have Istio 1.4 and want to use the managed Knative add-on, you must [uninstall Istio 1.4](/docs/containers?topic=containers-istio#istio_uninstall).
 
