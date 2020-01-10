@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, networking
 
@@ -89,6 +89,8 @@ The following image demonstrates how Kubernetes forwards public network traffic 
 
 ## Understanding Kubernetes service types
 {: #external}
+{: help}
+{: support}
 
 Kubernetes supports four basic types of network services: `ClusterIP`, `NodePort`, `LoadBalancer`, and `Ingress`. `ClusterIP` services make your apps accessible internally to allow communication between pods in your cluster only. `NodePort`, `LoadBalancer`, and `Ingress` services make your apps externally accessible from the public internet or a private network.
 {: shortdesc}
