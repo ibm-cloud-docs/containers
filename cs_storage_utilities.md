@@ -741,60 +741,60 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
 {: important}
 
 1. Identify the storage volume that you want to remove and note the volume ID.
-  ```
+  ```sh
   ibmcloud is volumes
   ```
   {: pre}
 
 3. Get details about the volume. This command returns the worker node ID and attachment ID. Note the worker node ID. In the following command this ID is returned as "Instance name".
-  ```
+  ```sh
   ibmcloud is volume <volume_ID>
   ```
   {: pre}
 
 4. Retrieve a list of your PVs. This command returns a list of your PVs that you can then you use to determine which PVC uses the volume that you want to remove.
-  ```
+  ```sh
   kubectl get pv
   ```
   {: pre}
 
 4. Describe the PV that uses the volume. If you do not know which PV uses the volume that you want to remove, you can run the `describe pv` command on each PV in your cluster. Note the PVC that uses the PV.
-  ```
+  ```sh
   kubectl describe pv <pv_name>
   ```
   {: pre}
 
 5. Check to see if your storage volume is in use by a pod. The following command shows the pods that mount the volume and the associated PVC. If no pod is returned, the storage is not in use.
 
-  ```
+  ```sh
   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
   ```
   {: pre}
 
 6. If the pod your volume is using is part of a deployment, delete the deployment. If your pod does not belong to a deployment, delete the pod.
-  ```
+  ```sh
   kubectl delete deployment <deployment_name>
   ```
   {: pre}
 
-  ```
+  ```sh
   kubectl delete pod <pod_name>
   ```
   {: pre}
 
 7. Delete the PVC and PV.
-  ```
+  ```sh
   kubectl delete pvc <pvc_name>
   ```
   {: pre}
 
-  ```
+  ```sh
   kubectl delete pv <pv_name>
   ```
   {: pre}
 
 8. Retrieve your IAM token.
-  ```
+  ```sh
   ibmcloud iam oauth-tokens
   ```
   {: pre}
@@ -827,20 +827,20 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
 
 1. Retrieve your IAM token.
 
-  ```
+  ```sh
   ibmcloud iam oauth-tokens
   ```
   {: pre}
 
 2. Retrieve the ID of the resource group where your cluster is deployed.
 
-  ```
+  ```sh
   ibmcloud ks cluster get <cluster_name_or_ID> | grep "Resource Group ID"
   ```
   {: pre}
 
 3. Retrieve the ID of the worker node for which you want to see volume attachment details. Make sure to select a worker node that is located in the same zone as your {{site.data.keyword.blockstorageshort}} instance. 
-  ```
+  ```sh
   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
@@ -849,7 +849,7 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
 
   Example request:
 
-  ```
+  ```sh
   curl -X GET -H "Authorization: <IAM_token>" -H "Content-Type: application/json" -H "X-Auth-Resource-Group-ID: <resource_group_ID>" "https://<region>.containers.cloud.ibm.com/v2/storage/clusters/<cluster_ID>/workers/<worker_ID>/volume_attachments"
   ```
   {: codeblock}
