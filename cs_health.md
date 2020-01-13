@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-04"
+  years: 2014, 2020
+lastupdated: "2020-01-13"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -10,19 +10,28 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
 {:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Logging and monitoring
 {: #health}
@@ -30,7 +39,7 @@ subcollection: containers
 Set up logging and monitoring in {{site.data.keyword.containerlong}} to help you troubleshoot issues and improve the health and performance of your Kubernetes clusters and apps.
 {: shortdesc}
 
-Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime. **Note**: To configure logging and monitoring, you must use a standard cluster in {{site.data.keyword.containerlong_notm}}.
+Continuous monitoring and logging is the key to detecting attacks on your cluster and troubleshooting issues as they arise. By continuously monitoring your cluster, you're able to better understand your cluster capacity and the availability of resources that are available to your app. With this insight, you can prepare to protect your apps against downtime. 
 
 ## Choosing a logging solution
 {: #logging_overview}
@@ -38,7 +47,7 @@ Continuous monitoring and logging is the key to detecting attacks on your cluste
 By default, logs are generated and written locally for all of the following {{site.data.keyword.containerlong_notm}} cluster components: worker nodes, containers, applications, persistent storage, Ingress application load balancer, Kubernetes API, and the `kube-system` namespace. Several logging solutions are available to collect, forward, and view these logs.
 {: shortdesc}
 
-You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full_notm}} or a third-party service. You can then use {{site.data.keyword.at_full_notm}} to audit user activity in the cluster and backup cluster master logs to {{site.data.keyword.cos_full_notm}}. **Note**: To configure logging, you must have a standard Kubernetes cluster.
+You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full_notm}} or a third-party service. You can then use {{site.data.keyword.at_full_notm}} to audit user activity in the cluster and back up cluster master logs to {{site.data.keyword.cos_full_notm}}. 
 
 <dl>
 
@@ -64,11 +73,13 @@ You can choose your logging solution based on which cluster components you need 
 <br />
 
 
+
 ## Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
 {: #logdna}
 
 Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
+
 
 ### Forwarding cluster and app logs
 {: #app_logdna}
@@ -77,6 +88,7 @@ To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to ev
 {: shortdesc}
 
 This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+      
 
 ### Forwarding Kubernetes API audit logs
 {: #webhook_logdna}
@@ -722,10 +734,11 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 ## Choosing a monitoring solution
 {: #view_metrics}
 
-Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and container runtime features to monitor the health of your clusters and apps. **Note**: Monitoring is supported only for standard clusters.
-{:shortdesc}
+Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and container runtime features to monitor the health of your clusters and apps. 
+{: shortdesc}
 
-**Does IBM monitor my cluster?**
+Monitoring of cluster metrics is supported only for standard clusters.
+{: note}
 
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster components.
 
@@ -733,7 +746,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 <dl>
-  <dt>{{site.data.keyword.mon_full}}</dt>
+    <dt>{{site.data.keyword.mon_full}}</dt>
   <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full_notm}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
 
   <dt>Kubernetes dashboard</dt>
@@ -745,6 +758,8 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 </dl>
 
 <br />
+
+
 
 
 ## Viewing cluster states

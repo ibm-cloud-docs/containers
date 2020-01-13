@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-18"
+  years: 2014, 2020
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -10,18 +10,28 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
-{:note: .note}
+{:download: .download}
 {:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Version information and update actions   
 {: #cs_versions}
@@ -90,6 +100,8 @@ Server Version: v1.14.9+IKS
 
 ## Release history
 {: #release-history}
+{: help}
+{: support}
 
 The following table records {{site.data.keyword.containerlong_notm}} version release history. You can use this information for planning purposes, such as to estimate general time frames when a certain release might become unsupported. After the Kubernetes community releases a version update, the IBM team begins a process of hardening and testing the release for {{site.data.keyword.containerlong_notm}} environments. Availability and unsupported release dates depend on the results of these tests, community updates, security patches, and technology changes between versions. Plan to keep your cluster master and worker node version up-to-date according to the `n-2` version support policy.
 {: shortdesc}
@@ -136,7 +148,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.13](#cs_v113)</td>
   <td>05 Feb 2019</td>
-  <td>19 Feb 2020 `†`</td>
+  <td>22 Feb 2020 `†`</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -202,12 +214,12 @@ Each supported version of {{site.data.keyword.containerlong_notm}} goes through 
 Estimated days and versions are provided for general understanding. Actual availability and release dates are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 {: note}
 
-1.  The Kubernetes community releases version `n`. IBM engineers begin a process of testing and hardening the community version to in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
+1.  The Kubernetes community releases version `n`. IBM engineers begin a process of testing and hardening the community version in preparation to release a supported {{site.data.keyword.containerlong_notm}} version.
 2.  Version `n` is released as the latest supported {{site.data.keyword.containerlong_notm}} version.
 3.  Version `n` becomes the default supported {{site.data.keyword.containerlong_notm}} version.
 4.  Version `n` becomes the oldest supported {{site.data.keyword.containerlong_notm}} version.
-5.  Version `n` is deprecated, and security patch updates might not be provided. You have a minimum of 45 days to review and update to a supported Kubernetes version before the version becomes unsupported. During the deprecation period, your cluster is still functional, but might require updates to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
-6.  Version `n` is deprecated, with only 45 days left before support stops. New clusters can no longer be created at this version, and you might need to update the cluster to receive security patch updates.
+5.  Version `n` is deprecated, and security patch updates might not be provided. Depending on the community release cycle and version testing, you have 45 days or less until the next phase of deprecation starts in step 6. During the deprecation period, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
+6.  You cannot create clusters at the deprecated version `n`. You have 45 days to update your cluster to a supported version before version `n` becomes unsupported. Similar to step 5, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities.
 7.  Version `n` is unsupported. Review the following potential impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes.
 8.  The cluster master runs two versions behind the oldest supported version. You can still update the cluster to the oldest supported version. If the worker nodes run four or more versions behind the oldest supported version, you must delete the worker nodes to update the cluster.
 9. The cluster master runs three or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.

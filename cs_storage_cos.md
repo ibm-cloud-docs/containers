@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-12"
+  years: 2014, 2020
+lastupdated: "2020-01-09"
 
 keywords: kubernetes, iks
 
@@ -10,18 +10,28 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
@@ -790,7 +800,7 @@ To remove the plug-in:
 
 Now that you decided on the configuration that you want, you are ready to [create a PVC](#add_cos) to provision {{site.data.keyword.cos_full_notm}}.
 
-## Adding object storage to apps in classic clusters
+## Adding object storage to apps
 {: #add_cos}
 
 Create a persistent volume claim (PVC) to provision {{site.data.keyword.cos_full_notm}} for your cluster.
@@ -1485,5 +1495,6 @@ If you installed the plug-in in a VPC cluster, the storage classes that were aut
 </tr>
 </tbody>
 </table>
+
 
 

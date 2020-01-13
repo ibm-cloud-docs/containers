@@ -2,8 +2,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-12-03"
+  years: 2014, 2020
+lastupdated: "2020-01-10"
 
 keywords: kubernetes, iks, vpc
 
@@ -11,18 +11,28 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
-{:preview: .preview} 
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
+{:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)
 {: #vpc-block}
@@ -170,7 +180,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
       - If you want the PV, the data, and your physical {{site.data.keyword.block_storage_is_short}} device to be deleted when you delete the PVC, choose a storage class without `retain`.
 
 4. Create a configuration file to define your persistent volume claim and save the configuration as a YAML file.
-   ```
+   ```yaml
    apiVersion: v1
    kind: PersistentVolumeClaim
    metadata:
@@ -246,7 +256,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    {: screen}
 
 7. Create a deployment configuration file for your app and mount the PVC to your app.
-   ```
+   ```yaml
    apiVersion: apps/v1
    kind: Deployment
    metadata:
@@ -345,12 +355,32 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
 ## Using an existing {{site.data.keyword.block_storage_is_short}} instance
 {: #vpc-block-static}
 
-If you have an existing physical {{site.data.keyword.block_storage_is_short}} device that you want to use in your cluster, you can manually create the PV and PVC to [statically provision](/docs/containers?topic=containers-kube_concepts#static_provisioning) the storage.
+If you have an existing physical {{site.data.keyword.block_storage_is_short}} device that you want to use in your cluster, you can manually create the PV and PVC to statically provision the storage.
 {: shortdesc}
 
-1. From the [{{site.data.keyword.block_storage_is_short}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/storage/storageVolumes){: new_window}, select the block storage device that you want to add to your cluster.
-2. From the volumes details page, note the **ID**, **Size**, **Location**, and **Max IOPS** of your {{site.data.keyword.block_storage_is_short}} device.
-3. Optional: If you provisioned your physical {{site.data.keyword.block_storage_is_short}} instance by using a `retain` storage class, the PV and the physical storage is not removed when you remove the PVC. To use your physical {{site.data.keyword.block_storage_is_short}} device in your cluster, you must remove the existing PV first.  
+
+You can attach a volume to one worker node only. Make sure that the volume is in the same zone as the worker node for the attachment to succeed.
+{: note}
+
+1. Determine the volume that you want to attach to a worker node in your VPC cluster. Note the **volume ID**.
+  ```
+  ibmcloud is volumes
+  ```
+  {: pre}
+
+2. List the details of your volume. Note the **Size**, **Zone**, and **IOPS**. These values are used to create your PV.
+  ```
+  ibmcloud volume <volume_id>
+  ```
+  {: pre}
+
+3. Retrieve a list of worker nodes in your VPC cluster. Note the **Primary IP** of the worker node that is in the same zone as your storage volume.
+  ```
+  ibmcloud ks worker ls <cluster_name>
+  ```
+  {: pre}
+
+4. Optional: If you provisioned your physical {{site.data.keyword.block_storage_is_short}} instance by using a `retain` storage class, the PV and the physical storage is not removed when you remove the PVC. To use your physical {{site.data.keyword.block_storage_is_short}} device in your cluster, you must remove the existing PV first.  
 
    1. List the PVs in your cluster and look for the PV that belongs to your {{site.data.keyword.block_storage_is_short}} device. The PV is in a `released` state.
       ```
@@ -364,30 +394,38 @@ If you have an existing physical {{site.data.keyword.block_storage_is_short}} de
       ```
       {: pre}
 
-4. Create a configuration file for your PV. Include the **ID**, **Size**, **Location**, and **Max IOPS** that you retrieved earlier.
-   ```
-   apiVersion: v1
-   kind: PersistentVolume
-   metadata:
-     name: <pv_name>
-   spec:
-     accessModes:
-     - ReadWriteOnce
-     capacity:
-       storage: <vpc_block_storage_size>
-     csi:
-       driver: vpc.block.csi.ibm.io
-       fsType: ext4
-       volumeAttributes:
-         iops: "<vpc_block_storage_iops>"
-         volumeId: <vpc_block_storage_ID>
-         zone: "<vpc_block_location>"
-       volumeHandle: <vpc_block_storage_ID>
-     persistentVolumeReclaimPolicy: Retain
-     storageClassName: ""
-     volumeMode: Filesystem
-   ```
-   {: codeblock}
+5. Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, **IOPS**, and **Worker Node Primary IP** that you retrieved earlier.
+    ```yaml
+    apiVersion: v1
+    kind: PersistentVolume
+    metadata:
+      name: <pv_name> # example: my-persistent-volume
+    spec:
+      accessModes:
+      - ReadWriteOnce
+      capacity:
+        storage: <vpc_block_storage_size> # example: 20Gi
+      csi:
+        driver: vpc.block.csi.ibm.io
+        fsType: ext4
+        volumeAttributes:
+          iops: "<vpc_block_storage_iops>" # example: "3000"
+          volumeId: <vpc_block_storage_ID> # example: a1a11a1a-a111-1111-1a11-1111a11a1a11
+          zone: "<vpc_block_zone>" # example: "eu-de-1"
+        volumeHandle: <vpc_block_storage_ID>
+      nodeAffinity:
+        required:
+          nodeSelectorTerms:
+          - matchExpressions:
+            - key: kubernetes.io/hostname
+              operator: In
+              values:
+              - <worker_node_primary_IP> # example: 172.XX.X.XX
+      persistentVolumeReclaimPolicy: Retain
+      storageClassName: ""
+      volumeMode: Filesystem
+      ```
+      {: codeblock}
 
    <table>
    <caption>Understanding the YAML file components</caption>
@@ -419,23 +457,27 @@ If you have an existing physical {{site.data.keyword.block_storage_is_short}} de
    <td><code>spec.storageClassName</code></td>
    <td>For the storage class name, enter an empty string.</td>
    </tr>
+   <tr>
+   <td><code>spec.nodeAffinity.nodeSelectorTerms</code></td>
+   <td>For the key, enter an <code>kubernetes.io/hostname</code> For the value, enter the primary IP of your worker node.</td>
+   </tr>
    </tbody>
    </table>
 
-5. Create the PV in your cluster.
+6. Create the PV in your cluster.
    ```
    kubectl apply -f pv.yaml
    ```
    {: pre}
 
-6. Verify that the PV is created in your cluster.
+7. Verify that the PV is created in your cluster.
    ```
    kubectl get pv
    ```
    {: pre}
 
-7. Create another configuration file for your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for the storage size and access mode. In your storage class field, enter an empty string value to match your PV. If any of these fields do not match the PV, then a new PV and a block storage instance are created automatically via dynamic provisioning.
-   ```
+8. Create another configuration file for your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for the storage size and access mode. In your storage class field, enter an empty string value to match your PV. If any of these fields do not match the PV, then a new PV and a block storage instance are created automatically via dynamic provisioning.
+   ```yaml
    apiVersion: v1
    kind: PersistentVolumeClaim
    metadata:
@@ -462,6 +504,9 @@ If you have an existing physical {{site.data.keyword.block_storage_is_short}} de
    ```
    {: pre}
 
+10. Create a deployment or a pod that uses your PVC.
+
+
 ## Creating {{site.data.keyword.block_storage_is_short}} with a different file system
 {: #vpc-block-xfs}
 
@@ -471,7 +516,7 @@ You can create a customized storage class to provision {{site.data.keyword.block
 1. Follow the steps to [create a customized storage class](#vpc-customize-storage-class) with the file system that you want to use.
 
    Example storage class:
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -573,7 +618,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 5. [Decide if you want to store the {{site.data.keyword.keymanagementserviceshort}} root key CRN in a customized storage class or in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-customize-default). Then, follow the steps to create a customized storage class or a Kubernetes secret.
 
    **Example customized storage class**:
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -617,7 +662,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     </table>
 
     **Example Kubernetes secret**:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Secret
     type: vpc.block.csi.ibm.io
@@ -763,7 +808,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    {: screen}
 
 3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the `metadata` section, except for the `name`.
-   ```
+   ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass
    metadata:
@@ -888,7 +933,7 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
    {: codeblock}
 
 2. As the cluster user, create a Kubernetes secret that customizes the default settings of the storage class.
-   ```
+   ```yaml
    apiVersion: v1
    kind: Secret
    type: vpc.block.csi.ibm.io
@@ -960,7 +1005,7 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
 {: #static-secret}
 
 1. As the cluster admin, create a Kubernetes secret that includes the base64 encoded value for your {{site.data.keyword.keymanagementserviceshort}} root key CRN. To retrieve the root key CRN, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption).
-   ```
+   ```yaml
    apiVersion: v1
    kind: Secret
    type: vpc.block.csi.ibm.io
@@ -1261,7 +1306,6 @@ To clean up persistent data:
     ibmcloud is volumes
     ```
     {: pre}
-
 
 
 

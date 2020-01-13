@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-02"
+lastupdated: "2020-01-08"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -10,18 +10,28 @@ subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
 {:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Getting started with Istio
 {: #istio-qs}
@@ -352,15 +362,15 @@ The managed `istio` add-on installs Prometheus into your cluster. The `istio-mix
 
 Since all of the Prometheus work is done, all that is left for you is to deploy Sysdig in your cluster.
 
-1. [Provision an instance of {{site.data.keyword.mon_full_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon").](https://cloud.ibm.com/observe/monitoring/create)
+1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
 2. [Configure a Sysdig agent in your cluster.](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-config_agent#config_agent_kube_script)
 
-3. In the [Monitoring console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/observe/monitoring), click **View Sysdig** for the instance that you provisioned.
+3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
 
 4. In the Sysdig UI, click **Add new dashboard**.
 
 5. Search for `Istio` and select one of Sysdig's predefined Istio dashboards.
 
-For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh ![External link icon](../icons/launch-glyph.svg "External link icon")](https://sysdig.com/blog/monitor-istio/) on the Sysdig blog.
+For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} on the Sysdig blog.
 
