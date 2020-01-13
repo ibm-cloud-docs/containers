@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-13"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -854,7 +854,7 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
   | `X-Auth-Resource-Group-ID` | The ID of the resource group that your cluster is in. You can see the ID of a resource group by running `ibmcloud resource group <resource_group_name>` or `ibmcloud ks cluster get <cluster_name>`. |
   | `<resource_group_name>` | The name of the resource group that your cluster is in. You can get a list of your resource groups by running `ibmcloud resource groups`. |
   | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-  | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `{{icks}} worker ls -c <cluster_name>`. |
+  | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
   | `volume_attachment_ID` | The unique ID assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
 
 
