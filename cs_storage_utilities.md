@@ -36,13 +36,16 @@ subcollection: containers
 # IBM Cloud storage utilities
 {: #utilities}
 
-## Installing the IBM Cloud Block Storage Attacher plug-in (beta)
+## Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)
 {: #block_storage_attacher}
 
-Use the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in to attach raw, unformatted, and unmounted block storage to a worker node in your cluster.  
+Use the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in to attach raw, unformatted, and unmounted block storage to a classic worker node in your cluster.  
 {: shortdesc}
 
-For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.cloud_notm}} infrastructure account and use the {{site.data.keyword.cloud_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
+The {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in is available for classic worker nodes only. If you want to attach raw, unformatted block storage to a VPC worker node, see [Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](#vpc_api_attach). 
+{: note}
+
+For example, you want to store your data with a software-defined storage solution (SDS), such as [Portworx](/docs/containers?topic=containers-portworx), but you do not want to use classic bare metal worker nodes that are optimized for SDS usage and that come with extra local disks. To add local disks to your classic non-SDS worker node, you must manually create your block storage devices in your {{site.data.keyword.cloud_notm}} infrastructure account and use the {{site.data.keyword.cloud_notm}} Block Volume Attacher to attach the storage to your non-SDS worker node.
 
 The {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in creates pods on every worker node in your cluster as part of a daemon set and sets up a Kubernetes storage class that you later use to attach the block storage device to your non-SDS worker node.
 
@@ -216,11 +219,14 @@ If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Blo
 
    The removal of the storage class is successful if no storage class is displayed in your CLI output.
 
-## Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage
+## Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage
 {: #automatic_block}
 
-You can use the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all worker nodes in your cluster.
+You can use the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in to automatically add raw, unformatted, and unmounted block storage with the same configuration to all classic worker nodes in your cluster.
 {: shortdesc}
+
+The {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in is available for classic worker nodes only. If you want to attach raw, unformatted block storage to a VPC worker node, see [Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](#vpc_api_attach). 
+{: note}
 
 The `mkpvyaml` container that is included in the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in is configured to run a script that finds all worker nodes in your cluster, creates raw block storage in the {{site.data.keyword.cloud_notm}} infrastructure portal, and then authorizes the worker nodes to access the storage.
 
@@ -410,11 +416,14 @@ To add different block storage configurations, add block storage to a subset of 
 
 7. [Attach the block storage devices to your worker nodes](#attach_block).
 
-## Manually adding block storage to specific worker nodes
+## Classic: Manually adding block storage to specific worker nodes
 {: #manual_block}
 
 Use this option if you want to add different block storage configurations, add block storage to a subset of worker nodes only, or to have more control over the provisioning process.
 {: shortdesc}
+
+The instructions in this topic are available for classic worker nodes only. If you want to attach raw, unformatted block storage to a VPC worker node, see [Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](#vpc_api_attach). 
+{: note}
 
 1. List the worker nodes in your cluster and note the private IP address and the zone of the non-SDS worker nodes where you want to add a block storage device.
    ```
@@ -504,11 +513,14 @@ Use this option if you want to add different block storage configurations, add b
 8. [Attach the block storage devices to your worker nodes](#attach_block).
 
 
-## Attaching raw block storage to non-SDS worker nodes
+## Classic: Attaching raw block storage to non-SDS worker nodes
 {: #attach_block}
 
 To attach the block storage device to a non-SDS worker node, you must create a persistent volume (PV) with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class and the details of your block storage device.
 {: shortdesc}
+
+The instructions in this topic are available for classic worker nodes only. If you want to attach raw, unformatted block storage to a VPC worker node, see [Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](#vpc_api_attach). 
+{: note}
 
 **Before you begin**:
 - Make sure that you [automatically](#automatic_block) or [manually](#manual_block) created raw, unformatted, and unmounted block storage to your non-SDS worker nodes.
@@ -656,13 +668,16 @@ To attach the block storage device to a non-SDS worker node, you must create a p
 If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure account](/docs/containers?topic=containers-cleanup).
 {: note}
 
-## Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
+## VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
 {: #vpc_api_attach}
 
 You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}]((https://containers.cloud.ibm.com/swagger-storage-api/) to a worker node in your VPC cluster.
 {: shortdesc} 
 
 You can attach a volume to one worker node only. Make sure that the volume is in the same zone as the worker node for the attachment to succeed.
+{: note}
+
+The instructions in this topic are available for VPC worker nodes only. If you want to attach raw, unformatted block storage to a classic worker node, you must install the [{{site.data.keyword.cloud_notm}} Block Storage attacher plug-in](#block_storage_attacher). 
 {: note}
 
 Before you begin:
@@ -854,7 +869,8 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
   | `X-Auth-Resource-Group-ID` | The ID of the resource group that your cluster is in. You can see the ID of a resource group by running `ibmcloud resource group <resource_group_name>` or `ibmcloud ks cluster get <cluster_name>`. |
   | `<resource_group_name>` | The name of the resource group that your cluster is in. You can get a list of your resource groups by running `ibmcloud resource groups`. |
   | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-  | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
+  | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `{{icks}} worker ls -c <cluster_name>`. |
   | `volume_attachment_ID` | The unique ID assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
+
 
 
