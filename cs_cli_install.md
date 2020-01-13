@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-13"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -75,8 +75,8 @@ To install the CLIs:
 
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
-
-3.  Verify that the {{site.data.keyword.containerlong_notm}} plug-in and {{site.data.keyword.registryshort_notm}} plug-ins are installed correctly.
+      
+4.  Verify that the {{site.data.keyword.containerlong_notm}} plug-in and {{site.data.keyword.registryshort_notm}} plug-ins are installed correctly.
     ```
     ibmcloud plugin list
     ```
@@ -87,8 +87,8 @@ To install the CLIs:
     Listing installed plug-ins...
 
     Plugin Name                            Version   Status        
-    container-registry                     0.1.373     
-    container-service/kubernetes-service   0.3.23   
+    container-registry                     0.1.404     
+    container-service/kubernetes-service   0.4.66
     ```
     {: screen}
 
@@ -400,7 +400,7 @@ To update the CLIs:
         ibmcloud ks init
         ```
         {: pre}
-
+        
 4.  [Update the Kubernetes CLI](#kubectl).
 
 5.  Update the {{site.data.keyword.registryshort_notm}} plug-in.
@@ -452,7 +452,7 @@ To uninstall the CLIs:
     ```
     {: pre}
 
-3.  Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
+4.  Verify the plug-ins were uninstalled by running the following command and checking the list of the plug-ins that are installed.
 
     ```
     ibmcloud plugin list
