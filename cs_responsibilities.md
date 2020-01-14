@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -68,7 +68,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
      <td align="center"><img src="images/icon_tools.svg" alt="Icon of a wrench"/><br>Managed cluster</td>
      <td>
      **IBM responsibilities**:
-     <ul><li>Provide a suite of tools to automate cluster management, such as the {{site.data.keyword.containerlong_notm}} [API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/), [CLI plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), and [console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).</li>
+     <ul><li>Provide a suite of tools to automate cluster management, such as the {{site.data.keyword.containerlong_notm}} [API](https://containers.cloud.ibm.com/global/swagger-global-api/){: external}, [CLI plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), and [console](https://cloud.ibm.com/kubernetes/clusters){: external}.</li>
      <li>Automatically apply Kubernetes master patch OS, version, and security updates. Make major and minor updates available for you to apply.</li>
      <li>Update and recover operational {{site.data.keyword.containerlong_notm}} and Kubernetes components within the cluster, such as the Ingress application load balancer and file storage plug-in.</li>
      <li>Back up and recover data in etcd, such as your Kubernetes workload configuration files</li>
