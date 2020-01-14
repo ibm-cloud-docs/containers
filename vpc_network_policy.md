@@ -262,7 +262,7 @@ The Accounts team wants to allow traffic from the front end to the back end, and
 
 First, they create a Kubernetes network policy that allows traffic from the front end to the back end:
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -285,7 +285,7 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 back-en
 
 Then, they create a similar Kubernetes network policy that allows traffic from the back end to the database:
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -319,7 +319,7 @@ Services that are owned by different subteams need to communicate, but the servi
 
 The Finance team's Srv2 needs to call information from the Accounts team's Srv1 back end. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 back end in the accounts namespace. The team also specifies the port 3111 to isolate access through that port only.
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:

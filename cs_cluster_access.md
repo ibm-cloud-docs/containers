@@ -148,7 +148,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   {: screen}
 
 3. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
-  ```
+  ```yaml
   apiVersion: v1
   kind: Service
   metadata:

@@ -231,7 +231,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
     {: screen}
 
 2.  Create a YAML file for your Kubernetes deployment and mount the secret as a volume to your pod.
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -387,7 +387,7 @@ You can add the service credentials and other key value pairs from your Kubernet
    {: screen}
 
 3. Create a YAML file for your Kubernetes deployment and specify an environment variable that references the `binding` key.
-   ```
+   ```yaml
    apiVersion: apps/v1
    kind: Deployment
    metadata:

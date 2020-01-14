@@ -104,7 +104,7 @@ To deploy a container into the **default** namespace of your cluster:
 1.  Create a deployment configuration file that is named `mydeployment.yaml`.
 2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registryshort_notm}}.
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -570,7 +570,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
 2.  Define the pod and the image pull secret to access images in {{site.data.keyword.registrylong_notm}}.
 
     To access a private image:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -585,7 +585,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     {: codeblock}
 
     To access an {{site.data.keyword.cloud_notm}} public image:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -677,7 +677,7 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
    {: pre}
 
 4. Deploy a container from an image in your registry.
-   ```
+   ```yaml
    apiVersion: v1
    kind: Pod
    metadata:

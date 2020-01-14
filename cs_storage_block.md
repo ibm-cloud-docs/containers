@@ -427,14 +427,14 @@ To add block storage:
     -  **Example for bronze, silver, gold storage classes**:
        The following `.yaml` file creates a claim that is named `mypvc` of the `"ibmc-block-silver"` storage class, billed `"hourly"`, with a gigabyte size of `24Gi`.
 
-       ```
+       ```yaml
        apiVersion: v1
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
          labels:
            billingType: "hourly"
-	       region: us-south
+         region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -442,21 +442,21 @@ To add block storage:
          resources:
            requests:
              storage: 24Gi
-	     storageClassName: ibmc-block-silver
+         storageClassName: ibmc-block-silver
        ```
        {: codeblock}
 
     -  **Example for using the custom storage class**:
        The following `.yaml` file creates a claim that is named `mypvc` of the storage class `ibmc-block-retain-custom`, billed `"hourly"`, with a gigabyte size of `45Gi` and IOPS of `"300"`.
 
-       ```
+       ```yaml
        apiVersion: v1
        kind: PersistentVolumeClaim
        metadata:
          name: mypvc
          labels:
            billingType: "hourly"
-	       region: us-south
+         region: us-south
            zone: dal13
        spec:
          accessModes:
@@ -465,7 +465,7 @@ To add block storage:
            requests:
              storage: 45Gi
              iops: "300"
-	     storageClassName: ibmc-block-retain-custom
+         storageClassName: ibmc-block-retain-custom
        ```
        {: codeblock}
 
@@ -545,7 +545,7 @@ To add block storage:
 
 4.  {: #block_app_volume_mount}To mount the PV to your deployment, create a configuration `.yaml` file and specify the PVC that binds the PV.
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -719,7 +719,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
 
 2.  Create a configuration file for your PV. Include the block storage `id`, `ip_addr`, `capacity_gb`, the `datacenter`, and `lunIdID` that you retrieved earlier.
 
-    ```
+    ```yaml
     apiVersion: v1
     kind: PersistentVolume
     metadata:
@@ -796,7 +796,7 @@ Before you can start to mount your existing storage to an app, you must retrieve
 
 5. Create another configuration file to create your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for `storage` and `accessMode`. The `storage-class` field must be an empty string. If any of these fields do not match the PV, then a new PV is created automatically instead.
 
-     ```
+     ```yaml
      kind: PersistentVolumeClaim
      apiVersion: v1
      metadata:
@@ -928,7 +928,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
      The following example shows how to deploy NGINX as a stateful set with three replicas. For each replica, a 20 gigabyte block storage device is provisioned based on the specifications that are defined in the `ibmc-block-retain-bronze` storage class. All storage devices are provisioned in the `dal10` zone. Because block storage cannot be accessed from other zones, all replicas of the stateful set are also deployed onto worker nodes that are located in `dal10`.
 
-     ```
+     ```yaml
      apiVersion: v1
      kind: Service
      metadata:
@@ -984,7 +984,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             requests:
               storage: 20Gi
               iops: "300" #required only for performance storage
-	      storageClassName: ibmc-block-retain-bronze
+         storageClassName: ibmc-block-retain-bronze
      ```
      {: codeblock}
 
@@ -992,7 +992,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
      The following example shows how to deploy NGINX as a stateful set with three replicas. The stateful set does not specify the region and zone where the block storage is created. Instead, the stateful set uses an anti-affinity rule to ensure that the pods are spread across worker nodes and zones. By defining `topologykey: failure-domain.beta.kubernetes.io/zone`, the Kubernetes scheduler cannot schedule a pod on a worker node if the worker node is in the same zone as a pod that has the `app: nginx` label. For each stateful set pod, two PVCs are created as defined in the `volumeClaimTemplates` section, but the creation of the block storage instances is delayed until a stateful set pod that uses the storage is scheduled. This setup is referred to as [topology-aware volume scheduling](https://kubernetes.io/blog/2018/10/11/topology-aware-volume-provisioning-in-kubernetes/).
 
-     ```
+     ```yaml
      apiVersion: storage.k8s.io/v1
      kind: StorageClass
      metadata:
@@ -1070,7 +1070,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-	       storageClassName: ibmc-block-bronze-delayed
+         storageClassName: ibmc-block-bronze-delayed
        - metadata:
            name: myvol2
          spec:
@@ -1079,7 +1079,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-	       storageClassName: ibmc-block-bronze-delayed
+         storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 
@@ -1413,7 +1413,7 @@ Topology-aware volume scheduling is supported on clusters that run Kubernetes ve
 The following examples show how to create storage classes that delay the creation of the block storage instance until the first pod that uses this storage is ready to be scheduled. To delay the creation, you must include the `volumeBindingMode: WaitForFirstConsumer` option. If you do not include this option, the `volumeBindingMode` is automatically set to `Immediate` and the block storage instance is created when you create the PVC.
 
 - **Example for Endurance block storage:**
-  ```
+  ```yaml
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
@@ -1432,7 +1432,7 @@ The following examples show how to create storage classes that delay the creatio
   {: codeblock}
 
 - **Example for Performance block storage:**
-  ```
+  ```yaml
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
@@ -1475,7 +1475,7 @@ The following `.yaml` file customizes a storage class that is based on the `ibm-
 Create the storage class in the same region and zone as your cluster and worker nodes. To get the region of your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and look for the region prefix in the **Master URL**, such as `eu-de` in `https://c2.eu-de.containers.cloud.ibm.com:11111`. To get the zone of your worker node, run `ibmcloud ks worker ls --cluster <cluster_name_or_ID>`.
 
 - **Example for Endurance block storage:**
-  ```
+  ```yaml
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
@@ -1494,7 +1494,7 @@ Create the storage class in the same region and zone as your cluster and worker 
   {: codeblock}
 
 - **Example for Performance block storage:**
-  ```
+  ```yaml
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:
@@ -1546,7 +1546,7 @@ The following examples create a storage class that provisions block storage with
   ```
 
 - **Example for Performance block storage:**
-  ```
+  ```yaml
   apiVersion: storage.k8s.io/v1
   kind: StorageClass
   metadata:

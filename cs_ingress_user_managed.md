@@ -61,7 +61,7 @@ In classic clusters, bringing your own Ingress controller is supported only for 
     {: pre}
 
 3. Define a load balancer service to expose your custom Ingress deployment.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -145,7 +145,7 @@ Expose your custom Ingress controller deployment to the public or to the private
     {: pre}
 
 3. Define a Kubernetes `LoadBalancer` service to expose your custom Ingress deployment.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:

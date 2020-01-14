@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -768,7 +768,7 @@ Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS)
 {: shortdesc}
 
 1. Create a mesh-wide authentication policy file that is named `meshpolicy.yaml`. This policy configures all workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh.
-  ```
+  ```yaml
   apiVersion: "authentication.istio.io/v1alpha1"
   kind: "MeshPolicy"
   metadata:
@@ -786,7 +786,7 @@ Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS)
   {: pre}
 
 3. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
-  ```
+  ```yaml
   apiVersion: "networking.istio.io/v1alpha3"
   kind: "DestinationRule"
   metadata:
