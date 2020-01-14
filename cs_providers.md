@@ -119,7 +119,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  </tr>
  <tr>
    <td>Service interface (API, CLI, UI)</td>
-   <td>Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [v1 API](https://containers.cloud.ibm.com/global/swagger-global-api/){: external}, [CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), and [console](https://cloud.ibm.com/kubernetes/clusters){: external}.</td>
+   <td>Classic clusters are fully supported in the {{site.data.keyword.containershort_notm}} [v1 API ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/), [CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), and [console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).</td>
    <td>VPC clusters are supported by the [next version (`v2`) of the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install#about_api), and you can manage your VPC clusters through the same CLI and console as classic clusters.</td>
  </tr>
  <tr>
