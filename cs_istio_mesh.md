@@ -285,7 +285,7 @@ To enable automatic sidecar injection for a namespace:
 5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -357,7 +357,7 @@ To manually inject sidecars into a deployment:
 3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/).
 
   1. Define a service for the app.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -430,7 +430,7 @@ In the following steps, you set up a subdomain through which your users can acce
 **To publicly expose your Istio-managed apps with a subdomain without using TLS:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `80`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
-  ```
+  ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
   metadata:
@@ -456,7 +456,7 @@ In the following steps, you set up a subdomain through which your users can acce
   {: pre}
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
-  ```
+  ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
   metadata:
@@ -588,7 +588,7 @@ In the following steps, you set up a subdomain through which your users can acce
 **To publicly expose your Istio-managed apps with a subdomain using TLS:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 443 for HTTPS. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `443`, add that port. For more information about gateway YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/).
-  ```
+  ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
   metadata:
@@ -618,7 +618,7 @@ In the following steps, you set up a subdomain through which your users can acce
   {: pre}
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/).
-  ```
+  ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
   metadata:

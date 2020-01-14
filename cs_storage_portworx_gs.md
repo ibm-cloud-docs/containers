@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -152,7 +152,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 
 2. If you don't want to use an existing storage class, create a customized storage class. For a full list of supported options that you can specify in your storage class, see [Using Dynamic Provisioning ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-pvcs/dynamic-provisioning/#using-dynamic-provisioning).
    1. Create a configuration file for your storage class.
-      ```
+      ```yaml
       kind: StorageClass
       apiVersion: storage.k8s.io/v1
       metadata:
@@ -209,7 +209,7 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 
 2. Create a persistent volume claim (PVC).
    1. Create a configuration file for your PVC.
-      ```
+      ```yaml
       kind: PersistentVolumeClaim
       apiVersion: v1
       metadata:
@@ -272,7 +272,7 @@ To access the storage from your app, you must mount the PVC to your app.
    For tips on how to deploy a stateful set with Portworx, see [StatefulSets ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/). The Portworx documentation also includes examples for how to deploy [Cassandra ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/cassandra/), [Kafka ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/kafka-with-zookeeper/), [ElasticSearch with Kibana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/elastic-search-and-kibana/), and [WordPress with MySQL ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/portworx-install-with-kubernetes/application-install-with-kubernetes/wordpress/).
    {: tip}
 
-   ```
+   ```yaml
    apiVersion: apps/v1
    kind: Deployment
    metadata:
@@ -292,7 +292,7 @@ To access the storage from your app, you must mount the PVC to your app.
          containers:
          - image: <image_name>
            name: <container_name>
-	   securityContext:
+       securityContext:
              fsGroup: <group_ID>
            volumeMounts:
            - name: <volume_name>

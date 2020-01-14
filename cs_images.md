@@ -782,7 +782,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
 
     To use a private image from a namespace in {{site.data.keyword.registryshort_notm}}:
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:

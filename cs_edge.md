@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Restricting network traffic to edge worker nodes
+# Classic: Restricting network traffic to edge worker nodes
 {: #edge}
 
 Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload.

@@ -1061,7 +1061,7 @@ To deploy apps to specific worker nodes:
 
     Example YAML:
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
