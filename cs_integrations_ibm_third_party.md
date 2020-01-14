@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, helm
 
@@ -33,10 +33,11 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
+
 # IBM Cloud services and third-party integrations
 {: #ibm-3rd-party-integrations}
 
-You can use {{site.data.keyword.cloud_notm}} platform and infrastructure services, and other third-party integrations to add extra capabilities to your cluster.
+You can use {{site.data.keyword.cloud}} platform and infrastructure services, and other third-party integrations to add extra capabilities to your cluster.
 {: shortdesc}
 
 ## IBM Cloud services
@@ -60,7 +61,7 @@ To find an overview of popular {{site.data.keyword.cloud_notm}} services, see [P
 ### IBM Cloud classic infrastructure services
 {: #infrastructure-services}
 
-Because {{site.data.keyword.containerlong_notm}} lets you create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic infrastructure, some classic infrastructure services, such as Virtual Servers, Bare Metal Servers, or VLANs are fully integrated into {{site.data.keyword.containerlong_notm}}. You create and work with these service instances by using the {{site.data.keyword.containerlong_notm}} API, CLI, or console.
+Because {{site.data.keyword.containerlong_notm}} lets you create a cluster on {{site.data.keyword.cloud_notm}} classic infrastructure, some classic infrastructure services, such as Virtual Servers, Bare Metal Servers, or VLANs are fully integrated into {{site.data.keyword.containerlong_notm}}. You create and work with these service instances by using the {{site.data.keyword.containerlong_notm}} API, CLI, or console.
 {: shortdesc}
 
 Supported persistent storage solutions, such as {{site.data.keyword.cloud_notm}} File Storage, {{site.data.keyword.cloud_notm}} Block Storage, or {{site.data.keyword.cos_full}} are integrated as Kubernetes flex drivers and can be set up by using [Helm charts](/docs/containers?topic=containers-helm). The Helm chart automatically sets up Kubernetes storage classes, the storage provider, and the storage driver in your cluster. You can use the storage classes to provision persistent storage by using persistent volume claims (PVCs). For more information, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning).
@@ -70,6 +71,8 @@ To secure your cluster network or connect to an on-prem data center, you can con
 - [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link)
 - [Virtual Router Appliance (VRA)](/docs/containers?topic=containers-vpn#vyatta)
 - [Fortigate Security Appliance (FSA)](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)
+
+
 
 ### IBM Cloud VPC infrastructure services
 {: #vpc-infrastructure-services}
@@ -82,6 +85,7 @@ Before you can create a VPC cluster, you must have a VPC and at least one VPC su
 To add persistent storage to your VPC cluster, you can enable the [{{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block). The add-on sets up pre-defined Kubernetes storage classes, the storage provider, and the storage driver in your cluster so that you can provision {{site.data.keyword.block_storage_is_short}} by using Kubernetes persistent volume claims (PVCs). To use the add-on, all your VPC subnets must be configured with a public network gateway.
 
 To secure your cluster network traffic, you can create access control lists (ACLs) for your VPC subnet. For more information, see [Security in your {{site.data.keyword.cloud_notm}} VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-security-in-your-ibm-cloud-vpc). To connect to a different VPC or to an on-prem data center, use the [VPN for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) service.  
+
 
 
 ## Kubernetes community and open source integrations
@@ -106,7 +110,7 @@ For more information about {{site.data.keyword.containerlong_notm}} partners and
 {: #cluster-add-ons}
 {{site.data.keyword.containerlong_notm}} integrates popular open source integrations, such as [Knative](/docs/containers?topic=containers-serverless-apps-knative) or [Istio](/docs/containers?topic=containers-istio) by using [managed add-ons](/docs/containers?topic=containers-managed-addons). Managed add-ons are an easy way to install an open source tool in your cluster that is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
 
-Managed add-ons are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using the managed add-ons, you can use one of the I{{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Managed add-ons are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using the managed add-ons, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 If the tool that you add to your cluster incurs costs, these costs are automatically integrated and listed as part of your monthly {{site.data.keyword.cloud_notm}} billing. The billing cycle is determined by {{site.data.keyword.cloud_notm}} depending on when you enabled the add-on in your cluster.
 
@@ -124,7 +128,10 @@ Installing third-party open source integrations or Helm charts from the Kubernet
 ### Extending Kubernetes API and software with CRDs and Operators
 {: #kube-crd-operators}
 
-You might use custom resource definitions (CRDs) to extend the Kubernetes API to create and orchestrate custom objects in your cluster. Operators combine custom resources and controllers to automate the life cycle of app, such as developing a catalog to deploy and update customized apps in your cluster. Custom resources are generally available in [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) and later.
+You might use custom resource definitions (CRDs) to extend the Kubernetes API to create and orchestrate custom objects in your cluster. Operators combine custom resources and controllers to automate the lifecycle of app, such as installing and rolling out updates to a customized app from a catalog in your cluster. Custom resources are generally available in [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) and later.
 {: shortdesc}
 
 To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.
+
+
+
