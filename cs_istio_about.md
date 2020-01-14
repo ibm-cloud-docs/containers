@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -44,7 +44,7 @@ With one click, you can get all Istio core components and additional tracing, mo
 ## What is Istio?
 {: #istio_ov_what_is}
 
-[Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/istio) is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
+[Istio](https://www.ibm.com/cloud/istio){: external} is an open service mesh platform to connect, secure, control, and observe microservices on cloud platforms such as Kubernetes in {{site.data.keyword.containerlong_notm}}.
 {:shortdesc}
 
 When you shift monolith applications to a distributed microservice architecture, a set of new challenges arises such as how to control the traffic of your microservices, do dark launches and canary rollouts of your services, handle failures, secure the service communication, observe the services, and enforce consistent access policies across the fleet of services. To address these difficulties, you can leverage a service mesh. A service mesh provides a transparent and language-independent network for connecting, observing, securing, and controlling the connectivity between microservices. Istio provides insights and control over the service mesh by so that you can manage network traffic, load balance across microservices, enforce access policies, verify service identity, and more.
@@ -72,7 +72,7 @@ When you install the Istio add-on, the Istio control and data planes use the net
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/platform-setup/ibm/).
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/docs/setup/platform-setup/ibm/){: external}.
 {: tip}
 
 <br />
@@ -87,7 +87,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4.
 {: shortdesc}
 
-The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/).
+The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/docs/concepts/what-is-istio/){: external}.
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `Mixer` provides telemetry collection and policy controls.
   * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
@@ -96,7 +96,7 @@ The Istio add-on installs the core components of Istio. For more information abo
 * `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
 * `Galley` validates configuration changes for the other Istio control plane components.
 
-To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://prometheus.io/), [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/).
+To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://www.kiali.io/){: external}.
 
 ### Kubernetes version 1.15 and earlier clusters
 {: #istio_ov_115}
@@ -133,6 +133,6 @@ Review the following limitations for the managed Istio add-on.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
-  * [Policy enforcement ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/)
-  * [Secret discovery service (SDS) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/security/citadel-config/auth-sds/)
-  * [Any features by the community that are in alpha or beta release stages ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/about/feature-stages/)
+  * [Policy enforcement](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/){: external}
+  * [Secret discovery service (SDS)](https://istio.io/docs/tasks/security/citadel-config/auth-sds/){: external}
+  * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/){: external}

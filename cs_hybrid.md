@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -36,7 +36,7 @@ subcollection: containers
 # Hybrid cloud
 {: #hybrid_iks_icp}
 
-If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.cloud_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.cloud_notm}} Private and IBM Public Cloud ![External link icon](../icons/launch-glyph.svg "External link icon")](http://ibm.biz/hybridJune2018).
+If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.cloud_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.cloud_notm}} Private and IBM Public Cloud](http://ibm.biz/hybridJune2018){: external}.
 {: shortdesc}
 
 You understand the [{{site.data.keyword.cloud_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can connect your public and private cloud by using the strongSwan VPN service or {{site.data.keyword.BluDirectLink}}.
@@ -54,7 +54,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.cloud_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html). When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
+    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html){: external}. When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
 
@@ -79,13 +79,13 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
     ```
     {: pre}
 
-4.  [Create a cluster in {{site.data.keyword.cloud_notm}} Private ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html).
+4.  [Create a cluster in {{site.data.keyword.cloud_notm}} Private](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html){: external}.
 
 5.  In your {{site.data.keyword.cloud_notm}} Private cluster, deploy the strongSwan IPSec VPN service.
 
-    1.  [Complete the strongSwan IPSec VPN workarounds ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html).
+    1.  [Complete the strongSwan IPSec VPN workarounds](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html){: external}.
 
-    2.  [Set up the strongSwan VPN Helm chart ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html) in your private cluster.
+    2.  [Set up the strongSwan VPN Helm chart](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html){: external} in your private cluster.
 
         *  In the configuration parameters, set the **Remote gateway** field to the value of the portable public IP address that you set as the `loadbalancerIP` of your {{site.data.keyword.containerlong_notm}} cluster.
 
@@ -108,7 +108,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 **What's next?**
 
 *   [Run your licensed software images in public clusters](#hybrid_ppa_importer).
-*   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+*   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 
 
 ## Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link
@@ -127,7 +127,7 @@ To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
-* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html).
+* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 
 <br />
 
@@ -138,10 +138,10 @@ To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an
 You can run select licensed IBM products that were packaged for {{site.data.keyword.cloud_notm}} Private in a cluster in {{site.data.keyword.cloud_notm}} Public by using the PPA importer tool.  
 {: shortdesc}
 
-The PPA importer tool is available only for older versions of entitled software. If you want to run entitled software from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
+The PPA importer tool is available only for older versions of entitled software. If you want to run entitled software from your [MyIBM.com](https://myibm.ibm.com){: external} container software library, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
 {: note}
 
-Licensed software is available in [IBM Passport Advantage ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/software/passportadvantage/index.html). To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
+Licensed software is available in [IBM Passport Advantage](https://www.ibm.com/software/passportadvantage/index.html){: external}. To use this software in a cluster in {{site.data.keyword.cloud_notm}} Public, you must download the software, extract the image, and upload the image to your namespace in {{site.data.keyword.registryshort}} by using the PPA importer tool, the `ibmcloud cr ppa-archive-load` command. Independent of the environment where you plan to use the software, you must obtain the required license for the product first.
 
 The following table is an overview of available {{site.data.keyword.cloud_notm}} Private products that you can use in your cluster in {{site.data.keyword.cloud_notm}} Public.
 
@@ -165,9 +165,9 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
 
     **For IBM WebSphere Application Server Liberty**:
 
-    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/_/websphere-liberty/). For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade).
+    1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image](https://hub.docker.com/_/websphere-liberty/){: external}. For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade){: external}.
 
-    2.  Follow the [Liberty Helm chart instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html).
+    2.  Follow the [Liberty Helm chart instructions](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html){: external}.
 
 2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, and then try again.
     ```
@@ -177,6 +177,6 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
 
 3.  For more information about how to configure and use the product with your cluster, refer to the product-specific documentation.
 
-    - [IBM Db2 Direct Advanced Edition Server ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html)
-    - [IBM MQ Advanced ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html)
-    - [IBM WebSphere Application Server Liberty ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/welcome_liberty.html)
+    - [IBM Db2 Direct Advanced Edition Server](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html){: external}
+    - [IBM MQ Advanced](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html){: external}
+    - [IBM WebSphere Application Server Liberty](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/welcome_liberty.html){: external}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, containers
 
@@ -132,7 +132,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console.
 {: shortdesc}
 
-1.  In the [{{site.data.keyword.cloud_notm}} **Catalog** ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog?category=containers), select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
+1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
 2.  Select the **Free** cluster option, and give your cluster a unique name.
 3.  Click **Create Cluster**. A worker pool is created that contains one worker node.   
 <br>
@@ -151,8 +151,8 @@ Create a standard VPC Generation 1 compute cluster by using the {{site.data.keyw
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
 {: important}
 
-1. [Create a Virtual Private Cloud (VPC) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/vpc/provision/vpc) with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
-2. From the [{{site.data.keyword.containerlong_notm}} dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click **Create cluster**.
+1. [Create a Virtual Private Cloud (VPC)](https://cloud.ibm.com/vpc/provision/vpc){: external} with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
+2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
    1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.15 or later**.
    2. Select **VPC infrastructure**.
@@ -173,7 +173,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 ## Deploying an app to your cluster
 {: #deploy-app}
 
-After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, deploy your first `websphere-liberty` Java application server in your cluster by using the Kubernetes dashboard. The [Kubernetes dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dashboard) is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
+After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, deploy your first `websphere-liberty` Java application server in your cluster by using the Kubernetes dashboard. The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
 {: shortdesc}
 
 1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters) to open the details for your cluster.

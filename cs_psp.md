@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks
 
@@ -36,7 +36,7 @@ subcollection: containers
 # Configuring pod security policies
 {: #psp}
 
-With [pod security policies (PSPs) ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/), you can
+With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}, you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 **Why do I set pod security policies?**</br>
@@ -86,7 +86,7 @@ You can modify these RBAC roles to remove or add administrators, users, services
 
 Before you begin:
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview).
+*  Understand working with RBAC roles. For more information, see [Authorizing users with custom Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac) or the [Kubernetes documentation](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#api-overview){: external}.
 * Ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for all namespaces.
 
 When you modify the default configuration, you can prevent important cluster actions, such as pod deployments or cluster updates. Test your changes in a non-production cluster that other teams do not rely on.
@@ -140,7 +140,7 @@ When you modify the default configuration, you can prevent important cluster act
     ```
     {: codeblock}
 
-3.  Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/). Example actions:
+3.  Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}. Example actions:
 
     *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in other namespaces are no longer authorized.
 
@@ -196,7 +196,7 @@ When you modify the default configuration, you can prevent important cluster act
 
 </br>
 **To create your own pod security policy**:</br>
-To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/policy/pod-security-policy/).
+To create your own pod security policy resource and authorize users with RBAC, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}.
 
 Make sure that you modified the existing policies so that the new policy that you create does not conflict with the existing policy. For example, the existing policy permits users to create and update privileged pods. If you create a policy that does not permit users to create or update privileged pods, the conflict between the existing and the new policy might cause unexpected results.
 

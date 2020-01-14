@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, vpc
 
@@ -174,7 +174,7 @@ The components that you deploy by completing this lesson are shown in the follow
 
 To deploy the app:
 
-1.  Clone the source code for the [Hello world app ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt) to your user home directory. The repository contains different versions of a similar app in folders that each start with `Lab`. Each version contains the following files:
+1.  Clone the source code for the [Hello world app](https://github.com/IBM/container-service-getting-started-wt){: external} to your user home directory. The repository contains different versions of a similar app in folders that each start with `Lab`. Each version contains the following files:
     * `Dockerfile`: The build definitions for the image.
     * `app.js`: The Hello world app.
     * `package.json`: Metadata about the app.

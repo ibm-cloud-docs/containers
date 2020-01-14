@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-13"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -57,7 +57,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, after y
 <br>
 To install the CLIs:
 
-1.  Install the [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started#idt-prereq). This installation includes:
+1.  Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started#idt-prereq){: external}. This installation includes:
     -   The base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`).
     -   {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
@@ -75,7 +75,7 @@ To install the CLIs:
 
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
-      
+
 4.  Verify that the {{site.data.keyword.containerlong_notm}} plug-in and {{site.data.keyword.registryshort_notm}} plug-ins are installed correctly.
     ```
     ibmcloud plugin list
@@ -101,7 +101,7 @@ For reference information about these CLIs, see the documentation for those tool
 ## Installing the Kubernetes CLI (`kubectl`)
 {: #kubectl}
 
-To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.cloud_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.cloud_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 {: shortdesc}
 
 Using an OpenShift cluster? [Install the OpenShift CLI (`oc`)](/docs/openshift?topic=openshift-openshift-cli). If you have both Red Hat OpenShift on IBM Cloud and Ubuntu {{site.data.keyword.containershort_notm}} clusters, make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version. You might want to set up multiple directories on your local machine to organize different `kubectl` versions and then create aliases in your terminal for these directories.
@@ -115,9 +115,9 @@ Using an OpenShift cluster? [Install the OpenShift CLI (`oc`)](/docs/openshift?t
         ```
         {: pre}
 2.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.14.9.
-    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/darwin/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/darwin/amd64/kubectl)
-    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/linux/amd64/kubectl ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/linux/amd64/kubectl)
-    -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/windows/amd64/kubectl.exe ![External link icon](../icons/launch-glyph.svg "External link icon")](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/windows/amd64/kubectl.exe)
+    -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/darwin/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/darwin/amd64/kubectl){: external}
+    -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/linux/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/linux/amd64/kubectl){: external}
+    -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/windows/amd64/kubectl.exe](https://storage.googleapis.com/kubernetes-release/release/v1.14.9/bin/windows/amd64/kubectl.exe){: external}
 
 3.  If you use OS X or Linux, complete the following steps.
     1.  Move the executable file to the `/usr/local/bin` directory.
@@ -143,11 +143,11 @@ Using an OpenShift cluster? [Install the OpenShift CLI (`oc`)](/docs/openshift?t
         ```
         {: pre}
 4.  If you have clusters that run different versions of Kubernetes, such as 1.16.3 and 1.15.6, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
-5.  **Optional**: [Enable autocompletion for `kubectl` commands ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion). The steps vary depending on the shell that you use.
+5.  **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
 
-For more information about the Kubernetes CLI, see the [`kubectl` reference docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
+For more information about the Kubernetes CLI, see the [`kubectl` reference docs](https://kubectl.docs.kubernetes.io/){: external}.
 {: note}
 
 <br />
@@ -159,7 +159,7 @@ For more information about the Kubernetes CLI, see the [`kubectl` reference docs
 Instead of installing each of the CLIs individually on your computer, you can install the CLIs into a container that runs on your computer.
 {:shortdesc}
 
-Before you begin, [install Docker for Mac ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/docker-for-mac/install/) or [Windows ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/docker-for-windows/install/) to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.docker.com/toolbox/toolbox_install_windows/) instead.
+Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-mac/install/){: external} or [Windows](https://docs.docker.com/docker-for-windows/install/){: external} to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/){: external} instead.
 
 1. Create an image from the provided Dockerfile.
 
@@ -274,7 +274,7 @@ In CLI plug-in version 0.4 and earlier, `cluster config` provides a command that
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}.
 
 If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 {: tip}
@@ -341,7 +341,7 @@ In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file t
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
+Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}.
 
 If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 {: tip}
@@ -365,7 +365,7 @@ This task includes the information for updating these CLIs.
 <br>
 To update the CLIs:
 
-1.  Update the {{site.data.keyword.cloud_notm}} CLI. Download the [latest version ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started) and run the installer.
+1.  Update the {{site.data.keyword.cloud_notm}} CLI. Download the [latest version](/docs/cli?topic=cloud-cli-getting-started){: external} and run the installer.
 
 2. Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
 
@@ -400,7 +400,7 @@ To update the CLIs:
         ibmcloud ks init
         ```
         {: pre}
-        
+
 4.  [Update the Kubernetes CLI](#kubectl).
 
 5.  Update the {{site.data.keyword.registryshort_notm}} plug-in.
@@ -473,14 +473,14 @@ The Kubernetes web terminal allows you to use the {{site.data.keyword.cloud_notm
 You can use the Kubernetes web terminal for quick access and testing of your cluster. Do not use it for production workloads.
 {: important}
 
-If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started), the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
+If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external}, the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
 
 Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and do not persist across sessions.
 {: note}
 
 To install and launch the Kubernetes web terminal:
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the web terminal.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the web terminal.
 2.  From the upper right of the cluster detail page, click the **Web terminal** button.
 3.  Click **Install**. It might take a few minutes for the terminal add-on to install.
 4.  Click the **Web terminal** button again. The terminal opens in your browser.

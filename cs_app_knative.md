@@ -52,7 +52,7 @@ Knative comes with two key components, or _primitives_, that help you to deploy 
 - **Serving:** The `Serving` primitive helps to deploy serverless apps as Knative services and to automatically scale them, even down to zero instances. To expose your serverless and containerized workloads, Knative uses Istio. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. By using the traffic management and intelligent routing capabilities of Istio, you can control what traffic is routed to a specific version of your service, which makes it easy for a developer to test and roll out a new app version or do A-B testing.
 - **Eventing:** With the `Eventing` primitive, you can create triggers or event streams that other services can subscribe to. For example, you might want to kick off a new build of your app every time code is pushed to your GitHub master repo. Or you want to run a serverless app only if the temperature drops below freezing point. For example, the `Eventing` primitive can be integrated into your CI/CD pipeline to automate the build and deployment of apps in case a specific event occurs.
 
-The Knative open-source project deprecated the **Build** primitive in favor of the Tekton open-source project. The Build primitive provided you with tools to automate the build process for your app from source code to a container image. The Tekton project originated from the Knative project and provides advanced CI/CD features on top of the deprecated Knative Build primitive. For more information, see the [Tekton open-source project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://tekton.dev).
+The Knative open-source project deprecated the **Build** primitive in favor of the Tekton open-source project. The Build primitive provided you with tools to automate the build process for your app from source code to a container image. The Tekton project originated from the Knative project and provides advanced CI/CD features on top of the deprecated Knative Build primitive. For more information, see the [Tekton open-source project](https://tekton.dev){: external}.
 {: note}
 
 **What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?**
@@ -463,7 +463,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
    - Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
    - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as an A record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
-3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN](https://support.dnsimple.com/articles/what-is-common-name/){: external} is different for each certificate.
 4. Create a Kubernetes secret for your cert and key.
    1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
       ```
@@ -1023,9 +1023,9 @@ The current implementation of Knative does not provide a standard way to force y
 ## Related links  
 {: #knative-related-links}
 
-- Try out this [Knative workshop ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/knative101/tree/master/workshop) to deploy your first `Node.js` fibonacci app to your cluster.
+- Try out this [Knative workshop](https://github.com/IBM/knative101/tree/master/workshop){: external} to deploy your first `Node.js` fibonacci app to your cluster.
   - Explore how to use the Knative `Build` primitive to build an image from a Dockerfile in GitHub and automatically push the image to your namespace in {{site.data.keyword.registrylong_notm}}.  
   - Learn how you can set up routing for network traffic from the IBM-provided Ingress subdomain to the Istio Ingress gateway that is provided by Knative.
   - Roll out a new version of your app and use Istio to control the amount of traffic that is routed to each app version.
-- Explore [Knative `Eventing` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs/tree/master/docs/eventing/samples) samples.
-- Learn more about Knative with the [Knative documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs).
+- Explore [Knative `Eventing`](https://github.com/knative/docs/tree/master/docs/eventing/samples){: external} samples.
+- Learn more about Knative with the [Knative documentation](https://github.com/knative/docs){: external}.
