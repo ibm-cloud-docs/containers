@@ -39,6 +39,8 @@ subcollection: containers
 You can add complex Kubernetes apps to your cluster by using Helm charts.
 {: shortdesc}
 
+
+
 **What is Helm and how do I use it?** </br>
 [Helm ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh) is a Kubernetes package manager that uses Helm charts to define, install, and upgrade complex Kubernetes apps in your cluster. Helm charts package the specifications to generate YAML files for Kubernetes resources that build your app. These Kubernetes resources are automatically applied in your cluster and assigned a version by Helm. You can also use Helm to specify and package your own app and let Helm generate the YAML files for your Kubernetes resources.
 
