@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -31,6 +31,8 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
+
 
 
 # Building containers from images
@@ -64,6 +66,8 @@ After you set up an image registry, cluster users can use the images to deploy a
 Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
 <br />
+
+
 
 
 ## Setting up trusted content for container images
@@ -220,12 +224,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
     {: pre}
     Example output:
     ```
-    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 4.  Update your container deployments to pull images from the `icr.io` domain name.
@@ -301,12 +305,12 @@ You can copy an image pull secret, such as the one that is automatically created
     {: pre}
     Example output:
     ```
-    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.
@@ -736,6 +740,8 @@ Wondering what to do next? You can [set up the **entitled** Helm chart repositor
 
 
 
+
+
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
 {: #namespace_token}
 
@@ -935,3 +941,5 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     {: pre}
 
 6.  [Deploy a container by using the image pull secret](#use_imagePullSecret) in your namespace.
+
+

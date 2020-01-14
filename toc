@@ -24,9 +24,6 @@ IBM Cloud Kubernetes Service
         cs_uc_gov.md
 
     {: .topicgroup}
-    Learning paths
-
-    {: .topicgroup}
     Cluster strategy
         cs_responsibilities.md
         cs_secure.md

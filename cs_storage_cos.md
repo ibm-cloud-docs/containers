@@ -42,6 +42,9 @@ subcollection: containers
 If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster without public network access, you must set up your {{site.data.keyword.cos_full_notm}} service instance for HMAC authentication. If you don't want to use HMAC authentication, you must open up all outbound network traffic on port 443 for the plug-in to work properly in a private cluster.
 {: important}
 
+If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure to install the plug-in without the Helm server Tiller.
+{: important}
+
 
 
 If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
@@ -173,6 +176,8 @@ To install the plug-in:
 
 
 
+If you have a private-only cluster, you must install the plugin without Tiller.
+{: note}
 
 2.  Choose if you want to install the {{site.data.keyword.cos_full_notm}} plug-in with or without the Helm server, Tiller. **Note** Tiller requires public network connectivity. Learn more about [Helm and Tiller](/docs/containers?topic=containers-helm). Then, [follow the instructions](/docs/containers?topic=containers-helm#public_helm_install){: new_window} to install the Helm client on your local machine and optionally Tiller with a service account in your cluster.
 
@@ -287,6 +292,9 @@ To install the plug-in:
    6. Save your changes.
 
 9. Install the {{site.data.keyword.cos_full_notm}} plug-in. When you install the plug-in, pre-defined storage classes are added to your cluster.
+
+If you have a private-only cluster, you must install the plugin without Tiller.
+{: note}
 
   - **For OS X and Linux:**
     - If you skipped the previous step, install without a limitation to specific Kubernetes secrets.</br>

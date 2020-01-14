@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -31,6 +31,8 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
+
 
 
 # Deploying Kubernetes-native apps in clusters
@@ -1405,7 +1407,7 @@ To manage rolling updates to your apps:
     ```
     apiVersion: apps/v1
     kind: Deployment
-    metadata:  
+    metadata:  
       name: nginx-test
     spec:
       replicas: 10
@@ -1414,9 +1416,9 @@ To manage rolling updates to your apps:
           service: http-server
       minReadySeconds: 5
       progressDeadlineSeconds: 600
-      strategy: 
-        type: RollingUpdate  
-        rollingUpdate:    
+      strategy:
+        type: RollingUpdate  
+        rollingUpdate:    
           maxUnavailable: 50%
           maxSurge: 2
     ...
@@ -1609,3 +1611,5 @@ Before you begin, you need two clusters and the **Manager** [service role](/docs
     kubectl get all
     ```
     {: pre}
+
+

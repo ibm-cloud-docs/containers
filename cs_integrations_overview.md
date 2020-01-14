@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, helm
 
@@ -201,7 +201,7 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Codeship</td>
-<td>You can use <a href="https://codeship.com" target="_blank">Codeship <img src="../icons/launch-glyph.svg" alt="External link icon"></a> for the continuous integration and delivery of containers. For more information, see <a href="https://www.ibm.com/cloud/blog/using-codeship-pro-deploy-workloads-ibm-container-service" target="_blank">Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>You can use [Codeship](https://codeship.com){: external} for the continuous integration and delivery of containers. For more information, see [Using Codeship Pro To Deploy Workloads to {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/cloud/blog/using-codeship-pro-deploy-workloads-ibm-container-service){:external}.</td>
  <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -213,19 +213,19 @@ You can use various external services and catalog services with a standard Kuber
 </tr>
 <tr>
 <td>Helm</td>
-<td> <a href="https://helm.sh" target="_blank">Helm <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).</p></td>
+<td>[Helm](https://helm.sh){:external} is a Kubernetes package manager. You can create new Helm charts or use preexisting Helm charts to define, install, and upgrade complex Kubernetes applications that run in {{site.data.keyword.containerlong_notm}} clusters. <p>For more information, see [Setting up Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm).</p></td>
  <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.contdelivery_full}}</td>
-<td>Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see the blog <a href="https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/" target="_blank">Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see the blog [Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines](https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/){: external}.</td>
  <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>Istio on {{site.data.keyword.containerlong_notm}}</td>
-<td><a href="https://www.ibm.com/cloud/istio" target="_blank">Istio <img src="../icons/launch-glyph.svg" alt="External link icon"></a> is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known as a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. To get started, see [Using the managed Istio add-on](/docs/containers?topic=containers-istio).</td>
+<td>[Istio](https://www.ibm.com/cloud/istio){: external} is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known as a service mesh, on cloud orchestration platforms. Istio on {{site.data.keyword.containerlong}} provides a one-step installation of Istio into your cluster through a managed add-on. With one click, you can get all Istio core components, additional tracing, monitoring, and visualization up and running. To get started, see [Using the managed Istio add-on](/docs/containers?topic=containers-istio).</td>
  <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
