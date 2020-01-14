@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Configuring the cluster DNS provider for classic clusters
+# Classic: Configuring the cluster DNS provider
 {: #cluster_dns}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to classic clusters. For DNS provider information for VPC clusters, see [Configuring CoreDNS](/docs/containers?topic=containers-vpc_dns).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -33,13 +33,13 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Setting up VPC VPN connectivity
+# VPC: Setting up VPN connectivity
 {: #vpc-vpnaas}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to VPC clusters. For VPN information for classic clusters, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 {: note}
 
-With VPN connectivity, you can securely connect apps and services in a VPC cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster. 
+With VPN connectivity, you can securely connect apps and services in a VPC cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster.
 {: shortdesc}
 
 ## Choosing a VPN solution

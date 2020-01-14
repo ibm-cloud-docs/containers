@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Opening required ports and IP addresses in your firewall
+# Classic: Opening required ports and IP addresses in your firewall
 {: #firewall}
 
 

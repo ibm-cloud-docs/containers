@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Configuring subnets and IP addresses for classic clusters
+# Classic: Configuring subnets and IP addresses
 {: #subnets}
 
 Change the pool of available portable public or private IP addresses by adding subnets to your {{site.data.keyword.containerlong}} cluster.
