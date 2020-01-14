@@ -117,7 +117,7 @@ IBM Cloud Kubernetes Service
         cs_loadbalancer_dns.md
 
     {: .topicgroup}
-    HTTPS load balancing with Ingress ALBs
+    Exposing apps with Ingress ALBs
         cs_ingress_qs.md
         cs_ingress_about.md
         cs_ingress.md
