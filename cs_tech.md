@@ -82,34 +82,34 @@ The Kubernetes master and all the master components are dedicated only to you, a
 
 The following table describes the components of the Kubernetes master.
 
-    <table>
-    <caption>Components of the Kubernetes master</caption>
-    <thead>
-    <th>Master component</th>
-    <th>Description</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>kube-apiserver</td>
-    <td>The Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The Kubernetes API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in etcd.</td>
-    </tr>
-    <tr>
-    <td>`openvpn-server`</td>
-    <td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
-    </tr>
-    <tr>
-    <td>`etcd`</td>
-    <td>`etcd` is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
-    </tr>
-    <tr>
-    <td>`kube-scheduler`</td>
-    <td>The Kubernetes scheduler watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</td>
-    </tr>
-    <tr>
-    <td>`kube-controller-manager`</td>
-    <td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
-    </tr>
-    </tbody></table>
+<table>
+<caption>Components of the Kubernetes master</caption>
+<thead>
+<th>Master component</th>
+<th>Description</th>
+</thead>
+<tbody>
+<tr>
+<td>kube-apiserver</td>
+<td>The Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The Kubernetes API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in etcd.</td>
+</tr>
+<tr>
+<td>`openvpn-server`</td>
+<td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
+</tr>
+<tr>
+<td>`etcd`</td>
+<td>`etcd` is a highly available key value store that stores the state of all Kubernetes resources of a cluster, such as services, deployments, and pods. Data in etcd is backed up to an encrypted storage instance that IBM manages.</td>
+</tr>
+<tr>
+<td>`kube-scheduler`</td>
+<td>The Kubernetes scheduler watches for newly created pods and decides where to deploy them based on capacity, performance needs, policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</td>
+</tr>
+<tr>
+<td>`kube-controller-manager`</td>
+<td>The Kubernetes controller manager is a daemon that watches the state of cluster resources, such as replica sets. When the state of a resource changes, for example if a pod in a replica set goes down, the controller manager initiates correcting actions to achieve the required state.</td>
+</tr>
+</tbody></table>
 
 ### Worker node components
 {: #worker-components}
