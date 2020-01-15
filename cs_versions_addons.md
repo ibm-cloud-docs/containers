@@ -72,7 +72,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <tr>
 <td>618 / 373</td>
 <td>16 Jan 2020</td>
-<td>Fixes [GnuTLS vulnerabilities for SHA1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-1/).</td>
+<td>Fixes [SHA1 vulnerabilities for GnuTLS ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-1/).</td>
 <td>-</td>
 </tr>
 <tr>
