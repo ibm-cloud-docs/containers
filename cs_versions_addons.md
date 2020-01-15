@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-15"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -69,6 +69,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>618 / 373</td>
+<td>16 Jan 2020</td>
+<td>Fixes [GnuTLS vulnerabilities for SHA1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-1/).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>615 / 373</td>
 <td>06 Jan 2020</td>
