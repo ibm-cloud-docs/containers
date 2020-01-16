@@ -716,9 +716,9 @@ Before you begin:
     {: codeblock}
   <br>
   <table>
-      <caption>Understanding the YAML file components</caption>
+      <caption>Understanding the POST request</caption>
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>POST</code> request</th>
       </thead>
       <tbody>
       <tr>
@@ -827,9 +827,9 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
 
   <br>
     <table>
-      <caption>Understanding the YAML file components</caption>
+      <caption>Understanding the DELETE request</caption>
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>DELETE</code> request</th>
       </thead>
       <tbody>
       <tr>
@@ -900,9 +900,9 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
 
   <br>
     <table>
-      <caption>Understanding the YAML file components</caption>
+      <caption>Understanding the GET request</caption>
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>GET</code> request</th>
       </thead>
       <tbody>
       <tr>
