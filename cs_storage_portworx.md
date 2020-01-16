@@ -105,7 +105,7 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 
 
 **VPC clusters:**
-1. Follow the [steps 1-7](/docs/containers?topic=containers-utilities#vpc_api_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. Do not create a PVC or PV for your storage yet. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.  
+1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_api_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.  
 2. Continue with your Portworx setup by [Setting up a key-value store for Portworx metadata](#portworx_database).
 
 
