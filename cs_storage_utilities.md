@@ -714,7 +714,7 @@ Before you begin:
     curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
     ```
     {: codeblock}
-
+  <br>
   <table>
       <caption>Understanding the YAML file components</caption>
       <thead>
@@ -825,16 +825,37 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
       ```
       {: codeblock}
 
-<br>
-**Understanding the detach volume `DELETE` request**
-
-  | Variable | Description |
-  |--- | --- |
-  | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-  | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-  | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-  | `worker_ID` | The unique ID that is assigned to the worker node where you want to detach the volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-  | `volume_attachment_ID` | The unique ID that is assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
+  <br>
+    <table>
+      <caption>Understanding the YAML file components</caption>
+      <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>IAM_token</code></td>
+      <td>The IAM OAuth token for your current session. You can retrieve this value by running <code>ibmcloud iam oauth-tokens</code>.</td>
+      </tr>
+      <tr>
+      <td><code>region</code></td>
+      <td>The region that your cluster is in. You can retrieve this value by running <code>ibmcloud ks cluster get <cluster_name></code>. Example value: <code>eu-de</code>. </td>
+      </tr>
+      <tr>
+      <td><code>cluster_ID</code></td>
+      <td>The unique ID that is assigned to your cluster. You can retrieve this ID by running <code>ibmcloud ks cluster ls</code>. </td>
+      </tr>
+      <tr>
+      <td><code>worker_ID</code></td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      </tr>
+      <tr>
+      <td><code>volume_ID</code></td>
+      <td>The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running <code>ibmcloud is volumes</code>. </td>
+      </tr>
+      <td><code>volume_attachment_ID</code></td>
+      <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
+      </tr>
+  </table>
 
 ### Reviewing volume attachment details for a VPC worker node
 {: #vpc_api_get_worker}
@@ -877,19 +898,37 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       ```
       {: codeblock}
 
-
-<br>
-**Understanding the `GET` attachment details request**
-
-| Variable | Description |
-| --- | --- |
-| `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-| `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-| `X-Auth-Resource-Group-ID` | The ID of the resource group that your cluster is in. You can see the ID of a resource group by running `ibmcloud resource group <resource_group_name>` or `ibmcloud ks cluster get <cluster_name>`. |
-| `<resource_group_name>` | The name of the resource group that your cluster is in. You can get a list of your resource groups by running `ibmcloud resource groups`. |
-| `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-| `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-| `volume_attachment_ID` | The unique ID assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
+  <br>
+    <table>
+      <caption>Understanding the YAML file components</caption>
+      <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>IAM_token</code></td>
+      <td>The IAM OAuth token for your current session. You can retrieve this value by running <code>ibmcloud iam oauth-tokens</code>.</td>
+      </tr>
+      <tr>
+      <td><code>region</code></td>
+      <td>The region that your cluster is in. You can retrieve this value by running <code>ibmcloud ks cluster get <cluster_name></code>. Example value: <code>eu-de</code>. </td>
+      </tr>
+      <tr>
+      <td><code>cluster_ID</code></td>
+      <td>The unique ID that is assigned to your cluster. You can retrieve this ID by running <code>ibmcloud ks cluster ls</code>. </td>
+      </tr>
+      <tr>
+      <td><code>worker_ID</code></td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      </tr>
+      <tr>
+      <td><code>volume_ID</code></td>
+      <td>The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running <code>ibmcloud is volumes</code>. </td>
+      </tr>
+      <td><code>volume_attachment_ID</code></td>
+      <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
+      </tr>
+  </table>
 
 
 
