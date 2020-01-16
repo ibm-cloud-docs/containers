@@ -735,7 +735,7 @@ Before you begin:
       </tr>
       <tr>
       <td><code>worker_ID</code></td>
-      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <code>ibmcloud ks worker ls -c <cluster_name></code>. </td>
       </tr>
       <tr>
       <td><code>volume_ID</code></td>
@@ -846,7 +846,7 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
       </tr>
       <tr>
       <td><code>worker_ID</code></td>
-      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <code>ibmcloud ks worker ls -c <cluster_name></code>. </td>
       </tr>
       <tr>
       <td><code>volume_ID</code></td>
@@ -919,7 +919,7 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       </tr>
       <tr>
       <td><code>worker_ID</code></td>
-      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <code>ibmcloud ks worker ls -c <cluster_name></code>. </td>
       </tr>
       <tr>
       <td><code>volume_ID</code></td>
