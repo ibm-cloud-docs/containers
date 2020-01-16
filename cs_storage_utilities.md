@@ -163,7 +163,7 @@ You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage Atta
 
 3. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
-   helm list| grep ibm-block-storage-attacher
+   helm list | grep ibm-block-storage-attacher
    ```
    {: pre}
 
@@ -187,7 +187,7 @@ If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Blo
 
 1. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
-   helm list| grep ibm-block-storage-attacher
+   helm list | grep ibm-block-storage-attacher
    ```
    {: pre}
 

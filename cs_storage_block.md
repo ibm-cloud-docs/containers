@@ -194,7 +194,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 3. Find the name of the block storage Helm chart that you installed in your cluster.
    ```
-   helm list| grep ibmcloud-block-storage-plugin
+   helm list | grep ibmcloud-block-storage-plugin
    ```
    {: pre}
 
@@ -232,7 +232,7 @@ To remove the plug-in:
 
 1. Find the name of the block storage Helm chart that you installed in your cluster.
    ```
-   helm list| grep ibmcloud-block-storage-plugin
+   helm list | grep ibmcloud-block-storage-plugin
    ```
    {: pre}
 

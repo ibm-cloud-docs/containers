@@ -55,7 +55,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 If you previously installed the debug tool by using Helm, first uninstall the `ibmcloud-iks-debug` Helm chart.
 1. Find the installation name of your Helm chart.
   ```
-  helm list| grep ibmcloud-iks-debug
+  helm list | grep ibmcloud-iks-debug
   ```
   {: pre}
 
