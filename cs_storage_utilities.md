@@ -707,7 +707,7 @@ Before you begin:
   ```
   {: pre}
 
-6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node. For more information about how to format your cURL request, see the [Understanding the `POST` request table](#understand_post).
+6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node.
 
     Example request:
     ```sh
@@ -715,20 +715,37 @@ Before you begin:
     ```
     {: codeblock}
 
+  <table>
+      <caption>Understanding the YAML file components</caption>
+      <thead>
+      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>IAM_token</code></td>
+      <td>The IAM OAuth token for your current session. You can retrieve this value by running <code>ibmcloud iam oauth-tokens</code>.</td>
+      </tr>
+      <tr>
+      <td><code>region</code></td>
+      <td>The region that your cluster is in. You can retrieve this value by running <code>ibmcloud ks cluster get <cluster_name></code>. Example value: <code>eu-de</code>. </td>
+      </tr>
+      <tr>
+      <td><code>cluster_ID</code></td>
+      <td>The unique ID that is assigned to your cluster. You can retrieve this ID by running <code>ibmcloud ks cluster ls</code>. </td>
+      </tr>
+      <tr>
+      <td><code>worker_ID</code></td>
+      <td>The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running <cdoe>ibmcloud ks worker ls -c <cluster_name></code>. </td>
+      </tr>
+      <tr>
+      <td><code>volume_ID</code></td>
+      <td>The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running <code>ibmcloud is volumes</code>. </td>
+      </tr>
+  </table>
+
 7. Verify the attachment by [reviewing existing volume attachments for a VPC worker node](#vpc_api_get_worker).
 
 8. [Create a PV and PVC by using your existing storage volume](/docs/containers?topic=containers-vpc-block#vpc-block-static){: new_window}.
-
-**Understanding the create attachment `POST` request**
-{: #understand_post}
-
-| Variable | Description |
-| --- | --- |
-| `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-| `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-| `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-| `worker_ID` | The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-| `volume_ID` | The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running `ibmcloud is volumes`. |
 
 
 ### Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster
