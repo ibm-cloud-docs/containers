@@ -709,24 +709,24 @@ Before you begin:
 
 6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node.
 
-      Example request:
-      ```sh
-      curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
-      ```
-      {: codeblock}
+    Example request:
+    ```sh
+    curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
+    ```
+    {: codeblock}
 
-      <br>
+    <br>
 
 
-    **Understanding the create attachment `POST` request**
+  **Understanding the create attachment `POST` request**
 
-      | Variable | Description |
-      | --- | --- |
-      | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-      | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-      | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-      | `worker_ID` | The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-      | `volume_ID` | The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running `ibmcloud is volumes`. |
+    | Variable | Description |
+    | --- | --- |
+    | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
+    | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
+    | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
+    | `worker_ID` | The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
+    | `volume_ID` | The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running `ibmcloud is volumes`. |
 
 7. Verify the attachment by [reviewing existing volume attachments for a VPC worker node](#vpc_api_get_worker).
 
