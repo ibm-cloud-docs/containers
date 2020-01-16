@@ -715,7 +715,7 @@ Before you begin:
     ```
     {: codeblock}
 
-    <br>
+  <br>
 
 
   **Understanding the create attachment `POST` request**
