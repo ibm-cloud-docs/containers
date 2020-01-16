@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -54,7 +54,7 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 - **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
 - **entitled**: Helm charts of licensed software that you must purchase and for which you must set up cluster access with an entitlement key. For more information, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
 
-Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitled**repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
+Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitled** repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
 **What are the prerequisites to use Helm and can I use Helm in a private cluster?** </br>
 To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), tag it, and [push the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing) to your namespace in [{{site.data.keyword.registryshort_notm}}](#private_local_tiller). Or you can [install Helm charts without using Tiller](#private_install_without_tiller).
@@ -380,7 +380,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 
 6. Identify the Helm chart that you want to install, download the Helm chart to your local machine, and unpack the files of your Helm chart. The following example shows how to download the Helm chart for the cluster autoscaler version 1.0.3 and unpack the files in a `cluster-autoscaler` directory.
    ```
-   helm fetch iks-charts/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
+   helm pull iks-charts/ibm-iks-cluster-autoscaler --untar --untardir ./cluster-autoscaler --version 1.0.3
    ```
    {: pre}
 
@@ -477,5 +477,6 @@ Review the following links to find additional Helm information.
 * View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm).
 * Learn more about the Helm commands that you can use to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
+
 
 

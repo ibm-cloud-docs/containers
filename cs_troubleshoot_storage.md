@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, help, debug
 
@@ -119,7 +119,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    3. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available.
       ```
-      helm ls
+      helm list
       ```
       {: pre}
 
@@ -131,7 +131,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    2. List the installed Helm charts in your cluster and compare the version that you installed with the version that is available.
       ```
-      helm ls
+      helm list
       ```
       {: pre}
 
@@ -839,7 +839,7 @@ If a network error occurs while a pod writes to a volume, IBM Cloud infrastructu
 {: tsResolve}
 1. Check the version of the {{site.data.keyword.cloud_notm}} Block Storage plug-in that is installed in your cluster.
    ```
-   helm ls
+   helm list
    ```
    {: pre}
 

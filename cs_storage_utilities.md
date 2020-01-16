@@ -52,7 +52,7 @@ The {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in creates pods 
 Looking for instructions for how to update or remove the {{site.data.keyword.cloud_notm}} Block Volume Attacher plug-in? See [Updating the plug-in](#update_block_attacher) and [Removing the plug-in](#remove_block_attacher).
 {: tip}
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, and install the Helm server (tiller) with a service account in your cluster.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and install the Helm server (Tiller) with a service account.
 
 2.  Verify that tiller is installed with a service account.
 
@@ -163,7 +163,7 @@ You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage Atta
 
 3. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
-   helm ls | grep ibm-block-storage-attacher
+   helm list| grep ibm-block-storage-attacher
    ```
    {: pre}
 
@@ -187,7 +187,7 @@ If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Blo
 
 1. Find the name of the Helm chart for the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in.
    ```
-   helm ls | grep ibm-block-storage-attacher
+   helm list| grep ibm-block-storage-attacher
    ```
    {: pre}
 
@@ -199,7 +199,7 @@ If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Blo
 
 2. Delete the {{site.data.keyword.cloud_notm}} Block Storage Attacher plug-in by removing the Helm chart.
    ```
-   helm delete <helm_chart_name> --purge
+   helm delete --purge <helm_chart_name>
    ```
    {: pre}
 

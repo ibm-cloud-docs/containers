@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -1249,7 +1249,7 @@ To see if your pod is being replaced by higher priority pods:
 {: #cs_helm_install}
 
 {: tsSymptoms}
-When you try to install an updated Helm chart by running `helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
+When you try to install an updated Helm chart by running `helm install --name=<release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
 
 {: tsCauses}
 The URL for the {{site.data.keyword.cloud_notm}} repository in your Helm instance might be incorrect.
@@ -1300,19 +1300,19 @@ To troubleshoot your Helm chart:
 3. Install the Helm chart with your updates.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>
+    helm install --name=<release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system
     ```
     {: pre}
 
 <br />
 
 
-## Cannot install Helm tiller or deploy containers from public images in my cluster
+## Cannot install Tiller for Helm version 2 or deploy containers from public images in my cluster
 {: #cs_tiller_install}
 
 {: tsSymptoms}
 
-When you try to install Helm tiller or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
+When you try to install Tiller for Helm version 2 or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:

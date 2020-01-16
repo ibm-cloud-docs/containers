@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -623,7 +623,7 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 {: #cs_strongswan_release}
 
 {: tsSymptoms}
-You modify your strongSwan Helm chart and try to install your new release by running `helm install -f config.yaml --name=vpn ibm/strongswan`. However, you see the following error:
+You modify your strongSwan Helm chart and try to install your new release by running `helm install --name=vpn iks-charts/strongswan -f config.yaml`. However, you see the following error:
 ```
 Error: release vpn failed: deployments.extensions "vpn-strongswan" already exists
 ```
@@ -654,7 +654,7 @@ This error indicates that the previous release of the strongSwan chart was not c
 
 4. Re-install the updated strongSwan Helm chart with a new release name.
     ```
-    helm install -f config.yaml --name=vpn ibm/strongswan
+    helm install --name=vpn iks-charts/strongswan -f config.yaml
     ```
     {: pre}
 
@@ -755,7 +755,7 @@ Update the Helm chart values to reflect the worker node changes:
 4. Install the new Helm chart with your updated values.
 
     ```
-    helm install -f config.yaml --name=<release_name> ibm/strongswan
+    helm install --name=<release_name> iks-charts/strongswan -f config.yaml
     ```
     {: pre}
 

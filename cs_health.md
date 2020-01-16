@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -994,15 +994,17 @@ Before you begin:
 
 To configure Autorecovery:
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repository.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and install the Helm server (Tiller) with a service account.
 
 2.  Verify that tiller is installed with a service account.
+
     ```
     kubectl get serviceaccount -n kube-system | grep tiller
     ```
     {: pre}
 
     Example output:
+
     ```
     NAME                                 SECRETS   AGE
     tiller                               1         2m
@@ -1165,7 +1167,7 @@ To configure Autorecovery:
 
 6. Deploy Autorecovery into your cluster by installing the `ibm-worker-recovery` Helm chart.
     ```
-    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery  --namespace kube-system
+    helm install --name ibm-worker-recovery iks-charts/ibm-worker-recovery --namespace kube-system
     ```
     {: pre}
 
