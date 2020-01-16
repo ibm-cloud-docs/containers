@@ -371,7 +371,7 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is
 blocked and only traffic from your whitelisted system IP is allowed:
 
-<img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public NLB to your system IP only." style="width:500px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="500" alt="The webserver app is exposed by public NLB to your system IP only." style="width:550px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the NLB IP address and port. Replace `<loadbalancer_IP>` with the NLB public IP address from your cheat sheet.
 
