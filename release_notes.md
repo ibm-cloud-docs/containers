@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-15"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,7 +44,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 16 January 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image to build 618](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 13 January 2020 | **{{site.data.keyword.blockstorageshort}}**: Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach). |
 | 06 January 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|
 | 03 January 2020 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1521](/docs/containers?topic=containers-changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-changelog#11312_1547).|
