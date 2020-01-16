@@ -134,6 +134,9 @@ Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make
    ```
    {: screen}
 
+   <br />
+
+
 ## Adding {{site.data.keyword.block_storage_is_short}} to your apps
 {: #vpc-block-add}
 
@@ -352,6 +355,9 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    ```
    {: screen}
 
+   <br />
+
+
 ## Using an existing {{site.data.keyword.block_storage_is_short}} instance
 {: #vpc-block-static}
 
@@ -506,6 +512,9 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 
 10. Create a deployment or a pod that uses your PVC.
 
+<br />
+
+
 
 ## Creating {{site.data.keyword.block_storage_is_short}} with a different file system
 {: #vpc-block-xfs}
@@ -591,6 +600,9 @@ You can create a customized storage class to provision {{site.data.keyword.block
       exit
       ```
       {: pre}
+
+      <br />
+
 
 ## Setting up encryption for {{site.data.keyword.block_storage_is_short}}
 {: #vpc-block-encryption}
@@ -742,6 +754,9 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
       Volume Attachment Instance Reference
       ```
       {: screen}
+
+      <br />
+
 
 
 ## Customizing the default storage settings
@@ -1060,6 +1075,9 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
 
 4. As the cluster user, follow the steps in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to create a PVC from your customized storage class.
 
+<br />
+
+
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
 
@@ -1089,6 +1107,9 @@ To back up or restore data, choose between the following options:
   kubectl cp <local_filepath>/<filename> <namespace>/<pod>:<pod_filepath> -c <container>
   ```
   {: pre}
+
+  <br />
+
 
 ## Storage class reference
 {: #vpc-block-reference}

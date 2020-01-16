@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-13"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks
 
@@ -41,7 +41,7 @@ subcollection: containers
 {: #choose_storage_solution}
 
 
-Before you can decide what type of storage is the right solution for your {{site.data.keyword.containerlong}} clusters, you must understand the {{site.data.keyword.cloud_notm}} infrastructure provider, your app requirements, the type of data that you want to store, and how often you want to access this data. 
+Before you can decide what type of storage is the right solution for your {{site.data.keyword.containerlong}} clusters, you must understand the {{site.data.keyword.cloud_notm}} infrastructure provider, your app requirements, the type of data that you want to store, and how often you want to access this data.
 
 1. Decide whether your data must be permanently stored, or if your data can be removed at any time.
    - **Persistent storage:** Your data must still be available, even if the container, the worker node, or the cluster is removed. Use persistent storage in the following scenarios:
@@ -94,6 +94,9 @@ Before you can decide what type of storage is the right solution for your {{site
    - **Encryption:** The masking of data to prevent visibility when data is accessed by an unauthorized user.
 
 8. [Review available persistent storage solutions](#persistent_storage_overview) and pick the solution that best fits your app and data requirements.
+
+<br />
+
 
 
 ## Comparison of non-persistent storage options
@@ -185,6 +188,9 @@ The following image shows available non-persistent data storage options in {{sit
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 
 ## Comparison of persistent storage options for single zone clusters
@@ -290,6 +296,9 @@ The following image shows the options that you have in {{site.data.keyword.conta
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 
 

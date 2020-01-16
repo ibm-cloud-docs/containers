@@ -219,6 +219,9 @@ If you do not want to provision and use the {{site.data.keyword.cloud_notm}} Blo
 
    The removal of the storage class is successful if no storage class is displayed in your CLI output.
 
+   <br />
+
+
 ## Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage
 {: #automatic_block}
 
@@ -416,6 +419,9 @@ To add different block storage configurations, add block storage to a subset of 
 
 7. [Attach the block storage devices to your worker nodes](#attach_block).
 
+<br />
+
+
 ## Classic: Manually adding block storage to specific worker nodes
 {: #manual_block}
 
@@ -511,6 +517,9 @@ The instructions in this topic are available for classic worker nodes only. If y
    The authorization is successful when the **`host_iqn`**, **`username`**, and **`password`** are assigned.
 
 8. [Attach the block storage devices to your worker nodes](#attach_block).
+
+<br />
+
 
 
 ## Classic: Attaching raw block storage to non-SDS worker nodes
@@ -667,6 +676,9 @@ The instructions in this topic are available for classic worker nodes only. If y
 
 If you want to detach a volume, delete the PV. Detached volumes are still authorized to be accessed by a specific worker node and are attached again when you create a new PV with the {{site.data.keyword.cloud_notm}} Block Volume Attacher storage class to attach a different volume to the same worker node. To avoid attaching the old detached volume again, unauthorize the worker node to access the detached volume by using the `ibmcloud sl block access-revoke` command. Detaching the volume does not remove the volume from your IBM Cloud infrastructure account. To cancel the billing for your volume, you must manually [remove the storage from your IBM Cloud infrastructure account](/docs/containers?topic=containers-cleanup).
 {: note}
+
+<br />
+
 
 ## VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
 {: #vpc_api_attach}
@@ -927,6 +939,5 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
       </tr>
   </table>
-
 
 

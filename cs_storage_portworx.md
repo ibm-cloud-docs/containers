@@ -79,7 +79,10 @@ Portworx is available for standard clusters that are set up with public network 
 
 
 
-All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, [install Portworx](#install_portworx) in your cluster and create your first hyper-converged storage cluster.  
+All set? Let's start with [creating a cluster with an SDS worker pool of at least three worker nodes](/docs/containers?topic=containers-clusters). If you want to include non-SDS worker nodes into your Portworx cluster, [add raw block storage](#create_block_storage) to each worker node. After your cluster is prepared, [install Portworx](#install_portworx) in your cluster and create your first hyper-converged storage cluster.
+
+<br />
+
 
 ## Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes
 {: #create_block_storage}
@@ -108,6 +111,9 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_api_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.  
 2. Continue with your Portworx setup by [Setting up a key-value store for Portworx metadata](#portworx_database).
 
+
+
+<br />
 
 
 ## Setting up a key-value store for Portworx metadata
@@ -224,6 +230,9 @@ Databases for etcd is a managed etcd service that securely stores and replicates
       {: pre}
 
 6. Choose if you want to [set up encryption for your volumes with {{site.data.keyword.keymanagementservicelong_notm}}](#encrypt_volumes). If you don't want to set up {{site.data.keyword.keymanagementservicelong_notm}} encryption for your volumes, continue with [installing Portworx in your cluster](#install_portworx).
+
+<br />
+
 
 ## Setting up volume encryption with {{site.data.keyword.keymanagementservicelong_notm}}
 {: #encrypt_volumes}
@@ -482,6 +491,9 @@ Follow these steps to set up encryption for your Portworx volumes with {{site.da
 Check out how to [encrypt the secrets in your cluster](/docs/containers?topic=containers-encryption#keyprotect), including the secret where you stored your {{site.data.keyword.keymanagementserviceshort}} CRK for your Portworx storage cluster.
 {: tip}
 
+<br />
+
+
 
 ## Installing Portworx in your cluster
 {: #install_portworx}
@@ -682,6 +694,9 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 To stop billing for Portworx, you must remove the Portworx Helm installation from your cluster and remove the Portworx service instance from your {{site.data.keyword.cloud_notm}} account.
 {: important}
 
+<br />
+
+
 ## Creating a Portworx volume
 {: #add_portworx_storage}
 
@@ -807,6 +822,9 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       kubectl get pvc
       ```
       {: pre}
+
+      <br />
+
 
 ## Mounting the volume to your app
 {: #mount_pvc}
@@ -949,6 +967,9 @@ To access the storage from your app, you must mount the PVC to your app.
       ```
       {: pre}
 
+      <br />
+
+
 ## Exploring other Portworx features
 {: #features}
 
@@ -964,6 +985,9 @@ To access the storage from your app, you must mount the PVC to your app.
 	<dt>Monitoring and managing your Portworx cluster with Lighthouse</dt>
 	<dd>[Lighthouse ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.portworx.com/reference/lighthouse/) is an intuitive, graphical tool to help you manage and monitor your Portworx clusters and volume snapshots. With Lighthouse, you can view the health of your Portworx cluster, including the number of available storage nodes, volumes and available capacity, and analyze your data in Prometheus, Grafana, or Kibana. </dd>
 </dl>
+
+<br />
+
 
 ## Cleaning up your Portworx volumes and cluster
 {: #portworx_cleanup}
@@ -1078,6 +1102,9 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 
 - **Remove a worker node from the Portworx cluster:** If you want to remove a worker node that runs Portworx and stores data in your Portworx cluster,  you must migrate existing pods to remaining worker nodes and then uninstall Portworx from the node. For more information, see [Decommission a Portworx node in Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/){: external}.
 - **Remove the entire Portworx cluster:** When you remove a Portworx cluster, you can decide if you want to remove all your data at the same time. For more information, see [Uninstall from Kubernetes cluster](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#delete-wipe-px-cluster-configuration){: external}.
+
+<br />
+
 
 ## Getting help and support
 {: #portworx_help}
