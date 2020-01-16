@@ -808,7 +808,7 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
       ```
       {: codeblock}
 
-
+<br>
 **Understanding the detach volume `DELETE` request**
 
   | Variable | Description |
@@ -860,6 +860,8 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       ```
       {: codeblock}
 
+
+<br>
 **Understanding the `GET` attachment details request**
 
 | Variable | Description |
