@@ -745,8 +745,6 @@ Before you begin:
 
 7. Verify the attachment by [reviewing existing volume attachments for a VPC worker node](#vpc_api_get_worker).
 
-8. [Create a PV and PVC by using your existing storage volume](/docs/containers?topic=containers-vpc-block#vpc-block-static){: new_window}.
-
 
 ### Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster
 {: #vpc_api_detach}
