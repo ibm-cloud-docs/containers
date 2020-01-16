@@ -707,7 +707,7 @@ Before you begin:
   ```
   {: pre}
 
-6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node. For more information about formatting your cURL request, see the [Understanding the `POST` request table](#understand_post).
+6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node. For more information about how to format your cURL request, see the [Understanding the `POST` request table](#understand_post).
 
     Example request:
     ```sh
