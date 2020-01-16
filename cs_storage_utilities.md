@@ -709,22 +709,22 @@ Before you begin:
 
 6. Use a `POST` request to attach your {{site.data.keyword.blockstorageshort}} volume to the worker node.
 
-    Example request:
-    ```sh
-    curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
-    ```
-    {: codeblock}
+      Example request:
+      ```sh
+      curl -X POST -H "Authorization: <IAM_token>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/createAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeID=<volume_ID>"
+      ```
+      {: codeblock}
 
 
     **Understanding the create attachment `POST` request**
 
-    | Variable | Description |
-    | --- | --- |
-    | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-    | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-    | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-    | `worker_ID` | The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-    | `volume_ID` | The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running `ibmcloud is volumes`. |
+      | Variable | Description |
+      | --- | --- |
+      | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
+      | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
+      | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
+      | `worker_ID` | The unique ID that is assigned to the worker node where you want to attach your volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
+      | `volume_ID` | The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running `ibmcloud is volumes`. |
 
 7. Verify the attachment by [reviewing existing volume attachments for a VPC worker node](#vpc_api_get_worker).
 
@@ -799,25 +799,25 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
   ```
   {: pre}
 
-11. Detach storage by using a `DELETE` request.
+9. Detach storage by using a `DELETE` request.
 
-  Example request:
+    Example request:
 
-    ```sh
-    curl -X DELETE -H "Authorization: <IAM_token>" "https://<region>containers.cloud.ibm.com/v2/storage/vpc/deleteAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
-    ```
-    {: codeblock}
+      ```sh
+      curl -X DELETE -H "Authorization: <IAM_token>" "https://<region>containers.cloud.ibm.com/v2/storage/vpc/deleteAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
+      ```
+      {: codeblock}
 
 
     **Understanding the detach volume `DELETE` request**
 
-    | Variable | Description |
-    |--- | --- |
-    | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-    | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-    | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-    | `worker_ID` | The unique ID that is assigned to the worker node where you want to detach the volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-    | `volume_attachment_ID` | The unique ID that is assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
+      | Variable | Description |
+      |--- | --- |
+      | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
+      | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
+      | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
+      | `worker_ID` | The unique ID that is assigned to the worker node where you want to detach the volume. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
+      | `volume_attachment_ID` | The unique ID that is assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
 
 ### Reviewing volume attachment details for a VPC worker node
 {: #vpc_api_get_worker}
@@ -855,22 +855,22 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
   {: codeblock}
 
 5. Retrieve the details for a specific attachment.
-    ```sh
-    curl -X GET -H "Authorization: <IAM_token>" -H "Content-Type: application/json" -H "X-Auth-Resource-Group-ID: <resource_group_ID>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/getAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
-    ```
-    {: codeblock}
+      ```sh
+      curl -X GET -H "Authorization: <IAM_token>" -H "Content-Type: application/json" -H "X-Auth-Resource-Group-ID: <resource_group_ID>" "https://<region>.containers.cloud.ibm.com/v2/storage/vpc/getAttachment?cluster=<cluster_ID>&worker=<worker_ID>&volumeAttachmentID=<volume_attachment_ID>"
+      ```
+      {: codeblock}
 
   **Understanding the `GET` attachment details request**
 
-    | Variable | Description |
-    | --- | --- |
-    | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
-    | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
-    | `X-Auth-Resource-Group-ID` | The ID of the resource group that your cluster is in. You can see the ID of a resource group by running `ibmcloud resource group <resource_group_name>` or `ibmcloud ks cluster get <cluster_name>`. |
-    | `<resource_group_name>` | The name of the resource group that your cluster is in. You can get a list of your resource groups by running `ibmcloud resource groups`. |
-    | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
-    | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
-    | `volume_attachment_ID` | The unique ID assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
+      | Variable | Description |
+      | --- | --- |
+      | `IAM_token` | The IAM OAuth token for your current session. You can retrieve this value by running `ibmcloud iam oauth-tokens`. |
+      | `region` | The region that your cluster is in. You can retrieve this value by running `ibmcloud ks cluster get <cluster_name>`. Example value: `eu-de`. |
+      | `X-Auth-Resource-Group-ID` | The ID of the resource group that your cluster is in. You can see the ID of a resource group by running `ibmcloud resource group <resource_group_name>` or `ibmcloud ks cluster get <cluster_name>`. |
+      | `<resource_group_name>` | The name of the resource group that your cluster is in. You can get a list of your resource groups by running `ibmcloud resource groups`. |
+      | `cluster_ID`. | The unique ID that is assigned to your cluster. You can retrieve this ID by running `ibmcloud ks cluster ls`. |
+      | `worker_ID` | The unique ID that is assigned to each of your worker nodes. You can retrieve this value by running `ibmcloud ks worker ls -c <cluster_name>`. |
+      | `volume_attachment_ID` | The unique ID assigned to your volume attachment. You can retrieve this ID by running `ibmcloud is volume <volume_ID>`. |
 
 
 
