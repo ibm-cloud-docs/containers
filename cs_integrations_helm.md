@@ -66,7 +66,7 @@ Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitle
 ### Do I install Helm v2 or v3?
 {: #helm-v2-v3}
 
-[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v3 provides several advantages over Helm v2. For example, the Helm server [Tiller is removed in Helm v3](https://helm.sh/docs/faq/#removal-of-tiller){: external}, and the [upgrade strategy for patch merges is improved](https://helm.sh/docs/faq/#removal-of-tiller){: external}.
+[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v3 provides several advantages over Helm v2. For example, the Helm server [Tiller is removed in Helm v3](https://helm.sh/docs/faq/#removal-of-tiller){: external}. You no longer need to set up a Tiller service account or initialize Helm with Tiller. Additionally, [chart release names are now scoped to namespaces](https://helm.sh/docs/faq/#release-names-are-now-scoped-to-the-namespace){: external} so that you can release one version of the same chart across several namespaces.
 
 [Install Helm v2](#install_v2) only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](#install_v3). If you already installed Helm v2 in your cluster, you can [migrate from Helm v2 to v3](#migrate_v3).
 
@@ -114,22 +114,22 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 4. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
    ```
-   helm search iks-charts
+   helm search repo iks-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-charts
+   helm search repo ibm-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-community
+   helm search repo ibm-community
    ```
    {: pre}
 
    ```
-   helm search entitled
+   helm search repo entitled
    ```
    {: pre}
 
@@ -146,7 +146,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1. Before you migrate, review the [list of changes between v2 and v3](https://helm.sh/docs/topics/v2_v3_migration/){: external} and the [v3 FAQs](https://helm.sh/docs/faq/){: external}.
 
-2. Follow the [Helm v2 to v3 migration steps](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/){: external}. These steps include installing and using the [`helm-2to3` plug-in](https://github.com/helm/helm-2to3){: external}.
+2. Follow the [Helm v2 to v3 migration steps](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/){: external}. These steps include installing the Helm v3 client, backing up Helm v2 data, using the [`helm-2to3` plug-in](https://github.com/helm/helm-2to3){: external} to migrate your Helm v2 configuration and releases, and cleaning up Helm v2 data and the v2 client.
 
 3. Continue with step 2 in [Installing Helm v3 in your cluster](#install_v3) to add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
 
@@ -292,22 +292,22 @@ To install Helm in a cluster with public network access:
 
 6. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
    ```
-   helm search iks-charts
+   helm search repo iks-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-charts
+   helm search repo ibm-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-community
+   helm search repo ibm-community
    ```
    {: pre}
 
    ```
-   helm search entitled
+   helm search repo entitled
    ```
    {: pre}
 
@@ -405,22 +405,22 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 11. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
     ```
-    helm search iks-charts
+    helm search repo iks-charts
     ```
     {: pre}
 
     ```
-    helm search ibm-charts
+    helm search repo ibm-charts
     ```
     {: pre}
 
     ```
-    helm search ibm-community
+    helm search repo ibm-community
     ```
     {: pre}
 
     ```
-    helm search entitled
+    helm search repo entitled
     ```
     {: pre}
 
@@ -466,22 +466,22 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 
 5. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
    ```
-   helm search iks-charts
+   helm search repo iks-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-charts
+   helm search repo ibm-charts
    ```
    {: pre}
 
    ```
-   helm search ibm-community
+   helm search repo ibm-community
    ```
    {: pre}
 
    ```
-   helm search entitled
+   helm search repo entitled
    ```
    {: pre}
 
