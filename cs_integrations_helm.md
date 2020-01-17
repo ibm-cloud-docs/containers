@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-16"
+lastupdated: "2020-01-17"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -63,16 +63,105 @@ For an overview of available Helm charts, see the [Helm charts catalog ![Externa
 
 Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitled** repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
-### What are the prerequisites to use Helm and can I use Helm in a private cluster?
-{: #helm-prereqs}
+### Do I install Helm v2 or v3?
+{: #helm-v2-v3}
 
-To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), tag it, and [push the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing) to your namespace in [{{site.data.keyword.registryshort_notm}}](#private_local_tiller). Or you can [install Helm charts without using Tiller](#private_install_without_tiller).
+[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v3 provides several advantages over Helm v2. For example, the Helm server [Tiller is removed in Helm v3](https://helm.sh/docs/faq/#removal-of-tiller){: external}, and the [upgrade strategy for patch merges is improved](https://helm.sh/docs/faq/#removal-of-tiller){: external}.
+
+[Install Helm v2](#install_v2) only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](#install_v3). If you already installed Helm v2 in your cluster, you can [migrate from Helm v2 to v3](#migrate_v3).
 
 <br />
 
 
+## Installing Helm v3 in your cluster
+{: #install_v3}
 
-## Setting up Helm in a cluster with public access
+Set up Helm v3 and the {{site.data.keyword.cloud_notm}} Helm repositories in your cluster.
+{: shortdesc}
+
+
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1. Install the latest release of the version 3 [Helm CLI](https://github.com/helm/helm/releases){: external} on your local machine.
+
+2. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
+   ```
+   helm repo add iks-charts https://icr.io/helm/iks-charts
+   ```
+   {: pre}
+
+   ```
+   helm repo add ibm-charts https://raw.githubusercontent.com/IBM/charts/master/repo/stable
+   ```
+   {: pre}
+
+   ```
+   helm repo add ibm-community https://raw.githubusercontent.com/IBM/charts/master/repo/community
+   ```
+   {: pre}
+
+   ```
+   helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled
+   ```
+   {: pre}
+
+3. Update the repos to retrieve the latest versions of all Helm charts.
+   ```
+   helm repo update
+   ```
+   {: pre}
+
+4. List the Helm charts that are currently available in the {{site.data.keyword.cloud_notm}} repositories.
+   ```
+   helm search iks-charts
+   ```
+   {: pre}
+
+   ```
+   helm search ibm-charts
+   ```
+   {: pre}
+
+   ```
+   helm search ibm-community
+   ```
+   {: pre}
+
+   ```
+   helm search entitled
+   ```
+   {: pre}
+
+5. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
+
+<br />
+
+
+## Migrating from Helm v2 to v3
+{: #migrate_v3}
+
+[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. In Helm v3, the Helm server Tiller is removed, among many other changes. Continue to use Helm with Tiller only if you have specific requirements to use Helm v2 in your cluster. Otherwise, migrate to Helm v3.
+{: shortdesc}
+
+1. Before you migrate, review the [list of changes between v2 and v3](https://helm.sh/docs/topics/v2_v3_migration/){: external} and the [v3 FAQs](https://helm.sh/docs/faq/){: external}.
+
+2. Follow the [Helm v2 to v3 migration steps](https://helm.sh/blog/migrate-from-helm-v2-to-helm-v3/){: external}. These steps include installing and using the [`helm-2to3` plug-in](https://github.com/helm/helm-2to3){: external}.
+
+3. Continue with step 2 in [Installing Helm v3 in your cluster](#install_v3) to add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
+
+As you work with Helm charts, keep in mind the Helm v3 changes, such as the fact that [chart release names are now scoped to namespaces](https://helm.sh/docs/faq/#release-names-are-now-scoped-to-the-namespace){: external} and that several [Helm CLI commands are renamed](https://helm.sh/docs/faq/#cli-command-renames){: external}.
+
+<br />
+
+
+## Deprecated: Installing Helm v2 in your cluster
+{: #install_v2}
+
+[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v2 requires you to set up the Helm server, Tiller, which is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](#install_v3).
+{: deprecated}
+
+### Deprecated: Setting up Helm v2 in a cluster with public access
 {: #public_helm_install}
 
 If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gateway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
@@ -86,7 +175,7 @@ Before you begin:
 
 To install Helm in a cluster with public network access:
 
-1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
+1. Install version 2.16.1 of the [Helm CLI](https://github.com/helm/helm/releases/tag/v2.16.1){: external} on your local machine.
 
 2. Check whether you already installed Tiller with a Kubernetes service account in your cluster.
    ```
@@ -224,8 +313,15 @@ To install Helm in a cluster with public network access:
 
 7. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
 
+### Deprecated: Installing Helm v2 in a private cluster
+{: #private_v2}
 
-## Private clusters: Pushing the Tiller image to your namespace in IBM Cloud Container Registry
+Install Helm v2 in a cluster that does not have public access.
+{: shortdesc}
+
+To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, tag it, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller). Or you can [install Helm charts without using Tiller](#private_install_without_tiller).
+
+#### Pushing the Tiller image to your namespace in IBM Cloud Container Registry
 {: #private_local_tiller}
 
 You can pull the Tiller image to your local machine, push the image to your namespace in {{site.data.keyword.registryshort_notm}} and install Tiller in your private cluster by using the image in {{site.data.keyword.registryshort_notm}}.
@@ -330,8 +426,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
 12. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
 
-
-## Private clusters: Installing Helm charts without using Tiller
+#### Installing Helm charts without using Tiller
 {: #private_install_without_tiller}
 
 If you don't want to install Tiller in your private cluster, you can manually create the Helm chart YAML files and apply them by using `kubectl` commands.
@@ -441,10 +536,10 @@ The steps in this example show how to install Helm charts from the {{site.data.k
     ```
     {: pre}
 
-## Installing Tiller with a different version than your cluster
+### Deprecated: Installing Tiller with a different version than your cluster
 {: #tiller_version}
 
-By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kubernetes version 1.11, the Tiller version is 2.11. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
+By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kubernetes version 1.13, the Tiller version is 2.13. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
 {: shortdesc}
 
 Some Helm charts might not be compatible with an older Tiller version. For example, if you have an OpenShift cluster that runs version 3.11, the default corresponding Helm and Tiller version is 2.11. However, if you install the `ibm-iks-cluster-autoscaler` Helm chart at version 1.0.8 or later, the Helm chart is not compatible with Tiller 2.11. You see an error similar to the following:
@@ -486,9 +581,10 @@ To change your version of Tiller:
 Review the following links to find additional Helm information.
 {: shortdesc}
 
-* View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/helm).
-* Learn more about the Helm commands that you can use to set up and manage Helm charts in the <a href="https://docs.helm.sh/helm/" target="_blank">Helm documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.
-* Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/).
+* View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalo](https://cloud.ibm.com/kubernetes/helm){:external}.
+* Learn more about the Helm commands that you can use to set up and manage Helm charts in the [Helm documentation](https://docs.helm.sh/helm/){:external}.
+* Review the [list of changes between Helm v2 and v3](https://helm.sh/docs/topics/v2_v3_migration/){: external} and the [v3 FAQs](https://helm.sh/docs/faq/){: external}.
+* Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/){:external}.
 
 
 
