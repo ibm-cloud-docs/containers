@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-20"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -197,13 +197,13 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 **Note**: You cannot use TOTP if you want to use VPC clusters, because {{site.data.keyword.containerlong_notm}} does not support manually setting infrastructure credentials for VPC clusters.
 
 **To disable TOTP MFA for the account:**
-1. Log in to the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/). From the menu bar, select **Manage > Access (IAM)**.
+1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external}. From the menu bar, select **Manage > Access (IAM)**.
 2. In the left navigation, click the **Settings** page.
 3. Under **Multifactor authentication**, click **Edit**.
 4. Select **None**, and click **Update**.
 
 **To use TOTP MFA and create an infrastructure API key for {{site.data.keyword.containerlong_notm}}:**
-1. From the [{{site.data.keyword.cloud_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/) console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
+1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
 2. In the **API Keys** section, find or create a classic infrastructure API key.   
 3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
     ```
@@ -424,7 +424,7 @@ You cannot access your worker node by using an SSH connection.
 SSH by password is unavailable on the worker nodes.
 
 {: tsResolve}
-Use a Kubernetes [`DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) for actions that you must run on every node, or use jobs for one-time actions that you must run.
+Use a Kubernetes [`DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for actions that you must run on every node, or use jobs for one-time actions that you must run.
 
 <br />
 
@@ -481,7 +481,7 @@ Consider the following scenario to understand how clusters might become orphaned
 
 {: tsResolve}
 1.  Check which infrastructure account the region that your cluster is in currently uses to provision clusters.
-    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
+    1.  Log in to the [{{site.data.keyword.containerlong_notm}} clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
     2.  From the table, select your cluster.
     3.  In the **Overview** tab, check for an **Infrastructure User** field. This field helps you determine if your {{site.data.keyword.containerlong_notm}} account uses a different infrastructure account than the default.
         * If you do not see the **Infrastructure User** field, you have a linked Pay-As-You-Go account that uses the same credentials for your infrastructure and platform accounts. The cluster that cannot be modified might be provisioned in a different infrastructure account.
@@ -526,7 +526,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
@@ -688,7 +688,7 @@ This service doesn't support creation of keys
 Some services in {{site.data.keyword.cloud_notm}}, such as {{site.data.keyword.keymanagementservicelong}} do not support the creation of service credentials, also referred to as service keys. Without the support of service keys, the service is not bindable to a cluster. To find a list of services that support the creation of service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
 
 {: tsResolve}
-To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/apidocs/key-protect).
+To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference](https://cloud.ibm.com/apidocs/key-protect){: external}.
 
 <br />
 
@@ -1155,7 +1155,7 @@ If this cluster is an existing one, check your cluster capacity.
 
     2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
 
-6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending) to further troubleshoot the pending state of your pod.
+6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.
 
 <br />
 
@@ -1249,7 +1249,7 @@ To see if your pod is being replaced by higher priority pods:
 {: #cs_helm_install}
 
 {: tsSymptoms}
-When you try to install an updated Helm chart by running `helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
+When you try to install an updated Helm chart by running `helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
 
 {: tsCauses}
 The URL for the {{site.data.keyword.cloud_notm}} repository in your Helm instance might be incorrect.
@@ -1300,19 +1300,19 @@ To troubleshoot your Helm chart:
 3. Install the Helm chart with your updates.
 
     ```
-    helm install -f config.yaml --namespace=kube-system --name=<release_name> iks-charts/<chart_name>
+    helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system
     ```
     {: pre}
 
 <br />
 
 
-## Cannot install Helm tiller or deploy containers from public images in my cluster
+## Cannot install Tiller for Helm version 2 or deploy containers from public images in my cluster
 {: #cs_tiller_install}
 
 {: tsSymptoms}
 
-When you try to install Helm tiller or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
+When you try to install Tiller for Helm version 2 or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
 
 ```
 Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
@@ -1325,6 +1325,9 @@ You might have set up a custom firewall, specified custom Calico policies, or cr
 {: tsResolve}
 - If you have a custom firewall or set custom Calico policies, allow outbound and inbound network traffic between your worker nodes and the container registry where the image is stored. If the image is stored in {{site.data.keyword.registryshort_notm}}, review the required ports in [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
 - If you created a private cluster by enabling the private service endpoint only, you can [enable the public service endpoint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable) for your cluster. If want to install Helm charts in a private cluster without opening up a public connection, you can install Helm [with Tiller](/docs/containers?topic=containers-helm#private_local_tiller) or [without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
+
+    [Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Tiller is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](/docs/containers?topic=containers-helm#install_v3).
+    {: note}
 
 <br />
 

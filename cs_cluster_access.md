@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, clusters
 
@@ -35,6 +35,8 @@ subcollection: containers
 
 # Accessing Kubernetes clusters
 {: #access_cluster}
+{: help}
+{: support}
 
 After your {{site.data.keyword.containerlong}} cluster is created, you can begin working with your cluster by accessing the cluster.
 {: shortdesc}
@@ -146,7 +148,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   {: screen}
 
 3. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
-  ```
+  ```yaml
   apiVersion: v1
   kind: Service
   metadata:

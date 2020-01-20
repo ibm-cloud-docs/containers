@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-17"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -33,13 +33,13 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Setting up VPC VPN connectivity
+# VPC: Setting up VPN connectivity
 {: #vpc-vpnaas}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This VPN information is specific to VPC clusters. For VPN information for classic clusters, see [Setting up VPN connectivity](/docs/containers?topic=containers-vpn).
 {: note}
 
-With VPN connectivity, you can securely connect apps and services in a VPC cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster. 
+With VPN connectivity, you can securely connect apps and services in a VPC cluster in {{site.data.keyword.containerlong}} to on-premises networks, other VPCs, and {{site.data.keyword.cloud_notm}} classic infrastructure resources. You can also connect apps that are external to your cluster to an app that runs inside your cluster.
 {: shortdesc}
 
 ## Choosing a VPN solution
@@ -55,7 +55,7 @@ To connect your cluster with your on-premises data center, you can set up the VP
 {: shortdesc}
 
 * With the {{site.data.keyword.vpc_short}} VPN, you connect an entire VPC to an on-premises data center. This option allows you to remain VPC-native in you VPN connection setup. To get started by creating a VPC gateway for your subnets, see [Using VPN with your VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). Note that if you have a multizone cluster, you must create a VPC gateway on a subnet in each zone where you have worker nodes.
-* With the [strongSwan IPSec VPN service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.strongswan.org/about.html), you set up a VPN load balancer directly in your cluster. To get started, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup).
+* With the [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){: external}, you set up a VPN load balancer directly in your cluster. To get started, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup).
 
 If you plan to connect your cluster to on-premises networks, you might have subnet conflicts with the IBM-provided default 172.30.0.0/16 range for pods and 172.21.0.0/16 range for services. You can avoid subnet conflicts when you [create a cluster in the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) by specifying a custom subnet CIDR for pods in the `--pod-subnet` flag and a custom subnet CIDR for services in the `--service-subnet` flag.
 {: tip}
@@ -166,7 +166,7 @@ Before you begin:
 
 In VPC cluster, only outbound VPN connections are permitted. The cluster initiates the VPN connection, and the on-premises VPN endpoint from the remote network listens for the connection. To allow worker nodes to access the on-premises VPN endpoint, you must enable a public gateway on the VPC subnet that the worker nodes are deployed to. The outbound VPN request is routed through the public gateway in order to reach the internet. The public IP address of the public gateway is used for the cluster VPN endpoint.
 
-1. From the [VPC **Subnets** dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the subnet that your worker nodes are attached to.
+1. From the [VPC **Subnets** dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the subnet that your worker nodes are attached to.
 2. Under **Public Gateway**, select **Attached**.
 
 ### Step 2: Get the strongSwan Helm chart
@@ -175,27 +175,12 @@ In VPC cluster, only outbound VPN connections are permitted. The cluster initiat
 Install Helm and get the strongSwan Helm chart to view possible configurations.
 {: shortdesc}
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (tiller) with a service account, and add the {{site.data.keyword.cloud_notm}} Helm repository. Note that Helm version 2.8 or later is required.
-
-2.  Verify that tiller is installed with a service account.
-
-    ```
-    kubectl get serviceaccount -n kube-system | grep tiller
-    ```
-    {: pre}
-
-    Example output:
-
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the version 3 Helm client on your local machine.
 
 3. Save the default configuration settings for the strongSwan Helm chart in a local YAML file.
 
     ```
-    helm inspect values iks-charts/strongswan > config.yaml
+    helm show values iks-charts/strongswan > config.yaml
     ```
     {: pre}
 
@@ -272,7 +257,7 @@ To monitor the status of the strongSwan VPN, you can set up a webhook to automat
 
 1. Sign in to your Slack workspace.
 
-2. Go to the [Incoming WebHooks app page ![External link icon](../icons/launch-glyph.svg "External link icon")](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks).
+2. Go to the [Incoming WebHooks app page](https://slack.com/apps/A0F7XDUAZ-incoming-webhooks){: external}.
 
 3. Click **Request to Install**. If this app is not listed in your Slack setup, contact your Slack workspace owner.
 
@@ -316,7 +301,7 @@ Deploy the strongSwan Helm chart in your cluster with the configurations that yo
     {: tip}
 
     ```
-    helm install -f config.yaml --name=vpn iks-charts/strongswan
+    helm install vpn iks-charts/strongswan -f config.yaml
     ```
     {: pre}
 
@@ -333,6 +318,9 @@ Deploy the strongSwan Helm chart in your cluster with the configurations that yo
     helm get values vpn
     ```
     {: pre}
+
+    <br />
+
 
 ## Testing and verifying strongSwan VPN connectivity
 {: #vpc-vpn_test}
@@ -367,16 +355,16 @@ After you deploy your Helm chart, test the VPN connectivity.
     {: screen}
 
     * When you try to establish VPN connectivity with the strongSwan Helm chart, it is likely that the VPN status is not `ESTABLISHED` the first time. You might need to check the on-premises VPN endpoint settings and change the configuration file several times before the connection is successful:
-        1. Run `helm delete --purge <release_name>`
+        1. Run `helm uninstall <helm_chart_name> -n <namespace>`
         2. Fix the incorrect values in the configuration file.
-        3. Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`
+        3. Run `helm install vpn iks-charts/strongswan -f config.yaml`
       You can also run more checks in the next step.
 
     * If the VPN pod is in an `ERROR` state or continues to crash and restart, it might be due to parameter validation of the `ipsec.conf` settings in the chart's configmap.
         1. Check for any validation errors in the strongSwan pod logs by running `kubectl logs $STRONGSWAN_POD`.
-        2. If validation errors exist, run `helm delete --purge <release_name>`
+        2. If validation errors exist, run `helm uninstall <release_name> -n <namespace>`
         3. Fix the incorrect values in the configuration file.
-        4. Run `helm install -f config.yaml --name=<release_name> ibm/strongswan`
+        4. Run `helm install vpn iks-charts/strongswan -f config.yaml`
 
 4. You can further test the VPN connectivity by running the five Helm tests that are included in the strongSwan chart definition.
 
@@ -430,7 +418,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 6. Delete the current Helm chart.
 
     ```
-    helm delete --purge vpn
+    helm uninstall vpn -n <namespace>
     ```
     {: pre}
 
@@ -441,7 +429,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 9. Install the Helm chart to your cluster with the updated `config.yaml` file. The updated properties are stored in a configmap for your chart.
 
     ```
-    helm install -f config.yaml --name=<release_name> ibm/strongswan
+    helm install vpn iks-charts/strongswan -f config.yaml
     ```
     {: pre}
 
@@ -506,7 +494,7 @@ Before you begin:
 
 To limit VPN traffic to a certain namespace:
 
-1. Create a Calico global network policy named `allow-non-vpn-outbound.yaml`. This policy allows all namespaces to continue to send outbound traffic to all destinations, except to the remote subnet that the strongSwan VPN accesses. Replace `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple remote subnets, see the [Calico documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+1. Create a Calico global network policy named `allow-non-vpn-outbound.yaml`. This policy allows all namespaces to continue to send outbound traffic to all destinations, except to the remote subnet that the strongSwan VPN accesses. Replace `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple remote subnets, see the [Calico documentation](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy){: external}.
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -532,7 +520,7 @@ To limit VPN traffic to a certain namespace:
     ```
     {: pre}
 
-3. Create another Calico global network policy named `allow-vpn-from-namespace.yaml`. This policy allows only a specified namespace to send outbound traffic to the remote subnet that the strongSwan VPN accesses. Replace `<namespace>` with the namespace that can access the VPN and `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple namespaces or remote subnets, see the [Calico documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy).
+3. Create another Calico global network policy named `allow-vpn-from-namespace.yaml`. This policy allows only a specified namespace to send outbound traffic to the remote subnet that the strongSwan VPN accesses. Replace `<namespace>` with the namespace that can access the VPN and `<remote.subnet>` with the `remote.subnet` that you specified in the Helm `values.yaml` configuration file. To specify multiple namespaces or remote subnets, see the [Calico documentation](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/globalnetworkpolicy){: external}.
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
@@ -575,7 +563,7 @@ When you deploy a strongSwan Helm chart, a strongSwan VPN deployment is created.
 Routes are not configured on tainted nodes unless you specify the taint in the `tolerations` setting in the `value.yaml` file. By tainting worker nodes, you can prevent any VPN routes from being configured on those workers. Then, you can specify the taint in the `tolerations` setting for only the VPN deployment that you do want to permit on the tainted workers. In this way, the strongSwan VPN pods for one tenant's Helm chart deployment only use the routes on that tenant's worker nodes to forward traffic over the VPN connection to the remote subnet.
 
 Before you use this solution, review the following considerations and limitations.
-* By default, Kubernetes places app pods onto any untainted worker nodes that are available. To make sure that this solution works correctly, each tenant must first ensure that they deploy their app pods only to workers that are tainted for the correct tenant. Additionally, each tainted worker node must also have a toleration to allow the app pods to be placed on the node. For more information about taints and tolerations, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/).
+* By default, Kubernetes places app pods onto any untainted worker nodes that are available. To make sure that this solution works correctly, each tenant must first ensure that they deploy their app pods only to workers that are tainted for the correct tenant. Additionally, each tainted worker node must also have a toleration to allow the app pods to be placed on the node. For more information about taints and tolerations, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/){: external}.
 * Cluster resources might not be optimally utilized because neither tenant can place app pods on the shared non-tainted nodes.
 
 The following steps for limiting strongSwan VPN traffic by worker node use this example scenario: Say that you have a multi-tenant {{site.data.keyword.containerlong_notm}} cluster with six worker nodes. The cluster supports tenant A and tenant B. You taint the worker nodes in the following ways:
@@ -586,7 +574,7 @@ The following steps for limiting strongSwan VPN traffic by worker node use this 
 To limit VPN traffic to tainted nodes for each tenant:
 
 1. To limit the VPN traffic to only workers dedicated to tenant A in this example, you specify the following `toleration` in the `values.yaml` file for the tenant A strongSwan Helm chart:
-    ```
+    ```yaml
     tolerations:
      - key: dedicated
        operator: "Equal"
@@ -597,7 +585,7 @@ To limit VPN traffic to tainted nodes for each tenant:
     This toleration allows the route daemon set to run on the two worker nodes that have the `dedicated="tenantA"` taint and on the two untainted worker nodes. The strongSwan VPN pods for this deployment run on the two untainted worker nodes.
 
 2. To limit the VPN traffic to only workers dedicated to tenant B in this example, you specify the following `toleration` in the `values.yaml` file for the tenant B strongSwan Helm chart:
-    ```
+    ```yaml
     tolerations:
      - key: dedicated
        operator: "Equal"
@@ -627,7 +615,7 @@ You can disable the VPN connection by deleting the Helm chart.
 {:shortdesc}
 
   ```
-  helm delete --purge <release_name>
+  helm uninstall <release_name> -n <namespace>
   ```
   {: pre}
 

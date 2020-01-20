@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Controlling traffic with VPC ACLs and network policies
+# VPC: Controlling traffic with VPC ACLs and network policies
 {: #vpc-network-policy}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This ACL information is specific to VPC clusters. For network policy information for classic clusters, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
@@ -246,7 +246,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
 Kubernetes policies protect pods from internal network traffic. You can create simple Kubernetes network policies to isolate app microservices from each other within a namespace or across namespaces.
 {: shortdesc}
 
-For more information about how Kubernetes network policies control pod-to-pod traffic and for more example policies, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/).
+For more information about how Kubernetes network policies control pod-to-pod traffic and for more example policies, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/){: external}.
 {: tip}
 
 ### Isolate app services within a namespace
@@ -262,7 +262,7 @@ The Accounts team wants to allow traffic from the front end to the back end, and
 
 First, they create a Kubernetes network policy that allows traffic from the front end to the back end:
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -285,7 +285,7 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 back-en
 
 Then, they create a similar Kubernetes network policy that allows traffic from the back end to the database:
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:
@@ -319,7 +319,7 @@ Services that are owned by different subteams need to communicate, but the servi
 
 The Finance team's Srv2 needs to call information from the Accounts team's Srv1 back end. So the Accounts team creates a Kubernetes network policy that uses labels to allow all traffic from the finance namespace to the Srv1 back end in the accounts namespace. The team also specifies the port 3111 to isolate access through that port only.
 
-```
+```yaml
 kind: NetworkPolicy
 apiVersion: networking.k8s.io/v1
 metadata:

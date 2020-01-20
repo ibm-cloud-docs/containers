@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -224,7 +224,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 8.  The cluster master runs two versions behind the oldest supported version. You can still update the cluster to the oldest supported version. If the worker nodes run four or more versions behind the oldest supported version, you must delete the worker nodes to update the cluster.
 9. The cluster master runs three or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.
 
-If you wait until your cluster is three or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than three ahead of the current version, such as 1.13 to 1.14 and then update to the latest version, 1.16. If the worker nodes run a version three or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters).
+If you wait until your cluster is three or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than three ahead of the current version, such as 1.13 to 1.14 and then update to the latest version, 1.16. If the worker nodes run a version three or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 <br />
@@ -232,7 +232,7 @@ If you wait until your cluster is three or more minor versions behind the oldest
 
 ## Preparing to update
 {: #prep-up}
-This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) and [IBM version](/docs/containers?topic=containers-changelog) changelogs.
+This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) and [IBM version](/docs/containers?topic=containers-changelog){: external} changelogs.
 {: shortdesc}
 
 -  Version 1.16 [preparation actions](#cs_v116).
@@ -422,7 +422,7 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.14.
 {: shortdesc}
 
-Kubernetes 1.14 introduces new capabilities for you to explore. Try out the new [`kustomize` project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes-sigs/kustomize) that you can use to hep write, customize, and reuse your Kubernetes resource YAML configurations. Or take a look at the new [`kubectl` CLI docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubectl.docs.kubernetes.io/).
+Kubernetes 1.14 introduces new capabilities for you to explore. Try out the new [`kustomize` project](https://github.com/kubernetes-sigs/kustomize){: external} that you can use to hep write, customize, and reuse your Kubernetes resource YAML configurations. Or take a look at the new [`kubectl` CLI docs](https://kubectl.docs.kubernetes.io/){: external}.
 {: tip}
 
 ### Update before master

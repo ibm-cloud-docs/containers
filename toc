@@ -24,9 +24,6 @@ IBM Cloud Kubernetes Service
         cs_uc_gov.md
 
     {: .topicgroup}
-    Learning paths
-
-    {: .topicgroup}
     Cluster strategy
         cs_responsibilities.md
         cs_secure.md
@@ -102,6 +99,7 @@ IBM Cloud Kubernetes Service
 
     {: .topicgroup}
     Setting up a service mesh with Istio
+        cs_istio_qs.md
         cs_istio_about.md
         cs_istio.md
         cs_istio_mesh.md
@@ -119,7 +117,7 @@ IBM Cloud Kubernetes Service
         cs_loadbalancer_dns.md
 
     {: .topicgroup}
-    HTTPS load balancing with Ingress ALBs
+    Exposing apps with Ingress ALBs
         cs_ingress_qs.md
         cs_ingress_about.md
         cs_ingress.md

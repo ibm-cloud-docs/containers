@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, helm
 
@@ -33,10 +33,10 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# IBM Cloud Kubernetes Service partners
+# {{site.data.keyword.containerlong_notm}} partners
 {: #service-partners}
 
-IBM is dedicated to make {{site.data.keyword.containerlong_notm}} the best Kubernetes service that helps you migrate, operate, and administer your Kubernetes workloads. To provide you with all the capabilities that you need to run production workloads in the cloud, {{site.data.keyword.containerlong_notm}} partners with other third-party service providers to enhance your cluster with top-notch logging, monitoring, and storage tools.
+IBM is dedicated to make {{site.data.keyword.containerlong}} the best Kubernetes service that helps you migrate, operate, and administer your containerized workloads. To provide you with all the capabilities that you need to run production workloads in the cloud, {{site.data.keyword.containerlong_notm}} partners with other third-party service providers to enhance your cluster with top-notch logging, monitoring, and storage tools.
 {: shortdesc}
 
 Review our partners and the benefits of each solution that they provide. To find other proprietary {{site.data.keyword.cloud_notm}} and third-party open source services that you can use in your cluster, see [Understanding {{site.data.keyword.cloud_notm}} and 3rd party integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations).
@@ -165,3 +165,5 @@ Classic SDS worker node machines that come with local disks, and classic virtual
 {: shortdesc}
 
 If you run into an issue with using Portworx or you want to chat about Portworx configurations for your specific use case, post a question in the `portworx-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibm-container-service.slack.com/). Log in to Slack by using your IBMid. If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation to this Slack ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/slack).
+
+

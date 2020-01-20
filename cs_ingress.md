@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -227,7 +227,7 @@ If you do not have a TLS certificate ready, follow these steps:
       {: pre}
 
 3. Create a secret YAML file using the cert and key.
-     ```
+     ```yaml
      apiVersion: v1
      kind: Secret
      metadata:
@@ -239,7 +239,7 @@ If you do not have a TLS certificate ready, follow these steps:
      ```
      {: codeblock}
 
-4. Create the certificate as a Kubernetes secret.
+4. Create a Kubernetes secret for your certificate.
      ```
      kubectl apply -f ssl-my-test
      ```
@@ -262,7 +262,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 2. Define an Ingress resource in your configuration file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
 
     Example YAML that does not use TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
@@ -284,7 +284,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     {: codeblock}
 
     Example YAML that uses TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
@@ -428,7 +428,7 @@ Before you begin:
 
 To expose apps that are outside of your cluster to the public:
 1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service that forwards incoming requests to an external endpoint that you create in subsequent steps.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -448,7 +448,7 @@ To expose apps that are outside of your cluster to the public:
 
 3.  Define an external endpoint configuration file. Include all public IP addresses and ports that you can use to access your external app. Note that the name of the endpoint must be the same as the name of the service that you defined in the previous step, `myexternalservice`.
 
-    ```
+    ```yaml
     kind: Endpoints
     apiVersion: v1
     metadata:
@@ -504,7 +504,7 @@ To expose apps that are outside of your cluster to the public:
 1. [Choose the app domain](#public_inside_2) that you want the external service to be accessible from.
 
 2. Create an Ingress resource file that is named, for example, `myingressresource.yaml`.
-  ```
+  ```yaml
   apiVersion: extensions/v1beta1
   kind: Ingress
   metadata:
@@ -573,7 +573,7 @@ To use a private ALB, you must first enable the private ALB. Because private VLA
 
 Before you begin:
 * Review the Ingress [prerequisites](#config_prereqs).
-* If you have a classic cluster with worker nodes that are connected to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) you must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+* If you have a classic cluster with worker nodes that are connected to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) you must configure a [DNS service that is available on the private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 
 ### Step 1: Deploy apps and create app services
 {: #private_1}
@@ -627,7 +627,7 @@ When you configure the private ALBs, you must expose your apps by using a custom
 
 **Private VLAN-only classic clusters:**
 
-1. Configure your own [DNS service that is available on your private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+1. Configure your own [DNS service that is available on your private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 2. Create a custom domain through your DNS provider. If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`.
 3. Using your private DNS service, map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks alb get --alb-id <private_alb_ID>` for each ALB. </br>
 
@@ -672,7 +672,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier.
 
     Example YAML that does not use TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
@@ -696,7 +696,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     {: codeblock}
 
     Example YAML that uses TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
@@ -786,8 +786,8 @@ Your Ingress resource is created in the same namespace as your app services. You
 {: #private_6}
 
 1. Before you can access your app, make sure that you can access a DNS service.
-  * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](/docs/containers?topic=containers-edge#edge) and [configure a Virtual Router Appliance ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/blogs/cloud-archive/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/).
-  * Private VLAN only: You must configure a [DNS service that is available on the private network ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/).
+  * Public and private VLAN: To use the default external DNS provider, you must [configure edge nodes with public access](/docs/containers?topic=containers-edge#edge) and [configure a Virtual Router Appliance](https://www.ibm.com/blogs/cloud-archive/2017/07/kubernetes-and-bluemix-container-based-workloads-part4/){: external}.
+  * Private VLAN only: You must configure a [DNS service that is available on the private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 
 2. From within your private network firewall, enter the URL of the app service in a web browser.
 
@@ -816,7 +816,7 @@ http://<subdomain2>.<domain>/<app1_path>
 {: codeblock}
 
 
-For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2).
+For a comprehensive tutorial on how to secure microservice-to-microservice communication across your clusters by using the private ALB with TLS, check out [this blog post](https://medium.com/ibm-cloud/secure-microservice-to-microservice-communication-across-kubernetes-clusters-using-a-private-ecbe2a8d4fe2){: external}.
 {: tip}
 
 <br />
@@ -934,7 +934,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier.
 
     Example YAML that does not use TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:
@@ -958,7 +958,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     {: codeblock}
 
     Example YAML that uses TLS:
-    ```
+    ```yaml
     apiVersion: extensions/v1beta1
     kind: Ingress
     metadata:

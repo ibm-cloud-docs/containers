@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks
 
@@ -78,11 +78,11 @@ Create your Kubernetes cluster in the {{site.data.keyword.cloud_notm}} console, 
 
 Because it can take a few minutes to provision, create your cluster before you set up the rest of your cluster environment.
 
-1.  [In the {{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/catalog/cluster/create), create a free or standard cluster with one worker pool that has one worker node in it.
+1.  [In the {{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/kubernetes/catalog/cluster/create){: external}, create a free or standard cluster with one worker pool that has one worker node in it.
 
     You can also create a [cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps).
     {: tip}
-2.  While your cluster provisions, install the [{{site.data.keyword.cloud_notm}} CLI ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/cli?topic=cloud-cli-getting-started). This installation includes:
+2.  While your cluster provisions, install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external}. This installation includes:
     -   The base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in plug-in (`ibmcloud ks`). Use this plug-in to manage your Kubernetes clusters, such as to resize worker pools for added compute capacity or to bind {{site.data.keyword.cloud_notm}} services to the cluster.
     -   {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}.
@@ -181,7 +181,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
 
 1.  Add the {{site.data.keyword.toneanalyzershort}} service to your {{site.data.keyword.cloud_notm}} account in the same region as your cluster. Replace `<service_name>` with a name for your service instance and `<region>` with a region, such as the one that your cluster is in.
 
-    When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/catalog/services/tone-analyzer).
+    When you add the {{site.data.keyword.toneanalyzershort}} service to your account, a message is displayed that the service is not free. If you limit your API call, this tutorial does not incur charges from the {{site.data.keyword.watson}} service. [Review the pricing information for the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service](https://cloud.ibm.com/catalog/services/tone-analyzer){: external}.
     {: note}
 
     ```
@@ -223,7 +223,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
 </br>
 Great work! Your cluster is configured and your local environment is ready for you to start deploying apps into the cluster.
 
-Before you continue with the next lesson, why not test your knowledge and [take a short quiz ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php)?
+Before you continue with the next lesson, why not test your knowledge and [take a short quiz](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php){: external}?
 {: note}
 
 <br />
@@ -241,7 +241,7 @@ The components that you deploy by completing this lesson are shown in the follow
 
 To deploy the app:
 
-1.  Clone the source code for the [Hello world app ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt) to your user home directory. The repository contains different versions of a similar app in folders that each start with `Lab`. Each version contains the following files:
+1.  Clone the source code for the [Hello world app](https://github.com/IBM/container-service-getting-started-wt){: external} to your user home directory. The repository contains different versions of a similar app in folders that each start with `Lab`. Each version contains the following files:
     *   `Dockerfile`: The build definitions for the image.
     *   `app.js`: The Hello world app.
     *   `package.json`: Metadata about the app.
@@ -783,7 +783,7 @@ Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyze
   ```
   {: pre}
 
-Quiz time! You covered a lot of material, so [make sure that you understand it all ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php). Don't worry, the quiz is not cumulative!
+Quiz time! You covered a lot of material, so [make sure that you understand it all](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php){: external}. Don't worry, the quiz is not cumulative!
 {: note}
 
 <br />
@@ -795,6 +795,6 @@ Quiz time! You covered a lot of material, so [make sure that you understand it a
 Now that you conquered the basics, you can move to more advanced activities. Consider trying out one of the following resources to do more with {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-*   Complete a [more complicated lab ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/container-service-getting-started-wt#lab-overview) in the repository.
+*   Complete a [more complicated lab](https://github.com/IBM/container-service-getting-started-wt#lab-overview){: external} in the repository.
 *   Learn about creating [highly available apps](/docs/containers?topic=containers-ha) by using features such as multizone clusters, persistent storage, cluster autoscaler, and horizontal pod autoscaling for apps.
-*   Explore the container orchestration code patterns on [IBM Developer ![External link icon](../icons/launch-glyph.svg "External link icon")](https://developer.ibm.com/technologies/containers/).
+*   Explore the container orchestration code patterns on [IBM Developer](https://developer.ibm.com/technologies/containers/){: external}.

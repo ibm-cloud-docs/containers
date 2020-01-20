@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, containers
 
@@ -36,7 +36,7 @@ subcollection: containers
 # Benefits and service offerings
 {: #cs_ov}
 
-{{site.data.keyword.containerlong}} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For more information about certification, see [Compliance on the {{site.data.keyword.cloud_notm}} ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/compliance).
+{{site.data.keyword.containerlong}} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For more information about certification, see [Compliance on the {{site.data.keyword.cloud_notm}}](https://www.ibm.com/cloud/compliance){: external}.
 {:shortdesc}
 
 Check out the following <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a> to learn more about how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps.
@@ -140,7 +140,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 ## Comparison between OpenShift and community Kubernetes clusters
 {: #openshift_kubernetes}
 
-Both OpenShift and community Kubernetes clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case. 
+Both OpenShift and community Kubernetes clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
 {: shortdesc}
 
 |Characteristics|Community Kubernetes clusters|OpenShift clusters|

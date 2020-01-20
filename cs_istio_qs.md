@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -261,7 +261,7 @@ To visualize the BookInfo microservices in the Istio service mesh, launch the Ki
 
 7. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
 
-For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
 
 ## Step 4: Simulate a phased rollout of BookInfo
 {: #istio-qs-4}
@@ -272,7 +272,7 @@ To simulate a release of an app, you can perform a phased rollout `v3` of the `r
 After you finish testing your app and are ready to start directing live traffic to it, you can perform rollouts gradually through Istio. For example, you can first release `v3` to 10% of the users, then to 20% of users, and so on.
 
 1. Configure a virtual service to distribute 0% of traffic to `v1`, 90% of traffic to `v2`, and 10% of traffic to `v3` of `reviews`.
-  ```
+  ```yaml
   kubectl apply -f - <<EOF
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService

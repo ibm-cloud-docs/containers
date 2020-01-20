@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -33,6 +33,8 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
+
+
 # Building containers from images
 {: #images}
 
@@ -55,7 +57,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 |Registry|Description|Benefit|
 |--------|-----------|-------|
 |[{{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registryshort_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
-|Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/containers/images/). The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
+|Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret](https://kubernetes.io/docs/concepts/containers/images/){: external}. The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
 |[Public Docker Hub![External link icon](../icons/launch-glyph.svg "External link icon")](https://hub.docker.com/){: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/) when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
 {: caption="Public and private image registry options" caption-side="top"}
 
@@ -64,6 +66,8 @@ After you set up an image registry, cluster users can use the images to deploy a
 Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
 <br />
+
+
 
 
 ## Setting up trusted content for container images
@@ -100,7 +104,7 @@ To deploy a container into the **default** namespace of your cluster:
 1.  Create a deployment configuration file that is named `mydeployment.yaml`.
 2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registryshort_notm}}.
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -220,12 +224,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [an im
     {: pre}
     Example output:
     ```
-    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 4.  Update your container deployments to pull images from the `icr.io` domain name.
@@ -301,12 +305,12 @@ You can copy an image pull secret, such as the one that is automatically created
     {: pre}
     Example output:
     ```
-    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
-    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
+    default-us-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-uk-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-de-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-au-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-jp-icr-io                          kubernetes.io/dockerconfigjson        1         16d
+    default-icr-io                             kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
 3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.
@@ -566,7 +570,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
 2.  Define the pod and the image pull secret to access images in {{site.data.keyword.registrylong_notm}}.
 
     To access a private image:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -581,7 +585,7 @@ When you refer to the image pull secret in a pod deployment, the image pull secr
     {: codeblock}
 
     To access an {{site.data.keyword.cloud_notm}} public image:
-    ```
+    ```yaml
     apiVersion: v1
     kind: Pod
     metadata:
@@ -673,7 +677,7 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
    {: pre}
 
 4. Deploy a container from an image in your registry.
-   ```
+   ```yaml
    apiVersion: v1
    kind: Pod
    metadata:
@@ -706,7 +710,7 @@ Do you have older entitled software from Passport Advantage? Use the [PPA import
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Get the entitlement key for your entitled software library.
-    1.  Log in to [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) and scroll to the **Container software library** section. Click **View library**.
+    1.  Log in to [MyIBM.com](https://myibm.ibm.com){: external} and scroll to the **Container software library** section. Click **View library**.
     2.  From the **Access your container software > Entitlement keys** page, click **Copy key**. This key authorizes access to all the entitled software in your container software library.
 2.  In the namespace that you want to deploy your entitled containers, create an image pull secret so that you can access the `cp.icr.io` entitled registry. For more information, see [Accessing images that are stored in other private registries](#private_images).
     ```
@@ -733,6 +737,8 @@ Wondering what to do next? You can [set up the **entitled** Helm chart repositor
 {: tip}
 
 <br />
+
+
 
 
 
@@ -776,7 +782,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
 
     To use a private image from a namespace in {{site.data.keyword.registryshort_notm}}:
 
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: Deployment
     metadata:
@@ -935,3 +941,5 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     {: pre}
 
 6.  [Deploy a container by using the image pull secret](#use_imagePullSecret) in your namespace.
+
+

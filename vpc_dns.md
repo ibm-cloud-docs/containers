@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Configuring CoreDNS for VPC clusters
+# VPC: Configuring CoreDNS
 {: #vpc_dns}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This DNS provider information is specific to VPC clusters. For DNS provider information for classic clusters, see [Configuring the DNS provider for classic clusters](/docs/containers?topic=containers-cluster_dns).

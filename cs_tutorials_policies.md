@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ subcollection: containers
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 {: shortdesc}
 
-However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat) to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
+However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://docs.projectcalico.org/v3.1/getting-started/bare-metal/policy/pre-dnat){: external} to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
 In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic that hits your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
 
@@ -110,7 +110,7 @@ The following image shows how the web server app is exposed to the internet by t
     {: screen}
 
 3. To expose the app to the public internet, create an NLB 1.0 service configuration file called `webserver-lb.yaml` in a text editor.
-    ```
+    ```yaml
     apiVersion: v1
     kind: Service
     metadata:
@@ -197,7 +197,7 @@ The following image shows how the web server app is exposed to the internet by t
         ```
         {: screen}  
 
-    2. Get the **Public IP** address of a worker node.
+    2. For classic clusters, get the **Public IP** address of a worker node. For VPC clusters, get the **Private IP** address instead.
         ```
         ibmcloud ks worker ls --cluster <cluster_name>
         ```
@@ -214,7 +214,7 @@ The following image shows how the web server app is exposed to the internet by t
 
     3. Copy the public IP of the worker node and the node port into your text cheat sheet to use in later lessons.
 
-    4. Verify that you can access the public IP address the worker node through the node port.
+    4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection or by using the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web). Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
         ```
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```
@@ -259,7 +259,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
 <img src="images/cs_tutorial_policies_Lesson2.png" width="425" alt="At the end of Lesson 2, the webserver app is exposed to the internet by public NLB only." style="width:425px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-nodeports.yaml` to deny incoming TCP and UDP traffic from any source IP to all node ports.
-    ```
+    ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -371,11 +371,11 @@ You now decide to completely lock down traffic to the PR firm's cluster and test
 First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is
 blocked and only traffic from your whitelisted system IP is allowed:
 
-<img src="images/cs_tutorial_policies_L3.png" width="550" alt="The webserver app is exposed by public NLB to your system IP only." style="width:500px; border-style: none"/>
+<img src="images/cs_tutorial_policies_L3.png" width="500" alt="The webserver app is exposed by public NLB to your system IP only." style="width:550px; border-style: none"/>
 
 1. In a text editor, create a high-order Pre-DNAT policy called `deny-lb-port-80.yaml` to deny all incoming TCP and UDP traffic from any source IP to the NLB IP address and port. Replace `<loadbalancer_IP>` with the NLB public IP address from your cheat sheet.
 
-    ```
+    ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -429,7 +429,7 @@ blocked and only traffic from your whitelisted system IP is allowed:
     {: pre}
 
 4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the NLB IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP. If you can't remember your system IP, you can run `curl ifconfig.co`.
-    ```
+    ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
@@ -520,7 +520,7 @@ In this lesson, test blacklisting by blocking traffic from your own system's sou
     Now, all incoming TCP and UDP traffic from any source IP to the NLB IP address and port is permitted again.
 
 2. To deny all incoming TCP and UDP traffic from your system's source IP address to the NLB IP address and port, create a low-order pre-DNAT policy called `blacklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP.
-  ```
+  ```yaml
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
   metadata:
@@ -590,7 +590,7 @@ In the previous lesson, you blacklisted traffic from your system IP to the NLB. 
 In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on the NLB IP.
 
 1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower-order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
-  ```
+  ```yaml
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
   metadata:
@@ -677,4 +677,4 @@ If you want to clean up the blacklist and the log policies:
 {: #whats_next}
 
 * Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
-* For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/) and the [advanced network policy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy).
+* For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/stars-policy/){: external} and the [advanced network policy](https://docs.projectcalico.org/v3.1/getting-started/kubernetes/tutorials/advanced-policy){: external}.

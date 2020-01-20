@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, containers
 
@@ -31,6 +31,8 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
+
 
 
 # Defining your Kubernetes strategy
@@ -503,3 +505,5 @@ As you set up your logging and monitoring, think about the following considerati
 <dt>Prepare for audits</dt>
   <dd>In addition to app logs and cluster metrics, you want to set up activity tracking so that you have an auditable record of who performed what cluster and Kubernetes actions. For more information, see [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events#at_events).</dd>
 </dl>
+
+

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-20"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -43,7 +43,7 @@ subcollection: containers
 Kubernetes is an open source platform for managing containerized workloads and services across multiple hosts, and offers managements tools for deploying, automating, monitoring, and scaling containerized apps with minimal to no manual intervention. All containers that make up your microservice are grouped into pods, a logical unit to ensure easy management and discovery. These pods run on compute hosts that are managed in a Kubernetes cluster that is portable, extensible, and self-healing in case of failures.
 {: shortdesc}
 
-For more information about Kubernetes, see the [Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational).
+For more information about Kubernetes, see the [Kubernetes documentation](https://kubernetes.io/docs/home/?path=users&persona=app-developer&level=foundational){: external}.
 
 ## How does IBM Cloud Kubernetes Service work?
 {: #kubernetes_service}
@@ -193,7 +193,7 @@ For more information about supported regions, see [Locations](/docs/containers?t
 {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
-- Service Organization Control standards (SOC 1, SOC 2 Type 1)
+- Service Organization Control standards (SOC 1 Type 2, SOC 2 Type 2)
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
 - International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
 - Payment Card Industry Data Security Standard (PCI DSS)
@@ -224,13 +224,13 @@ For an overview of supported {{site.data.keyword.containerlong_notm}} offerings,
 
 If you do not want to move your apps into {{site.data.keyword.cloud_notm}} Public but you still want to leverage the features of {{site.data.keyword.containerlong_notm}}, you can install {{site.data.keyword.cloud_notm}} Private. {{site.data.keyword.cloud_notm}} Private is an application platform that can be installed locally on your own machines and that you can use for developing and managing on-prem, containerized apps in your own controlled environment behind a firewall.
 
-For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html).
+For more information, see the [{{site.data.keyword.cloud_notm}} Private product documentation](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_1.2.0/kc_welcome_containers.html){: external}.
 
 ## Where can I find more information about IBM Cloud Kubernetes Service pricing models?
 {: #pricing}
 {: faq}
 
-To find detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/container-service/pricing). You can also review what components you are [charged for when you use {{site.data.keyword.containerlong_notm}}](#charges) or [estimate your costs](#cost_estimate).
+To find detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/container-service/pricing){: external}. You can also review what components you are [charged for when you use {{site.data.keyword.containerlong_notm}}](#charges) or [estimate your costs](#cost_estimate).
 
 ## What am I charged for when I use IBM Cloud Kubernetes Service?
 {: #charges}

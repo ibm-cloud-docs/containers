@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, knative
 
@@ -52,7 +52,7 @@ Knative comes with two key components, or _primitives_, that help you to deploy 
 - **Serving:** The `Serving` primitive helps to deploy serverless apps as Knative services and to automatically scale them, even down to zero instances. To expose your serverless and containerized workloads, Knative uses Istio. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. By using the traffic management and intelligent routing capabilities of Istio, you can control what traffic is routed to a specific version of your service, which makes it easy for a developer to test and roll out a new app version or do A-B testing.
 - **Eventing:** With the `Eventing` primitive, you can create triggers or event streams that other services can subscribe to. For example, you might want to kick off a new build of your app every time code is pushed to your GitHub master repo. Or you want to run a serverless app only if the temperature drops below freezing point. For example, the `Eventing` primitive can be integrated into your CI/CD pipeline to automate the build and deployment of apps in case a specific event occurs.
 
-The Knative open-source project deprecated the **Build** primitive in favor of the Tekton open-source project. The Build primitive provided you with tools to automate the build process for your app from source code to a container image. The Tekton project originated from the Knative project and provides advanced CI/CD features on top of the deprecated Knative Build primitive. For more information, see the [Tekton open-source project ![External link icon](../icons/launch-glyph.svg "External link icon")](https://tekton.dev).
+The Knative open-source project deprecated the **Build** primitive in favor of the Tekton open-source project. The Build primitive provided you with tools to automate the build process for your app from source code to a container image. The Tekton project originated from the Knative project and provides advanced CI/CD features on top of the deprecated Knative Build primitive. For more information, see the [Tekton open-source project](https://tekton.dev){: external}.
 {: note}
 
 **What is the Managed Knative on {{site.data.keyword.containerlong_notm}} (experimental) add-on?**
@@ -279,7 +279,7 @@ You can change the configmap of your Istio Ingress gateway and the Ingress routi
 To deploy your serverless app as a Knative service:
 
 1. Create a YAML file for your first serverless [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) app in Go with Knative. When you send a request to your sample app, the app reads the environment variable `TARGET` and prints `"Hello ${TARGET}!"`. If this environment variable is empty, `"Hello World!"` is returned.
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -385,7 +385,7 @@ To deploy your serverless app as a Knative service:
 7. Update your Knative service sample and enter a different value for the `TARGET` environment variable.
 
    Example service YAML:
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -463,7 +463,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 2. Configure your domain to route incoming network traffic to the IBM-provided Ingress gateway. Choose between these options:
    - Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field. Using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
    - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as an A record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
-3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN ![External link icon](../icons/launch-glyph.svg "External link icon")](https://support.dnsimple.com/articles/what-is-common-name/) is different for each certificate.
+3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN](https://support.dnsimple.com/articles/what-is-common-name/){: external} is different for each certificate.
 4. Create a Kubernetes secret for your cert and key.
    1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
       ```
@@ -478,7 +478,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
       {: pre}
 
    3. Create a secret YAML file by using the cert and key.
-      ```
+      ```yaml
       apiVersion: v1
       kind: Secret
       metadata:
@@ -507,7 +507,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
    - Configure all hosts of your custom wildcard domain to use the TLS secret that you created earlier in the `spec.tls.hosts` section.
 
    Example Ingress:
-   ```
+   ```yaml
    apiVersion: extensions/v1beta1
    kind: Ingress
    metadata:
@@ -541,7 +541,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 
    2. Specify your custom domain in the `data` section of your configmap and remove the default domain that is set for your cluster.
       - **Example to assign a hostname from your custom domain for all Knative services**:
-        ```
+        ```yaml
         apiVersion: v1
         kind: ConfigMap
         data:
@@ -555,7 +555,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
         By adding `""` to your custom domain, all Knative services that you create are assigned a hostname from your custom domain.  
 
       - **Example to assign a hostname from your custom domain for select Knative services**:
-        ```
+        ```yaml
         apiVersion: v1
         kind: ConfigMap
         data:
@@ -600,7 +600,7 @@ Knative services support the Kubernetes `volume` specification to mount an exist
 2. Reference your secret or config map as a Kubernetes volume in your Knative service. To share secrets and config maps across Knative services, mount the volume to every Knative service that must access the data.
 
    Example YAML file for mounting a secret:
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -622,7 +622,7 @@ Knative services support the Kubernetes `volume` specification to mount an exist
    {: codeblock}
 
    Example YAML file for mounting a config map:
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -695,7 +695,7 @@ To access a container registry, your cluster must bet set up with the appropriat
 2. Create a Knative service that uses the image pull secret. You can choose if you want to reference the image pull secret in your Knative service directly as shown in the following example, or to [add the image pull secret to the Kubernetes service account of the namespace](/docs/containers?topic=containers-images#store_imagePullSecret) where you want to deploy your Knative service.
 
    Example to reference the image pull secret in your Knative service:
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -782,7 +782,7 @@ Review common Knative service settings that you might find useful as you develop
 You can specify the minimum and maximum number of pods that you want to run for your apps by using an annotation. For example, if you don't want Knative to scale down your app to zero instances, set the minimum number of pods to 1.
 {: shortdesc}
 
-```
+```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
@@ -823,7 +823,7 @@ spec:
 By default, Knative scales your app based on the average number of incoming requests per pod. If the number of concurrent requests exceeds the default setting of 100 requests per pod, Knative automatically creates another instance of your pod and starts load balancing incoming requests between your instances. This behavior is also referred to as concurrency or concurrent auto-scaling. You can change the default number of requests by [specifying the number of requests per pod](#max-request-per-pod). To instruct Knative to scale your app based on CPU usage instead, use the `autoscaling.knative.dev/metric` annotation.
 {: shortdesc}
 
-```
+```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
@@ -864,7 +864,7 @@ spec:
 
 You can specify the maximum number of requests that an app instance can receive and process before Knative considers to scale up your app instances. For example, if you set the maximum number of requests to 1, then your app instance can receive one request at a time. If a second request arrives before the first one is fully processed, Knative scales up another instance. By default, Knative sets the maximum number of requests for a pod to 100.
 
-```
+```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
@@ -898,7 +898,7 @@ spec:
 By default, all incoming requests to your Knative service are sent to port 8080. You can change this setting by using the `containerPort` specification.
 {: shortdesc}
 
-```
+```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
@@ -950,7 +950,7 @@ If you do not want Knative to scale down your service to zero instances, set the
 By default, every Knative service is assigned a public route from your Istio Ingress subdomain and a private route in the format `<service_name>.<namespace>.cluster.local`. You can use the public route to access your app from the public network. If you want to keep your service private, you can add the `serving.knative.dev/visibility` label to your Knative service. This label instructs Knative to assign a private hostname to your service only.
 {: shortdesc}
 
-```
+```yaml
 apiVersion: serving.knative.dev/v1alpha1
 kind: Service
 metadata:
@@ -985,7 +985,7 @@ spec:
 The current implementation of Knative does not provide a standard way to force your Knative `Serving` component to repull a container image. To repull an image from your registry, choose between the following options:
 
 - **Modify the Knative service `template`**: The `template` of a Knative service is used to create a revision of your Knative service. If you modify this template and for example, add the `repullFlag` annotation, Knative must create a new revision for your app. As part of creating the revision, Knative must check for container image updates. When you set `imagePullPolicy: Always`, Knative cannot use the image cache in the cluster, but instead must pull the image from your container registry.
-   ```
+   ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
    metadata:
@@ -1006,7 +1006,7 @@ The current implementation of Knative does not provide a standard way to force y
     {: note}
 
 - **Use tags to create unique container images**: You can use unique tags for every container image that you create and reference this image in your Knative service `container.image` configuration. In the following example, `v1` is used as the image tag. To force Knative to pull a new image from your container registry, you must change the image tag. For example, use `v2` as your new image tag.
-  ```
+  ```yaml
   apiVersion: serving.knative.dev/v1alpha1
   kind: Service
   metadata:
@@ -1023,9 +1023,9 @@ The current implementation of Knative does not provide a standard way to force y
 ## Related links  
 {: #knative-related-links}
 
-- Try out this [Knative workshop ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/IBM/knative101/tree/master/workshop) to deploy your first `Node.js` fibonacci app to your cluster.
+- Try out this [Knative workshop](https://github.com/IBM/knative101/tree/master/workshop){: external} to deploy your first `Node.js` fibonacci app to your cluster.
   - Explore how to use the Knative `Build` primitive to build an image from a Dockerfile in GitHub and automatically push the image to your namespace in {{site.data.keyword.registrylong_notm}}.  
   - Learn how you can set up routing for network traffic from the IBM-provided Ingress subdomain to the Istio Ingress gateway that is provided by Knative.
   - Roll out a new version of your app and use Istio to control the amount of traffic that is routed to each app version.
-- Explore [Knative `Eventing` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs/tree/master/docs/eventing/samples) samples.
-- Learn more about Knative with the [Knative documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/knative/docs).
+- Explore [Knative `Eventing`](https://github.com/knative/docs/tree/master/docs/eventing/samples){: external} samples.
+- Learn more about Knative with the [Knative documentation](https://github.com/knative/docs){: external}.

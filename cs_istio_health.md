@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -42,7 +42,7 @@ To log, monitor, trace, and visualize your apps that are managed by Istio on {{s
 ## Launching the Prometheus, Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
-For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus ![External link icon](../icons/launch-glyph.svg "External link icon")](https://prometheus.io/), [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) dashboards.
+For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://www.kiali.io/){: external} dashboards.
 {: shortdesc}
 
 **Before you begin**
@@ -90,7 +90,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-2. If you installed BookInfo, the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/) in the Istio open source documentation.
+2. If you installed BookInfo, the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
 
 ### Jaeger
 {: #jaeger}
@@ -107,7 +107,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample) in the Istio open source documentation.
+3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
 
 ### Kiali
 {: #kiali}
@@ -152,7 +152,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 4. In the menu, click **Graph**.
 
 5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
-For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph ![External link icon](../icons/launch-glyph.svg "External link icon")](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph) in the Istio open source documentation.
+For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
 
 
 
@@ -162,7 +162,7 @@ For more information about using Kiali to visualize your Istio-managed microserv
 ## Launching the ControlZ component inspection and Envoy sidecar dashboards
 {: #istio_inspect}
 
-To inspect specific components of Istio, launch the [ControlZ ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/ops/diagnostic-tools/controlz/) and [Envoy ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/reference/commands/istioctl/#istioctl-dashboard-envoy) dashboards.
+To inspect specific components of Istio, launch the [ControlZ](https://istio.io/docs/ops/diagnostic-tools/controlz/){: external} and [Envoy](https://istio.io/docs/reference/commands/istioctl/#istioctl-dashboard-envoy){: external} dashboards.
 {: shortdesc}
 
 The ControlZ dashboard accesses the Istio component ports to provide an interactive view into the internal state of each component. The Envoy dashboard provides configuration information and metrics for an Envoy sidecar proxy that runs in an app pod.

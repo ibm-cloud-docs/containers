@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks
 
@@ -48,13 +48,13 @@ If you choose to change the default settings, you are doing so at your own risk.
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes.
 {: shortdesc}
 
-Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/) object to your cluster. The daemon set alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
+Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} object to your cluster. The daemon set alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
 
 You must have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 {: note}
 
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
-    ```
+    ```yaml
     apiVersion: apps/v1
     kind: DaemonSet
     metadata:
@@ -138,12 +138,12 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 If you have specific performance workload demands, you can change the default settings for the Linux kernel `sysctl` parameters on pod network namespaces.
 {: shortdesc}
 
-To optimize kernel settings for app pods, you can insert an [`initContainer` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/) patch into the `pod/ds/rs/deployment` YAML for each deployment. The `initContainer` is added to each app deployment that is in the pod network namespace for which you want to optimize performance.
+To optimize kernel settings for app pods, you can insert an [`initContainer`](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/){: external} patch into the `pod/ds/rs/deployment` YAML for each deployment. The `initContainer` is added to each app deployment that is in the pod network namespace for which you want to optimize performance.
 
 Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 
 1. Save the following `initContainer` patch in a file named `pod-patch.yaml` and add the fields and values for the `sysctl` parameters that you want to tune. This example `initContainer` changes the default maximum number of connections allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
-    ```
+    ```yaml
     spec:
       template:
         spec:
@@ -167,7 +167,7 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
     ```
     {: pre}
 
-3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app runs, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nginx.com/blog/tuning-nginx/).
+3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app runs, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post](https://www.nginx.com/blog/tuning-nginx/){: external}.
 
 <br />
 
@@ -213,7 +213,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 2.  Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value is set to `4Mi`.
-    ```
+    ```yaml
     apiVersion: v1
     data:
       NannyConfiguration: |-
@@ -233,7 +233,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 4.  Monitor the metrics provider pods to see if containers continue to be restarted due to an `OOMKilled` error message. If so, repeat these steps and increase the `memoryPerNode` size until the pod is stable.
 
-Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration) for more ideas.
+Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}
 
 <br />
@@ -263,7 +263,7 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
     Do not change the values of `mtu` or `veth_mtu`.
     {: important}
 
-    ```
+    ```yaml
     apiVersion: v1
     data:
       calico_backend: bird
@@ -344,7 +344,7 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
   kind: ConfigMap
   ...
   ```
-  {: codeblock}
+  {: screen}
 
 6. Apply the MTU changes to your worker nodes by [rebooting all worker nodes in your cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot).
 
@@ -371,7 +371,7 @@ To disable the portmap plug-in:
   {: pre}
 
 2. In the `data.cni_network_config.plugins` section after the `kubernetes` plug-in, remove the `portmap` plug-in section. After you remove the `portmap` section, the configuration looks like the following:
-  ```
+  ```yaml
   apiVersion: v1
   data:
     calico_backend: bird

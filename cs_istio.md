@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -64,7 +64,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 **To use the {{site.data.keyword.cloud_notm}} console:**
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to install the Istio add-ons.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the Istio add-ons.
 
 2. Click the **Add-ons** tab.
 
@@ -410,7 +410,7 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   {: screen}
   * If the `Version` matches the control plane version that you found in the previous step, no further updates are required.
-  * If the `Version` does not match the control plane version, [update your sidecars ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
+  * If the `Version` does not match the control plane version, [update your sidecars{: external}](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
 
 
 <br />
@@ -445,7 +445,7 @@ The `istio` add-on is a dependency for the `istio-extras`, `istio-sample-bookinf
 ### Uninstalling managed Istio add-ons from the console
 {: #istio_uninstall_ui}
 
-1. In your [cluster dashboard ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters), click the name of the cluster where you want to remove the Istio add-ons.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-ons.
 
 2. Click the **Add-ons** tab.
 
@@ -506,7 +506,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
   3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
 
-- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/setup/kubernetes/install/kubernetes/#uninstall-istio-core-components).
+- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/docs/setup/kubernetes/install/kubernetes/#uninstall-istio-core-components){: external}.
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```

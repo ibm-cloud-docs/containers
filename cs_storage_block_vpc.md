@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-10"
+lastupdated: "2020-01-16"
 
 keywords: kubernetes, iks, vpc
 
@@ -133,6 +133,9 @@ Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make
    ibmc-vpc-block-retain-general-purpose   vpc.block.csi.ibm.io   72m
    ```
    {: screen}
+
+   <br />
+
 
 ## Adding {{site.data.keyword.block_storage_is_short}} to your apps
 {: #vpc-block-add}
@@ -352,6 +355,9 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    ```
    {: screen}
 
+   <br />
+
+
 ## Using an existing {{site.data.keyword.block_storage_is_short}} instance
 {: #vpc-block-static}
 
@@ -506,6 +512,9 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 
 10. Create a deployment or a pod that uses your PVC.
 
+<br />
+
+
 
 ## Creating {{site.data.keyword.block_storage_is_short}} with a different file system
 {: #vpc-block-xfs}
@@ -591,6 +600,9 @@ You can create a customized storage class to provision {{site.data.keyword.block
       exit
       ```
       {: pre}
+
+      <br />
+
 
 ## Setting up encryption for {{site.data.keyword.block_storage_is_short}}
 {: #vpc-block-encryption}
@@ -742,6 +754,9 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
       Volume Attachment Instance Reference
       ```
       {: screen}
+
+      <br />
+
 
 
 ## Customizing the default storage settings
@@ -909,7 +924,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
 ### Storing your custom PVC settings in a Kubernetes secret
 {: #vpc-block-storageclass-secret}
 
-Specify your PVC settings in a Kubernetes secret and reference this secret in a customized storage class. Then, use the customized storage class to create a PVC with the custom parameters that you set in your secret. 
+Specify your PVC settings in a Kubernetes secret and reference this secret in a customized storage class. Then, use the customized storage class to create a PVC with the custom parameters that you set in your secret.
 {: shortdesc}
 
 **What options do I have to use the Kubernetes secret?** </br>
@@ -1060,13 +1075,16 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
 
 4. As the cluster user, follow the steps in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to create a PVC from your customized storage class.
 
+<br />
+
+
 ## Backing up and restoring data
 {: #vpc-block-backup-restore}
 
 Data that is stored on {{site.data.keyword.block_storage_is_short}} is secured across redundant fault zones in your region. To manually back up your data, use the Kubernetes `kubectl cp` command.
 {: shortdesc}
 
-You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster
+You can use the `kubectl cp` [command](https://kubernetes.io/docs/reference/kubectl/overview/#cp){: external} to copy files and directories to and from pods or specific containers in your cluster
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -1089,6 +1107,9 @@ To back up or restore data, choose between the following options:
   kubectl cp <local_filepath>/<filename> <namespace>/<pod>:<pod_filepath> -c <container>
   ```
   {: pre}
+
+  <br />
+
 
 ## Storage class reference
 {: #vpc-block-reference}
@@ -1279,9 +1300,6 @@ To clean up persistent data:
    {: pre}
 
    
-
-
-
 
 8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance.
 
