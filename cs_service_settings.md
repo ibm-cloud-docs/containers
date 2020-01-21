@@ -44,7 +44,7 @@ Review the default settings for the `kube-apiserver` master component in {{site.
 | Kube audit log config | <ul><li><code>audit-log-maxsize=128</code></li><li><code>audit-log-maxage=2</code></li><li><code>audit-log-maxbackup=2</code></li></ul> | 
 | Feature gates | See [Feature gates](#feature-gates) | 
 {: summary="The rows are read from left to right. The category is in the first column, with the description in the second column."}
-{: caption="`kube-apiserver` settings" caption-side="top"}
+{: caption="kube-apiserver settings" caption-side="top"}
 
 ## `kube-controller-manager`
 {: #kube-controller-manager}
@@ -59,7 +59,7 @@ Review the default settings for the `kube-controller-manager` master component i
 | Pod garbage collection threshold | `terminated-pod-gc-threshold=12500` | 
 | Horizontal pod autoscaling | `horizontal-pod-autoscaler-use-rest-clients=true` |
 {: summary="The rows are read from left to right. The category is in the first column, with the description in the second column."}
-{: caption="`kube-controller-manager` settings" caption-side="top"}
+{: caption="kube-controller-manager settings" caption-side="top"}
 
 
 ## `kubelet`
@@ -81,7 +81,7 @@ Review the default settings for the `kubelet` worker node component in {{site.da
 | cgroups | <ul><li><code>kubelet-cgroups=/podruntime/kubelet</code></li><li><code>runtime-cgroups=/podruntime/runtime</code></li></ul> | 
 | Pod eviction | <ul><li><code>eviction-soft='memory.available<100Mi,nodefs.available<10%,imagefs.available<10%,nodefs.inodesFree<10%,imagefs.inodesFree<10%'</code></li><li><code>eviction-soft-grace-period='memory.available=10m,nodefs.available=10m,imagefs.available=10m,nodefs.inodesFree=10m,imagefs.inodesFree=10m'</code></li><li><code>eviction-hard='memory.available<100Mi,nodefs.available<5%,imagefs.available<5%,nodefs.inodesFree<5%,imagefs.inodesFree<5%'</code></li></ul> | 
 {: summary="The rows are read from left to right. The category is in the first column, with the description in the second column."}
-{: caption="`kubelet` settings" caption-side="top"}
+{: caption="kubelet settings" caption-side="top"}
 
 ## `kube-proxy`
 {: #kube-proxy}
@@ -95,7 +95,7 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 | Proxy mode | `proxy-mode=iptables` |
 | Feature gates | See [Feature gates](#feature-gates) | 
 {: summary="The rows are read from left to right. The category is in the first column, with the description in the second column."}
-{: caption="`kube-proxy` settings" caption-side="top"}
+{: caption="kube-proxy settings" caption-side="top"}
 
 ## Feature gates
 {: #feature-gates}
