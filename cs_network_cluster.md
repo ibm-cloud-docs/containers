@@ -196,7 +196,7 @@ Trying to change the service endpoint for master-worker communication instead? C
 
 
 
-Before you begin:
+Before you begin: 
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
