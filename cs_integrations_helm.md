@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-17"
+lastupdated: "2020-01-21"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -78,8 +78,6 @@ Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitle
 
 Set up Helm v3 and the {{site.data.keyword.cloud_notm}} Helm repositories in your cluster.
 {: shortdesc}
-
-
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 

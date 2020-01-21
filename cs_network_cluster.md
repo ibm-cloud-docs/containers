@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-21"
 
 keywords: kubernetes, iks, vlan
 
@@ -45,7 +45,7 @@ After you initially set up your network when you [create a cluster](/docs/contai
 ## Setting up the private service endpoint
 {: #set-up-private-se}
 
-Enable or disable the private service endpoint for your cluster.
+Enable the private service endpoint for your cluster.
 {: shortdesc}
 
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
@@ -82,7 +82,6 @@ Did you create a cluster with only a private service endpoint before you enabled
 9.  Optional: To use the private service endpoint only:
     1.  [Disable the public service endpoint](#disable-public-se).
     2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
-
 
 <br />
 
@@ -184,6 +183,7 @@ Note that you cannot disable the private service endpoint after you enable it.
 ## Changing your worker node VLAN connections
 {: #change-vlans}
 
+
 When you create a cluster, you choose whether to connect your worker nodes to a private and a public VLAN or to a private VLAN only. Your worker nodes are part of worker pools, which store networking metadata that includes the VLANs to use to provision future worker nodes in the pool. You might want to change your cluster's VLAN connectivity setup later, in cases such as the following.
 {: shortdesc}
 
@@ -194,7 +194,9 @@ When you create a cluster, you choose whether to connect your worker nodes to a 
 Trying to change the service endpoint for master-worker communication instead? Check out the topics to set up [public](#set-up-public-se) and [private](#set-up-private-se) service endpoints.
 {: tip}
 
-Before you begin:
+
+
+Before you begin: 
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * If your worker nodes are stand-alone (not part of a worker pool), [update them to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool).
 
@@ -261,9 +263,9 @@ To change the VLANs that a worker pool uses to provision worker nodes:
    {: pre}
 
    If you want to remove worker nodes that use the previous network metadata, change the number of workers per zone to double the previous number of workers per zone. Later in these steps, you can cordon, drain, and remove the previous worker nodes.
-  {: tip}
+   {: tip}
 
-6. Verify that new worker nodes are created with the appropriate **Public IP** and **Private IP** in the output. For example, if you change the worker pool from a public and private VLAN to private-only, the new worker nodes have only a private IP. If you change the worker pool from private-only to both public and private VLANs, the new worker nodes have both public and private IPs.
+6. Verify that new worker nodes are created with the appropriate **Public IP** and **Private IP** addresses in the output. For example, if you change the worker pool from a public and private VLAN to private-only, the new worker nodes have only a private IP. If you change the worker pool from private-only to both public and private VLANs, the new worker nodes have both public and private IPs.
    ```
    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
    ```
@@ -302,5 +304,4 @@ To change the VLANs that a worker pool uses to provision worker nodes:
 8. Optional: You can repeat steps 2 - 7 for each worker pool in your cluster. After you complete these steps, all worker nodes in your cluster are set up with the new VLANs.
 
 10. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
 
