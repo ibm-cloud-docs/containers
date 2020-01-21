@@ -1936,7 +1936,7 @@ Review the version 1.13 changelog.
 {: shortdesc}
 
 ### Changelog for 1.13.12_1548, released 20 January 2020
-{: #11410_1545}
+{: #11312_1548}
 
 The following table shows the changes that are included in the master and worker node patch update 1.13.12_1548.
 {: shortdesc}
