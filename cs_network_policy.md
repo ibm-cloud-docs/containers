@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-17"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -333,7 +333,7 @@ To see how to whitelist or blacklist source IP addresses, try the [Using Calico 
     * Use [Calico v3 policy syntax](https://docs.projectcalico.org/v3.3/reference/calicoctl/resources/networkpolicy){: external}.
     * If you manage traffic to an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs), you must include the `applyOnForward: true` and `doNotTrack: true` fields to the `spec` section of the policy.
 
-        Example resource that blocks all node ports:
+        Example resource that blocks traffic to all public node ports:
 
         ```yaml
         apiVersion: projectcalico.org/v3
