@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks
 
@@ -1115,7 +1115,7 @@ To back up or restore a PVC by editing the `values.yaml` file:
     ```
     {: screen}
 
-    Example to deploy by setting flags in the `helm install` command. You can name your release by specifying the `--name` parameter. 
+    Example to deploy by setting flags in the `helm install` command. You can name your release by specifying the `--name` parameter.
     
     
     ```
@@ -1305,8 +1305,6 @@ To back up or restore a PVC by editing the `values.yaml` file:
         
 
         You successfully restored your backup. You can now mount the PVC that binds the PV to any other pod in your cluster to access the restored files. If the container data that was backed up included a non-root user, you must add non-root permissions to your new container. For more information, see [Adding non-root user access to volumes](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).
-
-
 
 
 
