@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-17"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -286,17 +286,7 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
     NOTES:
     Thank you for installing: ibm-iks-cluster-autoscaler. Your release is named: ibm-iks-cluster-autoscaler
 
-    1. Wait for the ibm-worker-recovery pod to go to a "Running" state:
-    
-    kubectl get pod -wn kube-system  -l app=ibm-worker-recovery,release=ibm-worker-recovery
-
-    2. Verify that your checks are in place:
-
-    kubectl get cm -n kube-system -l app=ibm-worker-recovery,release=ibm-worker-recovery
-
-    3. After a few minutes, you can check the Events section in the output of the following command to see activity on the Autorecovery deployment:
-
-    kubectl describe deployment -n kube-system  -l app=ibm-worker-recovery,release=ibm-worker-recovery
+    For more information about using the cluster autoscaler, refer to the chart README.md file.
     ```
     {: screen}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-16"
+lastupdated: "2020-01-21"
 
 keywords: kubernetes, iks
 
@@ -41,6 +41,7 @@ subcollection: containers
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
+
 
 
 ## Installing the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster
@@ -1304,8 +1305,8 @@ Review the following backup and restore options for your block storage:
  <dt>Duplicate storage</dt>
  <dd><p>You can [duplicate your block storage instance](/docs/infrastructure/BlockStorage?topic=BlockStorage-duplicatevolume#duplicatevolume) in the same zone as the original storage instance. A duplicate has the same data as the original storage instance at the point in time that you create the duplicate. Unlike replicas, use the duplicate as an independent storage instance from the original. To duplicate, first set up snapshots for the volume.</p></dd>
   <dt>Back up data to {{site.data.keyword.cos_full}}</dt>
-  <dd><p>You can use the [**ibm-backup-restore image**](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter#ibmbackup_restore_starter) to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full}} instance that you set up in a zone.</p><p class="note">Block storage is mounted with an RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To back up your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and remount the storage to your app pod. </p>
-To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.cos_short}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.cos_short}} instance, use the restore script that is provided with the image.</dd>
+  <dd><p>You can use the [**ibm-backup-restore**](/docs/containers?topic=containers-utilities#backup-restore-pvc) Helm chart to spin up a backup and restore pod in your cluster. This pod contains a script to run a one-time or periodic backup for any persistent volume claim (PVC) in your cluster. Data is stored in your {{site.data.keyword.cos_full}} instance that you set up in a zone.</p><p class="note">Block storage is mounted with an RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To back up your data, you must unmount the app pod from the storage, mount it to your backup pod, back up the data, and remount the storage to your app pod. </p>
+To make your data even more highly available and protect your app from a zone failure, set up a second {{site.data.keyword.cos_short}} instance and replicate data across zones. If you need to restore data from your {{site.data.keyword.cos_short}} instance, use the restore pod that is provided with the Helm chart.</dd>
 <dt>Copy data to and from pods and containers</dt>
 <dd><p>You can use the `kubectl cp` [command![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/kubectl/overview/#cp) to copy files and directories to and from pods or specific containers in your cluster.</p>
 <p>Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) If you do not specify a container with <code>-c</code>, the command uses to the first available container in the pod.</p>

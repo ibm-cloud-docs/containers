@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-21"
 
 keywords: kubernetes, iks, knative
 
@@ -38,6 +38,8 @@ subcollection: containers
 
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
+
+
 
 **What is Knative and why do I want use it?**
 

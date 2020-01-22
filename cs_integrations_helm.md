@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -38,8 +38,6 @@ subcollection: containers
 
 You can add complex Kubernetes apps to your cluster by using Helm charts.
 {: shortdesc}
-
-
 
 ## About Helm in {{site.data.keyword.containerlong_notm}}
 {: #about-helm}
@@ -164,8 +162,6 @@ As you work with Helm charts, keep in mind the Helm v3 changes, such as the fact
 
 If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gateway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
 {: shortdesc}
-
-
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -324,8 +320,6 @@ To deploy Helm charts, you must install the Helm CLI on your local machine and i
 
 You can pull the Tiller image to your local machine, push the image to your namespace in {{site.data.keyword.registryshort_notm}} and install Tiller in your private cluster by using the image in {{site.data.keyword.registryshort_notm}}.
 {: shortdesc}
-
-
 
 If you want to install a Helm chart without using Tiller, see [Private clusters: Installing Helm charts without using Tiller](#private_install_without_tiller).
 {: tip}
@@ -540,7 +534,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kubernetes version 1.13, the Tiller version is 2.13. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
 {: shortdesc}
 
-Some Helm charts might not be compatible with an older Tiller version. For example, if you have an OpenShift cluster that runs version 3.11, the default corresponding Helm and Tiller version is 2.11. However, if you install the `ibm-iks-cluster-autoscaler` Helm chart at version 1.0.8 or later, the Helm chart is not compatible with Tiller 2.11. You see an error similar to the following:
+Some Helm charts might not be compatible with an older Tiller version. You see an error similar to the following:
 
 ```
 Error: Chart incompatible with Tiller v2.11.0
@@ -579,10 +573,6 @@ To change your version of Tiller:
 Review the following links to find additional Helm information.
 {: shortdesc}
 
-* View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalo](https://cloud.ibm.com/kubernetes/helm){:external}.
-* Learn more about the Helm commands that you can use to set up and manage Helm charts in the [Helm documentation](https://docs.helm.sh/helm/){:external}.
+* View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalog](https://cloud.ibm.com/kubernetes/helm){:external}.
 * Review the [list of changes between Helm v2 and v3](https://helm.sh/docs/topics/v2_v3_migration/){: external} and the [v3 FAQs](https://helm.sh/docs/faq/){: external}.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/){:external}.
-
-
-

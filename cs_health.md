@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -895,7 +895,7 @@ The **Master Status** provides details of what operation from the master state i
     </tr>
     <tr>
        <td>`update_cancelled`</td>
-       <td>The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).<p class="note">If you do not want to update the master to the default `major.minor` version during the update, include the `--kube-version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.14.10`. To list available versions, run `ibmcloud ks versions`.</p></td>
+       <td>The master update is canceled because the cluster was not in a healthy state at the time of the update. Your master remains in this state until your cluster is healthy and you manually update the master. To update the master, use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).<p class="note">If you do not want to update the master to the default `major.minor` version during the update, include the `--kube-version` flag and specify the latest patch version that is available for the `major.minor` version that you want, such as `1.15.8`. To list available versions, run `ibmcloud ks versions`.</p></td>
     </tr>
     <tr>
        <td>`update_failed`</td>
@@ -1164,6 +1164,6 @@ To configure Autorecovery:
 
 7. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
     ```
-    helm test ibm-worker-recovery
+    helm test ibm-worker-recovery -n kube-system
     ```
     {: pre}

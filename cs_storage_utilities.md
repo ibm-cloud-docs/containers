@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-16"
+lastupdated: "2020-01-22"
 
-keywords: kubernetes, iks, local persistent storage
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -284,7 +284,7 @@ To add different block storage configurations, add block storage to a subset of 
    </tr>
    <tr>
    <td><code>region</code></td>
-   <td>Enter the {{site.data.keyword.containerlong_notm}} region where you created your cluster. Run <code>[bxcs] cluster get --cluster &lt;cluster_name_or_ID&gt;</code> to find the region of your cluster.  </td>
+   <td>Enter the {{site.data.keyword.containerlong_notm}} region where you created your cluster. Run <code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt;</code> to find the region of your cluster.  </td>
    </tr>
    <tr>
    <td><code>type</code></td>
@@ -680,10 +680,12 @@ If you want to detach a volume, delete the PV. Detached volumes are still author
 <br />
 
 
+
+
 ## VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
 {: #vpc_api_attach}
 
-You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}]((https://containers.cloud.ibm.com/swagger-storage-api/) to a worker node in your VPC cluster.
+You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}](https://containers.cloud.ibm.com/swagger-storage-api/) to a worker node in your VPC cluster.
 {: shortdesc}
 
 You can attach a volume to one worker node only. Make sure that the volume is in the same zone as the worker node for the attachment to succeed.
@@ -939,5 +941,371 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
       </tr>
   </table>
+
+
+
+<br />
+
+
+## Backing up and restoring PVC data for file and block storage
+{: #ibmcloud-backup-restore}
+
+With the {{site.data.keyword.cloud_notm}} Backup Restore Helm chart, you can create a one-time or scheduled backup for data that is stored in a file storage or block storage persistent volume claim (PVC). Your data is stored in an {{site.data.keyword.cos_full_notm}} service instance that you create and own. You can use existing backups in your {{site.data.keyword.cos_full_notm}} service instance to restore data to a PVC in your cluster.
+{: shortdesc}
+
+**What happens when I install the Helm chart?**</br>
+When you install the Helm chart, a Kubernetes pod is created in your cluster that performs a one-time or periodic backup of your PVC data, or restores data from {{site.data.keyword.cos_full_notm}} to a PVC. You configure your backup or restore in the `values.yaml` file that is provided with the Helm chart or by setting flags in the `helm install` command.
+
+**What limitations do I need to be aware of?**</br>
+If you want to back up or restore data of a block storage PVC, your PVC must not be mounted to an app. Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To back up or restore your data, you must remove the pod that uses the storage to unmount the PVC. After the backup or restoring of data is finished, you can re-create your pod and mount the backed up or restored PVC.
+
+**What do I need before I get started?** </br>
+To back up or restore data to {{site.data.keyword.cos_full_notm}}, you must [set up an {{site.data.keyword.cos_full_notm}} service instance, create service credentials to access the service, and create a bucket that can hold your data](#backup_restore_setup_object_storage).  
+
+### Setting up an {{site.data.keyword.cos_full_notm}} service instance
+{: #backup_restore_setup_object_storage}
+
+Create and configure an {{site.data.keyword.cos_full_notm}} service instance to serve as the repository for the data that you want to back up.
+{: shortdesc}
+
+1. Create an [{{site.data.keyword.cos_full_notm}} service instance](/docs/containers?topic=containers-object_storage#create_cos_service) that uses HMAC credentials.
+2. Store your [{{site.data.keyword.cos_full_notm}} credentials in a Kubernetes secret](docs/containers?topic=containers-object_storage#create_cos_secret).
+3. Create your first {{site.data.keyword.cos_full_notm}} bucket.
+   1. In the navigation on the service details page, click **Buckets**.
+   2. Click **Create bucket**. A dialog box is displayed.
+   3. Enter a unique name for your bucket. The name must be unique within {{site.data.keyword.cos_full_notm}} across all regions and across all {{site.data.keyword.cloud_notm}} accounts.
+   4. From the **Resiliency** list, select the level of availability that you want for your data. For more information, see [{{site.data.keyword.cos_full_notm}} regions and endpoints](/docs/services/cloud-object-storage/basics?topic=cloud-object-storage-endpoints#endpoints).
+   5. Change the **Location** to the region where you want to store your data. Keep in mind that your data might not be allowed to be stored in every region due to legal reasons.  
+   6. Click **Create**.
+4. Retrieve the {{site.data.keyword.cos_full_notm}} host name for your bucket.
+   1. Click on your bucket name that you created in the previous step.
+   2. In the navigation on the service details page, click **Buckets** > **Configuration**.
+   3. Note the public URL that you can use to access the data in your bucket.
+
+For more information about configuring your service instance, see the [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started) documentation.
+
+### Using {{site.data.keyword.cos_full_notm}} to back up and restore PVC data
+{: #backup-restore-pvc}
+
+You can use the {{site.data.keyword.cloud_notm}} Backup Restore Helm chart to back up data in a file storage or block storage PVC to {{site.data.keyword.cos_full_notm}}, or restore data from {{site.data.keyword.cos_full_notm}} to a PVC in your cluster.
+{: shortdesc}
+
+Before you begin:
+- Make sure that you have a PVC that you can back up or restore data to. For more information about how to create a PVC, see [Adding file storage to apps](/docs/containers?topic=containers-file_storage#add_file) and [Adding block storage to apps](/docs/containers?topic=containers-block_storage#add_block).
+- If you want to back up a block storage PVC, make sure that your PVC is not mounted to an app. Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. To back up your data, you must remove the app pod that mounts the storage. To check whether a pod is mounted to your PVC, run the following command.
+  ```sh
+  kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+  ```
+  {: pre}
+- [Retrieve your {{site.data.keyword.cos_full_notm}} service credentials, the bucket name, and the bucket hostname](#backup_restore_setup_object_storage).
+- [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine, install the Helm server (Tiller) with a service account, and set up the {{site.data.keyword.cloud_notm}} Helm chart repositories.
+- [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+You can deploy the `ibm-storage-backup` pod or the `ibm-storage-restore` pod by either editing and applying the `values.yaml` file of the Helm chart, or by running the `helm install` command from the CLI.
+{: note}
+
+To back up or restore a PVC by editing the `values.yaml` file:
+
+1. Download the latest Helm chart version to your local machine.
+  ```
+  helm fetch --untar iks-charts/ibmcloud-backup-restore
+  ```
+  {: pre}
+
+2. Open the `values.yaml` file in the nano command line editor.
+  ```
+  nano ibmcloud-backup-restore/values.yaml
+  ```
+  {: pre}
+
+3. Configure your Helm chart to back up or restore PVC data. You can configure the backup for more than one PVC.
+
+  Example to create a backup pod by configuring the `values.yaml` file:
+
+  ```yaml
+  image:
+    repository: icr.io/iks-charts/ibmcloud-backup-restore
+    pullPolicy: Always
+    tag: latest
+  ACCESS_KEY_ID: # Example: 10110abab1111bbb111aa1aaa111b1a1
+  SECRET_ACCESS_KEY: # Example: a1aba11aaa11b11b11aa1111a1111ba111111111a0b1b11a
+  ENDPOINT: # Example: s3.us-east.cloud-object-storage.appdomain.cloud
+  BUCKET_NAME: # Example: my-bucket
+  BACKUP_NAME: # Example: my_backup
+  PVC_NAMES:
+    - # Example: my_pvc
+    - # Optional example: my_pvc2
+  CHART_TYPE: # Example: backup
+  BACKUP_TYPE: # Example: incremental
+  SCHEDULE_TYPE: # Example: periodic
+  SCHEDULE_INFO: # Example: weekly
+  ```
+  {: codeblock}
+
+  <table>
+    <caption>Understanding the <code>values.yaml</code> file</caption>
+    <thead>
+    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the `values.yaml` file components</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>ACCESS_KEY_ID</code></td>
+    <td>Enter the access key ID of the {{site.data.keyword.cos_full_notm}} service credentials that you retrieved earlier. </td>
+    </tr>
+    <tr>
+    <td><code>SECRET_ACCESS_KEY</code></td>
+    <td>Enter the secret access key of the {{site.data.keyword.cos_full_notm}} service credentials that you retrieved earlier.</td>
+    </tr>
+    <tr>
+    <td><code>ENDPOINT</code></td>
+    <td>Enter the public {{site.data.keyword.cos_full_notm}} s3 API endpoint for your bucket that you retrieved earlier. </td>
+    </tr>
+    <tr>
+    <td><code>BUCKET_NAME</code></td>
+    <td><ul><li><strong>Backup: </strong>Enter the name of the {{site.data.keyword.cos_full_notm}} bucket that you created earlier. You use this bucket to store PVC data when you perform a backup. </li><li><strong>Restore: </strong>Enter the name of the {{site.data.keyword.cos_full_notm}} bucket where your backup is stored. </li></ul></td>
+    </tr>
+    <tr>
+    <td><code>BACKUP_NAME</code></td>
+    <td><ul><li><strong>Backup: </strong>Enter the name of the backup that you want to create in {{site.data.keyword.cos_full_notm}}. </li><li><strong>Restore: </strong>Enter the name of the backup that you created with the {{site.data.keyword.cloud_notm}} Backup Restore Helm chart in {{site.data.keyword.cos_full_notm}}. If you have multiple full backups in your {{site.data.keyword.cos_full_notm}} service instance, the PVC is restored with the data of the last full backup. If you have incremental backups, the PVC is restored with the data of the last full backup, including all incremental backups up to the day where you start the restore. </li></ul> </td>
+    </tr>
+    <tr>
+    <td><code>PVC_NAMES</code></td>
+    <td><ul><li><strong>Backup: </strong>Enter the name of the PVC that you want to back up. If you want to back up multiple PVCs, add each PVC to the list of PVCs. To list available PVCs in your cluster that you can back up, run <code>kubectl get pvc</code>. </li><li><strong>Restore: </strong>Enter the name of the PVC to which you want to restore data from {{site.data.keyword.cos_full_notm}}. You can restore data to one PVC at a time only. To list available PVCs in your cluster that you can restore data to, run <code>kubectl get pvc</code>.</li></ul></td>
+    </tr>
+    <tr>
+    <td><code>BACKUP_TYPE</code></td>
+    <td>Required only for backups. Enter <strong>full</strong> to create a full backup, or <strong>incremental</strong> if you want to back up only new or changed files. If you choose <strong>incremental</strong>, you must specify the <code>SCHEDULING_INFO</code> and <code>SCHEDULING_TYPE</code> option. If you don't specify the <code>BACKUP_TYPE</code> option, a full backup is created by default. </td>
+    </tr>
+    <tr>
+    <td><code>SCHEDULE_TYPE</code></td>
+    <td>Required only for backups. Enter <strong>periodic</strong> to create scheduled backups, or leave this option empty to create a one-time backup. If you want to create periodic backups, you must define the backup interval in the <code>SCHEDULE_INFO</code> option. </td>
+    </tr>
+    <tr>
+    <td><code>SCHEDULE_INFO</code></td>
+    <td>Required only for backups. If you want to create periodic backups, you must decide on the backup schedule. Choose between <strong>hourly</strong>, <strong>daily</strong>, or <strong>weekly</strong>. If you set this option, you must set <code>SCHEDULE_TYPE</code> to <strong>periodic</strong>.</td>
+    </tr>
+    </tbody>
+  </table>
+
+4. Save and close the `values.yaml` file.
+
+5. Install the Helm chart with your custom settings in the `values.yaml` file. When you install the Helm chart and you configure a backup or restore, an `ibm-storage-backup` or an `ibm-storage-restore` pod is deployed to your cluster. The backup pod backs up the data from your PVC to {{site.data.keyword.cos_full_notm}} and the restore pod restores data to a PVC. Replace `<chart_name>` with a name for your Helm chart.
+    
+
+    
+    ```
+    helm install ./ibmcloud-backup-restore --name <chart_name>
+    ```
+    {: pre}
+    
+
+    Example output for backup:
+    ```
+    NAME: <release_name>
+    LAST DEPLOYED: Mon Jan 20 09:17:02 2020
+    NAMESPACE: default
+    STATUS: deployed
+    REVISION: 1
+    TEST SUITE: None
+    NOTES:
+    Thank you for installing: ibmcloud-backup-restore.   Your release is named: <release_name>
+
+    Please refer Chart README.md file for creating a sample PVC
+    Please refer Chart RELEASE.md to see the release details/fixes
+    ```
+    {: screen}
+
+    Example to deploy by setting flags in the `helm install` command. You can name your release by specifying the `--name` parameter.
+    
+    
+    ```
+    helm install ./ibmcloud-backup-restore --set ACCESS_KEY_ID=<access_key_ID><br>
+    --set SECRET_ACCESS_KEY=<secret_access_key><br>
+    --set ENDPOINT=<public_bucket_endpoint> --set BUCKET_NAME=<bucket_name><br>
+    --set BACKUP_NAME=<backup_name> --set PVC_NAMES[0]=<pvc_name1><br>
+    --set PVC_NAMES[1]=<pvc_name2> --set CHART_TYPE=backup<br>
+    --set BACKUP_TYPE=<backup_type> --set SCHEDULE_TYPE=<schedule_type><br>
+    --set SCHEDULE_INFO=<schedule_info> --name <release_name>
+    ```
+    {: pre}
+    
+
+5. Verify that your data backup or restore completed successfully. </br>
+  **Backup**:
+  1. Verify that the `ibm-storage-backup` pod has a status of **Running**.
+    ```
+    kubectl get pods | grep backup
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    ibm-storage-backup                        1/1     Running             0          64m
+    ```
+    {: screen}
+  2. Review the logs of the `ibm-storage-backup` pod to make sure that your backup was successful. When you see the `... backup completed` message in the event logs, your backup completed successfully.
+    ```
+    kubectl logs ibm-storage-backup
+    ```
+    {: pre}
+
+    Example output for daily backups:
+    ```
+    [2019-04-18 16:01:51,157] [utilities : 151] [INFO] *****************Start logging to ./Backup.log
+    [2019-04-18 16:01:51,158] [backup : 48] [INFO] Starting backup:
+    [2019-04-18 16:01:51,158] [configureOS : 66] [INFO] Configuring duplicity with IBM CloudObjectStorage i.e s3.
+    [2019-04-18 16:01:51,158] [backup : 62] [INFO] Configuration done!!!
+    [2019-04-18 16:01:51,158] [backup : 78] [INFO] Got all required input from config file!!
+    [2019-04-18 16:01:52,366] [backup : 119] [WARNING] Incremental backup was not created
+    [2019-04-18 16:01:52,366] [backup : 120] [INFO] duplicity  --no-encryption incremental /myvol s3://s3.us-south.cloud-object-storage.appdomain.cloud/mybucket/helm-backup command failed due to Fatal Error: Unable to start incremental backup.  Old signatures not found and incremental specified
+
+    [2019-04-18 16:01:52,367] [backup : 121] [INFO] A full backup is required before incremental backups can begin. Creating a one-time full backup and will run incremental backups for scheduled backups.
+    [2019-04-18 16:01:54,357] [backup : 129] [INFO] Full backup completed
+    [2019-04-18 16:01:54,357] [backup : 130] [INFO] Local and Remote metadata are synchronized, no sync needed.
+    Last full backup date: none
+    --------------[ Backup Statistics ]--------------
+    StartTime 1555603313.31 (Thu Apr 18 16:01:53 2019)
+    EndTime 1555603313.32 (Thu Apr 18 16:01:53 2019)
+    ElapsedTime 0.01 (0.01 seconds)
+    SourceFiles 3
+    SourceFileSize 20495 (20.0 KB)
+    NewFiles 3
+    NewFileSize 20495 (20.0 KB)
+    DeletedFiles 0
+    ChangedFiles 0
+    ChangedFileSize 0 (0 bytes)
+    ChangedDeltaSize 0 (0 bytes)
+    DeltaEntries 3
+    RawDeltaSize 15 (15 bytes)
+    TotalDestinationSizeChange 183 (183 bytes)
+    Errors 0
+    -------------------------------------------------
+
+    [2019-04-18 16:01:54,357] [backup : 162] [INFO] Scheduling backup as per configurations, please do not stop this program or run this in background !!!
+    [2019-04-18 16:01:54,358] [backup : 166] [INFO] Schedule info is: ['daily']
+    [2019-04-18 16:01:54,358] [backup : 172] [INFO] Scheduled for daily!!!
+    ```
+    {: screen}
+
+6. Verify that your data is successfully backed up or restored. </br>
+    **Backup**:
+    1. Find your {{site.data.keyword.cos_full_notm}} service instance in the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources).
+    2. From the navigation, select **Buckets** and click on the bucket that you used in your backup configuration. Your backup is displayed as an object in your bucket.
+    3. Review the compressed files. You can download the `*.gz` file, extract the file, and verify the backed-up data.
+
+    **Restore**:
+    1. Create a `deployment.yaml` file with a pod that mounts the PVC that contains your restored data. The following example deploys an `nginx` pod that mounts the PVC on the `/test` mount directory.
+        ```yaml
+        apiVersion: apps/v1
+        kind: Deployment
+        metadata:
+          name: restore
+          labels:
+          app: nginx
+        spec:
+          selector:
+            matchLabels:
+              app: nginx
+          template:
+            metadata:
+              labels:
+                app: nginx
+            spec:
+              containers:
+                - image: nginx
+                  name: nginx
+                  volumeMounts:
+                  - name: <volume_name> # Example: my_volume
+                    mountPath: <mount_path> # Example: /test
+                volumes:
+                - name: <volume_name> # Example: my_volume
+                  persistentVolumeClaim:
+                    claimName: <pvc_name> # Example: my_pvc
+        ```
+        {: codeblock}
+
+        <table>
+        <caption>Understanding the <code>deployment.yaml</code> file components</caption>
+        <thead>
+        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+        </thead>
+        <tbody>
+        <tr>
+        <td><code>spec.containers.image</code></td>
+        <td>The name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run <code>ibmcloud cr image-list</code>.</td>
+        </tr>
+        <tr>
+        <td><code>spec.containers.name</code></td>
+        <td>The name of the container that you want to deploy to your cluster.</td>
+        </tr>
+        <tr>
+        <td><code>spec.containers.volumeMounts.mountPath</code></td>
+        <td>The absolute path of the directory to where the volume is mounted inside the container. Data that is written to the mount path is stored under the root directory in your physical block storage instance. If you want to share a volume between different apps, you can specify [volume sub paths ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/storage/volumes/#using-subpath) for each of your apps. </td>
+        </tr>
+        <tr>
+        <td><code>spec.containers.volumeMounts.name</code></td>
+        <td>The name of the volume to mount to your pod.</td>
+        </tr>
+        <tr>
+        <td><code>volumes.name</code></td>
+        <td>The name of the volume to mount to your pod. Typically this name is the same as <code>volumeMounts/name</code>.</td>
+        </tr>
+        <tr>
+        <td><code>volumes.persistentVolumeClaim.claimName</code></td>
+        <td>The name of the PVC that binds the PV that you want to use. </td>
+        </tr>
+        </tbody></table>
+
+    2. Create the deployment.
+        ```
+        kubectl apply -f deployment.yaml
+        ```
+        {: pre}
+
+    3. Verify that your pod has a status of **Running**.
+
+        If you find that your `ibm-storage-restore` pod does not reach a **Completed** or **CrashLoopBackOff** status, restoring your data might have failed. Run `kubectl logs ibm-storage-restore` to find the root cause for the failure.
+        {: tip}
+
+        ```
+        kubectl get pods | grep restore
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        restore-7dfc6f4c78-wkcqp                  1/1     Running             0          3m54s
+        ```
+        {: screen}
+
+    4. Log in to your pod.
+        ```
+        kubectl exec <pod_name> -it bash
+        ```
+        {: pre}
+
+    5. Navigate to the mount directory that you specified in your deployment YAML.
+        ```
+        cd <mount_directory>
+        ```
+        {: pre}
+
+    6. List the files in your mount directory to verify that all your data is restored to the mount directory.
+        ```
+        ls
+        ```
+        {: pre}
+    7. Delete the Helm chart installation from your cluster. This step is required if you restored data to a block storage PVC. Block storage is mounted with a RWO access mode. This access allows only one pod to be mounted to the block storage at a time. Because the `ibm-storage-restore` pod already mounts the PVC, you must remove the pod to release the PVC so that you can mount the PVC to a different pod in your cluster.
+        
+        ```
+        helm delete <release_name> --purge
+        ```
+        {: pre}
+        
+        
+
+        You successfully restored your backup. You can now mount the PVC that binds the PV to any other pod in your cluster to access the restored files. If the container data that was backed up included a non-root user, you must add non-root permissions to your new container. For more information, see [Adding non-root user access to volumes](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).
+
+
 
 
