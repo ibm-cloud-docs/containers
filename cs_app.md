@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -636,7 +636,7 @@ spec:
 <br />
 
 
-## Managing Kubernetes configuration files for reuse in multiple environments with Kustomize
+## Packaging apps for reuse in multiple environments with Kustomize
 {: #kustomize}
 
 As part of a [twelve-factor](https://12factor.net/){: external}, cloud-native app, you want to maintain dev-to-prod parity by setting up a continuous development and delivery pipeline that uses a common, version-controlled codebase source. In your codebase repositories, you store your Kubernetes resource configuration manifest files, often in YAML format. You can use the Kubernetes project [Kustomize](https://kustomize.io/){: external} both to standardize and customize your deployments across multiple environments.
@@ -644,7 +644,7 @@ As part of a [twelve-factor](https://12factor.net/){: external}, cloud-native ap
 
 For example, you can set up a base `kustomization` YAML to declare Kubernetes objects such as deployments and PVCs that are shared in your development, testing, and production environments. Next, you can set up separate `kustomization` YAMLs that have customized configurations for each environment, such as more replicas in production than testing. These customized YAMLs can then overlay, or build on, the shared base YAML so that you can manage environments that are mostly identical except for a few overlay configuration differences that you source-control. For more information about Kustomize such as a glossary and FAQs, check out the [Kustomize docs](https://github.com/kubernetes-sigs/kustomize/tree/master/docs){: external}.
 
-Before you begin:
+Before you begin: 
 *   [Create](/docs/containers?topic=containers-clusters#clusters_ui) or [update](/docs/containers?topic=containers-update) to a cluster that runs Kubernetes version 1.14 or later.
 *   Make sure that your [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches your cluster version.
 *   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -853,6 +853,10 @@ To set up configuration files with Kustomize:
     persistentvolumeclaim "staging-kustomtest-pvc-v2" deleted
     ```
     {: screen}
+
+<br />
+
+
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}

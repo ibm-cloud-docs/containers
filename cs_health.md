@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -1164,6 +1164,6 @@ To configure Autorecovery:
 
 7. If you do not see activity on the Autorecovery deployment, you can check the Helm deployment by running the tests that are included in the Autorecovery chart definition.
     ```
-    helm test ibm-worker-recovery
+    helm test ibm-worker-recovery -n kube-system
     ```
     {: pre}
