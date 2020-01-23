@@ -106,7 +106,7 @@ The four BookInfo microservices include:
   * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
   * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The BookInfo app is also already exposed on a public IP address by an Istio Gateway. To see the BookInfo architecture, check out the [Istio documentation](https://istio.io/docs/examples/bookinfo/){: etxernal}.
+The BookInfo app is also already exposed on a public IP address by an Istio Gateway. To see the BookInfo architecture, check out the [Istio documentation](https://istio.io/docs/examples/bookinfo/){: external}.
 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
@@ -278,7 +278,7 @@ To simulate a release of an app, you can perform a phased rollout `v3` of the `r
 After you finish testing your app and are ready to start directing live traffic to it, you can perform rollouts gradually through Istio. For example, you can first release `v3` to 10% of the users, then to 20% of users, and so on.
 
 1. Configure a virtual service to distribute 0% of traffic to `v1`, 90% of traffic to `v2`, and 10% of traffic to `v3` of `reviews`.
-  ```yaml
+  ```
   kubectl apply -f - <<EOF
   apiVersion: networking.istio.io/v1alpha3
   kind: VirtualService
