@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Version information and update actions   
+# Kubernetes version information and update actions   
 {: #cs_versions}
 
 Review information about supported Kubernetes versions for {{site.data.keyword.containerlong}} clusters.

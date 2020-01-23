@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-20"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Fluentd and Ingress ALB changelog
+# Fluentd and Ingress ALB version changelog
 {: #cluster-add-ons-changelog}
 
 Your {{site.data.keyword.containerlong}} cluster comes with components, such as the Fluentd and Ingress ALB components, that are updated automatically by IBM. You can also disable automatic updates for some components and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
