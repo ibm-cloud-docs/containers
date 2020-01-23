@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -53,7 +53,7 @@ Set up the managed Istio add-on in your cluster.
   ```
   {: pre}
 
-3. Verify that the managed Istio add-on has a status of `Addon Ready`.
+3. Verify that the managed Istio add-on has a status of `Addon Ready`. Note that it can take a few minutes for the add-on to be ready.
   ```
   ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
@@ -94,7 +94,7 @@ For more information about Istio in {{site.data.keyword.containerlong_notm}}, se
 ## Step 2: Set up the BookInfo sample app
 {: #istio-qs-2}
 
-The BookInfo sample application for Istio includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.
+The BookInfo sample application includes a basic Istio configuration so that you can try out Istio's capabilities immediately.
 {: shortdesc}
 
 The four BookInfo microservices include:
@@ -106,77 +106,83 @@ The four BookInfo microservices include:
   * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
   * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The BookInfo app is also already exposed on a public IP address by an Istio Gateway.
+The BookInfo app is also already exposed on a public IP address by an Istio Gateway. To see the BookInfo architecture, check out the [Istio documentation](https://istio.io/docs/examples/bookinfo/){: etxernal}.
 
 1. Install BookInfo in your cluster.
-    1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
-      ```
-      curl -L https://istio.io/downloadIstio | sh -
-      ```
-      {: pre}
+  1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
+    ```
+    curl -L https://istio.io/downloadIstio | sh -
+    ```
+    {: pre}
 
-    2. Navigate to the Istio package directory.
-      ```
-      cd istio-1.4.2
-      ```
-      {: pre}
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.4.2
+    ```
+    {: pre}
 
-    3. Label the `default` namespace for automatic sidecar injection.
-      ```
-      kubectl label namespace default istio-injection=enabled
-      ```
-      {: pre}
+  3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+    ```
+    export PATH=$PWD/bin:$PATH
+    ```
+    {: pre}
 
-    4. Deploy the BookInfo application, gateway, and destination rules.
-      ```
-      kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-      kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-      kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
-      ```
-      {: pre}
+  4. Label the `default` namespace for automatic sidecar injection. Any new pods that are deployed to `default` are now automatically created with Envoy proxy sidecar containers.
+    ```
+    kubectl label namespace default istio-injection=enabled
+    ```
+    {: pre}
 
-    5. Ensure that the BookInfo microservices pods are `Running`.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
+  5. Deploy the BookInfo application, gateway, and destination rules.
+    ```
+    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+    kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+    kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
+    ```
+    {: pre}
 
-      ```
-      NAME                                     READY     STATUS      RESTARTS   AGE
-      details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
-      productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
-      ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
-      reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
-      reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
-      reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
-      ```
-      {: screen}
+  6. Ensure that the BookInfo microservices pods are `Running`.
+    ```
+    kubectl get pods
+    ```
+    {: pre}
+
+    ```
+    NAME                                     READY     STATUS      RESTARTS   AGE
+    details-v1-6865b9b99d-7v9h8              2/2       Running     0          2m
+    productpage-v1-f8c8fb8-tbsz9             2/2       Running     0          2m
+    ratings-v1-77f657f55d-png6j              2/2       Running     0          2m
+    reviews-v1-6b7f6db5c5-fdmbq              2/2       Running     0          2m
+    reviews-v2-7ff5966b99-zflkv              2/2       Running     0          2m
+    reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
+    ```
+    {: screen}
 
 2. Get the public address for the `istio-ingressgateway` load balancer that exposes BookInfo.
-    * **Classic clusters**:
-      1. Set the Istio ingress host.
-         ```
-         export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
-         ```
-         {: pre}
+  * **Classic clusters**:
+    1. Set the Istio ingress IP address as an environment variable.
+       ```
+       export INGRESS_IP=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].ip}')
+       ```
+       {: pre}
 
-      2. Set the Istio ingress port.
-         ```
-         export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
-         ```
-         {: pre}
+    2. Set the Istio ingress port as an environment variable.
+       ```
+       export INGRESS_PORT=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.spec.ports[?(@.name=="http2")].port}')
+       ```
+       {: pre}
 
-      3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
-         ```
-         export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
-         ```
-         {: pre}
+    3. Create a `GATEWAY_URL` environment variable that uses the Istio ingress host and port.
+       ```
+       export GATEWAY_URL=$INGRESS_IP:$INGRESS_PORT
+       ```
+       {: pre}
 
-    * **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
-      ```
-      export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
-      ```
-      {: pre}
+  * **VPC clusters**: Create a `GATEWAY_URL` environment variable that uses the Istio ingress hostname.
+    ```
+    export GATEWAY_URL=$(kubectl -n istio-system get service istio-ingressgateway -o jsonpath='{.status.loadBalancer.ingress[0].hostname}')
+    ```
+    {: pre}
 
 3. Curl the `GATEWAY_URL` variable to check that the BookInfo app is running. A `200` response means that the BookInfo app is running properly with Istio.
    ```
@@ -373,4 +379,53 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 5. Search for `Istio` and select one of Sysdig's predefined Istio dashboards.
 
 For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} on the Sysdig blog.
+
+
+## Step 6: Secure in-cluster traffic by enabling mTLS
+{: #mtls}
+
+Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls){: external}.
+{: shortdesc}
+
+1. Create a mesh-wide authentication policy file that is named `meshpolicy.yaml`. This policy configures all workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh.
+  ```yaml
+  apiVersion: "authentication.istio.io/v1alpha1"
+  kind: "MeshPolicy"
+  metadata:
+    name: "default"
+  spec:
+    peers:
+    - mtls: {}
+  ```
+  {: codeblock}
+
+2. Apply the authentication policy.
+  ```
+  kubectl apply -f meshpolicy.yaml
+  ```
+  {: pre}
+
+3. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
+  ```yaml
+  apiVersion: "networking.istio.io/v1alpha3"
+  kind: "DestinationRule"
+  metadata:
+    name: "default"
+    namespace: "istio-system"
+  spec:
+    host: "*.local"
+    trafficPolicy:
+      tls:
+        mode: ISTIO_MUTUAL
+  ```
+  {: codeblock}
+
+4. Apply the destination rule.
+  ```
+  kubectl apply -f destination-mtls.yaml
+  ```
+  {: pre}
+
+Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
+{: note}
 

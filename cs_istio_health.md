@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -47,18 +47,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 
 **Before you begin**
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster. If your cluster runs Kubernetes version 1.15 or earlier, you must also [install the `istio-extras` add-on](/docs/containers?topic=containers-istio#install_115).
-* Install the `istioctl` client.
-  1. Download the `istioctl` client.
-    ```
-    curl -L https://istio.io/downloadIstio | sh -
-    ```
-    {: pre}
-
-  2. Navigate to the Istio package directory.
-    ```
-    cd istio-1.4.2
-    ```
-    {: pre}
+* [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 
 ### Promethueus
 {: #prometheus}
@@ -169,18 +158,7 @@ The ControlZ dashboard accesses the Istio component ports to provide an interact
 
 **Before you begin**
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-* Install the `istioctl` client.
-  1. Download the `istioctl` client.
-    ```
-    curl -L https://istio.io/downloadIstio | sh -
-    ```
-    {: pre}
-
-  2. Navigate to the Istio package directory.
-    ```
-    cd istio-1.4.2
-    ```
-    {: pre}
+* [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 
 ### ControlZ
 {: #controlz}

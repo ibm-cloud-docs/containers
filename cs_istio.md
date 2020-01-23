@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -284,6 +284,27 @@ To enable the Istio add-on:
 <br />
 
 
+## Installing the `istioctl` CLI
+{: #istioctl}
+
+Install the `istioctl` CLI client. For more information, see the [`istioctl` command reference](https://istio.io/docs/reference/commands/istioctl/){: external}.
+
+1. Download `istioctl`.
+  ```
+  curl -L https://istio.io/downloadIstio | sh -
+  ```
+  {: pre}
+2. Navigate to the Istio package directory.
+  ```
+  cd istio-1.4.2
+  ```
+  {: pre}
+3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+  ```
+  export PATH=$PWD/bin:$PATH
+  ```
+  {: pre}
+
 ## Updating the Istio add-ons
 {: #istio_update}
 
@@ -296,7 +317,7 @@ Update your Istio add-ons to the latest versions, which are tested by {{site.dat
 The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: shortdesc}
 
-During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterruptedly. After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
+During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterruptedly. After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}. You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
 
 1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
    ```
