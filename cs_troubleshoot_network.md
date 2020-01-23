@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -304,9 +304,11 @@ Even if the cluster is in a `normal` state, the Ingress subdomain and secret mig
 1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
 2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
 3. When the `ibm-cloud-provider-vlan-ip-config` config map is updated, the public ALB is triggered for creation.
-4. After the ALB is successfully created in the cluster and the corresponding `LoadBalancer` service that exposes the ALB is assigned an IP address (classic clusters) or a hostname (VPC clusters), the IP address or hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
+4. A load balancer service that exposes the ALB is created and assigned an IP address (classic clusters) or a hostname (VPC clusters).
+5. The load balancer IP address or hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
 
-Note that if you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
+If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
+{: note}
 
 {: tsResolve}
 Typically, after the cluster is ready, the Ingress subdomain and secret are created after 15 minutes. If the Ingress subdomain and secret are still unavailable after your cluster is in a `normal` state for more than 15 minutes, you can check the progress of the creation process by following these steps:
@@ -319,7 +321,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 
    Example output:
    ```
-   ID                                                     Public IP        Private IP     Flavor              State     Status   Zone    Version
+   ID                                                     Public IP         Private IP      Flavor              State     Status   Zone    Version
    kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.15.8
    ```
    {: screen}
