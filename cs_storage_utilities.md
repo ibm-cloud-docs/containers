@@ -755,6 +755,7 @@ Before you begin:
       <td><code>volume_ID</code></td>
       <td>The unique ID that is assigned to your {{site.data.keyword.blockstorageshort}} volume. You can retrieve a list of your {{site.data.keyword.blockstorageshort}} volumes by running <code>ibmcloud is volumes</code>. </td>
       </tr>
+    </tbody>
   </table>
 
 7. Verify the attachment by [reviewing existing volume attachments for a VPC worker node](#vpc_api_get_worker).
@@ -867,6 +868,7 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
       <td><code>volume_attachment_ID</code></td>
       <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
       </tr>
+    </tbody>
   </table>
 
 ### Reviewing volume attachment details for a VPC worker node
@@ -940,6 +942,7 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
       <td><code>volume_attachment_ID</code></td>
       <td>The unique ID that is assigned to your volume attachment. You can retrieve this ID by running <code>ibmcloud is volume <volume_ID></code>.</td>
       </tr>
+    </tbody>
   </table>
 
 
