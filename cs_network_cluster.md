@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, vlan
 
@@ -48,6 +48,8 @@ After you initially set up your network when you [create a cluster](/docs/contai
 Enable the private service endpoint for your cluster.
 {: shortdesc}
 
+
+
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
 
 Did you create a cluster with only a private service endpoint before you enabled your account for [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
@@ -92,6 +94,8 @@ Did you create a cluster with only a private service endpoint before you enabled
 Enable or disable the public service endpoint for your cluster.
 {: shortdesc}
 
+
+
 The public service endpoint makes your Kubernetes master publicly accessible. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#internet-facing).
 
 **Steps to enable**</br>
@@ -113,6 +117,7 @@ If you previously disabled the public endpoint, you can re-enable it.
    ```
   {: pre}
    </br>
+
 
 {: #disable-public-se}
 **Steps to disable**</br>
