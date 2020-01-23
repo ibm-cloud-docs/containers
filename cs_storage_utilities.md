@@ -1316,7 +1316,7 @@ To back up or restore a PVC by editing the `values.yaml` file:
 
       
 
-      You successfully restored your backup. You can now mount the PVC that binds the PV to any other pod in your cluster to access the restored files. If the container data that was backed up included a non-root user, you must add non-root permissions to your new container. For more information, see [Adding non-root user access to volumes](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).
+    8. You successfully restored your backup. You can now mount the PVC that binds the PV to any other pod in your cluster to access the restored files. If the container data that was backed up included a non-root user, you must add non-root permissions to your new container. For more information, see [Adding non-root user access to volumes](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).
 
 
 
