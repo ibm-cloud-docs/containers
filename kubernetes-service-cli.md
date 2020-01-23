@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -5488,7 +5488,7 @@ ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic) [--json] [-s]
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>Enter the zone where you want to list available flavors. This value is required. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute.</dd>
 
-<dt><code>--provider <em>(classic | vpc-classic)</em></dt>
+<dt><code>--provider <em>(classic | vpc-classic)</em></code></dt>
 <dd>The infrastructure provider for which you want to list available flavors.</dd>
 
 <dt><code>--json</code></dt>
