@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-24"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -33,13 +33,12 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Debugging Ingress
+# Troubleshooting Ingress
 {: #cs_troubleshoot_debug_ingress}
-{: troubleshoot}
-{: support}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for general Ingress troubleshooting and debugging.
 {: shortdesc}
+
 
 You publicly exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the ALB's public IP address or subdomain, the connection fails or times out. The steps in the following sections can help you debug your Ingress setup.
 
@@ -456,4 +455,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
+
 

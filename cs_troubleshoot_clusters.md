@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-24"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -40,6 +40,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 {: shortdesc}
 
 <p class="tip">If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).<br>Also, while you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.</p>
+
 
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
@@ -1350,4 +1351,5 @@ Still having issues with your cluster?
 -   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
 {: tip}
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-24"
 
 keywords: kubernetes, iks, help, debug
 
@@ -412,9 +412,10 @@ Review the options that you have to debug your app deployments and find the root
 Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the namespace where your app is deployed.
 
 1. Look for abnormalities in the service or deployment resources by running the `describe` command.
-
- Example:
- <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+    ```
+    kubectl describe service <service_name>
+    ```
+    {: pre}
 
 2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
 
@@ -422,27 +423,54 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
 
 4. Verify that the service is listening on the correct port.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
-     <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+      ```
+      curl localhost: <port>
+      ```
+      {: pre}
 
 5. Verify that the service is linked correctly to the pods.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If no endpoints are listed, then the selector for the service does not match the pods. If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
-     <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+      ```
+      curl <cluster_IP>:<port>
+      ```
+      {: pre}
 
 6. For Ingress services, verify that the service is accessible from within the cluster.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint. 
-     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+      ```
+      curl <host_name>.<domain>
+      ```
+      {: pre}
 
 <br />
 
