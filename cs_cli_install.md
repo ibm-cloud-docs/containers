@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -114,7 +114,7 @@ Using an OpenShift cluster? [Install the OpenShift CLI (`oc`)](/docs/openshift?t
         kubectl version --short
         ```
         {: pre}
-2.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.15.8.
+2.  Download the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. The current {{site.data.keyword.containerlong_notm}} default Kubernetes version is 1.15.8. 
     -   **OS X**: [https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/darwin/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/darwin/amd64/kubectl){: external}
     -   **Linux**: [https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/linux/amd64/kubectl](https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/linux/amd64/kubectl){: external}
     -   **Windows**: Install the Kubernetes CLI in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later. [https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/windows/amd64/kubectl.exe](https://storage.googleapis.com/kubernetes-release/release/v1.15.8/bin/windows/amd64/kubectl.exe){: external}
