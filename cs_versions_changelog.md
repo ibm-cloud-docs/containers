@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-21"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Version changelog
+# Kubernetes version changelog
 {: #changelog}
 
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
@@ -63,7 +63,7 @@ Review the version 1.16 changelog.
 ### Changelog for 1.16.5_1522, released 20 January 2020
 {: #1165_1522}
 
-The following table shows the changes that are included in the master and worker node patch update 1.16.5_1522.
+The following table shows the changes that are included in the master and worker node patch update 1.16.5_1522. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -228,7 +228,7 @@ Review the version 1.15 changelog.
 ### Changelog for 1.15.8_1529, released 20 January 2020
 {: #1158_1529}
 
-The following table shows the changes that are included in the master and worker node patch update 1.15.8_1529.
+The following table shows the changes that are included in the master and worker node patch update 1.15.8_1529. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -887,7 +887,7 @@ Review the version 1.14 changelog.
 ### Changelog for 1.14.10_1545, released 20 January 2020
 {: #11410_1545}
 
-The following table shows the changes that are included in the master and worker node patch update 1.14.10_1545.
+The following table shows the changes that are included in the master and worker node patch update 1.14.10_1545. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1938,7 +1938,7 @@ Review the version 1.13 changelog.
 ### Changelog for 1.13.12_1548, released 20 January 2020
 {: #11312_1548}
 
-The following table shows the changes that are included in the master and worker node patch update 1.13.12_1548.
+The following table shows the changes that are included in the master and worker node patch update 1.13.12_1548. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-27"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,8 +44,9 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 27 January 2020 | <ul><li>**Istio changelog**: Added an [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog).</li><li>**Back up and restore File and Block storage**: Added steps for deploying the [<code>ibmcloud-backup-restore</code> Helm chart](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore).</li></ul> |
 | 22 January 2020 | **Kubernetes 1.15**: [Kubernetes 1.15](/docs/containers?topic=containers-cs_versions#version_types) is now the default version. |
-| 21 January 2020 | **Default {{site.data.keyword.containerlong}} settings**: Review the [default settings](/docs/containers?topic=containers-service-settings) for Kubernetes components, such as the `kube-apiserver`, `kubelet`, or `kube-proxy`. |
+| 21 January 2020 | **Default {{site.data.keyword.containerlong_notm}} settings**: Review the [default settings](/docs/containers?topic=containers-service-settings) for Kubernetes components, such as the `kube-apiserver`, `kubelet`, or `kube-proxy`. |
 | 20 January 2020 | <ul><li>**Helm version 3**: Updated [Adding services by using Helm charts](/docs/containers?topic=containers-helm) to include steps for installing Helm v3 in your cluster. Migrate to Helm v3 today for several advantages over Helm v2, such as the removal of the Helm server, Tiller.</li><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 621](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>**Version changelog**: Patch updates are available for Kubernetes [1.16.5_1522](/docs/containers?topic=containers-changelog#1165_1522), [1.15.8_1529](/docs/containers?topic=containers-changelog#1158_1529), [1.14.10_1545](/docs/containers?topic=containers-changelog#11410_1545), and [1.13.12_1548](/docs/containers?topic=containers-changelog#11312_1548).</li></ul> |
 | 13 January 2020 | **{{site.data.keyword.blockstorageshort}}**: Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach). |
 | 06 January 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|

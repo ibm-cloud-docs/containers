@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-27"
 
 keywords: kubernetes, iks, vpc
 
@@ -144,7 +144,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
     3.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
-    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
+    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version. 
 
         ```
         kubectl version  --short

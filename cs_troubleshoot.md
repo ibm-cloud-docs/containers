@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-27"
 
 keywords: kubernetes, iks, help, debug
 
@@ -412,9 +412,10 @@ Review the options that you have to debug your app deployments and find the root
 Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the namespace where your app is deployed.
 
 1. Look for abnormalities in the service or deployment resources by running the `describe` command.
-
- Example:
- <pre class="pre"><code>kubectl describe service &lt;service_name&gt; </code></pre>
+    ```
+    kubectl describe service <service_name>
+    ```
+    {: pre}
 
 2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
 
@@ -422,27 +423,54 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
 
 4. Verify that the service is listening on the correct port.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
-     <pre class="pre"><code>curl localhost: &lt;port&gt;</code></pre>
+      ```
+      curl localhost: <port>
+      ```
+      {: pre}
 
 5. Verify that the service is linked correctly to the pods.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If no endpoints are listed, then the selector for the service does not match the pods. If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
-     <pre class="pre"><code>curl &lt;cluster_IP&gt;:&lt;port&gt;</code></pre>
+      ```
+      curl <cluster_IP>:<port>
+      ```
+      {: pre}
 
 6. For Ingress services, verify that the service is accessible from within the cluster.
    1. Get the name of a pod.
-     <pre class="pre"><code>kubectl get pods</code></pre>
+      ```
+      kubectl get pods
+      ```
+      {: pre}
    2. Log in to a container.
-     <pre class="pre"><code>kubectl exec -it &lt;pod_name&gt; -- /bin/bash</code></pre>
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
    2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint. 
-     <pre class="pre"><code>curl &lt;host_name&gt;.&lt;domain&gt;</code></pre>
+      ```
+      curl <host_name>.<domain>
+      ```
+      {: pre}
 
 <br />
 
@@ -456,14 +484,10 @@ Still having issues with your cluster?
 
 -  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 -   To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page](https://cloud.ibm.com/status?selected=status){: external}.
--   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack](https://ibm-container-service.slack.com){: external}.
-    If you are not using an IBM ID for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
-    {: tip}
+-   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack](https://ibm-container-service.slack.com){: external}.<p class="tip">If you are not using an IBM ID for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.</p>
 -   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
     -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+containers){: external} and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
     -   For questions about the service and getting started instructions, use the [IBM Developer Answers](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix){: external} forum. Include the `ibm-cloud` and `containers` tags.
     See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
--   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
-When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.
-{: tip}
+-   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).<p class="tip">When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.</p>
 

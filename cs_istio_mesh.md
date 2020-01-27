@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -397,7 +397,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 <br />
 
 
-## Exposing Istio-managed apps by using an IBM-provided subdomain
+## Publicly exposing Istio-managed apps
 {: #istio_expose}
 
 Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
@@ -408,23 +408,13 @@ In the following steps, you set up a subdomain through which your users can acce
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
 * A subdomain for the `istio-ingressgateway` load balancer. All user requests to the subdomain are forwarded to your app according to your `my-virtual-service` routing rules.
 
-### Exposing Istio-managed apps without TLS termination
+### Publicly exposing Istio-managed apps without TLS termination
 {: #no-tls}
 
 **Before you begin:**
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-2. Install the `istioctl` client.
-  1. Download `istioctl`.
-    ```
-    curl -L https://istio.io/downloadIstio | sh -
-    ```
-    {: pre}
-  2. Navigate to the Istio package directory.
-    ```
-    cd istio-1.4.2
-    ```
-    {: pre}
+2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
 **To publicly expose your Istio-managed apps with a subdomain without using TLS:**
@@ -566,23 +556,13 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: codeblock}
 
-### Exposing Istio-managed apps with TLS termination
+### Publicly exposing Istio-managed apps with TLS termination
 {: #tls}
 
 **Before you begin:**
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-2. Install the `istioctl` client.
-  1. Download `istioctl`.
-    ```
-    curl -L https://istio.io/downloadIstio | sh -
-    ```
-    {: pre}
-  2. Navigate to the Istio package directory.
-    ```
-    cd istio-1.4.2
-    ```
-    {: pre}
+2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
 **To publicly expose your Istio-managed apps with a subdomain using TLS:**

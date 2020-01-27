@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-16"
+lastupdated: "2020-01-24"
 
 keywords: kubernetes, iks
 
@@ -44,7 +44,6 @@ If you want to use {{site.data.keyword.cos_full_notm}} in a private cluster with
 
 If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure to install the plug-in without the Helm server Tiller.
 {: important}
-
 
 
 If you plan to install the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, you must enable VRF in your {{site.data.keyword.cloud_notm}} account by running `ibmcloud account update --service-endpoint-enable true`. This command output prompts you to open a support case to enable your account to use VRF and service endpoints. When VRF is enabled, any system that is connected to any of the private VLANs in the same {{site.data.keyword.cloud_notm}} account can communicate with the cluster worker nodes. You can isolate your cluster from other systems on the private network by applying [Calico private network policies](/docs/containers?topic=containers-network_policies#isolate_workers).
@@ -351,6 +350,12 @@ If you have a private-only cluster, you must install the plugin without Tiller.
         SET DC_NAME=dal13
         ```
         {: pre}
+
+      c. Optional: Set the environment variable in Windows PowerShell.
+        ```
+        $env:DC_NAME="<datacenter>"
+        ```
+        {: codeblock}
 
     2. Retrieve the infrastructure provider that your cluster uses and store it in an environment variable.
 

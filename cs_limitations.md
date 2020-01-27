@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-22"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -71,6 +71,8 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 
 Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
+
+
 
 ### Compute
 {: #classic_compute_limit}
