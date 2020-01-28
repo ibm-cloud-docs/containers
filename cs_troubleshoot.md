@@ -263,7 +263,6 @@ Review the options to debug your worker nodes and find the root causes for failu
       </tbody>
     </table>
 
-
 3. List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
     ```
     ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>
