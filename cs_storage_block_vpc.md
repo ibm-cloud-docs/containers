@@ -42,11 +42,13 @@ subcollection: containers
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
 
-{{site.data.keyword.block_storage_is_short}} is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use block storage in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage). {{site.data.keyword.block_storage_is_short}} is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.block_storage_is_short}} is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use {{site.data.keyword.blockstorageshort}}rt}} in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}rt}}](/docs/containers?topic=containers-block_storage). {{site.data.keyword.block_storage_is_short}} is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 {{site.data.keyword.block_storage_is_short}} is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove {{site.data.keyword.block_storage_is_short}} from your cluster.
 {: important}
+
+
 
 ## Installing the {{site.data.keyword.block_storage_is_short}} add-on
 {: #vpc-block-addon}
@@ -214,7 +216,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    </tr>
    <tr>
    <td><code>spec.resources.requests.storage</code></td>
-   <td>Enter the size of the {{site.data.keyword.block_storage_is_short}} instance, in gigabytes (Gi). Make sure that the size is supported in the {{site.data.keyword.block_storage_is_short}} profile that you chose. For example, if you want 10 gigabyte of block storage, enter `10Gi`.  </td>
+   <td>Enter the size of the {{site.data.keyword.block_storage_is_short}} instance, in gigabytes (Gi). Make sure that the size is supported in the {{site.data.keyword.block_storage_is_short}} profile that you chose. For example, if you want 10 gigabyte of {{site.data.keyword.blockstorageshort}}rt}}, enter `10Gi`.  </td>
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
@@ -445,11 +447,11 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    </tr>
    <tr>
       <td><code>spec.capacity.storage</code></td>
-   <td>Enter the size of your block storage volume in gigabytes (Gi) that you retrieved earlier. For example, if the size of your device is 100 GB, enter <code>100Gi</code>.  </td>
+   <td>Enter the size of your {{site.data.keyword.blockstorageshort}}rt}} volume in gigabytes (Gi) that you retrieved earlier. For example, if the size of your device is 100 GB, enter <code>100Gi</code>.  </td>
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.iops</code></td>
-   <td>Enter the Max IOPS of the block storage volume that you retrieved earlier.</td>
+   <td>Enter the Max IOPS of the {{site.data.keyword.blockstorageshort}}rt}} volume that you retrieved earlier.</td>
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.zone</code></td>
@@ -457,7 +459,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
-   <td>Enter the ID of the block storage volume that you retrieved earlier. </td>
+   <td>Enter the ID of the {{site.data.keyword.blockstorageshort}}rt}} volume that you retrieved earlier. </td>
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
@@ -482,7 +484,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    ```
    {: pre}
 
-8. Create another configuration file for your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for the storage size and access mode. In your storage class field, enter an empty string value to match your PV. If any of these fields do not match the PV, then a new PV and a block storage instance are created automatically via dynamic provisioning.
+8. Create another configuration file for your PVC. In order for the PVC to match the PV that you created earlier, you must choose the same value for the storage size and access mode. In your storage class field, enter an empty string value to match your PV. If any of these fields do not match the PV, then a new PV and a {{site.data.keyword.blockstorageshort}}rt}} instance are created automatically via dynamic provisioning.
    ```yaml
    apiVersion: v1
    kind: PersistentVolumeClaim
@@ -565,7 +567,7 @@ You can create a customized storage class to provision {{site.data.keyword.block
     </tbody>
     </table>
 
-2. Follow step 4-9 in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision block storage with a different file system. Then, mount this storage to a sample app.
+2. Follow step 4-9 in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision {{site.data.keyword.blockstorageshort}}rt}} with a different file system. Then, mount this storage to a sample app.
 
    Your app might take a few minutes to mount the storage and get into a **Running** state.
    {: note}
@@ -623,7 +625,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
    1. From the {{site.data.keyword.cloud_notm}} menu, select **Manage** > **Access (IAM)**.
    2. From the menu, select **Authorizations**.
    3. Click **Create**.
-   4. Select **Cloud Block Storage** as your source service.
+   4. Select **Cloud {{site.data.keyword.blockstorageshort}}rt}}** as your source service.
    5. Select **Key Protect** as your target service.
    6. Select the **Reader** service access role and click **Authorize**.
 
@@ -664,7 +666,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     </tr>
     <tr>
     <td><code>parameters.encrypted</code></td>
-    <td>Enter <strong>true</strong> to create a storage class that sets up encryption for your block storage volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>.</td>
+    <td>Enter <strong>true</strong> to create a storage class that sets up encryption for your {{site.data.keyword.blockstorageshort}}rt}} volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>.</td>
     </tr>
     <tr>
     <td><code>parameters.encryptionKey</code></td>
@@ -704,11 +706,11 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     </tr>
     <tr>
     <td><code>parameters.encrypted</code></td>
-    <td>Enter <strong>true</strong> to set up encryption for your block storage volumes. </td>
+    <td>Enter <strong>true</strong> to set up encryption for your {{site.data.keyword.blockstorageshort}}rt}} volumes. </td>
     </tr>
     <tr>
     <td><code>parameters.encryptionKey</code></td>
-    <td>Enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your block storage volume. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. </td>
+    <td>Enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your {{site.data.keyword.blockstorageshort}}rt}} volume. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. </td>
     </tr>
     </tbody>
     </table>
@@ -719,7 +721,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
     {: note}
 
 7. Verify that your data is encrypted.
-   1. List your block storage volumes and note the **ID** of the instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC.
+   1. List your {{site.data.keyword.blockstorageshort}}rt}} volumes and note the **ID** of the instance that you created. The storage instance **Name** equals the name of the PV that was automatically created when you created the PVC.
       ```
       ibmcloud is vols
       ```
@@ -732,7 +734,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
       ```
       {: screen}
 
-   2. Using the volume **ID**, list the details for your block storage instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output.
+   2. Using the volume **ID**, list the details for your {{site.data.keyword.blockstorageshort}}rt}} instance to ensure that your {{site.data.keyword.keymanagementserviceshort}} root key is stored in the storage instance. You can find the root key in the **Encryption key** field of your CLI output.
       ```
       ibmcloud is vol <volume_ID>
       ```
@@ -770,13 +772,13 @@ As a cluster admin, [create a customized storage class](#vpc-customize-storage-c
 
 However, when multiple configurations are required and you don't want to create a customized storage class for every possible PVC configuration, you can create one customized storage class with the default PVC settings and a reference to a generic [Kubernetes secret](#vpc-block-storageclass-secret). If your cluster users must override the default settings of your customized storage class, they can do so by creating a Kubernetes secret that holds their custom settings.
 
-When you want to set up encryption for your block storage instance, you can also use a Kubernetes secret if you want to encode the {{site.data.keyword.keymanagementserviceshort}} root key CRN to base64 instead of providing the key directly in the customized storage class.  
+When you want to set up encryption for your {{site.data.keyword.blockstorageshort}}rt}} instance, you can also use a Kubernetes secret if you want to encode the {{site.data.keyword.keymanagementserviceshort}} root key CRN to base64 instead of providing the key directly in the customized storage class.  
 
 
 ### Customizing a storage class
 {: #vpc-customize-storage-class}
 
-Use one of the IBM-provided storage classes as a basis to create your own customized storage class with the preferred settings for your block storage instance.
+Use one of the IBM-provided storage classes as a basis to create your own customized storage class with the preferred settings for your {{site.data.keyword.blockstorageshort}}rt}} instance.
 {: shortdesc}
 
 1. Review step 1 and 2 in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to find the pre-defined storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
@@ -862,15 +864,15 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
        </tr>
        <tr>
           <td><code>parameters.csi.storage.k8s.io/fstype</code></td>
-          <td>Enter the file system for your block storage instance. Choose `xfs`, `ext3`, or `ext4`. The default value is `ext4` and is used if you do not specify a file system.</td>
+          <td>Enter the file system for your {{site.data.keyword.blockstorageshort}}rt}} instance. Choose `xfs`, `ext3`, or `ext4`. The default value is `ext4` and is used if you do not specify a file system.</td>
        </tr>
        <tr>
           <td><code>parameters.encrypted</code></td>
-          <td>Enter <strong>true</strong> to create a storage class that sets up encryption for your block storage volume. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>Enter <strong>true</strong> to create a storage class that sets up encryption for your {{site.data.keyword.blockstorageshort}}rt}} volume. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        <tr>
           <td><code>parameters.encryptionKey</code></td>
-          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your block storage volume. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your {{site.data.keyword.blockstorageshort}}rt}} volume. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        </tr>
        <tr>
@@ -930,9 +932,9 @@ Specify your PVC settings in a Kubernetes secret and reference this secret in a 
 **What options do I have to use the Kubernetes secret?** </br>
 As a cluster admin, you can choose if you want to allow each cluster user to override the default settings of a storage class, or if you want to create one secret that everyone in your cluster must use and that enforces base64 encoding for your {{site.data.keyword.keymanagementserviceshort}} root key CRN.
 
-- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a generic Kubernetes secret. Cluster users can override the default settings of the storage class by creating a Kubernetes secret with the PVC settings that they want. In order for the customized settings in the secret to get applied to your block storage instance, you must create a PVC with the same name as your Kubernetes secret.
+- **[Every user can customize the default settings](#customize-with-secret)**: In this scenario, the cluster admin creates one customized storage class with the default PVC settings and a reference to a generic Kubernetes secret. Cluster users can override the default settings of the storage class by creating a Kubernetes secret with the PVC settings that they want. In order for the customized settings in the secret to get applied to your {{site.data.keyword.blockstorageshort}}rt}} instance, you must create a PVC with the same name as your Kubernetes secret.
 
-- **[Enforce base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides or enhances the default settings of the customized storage class. Your cluster users cannot override the default settings by creating their own Kubernetes secret. Instead, cluster users must provision {{site.data.keyword.block_storage_is_short}} with the configuration that you chose in your customized storage class and secret. The benefit of using this method over creating a [customized storage class](#vpc-customize-storage-class) only is that you can enforce base64 encoding for the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance when you want to encrypt the data in your block storage instance.  
+- **[Enforce base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key](#static-secret)**: In this scenario, you create one customized storage class with the default PVC settings and a reference to a static Kubernetes secret that overrides or enhances the default settings of the customized storage class. Your cluster users cannot override the default settings by creating their own Kubernetes secret. Instead, cluster users must provision {{site.data.keyword.block_storage_is_short}} with the configuration that you chose in your customized storage class and secret. The benefit of using this method over creating a [customized storage class](#vpc-customize-storage-class) only is that you can enforce base64 encoding for the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance when you want to encrypt the data in your {{site.data.keyword.blockstorageshort}}rt}} instance.  
 
 **What do I need to be aware of before I start using the Kubernetes secret for my PVC settings?** </br>
 Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeBindingMode` cannot be set in the Kubernetes secret and must be set in the storage class. As the cluster admin, if you want to enable your cluster users to override your default settings, you must ensure that you set up enough customized storage classes that reference a generic Kubernetes secret so that your users can provision {{site.data.keyword.block_storage_is_short}} with different `reclaimPolicy`, `fstype`, and `volumeBindingMode` settings.
@@ -982,11 +984,11 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
        </tr>
        <tr>
           <td><code>stringData.iops</code></td>
-          <td>Enter the range of IOPS that you want to allow for your block storage instance. The range that you enter must match the {{site.data.keyword.block_storage_is_short}} tier that you plan to use. </td>
+          <td>Enter the range of IOPS that you want to allow for your {{site.data.keyword.blockstorageshort}}rt}} instance. The range that you enter must match the {{site.data.keyword.block_storage_is_short}} tier that you plan to use. </td>
        </tr>
        <tr>
           <td><code>stringData.zone</code></td>
-          <td>Enter the VPC zone where you want to create the block storage instance. Make sure that you use a zone that your worker nodes are connected to. To list VPC zones that your worker nodes use, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look at the <strong>Worker Zones</strong> field in your CLI output. If you do not specify a zone, one of the worker node zones is automatically selected for your block storage instance.</td>
+          <td>Enter the VPC zone where you want to create the {{site.data.keyword.blockstorageshort}}rt}} instance. Make sure that you use a zone that your worker nodes are connected to. To list VPC zones that your worker nodes use, run `ibmcloud ks cluster-get --cluster <cluster_name_or_ID>` and look at the <strong>Worker Zones</strong> field in your CLI output. If you do not specify a zone, one of the worker node zones is automatically selected for your {{site.data.keyword.blockstorageshort}}rt}} instance.</td>
        </tr>
        <tr>
           <td><code>stringData.tags</code></td>
@@ -994,15 +996,15 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
        </tr>
        <tr>
           <td><code>stringData.resourceGroup</code></td>
-          <td>Enter the resource group that you want your block storage instance to get access to. If you do not enter a resource group, the instance is automatically authorized to access resources of the resource group that your cluster belongs to. </td>
+          <td>Enter the resource group that you want your {{site.data.keyword.blockstorageshort}}rt}} instance to get access to. If you do not enter a resource group, the instance is automatically authorized to access resources of the resource group that your cluster belongs to. </td>
        </tr>
        <tr>
           <td><code>stringData.encrypted</code></td>
-          <td>Enter <strong>true</strong> to create a secret that sets up encryption for block storage volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>Enter <strong>true</strong> to create a secret that sets up encryption for {{site.data.keyword.blockstorageshort}}rt}} volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        <tr>
           <td><code>data.encryptionKey</code></td>
-          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your block storage volumes. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your {{site.data.keyword.blockstorageshort}}rt}} volumes. To use your root key CRN in a secret, you must first convert it to base64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        </tbody>
        </table>
@@ -1051,11 +1053,11 @@ Some of the PVC settings, such as the `reclaimPolicy`, `fstype`, or the `volumeB
        </tr>
        <tr>
           <td><code>stringData.encrypted</code></td>
-          <td>Enter <strong>true</strong> to create a secret that sets up encryption for block storage volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>Enter <strong>true</strong> to create a secret that sets up encryption for {{site.data.keyword.blockstorageshort}}rt}} volumes. If you set this option to <strong>true</strong>, you must provide the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use in <code>parameters.encryptionKey</code>. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        <tr>
           <td><code>data.encryptionKey</code></td>
-          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your block storage volume. To use your root key CRN in a secret, you must first convert it to base 64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
+          <td>If you entered <strong>true</strong> for <code>parameters.encrypted</code>, then enter the root key CRN of your {{site.data.keyword.keymanagementserviceshort}} service instance that you want to use to encrypt your {{site.data.keyword.blockstorageshort}}rt}} volume. To use your root key CRN in a secret, you must first convert it to base 64 by running `echo  -n "<root_key_CRN>" | base64`. For more information about encrypting your data, see [Setting up encryption for your {{site.data.keyword.block_storage_is_short}}](#vpc-block-encryption).</td>
        </tr>
        </tbody>
        </table>
