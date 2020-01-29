@@ -36,11 +36,11 @@ subcollection: containers
 # CLI changelog
 {: #cs_cli_changelog}
 
-In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags. [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
+In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
 {:shortdesc}
 
 <br>
-Refer to the following table for a summary of changes for each CLI plug-in version.
+Refer to the following table for a summary of changes for each version of the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
 
 
 <table summary="Overview of version changes for the {{site.data.keyword.containerlong_notm}} CLI plug-in">
@@ -211,7 +211,8 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 <tr>
 <td>0.3.34</td>
-<td>31 May 2019</td><ul>
+<td>31 May 2019</td>
+<td><ul>
 <li>Adds the `versions` command to list all supported Kubernetes and OpenShift versions.</li>
 <li>Deprecates the `kube-versions` command.</li>
 </ul></td>
