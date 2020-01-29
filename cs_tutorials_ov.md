@@ -408,7 +408,7 @@ subcollection: containers
 {: #tutorials-ov-monitor-log}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube">
+    <a href = "/docs/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}
@@ -423,7 +423,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-  <a href = "/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
+  <a href = "/docs/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Analyze cluster metrics with {{site.data.keyword.mon_full_notm}}

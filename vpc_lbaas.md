@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -68,7 +68,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
 **Before you begin**:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-* If you use [VPC security groups](/docs/infrastructure/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
+* If you use [VPC security groups](/docs/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
   1. List the worker nodes in your VPC cluster, and note the private IP addresses.
     ```
     kubectl get nodes
@@ -259,7 +259,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
       {: screen}
 
   * **Custom domain**: Provide your own custom domain and give it an alias by specifying the VPC load balancer hostname as a Canonical Name record (CNAME).
-    1. Register a custom domain by working with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/infrastructure/dns?topic=dns-getting-started).
+    1. Register a custom domain by working with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns?topic=dns-getting-started).
     2. Define an alias for your custom domain by specifying the VPC load balancer hostname as a Canonical Name record (CNAME).
 
 3. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain. If you created a subdomain for a private VPC load balancer, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to test access to your subdomain.
@@ -270,7 +270,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 ## Limitations
 {: #lbaas_limitations}
 
-For more information about using load balancers for VPC, see the VPC docs for [public and private](/docs/infrastructure/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#private-load-balancer) load balancers.
+For more information about using load balancers for VPC, see the VPC docs for [public and private](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#private-load-balancer) load balancers.
 {: shortdesc}
 
 * VPC load balancers do not currently support UDP.

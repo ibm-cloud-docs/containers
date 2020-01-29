@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks
 
@@ -54,7 +54,7 @@ Key technologies:
 * [Container security and isolation](/docs/containers?topic=containers-security#security) 
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime#nodejs_runtime)
-* [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/services/appid?topic=appid-getting-started)
+* [Sign-on capability without changing app code by using {{site.data.keyword.appid_short_notm}}](/docs/appid?topic=appid-getting-started)
 
 They started by containerizing their SaaS systems and putting them in the cloud. From that first step, they went from over-built hardware in a private data center to customizable compute that reduces IT operations, maintenance, and energy. To host the SaaS apps, they easily designed Kubernetes clusters to fit their CPU, RAM, and storage needs.  Another factor for decreased staff costs is that IBM manages Kubernetes, so the provider can focus on delivering better customer service. 
 
@@ -130,8 +130,8 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} d
 
 Key technologies:
 * [Intelligent scheduling places workloads where needed](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant)
-* [Vulnerability scanning  and isolation for workloads](/docs/services/Registry?topic=va-va_index#va_index)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [Vulnerability scanning  and isolation for workloads](/docs/Registry?topic=va-va_index#va_index)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
 * [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk?topic=cloud-functions-pkg_cloudant#openwhisk_cloudant)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -114,7 +114,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 ## Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link
 {: #hybrid_dl}
 
-With [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+With [{{site.data.keyword.BluDirectLink}}](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 {: shortdesc}
 
 To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} Private instance, you can use one of the four offerings:
@@ -123,7 +123,7 @@ To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} 
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated Hosting
 
-To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
+To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
@@ -154,14 +154,14 @@ The following table is an overview of available {{site.data.keyword.cloud_notm}}
 {: caption="Table. Supported {{site.data.keyword.cloud_notm}} Private products to be used in {{site.data.keyword.cloud_notm}} Public." caption-side="top"}
 
 Before you begin:
-- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
-- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/services/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
+- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
+- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
 - [Target your `kubectl` CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install the Helm CLI and set up tiller in your cluster](/docs/containers?topic=containers-helm#public_helm_install).
 
 To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{site.data.keyword.cloud_notm}} Public:
 
-1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/services/Registry?topic=registry-ts_index#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
+1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/Registry?topic=registry-ts_index#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
 
     **For IBM WebSphere Application Server Liberty**:
 

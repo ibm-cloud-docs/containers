@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -326,7 +326,7 @@ If you want to install a Helm chart without using Tiller, see [Private clusters:
 
 Before you begin:
 - Install Docker on your local machine. If you installed the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started), Docker is already installed.
-- [Install the {{site.data.keyword.registryshort_notm}} CLI plug-in and set up a namespace](/docs/services/Registry?topic=registry-getting-started#gs_registry_cli_install).
+- [Install the {{site.data.keyword.registryshort_notm}} CLI plug-in and set up a namespace](/docs/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
 To install Tiller by using {{site.data.keyword.registryshort_notm}}:
@@ -352,7 +352,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    Status: Downloaded newer image for gcr.io/kubernetes-helm/tiller:v2.13.0
    ```
    {: screen}
-5. [Tag the Tiller image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), then [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing).
+5. [Tag the Tiller image](/docs/Registry?topic=registry-getting-started#gs_registry_images_pulling), then [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-getting-started#gs_registry_images_pushing).
 6. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
 7. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod.
     1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).

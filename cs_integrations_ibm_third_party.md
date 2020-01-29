@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, helm
 
@@ -68,9 +68,9 @@ Supported persistent storage solutions, such as {{site.data.keyword.cloud_notm}}
 
 To secure your cluster network or connect to an on-prem data center, you can configure one of the following options:
 - [strongSwan IPSec VPN Service](/docs/containers?topic=containers-vpn#vpn-setup)
-- [{{site.data.keyword.BluDirectLink}}](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link)
+- [{{site.data.keyword.BluDirectLink}}](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link)
 - [Virtual Router Appliance (VRA)](/docs/containers?topic=containers-vpn#vyatta)
-- [Fortigate Security Appliance (FSA)](/docs/services/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)
+- [Fortigate Security Appliance (FSA)](/docs/vmwaresolutions/services?topic=vmware-solutions-fsa_considerations)
 
 
 
