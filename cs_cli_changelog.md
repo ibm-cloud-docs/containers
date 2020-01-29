@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks
 
@@ -36,11 +36,8 @@ subcollection: containers
 # CLI changelog
 {: #cs_cli_changelog}
 
-In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
+In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags. [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
 {:shortdesc}
-
-* **Community Kubernetes**: [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
-* **OpenShift**: [Install the CLI plug-in](/docs/openshift?topic=openshift-openshift-cli), which uses the `ibmcloud oc` alias.
 
 <br>
 Refer to the following table for a summary of changes for each CLI plug-in version.
@@ -67,7 +64,6 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>0.4.64</td>
 <td>11 Dec 2019</td>
 <td><ul>
-<li>Adds the `--entitlement` flag to the `ibmcloud ks cluster create` and `ibmcloud ks worker-pool create` commands. Include this flag only if you use this cluster with an [IBM Cloud Pak&trade;](/docs/openshift?topic=openshift-openshift_cloud_paks) that has an OpenShift entitlement.</li>
 <li>Updates the Go version to 1.12.11.</li>
 <li>Updates the help text in various languages.</li></ul>
 </td>
@@ -77,7 +73,6 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>26 Nov 2019</td>
 <td><ul>
 <li>Removes the `kube-audit` log source option from `ibmcloud ks logging config` commands.</li>
-<li>Adds a column to the output of `ibmcloud ks addon-versions` for the minimum required OpenShift version.</li>
 <li>Adds a check to verify that you are logged in to the {{site.data.keyword.cloud_notm}} CLI before the command request is issued.</li>
 <li>Updates the help text in various languages.</li></ul>
 </td>
@@ -183,7 +178,6 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>30 Jul 2019</td>
 <td>
 <ul>
-<li>Adds the `ibmcloud oc` alias to the {{site.data.keyword.containershort_notm}} plug-in for management of Red Hat OpenShift on IBM Cloud clusters.</li>
 <li>Adds the [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) command to detach a public or private portable subnet in an IBM Cloud infrastructure account from a cluster.</li>
 <li>Renames the `ibmcloud ks machine-types` command to `ibmcloud ks flavors`. You can still use the `machine-types` alias.</li>
 <li>In the output of `ibmcloud ks flavors (machine-types)`, indicates flavors that are supported only for {{site.data.keyword.containerlong_notm}} or only for Red Hat OpenShift on IBM Cloud.</li>
@@ -197,7 +191,6 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 <td>02 Jul 2019</td>
 <td><ul>
 <li>Fixes a bug so that a worker pool rebalance message is not returned when the cluster autoscaler is enabled.</li>
-<li>Fixes a bug to support the default OpenShift cluster version.</li>
 <li>Updates help text for the `cluster feature enable private-service-endpoint` and `nlb-dns monitor configure` commands.</li>
 <li>Updates the help text in various languages.</li>
 </ul>
@@ -218,9 +211,7 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 <tr>
 <td>0.3.34</td>
-<td>31 May 2019</td>
-<td>Adds support for creating Red Hat OpenShift on IBM Cloud clusters:<ul>
-<li>Adds support for OpenShift versions in the `--kube-version` flag of the `cluster create classic` command. For example, to create a standard OpenShift cluster, you can pass in `--kube-version 3.11_openshift` in your `cluster create classic` command.</li>
+<td>31 May 2019</td><ul>
 <li>Adds the `versions` command to list all supported Kubernetes and OpenShift versions.</li>
 <li>Deprecates the `kube-versions` command.</li>
 </ul></td>
@@ -411,3 +402,4 @@ Refer to the following table for a summary of changes for each CLI plug-in versi
 </tr>
 </tbody>
 </table>
+
