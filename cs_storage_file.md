@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-01-30"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,83 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is available only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not supported for VPC on Classic clusters. To use {{site.data.keyword.filestorage_short}} in a private cluster that is set up without public network access, your cluster must run Kubernetes version 1.13 or higher.  NFS {{site.data.keyword.filestorage_short}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
+## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}
+{: #file_qs}
 
+In this quickstart guide, you create a 24Gi endurance {{site.data.keyword.filestorage_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
+{: shortdesc}
+
+First time using {{site.data.keyword.filestorage_short}} in your cluster? Come back here once you are familiar with the [{{site.data.keyword.filestorage_short}}](#file_predefined_storageclass) configurations.
+{: tip}
+
+1. Create a file for your PVC and name it `pvc.yaml`.
+
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: silver-pvc
+    labels:
+      billingType: hourly
+      region: # Example: us-south
+      zone: # Example: dal13
+  spec:
+    accessModes:
+      - ReadWriteMany
+    resources:
+      requests:
+        storage: 24Gi
+    storageClassName: ibmc-file-silver
+  ```
+  {: codeblock}
+
+2. Create the PVC in your cluster.
+  ```sh
+  kubectl apply -f pvc.yaml
+  ```
+  {: pre}
+
+3. After your `silver-pvc` PVC is bound, create an app deployment that uses your PVC. Create a file for your deployment and name it `deployment.yaml`.
+
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+      name: my-deployment
+      labels:
+        app: 
+    spec:
+      selector:
+        matchLabels:
+          app: my-app
+      template:
+        metadata:
+          labels:
+            app: my-app
+        spec:
+          containers:
+          - image: # Your contanerized app image.
+            name: my-container
+            volumeMounts:
+            - name: my-volume
+              mountPath: /mount-path
+          volumes:
+          - name: my-volume
+            persistentVolumeClaim:
+              claimName: silver-pvc
+    ```
+    {: codeblock}
+
+3. Create the deployment in your cluster.
+  ```sh
+  kubectl apply -f deployment.yaml
+  ```
+  {: pre}
+
+For more information, see:
+  * [Adding {{site.data.keyword.filestorage_short}} to apps](#add_file).
+  * [Storage class reference](#file_storageclass_reference).
+  * [Custom storage classes](#file_custom_storageclass).
   
 ## Deciding on the {{site.data.keyword.filestorage_short}} configuration
 {: #file_predefined_storageclass}

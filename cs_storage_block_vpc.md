@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-01-30"
 
 keywords: kubernetes, iks, vpc
 
@@ -49,6 +49,80 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 {: important}
 
 
+## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
+{: #file_qs}
+
+In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
+{: shortdesc}
+
+First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [[installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
+{: tip}
+
+1. Create a file for your PVC and name it `pvc.yaml`.
+
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: my-pvc
+  spec:
+    accessModes:
+    - ReadWriteOnce
+    resources:
+      requests:
+        storage: 10Gi
+    storageClassName: ibmc-vpc-block-5iops-tier
+  ```
+  {: codeblock}
+
+2. Create the PVC in your cluster.
+  ```sh
+  kubectl apply -f pvc.yaml
+  ```
+  {: pre}
+
+3. After your `silver-pvc` PVC is bound, create an app deployment that uses your PVC. Create a file for your deployment and name it `deployment.yaml`.
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: my-deployment
+    labels:
+      app: 
+  spec:
+    selector:
+      matchLabels:
+        app: my-app
+    template:
+      metadata:
+        labels:
+          app: my-app
+      spec:
+        containers:
+        - image: # Your contanerized app image.
+          name: my-container
+          volumeMounts:
+          - name: my-volume
+            mountPath: /mount-path
+        volumes:
+        - name: my-volume
+          persistentVolumeClaim:
+            claimName: my-pvc
+  ```
+  {: codeblock}
+
+3. Create the deployment in your cluster.
+  ```sh
+  kubectl apply -f deployment.yaml
+  ```
+  {: pre}
+
+For more information, see:
+  * [Installing the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon)
+  * [Adding {{site.data.keyword.block_storage_is_short}} to apps](#vpc-block-add).
+  * [Storage class reference](#vpc-block-reference).
+  * [Customizing the default storage settings](#vpc-customize-default).
 
 ## Installing the {{site.data.keyword.block_storage_is_short}} add-on
 {: #vpc-block-addon}
