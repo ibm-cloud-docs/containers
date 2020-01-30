@@ -144,7 +144,7 @@ To troubleshoot your NLB service:
 <br />
 
 
-## Classic cluster: Cannot deploy a load balancer
+## Classic clusters: Cannot deploy a load balancer
 {: #cs_subnet_limit}
 
 {: tsSymptoms}
