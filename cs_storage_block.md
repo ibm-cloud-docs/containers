@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-01-30"
 
 keywords: kubernetes, iks
 
@@ -41,6 +41,85 @@ subcollection: containers
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
+
+## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}
+{: #block_qs}
+
+In this quickstart guide, you create a 24Gi silver tier {{site.data.keyword.blockshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
+{: shortdesc}
+
+First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [[installed the {{site.data.keyword.blockstorageshort}} plugin](#install_block).
+{: tip}
+
+1. Create a file for your PVC and name it `pvc.yaml`.
+
+  ```yaml
+  apiVersion: v1
+  kind: PersistentVolumeClaim
+  metadata:
+    name: my-pvc
+    labels:
+      billingType: "hourly"
+    region: # Example: us-south
+      zone: # Example: dal13
+  spec:
+    accessModes:
+      - ReadWriteOnce
+    resources:
+      requests:
+        storage: 24Gi
+    storageClassName: ibmc-block-silver
+  ```
+  {: codeblock}
+
+2. Create the PVC in your cluster.
+  ```sh
+  kubectl apply -f pvc.yaml
+  ```
+  {: pre}
+
+3. After your PVC is bound, create an app deployment that uses your PVC. Create a file for your deployment and name it `deployment.yaml`.
+
+  ```yaml
+  apiVersion: apps/v1
+  kind: Deployment
+  metadata:
+    name: my-deployment
+    labels:
+      app: 
+  spec:
+    selector:
+      matchLabels:
+        app: my-app
+    template:
+      metadata:
+        labels:
+          app: my-app
+      spec:
+        containers:
+        - image: # Your contanerized app image.
+          name: my-container
+          volumeMounts:
+          - name: my-volume
+            mountPath: /mount-path
+        volumes:
+        - name: my-volume
+          persistentVolumeClaim:
+            claimName: my-pvc
+  ```
+  {: codeblock}
+
+3. Create the deployment in your cluster.
+  ```sh
+  kubectl apply -f deployment.yaml
+  ```
+  {: pre}
+
+For more information, see:
+  * [Installing the {{site.data.keyword.blockstorageshort}} plugin](##install_block)
+  * [Adding {{site.data.keyword.blockstorageshort}} to apps](#add_block).
+  * [Storage class reference](#block_storageclass_reference).
+  * [Customizing storage classes](#block_custom_storageclass).
 
 
 
