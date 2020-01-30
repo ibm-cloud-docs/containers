@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-23"
+lastupdated: "2020-01-30"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -69,6 +69,16 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>625 / 373</td>
+<td>30 Jan 2020</td>
+<td><ul>
+<li>Fixes a bug so that OCSP stapling works when the OCSP responder sends its own certificate in the OCSP response, which the NGINX validates.</li>
+<li>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-2/).</li>
+<li>Fixes `E2fsprogs` `e2fsck` vulnerabilities for [CVE-2019-5188 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188).</li></ul>
+</td>
+<td>-</td>
+</tr>
 <tr>
 <td>621 / 373</td>
 <td>20 Jan 2020</td>
