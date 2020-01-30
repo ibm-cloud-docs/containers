@@ -116,7 +116,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
   {: pre}
 
 For more information, see:
-  * [Installing the {{site.data.keyword.blockstorageshort}} plugin](##install_block)
+  * [Installing the {{site.data.keyword.blockstorageshort}} plugin](#install_block)
   * [Adding {{site.data.keyword.blockstorageshort}} to apps](#add_block).
   * [Storage class reference](#block_storageclass_reference).
   * [Customizing storage classes](#block_custom_storageclass).
