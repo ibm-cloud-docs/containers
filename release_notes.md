@@ -44,7 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 30 January 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 625](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>****: </li></ul> |
+| 30 January 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 625](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 27 January 2020 | <ul><li>**Istio changelog**: Added an [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog).</li><li>**Back up and restore File and Block storage**: Added steps for deploying the [<code>ibmcloud-backup-restore</code> Helm chart](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore).</li></ul> |
 | 22 January 2020 | **Kubernetes 1.15**: [Kubernetes 1.15](/docs/containers?topic=containers-cs_versions#version_types) is now the default version. |
 | 21 January 2020 | **Default {{site.data.keyword.containerlong_notm}} settings**: Review the [default settings](/docs/containers?topic=containers-service-settings) for Kubernetes components, such as the `kube-apiserver`, `kubelet`, or `kube-proxy`. |
