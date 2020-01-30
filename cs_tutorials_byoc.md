@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks
 
@@ -68,7 +68,7 @@ This tutorial is intended for experienced software developers and DevOps enginee
 
 * Containerize your app and store the Dockerfile and related app code in a GitHub repository. For more information about how to create a Dockerfile, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/){: external}.
 * [Install the {{site.data.keyword.cloud_notm}} CLI, the {{site.data.keyword.containerlong_notm}} CLI plug-in, and the Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
-* [Set up a namespace in {{site.data.keyword.registrylong_notm}}](/docs/services/Registry?topic=registry-getting-started) to store your container image.
+* [Set up a namespace in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-getting-started) to store your container image.
 * Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster to deploy and run your app.
 * Create or retrieve an [{{site.data.keyword.cloud_notm}} API key](/docs/iam?topic=iam-userapikey).
 
@@ -214,6 +214,6 @@ With your app up and running, review the health of your app in your cluster.
 
 ## What's next
 
-- Explore other [pre-defined toolchains](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-cd_about#templates) in {{site.data.keyword.cloud_notm}} that you can use to deploy Helm charts to a cluster or accomplish canary testing for your app.
+- Explore other [pre-defined toolchains](/docs/ContinuousDelivery?topic=ContinuousDelivery-cd_about#templates) in {{site.data.keyword.cloud_notm}} that you can use to deploy Helm charts to a cluster or accomplish canary testing for your app.
 - Learn about other ways to expose an app to the public, such as [Ingress or LoadBalancer services](/docs/containers?topic=containers-cs_network_planning).
 - Set up [logging and monitoring](/docs/containers?topic=containers-health) for your containerized app.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-28"
 
 keywords: kubernetes, iks, nlb, lbaas
 
@@ -38,6 +38,10 @@ subcollection: containers
 
 Quickly expose your app to the Internet by creating a layer 4 load balancer.
 {: shortdesc}
+
+First time setting up a load balancer? Check out [Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer) or [VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas) for prerequisite steps and more details. Come back to these quick start steps for a brief refresher the next time you set up a load balancer.
+{: tip}
+
 
 ## Exposing an app by using an NLB in a classic cluster
 {: #lb_qs_classic}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-16"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, helm
 
@@ -58,21 +58,21 @@ You can use various external services and catalog services with a standard clust
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
 <td>Cluster activity logs</td>
-<td>Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
+<td>Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.appid_full}}</td>
 <td>Authentication</td>
-<td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+<td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} Classic Block Storage</td>
 <td>Block storage</td>
-<td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+<td>[{{site.data.keyword.cloud_notm}} Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
@@ -86,14 +86,14 @@ You can use various external services and catalog services with a standard clust
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
 <td>TLS certificates</td>
-<td>You can use <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>You can use <a href="/docs/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.registrylong}}</td>
 <td>Container images</td>
-<td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+<td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -107,42 +107,42 @@ You can use various external services and catalog services with a standard clust
 <tr>
 <td>{{site.data.keyword.datashield_full}} (Beta)</td>
 <td>Memory encryption</td>
-<td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+<td>You can use <a href="/docs/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.Bluemix}} Classic File Storage</td>
 <td>File storage</td>
-<td>[{{site.data.keyword.cloud_notm}} Classic File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+<td>[{{site.data.keyword.cloud_notm}} Classic File Storage](/docs/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.keymanagementservicefull}}</td>
 <td>Data encryption</td>
-<td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+<td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full}}</td>
 <td>Cluster and app logs</td>
-<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full}}</td>
 <td>Cluster and app metrics</td>
-<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
+<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cos_full}}</td>
 <td>Object storage</td>
-<td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+<td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the <a href="/docs/cloud-object-storage?topic=cloud-object-storage-getting-started" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
@@ -265,7 +265,7 @@ You can use various external services and catalog services with a standard clust
 <tbody>
   <tr>
     <td>{{site.data.keyword.BluDirectLink}}</td>
-    <td>With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/infrastructure/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.</td>
+    <td>With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.</td>
  <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
   </tr>
@@ -308,19 +308,19 @@ You can use various external services and catalog services with a standard clust
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudaccesstrailfull}}</td>
-<td>Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/services/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
+<td>Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/cloud-activity-tracker?topic=cloud-activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.la_full_notm}}</td>
-<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
+<td>Add log management capabilities to your cluster by deploying LogDNA as a third-party service to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.mon_full_notm}}</td>
-<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
+<td>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster). </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -383,37 +383,37 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <tbody>
   <tr>
     <td>{{site.data.keyword.appid_full}}</td>
-    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/services/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
+    <td>Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
   </tr>
 <tr>
 <td>Aqua Security</td>
-  <td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+  <td>As a supplement to <a href="/docs/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.aquasec.com/" target="_blank">Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to improve the security of container deployments by reducing what your app is allowed to do. For more information, see <a href="https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security" target="_blank">Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloudcerts_full}}</td>
-<td>You can use <a href="/docs/services/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>You can use <a href="/docs/certificate-manager?topic=certificate-manager-getting-started#getting-started" target="_blank">{{site.data.keyword.cloudcerts_long}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to store and manage SSL certificates for your apps. For more information, see <a href="https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates" target="_blank">Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
   <td>{{site.data.keyword.datashield_full}} (Beta)</td>
-  <td>You can use <a href="/docs/services/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
+  <td>You can use <a href="/docs/data-shield?topic=data-shield-getting-started#getting-started" target="_blank">{{site.data.keyword.datashield_short}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
 <tr>
   <td>{{site.data.keyword.registrylong}}</td>
-  <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/services/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the <a href="/docs/Registry?topic=registry-getting-started" target="_blank">{{site.data.keyword.registrylong}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
 <tr>
   <td>{{site.data.keyword.keymanagementservicefull}}</td>
-  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/services/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information.<br>To set up, see <a href="/docs/containers?topic=containers-encryption#keyprotect">Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}</a>.<br>For more information, see the <a href="/docs/key-protect?topic=key-protect-getting-started-tutorial" target="_blank">{{site.data.keyword.keymanagementserviceshort}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -425,7 +425,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 </tr>
 <tr>
 <td>Twistlock</td>
-<td>As a supplement to <a href="/docs/services/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to manage firewalls, threat protection, and incident response. For more information, see <a href="https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
+<td>As a supplement to <a href="/docs/va?topic=va-va_index" target="_blank">Vulnerability Advisor</a>, you can use <a href="https://www.twistlock.com/" target="_blank">Twistlock <img src="../icons/launch-glyph.svg" alt="External link icon"></a> to manage firewalls, threat protection, and incident response. For more information, see <a href="https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/" target="_blank">Twistlock on {{site.data.keyword.containerlong_notm}} <img src="../icons/launch-glyph.svg" alt="External link icon"></a>. </td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 </tr>
@@ -457,7 +457,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 </tr>
 <tr>
   <td>{{site.data.keyword.cloud_notm}} Classic Block Storage</td>
-  <td>[{{site.data.keyword.cloud_notm}} Classic Block Storage](/docs/infrastructure/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
+  <td>[{{site.data.keyword.cloud_notm}} Classic Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
   </tr>
@@ -469,13 +469,13 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 </tr>
 <tr>
   <td>{{site.data.keyword.cos_full}}</td>
-  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/services/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the <a href="/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
+  <td>Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the <a href="/docs/cloud-object-storage?topic=cloud-object-storage-getting-started" target="_blank">{{site.data.keyword.cos_short}} documentation <img src="../icons/launch-glyph.svg" alt="External link icon"></a>.</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
 </tr>
   <tr>
   <td>{{site.data.keyword.cloud_notm}} Classic File Storage</td>
-  <td>[{{site.data.keyword.cloud_notm}} Classic File Storage](/docs/infrastructure/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
+  <td>[{{site.data.keyword.cloud_notm}} Classic File Storage](/docs/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
   </tr>
@@ -507,7 +507,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <tbody>
   <tr>
     <td>{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta</td>
-    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/services/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
+    <td>Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).</td>
 <td><img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /></td>
 <td></td>
   </tr>

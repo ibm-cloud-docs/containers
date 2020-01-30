@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, helm
 
@@ -71,7 +71,7 @@ To use LogDNA in your classic or VPC cluster, you must provision an instance of 
 If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the public LogDNA API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound).
 {: important}
 
-For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/services/Log-Analysis-with-LogDNA?topic=LogDNA-kube).
+For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-kube).
 
 ### Billing and support
 {: #logdna-billing-support}
@@ -109,7 +109,7 @@ To use Sysdig Monitor in your classic or VPC cluster, you must provision an inst
 If you have a private cluster, such as a cluster behind a firewall or a cluster that is configured to block public egress from your worker nodes, you must allow public egress to the Sysdig API endpoints. For more information, see [Opening required ports in a public firewall](/docs/containers?topic=containers-firewall#firewall_outbound).
 {: important}
 
-For more information, see [Analyze metrics for an app that is deployed in a Kubernetes cluster](/docs/services/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster).
+For more information, see [Analyze metrics for an app that is deployed in a Kubernetes cluster](/docs/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster).
 
 ### Billing and support
 {: #sysdig-billing-support}

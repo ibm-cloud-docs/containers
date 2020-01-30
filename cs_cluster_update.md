@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-27"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -371,7 +371,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     ```
     {: screen}
 5.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.15.8 to 1.16.5, include the `--update` flag. 
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.15.8 to 1.16.5, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```
@@ -494,22 +494,11 @@ To update flavors:
    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
-5.  To prevent downtime, reschedule the apps from the old worker nodes before you delete the old worker nodes.
-    1.  Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the **Private IP** of the worker node that you retrieved earlier, which is the worker node name in Kubernetes.
-        ```
-        kubectl cordon <private_IP_address_of_worker_node>
-        ```
-        {: pre}
-    2.  Verify that pod scheduling is disabled for the worker node by checking that the status is **SchedulingDisabled**.
-        ```
-        kubectl get nodes
-        ```
-        {: pre}
-    3.  Force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster. This process can take a few minutes.
-        ```
-        kubectl drain <worker_name>
-        ```
-        {: pre}
+5.  To prevent downtime, force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster. The worker node is also cordoned, or marked as unavailable for future pod scheduling. Use the **Private IP** of the worker node that you retrieved earlier. This process can take a few minutes.
+    ```
+    kubectl drain <worker_private_IP>
+    ```
+    {: pre}
 6. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
    - **For worker nodes in a worker pool**:
      1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
@@ -750,7 +739,7 @@ To update stand-alone worker nodes to worker pools:
       ```
       {: pre}
 
-   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/infrastructure/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/infrastructure/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
       ```
       ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name1> -w <pool_name2> -w <pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```
@@ -771,30 +760,12 @@ To update stand-alone worker nodes to worker pools:
       kubectl get nodes
       ```
       {: pre}
-   2. Mark the worker node as unschedulable in a process that is known as cordoning. When you cordon a worker node, you make it unavailable for future pod scheduling. Use the `name` that is returned in the `kubectl get nodes` command.
-      ```
-      kubectl cordon <worker_name>
-      ```
-      {: pre}
-   3. Verify that pod scheduling is disabled for your worker node.
-      ```
-      kubectl get nodes
-      ```
-      {: pre}
-      Your worker node is disabled for pod scheduling if the status displays **`SchedulingDisabled`**.
-   4. Force pods to be removed from your stand-alone worker node and rescheduled onto remaining uncordoned stand-alone worker nodes and worker nodes from your worker pool.
-      ```
-      kubectl drain <worker_name> --ignore-daemonsets
-      ```
-      {: pre}
-      This process can take a few minutes.
-
-   5. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
+   2. Remove your stand-alone worker node. Use the ID of the worker node that you retrieved with the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command.
       ```
       ibmcloud ks worker rm --cluster <cluster_name_or_ID> --worker <worker_ID>
       ```
       {: pre}
-   6. Repeat these steps until all your stand-alone worker nodes are removed.
+   3. Repeat these steps until all your stand-alone worker nodes are removed.
 
 
 **What's next?** </br>

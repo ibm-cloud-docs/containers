@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-22"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -164,7 +164,7 @@ To control access at the pod level, you can configure [pod security policies (PS
 
 Within the app deployment YAML, you can set the security context for a pod or container. For more information, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}.
 
-Want to control access at the application level? To create a sign-on flow that you can update at any time without changing your app code, try using [{{site.data.keyword.appid_long_notm}}](/docs/services/appid?topic=appid-getting-started).
+Want to control access at the application level? To create a sign-on flow that you can update at any time without changing your app code, try using [{{site.data.keyword.appid_long_notm}}](/docs/appid?topic=appid-getting-started).
 {: tip}
 
 <br />
@@ -216,7 +216,7 @@ Consider the following options to increase availability of your app.
   <p><strong>Tip</strong>: In multizone clusters, try to keep your worker node capacity at 50% per zone so that enough capacity is left to protect your cluster against a zonal failure.</p>
   <p><strong>What if I want to spread my app across regions?</strong></br>To protect your app from a region failure, create a second cluster in another region, [set up a global load balancer](/docs/containers?topic=containers-ha_clusters#multiple_clusters) to connect your clusters, and use a deployment YAML to deploy a duplicate replica set with [pod anti-affinity ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/) for your app.</p>
   <p><strong>What if my apps need persistent storage?</strong></p>
-  <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/services/Cloudant?topic=cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/services/cloud-object-storage?topic=cloud-object-storage-getting-started).</p></dd>
+  <p>Use a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/Cloudant?topic=cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started).</p></dd>
 </dl>
 
 ## Specifying your app requirements in your YAML file
@@ -1316,7 +1316,7 @@ To execute a workload on a GPU machine:
 With Kubernetes, you can enable [horizontal pod autoscaling](https://kubernetes.io/docs/tasks/run-application/horizontal-pod-autoscale/){: external} to automatically increase or decrease the number of instances of your apps based on CPU.
 {:shortdesc}
 
-Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.cloud_notm}}](/docs/services/Auto-Scaling?topic=Auto-Scaling-get-started). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
+Looking for information about scaling Cloud Foundry applications? Check out [IBM Auto-Scaling for {{site.data.keyword.cloud_notm}}](/docs/Auto-Scaling?topic=Auto-Scaling-get-started). Want to scale your worker nodes instead of your pods? Check out the [cluster autoscaler](/docs/containers?topic=containers-ca#ca).
 {: tip}
 
 Before you begin:
@@ -1545,9 +1545,9 @@ Check out this [blog](https://www.ibm.com/cloud/blog/announcements/connecting-ib
 1. From the [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters), select the cluster for which you want to set up a continuous delivery pipeline.
 2. Select the **DevOps** tab.
 3. Click **Create a toolchain**.
-4. Review the available toolchains. IBM provides pre-defined toolchains that you can use to deploy, test, and monitor Kubernetes-native apps or Helm charts. You can expand each toolchain to find an overview of the tools that are set up for you and to find the scripts in GitHub that are used to configure the toolchain in your cluster. For more information about each toolchain, see [Toolchain templates](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-cd_about#templates). If you know what tools you want to use, you can create your own toolchain.
+4. Review the available toolchains. IBM provides pre-defined toolchains that you can use to deploy, test, and monitor Kubernetes-native apps or Helm charts. You can expand each toolchain to find an overview of the tools that are set up for you and to find the scripts in GitHub that are used to configure the toolchain in your cluster. For more information about each toolchain, see [Toolchain templates](/docs/ContinuousDelivery?topic=ContinuousDelivery-cd_about#templates). If you know what tools you want to use, you can create your own toolchain.
 5. Select the toolchain that you want to use and click **Create**.
-6. Follow the directions in the console to configure your toolchain. Make sure to include the name of your cluster in your toolchain name so that you can easily find the toolchain that is associated with your cluster later. For more information, see [Creating toolchains](/docs/services/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started).
+6. Follow the directions in the console to configure your toolchain. Make sure to include the name of your cluster in your toolchain name so that you can easily find the toolchain that is associated with your cluster later. For more information, see [Creating toolchains](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains_getting_started).
 7. Select **Delivery Pipeline** to review the stages of your continuous integration and continuous delivery pipeline. After you create your toolchain, your pipeline is automatically kicked off and runs through the stages that you configured. Make sure that your stages run successfully and correct any errors.
 8. Modify your toolchain. You can add more tools to your toolchain or change the stages of your delivery pipeline.
    1. From the [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters), select the cluster for which you want to set up a continuous delivery pipeline.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-23"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -370,7 +370,7 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
-2. [Configure a Sysdig agent in your cluster.](/docs/services/Monitoring-with-Sysdig/tutorials?topic=Sysdig-config_agent#config_agent_kube_script)
+2. [Configure a Sysdig agent in your cluster.](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-config_agent#config_agent_kube_script)
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
 

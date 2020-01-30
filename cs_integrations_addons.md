@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-01-29"
 
 keywords: kubernetes, iks, helm
 
@@ -51,7 +51,7 @@ Managed add-ons are fully integrated into the {{site.data.keyword.cloud_notm}} s
 If the tool that you add to your cluster incurs costs, these costs are automatically integrated and listed as part of your {{site.data.keyword.containerlong_notm}} billing. The billing cycle is determined by {{site.data.keyword.cloud_notm}} depending on when you enabled the add-on in your cluster.
 
 **What limitations do I need to account for?** </br>
-If you installed the [container image security enforcer admission controller](/docs/services/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable managed add-ons in your cluster.
+If you installed the [container image security enforcer admission controller](/docs/Registry?topic=registry-security_enforce#security_enforce) in your cluster, you cannot enable managed add-ons in your cluster.
 
 ## Adding managed add-ons
 {: #adding-managed-add-ons}
