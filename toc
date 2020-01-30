@@ -179,7 +179,7 @@ IBM Cloud Kubernetes Service
     faqs.md
 
     {: .topicgroup}
-    Troubleshooting clusters
+    Troubleshooting cluster components
         cs_troubleshoot.md
         cs_troubleshoot_clusters.md
         cs_troubleshoot_storage.md
