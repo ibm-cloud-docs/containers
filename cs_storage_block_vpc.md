@@ -50,7 +50,7 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
-{: #file_qs}
+{: #vpc_block_qs}
 
 In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
@@ -81,7 +81,7 @@ First time using {{site.data.keyword.block_storage_is_short}} in your cluster? C
   ```
   {: pre}
 
-3. After your `silver-pvc` PVC is bound, create an app deployment that uses your PVC. Create a file for your deployment and name it `deployment.yaml`.
+3. After your PVC is bound, create an app deployment that uses your PVC. Create a file for your deployment and name it `deployment.yaml`.
 
   ```yaml
   apiVersion: apps/v1
