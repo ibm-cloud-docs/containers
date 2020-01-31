@@ -227,7 +227,7 @@ To install Helm in a cluster with public network access:
 
      2. Verify that the Tiller service account is created.
         ```
-        kubectl get serviceaccount -n kube-system tiller
+        kubectl get serviceaccount tiller -n kube-system
         ```
         {: pre}
 
