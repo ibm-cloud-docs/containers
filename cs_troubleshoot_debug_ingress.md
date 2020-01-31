@@ -885,3 +885,4 @@ Still having issues with your cluster? Review different ways to get help and sup
 2.  In your support case, for **Category**, select **Containers**.
 3.  For the **Offering**, select your {{site.data.keyword.containershort}} cluster.<p class="tip">When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.</p>
 
+

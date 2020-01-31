@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-30"
+lastupdated: "2020-01-31"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -222,9 +222,9 @@ The following steps assume that the API key stores the credentials of a service 
 
     Example output:
     ```
-    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
-    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false   
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
+    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked
+    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false
+    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false
     ```
     {: screen}
 2.  Verify that the service ID is assigned at least an {{site.data.keyword.cloud_notm}} IAM **Reader** [service access role policy for {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-user#create). If the service ID does not have the **Reader** service role, [edit the IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit). If the policies are correct, continue with the next step to see if the credentials are valid.
@@ -234,17 +234,17 @@ The following steps assume that the API key stores the credentials of a service 
     {: pre}
 
     Example output:
-    ```              
-    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
-    Roles:       Reader   
-    Resources:                            
-                  Service Name       container-registry      
-                  Service Instance         
-                  Region                  
-                  Resource Type      namespace      
-                  Resource           <registry_namespace>  
     ```
-    {: screen}  
+    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5
+    Roles:       Reader
+    Resources:
+                  Service Name       container-registry
+                  Service Instance
+                  Region
+                  Resource Type      namespace
+                  Resource           <registry_namespace>
+    ```
+    {: screen}
 3.  Check if the image pull secret credentials are valid.
     1.  Get the image pull secret configuration. If the pod is not in the `default` namespace, include the `-n` flag.
         ```
@@ -781,4 +781,5 @@ Still having issues with your cluster? Review different ways to get help and sup
 1.  Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 2.  In your support case, for **Category**, select **Containers**.
 3.  For the **Offering**, select your {{site.data.keyword.containershort}} cluster.<p class="tip">When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.</p>
+
 
