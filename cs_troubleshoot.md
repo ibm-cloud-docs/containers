@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-30"
+lastupdated: "2020-01-31"
 
 keywords: kubernetes, iks, help, debug
 
@@ -414,7 +414,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ```
         Getting information about the API key owner for cluster <cluster_name>...
         OK
-        Name                Email   
+        Name                Email
         <user_name>         <name@email.com>
         ```
         {: screen}
@@ -507,7 +507,7 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 
 **To use TOTP MFA and create an infrastructure API key for {{site.data.keyword.containerlong_notm}}:**
 1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
-2. In the **API Keys** section, find or create a classic infrastructure API key.   
+2. In the **API Keys** section, find or create a classic infrastructure API key.
 3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
     ```
     ibmcloud ks credential set classic --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
@@ -525,6 +525,7 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key reset --region <region>` in each region where you have clusters.
 
 <br />
+
 
 
 ## Cluster create error cannot pull images from registry
