@@ -120,7 +120,7 @@ Review the options to debug your clusters and find the root causes for failures.
   ```
   {: pre}
 
-2.  Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](#debug_worker_nodes).
+2.  Review the `State` of your cluster. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, start [debugging the worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes).
 
     You can view the current cluster state by running the `ibmcloud ks cluster ls` command and locating the **State** field.
 {: shortdesc}
