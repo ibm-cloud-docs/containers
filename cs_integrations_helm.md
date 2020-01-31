@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-01-31"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -151,13 +151,13 @@ As you work with Helm charts, keep in mind the Helm v3 changes, such as the fact
 <br />
 
 
-## Deprecated: Installing Helm v2 in your cluster
+## Installing Helm v2 in your cluster
 {: #install_v2}
 
-[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v2 requires you to set up the Helm server, Tiller, which is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](#install_v3).
-{: deprecated}
+[Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Helm v2 requires you to set up the Helm server, Tiller, which is removed in Helm v3. Because Tiller requires a specific service account due to security issues, install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](#install_v3).
+{: note}
 
-### Deprecated: Setting up Helm v2 in a cluster with public access
+### Setting up Helm v2 in a cluster with public access
 {: #public_helm_install}
 
 If you have a classic cluster that is connected to a public VLAN, or a VPC cluster with a subnet that is configured with a public gateway, you can install the Helm server Tiller by using the public image in the Google Container Registry.
@@ -186,7 +186,7 @@ To install Helm in a cluster with public network access:
    The example output includes the Kubernetes namespace and name of the service account for Tiller. If Tiller is not installed with a service account in your cluster, no CLI output is returned.
 
 3. **Important**: To maintain cluster security, set up Tiller with a service account and cluster role binding in your cluster.
-   - **If Tiller is installed with a service account:**
+   - **If Tiller is already installed with a service account:**
      1. Create a cluster role binding for the Tiller service account. Replace `<namespace>` with the namespace where Tiller is installed in your cluster.
         ```
         kubectl create clusterrolebinding tiller --clusterrole=cluster-admin --serviceaccount=<namespace>:tiller -n <namespace>
@@ -213,7 +213,7 @@ To install Helm in a cluster with public network access:
         ```
         {: screen}
 
-   - **If Tiller is not installed with a service account:**
+   - **If Tiller is not yet installed with a service account:**
      1. Create a Kubernetes service account and cluster role binding for Tiller in the `kube-system` namespace of your cluster.
         ```
         kubectl create serviceaccount tiller -n kube-system
@@ -307,7 +307,7 @@ To install Helm in a cluster with public network access:
 
 7. Identify the Helm chart that you want to install and follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
 
-### Deprecated: Installing Helm v2 in a private cluster
+### Installing Helm v2 in a private cluster
 {: #private_v2}
 
 Install Helm v2 in a cluster that does not have public access.
@@ -331,7 +331,7 @@ Before you begin:
 
 To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 
-1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.
+1. Install the [Helm CLI](https://helm.sh/docs/using_helm/#installing-helm){: external} on your local machine.
 2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc).
 3. [Find the version of Tiller ![External link icon](../icons/launch-glyph.svg "External link icon")](https://console.cloud.google.com/gcr/images/kubernetes-helm/GLOBAL/tiller?gcrImageListsize=30) that you want to install in your cluster. If you do not need a specific version, use the latest one. In the digest image row, click the vertical ellipsis action menu, and then click **Show Pull Command** to copy the pull command.
 4. Pull the Tiller image from the public Google Container Registry to your local machine. Include the image tag that you copied in the previous step.
@@ -528,7 +528,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
     ```
     {: pre}
 
-### Deprecated: Installing Tiller with a different version than your cluster
+### Installing Tiller with a different version than your cluster
 {: #tiller_version}
 
 By default, when you initiate Helm for your cluster, the version of Tiller matches the version of your cluster. For example, if you have a cluster that runs Kubernetes version 1.13, the Tiller version is 2.13. You can update your Tiller deployment to use a different version of the Tiller image. For more information, see the [Helm documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://helm.sh/docs/install/).
@@ -576,3 +576,4 @@ Review the following links to find additional Helm information.
 * View the available Helm charts that you can use in {{site.data.keyword.containerlong_notm}} in the [Helm Charts Catalog](https://cloud.ibm.com/kubernetes/helm){:external}.
 * Review the [list of changes between Helm v2 and v3](https://helm.sh/docs/topics/v2_v3_migration/){: external} and the [v3 FAQs](https://helm.sh/docs/faq/){: external}.
 * Learn more about how you can [increase deployment velocity with Kubernetes Helm Charts](https://developer.ibm.com/recipes/tutorials/increase-deployment-velocity-with-kubernetes-helm-charts/){:external}.
+
