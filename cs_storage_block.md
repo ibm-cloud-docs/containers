@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-30"
+lastupdated: "2020-02-03"
 
 keywords: kubernetes, iks
 
@@ -41,6 +41,8 @@ subcollection: containers
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
+
+<br>
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}
 {: #block_qs}
