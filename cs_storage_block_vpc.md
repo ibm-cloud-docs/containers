@@ -212,6 +212,7 @@ Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make
 
    <br />
 
+</br>
 
 ## Adding {{site.data.keyword.block_storage_is_short}} to your apps
 {: #vpc-block-add}
