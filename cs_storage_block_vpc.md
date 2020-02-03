@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-30"
+lastupdated: "2020-02-03"
 
 keywords: kubernetes, iks, vpc
 
@@ -42,7 +42,7 @@ subcollection: containers
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
 
-{{site.data.keyword.block_storage_is_short}} is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use {{site.data.keyword.blockstorageshort}}rt}} in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}rt}}](/docs/containers?topic=containers-block_storage). {{site.data.keyword.block_storage_is_short}} is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.block_storage_is_short}} is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use {{site.data.keyword.blockstorageshort}} in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}rt}}](/docs/containers?topic=containers-block_storage). {{site.data.keyword.block_storage_is_short}} is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 {{site.data.keyword.block_storage_is_short}} is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove {{site.data.keyword.block_storage_is_short}} from your cluster.
@@ -212,6 +212,7 @@ Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make
 
    <br />
 
+</br>
 
 ## Adding {{site.data.keyword.block_storage_is_short}} to your apps
 {: #vpc-block-add}
@@ -456,7 +457,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
   ```
   {: pre}
 
-3. Retrieve a list of worker nodes in your VPC cluster. Note the **Primary IP** of the worker node that is in the same zone as your storage volume.
+3. Retrieve a list of worker nodes in your VPC cluster. Note the **Zone** of the worker node that is in the same zone as your storage volume.
   ```
   ibmcloud ks worker ls <cluster_name>
   ```
@@ -476,33 +477,37 @@ You can attach a volume to one worker node only. Make sure that the volume is in
       ```
       {: pre}
 
-5. Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, **IOPS**, and **Worker Node Primary IP** that you retrieved earlier.
+5. Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, and **IOPS** that you retrieved earlier.
     ```yaml
     apiVersion: v1
     kind: PersistentVolume
     metadata:
-      name: <pv_name> # example: my-persistent-volume
+      name: <pv_name> # Example: my-persistent-volume
     spec:
       accessModes:
       - ReadWriteOnce
       capacity:
-        storage: <vpc_block_storage_size> # example: 20Gi
+        storage: <vpc_block_storage_size> # Example: 20Gi
       csi:
         driver: vpc.block.csi.ibm.io
         fsType: ext4
         volumeAttributes:
-          iops: "<vpc_block_storage_iops>" # example: "3000"
-          volumeId: <vpc_block_storage_ID> # example: a1a11a1a-a111-1111-1a11-1111a11a1a11
-          zone: "<vpc_block_zone>" # example: "eu-de-1"
+          iops: "<vpc_block_storage_iops>" # Example: "3000"
+          volumeId: <vpc_block_storage_ID> # Example: a1a11a1a-a111-1111-1a11-1111a11a1a11
+          zone: "<vpc_block_zone>" # Example: "eu-de-3"
         volumeHandle: <vpc_block_storage_ID>
       nodeAffinity:
         required:
           nodeSelectorTerms:
           - matchExpressions:
-            - key: kubernetes.io/hostname
+            - key: failure-domain.beta.kubernetes.io/zone
               operator: In
               values:
-              - <worker_node_primary_IP> # example: 172.XX.X.XX
+              - <worker_node_zone> # Example: eu-de-3
+            - key: failure-domain.beta.kubernetes.io/region
+              operator: In
+              values:
+              - <worker_node_region> # Example: eu-de
       persistentVolumeReclaimPolicy: Retain
       storageClassName: ""
       volumeMode: Filesystem
@@ -541,7 +546,10 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    </tr>
    <tr>
    <td><code>spec.nodeAffinity.nodeSelectorTerms</code></td>
-   <td>For the key, enter an <code>kubernetes.io/hostname</code> For the value, enter the primary IP of your worker node.</td>
+   <td>For the key, enter <code>failure-domain.beta.kubernetes.io/zone</code>. For the value, enter the zone of your worker node where you want to attach storage.</td>
+   </tr>
+   <td><code>spec.nodeAffinity.nodeSelectorTerms</code></td>
+   <td>For the key, enter <code>failure-domain.beta.kubernetes.io/region</code>. For the value, enter the region of the worker node where you want to attach storage.</td>
    </tr>
    </tbody>
    </table>

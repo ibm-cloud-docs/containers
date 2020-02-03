@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-03"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -33,13 +33,180 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Troubleshooting clusters and worker nodes
+# Worker nodes
 {: #cs_troubleshoot_clusters}
 
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting your clusters and worker nodes.
+As you use {{site.data.keyword.containerlong}}, consider these techniques for general troubleshooting and debugging your cluster and cluster master.
 {: shortdesc}
 
-<p class="tip">If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).<br>Also, while you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.</p>
+**General ways to resolve issues**<br>
+1. Keep your cluster environment up to date.
+   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/openshift?topic=openshift-update#worker_node).
+   * [Update your cluster](/docs/openshift?topic=openshift-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/openshift?topic=openshift-openshift_versions).
+2. Make sure that your command line tools are up to date.
+   * In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
+   * Make sure that [your `kubectl` CLI](/docs/openshift?topic=openshift-openshift-cli#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+<br>
+
+**Reviewing issues and status**<br>
+1. To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page](https://cloud.ibm.com/status?selected=status){: external}.
+2. Filter for the **Kubernetes Service** component.
+
+## Debugging worker nodes
+{: #debug_worker_nodes}
+{: troubleshoot}
+{: support}
+
+Review the options to debug your worker nodes and find the root causes for failures.
+
+1. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+2. Review the **State** and **Status** field for every worker node in your CLI output.
+    You can view the current worker node state by running the `ibmcloud ks worker ls --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
+{: shortdesc}
+    <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
+    <caption>Worker node states</caption>
+      <thead>
+      <th>Worker node state</th>
+      <th>Description</th>
+      </thead>
+      <tbody>
+    <tr>
+        <td>`Critical`</td>
+        <td>A worker node can go into a Critical state for many reasons: <ul><li>You initiated a reboot for your worker node without cordoning and draining your worker node. Rebooting a worker node can cause data corruption in <code>containerd</code>, <code>kubelet</code>, <code>kube-proxy</code>, and <code>calico</code>. </li>
+        <li>The pods that are deployed to your worker node do not use resource limits for [memory ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-memory-resource/) and [CPU ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/assign-cpu-resource/). Without resource limits, pods can consume all available resources, leaving no resources for other pods to run on this worker node. This overcommitment of workload causes the worker node to fail. </li>
+        <li><code>containerd</code>, <code>kubelet</code>, or <code>calico</code> went into an unrecoverable state after it ran hundreds or thousands of containers over time. </li>
+        <li>You set up a Virtual Router Appliance for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containerlong_notm}} or IBM Cloud infrastructure that causes the communication between your worker node and the Kubernetes master to fail.</li>
+        <li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li>
+        <li>The device was powered off from the [{{site.data.keyword.cloud_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
+        In many cases, [reloading](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node. </br></br><strong>Tip:</strong> You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability).
+        </td>
+       </tr>
+       <tr>
+       <td>`Deployed`</td>
+       <td>Updates are successfully deployed to your worker node. After updates are deployed, {{site.data.keyword.containerlong_notm}} starts a health check on the worker node. After the health check is successful, the worker node goes into a <code>Normal</code> state. Worker nodes in a <code>Deployed</code> state usually are ready to receive workloads, which you can check by running <code>kubectl get nodes</code> and confirming that the state shows <code>Normal</code>. </td>
+       </tr>
+        <tr>
+          <td>`Deploying`</td>
+          <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If you reload or reboot your worker node, the worker node is redeployed to automatically install the latest patch version. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the deployment. </td>
+       </tr>
+          <tr>
+          <td>`Normal`</td>
+          <td>Your worker node is fully provisioned and ready to be used in the cluster. This state is considered healthy and does not require an action from the user. **Note**: Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention.</td>
+       </tr>
+     <tr>
+          <td>`Provisioning`</td>
+          <td>Your worker node is being provisioned and is not available in the cluster yet. You can monitor the provisioning process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the provisioning.</td>
+        </tr>
+        <tr>
+          <td>`Provision_failed`</td>
+          <td>Your worker node could not be provisioned. Continue with the next step to find the details for the failure.</td>
+        </tr>
+     <tr>
+          <td>`Reloading`</td>
+          <td>Your worker node is being reloaded and is not available in the cluster. You can monitor the reloading process in the <strong>Status</strong> column of your CLI output. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the reloading.</td>
+         </tr>
+         <tr>
+          <td>`Reloading_failed`</td>
+          <td>Your worker node could not be reloaded. Continue with the next step to find the details for the failure.</td>
+        </tr>
+        <tr>
+          <td>`Reload_pending`</td>
+          <td>A request to reload or to update the Kubernetes version of your worker node is sent. When the worker node is being reloaded, the state changes to <code>Reloading</code>. </td>
+        </tr>
+        <tr>
+         <td>`Unknown`</td>
+         <td>The Kubernetes master is not reachable for one of the following reasons:<ul><li>You requested an update of your Kubernetes master. The state of the worker node cannot be retrieved during the update. If the worker node remains in this state for an extended period of time even after the Kubernetes master is successfully updated, try to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) the worker node.</li><li>You might have another firewall that is protecting your worker nodes, or changed firewall settings recently. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. For more information, see [Firewall prevents worker nodes from connecting](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall).</li><li>The Kubernetes master is down. Contact {{site.data.keyword.cloud_notm}} support by opening an [{{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-cs_troubleshoot#ts_getting_help).</li></ul></td>
+    </tr>
+       <tr>
+          <td>`Warning`</td>
+          <td>Your worker node is reaching the limit for memory or disk space. You can either reduce work load on your worker node or add a worker node to your cluster to help load balance the work load.</td>
+    </tr>
+      </tbody>
+    </table>
+
+3. List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
+    ```
+    ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>
+    ```
+    {: pre}
+
+<br />
+
+
+## Common issues with worker nodes
+{: #common_worker_nodes_issues}
+
+Review common error messages and learn how to resolve them.
+
+  <table>
+  <caption>Common error messages</caption>
+    <thead>
+    <th>Error message</th>
+    <th>Description and resolution
+    </thead>
+    <tbody>
+      <tr>
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Your account is currently prohibited from ordering 'Computing Instances'.</td>
+        <td>Your IBM Cloud infrastructure account might be restricted from ordering compute resources. Contact {{site.data.keyword.cloud_notm}} support by opening an [{{site.data.keyword.cloud_notm}} support case](#getting_help).</td>
+      </tr>
+      <tr>
+      <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order.<br><br>
+      {{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not place order. There are insufficient resources behind router 'router_name' to fulfill the request for the following guests: 'worker_id'.</td>
+      <td>The zone that you selected might not have enough infrastructure capacity to provision your worker nodes. Or you might have exceeded a limit in your IBM Cloud infrastructure account. To resolve, try one of the following options:
+      <ul><li>Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.</li>
+      <li>For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.</li>
+      <li>Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the <code>ibmcloud ks zone network-set</code> [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set).</li>
+      <li>Contact your IBM Cloud infrastructure account manager to verify that you do not exceed an account limit, such as a global quota.</li>
+      <li>Open an [IBM Cloud infrastructure support case](#getting_help)</li></ul></td>
+      </tr>
+      <tr>
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: Could not obtain network VLAN with ID: <code>&lt;vlan id&gt;</code>.</td>
+        <td>Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:<ul><li>You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. Run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code> to retrieve the VLAN ID.<li>The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. Run <code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code> to list available VLAN IDs for your account. To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set). </ul></td>
+      </tr>
+      <tr>
+        <td>SoftLayer_Exception_Order_InvalidLocation: The location provided for this order is invalid. (HTTP 500)</td>
+        <td>Your IBM Cloud infrastructure is not set up to order compute resources in the selected data center. Contact [{{site.data.keyword.cloud_notm}} support](#getting_help) to verify that you account is set up correctly.</td>
+       </tr>
+       <tr>
+        <td>{{site.data.keyword.cloud_notm}} classic infrastructure exception: The user does not have the necessary {{site.data.keyword.cloud_notm}} classic infrastructure permissions to add servers
+        </br></br>
+        {{site.data.keyword.cloud_notm}} classic infrastructure exception: 'Item' must be ordered with permission.
+        </br></br>
+        The {{site.data.keyword.cloud_notm}} classic infrastructure credentials could not be validated.</td>
+        <td>You might not have the required permissions to perform the action in your IBM Cloud infrastructure portfolio, or you are using the wrong infrastructure credentials. See [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-users#api_key).</td>
+      </tr>
+      <tr>
+       <td>Worker unable to talk to {{site.data.keyword.containerlong_notm}} servers. Please verify your firewall setup is allowing traffic from this worker.
+       <td><ul><li>If you have a firewall, [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
+       <li>Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
+       <ul><li>If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_clusters#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
+       <li>If you created the cluster with only the private service endpoint before you enabled your account for [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers cannot connect to the master. Try [setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private service endpoint only cluster after your account is updated, you can then disable the public service endpoint.</li>
+       <li>If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.</li></ul></li></ul></td>
+     </tr>
+  <tr>
+    <td>Worker not responding to soft reboot.</td>
+    <td>Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).</td>
+  </tr>
+      <tr>
+  <td>Cannot create IMS portal token, as no IMS account is linked to the selected BSS account</br></br>Provided user not found or active</br></br>SoftLayer_Exception_User_Customer_InvalidUserStatus: User account is currently cancel_pending.</br></br>Worker not found. Review {{site.data.keyword.cloud_notm}} classic infrastructure user permissions</td>
+  <td>The owner of the API key that is used to access the IBM Cloud infrastructure portfolio does not have the required permissions to perform the action, or might be pending deletion.</br></br><strong>As the user</strong>, follow these steps:
+  <ol><li>If you have access to multiple accounts, make sure that you are logged in to the account where you want to work with {{site.data.keyword.containerlong_notm}}. </li>
+  <li>Run <code>ibmcloud ks api-key info --cluster &lt;cluster_name_or_ID&gt;</code> to view the current API key owner that is used to access the IBM Cloud infrastructure portfolio. </li>
+  <li>Run <code>ibmcloud account list</code> to view the owner of the {{site.data.keyword.cloud_notm}} account that you currently use. </li>
+  <li>Contact the owner of the {{site.data.keyword.cloud_notm}} account and report that the API key owner has insufficient permissions in IBM Cloud infrastructure or might be pending to be deleted. </li></ol>
+  </br><strong>As the account owner</strong>, follow these steps:
+  <ol><li>Review the [required permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-users#infra_access) to perform the action that previously failed. </li>
+  <li>Fix the permissions of the API key owner or create a new API key by using the [<code>ibmcloud ks api-key reset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) command. </li>
+  <li>If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [<code>ibmcloud ks credential unset --region <region></code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.</li></ol></td>
+  </tr>
+    </tbody>
+  </table>
+
+<br />
 
 
 ## Unable to create a cluster or manage worker nodes due to permission errors
@@ -94,7 +261,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials). If you use a different IBM Cloud infrastructure account to provision infrastructure resources, you might also have [orphaned clusters](#orphaned) in your account.
+The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials). If you use a different IBM Cloud infrastructure account to provision infrastructure resources, you might also have [orphaned clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned) in your account.
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
@@ -112,7 +279,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ```
         Getting information about the API key owner for cluster <cluster_name>...
         OK
-        Name                Email   
+        Name                Email
         <user_name>         <name@email.com>
         ```
         {: screen}
@@ -166,8 +333,8 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
         ```
         {: screen}
 
-    3.  If the worker node is not removed, review that [**State** and **Status** fields](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes) and the [common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot#common_worker_nodes_issues) to continue debugging.
-    4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](#orphaned).
+    3.  If the worker node is not removed, review that [**State** and **Status** fields](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes) and the [common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#common_worker_nodes_issues) to continue debugging.
+    4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 <br />
 
@@ -205,7 +372,7 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 
 **To use TOTP MFA and create an infrastructure API key for {{site.data.keyword.containerlong_notm}}:**
 1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
-2. In the **API Keys** section, find or create a classic infrastructure API key.   
+2. In the **API Keys** section, find or create a classic infrastructure API key.
 3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
     ```
     ibmcloud ks credential set classic --infrastructure-username <infrastructure_API_username> --infrastructure-api-key <infrastructure_API_authentication_key> --region <region>
@@ -225,229 +392,69 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 <br />
 
 
-## Firewall prevents running CLI commands
-{: #ts_firewall_clis}
-{: troubleshoot}
-{: support}
+
+## Cannot add worker nodes due to an invalid VLAN ID
+{: #suspended}
 
 {: tsSymptoms}
-When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they fail.
-
-{: tsCauses}
-You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
-
-{: tsResolve}
-[Allow TCP access for the CLI commands to work](/docs/containers?topic=containers-firewall#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-
-
-## Cannot access resources in my cluster
-{: #cs_firewall}
-
-{: tsSymptoms}
-When the worker nodes in your cluster cannot communicate on the private network, you might see various different symptoms.
-
-- Sample error message when you run `kubectl exec`, `attach`, `logs`, `proxy`, or `port-forward`:
-  ```
-  Error from server: error dialing backend: dial tcp XXX.XXX.XXX:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-- Sample error message when `kubectl proxy` succeeds, but the Kubernetes dashboard is not available:
-  ```
-  timeout on 172.xxx.xxx.xxx
-  ```
-  {: screen}
-
-- Sample error message when `kubectl proxy` fails or the connection to your service fails:
-  ```
-  Connection refused
-  ```
-  {: screen}
-
-  ```
-  Connection timed out
-  ```
-  {: screen}
-
-  ```
-  Unable to connect to the server: net/http: TLS handshake timeout
-  ```
-  {: screen}
-
-
-{: tsCauses}
-To access resources in the cluster, your worker nodes must be able to communicate on the private network. You might have a Vyatta or another firewall set up, or customized your existing firewall settings in your IBM Cloud infrastructure account. {{site.data.keyword.containerlong_notm}} requires certain IP addresses and ports to be opened to allow communication from the worker node to the Kubernetes master and vice versa. If your worker nodes are spread across multiple zones, you must allow private network communication by enabling VLAN spanning. Communication between worker nodes might also not be possible if your worker nodes are stuck in a reloading loop.
-
-{: tsResolve}
-1. List the worker nodes in your cluster and verify that your worker nodes are not stuck in a `Reloading` state.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_id>
-   ```
-   {: pre}
-
-2. If you have a multizone cluster and your account is not enabled for VRF, verify that you [enabled VLAN spanning](/docs/containers?topic=containers-subnets#subnet-routing) for your account.
-3. If you have a Vyatta or custom firewall settings, make sure that you [opened up the required ports](/docs/containers?topic=containers-firewall#firewall_outbound) to allow the cluster to access infrastructure resources and services.
-
-<br />
-
-
-
-## Unable to view or work with a cluster
-{: #cs_cluster_access}
-
-{: tsSymptoms}
-* You are not able to find a cluster. When you run `ibmcloud ks cluster ls`, the cluster is not listed in the output.
-* You are not able to work with a cluster. When you run `ibmcloud ks cluster config` or other cluster-specific commands, the cluster is not found.
-
-
-{: tsCauses}
-In {{site.data.keyword.cloud_notm}}, each resource must be in a resource group. For example, cluster `mycluster` might exist in the `default` resource group. When the account owner gives you access to resources by assigning you an {{site.data.keyword.cloud_notm}} IAM platform role, the access can be to a specific resource or to the resource group. When you are given access to a specific resource, you don't have access to the resource group. In this case, you don't need to target a resource group to work with the clusters you have access to. If you target a different resource group than the group that the cluster is in, actions against that cluster can fail. Conversely, when you are given access to a resource as part of your access to a resource group, you must target a resource group to work with a cluster in that group. If you don't target your CLI session to the resource group that the cluster is in, actions against that cluster can fail.
-
-If you cannot find or work with a cluster, you might be experiencing one of the following issues:
-* You have access to the cluster and the resource group that the cluster is in, but your CLI session is not targeted to the resource group that the cluster is in.
-* You have access to the cluster, but not as part of the resource group that the cluster is in. Your CLI session is targeted to this or another resource group.
-* You don't have access to the cluster.
-
-{: tsResolve}
-To check your user access permissions:
-
-1. List all of your user permissions.
-    ```
-    ibmcloud iam user-policies <your_user_name>
-    ```
-    {: pre}
-
-2. Check if you have access to the cluster and to the resource group that the cluster is in.
-    1. Look for a policy that has a **Resource Group Name** value of the cluster's resource group and a **Memo** value of `Policy applies to the resource group`. If you have this policy, you have access to the resource group. For example, this policy indicates that a user has access to the `test-rg` resource group:
-        ```
-        Policy ID:   3ec2c069-fc64-4916-af9e-e6f318e2a16c
-        Roles:       Viewer
-        Resources:
-                     Resource Group ID     50c9b81c983e438b8e42b2e8eca04065
-                     Resource Group Name   test-rg
-                     Memo                  Policy applies to the resource group
-        ```
-        {: screen}
-    2. Look for a policy that has a **Resource Group Name** value of the cluster's resource group, a **Service Name** value of `containers-kubernetes` or no value, and a **Memo** value of `Policy applies to the resource(s) within the resource group`. If you this policy, you have access to clusters or to all resources within the resource group. For example, this policy indicates that a user has access to clusters in the `test-rg` resource group:
-        ```
-        Policy ID:   e0ad889d-56ba-416c-89ae-a03f3cd8eeea
-        Roles:       Administrator
-        Resources:
-                     Resource Group ID     a8a12accd63b437bbd6d58fb6a462ca7
-                     Resource Group Name   test-rg
-                     Service Name          containers-kubernetes
-                     Service Instance
-                     Region
-                     Resource Type
-                     Resource
-                     Memo                  Policy applies to the resource(s) within the resource group
-        ```
-        {: screen}
-    3. If you have both of these policies, skip to Step 4, first bullet. If you don't have the policy from Step 2a, but you do have the policy from Step 2b, skip to Step 4, second bullet. If you do not have either of these policies, continue to Step 3.
-
-3. Check if you have access to the cluster, but not as part of access to the resource group that the cluster is in.
-    1. Look for a policy that has no values besides the **Policy ID** and **Roles** fields. If you have this policy, you have access to the cluster as part of access to the entire account. For example, this policy indicates that a user has access to all resources in the account:
-        ```
-        Policy ID:   8898bdfd-d520-49a7-85f8-c0d382c4934e
-        Roles:       Administrator, Manager
-        Resources:
-                     Service Name
-                     Service Instance
-                     Region
-                     Resource Type
-                     Resource
-        ```
-        {: screen}
-    2. Look for a policy that has a **Service Name** value of `containers-kubernetes` and a **Service Instance** value of the cluster's ID. You can find a cluster ID by running `ibmcloud ks cluster get --cluster <cluster_name>`. For example, this policy indicates that a user has access to a specific cluster:
-        ```
-        Policy ID:   140555ce-93ac-4fb2-b15d-6ad726795d90
-        Roles:       Administrator
-        Resources:
-                     Service Name       containers-kubernetes
-                     Service Instance   df253b6025d64944ab99ed63bb4567b6
-                     Region
-                     Resource Type
-                     Resource
-        ```
-        {: screen}
-    3. If you have either of these policies, skip to the second bullet point of step 4. If you do not have either of these policies, skip to the third bullet point of step 4.
-
-4. Depending on your access policies, choose one of the following options.
-    * If you have access to the cluster and to the resource group that the cluster is in:
-      1. Target the resource group. **Note**: You can't work with clusters in other resource groups until you untarget this resource group.
-          ```
-          ibmcloud target -g <resource_group>
-          ```
-          {: pre}
-
-      2. Target the cluster.
-          ```
-          ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-          ```
-          {: pre}
-
-    * If you have access to the cluster but not to the resource group that the cluster is in:
-      1. Do not target a resource group. If you already targeted a resource group, untarget it:
-        ```
-        ibmcloud target --unset-resource-group
-        ```
-        {: pre}
-
-      2. Target the cluster.
-        ```
-        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
-
-    * If you do not have access to the cluster:
-        1. Ask your account owner to assign an [{{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) to you for that cluster.
-        2. Do not target a resource group. If you already targeted a resource group, untarget it:
-          ```
-          ibmcloud target --unset-resource-group
-          ```
-          {: pre}
-        3. Target the cluster.
-          ```
-          ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-          ```
-          {: pre}
-
-<br />
-
-
-## Accessing your worker node with SSH fails
-{: #cs_ssh_worker}
-
-{: tsSymptoms}
-You cannot access your worker node by using an SSH connection.
-
-{: tsCauses}
-SSH by password is unavailable on the worker nodes.
-
-{: tsResolve}
-Use a Kubernetes [`DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for actions that you must run on every node, or use jobs for one-time actions that you must run.
-
-<br />
-
-
-## Bare metal instance ID is inconsistent with worker records
-{: #bm_machine_id}
-
-{: tsSymptoms}
-When you use `ibmcloud ks worker` commands with your bare metal worker node, you see a message similar to the following.
+Your {{site.data.keyword.cloud_notm}} account was suspended, or all worker nodes in your cluster were deleted. After the account is reactivated, you cannot add worker nodes when you try to resize or rebalance your worker pool. You see an error message similar to the following:
 
 ```
-Instance ID inconsistent with worker records
+SoftLayerAPIError(SoftLayer_Exception_Public): Could not obtain network VLAN with id #123456.
 ```
 {: screen}
 
 {: tsCauses}
-The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure resolves this issue, a component can change within the system that the service does not identify.
+When an account is suspended, the worker nodes within the account are deleted. If a cluster has no worker nodes, IBM Cloud infrastructure reclaims the associated public and private VLANs. However, the cluster worker pool still has the previous VLAN IDs in its metadata and uses these unavailable IDs when you rebalance or resize the pool. The nodes fail to create because the VLANs are no longer associated with the cluster.
 
 {: tsResolve}
-For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](/docs/containers?topic=containers-changelog).
 
-You can also [delete the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+You can [delete your existing worker pool](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm), then [create a new worker pool](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
+
+Alternatively, you can keep your existing worker pool by ordering new VLANs and using these to create new worker nodes in the pool.
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  To get the zones that you need new VLAN IDs for, note the **Location** in the following command output. **Note**: If your cluster is a multizone, you need VLAN IDs for each zone.
+
+    ```
+    ibmcloud ks cluster ls
+    ```
+    {: pre}
+
+2.  Get a new private and public VLAN for each zone that your cluster is in by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
+
+3.  Note the new private and public VLAN IDs for each zone.
+
+4.  Note the name of your worker pools.
+
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
+
+5.  Use the `zone network-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_network_set) to change the worker pool network metadata.
+
+    ```
+    ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> -- worker-pool ls <worker-pool> --private-vlan <private_vlan_ID> --public-vlan <public_vlan_ID>
+    ```
+    {: pre}
+
+6.  **Multizone cluster only**: Repeat **Step 5** for each zone in your cluster.
+
+7.  Rebalance or resize your worker pool to add worker nodes that use the new VLAN IDs. For example:
+
+    ```
+    ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <worker_pool> --size-per-zone <number_of_workers_per_zone>
+    ```
+    {: pre}
+
+8.  Verify that your worker nodes are created.
+
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool>
+    ```
+    {: pre}
 
 <br />
 
@@ -504,192 +511,39 @@ Consider the following scenario to understand how clusters might become orphaned
 <br />
 
 
-## `kubectl` commands do not work
-{: #kubectl_fails}
+## Accessing your worker node with SSH fails
+{: #cs_ssh_worker}
 
 {: tsSymptoms}
-When you run `kubectl` commands against your cluster, your commands fail with an error message similar to the following.
-
-```
-No resources found.
-Error from server (NotAcceptable): unknown (get nodes)
-```
-{: screen}
-
-```
-invalid object doesn't have additional properties
-```
-{: screen}
-
-```
-error: No Auth Provider found for name "oidc"
-```
-{: screen}
+You cannot access your worker node by using an SSH connection.
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
-
-To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
+SSH by password is unavailable on the worker nodes.
 
 {: tsResolve}
-[Install the version of `kubectl`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the Kubernetes version of your cluster.
-
-If you have multiple clusters at different Kubernetes versions or different container platforms such as OpenShift, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary directory that matches the `kubectl` version of the cluster that you want to work with, or you might be able to use a tool such as `brew switch kubernetes-cli <major.minor>`.
+Use a Kubernetes [`DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for actions that you must run on every node, or use jobs for one-time actions that you must run.
 
 <br />
 
 
-## `kubectl` commands time out
-{: #exec_logs_fail}
+## Bare metal instance ID is inconsistent with worker records
+{: #bm_machine_id}
 
 {: tsSymptoms}
-If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward`, or `kubectl logs`, you see the following message.
-
-  ```
-  <workerIP>:10250: getsockopt: connection timed out
-  ```
-  {: screen}
-
-{: tsCauses}
-The OpenVPN connection between the master node and worker nodes is not functioning properly.
-
-{: tsResolve}
-1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#how-you-can-initiate-the-conversion). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
-2. Restart the OpenVPN client pod.
-  ```
-  kubectl delete pod -n kube-system -l app=vpn
-  ```
-  {: pre}
-3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
-
-<br />
-
-
-## Binding a service to a cluster results in same name error
-{: #cs_duplicate_services}
-
-{: tsSymptoms}
-When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+When you use `ibmcloud ks worker` commands with your bare metal worker node, you see a message similar to the following.
 
 ```
-Multiple services with the same name were found.
-Run 'ibmcloud service list' to view available Bluemix service instances...
+Instance ID inconsistent with worker records
 ```
 {: screen}
 
 {: tsCauses}
-Multiple service instances might have the same name in different regions.
+The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure resolves this issue, a component can change within the system that the service does not identify.
 
 {: tsResolve}
-Use the service GUID instead of the service instance name in the `ibmcloud ks cluster service bind` command.
+For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](/docs/containers?topic=containers-changelog).
 
-1. [Log in to the {{site.data.keyword.cloud_notm}} region that includes the service instance to bind.](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
-
-2. Get the GUID for the service instance.
-  ```
-  ibmcloud service show <service_instance_name> --guid
-  ```
-  {: pre}
-
-  Output:
-  ```
-  Invoking 'cf service <service_instance_name> --guid'...
-  <service_instance_GUID>
-  ```
-  {: screen}
-3. Bind the service to the cluster again.
-  ```
-  ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
-  ```
-  {: pre}
-
-<br />
-
-
-## Binding a service to a cluster results in service not found error
-{: #cs_not_found_services}
-
-{: tsSymptoms}
-When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
-
-```
-Binding service to a namespace...
-FAILED
-
-The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ibmcloud service list'. (E0023)
-```
-{: screen}
-
-{: tsCauses}
-To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platform access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
-
-{: tsResolve}
-
-**As the user:**
-
-1. Log in to {{site.data.keyword.cloud_notm}}.
-   ```
-   ibmcloud login
-   ```
-   {: pre}
-
-2. Target the org and the space where the service instance is provisioned.
-   ```
-   ibmcloud target -o <org> -s <space>
-   ```
-   {: pre}
-
-3. Verify that you are in the right space by listing your service instances.
-   ```
-   ibmcloud service list
-   ```
-   {: pre}
-
-4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps).
-
-**As the account admin:**
-
-1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam?topic=iam-iammanidaccser#edit_existing).
-
-2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam?topic=iam-mngcf#update_cf_access) where the service is provisioned.
-
-3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission.
-
-4. Wait a few minutes, then let the user try to bind the service again.
-
-5. If this does not resolve the problem, then the {{site.data.keyword.cloud_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-getting-customer-support) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
-   1. Retrieve the cluster ID.
-      ```
-      ibmcloud ks cluster ls
-      ```
-      {: pre}
-
-   2. Retrieve the service instance ID.
-      ```
-      ibmcloud service show <service_name> --guid
-      ```
-      {: pre}
-
-
-<br />
-
-
-## Binding a service to a cluster results in service does not support service keys error
-{: #cs_service_keys}
-
-{: tsSymptoms}
-When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
-
-```
-This service doesn't support creation of keys
-```
-{: screen}
-
-{: tsCauses}
-Some services in {{site.data.keyword.cloud_notm}}, such as {{site.data.keyword.keymanagementservicelong}} do not support the creation of service credentials, also referred to as service keys. Without the support of service keys, the service is not bindable to a cluster. To find a list of services that support the creation of service keys, see [Enabling external apps to use {{site.data.keyword.cloud_notm}} services](/docs/resources?topic=resources-externalapp#externalapp).
-
-{: tsResolve}
-To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference](https://cloud.ibm.com/apidocs/key-protect){: external}.
+You can also [delete the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
 
@@ -775,577 +629,39 @@ The deleted node is no longer listed in Calico.
 <br />
 
 
+## Feedback, questions, and support
+{: #getting_help}
 
-
-## Pods fail to deploy because of a pod security policy
-{: #cs_psp}
-
-{: tsSymptoms}
-After creating a pod or running `kubectl get events` to check on a pod deployment, you see an error message similar to the following.
-
-```
-unable to validate against any pod security policy
-```
-{: screen}
-
-{: tsCauses}
-[The `PodSecurityPolicy` admission controller](/docs/containers?topic=containers-psp) checks the authorization of the user or service account, such as a deployment or Helm tiller, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
-
-If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp), you might experience similar issues.
-
-{: tsResolve}
-Make sure that the user or service account is authorized by a pod security policy. You might need to [modify an existing policy](/docs/containers?topic=containers-psp#customize_psp).
-
-If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, refresh the Kubernetes master to restore it.
-
-1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2.  Refresh the Kubernetes master to restore it.
-
-    ```
-    ibmcloud ks cluster master refresh
-    ```
-    {: pre}
-
-
-<br />
-
-
-
-
-## Cluster remains in a pending State
-{: #cs_cluster_pending}
-
-{: tsSymptoms}
-When you deploy your cluster, it remains in a pending state and doesn't start.
-
-{: tsCauses}
-If you just created the cluster, the worker nodes might still be configuring. If you already wait for a while, you might have an invalid VLAN.
-
-{: tsResolve}
-
-You can try one of the following solutions:
-  - Check the status of your cluster by running `ibmcloud ks cluster ls`. Then, check to be sure that your worker nodes are deployed by running `ibmcloud ks worker ls --cluster <cluster_name>`.
-  - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans) by running `ibmcloud ks vlan ls --zone <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
-
-<br />
-
-
-## Cluster create error cannot pull images from registry
-{: #ts_image_pull_create}
-
-{: tsSymptoms}
-When you created a cluster, you received an error message similar to the following.
-
-
-```
-Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster pull-secret apply'.
-```
-{: screen}
-
-{: tsCauses}
-During cluster creation, a service ID is created for your cluster and assigned the **Reader** service access policy to {{site.data.keyword.registrylong_notm}}. Then, an API key for this service ID is generated and stored in [an image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}.
-
-To successfully assign the **Reader** service access policy to the service ID during cluster creation, you must have the **Administrator** platform access policy to {{site.data.keyword.registrylong_notm}}.
-
-{: tsResolve}
-
-Steps:
-1.  Make sure that the account owner gives you the **Administrator** role to {{site.data.keyword.registrylong_notm}}.
-    ```
-    ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
-    ```
-    {: pre}
-2.  [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
-
-<br />
-
-
-## Failed to pull image from registry with `ImagePullBackOff` or authorization errors
-{: #ts_image_pull}
-
-{: tsSymptoms}
-
-When you deploy a workload that pulls an image from {{site.data.keyword.registrylong_notm}}, your pods fail with an **`ImagePullBackOff`** status.
-
-```
-kubectl get pods
-```
-{: pre}
-
-```
-NAME         READY     STATUS             RESTARTS   AGE
-<pod_name>   0/1       ImagePullBackOff   0          2m
-```
-{: screen}
-
-When you describe the pod, you see authentication errors similar to the following.
-
-```
-kubectl describe pod <pod_name>
-```
-{: pre}
-
-```
-Failed to pull image "<region>.icr.io/<namespace>/<image>:<tag>" ... unauthorized: authentication required
-Failed to pull image "<region>.icr.io/<namespace>/<image>:<tag>" ... 401 Unauthorized
-```
-{: screen}
-
-```
-Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... unauthorized: authentication required
-Failed to pull image "registry.ng.bluemix.net/<namespace>/<image>:<tag>" ... 401 Unauthorized
-```
-{: screen}
-
-{: tsCauses}
-Your cluster uses an API key or token that is stored in an [image pull secret](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}. By default, new clusters have image pull secrets that use API keys so that the cluster can pull images from any regional `icr.io` registry for containers that are deployed to the `default` Kubernetes namespace.
-
-For clusters that were created before **1 July 2019**, the cluster might have an image pull secret that uses a token. Tokens grant access to {{site.data.keyword.registrylong_notm}} for only certain regional registries that use the deprecated `<region>.registry.bluemix.net` domains.
-
-{: tsResolve}
-
-1.  Verify that you use the correct name and tag of the image in your deployment YAML file.
-    ```
-    ibmcloud cr images
-    ```
-    {: pre}
-2.  Check your [pull traffic and storage quota](/docs/Registry?topic=registry-registry_quota). If the limit is reached, free up used storage or ask your registry administrator to increase the quota.
-    ```
-    ibmcloud cr quota
-    ```
-    {: pre}
-3.  Get the pod configuration file of a failing pod, and look for the `imagePullSecrets` section.
-    ```
-    kubectl get pod <pod_name> -o yaml
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ...
-    imagePullSecrets:
-    - name: bluemix-default-secret
-    - name: bluemix-default-secret-regional
-    - name: bluemix-default-secret-international
-    - name: default-us-icr-io
-    - name: default-uk-icr-io
-    - name: default-de-icr-io
-    - name: default-au-icr-io
-    - name: default-jp-icr-io
-    - name: default-icr-io
-    ...
-    ```
-    {: screen}
-4.  If no image pull secrets are listed, set up the image pull secret in your namespace.
-    1.  Verify that the `default` namespace has `icr-io` image pull secrets for each regional registry that you want to use. If no `icr-io` secrets are listed in the namespace, [use the `ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>` command](/docs/containers?topic=containers-images#imagePullSecret_migrate_api_key) to create the image pull secrets in the `default` namespace.
-        ```
-        kubectl get secrets -n default | grep "icr-io"
-        ```
-        {: pre}
-    2.  [Copy the image pull secrets from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-images#copy_imagePullSecret).
-    3.  [Add the image pull secret to the service account for this Kubernetes namespace](/docs/containers?topic=containers-images#store_imagePullSecret) so that all pods in the namespace can use the image pull secret credentials.
-5.  If image pull secrets are listed in the pod, determine what type of credentials you use to access {{site.data.keyword.registrylong_notm}}.
-    *   **Deprecated**: If the secret has `bluemix` in the name, you use a registry token to authenticate with the deprecated `registry.<region>.bluemix.net` domain names. Continue with [Troubleshooting image pull secrets that use tokens](#ts_image_pull_token).
-    *   If the secret has `icr` in the name, you use an API key to authenticate with the `icr.io` domain names. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
-    *   If you have both types of secrets, then you use both authentication methods. Going forward, use the `icr.io` domain names in your deployment YAMLs for the container image. Continue with [Troubleshooting image pull secrets that use API keys](#ts_image_pull_apikey).
-
-<br>
-<br>
-
-**Troubleshooting image pull secrets that use API keys**</br>
-{: #ts_image_pull_apikey}
-
-If your pod configuration has an image pull secret that uses an API key, check that the API key credentials are set up correctly.
+Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}
 
-The following steps assume that the API key stores the credentials of a service ID. If you set up your image pull secret to use an API key of an individual user, you must verify that user's {{site.data.keyword.cloud_notm}} IAM permissions and credentials.
-{: note}
-
-1.  Find the service ID that API key uses for the image pull secret by reviewing the **Description**. The service ID that is created with the cluster is named `cluster-<cluster_ID>` and is used in the `default` Kubernetes namespace. If you created another service ID such as to access a different Kubernetes namespace or to modify {{site.data.keyword.cloud_notm}} IAM permissions, you customized the description.
-    ```
-    ibmcloud iam service-ids
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked     
-    ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false   
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false    
-    ```
-    {: screen}
-2.  Verify that the service ID is assigned at least an {{site.data.keyword.cloud_notm}} IAM **Reader** [service access role policy for {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-user#create). If the service ID does not have the **Reader** service role, [edit the IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit). If the policies are correct, continue with the next step to see if the credentials are valid.
-    ```
-    ibmcloud iam service-policies <service_ID_name>
-    ```
-    {: pre}
-
-    Example output:
-    ```              
-    Policy ID:   a111a111-b22b-333c-d4dd-e555555555e5   
-    Roles:       Reader   
-    Resources:                            
-                  Service Name       container-registry      
-                  Service Instance         
-                  Region                  
-                  Resource Type      namespace      
-                  Resource           <registry_namespace>  
-    ```
-    {: screen}  
-3.  Check if the image pull secret credentials are valid.
-    1.  Get the image pull secret configuration. If the pod is not in the `default` namespace, include the `-n` flag.
-        ```
-        kubectl get secret <image_pull_secret_name> -o yaml [-n <namespace>]
-        ```
-        {: pre}
-    2.  In the output, copy the base64 encoded value of the `.dockerconfigjson` field.
-        ```
-        apiVersion: v1
-        kind: Secret
-        data:
-          .dockerconfigjson: eyJyZWdp...==
-        ...
-        ```
-        {: screen}
-    3.  Decode the base64 string. For example, on OS X you can run the following command.
-        ```
-        echo -n "<base64_string>" | base64 --decode
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        {"auths":{"<region>.icr.io":{"username":"iamapikey","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
-        ```
-        {: screen}
-    4.  Compare the image pull secret regional registry domain name with the domain name that you specified in the container image. By default, new clusters have image pull secrets for each regional registry domain name for containers that run in the `default` Kubernetes namespace. However, if you modified the default settings or are using a different Kubernetes namespace, you might not have an image pull secret for the regional registry. [Copy an image pull secret](/docs/containers?topic=containers-images#copy_imagePullSecret) for the regional registry domain name.
-    5.  Log in to the registry from your local machine by using the `username` and `password` from your image pull secret. If you cannot log in, you might need to fix the service ID.
-        ```
-        docker login -u iamapikey -p <password_string> <region>.icr.io
-        ```
-        {: pre}
-        1.  Re-create the cluster service ID, {{site.data.keyword.cloud_notm}} IAM policies, API key, and image pull secrets for containers that run in the `default` Kubernetes namespace.
-            ```
-            ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
-            ```
-            {: pre}
-        2.  Re-create your deployment in the `default` Kubernetes namespace. If you still see an authorization error message, repeat Steps 1-5 with the new image pull secrets. If you still cannot log in, [open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
-    6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#other_registry_accounts). If you can pull an image to your local machine, then your API key has the right permissions, but the API setup in your cluster is not correct. You cannot resolve this issue. [Open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
-        ```
-        docker pull <region>icr.io/<namespace>/<image>:<tag>
-        ```
-        {: pre}
-
-<br>
+**General ways to resolve issues**<br>
+1. Keep your cluster environment up to date.
+   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#worker_node).
+   * [Update your cluster](/docs/containers?topic=containers-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/containers?topic=containers-cs_versions).
+2. Make sure that your command line tools are up to date.
+   * In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
+   * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 <br>
 
-**Deprecated: Troubleshooting image pull secrets that use tokens**</br>
-{: #ts_image_pull_token}
-
-If your pod configuration has an image pull secret that uses a token, check that the token credentials are valid.
-{: shortdesc}
-
-This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} for the `registry.bluemix.net` domain names is deprecated. Before tokens become unsupported, update your deployments to [use the API key method](/docs/containers?topic=containers-images#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
-{: deprecated}
-
-1.  Get the image pull secret configuration. If the pod is not in the `default` namespace, include the `-n` flag.
-    ```
-    kubectl get secret <image_pull_secret_name> -o yaml [-n <namespace>]
-    ```
-    {: pre}
-2.  In the output, copy the base64 encoded value of the `.dockercfg` field.
-    ```
-    apiVersion: v1
-    kind: Secret
-    data:
-      .dockercfg: eyJyZWdp...==
-    ...
-    ```
-    {: screen}
-3.  Decode the base64 string. For example, on OS X you can run the following command.
-    ```
-    echo -n "<base64_string>" | base64 --decode
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    {"auths":{"registry.<region>.bluemix.net":{"username":"token","password":"<password_string>","email":"<name@abc.com>","auth":"<auth_string>"}}}
-    ```
-    {: screen}
-4.  Compare the registry domain name with the domain name that you specified in the container image. For example, if the image pull secret authorizes access to the `registry.ng.bluemix.net` domain but you specified an image that is stored in `registry.eu-de.bluemix.net`, you must [create a token to use in an image pull secret](/docs/containers?topic=containers-images#token_other_regions_accounts) for `registry.eu-de.bluemix.net`.
-5.  Log in to the registry from your local machine by using the `username` and `password` from the image pull secret. If you cannot log in, the token has an issue that you cannot resolve. [Open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
-    ```
-    docker login -u token -p <password_string> registry.<region>.bluemix.net
-    ```
-    {: pre}
-6.  If the login succeeds, pull an image locally. If the command fails with an `access denied` error, the registry account is in a different {{site.data.keyword.cloud_notm}} account than the one your cluster is in. [Create an image pull secret to access images in the other account](/docs/containers?topic=containers-images#token_other_regions_accounts). If the command succeeds, [open an {{site.data.keyword.cloud_notm}} Support case](#clusters_getting_help).
-    ```
-    docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
-    ```
-    {: pre}
-
-<br />
-
-
-## Pods remain in pending state
-{: #cs_pods_pending}
-
-{: tsSymptoms}
-When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
-
-{: tsCauses}
-If you just created the Kubernetes cluster, the worker nodes might still be configuring.
-
-If this cluster is an existing one:
-*  You might not have enough capacity in your cluster to deploy the pod.
-*  The pod might have exceeded a resource request or limit.
-
-{: tsResolve}
-This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for the cluster and the [**Manager** service role](/docs/containers?topic=containers-users#platform) for all namespaces.
-
-If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
-
-```
-kubectl get nodes
-```
-{: pre}
-
-If this cluster is an existing one, check your cluster capacity.
-
-1.  Set the proxy with the default port number.
-
-  ```
-  kubectl proxy
-  ```
-   {: pre}
-
-2.  Open the Kubernetes dashboard.
-
-  ```
-  http://localhost:8001/ui
-  ```
-  {: pre}
-
-3.  Check if you have enough capacity in your cluster to deploy your pod.
-
-4.  If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
-
-    1.  Review the current sizes and flavors of your worker pools to decide which one to resize.
-
-        ```
-        ibmcloud ks worker-pool ls
-        ```
-        {: pre}
-
-    2.  Resize your worker pools to add more nodes to each zone that the pool spans.
-
-        ```
-        ibmcloud ks worker-pool resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
-        ```
-        {: pre}
-
-5.  Optional: Check your pod resource requests.
-
-    1.  Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
-
-        ```
-        kubectl get pod <pod_name> -o yaml
-        ```
-        {: pre}
-
-    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
-
-6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.
-
-<br />
-
-
-## Containers do not start
-{: #containers_do_not_start}
-
-{: tsSymptoms}
-The pods deploy successfully to clusters, but the containers do not start.
-
-{: tsCauses}
-Containers might not start when the registry quota is reached.
-
-{: tsResolve}
-[Free up storage in {{site.data.keyword.registryshort_notm}}.](/docs/Registry?topic=registry-registry_quota#registry_quota_freeup)
-
-<br />
-
-
-## Pods repeatedly fail to restart or are unexpectedly removed
-{: #pods_fail}
-
-{: tsSymptoms}
-Your pod was healthy but unexpectedly gets removed or gets stuck in a restart loop.
-
-{: tsCauses}
-Your containers might exceed their resource limits, or your pods might be replaced by higher priority pods.
-
-{: tsResolve}
-To see if a container is being killed because of a resource limit:
-<ol><li>Get the name of your pod. If you used a label, you can include it to filter your results.<pre class="pre"><code>kubectl get pods --selector='app=wasliberty'</code></pre></li>
-<li>Describe the pod and look for the **Restart Count**.<pre class="pre"><code>kubectl describe pod</code></pre></li>
-<li>If the pod restarted many times in a short period of time, fetch its status. <pre class="pre"><code>kubectl get pod -o go-template={{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}</code></pre></li>
-<li>Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.</li>
-<li>Add capacity to your cluster so that the resources can be fulfilled.</li></ol>
-
+**Reviewing issues and status**<br>
+1. To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page](https://cloud.ibm.com/status?selected=status){: external}.
+2. Filter for the **Kubernetes Service** component.
 <br>
 
-To see if your pod is being replaced by higher priority pods:
-1.  Get the name of your pod.
+**Feedback and questions**<br>
+1. Post in the {{site.data.keyword.containershort}} Slack.
+   * If you are an external user, post in the [#general](https://ibm-container-service.slack.com/archives/C4G6362ER){: external} channel.
+   * If you are an IBMer, use the [#armada-users](https://ibm-argonauts.slack.com/archives/C4S4NUCB1) channel.<p class="tip">If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack){:external} to this Slack.</p>
+2. Review forums such as {{site.data.keyword.containershort}} help, Stack Overflow, and IBM Developer to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
+   * If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+containers){: external} and tag your question with `ibm-cloud`, `containers`, and `openshift`.
+   * For questions about the service and getting started instructions, use the [IBM Developer Answers](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix){: external} forum. Include the `ibm-cloud` and `containers` tags.
+   * See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
+<br>
 
-    ```
-    kubectl get pods
-    ```
-    {: pre}
-
-2.  Describe your pod YAML.
-
-    ```
-    kubectl get pod <pod_name> -o yaml
-    ```
-    {: pre}
-
-3.  Check the `priorityClassName` field.
-
-    1.  If there is no `priorityClassName` field value, then your pod has the `globalDefault` priority class. If your cluster admin did not set a `globalDefault` priority class, then the default is zero (0), or the lowest priority. Any pod with a higher priority class can preempt, or remove, your pod.
-
-    2.  If there is a `priorityClassName` field value, get the priority class.
-
-        ```
-        kubectl get priorityclass <priority_class_name> -o yaml
-        ```
-        {: pre}
-
-    3.  Note the `value` field to check your pod's priority.
-
-4.  List existing priority classes in the cluster.
-
-    ```
-    kubectl get priorityclasses
-    ```
-    {: pre}
-
-5.  For each priority class, get the YAML file and note the `value` field.
-
-    ```
-    kubectl get priorityclass <priority_class_name> -o yaml
-    ```
-    {: pre}
-
-6.  Compare your pod's priority class value with the other priority class values to see if it is higher or lower in priority.
-
-7.  Repeat steps 1 to 3 for other pods in the cluster, to check what priority class they are using. If those other pods' priority class is higher than your pod, your pod is not provisioned unless there is enough resources for your pod and every pod with higher priority.
-
-8.  Contact your cluster admin to add more capacity to your cluster and confirm that the right priority classes are assigned.
-
-<br />
-
-
-## Cannot install a Helm chart with updated configuration values
-{: #cs_helm_install}
-
-{: tsSymptoms}
-When you try to install an updated Helm chart by running `helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
-
-{: tsCauses}
-The URL for the {{site.data.keyword.cloud_notm}} repository in your Helm instance might be incorrect.
-
-{: tsResolve}
-To troubleshoot your Helm chart:
-
-1. List the repositories currently available in your Helm instance.
-
-    ```
-    helm repo list
-    ```
-    {: pre}
-
-2. In the output, verify that the URL for the {{site.data.keyword.cloud_notm}} repository, `ibm`, is `https://icr.io/helm/iks-charts`.
-
-    ```
-    NAME    URL
-    stable  https://kubernetes-charts.storage.googleapis.com
-    local   http://127.0.0.1:8888/charts
-    ibm     https://icr.io/helm/iks-charts
-    ```
-    {: screen}
-
-    * If the URL is incorrect:
-
-        1. Remove the {{site.data.keyword.cloud_notm}} repository.
-
-            ```
-            helm repo remove ibm
-            ```
-            {: pre}
-
-        2. Add the {{site.data.keyword.cloud_notm}} repository again.
-
-            ```
-            helm repo add iks-charts  https://icr.io/helm/iks-charts
-            ```
-            {: pre}
-
-    * If the URL is correct, get the latest updates from the repository.
-
-        ```
-        helm repo update
-        ```
-        {: pre}
-
-3. Install the Helm chart with your updates.
-
-    ```
-    helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system
-    ```
-    {: pre}
-
-<br />
-
-
-## Cannot install Tiller for Helm version 2 or deploy containers from public images in my cluster
-{: #cs_tiller_install}
-
-{: tsSymptoms}
-
-When you try to install Tiller for Helm version 2 or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
-
-```
-Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
-```
-{: screen}
-
-{: tsCauses}
-You might have set up a custom firewall, specified custom Calico policies, or created a private-only cluster by using the private service endpoint that block public network connectivity to the container registry where the image is stored.
-
-{: tsResolve}
-- If you have a custom firewall or set custom Calico policies, allow outbound and inbound network traffic between your worker nodes and the container registry where the image is stored. If the image is stored in {{site.data.keyword.registryshort_notm}}, review the required ports in [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
-- If you created a private cluster by enabling the private service endpoint only, you can [enable the public service endpoint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable) for your cluster. If want to install Helm charts in a private cluster without opening up a public connection, you can install Helm [with Tiller](/docs/containers?topic=containers-helm#private_local_tiller) or [without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
-
-    [Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){:external}. Tiller is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](/docs/containers?topic=containers-helm#install_v3).
-    {: note}
-
-<br />
-
-
-## Getting help and support
-{: #clusters_getting_help}
-
-Still having issues with your cluster?
-{: shortdesc}
-
--  In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
--   To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page](https://cloud.ibm.com/status?selected=status){: external}.
--   Post a question in the [{{site.data.keyword.containerlong_notm}} Slack](https://ibm-container-service.slack.com){: external}.<p class="tip">If you are not using an IBM ID for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.</p>
--   Review the forums to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
-    -   If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+containers){: external} and tag your question with `ibm-cloud`, `kubernetes`, and `containers`.
-    -   For questions about the service and getting started instructions, use the [IBM Developer Answers](https://developer.ibm.com/answers/topics/containers/?smartspace=bluemix){: external} forum. Include the `ibm-cloud` and `containers` tags.
-    See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.
--   Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).<p class="tip">When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.</p>
+**Getting help**<br>
+1.  Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
+2.  In your support case, for **Category**, select **Containers**.
+3.  For the **Offering**, select your {{site.data.keyword.containershort}} cluster.<p class="tip">When you report an issue, include your cluster ID. To get your cluster ID, run `ibmcloud ks cluster ls`. You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information from your cluster to share with IBM Support.</p>
 
 
