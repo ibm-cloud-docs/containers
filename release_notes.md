@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-31"
+lastupdated: "2020-02-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,6 +39,15 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
+## February 2020
+{: #feb20}
+
+| Date | Description |
+| ---- | ----------- |
+| 03 February 2020 | **Version changelog**: Updates are available for Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-changelog#11312_1549). |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in February 2020"}
+
 ## January 2020
 {: #jan20}
 
@@ -52,7 +61,8 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 | 13 January 2020 | **{{site.data.keyword.blockstorageshort}}**: Added steps for [adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach). |
 | 06 January 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image to build 373](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|
 | 03 January 2020 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1521](/docs/containers?topic=containers-changelog#1163_1521), [1.15.6_1528](/docs/containers?topic=containers-changelog#1156_1528), [1.14.9_1544](/docs/containers?topic=containers-changelog#1149_1544), and [1.13.12_1547](/docs/containers?topic=containers-changelog#11312_1547).|
-
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in January 2020"}
 
 ## December 2019
 {: #dec19}
