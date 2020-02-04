@@ -340,7 +340,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
   kubectl delete pod -n kube-system -l app=vpn
   ```
   {: pre}
-3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
+3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
 
 <br />
 
