@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks
 
@@ -110,7 +110,7 @@ Refer to the following table for a summary of changes for each version of the [{
 </tr>
 <tr>
 <td>0.4.31</td>
-<td>24 Sept 2019</td>
+<td>24 Sep 2019</td>
 <td>
 <ul>
 <li>Adds the `--gateway-enabled` flag to the `ibmcloud ks cluster create classic` command to create a gateway-enabled cluster. You can enable a gateway only on standard, Kubernetes clusters during cluster creation. For more information, see [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli).</li>
@@ -123,7 +123,7 @@ Refer to the following table for a summary of changes for each version of the [{
 </tr>
 <tr>
 <td>0.4.23</td>
-<td>16 Sept 2019</td>
+<td>16 Sep 2019</td>
 <td>
 <ul>
 <li>Decreases startup time for the plug-in.</li>
@@ -136,12 +136,12 @@ Refer to the following table for a summary of changes for each version of the [{
 </tr>
 <tr>
 <td>0.4.3</td>
-<td>04 Sept 2019</td>
+<td>04 Sep 2019</td>
 <td>Adds deprecation warnings for legacy commands to error messages that are sent to `stderr`.</td>
 </tr>
 <tr>
 <td>0.4.1</td>
-<td>03 Sept 2019</td>
+<td>03 Sep 2019</td>
 <td>
 <ul><li>Sets the {{site.data.keyword.containerlong_notm}} plug-in to the redesigned format by default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of `ibmcloud ks help`, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version `0.3` and `0.4`, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li>
 <li>Adds the [<code>ibmcloud ks script update</code>](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) command to rewrite scripts that call `ibmcloud ks` commands.</li>
