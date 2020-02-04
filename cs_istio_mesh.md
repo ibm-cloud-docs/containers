@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -790,10 +790,4 @@ Destination rules are also used for non-authentication reasons, such as routing 
 {: note}
 
 
-<br />
 
-
-## Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}
-{: #app-id}
-
-By using the App Identity and Access adapter, you can centralize all of your identity management with a single instance of {{site.data.keyword.appid_full}}. The adapter can be configured to work with any OIDC compliant identity provider, which enables the adapter to control authentication and authorization policies in all environments including frontend and backend applications. To use this feature, you do not need to make changes to your code or redeploy your app. To get started, see [Securing multicloud apps with Istio](/docs/appid?topic=appid-istio-adapter) in the {{site.data.keyword.appid_short_notm}} documentation.
