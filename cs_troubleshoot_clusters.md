@@ -209,7 +209,6 @@ Review common error messages and learn how to resolve them.
 <br />
 
 
-
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
 {: troubleshoot}
@@ -338,7 +337,6 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
     4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 <br />
-
 
 
 ## Unable to create a cluster or manage worker nodes due to paid account error

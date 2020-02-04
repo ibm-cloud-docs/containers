@@ -349,7 +349,6 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 <br />
 
 
-
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
 {: troubleshoot}
@@ -480,7 +479,6 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 <br />
 
 
-
 ## Unable to create a cluster or manage worker nodes due to paid account error
 {: #cs_totp}
 
@@ -535,7 +533,7 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 
 
 
-## Cluster create error cannot pull images from registry
+## Cluster create error cannot pull images from {{site.data.keyword.registryshort_notm}}
 {: #ts_image_pull_create}
 
 {: tsSymptoms}
@@ -543,7 +541,7 @@ When you created a cluster, you received an error message similar to the followi
 
 
 ```
-Your cluster cannot pull images from the IBM Cloud Container Registry 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to IBM Cloud Container Registry. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster pull-secret apply'.
+Your cluster cannot pull images from the {{site.data.keyword.registryshort_notm}} 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform role to {{site.data.keyword.registryshort_notm}}. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster pull-secret apply'.
 ```
 {: screen}
 
