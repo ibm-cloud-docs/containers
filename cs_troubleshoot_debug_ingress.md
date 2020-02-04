@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -47,6 +47,8 @@ While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}
 {: troubleshoot}
 {: support}
 
+
+
 You publicly exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the ALB's public IP address or subdomain, the connection fails or times out. The steps in the following sections can help you debug your Ingress setup.
 {: shortdesc}
 
@@ -57,7 +59,7 @@ Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}
   - **Editor** or **Administrator** platform role for the cluster
   - **Writer** or **Manager** service role
 
-### Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
+### Step 1: Run Ingress tests in the Diagnostics and Debug Tool
 {: #debug-tool-ingress}
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
@@ -449,10 +451,10 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 {: #cs_ingress_fails}
 
 {: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
+You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or Ingress subdomain, the connection failed or timed out.
 
 {: tsResolve}
-First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
+First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALBALB.
 ```
 ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 ```
@@ -460,7 +462,7 @@ ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 
 In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a flavor other than **free**.
 
-* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [Cannot get a subdomain for Ingress ALB](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit).
+* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain).
 * For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
 
 If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents ALB pods from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes.
@@ -496,6 +498,8 @@ Verify that the VPC load balancer for your ALBs exists. In the output, look for 
 
 ## Ingress application load balancer (ALB) secret issues
 {: #cs_albsecret_fails}
+
+
 
 {: tsSymptoms}
 After you deploy an Ingress application load balancer (ALB) secret to your cluster by using the `ibmcloud ks alb cert deploy` command, the `Description` field is not updating with the secret name when you view your certificate in {{site.data.keyword.cloudcerts_full_notm}}.
@@ -549,6 +553,8 @@ Review the following reasons why the ALB secret might fail and the corresponding
 
 ## ALB does not deploy in a zone
 {: #cs_subnet_limit}
+
+
 
 {: tsSymptoms}
 When you have a multizone cluster and run `ibmcloud ks alb ls --cluster <cluster>`, no ALB is deployed in a zone. For example, if you have worker nodes in 3 zones, you might see an output similar to the following in which a public ALB did not deploy to the third zone.
@@ -808,6 +814,8 @@ To prevent the connection from closing after 60 seconds of inactivity:
 
 ## Source IP preservation fails when using tainted nodes
 {: #cs_source_ip_fails}
+
+
 
 {: tsSymptoms}
 You enabled source IP preservation for an [Ingress ALB](/docs/containers?topic=containers-ingress-settings#preserve_source_ip) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, help, debug
 
@@ -41,18 +41,18 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 
 **General ways to resolve issues**<br>
 1. Keep your cluster environment up to date.
-   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/openshift?topic=openshift-update#worker_node).
-   * [Update your cluster](/docs/openshift?topic=openshift-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/openshift?topic=openshift-openshift_versions).
+   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#worker_node).
+   * [Update your cluster](/docs/containers?topic=containers-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/containers?topic=containers-openshift_versions).
 2. Make sure that your command line tools are up to date.
    * In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
-   * Make sure that [your `kubectl` CLI](/docs/openshift?topic=openshift-openshift-cli#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+   * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 <br>
 
 **Reviewing issues and status**<br>
 1. To see whether {{site.data.keyword.cloud_notm}} is available, [check the {{site.data.keyword.cloud_notm}} status page](https://cloud.ibm.com/status?selected=status){: external}.
 2. Filter for the **Kubernetes Service** component.
 
-## Running tests with the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool
+## Running tests with the Diagnostics and Debug Tool
 {: #debug_utility}
 {: troubleshoot}
 {: support}
@@ -86,7 +86,7 @@ If you previously installed the debug tool by using Helm, first uninstall the `i
   ```
   {: pre}
 
-</br>**To enable and use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool add-on:**
+</br>**To enable and use the Diagnostics and Debug Tool add-on:**
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
@@ -306,7 +306,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). You might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). If you use a community Kubernetes cluster, you might also have the OpenShift version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
@@ -316,6 +316,7 @@ To check your client `kubectl` version against the cluster server version, run `
 If you have multiple clusters at different Kubernetes versions or different container platforms such as OpenShift, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary directory that matches the `kubectl` version of the cluster that you want to work with, or you might be able to use a tool such as `brew switch kubernetes-cli <major.minor>`.
 
 <br />
+
 
 
 ### `kubectl` commands time out
@@ -342,6 +343,11 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
 
 <br />
+
+
+
+<br />
+
 
 
 ## Unable to create a cluster or manage worker nodes due to permission errors
@@ -472,6 +478,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
     4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 <br />
+
 
 
 ## Unable to create a cluster or manage worker nodes due to paid account error
@@ -700,6 +707,7 @@ To check your user access permissions:
 <br />
 
 
+
 ## Cannot access resources in a cluster
 {: #cs_firewall}
 
@@ -749,6 +757,8 @@ To access resources in the cluster, your worker nodes must be able to communicat
 3. If you have a Vyatta or custom firewall settings, make sure that you [opened up the required ports](/docs/containers?topic=containers-firewall#firewall_outbound) to allow the cluster to access infrastructure resources and services.
 
 <br />
+
+
 
 
 ## Feedback, questions, and support

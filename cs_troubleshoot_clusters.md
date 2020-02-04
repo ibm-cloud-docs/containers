@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -36,16 +36,16 @@ subcollection: containers
 # Worker nodes
 {: #cs_troubleshoot_clusters}
 
-As you use {{site.data.keyword.containerlong}}, consider these techniques for general troubleshooting and debugging your cluster and cluster master.
+As you use {{site.data.keyword.containerlong_notm}}, consider these techniques for general troubleshooting and debugging your cluster and cluster master.
 {: shortdesc}
 
 **General ways to resolve issues**<br>
 1. Keep your cluster environment up to date.
-   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/openshift?topic=openshift-update#worker_node).
-   * [Update your cluster](/docs/openshift?topic=openshift-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/openshift?topic=openshift-openshift_versions).
+   * Check monthly for available security and operating system patches to [update your worker nodes](/docs/containers?topic=containers-update#worker_node).
+   * [Update your cluster](/docs/containers?topic=containers-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/containers?topic=containers-openshift_versions).
 2. Make sure that your command line tools are up to date.
    * In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
-   * Make sure that [your `kubectl` CLI](/docs/openshift?topic=openshift-openshift-cli#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+   * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 <br>
 
 **Reviewing issues and status**<br>
@@ -209,6 +209,7 @@ Review common error messages and learn how to resolve them.
 <br />
 
 
+
 ## Unable to create a cluster or manage worker nodes due to permission errors
 {: #cs_credentials}
 {: troubleshoot}
@@ -337,6 +338,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
     4.  If you manually set credentials and still cannot see the cluster's worker nodes in your infrastructure account, you might check whether the [cluster is orphaned](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned).
 
 <br />
+
 
 
 ## Unable to create a cluster or manage worker nodes due to paid account error

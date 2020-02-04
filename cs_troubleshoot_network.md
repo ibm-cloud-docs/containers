@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -36,11 +36,12 @@ subcollection: containers
 # Cluster networking
 {: #cs_troubleshoot_network}
 
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting the management of your cluster network.
+As you use {{site.data.keyword.containerlong_notm}}, consider these techniques for troubleshooting the management of your cluster network.
 {: shortdesc}
 
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.
 {: tip}
+
 
 ## Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted
 {: #coredns_lameduck}
@@ -89,6 +90,7 @@ Update your app to use a newer DNS client. For example, if your app image is Ubu
 You can also remove the cache plug-in configurations from the `coredns` configmap in the `kube-system` namespace. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).
 
 <br />
+
 
 
 ## Cannot establish VPN connectivity with the strongSwan Helm chart
