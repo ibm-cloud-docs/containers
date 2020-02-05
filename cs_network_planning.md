@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks, networking
 
@@ -209,7 +209,8 @@ Still want more details about the load-balancing deployment patterns that are av
 {: #pattern_public_vpc}
 
 To make an app publicly available to the internet in a VPC cluster, choose a load-balancing deployment pattern that uses public `LoadBalancer` or `Ingress` services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
-{: shortdesc}
+{: shortdesc} If you create a non-default security group for a VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`. For more information, see the "Before you begin" section of the [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) or [Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) setup topics.
+{: note}
 
 <table summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns.">
 <caption>Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}}</caption>
