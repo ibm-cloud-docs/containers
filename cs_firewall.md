@@ -279,7 +279,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
           <tr>
             <td>AP North</td>
             <td>che01<br>hkg02<br>seo01<br>sng01<br><br>tok02, tok04, tok05</td>
-            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226, 119.81.222.210</code><br><br><code>128.168.71.117, 135.90.69.66, 135.90.69.82, 161.202.126.210, 165.192.69.69</code></td>
+            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>128.168.71.117, 135.90.69.66, 135.90.69.82, 161.202.126.210, 165.192.69.69</code></td>
            </tr>
           <tr>
              <td>AP South</td>
