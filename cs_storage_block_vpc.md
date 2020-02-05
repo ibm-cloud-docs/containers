@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks, vpc
 
@@ -55,7 +55,7 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
 
-First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [[installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
+First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
 {: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.

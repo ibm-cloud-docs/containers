@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks
 
@@ -47,10 +47,10 @@ subcollection: containers
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}
 {: #block_qs}
 
-In this quickstart guide, you create a 24Gi silver tier {{site.data.keyword.blockshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
+In this quickstart guide, you create a 24Gi silver tier {{site.data.keyword.blockstorageshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
 
-First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [[installed the {{site.data.keyword.blockstorageshort}} plugin](#install_block).
+First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.blockstorageshort}} plugin](#install_block).
 {: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.
