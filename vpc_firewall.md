@@ -263,7 +263,29 @@ Although Calico policies are supported in VPC clusters, you can remain VPC-nativ
 If you use use non-default security groups that are applied at the level of the VPC, incoming traffic requests to apps in your cluster are denied by default. You must modify the security group rules to allow traffic requests that are routed to node ports on your worker nodes.
 {: shortdesc}
 
-[VPC security groups](/docs/vpc?topic=vpc-using-security-groups) are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker nodes instances. However, you can use security groups at the level of the VPC. If you create a non-default security group for a VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`. For more information, see the "Before you begin" section of the [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) or [Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) setup topics.
+[VPC security groups](/docs/vpc?topic=vpc-using-security-groups) are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker nodes instances. However, you can use security groups at the level of the VPC. If you create a non-default security group for a VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`.
+
+1. Target Generation 1 of VPC compute.
+   ```
+   ibmcloud is target --gen 1
+   ```
+   {: pre}
+2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+  ```
+  ibmcloud is security-groups
+  ```
+  {: pre}
+  Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+  ```
+  ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+  1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+  ```
+  {: screen}
+3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+  ```
+  ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+  ```
+  {: pre}
 
 <br />
 
