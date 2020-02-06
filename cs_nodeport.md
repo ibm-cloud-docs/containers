@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-05"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, app access
 
@@ -75,6 +75,33 @@ Because worker nodes in VPC clusters do not have a public IP address, you can ac
 {: note}
 
 If you do not already have an app ready, you can use a Kubernetes example app called [Guestbook](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml){: external}.
+
+**Before you begin**: 
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* VPC clusters: If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+    ```
+    ibmcloud is security-groups
+    ```
+    {: pre}
+    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+    ```
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    ```
+    {: screen}
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+    ```
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+    ```
+    {: pre}
+
+**To use a NodePort**:
 
 1.  In the configuration file for your app, define a [service](https://kubernetes.io/docs/concepts/services-networking/service/){: external} section.
 
