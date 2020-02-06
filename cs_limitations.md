@@ -46,7 +46,7 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 ## Service limitations
 {: #tech_limits}
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#vpc_ks_limits) cluster limitations also apply.
 {: shortdesc}
 
 | Category | Description |
@@ -72,7 +72,7 @@ Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are 
 ### Compute
 {: #classic_compute_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
@@ -87,7 +87,7 @@ Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are 
 ### Networking
 {: #classic_networking_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
@@ -103,7 +103,7 @@ Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are 
 ### Storage
 {: #classic_storage_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
@@ -123,7 +123,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
 ### Compute
 {: #vpc_compute_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
@@ -144,7 +144,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
 ### Networking
 {: #vpc_networking_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
@@ -160,7 +160,7 @@ VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} ar
 ### Storage
 {: #vpc_storage_limit}
 
-</br>
+Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
