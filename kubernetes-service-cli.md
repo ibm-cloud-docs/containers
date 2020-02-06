@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-05"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -835,6 +835,9 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -842,6 +845,9 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -940,6 +946,9 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -947,6 +956,9 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
