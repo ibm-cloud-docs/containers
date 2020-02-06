@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-04"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 06 February 2020 | <ul><li>**Cluster autoscaler**: Added a [debugging guide for the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).</li><li>**Tags**: Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).</li></ul> |
 | 03 February 2020 | **Version changelog**: Updates are available for Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-changelog#11312_1549). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in February 2020"}
