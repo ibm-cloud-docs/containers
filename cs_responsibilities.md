@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -129,7 +129,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         <br><br>
         **Your responsibilities**:
         <ul>
-        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app); [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning); [monitor the health](/docs/containers?topic=containers-health); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
+        <li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app); [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning); [set up and monitor the health](/docs/containers?topic=containers-health); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li>
         </ul>
         </td>
         </tr>
