@@ -442,7 +442,6 @@ Forward requests directly to the IP address of your external service by setting 
 {: shortdesc}
 
 **Before you begin:**
-
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -538,7 +537,6 @@ Route requests through the Ingress ALB to your external service by using the `pr
 {: shortdesc}
 
 **Before you begin:**
-
 * Review the Ingress [prerequisites](#config_prereqs).
 * VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
