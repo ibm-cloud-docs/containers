@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -130,7 +130,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from a variet
  <tr>
    <td>Troubleshooting and support</td>
    <td>Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-cs_troubleshoot) guide. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.</td>
-   <td>Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [VPC troubleshooting](/docs/containers?topic=containers-vpc_troubleshoot#vpc_troubleshoot) specific information. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.</td>
+   <td>Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [troubleshooting documentation](/docs/containers?topic=containers-cs_troubleshoot) for VPC-specific topics. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-container-service.slack.com/messages/C4G6362ER) Slack channels.</td>
  </tr>
  </tbody>
 </table>

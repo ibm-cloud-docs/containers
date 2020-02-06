@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 06 February 2020 | <ul><li>**Cluster autoscaler**: Added a [debugging guide for the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).</li><li>**Tags**: Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).</li></ul> |
 | 03 February 2020 | **Version changelog**: Updates are available for Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-changelog#11312_1549). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in February 2020"}
@@ -445,7 +446,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td>01 July 2019</td>
   <td><ul>
   <li><strong>Infrastructure permissions</strong>: Updated the [classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra) required for common use cases.</li>
-  <li><strong>Securing Istio-managed apps with {{site.data.keyword.appid_short_notm}}</strong>: Added information about the [App Identity and Access adapter](/docs/containers?topic=containers-istio-mesh#app-id).</li>
   <li><strong>strongSwan VPN service</strong>: If you install strongSwan in a multizone cluster and use the `enableSingleSourceIP=true` setting, you can now [set `local.subnet` to the `%zoneSubnet` variable and use the `local.zoneSubnet` to specify an IP address as a /32 subnet for each zone of the cluster](/docs/containers?topic=containers-vpn#strongswan_4).</li>
   </ul></td>
 </tr>

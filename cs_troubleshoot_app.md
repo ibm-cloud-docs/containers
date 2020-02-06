@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-04"
 
-keywords: kubernetes, iks, nginx, nlb, help
+keywords: kubernetes, iks, help
 
 subcollection: containers
 
@@ -111,6 +111,8 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
       {: pre}
 
 <br />
+
+
 
 
 ## Failed to pull image from registry with `ImagePullBackOff` or authorization errors
@@ -224,7 +226,7 @@ The following steps assume that the API key stores the credentials of a service 
     ```
     UUID                Name               Created At              Last Updated            Description                                                                                                                                                                                         Locked
     ServiceId-aa11...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   ID for <cluster_name>                                                                                                                                         false
-    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <kube_namespace>                                                                                                                                         false
+    ServiceId-bb22...   <service_ID_name>  2019-02-01T19:01+0000   2019-02-01T19:01+0000   Service ID for IBM Cloud Container Registry in Kubernetes cluster <cluster_name> namespace <namespace>                                                                                                                                         false
     ```
     {: screen}
 2.  Verify that the service ID is assigned at least an {{site.data.keyword.cloud_notm}} IAM **Reader** [service access role policy for {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-user#create). If the service ID does not have the **Reader** service role, [edit the IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit). If the policies are correct, continue with the next step to see if the credentials are valid.
@@ -356,6 +358,7 @@ Containers might not start when the registry quota is reached.
 <br />
 
 
+
 ## Pods fail to deploy because of a pod security policy
 {: #cs_psp}
 
@@ -388,6 +391,7 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
 <br />
 
 
+
 ## Pods remain in pending state
 {: #cs_pods_pending}
 
@@ -412,6 +416,7 @@ kubectl get nodes
 {: pre}
 
 If this cluster is an existing one, check your cluster capacity.
+
 
 1.  Set the proxy with the default port number.
 
@@ -459,6 +464,8 @@ If this cluster is an existing one, check your cluster capacity.
 6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.
 
 <br />
+
+
 
 
 ## Pods repeatedly fail to restart or are unexpectedly removed
@@ -587,7 +594,7 @@ The specified IBM Cloud service could not be found. If you just created the serv
 {: screen}
 
 {: tsCauses}
-To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platform access to {{site.data.keyword.containerlong}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platform access to {{site.data.keyword.containerlong_notm}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
 
 {: tsResolve}
 
@@ -615,7 +622,7 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 **As the account admin:**
 
-1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong}}](/docs/iam?topic=iam-iammanidaccser#edit_existing).
+1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong_notm}}](/docs/iam?topic=iam-iammanidaccser#edit_existing).
 
 2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/iam?topic=iam-mngcf#update_cf_access) where the service is provisioned.
 
@@ -664,7 +671,7 @@ To integrate services that do not support service keys, check if the service pro
 {: #cs_helm_install}
 
 {: tsSymptoms}
-When you try to install an updated Helm chart by running `helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
+When you try to install an updated Helm chart by running `helm install <release_name> iks-charts/<chart_name> -f config.yaml`, you get the `Error: failed to download "iks-charts/<chart_name>"` error message.
 
 {: tsCauses}
 The URL for the {{site.data.keyword.cloud_notm}} repository in your Helm instance might be incorrect.
@@ -715,7 +722,7 @@ To troubleshoot your Helm chart:
 3. Install the Helm chart with your updates.
 
     ```
-    helm install <release_name> iks-charts/<chart_name> -f config.yaml --namespace=kube-system
+    helm install <release_name> iks-charts/<chart_name> -f config.yaml
     ```
     {: pre}
 

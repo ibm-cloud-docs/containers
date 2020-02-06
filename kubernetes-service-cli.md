@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -67,81 +67,22 @@ When version 1.0 releases, permanent syntax and behavior changes are not backwar
 
 Check out the following changes between each version of the CLI plug-in:
 
-<table summary="The rows are read from left to right, with the area of comparison in column one, Classic clusters CLI in column two, and VPC clusters CLI in column three.">
-<caption>Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in</caption>
-<col width="60%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
-<col width="10%">
- <thead>
-   <th>Functionality</th>
-   <th>`0.2`</th>
-   <th>`0.3`</th>
-   <th>`0.4`</th>
-   <th>`1.0`</th>
- </thead>
- <tbody>
-  <tr>
-  <td>Supported?</td>
-  <td>Deprecated</td>
-  <td>Deprecated</td>
-  <td>Default</td>
-  <td>Latest</td>
-  </tr>
-  <tr>
-  <td>`ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul></td>
-  <td>Legacy</td>
-  <td>Legacy</td>
-  <td>Beta</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Beta: Spaced structure (`ibmcloud ks alb cert get`)</li></ul></td>
-  <td>Legacy and beta</td>
-  <td>Legacy and beta</td>
-  <td>Legacy and beta</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>Positional arguments<ul><li>Legacy: Arguments specified by position (`cluster-get mycluster`)</li><li>Beta: Arguments specified by flags (`cluster get --cluster mycluster`)</li></ul></td>
-  <td>Legacy and beta</td>
-  <td>Legacy and beta</td>
-  <td>Legacy and beta</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>Repeated arguments<ul><li>Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`)</li></ul></td>
-  <td>Legacy</td>
-  <td>Legacy</td>
-  <td>Legacy and beta</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Beta: Dashed (`--show-resources`)</li></ul></td>
-  <td>Legacy</td>
-  <td>Legacy</td>
-  <td>Legacy and beta</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul></td>
-  <td>Legacy</td>
-  <td>Legacy</td>
-  <td>Legacy</td>
-  <td>Beta</td>
-  </tr>
-  <tr><td>API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Beta: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul></td>
-  <td>Legacy</td>
-  <td>Beta</td>
-  <td>Beta</td>
-  <td>Beta</td>
-  </tr>
- </tbody>
-</table>
+|Functionality|`0.2`|`0.3`|`0.4`|`1.0`|
+|-------------|-----|-----|-----|-----|
+| Supported? | Deprecated | Deprecated | Default | Latest |
+| `ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul> | Legacy | Legacy | Beta | Beta |
+| Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Beta: Spaced structure (`ibmcloud ks alb cert get`)</li></ul> | Legacy and beta | Legacy and beta | Legacy and beta | Beta |
+| Positional arguments<ul><li>Legacy: Arguments specified by position (`cluster-get mycluster`)</li><li>Beta: Arguments specified by flags (`cluster get --cluster mycluster`)</li></ul> | Legacy and beta | Legacy and beta | Legacy and beta | Beta |
+| Repeated arguments<ul><li>Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`)</li></ul> | Legacy | Legacy | Legacy and beta | Beta |
+| Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Beta: Dashed (`--show-resources`)</li></ul> | Legacy | Legacy | Legacy and beta | Beta |
+| Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul> | Legacy | Legacy | Legacy | Beta |
+| API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Beta: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul> | Legacy | Beta | Beta | Beta |
+{: caption="Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
 
 <br />
 
-<br>
 
 
-
-<br>
 
 ## Comparison of Classic and VPC commands
 {: #cli_classic_vpc_about}
@@ -835,6 +776,9 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -842,6 +786,9 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -940,6 +887,9 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -947,6 +897,9 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
 <ul><li><code>10.0.&#42;.&#42;</code></li>
+<li><code>172.16.&#42;.&#42;</code></li>
+<li><code>172.18.&#42;.&#42;</code></li>
+<li><code>172.19.&#42;.&#42;</code></li>
 <li><code>172.20.&#42;.&#42;</code></li>
 <li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
@@ -3240,7 +3193,7 @@ You can use this command to:
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
 
 ```
-ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable|--disable-deployment [-s]
+ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [-s]
 ```
 {: pre}
 
@@ -3258,9 +3211,6 @@ ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable|--disab
 
 <dt><code>--disable</code></dt>
 <dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--disable-deployment</code></dt>
-<dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>

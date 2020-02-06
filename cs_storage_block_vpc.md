@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, vpc
 
@@ -55,7 +55,7 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
 
-First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [[installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
+First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
 {: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.
@@ -1198,11 +1198,14 @@ To back up or restore data, choose between the following options:
 ## Storage class reference
 {: #vpc-block-reference}
 
+{[relcaim.md]}
+
 | Characteristics | Setting|
 |:-----------------|:-----------------|
-| Name | <code>ibmc-vpc-block-10iops-tier</code></br><code>ibmc-vpc-block-retain-10iops-tier</code>|
+| Name | <code>ibmc-vpc-block-10iops-tier</code></br><code>ibmc-vpc-block-retain-10iops-tier</code> |
 | File system | `ext4` |
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [10 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Reclaim policy | <code>ibmc-vpc-block-10iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-10iops-tier</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
@@ -1213,9 +1216,10 @@ To back up or restore data, choose between the following options:
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|
-| Name | <code>ibmc-vpc-block-5iops-tier</code></br><code>ibmc-vpc-block-retain-5iops-tier</code>|
+| Name | <code>ibmc-vpc-block-5iops-tier</code></br><code>ibmc-vpc-block-retain-5iops-tier</code> |
 | File system | `ext4` |
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [5 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Reclaim policy | <code>ibmc-vpc-block-5iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-5iops-tier</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
@@ -1226,9 +1230,10 @@ To back up or restore data, choose between the following options:
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|
-| Name | <code>ibmc-vpc-block-custom</code></br><code>ibmc-vpc-block-retain-custom</code>|
+| Name | <code>ibmc-vpc-block-custom</code></br><code>ibmc-vpc-block-retain-custom</code> |
 | File system | `ext4` |
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [Custom](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#custom) |
+| Reclaim policy | <code>ibmc-vpc-block-custom</code>: Delete</br><code>ibmc-vpc-block-retain-custom</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}
@@ -1239,9 +1244,10 @@ To back up or restore data, choose between the following options:
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|
-| Name | <code>ibmc-vpc-block-general-purpose</code></br><code>ibmc-vpc-block-retain-general-purpose</code>|
+| Name | <code>ibmc-vpc-block-general-purpose</code></br><code>ibmc-vpc-block-retain-general-purpose</code> |
 | File system | `ext4` |
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [3 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Reclaim policy | <code>ibmc-vpc-block-general-purpose</code>: Delete</br><code>ibmc-vpc-block-retain-general-purpose</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
 {: class="simple-tab-table"}

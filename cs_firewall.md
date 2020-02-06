@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -279,7 +279,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
           <tr>
             <td>AP North</td>
             <td>che01<br>hkg02<br>seo01<br>sng01<br><br>tok02, tok04, tok05</td>
-            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226, 119.81.222.210</code><br><br><code>128.168.71.117, 135.90.69.66, 135.90.69.82, 161.202.126.210, 165.192.69.69</code></td>
+            <td><code>169.38.70.10</code><br><code>169.56.132.234</code><br><code>169.56.69.242</code><br><code>161.202.186.226</code><br><br><code>128.168.71.117, 135.90.69.66, 135.90.69.82, 161.202.126.210, 165.192.69.69</code></td>
            </tr>
           <tr>
              <td>AP South</td>
@@ -571,7 +571,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`. 
+    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.8   

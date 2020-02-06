@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-31"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -118,10 +118,32 @@ The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<globally_unique_
 Expose apps that are inside your cluster to the public by using the public Ingress ALB.
 {:shortdesc}
 
-Before you begin:
+**Before you begin:**
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* VPC clusters: If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by Ingress to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+    ```
+    ibmcloud is security-groups
+    ```
+    {: pre}
+    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+    ```
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    ```
+    {: screen}
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+    ```
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+    ```
+    {: pre}
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -419,12 +441,33 @@ You have two options for setting up routing to an external app:
 Forward requests directly to the IP address of your external service by setting up a Kubernetes endpoint that defines the external IP address and port of the app.
 {: shortdesc}
 
-Before you begin:
-
+**Before you begin:**
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
-* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
+* VPC clusters: If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by Ingress to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+    ```
+    ibmcloud is security-groups
+    ```
+    {: pre}
+    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+    ```
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    ```
+    {: screen}
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+    ```
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+    ```
+    {: pre}
 
 To expose apps that are outside of your cluster to the public:
 1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service that forwards incoming requests to an external endpoint that you create in subsequent steps.
@@ -493,8 +536,7 @@ To expose apps that are outside of your cluster to the public:
 Route requests through the Ingress ALB to your external service by using the `proxy-external-service` annotation in your Ingress resource file.
 {: shortdesc}
 
-Before you begin:
-
+**Before you begin:**
 * Review the Ingress [prerequisites](#config_prereqs).
 * VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -571,7 +613,7 @@ Expose apps to a private network by using the private Ingress ALBs in a classic 
 
 To use a private ALB, you must first enable the private ALB. Because private VLAN-only classic clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
 
-Before you begin:
+**Before you begin:**
 * Review the Ingress [prerequisites](#config_prereqs).
 * If you have a classic cluster with worker nodes that are connected to [a private VLAN only](/docs/containers?topic=containers-cs_network_planning#plan_private_vlan) you must configure a [DNS service that is available on the private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 
@@ -835,7 +877,31 @@ Expose apps to a private network by using the private Ingress ALBs in a VPC clus
 
 To use a private ALB, you must first enable the private ALB. Then, to expose your apps to the private network, you must create a DNS entry for your private ALB hostname.
 
-Before you begin, review the Ingress [prerequisites](#config_prereqs).
+**Before you begin**:
+* Review the Ingress [prerequisites](#config_prereqs).
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* VPC clusters: If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by Ingress to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+    ```
+    ibmcloud is security-groups
+    ```
+    {: pre}
+    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+    ```
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    ```
+    {: screen}
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+    ```
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+    ```
+    {: pre}
 
 ### Step 1: Deploy apps and create app services
 {: #vpc_private_1}

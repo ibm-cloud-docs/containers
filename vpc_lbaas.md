@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -68,13 +68,14 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
 **Before you begin**:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
-* If you use [VPC security groups](/docs/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
-  1. List the worker nodes in your VPC cluster, and note the private IP addresses.
-    ```
-    kubectl get nodes
-    ```
-    {: pre}
-  2. List your security groups. If your VPC has only the default security group with a randomly generated name, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+* [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+* If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
     ```
     ibmcloud is security-groups
     ```
@@ -82,12 +83,12 @@ Expose your app to the public or to the private network by setting up a Kubernet
     Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
     ```
     ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
-    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment   4       -                           2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
     ```
     {: screen}
-  3. For any other security groups for your VPC, add a rule to allow inbound TCP traffic on ports 30000-32767 to the private IP addresses of your worker nodes. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc-on-classic?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
     ```
-    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --remote <worker_node_private_IP> --port-min 30000 --port-max 32767
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
     ```
     {: pre}
 

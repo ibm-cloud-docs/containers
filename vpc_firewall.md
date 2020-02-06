@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-05"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -44,6 +44,7 @@ Review these situations in which you might need to open specific ports and IP ad
 
 * [Corporate firewalls](#vpc-corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
 * [Access control lists](#firewall_acls): If you use ACLs on your VPC subnets to act as a firewall to restrict all worker node egress, you must allow your worker nodes to access the resources that are required for the cluster to function.
+* [Security groups](#security_groups): If you use use non-default security groups that are applied at the level of the VPC, you must allow traffic requests that are routed to node ports on your worker nodes.
 * [Other services or network firewalls](#vpc-whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
 
 <br />
@@ -256,6 +257,39 @@ Although Calico policies are supported in VPC clusters, you can remain VPC-nativ
 <br />
 
 
+## Opening required ports in VPC security groups
+{: #security_groups}
+
+If you use use non-default security groups that are applied at the level of the VPC, incoming traffic requests to apps in your cluster are denied by default. You must modify the security group rules to allow traffic requests that are routed to node ports on your worker nodes.
+{: shortdesc}
+
+[VPC security groups](/docs/vpc?topic=vpc-using-security-groups) are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker nodes instances. However, you can use security groups at the level of the VPC. If you create a non-default security group for a VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`.
+
+1. Target Generation 1 of VPC compute.
+   ```
+   ibmcloud is target --gen 1
+   ```
+   {: pre}
+2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
+  ```
+  ibmcloud is security-groups
+  ```
+  {: pre}
+  Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+  ```
+  ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+  1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+  ```
+  {: screen}
+3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+  ```
+  ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+  ```
+  {: pre}
+
+<br />
+
+
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #vpc-whitelist_workers}
 
@@ -273,7 +307,7 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`. 
+    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
         kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.8

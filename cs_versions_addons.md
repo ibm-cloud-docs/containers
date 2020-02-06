@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-30"
+lastupdated: "2020-02-04"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -133,13 +133,13 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>566 / 340</td>
-<td>24 Sept 2019</td>
+<td>24 Sep 2019</td>
 <td>In Kubernetes version 1.14 and later clusters, adds support for `apiVersion: networking.k8s.io/v1beta1` in Ingress resource YAML files. Note that `apiVersion: extensions/v1beta1` is still supported for all versions, and version 1.13 clusters must continue to use `apiVersion: extensions/v1beta1`.</td>
 <td>-</td>
 </tr>
 <tr>
 <td>552 / 340</td>
-<td>12 Sept 2019</td>
+<td>12 Sep 2019</td>
 <td><ul>
 <li>Adds the [`proxy-ssl-verify-depth` optional parameter to the `ssl-services` annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services).</li>
 <li>Fixes a bug so that when traffic is routed to a host that does not exist, a default server now successfully returns a `404 Not Found` error message.</li>
@@ -148,7 +148,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 <tr>
 <td>524 / 340</td>
-<td>05 Sept 2019</td>
+<td>05 Sep 2019</td>
 <td>Fixes HTTP/2 vulnerabilities for [CVE-2019-9511 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9511) and [CVE-2019-9513 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9513).</td>
 <td>-</td>
 </tr>

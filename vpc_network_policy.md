@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-06"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -49,7 +49,7 @@ If you have unique security requirements, you can control traffic to and from yo
 <dd>Kubernetes network policies specify how pods can communicate with other pods and with external endpoints. As of Kubernetes version 1.8, both incoming and outgoing network traffic can be allowed or blocked based on protocol, port, and source or destination IP addresses. Traffic can also be filtered based on pod and namespace labels. Kubernetes network policies are applied by using `kubectl` commands or the Kubernetes APIs. When these policies are applied, they are automatically converted into Calico network policies. The Calico network plug-in in your cluster enforces these policies by setting up Linux Iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.</dd>
 </dl>
 
-You cannot use [VPC security groups](/docs/security-groups?topic=security-groups-about-ibm-security-groups#about-ibm-security-groups) to control traffic for your worker nodes. VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. However, the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard. You cannot attach a security group to your worker nodes instances.
+You cannot attach worker nodes to [VPC security groups](/docs/vpc?topic=vpc-using-security-groups) because your worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. Although you cannot attach a security group to your worker nodes instances, you can create security groups at the level of the VPC. For more information, see [Opening required ports in VPC security groups](/docs/containers?topic=containers-vpc-firewall#security_groups).
 {: note}
 
 <br />

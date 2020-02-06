@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-01-31"
+lastupdated: "2020-02-04"
 
 ---
 
@@ -686,7 +686,6 @@ lastupdated: "2020-01-31"
   * [Exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
   * [Exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
-* [Securing Istio-managed apps with App ID](/docs/containers?topic=containers-istio-mesh#app-id)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
 * [Launching the Grafana, Jaeger, and Kiali dashboards](/docs/containers?topic=containers-istio-health#istio_health_extras)

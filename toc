@@ -182,6 +182,7 @@ IBM Cloud Kubernetes Service
     Troubleshooting cluster components
         cs_troubleshoot.md
         cs_troubleshoot_clusters.md
+        cs_ts_cluster_autoscaler.md
         cs_troubleshoot_network.md
         cs_troubleshoot_health.md
         cs_troubleshoot_app.md
