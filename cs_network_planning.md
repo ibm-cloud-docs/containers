@@ -95,25 +95,25 @@ The following image demonstrates how Kubernetes forwards public network traffic 
 Kubernetes supports four basic types of network services: `ClusterIP`, `NodePort`, `LoadBalancer`, and `Ingress`. `ClusterIP` services make your apps accessible internally to allow communication between pods in your cluster only. `NodePort`, `LoadBalancer`, and `Ingress` services make your apps externally accessible from the public internet or a private network.
 {: shortdesc}
 
-<dl>
-<dt>[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service)</dt>
-<dd>You can expose apps only as cluster IP services on the private network. A `clusterIP` service provides an in-cluster IP address that is accessible by other pods and services inside the cluster only. No external IP address is created for the app. To access a pod behind a cluster service, other apps in the cluster can either use the in-cluster IP address of the service or send a request by using the name of the service. When a request reaches the service, the service forwards requests to the pods equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to. Note that if you do not specify a `type` in a service's YAML configuration file, the `ClusterIP` type is created by default.</dd>
+**[ClusterIP](https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service)**
 
-<dt>[NodePort](/docs/containers?topic=containers-nodeport)</dt>
-<dd>When you expose apps with a NodePort service, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. To access the service from outside the cluster, you use the public or private IP address of any worker node and the NodePort in the format <code>&lt;IP_address&gt;:&lt;nodeport&gt;</code>. However, the public and private IP addresses of the worker node are not permanent. When a worker node is removed or re-created, a new public and a new private IP address are assigned to the worker node. NodePorts are ideal for testing public or private access or providing access for only a short amount of time. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection.</dd>
+You can expose apps only as cluster IP services on the private network. A `clusterIP` service provides an in-cluster IP address that is accessible by other pods and services inside the cluster only. No external IP address is created for the app. To access a pod behind a cluster service, other apps in the cluster can either use the in-cluster IP address of the service or send a request by using the name of the service. When a request reaches the service, the service forwards requests to the pods equally, independent of pods' in-cluster IP addresses and the worker node that they are deployed to. Note that if you do not specify a `type` in a service's YAML configuration file, the `ClusterIP` type is created by default.
 
-<dt>LoadBalancer</dt>
-<dd>The LoadBalancer service type is implemented differently depending on your cluster's infrastructure provider.<ul>
-<li>Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and do not change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.</li>
-<li>VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.</li>
-</ul></dd>
+**[NodePort](/docs/containers?topic=containers-nodeport)**
 
-<dt>[Ingress](/docs/containers?topic=containers-ingress)</dt>
-<dd>Expose multiple apps in a cluster by setting up routing with the Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one subdomain to expose multiple apps in your cluster as services. Ingress consists of three components:<ul>
-  <li>The Ingress resource defines the rules for how to route and load balance incoming requests for an app.</li>
-  <li>The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.</li>
-  <li>The multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks for the public Ingress IP addresses.</li></ul></dd>
-</dl>
+When you expose apps with a NodePort service, a NodePort in the range of 30000 - 32767 and an internal cluster IP address is assigned to the service. To access the service from outside the cluster, you use the public or private IP address of any worker node and the NodePort in the format `<IP_address>:<nodeport>`. However, the public and private IP addresses of the worker node are not permanent. When a worker node is removed or re-created, a new public and a new private IP address are assigned to the worker node. NodePorts are ideal for testing public or private access or providing access for only a short amount of time. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection.
+
+**LoadBalancer**
+
+The LoadBalancer service type is implemented differently depending on your cluster's infrastructure provider.
+* Classic clusters: [Network load balancer (NLB)](/docs/containers?topic=containers-loadbalancer). Every standard cluster is provisioned with four portable public and four portable private IP addresses that you can use to create a layer 4 TCP/UDP network load balancer (NLB) for your app. You can customize your NLB by exposing any port that your app requires. The portable public and private IP addresses that are assigned to the NLB are permanent and do not change when a worker node is re-created in the cluster. You can create a subdomain for your app that registers public NLB IP addresses with a DNS entry. You can also enable health check monitors on the NLB IPs for each subdomain.
+* VPC clusters: [Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas). When you create a Kubernetes LoadBalancer service for an app in your cluster, a layer 7 VPC load balancer is automatically created in your VPC outside of your cluster. The VPC load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. By default, the load balancer is also created with a hostname that you can use to access your app.
+
+**[Ingress](/docs/containers?topic=containers-ingress)**
+Expose multiple apps in a cluster by setting up routing with the Ingress application load balancer (ALB). The ALB uses a secured and unique public or private entry point, an Ingress subdomain, to route incoming requests to your apps. You can use one subdomain to expose multiple apps in your cluster as services. Ingress consists of three components:
+* The Ingress resource defines the rules for how to route and load balance incoming requests for an app.
+* The ALB listens for incoming HTTP, HTTPS, or TCP service requests. It forwards requests across the apps' pods based on the rules that you defined in the Ingress resource.
+* The multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters handles all incoming requests to your apps and load balances the requests among the ALBs in the various zones. It also enables health checks for the public Ingress IP addresses.
 
 </br>
 The following table compares the features of each network service type.
@@ -156,51 +156,15 @@ The public network interface for worker nodes is protected by [predefined Calico
 
 To make an app publicly available to the internet in a classic cluster, choose a load-balancing deployment pattern that uses public NodePort, LoadBalancer, or Ingress services. The following table describes each possible deployment pattern, why you might use it, and how to set it up. For basic information about the networking services that these deployment patterns use, see [Understanding Kubernetes service types](#external).
 
-<table summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns.">
-<caption>Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}}</caption>
-<col width="10%">
-<col width="25%">
-<col width="25%">
-<thead>
-<th>Name</th>
-<th>Load-balancing method</th>
-<th>Use case</th>
-<th>Implementation</th>
-</thead>
-<tbody>
-<tr>
-<td>NodePort</td>
-<td>Port on a worker node that exposes the app on the worker's public IP address</td>
-<td>Test public access to one app or provide access for only a short amount of time.</td>
-<td>[Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).</td>
-</tr><tr>
-<td>NLB v1.0 (+ subdomain)</td>
-<td>Basic load balancing that exposes the app with an IP address or a subdomain</td>
-<td>Quickly expose one app to the public with an IP address or a subdomain that supports SSL termination.</td>
-<td><ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol></td>
-</tr><tr>
-<td>NLB v2.0 (+ subdomain)</td>
-<td>DSR load balancing that exposes the app with an IP address or a subdomain</td>
-<td>Expose an app that might receive high levels of traffic to the public with an IP address or a subdomain that supports SSL termination.</td>
-<td><ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol></td>
-</tr><tr>
-<td>Istio + NLB subdomain</td>
-<td>Basic load balancing that exposes the app with a subdomain and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).</li><li>Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).</li></ol></td>
-</tr><tr>
-<td>Ingress ALB</td>
-<td>HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules</td>
-<td>Implement custom routing rules and SSL termination for multiple apps.</td>
-<td><ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
-</tr><tr>
-<td>Bring your own Ingress controller + NLB subdomain</td>
-<td>HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB subdomain and uses custom routing rules</td>
-<td>Implement custom routing rules or other specific requirements for custom tuning for multiple apps.</td>
-<td>[Deploy your Ingress controller and leverage an IBM-provided subdomain](/docs/containers?topic=containers-ingress-user_managed).</td>
-</tr>
-</tbody>
-</table>
+|Name|Load-balancing method|Use case|Implementation|
+|----|---------------------|--------|--------------|
+| NodePort | Port on a worker node that exposes the app on the worker's public IP address | Test public access to one app or provide access for only a short amount of time. | [Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).|
+| NLB v1.0 (+ subdomain) | Basic load balancing that exposes the app with an IP address or a subdomain | Quickly expose one app to the public with an IP address or a subdomain that supports SSL termination. | <ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol>|
+| NLB v2.0 (+ subdomain) | DSR load balancing that exposes the app with an IP address or a subdomain | Expose an app that might receive high levels of traffic to the public with an IP address or a subdomain that supports SSL termination. | <ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol>|
+| Istio + NLB subdomain | Basic load balancing that exposes the app with a subdomain and uses Istio routing rules | Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.</li></ol> | <ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).</li><li>Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).</li></ol>|
+| Ingress ALB | HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules | Implement custom routing rules and SSL termination for multiple apps. | <ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
+| Bring your own Ingress controller + NLB subdomain | HTTPS load balancing with a custom Ingress controller that exposes the app with the IBM-provided ALB subdomain and uses custom routing rules | Implement custom routing rules or other specific requirements for custom tuning for multiple apps. | [Deploy your Ingress controller and leverage an IBM-provided subdomain](/docs/containers?topic=containers-ingress-user_managed).|
+{: caption="Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}} classic clusters" caption-side="top"}
 
 Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post](https://www.ibm.com/cloud/blog/new-builders/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability){: external}.
 {: tip}
@@ -214,36 +178,12 @@ To make an app publicly available to the internet in a VPC cluster, choose a loa
 If you create a non-default security group for a VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`. For more information, see the "Before you begin" section of the [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) or [Ingress](/docs/containers?topic=containers-ingress#ingress_expose_public) setup topics.
 {: note}
 
-<table summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns.">
-<caption>Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}}</caption>
-<col width="10%">
-<col width="25%">
-<col width="25%">
-<thead>
-<th>Name</th>
-<th>Load-balancing method</th>
-<th>Use case</th>
-<th>Implementation</th>
-</thead>
-<tbody>
-<tr>
-<td>VPC load balancer</td>
-<td>Basic load balancing that exposes the app with a hostname</td>
-<td>Quickly expose one app to the public with a VPC load balancer-assigned hostname.</td>
-<td>[Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A multizonal VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.</td>
-</tr>
-<td>Istio</td>
-<td>Basic load balancing that exposes the app with a hostname and uses Istio routing rules</td>
-<td>Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.</li></ol></td>
-<td><ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio#istio_expose).</li></ol></td>
-</tr><tr>
-<td>Ingress ALB</td>
-<td>HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules</td>
-<td>Implement custom routing rules and SSL termination for multiple apps.</td>
-<td><ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol></td>
-</tr>
-</tbody>
-</table>
+|Name|Load-balancing method|Use case|Implementation|
+|----|---------------------|--------|--------------|
+| VPC load balancer | Basic load balancing that exposes the app with a hostname | Quickly expose one app to the public with a VPC load balancer-assigned hostname. | [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A multizonal VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.|
+| Istio | Basic load balancing that exposes the app with a hostname and uses Istio routing rules | Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.</li></ol> | <ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio#istio_expose).</li></ol>|
+| Ingress ALB | HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules | Implement custom routing rules and SSL termination for multiple apps. | <ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
+{: caption="Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}} VPC clusters" caption-side="top"}
 
 <br />
 
