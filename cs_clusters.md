@@ -213,7 +213,8 @@ Create your single zone or multizone classic Kubernetes cluster by using the {{s
    3. Select **Classic infrastructure**.
    4. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned during cluster creation blocks the Kubernetes master from managing your cluster.
-   5. Select a resource group in which to create your cluster.
+   5. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
+   6. Select a resource group in which to create your cluster.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
 4. Select **Single zone** or **Multizone** availability. In a multizone cluster, the Kubernetes master is deployed in a multizone-capable zone and three replicas of your master are spread across zones.
@@ -421,7 +422,9 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster). For more possibilities, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
+9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster). 
+
+Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
 <br />
 
@@ -602,7 +605,9 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster). For more possibilities, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
+9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
+
+Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
 
 
@@ -640,8 +645,9 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    3. Select **VPC infrastructure**.
    4. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
- **Note**: Changing the unique ID or domain name that is assigned during cluster creation blocks the Kubernetes master from managing your cluster.
-   6. Select a resource group in which to create your cluster.
+ **Note**: Changing the unique ID or domain name that is assigned 6uring cluster creation blocks the Kubernetes master from managing your cluster.
+   6. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage 7site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
+   7. Select a resource group in which to create your cluster.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
       * The cluster can be in a different resource group than the VPC.
@@ -777,7 +783,9 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-8. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster). For more possibilities, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
+8. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
+
+Your cluster is ready for your workloads! You might also want to [add a tag to your cluster](/docs/containers?topic=containers-add_workers#cluster_tags), such as the team or billing department that uses the cluster, to help manage {{site.data.keyword.cloud_notm}} resources. For more ideas of what to do with your cluster, review the [Next steps](/docs/containers?topic=containers-clusters#next_steps).
 
 <br />
 
