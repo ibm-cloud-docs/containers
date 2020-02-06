@@ -879,7 +879,7 @@ Expose apps to a private network by using the private Ingress ALBs in a VPC clus
 
 To use a private ALB, you must first enable the private ALB. Then, to expose your apps to the private network, you must create a DNS entry for your private ALB hostname.
 
-Before you begin:
+**Before you begin**:
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * VPC clusters: If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by Ingress to node ports on your worker nodes.
