@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-07"
 
 keywords: kubernetes, iks, helm
 
@@ -63,6 +63,7 @@ You can use various external services and catalog services with a standard clust
 |Portworx|Storage for stateful apps|[Portworx](https://portworx.com/products/introduction/){:external} is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |Razee|Deployment automation|[Razee](https://razee.io/){:external} is an open-source project that automates and manages the deployment of Kubernetes resources across clusters, environments, and cloud providers, and helps you to visualize deployment information for your resources so that you can monitor the rollout process and find deployment issues more quickly. For more information about Razee and how to set up Razee in your cluster to automate your deployment process, see the [Razee documentation](https://github.com/razee-io/Razee){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Popular integrations"}
+{: summary="The table shows available services that you can add to your cluster and that are popular among {{site.data.keyword.containerlong_notm}} users. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -82,6 +83,7 @@ You can use various external services and catalog services with a standard clust
 |Knative|[Knative](https://github.com/knative/docs){:external} is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others with the goal of extending the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying, and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. For more information, see [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Razee|[Razee](https://razee.io/){:external} is an open-source project that automates and manages the deployment of Kubernetes resources across clusters, environments, and cloud providers, and helps you to visualize deployment information for your resources so that you can monitor the rollout process and find deployment issues more quickly. For more information about Razee and how to set up Razee in your cluster to automate your deployment process, see the [Razee documentation](https://github.com/razee-io/Razee){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="DevOps services"}
+{: summary="The table shows available services that you can add to your cluster to add extra DevOps capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -94,6 +96,7 @@ You can use various external services and catalog services with a standard clust
 |{{site.data.keyword.BluDirectLink}}|With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |strongSwan IPSec VPN Service|Set up a [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){:external} that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 {: caption="Hybrid cloud services"}
+{: summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -114,6 +117,7 @@ You can use various external services and catalog services with a standard clust
 |Splunk|Import and search your Kubernetes logging, object, and metrics data in Splunk by using Splunk Connect for Kubernetes. Splunk Connect for Kubernetes is a collection of Helm charts that deploy a Splunk-supported deployment of Fluentd to your Kubernetes cluster, a Splunk-built Fluentd HTTP Event Collector (HEC) plug-in to send logs and metadata, and a metrics deployment that captures your cluster metrics. For more information, see [Solving Business Problems with Splunk on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/cloud/blog/solving-business-problems-with-splunk-on-ibm-cloud-kubernetes-service){:external).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Weave Scope|[Weave Scope](https://www.weave.works/oss/scope/){:external} provides a visual diagram of your resources within a Kubernetes cluster, including services, pods, containers, processes, nodes, and more. Weave Scope provides interactive metrics for CPU and memory and also provides tools to tail and exec into a container.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Logging and monitoring services"}
+{: summary="The table shows available services that you can add to your cluster to add extra logging and monitoring capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -136,6 +140,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){:external). For more information, see [NeuVector Container Security](https://www.ibm.com/us-en/marketplace/neuvector-container-security){:external).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Twistlock|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){:external}, you can use [Twistlock](https://www.twistlock.com/){:external) to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/){:external).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Security services"}
+{: summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -153,6 +158,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.cloud_notm}} Classic File Storage|[{{site.data.keyword.cloud_notm}} Classic File Storage](/docs/FileStorage?topic=FileStorage-getting-started#getting-started) is persistent, fast, and flexible network-attached, NFS-based file storage that you can add to your apps by using Kubernetes persistent volumes. You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. For more information about how to provision file storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} File Storage](/docs/containers?topic=containers-file_storage#file_storage).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |Portworx|[Portworx](https://portworx.com/products/introduction/){:external} is a highly available software-defined storage solution that you can use to manage persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones. You can install Portworx with a Helm chart and provision storage for your apps by using Kubernetes persistent volumes. For more information about how to set up Portworx in your cluster, see [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 {: caption="Storage services"}
+{: summary="The table shows available services that you can add to your cluster to add persistent storage capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
 
@@ -165,6 +171,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.blockchainfull_notm}} Platform 2.0 beta|Deploy and manage your own {{site.data.keyword.blockchainfull_notm}} Platform on {{site.data.keyword.containerlong_notm}}. With {{site.data.keyword.blockchainfull_notm}} Platform 2.0, you can host {{site.data.keyword.blockchainfull_notm}} networks or create organizations that can join other {{site.data.keyword.blockchainfull_notm}} 2.0 networks. For more information about how to set up {{site.data.keyword.blockchainfull_notm}} in {{site.data.keyword.containerlong_notm}}, see [About {{site.data.keyword.blockchainfull_notm}} Platform free 2.0 beta](/docs/blockchain?topic=blockchain-ibp-console-overview#ibp-console-overview).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Database services"}
+{: summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 
 

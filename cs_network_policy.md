@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-07"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -89,6 +89,7 @@ Review the following default Calico host policies that are automatically applied
 |`allow-sys-mgmt`|Allows incoming connections for specific IBM Cloud infrastructure systems that are used to manage the worker nodes.|
 |`allow-vrrp`|Allows VRRP packets, which are used to monitor and move virtual IP addresses between worker nodes.|
 {: caption="Default Calico host policies for each cluster"}
+{: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Calico policy in column one and the description in column two."}
 
 A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to all classic clusters.
 
@@ -96,6 +97,7 @@ A default Kubernetes policy that limits access to the Kubernetes Dashboard is al
 |--- |--- |
 |`kubernetes-dashboard`|Provided in the `kube-system` namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.cloud_notm}} console or by using `kubectl proxy`. If a pod requires access to the dashboard, deploy the pod in a namespace that has the `kubernetes-dashboard-policy: allow` label.|
 {: caption="Default Kubernetes policies for each cluster"}
+{: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Kubernetes policy in column one and the description in column two."}
 
 <br />
 
