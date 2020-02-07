@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -775,22 +775,22 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.16.&#42;.&#42;</code></li>
-<li><code>172.18.&#42;.&#42;</code></li>
-<li><code>172.19.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
+<ul><li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/16</code></li>
+<li><code>172.18.0.0/16</code></li>
+<li><code>172.19.0.0/16</code></li>
+<li><code>172.20.0.0/16</code></li>
+<li><code>192.168.255.0/24</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt id="service-subnet"><code><strong>--service-subnet <em>SUBNET</em></strong></code></br>
 <dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.16.&#42;.&#42;</code></li>
-<li><code>172.18.&#42;.&#42;</code></li>
-<li><code>172.19.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
+<ul><li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/16</code></li>
+<li><code>172.18.0.0/16</code></li>
+<li><code>172.19.0.0/16</code></li>
+<li><code>172.20.0.0/16</code></li>
+<li><code>192.168.255.0/24</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
@@ -886,22 +886,22 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
 <p>The subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.16.&#42;.&#42;</code></li>
-<li><code>172.18.&#42;.&#42;</code></li>
-<li><code>172.19.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
+<ul><li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/16</code></li>
+<li><code>172.18.0.0/16</code></li>
+<li><code>172.19.0.0/16</code></li>
+<li><code>172.20.0.0/16</code></li>
+<li><code>192.168.255.0/24</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code>--service-subnet <em>SUBNET</em></code></dt>
 <dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
 <p>The subnet must be at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet cannot be in the following reserved ranges:
-<ul><li><code>10.0.&#42;.&#42;</code></li>
-<li><code>172.16.&#42;.&#42;</code></li>
-<li><code>172.18.&#42;.&#42;</code></li>
-<li><code>172.19.&#42;.&#42;</code></li>
-<li><code>172.20.&#42;.&#42;</code></li>
-<li><code>192.168.255.&#42;</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
+<ul><li><code>10.0.0.0/8</code></li>
+<li><code>172.16.0.0/16</code></li>
+<li><code>172.18.0.0/16</code></li>
+<li><code>172.19.0.0/16</code></li>
+<li><code>172.20.0.0/16</code></li>
+<li><code>192.168.255.0/24</code> **Note**: The device interconnect range, <code>192.18.0.0/15</code>, is permitted.</li></ul></p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
 <dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
@@ -2745,16 +2745,36 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 </dl>
 
 **Usage**:
-<ol><li>Check the VLANs that are available in your cluster. <pre class="pre"><code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; --show-resources</code></pre><p>Example output:</p>
-<pre class="screen"><code>Subnet VLANs
-VLAN ID   Subnet CIDR         Public   User-managed
-229xxxx   169.xx.xxx.xxx/29   true     false
-229xxxx   10.xxx.xx.x/29      false    false</code></pre></li>
-<li>Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the <strong>Router</strong> must have the same pod ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.<pre class="pre"><code>ibmcloud ks vlan ls --zone &lt;zone&gt;</code></pre><p>Example output:</p>
-<pre class="screen"><code>ID        Name   Number   Type      Router         Supports Virtual Workers
-229xxxx          1234     private   bcr01a.dal12   true
-229xxxx          5678     public    fcr01a.dal12   true</code></pre><p>Note that <strong>Router</strong> pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you cannot set these public and private VLAN IDs for your worker pool.</p></li>
-<li>If you do not have any VLANs available, you can <a href="/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans">order new VLANs</a>.</li></ol>
+1. Check the VLANs that are available in your cluster.
+  ```
+  ibmcloud ks cluster get --cluster <cluster_name_or_ID> --show-resources
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Subnet VLANs
+  VLAN ID   Subnet CIDR         Public   User-managed
+  229xxxx   169.xx.xxx.xxx/29   true     false
+  229xxxx   10.xxx.xx.x/29      false    false
+  ```
+  {: screen}
+
+2. Check that the public and private VLAN IDs that you want to use are compatible. To be compatible, the **Router** must have the same pod ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.
+  ```
+  ibmcloud ks vlan ls --zone <zone>
+  ```
+  {: pre}
+
+  In the exmaple output, note that **Router** pod IDs match: `01a` and `01a`. If one pod ID was `01a` and the other was `02a`, you cannot set these public and private VLAN IDs for your worker pool.
+  ```
+  ID        Name   Number   Type      Router         Supports Virtual Workers
+  229xxxx          1234     private   bcr01a.dal12   true
+  229xxxx          5678     public    fcr01a.dal12   true
+  ```
+  {: screen}
+
+3. If you do not have any VLANs available, you can [order new VLANs](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans).
 
 **Example**:
 ```
