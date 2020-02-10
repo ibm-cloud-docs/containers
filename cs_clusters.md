@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -73,7 +73,7 @@ ibmcloud ks cluster create classic --name my_cluster
    {: pre}
 *  Classic cluster with a gateway enabled:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --gateway-enabled --kube-version 1.16.5 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --gateway-enabled --kube-version 1.17.2 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
    ```
    {: pre}
 *  Classic cluster that uses private VLANs and the private service endpoint only:
@@ -503,7 +503,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
 6. Create your gateway-enabled cluster.
    ```
-  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.16.5 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
+  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.17.2 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
    ```
    {: pre}
 

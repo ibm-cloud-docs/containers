@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,8 +44,9 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 06 February 2020 | <ul><li>**Cluster autoscaler**: Added a [debugging guide for the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).</li><li>**Tags**: Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).</li></ul> |
-| 03 February 2020 | **Version changelog**: Updates are available for Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-changelog#11312_1549). |
+| 10 February 2020 | <ul><li>**New! Kubernetes version 1.17**: You can now create clusters that run Kubernetes version 1.17. To update an existing cluster, see the [Version 1.17 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v117).<li>**Deprecated: Kubernetes version 1.14**: With the release of version 1.17, clusters that run version 1.14 are deprecated. Consider [updating to at least version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115) today.</li></li><li>**VPC cluster creation troubleshooting**: Added [troubleshooting steps](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc) for when no VPCs are listed when you try to create a VPC cluster in the console.</li><li></li></ul> |
+| 06 February 2020 | <ul><li>**Cluster autoscaler**: Added a [debugging guide for the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).</li><li>**Tags**: Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).</li><li>**VPC security groups**: If you use non-default VPC security groups, [modify the security group rules](/docs/containers?topic=containers-vpc-firewall#security_groups) to allow traffic requests that are routed to node ports on your worker nodes.</li></ul> |
+| 03 February 2020 | <ul><li>**Version changelog**: Updates are available for Kubernetes worker node fix packs [1.16.5_1523](/docs/containers?topic=containers-changelog#1165_1523), [1.15.8_1530](/docs/containers?topic=containers-changelog#1158_1530), [1.14.10_1546](/docs/containers?topic=containers-changelog#11410_1546), and [1.13.12_1549](/docs/containers?topic=containers-changelog#11312_1549).</li><li>**Expanded troubleshooting**: You can now find troubleshooting steps for {{site.data.keyword.containerlong_notm}} clusters in the following pages:<ul><li>[Clusters and masters](/docs/containers?topic=containers-cs_troubleshoot)</li><li>[Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)</li><li>[Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network)</li><li>[Apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app)</li><li>[Load balancers](/docs/containers?topic=containers-cs_troubleshoot_lb)</li><li>[Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)</li><li>[Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage)</li></ul></li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in February 2020"}
 

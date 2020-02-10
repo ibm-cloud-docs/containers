@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-03"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -53,6 +53,40 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 {: note}
 
 </br>
+
+## Version 1.17 changelog
+{: #117_changelog}
+
+Review the version 1.17 changelog.
+{: shortdesc}
+
+### Changelog for 1.17.2_1515, released 10 February 2020
+{: #1172_1515}
+
+The following table shows the changes that are included in patch update 1.17.2_1515.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico | v3.9.5 | v3.12.0 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| CoreDNS | 1.6.6 | 1.6.7 | See the [CoreDNS release notes](https://coredns.io/2020/01/28/coredns-1.6.7-release/){: external}. |
+| etcd | v3.3.18 | v3.4.3 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.3){: external}. |
+| GPU device plug-in and installer | da19df3 | affdfe2 | Image updated for [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}, [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}, [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}, [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}, and [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}. |
+| **New**: {{site.data.keyword.cloud_notm}} Controller Manager | v1.16.5-148 | v1.17.2-4 | The {{site.data.keyword.cloud_notm}} Controller Manager component replaces the {{site.data.keyword.cloud_notm}} Provider component by moving the {{site.data.keyword.cloud_notm}} controllers from the Kubernetes [`kube-controller-manager`](https://kubernetes.io/docs/concepts/overview/components/#kube-controller-manager){: external} to the [`cloud-controller-manager`](https://kubernetes.io/docs/concepts/overview/components/#cloud-controller-manager){: external} component. The {{site.data.keyword.cloud_notm}} Controller Manager is updated to support the Kubernetes 1.17.2 release, to use `distroless/static` base image version `c6d59815`, and to use `calicoctl` version 3.12.0. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 357 | 358 | Made the `ibmc-file-gold` storage class the default storage class for new clusters only. The default storage class for existing clusters is unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass). In addition, the updated the image for [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}. |
+| Kubernetes | v1.16.5 | v1.17.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.2){: external}. |
+| Kubernetes configuration | N/A | N/A | Updated the OpenID Connect configuration for the cluster's Kubernetes API server to use the {{site.data.keyword.iamlong}} (IAM) `iam.cloud.ibm.com` endpoint. Added the `AllowInsecureBackendProxy=false` Kubernetes feature gate to prevent skipping TLS verification of kubelet during pod logs requests. |
+| Kubernetes Dashboard | v2.0.0-rc2 | v2.0.0-rc3 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc3){: external}. |
+| Kubernetes Dashboard metrics scraper | v1.0.2 | v1.0.3 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.3){: external}. |
+| Kubernetes nodelocal DNS cache | 1.15.4 | 1.15.8 | See the [Kubernetes nodelocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.8){: external}. Now in Kubernetes 1.17, when you [apply the label to set up node local DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes. |
+| OpenVPN server | N/A | N/A | OpenVPN server is now restarted during [cluster master refresh](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh){: external}. |
+| Operator Lifecycle Manager Catalog | v1.5.6 | v1.5.8 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.8){: external}. |
+| Operator Lifecycle Manager | 0.13.0 | 0.14.1 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.14.1){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.5_1522" caption-side="top"}
+
+<br />
+
 
 ## Version 1.16 changelog
 {: #116_changelog}
@@ -904,11 +938,14 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 </tbody>
 </table>
 
-## Version 1.14 changelog
+## Deprecated: Version 1.14 changelog
 {: #114_changelog}
 
 Review the version 1.14 changelog.
 {: shortdesc}
+
+Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
+{: deprecated}
 
 ### Changelog for worker node fix pack 1.14.10_1546, released 3 February 2020
 {: #11410_1546}
@@ -1973,6 +2010,9 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 
 Review the version 1.13 changelog.
 {: shortdesc}
+
+Version 1.13 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
+{: deprecated}
 
 ### Changelog for worker node fix pack 1.13.12_1549, released 3 February 2020
 {: #11312_1549}
@@ -6291,7 +6331,7 @@ The following table shows the changes that are included in patch 1.11.3_1524.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
 </tr>
 </tbody>
 </table>
@@ -6324,7 +6364,7 @@ The following table shows the changes that are included in patch 1.11.3_1521.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+Also, now when you update the cluster master, the default IBM file storage class remains `ibmc-file-bronze`. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
 </tr>
 <tr>
 <td>Key Management Service Provider</td>
@@ -7446,7 +7486,7 @@ The following table shows the changes that are included in patch 1.10.8_1524.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
 </tr>
 </tbody>
 </table>
@@ -8191,7 +8231,7 @@ The following table shows the changes that are included in patch 1.9.10_1527.
 <td>N/A</td>
 <td>N/A</td>
 <td>Removed `mountOptions` in the IBM file storage classes to use the default that is provided by the worker node. Removed duplicate `reclaimPolicy` parameter in the IBM file storage classes.<br><br>
-Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to change the default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'` and replace `<storageclass>` with the name of the storage class.</td>
+Also, now when you update the cluster master, the default IBM file storage class remains unchanged. If you want to set your own default, see [Changing the default storage class](/docs/containers?topic=containers-kube_concepts#default_storageclass).</td>
 </tr>
 </tbody>
 </table>

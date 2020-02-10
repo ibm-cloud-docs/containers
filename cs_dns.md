@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -315,16 +315,22 @@ Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
     ```
     {: pre}
 
+<br />
+
+
 ## Setting up NodeLocal DNS cache (beta)
 {: #dns_cache}
 
 Set up the `NodeLocal` DNS caching agent on select worker nodes for improved cluster DNS performance in your {{site.data.keyword.containerlong_notm}} cluster. For more information, see the [Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/){: external}.
 {: shortdesc}
 
-`NodeLocal` DNS cache is a beta feature that is subject to change, available for clusters that run Kubernetes version 1.15 or later. Further, you can enable this beta feature on only classic clusters, not on VPC clusters, because the worker nodes must be reloaded.
+By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable this beta feature on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. Additionally, in clusters that run Kubernetes 1.17 or later, the DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
+
+`NodeLocal` DNS cache is a beta feature that is subject to change, and available only for select Kubernetes versions that depend on your cluster infrastructure provider.
 {: preview}
 
-By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable this beta feature on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10.
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: Kubernetes version 1.15 or later is required.
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Kubernetes version 1.17 or later is required.
 
 
 ### Enable NodeLocal DNS cache (beta)
@@ -333,7 +339,7 @@ By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy]
 Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes cluster.
 {: shortdesc}
 
-The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future nodes inherit the label. You must still reload the individual worker nodes for the beta change to take effect.
+The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future nodes inherit the label.
 {: note}
 
 **Before you begin**: Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this beta feature, such as policies that rely on pod or namespace selectors for DNS egress.
@@ -345,12 +351,13 @@ The following steps update DNS pods that run on particular worker nodes. You can
 <br>
 **To enable NodeLocal DNS cache**:
 
-1. List the nodes in your cluster. The `NodeLocal` DNS caching agent pods are part of a daemon set that run on each node.
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. List the nodes in your cluster. The `NodeLocal` DNS caching agent pods are part of a daemon set that run on each node.
    ```
    kubectl get nodes
    ```
    {: pre}
-2. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node. However, the pod is not yet handling cluster DNS requests.
+3. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
    ```
    kubectl label node <node_name> --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
    ```
@@ -379,28 +386,28 @@ The following steps update DNS pods that run on particular worker nodes. You can
       node-local-dns-pvnjn   1/1     Running   0          1m    10.xxx.xx.xxx   10.xxx.xx.xxx  <none>           <none>
       ```
       {: screen}
-3. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
-   ```
-   kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   node/10.xxx.xx.xxx cordoned
-   WARNING: ignoring DaemonSet-managed Pods: default/ssh-daemonset-kdns4, kube-system/ calico-node-9hz77, kube-system/ibm-keepalived-watcher-sh68n, kube-system/ibm-kube-fluentd-bz4ts,
-   evicting pod "<pod_name>"
-   ...
-   pod/<pod_name> evicted
-   ...
-   node/10.xxx.xx.xxx evicted
-   ```
-   {: screen}
-4. Reload the worker node. After the worker node reload completes, the DNS caching agent pod handles cluster DNS requests for applicable pods that are running on the worker node. The worker node is also made available for pod scheduling.
-   ```
-   ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
-   ```
-   {: pre}
+4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Drain and reload the worker node to apply the node local DNS caching changes. Even though you labelled the worker node, the pod is not yet handling cluster DNS requests.
+   1. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
+      ```
+      kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
+      ```
+      {: pre}
+      Example output:
+      ```
+      node/10.xxx.xx.xxx cordoned
+      WARNING: ignoring DaemonSet-managed Pods: default/ssh-daemonset-kdns4, kube-system/ calico-node-9hz77, kube-system/    ibm-keepalived-watcher-sh68n, kube-system/ibm-kube-fluentd-bz4ts,
+      evicting pod "<pod_name>"
+      ...
+      pod/<pod_name> evicted
+      ...
+      node/10.xxx.xx.xxx evicted
+      ```
+      {: screen}
+   2. Reload the worker node. After the worker node reload completes, the DNS caching agent pod handles cluster DNS requests for applicable pods that are running on the worker node. The worker node is also made available for pod scheduling.
+      ```
+      ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
+      ```
+      {: pre}
 5. Repeat the previous steps for each worker node to enable DNS caching.
 
 ### Disable NodeLocal DNS cache (beta)
@@ -409,12 +416,13 @@ The following steps update DNS pods that run on particular worker nodes. You can
 You can disable the beta feature for one or more worker nodes.
 {: shortdesc}
 
-1. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
    ```
    kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
    ```
    {: pre}
-2. Remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from the worker node. This action terminates the DNS caching agent pod on the worker node.
+3. Remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from the worker node. This action terminates the DNS caching agent pod on the worker node.
    ```
    kubectl label node <node_name> "ibm-cloud.kubernetes.io/node-local-dns-enabled-"
    ```
@@ -442,9 +450,10 @@ You can disable the beta feature for one or more worker nodes.
       No resources found.
       ```
       {: screen}
-3. Reload the worker node. After the worker node has been reloaded, pods that run on the node won't use the local DNS cache. Instead, the pods revert to the same behavior that they had before you enabled the beta feature. The worker node is also made available for pod scheduling.
+4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Reload the worker node. After the worker node has been reloaded, pods that run on the node won't use the local DNS cache. Instead, the pods revert to the same behavior that they had before you enabled the beta feature. The worker node is also made available for pod scheduling.
    ```
    ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
    ```
    {: pre}
-4.  Repeat the previous steps for each worker node to disable DNS caching.
+5.  Repeat the previous steps for each worker node to disable DNS caching.
+

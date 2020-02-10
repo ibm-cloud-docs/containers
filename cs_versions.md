@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-27"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -76,12 +76,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.16.5
+*   Latest: 1.17.2
 *   Default: 1.15.8 
-*   Other: 1.14.10
+*   Other: 1.16.5
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.13
+*   Deprecated: 1.13, 1.14
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12
 
 <br>
@@ -128,6 +128,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <tbody>
   <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.17](#cs_v117)</td>
+  <td>10 Feb 2020</td>
+  <td>Feb 2021 `†`</td>
+</tr>
+  <tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.16](#cs_v116)</td>
   <td>04 Nov 2019</td>
   <td>Nov 2020 `†`</td>
@@ -139,10 +145,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>Aug 2020 `†`</td>
 </tr>
 <tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.14](#cs_v114)</td>
   <td>07 May 2019</td>
-  <td>May 2020 `†`</td>
+  <td>21 May 2020 `†`</td>
 </tr>
 <tr>
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
@@ -235,11 +241,63 @@ If you wait until your cluster is three or more minor versions behind the oldest
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG.md) and [IBM version](/docs/containers?topic=containers-changelog){: external} changelogs.
 {: shortdesc}
 
+-  Version 1.17 [preparation actions](#cs_v117).
 -  Version 1.16 [preparation actions](#cs_v116).
 -  Version 1.15 [preparation actions](#cs_v115).
--  Version 1.14 [preparation actions](#cs_v114).
+-  **Deprecated**: Version 1.14 [preparation actions](#cs_v114).
 -  **Deprecated**: Version 1.13 [preparation actions](#cs_v113).
 -  [Archive](#k8s_version_archive) of unsupported versions.
+
+<br />
+
+
+## Version 1.17
+{: #cs_v117}
+
+
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.17.
+{: shortdesc}
+
+### Update before master
+{: #117_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description |
+| ---- | ----------- |
+| **Gateway-enabled clusters only**: Public traffic is blocked on node ports | If you have a gateway-enabled cluster and use a public node port to expose your app, public traffic on the node port is now blocked by default. Instead, use a [load balancer service](/docs/containers?topic=containers-loadbalancer-qs) or [create a preDNAT Calico policy](/docs/containers?topic=containers-policy_tutorial) with an order number that is lower than `1800` and with a selector `ibm.role == 'worker_public'` so that public traffic is explicitly allowed to the node port. |
+| Removed Kubernetes built-in cluster roles | Kubernetes built-in `system:csi-external-provisioner` and `system:csi-external-attacher` cluster roles are removed. Update any role or cluster role bindings that rely on these built-in cluster roles to use different cluster roles. |
+| **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metrics available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated Kubernetes metrics](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG-1.14.md#removed-and-deprecated-metrics){: external}, change to the available replacement metric.<ul><li>`apiserver_request_count`</li><li>`apiserver_request_latencies`</li><li> `apiserver_request_latencies_summary`</li><li>`apiserver_dropped_requests`</li><li>`etcd_request_latencies_summary`</li><li>`apiserver_storage_transformation_latencies_microseconds`</li><li>`apiserver_storage_data_key_generation_latencies_microseconds`</li><li>`apiserver_storage_transformation_failures_total`</li><li>`rest_client_request_latency_seconds`</li></ul> |
+{: caption="Changes to make before you update the master to Kubernetes 1.17" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+
+### Update after master
+{: #117_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description |
+| ---- | ----------- |
+| Kubernetes configuration | The OpenID Connect configuration for the cluster's Kubernetes API server now uses the {{site.data.keyword.iamlong}} (IAM) `iam.cloud.ibm.com` endpoint. As a result, you must refresh the cluster's Kubernetes configuration by using the [`ibmcloud ks cluster config` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) after you update the master to Kubernetes version 1.17. If you continue to use an old Kubernetes configuration, you see an error message similar to the following: `You must be logged in to the server (Unauthorized).` |
+| **Unsupported:** `kubectl` commands `--include-uninitialized` flag | The `kubectl` command `--include-uninitialized` flag is no longer supported. If your scripts rely on this flag, update them by removing the flag. |
+{: caption="Changes to make after you update the master to Kubernetes 1.17" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after worker nodes
+{: #117_after_worker}
+
+The following table shows the actions that you must take after you update your worker nodes.
+{: shortdesc}
+
+| Type | Description |
+| ---- | ----------- |
+| **Unsupported or changed:** Select Kubernetes `kube-proxy` metrics | Select Kubernetes kube-proxy metrics available via the `/metrics` endpoint are unsupported or are changed. Update your `kube-proxy` metrics usage accordingly.<ul><li>**Removed**: The `kubeproxy_sync_proxy_rules_latency_microseconds` metric is removed.</li><li>**Changed**: The `sync_proxy_rules_last_timestamp_seconds` metric now updates only when services or endpoints change. To monitor for `iptables` update failures, use the `sync_proxy_rules_iptables_restore_failures_total` metric instead.</li></ul> |
+{: caption="Changes to make after you update the worker nodes to Kubernetes 1.17" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 <br />
 
@@ -283,7 +341,6 @@ The following table shows the actions that you must take after you update the Ku
 | Connection between gateway-enabled clusters and classic virtual or bare metal server instances | [Update your server instance connection](/docs/containers?topic=containers-add_workers#update_connection) to use the latest latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository. |
 | **Unsupported**: `kubectl cp` to copy symbolic links from containers | The `kubectl cp` command no longer supports copying symbolic links from containers. If your scripts rely on this, update them to use `kubectl exec` with `tar` instead. For an example, run `kubectl cp --help` in the `kubectl` 1.16 CLI version. |
 | **Unsupported**: `kubectl log` | The `kubectl log` command is removed. If your scripts rely on this command, update them to use the `kubectl logs` command instead. |
-| **Unsupported**: `kubectl` commands `--include-uninitialized` flag | The `kubectl` command `--include-uninitialized` flag is no longer supported. If your scripts rely on this flag, update them by removing the flag. |
 | **Unsupported**: Prometheus queries that use `pod_name` and `container_name` labels | Update any Prometheus queries that match `pod_name` or `container_name` labels to use `pod` or `container` labels instead. Example queries that might use these deprecated labels include `kubelet` probe metrics. |
 {: caption="Changes to make after you update the master to Kubernetes 1.16" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
@@ -422,6 +479,9 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.14.
 {: shortdesc}
 
+Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
+{: deprecated}
+
 Kubernetes 1.14 introduces new capabilities for you to explore. Try out the new [`kustomize` project](https://github.com/kubernetes-sigs/kustomize){: external} that you can use to hep write, customize, and reuse your Kubernetes resource YAML configurations. Or take a look at the new [`kubectl` CLI docs](https://kubectl.docs.kubernetes.io/){: external}.
 {: tip}
 
@@ -515,6 +575,9 @@ The following table shows the actions that you must take after you update the Ku
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.13.
 {: shortdesc}
+
+Version 1.13 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
+{: deprecated}
 
 ### Update before master
 {: #113_before}
