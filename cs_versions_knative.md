@@ -34,7 +34,7 @@ subcollection: containers
 
 
 # Knative add-on version changelog
-{: #Knative-changelog}
+{: #knative-changelog}
 
 View information for patch updates to the [managed Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
