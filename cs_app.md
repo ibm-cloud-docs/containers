@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-31"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -690,7 +690,7 @@ To set up configuration files with Kustomize:
         cd ~/<my_app>/base
         ```
         {: pre}
-    2.  Create an initial set of Kubernetes configuration YAML files for your app deployment. You might use the `wasliberty` [YAML example](#yaml-example) to create a deployment, service, config map, and persistent volume claim.
+    2.  Create an initial set of Kubernetes configuration YAML files for your app deployment.
     3.  Create a [`kustomization` file](https://github.com/kubernetes-sigs/kustomize#1-make-a-kustomization-file) that specifies the base configuration to be applied across environments. The `kustomization` file must include the list of Kubernetes resource configuration YAMLs that are stored in the same `base` repo. In the `kustomization` file, you can also add configurations that apply to all the resource YAMLs in the base repo, such as a prefix or suffix that is appended to all the resource names, a label, the existing namespace all the resources are created in, secrets, configmaps, and more.
         ```
         apiVersion: kustomize.config.k8s.io/v1beta1
