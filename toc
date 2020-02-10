@@ -166,6 +166,7 @@ IBM Cloud Kubernetes Service
         cs_versions_changelog.md
         cs_versions_addons.md
         cs_versions_istio.md
+        cs_versions_knative.md
 
     cs_locations.md
     cs_hybrid.md
