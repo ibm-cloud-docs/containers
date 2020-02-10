@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Generator: Adobe Illustrator 21.1.0, SVG Export Plug-In . SVG Version: 6.00 Build 0)  -->
+<svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px"
+	 viewBox="0 0 4086 1996.7" style="enable-background:new 0 0 4086 1996.7;" xml:space="preserve">
+<style type="text/css">
+	.st0{fill:#0F6FFF;}
+	.st1{font-family:'IBMPlexSans';}
+	.st2{font-size:400px;}
+	.st3{font-family:'IBMPlexSans-Bold';}
+</style>
+<g id="Layer_1">
+	<g id="Layer_1_1_">
+		<title>ContainerService_Logo_LightBackground</title>
+		<path d="M0,584.4c0,26.9,14.8,53.7,44.3,74.1L739,1138c59.1,40.8,155.8,40.8,214.9,0l694.8-479.3c29.6-20.4,44.3-47.3,44.3-74.1
+			v828.1c0,26.9-14.8,53.7-44.3,74.1l-694.8,479.3c-59.1,40.8-155.8,40.8-214.9,0L44.3,1486.7C14.8,1466.3,0,1439.4,0,1412.5V584.4z
+			"/>
+		<path class="st0" d="M0,584.4c0,26.9,14.8,53.7,44.3,74.1l492.7,340l202.1-139.4c59.1-40.8,155.8-40.8,214.9,0l202,139.5
+			l492.7-339.9c29.6-20.4,44.3-47.3,44.3-74.1v-0.4c0-26.9-14.8-53.8-44.3-74.1L954,30.6c-59.1-40.8-155.8-40.8-214.9,0L44.3,509.9
+			C14.8,530.3,0,557.2,0,584v818.2V584.4z"/>
+		<path class="st0" d="M0,1412.6L0,1412.6L0,1412.6z"/>
+		<text transform="matrix(1 0 0 1 1754.9797 587.4402)" class="st1 st2">Red Hat</text>
+		<text transform="matrix(1 0 0 1 1754.9797 1127.9401)" class="st1 st2">OpenShift on</text>
+		<text transform="matrix(1 0 0 1 1754.98 1662.4402)" class="st3 st2">IBM Cloud</text>
+	</g>
+	<g id="Text">
+	</g>
+</g>
+<g id="Text_1_">
+</g>
+</svg>
