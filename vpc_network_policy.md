@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -85,8 +85,8 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.16.5
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.16.5
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.17.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.17.2
   ```
   {: screen}
 
@@ -106,7 +106,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
   Worker Pool Name:   default
   Flavor:             c2.2x4
-  Version:            1.16.5
+  Version:            1.17.2
 
   Health
   State:     normal

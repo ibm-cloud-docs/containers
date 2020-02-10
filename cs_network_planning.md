@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-07"
+lastupdated: "2020-02-10"
 
 keywords: kubernetes, iks, networking
 
@@ -159,7 +159,7 @@ To make an app publicly available to the internet in a classic cluster, choose a
 
 |Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
-| NodePort | Port on a worker node that exposes the app on the worker's public IP address | Test public access to one app or provide access for only a short amount of time. | [Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).|
+| NodePort | Port on a worker node that exposes the app on the worker's public IP address | Test public access to one app or provide access for only a short amount of time. | [Create a public NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config).<p class="note">**Gateway-enabled clusters that run Kubernetes version 1.17 only**: If you have a gateway-enabled cluster and use a public node port to expose your app, public traffic on the node port is blocked by default in Kubernetes version 1.17. Instead, use a [load balancer service](/docs/containers?topic=containers-loadbalancer-qs) or [create a preDNAT Calico policy](/docs/containers?topic=containers-policy_tutorial) with an order number that is lower than `1800` and with a selector `ibm.role == 'worker_public'` so that public traffic is explicitly allowed to the node port.</p>|
 | NLB v1.0 (+ subdomain) | Basic load balancing that exposes the app with an IP address or a subdomain | Quickly expose one app to the public with an IP address or a subdomain that supports SSL termination. | <ol><li>Create a public network load balancer (NLB) 1.0 in a [single-](/docs/containers?topic=containers-loadbalancer#lb_config) or [multizone](/docs/containers?topic=containers-loadbalancer#multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol>|
 | NLB v2.0 (+ subdomain) | DSR load balancing that exposes the app with an IP address or a subdomain | Expose an app that might receive high levels of traffic to the public with an IP address or a subdomain that supports SSL termination. | <ol><li>Complete the [prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision).</li><li>Create a public NLB 2.0 in a [single-](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config) or [multizone](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config) cluster.</li><li>Optionally [register](/docs/containers?topic=containers-loadbalancer_hostname) a subdomain and health checks.</li></ol>|
 | Istio + NLB subdomain | Basic load balancing that exposes the app with a subdomain and uses Istio routing rules | Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public subdomain.</li></ol> | <ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).</li><li>Register the default Istio load balancer with [a subdomain](/docs/containers?topic=containers-istio-mesh#istio_expose).</li></ol>|
