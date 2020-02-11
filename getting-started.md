@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-11"
 
 keywords: kubernetes, iks, containers
 
@@ -99,32 +99,32 @@ First, create a free classic cluster or a paid cluster on the first generation o
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/iam?topic=iam-iammanidaccser).
 {: note}
 
-  <div class=solutionBoxContainer>
+<div class=solutionBoxContainer>
   <div class="solutionBox">
-   <a href = "#clusters_gs">
-    <div>
-         <h2><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a classic cluster</h2>
-         <p class="bx--type-caption">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic workers nodes, subnets, and VLAN networking. Choose from a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
-    </div>
+    <a href = "#clusters_gs">
+      <div>
+        <h2><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a classic cluster</h2>
+        <p class="bx--type-caption">Create a Kubernetes cluster on {{site.data.keyword.cloud_notm}} classic workers nodes, subnets, and VLAN networking. Choose from a variety of virtual, bare metal, GPU, or software-defined storage flavors.</p>
+      </div>
     </a>
-</div>
+  </div>
   <div class="solutionBox">
-   <a href = "#vpc-classic-gs">
-    <div>
+    <a href = "#vpc-classic-gs">
+      <div>
          <h2><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a VPC cluster</h2>
          <p class="bx--type-caption">Create your cluster in the first generation of virtual machine compute resources in a Virtual Private Cloud (VPC) that gives you the security of a private cloud with the dynamic scalability of a public cloud.</p>
-     </div>
+      </div>
     </a>
-</div>
+  </div>
   <div class="solutionBox">
-   <a href = "#deploy-app">
-    <div>
+    <a href = "#deploy-app">
+      <div>
          <h2><img src="images/icon-containers-bw.svg" alt="Container icon" width="15" style="width:15px; border-style: none"/> Deploy and expose an app</h2>
          <p class="bx--type-caption">Deploy a `websphere-liberty` Java application server as a container from a Docker Hub image. Then, expose it with a `LoadBalancer` service to get an IP address for quick testing of your first app.</p>
-     </div>
+      </div>
     </a>
+  </div>
 </div>
-    </div>
 
 ## Creating a free classic cluster
 {: #clusters_gs}
@@ -151,13 +151,13 @@ Create a standard VPC Generation 1 compute cluster by using the {{site.data.keyw
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
 {: important}
 
-1. [Create a Virtual Private Cloud (VPC)](https://cloud.ibm.com/vpc/provision/vpc){: external} with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
+1. [Create a Virtual Private Cloud (VPC) on generation 1 compute](https://cloud.ibm.com/vpc/provision/vpc){: external} with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.<p class="tip">Make sure that the banner at the beginning of the new VPC page is set to **Gen 1 compute**. If **Gen 2 compute** is set, click **Switch to Gen 1 compute**.</p>
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
    1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.15 or later**.
    2. Select **VPC infrastructure**.
    3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
-   4. Fill out the cluster name, resource group, and geography.
+   4. Fill out the cluster name and resource group.
    5. For the **Location**, select the zone for which you created a VPC subnet earlier.
 4. Select the **2 vCPUs 4GB RAM** worker node flavor.
 5. For the number of worker nodes, enter **1**.

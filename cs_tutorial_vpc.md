@@ -1,9 +1,8 @@
-
 ---
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-27"
+lastupdated: "2020-02-11"
 
 keywords: kubernetes, iks, vpc
 
@@ -144,7 +143,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
     3.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
-    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version. 
+    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
 
         ```
         kubectl version  --short
@@ -506,3 +505,4 @@ Need help, have questions, or want to give feedback on VPC clusters? Try posting
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
 {: tip}
+
