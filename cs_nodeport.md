@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-12"
 
 keywords: kubernetes, iks, app access
 
@@ -38,6 +38,7 @@ subcollection: containers
 
 Make your containerized app available to internet access by using the public IP address of any worker node in a Kubernetes cluster and exposing a NodePort. Use this option for testing in {{site.data.keyword.containerlong}} and for short-term public access.
 {:shortdesc}
+<br>
 
 ## About NodePorts
 {: #nodeport_planning}
