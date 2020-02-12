@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-11"
+lastupdated: "2020-02-12"
 
 keywords: kubernetes, iks, vpc
 
@@ -1198,7 +1198,9 @@ To back up or restore data, choose between the following options:
 ## Storage class reference
 {: #vpc-block-reference}
 
-{[relcaim.md]}
+Storage classes that have `retain` in the title, have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title, have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
+{: tip}
+
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|
