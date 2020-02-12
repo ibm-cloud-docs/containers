@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-11"
+lastupdated: "2020-02-12"
 
 keywords: kubernetes, iks, containers
 
@@ -176,6 +176,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, deploy your first `websphere-liberty` Java application server in your cluster by using the Kubernetes dashboard. The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
 {: shortdesc}
 
+
 1. Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters) to open the details for your cluster.
 2. Click **Kubernetes dashboard**.
 3. From the menu bar, click the **Create** icon (`+`).
@@ -190,8 +191,6 @@ After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, de
 6. Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).
 7. From the **Workloads** > **Pods** menu, click your `liberty` pod and check that its status is **Running**.
 8. From the **Discovery and Load Balancing > Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.
-<br>
-
 Great job! You just deployed your first app in your Kubernetes cluster.
 
 <br />
