@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-12"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -575,7 +575,7 @@ kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite rest
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
 {: shortdesc}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){:external}, click the name of the cluster where you want to install the debug tool add-on.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
 2. Click the **Add-ons** tab.
 
