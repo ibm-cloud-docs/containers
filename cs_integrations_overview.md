@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-13"
 
 keywords: kubernetes, iks, helm
 
@@ -37,7 +37,7 @@ subcollection: containers
 {: #supported_integrations}
 
 
-You can use various external services and catalog services with a standard cluster in {{site.data.keyword.containerlong}}.
+You can use various external services and catalog services with a standard cluster in {{site.data.keyword.containerlong}}. 
 {:shortdesc}
 
 ## Popular integrations
