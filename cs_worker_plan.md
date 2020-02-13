@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-13"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -145,9 +145,6 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: #vpc-classic-worker-vm-flavors}
 {: tab-title="VPC Gen 1 compute"}
 {: tab-group="vm-worker-flavors"}
-
-`*` For more information about network performance caps for VPC virtual machines, see [Profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
-{: note}
 
 
 
