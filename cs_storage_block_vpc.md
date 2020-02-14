@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-13"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, vpc
 
@@ -54,9 +54,6 @@ The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled
 
 In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
-
-First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
-{: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.
 
@@ -119,7 +116,6 @@ First time using {{site.data.keyword.block_storage_is_short}} in your cluster? C
   {: pre}
 
 For more information, see:
-  * [Installing the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon)
   * [Adding {{site.data.keyword.block_storage_is_short}} to apps](#vpc-block-add).
   * [Storage class reference](#vpc-block-reference).
   * [Customizing the default storage settings](#vpc-customize-default).
@@ -1108,7 +1104,7 @@ To back up or restore data, choose between the following options:
 ## Storage class reference
 {: #vpc-block-reference}
 
-Storage classes that have `retain` in the title, have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title, have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
+Storage classes that have `retain` in the title have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
 {: tip}
 
 
