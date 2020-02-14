@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, knative, add-on, knative changelog
 
@@ -47,6 +47,6 @@ The following table shows the changes that are included in version 0.12.1 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 0.8.0 | 0.12.1 | <ul><li>[See the Knative release notes](https://github.com/knative/serving/releases/tag/v0.12.1){: external}.</li><li>`Knative-monitoring` was removed. To continue collecting app logs, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).</li></ul> |
+| 0.8.0 | 0.12.1 | <ul><li>[See the Knative release notes for version 0.12.1](https://github.com/knative/serving/releases/tag/v0.12.1){: external}.</li><li>Istio version 1.4 is now installed with the add-on. You cannot use the Knative add-on with Istio 1.3. If you have Istio 1.3 and want to use the managed Knative add-on, you must [uninstall Istio 1.3](/docs/containers?topic=containers-istio#istio_uninstall).</li><li>The Knative add-on can be enabled in clusters that run Kubernetes version 1.16 or later only.</li><li>`Knative-monitoring` was removed. To continue collecting app logs, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Knative 0.12.1" caption-side="top"}

@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-11"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, vpc
 
@@ -38,25 +38,22 @@ subcollection: containers
 {: #vpc-block}
 
 [{{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
-{: shortdsc}
+{: shortdesc}
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
 
-{{site.data.keyword.block_storage_is_short}} is available only for standard clusters that are provisioned on VPC infrastructure and that have all subnets configured with a public gateway. To use {{site.data.keyword.blockstorageshort}} in a cluster with classic {{site.data.keyword.cloud_notm}} infrastructure, see [Storing data on classic {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage). {{site.data.keyword.block_storage_is_short}} is a single zone storage solution. If you have a multizone cluster, consider using one of the [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-{: important}
+
+The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled by default on VPC clusters. You can enable or disable the add-on by using the [`addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) or [`addon disable](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) command in the CLI.
+{: note}
 
 {{site.data.keyword.block_storage_is_short}} is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove {{site.data.keyword.block_storage_is_short}} from your cluster.
 {: important}
-
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
 {: #vpc_block_qs}
 
 In this quickstart guide, you create a 10Gi 5IOPS tier {{site.data.keyword.block_storage_is_short}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
-
-First time using {{site.data.keyword.block_storage_is_short}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon).
-{: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.
 
@@ -119,100 +116,9 @@ First time using {{site.data.keyword.block_storage_is_short}} in your cluster? C
   {: pre}
 
 For more information, see:
-  * [Installing the {{site.data.keyword.block_storage_is_short}} add-on](#vpc-block-addon)
   * [Adding {{site.data.keyword.block_storage_is_short}} to apps](#vpc-block-add).
   * [Storage class reference](#vpc-block-reference).
   * [Customizing the default storage settings](#vpc-customize-default).
-
-## Installing the {{site.data.keyword.block_storage_is_short}} add-on
-{: #vpc-block-addon}
-
-Use an [{{site.data.keyword.cloud_notm}} managed add-on](/docs/containers?topic=containers-managed-addons) to install the {{site.data.keyword.block_storage_is_short}} plug-in in your cluster. The add-on automatically installs the plug-in drivers and a set of pre-defined storage classes that you can use to provision {{site.data.keyword.block_storage_is_short}} in your cluster.
-{: shortdesc}
-
-Before you install the {{site.data.keyword.block_storage_is_short}} add-on, make sure that your cluster's VPC subnets are configued with a public gateway. For more information, see step 12 in [Creating a VPC and subnet](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-console#creating-a-vpc-and-subnet).
-{: important}
-
-1. Verify that your cluster runs the minimum required Kubernetes version for the {{site.data.keyword.block_storage_is_short}} plug-in.
-   1. List the **Minimum Kubernetes version** for the **vpc-block-csi-driver** add-on.
-      ```
-      ibmcloud ks addon-versions --addon vpc-block-csi-driver
-      ```
-      {: pre}
-
-      Example output:
-      ```
-      OK
-      Name                    Version           Minimum Kubernetes version   
-      vpc-block-csi-driver    0.0.1 (default)   1.14
-      ```
-      {: screen}
-
-   2. Make sure that your cluster runs the minimum required or a higher version of Kubernetes.
-      ```
-      ibmcloud ks cluster ls
-      ```
-      {: pre}
-
-   3. If your cluster does not meet the minimum Kubernetes version requirement, [update your cluster](/docs/containers?topic=containers-update).
-
-2. List the add-ons that are installed in your cluster to verify that the **vpc-block-csi-driver** add-on is not yet enabled.
-   ```
-   ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   If the {{site.data.keyword.block_storage_is_short}} add-on is displayed in your CLI output, the add-on is already installed in your cluster.
-
-3. If the add-on is not installed, enable the add-on in your cluster.
-   ```
-   ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   OK
-   ```
-   {: screen}
-
-4. Verify that the {{site.data.keyword.block_storage_is_short}} add-on is successfully installed.
-   ```
-   kubectl get pod -n kube-system | grep vpc
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ibm-vpc-block-csi-controller-0                        3/3     Running   0          79s
-   ibm-vpc-block-csi-node-pvpnf                          2/2     Running   0          78s
-   ```
-   {: screen}
-
-   The installation is successful when you see one `ibm-vpc-block-csi-controller` and one or more `ibm-vpc-block-csi-node` pods. The number of `ibm-vpc-block-csi-node` pods equals the number of worker nodes in your cluster.
-
-5. Verify that the {{site.data.keyword.block_storage_is_short}} storage classes are created in your cluster.
-   ```
-   kubectl get storageclasses | grep vpc
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ibmc-vpc-block-10iops-tier              vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-5iops-tier               vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-custom                   vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-general-purpose          vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-retain-10iops-tier       vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-retain-5iops-tier        vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-retain-custom            vpc.block.csi.ibm.io   72m
-   ibmc-vpc-block-retain-general-purpose   vpc.block.csi.ibm.io   72m
-   ```
-   {: screen}
-
-   <br />
-
-</br>
 
 ## Adding {{site.data.keyword.block_storage_is_short}} to your apps
 {: #vpc-block-add}
@@ -1198,7 +1104,9 @@ To back up or restore data, choose between the following options:
 ## Storage class reference
 {: #vpc-block-reference}
 
-{[relcaim.md]}
+Storage classes that have `retain` in the title have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
+{: tip}
+
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|

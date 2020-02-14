@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, knative
 
@@ -39,8 +39,6 @@ subcollection: containers
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-
-
 **What is Knative and why do I want use it?**
 
 [Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others. The goal is to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.  
@@ -64,7 +62,8 @@ Managed Knative on {{site.data.keyword.containerlong_notm}} is a [managed add-on
 **Are there any limitations?**
 {: #knative_limitations}
 
-The managed Knative add-on version 0.8.0 requires and installs Istio 1.3 with the add-on. You cannot use the Knative add-on with Istio 1.4. Before you install Knative, you can check your Istio version by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`. If you have Istio 1.4 and want to use the managed Knative add-on, you must [uninstall Istio 1.4](/docs/containers?topic=containers-istio#istio_uninstall).
+* The managed Knative add-on version 0.12.1 requires and installs Istio 1.4 with the add-on. You cannot use the Knative add-on with Istio 1.3. Before you install Knative, you can check your Istio version by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`. If you have Istio 1.3 and want to use the managed Knative add-on, you must [uninstall Istio 1.3](/docs/containers?topic=containers-istio#istio_uninstall).
+* The Knative add-on can be enabled in clusters that run Kubernetes version 1.16 or later only.
 
 ## Setting up Knative in your cluster
 {: #knative-setup}
@@ -72,12 +71,15 @@ The managed Knative add-on version 0.8.0 requires and installs Istio 1.3 with th
 Knative builds on top of Istio to ensure that your serverless and containerized workloads can be exposed within the cluster and on the internet. With Istio, you can also monitor and control network traffic between your services and ensure that your data is encrypted during transit. When you install the managed Knative add-on, the managed Istio add-on is automatically installed as well. However, as a developer you don't need to know Ingress specifics because you use Knative features only to work with your serverless app.
 {: shortdesc}
 
+The Knative add-on can be enabled in clusters that run Kubernetes version 1.16 or later only.
+{: important}
+
 Before you begin:
 -  [Install the IBM Cloud CLI, the {{site.data.keyword.containerlong_notm}} plug-in, and the Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps). Make sure to install the `kubectl` CLI version that matches the Kubernetes version of your cluster.
 -  [Create a standard cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui). Additionally, the cluster and worker nodes must run at least the minimum supported version of Kubernetes, which you can review by running `ibmcloud ks addon-versions --addon knative`.
 -  Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 -  [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
--  If you already have the managed Istio add-on installed, [check that the version is 1.3 or uninstall Istio](#knative_limitations). When you install the managed Knative add-on, Istio 1.3 is installed with the add-on.
+-  If you already have the managed Istio add-on installed, [check that the version is 1.4 or uninstall Istio](#knative_limitations). When you install the managed Knative add-on, Istio 1.4 is installed with the add-on.
 </br>
 
 To install Knative in your cluster:
@@ -157,7 +159,7 @@ Update your Knative add-on to the latest versions.
    ```
    OK
    Name      Version              
-   knative   0.8* (<version> latest)
+   knative   0.12.1* (<version> latest)
    ```
    {: screen}
 
@@ -252,7 +254,7 @@ Update your Knative add-on to the latest versions.
     ```
     OK
     Name      Version              
-    knative   0.8
+    knative   0.12.1
     ```
     {: screen}
 

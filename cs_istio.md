@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -41,7 +41,7 @@ Istio on {{site.data.keyword.containerlong}} provides a seamless installation of
 
 With one click, you can get all Istio core components and additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
 
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 14 February 2020. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: important}
 
 ## Installing the Istio add-on
@@ -78,7 +78,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.4.2, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.4.4, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -93,7 +93,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.4.2       normal         Addon Ready
+  istio           1.4.4       normal         Addon Ready
   ```
   {: screen}
 
@@ -296,7 +296,7 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   {: pre}
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.4.2
+  cd istio-1.4.4
   ```
   {: pre}
 3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -314,10 +314,10 @@ Update your Istio add-ons to the latest versions, which are tested by {{site.dat
 ### Updating your add-on from beta versions to the generally available version
 {: #istio-ga}
 
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
+The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 12 February 2020. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: shortdesc}
 
-During the update, any traffic that is sent to Istio-managed services is interrupted, but your apps continue to run uninterruptedly. After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}. You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
+After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}. You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
 
 1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
    ```
@@ -404,19 +404,19 @@ For example, the patch version of your add-on might be updated automatically by 
   Example output:
   ```
   client version: 1.3.3
-  control plane version: 1.4.2
+  control plane version: 1.4.4
   ```
   {: screen}
   * If the `client version` (`istioctl`) matches the `control plane version` (Istio add-on control plane), including the patch version, continue to the next step.
   * If the `client version` does not match the `control plane version`:
     1. Download the `istioctl` client of the same version as the control plane.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.2 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.4 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.4.2
+      cd istio-1.4.4
       ```
       {: pre}
 
@@ -531,7 +531,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.4.2
+    cd <filepath>/istio-1.4.4
     ```
     {: pre}
 
@@ -575,7 +575,7 @@ kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite rest
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
 {: shortdesc}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){:external}, click the name of the cluster where you want to install the debug tool add-on.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
 2. Click the **Add-ons** tab.
 

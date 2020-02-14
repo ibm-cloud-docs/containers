@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -151,8 +151,8 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
 | Security groups | You cannot attach worker nodes to [VPC security groups](/docs/vpc?topic=vpc-using-security-groups) because your worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. Although you cannot attach a security group to your worker nodes instances, you can create security groups at the level of the VPC. If you use use non-default security groups, you must [allow traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups). |
-| strongSwan VPN service | See [strongSwan VPN service considerations](/docs/openshift?topic=openshift-vpn#strongswan_limitations).<ul><li>Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established.</li><li>Because VPC clusters do not support UDP load balancers, the following <code>config.yaml</code> options are not supported for use in strongSwan Helm charts in VPC clusters: <ul><li><code>enableServiceSourceIP</code></li><li><code>loadBalancerIP</code></li><li><code>zoneLoadBalancer</code></li><li><code>connectUsingLoadBalancerIP</code></li></ul></li></ul> |
-| Subnets | See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations). |
+| strongSwan VPN service | See [strongSwan VPN service considerations](/docs/openshift?topic=openshift-vpn#strongswan_limitations).<ul><li>Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established.</li><li>Because VPC clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC clusters: <ul><li>`enableServiceSourceIP`</li><li>`loadBalancerIP`</li><li>`zoneLoadBalancer`</li><li>`connectUsingLoadBalancerIP`</li></ul></li></ul> |
+| Subnets | <ul><li>See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations).</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
 | VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations). |
 {: summary="This table contains information on networking limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster networking limitations"}
@@ -168,6 +168,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage and Portworx software-defined storage (SDS) are not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
+
 
 
 

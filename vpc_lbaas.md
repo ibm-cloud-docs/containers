@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-05"
+lastupdated: "2020-02-13"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -207,6 +207,9 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
   If you created a private `LoadBalancer` service, you must be [connected to your private VPC network](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) to curl the hostname.
   {: tip}
+
+Do not delete the subnets that you attached to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
+{: important}
 
 <br />
 
