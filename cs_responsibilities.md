@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -135,6 +135,7 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         </tr>
   </tbody>
   </table>
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-13"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -374,6 +374,7 @@ To review how much compute resources are currently used on your worker node, run
 
 Sample worker node values are provided for example only. Your actual usage might vary slightly.
 {: note}
+
 
 
 

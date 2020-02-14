@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-13"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -168,6 +168,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage and Portworx software-defined storage (SDS) are not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
+
 
 
 
