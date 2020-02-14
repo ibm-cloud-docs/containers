@@ -159,7 +159,7 @@ Update your Knative add-on to the latest versions.
    ```
    OK
    Name      Version              
-   knative   0.8* (<version> latest)
+   knative   0.12.1* (<version> latest)
    ```
    {: screen}
 
@@ -254,7 +254,7 @@ Update your Knative add-on to the latest versions.
     ```
     OK
     Name      Version              
-    knative   0.8
+    knative   0.12.1
     ```
     {: screen}
 

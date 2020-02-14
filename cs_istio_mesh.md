@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-04"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -71,7 +71,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.4.2
+      cd istio-1.4.4
       ```
       {: pre}
     3. Label the `default` namespace for automatic sidecar injection.
@@ -336,7 +336,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.4.2
+  cd istio-1.4.4
   ```
   {: pre}
 
