@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-02-13"
+lastupdated: "2020-02-14"
 
 ---
 
@@ -340,9 +340,9 @@ lastupdated: "2020-02-13"
 * [Limiting apps to run on only certain autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
 * [Upgrading a cluster autoscaler release](/docs/containers?topic=containers-ca#ca_helm_up)
-  * [Prerequisites](#ca_helm_up_prereqs)
-  * [Upgrading the cluster autoscaler release version](#ca_helm_up_general)
-  * [Upgrading a release from Helm v2 to v3](#ca_helm_up_2to3)
+  * [Prerequisites](/docs/openshift?topic=openshift-ca#ca_helm_up_prereqs)
+  * [Upgrading the cluster autoscaler release version](/docs/openshift?topic=openshift-ca#ca_helm_up_general)
+  * [Upgrading a release from Helm v2 to v3](/docs/openshift?topic=openshift-ca#ca_helm_up_2to3)
 * [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
 
 [Updating clusters, worker nodes, and add-ons](/docs/containers?topic=containers-update#update)

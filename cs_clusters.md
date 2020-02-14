@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-13"
+lastupdated: "2020-02-14"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -103,7 +103,6 @@ ibmcloud ks cluster create classic --name my_cluster
 
 
 <br />
-
 
 
 ## Prepare to create clusters at the account level

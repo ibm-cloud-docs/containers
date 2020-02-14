@@ -146,6 +146,9 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: tab-title="VPC Gen 1 compute"}
 {: tab-group="vm-worker-flavors"}
 
+`*` For more information about network performance caps for VPC virtual machines, see [Profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
+{: note}
+
 
 
 
@@ -374,7 +377,6 @@ To review how much compute resources are currently used on your worker node, run
 
 Sample worker node values are provided for example only. Your actual usage might vary slightly.
 {: note}
-
 
 
 
