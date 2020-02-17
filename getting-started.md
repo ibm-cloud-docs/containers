@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks, containers
 
@@ -214,10 +214,14 @@ Go through a tutorial to install the CLI, create a private image registry, set u
 
 Set up the right environment for your workloads.
 * Plan your [cluster network setup](/docs/containers?topic=containers-plan_clusters), develop a [highly available architecture](/docs/containers?topic=containers-ha_clusters), and [set up autoscaling](/docs/containers?topic=containers-ca) for your cluster.
-* Create [image pull secrets](/docs/containers?topic=containers-images#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
+* Create [image pull secrets](/docs/containers?topic=containers-registry#other) to [deploy apps](/docs/containers?topic=containers-app) to Kubernetes namespaces other than `default`.
 * Decide what type of [file, block, object, database, or software-defined storage](/docs/containers?topic=containers-storage_planning) you want to integrate with your apps.
 * Control network traffic to your apps for [classic](/docs/containers?topic=containers-network_policies) and [VPC](/docs/containers?topic=containers-vpc-network-policy) clusters.
 
 Explore other capabilities for your cluster.
 * Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as LogDNA and Sysdig to monitor your cluster's health.
 * Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio and Knative.
+
+Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
+{: tip}
+

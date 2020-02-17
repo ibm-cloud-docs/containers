@@ -384,7 +384,7 @@ To deploy the app:
 
     To see that the app is publicly available, try entering it into a browser on your cell phone.
     {: tip}
-8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
+8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
@@ -523,7 +523,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         ```
         {: pre}
     *   **From the Kubernetes dashboard**:
-        1.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
+        1.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
         2.  In the **Workloads** tab, you can see the resources that you created. From this tab, you can continually refresh and see that the health check is working. In the **Pods** section, you can see how many times the pods are restarted when      containers in them are re-created. If you happen to catch the following error in the dashboard, this message indicates that the health check caught a problem. Give it a few minutes and refresh again. You see the number of restarts changes for each pod.
 
             ```
@@ -717,7 +717,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     }
     ```
     {: screen}
-8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
+8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 9. In the **Workloads** tab, you can see the resources that you created.
 
 ### Lesson 5b: Updating the running Watson Tone Analyzer deployment

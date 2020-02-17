@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -57,7 +57,7 @@ For an overview of available Helm charts, see the [Helm charts catalog](https://
 - **ibm-community**: Helm charts that originated outside IBM, such as from [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners). These charts are supported and maintained by the community partners.
 - **kubernetes**: Helm charts that are provided by the Kubernetes community and considered `stable` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
 - **kubernetes-incubator**: Helm charts that are provided by the Kubernetes community and considered `incubator` by the community governance. These charts are not verified to work in {{site.data.keyword.containerlong_notm}} or {{site.data.keyword.cloud_notm}} Private clusters.
-- **entitled**: Helm charts of licensed software that you must purchase and for which you must set up cluster access with an entitlement key. For more information, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-images#secret_entitled_software).
+- **entitled**: Helm charts of licensed software that you must purchase and for which you must set up cluster access with an entitlement key. For more information, see [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software).
 
 Helm charts from the **iks-charts**, **ibm-charts**, and, if licensed, **entitled** repositories are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using these Helm charts, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#clusters_getting_help).
 
@@ -353,7 +353,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    ```
    {: screen}
 5. [Tag the Tiller image](/docs/Registry?topic=registry-getting-started#gs_registry_images_pulling), then [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-getting-started#gs_registry_images_pushing).
-6. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-images#copy_imagePullSecret).
+6. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
 7. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod.
     1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
     2. Create the Kubernetes resources in your cluster.

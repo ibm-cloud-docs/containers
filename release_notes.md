@@ -209,7 +209,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td>03 October 2019</td>
   <td><ul>
   <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 579 and `ingress-auth` image build to 341](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>DevOps toolchain</strong>: You can now use the **DevOps** tab on the cluster details page to configure your DevOps toolchain. For more information, see [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-app#continuous-delivery-pipeline).</li>
+  <li><strong>DevOps toolchain</strong>: You can now use the **DevOps** tab on the cluster details page to configure your DevOps toolchain. For more information, see [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd#continuous-delivery-pipeline).</li>
   <li><strong><strong>Security for VPC clusters</strong>: Added information for how to achieve [network segmentation and privacy in VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc).</li>
   </ul>
   </td>
@@ -275,7 +275,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>13 September 2019</td>
   <td><ul>
-    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</li>
+    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-registry#secret_entitled_software).</li>
   <li><strong>`script update` command</strong>: Added [steps for using the `script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in.</td>
 </tr>
 <tr>
@@ -362,7 +362,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>15 August 2019</td>
   <td><ul>
-  <li><strong>App deployments</strong>: Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-app#copy_apps_cluster).</li>
+  <li><strong>App deployments</strong>: Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-update_app#copy_apps_cluster).</li>
   <li><strong>FAQs</strong>: Added an FAQ about [free clusters](/docs/containers?topic=containers-faqs#faq_free).</li>
   <li><strong>Istio</strong>: Added steps for [exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls), [securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls), and [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update).</li>
   <li><strong>Knative</strong>: Added instructions for how to [use volumes to access secrets and config maps](/docs/containers?topic=containers-serverless-apps-knative#knative-access-volume), [pull images from a private registry](/docs/containers?topic=containers-serverless-apps-knative#knative-private-registry), [scale apps based on CPU usage](/docs/containers?topic=containers-serverless-apps-knative#scale-cpu-vs-number-requests), [change the default container port](/docs/containers?topic=containers-serverless-apps-knative#knative-container-port), and [change the `scale-to-zero-grace-period`](/docs/containers?topic=containers-serverless-apps-knative#knative-idle-time).</li>
