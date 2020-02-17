@@ -76,9 +76,9 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.17.2
-*   Default: 1.15.8 
-*   Other: 1.16.5
+*   Latest: 1.17.3
+*   Default: 1.15.10 
+*   Other: 1.16.7
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.13, 1.14
@@ -94,7 +94,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.15.8+IKS
+Server Version: v1.15.10+IKS
 ```
 {: screen}
 

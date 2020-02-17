@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 17 February 2020 | <ul><li>**Kubernetes version 1.17**: [Kubernetes 1.17 release](/docs/containers?topic=containers-cs_versions#cs_v117) is certified.</li><li>**Version changelogs**: Master and worker node patch updates are available for Kubernetes [1.17.3_1516](/docs/containers?topic=containers-changelog#1173_1516), [1.16.7_1524](/docs/containers?topic=containers-changelog#1167_1524), [1.15.10_1531](/docs/containers?topic=containers-changelog#11510_1531), [1.14.10_1547](/docs/containers?topic=containers-changelog#11410_1547), and [1.13.12_1550](/docs/containers?topic=containers-changelog#11312_1550)</li></ul>|
 | 14 February 2020 | **Istio add-on**: [Version 1.4.4 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#144) is released. |
 | 10 February 2020 | <ul><li>**New! Kubernetes version 1.17**: You can now create clusters that run Kubernetes version 1.17. To update an existing cluster, see the [Version 1.17 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v117).</li><li>**Deprecated: Kubernetes version 1.14**: With the release of version 1.17, clusters that run version 1.14 are deprecated. Consider [updating to at least version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115) today.</li><li>**VPC cluster creation troubleshooting**: Added [troubleshooting steps](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc) for when no VPCs are listed when you try to create a VPC cluster in the console.</li><li>**Knative changelogs:** Check out the changes that are included in [version 0.12.1 of the managed Knative add-on](/docs/containers?topic=containers-knative-changelog). If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.</li> </ul> |
 | 06 February 2020 | <ul><li>**Cluster autoscaler**: Added a [debugging guide for the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).</li><li>**Tags**: Added how to [add {{site.data.keyword.cloud_notm}} tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags).</li><li>**VPC security groups**: If you use non-default VPC security groups, [modify the security group rules](/docs/containers?topic=containers-vpc-firewall#security_groups) to allow traffic requests that are routed to node ports on your worker nodes.</li></ul> |
