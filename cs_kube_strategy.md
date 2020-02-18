@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, containers
 
@@ -31,8 +31,6 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
-
 
 
 # Moving your environment to {{site.data.keyword.containerlong_notm}}
@@ -114,7 +112,7 @@ As a cluster admin, you are responsible to set up, operate, secure, and manage t
 The cluster admin persona must have a broad knowledge that includes compute, network, storage, security, and compliance. In a typical company, this knowledge is spread across multiple specialists, such as System Engineers, System Administrators, Network Engineers, Network Architects, IT Managers, or Security and Compliance Specialists. Consider assigning the cluster admin role to multiple people in your company so that you have the required knowledge to successfully operate your cluster.
 
 **What are an app developer's main tasks and technical skills?** </br>
-As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/), and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy). If you want to deploy serverless apps, make yourself familiar with [Knative](/docs/containers?topic=containers-cs_network_planning).
+As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/), and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy). If you want to deploy serverless apps, make yourself familiar with [Knative](/docs/containers?topic=containers-cs_network_planning).
 
 Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported Ubuntu 16.64, 18.64 operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 

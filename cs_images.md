@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -47,13 +47,13 @@ An image is created from a Dockerfile, which is a file that contains instruction
 ## Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the `default` Kubernetes namespace
 {: #namespace}
 
-You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your {{site.data.keyword.registryshort_notm}} namespace. For more information about how your cluster accesses registry images, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](#cluster_registry_auth).
+You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your {{site.data.keyword.registryshort_notm}} namespace. For more information about how your cluster accesses registry images, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth).
 {:shortdesc}
 
 Before you begin:
 1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2. [Create a cluster](/docs/containers?topic=containers-clusters).
-3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](#imagePullSecret_migrate_api_key).
+3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key).
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To deploy a container into the **default** namespace of your cluster:
@@ -105,7 +105,7 @@ If the cluster administrator did not [store the image pull secret in the Kuberne
 {: shortdesc}
 
 Before you begin:
-* [Create an image pull secret](#other) to access images in other registries or Kubernetes namespaces other than `default`.
+* [Create an image pull secret](/docs/containers?topic=containers-registry#other) to access images in other registries or Kubernetes namespaces other than `default`.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 Steps:
@@ -214,7 +214,7 @@ For clusters that were created before **1 July 2019**, non-expiring registry tok
 
 Each token must be stored in a Kubernetes `imagePullSecret` so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containerlong_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the `kube-system` namespace, and the list of secrets in the `default` service account for those namespaces.
 
-This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} for the `registry.bluemix.net` domain names is deprecated. Before tokens become unsupported, update your deployments to [use the API key method](#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
+This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} for the `registry.bluemix.net` domain names is deprecated. Before tokens become unsupported, update your deployments to [use the API key method](/docs/containers?topic=containers-registry#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
 {: deprecated}
 
 Depending on where the image is and where the container is, you must deploy containers by following different steps.
@@ -223,7 +223,7 @@ Depending on where the image is and where the container is, you must deploy cont
 *   [Deploy a container with an image that is in a different region or {{site.data.keyword.cloud_notm}} account than your cluster](#token_other_regions_accounts)
 *   [Deploy a container with an image that is from a private, non-IBM registry](#private_images)
 
-By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](#other).
+By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-registry#other).
 {: note}
 
 ### Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token
@@ -327,7 +327,7 @@ You can copy the image pull secret with registry token credentials that is autom
     ```
     {: pre}
 
-5. [Deploy a container by using the `imagePullSecret`](#use_imagePullSecret) in your namespace.
+5. [Deploy a container by using the `imagePullSecret`](/docs/containers?topic=containers-app#pod_imagePullSecret) in your namespace.
 
 
 ### Deprecated: Accessing token-authorized images in other {{site.data.keyword.cloud_notm}} regions and accounts
@@ -336,7 +336,7 @@ You can copy the image pull secret with registry token credentials that is autom
 To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, you must create a registry token and save your credentials in an image pull secret.
 {: shortdesc}
 
-Tokens that authorize access to `registry.<region>.bluemix.net` domains are deprecated. You can no longer create new tokens. Instead, create cluster image pull secrets that use [API key credentials](#imagePullSecret_migrate_api_key) to pull images from the `icr.io` registry domains.
+Tokens that authorize access to `registry.<region>.bluemix.net` domains are deprecated. You can no longer create new tokens. Instead, create cluster image pull secrets that use [API key credentials](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key) to pull images from the `icr.io` registry domains.
 {: deprecated}
 
 1.  List tokens in your {{site.data.keyword.cloud_notm}} account.
@@ -402,4 +402,4 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     ```
     {: pre}
 
-6.  [Deploy a container by using the image pull secret](#use_imagePullSecret) in your namespace.
+6.  [Deploy a container by using the image pull secret](/docs/containers?topic=containers-app#pod_imagePullSecret) in your namespace.

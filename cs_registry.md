@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -72,7 +72,7 @@ You can build containers from trusted images that are signed and stored in {{sit
 1.  [Sign images for trusted content](/docs/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
 2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement](/docs/Registry?topic=registry-security_enforce#security_enforce).
 3.  Cluster users can deploy apps that are built from trusted images.
-    1. [Deploy to the `default` Kubernetes namespace](#namespace).
+    1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
@@ -594,5 +594,4 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 Wondering what to do next? You can [set up the **entitled** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
 {: tip}
-
 
