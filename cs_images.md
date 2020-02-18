@@ -221,7 +221,7 @@ Depending on where the image is and where the container is, you must deploy cont
 *   [Deploy a container to the `default` Kubernetes namespace with an image that is in the same region as your cluster](#token_default_namespace)
 *   [Deploy a container to a different Kubernetes namespace than `default`](#token_copy_imagePullSecret)
 *   [Deploy a container with an image that is in a different region or {{site.data.keyword.cloud_notm}} account than your cluster](#token_other_regions_accounts)
-*   [Deploy a container with an image that is from a private, non-IBM registry](#private_images)
+*   [Deploy a container with an image that is from a private, non-IBM registry](/docs/containers?topic=containers-registry#private_images)
 
 By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-registry#other).
 {: note}
