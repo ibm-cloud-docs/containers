@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, help
 
@@ -87,11 +87,14 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
       kubectl exec -it <pod_name> -- /bin/bash
       ```
       {: pre}
-   3. Curl the cluster IP address and port of the service. If the IP address and port are not accessible, look at the endpoints for the service. If no endpoints are listed, then the selector for the service does not match the pods. If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods.
+   3. Curl the cluster IP address and port of the service.
       ```
       curl <cluster_IP>:<port>
       ```
       {: pre}
+   4. If the IP address and port are not accessible, look at the endpoints for the service.
+      * If no endpoints are listed, then the selector for the service does not match the pods. For example, your app deployment might have the label `app=foo`, but the service might have the selector `run=foo`.
+      * If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods. For example, your app might listen on port 9080, but the service might listen on port 80.
 
 6. For Ingress services, verify that the service is accessible from within the cluster.
    1. Get the name of a pod.
@@ -104,7 +107,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
       kubectl exec -it <pod_name> -- /bin/bash
       ```
       {: pre}
-   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint. 
+   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint.
       ```
       curl <host_name>.<domain>
       ```

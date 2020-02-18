@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, helm
 
@@ -37,7 +37,7 @@ subcollection: containers
 {: #supported_integrations}
 
 
-You can use various external services and catalog services with a standard cluster in {{site.data.keyword.containerlong}}. 
+You can use various external services and catalog services with a standard cluster in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
 ## Popular integrations
@@ -172,7 +172,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){: external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Database services"}
 {: summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
-
 
 
 
