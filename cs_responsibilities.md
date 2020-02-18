@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -75,14 +75,14 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
      <li>Set up an OpenVPN connection between the master and worker nodes when the cluster is created.</li>
      <li>Monitor and report the health of the master and worker nodes in the various interfaces.</li>
      <li>Provide worker node major, minor, and patch OS, version, and security updates.</li>
-     <li>Fulfill automation requests to update and recover worker nodes. Provide the optional [worker node Autorecovery](/docs/containers?topic=containers-health#autorecovery).</li>
+     <li>Fulfill automation requests to update and recover worker nodes. For classic clusters, provide the optional [worker node Autorecovery](/docs/containers?topic=containers-health#autorecovery).</li>
      <li>Provide tools, such as the [cluster autoscaler](/docs/containers?topic=containers-ca#ca), to extend your cluster infrastructure.</li>
      </ul>
      <br><br>
      **Your responsibilities**:
      <ul>
      <li>Use the API, CLI, or console tools to [apply](/docs/containers?topic=containers-update#update) the provided major and minor Kubernetes master updates and major, minor, and patch worker node updates.</li>
-     <li>Use the API, CLI, or console tools to [recover](/docs/containers?topic=containers-cs_troubleshoot) your infrastructure resources, or set up and configure the optional [worker node Autorecovery](/docs/containers?topic=containers-health#autorecovery).</li></ul>
+     <li>Use the API, CLI, or console tools to [recover](/docs/containers?topic=containers-cs_troubleshoot) your infrastructure resources, or for classic clusters, set up and configure the optional [worker node Autorecovery](/docs/containers?topic=containers-health#autorecovery).</li></ul>
      <br><br></td>
       </tr>
     <tr>
@@ -135,7 +135,6 @@ IBM provides you with an enterprise cloud platform for you to deploy apps alongs
         </tr>
   </tbody>
   </table>
-
 
 
 

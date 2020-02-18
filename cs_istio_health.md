@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -112,7 +112,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
     KIALI_PASSPHRASE=$(read -p 'Kiali Passphrase: ' pval && echo -n $pval | base64)
     ```
     {: pre}
-  3. Create a file to store the credentials in a Kubernetes secret. Name the file `kiali-secret.yaml`.
+  3. Apply the following configuration to store the credentials in a Kubernetes secret.
       ```
       cat <<EOF | kubectl apply -f -
       apiVersion: v1
