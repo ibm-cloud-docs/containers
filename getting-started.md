@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, containers
 
@@ -179,7 +179,7 @@ After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, de
 The steps to deploy an app vary if you have a free or standard cluster, because free clusters do not support load balancers.
 
 | Steps |
-| ----- | 
+| ----- |
 | <ol><li>Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external} to open the details for your cluster.</li><li>Click **Kubernetes dashboard**.</li><li>From the menu bar, click the **Create** icon (`+`).</li><li>Select the **Create an app** tab.<ol><li>Enter a name for your app, such as `liberty`.</li><li>Enter `websphere-liberty` for your container image.</li><li>Enter the number of pods for your app deployment, such as `1`.</li><li>Leave the **Service** drop-down menu set to **None**.</li></ol></li><li>Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster.</li><li>Create a node port so that your app can be access by other users internally or externally. Because your cluster is a free cluster, you can only expose an app with a node port, not a load balancer or Ingress.<ol><li>Copy the [node port YAML from GitHub](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/gs-nodeport.yaml){: external}.</li><li>In the **Create from text input** box, paste the node port YAML that you copied in the previous step.</li><li>Click **Upload**. The node port service is created.</li></ol><li>From the menu, click **Discovery and Load Balancing > Services**, and note the TCP endpoint port of your `liberty` service, such as `liberty:32323 TCP`.</li><li>From the menu, click **Workloads > Pods**, and note the **Node** that your pod runs on, such as `10.xxx.xx.xxx`.</li><li>Return to the [{{site.data.keyword.cloud_notm}} clusters console](https://cloud.ibm.com/kubernetes/clusters), select your cluster, and click the **Worker Nodes** tab. Find the **Public IP** of the worker node that matches the private IP of the node that the pod runs on.</li><li>In a tab in your browser, form the URL of your app by combining `http://` with the public IP and TCP port that you previously retrieved. For example, `http://169.xx.xxx.xxx:32323`. The **Welcome to Liberty** page is displayed.</li> |
 {: summary="The rows contains the steps to deploy an app and expose it with a node port."}
 {: class="simple-tab-table"}
@@ -189,8 +189,8 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 {: tab-group="deployapp"}
 
 | Steps |
-| ----- | 
-| <ol><li>Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external} to open the details for your cluster.</li><li>Click **Kubernetes dashboard**.</li><li>From the menu bar, click the **Create** icon (`+`).</li><li>Select the **Create an app** tab.<ol><li>Enter a name for your app, such as `liberty`.</li><li>Enter `websphere-liberty` for your container image.</li><li>Enter the number of pods for your app deployment, such as `1`.</li><li>From the **Service** drop-down menu, select **External** to create a `LoadBalancer` service that external users can use to access the app. Configure the external service as follows.<ul><li>**Port**: `80`</li><li>**Target port**: `9080`</li><li>**Protocol**: `TCP`</li></ul></li></ol></li><li>Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).</li><li>From the **Workloads** > **Pods** menu, click your `liberty` pod and check that its status is **Running**.</li><li>From the **Discovery and Load Balancing > Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.</li></ol> | 
+| ----- |
+| <ol><li>Select your cluster from the [cluster list](https://cloud.ibm.com/kubernetes/clusters){: external} to open the details for your cluster.</li><li>Click **Kubernetes dashboard**.</li><li>From the menu bar, click the **Create** icon (`+`).</li><li>Select the **Create an app** tab.<ol><li>Enter a name for your app, such as `liberty`.</li><li>Enter `websphere-liberty` for your container image.</li><li>Enter the number of pods for your app deployment, such as `1`.</li><li>From the **Service** drop-down menu, select **External** to create a `LoadBalancer` service that external users can use to access the app. Configure the external service as follows.<ul><li>**Port**: `80`</li><li>**Target port**: `9080`</li><li>**Protocol**: `TCP`</li></ul></li></ol></li><li>Click **Deploy**. During the deployment, the cluster downloads the `websphere-liberty` container image from Docker Hub and deploys the app in your cluster. Your app is exposed by a Layer 4, version 1.0 network load balancer (NLB) so that it can be accessed by other users internally or externally. For other ways to expose an app such as Ingress, see [Planning in-cluster and external networking for apps](/docs/containers?topic=containers-cs_network_planning).</li><li>From the **Workloads** > **Pods** menu, click your `liberty` pod and check that its status is **Running**.</li><li>From the **Discovery and Load Balancing > Services** menu, click the **External Endpoint** of your `liberty` service. For example, `169.xx.xxx.xxx:80` for classic clusters or `http://<hash>-<region>.lb.appdomain.cloud/` for VPC clusters. The **Welcome to Liberty** page is displayed.</li></ol> |
 {: summary="The rows contains the steps to deploy an app and expose it with a load balancer."}
 {: class="simple-tab-table"}
 {: caption="Deploying an app to a standard cluster and exposing with a load balancer" caption-side="top"}
@@ -205,7 +205,7 @@ Great job! You just deployed your first app in your Kubernetes cluster.
 
 
 
-## What's next
+## What's next?
 {: #whats-next}
 
 Go through a tutorial to install the CLI, create a private image registry, set up your cluster environment, add an {{site.data.keyword.cloud_notm}} service to the cluster, and deploy an app.
@@ -224,4 +224,3 @@ Explore other capabilities for your cluster.
 
 Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
 {: tip}
-
