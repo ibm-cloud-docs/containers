@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -42,6 +42,258 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent Ingress information from your cluster.
 {: tip}
 
+
+
+## No Ingress subdomain exists after cluster creation
+{: #ingress_subdomain}
+{: troubleshoot}
+{: support}
+
+{: tsSymptoms}
+You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to check its status. The cluster **State** is `normal`, but the **Ingress Subdomain** and **Ingress Secret** are not available.
+
+{: tsCauses}
+Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete:
+
+1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
+2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
+3. When the `ibm-cloud-provider-vlan-ip-config` config map is updated, the public ALB is triggered for creation.
+4. A load balancer service that exposes the ALB is created and assigned an IP address (classic clusters) or a hostname (VPC clusters).
+5. The load balancer IP address or hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
+
+If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
+{: note}
+
+{: tsResolve}
+Typically, after the cluster is ready, the Ingress subdomain and secret are created after 15 minutes. If the Ingress subdomain and secret are still unavailable after your cluster is in a `normal` state for more than 15 minutes, you can check the progress of the creation process by following these steps:
+
+1. Verify that the worker nodes have a **State** of `normal` and a **Status** of `Ready`. After you create the cluster, it can take up to 20 minutes for the worker nodes to be ready.
+   ```
+   ibmcloud ks worker ls -c <cluster_name_or_ID>
+   ```
+   {: pre}
+
+   Example output:
+   ```
+   ID                                                     Public IP         Private IP      Flavor              State     Status   Zone    Version
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.15.10
+   ```
+   {: screen}
+
+2. Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
+  * If the config map shows IP addresses, continue to the next step.
+  * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
+
+    ```
+    kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
+    ```
+    {: pre}
+
+    Example output of a config map populated with IP addresses:
+    ```
+    Name:         ibm-cloud-provider-vlan-ip-config
+    Namespace:    kube-system
+    Labels:       <none>
+    Annotations:  <none>
+
+    Data
+    ====
+    reserved_public_vlan_id:
+    ----
+
+    vlanipmap.json:
+    ----
+    {
+      "vlans": [
+        {
+          "id": "2234947",
+          "subnets": [
+            {
+              "id": "2215454",
+              "ips": [
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX"
+              ],
+              "is_public": false,
+              "is_byoip": false,
+              "cidr": "10.XXX.XXX.X/29"
+            }
+          ],
+          "zone": "dal10",
+          "region": "us-south"
+        },
+        {
+          "id": "2234945",
+          "subnets": [
+            {
+              "id": "2219170",
+              "ips": [
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX"
+              ],
+              "is_public": true,
+              "is_byoip": false,
+              "cidr": "169.XX.XXX.X/29"
+            }
+          ],
+          "zone": "dal10",
+          "region": "us-south"
+        }
+      ],
+      "vlan_errors": [],
+      "reserved_ips": []
+    }
+    cluster_id:
+    ----
+    bmnj1b1d09lpvv3oof0g
+    reserved_private_ip:
+    ----
+
+    reserved_private_vlan_id:
+    ----
+
+    reserved_public_ip:
+    ----
+
+    Events:  <none>
+    ```
+    {: screen}
+
+3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
+  * If a public ALB is listed and is assigned an IP address, continue to the next step.
+  * If no ALBs are created after several minutes, [contact us](#getting_help).
+
+    ```
+    ibmcloud ks alb ls -c <cluster_name_or_ID>
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
+    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
+    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
+    ```
+    {: screen}
+
+4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address as the public ALB.
+  * If a `LoadBalancer` service is listed and is assigned an IP address, continue to the next step.
+  * If no `LoadBalancer` services are created after several minutes, [contact us](#getting_help).
+
+    ```
+    kubectl get svc -n kube-system | grep LoadBalancer
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    public-crbmnj1b1d09lpvv3oof0g-alb1   LoadBalancer   172.21.XXX.XXX   169.XX.XXX.XX   80:30723/TCP,443:31241/TCP   1d
+    ```
+    {: screen}
+
+5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [contact us](#getting_help).
+  ```
+  ibmcloud ks cluster get -c <cluster_name_or_ID>
+  ```
+  {: pre}
+
+<br />
+
+
+## No Ingress subdomain exists after you create clusters of the same or similar name
+{: #cs_rate_limit}
+
+{: tsSymptoms}
+You create and delete a cluster multiple times, such as for automation purposes, and you either use the same name for the cluster every time that you create it, or a name that is very similar to previous names that you used. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
+
+{: tsCauses}
+When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 5 times or more within 7 days, you might reach the Let's Encrypt [Duplicate Certificate rate limit](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N){: external}, because the same Ingress subdomain and certificate are registered every time that you create the cluster. Because very long cluster names are truncated to 24 characters in the Ingress subdomain for the cluster, you can also reach the rate limit if you use multiple cluster names that have the same first 24 characters.
+
+{: tsResolve}
+If you need to continue testing, you can change the name of the cluster so that when you create the new cluster a new, different Ingress subdomain and secret are registered.
+
+<br />
+
+
+## Classic clusters: Cannot connect to an app via Ingress
+{: #cs_ingress_fails}
+
+{: tsSymptoms}
+You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or Ingress subdomain, the connection failed or timed out.
+
+{: tsResolve}
+First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
+```
+ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+```
+{: pre}
+
+In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a flavor other than **free**.
+
+* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain).
+* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](#ingress-debug).
+
+If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents ALB pods from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes.
+{: note}
+
+<br />
+
+
+## VPC clusters: Cannot connect to an app via Ingress
+{: #vpc_ts_alb}
+
+{: tsSymptoms}
+You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
+
+{: tsCauses}
+When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
+* A VPC security group is blocking incoming traffic to your worker nodes, including incoming requests to your app.
+* The VPC load balancer is offline, such as due to load balancer provisioning errors or VSI connection errors.
+* The VPC load balancer is deleted through the VPC console or the CLI.
+* The VPC load balancer's DNS entry is still registering.
+
+{: tsResolve}
+Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
+1. If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
+  1. Target Generation 1 of VPC compute.
+     ```
+     ibmcloud is target --gen 1
+     ```
+     {: pre}
+  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed, and you can continue to step 2. If you have another security group, note its ID.
+    ```
+    ibmcloud is security-groups
+    ```
+    {: pre}
+    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+    ```
+    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+    ```
+    {: screen}
+  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
+    ```
+    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+    ```
+    {: pre}
+
+2. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
+  ```
+  ibmcloud is load-balancers
+  ```
+  {: pre}
+  * If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To re-create the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's hostname by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
+  * If the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using. You can either wait for the hostname to be registered in your DNS, or access the VPC load balancer directly by using one of its IP addresses. To find the VPC load balancer IP addresses, look for the **Public IP** column in the output of `ibmcloud is load-balancers`. If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.
+
+<br />
+
+
 ## Debugging Ingress
 {: #ingress-debug}
 {: troubleshoot}
@@ -49,17 +301,25 @@ While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}
 
 
 
-You publicly exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the ALB's public IP address or subdomain, the connection fails or times out. The steps in the following sections can help you debug your Ingress setup.
-{: shortdesc}
+{: tsSymptoms}
+You publicly exposed your app by creating an Ingress resource for your app in your cluster. However, when you try to connect to your app through the Ingress subdomain or the ALBs' IP addresses, the connection fails or times out.
 
-Ensure that you define a host in only one Ingress resource. If one host is defined in multiple Ingress resources, the ALB might not forward traffic properly and you might experience errors.
-{: tip}
+{: tsResolve}
+The steps in the following sections can help you debug your Ingress setup.
 
-Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users#platform):
+Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}:
   - **Editor** or **Administrator** platform role for the cluster
   - **Writer** or **Manager** service role
 
-### Step 1: Run Ingress tests in the Diagnostics and Debug Tool
+### Step 1: Check your app deployment
+{: #app-debug-ingress}
+
+Before you debug Ingress, first check out [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps).
+{: shortdesc}
+
+Ingress issues are often caused by underlying issues in your app deployment or in the `ClusterIP` service that exposes your app. For example, your app label and service selector might not match, or your app and service target ports might not match.
+
+### Step 2: Run Ingress tests in the Diagnostics and Debug Tool
 {: #debug-tool-ingress}
 
 While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Ingress tests and gather pertinent Ingress information from your cluster. To use the debug tool, you can enable the add-on in your cluster.
@@ -83,13 +343,13 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
   * If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
   * You can also use the results of tests that only gather information while you debug your Ingress service in the following sections.
 
-### Step 2: Check for error messages in your Ingress deployment and the ALB pod logs
+### Step 3: Check for error messages in your Ingress deployment and the ALB pod logs
 {: #errors}
 
 Start by checking for error messages in the Ingress resource deployment events and ALB pod logs. These error messages can help you find the root causes for failures and further debug your Ingress setup in the next sections.
 {: shortdesc}
 
-1. Check your Ingress resource deployment and look for warning or error messages.
+1. Check your Ingress resource deployment and look for warnings or error messages.
     ```
     kubectl describe ingress <myingress>
     ```
@@ -133,7 +393,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     2. Make sure that all pods are running by checking the **STATUS** column.
 
-    3. If a pod is not `Running`, you can disable and re-enable the ALB. In the following commands, replace `<ALB_ID>` with the ID of the pod's ALB. For example, if the pod that is not running has the name `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, the ALB ID is `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
+    3. If a pod does not have a `Running` status, you can disable and re-enable the ALB. In the following commands, replace `<ALB_ID>` with the ID of the pod's ALB. For example, if the pod that is not running has the name `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1-5d6d86fbbc-kxj6z`, the ALB ID is `public-crb2f60e9735254ac8b20b9c1e38b649a5-alb1`.
 
       When the pod restarts, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes by default.
       {: note}
@@ -173,7 +433,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
     4. Look for error messages in the ALB logs.
 
-### Step 3: Ping the ALB subdomain and public IP addresses
+### Step 4: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
 Check the availability of your Ingress subdomain and ALBs' public IP addresses.
@@ -207,7 +467,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         {: pre}
 
         * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your [firewall](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall).
-        * If there is no firewall that is blocking the pings and the pings still run to timeout, [check the status of your ALB pods](#check_pods).
+        * If you don't have a firewall or your firewall does not block the pings and the pings still timeout, [check the status of your ALB pods](#check_pods).
 
     * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](/docs/containers?topic=containers-add_workers#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
 
@@ -251,11 +511,11 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-### Step 4: Check your domain mappings and Ingress resource configuration
+### Step 5: Check your domain mappings and Ingress resource configuration
 {: #ts_ingress_config}
 
 1. If you use a custom domain, verify that you used your DNS provider to map the custom domain to the IBM-provided subdomain or the ALB's public IP address. Note that using a CNAME is preferred because IBM provides automatic health checks on the IBM subdomain and removes any failing IPs from the DNS response.
-    * IBM-provided subdomain: Check that your custom domain is mapped to the cluster's IBM-provided subdomain in the Canonical Name record (CNAME).
+    * **IBM-provided subdomain CNAME**: Check that your custom domain is mapped to the cluster's IBM-provided subdomain in the Canonical Name record (CNAME).
         ```
         host www.my-domain.com
         ```
@@ -269,7 +529,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         ```
         {: screen}
 
-    * Public IP address: Check that your custom domain is mapped to the ALB's portable public IP address in the A record. The IPs should match the public ALB IPs that you got in step 1 of the [previous section](#ping).
+    * **Public IP address A record**: Check that your custom domain is mapped to the ALB's portable public IP address in the A record. The IPs should match the public ALB IPs that you got in step 1 of the [previous section](#ping).
         ```
         host www.my-domain.com
         ```
@@ -447,256 +707,6 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 <br />
 
 
-## No Ingress subdomain exists after cluster creation
-{: #ingress_subdomain}
-{: troubleshoot}
-{: support}
-
-{: tsSymptoms}
-You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to check its status. The cluster **State** is `normal`, but the **Ingress Subdomain** and **Ingress Secret** are not available.
-
-{: tsCauses}
-Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete:
-
-1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
-2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
-3. When the `ibm-cloud-provider-vlan-ip-config` config map is updated, the public ALB is triggered for creation.
-4. A load balancer service that exposes the ALB is created and assigned an IP address (classic clusters) or a hostname (VPC clusters).
-5. The load balancer IP address or hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
-
-If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
-{: note}
-
-{: tsResolve}
-Typically, after the cluster is ready, the Ingress subdomain and secret are created after 15 minutes. If the Ingress subdomain and secret are still unavailable after your cluster is in a `normal` state for more than 15 minutes, you can check the progress of the creation process by following these steps:
-
-1. Verify that the worker nodes have a **State** of `normal` and a **Status** of `Ready`. After you create the cluster, it can take up to 20 minutes for the worker nodes to be ready.
-   ```
-   ibmcloud ks worker ls -c <cluster_name_or_ID>
-   ```
-   {: pre}
-
-   Example output:
-   ```
-   ID                                                     Public IP         Private IP      Flavor              State     Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.15.8
-   ```
-   {: screen}
-
-2. Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
-  * If the config map shows IP addresses, continue to the next step.
-  * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
-
-    ```
-    kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
-    ```
-    {: pre}
-
-    Example output of a config map populated with IP addresses:
-    ```
-    Name:         ibm-cloud-provider-vlan-ip-config
-    Namespace:    kube-system
-    Labels:       <none>
-    Annotations:  <none>
-
-    Data
-    ====
-    reserved_public_vlan_id:
-    ----
-
-    vlanipmap.json:
-    ----
-    {
-      "vlans": [
-        {
-          "id": "2234947",
-          "subnets": [
-            {
-              "id": "2215454",
-              "ips": [
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX"
-              ],
-              "is_public": false,
-              "is_byoip": false,
-              "cidr": "10.XXX.XXX.X/29"
-            }
-          ],
-          "zone": "dal10",
-          "region": "us-south"
-        },
-        {
-          "id": "2234945",
-          "subnets": [
-            {
-              "id": "2219170",
-              "ips": [
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX"
-              ],
-              "is_public": true,
-              "is_byoip": false,
-              "cidr": "169.XX.XXX.X/29"
-            }
-          ],
-          "zone": "dal10",
-          "region": "us-south"
-        }
-      ],
-      "vlan_errors": [],
-      "reserved_ips": []
-    }
-    cluster_id:
-    ----
-    bmnj1b1d09lpvv3oof0g
-    reserved_private_ip:
-    ----
-
-    reserved_private_vlan_id:
-    ----
-
-    reserved_public_ip:
-    ----
-
-    Events:  <none>
-    ```
-    {: screen}
-
-3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
-  * If a public ALB is listed and is assigned an IP address, continue to the next step.
-  * If no ALBs are created after several minutes, [contact us](#getting_help).
-
-    ```
-    ibmcloud ks alb ls -c <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
-    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
-    ```
-    {: screen}
-
-4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address as the public ALB.
-  * If a `LoadBalancer` service is listed and is assigned an IP address, continue to the next step.
-  * If no `LoadBalancer` services are created after several minutes, [contact us](#getting_help).
-
-    ```
-    kubectl get svc -n kube-system | grep LoadBalancer
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    public-crbmnj1b1d09lpvv3oof0g-alb1   LoadBalancer   172.21.XXX.XXX   169.XX.XXX.XX   80:30723/TCP,443:31241/TCP   1d
-    ```
-    {: screen}
-
-5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [contact us](#getting_help).
-  ```
-  ibmcloud ks cluster get -c <cluster_name_or_ID>
-  ```
-  {: pre}
-
-<br />
-
-
-## No Ingress subdomain exists after you create clusters of the same or similar name
-{: #cs_rate_limit}
-
-{: tsSymptoms}
-You create and delete a cluster multiple times, such as for automation purposes, and you either use the same name for the cluster every time that you create it, or a name that is very similar to previous names that you used. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
-
-{: tsCauses}
-When you create and delete a cluster that uses the same name multiple times, the Ingress subdomain for that cluster in the format `<cluster_name>.<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud` is registered and unregistered each time. The certificate for the subdomain is also generated and deleted each time. If you create and delete a cluster with the same name 5 times or more within 7 days, you might reach the Let's Encrypt [Duplicate Certificate rate limit](https://letsencrypt.org/docs/rate-limits/?origin_team=T4LT36D1N){: external}, because the same Ingress subdomain and certificate are registered every time that you create the cluster. Because very long cluster names are truncated to 24 characters in the Ingress subdomain for the cluster, you can also reach the rate limit if you use multiple cluster names that have the same first 24 characters.
-
-{: tsResolve}
-If you need to continue testing, you can change the name of the cluster so that when you create the new cluster a new, different Ingress subdomain and secret are registered.
-
-<br />
-
-
-## Classic clusters: Cannot connect to an app via Ingress
-{: #cs_ingress_fails}
-
-{: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or Ingress subdomain, the connection failed or timed out.
-
-{: tsResolve}
-First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
-```
-ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-```
-{: pre}
-
-In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a flavor other than **free**.
-
-* If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain).
-* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress).
-
-If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents ALB pods from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes.
-{: note}
-
-<br />
-
-
-## VPC clusters: Cannot connect to an app via Ingress
-{: #vpc_ts_alb}
-
-{: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
-
-{: tsCauses}
-When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
-* A VPC security group is blocking incoming traffic to your worker nodes, including incoming requests to your app.
-* The VPC load balancer is offline, such as due to load balancer provisioning errors or VSI connection errors.
-* The VPC load balancer is deleted through the VPC console or the CLI.
-* The VPC load balancer's DNS entry is still registering.
-
-{: tsResolve}
-Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. If you use use non-default [VPC security groups](/docs/vpc?topic=vpc-using-security-groups), allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes.
-  1. Target Generation 1 of VPC compute.
-     ```
-     ibmcloud is target --gen 1
-     ```
-     {: pre}
-  2. List your security groups. For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed, and you can continue to step 2. If you have another security group, note its ID.
-    ```
-    ibmcloud is security-groups
-    ```
-    {: pre}
-    Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
-    ```
-    ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
-    1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
-    ```
-    {: screen}
-  3. Add a rule to allow inbound TCP traffic on ports 30000-32767. For more information about the command options, see the [`security-group-rule-add` CLI reference docs](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#security-group-rule-add).
-    ```
-    ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
-    ```
-    {: pre}
-
-2. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
-  ```
-  ibmcloud is load-balancers
-  ```
-  {: pre}
-  * If the VPC load balancer is not listed, it was deleted through the VPC console or the CLI. To re-create the VPC load balancer for your ALBs, disable all of the public or private ALBs that are assigned that VPC load balancer's hostname by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable` for each ALB. Then, re-enable those ALBs by running `ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable` for each ALB. A new VPC load balancer for the ALBs takes a few minutes to provision in your VPC. You cannot access your app until the VPC load balancer for your ALBs is fully provisioned.
-  * If the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using. You can either wait for the hostname to be registered in your DNS, or access the VPC load balancer directly by using one of its IP addresses. To find the VPC load balancer IP addresses, look for the **Public IP** column in the output of `ibmcloud is load-balancers`. If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.
-
-<br />
-
-
 ## Ingress application load balancer (ALB) secret issues
 {: #cs_albsecret_fails}
 
@@ -777,11 +787,11 @@ To view how many subnets a VLAN has:
 2.  Click the **VLAN Number** of the VLAN that you used to create your cluster. Review the **Subnets** section to see whether 40 or more subnets exist.
 
 {: tsResolve}
-If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) that uses this new VLAN.
+Option 1: If you need a new VLAN, order one by [contacting {{site.data.keyword.cloud_notm}} support](/docs/vlans?topic=vlans-ordering-premium-vlans#ordering-premium-vlans). Then, [create a cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create) that uses this new VLAN.
 
-If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+Option 2: If you have another VLAN that is available, you can [set up VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) in your existing cluster. After, you can add new worker nodes to the cluster that use the other VLAN with available subnets. To check if VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
-If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
+Option 3: If you are not using all the subnets in the VLAN, you can reuse subnets on the VLAN by adding them to your cluster.
 1. Check that the subnet that you want to use is available.
   <p class="note">The infrastructure account that you use might be shared across multiple {{site.data.keyword.cloud_notm}} accounts. In this case, even if you run the `ibmcloud ks subnets` command to see subnets with **Bound Clusters**, you can see information only for your clusters. Check with the infrastructure account owner to make sure that the subnets are available and not in use by any other account or team.</p>
 
@@ -804,8 +814,8 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
     {: screen}
 
 4. Verify that the portable IP addresses from the subnet that you added are used for the ALBs in your cluster. It might take several minutes for the services to use the portable IP addresses from the newly-added subnet.
-  * No Ingress subdomain: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
-  * An ALB does not deploy in a zone: Run `ibmcloud ks alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
+  * **No Ingress subdomain**: Run `ibmcloud ks cluster get --cluster <cluster>` to verify that the **Ingress Subdomain** is populated.
+  * **An ALB does not deploy in a zone**: Run `ibmcloud ks alb ls --cluster <cluster>` to verify that the missing ALB is deployed.
 
 <br />
 

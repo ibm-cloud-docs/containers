@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks
 
@@ -49,7 +49,7 @@ A Risk Management VP for a residential mortgage company processes 70 million rec
 Why {{site.data.keyword.cloud_notm}}: To improve risk analysis, the company looked to {{site.data.keyword.containerlong_notm}} and IBM Cloud Analytic services to reduce costs, increase worldwide availability, and ultimately accelerate regulatory compliance. With {{site.data.keyword.containerlong_notm}} in multiple regions, their analysis apps can be containerized and deployed across the globe, improving availability and addressing local regulations. Those deployments are accelerated with familiar open source tools, already part of {{site.data.keyword.containerlong_notm}}.
 
 {{site.data.keyword.containerlong_notm}} and key technologies:
-* [Horizontal scaling](/docs/containers?topic=containers-app#highly_available_apps)
+* [Horizontal scaling](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
 * [Multiple regions for high availability](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)

@@ -24,11 +24,15 @@ IBM Cloud Kubernetes Service
         cs_uc_gov.md
 
     {: .topicgroup}
+    Learning paths
+        cs_path_admin.md
+        cs_path_dev.md
+
+    {: .topicgroup}
     Cluster strategy
         cs_responsibilities.md
         cs_secure.md
         cs_ha.md
-        cs_kube_strategy.md
 
     {: .topicgroup}
     Tutorials
@@ -51,51 +55,66 @@ IBM Cloud Kubernetes Service
         cs_api_install.md
 
     {: .topicgroup}
-    Setting up clusters
+    Planning your cluster
+        cs_kube_strategy.md
         cs_cluster_plan_network.md
         cs_cluster_plan_ha.md
         cs_worker_plan.md
-        cs_clusters.md
-        cs_cluster_access.md
-        cs_worker_add.md
 
     {: .topicgroup}
-    Administering clusters
+    Creating and accessing clusters
+        cs_clusters.md
+        cs_cluster_access.md
+        cs_users.md
+
+    {: .topicgroup}
+    Managing the cluster lifecycle
+        cs_worker_add.md
         cs_cluster_scaling.md
         cs_cluster_update.md
-        cs_users.md
-        cs_encrypt.md
-        cs_psp.md
-        cs_pod_priority.md
-        cs_health.md
         cs_performance.md
         cs_remove.md
 
     {: .topicgroup}
-    Classic: Managing the cluster network
+    Securing cluster workloads
+        cs_encrypt.md
+        cs_psp.md
+        cs_pod_priority.md
+
+    {: .topicgroup}
+    Securing the cluster network
         cs_firewall.md
-        cs_network_policy.md
         cs_edge.md
-        cs_vpn.md
+        cs_network_policy.md
+        vpc_firewall.md
+        vpc_network_policy.md
+
+    {: .topicgroup}
+    Managing the cluster network
         cs_subnets.md
         cs_network_cluster.md
         cs_dns.md
-
-    {: .topicgroup}
-    VPC: Managing the cluster network
-        vpc_firewall.md
-        vpc_network_policy.md
-        vpc_vpn.md
+        cs_vpn.md
         vpc_subnets.md
         vpc_dns.md
+        vpc_vpn.md
+
+    cs_health.md
 
     {: .topicgroup}
-    Deploying apps
+    Setting up an image build pipeline
+        cs_registry.md
+        cs_cicd.md
+
+    {: .topicgroup}
+    Developing and deploying apps
+        cs_app_plan.md
         cs_images.md
         cs_app.md
+        cs_app_deploy.md
         cs_app_knative.md
-
-    cs_nodeport.md
+        cs_nodeport.md
+        cs_app_update.md
 
     {: .topicgroup}
     Setting up a service mesh with Istio

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks
 
@@ -135,7 +135,7 @@ A Chief Marketing Officer (CMO) needs to increase customer traffic by 20% in sto
 Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} provides easy spin-up of more compute, where Developers quickly add Cloud Analytics services for sales behavior insights and digital market adaptability.
 
 Key technologies:    
-* [Horizontal scaling to accelerate development](/docs/containers?topic=containers-app#highly_available_apps)
+* [Horizontal scaling to accelerate development](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Insights to market trends with Watson Discovery](https://www.ibm.com/cloud/watson-discovery)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)

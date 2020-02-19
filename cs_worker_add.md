@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-06"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -80,13 +80,13 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     ```
     {: pre}
 
-    Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone: 
+    Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.15.8
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.15.8
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.15.8
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.15.8
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.15.10
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.15.10
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.15.10
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.15.10
     ```
     {: screen}
 
@@ -282,7 +282,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
@@ -307,8 +307,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.8
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.8
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.10
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.10
    ```
    {: screen}
 
@@ -384,7 +384,7 @@ To add a zone with worker nodes to your worker pool:
   Ingress Secret:                 mycluster-<hash>-0000
   Workers:                        6
   Worker Zones:                   dal10, dal12
-  Version:                        1.15.8_1524
+  Version:                        1.15.10_1524
   Owner:                          owner@email.com
   Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
   Resource Group Name:            Default
@@ -511,7 +511,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Ensure that you include the `--labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker` option to create a worker pool with compute functionality. If you provision a bare metal worker pool or dedicated VM, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
    ```
    {: pre}
 
@@ -536,8 +536,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.15.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.15.10
    ```
    {: screen}
 
@@ -576,7 +576,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Ensure that you include the `--labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway` option of following command to create a worker pool with gateway functionality. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
    ```
    {: pre}
 
@@ -601,8 +601,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.15.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.15.10
    ```
    {: screen}
 
@@ -1084,7 +1084,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 4. Add stand-alone worker nodes to the cluster. For bare metal flavors, specify `dedicated`.
    ```
-   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <flavor> --hardware <shared_or_dedicated>
+   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --flavor <flavor> --hardware <shared_or_dedicated>
    ```
    {: pre}
 
@@ -1103,7 +1103,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 You can assign a tag to {{site.data.keyword.containerlong_notm}} clusters to help manage your {{site.data.keyword.cloud_notm}} resources. For example, you might add `key:value` tags to your cluster and other cloud resources so that your billing department track resources, such as `costctr:1234`. Tags are visible account-wide. For more information, see [Working with tags](/docs/resources?topic=resources-tag).
 {: shortdesc}
 
-Tags are not the same thing as Kubernetes labels. [Kubernetes labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/){: external} are `key:value` pairs that can be used as selectors for the resources that are in your cluster, such as [adding a label to worker pool](#worker_pool_labels) to [deploy an app to only certain worker nodes](/docs/containers?topic=containers-app#node_affinity). Tags are an {{site.data.keyword.cloud_notm}} tool that you can use to filter your {{site.data.keyword.cloud_notm}} resources, such as clusters, storage devices, or {{site.data.keyword.watson}} services.
+Tags are not the same thing as Kubernetes labels. [Kubernetes labels](https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/){: external} are `key:value` pairs that can be used as selectors for the resources that are in your cluster, such as [adding a label to worker pool](#worker_pool_labels) to [deploy an app to only certain worker nodes](/docs/containers?topic=containers-deploy_app#node_affinity). Tags are an {{site.data.keyword.cloud_notm}} tool that you can use to filter your {{site.data.keyword.cloud_notm}} resources, such as clusters, storage devices, or {{site.data.keyword.watson}} services.
 {: note}
 
 Do not include personal information in your tags. Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with Kubernetes resources.
@@ -1205,13 +1205,14 @@ After you label your worker pool, you can use the [label in your app deployments
 <br />
 
 
-## Autorecovery for your worker nodes
+## Autorecovery for your worker nodes in classic clusters
 {: #planning_autorecovery}
 
 Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`, must be functional to have a healthy Kubernetes worker node. Over time these components can break and might leave your worker node in a nonfunctional state. Nonfunctional worker nodes decrease total capacity of the cluster and can result in downtime for your app.
 {:shortdesc}
 
-You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
+In classic clusters, you can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
+
 
 
 

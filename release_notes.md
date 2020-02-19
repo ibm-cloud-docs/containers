@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 19 February 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.90](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Developing and deploying apps**: You can now find expanded information on how to develop and deploy an app to your Kubernetes cluster in the following pages:<ul><li>[Planning app deployments](/docs/containers?topic=containers-plan_deploy)</li><li>[Building containers from images](/docs/containers?topic=containers-images)</li><li>[Developing Kubernetes-native apps](/docs/containers?topic=containers-app)</li><li>[Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app)</li><li>[Managing the app lifecycle](/docs/containers?topic=containers-update_app)</li></ul></li><li>**Learning paths**: Curated learning paths for [administrators](docs/containers?topic=containers-learning-path-admin) and [developers](docs/containers?topic=containers-learning-path-dev) are now available to help guide you through your {{site.data.keyword.containerlong_notm}} experience.</li><li>**Setting up image build pipelines**: You can now find expanded information on how to set up an image registry and build pipelines in the following pages:<ul><li>[Setting up an image registry](/docs/containers?topic=containers-registry)</li><li>[Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd)</li></ul></li><li>**Firewall subnets**: Removed outdated [subnet IP addresses for {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-firewall#vyatta_firewall).</li></ul> |
 | 17 February 2020 | <ul><li>**Kubernetes version 1.17**: [Kubernetes 1.17 release](/docs/containers?topic=containers-cs_versions#cs_v117) is certified.</li><li>**Version changelogs**: Master and worker node patch updates are available for Kubernetes [1.17.3_1516](/docs/containers?topic=containers-changelog#1173_1516), [1.16.7_1524](/docs/containers?topic=containers-changelog#1167_1524), [1.15.10_1531](/docs/containers?topic=containers-changelog#11510_1531), [1.14.10_1547](/docs/containers?topic=containers-changelog#11410_1547), and [1.13.12_1550](/docs/containers?topic=containers-changelog#11312_1550)</li></ul>|
 | 14 February 2020 | **Istio add-on**: [Version 1.4.4 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#144) is released. |
 | 10 February 2020 | <ul><li>**New! Kubernetes version 1.17**: You can now create clusters that run Kubernetes version 1.17. To update an existing cluster, see the [Version 1.17 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v117).</li><li>**Deprecated: Kubernetes version 1.14**: With the release of version 1.17, clusters that run version 1.14 are deprecated. Consider [updating to at least version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115) today.</li><li>**VPC cluster creation troubleshooting**: Added [troubleshooting steps](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc) for when no VPCs are listed when you try to create a VPC cluster in the console.</li><li>**Knative changelogs:** Check out the changes that are included in [version 0.12.1 of the managed Knative add-on](/docs/containers?topic=containers-knative-changelog). If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.</li> </ul> |
@@ -209,7 +210,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td>03 October 2019</td>
   <td><ul>
   <li><strong>Ingress ALB changelog</strong>: Updated the ALB [`nginx-ingress` image to build 579 and `ingress-auth` image build to 341](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>DevOps toolchain</strong>: You can now use the **DevOps** tab on the cluster details page to configure your DevOps toolchain. For more information, see [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-app#continuous-delivery-pipeline).</li>
+  <li><strong>DevOps toolchain</strong>: You can now use the **DevOps** tab on the cluster details page to configure your DevOps toolchain. For more information, see [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd#continuous-delivery-pipeline).</li>
   <li><strong><strong>Security for VPC clusters</strong>: Added information for how to achieve [network segmentation and privacy in VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc).</li>
   </ul>
   </td>
@@ -275,7 +276,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>13 September 2019</td>
   <td><ul>
-    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-images#secret_entitled_software).</li>
+    <li><strong>Entitled software</strong>: If you have licensed products from your [MyIBM.com ![External link icon](../icons/launch-glyph.svg "External link icon")](https://myibm.ibm.com) container software library, you can [set up your cluster to pull images from the entitled registry](/docs/containers?topic=containers-registry#secret_entitled_software).</li>
   <li><strong>`script update` command</strong>: Added [steps for using the `script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in.</td>
 </tr>
 <tr>
@@ -362,7 +363,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>15 August 2019</td>
   <td><ul>
-  <li><strong>App deployments</strong>: Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-app#copy_apps_cluster).</li>
+  <li><strong>App deployments</strong>: Added steps for [copying deployments from one cluster to another](/docs/containers?topic=containers-update_app#copy_apps_cluster).</li>
   <li><strong>FAQs</strong>: Added an FAQ about [free clusters](/docs/containers?topic=containers-faqs#faq_free).</li>
   <li><strong>Istio</strong>: Added steps for [exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls), [securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls), and [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update).</li>
   <li><strong>Knative</strong>: Added instructions for how to [use volumes to access secrets and config maps](/docs/containers?topic=containers-serverless-apps-knative#knative-access-volume), [pull images from a private registry](/docs/containers?topic=containers-serverless-apps-knative#knative-private-registry), [scale apps based on CPU usage](/docs/containers?topic=containers-serverless-apps-knative#scale-cpu-vs-number-requests), [change the default container port](/docs/containers?topic=containers-serverless-apps-knative#knative-container-port), and [change the `scale-to-zero-grace-period`](/docs/containers?topic=containers-serverless-apps-knative#knative-idle-time).</li>

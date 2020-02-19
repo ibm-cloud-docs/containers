@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-17"
 
 keywords: kubernetes, iks, knative
 
@@ -690,9 +690,9 @@ Knative services support the Kubernetes `volume` specification to mount an exist
 To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registryshort_notm}}. To access other private registries, you must store the credentials in a Kubernetes image pull secret in your cluster.
 {: shortdesc}
 
-1. Follow the instructions to [create an image pull secret](/docs/containers?topic=containers-images#private_images) that includes the credentials to access your private container registry.
+1. Follow the instructions to [create an image pull secret](/docs/containers?topic=containers-registry#private_images) that includes the credentials to access your private container registry.
 
-2. Create a Knative service that uses the image pull secret. You can choose if you want to reference the image pull secret in your Knative service directly as shown in the following example, or to [add the image pull secret to the Kubernetes service account of the namespace](/docs/containers?topic=containers-images#store_imagePullSecret) where you want to deploy your Knative service.
+2. Create a Knative service that uses the image pull secret. You can choose if you want to reference the image pull secret in your Knative service directly as shown in the following example, or to [add the image pull secret to the Kubernetes service account of the namespace](/docs/containers?topic=containers-registry#store_imagePullSecret) where you want to deploy your Knative service.
 
    Example to reference the image pull secret in your Knative service:
    ```yaml

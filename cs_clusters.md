@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -63,22 +63,22 @@ ibmcloud ks cluster create classic --name my_cluster
 **Classic clusters**:
 * Classic cluster, shared virtual machine:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  Classic cluster, bare metal:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
    ```
    {: pre}
 *  Classic cluster with a gateway enabled:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --gateway-enabled --kube-version 1.17.2 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.17.3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
    ```
    {: pre}
 *  Classic cluster that uses private VLANs and the private service endpoint only:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --machine-type b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
    ```
    {: pre}
 *  For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
@@ -317,13 +317,13 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
 6. Create your standard cluster.
    * To create a cluster in which you can run internet-facing workloads:
      ```
-     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version <major.minor.patch> [--public-service-endpoint] [--private-service-endpoint] [--disable-disk-encrypt]
+     ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version <major.minor.patch> [--public-service-endpoint] [--private-service-endpoint] [--disable-disk-encrypt]
      ```
      {: pre}
 
    * To create a cluster with private network connectivity only, such as to extend your on-premises data center:
      ```
-     ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --kube-version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt]
+     ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --hardware <shared_or_dedicated> --private-vlan <private_VLAN_ID> --private-only --workers <number> --name <cluster_name> --version <major.minor.patch> --public-service-endpoint [--disable-disk-encrypt]
      ```
      {: pre}
 
@@ -342,7 +342,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID that you chose earlier and that you want to use to create your cluster.</td>
    </tr>
    <tr>
-   <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
+   <td><code>--flavor <em>&lt;flavor&gt;</em></code></td>
    <td>Specify the flavor for your worker node that you chose earlier.</td>
    </tr>
    <tr>
@@ -371,7 +371,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    <td>Specify the number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, one worker node is created.</td>
    </tr>
    <tr>
-   <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+   <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
    <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
 </td>
    </tr>
@@ -398,7 +398,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `deployed`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
    Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-   mycluster    blrs3b1d0p0p2f7haq0g       deployed   20170201162433   3          dal10     1.15.8      Default             classic
+   mycluster    blrs3b1d0p0p2f7haq0g       deployed   20170201162433   3          dal10     1.15.10      Default             classic
    ```
    {: screen}
 
@@ -414,7 +414,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.10
    ```
    {: screen}
 
@@ -502,7 +502,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
 6. Create your gateway-enabled cluster.
    ```
-  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --machine-type <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --kube-version 1.17.2 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
+  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.17.3 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
    ```
    {: pre}
 
@@ -525,7 +525,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    <td>Create a cluster with a `gateway` worker pool of two gateway worker nodes that are connected to public and private VLANs to provide limited public access, and a `compute` worker pool of compute worker nodes that are connected to the private VLAN only. You can specify the number of compute nodes that are created in the `--workers` option. Note that you can later resize both the `compute` and `gateway` worker nodes by using the `ibmcloud ks worker-pool resize` command.</td>
    </tr>
    <tr>
-   <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
+   <td><code>--flavor <em>&lt;flavor&gt;</em></code></td>
    <td>Specify the flavor for your compute worker nodes that you chose earlier. Note that the gateway worker nodes are created with the `u3c.2x4` flavor by default. If you want to change the isolation and flavor of the gateway worker nodes, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the gateway worker pool that is created by default.</td>
    </tr>
    <tr>
@@ -550,7 +550,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    <td>Specify the number of compute worker nodes to include in the `compute` worker pool. If the <code>--workers</code> option is not specified, one compute worker node is created. Note that the `gateway` worker pool is created with two gateway worker nodes by default.</td>
    </tr>
    <tr>
-   <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+   <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
    <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
  Note that gateway-enabled clusters are supported for Kubernetes versions 1.15 and later only.</td>
    </tr>
@@ -593,11 +593,11 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    In the output, verify that the number of compute worker nodes that you specified in the `--workers` flag and two gateway worker nodes are provisioned. In the following example output, three compute and two gateway worker nodes are provisioned.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.8
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.10
    ```
    {: screen}
 
@@ -701,10 +701,10 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
   * If you want to create a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone), repeat this step to create additional subnets in all of the zones that you want to include in your cluster.
   * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
   * Do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
-  * Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
+  * **Important**: Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 5.  Create the cluster in your VPC. You can use the `cluster create vpc-classic` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```
-    ibmcloud ks cluster create vpc-classic --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--kube-version <major.minor.patch>] --provider vpc-classic [--workers <number_workers_per_zone>] [--disable-public-service-endpoint]
+    ibmcloud ks cluster create vpc-classic --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>] --provider vpc-classic [--workers <number_workers_per_zone>] [--disable-public-service-endpoint]
     ```
     {: pre}
 
@@ -740,7 +740,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     <td>Enter the worker node flavor that you want to use. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. VPC Gen 1 worker nodes can be created as virtual machines on shared infrastructure only. Bare metal or software-defined storage machines are not supported.  For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). To view available flavors, first list available VPC zones with <code>ibmcloud ks zone ls --provider vpc-classic</code>, and then use the zone to list supported flavors by running <code>ibmcloud ks flavors --zone &lt;VPC_zone&gt; --provider vpc-classic</code>. After you create your cluster, you can add different flavors by adding a worker node or worker pool to the cluster.</td>
     </tr>
     <tr>
-    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+    <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
  Note that VPC clusters are supported for Kubernetes versions 1.15 and later only.</td>
     </tr>  
@@ -766,7 +766,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After the Kubernetes master is ready, your worker nodes are set up.
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.15.8      Default               vpc-classic
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.15.10      Default               vpc-classic
     ```
     {: screen}
 
@@ -782,7 +782,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    When the worker nodes are ready, the worker node **State** changes to `deployed` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.15.10
    ```
    {: screen}
 
@@ -803,7 +803,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 When the cluster is up and running, you can check out the following cluster administration tasks:
 - If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers).
-- [Deploy an app in your cluster.](/docs/containers?topic=containers-app#app_cli)
+- [Deploy an app in your cluster.](/docs/containers?topic=containers-deploy_app#app_cli)
 - [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/Registry?topic=registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 - Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).

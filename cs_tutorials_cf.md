@@ -294,7 +294,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     <img src="images/python_flask.png" alt="A screen capture of the deployed boilerplate Python Flask app." />
 
-5.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-app#cli_dashboard).
+5.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}

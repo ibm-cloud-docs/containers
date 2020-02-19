@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -147,7 +147,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
     ```
     {: screen}
 
-5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
+5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar) or set up visualization of your Istio mesh by [creating a secret for Kiali](/docs/containers?topic=containers-istio-health#kiali).
 
 ### Kubernetes version 1.15 and earlier clusters
 {: #install_115}
@@ -279,7 +279,7 @@ To enable the Istio add-on:
     ```
     {: screen}
 
-5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).
+5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar) or set up visualization of your Istio mesh by [creating a secret for Kiali](/docs/containers?topic=containers-istio-health#kiali).
 
 <br />
 

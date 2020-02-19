@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-11"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -62,7 +62,7 @@ The following beta versions of the redesigned {{site.data.keyword.containerlong_
     ```
     {: pre}
 
-When version 1.0 releases, permanent syntax and behavior changes are not backwards compatible. You have until 14 March 2020 to update CLI command syntax.</br></br>To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run.
+When version 1.0 releases, permanent syntax and behavior changes are not backwards compatible. You have until 16 March 2020 to update CLI command syntax.</br></br>To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run.
 {: important}
 
 Check out the following changes between each version of the CLI plug-in:
@@ -616,7 +616,7 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 After logging in, download Kubernetes configuration data and certificates to connect to your cluster and run `kubectl` commands. The files are downloaded to `user_home_directory/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>`.
 {: shortdesc}
 
-In [CLI plug-in version 1.0](#cs_beta), `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately. Note that any pre-existing `kubeconfig` files are not merged automatically.</br></br>When version 1.0 releases on 14 March 2020, the permanent behavior changes to this command are not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
+In [CLI plug-in version 1.0](#cs_beta), `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately. Note that any pre-existing `kubeconfig` files are not merged automatically.</br></br>When version 1.0 releases on 16 March 2020, the permanent behavior changes to this command are not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
 {: important}
 
 ```
@@ -674,7 +674,7 @@ Create a cluster with worker nodes on classic infrastructure. For free clusters,
 {: shortdesc}
 
 ```
-ibmcloud ks cluster create classic [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --machine-type FLAVOR --name NAME [--kube-version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--gateway-enabled] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-s]
+ibmcloud ks cluster create classic [--file FILE_LOCATION] [--hardware HARDWARE] --zone ZONE --flavor FLAVOR --name NAME [--version MAJOR.MINOR.PATCH] [--no-subnet] [--private-vlan PRIVATE_VLAN] [--public-vlan PUBLIC_VLAN] [--private-only] [--gateway-enabled] [--private-service-endpoint] [--public-service-endpoint] [--workers WORKER] [--disable-disk-encrypt] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-s]
 ```
 {: pre}
 
@@ -720,14 +720,14 @@ service-subnet: <em>&lt;subnet&gt;</em>
 <p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
 
-<dt><code>--machine-type <em>FLAVOR</em></code></dt>
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a flavor, or machine type, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual flavors vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters. In gateway-enabled classic clusters, you can choose the flavor for compute worker nodes only. Gateway worker nodes are created with the `u3c.2x4` flavor by default.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
-<dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
 
 <dt><code>--no-subnet</code></dt>
@@ -815,14 +815,14 @@ ibmcloud ks cluster create classic --name my_cluster
 {: #example_cluster_create}
 
 ```
-ibmcloud ks cluster create classic --zone dal10 --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+ibmcloud ks cluster create classic --zone dal10 --private-vlan my_private_VLAN_ID --flavor b3c.4x16 --name my_cluster --hardware shared --workers 2
 ```
 {: pre}
 
 **Create subsequent standard clusters**: If you already created a standard cluster in this zone or created a public VLAN in IBM Cloud infrastructure before, specify that public VLAN with the `--public-vlan` flag. To find out whether you already have a public VLAN for a specific zone or to find the name of an existing public VLAN, run `ibmcloud ks vlan ls --zone <zone>`.
 
 ```
-ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --name my_cluster --hardware shared --workers 2
+ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --flavor b3c.4x16 --name my_cluster --hardware shared --workers 2
 ```
 {: pre}
 
@@ -838,7 +838,7 @@ Free clusters are not available in VPC.
 {: note}
 
 ```
-ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--kube-version MAJOR.MINOR.PATCH --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-s]
+ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version MAJOR.MINOR.PATCH --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-s]
 ```
 {: pre}
 
@@ -869,12 +869,12 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dt><code>--subnet-id <em>VPC_SUBNET_ID</em></code></dt>
 <dd>The VPC subnet to assign the cluster. This value is required. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic`.</dd>
 
-<dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
 </dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
-<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
 
 <dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with one worker node is created. This value is optional.
@@ -1290,7 +1290,7 @@ The `cluster-update` alias for this command is deprecated.
 {: deprecated}
 
 ```
-ibmcloud ks cluster master update --cluster CLUSTER [--kube-version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
+ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH] [--force-update] [-f] [-s]
 ```
 {: pre}
 
@@ -1305,7 +1305,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [--kube-version MAJOR.MINOR.
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--kube-version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command). This value is optional.</dd>
 
 <dt><code>--force-update</code></dt>
@@ -1748,7 +1748,7 @@ This command is deprecated. Create a worker pool by running [`ibmcloud ks worker
 {: deprecated}
 
 ```
-ibmcloud ks worker add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --machine-type FLAVOR --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
+ibmcloud ks worker add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARDWARE] --flavor FLAVOR --workers NUMBER --private-vlan PRIVATE_VLAN --public-vlan PUBLIC_VLAN [--disable-disk-encrypt] [-s]
 ```
 {: pre}
 
@@ -1766,7 +1766,7 @@ ibmcloud ks worker add --cluster CLUSTER [--file FILE_LOCATION] [--hardware HARD
 <dt><code>--file <em>FILE_LOCATION</em></code></dt>
 <dd>The path to the YAML file to add worker nodes to the cluster. Instead of defining additional worker nodes by using the options provided in this command, you can use a YAML file. This value is optional.
 
-<p class="note">If you provide the same option in the command as the parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a flavor in your YAML file and use the <code>--machine-type</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
+<p class="note">If you provide the same option in the command as the parameter in the YAML file, the value in the command takes precedence over the value in the YAML. For example, you define a flavor in your YAML file and use the <code>--flavor</code> option in the command, the value that you entered in the command option overrides the value in the YAML file.</p>
 
 <pre class="codeblock">
 <code>name: <em>&lt;cluster_name_or_ID&gt;</em>
@@ -1781,7 +1781,7 @@ diskEncryption: <em>false</em></code></pre></dd>
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
 <dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd>
 
-<dt><code>--machine-type <em>FLAVOR</em></code></dt>
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--workers <em>NUMBER</em></code></dt>
@@ -1803,7 +1803,7 @@ diskEncryption: <em>false</em></code></pre></dd>
 
 **Example**:
 ```
-ibmcloud ks worker add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --machine-type b3c.4x16 --hardware shared
+ibmcloud ks worker add --cluster my_cluster --workers 3 --public-vlan my_public_VLAN_ID --private-vlan my_private_VLAN_ID --flavor b3c.4x16 --hardware shared
 ```
 {: pre}
 
@@ -2191,7 +2191,7 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-s]
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Use this option to force the update of the master without user prompts. This value is optional.</dd>
+<dd>Use this option to force the update of the worker node without user prompts. This value is optional.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -2219,7 +2219,7 @@ You can create a worker pool in your cluster. When you add a worker pool, it is 
 {: shortdesc}
 
 ```
-ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --machine-type FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1]  [-s] [--json]
+ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flavor FLAVOR --size-per-zone WORKERS_PER_ZONE --hardware ISOLATION [--disable-disk-encrypt] [--label KEY1=VALUE1]  [-s] [--json]
 ```
 {: pre}
 
@@ -2235,7 +2235,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --mach
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code>--machine-type <em>FLAVOR</em></code></dt>
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (macine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
 
 <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
@@ -2259,7 +2259,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --mach
 
 **Example**:
 ```
-ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --machine-type b3c.4x16 --size-per-zone 6
+ibmcloud ks worker-pool create classic --name my_pool --cluster my_cluster --flavor b3c.4x16 --size-per-zone 6
 ```
 {: pre}
 
@@ -2293,7 +2293,7 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 <dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool. This value is required, and must be 1 or greater.</dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
-<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone>`.</dd>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
 <dd>Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is is. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. This value is optional. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
@@ -2516,7 +2516,7 @@ ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 ### `ibmcloud ks worker-pool zones`
 {: #cs_worker_pool_zones}
 
-View the zones attached to a worker pool.
+View the zones that are attached to a worker pool.
 {: shortdesc}
 
 ```
@@ -5439,7 +5439,7 @@ ibmcloud ks messages
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
 
-In [CLI plug-in version 1.0](#cs_beta), `supported-locations` is replaced by the `locations` command. When version 1.0 releases on 14 March 2020, the permanent syntax change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
+In [CLI plug-in version 1.0](#cs_beta), `supported-locations` is replaced by the `locations` command. When version 1.0 releases on 16 March 2020, the permanent syntax change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the CLI plug-in within the script or the environment where the script is run.
 {: important}
 
 ```

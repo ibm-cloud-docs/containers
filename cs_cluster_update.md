@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -371,7 +371,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     ```
     {: screen}
 5.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.15.8 to 1.17.2, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.15.10 to 1.17.3, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```
@@ -456,7 +456,7 @@ To update flavors:
      1. Create a worker pool with the number of worker nodes that you want to replace.
         * Classic clusters:
           ```
-          ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+          ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
           ```
           {: pre}
         * VPC Generation 1 clusters:
@@ -485,7 +485,7 @@ To update flavors:
 
    - **Deprecated: For stand-alone worker nodes**:
        ```
-       ibmcloud ks worker add --cluster <cluster_name> --machine-type <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+       ibmcloud ks worker add --cluster <cluster_name> --flavor <flavor> --workers <number_of_worker_nodes> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
        ```
        {: pre}
 
@@ -714,7 +714,7 @@ To update stand-alone worker nodes to worker pools:
 
 2. Create a worker pool and decide on the flavor and the number of worker nodes that you want to add to the pool.
    ```
-   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
