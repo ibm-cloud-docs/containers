@@ -237,7 +237,7 @@ ibmcloud ks worker ls --cluster <cluster_name_or_ID>
 In your CLI output, make sure that the **Status** of your worker nodes displays **Ready** and that the **Machine Type** shows a flavor other than **free**.
 
 * If your standard cluster is fully deployed and has at least 2 worker nodes per zone, but no **Ingress Subdomain** is available, see [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain).
-* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](#debug-ingress).
+* For other issues, troubleshoot your Ingress setup by following the steps in [Debugging Ingress](#ingress-debug).
 
 If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/docs/containers?topic=containers-ingress-settings#readiness-check) prevents ALB pods from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes.
 {: note}
