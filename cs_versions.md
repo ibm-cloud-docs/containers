@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -77,7 +77,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 *   Latest: 1.17.3
-*   Default: 1.15.10 
+*   Default: 1.15.10
 *   Other: 1.16.7
 
 **Deprecated and unsupported Kubernetes versions**:
@@ -417,7 +417,11 @@ The following table shows the actions that you must take before you update the K
 <td>Default Calico policy change</td>
 <td>If you created custom Calico HostEndpoints that refer to an `iks.worker.interface == 'private'` label, a new default Calico policy, `allow-all-private-default`, might disrupt network traffic. You must create a Calico policy with the `iks.worker.interface == 'private'` label to override the default policy. For more information, see [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy).</td>
 </tr>
-  </tbody>
+<tr>
+<td>Minimum Helm version</td>
+<td>If you [add services to your cluster by using Helm charts](/docs/containers?topic=containers-helm), update to Helm version 2.8 or later.</td>
+</tr>
+</tbody>
 </table>
 
 ### Update after master
