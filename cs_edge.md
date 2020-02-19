@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -290,7 +290,7 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 
 4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
   ```
-  ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --machine-type <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+  ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
   ```
   {: pre}
 

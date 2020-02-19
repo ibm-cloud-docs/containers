@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,7 @@ Refer to the following table for a summary of changes for each version of the [{
 
 |Version|Release date|Changes|
 |-------|------------|-------|
+| 0.4.90 | 19 Feb 2020 | <ul><li>Updates the Go version to 1.13.5 and removes `xgo`.</li><li>**Command updates**:<ul><li>Adds the `--provider` flag to the [`ibmcloud ks flavors`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) command.</li><li>Accepts newer flag names like `--flavor` instead of `--machine-type` across various commands.</li><li>Changes the default value of the `--flavor` flag to `free`.</li><li>Deprecates the `--disable-deployment` flag of the [`ibmcloud ks alb configure vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_alb_configure_vpc_classic) command.</li></ul></li><li>**VPC-specific command updates**:<ul><li>Fixes the [`ibmcloud ks zone rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_rm) command for VPC multizone clusters.</li><li>For the [`ibmcloud ks vpcs`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vpcs) command, defaults to list only generation 1 (`vpc-classic`) VPCs.</li><li>Revises the [`ibmcloud ks worker-pool create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_classic) command to remove the `--disable-disk-encrypt` flag and to hide the `--hardware` flag because it only accepts one value.</li></ul></li><li>**Help documentation updates**:<ul><li>Add deprecation warnings to encourage you to use the newer `classic` subcommands. For example, use `ibmcloud ks cluster create classic` instead of `ibmcloud ks cluster create`.</li><li>Standardizes formatting in help text, such as adding single quotes around variable names or styling for URLs.</li><li>Updates the help text in various languages.</li></ul></li></ul>|
 | 0.4.66 | 19 Dec 2019 | <ul><li>Adds a **Status** field to the [`ibmcloud ks alb cert get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get) command. The previous **Status** field is now called **State**.</li><li>Fixes a bug so that help text is now properly displayed for top-level commands, such as `ibmcloud ks flavors` and `ibmcloud ks subnets`.</li></ul>|
 | 0.4.64 | 11 Dec 2019 | <ul><li>Updates the Go version to 1.12.11.</li><li>Updates the help text in various languages.</li></ul>|
 | 0.4.61 | 26 Nov 2019 | <ul><li>Removes the `kube-audit` log source option from `ibmcloud ks logging config` commands.</li><li>Adds a check to verify that you are logged in to the {{site.data.keyword.cloud_notm}} CLI before the command request is issued.</li><li>Updates the help text in various languages.</li></ul>|

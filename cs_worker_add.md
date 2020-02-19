@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-18"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -282,7 +282,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone>
+   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone>
    ```
    {: pre}
 
@@ -511,7 +511,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Ensure that you include the `--labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker` option to create a worker pool with compute functionality. If you provision a bare metal worker pool or dedicated VM, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
    ```
    {: pre}
 
@@ -576,7 +576,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 4. Create a worker pool. Ensure that you include the `--labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway` option of following command to create a worker pool with gateway functionality. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
    ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --machine-type <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
    ```
    {: pre}
 
@@ -1084,7 +1084,7 @@ If you have a cluster that was created after worker pools were introduced, you c
 
 4. Add stand-alone worker nodes to the cluster. For bare metal flavors, specify `dedicated`.
    ```
-   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --machine-type <flavor> --hardware <shared_or_dedicated>
+   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --flavor <flavor> --hardware <shared_or_dedicated>
    ```
    {: pre}
 

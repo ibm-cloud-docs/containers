@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -707,7 +707,7 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
 1.  Create the worker pool with the label that you want to use. For example, your label might be `app: nginx`.
   * Classic clusters:
     ```
-    ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --machine-type <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+    ibmcloud ks worker-pool create classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
   * VPC Generation 1 clusters:

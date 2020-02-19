@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-19"
 
 keywords: kubernetes, iks
 
@@ -343,7 +343,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     Example:
 
     ```
-    ibmcloud ks cluster create classic --zone <zone> --machine-type <flavor> --name <cluster_name> --workers <number>
+    ibmcloud ks cluster create classic --zone <zone> --flavor <flavor> --name <cluster_name> --workers <number>
     ```
     {: pre}
 
@@ -362,7 +362,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>Enter the {{site.data.keyword.cloud_notm}} zone ID that your Dedicated environment is configured to use.</td>
     </tr>
     <tr>
-    <td><code>--machine-type <em>&lt;flavor&gt;</em></code></td>
+    <td><code>--flavor <em>&lt;flavor&gt;</em></code></td>
     <td>Enter a machine type. You can deploy your worker nodes as virtual machines on dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks machine-type` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
     </tr>
     <tr>
@@ -383,7 +383,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>Enter the number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, one worker node is created.</td>
     </tr>
     <tr>
-    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
+    <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
 </td>
     </tr>
