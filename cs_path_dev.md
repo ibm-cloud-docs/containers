@@ -87,7 +87,6 @@ subcollection: containers
     }
 -->
 </style>
-<br>
 
 # Learning path for developers
 {: #learning-path-dev}
