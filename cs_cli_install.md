@@ -450,23 +450,37 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
   2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
 
-## Using the {{site.data.keyword.cloud-shell_notm}} in your web browser (beta)
-{: #cloud-shell}
+## Using the Kubernetes web terminal in your web browser
+{: #cli_web}
 
-The [{{site.data.keyword.cloud-shell_full}}] allows you to use the {{site.data.keyword.cloud_notm}} CLI and various CLI plug-ins to manage your cluster directly from your web browser.
+After you create your cluster, the Kubernetes web terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-{{site.data.keyword.cloud-shell_notm}} is a beta feature that is subject to change, and available only for select Kubernetes versions that depend on your cluster infrastructure provider.
-{: preview}
+You can use the Kubernetes web terminal for quick access and testing of your cluster. Do not use it for production workloads.
+{: important}
 
-{{site.data.keyword.cloud-shell_notm}} is enabled with several [plug-ins and tools](/docs/cloud-shell?topic=cloud-shell-plugins-tools), including the base {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started) (`ibmcloud`), the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`), the {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`), and the Kubernetes CLI (`kubectl`).
+If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external}, the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registryshort_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
 
-You can open up to five concurrent sessions, which operate independently so you can work with different resources, regions, and accounts at once.
-Any files that you download and edit locally, such as YAML files, are stored temporarily in the {{site.data.keyword.cloud-shell_short}} and do not persist across sessions.
-{{site.data.keyword.cloud-shell_notm}} has a usage quota that limits you to 4 hours of continuous use or up to 30 hours within a week.
+Any files that you download and edit locally, such as YAML files, are stored temporarily in Kubernetes Terminal and do not persist across sessions.
+{: note}
 
-To launch and use the {{site.data.keyword.cloud-shell_notm}}:
+To install and launch the Kubernetes web terminal:
 
-1. In the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){:external}, open the {{site.data.keyword.cloud-shell_notm}} by clicking the {{site.data.keyword.cloud-shell_short}} icon ![{{site.data.keyword.cloud-shell_notm}} icon](../icons/terminal-cloud-shell.svg) in the console menu bar.
-2. A session starts and automatically logs you in with your current account through the {{site.data.keyword.cloud_notm}} CLI.
-3. Target your session context the cluster that you want to work with so that you can run `kubectl` commands.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the web terminal.
+2.  From the upper right of the cluster detail page, click the **Web terminal** button.
+3.  Click **Install**. It might take a few minutes for the terminal add-on to install.
+4.  Click the **Web terminal** button again. The terminal opens in your browser.
+5.  VPC clusters: Configure access to external endpoints, such as the {{site.data.keyword.containerlong_notm}} API, from the web terminal. Choose between the following options:
+    * Enable a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) on each VPC subnet that your worker nodes are attached to. This ensures that the `kube-terminal` pod in your cluster is always deployed to a worker node on a subnet that has external access.
+    * Edit the `KUBECONFIG` file to use the private service endpoint for your cluster.
+      1. In the web terminal, edit the `KUBECONFIG` file.
+        ```
+        vim $KUBECONFIG
+        ```
+        {: pre}
+      2. Type `i` to switch to insert mode so that you can edit the file.
+      3. In the service endpoint URL for the `server` field, add `private.` before the region. For example, if the service endpoint URL is `https://c1.us-south.containers.cloud.ibm.com:20267`, change it to `https://c1.private.us-south.containers.cloud.ibm.com:20267`.
+      4. Type `Esc` (escape key) to exit insert mode.
+      5. Type `:wq` to save and exit your file.
+
+Next time, you can launch the Kubernetes Terminal simply by clicking the **Web terminal** button.
