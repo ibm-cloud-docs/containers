@@ -339,7 +339,7 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
   * [Fluentd and Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
 
-</br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-cs_troubleshoot), [worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters), or [cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).
+</br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-cs_troubleshoot), [worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters), or the [cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).
 
 
 
