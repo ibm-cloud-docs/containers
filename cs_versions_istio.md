@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-20"
+lastupdated: "2020-02-21"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -46,6 +46,18 @@ The Istio managed add-on is generally available for Kubernetes version 1.16 and 
 
 Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and your app's Istio sidecars](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 {: note}
+
+## Changelog for 1.4.5, released 21 Febuary 2020
+{: #145}
+
+The following table shows the changes that are included in version 1.4.5 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.4.4 | 1.4.5 | <ul><li>See the Istio release notes for [Istio 1.4.5](https://istio.io/news/releases/1.4.x/announcing-1.4.5/){:external}.</li><li>Resolves vulnerabilities for [CVE-2019-18634](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18634){: external}, [CVE-2019-3843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3843){: external}, [CVE-2016-9840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9840){: external}, [CVE-2019-5188](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188){: external}, [CVE-2020-1712](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1712){: external}, [CVE-2018-16888](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16888){: external}, [CVE-2019-3844](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-3844){: external}, [CVE-2019-20386](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20386){: external}, [CVE-2016-9843](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9843){: external}, [CVE-2016-9841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9841){: external}, and [CVE-2016-9842](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-9842){: external}. Resolves vulnerabilities for [usn-4263-1](https://usn.ubuntu.com/4263-1/){: external}, [usn-4249-1](https://usn.ubuntu.com/4249-1/){: external}, [usn-4269-1](https://usn.ubuntu.com/4269-1/){: external}, and [usn-4246-1](https://usn.ubuntu.com/4246-1/){: external}. </li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.4.4" caption-side="top"}
 
 ## Changelog for 1.4.4, released 14 February 2020
 {: #144}
