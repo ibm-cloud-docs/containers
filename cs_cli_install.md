@@ -48,8 +48,8 @@ Install the required CLIs to create and manage your Kubernetes clusters in {{sit
 This task includes the information for installing these CLIs and plug-ins:
 
 * {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`)
-* {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`)
-* Container Registry plug-in (`ibmcloud cr`)
+* {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
+* {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
 
 If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell) or, after your cluster is created, the [Kubernetes Web Terminal](#cli_web).
 {: tip}
@@ -184,7 +184,6 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-ma
 <br />
 
 
-
 ## Configuring the CLI to run `kubectl`
 {: #cs_cli_configure}
 
@@ -286,6 +285,7 @@ If you are using Windows and the Kubernetes CLI is not installed in the same dir
 {: tip}
 
 <br />
+
 
 
 ## Updating the CLI
@@ -396,7 +396,15 @@ To uninstall the CLIs:
     ```
     {: pre}
 
-    The kubernetes-service and the container-registry plug-in are not displayed in the results.
+    The `kubernetes-service` and the `container-registry` plug-in are not displayed in the results.
+
+5.  [Uninstall the {{site.data.keyword.cloud_notm}} CLI.](/docs/cli?topic=cloud-cli-uninstall-ibmcloud-cli)
+
+6.  Uninstall the Kubernetes CLI.
+    ```
+    sudo rm /usr/local/bin/kubectl
+    ```
+    {: pre}
 
 <br />
 
@@ -420,7 +428,7 @@ While you use the {{site.data.keyword.cloud-shell_short}}, keep in mind the foll
 To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 
 1. In the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){:external} menu bar, click the {{site.data.keyword.cloud-shell_short}} icon ![{{site.data.keyword.cloud-shell_notm}} icon](../icons/terminal-cloud-shell.svg).
-2. A session starts and automatically logs you in with your current account through the {{site.data.keyword.cloud_notm}} CLI.
+2. A session starts and automatically logs you in to the {{site.data.keyword.cloud_notm}} CLI with your current account credentials.
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
   1.  Get the command to set the environment variable and download the Kubernetes configuration files to your temporary home directory.
       ```
@@ -437,6 +445,19 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
       {: screen}
 
   2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
+  3.  Verify that the `KUBECONFIG` environment variable is set properly.
+
+      Example:
+      ```
+      echo $KUBECONFIG
+      ```
+      {: pre}
+
+      Output:
+      ```
+      /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+      ```
+      {: screen}
 
 
 ## Using the Kubernetes web terminal in your web browser
