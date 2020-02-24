@@ -2096,7 +2096,7 @@ Unsupported Kubernetes versions:
 *  [Version 1.8](#18_changelog)
 *  [Version 1.7](#17_changelog)
 
-### Version 1.13 changelog {unsupported 22 February 2020)
+### Version 1.13 changelog (unsupported 22 February 2020)
 {: #113_changelog}
 
 Version 1.13 is unsupported. You can review the following archive of 1.12 changelogs.
