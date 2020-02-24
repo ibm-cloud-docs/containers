@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-19"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -51,7 +51,7 @@ You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when up
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
 
-For example, if your current Kubernetes API server version is 1.13 and you want to update to 1.16, you must first update to 1.14.
+For example, if your current Kubernetes API server version is 1.14 and you want to update to 1.17, you must first update to 1.15.
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 

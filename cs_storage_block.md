@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks
 
@@ -75,7 +75,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
   {: codeblock}
 
 2. Create the PVC in your cluster.
-  ```sh
+  ```
   kubectl apply -f pvc.yaml
   ```
   {: pre}
@@ -112,7 +112,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
   {: codeblock}
 
 3. Create the deployment in your cluster.
-  ```sh
+  ```
   kubectl apply -f deployment.yaml
   ```
   {: pre}
@@ -133,11 +133,34 @@ Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in with a Helm c
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
+1. Make sure that your worker node applies the latest patch for your minor version to run your worker node with the latest security settings. The patch version also ensures that the root password on the worker node is renewed. 
+   
+   If you did not apply updates or reload your worker node within the last 90 days, your root password on the worker node expires and the installation of the storage plug-in might fail. 
+   {: note}
+   1. List the current patch version of your worker nodes.
+      ```
+      ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      OK
+      ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.15.10_1523*
+      ```
+      {: screen}
+
+      If your worker node does not apply the latest patch version, you see an asterisk (`*`) in the **Version** column of your CLI output.
+
+   2. Review the [version changelog](/docs/containers?topic=containers-changelog) to find the changes that are included in the latest patch version.
+
+   3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and install the Helm server (Tiller) with a service account.
 
-    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine](/docs/containers?topic=containers-helm#private_local_tiller), [tag the image](/docs/Registry?topic=registry-getting-started#gs_registry_images_pulling), and [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-getting-started#gs_registry_images_pushing){: new_window}. Or you can [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller){: new_window}.
+    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine](/docs/containers?topic=containers-helm#private_local_tiller), [tag the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), and [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing). Or you can [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
     {: note}
 
 2.  Verify that Tiller is installed with a service account.
@@ -482,6 +505,7 @@ Make sure to choose your storage configuration carefully to have enough capacity
 6. Choose if you want to be billed hourly or monthly. Check the [pricing](https://www.ibm.com/cloud/block-storage/pricing){: external} for more information. By default, all block storage devices are provisioned with an hourly billing type.
 
 <br />
+
 
 
 
@@ -1405,7 +1429,7 @@ To make your data even more highly available and protect your app from a zone fa
 ## Storage class reference
 {: #block_storageclass_reference}
 
-Storage classes that have `retain` in the title, have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title, have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
+Storage classes that have `retain` in the title have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
 {: tip}
 
 

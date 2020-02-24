@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-21"
 
 keywords: kubernetes, iks, containers
 
@@ -197,7 +197,7 @@ Begin working with your cluster by setting up the CLI and accessing the cluster.
 2. **User permissions**: Ensure that your cluster administrator gives you the proper [{{site.data.keyword.cloud_notm}} IAM role](/docs/containers?topic=containers-learning-path-admin#admin_secure) to access the cluster.
 3. **Cluster access**: [Access your cluster through the public or private service endpoint](/docs/containers?topic=containers-access_cluster).
 
-</br>Need help? Check out [Troubleshooting worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_troubleshoot_clusters).
+</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-cs_troubleshoot) and [Troubleshooting worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters).
 
 <br />
 
@@ -228,6 +228,8 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
   1. <ff-roks>Version 4.3 and later clusters: </ff-roks>To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
   2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
 
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app).
+
 <br />
 
 
@@ -246,7 +248,7 @@ Deploy your app to the cluster by running your app configuration file.
 * **Serverless**: [Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative)
 
 
-</br>Need help? Check out [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps).
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app).
 
 <br />
 
@@ -266,6 +268,8 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 3. **Logging**:
   1. [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
   2. If you expose your app by using [Ingress](#dev_expose), you can set up [logging for requests that are proxied by your ALBs](/docs/containers?topic=containers-ingress_health).
+
+</br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health).
 
 <br />
 
@@ -314,14 +318,15 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 2. **Expose your app**:
   * Load balancers:
     * Classic clusters:
-      1. Create an [NLB 1.0](/docs/containers?topic=containers-loadbalancer) or [NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2).
-      2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
+        1. Create an [NLB 1.0](/docs/containers?topic=containers-loadbalancer) or [NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2).
+        2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
     * VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
-  * Ingress:
-    * Classic clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_private).
-    * VPC clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).
 
-</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_troubleshoot_debug_ingress) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_troubleshoot_lb).
+  * Ingress:
+      * Classic clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_private).
+      * VPC clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).
+
+</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_troubleshoot_lb).
 
 <br />
 

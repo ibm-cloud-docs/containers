@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -225,7 +225,7 @@ Choose a flavor, or machine type, with the right storage configuration to suppor
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>Data-intensive bare metal, md3c.28x512.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics..</td>
+<td><strong>Data-intensive bare metal, md3c.28x512.4x4tb</strong>: Use this type for a significant amount of local disk storage, including RAID to increase data availability, for workloads such as distributed file systems, large databases, and big data analytics.</td>
 <td>28 / 512 GB</td>
 <td>2x2 TB RAID1 / 4x4 TB SATA RAID10</td>
 <td>10000 Mbps</td>

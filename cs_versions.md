@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -55,7 +55,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 <dl>
   <dt>Major and minor updates (1.x)</dt>
     <dd>First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node). Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters.
-    <ul><li>You cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.13 and you want to update to 1.16, you must update to 1.14 first.</li>
+    <ul><li>You cannot update a Kubernetes master three or more minor versions ahead. For example, if your current master is version 1.14 and you want to update to 1.17, you must update to 1.15 first.</li>
     <li>If you use a `kubectl` CLI version that does match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.</li></ul></dd>
   <dt>Patch updates (x.x.4_1510)</dt>
     <dd>Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `workers`, or `worker get`.<br>
@@ -77,12 +77,12 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 *   Latest: 1.17.3
-*   Default: 1.15.10 
+*   Default: 1.15.10
 *   Other: 1.16.7
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.13, 1.14
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12
+*   Deprecated: 1.14
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13
 
 <br>
 
@@ -151,10 +151,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>21 May 2020 `†`</td>
 </tr>
 <tr>
-  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.13](#cs_v113)</td>
   <td>05 Feb 2019</td>
-  <td>22 Feb 2020 `†`</td>
+  <td>22 Feb 2020</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -230,7 +230,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 8.  The cluster master runs two versions behind the oldest supported version. You can still update the cluster to the oldest supported version. If the worker nodes run four or more versions behind the oldest supported version, you must delete the worker nodes to update the cluster.
 9. The cluster master runs three or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.
 
-If you wait until your cluster is three or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than three ahead of the current version, such as 1.13 to 1.14 and then update to the latest version, 1.16. If the worker nodes run a version three or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+If you wait until your cluster is three or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than three ahead of the current version, such as 1.14 to 1.15 and then update to the latest version, 1.17. If the worker nodes run a version three or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 <br />
@@ -245,7 +245,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.16 [preparation actions](#cs_v116).
 -  Version 1.15 [preparation actions](#cs_v115).
 -  **Deprecated**: Version 1.14 [preparation actions](#cs_v114).
--  **Deprecated**: Version 1.13 [preparation actions](#cs_v113).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
@@ -417,7 +416,11 @@ The following table shows the actions that you must take before you update the K
 <td>Default Calico policy change</td>
 <td>If you created custom Calico HostEndpoints that refer to an `iks.worker.interface == 'private'` label, a new default Calico policy, `allow-all-private-default`, might disrupt network traffic. You must create a Calico policy with the `iks.worker.interface == 'private'` label to override the default policy. For more information, see [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy).</td>
 </tr>
-  </tbody>
+<tr>
+<td>Minimum Helm version</td>
+<td>If you [add services to your cluster by using Helm charts](/docs/containers?topic=containers-helm), update to Helm version 2.8 or later.</td>
+</tr>
+</tbody>
 </table>
 
 ### Update after master
@@ -568,125 +571,27 @@ The following table shows the actions that you must take after you update the Ku
 <br />
 
 
-## Deprecated: Version 1.13
-{: #cs_v113}
-
-<p><img src="images/certified_kubernetes_1x13.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.13 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.13 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
-
-Review changes that you might need to make when you update from the previous Kubernetes version to 1.13.
-{: shortdesc}
-
-Version 1.13 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
-{: deprecated}
-
-### Update before master
-{: #113_before}
-
-The following table shows the actions that you must take before you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.13">
-<caption>Changes to make before you update the master to Kubernetes 1.13</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>N/A</td>
-<td></td>
-</tr>
-</tbody>
-</table>
-
-### Update after master
-{: #113_after}
-
-The following table shows the actions that you must take after you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.13">
-<caption>Changes to make after you update the master to Kubernetes 1.13</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CoreDNS available as the new default cluster DNS provider</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters in Kubernetes 1.13 and later. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set). For example, you might test your apps on CoreDNS in preparation for the next Kubernetes version update to make sure that you do not need to [update the app, or to customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).
-<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
-</tr>
-<tr>
-<td>`kubectl` output for `Deployment` and `StatefulSet`</td>
-<td>The `kubectl` output for `Deployment` and `StatefulSet` now includes a `Ready` column and is more human-readable. If your scripts rely on the previous behavior, update them.</td>
-</tr>
-<tr>
-<td>`kubectl` output for `PriorityClass`</td>
-<td>The `kubectl` output for `PriorityClass` now includes a `Value` column. If your scripts rely on the previous behavior, update them.</td>
-</tr>
-<tr>
-<td>`kubectl get componentstatuses`</td>
-<td>The `kubectl get componentstatuses` command does not properly report the health of some Kubernetes master components because these components are no longer accessible from the Kubernetes API server now that `localhost` and insecure (HTTP) ports are disabled. After introducing highly available (HA) masters in Kubernetes version 1.10, each Kubernetes master is set up with multiple `apiserver`, `controller-manager`, `scheduler`, and `etcd` instances. Instead, review the cluster healthy by checking the [{{site.data.keyword.cloud_notm}} console ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/landing) or by using the `ibmcloud ks cluster get` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).</td>
-</tr>
-<tr>
-<tr>
-<td>Unsupported: `kubectl run-container`</td>
-<td>The `kubectl run-container` command is removed. Instead, use the `kubectl run` command.</td>
-</tr>
-<tr>
-<td>`kubectl rollout undo`</td>
-<td>When you run `kubectl rollout undo` for a revision that does not exist, an error is returned. If your scripts rely on the previous behavior, update them.</td>
-</tr>
-<tr>
-<td>Deprecated: `scheduler.alpha.kubernetes.io/critical-pod` annotation</td>
-<td>The `scheduler.alpha.kubernetes.io/critical-pod` annotation is now deprecated. Change any pods that rely on this annotation to use [pod priority](/docs/containers?topic=containers-pod_priority#pod_priority) instead.</td>
-</tr>
-</tbody>
-</table>
-
-### Update after worker nodes
-{: #113_after_workers}
-
-The following table shows the actions that you must take after you update your worker nodes.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.13">
-<caption>Changes to make after you update your worker nodes to Kubernetes 1.13</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>containerd `cri` stream server</td>
-<td>In containerd version 1.2, the `cri` plug-in stream server now serves on a random port, `http://localhost:0`. This change supports the `kubelet` streaming proxy and provides a more secure streaming interface for container `exec` and `logs` operations. Previously, the `cri` stream server listened on the worker node's private network interface by using port 10010. If your apps use the container `cri` plug-in and rely on the previous behavior, update them.</td>
-</tr>
-</tbody>
-</table>
-
-<br />
-
-
 ## Archive
 {: #k8s_version_archive}
 
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
+### Version 1.13 (Unsupported)
+{: #cs_v113}
+
+As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+{: shortdesc}
+
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.14](#cs_v114).
+
 ### Version 1.12 (Unsupported)
 {: #cs_v112}
 
-As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support unless they are updated to the next most recent version.
 {: shortdesc}
 
-[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.13.
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.14](#cs_v114).
 
 ### Version 1.11 (Unsupported)
 {: #cs_v111}
@@ -694,7 +599,7 @@ As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that ru
 As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.11 clusters cannot receive security updates or support unless they are updated to the next most recent version.
 {: shortdesc}
 
-[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.13](#cs_v113).
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
 
 ### Version 1.10 (Unsupported)
 {: #cs_v110}

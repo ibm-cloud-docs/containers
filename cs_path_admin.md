@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-20"
 
 keywords: kubernetes, iks, containers
 
@@ -274,8 +274,8 @@ Set up logging and monitoring to help you troubleshoot issues and improve the he
 2. **Audit logging**: [Forwarding Kubernetes API audit logs to IBM Log Analysis with LogDNA](/docs/containers?topic=containers-health#webhook_logdna)
 3. **Monitoring**: [Choose a monitoring solution](/docs/containers?topic=containers-health#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
 
-
 </br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health).
+
 
 <br />
 
@@ -339,7 +339,7 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
   * [Fluentd and Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
 
-</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-cs_troubleshoot).
+</br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-cs_troubleshoot), [worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters), or the [cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).
 
 
 

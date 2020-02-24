@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-19"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -470,7 +470,7 @@ Forward requests directly to the IP address of your external service by setting 
     {: pre}
 
 To expose apps that are outside of your cluster to the public:
-1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service that forwards incoming requests to an external endpoint that you create in subsequent steps.
+1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service forwards incoming requests to an external endpoint that you create in subsequent steps.
     ```yaml
     apiVersion: v1
     kind: Service

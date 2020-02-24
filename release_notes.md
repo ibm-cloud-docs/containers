@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-19"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 22 February 2020 | **Unsupported: Kubernetes version 1.13**: With the release of version 1.17, clusters that run version 1.13 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. |
 | 19 February 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.90](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Developing and deploying apps**: You can now find expanded information on how to develop and deploy an app to your Kubernetes cluster in the following pages:<ul><li>[Planning app deployments](/docs/containers?topic=containers-plan_deploy)</li><li>[Building containers from images](/docs/containers?topic=containers-images)</li><li>[Developing Kubernetes-native apps](/docs/containers?topic=containers-app)</li><li>[Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-deploy_app)</li><li>[Managing the app lifecycle](/docs/containers?topic=containers-update_app)</li></ul></li><li>**Learning paths**: Curated learning paths for [administrators](docs/containers?topic=containers-learning-path-admin) and [developers](docs/containers?topic=containers-learning-path-dev) are now available to help guide you through your {{site.data.keyword.containerlong_notm}} experience.</li><li>**Setting up image build pipelines**: You can now find expanded information on how to set up an image registry and build pipelines in the following pages:<ul><li>[Setting up an image registry](/docs/containers?topic=containers-registry)</li><li>[Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd)</li></ul></li><li>**Firewall subnets**: Removed outdated [subnet IP addresses for {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-firewall#vyatta_firewall).</li></ul> |
 | 17 February 2020 | <ul><li>**Kubernetes version 1.17**: [Kubernetes 1.17 release](/docs/containers?topic=containers-cs_versions#cs_v117) is certified.</li><li>**Version changelogs**: Master and worker node patch updates are available for Kubernetes [1.17.3_1516](/docs/containers?topic=containers-changelog#1173_1516), [1.16.7_1524](/docs/containers?topic=containers-changelog#1167_1524), [1.15.10_1531](/docs/containers?topic=containers-changelog#11510_1531), [1.14.10_1547](/docs/containers?topic=containers-changelog#11410_1547), and [1.13.12_1550](/docs/containers?topic=containers-changelog#11312_1550)</li></ul>|
 | 14 February 2020 | **Istio add-on**: [Version 1.4.4 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#144) is released. |

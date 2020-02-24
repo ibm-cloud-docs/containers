@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2019
-lastupdated: "2019-07-19"
+  years: 2014, 2020
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks
 
@@ -396,6 +396,21 @@ subcollection: containers
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/razee_ov_no_txt.png" alt="Razee deployment automation architecture" />
+                </div>
+            </div>
+        </div>
+    </div>
+    </a>
+    <a href = "/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments">
+    <div class = "solutionBox">
+        <div class = "solutionBoxContent">
+                Automate cluster deployments across environments with Terraform
+            <div class="solutionBoxDescription">
+                <div class="descriptionContainer">
+                  </br><p>Plan, create, and update Kubernetes resources across multiple deployment environments with Terraform.</p></br>
+                </div>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src="images/terraform_tutorial_ov.png" alt="Terraform deployment automation architecture" />
                 </div>
             </div>
         </div>

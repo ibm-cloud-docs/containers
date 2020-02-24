@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -109,7 +109,6 @@ Review the feature gates that are applied to all Kubernetes master and worker no
 | 1.16 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.15 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
-| 1.13 | <ul><li><code>ExperimentalCriticalPodAnnotation=true</code></li></ul> | 
 {: summary="The rows are read from left to right. The Kubernetes version is in the first column, with the default feature gates in the second column."}
 {: caption="Overview of feature gates" caption-side="top"}
 

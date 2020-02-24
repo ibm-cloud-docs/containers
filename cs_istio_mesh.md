@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -62,33 +62,27 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 {: #bookinfo_setup}
 
 1. Install BookInfo in your cluster.
-  * **Kubernetes version 1.16 and later clusters**:
-    1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
-      ```
-      curl -L https://istio.io/downloadIstio | sh -
-      ```
-      {: pre}
-
-    2. Navigate to the Istio package directory.
-      ```
-      cd istio-1.4.4
-      ```
-      {: pre}
-    3. Label the `default` namespace for automatic sidecar injection.
-      ```
-      kubectl label namespace default istio-injection=enabled
-      ```
-      {: pre}
-    4. Deploy the BookInfo application, gateway, and destination rules.
-      ```
-      kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
-      kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
-      kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
-      ```
-      {: pre}
-  * **Kubernetes version 1.15 and earlier clusters**: Install the `istio-sample-bookinfo` managed add-on.
+  1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster <cluster_name_or_ID>
+    curl -L https://istio.io/downloadIstio | sh -
+    ```
+    {: pre}
+
+  2. Navigate to the Istio package directory.
+    ```
+    cd istio-1.4.5
+    ```
+    {: pre}
+  3. Label the `default` namespace for automatic sidecar injection.
+    ```
+    kubectl label namespace default istio-injection=enabled
+    ```
+    {: pre}
+  4. Deploy the BookInfo application, gateway, and destination rules.
+    ```
+    kubectl apply -f samples/bookinfo/platform/kube/bookinfo.yaml
+    kubectl apply -f samples/bookinfo/networking/bookinfo-gateway.yaml
+    kubectl apply -f samples/bookinfo/networking/destination-rule-all.yaml
     ```
     {: pre}
 
@@ -336,7 +330,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.4.4
+  cd istio-1.4.5
   ```
   {: pre}
 
@@ -788,6 +782,5 @@ Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS)
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
-
 
 

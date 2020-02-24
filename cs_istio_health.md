@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-18"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -46,7 +46,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 {: shortdesc}
 
 **Before you begin**
-* [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster. If your cluster runs Kubernetes version 1.15 or earlier, you must also [install the `istio-extras` add-on](/docs/containers?topic=containers-istio#install_115).
+* [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 * [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 
 ### Promethueus
