@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -43,14 +43,7 @@ Each service in your {{site.data.keyword.containerlong}} cluster is assigned a D
 {: shortdesc}
 
 **Which Kubernetes versions support which cluster DNS provider?**<br>
-
-| Kubernetes Version | Default for new clusters | Description |
-|---|---|---|
-| 1.14 and later | CoreDNS | If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS. Additionally, any remaining KubeDNS components are removed and no longer exist in clusters that run version 1.16 or later.|
-| 1.13 | CoreDNS | Clusters that are updated to 1.13 from an earlier version keep whichever DNS provider they used at the time of the update. If you want to use a different one, [switch the DNS provider](#dns_set). |
-| 1.12 | KubeDNS | To use CoreDNS instead, [switch the DNS provider](#set_coredns). |
-| 1.11 and earlier | KubeDNS | You cannot switch the DNS provider to CoreDNS. |
-{: caption="Default cluster DNS provider by Kubernetes version" caption-side="top"}
+All supported {{site.data.keyword.containerlong_notm}} versions use CoreDNS. If a cluster uses KubeDNS and is updated to version 1.14 or later from an earlier version, the cluster DNS provider is automatically migrated from KubeDNS to CoreDNS during the cluster update. You cannot switch the cluster DNS provider back to KubeDNS. Additionally, any remaining KubeDNS components are removed and no longer exist in clusters that run version 1.16 or later.
 
 **What are the benefits of using CoreDNS instead of KubeDNS?**<br>
 CoreDNS is the default supported cluster DNS provider for Kubernetes version 1.13 and later, and recently became a [graduated Cloud Native Computing Foundation (CNCF) project](https://www.cncf.io/projects/){: external}. A graduated project is thoroughly tested, hardened, and ready for wide-scale, production-level adoption.
@@ -186,137 +179,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             {"abc.com": ["1.2.3.4"]}
         ```
         {: screen}
-
-## Setting the cluster DNS provider to CoreDNS or KubeDNS
-{: #dns_set}
-
-If you have an {{site.data.keyword.containerlong_notm}} cluster that runs Kubernetes version 1.12 or 1.13, you can choose to use Kubernetes DNS (KubeDNS) or CoreDNS as the cluster DNS provider.
-{: shortdesc}
-
-Clusters that run other Kubernetes versions cannot set the cluster DNS provider. Version 1.11 and earlier supports only KubeDNS, and version 1.14 and later supports only CoreDNS.
-{: note}
-
-**Before you begin**:
-1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2.  Determine the current cluster DNS provider. In the following example, KubeDNS is the current cluster DNS provider.
-    ```
-    kubectl cluster-info
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ...
-    KubeDNS is running at https://c2.us-south.containers.cloud.ibm.com:20190/api/v1/namespaces/kube-system/services/kube-dns:dns/proxy
-    ...
-    ```
-    {: screen}
-3.  Based on the DNS provider that your cluster uses, follow the steps to switch DNS providers.
-    *  [Switch to use CoreDNS](#set_coredns).
-    *  [Switch to use KubeDNS](#set_kubedns).
-
-### Setting up CoreDNS as the cluster DNS provider
-{: #set_coredns}
-
-Set up CoreDNS instead of KubeDNS as the cluster DNS provider.
-{: shortdesc}
-
-1.  If you customized the KubeDNS provider configmap or KubeDNS autoscaler configmap, transfer any customizations to the CoreDNS configmaps.
-    *   For the `kube-dns` configmap in the `kube-system` namespace, transfer any [DNS customizations](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external} to the `coredns` configmap in the `kube-system` namespace. The syntax differs in the `kube-dns` and `coredns` configmaps. For an example, see [the Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns){: external}.
-    *   For the `kube-dns-autoscaler` configmap in the `kube-system` namespace, transfer any [DNS autoscaler customizations](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external} to the `coredns-autoscaler` configmap in the `kube-system` namespace. The customization syntax is the same in both.
-2.  Scale down the KubeDNS autoscaler deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=0 kube-dns-autoscaler
-    ```
-    {: pre}
-3.  Check and wait for the pods to be deleted.
-    ```
-    kubectl get pods -n kube-system -l k8s-app=kube-dns-autoscaler
-    ```
-    {: pre}
-4.  Switch the cluster DNS provider to CoreDNS from KubeDNS.<p class="important">When you run both cluster DNS providers at the same time, you might experience intermittent DNS failures. Be sure to scale down the KubeDNS deployment so that you do not keep both DNS providers running at the same time.</p>
-    1.  Scale up the CoreDNS autoscaler deployment.
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 coredns-autoscaler
-        ```
-        {: pre}
-    2.  Label and annotate the cluster DNS service for CoreDNS.
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=CoreDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port=9153
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape=true
-        ```
-        {: pre}
-    3.  Scale down the KubeDNS deployment.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 kube-dns-amd64
-        ```
-        {: pre}
-5.  **Optional**: If you plan to use Prometheus to collect metrics from the CoreDNS pods, you must add a metrics port to the `kube-dns` service that you are switching from.
-    ```
-    kubectl -n kube-system patch svc kube-dns --patch '{"spec": {"ports": [{"name":"metrics","port":9153,"protocol":"TCP"}]}}' --type strategic
-    ```
-    {: pre}
-
-
-
-### Setting up KubeDNS as the cluster DNS provider
-{: #set_kubedns}
-
-Set up KubeDNS instead of CoreDNS as the cluster DNS provider.
-{: shortdesc}
-
-1.  If you customized the CoreDNS provider configmap or CoreDNS autoscaler configmap, transfer any customizations to the KubeDNS configmaps.
-    *   For the `coredns` configmap in the `kube-system` namespace, transfer any [DNS customizations](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external} to the `kube-dns` configmap in the `kube-system` namespace. The syntax differs from the `kube-dns` and `coredns` configmaps. For an example, see [the Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns-configuration-equivalent-to-kube-dns){: external}.
-    *   For the `coredns-autoscaler` configmap in the `kube-system` namespace, transfer any [DNS autoscaler customizations](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external} to the `kube-dns-autoscaler` configmap in the `kube-system` namespace. The customization syntax is the same in both.
-2.  Scale down the CoreDNS autoscaler deployment.
-    ```
-    kubectl scale deployment -n kube-system --replicas=0 coredns-autoscaler
-    ```
-    {: pre}
-3.  Check and wait for the pods to be deleted.
-    ```
-    kubectl get pods -n kube-system -l k8s-app=coredns-autoscaler
-    ```
-    {: pre}
-4.  Switch the cluster DNS provider to KubeDNS from CoreDNS.<p class="important">When you run both cluster DNS providers at the same time, you might experience intermittent DNS failures. Be sure to scale down the CoreDNS deployment so that you do not keep both DNS providers running at the same time.</p>
-    1.  Scale up the KubeDNS autoscaler deployment.
-        ```
-        kubectl scale deployment -n kube-system --replicas=1 kube-dns-autoscaler
-        ```
-        {: pre}
-    2.  Label and annotate the cluster DNS service for KubeDNS.
-        ```
-        kubectl label service --overwrite -n kube-system kube-dns kubernetes.io/name=KubeDNS
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/port-
-        ```
-        {: pre}
-        ```
-        kubectl annotate service --overwrite -n kube-system kube-dns prometheus.io/scrape-
-        ```
-        {: pre}
-    3.  Scale down the CoreDNS deployment.
-        ```
-        kubectl scale deployment -n kube-system --replicas=0 coredns
-        ```
-        {: pre}
-5.  **Optional**: If you used Prometheus to collect metrics from the CoreDNS pods, your `kube-dns` service had a metrics port. However, KubeDNS does not need to include this metrics port so you can remove the port from the service.
-    ```
-    kubectl -n kube-system patch svc kube-dns --patch '{"spec": {"ports": [{"name":"dns","port":53,"protocol":"UDP"},{"name":"dns-tcp","port":53,"protocol":"TCP"}]}}' --type merge
-    ```
-    {: pre}
-
-<br />
-
 
 ## Setting up NodeLocal DNS cache (beta)
 {: #dns_cache}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-12"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks
 
@@ -39,7 +39,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is persistent, fast, and flexible network-attached, NFS-based {{site.data.keyword.filestorage_short}} that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Billing](/docs/FileStorage?topic=FileStorage-about#billing).
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is available only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not supported for VPC on Classic clusters. To use {{site.data.keyword.filestorage_short}} in a private cluster that is set up without public network access, your cluster must run Kubernetes version 1.13 or higher.  NFS {{site.data.keyword.filestorage_short}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}} is available only in classic {{site.data.keyword.containerlong_notm}} clusters, and is not supported for VPC on Classic clusters. NFS {{site.data.keyword.filestorage_short}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.filestorage_short}}
@@ -1294,7 +1294,7 @@ By default, your classic {{site.data.keyword.containerlong_notm}} clusters inclu
 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Update your cluster to run Kubernetes version [1.15.5_1520](/docs/containers?topic=containers-changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-changelog#1148_1536), [1.13.12_1539](/docs/containers?topic=containers-changelog#11312_1539), or later.
+* Update your cluster to run Kubernetes version [1.15.5_1520](/docs/containers?topic=containers-changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-changelog#1148_1536), or later.
 * Make sure that you have the **Manager** IAM service role for the cluster, so that you can make changes to deployments in the `kube-system` namespace.
 
 To scale down the {{site.data.keyword.filestorage_short}} plug-in:
@@ -1369,7 +1369,7 @@ Review the following backup and restore options for your {{site.data.keyword.fil
 ## Storage class reference
 {: #file_storageclass_reference}
 
-Storage classes that have `retain` in the title, have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title, have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
+Storage classes that have `retain` in the title have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
 {: tip}
 
 

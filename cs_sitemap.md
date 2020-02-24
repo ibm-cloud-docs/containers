@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-24"
 
 ---
 
@@ -1078,11 +1078,8 @@ lastupdated: "2020-02-17"
 * [Version 1.14](/docs/containers?topic=containers-cs_versions#cs_v114)
   * [Update before master](/docs/containers?topic=containers-cs_versions#114_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#114_after)
-* [Version 1.13](/docs/containers?topic=containers-cs_versions#cs_v113)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#113_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#113_after)
-  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#113_after_workers)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.13 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
   * [Version 1.12 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
   * [Version 1.10 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v110)
@@ -1095,8 +1092,8 @@ lastupdated: "2020-02-17"
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
 * [Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
-* [Version 1.13 changelog](/docs/containers?topic=containers-changelog#113_changelog)
 * [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
+  * [Version 1.13 changelog (unsupported as of 22 February 2020)](/docs/containers?topic=containers-changelog#113_changelog)
   * [Version 1.12 changelog (unsupported as of 3 November 2019)](/docs/containers?topic=containers-changelog#112_changelog)
   * [Version 1.11 changelog (unsupported as of 20 July 2019)](/docs/containers?topic=containers-changelog#111_changelog)
   * [Version 1.10 changelog (unsupported as of 16 May 2019)](/docs/containers?topic=containers-changelog#110_changelog)

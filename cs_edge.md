@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-19"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -47,11 +47,8 @@ If you want to restrict network traffic to edge worker nodes in a multizone clus
 ## Isolating networking workloads to edge nodes
 {: #edge_nodes}
 
-Add the `dedicated=edge` label to two or more worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only.
+Add the `dedicated=edge` label to two or more worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only. Both public and private NLBs and ALBs can deploy to edge worker nodes.
 {:shortdesc}
-
-In Kubernetes 1.14 and later, both public and private NLBs and ALBs can deploy to edge worker nodes. In Kubernetes 1.13 and earlier, public and private ALBs and public NLBs can deploy to edge nodes, but private NLBs must deploy to non-edge worker nodes in your cluster only.
-{: note}
 
 Trying out a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
 {: tip}
@@ -105,10 +102,7 @@ Before you begin:
   ```
   {: screen}
 
-4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.
-
-  If your cluster runs Kubernetes 1.14 or later, you can deploy both public and private NLBs and ALBs to the edge worker nodes. In Kubernetes 1.13 and earlier, only public and private ALBs and public NLBs can deploy to edge nodes, so do not redeploy private NLB services.
-  {: note}
+4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.You can deploy both public and private NLBs and ALBs to the edge worker nodes.
 
   ```
   kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
