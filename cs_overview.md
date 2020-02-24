@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -62,6 +62,7 @@ With {{site.data.keyword.containerlong_notm}}, you can create your cluster of co
 [VPC clusters](/docs/containers?topic=containers-getting-started#vpc-classic-gs) are created in your own Virtual Private Cloud that gives you the security of a private cloud environment with the dynamic scalability of a public cloud. You use network access control lists to protect the subnets that your worker nodes are connected to. VPC clusters can be provisioned on shared virtual infrastructure only.
 
 For more information, see [Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers). 
+
 
 **Where can I learn more about the service?** </br>
 Review the following links to find out more about the benefits and responsibilities when you use {{site.data.keyword.containerlong_notm}}.
