@@ -285,7 +285,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -307,7 +307,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -547,7 +547,7 @@ To expose apps that are outside of your cluster to the public:
 
 2. Create an Ingress resource file that is named, for example, `myingressresource.yaml`.
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1beta1
   kind: Ingress
   metadata:
     name: myingress
@@ -715,7 +715,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -739,7 +739,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -1006,7 +1006,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -1030,7 +1030,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: extensions/v1beta1
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource

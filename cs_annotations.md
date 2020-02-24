@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-20"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, ingress
 
@@ -148,7 +148,7 @@ You can also use the `custom-errors` annotation to redirect the client to an err
 
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -215,7 +215,7 @@ To view server and location blocks in the NGINX configuration file, run the foll
 
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -268,7 +268,7 @@ Choose a private ALB to route incoming requests instead of the public ALB.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -315,7 +315,7 @@ To view server and location blocks in the NGINX configuration file, run the foll
 
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -387,7 +387,7 @@ On the other hand, you can decrease the timeout to gain performance on the ALB. 
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -429,7 +429,7 @@ Sets the maximum number of requests that can be served through one keepalive con
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -471,7 +471,7 @@ Sets the maximum time that a keepalive connection stays open between the client 
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -520,7 +520,7 @@ Timeout is always configured when you use `proxy-next-upstream-config`, so don't
 
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -578,7 +578,7 @@ When you include multiple services, use a semi-colon (;) to separate them.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -630,7 +630,7 @@ Set the amount of time during which the ALB can attempt to connect to a server b
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -674,7 +674,7 @@ Set the maximum number of idle keepalive connections to the upstream server of a
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -716,7 +716,7 @@ Sets the maximum time that a keepalive connection stays open between the ALB pro
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -761,7 +761,7 @@ Set the maximum number of times the ALB can fail to connect to the server before
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -814,7 +814,7 @@ To enable mutual authentication on a port, [configure the ALB to open the valid 
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -923,7 +923,7 @@ Redirecting HTTP requests to HTTPS is disabled by default.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -958,7 +958,7 @@ HSTS instructs the browser to access a domain only by using HTTPS. Even if the u
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1018,7 +1018,7 @@ The mutual authentication annotation validates client certificates. To forward c
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1091,7 +1091,7 @@ Use the `ssl-services` annotation for SSL termination between the Ingress ALB an
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: <myingressname>
@@ -1193,7 +1193,7 @@ The ALB operates in pass-through mode and forwards traffic to back-end apps. SSL
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1311,7 +1311,7 @@ Looking to forward requests to the IP address of your external service instead o
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1359,7 +1359,7 @@ To handle regular expression (regex) paths, this annotation is required.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1403,7 +1403,7 @@ Your Ingress ALB domain routes incoming network traffic on `mykubecluster.us-sou
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1453,7 +1453,7 @@ Buffers that read large client request headers are allocated only by demand: If 
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -1501,7 +1501,7 @@ Response data buffering on the ALB is enabled by default.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -1546,7 +1546,7 @@ Set the number and size of the buffers that read a response for a single connect
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
@@ -1594,7 +1594,7 @@ If you get the error message `upstream sent too big header while reading respons
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
@@ -1638,7 +1638,7 @@ Limit the size of any buffers that are sending a response to the client while th
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: proxy-ingress
@@ -1688,7 +1688,7 @@ Add the `:server_port` to the host header of a client request before forwarding 
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -1746,7 +1746,7 @@ annotations:
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1811,7 +1811,7 @@ The Ingress ALB acts as a proxy between your back-end app and the client web bro
 
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1871,7 +1871,7 @@ Some client web browsers cannot display the 413 HTTP response message properly.
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
  name: myingress
@@ -1921,7 +1921,7 @@ For all services, limit the request processing rate and the number of connection
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -1966,7 +1966,7 @@ For specific services, limit the request processing rate and the number of conne
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
@@ -2025,7 +2025,7 @@ For security reasons, {{site.data.keyword.appid_short_notm}} authentication supp
 **Sample Ingress resource YAML**
 
 ```yaml
-apiVersion: extensions/v1beta1
+apiVersion: networking.k8s.io/v1beta1
 kind: Ingress
 metadata:
   name: myingress
