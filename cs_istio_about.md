@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -72,6 +72,8 @@ When you install the Istio add-on, the Istio control and data planes use the net
 **How does the update process work?**</br>
 The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_notm}} and approved for the use in {{site.data.keyword.containerlong_notm}}. Additionally, the Istio add-on simplifies the maintenance of your Istio control plane so you can focus on managing your microservices. {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}.
 
+Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and your app's Istio sidecars](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
+
 If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/docs/setup/platform-setup/ibm/){: external}.
 {: tip}
 
@@ -80,9 +82,6 @@ If you need to use the latest version of Istio or customize your Istio installat
 
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
-
-### Kubernetes version 1.16 and later clusters
-{: #istio_ov_116}
 
 In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4.
 {: shortdesc}
@@ -97,29 +96,6 @@ The Istio add-on installs the core components of Istio. For more information abo
 * `Galley` validates configuration changes for the other Istio control plane components.
 
 To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://www.kiali.io/){: external}.
-
-### Kubernetes version 1.15 and earlier clusters
-{: #istio_ov_115}
-
-In Kubernetes version 1.15 and earlier clusters, you can install the three beta managed Istio add-ons, which run Istio version 1.3 or earlier.
-{: shortdesc}
-
-<dl>
-<dt>Istio (`istio`)</dt>
-<dd>Installs the core components of Istio, including Prometheus. For more information about any of the following control plane components, see the [Istio documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/concepts/what-is-istio/).
-  <ul><li>`Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.</li>
-  <li>`Mixer` provides telemetry collection and policy controls.<ul>
-    <li>Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.</li>
-    <li>Policy pods enforce access control, including rate limiting and applying whitelist and blacklist policies.</li></ul>
-  <li>`Pilot` provides service discovery for the Envoy sidecars and configures the traffic management routing rules for sidecars.</li>
-  <li>`Citadel` uses identity and credential management to provide service-to-service and end-user authentication.</li>
-  <li>`Galley` validates configuration changes for the other Istio control plane components.</li>
-</ul></dd>
-<dt>Istio extras (`istio-extras`)</dt>
-<dd>Optional: Installs [Grafana ![External link icon](../icons/launch-glyph.svg "External link icon")](https://grafana.com/), [Jaeger ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.jaegertracing.io/), and [Kiali ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.kiali.io/) to provide extra monitoring, tracing, and visualization for Istio.</dd>
-<dt>BookInfo sample app (`istio-sample-bookinfo`)</dt>
-<dd>Optional: Deploys the [BookInfo sample application for Istio ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/examples/bookinfo/). This deployment includes the base demo setup and the default destination rules so that you can try out Istio's capabilities immediately.</dd>
-</dl>
 
 <br />
 

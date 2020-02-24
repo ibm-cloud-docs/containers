@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-21"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -91,6 +91,6 @@ The following table shows the changes that are included in version 1.4.2 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.4.2 | 1.4.0 | <ul><li>See the Istio release notes for [Istio 1.4.1](https://istio.io/news/releases/1.4.x/announcing-1.4.1){: external} and [Istio 1.4.2](https://istio.io/news/releases/1.4.x/announcing-1.4.2){: external}.</li><li>Resolves vulnerabilities for [CVE-2019-18801](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18801){: external}, [CVE-2019-18802](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18802){: external}, and [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}. For more information, see the [Istio security bulletin](https://istio.io/news/security/istio-security-2019-007/){: external}.</li></ul> |
+| 1.4.0 | 1.4.2 | <ul><li>See the Istio release notes for [Istio 1.4.1](https://istio.io/news/releases/1.4.x/announcing-1.4.1){: external} and [Istio 1.4.2](https://istio.io/news/releases/1.4.x/announcing-1.4.2){: external}.</li><li>Resolves vulnerabilities for [CVE-2019-18801](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18801){: external}, [CVE-2019-18802](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18802){: external}, and [CVE-2019-18838](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18838){: external}. For more information, see the [Istio security bulletin](https://istio.io/news/security/istio-security-2019-007/){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.0" caption-side="top"}
