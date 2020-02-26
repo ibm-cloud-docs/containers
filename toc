@@ -1,8 +1,8 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" category="containers" audience="compute" href="/docs/containers?topic=containers-getting-started" path="containers"}
-IBM Cloud Kubernetes Service
+{: .toc subcollection="containers" category="containers,compute" audience="compute" href="/docs/containers?topic=containers-getting-started" path="containers"}
+Kubernetes Service
 
     {: .navgroup id="learn"}
     getting-started.md
