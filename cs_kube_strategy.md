@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-18"
+lastupdated: "2020-02-26"
 
 keywords: kubernetes, iks, containers
 
@@ -47,7 +47,7 @@ You have lots of reasons to move your workloads to {{site.data.keyword.cloud_not
 
 But how do you get to the cloud? What are your options along the way? And how do you manage your workloads after you get there?
 
-Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack](https://ibm-container-service.slack.com){: external}.
+Use this page to learn some strategies for your Kubernetes deployments on {{site.data.keyword.containerlong_notm}}. And always feel free to engage with our team on [Slack](https://ibm-cloud-success.slack.com){: external}.
 
 Not on slack yet? [Request an invite!](https://cloud.ibm.com/kubernetes/slack){: external}
 {: tip}
