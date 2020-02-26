@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-28"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -65,7 +65,7 @@ First time setting up Ingress? Check out [Setting up Ingress](/docs/containers?t
 
 3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If you app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
   ```yaml
-  apiVersion: extensions/v1beta1
+  apiVersion: networking.k8s.io/v1beta1
   kind: Ingress
   metadata:
     name: myingressresource

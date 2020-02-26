@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-02-24"
 
 keywords: kubernetes, iks, knative
 
@@ -508,7 +508,7 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
 
    Example Ingress:
    ```yaml
-   apiVersion: extensions/v1beta1
+   apiVersion: networking.k8s.io/v1beta1
    kind: Ingress
    metadata:
      name: iks-knative-ingress

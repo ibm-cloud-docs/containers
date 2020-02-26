@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-02-26"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -43,7 +43,7 @@ If you have unique security requirements, you can control traffic to and from yo
 {: shortdesc}
 
 <dl>
-<dt>[VPC access control lists (ACLs)](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls)</dt>
+<dt>[VPC access control lists (ACLs)](#acls)</dt>
 <dd>VPC ACLs specify rules that are applied at the level of each VPC subnet.<ul><li>By using inbound rules, you can allow or deny traffic from a source IP range with specified protocols and ports. The destination IP range is determined by the subnet that you attach the ACL to.</li><li>By using outbound rules, you can allow or deny traffic to a source IP range with specified protocols and ports. The source IP range is determined by the subnet that you attach the ACL to.</li></ul><p class="note">Although Calico policies are supported in VPC clusters, you can remain VPC-native by using VPC ACLs for your subnets instead. However, if you create multiple clusters that use the same subnets in one VPC, you cannot use ACLs to control traffic between the clusters because they share the same subnets. You can use [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.</p></dd>
 <dt>[Kubernetes network policies ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/network-policies/)</dt>
 <dd>Kubernetes network policies specify how pods can communicate with other pods and with external endpoints. As of Kubernetes version 1.8, both incoming and outgoing network traffic can be allowed or blocked based on protocol, port, and source or destination IP addresses. Traffic can also be filtered based on pod and namespace labels. Kubernetes network policies are applied by using `kubectl` commands or the Kubernetes APIs. When these policies are applied, they are automatically converted into Calico network policies. The Calico network plug-in in your cluster enforces these policies by setting up Linux Iptables rules on the Kubernetes worker nodes. Iptables rules serve as a firewall for the worker node to define the characteristics that the network traffic must meet to be forwarded to the targeted resource.</dd>
@@ -67,7 +67,7 @@ When you create a VPC, a default ACL is created in the format `allow-all-network
 
 For example, you can create the following set of ACL rules to block most inbound and outbound network traffic of a cluster, while allowing communication that is necessary for the cluster to function.
 
-When you use the following steps to create custom ACLs, only network traffic that is specified in the ACL rules is permitted to and from your VPC subnets. All other traffic that is not specified in the ACLs is blocked for the subnets, such as cluster integrations with third party services. If you must allow other traffic to or from your worker nodes, you can add rules for that traffic in step 4.f.</br></br>ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete the steps in this topic, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by running `ibmcloud is network-acl-rule-add <new_rule_name> $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR> --before-rule-name deny-all-(inbound|outbound)`. For more information about ACL rule requirements and limitations, see [Working with ACLs and ACL rules](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls).
+When you use the following steps to create custom ACLs, only network traffic that is specified in the ACL rules is permitted to and from your VPC subnets. All other traffic that is not specified in the ACLs is blocked for the subnets, such as cluster integrations with third party services. If you must allow other traffic to or from your worker nodes, you can add rules for that traffic in step 4.f.</br></br>ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete the steps in this topic, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by running `ibmcloud is network-acl-rule-add <new_rule_name> $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR> --before-rule-name deny-all-(inbound|outbound)`. For more information about ACL rule requirements and limitations, see [Setting up network ACLs](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls).
 {: important}
 
 1. Target the region of the VPC that your cluster is deployed to.
@@ -85,8 +85,8 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.17.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.17.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.17.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.17.3
   ```
   {: screen}
 
@@ -106,7 +106,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
   Worker Pool Name:   default
   Flavor:             c2.2x4
-  Version:            1.17.2
+  Version:            1.17.3
 
   Health
   State:     normal
