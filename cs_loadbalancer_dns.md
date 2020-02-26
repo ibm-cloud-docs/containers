@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-02-26"
 
 keywords: kubernetes, iks, lb2.0, nlb, health check, dns, hostname, subdomain
 
@@ -163,7 +163,7 @@ Before you begin, [register NLB IPs with a DNS subdomain](#loadbalancer_hostname
 
 2. Create a health check monitor for the subdomain. If you do not include a configuration parameter, the default value is used.
   ```
-  ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
+  ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --enable --description <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
   ```
   {: pre}
 
@@ -238,7 +238,7 @@ Before you begin, [register NLB IPs with a DNS subdomain](#loadbalancer_hostname
 
   Example command:
   ```
-  ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --desc "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
+  ibmcloud ks nlb-dns monitor configure --cluster mycluster --nlb-host mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud --enable --description "Login page monitor" --type HTTPS --method GET --path / --timeout 5 --retries 2 --interval 60 --expected-body "healthy" --expected-codes 2xx --follows-redirects true
   ```
   {: pre}
 
@@ -250,7 +250,21 @@ Before you begin, [register NLB IPs with a DNS subdomain](#loadbalancer_hostname
 
   Example output:
   ```
-  <placeholder - still want to test this one>
+  Created On:                               2019-04-24 09:01:59.781392 +0000 UTC
+  Modified On:                              2020-02-26 15:39:05.273217 +0000 UTC
+  Type:                                     https
+  Description:                              Health check monitor for ingress public hostname
+  Method:                                   GET
+  Path:                                     /alive
+  Expected Body:                            -
+  Expected Codes:                           2xx
+  Follow Redirects:                         false
+  Allow Insecure:                           true
+  Port:                                     443
+  Timeout:                                  5
+  Retries:                                  2
+  Interval:                                 15
+  Health Monitor Apply Properties Status:   success
   ```
   {: screen}
 
@@ -296,7 +310,7 @@ ibmcloud ks nlb-dns rm classic --cluster <cluster_name_or_id> --ip <ip> --nlb-ho
 
 If you need to change your health monitor configuration, you can change specific settings. Include only the flags for the settings that you want to change.
 ```
-ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --desc <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
+ibmcloud ks nlb-dns monitor configure --cluster <cluster_name_or_id> --nlb-host <host_name> --description <description> --type <type> --method <method> --path <path> --timeout <timeout> --retries <retries> --interval <interval> --port <port> --expected-body <expected-body> --expected-codes <expected-codes> --follows-redirects <true> --allows-insecure <true>
 ```
 {: pre}
 
