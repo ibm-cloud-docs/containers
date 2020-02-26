@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-25"
+lastupdated: "2020-02-26"
 
 keywords: kubernetes, iks
 
@@ -33,13 +33,16 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Storing data on classic IBM Cloud Block Storage
+# Storing data on classic IBM Cloud {{site.data.keyword.blockstorageshort}}
 {: #block_storage}
 
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out whether {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For more information about pricing, see [Billing](/docs/BlockStorage?topic=BlockStorage-About#billing).
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your block storage instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC on Classic clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+{: important}
+
+If you installed the {{site.data.keyword.blockstorageshort}} plugin with Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3).
 {: important}
 
 <br>
@@ -125,10 +128,10 @@ For more information, see:
 
 
 
-## Installing the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster
+## Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster
 {: #install_block}
 
-Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in with a Helm chart to set up pre-defined storage classes for block storage. You can use these storage classes to create a PVC to provision block storage for your apps.
+Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in with a Helm chart to set up pre-defined storage classes for {{site.data.keyword.blockstorageshort}}. You can use these storage classes to create a PVC to provision {{site.data.keyword.blockstorageshort}} for your apps.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -158,47 +161,31 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#public_helm_install) to install the Helm client on your local machine and install the Helm server (Tiller) with a service account.
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
-    The installation of the Helm server Tiller requires public network connection to the public Google Container Registry. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint that is enabled, you can choose to [pull the Tiller image to your local machine](/docs/containers?topic=containers-helm#private_local_tiller), [tag the image](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pulling), and [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/services/Registry?topic=registry-getting-started#gs_registry_images_pushing). Or you can [install the Helm chart without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
-    {: note}
 
-2.  Verify that Tiller is installed with a service account.
+2. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 
-    ```
-    kubectl get serviceaccount -n kube-system tiller
-    ```
-    {: pre}
-
-    Example output:
-
-    ```
-    NAME                                 SECRETS   AGE
-    tiller                               1         2m
-    ```
-    {: screen}
-
-3. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
    ```
    helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
-4. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+3. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
    ```
    helm repo update
    ```
    {: pre}
 
-5. Install the {{site.data.keyword.cloud_notm}} Block Storage plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+4. Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
-   helm install iks-charts/ibmcloud-block-storage-plugin
+   helm install <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
    ```
    {: pre}
 
    Example output:
    ```
-   NAME:   bald-olm
+   NAME:   <release_name>
    LAST DEPLOYED: Wed Apr 18 10:02:55 2018
    NAMESPACE: default
    STATUS: DEPLOYED
@@ -236,13 +223,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ibmcloud-block-storage-plugin  0s
 
    NOTES:
-   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: bald-olm
+   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: <release_name>
    ```
    {: screen}
 
-6. Verify that the installation was successful.
+5. Verify that the installation was successful.
    ```
-   kubectl get pod -n kube-system | grep block
+   kubectl get pod -n <namespace> | grep block
    ```
    {: pre}
 
@@ -255,7 +242,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
    The installation is successful when you see one `ibmcloud-block-storage-plugin` pod and one or more `ibmcloud-block-storage-driver` pods. The number of `ibmcloud-block-storage-driver` pods equals the number of worker nodes in your cluster. All pods must be in a **Running** state.
 
-7. Verify that the storage classes for block storage were added to your cluster.
+6. Verify that the storage classes for {{site.data.keyword.blockstorageshort}} were added to your cluster.
    ```
    kubectl get storageclasses | grep block
    ```
@@ -274,7 +261,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: screen}
 
-8. Repeat these steps for every cluster where you want to provision block storage.
+7. Repeat these steps for every cluster where you want to provision block storage.
 
 You can now continue to [create a PVC](#add_block) to provision block storage for your app.
 
@@ -285,42 +272,42 @@ You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage plug
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1. Update the Helm repo to retrieve the latest version of all helm charts in this repo.
-   ```
-   helm repo update
-   ```
-   {: pre}
+1. Update the Helm repo to retrieve the latest version of all Helm charts in this repo.
+  ```
+  helm repo update
+  ```
+  {: pre}
 
 2. Optional: Download the latest Helm chart to your local machine. Then, extract the package and review the `release.md` file to find the latest release information.
-   ```
-   helm fetch iks-charts/ibmcloud-block-storage-plugin
-   ```
-   {: pre}
+  ```
+  helm pull iks-charts/ibmcloud-block-storage-plugin --untar
+  ```
+  {: pre}
 
-3. Find the name of the block storage Helm chart that you installed in your cluster.
-   ```
-   helm list | grep ibmcloud-block-storage-plugin
-   ```
-   {: pre}
+3. Find the release name and namespace of the block storage Helm chart that you installed in your cluster.
+  ```
+  helm ls -A
+  ```
+  {: pre}
 
-   Example output:
-   ```
-   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
-   ```
-   {: screen}
+  Example output:
+  ```
+  NAME        	NAMESPACE  	REVISION	    UPDATED                             	STATUS  	CHART                              	APP VERSION
+  <release_name>	  <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
+  ```
+  {: screen}
 
 4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
-   ```
-   helm upgrade --force --recreate-pods <helm_chart_name>  iks-charts/ibmcloud-block-storage-plugin
-   ```
-   {: pre}
+  ```
+  helm upgrade <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
+  ```
+  {: pre}
 
 5. Optional: When you update the plug-in, the `default` storage class is unset. If you want to set the default storage class to a storage class of your choice, run the following command.
-   ```
-   kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-   ```
-   {: pre}
-
+  ```
+  kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
+  ```
+  {: pre}
 
 ### Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in
 If you do not want to provision and use {{site.data.keyword.cloud_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
@@ -335,37 +322,38 @@ Before you begin:
 
 To remove the plug-in:
 
-1. Find the name of the block storage Helm chart that you installed in your cluster.
-   ```
-   helm list | grep ibmcloud-block-storage-plugin
-   ```
-   {: pre}
+1. Find the release name and the namespace of the block storage Helm chart that you installed in your cluster.
+  ```
+  helm ls -A
+  ```
+  {: pre}
 
-   Example output:
-   ```
-   myhelmchart 	1       	Mon Sep 18 15:31:40 2017	DEPLOYED	ibmcloud-block-storage-plugin-0.1.0	default
-   ```
-   {: screen}
+  Example output:
+  ```
+  NAME        	 NAMESPACE  	REVISION	    UPDATED                             	STATUS  	CHART                              	APP VERSION
+  <release_name> <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
+  ```
+  {: screen}
 
 2. Delete the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
-   ```
-   helm delete <helm_chart_name>
-   ```
-   {: pre}
+  ```
+  helm uninstall <release_name> -n <namespace>
+  ```
+  {: pre}
 
 3. Verify that the block storage pods are removed.
-   ```
-   kubectl get pod -n kube-system | grep ibmcloud-block-storage-plugin
-   ```
-   {: pre}
-   The removal of the pods is successful if no pods are displayed in your CLI output.
+  ```
+  kubectl get pods -n <namespace> | grep block
+  ```
+  {: pre}
+  The removal of the pods is successful if no pods are displayed in your CLI output.
 
 4. Verify that the block storage classes are removed.
-   ```
-   kubectl get storageclasses | grep block
-   ```
-   {: pre}
-   The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
+  ```
+  kubectl get storageclasses | grep block
+  ```
+  {: pre}
+  The removal of the storage classes is successful if no storage classes are displayed in your CLI output.
 
 <br />
 
