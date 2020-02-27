@@ -295,7 +295,7 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   {: screen}
   * If the `Version` matches the control plane version that you found in the previous step, no further updates are required.
-  * If the `Version` does not match the control plane version, [update your sidecars{: external}](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade).
+  * If the `Version` does not match the control plane version, [update your sidecars](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade){: external}.
 
 <br />
 
