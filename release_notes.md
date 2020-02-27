@@ -649,7 +649,11 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>
   </td>
-</tr>  
+</tr>
+<tr>
+  <td>
+  </td>
+</tr>
 </tbody></table>
 
 
