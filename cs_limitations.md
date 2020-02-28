@@ -114,7 +114,9 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 <br />
 
 
-## VPC cluster limitations
+
+
+## VPC Gen 1 compute cluster limitations
 {: #vpc_ks_limits}
 
 VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.

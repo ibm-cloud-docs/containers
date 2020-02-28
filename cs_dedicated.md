@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-19"
+lastupdated: "2020-02-28"
 
 keywords: kubernetes, iks
 
@@ -383,7 +383,7 @@ Design your {{site.data.keyword.Bluemix_dedicated_notm}} cluster setup for maxim
     <td>Enter the number of worker nodes to include in the cluster. If the <code>--workers</code> option is not specified, one worker node is created.</td>
     </tr>
     <tr>
-    <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
+    <td><code>--kube-version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
 </td>
     </tr>
