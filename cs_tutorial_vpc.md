@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-26"
+lastupdated: "2020-02-28"
 
 keywords: kubernetes, iks, vpc
 
@@ -190,13 +190,13 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Use an existing registry namespace or create one, such as `vpc`.
+3.  Use an existing registry namespace or create one, such as `myvpc`.
     ```
     ibmcloud cr namespace-list
     ```
     {: pre}
     ```
-    ibmcloud cr namespace-add vpc
+    ibmcloud cr namespace-add myvpc
     ```
     {: pre}
 
@@ -214,7 +214,7 @@ To deploy the app:
     ```
     Successfully built <image_ID>
     Successfully tagged us.icr.io/<namespace>/hello-world:1
-    The push refers to a repository [us.icr.io/vpc/hello-world]
+    The push refers to a repository [us.icr.io/myvpc/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -228,7 +228,7 @@ To deploy the app:
 5.  Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
-    kubectl create deployment hello-world-deployment --image=us.icr.io/vpc/hello-world:1
+    kubectl create deployment hello-world-deployment --image=us.icr.io/myvpc/hello-world:1
     ```
     {: pre}
 
@@ -325,7 +325,7 @@ To deploy the app:
         ```
         {: screen}
 
-    3.  Describe your pod to find out what worker node the pod is running on. In the example output, the worker node that the pod runs on is **172.30.xxx.xxx**.
+    3.  Describe your pod to find out what worker node the pod is running on. In the example output, the worker node that the pod runs on is **10.xxx.xx.xxx**.
         ```
         kubectl describe pod hello-world-deployment-d99cddb45-lmj2v
         ```

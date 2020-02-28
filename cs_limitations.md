@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-26"
+lastupdated: "2020-02-28"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -114,7 +114,9 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 <br />
 
 
-## VPC cluster limitations
+
+
+## VPC Gen 1 compute cluster limitations
 {: #vpc_ks_limits}
 
 VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
@@ -128,7 +130,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Container platforms | VPC clusters are available for only community Kubernetes clusters, not OpenShift clusters. |
-| Location | VPC clusters are available in the following [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones): Dallas, Frankfurt, London, Sydney, and Tokyo. |
+| Location | VPC clusters are available only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). |
 | v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about). |
 | Versions | VPC clusters must run Kubernetes version 1.15 or later. |
 | Virtual Private Cloud | See [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations) and [Quotas](/docs/vpc-on-classic?topic=vpc-on-classic-quotas). |
