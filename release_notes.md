@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-28"
+lastupdated: "2020-03-02"
 
 keywords: kubernetes, iks, release notes
 
@@ -38,6 +38,15 @@ subcollection: containers
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
+
+## March 2020
+{: #mar20}
+
+| Date | Description |
+| ---- | ----------- |
+| 02 March 2020 | **Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.3_1518](/docs/containers?topic=containers-changelog#1173_1518), [1.16.7_1525](/docs/containers?topic=containers-changelog#1167_1525), [1.15.10_1532](/docs/containers?topic=containers-changelog#11510_1532), and [1.14.10_1548](/docs/containers?topic=containers-changelog#11410_1548). |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in March 2020"}
 
 ## February 2020
 {: #feb20}
@@ -648,3 +657,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
+
+
+
