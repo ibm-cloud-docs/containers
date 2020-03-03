@@ -395,7 +395,6 @@ lastupdated: "2020-03-03"
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
 * [Encrypting data in classic clusters by using {{site.data.keyword.datashield_short}}](/docs/containers?topic=containers-encryption#datashield)
 
-
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
 * [Understanding default resources for {{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp)
