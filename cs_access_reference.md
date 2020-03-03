@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-26"
+lastupdated: "2020-03-03"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -118,6 +118,8 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Check whether automatic updates for the Ingress ALB add-on are enabled. | [`ibmcloud ks alb autoupdate get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_get) | [`GET /v1/clusters/{idOrName}/updatepolicy`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/GetUpdatePolicy) |
 | Enable or disable an Ingress ALB in a classic cluster. | [`ibmcloud ks alb configure classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) | [`POST /v1/albs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/EnableALB) and [`DELETE /v1/albs/{albId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/) |
 | Enable or disable an Ingress ALB in a VPC cluster. | [`ibmcloud ks alb configure vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_alb_configure_vpc_classic) | [`POST /v2/alb/vpc/enableAlb`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/VpcEnableALB) and [`POST /v2/alb/vpc/disableAlb`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/VpcDisableALB) |
+| Create an Ingress ALB in a classic cluster. | [`ibmcloud ks alb create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create) | [`POST /v1/clusters/{idOrName}/zone/{zoneId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/CreateALB) |
+| Create an Ingress ALB in a VPC cluster. | [`ibmcloud ks alb create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_alb-create-vpc-classic) | [`POST /v2​/alb​/vpc​/createAlb`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/VpcCreateALB) |
 | Roll back the Ingress ALB add-on update to the build that your ALB pods were previously running. | [`ibmcloud ks alb rollback`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_rollback) | [`PUT /v1/clusters/{idOrName}/updaterollback`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/RollbackUpdate) |
 | Force a one-time update of your ALB pods by manually updating the Ingress ALB add-on. | [`ibmcloud ks alb update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_update) | [`PUT /v1/clusters/{idOrName}/update`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb/UpdateALBs) |
 | Create an API server audit webhook. | [`ibmcloud ks cluster master audit-webhook set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_config_set) | [`PUT /v1/clusters/{idOrName}/apiserverconfigs/auditwebhook`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/apiserverconfigs/UpdateAuditWebhook) |
