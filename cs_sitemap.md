@@ -389,12 +389,12 @@ lastupdated: "2020-03-03"
     * [Remove IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#remove_infra)
 
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
-* [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)
-  * [Adding a service to a cluster](/docs/containers?topic=containers-encryption#secrets_service)
-  * [Encrypting traffic to your apps with TLS secrets](/docs/containers?topic=containers-encryption#secrets_tls)
-  * [Accessing your registry with credentials stored in a Kubernetes `imagePullSecret`](/docs/containers?topic=containers-encryption#imagepullsecret)
-* [Encrypting the Kubernetes master's local disk and secrets by using Key Protect (beta)](/docs/containers?topic=containers-encryption#keyprotect)
-* [Encrypting data by using {{site.data.keyword.datashield_full_notm}} (Beta)](/docs/containers?topic=containers-encryption#datashield)
+* [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
+* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
+* [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
+* [Encrypting data in classic clusters by using {{site.data.keyword.datashield_short}}](/docs/containers?topic=containers-encryption#datashield)
+
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
@@ -1035,7 +1035,7 @@ lastupdated: "2020-03-03"
 * [worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
 * [zone commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#zone)
 * [alb commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb-commands)
-* [Beta: `key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_key_protect)
+* [kms commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms)
 * [logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
 * [nlb-dns commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)
 * [webhook-create command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)
