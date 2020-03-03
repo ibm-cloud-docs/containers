@@ -43,7 +43,7 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 Refer to the following tables for a summary of changes for each version of the [{{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.
 
 ## Using the beta plug-in
-{: #cs_beta}
+{: #changelog_beta}
 
 A redesigned version of the {{site.data.keyword.containerlong_notm}} plug-in is available as a beta. The redesigned {{site.data.keyword.containerlong_notm}} plug-in groups commands into categories and changes commands from a hyphenated structure to a spaced structure.
 {: shortdesc}
