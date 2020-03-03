@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-03"
 
 ---
 
@@ -389,12 +389,11 @@ lastupdated: "2020-02-24"
     * [Remove IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#remove_infra)
 
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption#encryption)
-* [Understanding when to use secrets](/docs/containers?topic=containers-encryption#secrets)
-  * [Adding a service to a cluster](/docs/containers?topic=containers-encryption#secrets_service)
-  * [Encrypting traffic to your apps with TLS secrets](/docs/containers?topic=containers-encryption#secrets_tls)
-  * [Accessing your registry with credentials stored in a Kubernetes `imagePullSecret`](/docs/containers?topic=containers-encryption#imagepullsecret)
-* [Encrypting the Kubernetes master's local disk and secrets by using Key Protect (beta)](/docs/containers?topic=containers-encryption#keyprotect)
-* [Encrypting data by using {{site.data.keyword.datashield_full_notm}} (Beta)](/docs/containers?topic=containers-encryption#datashield)
+* [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
+* [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
+* [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
+* [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
+* [Encrypting data in classic clusters by using {{site.data.keyword.datashield_short}}](/docs/containers?topic=containers-encryption#datashield)
 
 [Configuring pod security policies](/docs/containers?topic=containers-psp#psp)
 * [Customizing pod security policies](/docs/containers?topic=containers-psp#customize_psp)
@@ -834,11 +833,13 @@ lastupdated: "2020-02-24"
 * [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check)
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-ingress-settings#default_server_cert)
 * [Tuning ALB performance](/docs/containers?topic=containers-ingress-settings#perf_tuning)
+  * [Scaling ALBs](/docs/containers?topic=containers-ingress-settings#scale_albs)
   * [Adding ALB socket listeners for each NGINX worker process](/docs/containers?topic=containers-ingress-settings#reuse-port)
   * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress-settings#access-log)
   * [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress-settings#keepalive_time)
   * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress-settings#backlog)
   * [Tuning kernel performance](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
+* [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-settings#migrate-alb-vlan)
 
 [Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)
@@ -1033,7 +1034,7 @@ lastupdated: "2020-02-24"
 * [worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
 * [zone commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#zone)
 * [alb commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb-commands)
-* [Beta: `key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_key_protect)
+* [kms commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms)
 * [logging commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#logging_commands)
 * [nlb-dns commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#nlb-dns)
 * [webhook-create command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_webhook_create)

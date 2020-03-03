@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-26"
+lastupdated: "2020-03-03"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -370,7 +370,7 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
     ```
     {: pre}
 
-</br>You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in the cluster are also deployed to an edge node in your edge worker pool.
+</br>You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in or added to the cluster are also deployed to an edge node in your edge worker pool.
 
 
 

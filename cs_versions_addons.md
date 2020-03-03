@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-04"
+lastupdated: "2020-03-03"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Fluentd and Ingress ALB version changelog
+# Ingress ALB and Fluentd version changelog
 {: #cluster-add-ons-changelog}
 
 Your {{site.data.keyword.containerlong}} cluster comes with components, such as the Fluentd and Ingress ALB components, that are updated automatically by IBM. You can also disable automatic updates for some components and manually update them separately from the master and worker nodes. Refer to the tables in the following sections for a summary of changes for each version.
@@ -69,6 +69,12 @@ Refer to the following table for a summary of changes for each build of the Ingr
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>625 / 390</td>
+<td>03 Mar 2020</td>
+<td>-</td>
+<td>Adds secret caching for the [{{site.data.keyword.appid_short_notm}} service binding](/docs/containers?topic=containers-ingress_annotation#appid-auth) in your cluster. If you change the {{site.data.keyword.appid_short_notm}} service binding, the new {{site.data.keyword.appid_short_notm}} secret that is generated is not used by the ALB. You must restart your ALB pods to pick up the new secret. You can find the ALB pod names by running `kubectl get pods -n kube-system | grep alb` and restart the ALB pods by running `kubectl delete pod <pod> -n kube-system` for each pod.</p></td>
+</tr>
 <tr>
 <td>625 / 373</td>
 <td>30 Jan 2020</td>
