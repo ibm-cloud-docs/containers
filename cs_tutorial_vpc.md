@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-28"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, vpc
 
@@ -501,7 +501,7 @@ Now that you have a VPC cluster, learn more about what you can do.
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
 * [Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
 
-Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [internal](https://ibm-argonauts.slack.com/messages/CJ58JHD9C) or [external](https://ibm-cloud-success.slack.com/messages/C4G6362ER) Slack channels.
+Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [internal](https://test.cloud.ibm.com/docs/containers?topic=containers-cs_internal#internal_help) or [external](https://ibm-cloud-success.slack.com/messages/C4G6362ER) Slack channels.
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
 {: tip}
