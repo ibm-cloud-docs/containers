@@ -262,22 +262,32 @@ Update your Knative add-on to the latest versions.
     {: screen}
 
 12. Update the pods of your Knative data plane to include the latest version of the Istio proxy sidecar.
-    1. Download the `istioctl` client.
+    1. Get the version of your Istio control plane components.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.5 sh -
+      kubectl -n istio-system get pod -l istio=pilot -o jsonpath='{.items[].spec.containers[0].image}'
       ```
       {: pre}
-    2. Navigate to the Istio package directory.
+      Example output:
+      ```
+      icr.io/ext/istio/pilot:1.4.5
+      ```
+      {: screen}
+    2. Using the Istio control plane version, download the `istioctl` client.
+      ```
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=<istio-version> sh -
+      ```
+      {: pre}
+    3. Navigate to the Istio package directory.
       ```
       cd istio-1.4.5
       ```
       {: pre}
-    3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+    4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
       ```
       export PATH=$PWD/bin:$PATH
       ```
       {: pre}
-    4. Get the names and namespaces of the Knative data plane pods.
+    5. Get the names and namespaces of the Knative data plane pods.
       ```
       istioctl version --short=false | egrep 'cluster-local-gateway-|knative'
       ```
@@ -292,12 +302,12 @@ Update your Knative add-on to the latest versions.
       data plane version: version.ProxyInfo{ID:"webhook-7f4f6d9b64-rbp7z.knative-serving", IstioVersion:"1.4.5"}
       ```
       {: screen}
-    5. Using the pod names and namespaces from the previous step, restart each pod by deleting it.
+    6. Using the pod names and namespaces from the previous step, restart each pod by deleting it.
       ```
       kubectl delete pod <pod_name> -n <namespace>
       ```
       {: pre}
-    6. Verify that the pods are restarted and have a `Running` status.
+    7. Verify that the pods are restarted and have a `Running` status.
       ```
       kubectl get pods -n istio-system
       kubectl get pods -n knative-serving
