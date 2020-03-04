@@ -281,7 +281,7 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   {: screen}
 
-2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `citadel version` or the `galley version`.
+2. In the output of step 1, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `citadel version` or the `galley version`.
   * If the `client version` and control plane component versions match, continue to the next step.
   * If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
@@ -300,7 +300,7 @@ For example, the patch version of your add-on might be updated automatically by 
       ```
       {: pre}
 
-3. In the output, compare the `client version` (`istioctl`) to the `sidecar injector version`.
+3. In the output of step 1, compare the `client version` (`istioctl`) to the `sidecar injector version`.
   * If the `client version` and `sidecar injector version` match, no further updates are required.
   * If the `client version` and `sidecar injector version` do not match, [update your sidecars](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade){: external}.
 

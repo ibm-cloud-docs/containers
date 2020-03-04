@@ -291,7 +291,7 @@ Update your Knative add-on to the latest versions.
       data plane version: version.ProxyInfo{ID:"autoscaler-7d8dc65584-njpng.knative-serving", IstioVersion:"1.4.5"}
       data plane version: version.ProxyInfo{ID:"webhook-7f4f6d9b64-rbp7z.knative-serving", IstioVersion:"1.4.5"}
       ```
-      {: pre}
+      {: screen}
     5. Using the pod names and namespaces from the previous step, restart each pod by deleting it.
       ```
       kubectl delete pod <pod_name> -n <namespace>
