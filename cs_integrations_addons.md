@@ -82,8 +82,11 @@ The versions of each managed add-on are tested by {{site.data.keyword.cloud_notm
 ## Reviewing add-on states and statuses
 {: #debug_addons}
 
-You can check the health state and status of a cluster add-on by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`.
-{: shortdesc}
+You can check the health state and status of a cluster add-on by running the following command:
+```
+ibmcloud ks cluster addons -c <cluster_name_or_ID>
+```
+{: pre}
 
 Example output:
 ```
@@ -115,6 +118,6 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 {: caption="Add-on health statuses"}
 {: summary="Table rows read from left to right, with the add-on status in column one and a description in column two."}
 
+
 Still having trouble with the Istio add-on? Check out these [troubleshooting topics](/docs/containers?topic=containers-istio#istio-ts) to debug your Istio deployment.
 {: tip}
-

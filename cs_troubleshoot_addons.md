@@ -42,8 +42,11 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 ## Reviewing add-on states and statuses
 {: #debug_addons}
 
-You can check the health state and status of a cluster add-on by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`.
-{: shortdesc}
+You can check the health state and status of a cluster add-on by running the following command:
+```
+ibmcloud ks cluster addons -c <cluster_name_or_ID>
+```
+{: pre}
 
 Example output:
 ```
@@ -75,9 +78,6 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 {: caption="Add-on health statuses"}
 {: summary="Table rows read from left to right, with the add-on status in column one and a description in column two."}
 
-Still having trouble with the Istio add-on? Check out these [troubleshooting topics](/docs/containers?topic=containers-istio#istio-ts) to debug your Istio deployment.
-{: tip}
-
 
 <br />
 
@@ -103,6 +103,9 @@ While you troubleshoot the [managed Istio add-on](/docs/containers?topic=contain
 6. Click **Run**.
 
 7. Check the results of each test. If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
+
+<br />
+
 
 ## Istio components are missing
 {: #control_plane}
