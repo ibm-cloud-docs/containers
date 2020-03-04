@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-02"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 04 March 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.102](/docs/containers?topic=containers-cs_cli_changelog#04).</li><li>**Ingress ALB changelog**: Updated the [`ingress-auth` image build to 390](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul> |
 | 02 March 2020 | **Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.3_1518](/docs/containers?topic=containers-changelog#1173_1518), [1.16.7_1525](/docs/containers?topic=containers-changelog#1167_1525), [1.15.10_1532](/docs/containers?topic=containers-changelog#11510_1532), and [1.14.10_1548](/docs/containers?topic=containers-changelog#11410_1548). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in March 2020"}
