@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-21"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -478,7 +478,7 @@ To install and launch the Kubernetes web terminal:
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the web terminal.
 2. In the **Actions...** drop-down list, select **Web terminal**.
-3. Click **Install**. It might take a few minutes for the terminal add-on to install.
+3. Click **Install**. It might take a few minutes for the terminal add-on to install. <p class="tip">To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons).</p>
 4. In the **Actions...** drop-down list, select **Web terminal** again. The terminal opens in your browser.
 5. VPC clusters: Configure access to external endpoints, such as the {{site.data.keyword.containerlong_notm}} API, from the web terminal. Choose between the following options:
     * Enable a [public gateway](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway) on each VPC subnet that your worker nodes are attached to. This ensures that the `kube-terminal` pod in your cluster is always deployed to a worker node on a subnet that has external access.

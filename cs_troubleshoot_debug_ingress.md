@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -39,7 +39,7 @@ subcollection: containers
 As you use {{site.data.keyword.containerlong}}, consider these techniques for general Ingress troubleshooting and debugging.
 {: shortdesc}
 
-While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent Ingress information from your cluster.
+While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](#debug-tool-ingress) to run tests and gather pertinent Ingress information from your cluster.
 {: tip}
 
 
@@ -331,7 +331,7 @@ While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}}
 
 3. On the Diagnostics and Debug Tool card, click **Install**.
 
-4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed. <p class="tip">To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons).</p>
 
 5. On the Diagnostics and Debug Tool card, click **Dashboard**.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, knative
 
@@ -142,6 +142,9 @@ To install Knative in your cluster:
    webhook-7797ffb6bf-wg46v      1/1       Running   0          21m
    ```
    {: screen}
+
+To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons).
+{: tip}
 
 ### Updating the Knative managed add-on
 {: #update-knative-addon}

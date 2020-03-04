@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-27"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -415,44 +415,5 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 ## Troubleshooting
 {: #istio-ts}
 
-Resolve some common issues that you might encounter when you use the managed Istio add-on.
+To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons).
 {: shortdesc}
-
-### Istio components are missing
-{: #control_plane}
-
-{: tsSymptoms}
-One or more of the Istio control plane components, such as `istio-citadel` or `istio-telemetry`, does not exist in your cluster.
-
-{: tsCauses}
-* You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
-* You changed the default `IstioControlPlane` resource. When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane. Only the `IstioControlPlane` resources that are managed by IBM are supported. Changing the control plane settings might result in an unsupported control plane state.
-
-{: tsResolve}
-Refresh your `IstioControlPlane` resource. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
-```
-kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
-```
-{: pre}
-
-### Debugging Istio
-{: #istio_debug_tool}
-
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
-{: shortdesc}
-
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
-
-2. Click the **Add-ons** tab.
-
-3. On the Diagnostics and Debug Tool card, click **Install**.
-
-4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
-
-5. On the Diagnostics and Debug Tool card, click **Dashboard**.
-
-5. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
-
-6. Click **Run**.
-
-7. Check the results of each test. If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.
