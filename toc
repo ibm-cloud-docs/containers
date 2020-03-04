@@ -206,6 +206,7 @@ Kubernetes Service
         cs_troubleshoot_network.md
         cs_troubleshoot_health.md
         cs_troubleshoot_app.md
+        cs_troubleshoot_addons.md
         cs_troubleshoot_lb.md
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_storage.md
