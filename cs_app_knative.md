@@ -41,7 +41,7 @@ Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyw
 
 **What is Knative and why do I want use it?**
 
-[Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others. The goal is to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.  
+[Knative](https://github.com/knative/docs) is an open source platform that was developed by IBM, Google, Pivotal, Red Hat, Cisco, and others. The goal is to extend the capabilities of Kubernetes to help you create modern, source-centric containerized, and serverless apps on top of your Kubernetes cluster. The platform is designed to address the needs of developers who today must decide what type of app they want to run in the cloud: 12-factor apps, containers, or functions. Each type of app requires an open source or proprietary solution that is tailored to these apps: Cloud Foundry for 12-factor apps, Kubernetes for containers, and OpenWhisk and others for functions. In the past, developers had to decide what approach they wanted to follow, which led to inflexibility and complexity when different types of apps had to be combined.
 
 Knative uses a consistent approach across programming languages and frameworks to abstract the operational burden of building, deploying, and managing workloads in Kubernetes so that developers can focus on what matters most to them: the source code. You can use proven build processes that you are already familiar with, such as Kaniko, Dockerfile, Bazel, and others. By integrating with Istio, Knative ensures that your serverless and containerized workloads can be easily exposed on the internet, monitored, and controlled, and that your data is encrypted during transit.
 
@@ -260,6 +260,49 @@ Update your Knative add-on to the latest versions.
     knative   0.12.1
     ```
     {: screen}
+
+12. Update the pods of your Knative data plane to include the latest version of the Istio proxy sidecar.
+    1. Download the `istioctl` client.
+      ```
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.5 sh -
+      ```
+      {: pre}
+    2. Navigate to the Istio package directory.
+      ```
+      cd istio-1.4.5
+      ```
+      {: pre}
+    3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+      ```
+      export PATH=$PWD/bin:$PATH
+      ```
+      {: pre}
+    4. Get the names and namespaces of the Knative data plane pods.
+      ```
+      istioctl version --short=false | egrep 'cluster-local-gateway-|knative'
+      ```
+      {: pre}
+      In the following example output, the pod names and namespaces are formatted like `"<pod_name>.<namespace>"`, such as the `controller-7865b5fd46-nf7r5` pod in the `istio-system` namespace.
+      ```
+      data plane version: version.ProxyInfo{ID:"cluster-local-gateway-dc7ff5449-lbt6f.istio-system", IstioVersion:"1.4.5"}
+      data plane version: version.ProxyInfo{ID:"controller-7865b5fd46-nf7r5.knative-serving", IstioVersion:"1.4.5"}
+      data plane version: version.ProxyInfo{ID:"activator-785dd6f98b-v69jx.knative-serving", IstioVersion:"1.4.5"}
+      data plane version: version.ProxyInfo{ID:"autoscaler-hpa-6cfbdcc99c-fhm2t.knative-serving", IstioVersion:"1.4.5"}
+      data plane version: version.ProxyInfo{ID:"autoscaler-7d8dc65584-njpng.knative-serving", IstioVersion:"1.4.5"}
+      data plane version: version.ProxyInfo{ID:"webhook-7f4f6d9b64-rbp7z.knative-serving", IstioVersion:"1.4.5"}
+      ```
+      {: pre}
+    5. Using the pod names and namespaces from the previous step, restart each pod by deleting it.
+      ```
+      kubectl delete pod <pod_name> -n <namespace>
+      ```
+      {: pre}
+    6. Verify that the pods are restarted and have a `Running` status.
+      ```
+      kubectl get pods -n istio-system
+      kubectl get pods -n knative-serving
+      ```
+      {: pre}
 
 ## Using Knative services to deploy a serverless app
 {: #knative-deploy-app}
