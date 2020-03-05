@@ -36,7 +36,6 @@ subcollection: containers
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
 
-
 Refer to these commands to create and manage **both community Kubernetes or OpenShift clusters** in {{site.data.keyword.containerlong}}.
 {:shortdesc}
 
