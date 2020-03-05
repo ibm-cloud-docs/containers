@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -396,7 +396,7 @@ You can also scale up your ALBs across more zones. When you create a multizone c
 **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB.
-  ````
+  ```
   ibmcloud ks alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone>
   ```
   {: pre}
