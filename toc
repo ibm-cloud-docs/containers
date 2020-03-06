@@ -141,6 +141,7 @@ Kubernetes Service
         cs_ingress_about.md
         cs_ingress.md
         cs_annotations.md
+        cs_ingress_manage.md
         cs_ingress_settings.md
         cs_ingress_health.md
         cs_ingress_user_managed.md
