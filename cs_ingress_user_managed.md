@@ -50,13 +50,13 @@ Create a network load balancer (NLB) to expose your custom Ingress controller de
 In classic clusters, bringing your own Ingress controller is supported only for providing public external access to your apps and is not supported for providing private external access.
 {: note}
 
-1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/static/provider/cloud-generic.yaml){: external}. If you use the community controller, edit the `cloud-generic.yaml` file by following these steps.
-  1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. In the `spec.selector` section, replace the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
+1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml){: external}. If you use the community controller, edit the `mandatory.yaml` file by following these steps.
+  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
 
 2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
-    kubectl apply -f cloud-generic.yaml -n kube-system
+    kubectl apply -f mandatory.yaml -n kube-system
     ```
     {: pre}
 
@@ -65,21 +65,21 @@ In classic clusters, bringing your own Ingress controller is supported only for 
     apiVersion: v1
     kind: Service
     metadata:
-      name: my-lb-svc
+      name: ingress-nginx
     spec:
       type: LoadBalancer
       selector:
         app: ingress-nginx
       ports:
        - protocol: TCP
-         port: 8080
+         port: 80
       externalTrafficPolicy: Cluster
     ```
     {: codeblock}
 
 4. Create the service in your cluster.
   ```
-  kubectl apply -f my-lb-svc.yaml
+  kubectl apply -f ingress-nginx.yaml -n kube-system
   ```
   {: pre}
 
@@ -153,7 +153,7 @@ In classic clusters, bringing your own Ingress controller is supported only for 
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
         {: pre}
-7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap.
+7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap. If you used the cloud-generic NGINX community Ingress controller in step 1, you can skip this step because the resources are already included in the `mandatory.yaml.` file.
 
 8. Create Ingress resources for your apps. You can use the Kubernetes documentation to create [an Ingress resource file](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external} and use [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external}.
   <p class="tip">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you can create separate Ingress resources for your ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress#ingress_expose_public), add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
@@ -170,13 +170,13 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 Expose your custom Ingress controller deployment to the public or to the private network by setting up a Kubernetes `LoadBalancer` service in your cluster. A VPC load balancer which routes requests to your app is automatically created for you in your VPC outside of your cluster.
 {: shortdesc}
 
-1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://github.com/kubernetes/ingress-nginx/blob/master/deploy/static/provider/cloud-generic.yaml){: external}. If you use the community controller, edit the `kustomization.yaml` file by following these steps.
-  1. Replace the `namespace: ingress-nginx` with `namespace: kube-system`.
-  2. In the `commonLabels` section, replace the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
+1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml){: external}. If you use the community controller, edit the `mandatory.yaml` file by following these steps.
+  1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
+  2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
 
 2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
-    kubectl apply --kustomize . -n kube-system
+    kubectl apply -f mandatory.yaml -n kube-system
     ```
     {: pre}
 
@@ -185,7 +185,7 @@ Expose your custom Ingress controller deployment to the public or to the private
     apiVersion: v1
     kind: Service
     metadata:
-      name: my-lb-svc
+      name: ingress-nginx
       annotations:
         service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: <public_or_private>
     spec:
@@ -194,13 +194,13 @@ Expose your custom Ingress controller deployment to the public or to the private
         app: ingress-nginx
       ports:
        - protocol: TCP
-         port: 8080
+         port: 80
     ```
     {: codeblock}
 
 4. Create the Kubernetes `LoadBalancer` service in your cluster.
     ```
-    kubectl apply -f my-lb-svc.yaml
+    kubectl apply -f ingress-nginx.yaml -n kube-system
     ```
     {: pre}
 
@@ -278,7 +278,7 @@ Expose your custom Ingress controller deployment to the public or to the private
         ```
         {: pre}
 
-7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap.
+7. Deploy any other resources that are required by your custom Ingress controller, such as the configmap. If you used the cloud-generic NGINX community Ingress controller in step 1, you can skip this step because the resources are already included in the `mandatory.yaml.` file.
 
 8. Create Ingress resources for your apps. You can use the Kubernetes documentation to create [an Ingress resource file](https://kubernetes.io/docs/concepts/services-networking/ingress/){: external} and use [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/){: external}.
   <p class="tip">If you continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you can create separate Ingress resources for your IBM ALBs and custom controller. In the [Ingress resource that you create to apply to the IBM ALBs only](/docs/containers?topic=containers-ingress#ingress_expose_public), add the annotation <code>kubernetes.io/ingress.class: "iks-nginx"</code>.</p>
