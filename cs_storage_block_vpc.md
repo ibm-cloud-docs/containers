@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-05"
+lastupdated: "2020-03-06"
 
 keywords: kubernetes, iks, vpc
 
@@ -503,6 +503,71 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 10. Create a deployment or a pod that uses your PVC.
 
 <br />
+
+
+## Updating the {{site.data.keyword.block_storage_is_short}} add-on
+{: #vpc-addon-update}
+
+You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabling and re-enabling the add-on in your cluster.
+{: shortdesc}
+
+1 Check to see if an update is available. If an update is available, the plug-in version is flagged with an asterisk and the latest version is shown. Note the latest version as this value is used later.
+  ```
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Name                   Version                 Health State   Health Status   
+  vpc-block-csi-driver   1.0.0* (2.0.0 latest)   normal         Addon Ready
+  ```
+  {: screen}
+
+2. Disable the {{site.data.keyword.block_storage_is_short}} add-on. 
+  ```
+  ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster <cluster_name_or_ID> -f
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Disabling add-on vpc-block-csi-driver for cluster <cluster_name_or_ID>...
+  OK
+  ```
+  {: screen}
+
+2. Verify that the add-on is disabled. If the add-on is disabled it does not appear in the list of add-ons in your cluster. The add-on might still display in your list of add-ons for a few minutes after running the `disable` command.
+  ```
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. Re-enable the add-on and specify the latest version that you retrieved earlier.
+  ```
+  ibmcloud ks cluster addon enable vpc-block-csi-driver --version <version> --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Enabling add-on vpc-block-csi-driver(2.0.0) for cluster <cluster_name_or_ID>...
+  OK
+  ```
+  {: pre}
+
+4. Verify that the add-on is in the `Addon Ready` state. The add-on might take a few minutes to become ready.
+  ```
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Name                   Version   Health State   Health Status   
+  vpc-block-csi-driver   2.0.0     normal         Addon Ready
+  ```
+  {: screen}
 
 
 
