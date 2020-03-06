@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-06"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -174,7 +174,6 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Delete a worker pool. | [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm) | [`DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPool) |
 | Reboot a worker node. | [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) | [`PUT /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker) |
 | Reload a worker node. | [`ibmcloud ks worker reload`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) | [`PUT /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker) |
-| Replace a worker node. | [`ibmcloud ks worker replace`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) | <ul><li>Classic: [`POST /v2​/replaceWorker`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/replaceWorker)</li><li>VPC: [`POST /v2​/vpc​/replaceWorker`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcReplaceWorker)</li></ul> |
 | Remove a worker node. | [`ibmcloud ks worker rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) | [`DELETE /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterWorker) |
 | Update a worker node. | [`ibmcloud ks worker update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) | [`PUT /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker) |
 | Add a zone to a worker pool. | [`ibmcloud ks zone add classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_add) | [`POST /v1/clusters/{idOrName}/workerpools/{poolidOrName}/zones`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddWorkerPoolZone) |
@@ -209,6 +208,7 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Enable automatic updates for the Fluentd cluster add-on. | [`ibmcloud ks logging autoupdate enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_enable) | [`PUT /v1/logging/{idOrName}/updatepolicy`](https://containers.cloud.ibm.com/global/swagger-global-api/#/logging/ChangeUpdatePolicy) |
 | Collect a snapshot of API server logs in an {{site.data.keyword.cos_full_notm}} bucket. | [`ibmcloud ks logging collect`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect) | [`POST /v1/log-collector/{idOrName}/masterlogs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/CreateMasterLogCollection) |
 | See the status of the API server logs snapshot request. | [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status) | [`GET /v1/log-collector/{idOrName}/masterlogs`](https://containers.cloud.ibm.com/global/swagger-global-api/#/log45collector/GetMasterLogCollectionStatus) |
+| Replace a worker node. | [`ibmcloud ks worker replace`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) | <ul><li>Classic: [`POST /v2​/replaceWorker`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/replaceWorker)</li><li>VPC: [`POST /v2​/vpc​/replaceWorker`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcReplaceWorker)</li></ul> |
 {: class="simple-tab-table"}
 {: caption="Overview of permissions required for CLI commands and API calls in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: #accessreftabtableadmin}
