@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-06"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -281,7 +281,7 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   {: screen}
 
-2. In the output of step 1, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `citadel version` or the `galley version`.
+2. In the output of step 1, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`.
   * If the `client version` and control plane component versions match, continue to the next step.
   * If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
@@ -375,9 +375,6 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
   ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
-
-<br />
-
 
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
