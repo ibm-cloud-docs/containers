@@ -508,7 +508,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabling and re-enabling the add-on in your cluster.
 {: shortdesc}
 
-1 Check to see if an update is available. If an update is available, the plug-in version is flagged with an asterisk and the latest version is shown. Note the latest version as this value is used later.
+1. Check to see if an update is available. If an update is available, the plug-in version is flagged with an asterisk and the latest version is shown. Note the latest version as this value is used later.
   ```
   ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
   ```
@@ -551,7 +551,7 @@ You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabl
   Enabling add-on vpc-block-csi-driver(2.0.0) for cluster <cluster_name_or_ID>...
   OK
   ```
-  {: pre}
+  {: screen}
 
 4. Verify that the add-on is in the `Addon Ready` state. The add-on might take a few minutes to become ready.
   ```
