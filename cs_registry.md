@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-18"
+lastupdated: "2020-03-04"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -78,7 +78,7 @@ You can build containers from trusted images that are signed and stored in {{sit
 <br />
 
 
-## Understanding how to authorize your cluster to pull images from a registry
+## Understanding how to authorize your cluster to pull images from a private registry
 {: #cluster_registry_auth}
 
 To pull images from a registry, your {{site.data.keyword.containerlong_notm}} cluster uses a special type of Kubernetes secret, an `imagePullSecret`. This image pull secret stores the credentials to access a container registry. The container registry can be your namespace in {{site.data.keyword.registrylong_notm}}, a namespace in {{site.data.keyword.registrylong_notm}} that belongs to a different {{site.data.keyword.cloud_notm}} account, or any other private registry such as Docker. Your cluster is set up to pull images from your namespace in {{site.data.keyword.registrylong_notm}} and deploy containers from these images to the `default` Kubernetes namespace in your cluster. If you need to pull images in other cluster Kubernetes namespace or other registries, you must set up the image pull secret.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-09"
 
 keywords: kubernetes, iks
 
@@ -150,7 +150,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.15.10_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.16.7_1523*
       ```
       {: screen}
 
@@ -1431,7 +1431,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Hard disk | SSD |
 | Reclaim policy | <code>ibmc-block-bronze</code>: Delete</br><code>ibmc-block-retain-bronze</code>: Retain |
 | Billing | The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul> |
-| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
+| Pricing | [Pricing information ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
 {: class="simple-tab-table"}
 {: caption="Block storage class: bronze" caption-side="top"}
 {: #block_bronze}
@@ -1448,7 +1448,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Hard disk | SSD |
 | Reclaim policy | <code>ibmc-block-silver</code>: Delete</br><code>ibmc-block-retain-silver</code>: Retain |
 | Billing | The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul> |
-| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
+| Pricing | [Pricing information ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
 {: class="simple-tab-table"}
 {: caption="Block storage class: silver" caption-side="top"}
 {: #block_silver}
@@ -1465,7 +1465,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Hard disk | SSD |
 | Reclaim policy | <code>ibmc-block-gold</code>: Delete</br><code>ibmc-block-retain-gold</code>: Retain |
 | Billing | The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul> |
-| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
+| Pricing | [Pricing information ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
 {: class="simple-tab-table"}
 {: caption="Block storage class: gold" caption-side="top"}
 {: #block_gold}
@@ -1481,7 +1481,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Hard disk | The IOPS to gigabyte ratio determines the type of hard disk that is provisioned. To determine your IOPS to gigabyte ratio, you divide the IOPS by the size of your storage. </br></br>Example: </br>You chose 500Gi of storage with 100 IOPS. Your ratio is 0.2 (100 IOPS/500Gi). </br></br><strong>Overview of hard disk types per ratio:</strong><ul><li>Less than or equal to 0.3: SATA</li><li>Greater than 0.3: SSD</li></ul> |
 | Reclaim policy | <code>ibmc-block-custom</code>: Delete</br><code>ibmc-block-retain-custom</code>: Retain |
 | Billing | The default billing type depends on the version of your {{site.data.keyword.cloud_notm}} Block Storage plug-in: <ul><li> Version 1.0.1 and higher: Hourly</li><li>Version 1.0.0 and lower: Monthly</li></ul> |
-| Pricing | [Pricing information![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
+| Pricing | [Pricing information ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/block-storage/pricing) |
 {: class="simple-tab-table"}
 {: caption="Block storage class: custom" caption-side="top"}
 {: #block_custom}
@@ -1657,6 +1657,7 @@ The following examples create a storage class that provisions block storage with
       addonmanager.kubernetes.io/mode: Reconcile
   provisioner: ibm.io/ibmc-block
   parameters:
+    classVersion: "2"
     type: "Performance"
     sizeIOPSRange: |-
       [20-39]Gi:[100-1000]
@@ -1672,7 +1673,6 @@ The following examples create a storage class that provisions block storage with
       [10000-12000]Gi:[1000-48000]
     fsType: "xfs"
   reclaimPolicy: "Delete"
-  classVersion: "2"
   ```
   {: codeblock}
 

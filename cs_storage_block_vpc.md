@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-09"
 
 keywords: kubernetes, iks, vpc
 
@@ -45,9 +45,6 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled by default on VPC clusters. You can enable or disable the add-on by using the [`addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) or [`addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) command in the CLI.
 {: note}
-
-{{site.data.keyword.block_storage_is_short}} is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove {{site.data.keyword.block_storage_is_short}} from your cluster.
-{: important}
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
 {: #vpc_block_qs}
@@ -505,6 +502,71 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 <br />
 
 
+## Updating the {{site.data.keyword.block_storage_is_short}} add-on
+{: #vpc-addon-update}
+
+You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabling and re-enabling the add-on in your cluster.
+{: shortdesc}
+
+1. Check to see if an update is available. If an update is available, the plug-in version is flagged with an asterisk and the latest version is shown. Note the latest version as this value is used later.
+  ```
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  Name                   Version                 Health State   Health Status   
+  vpc-block-csi-driver   1.0.0* (2.0.0 latest)   normal         Addon Ready
+  ```
+  {: screen}
+
+2. Disable the {{site.data.keyword.block_storage_is_short}} add-on. 
+  ```
+  ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster <cluster_name_or_ID> -f
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Disabling add-on vpc-block-csi-driver for cluster <cluster_name_or_ID>...
+  OK
+  ```
+  {: screen}
+
+2. Verify that the add-on is disabled. If the add-on is disabled it does not appear in the list of add-ons in your cluster. The add-on might still display in your list of add-ons for a few minutes after running the `disable` command.
+  ```
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. Re-enable the add-on and specify the latest version that you retrieved earlier.
+  ```
+  ibmcloud ks cluster addon enable vpc-block-csi-driver --version <version> --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Enabling add-on vpc-block-csi-driver(2.0.0) for cluster <cluster_name_or_ID>...
+  OK
+  ```
+  {: screen}
+
+4. Verify that the add-on is in the `Addon Ready` state. The add-on might take a few minutes to become ready.
+  ```
+  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example Output
+  ```
+  Name                   Version   Health State   Health Status   
+  vpc-block-csi-driver   2.0.0     normal         Addon Ready
+  ```
+  {: screen}
+
+
 
 ## Creating {{site.data.keyword.block_storage_is_short}} with a different file system
 {: #vpc-block-xfs}
@@ -910,6 +972,8 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
    {: screen}
 
 6. Follow the steps in [Adding {{site.data.keyword.block_storage_is_short}} to your apps](#vpc-block-add) to create a PVC with your customized storage class to provision {{site.data.keyword.block_storage_is_short}}. Then, mount this storage to a sample app.
+
+</br>
 
 ### Storing your custom PVC settings in a Kubernetes secret
 {: #vpc-block-storageclass-secret}

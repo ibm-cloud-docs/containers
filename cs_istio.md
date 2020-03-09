@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-27"
+lastupdated: "2020-03-06"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -179,7 +179,7 @@ Update your Istio add-on to the latest version, which is tested by {{site.data.k
 The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 12 February 2020. In Kubernetes version 1.16 or later clusters, you can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: shortdesc}
 
-After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio supported by {{site.data.keyword.containerlong_notm}}. You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
+After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or later cluster, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates. You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
 
 1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
    ```
@@ -250,8 +250,6 @@ After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or l
 
 10. Next, [update your `istioctl` client and sidecars](#update_client_sidecar).
 
-
-
 ### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
 
@@ -260,20 +258,33 @@ Whenever the Istio managed add-on is updated, update your `istioctl` client and 
 
 For example, the patch version of your add-on might be updated automatically by {{site.data.keyword.containerlong_notm}}, or you might [manually update your add-on](#istio_update) from older beta versions to a generally available version. In either case, update your `istioctl` client and your app's existing Istio sidecars to match the Istio version of the add-on.
 
-1. Check the version of your `istioctl` client and the Istio add-on control plane.
+1. Get the version of your `istioctl` client and the Istio add-on control plane components.
   ```
   istioctl version
   ```
   {: pre}
   Example output:
   ```
-  client version: 1.3.3
-  control plane version: 1.4.5
+  client version: 1.4.4
+  cluster-local-gateway version:
+  citadel version: 1.4.5
+  egressgateway version: 1.4.5
+  egressgateway version: 1.4.5
+  galley version: 1.4.5
+  ingressgateway version: 1.4.5
+  ingressgateway version: 1.4.5
+  pilot version: 1.4.5
+  policy version: 1.4.5
+  sidecar-injector version: 1.4.4
+  telemetry version: 1.4.5
+  data plane version: 1.0-dev (2 proxies), 1.4.4 (11 proxies), 1.4.5 (10 proxies), 1.1.7 (1 proxies)
   ```
   {: screen}
-  * If the `client version` (`istioctl`) matches the `control plane version` (Istio add-on control plane), including the patch version, continue to the next step.
-  * If the `client version` does not match the `control plane version`:
-    1. Download the `istioctl` client of the same version as the control plane.
+
+2. In the output of step 1, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`.
+  * If the `client version` and control plane component versions match, continue to the next step.
+  * If the `client version` and control plane component versions do not match:
+    1. Download the `istioctl` client of the same version as the control plane components.
       ```
       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.4.5 sh -
       ```
@@ -283,19 +294,15 @@ For example, the patch version of your add-on might be updated automatically by 
       cd istio-1.4.5
       ```
       {: pre}
+    3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+      ```
+      export PATH=$PWD/bin:$PATH
+      ```
+      {: pre}
 
-2. Check the version of your sidecar injector component.
-  ```
-  istioctl version --short=false | grep sidecar
-  ```
-  {: pre}
-  Example output:
-  ```
-  sidecar-injector version: version.BuildInfo{Version:"1.3.3", GitRevision:"c562694ea6e554c2b60d12c9876d2641cfdd917d-dirty", User:"root", Host:"ccdab576-c621-11e9-abca-26bcb80ec4e0", GolangVersion:"go1.12.9", DockerHub:"docker.io/istio", BuildStatus:"Modified", GitTag:"1.2.3"}
-  ```
-  {: screen}
-  * If the `Version` matches the control plane version that you found in the previous step, no further updates are required.
-  * If the `Version` does not match the control plane version, [update your sidecars](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade){: external}.
+3. In the output of step 1, compare the `client version` (`istioctl`) to the `sidecar injector version`.
+  * If the `client version` and `sidecar injector version` match, no further updates are required.
+  * If the `client version` and `sidecar injector version` do not match, [update your sidecars](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade){: external}.
 
 <br />
 
@@ -369,9 +376,6 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
   ```
   {: pre}
 
-<br />
-
-
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
 
@@ -415,44 +419,5 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 ## Troubleshooting
 {: #istio-ts}
 
-Resolve some common issues that you might encounter when you use the managed Istio add-on.
+To resolve some common issues that you might encounter when you use the managed Istio add-on, see [Troubleshooting managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons).
 {: shortdesc}
-
-### Istio components are missing
-{: #control_plane}
-
-{: tsSymptoms}
-One or more of the Istio control plane components, such as `istio-citadel` or `istio-telemetry`, does not exist in your cluster.
-
-{: tsCauses}
-* You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
-* You changed the default `IstioControlPlane` resource. When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane. Only the `IstioControlPlane` resources that are managed by IBM are supported. Changing the control plane settings might result in an unsupported control plane state.
-
-{: tsResolve}
-Refresh your `IstioControlPlane` resource. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
-```
-kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
-```
-{: pre}
-
-### Debugging Istio
-{: #istio_debug_tool}
-
-While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
-{: shortdesc}
-
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
-
-2. Click the **Add-ons** tab.
-
-3. On the Diagnostics and Debug Tool card, click **Install**.
-
-4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed.
-
-5. On the Diagnostics and Debug Tool card, click **Dashboard**.
-
-5. In the debug tool dashboard, select the **istio_control_plane** or **istio_resources**  group of tests. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
-
-6. Click **Run**.
-
-7. Check the results of each test. If any test fails, click the information icon next to the test's name in the left-hand column for information about how to resolve the issue.

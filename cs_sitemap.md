@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-06"
 
 ---
 
@@ -830,16 +830,16 @@ lastupdated: "2020-03-03"
 * [Opening ports in the Ingress ALB](/docs/containers?topic=containers-ingress-settings#opening_ingress_ports)
 * [Preserving the source IP address](/docs/containers?topic=containers-ingress-settings#preserve_source_ip)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers)
-* [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check)
+* [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-manage#readiness-check)
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-ingress-settings#default_server_cert)
 * [Tuning ALB performance](/docs/containers?topic=containers-ingress-settings#perf_tuning)
-  * [Scaling ALBs](/docs/containers?topic=containers-ingress-settings#scale_albs)
+  * [Scaling ALBs](/docs/containers?topic=containers-ingress-manage#scale_albs)
   * [Adding ALB socket listeners for each NGINX worker process](/docs/containers?topic=containers-ingress-settings#reuse-port)
   * [Enabling log buffering and flush timeout](/docs/containers?topic=containers-ingress-settings#access-log)
   * [Changing the number or duration of keepalive connections](/docs/containers?topic=containers-ingress-settings#keepalive_time)
   * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress-settings#backlog)
   * [Tuning kernel performance](/docs/containers?topic=containers-ingress-settings#ingress_kernel)
-* [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-settings#migrate-alb-vlan)
+* [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-manage#migrate-alb-vlan)
 
 [Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-03"
+lastupdated: "2020-03-06"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -181,7 +181,7 @@ Refer to the following table for a summary of changes for each build of the Ingr
 <td>515 / 334</td>
 <td>30 Jul 2019</td>
 <td><ul>
-<li>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-settings#readiness-check).</li>
+<li>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-manage#readiness-check).</li>
 <li>Fixes GNU `patch` vulnerabilities for [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13636) and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13638).</li>
 </ul></td>
 <td>-</td>

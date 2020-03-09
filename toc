@@ -142,6 +142,7 @@ Kubernetes Service
         cs_ingress.md
         cs_annotations.md
         cs_ingress_settings.md
+        cs_ingress_manage.md
         cs_ingress_health.md
         cs_ingress_user_managed.md
 
@@ -206,6 +207,7 @@ Kubernetes Service
         cs_troubleshoot_network.md
         cs_troubleshoot_health.md
         cs_troubleshoot_app.md
+        cs_troubleshoot_addons.md
         cs_troubleshoot_lb.md
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_storage.md
