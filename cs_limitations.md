@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-09"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -138,7 +138,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Pod instances | You can run 110 pods per worker node. If you have worker nodes that run Kubernetes 1.14.3_1524 or later, and are provisioned with 11 CPU cores or more, you can support 10 pods per core, up to a limit of 250 pods per worker node. The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity. |
 | Worker node flavors | Only certain flavors are available for worker node [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). Bare metal machines are not supported. |
 | Worker node host access | For security, you cannot SSH into the worker node compute host. |
-| Worker node instances | You can have up to 100 worker nodes across all VPC clusters per account. |
+| Worker node instances | You can have up to 20 worker nodes per region across all VPC clusters per account. For more information, see [VSI quotas](/docs/vpc-on-classic?topic=vpc-on-classic-quotas#vsi-quotas). |
 | Worker node updates | You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. |
 {: summary="This table contains information on compute limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster compute limitations"}
