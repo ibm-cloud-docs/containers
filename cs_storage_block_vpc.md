@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-06"
+lastupdated: "2020-03-09"
 
 keywords: kubernetes, iks, vpc
 
@@ -45,9 +45,6 @@ You can choose between predefined storage tiers with GB sizes and IOPS that meet
 
 The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled by default on VPC clusters. You can enable or disable the add-on by using the [`addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) or [`addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) command in the CLI.
 {: note}
-
-{{site.data.keyword.block_storage_is_short}} is not removed when you remove the cluster or the PVC. Instead, follow the [steps](/docs/containers?topic=containers-cleanup) to manually remove {{site.data.keyword.block_storage_is_short}} from your cluster.
-{: important}
 
 ## Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}
 {: #vpc_block_qs}
