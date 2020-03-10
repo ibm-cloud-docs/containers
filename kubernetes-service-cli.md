@@ -2836,9 +2836,9 @@ View and configure an Ingress application load balancer (ALB).
 Disable automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-By default, automatic updates to Ingress application load balancers (ALBs) are enabled. ALB pods are automatically updated when a new build version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb update` command](#cs_alb_update).
+By default, automatic updates to Ingress application load balancers (ALBs) are enabled. ALB pods are automatically updated when a new image version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb update` command](#cs_alb_update).
 
-When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the image version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
 
 ```
 ibmcloud ks alb autoupdate disable --cluster CLUSTER [-s]
@@ -2874,7 +2874,7 @@ ibmcloud ks alb autoupdate disable --cluster mycluster
 Enable automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next build version becomes available, the ALBs are automatically updated to the latest build.
+If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next image version becomes available, the ALBs are automatically updated to the latest build.
 
 ```
 ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
@@ -2901,7 +2901,7 @@ ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
 ### `ibmcloud ks alb autoupdate get`
 {: #cs_alb_autoupdate_get}
 
-Check whether automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest build version.
+Check whether automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest image version.
 {: shortdesc}
 
 ```
@@ -3471,12 +3471,14 @@ ibmcloud ks alb types [--json] [-s]
 ### `ibmcloud ks alb update`
 {: #cs_alb_update}
 
+
+
 Force an update of the Ingress ALB pods in the cluster to the latest version.
 {: shortdesc}
 
 If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
 
-When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
+When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the image version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
 
 ```
 ibmcloud ks alb update --cluster CLUSTER [--json] [-s]
@@ -3501,6 +3503,8 @@ ibmcloud ks alb update --cluster CLUSTER [--json] [-s]
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
+
+
 <br />
 
 
@@ -3518,7 +3522,7 @@ Disable automatic updates of all Fluentd pods in a cluster.
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
-Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd configmap, but does not change the build version of your Fluentd for logging add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your add-on images.
+Disable automatic updates of your Fluentd pods in a specific cluster. When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Fluentd configmap, but does not change the image version of your Fluentd for logging add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your add-on images.
 
 ```
 ibmcloud ks logging autoupdate disable --cluster CLUSTER [-s]
@@ -3539,7 +3543,7 @@ ibmcloud ks logging autoupdate disable --cluster CLUSTER [-s]
 ### `ibmcloud ks logging autoupdate enable`
 {: #cs_log_autoupdate_enable}
 
-Enable automatic updates for your Fluentd pods in a specific cluster. Fluentd pods are automatically updated when a new build version is available.
+Enable automatic updates for your Fluentd pods in a specific cluster. Fluentd pods are automatically updated when a new image version is available.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
