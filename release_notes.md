@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-10"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 10 March 2020 | **Istio add-on**: [Version 1.4.6 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#146) is released.|
 | 09 March 2020 | <ul><li>**Add-on troubleshooting**: Added a troubleshooting page for managed add-ons, including a topic for [reviewing add-on state and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons).</li><li>**Managing Ingress ALBs**: Added a page for [managing the lifecycle of your ALBs](/docs/containers?topic=containers-ingress-manage), including information about creating, updating, and moving ALBs.</li><li>**Kubernetes 1.16**: [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.</li><li>**Updating the {{site.data.keyword.block_storage_is_short}} add-on**: Added steps to update the {{site.data.keyword.block_storage_is_short}} add-on.</li></ul> |
 | 04 March 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.102](/docs/containers?topic=containers-cs_cli_changelog#04).</li><li>**Ingress ALB changelog**: Updated the [`ingress-auth` image build to 390](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul> |
 | 02 March 2020 | **Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.3_1518](/docs/containers?topic=containers-changelog#1173_1518), [1.16.7_1525](/docs/containers?topic=containers-changelog#1167_1525), [1.15.10_1532](/docs/containers?topic=containers-changelog#11510_1532), and [1.14.10_1548](/docs/containers?topic=containers-changelog#11410_1548). |
