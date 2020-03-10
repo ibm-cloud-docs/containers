@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-10"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -49,9 +49,9 @@ Periodically, the Kubernetes project releases [major, minor, or patch updates](/
 You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
-IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
+IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`).
 
-For example, if your current Kubernetes API server version is 1.14 and you want to update to 1.17, you must first update to 1.15.
+For example, if your current Kubernetes API server version is 1.15 (`n`) and you want to update to 1.17, you must first update to 1.16 (`n+1`) and then to 1.17 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.15 to 1.17 (`n+2`).
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
@@ -69,8 +69,6 @@ Unlike the master, you must update your workers for each patch version.
 
 **What happens during the master update?**</br>
 Your master is highly available with three replica master pods. The master pods have a rolling update, during which only one pod is unavailable at a time. Two instances are up and running so that you can access and change the cluster during the update. Your worker nodes, apps, and resources continue to run.
-
-For clusters that run previous versions of Kubernetes, when you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users deployed are not modified and continue to run.
 
 **Can I roll back the update?**</br>
 No, you cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before you update your production master.
@@ -542,17 +540,16 @@ You can optionally disable automatic updates for the following components:
 
 Yes. Your cluster is deployed with the following managed components and associated resources that cannot be changed, except to scale pods or edit configmaps for certain performance benefits. If you try to change one of these deployment components, their original settings are restored on a regular interval when they are updated with the cluster master. However, note that resources that you create that are associated with these components, such as Calico network policies that you create to be implemented by the Calico deployment components, are not updated.
 
-* `calico`
-* `coredns`
-* `coredns-autoscaler`
-* `heapster`
+* `calico` components
+* `coredns` components
+* `ibm-cloud-provider-ip`
 * `ibm-file-plugin`
-* `ibm-storage-watcher`
 * `ibm-keepalived-watcher`
-* `kube-dns-amd64`
-* `kube-dns-autoscaler`
-* `kubernetes-dashboard`
+* `ibm-master-proxy`
+* `ibm-storage-watcher`
+* `kubernetes-dashboard` components
 * `metrics-server`
+* `olm-operator` and `catalog` components (1.16 and later)
 * `vpn`
 * In gateway-enabled classic clusters, `ibm-gateway-controller`
 
