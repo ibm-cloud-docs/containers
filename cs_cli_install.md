@@ -102,7 +102,6 @@ For reference information about these CLIs, see the documentation for those tool
 
 
 
-
 ## Installing the Kubernetes CLI (`kubectl`)
 {: #kubectl}
 
@@ -286,9 +285,6 @@ If you are using Windows and the Kubernetes CLI is not installed in the same dir
 {: tip}
 
 <br />
-
-
-
 
 
 
