@@ -269,12 +269,15 @@ If you use non-default security groups that are applied at the level of the VPC,
 
 
 
+When you modify a security group to allow incoming TCP traffic to ports `30000 - 32767`, you can choose to allow traffic from any source, or only from the VPC subnets that your cluster is connected. If you choose to allow traffic from only your cluster's VPC subnets, your traffic rule provides more restrictive security, because incoming traffic is only permitted from your VPC load balancers that are on these subnets. However, any time that you add a VPC subnet to your cluster, you must create a new rule that allows incoming traffic from that subnet's CIDR.
+{: note}
+
 ### Opening security group ports in the console
 {: #security_groups_ui}
 
 1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC of your cluster.
 2. In the **Address prefixes** section, copy the **IP Range**. If your cluster is multizone, copy the range for each subnet.
-3. In the **Virtual private cloud details** section, click the **Default Security Group**.
+3. From the [Security groups for VPC page](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the security group for your VPC.
 4. In the **Inbound rules** section, click **New rule**.
 5. Type `30000` for the **Port min** and `32767` for the **Port max**.
 6. For the **Source Type**, select **CIDR block** and paste one IP range that you previously copied.
