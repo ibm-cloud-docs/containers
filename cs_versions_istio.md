@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-10"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -44,6 +44,18 @@ View information for patch updates to the [managed Istio add-on](/docs/container
 
 The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 14 February 2020. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](/docs/containers?topic=containers-istio#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
 {: important}
+
+## Changelog for 1.4.6, released 09 March 2020
+{: #146}
+
+The following table shows the changes that are included in version 1.4.6 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.4.5 | 1.4.6 | <ul><li>See the Istio release notes for [Istio 1.4.6](https://istio.io/news/releases/1.4.x/announcing-1.4.6/){:external}.</li><li>Resolves vulnerabilities for [CVE-2020-8659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8659){: external}, [CVE-2020-8660](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8660){: external}, [CVE-2020-8661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8661){: external}, and [CVE-2020-8664](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8664){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.4.5" caption-side="top"}
 
 ## Changelog for 1.4.5, released 21 February 2020
 {: #145}

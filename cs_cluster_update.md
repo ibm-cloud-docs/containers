@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-10"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -49,9 +49,9 @@ Periodically, the Kubernetes project releases [major, minor, or patch updates](/
 You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
-IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server no more than two versions ahead of its current version.
+IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`).
 
-For example, if your current Kubernetes API server version is 1.14 and you want to update to 1.17, you must first update to 1.15.
+For example, if your current Kubernetes API server version is 1.15 (`n`) and you want to update to 1.17, you must first update to 1.16 (`n+1`) and then to 1.17 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.15 to 1.17 (`n+2`).
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
@@ -69,8 +69,6 @@ Unlike the master, you must update your workers for each patch version.
 
 **What happens during the master update?**</br>
 Your master is highly available with three replica master pods. The master pods have a rolling update, during which only one pod is unavailable at a time. Two instances are up and running so that you can access and change the cluster during the update. Your worker nodes, apps, and resources continue to run.
-
-For clusters that run previous versions of Kubernetes, when you update the Kubernetes API server, the API server is down for about 5 - 10 minutes. During the update, you cannot access or change the cluster. However, worker nodes, apps, and resources that cluster users deployed are not modified and continue to run.
 
 **Can I roll back the update?**</br>
 No, you cannot roll back a cluster to a previous version after the update process takes place. Be sure to use a test cluster and follow the instructions to address potential issues before you update your production master.
@@ -542,17 +540,16 @@ You can optionally disable automatic updates for the following components:
 
 Yes. Your cluster is deployed with the following managed components and associated resources that cannot be changed, except to scale pods or edit configmaps for certain performance benefits. If you try to change one of these deployment components, their original settings are restored on a regular interval when they are updated with the cluster master. However, note that resources that you create that are associated with these components, such as Calico network policies that you create to be implemented by the Calico deployment components, are not updated.
 
-* `calico`
-* `coredns`
-* `coredns-autoscaler`
-* `heapster`
+* `calico` components
+* `coredns` components
+* `ibm-cloud-provider-ip`
 * `ibm-file-plugin`
-* `ibm-storage-watcher`
 * `ibm-keepalived-watcher`
-* `kube-dns-amd64`
-* `kube-dns-autoscaler`
-* `kubernetes-dashboard`
+* `ibm-master-proxy`
+* `ibm-storage-watcher`
+* `kubernetes-dashboard` components
 * `metrics-server`
+* `olm-operator` and `catalog` components (1.16 and later)
 * `vpn`
 * In gateway-enabled classic clusters, `ibm-gateway-controller`
 
@@ -589,87 +586,8 @@ You can manage automatic updates of the Fluentd component in the following ways.
 ### Managing automatic updates for Ingress ALBs
 {: #alb}
 
-Control when the Ingress application load balancer (ALB) component is updated.
+Control when the Ingress application load balancer (ALB) component is updated. For information about keeping ALBs up-to-date, see [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress-manage).
 {: shortdesc}
-
-When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest build version. By default, automatic updates to ALBs are enabled. Updates are performed on a rolling basis so that your Ingress ALBs don't experience any downtime. When a pod restarts after the update is applied, a [readiness check](/docs/containers?topic=containers-ingress-manage#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss during ALB pod updates and can take up to 5 minutes.
-
-If you disable automatic updates, you are responsible for updating your ALBs. As updates become available, you are notified in the CLI when you run the `ibmcloud ks alb ls` or `alb autoupdate get` commands.
-
-When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the build version of your Ingress ALBs. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALBs' images.
-{: note}
-
-Before you begin:
-
-1. Verify that your ALBs are running.
-    ```
-    ibmcloud ks alb ls
-    ```
-    {: pre}
-
-2. Check the status of automatic updates for the Ingress ALB component.
-    ```
-    ibmcloud ks alb autoupdate get --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output when automatic updates are enabled:
-    ```
-    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
-    OK
-    Automatic updates of the ALB pods are enabled in cluster mycluster
-    ALBs are at the latest version in cluster mycluster
-    ```
-    {: screen}
-
-    Example output when automatic updates are disabled:
-    ```
-    Retrieving automatic update status of application load balancer (ALB) pods in cluster mycluster...
-    OK
-    Automatic updates of the ALB pods are disabled in cluster mycluster
-    ALBs are not at the latest version in cluster mycluster. To view the current version, run 'ibmcloud ks alb ls'.
-    ```
-    {: screen}
-
-3. Verify the current **Build** version of your ALB pods.
-    ```
-    ibmcloud ks alb ls --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                           ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   10.xxx.xx.xxx   dal10   ingress:411/ingress-auth:315*   2294021       -
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:411/ingress-auth:315*   2234945       -
-
-    * An update is available for the ALB pods. Review any potentially disruptive changes for the latest version before you update: https://cloud.ibm.com/docs/containers?topic=containers-update#alb
-    ```
-    {: screen}
-
-You can manage automatic updates of the Ingress ALB component in the following ways. **Note**: To run the following commands, you must have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
-* Disable automatic updates.
-    ```
-    ibmcloud ks alb autoupdate disable --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-* Manually update your Ingress ALBs.
-    1. If an update is available and you want to update your ALBs, first check the [changelog for the latest version of the Ingress ALB component](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) to verify any potentially disruptive changes.
-    2. Force a one-time update of your ALB pods. All ALB pods in the cluster are updated to the latest build version. You cannot update an individual ALB or choose which build to update ALBs to. Automatic updates remain disabled.
-        ```
-        ibmcloud ks alb update --cluster <cluster_name_or_ID>
-        ```
-        {: pre}
-* If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. **Note**: After you roll back an update, automatic updates for ALB pods are disabled.
-    ```
-    ibmcloud ks alb rollback --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
-* Re-enable automatic updates. Whenever the next build becomes available, the ALB pods are automatically updated to the latest build.
-    ```
-    ibmcloud ks alb autoupdate enable --cluster <cluster_name_or_ID>
-    ```
-    {: pre}
 
 <br />
 
