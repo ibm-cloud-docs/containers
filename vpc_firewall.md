@@ -245,6 +245,8 @@ Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) an
 You can use access control lists (ACLs) on your VPC subnets to act as a firewall to restrict worker node ingress and egress. However, you must allow your worker nodes to access the resources that are required for the cluster to function by following the steps in [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls).
 {: shortdesc}
 
+
+
 <br />
 
 
