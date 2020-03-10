@@ -300,6 +300,11 @@ This task includes the information for updating the following CLIs:
 -   Kubernetes CLI version 1.16.7 or later
 -   {{site.data.keyword.registryshort_notm}} plug-in
 
+
+When version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in releases, permanent syntax and behavior changes are not backwards compatible. You have until 16 March 2020 to update `ibmcloud ks` CLI command syntax. For more information, see [Using the beta plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta).</br></br>To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run.
+{: important}
+
+
 <br>
 To update the CLIs:
 
