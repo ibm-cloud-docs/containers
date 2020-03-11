@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-18"
+lastupdated: "2020-03-11"
 
 keywords: kubernetes, iks
 
@@ -69,40 +69,17 @@ Before you begin:
 
 Steps:
 
-1.  Deploy your app to a cluster from the CLI. When you deploy your app, you must request CPU.
-
+1.  Deploy your app to a cluster from the CLI. For more complex deployments, you might need to create a [configuration file](/docs/containers?topic=containers-deploy_app#app_cli).
     ```
-    kubectl run <app_name> --image=<image> --requests=cpu=<cpu> --expose --port=<port_number>
+    kubectl create deployment <app_name> --image=<image>
     ```
     {: pre}
-
-    <table summary="A table that describes in Column 1 the kubectl command options and in Column 2 how to fill out those options.">
-    <caption>Command components for `kubectl run`</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command&apos;s components</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td><code>--image</code></td>
-    <td>The application that you want to deploy.</td>
-    </tr>
-    <tr>
-    <td><code>--request=cpu</code></td>
-    <td>The required CPU for the container, which is specified in millicores. As an example, <code>--requests=200m</code>.</td>
-    </tr>
-    <tr>
-    <td><code>--expose</code></td>
-    <td>When true, creates an external service.</td>
-    </tr>
-    <tr>
-    <td><code>--port</code></td>
-    <td>The port where your app is available externally.</td>
-    </tr></tbody></table>
-
-    For more complex deployments, you might need to create a [configuration file](/docs/containers?topic=containers-deploy_app#app_cli).
-    {: tip}
-
-2.  Create an autoscaler and define your policy. For more information about working with the `kubectl autoscale` command, see [the Kubernetes documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale){: external}.
+2.  Set CPU resource limits in millicores for the containers that run in your deployment, such as `100m`. You can also set memory limits, but the horizontal pod autoscaler only considers CPU resource limits for scaling purposes. For more information, see the [`kubectl set resources` documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#-em-resources-em-){: external}.
+    ```
+    kubectl set resources deployment <app_name> --limits=cpu=100m
+    ```
+    {: pre}
+3.  Create a horizontal pod autoscaler and define your policy. For more information, see the [`kubectl autoscale` documentation](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#autoscale){: external}.
 
     ```
     kubectl autoscale deployment <deployment_name> --cpu-percent=<percentage> --min=<min_value> --max=<max_value>

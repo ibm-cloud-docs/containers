@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-11"
 
 keywords: kubernetes, iks
 
@@ -90,7 +90,7 @@ The following image shows how the web server app is exposed to the internet by t
 
 1. Deploy the sample web server app. When a connection is made to the web server app, the app responds with the HTTP headers that it received in the connection.
     ```
-    kubectl run webserver --image=k8s.gcr.io/echoserver:1.10 --replicas=3
+    kubectl apply -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/deploy-apps-clusters/webserver.yaml
     ```
     {: pre}
 

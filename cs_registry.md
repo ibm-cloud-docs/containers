@@ -583,7 +583,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 4.  Create a pod in the namespace that builds a container from an image in the entitled registry.
     ```
-    kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace>
+    kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace> --generator=run-pod/v1
     ```
     {: pre}
 5.  Check that your container was able to successfully build from the entitled image by verifying that the pod is in a **Running** status.
