@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-06"
+lastupdated: "2020-03-11"
 
 ---
 
@@ -742,7 +742,7 @@ lastupdated: "2020-03-06"
 ## HTTPS load balancing with Ingress
 {: #sitemap-ingress}
 
-[Quick start for Ingress](https://cloud.ibm.com/docs/containers?topic=containers-ingress-qs)
+[Quick start for Ingress](/docs/containers?topic=containers-ingress-qs)
 
 [About Ingress ALBs](/docs/containers?topic=containers-ingress-about)
 * [What comes with Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
