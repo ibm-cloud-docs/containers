@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-12"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -275,10 +275,10 @@ When you modify a security group to allow incoming TCP traffic to ports `30000 -
 ### Opening security group ports in the console
 {: #security_groups_ui}
 
-1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC of your cluster.
+1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC that your cluster is in.
 2. In the **Address prefixes** section, copy the **IP Range**. If your cluster is multizone, copy the range for each subnet.
 3. From the [Security groups for VPC page](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the security group for your VPC.
-4. In the **Inbound rules** section, click **New rule**.
+4. In the **Inbound rules** section, click **New rule**. The **TCP** protocol is pre-selected.
 5. Type `30000` for the **Port min** and `32767` for the **Port max**.
 6. For the **Source Type**, select **CIDR block** and paste one IP range that you previously copied.
 7. Click **Save**.
