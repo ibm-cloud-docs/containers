@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-12"
+lastupdated: "2020-03-13"
 
 keywords: kubernetes, iks
 
@@ -123,5 +123,5 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.16 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.15 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> |
-{: summary="The rows are read from left to right. The Kubernetes version is in the first column, with the default feature gates in the second column."}
+{: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
 {: caption="Overview of feature gates" caption-side="top"}
