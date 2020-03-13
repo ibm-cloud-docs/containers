@@ -172,7 +172,8 @@ Now that you have a good estimate of your app size and the worker nodes that you
 
 1.  [Create your cluster](/docs/containers?topic=containers-clusters) with the worker pool flavor and number of worker nodes that you [previously estimated](#sizing_workers).
 2.  Review what compute resources your cluster uses by default and calculate the remaining cluster capacity that you can use for your workloads.
-    1.  Find the CPU and memory usage across all worker nodes. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
+    1.  With the {{site.data.keyword.cloud_notm}} IAM **Manager** service role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  Find the CPU and memory usage across all worker nodes. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
         ```
         kubectl top nodes
         ```
@@ -191,18 +192,19 @@ Now that you have a good estimate of your app size and the worker nodes that you
 3.  [Deploy your apps](/docs/containers?topic=containers-deploy_app) to the cluster, and make sure to [set resource requests and limits](/docs/containers?topic=containers-app#resourcereq) based on the [app size that you previously estimated](#sizing_resources) for your apps, to limit the amount of compute resources the apps can consume.
 4.  Deploy any add-ons, plug-ins, or other cloud services that you want to use.
 5.  Review what compute resources your workloads consume and calculate the remaining cluster capacity to deploy additional apps or scale existing apps.
-    1.  List the pods that run in your cluster.
+    1.  With at least the {{site.data.keyword.cloud_notm}} IAM **Reader** service role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+    2.  List the pods that run in your cluster.
         ```
         kubectl get pods --all-namespaces
         ```
         {: pre}
-    2.  Get the details of a pod. Note the **limits** and **request** map of the CPU and memory.
+    3.  Get the details of a pod. Note the **limits** and **request** map of the CPU and memory.
         ```
         kubectl get pod -n <namespace> <pod> -o=jsonpath='{range .spec.containers[*]}  {.name}:{.resources}{"\n"}{end}'
         ```
         {: pre}
-    3.  Repeat the previous step for each pod in your cluster.
-    4.  Add up the resource requests and limits of the apps that you deployed by default.
+    4.  Repeat the previous step for each pod in your cluster.
+    5.  Add up the resource requests and limits of the apps that you deployed by default.
 6.  Subtract the sum of your workload resource limits that you estimated in Step 5 from the available compute resources of your worker nodes that you estimated in Step 2. The remaining amount is the extra compute resources that you have to run new workloads or to scale existing your workloads.
 7.  For workloads that need to scale up and down in response to resource requests, set up the [horizontal pod autoscaler](/docs/containers?topic=containers-update_app#app_scaling) and [cluster worker pool autoscaler](/docs/containers?topic=containers-ca#ca).
 8.  [Set up monitoring tools](/docs/containers?topic=containers-health#view_metrics) to continue reviewing CPU and memory usage across worker nodes in your cluster.
