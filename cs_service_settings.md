@@ -118,10 +118,10 @@ Review the feature gates that are applied to all master and worker node componen
 {: shortdesc}
 
 | Kubernetes version | Default feature gates |
-|------|--------------|
+|---|---|
 | 1.17 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul> | 
 | 1.16 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.15 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
-{: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
 {: caption="Overview of feature gates" caption-side="top"}
+{: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
