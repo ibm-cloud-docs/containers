@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-13"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -119,7 +119,7 @@ You and IBM share responsibilities for controlling access to your {{site.data.ke
 
 | Resource | IBM responsibilities | Your responsibilities |
 | -------- | -------------------- | --------------------- |
-| Observability | <ul><li>Provide the ability to integrate {{site.data.keyword.at_full_notm}} with your cluster to audit the actions that users take in the cluster.</li></ul> | <ul><li>Set up {{site.data.keyword.at_full_notm}} or other abilities to track user activity in the cluster.</li></ul> |
+| Observability | <ul><li>Provide the ability to integrate {{site.data.keyword.at_full_notm}} with your cluster to audit the actions that users take in the cluster.</li></ul> | <ul><li>Set up {{site.data.keyword.at_full_notm}} or other capabilities to track user activity in the cluster.</li></ul> |
 {: summary="The rows are read from left to right. The resource area of comparing responsibilities is in the first column, with the responsibilities of IBM in the second column and your responsibilities in the third column."}
 {: caption="Table 4. Responsibilities for identity and access management" caption-side="top"}
 
@@ -134,7 +134,7 @@ IBM is responsible for the security and compliance of {{site.data.keyword.contai
 
 | Resource | IBM responsibilities | Your responsibilities |
 | -------- | -------------------- | --------------------- |
-| General | <ul><li>Maintain controls commensurate to [various industry compliance standards](/docs/containers?topic=containers-faqs#standards), such as PCI DSS.</li><li>Monitor, isolate, and recover the cluster master.</li><li>Provide highly available replicas of the Kubernetes master API server, etcd, scheduler, and controller manager components to protect against a master outage.</li><li>Monitor and report the health of the master and worker nodes in the various interfaces.</li><li>Automatically apply master security patch updates, and provide worker node security patch updates.</li><li>Enable certain security settings, such as encrypted disks on worker nodes</li><li>Disable certain insecure actions for worker nodes, such as not permitting users to SSH into the host.</li><li>Encrypt communication between the master and worker nodes with TLS.</li><li>Provide CIS-compliant Linux images for worker node operating systems.</li><li>Continuously monitor master and worker node images to detect vulnerability and security compliance issues.</li><li>Provision worker nodes with two local SSD, AES 256-bit encrypted data partitions.</li><li>Provide options for cluster network connectivity, such as public and private service endpoints.</li><li>Provide options for compute isolation, such as dedicated virtual machines or bare metal.</li><li>Integrate Kubernetes role-based access control (RBAC) with {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM).</li></li></ul> | <ul><li>Set up and maintain security and regulation compliance for your apps and data. For example, choose how to set up your [cluster network](/docs/containers?topic=containers-plan_clusters) and configure further [security settings](/docs/containers?topic=containers-security#security) to meet your workload's security and compliance needs. If applicable, configure your [firewall](/docs/containers?topic=containers-firewall#firewall).</li><li>As part of your incident and operations management responsibilties for the worker nodes, apply the provided security patch updates.</li></ul>  |
+| General | <ul><li>Maintain controls commensurate to [various industry compliance standards](/docs/containers?topic=containers-faqs#standards), such as PCI DSS.</li><li>Monitor, isolate, and recover the cluster master.</li><li>Provide highly available replicas of the Kubernetes master API server, etcd, scheduler, and controller manager components to protect against a master outage.</li><li>Monitor and report the health of the master and worker nodes in the various interfaces.</li><li>Automatically apply master security patch updates, and provide worker node security patch updates.</li><li>Enable certain security settings, such as encrypted disks on worker nodes</li><li>Disable certain insecure actions for worker nodes, such as not permitting users to SSH into the host.</li><li>Encrypt communication between the master and worker nodes with TLS.</li><li>Provide CIS-compliant Linux images for worker node operating systems.</li><li>Continuously monitor master and worker node images to detect vulnerability and security compliance issues.</li><li>Provision worker nodes with two local SSD, AES 256-bit encrypted data partitions.</li><li>Provide options for cluster network connectivity, such as public and private service endpoints.</li><li>Provide options for compute isolation, such as dedicated virtual machines or bare metal.</li><li>Integrate Kubernetes role-based access control (RBAC) with {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM).</li></li></ul> | <ul><li>Set up and maintain security and regulation compliance for your apps and data. For example, choose how to set up your [cluster network](/docs/containers?topic=containers-plan_clusters), [protect sensitive information](/docs/containers?topic=containers-encryption) such as with {{site.data.keyword.keymanagementservicelong_notm}} encryption, and configure further [security settings](/docs/containers?topic=containers-security#security) to meet your workload's security and compliance needs. If applicable, configure your [firewall](/docs/containers?topic=containers-firewall#firewall).</li><li>As part of your incident and operations management responsibilties for the worker nodes, apply the provided security patch updates.</li></ul>  |
 {: summary="The rows are read from left to right. The resource area of comparing responsibilities is in the first column, with the responsibilities of IBM in the second column and your responsibilities in the third column."}
 {: caption="Table 5. Responsibilities for security and regulation compliance" caption-side="top"}
 
@@ -157,6 +157,7 @@ IBM is responsible for the recovery of {{site.data.keyword.containerlong_notm}} 
 {: #applications-and-data}
 
 You are completely responsible for the applications, workloads, and data that you deploy to {{site.data.keyword.cloud_notm}}. However, IBM provides various tools to help you set up, manage, secure, integrate and optimize your apps as described in the following table.
+{: shortdesc}
 
 | Resource | How IBM helps | What you can do |
 | -------- | -------------------- | --------------------- |
