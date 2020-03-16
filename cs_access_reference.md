@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -64,9 +64,6 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. | `ibmcloud ks kube-versions`| [`GET /v1/kube-versions`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions) |
 | View a list of available flavors for your worker nodes. | [`ibmcloud ks flavors`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types) | [`GET /v2​/getFlavors`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/v2GetFlavors) |
 | View current messages for the IBMid user. | [`ibmcloud ks messages`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages) | [`GET /v1/messages`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages) |
-| Deprecated: Find the {{site.data.keyword.containerlong_notm}} region that you are currently in. | [`ibmcloud ks region`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region) | - |
-| Deprecated: Set the region for {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks region set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_region-set) | - |
-| Deprecated: List the available regions. | [`ibmcloud ks region ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_regions) | [`GET /v1/regions`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetRegions) |
 | View a list of supported locations in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks supported-locations`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) | [`GET /v1/locations`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations) |
 | View a list of supported versions in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command) | - |
 | View a list of available zones that you can create a cluster in. | [`ibmcloud ks zone ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_datacenters) | <ul><li>Classic: [`GET /v1/zones`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetZones)</li><li>VPC: [`GET ​/v2​/vpc​/getZones`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcGetZones)</li></ul> |
@@ -170,7 +167,7 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Create a worker pool in a VPC cluster. | [`ibmcloud ks worker-pool create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_classic) | [`POST ​/v2​/vpc​/createWorkerPool`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcCreateWorkerPool) |
 | Rebalance a worker pool. | [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) | [`PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool) |
 | Resize a worker pool. | [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) | [`PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool) |
-| Set a label on a worker pool. | <ul><li>**v1 API**: </li>[`PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)<li>**v2 API**: [`POST /v2/setWorkerPoolLabels`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/v2SetWorkerPoolLabels)</li></ul>|
+| Set a label on a worker pool. | - | <ul><li>**v1 API**: </li>[`PATCH /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/PatchWorkerPool)<li>**v2 API**: [`POST /v2/setWorkerPoolLabels`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/v2SetWorkerPoolLabels)</li></ul>|
 | Delete a worker pool. | [`ibmcloud ks worker-pool rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_rm) | [`DELETE /v1/clusters/{idOrName}/workerpools/{poolidOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveWorkerPool) |
 | Reboot a worker node. | [`ibmcloud ks worker reboot`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) | [`PUT /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker) |
 | Reload a worker node. | [`ibmcloud ks worker reload`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) | [`PUT /v1/clusters/{idOrName}/workers/{workerId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateClusterWorker) |

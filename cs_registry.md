@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-12"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -353,7 +353,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tbody></table>
 4.  Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created, ``<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
     ```
-    ibmcloud iam service-api-key-create <cluster_name>-<kube_namespace>-key <cluster_name>-<kube_namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <kube_namespace>"
+    ibmcloud iam service-api-key-create <cluster_name>-<namespace>-key <cluster_name>-<namespace>-id --description "API key for service ID <service_id> in Kubernetes cluster <cluster_name> namespace <namespace>"
     ```
     {: pre}
 5.  Retrieve your **API Key** value from the output of the previous command.
@@ -490,7 +490,7 @@ You can define an image pull secret in your pod deployment or store the image pu
 {: shortdesc}
 
 To plan how image pull secrets are used in your cluster, choose between the following options:
-* Referring to the image pull secret in your pod deployment: Use this option if you do not want to grant access to your registry for all pods in your namespace by default. Developers can [include the image pull secret in each pod deployment](/docs/containers?topic=containers-app#pod_imagePullSecret) that must access your registry.
+* Referring to the image pull secret in your pod deployment: Use this option if you do not want to grant access to your registry for all pods in your namespace by default. Developers can [include the image pull secret in each pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret) that must access your registry.
 * Storing the image pull secret in the Kubernetes service account: Use this option to grant access to images in your registry for all deployments in the selected Kubernetes namespaces. To store in image pull secret in the Kubernetes service account, use the [following steps](#store_imagePullSecret).
 
 ### Storing the image pull secret in the Kubernetes service account for the selected namespace
@@ -583,7 +583,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 4.  Create a pod in the namespace that builds a container from an image in the entitled registry.
     ```
-    kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace>
+    kubectl run <pod_name> --image=cp.icr.io/<image_name> -n <namespace> --generator=run-pod/v1
     ```
     {: pre}
 5.  Check that your container was able to successfully build from the entitled image by verifying that the pod is in a **Running** status.

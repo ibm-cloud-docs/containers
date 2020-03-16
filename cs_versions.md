@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -76,9 +76,9 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.17.3
-*   Default: 1.16.7
-*   Other: 1.15.10
+*   Latest: 1.17.4
+*   Default: 1.16.8
+*   Other: 1.15.11
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.14
@@ -94,7 +94,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.16.7+IKS
+Server Version: v1.16.8+IKS
 ```
 {: screen}
 
@@ -587,7 +587,7 @@ As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that r
 ### Version 1.12 (Unsupported)
 {: #cs_v112}
 
-As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
@@ -595,7 +595,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.11 (Unsupported)
 {: #cs_v111}
 
-As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.11 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.11 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.

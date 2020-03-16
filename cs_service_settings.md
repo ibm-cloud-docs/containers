@@ -2,32 +2,44 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-13"
 
-keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
+keywords: kubernetes, iks
 
 subcollection: containers
 
 ---
 
-{:new_window: target="_blank"}
-{:shortdesc: .shortdesc}
-{:screen: .screen}
-{:pre: .pre}
-{:table: .aria-labeledby="caption"}
 {:codeblock: .codeblock}
-{:tip: .tip}
-{:note: .note}
-{:important: .important}
 {:deprecated: .deprecated}
 {:download: .download}
+{:external: target="_blank" .external}
+{:faq: data-hd-content-type='faq'}
+{:gif: data-image-type='gif'}
+{:help: data-hd-content-type='help'}
+{:important: .important}
+{:new_window: target="_blank"}
+{:note: .note}
+{:pre: .pre}
 {:preview: .preview}
+{:screen: .screen}
+{:shortdesc: .shortdesc}
+{:support: data-reuse='support'}
+{:table: .aria-labeledby="caption"}
+{:tip: .tip}
+{:troubleshoot: data-hd-content-type='troubleshoot'}
+{:tsCauses: .tsCauses}
+{:tsResolve: .tsResolve}
+{:tsSymptoms: .tsSymptoms}
+
 
 # Default service settings for Kubernetes components
 {: #service-settings}
 
-Review the default settings for Kubernetes components, such as the `kube-apiserver`, `kubelet` or `kube-proxy` that {{site.data.keyword.containerlong_notm}} sets when you create your cluster. 
+Review the default settings for Kubernetes components, such as the `kube-apiserver`, `kubelet` or `kube-proxy` that {{site.data.keyword.containerlong}} sets when you create your cluster. 
 {: shortdesc}
+
+
 
 ## `kube-apiserver`
 {: #kube-apiserver}
@@ -97,18 +109,19 @@ Review the default settings for the `kube-proxy` worker node component in {{site
 {: summary="The rows are read from left to right. The category is in the first column, with the description in the second column."}
 {: caption="kube-proxy settings" caption-side="top"}
 
+
+
 ## Feature gates
 {: #feature-gates}
 
-Review the feature gates that are applied to all Kubernetes master and worker node components by default. 
+Review the feature gates that are applied to all master and worker node components by default in {{site.data.keyword.containerlong_notm}} clusters. These feature gates differ from the ones that are set up in community distributions. The {{site.data.keyword.cloud_notm}} provider version enables Kubernetes APIs and features that are at beta. Kubernetes alpha features, which are subject to change, are disabled.
 {: shortdesc}
 
 | Kubernetes version | Default feature gates |
-|------|--------------|
+|---|---|
 | 1.17 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul> | 
 | 1.16 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
 | 1.15 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
-| 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
-{: summary="The rows are read from left to right. The Kubernetes version is in the first column, with the default feature gates in the second column."}
+| 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
-
+{: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}

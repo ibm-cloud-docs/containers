@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -203,7 +203,7 @@ ibmcloud ks alb cert deploy --secret-name <secret_name> --cluster <cluster_name_
 ```
 {: pre}
 
-Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
+Do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
 {: note}
 
 When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
@@ -245,7 +245,7 @@ If you do not have a TLS certificate ready, follow these steps:
      kubectl apply -f ssl-my-test
      ```
      {: pre}
-     Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
+     Do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.
      {: note}
 
 
@@ -317,10 +317,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <tbody>
     <tr>
     <td><code>tls.hosts</code></td>
-    <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.
-
-    </br></br>
-    <strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, add a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster-<hash>-0000.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
+    <td>To use TLS, replace <em>&lt;domain&gt;</em> with the IBM-provided Ingress subdomain or your custom domain.</br></br><strong>Note:</strong><ul><li>If your apps are exposed by services in different namespaces in one cluster, add a wildcard subdomain to the beginning of the domain, such as `subdomain1.custom_domain.net` or `subdomain1.mycluster-<hash>-0000.us-south.containers.appdomain.cloud`. Use a unique subdomain for each resource that you create in the cluster.</li><li>Do not use &ast; for your host or leave the host property empty to avoid failures during Ingress creation.</li></ul></td>
     </tr>
     <tr>
     <td><code>tls.secretName</code></td>
@@ -355,14 +352,12 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
     {: pre}
-4.   Verify that the Ingress resource was created successfully.
+4.   Verify that the Ingress resource was created successfully. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+    ```
+    kubectl describe ingress myingressresource
+    ```
+    {: pre}
 
 
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
@@ -545,14 +540,12 @@ To expose apps that are outside of your cluster to the public:
     kubectl apply -f myingressresource.yaml
     ```
     {: pre}
-4.   Verify that the Ingress resource was created successfully.
+4.   Verify that the Ingress resource was created successfully. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+    ```
+    kubectl describe ingress myingressresource
+    ```
+    {: pre}
 
 5. In a web browser, enter the URL of the app service to access.
   ```
@@ -769,14 +762,12 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
     {: pre}
-4.   Verify that the Ingress resource was created successfully.
+4.   Verify that the Ingress resource was created successfully. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+    ```
+    kubectl describe ingress myingressresource
+    ```
+    {: pre}
 
 
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
@@ -1039,14 +1030,12 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     kubectl apply -f myingressresource.yaml -n <namespace>
     ```
     {: pre}
-4.   Verify that the Ingress resource was created successfully.
+4.   Verify that the Ingress resource was created successfully. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
 
-      ```
-      kubectl describe ingress myingressresource
-      ```
-      {: pre}
-
-      1. If messages in the events describe an error in your resource configuration, change the values in your resource file and reapply the file for the resource.
+    ```
+    kubectl describe ingress myingressresource
+    ```
+    {: pre}
 
 
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.

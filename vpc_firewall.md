@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -275,10 +275,10 @@ When you modify a security group to allow incoming TCP traffic to ports `30000 -
 ### Opening security group ports in the console
 {: #security_groups_ui}
 
-1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC of your cluster.
+1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC that your cluster is in.
 2. In the **Address prefixes** section, copy the **IP Range**. If your cluster is multizone, copy the range for each subnet.
 3. From the [Security groups for VPC page](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the security group for your VPC.
-4. In the **Inbound rules** section, click **New rule**.
+4. In the **Inbound rules** section, click **New rule**. The **TCP** protocol is pre-selected.
 5. Type `30000` for the **Port min** and `32767` for the **Port max**.
 6. For the **Source Type**, select **CIDR block** and paste one IP range that you previously copied.
 7. Click **Save**.
@@ -352,10 +352,10 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.7
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.7
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.7
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.7
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.8
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.8
         ```
         {: screen}
     3.  List the VLAN subnets for each unique network ID.

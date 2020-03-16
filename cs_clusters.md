@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -73,7 +73,7 @@ ibmcloud ks cluster create classic --name my_cluster
    {: pre}
 *  Classic cluster with a gateway enabled:
    ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.17.3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
+   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --gateway-enabled --version 1.17.4 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --public-service-endpoint --private-service-endpoint
    ```
    {: pre}
 *  Classic cluster that uses private VLANs and the private service endpoint only:
@@ -398,7 +398,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    When the provisioning of your Kubernetes master is completed, the **State** of your cluster changes to `deployed`. After your Kubernetes master is ready, the provisioning of your worker nodes is initiated.
    ```
    Name         ID                         State      Created          Workers    Zone      Version     Resource Group Name   Provider
-   mycluster    blrs3b1d0p0p2f7haq0g       deployed   20170201162433   3          dal10     1.16.7      Default             classic
+   mycluster    blrs3b1d0p0p2f7haq0g       deployed   20170201162433   3          dal10     1.16.8      Default             classic
    ```
    {: screen}
 
@@ -414,7 +414,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    When the worker nodes are ready, the worker node state changes to **normal** and the status changes to **Ready**. When the node status is **Ready**, you can then access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process. Note that if you created your cluster with a private VLAN only, no **Public IP** addresses are assigned to your worker nodes.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.8
    ```
    {: screen}
 
@@ -502,7 +502,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
 6. Create your gateway-enabled cluster.
    ```
-  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.17.3 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
+  ibmcloud ks cluster create classic --zone <single_zone> --gateway-enabled --flavor <flavor> --hardware <shared_or_dedicated> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --workers <number> --name <cluster_name> --version 1.17.4 --private-service-endpoint --public-service-endpoint [--disable-disk-encrypt]
    ```
    {: pre}
 
@@ -593,11 +593,11 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    In the output, verify that the number of compute worker nodes that you specified in the `--workers` flag and two gateway worker nodes are provisioned. In the following example output, three compute and two gateway worker nodes are provisioned.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000003d6   -                10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.8
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000003d6   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.8
    ```
    {: screen}
 
@@ -642,7 +642,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    2. Verify that the banner at the beginning of the new subnet page is set to **Gen 1 compute**. If **Gen 2 compute** is set, click **Switch to Gen 1 compute**.
    3. Enter a name for your subnet and select the name of the VPC that you created.
    4. Select the location and zone where you want to create the subnet.
-   5. Specify the number of IP addresses to create. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later. If you enter a specific IP range, do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
+   5. Specify the number of IP addresses to create. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later. If you enter a specific IP range, do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
    6. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only. Make sure to review the [VPC networking basics](/docs/containers?topic=containers-plan_clusters#vpc_basics) to understand when a public network gateway is required and how you can set up your cluster to limit public access to one or more subnets only.
    7. Click **Create subnet**.  
 4. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
@@ -701,7 +701,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
 3. [Create a VPC](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-3-create-a-vpc-and-save-the-vpc-id) in the same region where you want to create the cluster.
 4. [Create a subnet for your VPC](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-4-create-a-subnet-and-save-the-subnet-id).
   * If you want to create a [multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone), repeat this step to create additional subnets in all of the zones that you want to include in your cluster.
-  * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
+  * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
   * Do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
   * **Important**: Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 5.  Create the cluster in your VPC. You can use the `cluster create vpc-classic` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
@@ -768,7 +768,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     When the provisioning of your Kubernetes master is completed, the status of your cluster changes to **deployed**. After the Kubernetes master is ready, your worker nodes are set up.
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
-    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.16.7      Default               vpc-classic
+    mycluster    aaf97a8843a29941b49a598f516da72101   deployed   20170201162433   3          mil01     1.16.8      Default               vpc-classic
     ```
     {: screen}
 
@@ -784,7 +784,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    When the worker nodes are ready, the worker node **State** changes to `deployed` and the **Status** changes to `Ready`. When the node **Status** changes to `Ready`, you can access the cluster. Note that even if the cluster is ready, some parts of the cluster that are used by other services, such as Ingress secrets or registry image pull secrets, might still be in process.
    ```
    ID                                                     Public IP        Private IP     Flavor              State    Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.7
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx  10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.16.8
    ```
    {: screen}
 

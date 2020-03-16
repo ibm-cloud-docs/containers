@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-02"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -60,6 +60,24 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.17 changelog.
 {: shortdesc}
 
+### Changelog for 1.17.4_1519, released 16 March 2020
+{: #1174_1519}
+
+The following table shows the changes that are included in the master and worker node update `1.17.4_1519`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | N/A | N/A | Cluster health status now includes links to {{site.data.keyword.cloud_notm}} documentation. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | Master | v1.17.3-1 | v1.17.4-1 | Updated to support the Kubernetes 1.17.4 release and to use `Go` version 1.13.8. Fixed VPC load balancer error message to use the current {{site.data.keyword.containerlong_notm}} plug-in CLI syntax. |
+| Kubernetes | Both | v1.17.3 | v1.17.4 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.4){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 169 | 177 | Version 2.0 network load balancers (NLB) were updated to fix problems with long-lived network connections to endpoints that failed readiness probes. |
+| Operator Lifecycle Manager Catalog | Master | v1.5.9 | v1.5.11 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.11){: external}. |
+| Ubuntu 18.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19923](https://nvd.nist.gov/vuln/detail/CVE-2019-19923){: external}, [CVE-2019-19924](https://nvd.nist.gov/vuln/detail/CVE-2019-19924){: external}, [CVE-2019-19925](https://nvd.nist.gov/vuln/detail/CVE-2019-19925){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, [CVE-2019-19959](https://nvd.nist.gov/vuln/detail/CVE-2019-19959){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+| Ubuntu 16.04 packages | Worker |N/A | N/A | Updated worker node images with  package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.3_1518" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020
 {: #1173_1518}
 
@@ -112,7 +130,7 @@ The following table shows the changes that are included in patch update 1.17.2_1
 | Kubernetes Dashboard | v2.0.0-rc2 | v2.0.0-rc3 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc3){: external}. |
 | Kubernetes Dashboard metrics scraper | v1.0.2 | v1.0.3 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.3){: external}. |
 | Kubernetes nodelocal DNS cache | 1.15.4 | 1.15.8 | See the [Kubernetes nodelocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.8){: external}. Now in Kubernetes 1.17, when you [apply the label to set up node local DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes. |
-| OpenVPN server | N/A | N/A | OpenVPN server is now restarted during [cluster master refresh](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh){: external}. |
+| OpenVPN server | N/A | N/A | OpenVPN server is now restarted during [cluster master refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh){: external}. |
 | Operator Lifecycle Manager Catalog | v1.5.6 | v1.5.8 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.8){: external}. |
 | Operator Lifecycle Manager | 0.13.0 | 0.14.1 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.14.1){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
@@ -126,6 +144,24 @@ The following table shows the changes that are included in patch update 1.17.2_1
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for 1.16.8_1526, released 16 March 2020
+{: #1168_1526}
+
+The following table shows the changes that are included in the master and worker node update `1.16.8_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | N/A | N/A | Cluster health status now includes links to {{site.data.keyword.cloud_notm}} documentation. |
+| {{site.data.keyword.cloud_notm}} Provider | Master | v1.16.7-170 | v1.16.8-192 | Updated to support the Kubernetes 1.16.8 release and to use `Go` version 1.13.8. Fixed VPC load balancer error message to use the current {{site.data.keyword.containerlong_notm}} plug-in CLI syntax. |
+| Kubernetes | Both | v1.16.7 | v1.16.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.8){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 169 | 177 | Version 2.0 network load balancers (NLB) were updated to fix problems with long-lived network connections to endpoints that failed readiness probes. |
+| Operator Lifecycle Manager Catalog | Master | v1.5.9 | v1.5.11 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.11){: external}. |
+| Ubuntu 18.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19923](https://nvd.nist.gov/vuln/detail/CVE-2019-19923){: external}, [CVE-2019-19924](https://nvd.nist.gov/vuln/detail/CVE-2019-19924){: external}, [CVE-2019-19925](https://nvd.nist.gov/vuln/detail/CVE-2019-19925){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, [CVE-2019-19959](https://nvd.nist.gov/vuln/detail/CVE-2019-19959){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+| Ubuntu 16.04 packages | Worker |N/A | N/A | Updated worker node images with  package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.7_1525" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.7_1525, released 2 March 2020
 {: #1167_1525}
@@ -157,7 +193,7 @@ The following table shows the changes that are included in the master and worker
 | Kubernetes | Both | v1.16.5 | v1.16.7 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.7){: external}. |
 | Kubernetes Dashboard | Master | v2.0.0-rc2 | v2.0.0-rc5 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc5){: external}. |
 | Kubernetes Dashboard Metrics Scraper | Master | v1.0.2 | v1.0.3 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.3){: external}. |
-| OpenVPN server | Master | N/A | N/A | OpenVPN server is now restarted during [cluster master refresh](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh){: external}. |
+| OpenVPN server | Master | N/A | N/A | OpenVPN server is now restarted during [cluster master refresh](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh){: external}. |
 | Operator Lifecycle Manager | Master | 0.13.0 | 0.14.1 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.14.1){: external}. |
 | Operator Lifecycle Manager Catalog | Master | v1.5.6 | v1.5.9 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.9){: external}. |
 | Ubuntu 18.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-19956](https://nvd.nist.gov/vuln/detail/CVE-2019-19956){: external}, [CVE-2020-7595](https://nvd.nist.gov/vuln/detail/CVE-2020-7595){: external}, [CVE-2019-18634](https://nvd.nist.gov/vuln/detail/CVE-2019-18634){: external}, [CVE-2019-3843](https://nvd.nist.gov/vuln/detail/CVE-2019-3843){: external}, [CVE-2019-3844](https://nvd.nist.gov/vuln/detail/CVE-2019-3844){: external}, [CVE-2019-20386](https://nvd.nist.gov/vuln/detail/CVE-2019-20386){: external}, and [CVE-2020-1712](https://nvd.nist.gov/vuln/detail/CVE-2020-1712). |
@@ -193,7 +229,7 @@ The following table shows the changes that are included in the master and worker
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
 | IBM Calico extension | 130 | 258 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.16.3-115 | v1.16.5-148 | Updated to support the Kubernetes 1.16.5 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.16.3 | v1.16.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.5){: external}. |
@@ -343,6 +379,22 @@ The following tables show the changes that are included in the patch `1.16.2_151
 Review the version 1.15 changelog.
 {: shortdesc}
 
+### Changelog for 1.15.11_1533, released 16 March 2020
+{: #11511_1533}
+
+The following table shows the changes that are included in the master and worker node update `1.15.11_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | N/A | N/A | Cluster health status now includes links to {{site.data.keyword.cloud_notm}} documentation. |
+| {{site.data.keyword.cloud_notm}} Provider | Master | v1.15.10-252 | v1.15.11-274 | Updated to support the Kubernetes 1.15.11 release and to use `Go` version 1.12.17. Fixed VPC load balancer error message to use the current {{site.data.keyword.containerlong_notm}} plug-in CLI syntax. |
+| Kubernetes | Both | v1.15.10 | v1.15.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.11){: external}. |
+| Ubuntu 18.04 packages | Worker | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19923](https://nvd.nist.gov/vuln/detail/CVE-2019-19923){: external}, [CVE-2019-19924](https://nvd.nist.gov/vuln/detail/CVE-2019-19924){: external}, [CVE-2019-19925](https://nvd.nist.gov/vuln/detail/CVE-2019-19925){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, [CVE-2019-19959](https://nvd.nist.gov/vuln/detail/CVE-2019-19959){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+| Ubuntu 16.04 packages | Worker |N/A | N/A | Updated worker node images with  package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.10_1532" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.15.10_1532, released 2 March 2020
 {: #11510_1532}
 
@@ -402,7 +454,7 @@ The following table shows the changes that are included in the master and worker
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | Gateway-enabled cluster controller | 1032 | 1045 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.15.6-200 | v1.15.8-230 | Updated to support the Kubernetes 1.15.8 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.15.6 | v1.15.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.8){: external}. |
@@ -1051,6 +1103,19 @@ Review the version 1.14 changelog.
 Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
 {: deprecated}
 
+### Changelog for worker node fix pack 1.14.10_1549, released 2 March 2020
+{: #11410_1549}
+
+The following table shows the changes that are included in the worker node fix pack 1.14.10_1549. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node images with package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19923](https://nvd.nist.gov/vuln/detail/CVE-2019-19923){: external}, [CVE-2019-19924](https://nvd.nist.gov/vuln/detail/CVE-2019-19924){: external}, [CVE-2019-19925](https://nvd.nist.gov/vuln/detail/CVE-2019-19925){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, [CVE-2019-19959](https://nvd.nist.gov/vuln/detail/CVE-2019-19959){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with  package updates for [CVE-2019-13734](https://nvd.nist.gov/vuln/detail/CVE-2019-13734){: external}, [CVE-2019-13750](https://nvd.nist.gov/vuln/detail/CVE-2019-13750){: external}, [CVE-2019-13751](https://nvd.nist.gov/vuln/detail/CVE-2019-13751){: external}, [CVE-2019-13752](https://nvd.nist.gov/vuln/detail/CVE-2019-13752){: external}, [CVE-2019-13753](https://nvd.nist.gov/vuln/detail/CVE-2019-13753){: external}, [CVE-2019-19926](https://nvd.nist.gov/vuln/detail/CVE-2019-19926){: external}, and [CVE-2019-20218](https://nvd.nist.gov/vuln/detail/CVE-2019-20218){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.14.10_1548" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020
 {: #11410_1548}
 
@@ -1106,7 +1171,7 @@ The following table shows the changes that are included in the master and worker
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
 | {{site.data.keyword.cloud_notm}} Provider | v1.14.9-239	| v1.14.10-288 | Updated to support the Kubernetes 1.14.10 release. |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Kubernetes | v1.14.9 |	v1.14.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.10){: external}. |
@@ -2074,7 +2139,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>CoreDNS</td>
 <td>1.2.6</td>
 <td>1.3.1</td>
-<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). The update includes the addition of a [metrics port ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/metrics/) on the cluster DNS service. <br><br>CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
+<td>See the [CoreDNS release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/2019/01/13/coredns-1.3.1-release/). The update includes the addition of a [metrics port ![External link icon](../icons/launch-glyph.svg "External link icon")](https://coredns.io/plugins/metrics/) on the cluster DNS service. <br><br>CoreDNS is now the only supported cluster DNS provider. If you update a cluster to Kubernetes version 1.14 from an earlier version and used KubeDNS, KubeDNS is automatically migrated to CoreDNS during the cluster update. For more information or to test out CoreDNS before you update, see [Configure the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#cluster_dns).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -2126,7 +2191,7 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 <td>N/A</td>
 <td><ul>
   <li>Added `RuntimeClass=false` to disable selection of the container runtime configuration.</li>
-  <li>Removed `ExperimentalCriticalPodAnnotation=true` because the `scheduler.alpha.kubernetes.io/critical-pod` pod annotation is no longer supported. Instead, you can use [Kubernetes pod priority ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
+  <li>Removed `ExperimentalCriticalPodAnnotation=true` because the `scheduler.alpha.kubernetes.io/critical-pod` pod annotation is no longer supported. Instead, you can use [Kubernetes pod priority ![External link icon](../icons/launch-glyph.svg "External link icon")](/docs/containers?topic=containers-pod_priority#pod_priority).</li></ul></td>
 </tr>
 <tr>
 <td>Trusted compute agent</td>
@@ -2238,7 +2303,7 @@ The following table shows the changes that are included in the master and worker
 | Cluster master HA Proxy | 1.8.21-alpine | 1.8.23-alpine | See the [HAProxy release notes](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | etcd | v3.3.17 | v3.3.18 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.18){: external}. Update resolves [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | GPU device plug-in and installer | f2e7bd7 | da19df3 | Updated image for [CVE-2019-13627](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13627) and [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. Updated the GPU drivers to version [440.44](https://www.nvidia.com/Download/driverResults.aspx/156086/){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 354 | 357 | <ul><li>Added the following storage classes: `ibmc-file-bronze-gid`, `ibmc-file-silver-gid`, and `ibmc-file-gold-gid`.</li><li>Fixed bugs in support of [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot).</li><li>Resolved [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}.</li></ul> |
 | Key Management Service provider | 270 | 277 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} Go client. |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 159 | 169 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
 | OpenVPN server | 2.4.6-r3-IKS-121 | 2.4.6-r3-IKS-131 | Updated image for [CVE-2019-1551](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551){: external}. |
