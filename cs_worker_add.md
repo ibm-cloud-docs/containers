@@ -123,7 +123,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    ```
    {: screen}
 
-2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc-on-classic?topic=vpc-on-classic-vpc-reference#subnet-create). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256.
+2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc-on-classic?topic=vpc-on-classic-vpc-reference#subnet-create). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
    ```
    ibmcloud ks subnets --zone <zone> --provider vpc-classic --vpc-id <VPC_ID>
    ```
@@ -203,7 +203,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    ```
    {: pre}
 
-3. List available VPC subnets for each zone that you want to add. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc-on-classic?topic=vpc-on-classic-vpc-reference#subnet-create). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
+3. List available VPC subnets for each zone that you want to add. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc-on-classic?topic=vpc-on-classic-vpc-reference#subnet-create). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
    ```
    ibmcloud ks subnets --zone <zone> --provider vpc-classic --vpc-id <VPC_ID>
    ```

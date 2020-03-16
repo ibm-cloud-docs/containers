@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -64,6 +64,16 @@ Need to create your cluster by using custom-range subnets? Check out this guidan
 Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 {: important}
 
+**How many IP addresses do I need for my VPC subnet?**<br>
+When you [create your VPC subnet](https://cloud.ibm.com/vpc/provision/network){: external}, make sure to create a subnet with enough IP addresses for your cluster, such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
+
+Keep in mind the following IP address reservations.
+* 5 IP addresses are [reserved by VPC](/docs/vpc?topic=vpc-about-networking-for-vpc#reserved-ip-addresses) from each subnet by default.
+* 1 IP address is required per worker node in your cluster.
+* 1 IP address is required each time that you update or replace a worker node. These IP addresses are eventually reclaimed and available for reuse.
+* 2 IP addresses are used each time that you create a public or private load balancer. If you have a multizone cluster, these 2 IP addresses are spread across zones, so the subnet might not have an IP address reserved.
+* Other networking resources that you set up for the cluster, such as a VPNaaS or LBaaS autoscaling, might require additional IP addresses or have other [service limitations](/docs/vpc?topic=vpc-limitations). For example, LBaaS autoscaling might scale up to 16 IP addresses per load balancer.
+
 ### Public gateways
 {: #vpc_basics_pgw}
 
@@ -118,7 +128,7 @@ Use the {{site.data.keyword.cloud_notm}} console to create a VPC subnet for your
 2. Enter a name for your subnet and select the name of the VPC that you created.
 3. Select the location and zone where you want to create the subnet.
 4. Specify the number of IP addresses to create.
-  * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
+  * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
   * If you enter a specific IP range, do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
 5. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only.
 6. Click **Create subnet**.
@@ -158,7 +168,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
   ibmcloud is subnet-create <subnet_nmae> <vpc_id> --zone <vpc_zone> --ipv4-address-count <number_of_ip_address>
   ```
   {: pre}
-    * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so create a VPC subnet with enough IP addresses, such as 256. You cannot change the number of IPs that a VPC subnet has later.
+    * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
     * Do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
 
 3. Use the subnet to [create a cluster](/docs/containers?topic=containers-clusters#cluster_vpc_cli), [create a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [add the subnet to an existing worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone).<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
