@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-15"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Service architecture
+# Service architecture and dependencies
 {: #service-arch}
 
 Review sample cluster architectures and the components that are created in your [classic](#architecture_classic) or [VPC](#architecture_vpc) cluster.
@@ -225,4 +225,6 @@ The following diagram and table describe the default components that are set up 
 | Storage | You can set up only block persistent storage. Block storage is available as a cluster add-on. For more information, see [Storing data on IBM Block Storage for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-block_storage). |
 
 <br />
+
+
 
