@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-16"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -369,7 +369,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     ```
     {: screen}
 5.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.16.7 to 1.17.3, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.16.8 to 1.17.4, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```

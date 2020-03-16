@@ -153,8 +153,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         Example output:
 
         ```
-        Client Version: v1.16.7
-        Server Version: v1.16.7+IKS
+        Client Version: v1.16.8
+        Server Version: v1.16.8+IKS
         ```
         {: screen}
 
