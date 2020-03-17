@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-13"
+lastupdated: "2020-03-17"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -174,7 +174,7 @@ Yes, with bare metal worker nodes, you can use {{site.data.keyword.datashield_fu
 For supported flavors, see the [{{site.data.keyword.datashield_short}} documentation](/docs/data-shield?topic=data-shield-getting-started).
 
 **Bare metal sounds awesome! What's stopping me from ordering one right now?**</br>
-Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control.
+Bare metal servers are more expensive than virtual servers, and are best suited for high-performance apps that need more resources and host control. Bare metal worker nodes are also not available for VPC clusters.
 
 Bare metal servers are billed monthly. If you cancel a bare metal server before the end of the month, you are charged through the end of that month. After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure account. Therefore, it can take more than one business day to complete.
 {: important}
