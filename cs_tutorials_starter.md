@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-08"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks
 
@@ -117,8 +117,8 @@ With your toolchain set up, explore how you can use each tool to automate the de
       3. Follow the on-screen instructions to set up your personal access token.
 3. Review your **Delivery Pipeline** stages.
    1. From the toolchain overview page, select **Delivery Pipeline**. The pipeline stages are displayed.
-      - The **BUILD** stage clones your GitLab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registryshort_notm}}.
-      - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registryshort_notm}} and deploys your app to your Kubernetes cluster.
+      - The **BUILD** stage clones your GitLab repository, builds your Docker image, and pushes the image to your namespace in {{site.data.keyword.registrylong_notm}}.
+      - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registrylong_notm}} and deploys your app to your Kubernetes cluster.
    2. To find the details of what happened in each deployment stage, click **View logs and history**.
 
 ## Lesson 4: Verify the health of your app

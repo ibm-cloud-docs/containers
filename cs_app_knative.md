@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, knative
 
@@ -743,7 +743,7 @@ Knative services support the Kubernetes `volume` specification to mount an exist
 ## Pulling images from a private container registry
 {: #knative-private-registry}
 
-To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registryshort_notm}}. To access other private registries, you must store the credentials in a Kubernetes image pull secret in your cluster.
+To access a container registry, your cluster must bet set up with the appropriate image pull secrets that include the credentials to authenticate with your registry. By default, Knative services can access images that are stored in {{site.data.keyword.registrylong_notm}}. To access other private registries, you must store the credentials in a Kubernetes image pull secret in your cluster.
 {: shortdesc}
 
 1. Follow the instructions to [create an image pull secret](/docs/containers?topic=containers-registry#private_images) that includes the credentials to access your private container registry.

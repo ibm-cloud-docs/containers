@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -45,14 +45,14 @@ A Docker image is the basis for every container that you create with {{site.data
 An image is created from a Dockerfile, which is a file that contains instructions to build the image. A Dockerfile might reference build artifacts in its instructions that are stored separately, such as an app, the app's configuration, and its dependencies.
 
 
-## Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the `default` Kubernetes namespace
+## Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the `default` Kubernetes namespace
 {: #namespace}
 
-You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your {{site.data.keyword.registryshort_notm}} namespace. For more information about how your cluster accesses registry images, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth).
+You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your {{site.data.keyword.registrylong_notm}} namespace. For more information about how your cluster accesses registry images, see [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth).
 {:shortdesc}
 
 Before you begin:
-1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
+1. [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2. [Create a cluster](/docs/containers?topic=containers-clusters).
 3. If you have an existing cluster that was created before **25 February 2019**, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key).
 4. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -60,7 +60,7 @@ Before you begin:
 To deploy a container into the **default** namespace of your cluster:
 
 1.  Create a deployment configuration file that is named `mydeployment.yaml`.
-2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registryshort_notm}}.
+2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registrylong_notm}}.
 
     ```yaml
     apiVersion: apps/v1
@@ -85,7 +85,7 @@ To deploy a container into the **default** namespace of your cluster:
 
     Replace the image URL variables with the information for your image:
     *  **`<app_name>`**: The name of your app.
-    *  **`<region>`**: The regional {{site.data.keyword.registryshort_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.
+    *  **`<region>`**: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.
     *  **`<namespace>`**: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`.
     *  **`<my_image>:<tag>`**: The image and tag that you want to use to build the container. To get the images available in your registry, run `ibmcloud cr images`.
 
@@ -182,21 +182,21 @@ Steps:
 <br />
 
 
-## Pushing images to {{site.data.keyword.registryshort_notm}}
+## Pushing images to {{site.data.keyword.registrylong_notm}}
 {: #push-images}
 
-After the cluster administrator [sets up an image registry with {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-getting-started#getting-started), you can securely store and share Docker images with other users by adding images to your namespace.
+After the cluster administrator [sets up an image registry with {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-getting-started#getting-started), you can securely store and share Docker images with other users by adding images to your namespace.
 {: shortdesc}
 
-For example, you might pull an image from any private or public registry source, and then tag it for later use in {{site.data.keyword.registryshort_notm}}. Or, you might push a Docker image that you work with to your namespace so that other users can access the image. To get started, see [Adding images to your namespace](/docs/Registry?topic=registry-registry_images_).
+For example, you might pull an image from any private or public registry source, and then tag it for later use in {{site.data.keyword.registrylong_notm}}. Or, you might push a Docker image that you work with to your namespace so that other users can access the image. To get started, see [Adding images to your namespace](/docs/Registry?topic=registry-registry_images_).
 
 <br />
 
 
-## Managing security of images in {{site.data.keyword.registryshort_notm}} with Vulnerability Advisor
-{: #push-images}
+## Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor
+{: #va-images}
 
-Vulnerability Advisor checks the security status of container images that are provided by IBM, third parties, or added to your organization's {{site.data.keyword.registryshort_notm}} namespace.
+Vulnerability Advisor checks the security status of container images that are provided by IBM, third parties, or added to your organization's {{site.data.keyword.registrylong_notm}} namespace.
 {: shortdesc}
 
 When you add an image to a namespace, the image is automatically scanned by Vulnerability Advisor to detect security issues and potential vulnerabilities. If security issues are found, instructions are provided to help fix the reported vulnerability. To get started, see [Managing image security with Vulnerability Advisor](/docs/Registry?topic=va-va_index).
@@ -208,10 +208,10 @@ When you add an image to a namespace, the image is automatically scanned by Vuln
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
 {: #namespace_token}
 
-You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registryshort_notm}}. Existing clusters use a registry [token](/docs/Registry?topic=registry-registry_access#registry_tokens) that is stored in a cluster `imagePullSecret` to authorize access to pull images from the `registry.bluemix.net` domain names.
+You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registrylong_notm}}. Existing clusters use a registry [token](/docs/Registry?topic=registry-registry_access#registry_tokens) that is stored in a cluster `imagePullSecret` to authorize access to pull images from the `registry.bluemix.net` domain names.
 {:shortdesc}
 
-For clusters that were created before **1 July 2019**, non-expiring registry tokens and secrets were automatically created for both the [nearest regional registry and the global registry](/docs/Registry?topic=registry-registry_overview#registry_regions). The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images. The tokens are used to authorize read-only access to any of your namespaces that you set up in {{site.data.keyword.registryshort_notm}} so that you can work with these public (global registry) and private (regional registry) images.
+For clusters that were created before **1 July 2019**, non-expiring registry tokens and secrets were automatically created for both the [nearest regional registry and the global registry](/docs/Registry?topic=registry-registry_overview#registry_regions). The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images. The tokens are used to authorize read-only access to any of your namespaces that you set up in {{site.data.keyword.registrylong_notm}} so that you can work with these public (global registry) and private (regional registry) images.
 
 Each token must be stored in a Kubernetes `imagePullSecret` so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containerlong_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the `kube-system` namespace, and the list of secrets in the `default` service account for those namespaces.
 
@@ -234,16 +234,16 @@ With the registry token that is stored in the image pull secret, you can deploy 
 {: shortdesc}
 
 Before you begin:
-1. [Set up a namespace in {{site.data.keyword.registryshort_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
+1. [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
 2. [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To deploy a container into the **default** namespace of your cluster, create a configuration file.
 
 1.  Create a deployment configuration file that is named `mydeployment.yaml`.
-2.  Define the deployment and the image that you want to use from your namespace in {{site.data.keyword.registryshort_notm}}.
+2.  Define the deployment and the image that you want to use from your namespace in {{site.data.keyword.registrylong_notm}}.
 
-    To use a private image from a namespace in {{site.data.keyword.registryshort_notm}}:
+    To use a private image from a namespace in {{site.data.keyword.registrylong_notm}}:
 
     ```yaml
     apiVersion: apps/v1
@@ -384,7 +384,7 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     </tr>
     <tr>
     <td><code>--docker-username <em>&lt;docker_username&gt;</em></code></td>
-    <td>Required. The username to log in to your private registry. For {{site.data.keyword.registryshort_notm}}, the username is set to the value <strong><code>token</code></strong>.</td>
+    <td>Required. The username to log in to your private registry. For {{site.data.keyword.registrylong_notm}}, the username is set to the value <strong><code>token</code></strong>.</td>
     </tr>
     <tr>
     <td><code>--docker-password <em>&lt;token_value&gt;</em></code></td>

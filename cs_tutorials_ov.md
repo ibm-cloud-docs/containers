@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks
 
@@ -466,7 +466,7 @@ subcollection: containers
                 Containerize a Cloud Foundry app
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn how to create a Docker image from a Python Cloud Foundry app, push this image to {{site.data.keyword.registryshort_notm}}, and deploy your app to a Kubernetes cluster.  </p></br>
+                  </br> <p>Learn how to create a Docker image from a Python Cloud Foundry app, push this image to {{site.data.keyword.registrylong_notm}}, and deploy your app to a Kubernetes cluster.  </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/python_flask.png" alt="Python hello world welcome screen" />
