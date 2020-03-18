@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-16"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -760,17 +760,17 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
   ```
   {: pre}
 
-3. Set the {{site.data.keyword.registryshort_notm}} domain for the zone that your virtual or bare metal server is deployed in. In subsequent steps, you create a manifest file for a Kubernetes job. When the job runs to add the server instance to your cluster network, container images are pulled from this {{site.data.keyword.registryshort_notm}} domain to configure the server instance.
+3. Set the {{site.data.keyword.registrylong_notm}} domain for the zone that your virtual or bare metal server is deployed in. In subsequent steps, you create a manifest file for a Kubernetes job. When the job runs to add the server instance to your cluster network, container images are pulled from this {{site.data.keyword.registrylong_notm}} domain to configure the server instance.
   ```
   export REPO_NAME=<registry_domain>
   ```
   {: pre}
 
-  <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registryshort_notm}} domain in Column 2.">
-  <caption>{{site.data.keyword.registryshort_notm}} domains</caption>
+  <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registrylong_notm}} domain in Column 2.">
+  <caption>{{site.data.keyword.registrylong_notm}} domains</caption>
   <thead>
   <th>Zone</th>
-  <th>{{site.data.keyword.registryshort_notm}} domain</th>
+  <th>{{site.data.keyword.registrylong_notm}} domain</th>
   </thead>
   <tbody>
   <tr>
@@ -813,7 +813,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
     ```
     {: pre}
 
-6. Create the `ibm-external-compute-config` config map, which provides the necessary information to access and configure the connection to the server instance. This config map provides the server IP address, {{site.data.keyword.registryshort_notm}} domain, Kubernetes service namespace, and DNS resolution option that you set in the previous steps.
+6. Create the `ibm-external-compute-config` config map, which provides the necessary information to access and configure the connection to the server instance. This config map provides the server IP address, {{site.data.keyword.registrylong_notm}} domain, Kubernetes service namespace, and DNS resolution option that you set in the previous steps.
   ```
   kubectl create configmap -n kube-system ibm-external-compute-config --from-file="inventory=$INVENTORY" --from-literal="repo_name=$REPO_NAME" --from-literal="service_k8s_ns=$SERVICE_K8S_NS" --from-literal="clusterdns_setup=$CLUSTERDNS_SETUP"
   ```

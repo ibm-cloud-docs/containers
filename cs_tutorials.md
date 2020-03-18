@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-16"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks
 
@@ -85,7 +85,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 2.  While your cluster provisions, install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started){: external}. This installation includes:
     -   The base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`).
     -   The {{site.data.keyword.containerlong_notm}} plug-in plug-in (`ibmcloud ks`). Use this plug-in to manage your Kubernetes clusters, such as to resize worker pools for added compute capacity or to bind {{site.data.keyword.cloud_notm}} services to the cluster.
-    -   {{site.data.keyword.registryshort_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registryshort_notm}}.
+    -   {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registrylong_notm}}.
     -   The Kubernetes CLI (`kubectl`). Use this CLI to deploy and manage Kubernetes resources such as your app's pods and services.
 
     If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
@@ -101,11 +101,11 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: pre}
 
-    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registryshort_notm}} plug-in is displayed in the results as **container-registry**.
-6.  Set up your own private image repository in {{site.data.keyword.registryshort_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
+    The {{site.data.keyword.containerlong_notm}} plug-in is displayed in the results as **kubernetes-service**, and the {{site.data.keyword.registrylong_notm}} plug-in is displayed in the results as **container-registry**.
+6.  Set up your own private image repository in {{site.data.keyword.registrylong_notm}} to securely store and share Docker images with all cluster users. A private image repository in {{site.data.keyword.cloud_notm}} is identified by a namespace. The namespace is used to create a unique URL to your image repository that developers can use to access private Docker images.
     Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
-    In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registryshort_notm}}, so they choose `pr_firm` as their namespace to group all images in their account. Replace `<namespace>` with a namespace of your choice that is unrelated to the tutorial.
+    In this example, the PR firm wants to create only one image repository in {{site.data.keyword.registrylong_notm}}, so they choose `pr_firm` as their namespace to group all images in their account. Replace `<namespace>` with a namespace of your choice that is unrelated to the tutorial.
 
     ```
     ibmcloud cr namespace-add <namespace>
@@ -257,7 +257,7 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registryshort_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+3.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created in the previous lesson. If you need to make a change to the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image. **Note**: You must specify a [registry region](/docs/Registry?topic=registry-registry_overview#registry_regions), such as `us`. To get the registry region that you are currently in, run `ibmcloud cr region`.
 
@@ -441,7 +441,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
     cd 'container-service-getting-started-wt/Lab 2'
     ```
     {: pre}
-2.  Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Don't forget the period (`.`) at the end of the command.
+2.  Build, tag, and push the app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Don't forget the period (`.`) at the end of the command.
     ```
     ibmcloud cr build -t <region>.icr.io/<namespace>/hello-world:2 .
       ```
@@ -587,7 +587,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
         cd watson
         ```
         {: pre}
-    2.  Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registryshort_notm}}. Again, don't forget the period (`.`) at the end of the command.
+    2.  Build, tag, and push the `watson` app as an image to your namespace in {{site.data.keyword.registrylong_notm}}. Again, don't forget the period (`.`) at the end of the command.
         ```
         ibmcloud cr build -t <region>.icr.io/<namespace>/watson .
         ```

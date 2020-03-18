@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-11"
+lastupdated: "2020-03-18"
 
 ---
 
@@ -576,8 +576,8 @@ lastupdated: "2020-03-11"
 [Building containers from images](/docs/containers?topic=containers-images#images)
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
-* [Deploying containers from an {{site.data.keyword.registryshort_notm}} image to the default Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
-* [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth)
+* [Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the default Kubernetes namespace](/docs/containers?topic=containers-images#namespace)
+* [Understanding how your cluster is authorized to pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth)
 * [Updating existing clusters to use the API key image pull secret](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key)
 * [Using an image pull secret to access other Kubernetes namespaces, other {{site.data.keyword.cloud_notm}} accounts, or external private registries](/docs/containers?topic=containers-registry#other)
   * [Copying the image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-registry#copy_imagePullSecret)
@@ -587,7 +587,7 @@ lastupdated: "2020-03-11"
   * [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
   * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-registry#store_imagePullSecret)
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
-* [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registryshort_notm}} image](/docs/containers?topic=containers-images#namespace_token)
+* [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the default Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
   * [Deprecated: Creating a token-based image pull secret to access images in other {{site.data.keyword.cloud_notm}} regions and accounts](/docs/containers?topic=containers-images#token_other_regions_accounts)
@@ -1010,7 +1010,7 @@ lastupdated: "2020-03-11"
 
 [Adding services by using Helm](/docs/containers?topic=containers-helm#helm)
 * [Setting up Helm in a cluster with public access](/docs/containers?topic=containers-helm#public_helm_install)
-* [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registryshort_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
+* [Private clusters: Pushing the Tiller image to your private registry in {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-helm#private_local_tiller)
 * [Private clusters: Installing Helm charts without using Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller)
 * [Installing Tiller with a different version than your cluster](/docs/containers?topic=containers-helm#tiller_version)
 * [Related Helm links](/docs/containers?topic=containers-helm#helm_links)

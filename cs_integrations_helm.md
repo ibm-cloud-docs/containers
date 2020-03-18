@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -313,12 +313,12 @@ To install Helm in a cluster with public network access:
 Install Helm v2 in a cluster that does not have public access.
 {: shortdesc}
 
-To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, tag it, and push the image to your namespace in {{site.data.keyword.registryshort_notm}}](#private_local_tiller). Or you can [install Helm charts without using Tiller](#private_install_without_tiller).
+To deploy Helm charts, you must install the Helm CLI on your local machine and install the Helm server Tiller in your cluster. The image for Tiller is stored in the public Google Container Registry. To access the image during the Tiller installation, your cluster must allow public network connectivity to the public Google Container Registry. Classic clusters that are connected to a public VLAN and VPC clusters with subnets that are configured with a public gateway can access the image and install Tiller. Private clusters that are protected with a custom firewall, or clusters that do not have public network connectivity, such as classic clusters that are connected to a private VLAN only, or VPC clusters with subnets that are not configured with a public gateway, do not allow access to the Tiller image. Instead, you can [pull the image to your local machine, tag it, and push the image to your namespace in {{site.data.keyword.registrylong_notm}}](#private_local_tiller). Or you can [install Helm charts without using Tiller](#private_install_without_tiller).
 
 #### Pushing the Tiller image to your namespace in IBM Cloud Container Registry
 {: #private_local_tiller}
 
-You can pull the Tiller image to your local machine, push the image to your namespace in {{site.data.keyword.registryshort_notm}} and install Tiller in your private cluster by using the image in {{site.data.keyword.registryshort_notm}}.
+You can pull the Tiller image to your local machine, push the image to your namespace in {{site.data.keyword.registrylong_notm}} and install Tiller in your private cluster by using the image in {{site.data.keyword.registrylong_notm}}.
 {: shortdesc}
 
 If you want to install a Helm chart without using Tiller, see [Private clusters: Installing Helm charts without using Tiller](#private_install_without_tiller).
@@ -326,10 +326,10 @@ If you want to install a Helm chart without using Tiller, see [Private clusters:
 
 Before you begin:
 - Install Docker on your local machine. If you installed the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started), Docker is already installed.
-- [Install the {{site.data.keyword.registryshort_notm}} CLI plug-in and set up a namespace](/docs/Registry?topic=registry-getting-started#gs_registry_cli_install).
+- [Install the {{site.data.keyword.registrylong_notm}} CLI plug-in and set up a namespace](/docs/Registry?topic=registry-getting-started#gs_registry_cli_install).
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
-To install Tiller by using {{site.data.keyword.registryshort_notm}}:
+To install Tiller by using {{site.data.keyword.registrylong_notm}}:
 
 1. Install the [Helm CLI](https://helm.sh/docs/using_helm/#installing-helm){: external} on your local machine.
 2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc).
@@ -352,8 +352,8 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
    Status: Downloaded newer image for gcr.io/kubernetes-helm/tiller:v2.13.0
    ```
    {: screen}
-5. [Tag the Tiller image](/docs/Registry?topic=registry-getting-started#gs_registry_images_pulling), then [push it to your namespace in {{site.data.keyword.registryshort_notm}}](/docs/Registry?topic=registry-getting-started#gs_registry_images_pushing).
-6. To access the image in {{site.data.keyword.registryshort_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
+5. [Tag the Tiller image](/docs/Registry?topic=registry-getting-started#gs_registry_images_pulling), then [push it to your namespace in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-getting-started#gs_registry_images_pushing).
+6. To access the image in {{site.data.keyword.registrylong_notm}} from inside your cluster, [copy the image pull secret from the default namespace to the `kube-system` namespace](/docs/containers?topic=containers-registry#copy_imagePullSecret).
 7. **Important**: To maintain cluster security, create a service account for Tiller in the `kube-system` namespace and a Kubernetes RBAC cluster role binding for the `tiller-deploy` pod.
     1. [Get the Kubernetes service account and cluster role binding YAML file ![External link icon](../icons/launch-glyph.svg "External link icon")](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/rbac/serviceaccount-tiller.yaml).
     2. Create the Kubernetes resources in your cluster.
@@ -362,7 +362,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
        ```
        {: pre}
 
-8. Install Tiller in your private cluster by using the image that you stored in your namespace in {{site.data.keyword.registryshort_notm}}.
+8. Install Tiller in your private cluster by using the image that you stored in your namespace in {{site.data.keyword.registrylong_notm}}.
    ```
    helm init --tiller-image <region>.icr.io/<mynamespace>/<myimage>:<tag> --service-account tiller
    ```
@@ -424,7 +424,7 @@ To install Tiller by using {{site.data.keyword.registryshort_notm}}:
 If you don't want to install Tiller in your private cluster, you can manually create the Helm chart YAML files and apply them by using `kubectl` commands.
 {: shortdesc}
 
-The steps in this example show how to install Helm charts from the {{site.data.keyword.cloud_notm}} Helm chart repositories in your private cluster. If you want to install a Helm chart that is not stored in one of the {{site.data.keyword.cloud_notm}} Helm chart repositories, you must follow the instructions in this topic to create the YAML files for your Helm chart. In addition, you must download the Helm chart image from the public container registry, push it to your namespace in {{site.data.keyword.registryshort_notm}}, and update the `values.yaml` file to use the image in {{site.data.keyword.registryshort_notm}}.
+The steps in this example show how to install Helm charts from the {{site.data.keyword.cloud_notm}} Helm chart repositories in your private cluster. If you want to install a Helm chart that is not stored in one of the {{site.data.keyword.cloud_notm}} Helm chart repositories, you must follow the instructions in this topic to create the YAML files for your Helm chart. In addition, you must download the Helm chart image from the public container registry, push it to your namespace in {{site.data.keyword.registrylong_notm}}, and update the `values.yaml` file to use the image in {{site.data.keyword.registrylong_notm}}.
 {: note}
 
 1. Install the <a href="https://helm.sh/docs/using_helm/#installing-helm" target="_blank">Helm CLI <img src="../icons/launch-glyph.svg" alt="External link icon"></a> on your local machine.

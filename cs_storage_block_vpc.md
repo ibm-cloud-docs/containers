@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-09"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, vpc
 
@@ -284,7 +284,7 @@ Choose your {{site.data.keyword.block_storage_is_short}} profile and create a pe
    </tr>
    <tr>
    <td><code>spec.containers.image</code></td>
-   <td>Specify the name of the image that you want to use. To list available images in your {{site.data.keyword.registryshort_notm}} account, run `ibmcloud cr image-list`.</td>
+   <td>Specify the name of the image that you want to use. To list available images in your {{site.data.keyword.registrylong_notm}} account, run `ibmcloud cr image-list`.</td>
    </tr>
    <tr>
    <td><code>spec.containers.name</code></td>
