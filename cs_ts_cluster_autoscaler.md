@@ -168,7 +168,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-6.  If you do not find any failures or error messages and you already enabled logging, restart the cluster autoscaler pod. The deployment recreates the pod.
+6.  If you do not find any failures or error messages and you already enabled logging, restart the cluster autoscaler pod. The deployment re-creates the pod.
     ```
     kubectl delete pod -n kube-system <pod_name>
     ```
