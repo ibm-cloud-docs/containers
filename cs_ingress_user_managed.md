@@ -89,14 +89,14 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 
 5. Get the **EXTERNAL-IP** address for the load balancer.
     ```
-    kubectl get ingress-nginx -n kube-system
+    kubectl get svc ingress-nginx -n kube-system
     ```
     {: pre}
 
     In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
     ```
-    NAME         TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)            AGE
-    my-lb-svc    LoadBalancer   172.21.xxx.xxx   168.1.1.1        80:30104/TCP       2m
+    NAME             TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)            AGE
+    ingress-nginx    LoadBalancer   172.21.xxx.xxx   168.1.1.1        80:30104/TCP       2m
     ```
     {: screen}
 
@@ -152,19 +152,20 @@ In classic clusters, bringing your own Ingress controller is supported only for 
         ```
         {: pre}
 
-      5. Get the ID of the ALB.
-        ```
-        ibmcloud ks albs --cluster <cluster-name>
-        ```
-        {: pre}
+      5. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
+          1. Get the ID of the ALBs.
+            ```
+            ibmcloud ks albs --cluster <cluster-name>
+            ```
+            {: pre}
 
-      6. Disable the ALB.
-        ```
-        ibmcloud ks alb configure classic --alb-id <alb-id> --disable
-        ```
-        {: pre}
+          2. Disable each ALB.
+            ```
+            ibmcloud ks alb configure classic --alb-id <alb-id> --disable
+            ```
+            {: pre}
 
-      7. Verify that your load balancer is now registered with the Ingress subdomain.
+      6. Verify that your load balancer is now registered with the Ingress subdomain.
         ```
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
@@ -209,8 +210,12 @@ Expose your custom Ingress controller deployment to the public or to the private
       selector:
         app: ingress-nginx
       ports:
-       - protocol: TCP
+       - name: http
+         protocol: TCP
          port: 80
+       - name: https
+         protocol: TCP
+         port: 443
     ```
     {: codeblock}
 
@@ -225,14 +230,14 @@ Expose your custom Ingress controller deployment to the public or to the private
   **The VPC load balancer takes a few minutes to provision in your VPC.** You cannot access the hostname of your Kubernetes `LoadBalancer` service until the VPC load balancer is fully provisioned.
   {: note}
   ```
-  kubectl describe svc myloadbalancer
+  kubectl describe svc ingress-nginx -n kube-system
   ```
   {: pre}
 
   In the following example output, the **LoadBalancer Ingress** hostname is `1234abcd-us-south.lb.appdomain.cloud`:
   ```
-  Name:                     myloadbalancer
-  Namespace:                default
+  Name:                     ingress-nginx
+  Namespace:                kube-system
   Labels:                   <none>
   Annotations:              kubectl.kubernetes.io/last-applied-configuration:
                               {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type":"public"},...
@@ -288,7 +293,20 @@ Expose your custom Ingress controller deployment to the public or to the private
         ```
         {: pre}
 
-      3. Verify that your VPC load balancer hostname is now registered with the Ingress subdomain.
+      3. If you do not plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller:
+          1. Get the ID of the ALBs.
+            ```
+            ibmcloud ks albs --cluster <cluster-name>
+            ```
+            {: pre}
+
+          2. Disable each ALB.
+            ```
+            ibmcloud ks alb configure classic --alb-id <alb-id> --disable
+            ```
+            {: pre}
+
+      4. Verify that your VPC load balancer hostname is now registered with the Ingress subdomain.
         ```
         ibmcloud ks nlb-dns ls -c <cluster>
         ```
