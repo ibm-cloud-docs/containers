@@ -47,7 +47,7 @@ If you want to restrict network traffic to edge worker nodes in a multizone clus
 ## Isolating networking workloads to edge nodes
 {: #edge_nodes}
 
-Add the `dedicated=edge` label to three or more worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only. Both public and private NLBs and ALBs can deploy to edge worker nodes.
+Add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only. For NLBs, ensure that two or more worker nodes per zone are edge nodes. For ALBs, ensure that three or more worker nodes per zone are edge nodes. Both public and private NLBs and ALBs can deploy to edge worker nodes.
 {:shortdesc}
 
 Trying out a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
@@ -62,7 +62,7 @@ Before you begin:
 
 </br>To create an edge node worker pool:
 
-1. [Create a worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all zones in your cluster and has at least two workers per zone. In the `ibmcloud ks worker-pool create` command, include the `--label dedicated=edge` flag to label all worker nodes in the pool. All worker nodes in this pool, including any worker nodes that you add later, are labeled as edge nodes.
+1. [Create a worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all zones in your cluster and has at least two workers per zone if you use NLBs or 3 or more workers per zone if you use ALBs. In the `ibmcloud ks worker-pool create` command, include the `--label dedicated=edge` flag to label all worker nodes in the pool. All worker nodes in this pool, including any worker nodes that you add later, are labeled as edge nodes.
 
   <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least two workers per zone. You can label the worker pool with `dedicated=edge` by using the [POST worker pool labels API](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/v2SetWorkerPoolLabels){: external}. In the body of the request, pass in the following JSON.
       <pre class="screen">
