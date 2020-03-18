@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-16"
+lastupdated: "2020-03-18"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1103,7 +1103,7 @@ Review the version 1.14 changelog.
 Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
 {: deprecated}
 
-### Changelog for worker node fix pack 1.14.10_1549, released 2 March 2020
+### Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020
 {: #11410_1549}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.10_1549. Worker node patch updates can be applied by updating or reloading the worker node.
