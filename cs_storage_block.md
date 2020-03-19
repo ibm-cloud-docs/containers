@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks
 
@@ -1531,7 +1531,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-         storageClassName: ibmc-block-bronze-delayed
+           storageClassName: ibmc-block-bronze-delayed
        - metadata:
            name: myvol2
          spec:
@@ -1540,7 +1540,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-         storageClassName: ibmc-block-bronze-delayed
+           storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 
