@@ -661,6 +661,10 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>01 May 2019</td>
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
+ <tr>
+   <td>
+   </td>
+  </tr>
 </tbody></table>
 
 
