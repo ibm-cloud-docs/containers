@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -78,7 +78,7 @@ Refer to the following table for a summary of changes for each image version of 
 <td>625 / 373</td>
 <td>30 Jan 2020</td>
 <td><ul>
-<li>Fixes a bug so that OCSP stapling works when the OCSP responder sends its own certificate in the OCSP response, which the NGINX validates.</li>
+<li>Fixes a bug so that online certificate status protocol (OCSP) stapling works when the OCSP responder sends its own certificate in the OCSP response, which the NGINX validates.</li>
 <li>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-2/).</li>
 <li>Fixes `E2fsprogs` `e2fsck` vulnerabilities for [CVE-2019-5188 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188).</li></ul>
 </td>
@@ -461,7 +461,7 @@ Refer to the following table for a summary of changes for each build of the Flue
 <td>320ffdf87de068ee2f7f34c0e7a47a111e8d457b</td>
 <td>18 Feb 2019</td>
 <td><ul>
-<li>Updates Fluend to version 1.3.</li>
+<li>Updates Fluentd to version 1.3.</li>
 <li>Removes Git from the Fluentd image for [CVE-2018-19486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-19486).</li>
 </ul></td>
 <td>-</td>

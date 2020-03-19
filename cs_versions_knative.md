@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-14"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, knative, add-on, knative changelog
 
@@ -39,7 +39,7 @@ subcollection: containers
 View information for patch updates to the [managed Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
 
-## Changelog for 0.12.1, released 10 Febuary 2020
+## Changelog for 0.12.1, released 10 February 2020
 {: #0121}
 
 The following table shows the changes that are included in version 0.12.1 of the managed Knative add-on.

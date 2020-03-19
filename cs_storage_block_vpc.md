@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, vpc
 
@@ -814,7 +814,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 ## Customizing the default storage settings
 {: #vpc-customize-default}
 
-You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create V{{site.data.keyword.block_storage_is_short}} with your customized settings.
+You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create {{site.data.keyword.block_storage_is_short}} with your customized settings.
 {: shortdesc}
 
 **What is the benefit of using a secret and specifying my parameters in a customized storage class?**</br>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, coredns, dns
 
@@ -261,7 +261,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       node-local-dns-pvnjn   1/1     Running   0          1m    10.xxx.xx.xxx   10.xxx.xx.xxx  <none>           <none>
       ```
       {: screen}
-4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Drain and reload the worker node to apply the node local DNS caching changes. Even though you labelled the worker node, the pod is not yet handling cluster DNS requests.
+4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Drain and reload the worker node to apply the node local DNS caching changes. Even though you labeled the worker node, the pod is not yet handling cluster DNS requests.
    1. Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
       ```
       kubectl drain <node_name> --delete-local-data=true --ignore-daemonsets=true --force=true --timeout=5m
