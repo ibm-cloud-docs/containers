@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -233,7 +233,7 @@ The following diagram and table describe the default components that are set up 
 {: #dependencies-ibmcloud}
 
 Review the {{site.data.keyword.cloud_notm}} services that {{site.data.keyword.containerlong_notm}} connects to over the public network. 
-{: #shortdesc}
+{: shortdesc}
 
 
 | Service name | Description| 
@@ -259,7 +259,7 @@ Review the {{site.data.keyword.cloud_notm}} services that {{site.data.keyword.co
 {: #dependencies-3rd-party}
 
 Review the list of 3rd party services that {{site.data.keyword.containerlong_notm}} connects to over the public network. 
-{: #shortdesc}
+{: shortdesc}
 
 | Service name | Description| 
 | -----------|-------------------------------| 
