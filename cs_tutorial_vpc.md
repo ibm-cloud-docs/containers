@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks, vpc
 
@@ -125,23 +125,11 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ibmcloud ks cluster ls --provider vpc-classic
         ```
         {: pre}
-    2.  Download the Kubernetes configuration files.
-
+    2.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config --cluster myvpc-cluster
         ```
         {: pre}
-
-        When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-        Example:
-
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>/kube-config-<datacenter>-<cluster_name>.yml
-        ```
-        {: screen}
-
-    3.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
 
     4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
 

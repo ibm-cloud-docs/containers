@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -226,31 +226,11 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster.
-    * **CLI plug-in version 1.0**: Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
-      ```
-      ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-    * **CLI plug-in version 0.4 or earlier**:
-      1.  Get the command to set the environment variable and download the Kubernetes configuration files.<p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
-          ```
-          ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-          ```
-          {: pre}
-
-          After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-          Example:
-          ```
-          export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-          ```
-          {: screen}
-
-      2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-
-          **Mac or Linux users**: Instead of running the `ibmcloud ks cluster config` command and copying the `KUBECONFIG` environment variable, you can run `ibmcloud ks cluster config --export <cluster-name>`. Depending on your shell, you can set up your shell by running `eval $(ibmcloud ks cluster config --export <cluster-name>)`.
-          {: tip}
+6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    ```
+    ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 7. Verify that the `KUBECONFIG` environment variable is set properly.
 
@@ -435,22 +415,12 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 1. In the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){:external} menu bar, click the {{site.data.keyword.cloud-shell_short}} icon ![{{site.data.keyword.cloud-shell_notm}} icon](../icons/terminal-cloud-shell.svg).
 2. A session starts and automatically logs you in to the {{site.data.keyword.cloud_notm}} CLI with your current account credentials.
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
-  1.  Get the command to set the environment variable and download the Kubernetes configuration files to your temporary home directory.
+  1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
       ```
       ibmcloud ks cluster config --cluster <cluster_name_or_ID>
       ```
       {: pre}
-
-      After downloading the configuration files, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-      Example:
-      ```
-      export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
-
-  2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-  3.  Verify that the `KUBECONFIG` environment variable is set properly.
+  2.  Verify that the `KUBECONFIG` environment variable is set properly.
 
       Example:
       ```
