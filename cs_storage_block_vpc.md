@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-24"
 
 keywords: kubernetes, iks, vpc
 
@@ -40,7 +40,7 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
 {: shortdesc}
 
-You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc).
+You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/cloud/vpc/pricing).
 
 
 The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled by default on VPC clusters. You can enable or disable the add-on by using the [`addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) or [`addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) command in the CLI.
@@ -814,7 +814,7 @@ Use {{site.data.keyword.keymanagementservicelong}} to create a private root key 
 ## Customizing the default storage settings
 {: #vpc-customize-default}
 
-You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create V{{site.data.keyword.block_storage_is_short}} with your customized settings.
+You can change some of the default PVC settings by using a customized storage class or a Kubernetes secret to create {{site.data.keyword.block_storage_is_short}} with your customized settings.
 {: shortdesc}
 
 **What is the benefit of using a secret and specifying my parameters in a customized storage class?**</br>
@@ -1179,7 +1179,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [10 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-10iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-10iops-tier</code>: Retain |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
+| Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
 {: class="simple-tab-table"}
 {: caption="{{site.data.keyword.block_storage_is_short}} class: 10 IOPS-tier" caption-side="top"}
 {: #vpc-block-10iops}
@@ -1193,7 +1193,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [5 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-5iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-5iops-tier</code>: Retain |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
+| Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
 {: class="simple-tab-table"}
 {: caption="{{site.data.keyword.block_storage_is_short}} class: 5 IOPS-tier" caption-side="top"}
 {: #vpc-block-5iops}
@@ -1207,7 +1207,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [Custom](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#custom) |
 | Reclaim policy | <code>ibmc-vpc-block-custom</code>: Delete</br><code>ibmc-vpc-block-retain-custom</code>: Retain |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
+| Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
 {: class="simple-tab-table"}
 {: caption="{{site.data.keyword.block_storage_is_short}} class: custom" caption-side="top"}
 {: #vpc-block-custom}
@@ -1221,7 +1221,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 | Corresponding {{site.data.keyword.block_storage_is_short}} tier | [3 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-general-purpose</code>: Delete</br><code>ibmc-vpc-block-retain-general-purpose</code>: Retain |
 | Billing | Hourly |
-| Pricing | [Pricing information](/docs/vpc-on-classic?topic=vpc-on-classic-pricing-for-vpc#pricing-for-block-storage-for-vpc)|
+| Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
 {: class="simple-tab-table"}
 {: caption="{{site.data.keyword.block_storage_is_short}} class: 3 IOPS-tier" caption-side="top"}
 {: #vpc-block-3iops}

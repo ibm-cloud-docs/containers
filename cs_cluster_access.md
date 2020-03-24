@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-16"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks, clusters
 
@@ -47,7 +47,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 1. [Install the required CLI tools](/docs/containers?topic=containers-cs_cli_install), including the {{site.data.keyword.cloud_notm}} CLI, {{site.data.keyword.containershort_notm}} plug-in(`ibmcloud ks`), and Kubernetes CLI (`kubectl`).
 2. [Create your Kubernetes cluster](/docs/containers?topic=containers-clusters).
 3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private service endpoint-only clusters, you cannot test the connection to your cluster until you expose the private service endpoint of the master to the cluster by using a [private NLB](#access_private_se).
-4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
+4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
 
 <br />
 
@@ -68,31 +68,24 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
    3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
 2. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-   1. Get the command to set the environment variable and download the Kubernetes configuration files.
-      ```
-      ibmcloud ks cluster config --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-      When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
+    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+        ```
+        ibmcloud ks cluster config -c <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  Verify that the `KUBECONFIG` environment variable is set properly.
 
-      Example for OS X:
-      ```
-      export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
-   2. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-   3. Verify that the `KUBECONFIG` environment variable is set properly.
-      Example for OS X:
-      ```
-      echo $KUBECONFIG
-      ```
-      {: pre}
+        Example:
+        ```
+        echo $KUBECONFIG
+        ```
+        {: pre}
 
-      Output:
-      ```
-      /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
+        Output:
+        ```
+        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        ```
+        {: screen}
 
 3. Launch your Kubernetes dashboard with the default port `8001`.
    1. Set the proxy with the default port number.
@@ -128,7 +121,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 2. Get the private service endpoint URL and port for your cluster.
   ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster get -c <cluster_name_or_ID>
   ```
   {: pre}
 
@@ -187,25 +180,17 @@ The Kubernetes master is accessible through the private service endpoint if auth
     8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
   * If you also enabled the public service endpoint, you already have access to the master.
-    1. Get the command to set the environment variable and download the Kubernetes configuration files.
+    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
         ```
-        ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
         {: pre}
-        When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-        Example for OS X:
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-        ```
-        {: screen}
-    2. Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-    3. Create the NLB and endpoint.
+    2. Create the NLB and endpoint.
       ```
       kubectl apply -f kube-api-via-nlb.yaml
       ```
       {: pre}
-    4. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
       ```
       kubectl get svc -o wide
       ```
@@ -244,18 +229,11 @@ The Kubernetes master is accessible through the private service endpoint if auth
   * Classic clusters: Use a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection.
   * VPC clusters: Use a [VPC VPN](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) connection.
 
-7. Get the command to set the environment variable and download the Kubernetes configuration files.
+7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
     ```
-    ibmcloud ks cluster config --cluster <cluster_name_or_ID>
+    ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
     {: pre}
-    When the download of the configuration files is finished, a command is displayed that you can use to set the path to the local Kubernetes configuration file as an environment variable.
-
-    Example for OS X:
-    ```
-    export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
 
 8. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
   1. Navigate to the `kubeconfig` directory and open the file.

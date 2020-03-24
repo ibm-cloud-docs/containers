@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -49,7 +49,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 * [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 
-### Promethueus
+### Prometheus
 {: #prometheus}
 
 1. Send traffic to your service. For example, if you installed BookInfo, curl the product page microservice.

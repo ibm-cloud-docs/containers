@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,7 @@ subcollection: containers
 {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure, and is not supported in VPC clusters. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network. {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
 {: important}
 
-If you installed the {{site.data.keyword.blockstorageshort}} plugin with Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3).
+If you installed the {{site.data.keyword.blockstorageshort}} plug-in with Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3).
 {: important}
 
 <br>
@@ -53,7 +53,7 @@ If you installed the {{site.data.keyword.blockstorageshort}} plugin with Helm ve
 In this quickstart guide, you create a 24Gi silver tier {{site.data.keyword.blockstorageshort}} volume in your cluster by creating a PVC to dynamically provision the volume. Then, you create an app deployment that mounts your PVC.
 {: shortdesc}
 
-First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.blockstorageshort}} plugin](#install_block).
+First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come back here after you have the [installed the {{site.data.keyword.blockstorageshort}} plug-in](#install_block).
 {: tip}
 
 1. Create a file for your PVC and name it `pvc.yaml`.
@@ -121,7 +121,7 @@ First time using {{site.data.keyword.blockstorageshort}} in your cluster? Come b
   {: pre}
 
 For more information, see:
-  * [Installing the {{site.data.keyword.blockstorageshort}} plugin](#install_block)
+  * [Installing the {{site.data.keyword.blockstorageshort}} plug-in](#install_block)
   * [Adding {{site.data.keyword.blockstorageshort}} to apps](#add_block).
   * [Storage class reference](#block_storageclass_reference).
   * [Customizing storage classes](#block_custom_storageclass).
@@ -1531,7 +1531,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-         storageClassName: ibmc-block-bronze-delayed
+           storageClassName: ibmc-block-bronze-delayed
        - metadata:
            name: myvol2
          spec:
@@ -1540,7 +1540,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
            resources:
              requests:
                storage: 20Gi
-         storageClassName: ibmc-block-bronze-delayed
+           storageClassName: ibmc-block-bronze-delayed
      ```
      {: codeblock}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-20"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -109,7 +109,7 @@ The Ingress subdomain for your cluster is automatically linked to the VPC load b
 
 Before forwarding traffic to ALBs, the VPC load balancer also health checks the public ALB IP addresses that are behind the hostname to determine whether the ALBs are available or not. Every 5 seconds, the VPC load balancer health checks the floating public ALB IPs for your cluster and keeps the DNS lookup results updated based on these health checks. When a user sends a request to your app by using the cluster's Ingress subdomain and app route, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, the VPC load balancer receives the request. If all ALBs are healthy, a normal operation DNS lookup of your Ingress subdomain returns all of the floating IPs, 1 of which the client accesses at random. However, if one IP becomes unavailable for any reason, then the health check for that IP fails after 2 retries. The VPC load balancer removes the failed IP from the subdomain, and the DNS lookup returns only the healthy IPs while a new floating IP address is generated.
 
-Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually health check them and update DNS lookup results.
+Note that the VPC load balancer health checks only public ALBs and updates DNS lookup results for the Ingress subdomain. If you use only private ALBs, you must manually check their health and update DNS lookup results.
 
 <br />
 

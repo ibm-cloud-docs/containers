@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -695,7 +695,7 @@ If you have an existing virtual or bare metal server that meets all of these req
 5. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm). The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
   * For **Location**, select the same zone that you found in step 2.
   * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you do not have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
-  * For **Image**, select CentOS 7.x, RedHat 7.x, or Ubuntu 18.04.
+  * For **Image**, select CentOS 7.x, Red Hat 7.x, or Ubuntu 18.04.
   * Select private-only networking.
     * Virtual: For **Uplink port speeds**, select a **Private only** option.
     * Bare metal: For **Interface**, select **Private**.

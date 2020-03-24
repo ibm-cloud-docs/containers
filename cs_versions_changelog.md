@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -270,8 +270,8 @@ The following table shows the changes that are included in the master fix pack 1
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor	| 353 | 354 | Updated to support [non-root user access to an NFS file share](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_storage_nonroot) by allocating a group ID (GID) in the storage class. |
 | {{site.data.keyword.cloud_notm}} Provider	| v1.16.3-94 | v1.16.3-115 | Updated version 1.0 and 2.0 network load balancers (NLBs) to prefer scheduling NLB pods on worker nodes that do not currently run any NLB pods. In addition, the Virtual Private Cloud (VPC) load balancer plug-in is updated to use Go version 1.12.11. |
 | Key Management Service provider | 254 | 270 | Improves performance of secret management by minimizing the number of data encryption keys (DEKs) that are used to unwrap secrets in the cluster. In addition, the {{site.data.keyword.keymanagementservicelong_notm}} Go client is updated. |
-| Kubernetes addon resizer | 1.8.5 | 1.8.7 | See the [Kubernetes addon resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.7){: external}. |
-| Kubernetes Metrics Server | N/A | N/A | The `nanny` container is fixed (see Kubernetes addon resizer component) and added back to the `metrics-server` pod, which removes the Kubernetes 1.16 limitation to [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics). |
+| Kubernetes add-on resizer | 1.8.5 | 1.8.7 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.7){: external}. |
+| Kubernetes Metrics Server | N/A | N/A | The `nanny` container is fixed (see Kubernetes add-on resizer component) and added back to the `metrics-server` pod, which removes the Kubernetes 1.16 limitation to [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics). |
 | Kubernetes Dashboard | v2.0.0-beta6 | v2.0.0-beta8 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-beta8){: external}.|
 | Operator Lifecycle Manager Catalog | v1.4.0 | v1.5.4 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.5.4){: external}. |
 | Operator Lifecycle Manager | 0.12.0 | 0.13.0 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.13.0){: external}. |
@@ -1053,7 +1053,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 <td>Kubernetes add-on resizer</td>
 <td>1.8.4</td>
 <td>1.8.5</td>
-<td>For more information, see the [Kubernetes addon resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5).</td>
+<td>For more information, see the [Kubernetes add-on resizer release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.5).</td>
 </tr>
 <tr>
 <td>Kubernetes DNS autoscaler</td>

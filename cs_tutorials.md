@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-20"
 
 keywords: kubernetes, iks
 
@@ -125,21 +125,12 @@ Because it can take a few minutes to provision, create your cluster before you s
     ```
     {: screen}
 8.  Set the context for your Kubernetes cluster in your CLI.
-    1.  Get the command to set the environment variable and download the Kubernetes configuration files. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.cloud_notm}}.<p class="tip">Using Windows PowerShell? Include the `--powershell` flag to get environment variables in Windows PowerShell format.</p>
+    1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable. Every time that you log in to the {{site.data.keyword.containerlong}} CLI to work with clusters, you must run these commands to set the path to the cluster's configuration file as a session variable. The Kubernetes CLI uses this variable to find a local configuration file and certificates that are necessary to connect with the cluster in {{site.data.keyword.cloud_notm}}.
         ```
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
-
-        When the download of the configuration files is finished, a command is displayed that you     can use to set the path to the local Kubernetes configuration file as an environment    variable.
-
-        Example for OS X:
-        ```
-        export KUBECONFIG=/Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/    pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
-        ```
-        {: screen}
-    2.  Copy and paste the command that is displayed in your terminal to set the `KUBECONFIG` environment variable.
-    3.  Verify that the `KUBECONFIG` environment variable is set properly.
+    2.  Verify that the `KUBECONFIG` environment variable is set properly.
 
         Example for OS X:
         ```

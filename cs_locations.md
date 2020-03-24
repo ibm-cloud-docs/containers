@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-19"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -118,11 +118,12 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 | Europe | Italy | Milan | mil01 | EU Central (`eu-central`, `eu-de`) |
 | Europe | The Netherlands | Amsterdam | ams03 | EU Central (`eu-central`, `eu-de`) |
 | Europe | Norway | Oslo | osl01 | EU Central (`eu-central`, `eu-de`) |
-| Europe | United Kingdom | London | lon02`*`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
+| Europe | United Kingdom | London | lon02`†`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | Canada | Montreal | mon01 | US East (`us-east`) |
 | North America | Canada | Toronto | tor01 | US East (`us-east`) |
 | North America | Mexico | Mexico City | mex01 | US South (`us-south`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
+| North America | United States | Houston | hou02`*` | US South (`us-south`) |
 | North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
@@ -146,8 +147,7 @@ To quickly determine whether a zone is multizone-capable, your can run `ibmcloud
 {: tab-title="Multizone metros for VPC clusters"}
 {: tab-group="location-multi-single"}
 
-`*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
-{: note}
+<p class="note">`*` hou02 supports free clusters that are created in US South, and is not available for standard, production clusters.<br><br>`†` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.</p>
 
 ### Single zone clusters
 {: #regions_single_zone}
