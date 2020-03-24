@@ -4723,7 +4723,7 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster mycluster --nlb-subdomain mycluster
 
 </br>
 
-### Expermimental: `ibmcloud ks nlb-dns secret regenerate`
+### Experimental: `ibmcloud ks nlb-dns secret regenerate`
 {: #cs_nlb-dns-secret-regenerate}
 
 Regenerate the certificate and secret for an NLB subdomain.
@@ -4763,7 +4763,7 @@ ibmcloud ks nlb-dns secret regenerate --cluster mycluster --nlb-subdomain myclus
 
 </br>
 
-### Expermimental: `ibmcloud ks nlb-dns secret rm`
+### Experimental: `ibmcloud ks nlb-dns secret rm`
 {: #cs_nlb-dns-secret-rm}
 
 Delete a secret from an NLB subdomain and prevent future renewal of the certificate.
