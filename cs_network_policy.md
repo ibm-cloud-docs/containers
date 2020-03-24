@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-24"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -412,7 +412,7 @@ Trying out a [gateway-enabled cluster](/docs/containers?topic=containers-plan_cl
   {: pre}
 
 If you use a Windows machine, you must include the `--config=<filepath>/calicoctl.cfg` flag in all `calicoctl` commands.
-{: note}</br>
+{: note}
 
 **To protect your cluster on the public network by using Calico policies:**
 
@@ -478,7 +478,7 @@ When you apply the egress pod policies that are included in this policy set, onl
   {: pre}
 
 If you use a Windows machine, you must include the `--config=<filepath>/calicoctl.cfg` flag in all `calicoctl` commands.
-{: note}</br>
+{: note}
 
 **To isolate your cluster on the private network by using Calico policies:**
 
