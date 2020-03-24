@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-20"
+lastupdated: "2020-03-24"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -263,7 +263,7 @@ Review the list of 3rd party services that {{site.data.keyword.containerlong_not
 
 | Service name | Description| 
 | -----------|-------------------------------| 
-| Cloudflare | Cloudflare is used as the primary provider for DNS, global load balancing, and web firewall capabilities in {{site.data.keyword.containerlong_notm}}. |
+| Akamai, Cloudflare | Akamai and Cloudflare are used as the primary providers for DNS, global load balancing, and web firewall capabilities in {{site.data.keyword.containerlong_notm}}. |
 | Github Enterprise | GitHub Enterprise is used to track service enhancements, features, and customer issues. When a customer issue is identified, the cluster ID, worker node IDs, the flavor of the worker nodes, and the zone where the worker nodes are deployed to are documented. This information is then shared with the service team to start troubleshooting the issue. | 
 | Launch Darkly | To manage the roll out of new features in {{site.data.keyword.containerlong_notm}}, Launch Darkly feature flags are used. A feature flag controls the visibility and availability of a feature to a selected user base. | 
 | Let's Encrypt | This service is used as the Certificate authority to generate SSL certificates for customer owned public endpoints. All generated certificates are managed in {{site.data.keyword.cloudcerts_short}}.|
