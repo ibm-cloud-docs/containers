@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-25"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -738,34 +738,35 @@ Looking for even more fine-grained control over routing? To create rules that ar
 ## Securing in-cluster traffic by enabling mTLS
 {: #mtls}
 
-Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/docs/tasks/security/authn-policy/#globally-enabling-istio-mutual-tls){: external}.
+Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://archive.istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
 {: shortdesc}
 
-1. Create a mesh-wide authentication policy file that is named `meshpolicy.yaml`. This policy configures all workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh.
+1. Create an authentication policy file that is named `mtlspolicy.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
   ```yaml
   apiVersion: "authentication.istio.io/v1alpha1"
-  kind: "MeshPolicy"
+  kind: "Policy"
   metadata:
-    name: "default"
+    name: "mtlspolicy"
   spec:
     peers:
     - mtls: {}
   ```
   {: codeblock}
 
-2. Apply the authentication policy.
+2. Apply the authentication policy to a namespace.
   ```
-  kubectl apply -f meshpolicy.yaml
+  kubectl apply -f mtlspolicy.yaml -n <namespace>
   ```
   {: pre}
 
-3. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
+3. If you want to achieve mTLS for service mesh workloads in other namespaces, repeat steps 1 - 2 for each namespace.
+
+4. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
   ```yaml
   apiVersion: "networking.istio.io/v1alpha3"
   kind: "DestinationRule"
   metadata:
-    name: "default"
-    namespace: "istio-system"
+    name: "destination-mtls"
   spec:
     host: "*.local"
     trafficPolicy:
@@ -774,9 +775,9 @@ Enable encryption for the entire Istio service mesh to achieve mutual TLS (mTLS)
   ```
   {: codeblock}
 
-4. Apply the destination rule.
+5. Apply the destination rule.
   ```
-  kubectl apply -f destination-mtls.yaml
+  kubectl apply -f destination-mtls.yaml -n <namespace>
   ```
   {: pre}
 
