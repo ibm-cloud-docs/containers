@@ -62,8 +62,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  <tbody>
  <tr>
    <td>API endpoint</td>
-   <td>https://containers.cloud.ibm.com/global/v1</td>
-   <td>https://containers.cloud.ibm.com/global/v2</td>
+   <td><code>https://containers.cloud.ibm.com/global/v1</code></td>
+   <td><code>https://containers.cloud.ibm.com/global/v2</code></td>
  </tr>
  <tr>
    <td>API reference docs</td>
