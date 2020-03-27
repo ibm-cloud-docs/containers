@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-03-27"
 
 ---
 
@@ -1028,7 +1028,7 @@ lastupdated: "2020-03-18"
 [Command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
 * [Using the beta command structure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta)
 * [Comparison of Classic and VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
-* [`ibmcloud ks` commands](docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#map)
+* [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#map)
 * [cluster commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster)
 * [worker commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#-worker-commands)
 * [worker pool commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker-pool)
@@ -1041,7 +1041,7 @@ lastupdated: "2020-03-18"
 * [api-key commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#api_key-commands)
 * [credential commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#credential)
 * [infra-permissions commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra-commands)
-* [subnets command](docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)
+* [subnets command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_subnets)
 * [vlan commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#vlan)
 * [vpcs command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vpcs)
 * [addon-versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)

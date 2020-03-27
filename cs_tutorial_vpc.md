@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-20"
+lastupdated: "2020-03-26"
 
 keywords: kubernetes, iks, vpc
 
@@ -33,10 +33,10 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Creating a classic cluster in your Virtual Private Cloud (VPC)
+# Creating a cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 
-With the **{{site.data.keyword.containerlong}} clusters in VPC Generation 1 compute**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+With **{{site.data.keyword.containerlong}} clusters in VPC Generation 1 compute**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 {: shortdesc}
 
 ## Objectives

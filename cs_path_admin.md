@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-04"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, containers
 
@@ -256,7 +256,7 @@ Use built-in security features to protect your cluster infrastructure and networ
   * VPC clusters: Control traffic to and from your cluster with [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy). If you create multiple clusters that use the same subnets in one VPC, use [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network instead.
 3. **Workload security**:
   1. [Encrypt sensitive information](/docs/containers?topic=containers-encryption) in the cluster, such as the master's local disk and secrets.
-  2. Set up a [private image registry](docs/containers?topic=containers-security#images_registry) for your developers, such as the one provided by {{site.data.keyword.registryshort}}, to control access to the registry and the image content that can be pushed.
+  2. Set up a [private image registry](/docs/containers?topic=containers-security#images_registry) for your developers, such as the one provided by {{site.data.keyword.registryshort}}, to control access to the registry and the image content that can be pushed.
   3. [Set pod priority](/docs/containers?topic=containers-pod_priority) to indicate the relative priority of the pods that make up your cluster's workload.
   4. Authorize who can create and update pods by configuring [pod security policies (PSPs)](/docs/containers?topic=containers-psp).
 

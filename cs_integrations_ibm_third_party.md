@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-29"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, helm
 
@@ -77,7 +77,7 @@ To secure your cluster network or connect to an on-prem data center, you can con
 ### IBM Cloud VPC infrastructure services
 {: #vpc-infrastructure-services}
 
-With {{site.data.keyword.containerlong_notm}}, you can create a standard cluster in a [Virtual Private Cloud (VPC)](/docs/vpc-on-classic?topic=vpc-on-classic-getting-started). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
+With {{site.data.keyword.containerlong_notm}}, you can create a standard cluster in a [Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). A VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud.
 {: shortdesc}
 
 Before you can create a VPC cluster, you must have a VPC and at least one VPC subnet that you provision by using the {{site.data.keyword.cloud_notm}} console, CLI, or API. You manage these resources in the VPC dashboard directly. When you create your cluster, worker nodes are automatically provisioned as [{{site.data.keyword.vsi_is_short}}](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-getting-started) instances and you can view and manage these instances in {{site.data.keyword.containerlong_notm}} only.

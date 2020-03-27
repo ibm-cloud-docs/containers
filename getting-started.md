@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, containers
 
@@ -94,7 +94,7 @@ subcollection: containers
 Deploy highly available containerized apps in Kubernetes clusters and use the powerful tools of {{site.data.keyword.containerlong}} to automate, isolate, secure, manage, and monitor your workloads across zones or regions.
 {: shortdesc}
 
-First, create a free classic cluster or a paid cluster on the first generation of compute infrastructure in a Virtual Private Cloud (VPC). Then, deploy a `websphere-liberty` Java application server to your cluster.
+First, create a cluster with a few clicks in the {{site.data.keyword.cloud_notm}} console. Then, deploy your first containerized app to your cluster through the Kubernetes dashboard.
 
 To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {{site.data.keyword.cloud_notm}} account](/docs/account?topic=account-upgrading-account) where you are the owner or have [full Administrator access](/docs/iam?topic=iam-iammanidaccser).
 {: note}
@@ -129,7 +129,7 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 ## Creating a free classic cluster
 {: #clusters_gs}
 
-Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console.
+Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
 1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
@@ -173,7 +173,7 @@ The worker node can take a few minutes to provision, but you can see the progres
 ## Deploying an app to your cluster
 {: #deploy-app}
 
-After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, deploy your first `websphere-liberty` Java application server in your cluster by using the Kubernetes dashboard. The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
+After you create a [classic](#clusters_gs) or [VPC](#vpc-classic-gs) cluster, deploy your first app. You can use a sample `websphere-liberty` Java application server that IBM provides and deploy the app to your cluster by using the Kubernetes dashboard. The [Kubernetes dashboard](https://github.com/kubernetes/dashboard){: external} is a web console component that is provided by the open source community and installed in your cluster by default. Use the Kubernetes dashboard to manage resources that are within your cluster, such as pods, services, and namespaces.
 {: shortdesc}
 
 The steps to deploy an app vary if you have a free or standard cluster, because free clusters do not support load balancers.
