@@ -67,8 +67,8 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  </tr>
  <tr>
    <td>API reference docs</td>
-   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)</td>
-   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/)</td>
+   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</td>
+   <td>[`https://containers.cloud.ibm.com/global/swagger-global-api/` ![External link icon](../icons/launch-glyph.svg "External link icon")](https://containers.cloud.ibm.com/global/swagger-global-api/#/)</td>
  </tr>
  <tr>
    <td>API architectural style</td>
