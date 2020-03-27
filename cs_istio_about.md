@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -110,5 +110,5 @@ Review the following limitations for the managed Istio add-on.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
   * [Policy enforcement](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/){: external}
-  * [Secret discovery service (SDS)](https://istio.io/docs/tasks/security/citadel-config/auth-sds/){: external}
+  * [Secret discovery service (SDS)](https://istio.io/pt-br/docs/tasks/security/citadel-config/auth-sds/){: external}
   * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/){: external}
