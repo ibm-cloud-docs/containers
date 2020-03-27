@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -615,7 +615,7 @@ A user with the **Super User** infrastructure access role [sets the API key for 
 {: shortdesc}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Assigning role-based access to VPC resources](/docs/vpc-on-classic?topic=vpc-on-classic-setting-up-access-to-your-classic-infrastructure-from-vpc).
+Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Granting user permissions for VPC resources](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
 {: note}
 
 

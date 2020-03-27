@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks
 
@@ -1225,7 +1225,7 @@ If you installed the plug-in in a VPC cluster, the storage classes that were aut
    volumeBindingMode: Immediate
    ```
    {: screen}
-3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connecting to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc-on-classic?topic=vpc-on-classic-connecting-to-ibm-cloud-object-storage-from-a-vpc).
+3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connecting to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc?topic=vpc-connecting-vpc-cos).
    ```yaml
    apiVersion: storage.k8s.io/v1
    kind: StorageClass

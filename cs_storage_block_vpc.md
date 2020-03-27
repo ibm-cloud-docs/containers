@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, vpc
 
@@ -437,7 +437,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.zone</code></td>
-   <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region).</td>
+   <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region).</td>
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
