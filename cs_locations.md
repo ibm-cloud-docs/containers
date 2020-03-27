@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-03-27"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -177,7 +177,7 @@ In a multizone cluster, your cluster's resources are spread across multiple zone
     *   Setting up [file storage](/docs/containers?topic=containers-file_storage#add_file) and [block storage](/docs/containers?topic=containers-block_storage#add_block) in multizone clusters, or [choosing a multizone persistent storage solution](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
     *   [Enabling public or private access to an app by using a network load balancer (NLB) service in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config).
     *   [Managing network traffic by using Ingress](/docs/containers?topic=containers-ingress-about).
-    *   [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability).
+    *   [Increasing the availability of your app](/docs/containers?topic=containers-app).
 
 3.  When you initiate cluster management actions, such as using [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli), basic information about the cluster (such as name, ID, user, the command) is routed through the global endpoint.
 
