@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-03-30"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -53,7 +53,7 @@ _{{site.data.keyword.containerlong_notm}} locations_
 {: shortdesc}
 
 ```
-ibmcloud ks supported-locations
+ibmcloud ks locations
 ```
 {: pre}
 
@@ -84,7 +84,7 @@ The following tables list the available single and multizone locations in {{site
 * **Single zone**: If you create a cluster in a single zone (data center) location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
 * **VPC regions and zones**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
 
-To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks supported-locations` and look for the value in the `Multizone Metro` column.
+To quickly determine whether a zone is multizone-capable, your can run `ibmcloud ks locations` and look for the value in the `Multizone Metro` column.
 {: tip}
 
 {{site.data.keyword.cloud_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.

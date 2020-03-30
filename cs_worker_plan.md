@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-17"
+lastupdated: "2020-03-30"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -80,7 +80,7 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 ## Virtual machines
 {: #vm}
 
-With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general-purpose use cases such as testing and development environments, staging, and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high-performance computing for RAM-, data-, or GPU-intensive workloads, consider creating classic clusters with [bare metal](#bm) worker nodes.
+With VMs, you get greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price. You can use VMs for most general-purpose use cases such as testing and development environments, staging, and prod environments, microservices, and business apps. However, there is a trade-off in performance. If you need high-performance computing for data-, GPU-, or RAM-intensive workloads, consider creating classic clusters with [bare metal](#bm) worker nodes.
 {: shortdesc}
 
 **Do I want to use shared or dedicated hardware?**</br>
@@ -182,7 +182,7 @@ Bare metal servers are billed monthly. If you cancel a bare metal server before 
 **What bare metal flavors can I order?**</br>
 Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`. You can also review available [VM](#vm) or [SDS](#sds) flavors.
 
-Bare metal machines are optimized for different use cases such as RAM-intensive, data-intensive, or GPU-intensive workloads.
+Bare metal machines are optimized for different use cases such as data-, GPU-, or RAM-intensive workloads.
 
 Choose a flavor, or machine type, with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 

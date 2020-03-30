@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-16"
+lastupdated: "2020-03-30"
 
 keywords: kubernetes, iks
 
@@ -333,6 +333,8 @@ To deploy apps to specific worker nodes:
 <br />
 
 
+
+
 ## Deploying an app on a GPU machine
 {: #gpu_app}
 
@@ -501,5 +503,7 @@ To execute a workload on a GPU machine:
     {: screen}
 
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
+
+
 
 

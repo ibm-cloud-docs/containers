@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-25"
+lastupdated: "2020-03-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1077,7 +1077,7 @@ ibmcloud ks cluster ls [--provider (classic | vpc-classic)] [--location LOCATION
 <dd>Optional: Filter output based on infrastructure provider type.</dd>
 
 <dt><code>-l, --location <em>LOCATION</em></code></dt>
-<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks supported-locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
+<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional. **Note**: To use this flag, you must also specify the provider type in the `--provider` flag.</dd>
@@ -2630,7 +2630,7 @@ ibmcloud ks zone ls --provider (classic | vpc-classic) [--location LOCATION] [--
 <dd>The infrastructure provider type to list zones for. This flag is required.</dd>
 
 <dt><code>-l, --location <em>LOCATION</em></code></dt>
-<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks supported-locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
+<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--region-only</code></dt>
 <dd>List multizones only within the region that you are logged in to. This value is optional.</dd>
@@ -5316,7 +5316,7 @@ ibmcloud ks subnets [--provider (classic | vpc-classic)] [--vpc-id <VPC_ID> --zo
 <dd>The zone to list VPC subnets for. This flag is required when you specify a VPC provider type.</dd>
 
 <dt><code>-l, --location <em>LOCATION</em></code></dt>
-<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks supported-locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
+<dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -5575,17 +5575,17 @@ ibmcloud ks messages
 <br />
 
 
-## supported-locations command
+## locations command
 {: #cs_supported-locations}
 
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
 
-In [CLI plug-in version 1.0](#cs_beta), `supported-locations` is replaced by the `locations` command. Version 1.0 of the CLI plug-in was released on 16 March 2020. In version 1.0, the permanent behavior change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
+In [CLI plug-in version 1.0](#cs_beta), `locations` is replaced by the `locations` command. Version 1.0 of the CLI plug-in was released on 16 March 2020. In version 1.0, the permanent behavior change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
 {: important}
 
 ```
-ibmcloud ks supported-locations [--json]
+ibmcloud ks locations [--json]
 ```
 {: pre}
 
