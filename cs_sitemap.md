@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-03-30"
 
 ---
 
@@ -1047,7 +1047,7 @@ lastupdated: "2020-03-27"
 * [addon-versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
 * [flavors command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)
 * [messages command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)
-* [supported-locations command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)
+* [locations command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)
 * [versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)
 * [api command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)
 * [init command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)
