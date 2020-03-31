@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-03-31"
 
 keywords: kubernetes, iks
 
@@ -58,7 +58,7 @@ Check out the following syntax and behavior changes between each version of the 
 | Positional arguments<ul><li>Legacy: Arguments specified by position (`cluster-get mycluster`)</li><li>Latest: Arguments specified by flags (`cluster get --cluster mycluster`)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
 | Repeated arguments<ul><li>Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)</li><li>Latest: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
 | Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Latest: Dashed (`--show-resources`)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
-| Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Latest: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately.</li></ul> | Legacy | Legacy | Legacy | Latest |
+| Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Latest: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [first file that is set by the `KUBECONFIG` environment variable](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple).</li></ul> | Legacy | Legacy | Legacy | Latest |
 | API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Latest: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul> | Legacy | Latest | Latest | Latest |
 {: caption="Latest versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the functionality in column one, version 0.2 of the CLI in column two, version 0.3 in column three, version 0.4 in column four, and version 1.0 in column five."}
