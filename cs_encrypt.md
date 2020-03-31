@@ -275,7 +275,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Verify that you downloaded the Calico configuration file with the `ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --network` command. Run the `etcdctl get` commmand with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again. 
+    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Verify that you downloaded the Calico configuration file with the `ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --network` command. Check that your local `etcdctl` version matches the remote `etcd` version. Run the `etcdctl get` commmand with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again. 
     {: tip}
 
 ## Encrypting data in classic clusters by using IBM Cloud Data Shield 
