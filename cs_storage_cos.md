@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-03-31"
 
 keywords: kubernetes, iks
 
@@ -444,7 +444,10 @@ To install the plug-in:
 
 12. **VPC clusters only**: If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
 
-13. Follow the instructions to [add object storage to your apps](#add_cos).        
+13. Follow the instructions to [add object storage to your apps](#add_cos).
+
+If you're having trouble installing the {{site.data.keyword.cos_full_notm}} plug-in, see [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails) and [Object storage: Installing the Object storage plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_plugin_fails).
+{: tip}
 
 
 ### Updating the IBM Cloud Object Storage plug-in
@@ -521,6 +524,9 @@ You can upgrade the existing {{site.data.keyword.cos_full_notm}} plug-in to the 
    kubectl get pods -n <namespace> -o wide | grep object-storage
    ```
    {: pre}
+
+If you're having trouble updating the {{site.data.keyword.cos_full_notm}} plug-in, see [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails) and [Object storage: Installing the Object storage plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_plugin_fails).
+{: tip}
 
 
 ### Removing the IBM Cloud Object Storage plug-in
