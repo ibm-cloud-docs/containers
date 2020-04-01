@@ -268,7 +268,7 @@ Before you begin:
 * To make sure that you have an {{site.data.keyword.cloud_notm}} account and other prerequisite settings, see [Configuring the CLI to run `kubectl`](#cs_cli_configure)
 
 To set the Kubernetes context for multiple clusters:
-1.  Get the **Name** and **ID** of the clusters that you want to set the Kubernetes context for.
+1.  Get the **Name** or **ID** of the clusters that you want to set the Kubernetes context for.
     ```
     ibmcloud ks cluster ls
     ```
@@ -290,18 +290,23 @@ To set the Kubernetes context for multiple clusters:
     <cluster_name>/<cluster_ID>
     ```
     {: pre}
-5.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for the terminal session, or specify the context on each `kubectl` command.
+5.  List the available Kubernetes contexts and note the **Name** of a cluster context that you want to use.
+    ```
+    kubectl config get-contexts
+    ```
+    {: pre}
+6.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for each terminal that uses the `kubeconfig` file, or specify the context on each `kubectl` command.
 
-    *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
+    *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
 
         ```
-        kubectl config use-context <cluster_name>/<cluster_ID>
+        kubectl config use-context <context>
         ```
         {: pre}
 
-    *   **Specify the Kubernetex context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
+    *   **Specify the Kubernetes context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<context>` with the context that you previously retrieved.
         ```
-        kubectl --context=<cluster_name>/<cluster_ID> <command>
+        kubectl --context=<context> <command>
         ```
         {: pre}
 
@@ -347,7 +352,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
 
         Example output:
         ```
-        /var/folders/n5/<string>/T/tmp.<string>.yaml
+        /tmp/tmp.zhK6bD5Lpw
         ```
         {: screen}
     *   To print the `kubeconfig` file in your terminal:
