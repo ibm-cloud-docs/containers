@@ -298,7 +298,7 @@ To set the Kubernetes context for multiple clusters:
         kubectl config use-context <cluster_name>/<cluster_ID>
         ```
         {: pre}
-    
+
     *   **Specify the Kubernetex context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
         ```
         kubectl --context=<cluster_name>/<cluster_ID> <command>
