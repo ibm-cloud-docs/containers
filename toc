@@ -214,7 +214,7 @@ Kubernetes Service
 
     release_notes.md
     cs_limitations.md
-    cs_sitemap.md
+    sitemap.md
     {: .navgroup-end}
 
     cs_tutorials_apps.md
