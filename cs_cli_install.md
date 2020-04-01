@@ -227,7 +227,7 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the first file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
@@ -273,7 +273,7 @@ To set the Kubernetes context for multiple clusters:
     ibmcloud ks cluster ls
     ```
     {: pre}
-2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file, or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
+2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
