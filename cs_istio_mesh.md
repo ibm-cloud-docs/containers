@@ -759,9 +759,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
   ```
   {: pre}
 
-3. If you want to achieve mTLS for service mesh workloads in other namespaces, repeat step 2 for each namespace.
-
-4. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
+3. Create a destination rule file that is named `destination-mtls.yaml`. This policy configures service mesh workloads in a namespace to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
   ```yaml
   apiVersion: "networking.istio.io/v1alpha3"
   kind: "DestinationRule"
@@ -775,11 +773,13 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
   ```
   {: codeblock}
 
-5. Apply the destination rule.
+4. Apply the destination rule.
   ```
-  kubectl apply -f destination-mtls.yaml -n istio-system
+  kubectl apply -f destination-mtls.yaml -n <namespace>
   ```
   {: pre}
+
+5. If you want to achieve mTLS for service mesh workloads in other namespaces, repeat these steps each namespace.
 
 Destination rules are also used for non-authentication reasons, such as routing traffic to different versions of a service. Any destination rule that you create for a service must also contain the same TLS block that is set to `mode: ISTIO_MUTUAL`. This block prevents the rule from overriding the mesh-wide mTLS settings that you configured in this section.
 {: note}
