@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-25"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -405,7 +405,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
   ```
   {: pre}
 
-3. If you want to achieve mTLS for service mesh workloads in other namespaces, repeat steps 1 - 2 for each namespace.
+3. If you want to achieve mTLS for service mesh workloads in other namespaces, repeat step 2 for each namespace.
 
 4. Create a mesh-wide destination rule file that is named `destination-mtls.yaml`. This policy configures all workloads in the service mesh to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
   ```yaml
@@ -423,7 +423,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 5. Apply the destination rule.
   ```
-  kubectl apply -f destination-mtls.yaml -n <namespace>
+  kubectl apply -f destination-mtls.yaml -n istio-system
   ```
   {: pre}
 

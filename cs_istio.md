@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-06"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -253,7 +253,7 @@ After you install the Istio version 1.4 add-on in a Kubernetes version 1.16 or l
 ### Updating the `istioctl` client and sidecars
 {: #update_client_sidecar}
 
-Whenever the Istio managed add-on is updated, update your `istioctl` client and your app's Istio sidecars.
+Whenever the Istio managed add-on is updated, update your `istioctl` client and the Istio sidecars for your app.
 {: shortdesc}
 
 For example, the patch version of your add-on might be updated automatically by {{site.data.keyword.containerlong_notm}}, or you might [manually update your add-on](#istio_update) from older beta versions to a generally available version. In either case, update your `istioctl` client and your app's existing Istio sidecars to match the Istio version of the add-on.
