@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-31"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -233,30 +233,15 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-7. Verify that the `KUBECONFIG` environment variable is set properly.
-
-    Example:
+7.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
     ```
-    echo $KUBECONFIG
-    ```
-    {: pre}
-
-    Output:
-    ```
-    /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
-
-8.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-    ```
-    kubectl version --short
+    kubectl config current-context
     ```
     {: pre}
 
     Example output:
     ```
-    Client Version: v1.16.8
-    Server Version: v1.16.8
+    <cluster_name>/<cluster_ID>
     ```
     {: screen}
 
@@ -285,7 +270,7 @@ Before you begin:
 To set the Kubernetes context for multiple clusters:
 1.  Get the **Name** and **ID** of the clusters that you want to set the Kubernetes context for.
     ```
-    ibmcloud ks clusters
+    ibmcloud ks cluster ls
     ```
     {: pre}
 2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file, or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
@@ -305,11 +290,29 @@ To set the Kubernetes context for multiple clusters:
     <cluster_name>/<cluster_ID>
     ```
     {: pre}
-5.  Switch the Kubernetes context to another cluster. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
-    ```
-    kubectl config use-context <cluster_name>/<cluster_ID>
-    ```
-    {: pre}
+5.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for the terminal session, or specify the context on each `kubectl` command.
+
+    *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
+
+        ```
+        kubectl config use-context <cluster_name>/<cluster_ID>
+        ```
+        {: pre}
+    
+    *   **Specify the Kubernetex context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<cluster_name>` and `<cluster_ID>` with the information that you previously retrieved.
+        ```
+        kubectl --context=<cluster_name>/<cluster_ID> <command>
+        ```
+        {: pre}
+
+        Example:
+        ```
+        kubectl --context=mycluster/abc123 get pods
+        ```
+        {: pre}
+
+        Plan to switch contexts by command often? Create an alias for each cluster in your terminal for the context. For example: `alias kprod='kubectl --context=mycluster/abc123'`. Then you can use the alias to switch clusters.
+        {: tip}
 
 <br />
 
@@ -516,19 +519,17 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
       ibmcloud ks cluster config --cluster <cluster_name_or_ID>
       ```
       {: pre}
-  2.  Verify that the `KUBECONFIG` environment variable is set properly.
+  2.    Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+        ```
+        kubectl config current-context
+        ```
+        {: pre}
 
-      Example:
-      ```
-      echo $KUBECONFIG
-      ```
-      {: pre}
-
-      Output:
-      ```
-      /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
+        Example output:
+        ```
+        <cluster_name>/<cluster_ID>
+        ```
+        {: screen}
 
 
 ## Using the Kubernetes web terminal in your web browser
