@@ -43,9 +43,13 @@ subcollection: containers
 ## [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)
 {: #sitemap_getting_started_with_}
 
+
 [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
+
 [Creating a VPC Gen 1 compute cluster](/docs/containers?topic=containers-getting-started#vpc-classic-gs)
+
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
+
 [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
 
@@ -541,12 +545,19 @@ subcollection: containers
 ## [Logging and monitoring cluster health](/docs/containers?topic=containers-health)
 {: #sitemap_logging_and_monitoring_cluster_health}
 
+
 [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
+
 [Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+
 [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
+
 [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
+
 [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
+
 [Viewing cluster states](/docs/containers?topic=containers-health#states)
+
 [Configuring health monitoring for worker nodes in classic clusters with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#app_logdna)
 * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#webhook_logdna)
@@ -711,9 +722,13 @@ subcollection: containers
 ## [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning)
 {: #sitemap_choosing_an_app_exposure_service}
 
+
 [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
+
 [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
+
 [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
+
 [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
 * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
 * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
@@ -1182,7 +1197,9 @@ subcollection: containers
 ## [Locations](/docs/containers?topic=containers-regions-and-zones)
 {: #sitemap_locations}
 
+
 [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
+
 [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
 * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
 * [Single and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
@@ -1196,75 +1213,120 @@ subcollection: containers
 ## [Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp)
 {: #sitemap_hybrid_cloud}
 
+
 [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
+
 [Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
+
 [Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
 
 ## [Supported IBM Cloud and third-party integrations](/docs/containers?topic=containers-supported_integrations)
 {: #sitemap_supported_ibm_cloud_and_third-party_integrations}
 
+
 [Popular integrations](/docs/containers?topic=containers-supported_integrations#popular_services)
+
 [DevOps services](/docs/containers?topic=containers-supported_integrations#devops_services)
+
 [Hybrid cloud services](/docs/containers?topic=containers-supported_integrations#hybrid_cloud_services)
+
 [Logging and monitoring services](/docs/containers?topic=containers-supported_integrations#health_services)
+
 [Security services](/docs/containers?topic=containers-supported_integrations#security_services)
+
 [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
+
 [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
 
 ## [User access permissions](/docs/containers?topic=containers-access_reference)
 {: #sitemap_user_access_permissions}
 
+
 [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
+
 [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
+
 [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
+
 [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
+
 [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
+
 [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 
 ## [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
 {: #sitemap__events}
 
+
 [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+
 [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 
 ## [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings)
 {: #sitemap_default_service_settings_for_kubernetes_components}
 
+
 [`kube-apiserver`](/docs/containers?topic=containers-service-settings#kube-apiserver)
+
 [`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
+
 [`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
+
 [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
+
 [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
 
 ## [FAQs](/docs/containers?topic=containers-faqs)
 {: #sitemap_faqs}
 
+
 [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
+
 [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
+
 [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
+
 [Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
+
 [What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
+
 [Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
+
 [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
+
 [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
+
 [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
+
 [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
+
 [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
+
 [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+
 [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
+
 [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
+
 [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
+
 [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
+
 [Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
+
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
+
 [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
+
 [Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
+
 [Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
+
 [Can I add tags to my cluster?](/docs/containers?topic=containers-faqs#faq_tags)
 
 
@@ -1353,24 +1415,38 @@ subcollection: containers
 ## [Release notes](/docs/containers?topic=containers-iks-release)
 {: #sitemap_release_notes}
 
+
 [March 2020](/docs/containers?topic=containers-iks-release#mar20)
+
 [February 2020](/docs/containers?topic=containers-iks-release#feb20)
+
 [January 2020](/docs/containers?topic=containers-iks-release#jan20)
+
 [December 2019](/docs/containers?topic=containers-iks-release#dec19)
+
 [November 2019](/docs/containers?topic=containers-iks-release#nov19)
+
 [October 2019](/docs/containers?topic=containers-iks-release#oct19)
+
 [September 2019](/docs/containers?topic=containers-iks-release#sept19)
+
 [August 2019](/docs/containers?topic=containers-iks-release#aug19)
+
 [July 2019](/docs/containers?topic=containers-iks-release#jul19)
+
 [June 2019](/docs/containers?topic=containers-iks-release#jun19)
+
 [May 2019](/docs/containers?topic=containers-iks-release#may19)
 
 
 ## [Service limitations](/docs/containers?topic=containers-limitations)
 {: #sitemap_service_limitations}
 
+
 [Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
+
 [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
+
 [VPC Gen 1 compute cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
 * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
 * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
