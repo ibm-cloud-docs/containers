@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-02"
+lastupdated: "2020-04-03"
 
 keywords: sitemap, containers
 subcollection: containers
@@ -39,7 +39,9 @@ subcollection: containers
 
 
 
-## [Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)
+## Getting started with {{site.data.keyword.containerlong_notm}}
+
+[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)
 {: #sitemap_getting_started_with_}
 
 
@@ -227,9 +229,6 @@ subcollection: containers
 * [Time required](/docs/containers?topic=containers-tutorial-byoc-kube#time-byoc-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
 * [Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
- * [Move a VM-based application to Kubernetes](/tutorials/solution-tutorials-vm-to-containers-and-kubernetes)
- * [Create a multi-region cluster using Cloud Internet Services](/tutorials/solution-tutorials-multi-region-k8s-cis)
- * [Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/tutorials/solution-tutorials-continuous-deployment-to-kubernetes)
 
 
 ## Installing the CLI and API
@@ -591,7 +590,9 @@ subcollection: containers
   * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_namespace)
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_worker)
 
-## [Logging and monitoring cluster health](/docs/containers?topic=containers-health)
+## Logging and monitoring cluster health
+
+[Logging and monitoring cluster health](/docs/containers?topic=containers-health)
 {: #sitemap_logging_and_monitoring_cluster_health}
 
 
@@ -781,7 +782,9 @@ subcollection: containers
   * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
   * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
 
-## [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning)
+## Choosing an app exposure service
+
+[Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning)
 {: #sitemap_choosing_an_app_exposure_service}
 
 
@@ -1144,11 +1147,6 @@ subcollection: containers
 ## API reference
 {: #sitemap_api_reference}
 
- * [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
- * [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
- * [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
- * [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
- * [Community Kubernetes API](https://kubernetes.io/docs/reference/)
 
 
 ## Version history
@@ -1288,7 +1286,9 @@ subcollection: containers
 [Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
-## [Locations](/docs/containers?topic=containers-regions-and-zones)
+## Locations
+
+[Locations](/docs/containers?topic=containers-regions-and-zones)
 {: #sitemap_locations}
 
 
@@ -1303,7 +1303,9 @@ subcollection: containers
 * [Logging in to {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-regions-and-zones#login-ic)
 * [Logging in to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#login-iks)
 
-## [Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp)
+## Hybrid cloud
+
+[Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp)
 {: #sitemap_hybrid_cloud}
 
 
@@ -1313,7 +1315,9 @@ subcollection: containers
 
 [Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
-## [Supported IBM Cloud and third-party integrations](/docs/containers?topic=containers-supported_integrations)
+## Supported IBM Cloud and third-party integrations
+
+[Supported IBM Cloud and third-party integrations](/docs/containers?topic=containers-supported_integrations)
 {: #sitemap_supported_ibm_cloud_and_third-party_integrations}
 
 
@@ -1331,7 +1335,9 @@ subcollection: containers
 
 [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
 
-## [User access permissions](/docs/containers?topic=containers-access_reference)
+## User access permissions
+
+[User access permissions](/docs/containers?topic=containers-access_reference)
 {: #sitemap_user_access_permissions}
 
 
@@ -1347,7 +1353,9 @@ subcollection: containers
 
 [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
-## [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
+## {{site.data.keyword.at_full_notm}} events
+
+[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
 {: #sitemap__events}
 
 
@@ -1355,7 +1363,9 @@ subcollection: containers
 
 [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
-## [Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings)
+## Default service settings for Kubernetes components
+
+[Default service settings for Kubernetes components](/docs/containers?topic=containers-service-settings)
 {: #sitemap_default_service_settings_for_kubernetes_components}
 
 
@@ -1369,7 +1379,9 @@ subcollection: containers
 
 [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
-## [FAQs](/docs/containers?topic=containers-faqs)
+## FAQs
+
+[FAQs](/docs/containers?topic=containers-faqs)
 {: #sitemap_faqs}
 
 
@@ -1509,7 +1521,9 @@ subcollection: containers
 * [PVC creation fails because of missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help)
 
-## [Release notes](/docs/containers?topic=containers-iks-release)
+## Release notes
+
+[Release notes](/docs/containers?topic=containers-iks-release)
 {: #sitemap_release_notes}
 
 
@@ -1535,7 +1549,9 @@ subcollection: containers
 
 [May 2019](/docs/containers?topic=containers-iks-release#may19)
 
-## [Service limitations](/docs/containers?topic=containers-limitations)
+## Service limitations
+
+[Service limitations](/docs/containers?topic=containers-limitations)
 {: #sitemap_service_limitations}
 
 
