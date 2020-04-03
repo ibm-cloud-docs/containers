@@ -39,24 +39,16 @@ subcollection: containers
 
 
 
-## Getting started with {{site.data.keyword.containerlong_notm}}
-
-[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)
-{: #sitemap_getting_started_with_}
-
-
-[Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
-
-[Creating a VPC Gen 1 compute cluster](/docs/containers?topic=containers-getting-started#vpc-classic-gs)
-
-[Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
-
-[What's next?](/docs/containers?topic=containers-getting-started#whats-next)
-
 
 ## About
 {: #sitemap_about}
 
+
+[Getting started with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-getting-started)
+* [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
+* [Creating a VPC Gen 1 compute cluster](/docs/containers?topic=containers-getting-started#vpc-classic-gs)
+* [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
+* [What's next?](/docs/containers?topic=containers-getting-started#whats-next)
 
 [Overview](/docs/containers?topic=containers-overview)
 * [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#service-concepts)
@@ -90,11 +82,6 @@ subcollection: containers
   * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
   * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
 
-
-## Use cases
-{: #sitemap_use_cases}
-
-
 [Overview of use cases](/docs/containers?topic=containers-cs_uc_intro)
 
 [Financial services use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_finance)
@@ -116,11 +103,6 @@ subcollection: containers
 [Government use cases for {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-cs_uc_gov)
 * [Regional government improves collaboration and velocity with community Developers who combine public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)
 * [Large public port secures exchange of port data and shipping manifests that connect public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)
-
-
-## Learning paths
-{: #sitemap_learning_paths}
-
 
 [Learning path for administrators](/docs/containers?topic=containers-learning-path-admin)
 * [Plan your environment](/docs/containers?topic=containers-learning-path-admin#admin_plan)
@@ -144,11 +126,6 @@ subcollection: containers
 * [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-
-## Cluster strategy
-{: #sitemap_cluster_strategy}
-
 
 [Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
 * [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
@@ -176,11 +153,6 @@ subcollection: containers
 
 [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha)
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
-
-## Tutorials
-{: #sitemap_tutorials}
-
 
 [Tutorial overview](/docs/containers?topic=containers-tutorials-ov)
 * [Create a cluster and deploy your first app](/docs/containers?topic=containers-tutorials-ov#tutorials-create-cluster-deploy-app)
@@ -255,11 +227,8 @@ subcollection: containers
 * [Lesson 2: Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
 * [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
 * [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
-
 [Move a VM-based application to Kubernetes](/tutorials/solution-tutorials-vm-to-containers-and-kubernetes){: external}
-
 [Create a multi-region cluster using Cloud Internet Services](/tutorials/solution-tutorials-multi-region-k8s-cis){: external}
-
 [Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/tutorials/solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
@@ -285,11 +254,6 @@ subcollection: containers
 * [Working with your cluster by using the Kubernetes API](/docs/containers?topic=containers-cs_api_install#kube_api)
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API](/docs/containers?topic=containers-cs_api_install#cs_api_refresh)
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
-
-
-## Planning your cluster
-{: #sitemap_planning_your_cluster}
-
 
 [Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy)
 * [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
@@ -342,11 +306,6 @@ subcollection: containers
 * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
-
-## Creating and accessing clusters
-{: #sitemap_creating_and_accessing_clusters}
-
-
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
 * [Prepare to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
@@ -392,11 +351,6 @@ subcollection: containers
   * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-users#infra_cli)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
-
-
-## Managing the cluster lifecycle
-{: #sitemap_managing_the_cluster_lifecycle}
-
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
@@ -472,11 +426,6 @@ subcollection: containers
 
 [Removing clusters](/docs/containers?topic=containers-remove)
 
-
-## Securing cluster workloads
-{: #sitemap_securing_cluster_workloads}
-
-
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption)
 * [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
@@ -495,11 +444,6 @@ subcollection: containers
 * [Understanding default priority classes](/docs/containers?topic=containers-pod_priority#default_priority_class)
 * [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
 * [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
-
-
-## Securing the cluster network
-{: #sitemap_securing_the_cluster_network}
-
 
 [Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
@@ -549,11 +493,6 @@ subcollection: containers
 * [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
-
-
-## Managing the cluster network
-{: #sitemap_managing_the_cluster_network}
-
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
 * [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
@@ -669,11 +608,6 @@ subcollection: containers
   * [Master states](/docs/containers?topic=containers-health#states_master)
   * [Worker node states](/docs/containers?topic=containers-health#states_workers)
 
-
-## Setting up an image build pipeline
-{: #sitemap_setting_up_an_image_build_pipeline}
-
-
 [Setting up an image registry](/docs/containers?topic=containers-registry)
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
@@ -689,11 +623,6 @@ subcollection: containers
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd)
 * [Supported automation tools](/docs/containers?topic=containers-cicd#cicd_strategy)
 * [Setting up a continuous delivery pipeline for a cluster](/docs/containers?topic=containers-cicd#continuous-delivery-pipeline)
-
-
-## Developing and deploying apps
-{: #sitemap_developing_and_deploying_apps}
-
 
 [Planning app deployments](/docs/containers?topic=containers-plan_deploy)
 * [Moving workloads to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_deploy#moving)
@@ -784,11 +713,6 @@ subcollection: containers
 * [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#cicd)
 * [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
-
-## Setting up a service mesh with Istio
-{: #sitemap_setting_up_a_service_mesh_with_istio}
-
-
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs)
 * [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
 * [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
@@ -851,11 +775,6 @@ subcollection: containers
   * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
   * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
 
-
-## Exposing apps with load balancers
-{: #sitemap_exposing_apps_with_load_balancers}
-
-
 [Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs)
 * [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
 * [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
@@ -897,11 +816,6 @@ subcollection: containers
 * [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
   * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
-
-
-## Exposing apps with Ingress ALBs
-{: #sitemap_exposing_apps_with_ingress_albs}
-
 
 [Quick start for Ingress](/docs/containers?topic=containers-ingress-qs)
 
@@ -1022,11 +936,6 @@ subcollection: containers
 [Bringing your own Ingress controller](/docs/containers?topic=containers-ingress-user_managed)
 * [Classic clusters: Exposing your Ingress controller by creating an NLB and a hostname](/docs/containers?topic=containers-ingress-user_managed#user_managed_nlb)
 * [VPC clusters: Exposing your Ingress controller by creating a VPC load balancer and subdomain](/docs/containers?topic=containers-ingress-user_managed#user_managed_vpc)
-
-
-## Storing data on persistent storage
-{: #sitemap_storing_data_on_persistent_storage}
-
 
 [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning)
 * [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution)
@@ -1160,11 +1069,6 @@ subcollection: containers
   * [Setting up an {{site.data.keyword.cos_full_notm}} service instance](/docs/containers?topic=containers-utilities#backup_restore_setup_object_storage)
   * [Using {{site.data.keyword.cos_full_notm}} to back up and restore PVC data](/docs/containers?topic=containers-utilities#backup-restore-pvc)
 
-
-## Enhancing cluster capabilities with integrations
-{: #sitemap_enhancing_cluster_capabilities_with_integrations}
-
-
 [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners)
 * [LogDNA](/docs/containers?topic=containers-service-partners#logdna-partner)
 * [Sysdig](/docs/containers?topic=containers-service-partners#sydig-partner)
@@ -1227,26 +1131,11 @@ subcollection: containers
 * [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
 * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
 * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
-
-
-## API reference
-{: #sitemap_api_reference}
-
-
 [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/){: external}
-
 [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json){: external}
-
 [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry){: external}
-
 [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
-
 [Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
-
-
-## Version history
-{: #sitemap_version_history}
-
 
 [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions)
 * [Update types](/docs/containers?topic=containers-cs_versions#update_types)
@@ -1427,60 +1316,34 @@ subcollection: containers
 * [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 * [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
 
-## FAQs
-
-[FAQs](/docs/containers?topic=containers-faqs)
-{: #sitemap_faqs}
-
-
-[What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
-
-[How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
-
-[Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
-
-[Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
-
-[What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
-
-[Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
-
-[Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
-
-[What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
-
-[What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
-
-[Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
-
-[Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
-
-[Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
-
-[Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
-
-[Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
-
-[What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
-
-[Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
-
-[Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
-
-[What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
-
-[Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
-
-[Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
-
-[Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
-
-[Can I add tags to my cluster?](/docs/containers?topic=containers-faqs#faq_tags)
-
 
 ## Troubleshooting cluster components
 {: #sitemap_troubleshooting_cluster_components}
 
+
+[FAQs](/docs/containers?topic=containers-faqs)
+* [What is Kubernetes?](/docs/containers?topic=containers-faqs#kubernetes)
+* [How does {{site.data.keyword.containerlong_notm}} work?](/docs/containers?topic=containers-faqs#kubernetes_service)
+* [Why should I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#faq_benefits)
+* [Can I get a free cluster?](/docs/containers?topic=containers-faqs#faq_free)
+* [What container platforms are available for my cluster?](/docs/containers?topic=containers-faqs#container_platforms)
+* [Does the service come with a managed Kubernetes master and worker nodes?](/docs/containers?topic=containers-faqs#managed_master_worker)
+* [Are the master and worker nodes highly available?](/docs/containers?topic=containers-faqs#faq_ha)
+* [What options do I have to secure my cluster?](/docs/containers?topic=containers-faqs#secure_cluster)
+* [What access policies do I give my cluster users?](/docs/containers?topic=containers-faqs#faq_access)
+* [Where can I find a list of security bulletins that affect my cluster?](/docs/containers?topic=containers-faqs#faq_security_bulletins)
+* [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
+* [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
+* [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
+* [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
+* [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
+* [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
+* [Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
+* [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
+* [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
+* [Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
+* [Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
+* [Can I add tags to my cluster?](/docs/containers?topic=containers-faqs#faq_tags)
 
 [Clusters and masters](/docs/containers?topic=containers-cs_troubleshoot)
 * [Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
