@@ -34,7 +34,7 @@ subcollection: containers
 
 
 
-# Site map for {{site.data.keyword.containerlong_notm}}
+# Site map
 {: #sitemap}
 
 
