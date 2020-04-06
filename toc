@@ -214,7 +214,7 @@ Kubernetes Service
 
     release_notes.md
     cs_limitations.md
-    sitemap.md
+    cs_sitemap.md
     {: .navgroup-end}
 
     cs_storage_portworx_gs.md

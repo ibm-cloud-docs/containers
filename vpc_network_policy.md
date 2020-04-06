@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-28"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -87,8 +87,8 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.17.3
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.17.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.17.4
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.17.4
   ```
   {: screen}
 
@@ -108,7 +108,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
   Worker Pool Name:   default
   Flavor:             c2.2x4
-  Version:            1.17.3
+  Version:            1.17.4
 
   Health
   State:     normal
@@ -192,7 +192,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
 
   6. If you must allow other traffic to or from your worker nodes on this subnet, add rules for that traffic.
 
-    <p class="note">When you refer to the VPC subnet that your worker nodes are on, you must use `0.0.0.0/0`. For more tips on how to create your rule, see the [VPC CLI reference documentation](/docs/vpc-on-classic-network?topic=vpc-infrastructure-cli-plugin-vpc-reference#network-acl-rule-add).</p>
+    <p class="note">When you refer to the VPC subnet that your worker nodes are on, you must use `0.0.0.0/0`. For more tips on how to create your rule, see the [VPC CLI reference documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-vpc-reference#network-acls-section).</p>
 
     ```
     ibmcloud is network-acl-rule-add <new_rule_name> $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR>

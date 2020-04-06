@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-13"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, containers
 
@@ -82,14 +82,14 @@ Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www
 Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 
 ### Can I automate my infrastructure deployments?
-{: #packaging}
+{: #infra_packaging}
 
 If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, you might wonder how you can make your deployment strategy work across these environments.
 
 You can use the open source [Terraform](/docs/terraform?topic=terraform-getting-started#getting-started) tool to automate the provisioning of {{site.data.keyword.cloud_notm}} infrastructure, including Kubernetes clusters. Follow along with this tutorial to [plan, create, and update deployment environments](/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments#plan-create-update-deployments). After you create a cluster, you can also set up the [{{site.data.keyword.containerlong_notm}} cluster autoscaler](/docs/containers?topic=containers-ca) so that your worker pool scales up and down worker nodes in response to your workload's resource requests.</dd>
 
 ### What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?
-{: #app_types}
+{: #app_kinds}
 
 Your containerized app must be able to run on the supported operating system, Ubuntu 16.64, 18.64. You also want to consider the statefulness of your app. For more information about the kinds of apps that can run in {{site.data.keyword.containerlong_notm}}, see [Planning app deployments](/docs/containers?topic=containers-plan_deploy#app_types).
 

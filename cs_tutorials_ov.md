@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks
 
@@ -475,7 +475,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-  <a href = "/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#move-a-vm-based-application-to-kubernetes">
+  <a href = "/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Migrate a VM-based app

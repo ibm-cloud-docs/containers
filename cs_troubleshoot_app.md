@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-01"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, help
 
@@ -731,7 +731,7 @@ You might have set up a custom firewall, specified custom Calico policies, or cr
 
 
 ## Feedback, questions, and support
-{: #getting_help}
+{: #getting_help_app}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}

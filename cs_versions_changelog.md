@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -3456,7 +3456,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster DNS configuration</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed the update process from Kubernetes version 1.11 to prevent the update from switching the cluster DNS provider to CoreDNS. You can still [set up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns) after the update.</td>
+<td>Fixed the update process from Kubernetes version 1.11 to prevent the update from switching the cluster DNS provider to CoreDNS. You can still set up CoreDNS as the cluster DNS provider after the update.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -3724,7 +3724,7 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider. However, you can choose to [use CoreDNS instead](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
+<td>CoreDNS is now the default cluster DNS provider for new clusters. If you update an existing cluster to 1.13 that uses KubeDNS as the cluster DNS provider, KubeDNS continues to be the cluster DNS provider.</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -5350,13 +5350,13 @@ The following table shows the changes that are included in patch 1.12.2_1527.
 <td>Cluster DNS provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider. However, you now have the option to [change the cluster DNS provide to CoreDNS](/docs/containers?topic=containers-cluster_dns#dns_set).</td>
+<td>Kubernetes DNS (KubeDNS) remains the default cluster DNS provider..</td>
 </tr>
 <tr>
 <td>Cluster metrics provider</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider. For action items, see [the `metrics-server` preparation action](/docs/containers?topic=containers-cs_versions#metrics-server).</td>
+<td>Kubernetes Metrics Server replaces Kubernetes Heapster (deprecated since Kubernetes version 1.8) as the cluster metrics provider.</td>
 </tr>
 <tr>
 <td>containerd</td>

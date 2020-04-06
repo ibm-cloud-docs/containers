@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-01"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -382,7 +382,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 
 
 ## Step 6: Secure in-cluster traffic by enabling mTLS
-{: #mtls}
+{: #mtls-qs}
 
 Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://archive.istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
 {: shortdesc}

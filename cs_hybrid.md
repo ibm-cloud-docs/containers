@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-17"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -123,7 +123,7 @@ To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} 
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated
 * {{site.data.keyword.cloud_notm}} Direct Link Dedicated Hosting
 
-To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
+To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#get-started-solution-to-order) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
