@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-03"
+lastupdated: "2020-04-06"
 
 keywords: sitemap, containers
 subcollection: containers
@@ -1597,6 +1597,7 @@ subcollection: containers
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help)
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+* [April 2020](/docs/containers?topic=containers-iks-release#apr20)
 * [March 2020](/docs/containers?topic=containers-iks-release#mar20)
 * [February 2020](/docs/containers?topic=containers-iks-release#feb20)
 * [January 2020](/docs/containers?topic=containers-iks-release#jan20)

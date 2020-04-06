@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -38,6 +38,15 @@ subcollection: containers
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
+
+## April 2020
+{: #apr20}
+
+| Date | Description |
+| ---- | ----------- |
+| 06 April 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#10).</li></ul> |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in April 2020"}
 
 ## March 2020
 {: #mar20}
