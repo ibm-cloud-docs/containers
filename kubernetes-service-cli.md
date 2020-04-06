@@ -5536,7 +5536,7 @@ ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic) [--show-stora
 <dd>The infrastructure provider for which you want to list available flavors.</dd>
 
 <dt><code>--show-storage</code></dt>
-<dd>Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](https://cloud.ibm.com/docs/containers?topic=containers-planning_worker_nodes#sds).</dd>
+<dd>Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds).</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
