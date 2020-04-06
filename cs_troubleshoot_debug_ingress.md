@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -167,7 +167,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 
 3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
   * If a public ALB is listed and is assigned an IP address, continue to the next step.
-  * If no ALBs are created after several minutes, [contact us](#getting_help).
+  * If no ALBs are created after several minutes, [review ways to get help](#getting_help_ingress).
 
     ```
     ibmcloud ks alb ls -c <cluster_name_or_ID>
@@ -184,7 +184,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 
 4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address as the public ALB.
   * If a `LoadBalancer` service is listed and is assigned an IP address, continue to the next step.
-  * If no `LoadBalancer` services are created after several minutes, [contact us](#getting_help).
+  * If no `LoadBalancer` services are created after several minutes, [review ways to get help](#getting_help_ingress).
 
     ```
     kubectl get svc -n kube-system | grep LoadBalancer
@@ -197,7 +197,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     ```
     {: screen}
 
-5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [contact us](#getting_help).
+5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [review ways to get help](#getting_help_ingress).
   ```
   ibmcloud ks cluster get -c <cluster_name_or_ID>
   ```
@@ -892,7 +892,7 @@ To prevent the connection from closing after 60 seconds of inactivity:
 
 
 ## Feedback, questions, and support
-{: #getting_help}
+{: #getting_help_ingress}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}
@@ -938,8 +938,8 @@ Still having issues with your cluster? Review different ways to get help and sup
          ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
          ```
          {: pre}
-   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them. 
-   
+   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them.
+
    You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information to share with IBM Support.
    {: tip}
 

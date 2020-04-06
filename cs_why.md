@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, containers
 
@@ -107,7 +107,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 ## Comparison of free and standard clusters
 {: #cluster_types}
 
-You can create one free cluster or any number of standard clusters. Try out [free clusters](/docs/containers?topic=containers-getting-started#classic-cluster-create) to get familiar with a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps. Free clusters are automatically deleted after 30 days.
+You can create one free cluster or any number of standard clusters. Try out [free clusters](/docs/containers?topic=containers-getting-started#clusters_gs) to get familiar with a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps. Free clusters are automatically deleted after 30 days.
 {:shortdesc}
 
 If you have a free cluster and want to upgrade to a standard cluster, you can [create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui). Then, [copy your deployment configuration files](/docs/containers?topic=containers-update_app#copy_apps_cluster) from your free cluster into the standard cluster.

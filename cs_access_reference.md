@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -64,7 +64,7 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Deprecated: View a list of Kubernetes versions supported in {{site.data.keyword.containerlong_notm}}. | `ibmcloud ks kube-versions`| [`GET /v1/kube-versions`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetKubeVersions) |
 | View a list of available flavors for your worker nodes. | [`ibmcloud ks flavors`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types) (machine-types) | [`GET /v2​/getFlavors`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/v2GetFlavors) |
 | View current messages for the IBMid user. | [`ibmcloud ks messages`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages) | [`GET /v1/messages`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetMessages) |
-| View a list of supported locations in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks locations`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_locations) | [`GET /v1/locations`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations) |
+| View a list of supported locations in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks locations`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) | [`GET /v1/locations`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/ListLocations) |
 | View a list of supported versions in {{site.data.keyword.containerlong_notm}}. | [`ibmcloud ks versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command) | - |
 | View a list of available zones that you can create a cluster in. | [`ibmcloud ks zone ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_datacenters) | <ul><li>Classic: [`GET /v1/zones`](https://containers.cloud.ibm.com/global/swagger-global-api/#/util/GetZones)</li><li>VPC: [`GET ​/v2​/vpc​/getZones`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcGetZones)</li></ul> |
 {: class="simple-tab-table"}

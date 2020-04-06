@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 ---
 
@@ -59,23 +59,23 @@ lastupdated: "2020-03-30"
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
 [Service architecture](/docs/containers?topic=containers-service-arch)
-* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
+* [Classic cluster](/docs/containers?topic=containers-service-arch_classic)
   * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
   * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
   * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
   * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
-* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
+* [VPC cluster](/docs/containers?topic=containers-service-arch_vpc)
 
 [Limitations](/docs/containers?topic=containers-limitations)
 * [Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
 * [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
-  * [Compute](/docs/openshift?topic=openshift-openshift_limitations#classic_compute_limit)
-  * [Networking](/docs/openshift?topic=openshift-openshift_limitations#classic_networking_limit)
-  * [Storage](/docs/openshift?topic=openshift-openshift_limitations#classic_storage_limit)
+  * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
+  * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
+  * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 * [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
-  * [Compute](/docs/openshift?topic=openshift-openshift_limitations#vpc_compute_limit)
-  * [Networking](/docs/openshift?topic=openshift-openshift_limitations#vpc_networking_limit)
-  * [Storage](/docs/openshift?topic=openshift-openshift_limitations#vpc_storage_limit)
+  * [Compute](/docs/containers?topic=containers-limitations#vpc_compute_limit)
+  * [Networking](/docs/containers?topic=containers-limitations#vpc_networking_limit)
+  * [Storage](/docs/containers?topic=containers-limitations#vpc_storage_limit)
 
 ## Use cases
 {: #sitemap-usecases}
@@ -105,8 +105,9 @@ lastupdated: "2020-03-30"
 ## Your cluster strategy
 {: #sitemap-strategy}
 
-[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks#responsibilities_iks)
-* [Cluster management responsibilities](/docs/containers?topic=containers-responsibilities_iks#responsibilities)
+[Your responsibilities by using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
+* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
+* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
@@ -125,39 +126,6 @@ lastupdated: "2020-03-30"
 
 [High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#ha)
 * [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
-[Defining your Kubernetes strategy](/docs/containers?topic=containers-strategy#strategy)
-* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
-  * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
-  * [What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#app_types)
-  * [What are some guidelines for developing stateless, cloud-native apps?](/docs/containers?topic=containers-plan_deploy#12factor)
-  * [I already have an app. How can I migrate it to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-plan_deploy#migrate_containerize)
-  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
-* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
-  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
-  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
-  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
-  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
-* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
-  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
-  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
-* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
-* [Setting up service discovery](/docs/containers?topic=containers-plan_deploy#service_discovery)
-  * [Can I customize the Kubernetes cluster DNS provider?](/docs/containers?topic=containers-strategy#services_dns)
-  * [How can I make sure that my services are connected to the right deployments and ready to go?](/docs/containers?topic=containers-plan_deploy#services_connected)
-  * [How do I control network traffic among the services that run in my cluster?](/docs/containers?topic=containers-strategy#services_network_traffic)
-  * [How can I expose my services on the Internet?](/docs/containers?topic=containers-plan_deploy#services_expose_apps)
-* [Deploying app workloads to clusters](/docs/containers?topic=containers-plan_deploy#deployments)
-  * [I thought that I needed to put my app in a container. Now what's all this stuff about pods?](/docs/containers?topic=containers-plan_deploy#deploy_pods)
-  * [So if I can just use a pod, why do I need all these different types of objects?](/docs/containers?topic=containers-plan_deploy#deploy_objects)
-  * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-plan_deploy#deploy_organize)
-  * [What else can I do to prepare my app for deployment?](/docs/containers?topic=containers-strategy#deploy_prep)
-* [Packing your app](/docs/containers?topic=containers-plan_deploy#packaging)
-* [Keeping your app up-to-date](/docs/containers?topic=containers-plan_deploy#updating)
-  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-plan_deploy#updating_kube)
-  * [What app update strategies can I use?](/docs/containers?topic=containers-plan_deploy#updating_apps)
-* [Monitoring your cluster performance](/docs/containers?topic=containers-strategy#monitoring_health)
 
 ## Tutorials
 {: #sitemap-tutorials}
@@ -254,7 +222,7 @@ lastupdated: "2020-03-30"
 {: #sitemap-setup-clusters}
 
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
-* [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#vpc_basics)
+* [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
   * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
   * [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
   * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
@@ -512,9 +480,7 @@ lastupdated: "2020-03-30"
 [Configuring the cluster DNS provider for classic clusters](/docs/containers?topic=containers-cluster_dns#cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
 * [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-* [Setting the cluster DNS provider to CoreDNS or KubeDNS](/docs/containers?topic=containers-cluster_dns#dns_set)
-  * [Setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns)
-  * [Setting up KubeDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_kubedns)
+* [Setting up NodeLocal DNS cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_cache)
 
 ## Managing cluster network traffic for VPC clusters
 {: #sitemap-clusters-vpc-networking}
@@ -564,7 +530,7 @@ lastupdated: "2020-03-30"
 * [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
   * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
   * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
-* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-network-policy#vpc-restrict-gateway)
+* [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
 
 [Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-vpc_dns#vpc_dns_autoscale)
@@ -600,9 +566,9 @@ lastupdated: "2020-03-30"
   * [How can I add {{site.data.keyword.IBM_notm}} services to my app, such as Watson?](/docs/containers?topic=containers-app#how-can-i-add-ibm-services-to-my-app-such-as-watson-)
   * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-app#how-can-i-make-sure-that-my-app-has-the-right-resources-)
   * [How can I access my app?](/docs/containers?topic=containers-app#how-can-i-access-my-app-)
-  * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-app#after-i-deploy-my-app-how-can-i-monitor-its-health-)
+  * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_monitor)
   * [How can I keep my app up-to-date?](/docs/containers?topic=containers-app#how-can-i-keep-my-app-up-to-date-)
-  * [How can I control who has access to my app deployments?](/docs/containers?topic=containers-app#how-can-i-control-who-has-access-to-my-app-deployments-)
+  * [How can I control who has access to my app deployments?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_access)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
   * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
 * [Specifying your app requirements in your YAML file](/docs/containers?topic=containers-app#app_yaml)
@@ -656,14 +622,10 @@ lastupdated: "2020-03-30"
 * [What is Istio?](/docs/containers?topic=containers-istio-about#istio_ov_what_is)
 * [What is Istio on {{site.data.keyword.containerlong_notm}} (beta)?](/docs/containers?topic=containers-istio-about#istio_ov_addon)
 * [What comes with the Istio add-on?](/docs/containers?topic=containers-istio-about#istio_ov_components)
-  * [Kubernetes version 1.16 and later clusters](/docs/containers?topic=containers-istio-about#istio_ov_116)
-  * [Kubernetes version 1.15 and earlier clusters](/docs/containers?topic=containers-istio-about#istio_ov_115)
 * [Limitations](/docs/containers?topic=containers-istio-about#istio_limitations)
 
 [Setting up Istio](/docs/containers?topic=containers-istio)
 * [Installing the Istio add-ons](/docs/containers?topic=containers-istio#istio_install)
-  * [Kubernetes version 1.16 and later clusters](/docs/containers?topic=containers-istio#install_116)
-  * [Kubernetes version 1.15 and earlier clusters](/docs/containers?topic=containers-istio#install_115)
 * [Updating the Istio add-ons](/docs/containers?topic=containers-istio#istio_update)
   * [Updating your add-on from beta versions to the generally available version](/docs/containers?topic=containers-istio#istio-ga)
   * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio#update_client_sidecar)
@@ -672,7 +634,6 @@ lastupdated: "2020-03-30"
   * [Uninstalling managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
-  * [Istio components are missing](/docs/containers?topic=containers-istio#control_plane)
 
 [Managing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)
 * [Trying out the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
@@ -690,7 +651,7 @@ lastupdated: "2020-03-30"
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
 * [Launching the Grafana, Jaeger, and Kiali dashboards](/docs/containers?topic=containers-istio-health#istio_health_extras)
-* [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio#istio_inspect)
+* [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
 
@@ -756,7 +717,6 @@ lastupdated: "2020-03-30"
 * [How does a request get to my app with Ingress in a VPC cluster?](/docs/containers?topic=containers-ingress-about#architecture-vpc)
 
 [Setting up Ingress](/docs/containers?topic=containers-ingress)
-* [Sample YAMLs](/docs/containers?topic=containers-ingress#sample_ingress)
 * [Prerequisites](/docs/containers?topic=containers-ingress#config_prereqs)
 * [Planning networking for single or multiple namespaces](/docs/containers?topic=containers-ingress#multiple_namespaces)
   * [All apps are in one namespace](/docs/containers?topic=containers-ingress#one-ns)
@@ -950,8 +910,7 @@ lastupdated: "2020-03-30"
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx#portworx)
 * [Creating raw, unformatted, and unmounted block storage for non-SDS worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
-* [Getting a Portworx license](/docs/containers?topic=containers-portworx#portworx_license)
-* [Setting up a Databases for etcd service instance for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
+* [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
 * [Setting up volume encryption with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
   * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
@@ -959,10 +918,8 @@ lastupdated: "2020-03-30"
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-* [Getting started with Portworx](/docs/containers?topic=containers-portworx#px-getting-started)
-  * [Verifying your Portworx installation](/docs/containers?topic=containers-portworx#verify_installation)
-  * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
-  * [Mounting the PVC to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+* [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
+* [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
@@ -1112,7 +1069,6 @@ lastupdated: "2020-03-30"
 [Locations](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
   * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-  * [Available locations](/docs/containers?topic=containers-regions-and-zones#available-locations)
   * [Single zone and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
   * [Single-zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
   * [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
@@ -1177,8 +1133,6 @@ lastupdated: "2020-03-30"
 * [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
 * [What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
 * [Can I use {{site.data.keyword.cloud_notm}} and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
-* [Can I connect my cluster in {{site.data.keyword.cloud_notm}} Public with apps that run in my on-prem data center?](/docs/containers?topic=containers-faqs#hybrid)
-* [Can I deploy {{site.data.keyword.containerlong_notm}} in my own data center?](/docs/containers?topic=containers-faqs#private)
 * [Where can I find more information about IBM Cloud Kubernetes Service pricing models?](/docs/containers?topic=containers-faqs#pricing)
 * [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
 * [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
@@ -1205,11 +1159,11 @@ lastupdated: "2020-03-30"
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot#getting_help)
 
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_troubleshoot_clusters)
-* [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot#debug_worker_nodes)
+* [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#common_worker_nodes_issues)
 * [Unable to create a cluster due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
 * [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
-* [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_network#suspended)
+* [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
 * [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
@@ -1254,10 +1208,11 @@ lastupdated: "2020-03-30"
 
 [Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_troubleshoot_debug_ingress)
 * [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-debug)
-  * [Step 1: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#step-1-run-ingress-tests-in-the-ibm-cloud-kubernetes-service-diagnostics-and-debug-tool)
-  * [Step 2: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#errors)
-  * [Step 3: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ping)
-  * [Step 4: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ts_ingress_config)
+  * [Step 1: Check your app deployment](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#app-debug-ingress)
+  * [Step 2: Run Ingress tests in the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#debug-tool-ingress)
+  * [Step 3: Check for error messages in your Ingress deployment and the ALB pod logs](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#errors)
+  * [Step 4: Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ping)
+  * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ts_ingress_config)
   * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#one_alb)
 * [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
 * [VPC clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#vpc_ts_alb)

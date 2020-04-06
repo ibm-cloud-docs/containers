@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, help, debug
 
@@ -946,7 +946,7 @@ Update the file system in the existing PV from `ext4` to `XFS`.
 
 
 
-## Object storage: Installing the {{site.data.keyword.cos_full_notm}} `ibmc` Helm plug-in fails
+## Object storage: Installing the Object storage `ibmc` Helm plug-in fails
 {: #cos_helm_fails}
 
 
@@ -995,6 +995,114 @@ If you see a `permission denied` error, you do not have the required `read`, `wr
    {: pre}
 
 3. [Continue installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#install_cos).
+
+## Object storage: Installing the Object storage plug-in fails
+{: #cos_plugin_fails}
+
+{: tsSymptoms}
+When you install the `ibm-object-storage-plugin`, the installation fails with an error similar to the following:
+```
+Error: rendered manifest contains a resource that already exists. Unable to continue with install. Existing resource conflict: namespace: , name: ibmc-s3fs-flex-cross-region, existing_kind: storageClass, new_kind: storage.k8s.io/v1, Kind=StorageClass
+Error: plugin "ibmc" exited with error
+```
+{: screen}
+
+{: tsCauses}
+During the installation, many different tasks are executed by the {{site.data.keyword.cos_full_notm}} plug-in such as creating storage classes and cluster role bindings. Some of these resources might already exist in your cluster from previous {{site.data.keyword.cos_full_notm}} plug-in installations and were not properly removed when you removed or upgraded the plug-in.
+
+{: tsResolve}
+1. Delete the resource that is displayed in the error message.
+   ```
+   kubectl delete <resource_kind> <resource_name>
+   ```
+   {: pre}
+
+   Example for deleting a storage class resource:
+   ```
+   kubectl delete storageclass <storage_class_name>
+   ```
+   {: pre}
+
+2. [Retry the installation](/docs/containers?topic=containers-object_storage#install_cos).
+
+3. If you continue to see the same error, get a list of the resources that are installed when the plug-in is installed.
+
+   1. Get a list of storage classes that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get StorageClass --all-namespaces \
+          -l app=ibmcloud-object-storage-plugin \
+          -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 
+      ```
+      {: pre}
+   
+   2. Get a list of cluster role bindings that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get ClusterRoleBinding --all-namespaces \
+          -l app=ibmcloud-object-storage-plugin \
+          -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}' 
+      ```
+      {: pre}
+   
+   3. Get a list of role bindings that are created by the `ibmcloud-object-storage-driver`.
+      ```
+      kubectl get RoleBinding --all-namespaces \
+         -l app=ibmcloud-object-storage-driver \
+         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+   4. Get a list of role bindings that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get RoleBinding --all-namespaces \
+          -l app=ibmcloud-object-storage-plugin \
+          -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+   5. Get a list of cluster roles that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get ClusterRole --all-namespaces \
+         -l app=ibmcloud-object-storage-plugin \
+         -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+   6. Get a list of deployments that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get Deployments --all-namespaces \
+         -l app=ibmcloud-object-storage-plugin \
+         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+   7. Get a list of the daemon sets that are created by the `ibmcloud-object-storage-driver`.
+      ```
+      kubectl get DaemonSets --all-namespaces \
+         -l app=ibmcloud-object-storage-driver \
+         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+   8. Get a list of the service accounts that are created by the `ibmcloud-object-storage-driver`.
+      ```
+      kubectl get ServiceAccount --all-namespaces \
+         -l app=ibmcloud-object-storage-driver \
+         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre }
+   
+   9. Get a list of the service accounts that are created by the `ibmcloud-object-storage-plugin`.
+      ```
+      kubectl get ServiceAccount --all-namespaces \
+         -l app=ibmcloud-object-storage-plugin \
+         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+      ```
+      {: pre}
+
+4. Delete the conflicting resources.
+   
+5. After you delete the conflicting resources, [retry the installation](/docs/containers?topic=containers-object_storage#install_cos).
+
 
 
 <br />
@@ -1237,7 +1345,7 @@ The s3fs API endpoint for the bucket that you want to use might have the wrong f
    ```
    {: pre}
 
-   If the command returns `ibm.io/object-store-endpoint: NA`, your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. To add the location to the {{site.data.keyword.containerlong_notm}}, post a question in our public Slack or open an {{site.data.keyword.cloud_notm}} support case. For more information, see [Getting help and support](#getting_help).
+   If the command returns `ibm.io/object-store-endpoint: NA`, your cluster is deployed in a location that is supported in {{site.data.keyword.containerlong_notm}} but is not yet supported by the {{site.data.keyword.cos_full_notm}} plug-in. To add the location to the {{site.data.keyword.containerlong_notm}}, post a question in our public Slack or open an {{site.data.keyword.cloud_notm}} support case. For more information, see [Getting help and support](#getting_help_storage).
 
 2. If you manually added the s3fs API endpoint with the `ibm.io/endpoint` annotation or the IAM API endpoint with the `ibm.io/iam-endpoint` annotation in your PVC, make sure that you added the endpoints in the format `https://<s3fs_api_endpoint>` and `https://<iam_api_endpoint>`. The annotation overwrites the API endpoints that are automatically set by the `ibmc` plug-in in the {{site.data.keyword.cos_full_notm}} storage classes.
    ```
@@ -1595,7 +1703,7 @@ If you went through the troubleshooting guide and you still cannot find an issue
 Post a question in the `portworx-on-iks` channel in the [{{site.data.keyword.containerlong_notm}} Slack](https://ibm-cloud-success.slack.com/){: external}. Make sure to include the cluster ID and the steps that you took to verify your installation. Log in to Slack by using your IBM ID. If you do not use an IBM ID for your {{site.data.keyword.cloud_notm}} account, [request an invitation to this Slack](https://cloud.ibm.com/kubernetes/slack){: external}.
 
 ## Feedback, questions, and support
-{: #getting_help}
+{: #getting_help_storage}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}
@@ -1641,8 +1749,8 @@ Still having issues with your cluster? Review different ways to get help and sup
          ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
          ```
          {: pre}
-   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them. 
-   
+   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them.
+
    You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information to share with IBM Support.
    {: tip}
 

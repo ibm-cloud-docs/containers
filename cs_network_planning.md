@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-10"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, networking
 
@@ -183,7 +183,7 @@ If you create a non-default security group for a VPC, you must include an inboun
 |Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
 | VPC load balancer | Basic load balancing that exposes the app with a hostname | Quickly expose one app to the public with a VPC load balancer-assigned hostname. | [Create a public `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas) in your cluster. A multizonal VPC load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.|
-| Istio | Basic load balancing that exposes the app with a hostname and uses Istio routing rules | Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.</li></ol> | <ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio#istio_sidecar).</li><li>Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio#istio_expose).</li></ol>|
+| Istio | Basic load balancing that exposes the app with a hostname and uses Istio routing rules | Implement Istio post-routing rules, such as rules for different versions of one app microservice, and expose an Istio-managed app with a public hostname.</li></ol> | <ol><li>Install the [managed Istio add-on](/docs/containers?topic=containers-istio#istio_install).</li><li>Include your app in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar).</li><li>Register the default Istio load balancer with [a hostname](/docs/containers?topic=containers-istio-mesh#istio_expose).</li></ol>|
 | Ingress ALB | HTTPS load balancing that exposes the app with a subdomain and uses custom routing rules | Implement custom routing rules and SSL termination for multiple apps. | <ol><li>Create an [Ingress service](/docs/containers?topic=containers-ingress#ingress_expose_public) for the public ALB.</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}} VPC clusters" caption-side="top"}
 {: summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns in VPC clusters."}

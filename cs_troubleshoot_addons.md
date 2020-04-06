@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-05"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, help
 
@@ -68,13 +68,16 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 {: caption="Add-on health states"}
 {: summary="Table rows read from left to right, with the add-on state in column one and a description in column two."}
 
+</br>
+
 |Add-on health status|Description|
 |--- |--- |
 |`Addon Not Ready`|Some or all of the add-on components are unhealthy. Check whether all add-on component pods are running. For example, for the Istio add-on, check whether all pods in the `istio-system` namespace are `Running` by running `kubectl get pods -n istio-system`.|
 |`Addon Ready`|The add-on is successfully deployed and is healthy.|
 |`Addon Unsupported`|The add-on runs an unsupported version. [Update your add-on to the latest version](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons), or see specific update steps for [Istio](/docs/containers?topic=containers-istio#istio_update) or [Knative](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon).|
-|`Enabling`|The add-on is currently deploying to the cluster. Note that the add-on might take up to 15 minutes to install.|
 |`Cluster resources low, not enough workers in Ready state.`|The add-on is not ready to be used for one of the following reasons:<ul><li>The cluster does not meet the size criteria for the add-on. For example, check the size requirements for [Istio](/docs/containers?topic=containers-istio#istio_install) or [Knative](/docs/containers?topic=containers-serverless-apps-knative#knative-setup).</li><li>Worker nodes in your cluster are not in a `Normal` state. [Review the worker nodes' state and status](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes).</li></ul>|
+|`Enabling`|The add-on is currently deploying to the cluster. Note that the add-on might take up to 15 minutes to install.|
+|`Istio data plane components may need to be updated.`| When the Istio control plane is updated, the Istio data plane components are not updated automatically. Whenever the Istio add-on is updated to a new patch or minor version, you must [manually update your data plane components](/docs/containers?topic=containers-istio#update_client_sidecar), including the `istioctl` client and the Istio sidecars for your app.|
 {: caption="Add-on health statuses"}
 {: summary="Table rows read from left to right, with the add-on status in column one and a description in column two."}
 

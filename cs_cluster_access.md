@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-20"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, clusters
 
@@ -68,22 +68,20 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
    3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
 2. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
         {: pre}
-    2.  Verify that the `KUBECONFIG` environment variable is set properly.
-
-        Example:
+    2.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
         ```
-        echo $KUBECONFIG
+        kubectl config current-context
         ```
         {: pre}
 
-        Output:
+        Example output:
         ```
-        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
+        <cluster_name>/<cluster_ID>
         ```
         {: screen}
 

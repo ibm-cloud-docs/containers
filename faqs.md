@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -59,7 +59,7 @@ For more information about Kubernetes, see the [Kubernetes documentation](https:
 
 With {{site.data.keyword.containerlong_notm}}, you can create your own Kubernetes cluster to deploy and manage containerized apps on {{site.data.keyword.cloud_notm}}. Your containerized apps are hosted on IBM Cloud infrastructure compute hosts that are called worker nodes. You can choose to provision your compute hosts as [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm) with shared or dedicated resources, or as [bare metal machines](/docs/containers?topic=containers-planning_worker_nodes#bm) that can be optimized for GPU and software-defined storage (SDS) usage. Your worker nodes are controlled by a highly available Kubernetes master that is configured, monitored, and managed by IBM. You can use the {{site.data.keyword.containerlong_notm}} API or CLI to work with your cluster infrastructure resources and the Kubernetes API or CLI to manage your deployments and services.
 
-For more information about how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-service-arch#architecture). To find a list of capabilities and benefits, see [Benefits and service offerings](/docs/containers?topic=containers-cs_ov).
+For more information about how your cluster resources are set up, see the [Service architecture](/docs/containers?topic=containers-service-arch). To find a list of capabilities and benefits, see [Benefits and service offerings](/docs/containers?topic=containers-cs_ov).
 
 ## Why should I use {{site.data.keyword.containerlong_notm}}?
 {: #faq_benefits}
@@ -147,9 +147,9 @@ The access policies that you assign users vary depending on what you want your u
 | App developers | [Editor platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role scoped to a namespace](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry). |
 | Billing | [Viewer platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform). |
 | Create a cluster | Account-level permissions set by the API key with Super User infrastructure credentials for classic clusters, or the Administrator platform role to VPC Infrastructure for VPC clusters. Individual user permissions for Administrator platform role to {{site.data.keyword.containerlong_notm}}, and Administrator platform role to {{site.data.keyword.registrylong_notm}}. For more information, see [Preparing to create clusters](/docs/containers?topic=containers-clusters#cluster_prepare).|
-| Cluster administrator | [Administrator platform role for a cluster](/docs/containers?topic=containers-access_reference#admin-actions), [Manager service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service).|
+| Cluster administrator | [Administrator platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Manager service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service).|
 | DevOps operator | [Operator platform role for a cluster](/docs/containers?topic=containers-access_reference#iam_platform), [Writer service role not scoped to a namespace (for the whole cluster)](/docs/containers?topic=containers-access_reference#service), [Cloud Foundry developer space role](/docs/containers?topic=containers-access_reference#cloud-foundry).  |
-| Operator or site reliability engineer | [Administrator platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#admin-actions), [Reader service role for a cluster or region](/docs/containers?topic=containers-access_reference#service) or [Manager service role for all cluster namespaces](/docs/containers?topic=containers-access_reference#service) to be able to use `kubectl top nodes,pods` commands. |
+| Operator or site reliability engineer | [Administrator platform role for a cluster, region, or resource group](/docs/containers?topic=containers-access_reference#iam_platform), [Reader service role for a cluster or region](/docs/containers?topic=containers-access_reference#service) or [Manager service role for all cluster namespaces](/docs/containers?topic=containers-access_reference#service) to be able to use `kubectl top nodes,pods` commands. |
 {: caption="Types of roles you might assign to meet different use cases." caption-side="top"}
 
 ## Where can I find a list of security bulletins that affect my cluster?

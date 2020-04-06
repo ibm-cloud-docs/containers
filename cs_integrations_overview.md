@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, helm
 
@@ -93,7 +93,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|----|----|----|
-|{{site.data.keyword.BluDirectLink}}|With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#how-do-i-know-which-type-of-ibm-cloud-direct-link-i-need-) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
+|{{site.data.keyword.BluDirectLink}}|With [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet. The {{site.data.keyword.cloud_notm}} Direct Link offerings are useful when you must implement hybrid workloads, cross-provider workloads, large or frequent data transfers, or private workloads. To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#get-started-solution-to-order) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |strongSwan IPSec VPN Service|Set up a [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){: external} that securely connects your Kubernetes cluster with an on-premises network. The strongSwan IPSec VPN service provides a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite. To set up a secure connection between your cluster and an on-premises network, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup) directly in a pod in your cluster.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 {: caption="Hybrid cloud services"}
 {: summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}

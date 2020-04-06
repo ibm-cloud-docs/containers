@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -145,7 +145,7 @@ To troubleshoot your NLB service:
 
 
 ## Classic clusters: Cannot deploy a load balancer
-{: #cs_subnet_limit}
+{: #cs_subnet_limit_lb}
 
 {: tsSymptoms}
 When you describe the `ibm-cloud-provider-vlan-ip-config` configmap in your classic cluster, you might see an error message similar to the following example output.
@@ -202,7 +202,7 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
 
 
 ## Classic clusters: Source IP preservation fails when using tainted nodes
-{: #cs_source_ip_fails}
+{: #cs_source_ip_fails_lb}
 
 {: tsSymptoms}
 In a classic cluster, you enabled source IP preservation for a [version 1.0 load balancer](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) service by changing `externalTrafficPolicy` to `Local` in the service's configuration file. However, no traffic reaches the back-end service for your app.
@@ -331,7 +331,7 @@ After you create a VPC subnet, you cannot resize it or change its IP range. Inst
 
 
 ## Feedback, questions, and support
-{: #getting_help}
+{: #getting_help_lb}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}
@@ -377,8 +377,8 @@ Still having issues with your cluster? Review different ways to get help and sup
          ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
          ```
          {: pre}
-   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them. 
-   
+   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them.
+
    You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information to share with IBM Support.
    {: tip}
 

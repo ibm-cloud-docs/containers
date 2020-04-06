@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -75,7 +75,7 @@ A long log message might be truncated due to its length before it is collected b
 To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
 
 ## Feedback, questions, and support
-{: #getting_help}
+{: #getting_help_health}
 
 Still having issues with your cluster? Review different ways to get help and support for your {{site.data.keyword.containerlong_notm}} clusters. For any questions or feedback, post in Slack.
 {: shortdesc}
@@ -121,8 +121,8 @@ Still having issues with your cluster? Review different ways to get help and sup
          ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
          ```
          {: pre}
-   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them. 
-   
+   3. For issues with resources within your cluster such as pods or services, log in to the cluster and use the Kubernetes API to get more information about them.
+
    You can also use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to gather and export pertinent information to share with IBM Support.
    {: tip}
 

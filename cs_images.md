@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -208,7 +208,7 @@ When you add an image to a namespace, the image is automatically scanned by Vuln
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
 {: #namespace_token}
 
-You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registrylong_notm}}. Existing clusters use a registry [token](/docs/Registry?topic=registry-registry_access#registry_tokens) that is stored in a cluster `imagePullSecret` to authorize access to pull images from the `registry.bluemix.net` domain names.
+You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registrylong_notm}}. Existing clusters use a registry [token](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-registry-and-uaa-tokens){: external} that is stored in a cluster `imagePullSecret` to authorize access to pull images from the `registry.bluemix.net` domain names.
 {:shortdesc}
 
 For clusters that were created before **1 July 2019**, non-expiring registry tokens and secrets were automatically created for both the [nearest regional registry and the global registry](/docs/Registry?topic=registry-registry_overview#registry_regions). The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images. The tokens are used to authorize read-only access to any of your namespaces that you set up in {{site.data.keyword.registrylong_notm}} so that you can work with these public (global registry) and private (regional registry) images.
@@ -328,7 +328,7 @@ You can copy the image pull secret with registry token credentials that is autom
     ```
     {: pre}
 
-5. [Deploy a container by using the `imagePullSecret`](/docs/containers?topic=containers-app#pod_imagePullSecret) in your namespace.
+5. [Deploy a container by using the `imagePullSecret`](/docs/containers?topic=containers-images#pod_imagePullSecret) in your namespace.
 
 
 ### Deprecated: Accessing token-authorized images in other {{site.data.keyword.cloud_notm}} regions and accounts
@@ -403,4 +403,4 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     ```
     {: pre}
 
-6.  [Deploy a container by using the image pull secret](/docs/containers?topic=containers-app#pod_imagePullSecret) in your namespace.
+6.  [Deploy a container by using the image pull secret](/docs/containers?topic=containers-images#pod_imagePullSecret) in your namespace.

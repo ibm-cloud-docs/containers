@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-20"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks
 
@@ -130,32 +130,15 @@ Because it can take a few minutes to provision, create your cluster before you s
         ibmcloud ks cluster config --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  Verify that the `KUBECONFIG` environment variable is set properly.
-
-        Example for OS X:
+    2.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
         ```
-        echo $KUBECONFIG
+        kubectl config current-context
         ```
         {: pre}
 
         Example output:
-
         ```
-        /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/pr_firm_cluster/kube-config-prod-mil01-pr_firm_cluster.yml
-        ```
-        {: screen}
-
-    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-        ```
-        kubectl version  --short
-        ```
-        {: pre}
-
-        Example output:
-
-        ```
-        Client Version: v1.16.8
-        Server Version: v1.16.8
+        <cluster_name>/<cluster_ID>
         ```
         {: screen}
 

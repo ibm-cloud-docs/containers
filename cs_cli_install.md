@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-25"
+lastupdated: "2020-04-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -201,7 +201,7 @@ Before you can run `kubectl` commands:
 To run `kubectl` commands to manage your cluster:
 
 1. Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you must follow different steps to use `kubectl` commands.
-  * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the first file that is set by the `KUBECONFIG` environment variable. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately. Note that any pre-existing `kubeconfig` files are not merged automatically.
+  * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). Note that any pre-existing `kubeconfig` files are not merged automatically.
   * **Version 0.4 (deprecated) or earlier**: In CLI plug-in version 0.4 or earlier, `cluster config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.
 
 2.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
@@ -227,43 +227,145 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the first file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-7. Verify that the `KUBECONFIG` environment variable is set properly.
-
-    Example:
+7.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
     ```
-    echo $KUBECONFIG
-    ```
-    {: pre}
-
-    Output:
-    ```
-    /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-    ```
-    {: screen}
-
-8.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-    ```
-    kubectl version --short
+    kubectl config current-context
     ```
     {: pre}
 
     Example output:
     ```
-    Client Version: v1.16.8
-    Server Version: v1.16.8
+    <cluster_name>/<cluster_ID>
     ```
     {: screen}
 
-Now, you can run `kubectl` commands to manage your clusters in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}.
+Now, you can run `kubectl` commands to manage your cluster in {{site.data.keyword.cloud_notm}}. For a full list of commands, see the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}. If you have more than one cluster, you can [switch the CLI context across multiple clusters](#cli_config_multiple).
 
 If you are using Windows and the Kubernetes CLI is not installed in the same directory as the {{site.data.keyword.cloud_notm}} CLI, you must change directories to the path where the Kubernetes CLI is installed to run `kubectl` commands successfully.
 {: tip}
+
+<br />
+
+
+## Setting the Kubernetes context for multiple clusters
+{: #cli_config_multiple}
+
+You can use the {{site.data.keyword.containerlong_notm}} plug-in CLI to add the `kubeconfig` file for multiple clusters to the Kubernetes context of your terminal. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/){: external}.
+{: shortdesc}
+
+Before you begin:
+*   [Update the {{site.data.keyword.containerlong_notm}} plug-in](#cs_cli_upgrade) to at least version 1.0.
+    ```
+    ibmcloud plugin update kubernetes-service
+    ```
+    {: pre}
+* To make sure that you have an {{site.data.keyword.cloud_notm}} account and other prerequisite settings, see [Configuring the CLI to run `kubectl`](#cs_cli_configure)
+
+To set the Kubernetes context for multiple clusters:
+1.  Get the **Name** or **ID** of the clusters that you want to set the Kubernetes context for.
+    ```
+    ibmcloud ks cluster ls
+    ```
+    {: pre}
+2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
+    ```
+    ibmcloud ks cluster config -c <cluster_name_or_ID>
+    ```
+    {: pre}
+3.  Repeat step 2 for each cluster that you want to set the Kubernetes context for.
+4.  Check which cluster your terminal is currently set to use.
+    ```
+    kubectl config current-context
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    <cluster_name>/<cluster_ID>
+    ```
+    {: pre}
+5.  List the available Kubernetes contexts and note the **Name** of a cluster context that you want to use.
+    ```
+    kubectl config get-contexts
+    ```
+    {: pre}
+6.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for each terminal that uses the `kubeconfig` file, or specify the context on each `kubectl` command.
+
+    *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
+
+        ```
+        kubectl config use-context <context>
+        ```
+        {: pre}
+
+    *   **Specify the Kubernetes context per command**: For clusters that run the same version of Kubernetes as other clusters, you can switch between contexts by specifying the context in each `kubectl` command. Replace `<context>` with the context that you previously retrieved.
+        ```
+        kubectl --context=<context> <command>
+        ```
+        {: pre}
+
+        Example:
+        ```
+        kubectl --context=mycluster/abc123 get pods
+        ```
+        {: pre}
+
+        Plan to switch contexts by command often? Create an alias for each cluster in your terminal for the context. For example: `alias kprod='kubectl --context=mycluster/abc123'`. Then you can use the alias to switch clusters.
+        {: tip}
+
+<br />
+
+
+## Creating a temporary `kubeconfig` file
+{: #cli_temp_kubeconfig}
+
+Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_multiple) into the Kubernetes context, you might want a separate `kubeconfig` file per cluster. For example, you might have automation that relies on {{site.data.keyword.containerlong_notm}} plug-in CLI version 0.4 or earlier behavior and need time to adapt your scripts to the new CLI version 1.0.
+{: shortdesc}
+
+1.  Get the **Name** and **ID** of the cluster that you want to download a separate `kubeconfig` file for.
+    ```
+    ibmcloud ks clusters
+    ```
+    {: pre}
+2.  Set your `KUBECONFIG` environment variable in your terminal to a temporary directory.
+    ```
+    export KUBECONFIG=$(mktemp).yaml
+    ```
+    {: pre}
+3.  Download the `kubeconfig` file to the temporary directory that you just created.
+    ```
+    ibmcloud ks cluster config -c <cluster_name_or_ID>
+    ```
+    {: pre}
+4.  Optional: Get the `kubeconfig` file that you just downloaded.
+    *   To list the path of the `kubeconfig` file:
+        ```
+        echo $KUBECONFIG
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        /tmp/tmp.zhK6bD5Lpw
+        ```
+        {: screen}
+    *   To print the `kubeconfig` file in your terminal:
+        ```
+        cat $KUBECONFIG
+        ```
+        {: pre}
+5.  Verify that the Kubernetes context is set for your cluster, such as by listing pods.
+    ```
+    kubectl get pods
+    ```
+    {: pre}
+6.  Repeat these steps when you want to use a different cluster or open a new terminal session.
 
 <br />
 
@@ -422,19 +524,17 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
       ibmcloud ks cluster config --cluster <cluster_name_or_ID>
       ```
       {: pre}
-  2.  Verify that the `KUBECONFIG` environment variable is set properly.
+  2.    Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+        ```
+        kubectl config current-context
+        ```
+        {: pre}
 
-      Example:
-      ```
-      echo $KUBECONFIG
-      ```
-      {: pre}
-
-      Output:
-      ```
-      /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/mycluster/kube-config-prod-dal10-mycluster.yml
-      ```
-      {: screen}
+        Example output:
+        ```
+        <cluster_name>/<cluster_ID>
+        ```
+        {: screen}
 
 
 ## Using the Kubernetes web terminal in your web browser

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-26"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -111,7 +111,7 @@ The default cluster setup creates a service ID to store {{site.data.keyword.clou
 
 **My cluster image pull secret uses a registry token. Does a token still work?**<br>
 
-The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} via [tokens](/docs/Registry?topic=registry-registry_access#registry_tokens) is supported but deprecated.
+The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} via [tokens](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-registry-and-uaa-tokens){: external} is supported but deprecated.
 {: deprecated}
 
 Tokens authorize access to the deprecated `registry.bluemix.net` registry domains, whereas API keys authorize access to the `icr.io` registry domains. Existing clusters might have both tokens and API key-based image pull secrets, but new clusters only use API keys. Therefore by default, new clusters can pull images from only `icr.io` domains in the `default` Kubernetes namespace.
@@ -355,7 +355,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--resource-type <em>namespace</em> --resource <em>&lt;registry_namespace&gt;</em></code></td>
-    <td>Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=registry-registry_overview#registry_namespaces), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.</td>
+    <td>Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.</td>
     </tr>
     </tbody></table>
 4.  Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created, ``<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.

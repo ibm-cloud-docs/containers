@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-04-06"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -512,7 +512,7 @@ The following table shows the actions that you must take before you update the K
 </tr>
 <tr>
 <td>Unsupported: KubeDNS cluster DNS provider</td>
-<td>CoreDNS is now the only supported cluster DNS provider for clusters that run Kubernetes version 1.14 and later. If you update an existing cluster that uses KubeDNS as the cluster DNS provider to version 1.14, KubeDNS is automatically migrated to CoreDNS during the update. Thus before you update the cluster, consider [setting up CoreDNS as the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#set_coredns) and testing it. For example, if your app relies on an older DNS client, you might need to [update the app or customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
+<td>CoreDNS is now the only supported cluster DNS provider for clusters that run Kubernetes version 1.14 and later. If you update an existing cluster that uses KubeDNS as the cluster DNS provider to version 1.14, KubeDNS is automatically migrated to CoreDNS during the update. Thus before you update the cluster, consider setting up CoreDNS as the cluster DNS provider and testing it. For example, if your app relies on an older DNS client, you might need to [update the app or customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
 </tr>
 <tr>
 <td>Unsupported: Kubernetes `Initializers` alpha feature</td>
