@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-31"
+lastupdated: "2020-04-07"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -259,9 +259,14 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       etcdCACertFile: '/Users/<user>/.bluemix/plugins/container-service/clusters/<cluster_name>-admin/ca-<location>-<cluster_name>.pem'
     ```
     {: screen}
-5.  Confirm that the Kubernetes secrets for the cluster are encrypted. Replace the `cluster_name`, `etcdEndpoints`, `etcdCACertFile`, `etcdKeyFile`, and `etcdCertFile` fields with the values that you previously retrieved. The output is unreadable and scrambled, indicating that the secrets are encrypted.
+5. Get the name of any secret in the `default` namespace in your cluster.
     ```
-    etcdctl get /registry/secrets/default/<cluster_name> --endpoints <etcdEndpoints> --cacert="<etcdCACertFile>" --key="<etcdKeyFile>" --cert="<etcdCertFile>"
+    {[kubectl get secrets]}
+    ```
+    {: pre}
+6.  Confirm that the Kubernetes secrets for the cluster are encrypted. Replace the `secret_name`, `etcdEndpoints`, `etcdKeyFile`, `etcdCertFile`, and `etcdCACertFile` fields with the values that you previously retrieved. The output is unreadable and scrambled, indicating that the secrets are encrypted.
+    ```
+    etcdctl get /registry/secrets/default/<secret_name> --endpoints <etcdEndpoints> --key="<etcdKeyFile>" --cert="<etcdCertFile>" --cacert="<etcdCACertFile>"
     ```
     {: pre}
 
@@ -275,7 +280,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Verify that you downloaded the Calico configuration file with the `ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --network` command. Check that your local `etcdctl` version matches the remote `etcd` version. Run the `etcdctl get` commmand with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again. 
+    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Verify that you downloaded the Calico configuration file with the `ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --network` command. Check that your local `etcdctl` version matches the remote `etcd` version. Run the `etcdctl get` commmand with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again.
     {: tip}
 
 ## Encrypting data in classic clusters by using IBM Cloud Data Shield 
