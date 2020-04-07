@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-07"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -111,7 +111,6 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
   * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the {{site.data.keyword.containerlong_notm}} cluster.
   * [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/iam?topic=iam-userroles) for {{site.data.keyword.la_full_notm}}.
 * For the cluster that you want to collect API server audit logs from: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* If you have an existing cluster that was created before 25 February 2019, verify that the `default-icr-io` secret exists in your cluster by running `kubectl get secrets`. If the `default-icr-io` secret is not listed in the output, [update your cluster to use the API key `imagePullSecret`](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key).
 * Keep in mind that only one audit webhook can be created in a cluster. You can set up an audit webhook to forward logs to {{site.data.keyword.la_full_notm}} or to forward logs to an external syslog server, but not both.
 
 **To forward Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}:**

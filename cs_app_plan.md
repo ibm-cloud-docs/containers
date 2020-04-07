@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-07"
 
 keywords: kubernetes, iks, deploy
 
@@ -416,7 +416,7 @@ As you plan and develop your app, consider the following options to maintain a s
 <dt>Image security</dt>
 <dd>To protect your app, you must protect the image and establish checks to ensure the image's integrity. Review the [image and registry security topic](/docs/containers?topic=containers-security#images_registry) for steps that you can take to ensure secure container images. For example, you might use Vulnerability Advisor checks the security status of container images. When you add an image to your organization's {{site.data.keyword.registrylong_notm}} namespace, the image is automatically scanned by Vulnerability Advisor to detect security issues and potential vulnerabilities. If security issues are found, instructions are provided to help fix the reported vulnerability. To get started, see [Managing image security with Vulnerability Advisor](/docs/Registry?topic=va-va_index).</dd>
 <dt>Kubernetes secrets</dt>
-<dd>When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an `imagePullSecret` for registry credentials. You can then reference these secrets in your deployment YAML file.</dd>
+<dd>When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an image pull secret for registry credentials. You can then reference these secrets in your deployment YAML file.</dd>
 <dt>Secret encryption</dt>
 <dd>You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider (beta)](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).</dd>
 <dt>Microservice traffic encryption</dt>
