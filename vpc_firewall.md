@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -269,20 +269,13 @@ If you use non-default security groups that are applied at the level of the VPC,
 
 
 
-When you modify a security group to allow incoming TCP traffic to ports `30000 - 32767`, you can choose to allow traffic from any source, or only from the VPC subnets that your cluster is connected. If you choose to allow traffic from only your cluster's VPC subnets, your traffic rule provides more restrictive security, because incoming traffic is only permitted from your VPC load balancers that are on these subnets. However, any time that you add a VPC subnet to your cluster, you must create a new rule that allows incoming traffic from that subnet's CIDR.
-{: note}
-
 ### Opening security group ports in the console
 {: #security_groups_ui}
 
-1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the VPC that your cluster is in.
-2. In the **Address prefixes** section, copy the **IP Range**. If your cluster is multizone, copy the range for each subnet.
-3. From the [Security groups for VPC page](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the security group for your VPC.
-4. In the **Inbound rules** section, click **New rule**. The **TCP** protocol is pre-selected.
-5. Type `30000` for the **Port min** and `32767` for the **Port max**.
-6. For the **Source Type**, select **CIDR block** and paste one IP range that you previously copied.
-7. Click **Save**.
-8. If your cluster is multizone, repeat steps 4 - 7 for each IP range that you copied in step 2.
+1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
+2. In the **Inbound rules** section, click **New rule**. The **TCP** protocol and **Any** source type are pre-selected.
+3. Type `30000` for the **Port min** and `32767` for the **Port max**.
+4. Click **Save**.
 
 ### Opening security group ports from the CLI
 {: #security_groups_cli}
@@ -311,21 +304,9 @@ When you modify a security group to allow incoming TCP traffic to ports `30000 -
   ```
   {: screen}
 
-4. List the VPC subnets for your cluster. You can find the ID of the VPC that your cluster is in by running `ibmcloud ks cluster get -c <cluster_name_or_ID>` and checking the **VPCs** field. If you have a multizone cluster, run this command to get the subnet for each zone. In the output, note the **IPv4 CIDR Block**.
+4. For each security group, add a rule to allow inbound TCP traffic on ports 30000-32767.
   ```
-  ibmcloud ks subnets --provider vpc-classic --vpc-id <VPC_ID> --zone <VPC_zone>
-  ```
-  {: pre}
-  Example output:
-  ```
-  Name                   ID                                     Public Gateway Name   Public Gateway ID   IPv4 CIDR Block   Available IPv4 Addresses
-  mycluster-us-south-1   5f5787a4-f560-471b-b6ce-20067ac93439   -                     -                   10.240.0.0/24     183
-  ```
-  {: screen}
-
-5. For each security group that you found in step 3, add a rule to allow inbound TCP traffic on ports 30000-32767. If you have a multizone cluster, you must run this command for each subnet that you found step 4.
-  ```
-  ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767 --remote <VPC_subnet_CIDR>
+  ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
   ```
   {: pre}
 

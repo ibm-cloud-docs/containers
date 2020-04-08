@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-07"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -334,7 +334,7 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 #### `ibmcloud ks cluster addon disable vpc-block-csi-driver`
 {: #cs_cluster_addon_disable_vpc-block-csi-driver}
 
-Disable the [{{site.data.keyword.cloud_notm}} VPC Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block) add-on.
+Disable the [{{site.data.keyword.vpc_short}} Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block) add-on.
 {: shortdesc}
 
 ```
@@ -545,7 +545,7 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 #### `ibmcloud ks cluster addon enable vpc-block-csi-driver`
 {: #cs_cluster_addon_enable_vpc-block-csi-driver}
 
-Disable the [{{site.data.keyword.cloud_notm}} VPC Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block#vpc-block-addon) add-on.
+Disable the [{{site.data.keyword.vpc_short}} Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block#vpc-block-addon) add-on.
 {: shortdesc}
 
 ```

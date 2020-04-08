@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, strongswan, ipsec, on-prem, vpnaas, direct link
 
@@ -51,10 +51,10 @@ Choose a VPN connection solution based on which resources or networks you want t
 ### Communication with resources in on-premises data centers
 {: #onprem}
 
-To connect your cluster with your on-premises data center, you can set up the VPC VPN service or a strongSwan IPSec VPN service.
+To connect your cluster with your on-premises data center, you can set up the {{site.data.keyword.vpc_short}} VPN service or a strongSwan IPSec VPN service.
 {: shortdesc}
 
-* With the {{site.data.keyword.vpc_short}} VPN, you connect an entire VPC to an on-premises data center. This option allows you to remain VPC-native in you VPN connection setup. To get started by creating a VPC gateway for your subnets, see [Using VPN with your VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). Note that if you have a multizone cluster, you must create a VPC gateway on a subnet in each zone where you have worker nodes.
+* With the {{site.data.keyword.vpc_short}} VPN, you connect an entire VPC to an on-premises data center or to another VPC. This option allows you to remain VPC-native in you VPN connection setup. To get started by creating a VPC gateway for your subnets, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). Note that if you have a multizone cluster, you must create a VPC gateway on a subnet in each zone where you have worker nodes.
 * With the [strongSwan IPSec VPN service](https://www.strongswan.org/about.html){: external}, you set up a VPN load balancer directly in your cluster. To get started, [configure and deploy the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn-setup).
 
 If you plan to connect your cluster to on-premises networks, you might have subnet conflicts with the IBM-provided default 172.30.0.0/16 range for pods and 172.21.0.0/16 range for services. You can avoid subnet conflicts when you [create a cluster in the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic) by specifying a custom subnet CIDR for pods in the `--pod-subnet` flag and a custom subnet CIDR for services in the `--service-subnet` flag.
@@ -66,7 +66,7 @@ If you plan to connect your cluster to on-premises networks, you might have subn
 To connect an entire VPC to another VPC in your account, you can use the {{site.data.keyword.vpc_short}} VPN.
 {: shortdesc}
 
-For example, you can connect subnets in a VPC in one region through a VPN connection to subnets in a VPC in another region. To get started by creating a VPC gateway for your subnets, see [Using VPN with your VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc). Note that if you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) for your VPC subnets, you must create inbound or outbound rules to allow your worker nodes to communicate with the subnets in other VPCs.
+For example, you can connect subnets in a VPC in one region through a VPN connection to subnets in a VPC in another region. To get started by creating a VPC gateway for your subnets, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). Note that if you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) for your VPC subnets, you must create inbound or outbound rules to allow your worker nodes to communicate with the subnets in other VPCs.
 
 ### Communication with {{site.data.keyword.cloud_notm}} classic resources
 {: #vpc-classic}
@@ -157,6 +157,7 @@ Before you install the strongSwan Helm chart, you must decide on your strongSwan
 {: shortdesc}
 
 Before you begin:
+* Review the [considerations and limitations](#vpc-strongswan_limitations).
 * Install an IPSec VPN gateway in your on-premises data center.
 * Ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)

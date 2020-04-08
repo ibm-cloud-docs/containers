@@ -2,7 +2,7 @@
 
 copyright:
 years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-08"
 
 ---
 
@@ -955,7 +955,7 @@ lastupdated: "2020-04-06"
 * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-ibm-3rd-party-integrations#ibm-cloud-services)
   * [{{site.data.keyword.cloud_notm}} platform services](/docs/containers?topic=containers-ibm-3rd-party-integrations#platform-services)
   * [{{site.data.keyword.cloud_notm}} classic infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#infrastructure-services)
-  * [{{site.data.keyword.cloud_notm}} VPC infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
+  * [{{site.data.keyword.vpc_short}} infrastructure services](/docs/containers?topic=containers-ibm-3rd-party-integrations#vpc-infrastructure-services)
 * [Kubernetes community and open source integrations](/docs/containers?topic=containers-ibm-3rd-party-integrations#kube-community-tools)
   * [Integrations operated in partnership](/docs/containers?topic=containers-ibm-3rd-party-integrations#open-source-partners)
   * [Managed add-ons](/docs/containers?topic=containers-ibm-3rd-party-integrations#cluster-add-ons)
