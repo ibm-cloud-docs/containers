@@ -545,7 +545,7 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 #### `ibmcloud ks cluster addon enable vpc-block-csi-driver`
 {: #cs_cluster_addon_enable_vpc-block-csi-driver}
 
-Disable the [{{site.data.keyword.vpc_short}} Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block#vpc-block-addon) add-on.
+Disable the [{{site.data.keyword.vpc_short}} Block Storage CSI Driver](/docs/containers?topic=containers-vpc-block) add-on.
 {: shortdesc}
 
 ```

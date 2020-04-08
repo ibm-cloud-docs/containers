@@ -59,12 +59,12 @@ lastupdated: "2020-04-08"
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
 [Service architecture](/docs/containers?topic=containers-service-arch)
-* [Classic cluster](/docs/containers?topic=containers-service-arch_classic)
+* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
   * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
   * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
   * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
   * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
-* [VPC cluster](/docs/containers?topic=containers-service-arch_vpc)
+* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
 
 [Limitations](/docs/containers?topic=containers-limitations)
 * [Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
@@ -561,16 +561,10 @@ lastupdated: "2020-04-08"
 [Deploying Kubernetes-native apps in clusters](/docs/containers?topic=containers-app)
 * [Planning to run apps in clusters](/docs/containers?topic=containers-plan_deploy)
   * [What type of Kubernetes objects can I make for my app?](/docs/containers?topic=containers-plan_deploy#object)
-  * [How can I add capabilities to my Kubernetes app configuration?](/docs/containers?topic=containers-app#how-can-i-add-capabilities-to-my-kubernetes-app-configuration-)
   * [What if I want my Kubernetes app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
-  * [How can I add {{site.data.keyword.IBM_notm}} services to my app, such as Watson?](/docs/containers?topic=containers-app#how-can-i-add-ibm-services-to-my-app-such-as-watson-)
-  * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-app#how-can-i-make-sure-that-my-app-has-the-right-resources-)
-  * [How can I access my app?](/docs/containers?topic=containers-app#how-can-i-access-my-app-)
   * [After I deploy my app, how can I monitor its health?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_monitor)
-  * [How can I keep my app up-to-date?](/docs/containers?topic=containers-app#how-can-i-keep-my-app-up-to-date-)
   * [How can I control who has access to my app deployments?](/docs/containers?topic=containers-plan_deploy#app_plan_logmet_access)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
-  * [Increasing the availability of your app](/docs/containers?topic=containers-app#increase_availability)
 * [Specifying your app requirements in your YAML file](/docs/containers?topic=containers-app#app_yaml)
   * [Complete example deployment YAML](/docs/containers?topic=containers-app#yaml-example)
 * [Launching the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard)
@@ -878,7 +872,6 @@ lastupdated: "2020-04-08"
   * [Cleaning up persistent storage](/docs/containers?topic=containers-cleanup#storage_remove)
 
 [Storing data on {{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)
-* [Installing the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-block-addon)
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 * [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
 * [Creating {{site.data.keyword.block_storage_is_short}} with a different file system](/docs/containers?topic=containers-vpc-block#vpc-block-xfs)
@@ -1008,7 +1001,6 @@ lastupdated: "2020-04-08"
 * [versions command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_versions_command)
 * [api command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cli_api)
 * [init command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_init)
-* [Deprecated: region commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#region)
 * [script commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script)
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#cs_cli_changelog)
@@ -1169,7 +1161,6 @@ lastupdated: "2020-04-08"
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
 * [Accessing a pod on a new worker node fails with a timeout](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#getting_help)
 
 [Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network#cs_troubleshoot_network)
 * [Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck)
@@ -1178,12 +1169,10 @@ lastupdated: "2020-04-08"
 * [Cannot install a new strongSwan Helm chart release](/docs/containers?topic=containers-cs_troubleshoot_network#cs_strongswan_release)
 * [strongSwan VPN connectivity fails after you add or delete worker nodes](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails_worker_add)
 * [Cannot retrieve Calico network policies](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_network#getting_help)
 
 [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health)
 * [Kubernetes dashboard does not display utilization graphs](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)
 * [Log lines are too long](/docs/containers?topic=containers-cs_troubleshoot_health#long_lines)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_health#getting_help)
 
 [Apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app)
 * [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps)
@@ -1201,8 +1190,6 @@ lastupdated: "2020-04-08"
 
 [Load balancers](/docs/containers?topic=containers-cs_troubleshoot_lb)
 * [Classic clusters: Cannot connect to an app via a network load balancer (NLB) service](/docs/containers?topic=containers-cs_troubleshoot_lb#cs_loadbalancer_fails)
-* [Classic clusters: Cannot deploy a load balancer](/docs/containers?topic=containers-cs_troubleshoot_lb#cs_subnet_limit)
-* [Classic clusters: Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_lb#cs_source_ip_fails)
 * [VPC clusters: Cannot connect to an app via load balancer](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_ts_lb)
 * [VPC clusters: Kubernetes `LoadBalancer` service fails because no IPs are available](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_no_lb)
 
@@ -1223,7 +1210,6 @@ lastupdated: "2020-04-08"
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#getting_help)
 
 [Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage#cs_troubleshoot_storage)
 * [Debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
@@ -1244,7 +1230,6 @@ lastupdated: "2020-04-08"
 * [Object storage: Changing the ownership of the mount path fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_mountpath_error)
 * [Object storage: Accessing files with a non-root user fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
 * [PVC creation fails because of missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help)
 
 [Release notes](/docs/containers?topic=containers-iks-release)
 * [January 2020](/docs/containers?topic=containers-iks-release#jan20)
