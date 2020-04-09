@@ -93,11 +93,10 @@ Kubernetes Service
     Managing the cluster network
         cs_subnets.md
         cs_network_cluster.md
-        cs_dns.md
         cs_vpn.md
         vpc_subnets.md
-        vpc_dns.md
         vpc_vpn.md
+        cs_dns.md
 
     cs_health.md
 
