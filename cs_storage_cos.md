@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-02"
+lastupdated: "2020-04-09"
 
 keywords: kubernetes, iks
 
@@ -442,9 +442,7 @@ To install the `ibmc` Helm plug-in and `ibm-object-storage-plugin`:
     If you want to set one of the {{site.data.keyword.cos_full_notm}} storage classes as your default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`. Replace `<storageclass>` with the name of the {{site.data.keyword.cos_full_notm}} storage class.
     {: tip}
 
-12. **VPC clusters only**: If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
-
-13. Follow the instructions to [add object storage to your apps](#add_cos).
+12. Follow the instructions to [add object storage to your apps](#add_cos).
 
 If you're having trouble installing the {{site.data.keyword.cos_full_notm}} plug-in, see [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails) and [Object storage: Installing the Object storage plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_plugin_fails).
 {: tip}
@@ -1207,100 +1205,6 @@ To deploy a stateful set that uses object storage:
 
 <br />
 
-
-
-
-## Creating a customized storage class for VPC
-{: #customized_storageclass_vpc}
-
-If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance. To work with the plug-in in a VPC cluster, you must create a customized storage class that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance.
-{: shortdesc}
-
-1. Review the steps in [Deciding on your Object Storage configuration](/docs/containers?topic=containers-object_storage#configure_cos) to find the storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
-2. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-s3fs-cold-cross-region` storage class.
-   ```
-   kubectl get storageclass ibmc-s3fs-cold-cross-region -o yaml
-   ```
-
-   Example output:
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     creationTimestamp: "2019-09-25T18:17:26Z"
-     labels:
-       app: ibmcloud-object-storage-plugin
-       chart: ibm-object-storage-plugin-1.0.9
-       heritage: Tiller
-       release: ibm-object-storage-plugin
-     name: ibmc-s3fs-cold-cross-region
-     resourceVersion: "7347835"
-     selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-s3fs-cold-cross-region
-     uid: fd24749f-29fa-4b4c-85cf-63b3ad0d89bf
-   parameters:
-     ibm.io/chunk-size-mb: "16"
-     ibm.io/curl-debug: "false"
-     ibm.io/debug-level: warn
-     ibm.io/iam-endpoint: https://iam.bluemix.net
-     ibm.io/kernel-cache: "false"
-     ibm.io/multireq-max: "20"
-     ibm.io/object-store-endpoint: https://s3.private.dal.us.cloud-object-storage.appdomain.cloud
-     ibm.io/object-store-storage-class: us-cold
-     ibm.io/parallel-count: "2"
-     ibm.io/s3fs-fuse-retry-count: "5"
-     ibm.io/stat-cache-size: "100000"
-     ibm.io/tls-cipher-suite: AESGCM
-   provisioner: ibm.io/ibmc-s3fs
-   reclaimPolicy: Delete
-   volumeBindingMode: Immediate
-   ```
-   {: screen}
-3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connecting to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc?topic=vpc-connecting-vpc-cos).
-   ```yaml
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: cos-vpc
-   parameters:
-     ibm.io/chunk-size-mb: "16"
-     ibm.io/curl-debug: "false"
-     ibm.io/debug-level: warn
-     ibm.io/iam-endpoint: https://iam.bluemix.net
-     ibm.io/kernel-cache: "false"
-     ibm.io/multireq-max: "20"
-     ibm.io/object-store-endpoint: https://s3.direct.dal.us.cloud-object-storage.appdomain.cloud
-     ibm.io/object-store-storage-class: us-cold
-     ibm.io/parallel-count: "2"
-     ibm.io/s3fs-fuse-retry-count: "5"
-     ibm.io/stat-cache-size: "100000"
-     ibm.io/tls-cipher-suite: AESGCM
-   provisioner: ibm.io/ibmc-s3fs
-   reclaimPolicy: Delete
-   volumeBindingMode: Immediate
-   ```
-   {: codeblock}
-
-4. Create the storage class in your cluster.
-   ```
-   kubectl apply -f custom_storageclass.yaml
-   ```
-   {: pre}
-
-5. Verify that your storage class is available in the cluster.
-   ```
-   kubectl get storageclasses
-   ```
-   {: pre}
-
-6. Optional: Set the customized storage class as the default one for your cluster.
-   ```
-   kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-   ```
-   {: pre}
-
-7. Use the customized storage class to [add object storage to apps](/docs/containers?topic=containers-object_storage#add_cos).
-
-<br />
 
 
 ## Storage class reference
