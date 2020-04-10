@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-10"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -263,7 +263,7 @@ When you use the new global functionality in the {{site.data.keyword.containerlo
 </br></br>
 **{{site.data.keyword.containerlong_notm}} API**:
 * [Get started with the API](/docs/containers?topic=containers-cs_api_install#cs_api).
-* [View documentation on the API commands](https://containers.cloud.ibm.com/global/swagger-global-api/).
+* [View documentation on the API commands](https://containers.cloud.ibm.com/global/swagger-global-api/#/).
 * Generate a client of the API to use in automation by using the [`swagger.json` API](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json).
 
 To interact with the global {{site.data.keyword.containerlong_notm}} API, enter the command type and append `global/v1/command` to the endpoint.
