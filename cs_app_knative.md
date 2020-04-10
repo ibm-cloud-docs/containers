@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-04-10"
 
 keywords: kubernetes, iks, knative
 
@@ -521,13 +521,13 @@ By default, every app is assigned a public subdomain from your Ingress subdomain
    - Map your custom domain to the portable public IP address of the Ingress gateway by adding the IP address as an A record. To find the public IP address of the Ingress gateway, run `nslookup <ingress_subdomain>`.
 3. Purchase an official wildcard TLS certificate for your custom domain. If you want to purchase multiple TLS certificates, make sure the [CN](https://support.dnsimple.com/articles/what-is-common-name/){: external} is different for each certificate.
 4. Create a Kubernetes secret for your cert and key.
-   1. Encode the cert and key into base-64 and save the base-64 encoded value in a new file.
+   1. Encode the cert and key into base64 and save the base64 encoded value in a new file.
       ```
       openssl base64 -in tls.key -out tls.key.base64
       ```
       {: pre}
 
-   2. View the base-64 encoded value for your cert and key.
+   2. View the base64 encoded value for your cert and key.
       ```
       cat tls.key.base64
       ```
