@@ -1231,17 +1231,7 @@ subcollection: containers
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
-## CLI plug-in reference
-{: #sitemap_cli_plug-in_reference}
-
-
-[CLI changelog](/docs/containers?topic=containers-cs_cli_changelog)
-* [Using version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
-* [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-* [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
-* [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
-* [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
-* [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
+##[Kubernetes open source documentation](https://kubernetes.io/docs/home/){: external}
 
 
 ## API reference
@@ -1257,6 +1247,19 @@ subcollection: containers
 [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va){: external}
 
 [Community Kubernetes API](https://kubernetes.io/docs/reference/){: external}
+
+
+## CLI plug-in reference
+{: #sitemap_cli_plug-in_reference}
+
+
+[CLI changelog](/docs/containers?topic=containers-cs_cli_changelog)
+* [Using version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
+* [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
+* [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
+* [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
+* [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
+* [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
 
 ## Version history

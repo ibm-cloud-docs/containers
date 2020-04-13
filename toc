@@ -166,10 +166,7 @@ Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    {: .topicgroup}
-    CLI plug-in reference
-        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
-        cs_cli_changelog.md
+    [Kubernetes open source documentation](https://kubernetes.io/docs/home/)
 
     {: .topicgroup}
     API reference
@@ -178,6 +175,11 @@ Kubernetes Service
         [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
         [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
         [Community Kubernetes API](https://kubernetes.io/docs/reference/)
+
+    {: .topicgroup}
+    CLI plug-in reference
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
+        cs_cli_changelog.md
 
     {: .topicgroup}
     Version history
