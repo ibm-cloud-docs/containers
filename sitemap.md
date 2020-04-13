@@ -1307,7 +1307,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
-  * [Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020](/docs/containers?topic=containers-changelog#1168_1527)
+  * [Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020](/docs/containers?topic=containers-changelog#1168_1528)
   * [Changelog for worker node fix pack 1.16.8_1527, released 30 March 2020](/docs/containers?topic=containers-changelog#1168_1527)
   * [Changelog for 1.16.8_1526, released 16 March 2020](/docs/containers?topic=containers-changelog#1168_1526)
   * [Changelog for worker node fix pack 1.16.7_1525, released 2 March 2020](/docs/containers?topic=containers-changelog#1167_1525)

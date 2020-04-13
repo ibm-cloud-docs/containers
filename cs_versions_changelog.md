@@ -173,7 +173,7 @@ Review the version 1.16 changelog.
 {: shortdesc}
 
 ### Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020
-{: #1168_1527}
+{: #1168_1528}
 
 The following table shows the changes that are included in the worker node fix pack `1.16.8_1528`. Worker node patch updates can be applied by updating or reloading the worker node.
 {: shortdesc}
