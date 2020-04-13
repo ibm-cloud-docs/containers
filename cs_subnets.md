@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-13"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -172,7 +172,7 @@ Before you begin:
     ```
     {: pre}
 
-    When your cluster is fully provisioned, the **State** changes to `deployed`. 
+    When your cluster is fully provisioned, the **State** changes to `deployed`.
 
     ```
     Name         ID                                   State      Created          Workers    Zone      Version     Resource Group Name   Provider
