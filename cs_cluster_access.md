@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-01"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, clusters
 
@@ -48,6 +48,9 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 2. [Create your Kubernetes cluster](/docs/containers?topic=containers-clusters).
 3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private service endpoint-only clusters, you cannot test the connection to your cluster until you expose the private service endpoint of the master to the cluster by using a [private NLB](#access_private_se).
 4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
+5.  In the output of the cluster details from the previous step, check the **Public** or **Private Service Endpoint** URL of the cluster.
+    *  **Public Service Endpoint URL**: Continue with [Accessing Kubernetes clusters through the public service endpoint](#access_public_se).
+    *  **Private Service Endpoint URL only**: If your cluster has only a private service endpoint enabled, continue with [Accessing clusters through the private service endpoint](#access_private_se). Note that this step requires a private network connection to your cluster.
 
 <br />
 
@@ -225,7 +228,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 6. Verify that you are connected to the private network through one of the following methods:
   * Classic clusters: Use a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection.
-  * VPC clusters: Use a [VPC VPN](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) connection.
+  * VPC clusters: Use a [VPC VPN](/docs/vpc?topic=vpc-vpn-onprem-example) connection.
 
 7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
     ```

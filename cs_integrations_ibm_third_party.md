@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, helm
 
@@ -84,7 +84,9 @@ Before you can create a VPC cluster, you must have a VPC and at least one VPC su
 
 To add persistent storage to your VPC cluster, you can enable the [{{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block). The add-on sets up pre-defined Kubernetes storage classes, the storage provider, and the storage driver in your cluster so that you can provision {{site.data.keyword.block_storage_is_short}} by using Kubernetes persistent volume claims (PVCs). To use the add-on, all your VPC subnets must be configured with a public network gateway.
 
-To secure your cluster network traffic, you can create access control lists (ACLs) for your VPC subnet. For more information, see [Security in your {{site.data.keyword.cloud_notm}} VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-security-in-your-ibm-cloud-vpc). To connect to a different VPC or to an on-prem data center, use the [VPN for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-vpn-with-your-vpc) service.  
+To secure your cluster network traffic, you can create access control lists (ACLs) for your VPC subnet. For more information, see [Security in your {{site.data.keyword.vpc_short}}](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-security-in-your-ibm-cloud-vpc).
+
+To connect to a different VPC or to an on-prem data center, use the [VPN for VPC](/docs/vpc?topic=vpc-vpn-onprem-example) service.  
 
 
 

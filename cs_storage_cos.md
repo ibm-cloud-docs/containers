@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-02"
+lastupdated: "2020-04-13"
 
 keywords: kubernetes, iks
 
@@ -219,7 +219,7 @@ To install the `ibmc` Helm plug-in and `ibm-object-storage-plugin`:
   ```
   {: pre}
 
-5. If you previously installed the {{site.data.keyword.cos_full_notm}} Helm plug-in, remove the `ibmc` plug-in. 
+5. If you previously installed the {{site.data.keyword.cos_full_notm}} Helm plug-in, remove the `ibmc` plug-in.
   ```
   helm plugin uninstall ibmc
   ```
@@ -442,9 +442,7 @@ To install the `ibmc` Helm plug-in and `ibm-object-storage-plugin`:
     If you want to set one of the {{site.data.keyword.cos_full_notm}} storage classes as your default storage class, run `kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'`. Replace `<storageclass>` with the name of the {{site.data.keyword.cos_full_notm}} storage class.
     {: tip}
 
-12. **VPC clusters only**: If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. 
-
-13. Follow the instructions to [add object storage to your apps](#add_cos).
+12. Follow the instructions to [add object storage to your apps](#add_cos).
 
 If you're having trouble installing the {{site.data.keyword.cos_full_notm}} plug-in, see [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails) and [Object storage: Installing the Object storage plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_plugin_fails).
 {: tip}
@@ -617,10 +615,7 @@ To remove the `ibmc` Helm plugin and the `ibm-object-storage-plugin`:
 {{site.data.keyword.containerlong_notm}} provides pre-defined storage classes that you can use to create buckets with a specific configuration.
 {: shortdesc}
 
-1. List available storage classes in {{site.data.keyword.containerlong_notm}}. 
-
-   If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance by default. To work with the plug-in in a VPC cluster, you must create a [customized storage class](#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance. However, you can follow the steps in this topic to understand the {{site.data.keyword.cos_full_notm}} settings that you can include in your storage class.
-   {: note} 
+1. List available storage classes in {{site.data.keyword.containerlong_notm}}.
    ```
    kubectl get storageclasses | grep s3
    ```
@@ -760,7 +755,6 @@ Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
 - [Create a secret to store your {{site.data.keyword.cos_full_notm}} service credentials](#create_cos_secret).
 - [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos).
-- **VPC clusters only**: [Create a customized storage class that includes the `direct` {{site.data.keyword.cos_full_notm}} service endpoints](#customized_storageclass_vpc). 
 
 To add {{site.data.keyword.cos_full_notm}} to your cluster:
 
@@ -831,7 +825,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    </tr>
    <tr>
    <td><code>spec.storageClassName</code></td>
-   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.cloud_notm}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference). </br></br>If you provisioned {{site.data.keyword.cos_full_notm}} in a VPC cluster, make sure to use the [customized VPC storage class](#customized_storageclass_vpc) that you created.  <p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
+   <td>Choose between the following options: <ul><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>true</strong>: Enter the storage class that you want to use for your new bucket. </li><li>If <code>ibm.io/auto-create-bucket</code> is set to <strong>false</strong>: Enter the storage class that you used to create your existing bucket. </br></br>If you manually created the bucket in your {{site.data.keyword.cos_full_notm}} service instance or you cannot remember the storage class that you used, find your service instance in the {{site.data.keyword.cloud_notm}} dashboard and review the <strong>Class</strong> and <strong>Location</strong> of your existing bucket. Then, use the appropriate [storage class](#cos_storageclass_reference).<p class="note">The {{site.data.keyword.cos_full_notm}} API endpoint that is set in your storage class is based on the region that your cluster is in. If you want to access a bucket that is located in a different region than the one where your cluster is in, you must create a [custom storage class](/docs/containers?topic=containers-kube_concepts#customized_storageclass) and use the appropriate API endpoint for your bucket.</p></li></ul>  </td>
    </tr>
    </tbody>
    </table>
@@ -996,8 +990,7 @@ If you have a stateful app such as a database, you can create stateful sets that
 Before you begin:
 - [Create and prepare your {{site.data.keyword.cos_full_notm}} service instance](#create_cos_service).
 - [Create a secret to store your {{site.data.keyword.cos_full_notm}} service credentials](#create_cos_secret).
-- [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos). 
-- **VPC clusters only**: [Create a customized storage class that includes the `direct` {{site.data.keyword.cos_full_notm}} service endpoints](#customized_storageclass_vpc). 
+- [Decide on the configuration for your {{site.data.keyword.cos_full_notm}}](#configure_cos).
 
 To deploy a stateful set that uses object storage:
 
@@ -1180,7 +1173,7 @@ To deploy a stateful set that uses object storage:
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.metadata.</code></br><code>annotations.volume.beta.</code></br><code>kubernetes.io/storage-class</code></td>
-    <td style="text-align:left">Enter the storage class that you want to use. Choose between the following options: <ul><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to true: </strong>Enter the storage class that you want to use for your new bucket.</li><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to false: </strong>Enter the storage class that you used to create your existing bucket. If you provisioned {{site.data.keyword.cos_full_notm}} in a VPC cluster, make sure to use the [customized storage class](#customized_storageclass_vpc) that you created.  </li></ul></br>  To list existing storage classes, run <code>kubectl get storageclasses | grep s3</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-s3fs</code> provisioner so that your stateful set is provisioned with object storage.</td>
+    <td style="text-align:left">Enter the storage class that you want to use. Choose between the following options: <ul><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to true: </strong>Enter the storage class that you want to use for your new bucket.</li><li><strong>If <code>ibm.io/auto-create-bucket</code> is set to false: </strong>Enter the storage class that you used to create your existing bucket.</li></ul></br>  To list existing storage classes, run <code>kubectl get storageclasses | grep s3</code>. If you do not specify a storage class, the PVC is created with the default storage class that is set in your cluster. Make sure that the default storage class uses the <code>ibm.io/ibmc-s3fs</code> provisioner so that your stateful set is provisioned with object storage.</td>
     </tr>
     <tr>
     <td style="text-align:left"><code>spec.volumeClaimTemplates.</code></br><code>spec.storageClassName</code></td>
@@ -1207,100 +1200,6 @@ To deploy a stateful set that uses object storage:
 
 <br />
 
-
-
-
-## Creating a customized storage class for VPC
-{: #customized_storageclass_vpc}
-
-If you installed the plug-in in a VPC cluster, the storage classes that were automatically created during the Helm chart installation cannot be used to provision {{site.data.keyword.cos_full_notm}} in your cluster, because the storage classes refer to the private service endpoint of your {{site.data.keyword.cos_full_notm}} instance. To work with the plug-in in a VPC cluster, you must create a customized storage class that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance.
-{: shortdesc}
-
-1. Review the steps in [Deciding on your Object Storage configuration](/docs/containers?topic=containers-object_storage#configure_cos) to find the storage class that best meets the performance and capacity requirements of your app. This storage class is used as the basis to create your own customized storage class.
-2. Retrieve the YAML file for the storage class that you want to use as the basis to create your own customized storage class. For example, the following command retrieves the YAML file for the `ibmc-s3fs-cold-cross-region` storage class.
-   ```
-   kubectl get storageclass ibmc-s3fs-cold-cross-region -o yaml
-   ```
-
-   Example output:
-   ```
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     creationTimestamp: "2019-09-25T18:17:26Z"
-     labels:
-       app: ibmcloud-object-storage-plugin
-       chart: ibm-object-storage-plugin-1.0.9
-       heritage: Tiller
-       release: ibm-object-storage-plugin
-     name: ibmc-s3fs-cold-cross-region
-     resourceVersion: "7347835"
-     selfLink: /apis/storage.k8s.io/v1/storageclasses/ibmc-s3fs-cold-cross-region
-     uid: fd24749f-29fa-4b4c-85cf-63b3ad0d89bf
-   parameters:
-     ibm.io/chunk-size-mb: "16"
-     ibm.io/curl-debug: "false"
-     ibm.io/debug-level: warn
-     ibm.io/iam-endpoint: https://iam.bluemix.net
-     ibm.io/kernel-cache: "false"
-     ibm.io/multireq-max: "20"
-     ibm.io/object-store-endpoint: https://s3.private.dal.us.cloud-object-storage.appdomain.cloud
-     ibm.io/object-store-storage-class: us-cold
-     ibm.io/parallel-count: "2"
-     ibm.io/s3fs-fuse-retry-count: "5"
-     ibm.io/stat-cache-size: "100000"
-     ibm.io/tls-cipher-suite: AESGCM
-   provisioner: ibm.io/ibmc-s3fs
-   reclaimPolicy: Delete
-   volumeBindingMode: Immediate
-   ```
-   {: screen}
-3. Create a customized storage class YAML file that is based on the YAML file that you retrieved. You can streamline your YAML file by removing all of the information from the metadata section, except for the `name`. Make sure to change the service endpoint of your {{site.data.keyword.cos_full_notm}} service instance from `https://s3.private...` to `https://s3.direct...`. For a list of supported endpoints, see [Connecting to {{site.data.keyword.cos_full_notm}} from VPC](/docs/vpc?topic=vpc-connecting-vpc-cos).
-   ```yaml
-   apiVersion: storage.k8s.io/v1
-   kind: StorageClass
-   metadata:
-     name: cos-vpc
-   parameters:
-     ibm.io/chunk-size-mb: "16"
-     ibm.io/curl-debug: "false"
-     ibm.io/debug-level: warn
-     ibm.io/iam-endpoint: https://iam.bluemix.net
-     ibm.io/kernel-cache: "false"
-     ibm.io/multireq-max: "20"
-     ibm.io/object-store-endpoint: https://s3.direct.dal.us.cloud-object-storage.appdomain.cloud
-     ibm.io/object-store-storage-class: us-cold
-     ibm.io/parallel-count: "2"
-     ibm.io/s3fs-fuse-retry-count: "5"
-     ibm.io/stat-cache-size: "100000"
-     ibm.io/tls-cipher-suite: AESGCM
-   provisioner: ibm.io/ibmc-s3fs
-   reclaimPolicy: Delete
-   volumeBindingMode: Immediate
-   ```
-   {: codeblock}
-
-4. Create the storage class in your cluster.
-   ```
-   kubectl apply -f custom_storageclass.yaml
-   ```
-   {: pre}
-
-5. Verify that your storage class is available in the cluster.
-   ```
-   kubectl get storageclasses
-   ```
-   {: pre}
-
-6. Optional: Set the customized storage class as the default one for your cluster.
-   ```
-   kubectl patch storageclass <storageclass> -p '{"metadata": {"annotations":{"storageclass.kubernetes.io/is-default-class":"true"}}}'
-   ```
-   {: pre}
-
-7. Use the customized storage class to [add object storage to apps](/docs/containers?topic=containers-object_storage#add_cos).
-
-<br />
 
 
 ## Storage class reference

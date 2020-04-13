@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-31"
+lastupdated: "2020-04-09"
 
 keywords: kubernetes, iks
 
@@ -42,7 +42,7 @@ configure policies to authorize who can create and update pods in {{site.data.ke
 **Why do I set pod security policies?**</br>
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, Linux permissions such as read-only or group IDs, and more.
 
-With the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [Helm](/docs/containers?topic=containers-helm#public_helm_install), the Helm tiller component creates pods, and so you must have the correct pod security policy authorization.
+With the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [version 2 of Helm](/docs/containers?topic=containers-helm#public_helm_install), the `tiller` component creates pods, and so you must have the correct pod security policy authorization.
 
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-08"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -456,38 +456,39 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
       <tr>
         <td>Global registry across <br>{{site.data.keyword.containerlong_notm}} regions</td>
         <td><code>icr.io</code><br><br>
+        <br><br><code>cp.icr.io</code><br><br>
         Deprecated: <code>registry.bluemix.net</code></td>
-        <td><code>166.9.20.4</code></br><code>166.9.22.3</code></br><code>166.9.24.2</code></td>
+        <td><code>166.9.20.31</code></br><code>166.9.22.22</code></br><code>166.9.24.16</code></td>
       </tr>
       <tr>
         <td>AP North</td>
         <td><code>jp.icr.io</code><br><br>
         Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-        <td><code>166.9.40.3</code></br><code>166.9.42.3</code></br><code>166.9.44.3</code></td>
+        <td><code>166.9.40.20</code></br><code>166.9.42.21</code></br><code>166.9.44.12</code></td>
       </tr>
       <tr>
         <td>AP South</td>
         <td><code>au.icr.io</code><br><br>
         Deprecated: <code>registry.au-syd.bluemix.net</code></td>
-        <td><code>166.9.52.2</code></br><code>166.9.54.2</code></br><code>166.9.56.3</code></td>
+        <td><code>166.9.52.20</code></br><code>166.9.54.19</code></br><code>166.9.56.13</code></td>
       </tr>
       <tr>
         <td>EU Central</td>
         <td><code>de.icr.io</code><br><br>
         Deprecated: <code>registry.eu-de.bluemix.net</code></td>
-        <td><code>166.9.28.12</code></br><code>166.9.30.9</code></br><code>166.9.32.5</code></td>
+        <td><code>166.9.28.35</code></br><code>166.9.30.2</code></br><code>166.9.32.2</code></td>
        </tr>
        <tr>
         <td>UK South</td>
         <td><code>uk.icr.io</code><br><br>
         Deprecated: <code>registry.eu-gb.bluemix.net</code></td>
-        <td><code>166.9.36.9</code></br><code>166.9.38.5</code></br><code>166.9.34.4</code></td>
+        <td><code>166.9.36.19</code></br><code>166.9.38.14</code></br><code>166.9.34.12</code></td>
        </tr>
        <tr>
         <td>US East, US South</td>
         <td><code>us.icr.io</code><br><br>
         Deprecated: <code>registry.ng.bluemix.net</code></td>
-        <td><code>166.9.12.114</code></br><code>166.9.15.50</code></br><code>166.9.16.173</code></td>
+        <td><code>166.9.12.227</code></br><code>166.9.15.116</code></br><code>166.9.16.244</code></td>
        </tr>
       </tbody>
     </table>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 13 April 2020 | <ul><li>**Gateway appliance firewalls**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_private) that you must open in a private gateway device firewall for {{site.data.keyword.registrylong_notm}}.</li><li>**Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.3_1521](/docs/containers?topic=containers-changelog#1174_1521), [1.16.7_1528](/docs/containers?topic=containers-changelog#1168_1528), [1.15.10_1535](/docs/containers?topic=containers-changelog#11511_1535), and [1.14.10_1551](/docs/containers?topic=containers-changelog#11410_1551).</li></ul>
 | 06 April 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Kubernetes cluster context**: Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig).</li></ul> |
 | 01 April 2020 | **Istio add-on**: [Version 1.4.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#147) is released.|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
@@ -256,7 +257,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
       <li>[Isolating networking workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)</li>
       <li>Flow of traffic to apps when using an [NLB 1.0](/docs/containers?topic=containers-loadbalancer-about#v1_gateway), an [NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#v2_gateway), or [Ingress ALBs](/docs/containers?topic=containers-ingress-about#classic-gateway)</li></ul>
     Ready to get started? [Create a standard classic cluster with a gateway in the CLI.](/docs/containers?topic=containers-clusters#gateway_cluster_cli)</li>
-    <li><strong>Using the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster</strong>: To work with the {{site.data.keyword.cos_full_notm}} plug-in in a VPC cluster, added steps for [creating a customized storage class](/docs/containers?topic=containers-object_storage#customized_storageclass_vpc) that uses the `direct` service endpoint of your {{site.data.keyword.cos_full_notm}} service instance.</li>
     <li><strong>Version changelogs</strong>: Patch updates are available for Kubernetes [1.15.4_1518](/docs/containers?topic=containers-changelog#1154_1518), [1.14.7_1534](/docs/containers?topic=containers-changelog#1147_1534), [1.13.11_1537](/docs/containers?topic=containers-changelog#11311_1537), and [1.12.10_1568](/docs/containers?topic=containers-changelog#11210_1568_worker).</li>
   </ul>
   </td>
@@ -466,13 +466,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 </tr>
 <tr>
   <td>08 July 2019</td>
-  <td><ul>
-  <li><strong>App networking</strong>: You can now find information about app networking with NLBs and Ingress ALBs in the following pages:
-    <ul><li>[Basic and DSR load balancing with network load balancers (NLB)](/docs/containers?topic=containers-cs_sitemap#sitemap-nlb)</li>
-    <li>[HTTPS load balancing with Ingress application load balancers (ALB)](/docs/containers?topic=containers-cs_sitemap#sitemap-ingress)</li></ul>
-  </li>
-  <li><strong>Version changelogs</strong>: Updated the changelogs for [1.14.3_1525](/docs/containers?topic=containers-changelog#1143_1525), [1.13.7_1528](/docs/containers?topic=containers-changelog#1137_1528), [1.12.9_1559](/docs/containers?topic=containers-changelog#1129_1559), and [1.11.10_1564](/docs/containers?topic=containers-changelog#11110_1564) worker node patch updates.</li></ul>
-  </td>
+  <td><strong>Version changelogs</strong>: Updated the changelogs for [1.14.3_1525](/docs/containers?topic=containers-changelog#1143_1525), [1.13.7_1528](/docs/containers?topic=containers-changelog#1137_1528), [1.12.9_1559](/docs/containers?topic=containers-changelog#1129_1559), and [1.11.10_1564](/docs/containers?topic=containers-changelog#11110_1564) worker node patch updates.</td>
 </tr>
 <tr>
   <td>02 July 2019</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-10"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -36,7 +36,7 @@ subcollection: containers
 # Hybrid cloud
 {: #hybrid_iks_icp}
 
-If you have an {{site.data.keyword.Bluemix}} Private account, you can use it with select {{site.data.keyword.cloud_notm}} services, including {{site.data.keyword.containerlong}}. For more information, see the blog on [Hybrid experience across {{site.data.keyword.cloud_notm}} Private and IBM Public Cloud](http://ibm.biz/hybridJune2018){: external}.
+If you have an {{site.data.keyword.cloud}} Private account, you can use it with select {{site.data.keyword.cloud_notm}} services, including {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 You understand the [{{site.data.keyword.cloud_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can connect your public and private cloud by using the strongSwan VPN service or {{site.data.keyword.BluDirectLink}}.

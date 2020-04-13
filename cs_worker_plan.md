@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-30"
+lastupdated: "2020-04-13"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -103,16 +103,16 @@ Every VM comes with an attached disk for storage of information that the VM need
 * **VPC Gen 1 compute VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. To account for network latency, the storage disks have a maximum of up to 3000 IOPS. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#encryption).
 
 **What virtual machine flavors are available?**</br>
+{: #vm-table}
+
 The following table shows available worker node flavors for classic and VPC Gen 1 compute clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
 
 If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
 
-{: #vm-table}
-
 | Name and use case | Cores/ Memory | Primary/ Secondary disk | Network speed |
 |:-----------------|:-----------------|:------------------|:-------------|
-| **Virtual, u3c.2x4**: Use this smallest size VM for quick testing, proofs of concept, and other light workloads.<p class="note">Available for only Kubernetes clusters. Not available for OpenShift clusters. </p> | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
+| **Virtual, u3c.2x4**: Use this smallest size VM for quick testing, proofs of concept, and other light workloads. | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
 | **Virtual, b3c.4x16**: Select this balanced VM for testing and development, and other light workloads. | 4 / 16 GB | 25 GB / 100 GB | 1000 Mbps |
 | **Virtual, b3c.16x64**: Select this balanced VM for mid-sized workloads. | 16 / 64 GB | 25 GB / 100 GB | 1000 Mbps |
 | **Virtual, b3c.32x128**: Select this balanced VM for mid to large workloads, such as a database and a dynamic website with many concurrent users. | 32 / 128 GB | 25 GB / 100 GB | 1000 Mbps |

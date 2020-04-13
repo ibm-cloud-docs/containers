@@ -93,11 +93,10 @@ Kubernetes Service
     Managing the cluster network
         cs_subnets.md
         cs_network_cluster.md
-        cs_dns.md
         cs_vpn.md
         vpc_subnets.md
-        vpc_dns.md
         vpc_vpn.md
+        cs_dns.md
 
     cs_health.md
 
@@ -167,18 +166,20 @@ Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    {: .topicgroup}
-    CLI plug-in reference
-        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
-        cs_cli_changelog.md
+    [Community Kubernetes documentation](https://kubernetes.io/docs/home/)
 
     {: .topicgroup}
     API reference
-        [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/)
+        [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/)
         [IBM Cloud Kubernetes Service API JSON](https://containers.cloud.ibm.com/global/swagger-global-api/swagger.json)
         [IBM Cloud Container Registry API](https://cloud.ibm.com/apidocs/container-registry)
         [IBM Cloud Vulnerability Advisor API](https://cloud.ibm.com/apidocs/container-registry/va)
         [Community Kubernetes API](https://kubernetes.io/docs/reference/)
+
+    {: .topicgroup}
+    CLI plug-in reference
+        /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
+        cs_cli_changelog.md
 
     {: .topicgroup}
     Version history
@@ -214,7 +215,7 @@ Kubernetes Service
 
     release_notes.md
     cs_limitations.md
-    cs_sitemap.md
+    sitemap.md
     {: .navgroup-end}
 
     cs_storage_portworx_gs.md
