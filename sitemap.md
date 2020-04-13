@@ -1231,7 +1231,7 @@ subcollection: containers
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
-##[Kubernetes open source documentation](https://kubernetes.io/docs/home/){: external}
+##[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
 
 
 ## API reference

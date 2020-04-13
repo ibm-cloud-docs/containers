@@ -166,7 +166,7 @@ Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    [Kubernetes open source documentation](https://kubernetes.io/docs/home/)
+    [Community Kubernetes documentation](https://kubernetes.io/docs/home/)
 
     {: .topicgroup}
     API reference
