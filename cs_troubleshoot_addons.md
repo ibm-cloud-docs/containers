@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-01"
+lastupdated: "2020-04-14"
 
 keywords: kubernetes, iks, help
 
@@ -64,6 +64,7 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 |`critical`|The add-on is not ready to be used for one of the following reasons:<ul><li>Some or all of the add-on components are unhealthy.</li><li>The add-on failed to deploy.</li><li>The add-on may be at an unsupported version.</li></ul>Check the **Health Status** field for more information.|
 |`normal`|The add-on is successfully deployed. Check the status to verify that the add-on is `Ready` or to see if an update is available.|
 |`pending`|Some or all components of the add-on are currently deploying. Wait for the state to become `normal` before working with your add-on.|
+|`updating`|The add-on is updating and is not ready to be used. Check the **Health Status** field for the version that the add-on is updating to.|
 |`warning`|The add-on might not function properly due to cluster limitations. Check the **Health Status** field for more information.|
 {: caption="Add-on health states"}
 {: summary="Table rows read from left to right, with the add-on state in column one and a description in column two."}
