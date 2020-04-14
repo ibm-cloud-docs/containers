@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-02-24"
+lastupdated: "2020-04-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -45,7 +45,7 @@ First time setting up Ingress? Check out [Setting up Ingress](/docs/containers?t
 {: tip}
 
 
-1. Create a Kubernetes ClusterIP service for you app so that it can be included in the Ingress application load balancing.
+1. Create a Kubernetes ClusterIP service for your app so that it can be included in the Ingress application load balancing.
   ```
   kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
   ```
@@ -63,7 +63,7 @@ First time setting up Ingress? Check out [Setting up Ingress](/docs/containers?t
     ```
     {: screen}
 
-3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If you app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
+3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If your app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
   ```yaml
   apiVersion: networking.k8s.io/v1beta1
   kind: Ingress

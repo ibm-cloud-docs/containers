@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-08"
+lastupdated: "2020-04-14"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -48,7 +48,7 @@ When you create a Kubernetes `LoadBalancer` service for an app in your cluster, 
 {: shortdesc}
 
 The VPC load balancer serves as the external entry point for incoming requests for the app.
-* If you create a **public** Kubernetes `LoadBalancer` service, you can access your app from the internet through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if you app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
+* If you create a **public** Kubernetes `LoadBalancer` service, you can access your app from the internet through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`. Even though your worker nodes are connected to only a private VPC subnet, the VPC load balancer can receive and route public requests to the service that exposes your app. Note that no public gateway is required on your VPC subnet to allow public requests to your VPC load balancer. However, if your app must access a public URL, you must attach public gateways to the VPC subnets that your worker nodes are connected to.
 * If you create a **private** Kubernetes `LoadBalancer` service, your app is accessible only to systems that are connected to your private subnets within the same region and VPC. If you are connected to your private VPC network, you can access your app through the hostname that is assigned by the VPC load balancer to the Kubernetes `LoadBalancer` service in the format `1234abcd-<region>.lb.appdomain.cloud`.
 
 The following diagram illustrates how a user accesses an app from the internet through the VPC load balancer.
