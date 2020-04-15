@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-13"
+lastupdated: "2020-04-15"
 
 keywords: kubernetes, iks, release notes
 
@@ -288,8 +288,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <li><strong>Managing cluster network traffic for VPC clusters</strong>: Includes the following new content:<ul>
     <li>[Opening required ports and IP addresses in your firewall for VPC clusters](/docs/containers?topic=containers-vpc-firewall)</li>
     <li>[Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)</li>
-    <li>[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)</li>
-    <li>[Configuring CoreDNS for VPC clusters](/docs/containers?topic=containers-vpc_dns)</li></ul></li>
+    <li>[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)</li></ul></li>
   <li><strong>Customizing PVC settings for VPC Block Storage</strong>: You can create a customized storage class or use a Kubernetes secret to create VPC Block Storage with the configuration that you want. For more information, see [Customizing the default settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default).</li>
   </ul></td>
 </tr>

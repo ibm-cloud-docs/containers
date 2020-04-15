@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-14"
+lastupdated: "2020-04-15"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -196,10 +196,8 @@ Do not delete the subnets that you attached to your cluster during cluster creat
 ## Registering a VPC load balancer hostname with a DNS subdomain
 {: #vpc_lb_dns}
 
-After you set up a VPC load balancer, you can create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
+The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
 {: shortdesc}
-
-The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain.
 
 After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#health-checks).
 {: note}
