@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-04-16"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -56,11 +56,6 @@ Before you create a VPC cluster for the first time, you must [create a VPC subne
 
 When you create a cluster, you can specify only one existing VPC subnet for each zone. Each worker node that you add in a cluster is deployed with a private IP address from the VPC subnet in that zone. After the worker node is provisioned, the worker node IP address persists after a `reboot` operation, but the worker node IP address changes after `replace` and `update` operations.
 
-The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. For a list of IP address ranges per VPC zone, see [VPC default address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#default-vpc-address-prefixes).
-
-Need to create your cluster by using custom-range subnets? Check out this guidance on [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui).
-{: tip}
-
 Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 {: important}
 
@@ -73,6 +68,14 @@ Keep in mind the following IP address reservations.
 * 1 IP address is required each time that you update or replace a worker node. These IP addresses are eventually reclaimed and available for reuse.
 * 2 IP addresses are used each time that you create a public or private load balancer. If you have a multizone cluster, these 2 IP addresses are spread across zones, so the subnet might not have an IP address reserved.
 * Other networking resources that you set up for the cluster, such as a VPNaaS or LBaaS autoscaling, might require additional IP addresses or have other [service limitations](/docs/vpc?topic=vpc-limitations). For example, LBaaS autoscaling might scale up to 16 IP addresses per load balancer.
+
+**What IP ranges can I use for my VPC subnets?**<br>
+{: #vpc-ip-range}
+The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. Your worker nodes are assigned an IP address from this range. For a list of IP address ranges per VPC zone, see [VPC default address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#default-vpc-address-prefixes).
+
+If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation:
+* If you specified your own pod subnet in the `--pod-subnet` flag during cluster creation, your pods are assigned IP addresses from this range.
+* If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet, `172.30.0.0/16`.
 
 ### Public gateways
 {: #vpc_basics_pgw}

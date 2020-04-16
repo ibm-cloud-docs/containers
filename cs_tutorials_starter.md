@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-04-14"
 
 keywords: kubernetes, iks
 
@@ -124,7 +124,7 @@ With your toolchain set up, explore how you can use each tool to automate the de
 ## Lesson 4: Verify the health of your app
 {: #verify-starterkit-kube}
 
-Access your app to verify that you app is up and running.
+Access your app to verify that your app is up and running.
 {: shortdesc}
 
 1. From your DevOps toolchain, click **Delivery Pipeline**, and then find the **Deploy Stage**.

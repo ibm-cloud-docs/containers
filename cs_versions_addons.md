@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-25"
+lastupdated: "2020-04-16"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -68,6 +68,12 @@ Refer to the following table for a summary of changes for each image version of 
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>627 / 394</td>
+<td>16 Apr 2020</td>
+<td>General enhancements to code.</td>
+<td>-</td>
+</tr>
 <tr>
 <td>627 / 390</td>
 <td>25 Mar 2020</td>
