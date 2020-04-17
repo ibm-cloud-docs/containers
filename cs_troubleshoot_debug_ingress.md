@@ -95,84 +95,84 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
     ```
     {: pre}
-      * If the config map shows IP addresses, continue to the next step.
-      * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
+    * If the config map shows IP addresses, continue to the next step.
+    * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
 
-      Example output of a config map populated with IP addresses:
-      ```
-      Name:         ibm-cloud-provider-vlan-ip-config
-      Namespace:    kube-system
-      Labels:       <none>
-      Annotations:  <none>
+    Example output of a config map populated with IP addresses:
+    ```
+    Name:         ibm-cloud-provider-vlan-ip-config
+    Namespace:    kube-system
+    Labels:       <none>
+    Annotations:  <none>
 
-      Data
-      ====
-      reserved_public_vlan_id:
-      ----
+    Data
+    ====
+    reserved_public_vlan_id:
+    ----
 
-      vlanipmap.json:
-      ----
-      {
-        "vlans": [
-          {
-            "id": "2234947",
-            "subnets": [
-              {
-                "id": "2215454",
-                "ips": [
-                  "10.XXX.XXX.XXX",
-                  "10.XXX.XXX.XXX",
-                  "10.XXX.XXX.XXX",
-                  "10.XXX.XXX.XXX",
-                  "10.XXX.XXX.XXX"
-                ],
-                "is_public": false,
-                "is_byoip": false,
-                "cidr": "10.XXX.XXX.X/29"
-              }
-            ],
-            "zone": "dal10",
-            "region": "us-south"
-          },
-          {
-            "id": "2234945",
-            "subnets": [
-              {
-                "id": "2219170",
-                "ips": [
-                  "169.XX.XXX.XX",
-                  "169.XX.XXX.XX",
-                  "169.XX.XXX.XX",
-                  "169.XX.XXX.XX",
-                  "169.XX.XXX.XX"
-                ],
-                "is_public": true,
-                "is_byoip": false,
-                "cidr": "169.XX.XXX.X/29"
-              }
-            ],
-            "zone": "dal10",
-            "region": "us-south"
-          }
-        ],
-        "vlan_errors": [],
-        "reserved_ips": []
-      }
-      cluster_id:
-      ----
-      bmnj1b1d09lpvv3oof0g
-      reserved_private_ip:
-      ----
+    vlanipmap.json:
+    ----
+    {
+      "vlans": [
+        {
+          "id": "2234947",
+          "subnets": [
+            {
+              "id": "2215454",
+              "ips": [
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX",
+                "10.XXX.XXX.XXX"
+              ],
+              "is_public": false,
+              "is_byoip": false,
+              "cidr": "10.XXX.XXX.X/29"
+            }
+          ],
+          "zone": "dal10",
+          "region": "us-south"
+        },
+        {
+          "id": "2234945",
+          "subnets": [
+            {
+              "id": "2219170",
+              "ips": [
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX",
+                "169.XX.XXX.XX"
+              ],
+              "is_public": true,
+              "is_byoip": false,
+              "cidr": "169.XX.XXX.X/29"
+            }
+          ],
+          "zone": "dal10",
+          "region": "us-south"
+        }
+      ],
+      "vlan_errors": [],
+      "reserved_ips": []
+    }
+    cluster_id:
+    ----
+    bmnj1b1d09lpvv3oof0g
+    reserved_private_ip:
+    ----
 
-      reserved_private_vlan_id:
-      ----
+    reserved_private_vlan_id:
+    ----
 
-      reserved_public_ip:
-      ----
+    reserved_public_ip:
+    ----
 
-      Events:  <none>
-      ```
-      {: screen}
+    Events:  <none>
+    ```
+    {: screen}
   * **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`.
     ```
     ibmcloud is load-balancers
