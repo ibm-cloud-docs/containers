@@ -1650,7 +1650,7 @@ subcollection: containers
   * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ts_ingress_config)
   * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#one_alb)
 * [Ingress application load balancer (ALB) secret issues](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_albsecret_fails)
-* [ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
+* [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)

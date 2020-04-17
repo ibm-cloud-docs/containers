@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-13"
+lastupdated: "2020-04-17"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -53,16 +53,25 @@ While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}
 You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to check its status. The cluster **State** is `normal`, but the **Ingress Subdomain** and **Ingress Secret** are not available.
 
 {: tsCauses}
-Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete:
+Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete.
+
+**Classic clusters**:
 
 1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
 2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
-3. When the `ibm-cloud-provider-vlan-ip-config` config map is updated, the public ALB is triggered for creation.
-4. A load balancer service that exposes the ALB is created and assigned an IP address (classic clusters) or a hostname (VPC clusters).
-5. The load balancer IP address or hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
+3. When the `ibm-cloud-provider-vlan-ip-config` config map is updated, one public ALB per zone is triggered for creation.
+4. A load balancer service that exposes the ALB is created and assigned an IP address.
+5. The load balancer IP address is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
 
 If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
 {: note}
+
+**VPC clusters**:
+
+1. When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC.
+2. One public ALB per zone is triggered for creation.
+3. A load balancer service that exposes the ALB is created and assigned a hostname.
+4. The load balancer hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
 
 {: tsResolve}
 Typically, after the cluster is ready, the Ingress subdomain and secret are created after 15 minutes. If the Ingress subdomain and secret are still unavailable after your cluster is in a `normal` state for more than 15 minutes, you can check the progress of the creation process by following these steps:
@@ -80,93 +89,120 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
    ```
    {: screen}
 
-2. Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
-  * If the config map shows IP addresses, continue to the next step.
-  * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
+2. Verify that the prerequisite steps for your ALB creation are completed.
+  * **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
+    * If the config map shows IP addresses, continue to the next step.
+    * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
 
+      ```
+      kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
+      ```
+      {: pre}
+
+      Example output of a config map populated with IP addresses:
+      ```
+      Name:         ibm-cloud-provider-vlan-ip-config
+      Namespace:    kube-system
+      Labels:       <none>
+      Annotations:  <none>
+
+      Data
+      ====
+      reserved_public_vlan_id:
+      ----
+
+      vlanipmap.json:
+      ----
+      {
+        "vlans": [
+          {
+            "id": "2234947",
+            "subnets": [
+              {
+                "id": "2215454",
+                "ips": [
+                  "10.XXX.XXX.XXX",
+                  "10.XXX.XXX.XXX",
+                  "10.XXX.XXX.XXX",
+                  "10.XXX.XXX.XXX",
+                  "10.XXX.XXX.XXX"
+                ],
+                "is_public": false,
+                "is_byoip": false,
+                "cidr": "10.XXX.XXX.X/29"
+              }
+            ],
+            "zone": "dal10",
+            "region": "us-south"
+          },
+          {
+            "id": "2234945",
+            "subnets": [
+              {
+                "id": "2219170",
+                "ips": [
+                  "169.XX.XXX.XX",
+                  "169.XX.XXX.XX",
+                  "169.XX.XXX.XX",
+                  "169.XX.XXX.XX",
+                  "169.XX.XXX.XX"
+                ],
+                "is_public": true,
+                "is_byoip": false,
+                "cidr": "169.XX.XXX.X/29"
+              }
+            ],
+            "zone": "dal10",
+            "region": "us-south"
+          }
+        ],
+        "vlan_errors": [],
+        "reserved_ips": []
+      }
+      cluster_id:
+      ----
+      bmnj1b1d09lpvv3oof0g
+      reserved_private_ip:
+      ----
+
+      reserved_private_vlan_id:
+      ----
+
+      reserved_public_ip:
+      ----
+
+      Events:  <none>
+      ```
+      {: screen}
+  * **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`.
     ```
-    kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
+    ibmcloud is load-balancers
     ```
     {: pre}
+    <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
 
-    Example output of a config map populated with IP addresses:
-    ```
-    Name:         ibm-cloud-provider-vlan-ip-config
-    Namespace:    kube-system
-    Labels:       <none>
-    Annotations:  <none>
-
-    Data
-    ====
-    reserved_public_vlan_id:
-    ----
-
-    vlanipmap.json:
-    ----
-    {
-      "vlans": [
-        {
-          "id": "2234947",
-          "subnets": [
-            {
-              "id": "2215454",
-              "ips": [
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX",
-                "10.XXX.XXX.XXX"
-              ],
-              "is_public": false,
-              "is_byoip": false,
-              "cidr": "10.XXX.XXX.X/29"
-            }
-          ],
-          "zone": "dal10",
-          "region": "us-south"
-        },
-        {
-          "id": "2234945",
-          "subnets": [
-            {
-              "id": "2219170",
-              "ips": [
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX",
-                "169.XX.XXX.XX"
-              ],
-              "is_public": true,
-              "is_byoip": false,
-              "cidr": "169.XX.XXX.X/29"
-            }
-          ],
-          "zone": "dal10",
-          "region": "us-south"
-        }
-      ],
-      "vlan_errors": [],
-      "reserved_ips": []
-    }
-    cluster_id:
-    ----
-    bmnj1b1d09lpvv3oof0g
-    reserved_private_ip:
-    ----
-
-    reserved_private_vlan_id:
-    ----
-
-    reserved_public_ip:
-    ----
-
-    Events:  <none>
-    ```
-    {: screen}
 
 3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
-  * If a public ALB is listed and is assigned an IP address, continue to the next step.
+  * If a public ALB is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
+  * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
+    * Classic clusters:
+      ```
+      ibmcloud ks alb configure classic --alb-id <ALB_ID> --disable
+      ```
+      {: pre}
+      ```
+      ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
+      ```
+      {: pre}
+    * VPC clusters:
+      ```
+      ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
+      ```
+      {: pre}
+      ```
+      ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
+      ```
+      {: pre}
   * If no ALBs are created after several minutes, [review ways to get help](#getting_help_ingress).
 
     ```
@@ -182,8 +218,8 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     ```
     {: screen}
 
-4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address as the public ALB.
-  * If a `LoadBalancer` service is listed and is assigned an IP address, continue to the next step.
+4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address (classic clusters) or hostname (VPC clusters) as the public ALB.
+  * If a `LoadBalancer` service is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
   * If no `LoadBalancer` services are created after several minutes, [review ways to get help](#getting_help_ingress).
 
     ```
@@ -741,7 +777,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
 <br />
 
 
-## ALB does not deploy in a zone
+## Classic clusters: ALB does not deploy in a zone
 {: #cs_subnet_limit}
 
 
