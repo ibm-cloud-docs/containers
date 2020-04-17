@@ -91,13 +91,12 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 
 2. Verify that the prerequisite steps for your ALB creation are completed.
   * **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
-    * If the config map shows IP addresses, continue to the next step.
-    * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
-
-      ```
-      kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
-      ```
-      {: pre}
+    ```
+    kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
+    ```
+    {: pre}
+      * If the config map shows IP addresses, continue to the next step.
+      * If the **Events** section shows a warning message similar to `ErrorSubnetLimitReached: There are already the maximum number of subnets permitted in this VLAN`, see the [VLAN capacity troubleshooting topic](#cs_subnet_limit).
 
       Example output of a config map populated with IP addresses:
       ```
@@ -181,8 +180,19 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     {: pre}
     <p class="note">Even though the VPC load balancer is listed, its DNS entry might still be registering. When a VPC load balancer is created, the hostname is registered through a public DNS. In some cases, it can take several minutes for this DNS entry to be replicated to the specific DNS that your client is using.</p>
 
-
 3. Check whether an ALB exists for your cluster and that the ALB has a public IP address assigned.
+  ```
+  ibmcloud ks alb ls -c <cluster_name_or_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
+  private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
+  public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
+  ```
+  {: screen}
   * If a public ALB is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
   * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
     * Classic clusters:
@@ -204,19 +214,6 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ```
       {: pre}
   * If no ALBs are created after several minutes, [review ways to get help](#getting_help_ingress).
-
-    ```
-    ibmcloud ks alb ls -c <cluster_name_or_ID>
-    ```
-    {: pre}
-
-    Example output:
-    ```
-    ALB ID                                Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crbmnj1b1d09lpvv3oof0g-alb1   false     disabled   private   -               dal10   ingress:584/ingress-auth:344   2234947       2.0
-    public-crbmnj1b1d09lpvv3oof0g-alb1    true      enabled    public    169.XX.XXX.XX   dal10   ingress:584/ingress-auth:344   2234945       2.0
-    ```
-    {: screen}
 
 4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address (classic clusters) or hostname (VPC clusters) as the public ALB.
   * If a `LoadBalancer` service is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
