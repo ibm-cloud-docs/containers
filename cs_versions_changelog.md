@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-16"
+lastupdated: "2020-04-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -59,6 +59,25 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.17.4_1521, released 17 April 2020
+{: #1174_1521_master}
+
+The following table shows the changes that are included in the master fix pack update `1.17.4_1521`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/v3.12/release-notes/){: external}. |
+| CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. |
+| GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-1 | v1.17.4-3 | Updated to use `calicoctl` version 3.12.1. |
+| Kubernetes Dashboard | v2.0.0-rc5 | v2.0.0-rc7 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc7){: external}. |
+| Kubernetes Dashboard metrics scraper | v1.0.3 | v1.0.4 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.4){: external}. |
+| OpenVPN client | N/A | N/A | Fixed problem that might cause the `vpn-config` secret in the `kube-system` namespace to be deleted during cluster master operations. |
+| Operator Lifecycle Manager Catalog | v1.5.11 | v1.6.1 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.6.1){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.4_1520" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020
 {: #1174_1521}

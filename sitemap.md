@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-16"
+lastupdated: "2020-04-17"
 
 keywords: containers
 subcollection: containers
@@ -1300,6 +1300,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog#1174_1521_master)
   * [Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020](/docs/containers?topic=containers-changelog#1174_1521)
   * [Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020](/docs/containers?topic=containers-changelog#1174_1520)
   * [Changelog for 1.17.4_1519, released 16 March 2020](/docs/containers?topic=containers-changelog#1174_1519)
@@ -1649,7 +1650,7 @@ subcollection: containers
   * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ts_ingress_config)
   * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#one_alb)
 * [Ingress application load balancer (ALB) secret issues](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_albsecret_fails)
-* [ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
+* [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)

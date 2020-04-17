@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-17"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -353,22 +353,8 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
-4.  Drain the worker node to reschedule the pods onto remaining worker nodes in the cluster and to make it unavailable for future pod scheduling.
-    ```
-    kubectl drain <worker_node_primary_IP>
-    ```
-    {: pre}
-    Example output:
-    ```
-    node/10.xxx.xx.xxx cordoned
-    evicting pod "<pod_name>"
-    ...
-    pod/<pod_name> evicted
-    ...
-    node/10.xxx.xx.xxx evicted
-    ```
-    {: screen}
-5.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
+
+4.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
     *  To update the worker node to the same `major.minor` version as the master, such as from 1.16.8 to 1.17.4, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
@@ -385,7 +371,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
 ### Updating VPC worker nodes in the console
 {: #vpc_worker_ui}
 
-You can update your VPC worker nodes in the console. Before you begin, consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) to the cluster and [draining](https://kubernetes.io/docs/tasks/administer-cluster/safely-drain-node/){: external} the worker node before you replace, to help avoid downtime for your apps.
+You can update your VPC worker nodes in the console. Before you begin, consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) to the cluster to help avoid downtime for your apps.
 {: shortdesc}
 
 1.  Complete the [prerequisite steps](#vpc_worker_prereqs).
@@ -492,12 +478,8 @@ To update flavors:
    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
-5.  To prevent downtime, force pods to be removed from your worker node and rescheduled onto remaining worker nodes in the cluster. The worker node is also cordoned, or marked as unavailable for future pod scheduling. Use the **Private IP** of the worker node that you retrieved earlier. This process can take a few minutes.
-    ```
-    kubectl drain <worker_private_IP>
-    ```
-    {: pre}
-6. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
+
+5. Remove the old worker node. **Note**: If you are removing a flavor that is billed monthly (such as bare metal), you are charged for the entire the month.
    - **For worker nodes in a worker pool**:
      1. Remove the worker pool with the old machine type. Removing a worker pool removes all worker nodes in the pool in all zones. This process might take a few minutes to complete.
         ```
@@ -517,13 +499,13 @@ To update flavors:
       ```
       {: pre}
 
-7. Verify that the worker nodes are removed from your cluster.
+6. Verify that the worker nodes are removed from your cluster.
    ```
    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
-8. Repeat these steps to update other worker pools or stand-alone worker nodes to different flavors.
+7. Repeat these steps to update other worker pools or stand-alone worker nodes to different flavors.
 
 ## Updating cluster components
 {: #components}

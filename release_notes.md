@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-16"
+lastupdated: "2020-04-17"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,8 +44,9 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 17 April 2020 | **Version changelog**: Master patch updates are available for Kubernetes [1.17.4_1521](/docs/containers?topic=containers-changelog#1174_1521_master). |
 | 16 April 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image build to 394](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|
-| 13 April 2020 | <ul><li>**Gateway appliance firewalls**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_private) that you must open in a private gateway device firewall for {{site.data.keyword.registrylong_notm}}.</li><li>**Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.3_1521](/docs/containers?topic=containers-changelog#1174_1521), [1.16.7_1528](/docs/containers?topic=containers-changelog#1168_1528), [1.15.10_1535](/docs/containers?topic=containers-changelog#11511_1535), and [1.14.10_1551](/docs/containers?topic=containers-changelog#11410_1551).</li></ul>
+| 13 April 2020 | <ul><li>**Gateway appliance firewalls**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_private) that you must open in a private gateway device firewall for {{site.data.keyword.registrylong_notm}}.</li><li>**Version changelogs**: Worker node patch updates are available for Kubernetes [1.17.4_1521](/docs/containers?topic=containers-changelog#1174_1521), [1.16.7_1528](/docs/containers?topic=containers-changelog#1168_1528), [1.15.10_1535](/docs/containers?topic=containers-changelog#11511_1535), and [1.14.10_1551](/docs/containers?topic=containers-changelog#11410_1551).</li></ul>
 | 06 April 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.28](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Kubernetes cluster context**: Added topics for [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple) and [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig).</li></ul> |
 | 01 April 2020 | **Istio add-on**: [Version 1.4.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#147) is released.|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
