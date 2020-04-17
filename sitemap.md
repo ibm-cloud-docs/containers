@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-16"
+lastupdated: "2020-04-17"
 
 keywords: containers
 subcollection: containers
@@ -1300,6 +1300,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog#1174_1521_master)
   * [Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020](/docs/containers?topic=containers-changelog#1174_1521)
   * [Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020](/docs/containers?topic=containers-changelog#1174_1520)
   * [Changelog for 1.17.4_1519, released 16 March 2020](/docs/containers?topic=containers-changelog#1174_1519)
