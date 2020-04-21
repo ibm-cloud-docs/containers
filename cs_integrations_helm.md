@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-08"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -82,8 +82,12 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 1. Install the latest release of the version 3 [Helm CLI](https://github.com/helm/helm/releases){: external} on your local machine.
 
 2. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
+   
+   If you enabled [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
+   {: note}
+   
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add iks-charts https://private.icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -258,8 +262,12 @@ To install Helm in a cluster with public network access:
         {: screen}
 
 4. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
+   
+   If you enabled [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
+   {: note}
+   
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add iks-charts https://private.icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -370,7 +378,7 @@ To install Tiller by using {{site.data.keyword.registrylong_notm}}:
 
 9. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add iks-charts https://private.icr.io/helm/iks-charts
    ```
    {: pre}
 
@@ -431,7 +439,7 @@ The steps in this example show how to install Helm charts from the {{site.data.k
 2. Connect to your private classic cluster by using the {{site.data.keyword.cloud_notm}} infrastructure VPN tunnel that you set up, or to your VPC cluster by using the [VPC VPN service](/docs/vpc?topic=vpc-vpn-onprem-example).
 3. Add the {{site.data.keyword.cloud_notm}} Helm repositories to your Helm instance.
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add iks-charts https://private.icr.io/helm/iks-charts
    ```
    {: pre}
 

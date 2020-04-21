@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-08"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks
 
@@ -166,8 +166,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 2. Add the {{site.data.keyword.cloud_notm}} Helm chart repository to the cluster where you want to use the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in.
 
+   If you enabled [VRF](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public registry domain: `helm repo add iks-charts https://icr.io/helm/iks-charts`.
+   {: note}
+   
    ```
-   helm repo add iks-charts https://icr.io/helm/iks-charts
+   helm repo add iks-charts https://private.icr.io/helm/iks-charts
    ```
    {: pre}
 
