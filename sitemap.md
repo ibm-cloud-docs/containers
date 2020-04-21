@@ -683,6 +683,8 @@ subcollection: containers
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
+  * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
+  * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
 * [Updating existing clusters to use the API key image pull secret](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key)
 * [Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
   * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
