@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-10"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -871,10 +871,10 @@ When you create a standard cluster, a private ALB is created in each zone that y
     {: screen}
 
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
-  ```
-  ibmcloud ks alb configure vpc-classic --alb-id <private_ALB_ID> --enable
-  ```
-  {: pre}
+    ```
+    ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
+    ```
+    {: pre}
   </br>
 
 ### Step 3: Create a subdomain to register the ALBs with a DNS entry and create an SSL certificate
@@ -898,10 +898,10 @@ When you enable the private ALBs, one private VPC load balancer is automatically
   {: screen}
 
 2. Create a DNS subdomain for the private ALB hostname.
-  ```
-  ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type private
+    ```
+    {: pre}
 
 3. Verify that the subdomain is created.
   ```

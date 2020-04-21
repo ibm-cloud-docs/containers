@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-15"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -221,10 +221,10 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 2. Create a DNS subdomain for the load balancer hostname.
   * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with an SSL certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you.
     1. Create a DNS subdomain and SSL certificate.
-      ```
-      ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-      ```
-      {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
+        ```
+        {: pre}
 
     2. Verify that the subdomain is created. For more information, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format).
       ```

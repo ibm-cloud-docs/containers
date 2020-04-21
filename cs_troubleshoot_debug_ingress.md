@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-17"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -204,7 +204,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
       ```
       {: pre}
-    * VPC clusters:
+    * VPC Gen 1 clusters:
       ```
       ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
       ```
@@ -419,12 +419,11 @@ Start by checking for error messages in the Ingress resource deployment events a
         ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
         ```
         {: pre}
-      * VPC clusters:
+      * VPC Gen 1 clusters:
         ```
         ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
         ```
         {: pre}
-
         ```
         ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
         ```

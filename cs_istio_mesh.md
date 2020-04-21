@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-01"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -182,7 +182,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
     ```
     {: pre}
-  * VPC:
+  * VPC Gen 1:
     ```
     ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
     ```
@@ -675,7 +675,7 @@ In the following steps, you set up a subdomain through which your users can acce
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
-  * VPC clusters:
+  * VPC Gen 1 clusters:
     ```
     ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
