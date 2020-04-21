@@ -848,13 +848,8 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
   true
   Events:  <none>
   ```
-  {: screen}<ff-all-icr>
+  {: screen}
 
-8. Copy the `all-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
-  ```
-  kubectl get secret all-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/all-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
-  ```
-  {: pre}</ff-all-icr>
 8. Copy the `default-us-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
   ```
   kubectl get secret default-us-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/default-us-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
