@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-17"
+lastupdated: "2020-04-22"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -60,19 +60,34 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.17 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.17.4_1521, released 17 April 2020
-{: #1174_1521_master}
+### Changelog for master fix pack 1.17.5_1522, released 22 April 2020
+{: #1175_1522}
 
-The following table shows the changes that are included in the master fix pack update `1.17.4_1521`. Master patch updates are applied automatically.
+The following table shows the changes that are included in the master fix pack patch update `1.17.5_1522`. Master patch updates are applied automatically.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/v3.12/release-notes/){: external}. |
-| CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. |
+| Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-3 | v1.17.5-1 | Updated to support the Kubernetes 1.17.5 release and to use `Go` version 1.13.9. |
+| Kubernetes | v1.17.4 | v1.17.5 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.5){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.4_1521" caption-side="top"}
+
+### Changelog for master fix pack 1.17.4_1521, released 17 April 2020
+{: #1174_1521_master}
+
+The following table shows the changes that are included in the master fix pack patch update `1.17.4_1521`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/v3.12/release-notes/){: external}. Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-1 | v1.17.4-3 | Updated to use `calicoctl` version 3.12.1. |
-| Kubernetes Dashboard | v2.0.0-rc5 | v2.0.0-rc7 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc7){: external}. |
+| Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
+| Kubernetes Dashboard | v2.0.0-rc5 | v2.0.0-rc7 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc7){: external}. Added a readiness probe to the Kubernetes Dashboard configuration. |
 | Kubernetes Dashboard metrics scraper | v1.0.3 | v1.0.4 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.4){: external}. |
 | OpenVPN client | N/A | N/A | Fixed problem that might cause the `vpn-config` secret in the `kube-system` namespace to be deleted during cluster master operations. |
 | Operator Lifecycle Manager Catalog | v1.5.11 | v1.6.1 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.6.1){: external}. |
@@ -190,6 +205,28 @@ The following table shows the changes that are included in patch update 1.17.2_1
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.16.9_1529, released 22 April 2020
+{: #1169_1529}
+
+The following table shows the changes that are included in the master fix pack patch update `1.16.9_1529`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
+| CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
+| GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
+| {{site.data.keyword.cloud_notm}} Provider | v1.16.8-192 | v1.16.9-219 | Updated to support the Kubernetes 1.16.9 release and to use `Go` version 1.13.9. |
+| Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
+| Kubernetes | v1.16.8 | v1.16.9 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.9){: external}. |
+| Kubernetes Dashboard | v2.0.0-rc5 | v2.0.0-rc7 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0-rc7){: external}. Added a readiness probe to the Kubernetes Dashboard configuration. |
+| Kubernetes Dashboard metrics scraper | v1.0.3 | v1.0.4 | See the [Kubernetes Dashboard metrics scraper release notes](https://github.com/kubernetes-sigs/dashboard-metrics-scraper/releases/tag/v1.0.4){: external}. |
+| OpenVPN client | N/A | N/A | Fixed a problem that might cause the `vpn-config` secret in the `kube-system` namespace to be deleted during cluster master operations. |
+| Operator Lifecycle Manager Catalog | v1.5.11 | v1.6.1 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.6.1){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.8_1528" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020
 {: #1168_1528}
@@ -451,6 +488,22 @@ The following tables show the changes that are included in the patch `1.16.2_151
 
 Review the version 1.15 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.15.11_1536, released 22 April 2020
+{: #11511_1536}
+
+The following table shows the changes that are included in the master fix pack patch update `1.15.11_1536`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
+| GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
+| Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
+| OpenVPN client | N/A | N/A | Fixed a problem that might cause the `vpn-config` secret in the `kube-system` namespace to be deleted during cluster master operations. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.11_1535" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.11_1535, released 13 April 2020
 {: #11511_1535}
@@ -1202,6 +1255,22 @@ Review the version 1.14 changelog.
 
 Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
 {: deprecated}
+
+### Changelog for master fix pack 1.14.10_1552, released 22 April 2020
+{: #11410_1552}
+
+The following table shows the changes that are included in the master fix pack patch update `1.14.10_1552`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
+| GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
+| Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
+| OpenVPN client | N/A | N/A | Fixed a problem that might cause the `vpn-config` secret in the `kube-system` namespace to be deleted during cluster master operations. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.14.10_1551" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020
 {: #11410_1551}
