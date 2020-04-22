@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-16"
+lastupdated: "2020-04-22"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -168,7 +168,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
 
 2. Create the subnet. For more information about the options in this command, see the [CLI reference](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli).
   ```
-  ibmcloud is subnet-create <subnet_nmae> <vpc_id> --zone <vpc_zone> --ipv4-address-count <number_of_ip_address>
+  ibmcloud is subnet-create <subnet_name> <vpc_id> --zone <vpc_zone> --ipv4-address-count <number_of_ip_address>
   ```
   {: pre}
     * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
@@ -240,8 +240,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.17.4
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.17.4
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.17.5
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.17.5
   ```
   {: screen}
 
@@ -359,8 +359,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         Example output:
         ```
         ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.17.4
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.17.4
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.17.5
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.17.5
         ```
         {: screen}
 

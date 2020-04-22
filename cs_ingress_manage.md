@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-10"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -150,30 +150,10 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB.
-  ```
-  ibmcloud ks alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone>
-  ```
-  {: pre}
-
-  <table>
-  <caption>Understanding this command's components</caption>
-  <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>--cluster &lt;cluster_name_or_ID&gt;</code></td>
-  <td>The name or ID of the cluster.</td>
-  </tr>
-  <tr>
-  <td><code>--type &lt;public_or_private&gt;</code></td>
-  <td>The type of ALB: <code>public</code> or <code>private</code>.</td>
-  </tr><tr>
-  <td><code>--zone &lt;vpc_zone&gt;</code></td>
-  <td>The VPC zone to deploy the ALB to.</td>
-  </tr>
-  </tbody>
-  </table>
+    ```
+    ibmcloud ks alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone>
+    ```
+    {: pre}
 
 2. Verify that the ALBs that you created in each zone have a **Status** of `enabled` and that a **Load Balancer Hostname** is assigned.
   ```
@@ -193,11 +173,11 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   ```
   {: screen}
 
-3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster. You can re-enable an ALB at any time by running `ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable`.
-  ```
-  ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
-  ```
-  {: pre}
+3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster.
+    ```
+    ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
+    ```
+    {: pre}
 
 
 <br />

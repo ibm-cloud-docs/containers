@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-22"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -87,14 +87,13 @@ Let's say you need a worker node with six cores to handle the workload for your 
 - **Duplicate your resources in another zone:** This option leaves you with two worker nodes, each with six cores in each zone for a total of 12 cores. </br>
 - **Distribute resources across three zones:** With this option, you deploy three cores per zone, which leaves you with a total capacity of nine cores. To handle your workload, two zones must be up at a time. If one zone is unavailable, the other two zones can fully handle your six-core workload. If two zones are unavailable, the three remaining cores are up to handle your parts of your workload, and you could temporarily add another worker node to that zone. Deploying three cores per zone means smaller machines and hence reduced cost for you.</br>
 
-**How is my Kubernetes master set up?** </br>
+**How is my Kubernetes master set up?**</br>
 When you create a cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones), a highly available master is automatically deployed and three replicas are spread across the zones of the metro. For example, if the cluster is in `dal10`, `dal12`, or `dal13` zones, the replicas of the master are spread across each zone in the Dallas multizone metro.
 
 **Do I have to do anything so that the master can communicate with the workers across zones?**</br>
 If you created a VPC multizone cluster, the subnets in each zone are automatically set up with Access Control Lists (ACLs) that allow communication between the master and the worker nodes across zones. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/resources?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/direct-link?topic=direct-link-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 **Can I convert my single zone cluster to a multizone cluster?**</br>
-
 To convert a single zone cluster to a multizone cluster, your cluster must be set up in one of the supported [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). VPC clusters can be set up only in multizone metro locations, and as such can always be converted from a single zone cluster to a multizone cluster. Classic clusters that are set up in a single zone data center cannot be converted to a multizone cluster. To convert a single zone cluster to a multizone cluster, see [Adding worker nodes by adding a zone to a worker pool](/docs/containers?topic=containers-add_workers#add_zone).
 
 

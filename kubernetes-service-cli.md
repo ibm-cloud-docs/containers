@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-17"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -811,7 +811,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. To create a classic cluster, use the [`ibmcloud ks cluster create classic` command](#cs_cluster_create) instead.
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**:
 * [**Administrator** platform role for VPC Infrastructure](/docs/vpc-on-classic?topic=vpc-on-classic-managing-user-permissions-for-vpc-resources).
@@ -2212,7 +2212,7 @@ ibmcloud ks worker-pool create vpc-classic --name <worker pool name> --cluster <
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. To create a worker pool in a classic cluster, use the [`ibmcloud ks worker-pool create classic` command](#cs_worker_pool_create) instead.
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
@@ -3093,7 +3093,7 @@ ibmcloud ks alb configure classic --alb-id ALB_ID (--disable|--enable [--user-ip
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC Generation 1 compute clusters, use the [`ibmcloud ks alb configure vpc-classic` command](#cli_alb_configure_vpc_classic) instead.
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic.
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3157,7 +3157,7 @@ ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [-s]
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. For classic clusters, use the [`ibmcloud ks alb configure classic` command](#cs_alb_configure) instead.
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3192,6 +3192,7 @@ ibmcloud ks alb configure vpc-classic --alb-id public-cr18a61a63a6a94b658596aa93
 
 </br>
 
+
 ### `ibmcloud ks alb create classic`
 {: #cs_alb_create}
 
@@ -3203,7 +3204,7 @@ ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZO
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC Generation 1 compute clusters, use the [`ibmcloud ks alb create vpc-classic` command](#cli_alb-create-vpc-classic) instead.
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3247,7 +3248,7 @@ ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zon
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. For classic clusters, use the [`ibmcloud ks alb create classic` command](#cs_alb_create) instead.
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4202,7 +4203,7 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4238,7 +4239,7 @@ ibmcloud ks nlb-dns create classic --cluster mycluster --ip 1.1.1.1
 ### `ibmcloud ks nlb-dns create vpc-classic`
 {: #cs_nlb-dns-create-vpc}
 
-Create a DNS entry for a VPC load balancer hostname.
+Create a DNS entry for a VPC Gen 1 load balancer hostname.
 {: shortdesc}
 
 When you create a VPC load balancer, the load balancer is assigned a hostname instead of an external IP address. Additionally, a default public VPC load balancer provides a hostname for all public ALBs in your cluster, and a default private VPC load balancer provides a hostname for all private ALBs in your cluster. If you created a VPC load balancer, you can use this hostname to access your app directly. If you use Ingress, you can specify this hostname in your Ingress resource files to register your app with Ingress.
@@ -4252,7 +4253,7 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNA
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. For classic clusters, see [`ibmcloud ks nlb-dns create classic`](#cs_nlb-dns-create).
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4645,7 +4646,7 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [-
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. For VPC clusters, see [`ibmcloud ks nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4678,7 +4679,7 @@ ibmcloud ks nlb-dns rm classic --cluster mycluster --ip 1.1.1.1 --nlb-host myclu
 ### `ibmcloud ks nlb-dns rm vpc-classic`
 {: #cs_nlb-dns-rm-vpc}
 
-Remove the VPC load balancer hostname that is registered with a DNS subdomain. After you remove the hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
+Remove the VPC Gen 1 load balancer hostname that is registered with a DNS subdomain. After you remove the hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
 {: shortdesc}
 
 ```
@@ -4686,7 +4687,7 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-subdomain SUBDOMAIN [
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute. For classic clusters, see [`ibmcloud ks nlb-dns rm classic`](#cs_nlb-dns-rm).
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 

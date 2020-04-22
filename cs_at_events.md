@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-14"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, audit
 
@@ -57,7 +57,7 @@ The following list of the cluster management events are sent to {{site.data.keyw
 | `containers-kubernetes.alb.create` | An Ingress ALB is created. |
 | `containers-kubernetes.alb.delete` | An Ingress ALB is deleted. |
 | `containers-kubernetes.apikey.reset` | An API key is reset for a region and resource group. |
-| `containers-kubernetes.cluster.config` | A `kubeconfig` file that contains the certificates and secrets to access a cluster is requested. 
+| `containers-kubernetes.cluster.config` | A `kubeconfig` file that contains the certificates and secrets to access a cluster is requested. |
 | `containers-kubernetes.cluster.create` | A classic or VPC cluster is created or failed to create. |
 | `containers-kubernetes.cluster.delete` | A cluster is deleted. |
 | `containers-kubernetes.cluster.update` | A refresh or update of the Kubernetes master is requested.|
@@ -94,32 +94,52 @@ The following list of the cluster management events are sent to {{site.data.keyw
 ## Viewing your cluster events
 {: #at-ui}
 
-To [view events](/docs/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events) that are sent to {{site.data.keyword.at_full_notm}}, you select the {{site.data.keyword.at_short}} instance that matches with the location of your {{site.data.keyword.containerlong_notm}} cluster. You must first have an instance of {{site.data.keyword.at_short}} in each of the locations where your cluster is. Use the following table to find which {{site.data.keyword.at_short}} location your events are sent to based on the {{site.data.keyword.containerlong_notm}} location where the cluster is located. Note that clusters in the Montreal, Toronto, and Washington, D.C. locations are available in Dallas.
+To [view events](/docs/Activity-Tracker-with-LogDNA?topic=logdnaat-view_events) that are sent to {{site.data.keyword.at_full_notm}}, you select the {{site.data.keyword.at_short}} instance that matches with the location of your {{site.data.keyword.containerlong_notm}} cluster.
 {: shortdesc}
 
-| {{site.data.keyword.containerlong_notm}} metro | {{site.data.keyword.containerlong_notm}} data center | {{site.data.keyword.at_short}} event location |
+The following table shows the {{site.data.keyword.at_short}} location where your events are sent to. To view your events, make sure that you have an {{site.data.keyword.at_short}} instance in the location that matches your cluster location. Note that clusters in the Montreal, Toronto, and Washington, D.C. locations forward all events to the Dallas {{site.data.keyword.at_short}} location.
+
+| {{site.data.keyword.containerlong_notm}} classic location | {{site.data.keyword.at_short}} event location |
 |-----|-----|-----|
-| Dallas | dal10, dal12, dal13 | Dallas |
-| Mexico City | mex01 | Dallas |
-| Montreal | mon01 | Dallas |
-| San Jose | sjc03, sjc04 | Dallas |
-| São Paulo | sao01 | Dallas |
-| Toronto | tor01 | Dallas |
-| Washington, D.C. | wdc04, wdc06, wdc07 | Dallas |
-| Amsterdam | ams03 | Frankfurt |
-| Frankfurt | fra02, fra04, fra05 | Frankfurt |
-| Milan | mil01 | Frankfurt |
-| Oslo | osl01 | Frankfurt |
-| Paris | par01 | Frankfurt |
-| London | lon02,lon04, lon05, lon06 | London |
-| Sydney | syd01, syd04, syd05 | Sydney |
-| Melbourne | mel01 | Sydney |
-| Chennai | che01 | Tokyo |
-| Hong Kong<br>SAR of the PRC | hkg02 | Tokyo |
-| Seoul | seo01 | Tokyo |
-| Singapore | sng01 | Tokyo |
-| Tokyo | tok02, tok04, tok05 | Tokyo |
+| Dallas (dal10, dal12, dal13) | Dallas |
+| Mexico City (mex01) | Dallas |
+| Montreal (mon01) | Dallas |
+| San Jose (sjc03, sjc04) | Dallas |
+| São Paulo (sao01) | Dallas |
+| Toronto (tor01) | Dallas |
+| Washington, D.C. (wdc04, wdc06, wdc07) | Dallas |
+| Amsterdam (ams03) | Frankfurt |
+| Frankfurt (fra02, fra04, fra05) | Frankfurt |
+| Milan (mil01) | Frankfurt |
+| Oslo (osl01) | Frankfurt |
+| Paris (par01) | Frankfurt |
+| London (lon02, lon04, lon05, lon06) | London |
+| Sydney (syd01, syd04, syd05) | Sydney |
+| Melbourne (mel01) | Sydney |
+| Chennai (che01) | Tokyo |
+| Hong Kong SAR of the PRC (hkg02) | Tokyo |
+| Seoul (seo01) | Tokyo |
+| Singapore (sng01) | Tokyo |
+| Tokyo (tok02, tok04, tok05) | Tokyo |
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
+{: class="simple-tab-table"}
+{: #atlocationclassic}
+{: tab-title="Locations for classic clusters"}
+{: tab-group="at-locations"}
+
+| {{site.data.keyword.containerlong_notm}} VPC location | {{site.data.keyword.at_short}} event location |
+|-----|-----|-----|
+| Dallas (us-south-1, us-south-2, us-south-3) | Dallas |
+| Washington, D.C. (us-east-1, us-east-2, us-east-3) | Dallas |
+| Frankfurt (eu-de-1, eu-de-2, eu-de-3) | Frankfurt |
+| London (eu-gb-1, eu-gb-2, eu-gb-3) | London |
+| Sydney (au-syd-1, au-syd-2, au-syd-3) | Sydney |
+| Tokyo (jp-tok-1, jp-tok-2, jp-tok-3) | Tokyo |
+{: class="simple-tab-table"}
+{: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
+{: #atlocationvpc}
+{: tab-title="Locations for VPC clusters"}
+{: tab-group="at-locations"}
 
 
 

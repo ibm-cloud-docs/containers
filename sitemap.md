@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-20"
+lastupdated: "2020-04-22"
 
 keywords: containers
 subcollection: containers
@@ -683,6 +683,8 @@ subcollection: containers
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
+  * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
+  * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
 * [Updating existing clusters to use the API key image pull secret](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key)
 * [Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces](/docs/containers?topic=containers-registry#other)
   * [Copying an existing image pull secret](/docs/containers?topic=containers-registry#copy_imagePullSecret)
@@ -1300,6 +1302,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.5_1522, released 22 April 2020](/docs/containers?topic=containers-changelog#1175_1522)
   * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog#1174_1521_master)
   * [Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020](/docs/containers?topic=containers-changelog#1174_1521)
   * [Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020](/docs/containers?topic=containers-changelog#1174_1520)
@@ -1308,6 +1311,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for master fix pack 1.16.9_1529, released 22 April 2020](/docs/containers?topic=containers-changelog#1169_1529)
   * [Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020](/docs/containers?topic=containers-changelog#1168_1528)
   * [Changelog for worker node fix pack 1.16.8_1527, released 30 March 2020](/docs/containers?topic=containers-changelog#1168_1527)
   * [Changelog for 1.16.8_1526, released 16 March 2020](/docs/containers?topic=containers-changelog#1168_1526)
@@ -1323,6 +1327,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for master fix pack 1.15.11_1536, released 22 April 2020](/docs/containers?topic=containers-changelog#11511_1536)
   * [Changelog for worker node fix pack 1.15.11_1535, released 13 April 2020](/docs/containers?topic=containers-changelog#11511_1535)
   * [Changelog for worker node fix pack 1.15.11_1534, released 30 March 2020](/docs/containers?topic=containers-changelog#11511_1534)
   * [Changelog for 1.15.11_1533, released 16 March 2020](/docs/containers?topic=containers-changelog#11511_1533)
@@ -1348,6 +1353,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.15.2_1513, released 15 August 2019](/docs/containers?topic=containers-changelog#1152_1513)
   * [Changelog for 1.15.1_1511, released 5 August 2019](/docs/containers?topic=containers-changelog#1151_1511)
 * [Deprecated: Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
+  * [Changelog for master fix pack 1.14.10_1552, released 22 April 2020](/docs/containers?topic=containers-changelog#11410_1552)
   * [Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020](/docs/containers?topic=containers-changelog#11410_1551)
   * [Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020](/docs/containers?topic=containers-changelog#11410_1550)
   * [Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020](/docs/containers?topic=containers-changelog#11410_1549)

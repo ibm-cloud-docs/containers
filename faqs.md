@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-04-22"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -177,8 +177,8 @@ For more information about available bare metal flavors and how bare metal is di
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
 **Supported Kubernetes versions**:
-*   Latest: 1.17.4
-*   Default: 1.16.8
+*   Latest: 1.17.5
+*   Default: 1.16.9
 *   Other: 1.15.11
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
@@ -244,8 +244,6 @@ To find detailed pricing information for the service, see [{{site.data.keyword.c
 {: #charges}
 {: faq}
 {: support}
-
-
 
 With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure compute, networking, and storage resources with platform services such as Watson AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges).
 * [Worker nodes](#nodes)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-08"
+lastupdated: "2020-04-21"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -316,50 +316,117 @@ If you use non-default security groups that are applied at the level of the VPC,
 ## Whitelisting your cluster in other services' firewalls or in on-premises firewalls
 {: #vpc-whitelist_workers}
 
-If you want to access services that run inside or outside {{site.data.keyword.cloud_notm}} or on-premises and that are protected by a firewall, you can add the IP addresses of your worker nodes in that firewall to allow outbound network traffic to your cluster. For example, you might want to read data from an {{site.data.keyword.cloud_notm}} database that is protected by a firewall, or whitelist your worker node subnets in an on-premises firewall to allow network traffic from your cluster.
+Allow your worker nodes to communicate with services that are protected by firewalls.
 {:shortdesc}
 
-1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+For example, you might have services that run inside or outside {{site.data.keyword.cloud_notm}}, or services that run on-premises, that are protected by a firewall. You want to permit incoming network traffic to those services from your cluster. In your service's firewall, you must whitelist the external IP addresses of the public gateways on your cluster's VPC subnets.
 
-2. Get the worker node subnets or the worker node IP addresses.
-  * **Worker node subnets**: If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-ca#ca), you might not want to update your firewall for each new worker node. Instead, you can whitelist the VLAN subnets that the cluster uses. Keep in mind that the VLAN subnet might be shared by worker nodes in other clusters.
-    <p class="note">The **primary public subnets** that {{site.data.keyword.containerlong_notm}} provisions for your cluster come with 14 available IP addresses, and can be shared by other clusters on the same VLAN. When you have more than 14 worker nodes, another subnet is ordered, so the subnets that you need to whitelist can change. To reduce the frequency of change, create worker pools with worker node flavors of higher CPU and memory resources so that you don't need to add worker nodes as often.</p>
-    1. List the worker nodes in your cluster.
+If you want to permit egress from your firewall-protected services to your cluster, you must whitelist your worker nodes' private IP addresses or your cluster's VPC subnet CIDRs in your service's firewall. Note that because worker nodes in VPC clusters have only private IP addresses, connections into the VPC cluster worker nodes can only originate from systems that are connected to your IBM Cloud private network.
+
+Before you begin:
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. Install the `infrastructure-service` CLI plug-in. The prefix for running VPC infrastructure commands is `ibmcloud is`.
+    ```
+    ibmcloud plugin install infrastructure-service
+    ```
+    {: pre}
+
+3. Target Generation 1 of VPC compute.
+   ```
+   ibmcloud is target --gen 1
+   ```
+   {: pre}
+
+**To permit ingress from a cluster to another service**:
+
+1. Get the **Worker Zones** and **VPCs** that your cluster is created in.
+  ```
+  ibmcloud ks cluster get -c <cluster>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ...
+  Worker Zones:                   us-south-1, us-south-2, us-south-3
+  Ingress Subdomain:              vpc-prod.us-south.containers.appdomain.cloud
+  Ingress Secret:                 vpc-prod
+  Creator:                        -
+  Public Service Endpoint URL:    https://c2.us-south.containers.cloud.ibm.com:20267
+  Private Service Endpoint URL:   https://c2.private.us-south.containers.cloud.ibm.com:20267
+  Pull Secrets:                   enabled in the default namespace
+  VPCs:                           ff537d43-a5a4-4b65-9627-17eddfa5237b
+  ...
+  ```
+  {: screen}
+
+2. For the worker zones and VPC that you found, ensure that you [enabled a public gateway on the VPC subnets in each worker zone](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#attach-public-gateway-cli).
+
+3. List the public gateways for the subnets. In the output, for the zones and VPC that your cluster is in, note the gateway **Floating IP** addresses for the subnets.
+  ```
+  ibmcloud is public-gateways
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ID                                     Name                                       Status      Floating IP      VPC              Zone
+  5d308ea5-9f32-43b3-aaae-194d5723a3e5   pgw-b9d45630-c053-11e9-b2f8-79328ce05e7e   available   169.XX.XXX.XX    test-vpc         us-south-1
+  f8b95e43-a408-4dc8-a489-ed649fc4cfec   pgw-18a3ebb0-b539-11e9-9838-f3f4efa02374   available   169.XX.XXX.XX    prod             us-south-1
+  2ba9a280-fffa-4b0c-bdca-7970f09f9b8a   pgw-73b62bc0-b53a-11e9-9838-f3f4efa02374   available   169.XX.XXX.XX    prod             us-south-2
+  057ddef6-631f-4b22-89eb-1e99982a54fa   pgw-64c5cae0-0be2-11ea-8f26-e1565e79a36c   available   52.XX.XXX.XXX    prod             us-south-3
+  ```
+  {: screen}
+
+4.  Add the public gateway IP addresses to your service's firewall or your on-premises firewall for inbound traffic.
+5.  Repeat these steps for each cluster that you want to whitelist.
+
+**To permit egress to a cluster from another service**:
+
+1. Get the worker node subnets or the worker node IP addresses.
+  * **Worker node subnet CIDRs**: If you anticipate changing the number of worker nodes in your cluster frequently, such as if you enable the [cluster autoscaler](/docs/containers?topic=containers-ca), you might not want to update your firewall for each new worker node. Instead, you can whitelist the VPC subnets that the cluster uses. Keep in mind that the VPC subnet might be shared by worker nodes in other clusters.
+    1. Get the **Worker Zones** and **VPCs** that your cluster is created in.
       ```
-      ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+      ibmcloud ks cluster get -c <cluster>
       ```
       {: pre}
 
-    2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to whitelist a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
-        ```
-        ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.16.8
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.8
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.16.8
-        ```
-        {: screen}
-    3.  List the VLAN subnets for each unique network ID.
-        ```
-        ibmcloud sl subnet list | grep -e <networkID1> -e <networkID2>
-        ```
-        {: pre}
+      Example output:
+      ```
+      ...
+      Worker Zones:                   us-south-1, us-south-2, us-south-3
+      Ingress Subdomain:              vpc-prod.us-south.containers.appdomain.cloud
+      Ingress Secret:                 vpc-prod
+      Creator:                        -
+      Public Service Endpoint URL:    https://c2.us-south.containers.cloud.ibm.com:20267
+      Private Service Endpoint URL:   https://c2.private.us-south.containers.cloud.ibm.com:20267
+      Pull Secrets:                   enabled in the default namespace
+      VPCs:                           ff537d43-a5a4-4b65-9627-17eddfa5237b
+      ...
+      ```
+      {: screen}
 
-        Example output:
-        ```
-        ID        identifier       type                 network_space   datacenter   vlan_id   IPs   hardware   virtual_servers
-        1234567   169.xx.210.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal12        1122334   16    0          5
-        7654321   169.xx.178.xxx   ADDITIONAL_PRIMARY   PUBLIC          dal10        4332211   16    0          6
-        ```
-        {: screen}
-    4.  Retrieve the subnet address. In the output, find the number of **IPs**. Then, raise `2` to the power of `n` equal to the number of IPs. For example, if the number of IPs is `16`, then `2` is raised to the power of `4` (`n`) to equal `16`. Now get the subnet CIDR by subtracting the value of `n` from `32` bits. For example, when `n` equals `4`, then the CIDR is `28` (from the equation `32 - 4 = 28`). Combine the **identifier** mask with the CIDR value to get the full subnet address. In the previous output, the subnet addresses are:
-        *   `169.xx.210.xxx/28`
-        *   `169.xx.178.xxx/28`
-  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you want to whitelist only one worker node, list all the worker nodes in your cluster and note the **Public IP** addresses. If your worker nodes are connected to a private network only and you want to connect to {{site.data.keyword.cloud_notm}} services by using the private service endpoint, note the **Private IP** addresses instead. Only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
+    2. For the subnets in the zones and VPC that your cluster is in, note the **Subnet CIDR**.
+      ```
+      ibmcloud is subnets
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      ID                                     Name             Status      Subnet CIDR        Addresses   ACL                                                          Public Gateway                             VPC              Zone
+      5f5787a4-f560-471b-b6ce-20067ac93439   vpc-prod-dal1    available   10.240.0.0/24      183/256     allow-all-network-acl-ff537d43-a5a4-4b65-9627-17eddfa5237b   -                                          prod             us-south-1
+      e3c19786-1c54-4248-86ca-e60aab74ed62   vpc-prod-dal2    available   10.240.64.0/24     183/256     allow-all-network-acl-ff537d43-a5a4-4b65-9627-17eddfa5237b   -                                          prod             us-south-2
+      2930a068-51cc-4eca-807b-3f296d0891b4   vpc-prod-dal3    available   10.240.128.0/24    249/256     allow-all-network-acl-ff537d43-a5a4-4b65-9627-17eddfa5237b   -                                          prod             us-south-3
+      ```
+      {: screen}
+
+  * **Individual worker node IP addresses**: If you have a small number of worker nodes that run only one app and do not need to scale, or if you want to whitelist only one worker node, list all the worker nodes in your cluster and note the **Primary IP** addresses. Only these worker nodes are whitelisted. If you delete the worker nodes or add worker nodes to the cluster, you must update your firewall accordingly.
     ```
     ibmcloud ks worker ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
-4.  Add the subnet CIDR or IP addresses to your service's firewall for outbound traffic or your on-premises firewall for inbound traffic.
-5.  Repeat these steps for each cluster that you want to whitelist.
+
+2.  Add the subnet CIDRs or individual worker node IP addresses to your service's firewall or your on-premises firewall for outbound traffic.
+3.  Repeat these steps for each cluster that you want to whitelist.
 
