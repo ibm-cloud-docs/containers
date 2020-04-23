@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-04-23"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -60,7 +60,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.17 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.17.5_1522, released 22 April 2020
+### Changelog for master fix pack 1.17.5_1522, released 23 April 2020
 {: #1175_1522}
 
 The following table shows the changes that are included in the master fix pack patch update `1.17.5_1522`. Master patch updates are applied automatically.
@@ -206,7 +206,7 @@ The following table shows the changes that are included in patch update 1.17.2_1
 Review the version 1.16 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.16.9_1529, released 22 April 2020
+### Changelog for master fix pack 1.16.9_1529, released 23 April 2020
 {: #1169_1529}
 
 The following table shows the changes that are included in the master fix pack patch update `1.16.9_1529`. Master patch updates are applied automatically.
@@ -489,7 +489,7 @@ The following tables show the changes that are included in the patch `1.16.2_151
 Review the version 1.15 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.15.11_1536, released 22 April 2020
+### Changelog for master fix pack 1.15.11_1536, released 23 April 2020
 {: #11511_1536}
 
 The following table shows the changes that are included in the master fix pack patch update `1.15.11_1536`. Master patch updates are applied automatically.
@@ -1256,7 +1256,7 @@ Review the version 1.14 changelog.
 Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
 {: deprecated}
 
-### Changelog for master fix pack 1.14.10_1552, released 22 April 2020
+### Changelog for master fix pack 1.14.10_1552, released 23 April 2020
 {: #11410_1552}
 
 The following table shows the changes that are included in the master fix pack patch update `1.14.10_1552`. Master patch updates are applied automatically.
