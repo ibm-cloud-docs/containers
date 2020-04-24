@@ -77,12 +77,12 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 1. Define the credentials that you want to use to access Grafana.
   1. Copy and paste the following command. This command starts a text entry for you to enter a username, which is then encoded in base64 and stored in the `GRAFANA_USERNAME` environment variable.
     ```
-    GRAFANA_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)
+    GRAFANA_USERNAME=$(read -p 'Grafana Username: ' uval && echo -n $uval | base64)
     ```
     {: pre}
   2. Copy and paste the following command. This command starts a text entry for you to enter a passphrase, which is then encoded in base64 and stored in the `GRAFANA_PASSPHRASE` environment variable.
     ```
-    GRAFANA_PASSPHRASE=$(read -p 'Kiali Passphrase: ' pval && echo -n $pval | base64)
+    GRAFANA_PASSPHRASE=$(read -p 'Grafana Passphrase: ' pval && echo -n $pval | base64)
     ```
     {: pre}
   3. Apply the following configuration to store the credentials in a Kubernetes secret.
