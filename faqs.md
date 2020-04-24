@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-04-24"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -183,7 +183,7 @@ For more information about available bare metal flavors and how bare metal is di
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
-Have an [OpenShift cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported OpenShift version is 3.11, which includes Kubernetes 1.11.
+Have an [OpenShift cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported OpenShift version is 4.3, which includes Kubernetes 1.16.
 {: note}
 
 

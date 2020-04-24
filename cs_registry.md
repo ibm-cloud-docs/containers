@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-21"
+lastupdated: "2020-04-24"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -91,8 +91,6 @@ The container registry can be:
 
 However, by default, your cluster is set up to pull images from only your account's namespaces in {{site.data.keyword.registrylong_notm}}, and deploy containers from these images to the `default` Kubernetes namespace in your cluster. If you need to pull images in other namespaces of the cluster or from other container registries, then you must set up your own image pull secrets.
 
-
-
 ### Default image pull secret setup
 {: #cluster_registry_auth_default}
 
@@ -123,14 +121,7 @@ Yes, create an API key in the {{site.data.keyword.cloud_notm}} account that you 
 To use a non-{{site.data.keyword.cloud_notm}} registry such as Docker, see [Accessing images that are stored in other private registries](#private_images).
 
 **Does the API key need to be for a service ID? What happens if I reach the limit of service IDs for my account?**<br>
-The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/iam?topic=iam-iam_limits#iam_limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.<ff-all-icr>
-
-**I see image pull secrets for the regional registry domains and all registry domains. Which one do I use?**<br>
-Previously, {{site.data.keyword.containerlong_notm}} created separate image pull secrets for each regional, public `icr.io` registry domain. Now, all the public and private `icr.io` registry domains for all regions are stored in a single `all-icr-io` image pull secret that is automatically created in the `default` namespace of your cluster.
-
-To let your workloads pull container images from other namespaces, you can now copy only the `all-icr-io` image pull secret to that namespace, and specify the `all-icr-io` secret in your service account or deployment. You do not need to copy the image pull secret that matches the regional registry of your image anymore.
-
-The `all-icr-io` image pull secret is added in clusters that run the following versions: **TODO**.</ff-all-icr>
+The default cluster setup creates a service ID to store {{site.data.keyword.cloud_notm}} IAM API key credentials in the image pull secret. However, you can also create an API key for an individual user and store those credentials in an image pull secret. If you reach the [IAM limit for service IDs](/docs/iam?topic=iam-iam_limits#iam_limits), your cluster is created without the service ID and image pull secret and cannot pull images from the `icr.io` registry domains by default. You must [create your own image pull secret](#other_registry_accounts), but by using an API key for an individual user such as a functional ID, not an {{site.data.keyword.cloud_notm}} IAM service ID.
 
 
 
@@ -208,8 +199,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     ```
     {: pre}
     Example output:
-    ```<ff-all-icr>
-    all-icr-io           kubernetes.io/dockerconfigjson        1         16d</ff-all-icr>
+    ```
     default-us-icr-io    kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io    kubernetes.io/dockerconfigjson        1         16d
     default-de-icr-io    kubernetes.io/dockerconfigjson        1         16d
@@ -217,10 +207,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     default-jp-icr-io    kubernetes.io/dockerconfigjson        1         16d
     default-icr-io       kubernetes.io/dockerconfigjson        1         16d
     ```
-    {: screen}<ff-all-icr>
-
-    To maintain backwards compatibility, your cluster has a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region. However, you can copy and refer to only the `all-icr-io` image pull secret, which has credentials to the public and private `icr.io` registry domains for all regions.
-    {: note}</ff-all-icr>
+    {: screen}
 
 4.  Update your [container deployments](/docs/containers?topic=containers-app#image) to pull images from the `icr.io` domain name.
 5.  Optional: If you have a firewall, make sure you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.
@@ -293,8 +280,7 @@ You can copy an image pull secret, such as the one that is automatically created
     ```
     {: pre}
     Example output:
-    ```<ff-all-icr>
-    all-icr-io          kubernetes.io/dockerconfigjson        1         16d</ff-all-icr>
+    ```
     default-us-icr-io   kubernetes.io/dockerconfigjson        1         16d
     default-uk-icr-io   kubernetes.io/dockerconfigjson        1         16d
     default-de-icr-io   kubernetes.io/dockerconfigjson        1         16d
@@ -303,11 +289,7 @@ You can copy an image pull secret, such as the one that is automatically created
     default-icr-io      kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
-3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.<ff-all-icr>
-    ```
-    kubectl get secret all-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl create -n <new-namespace> -f -   
-    ```
-    {: pre}</ff-all-icr>
+3.  Copy each image pull secret from the `default` namespace to the namespace of your choice. The new image pull secrets are named `<namespace_name>-icr-<region>-io`. If you pull images from only a certain region, you can copy only that region's image pull secret.
     ```
     kubectl get secret default-us-icr-io -n default -o yaml | sed 's/default/<new-namespace>/g' | kubectl create -n <new-namespace> -f -   
     ```
@@ -648,4 +630,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 Wondering what to do next? You can [set up the **entitled** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
 {: tip}
+
+
 
