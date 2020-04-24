@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-21"
+lastupdated: "2020-04-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -562,28 +562,28 @@ In the following steps, you set up a subdomain through which your users can acce
 **To publicly expose your Istio-managed apps with a subdomain using TLS:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 443 for HTTPS. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `443`, add that port. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/){: external}.
-  ```yaml
-  apiVersion: networking.istio.io/v1alpha3
-  kind: Gateway
-  metadata:
-    name: my-gateway
-    namespace: <namespace>
-  spec:
-    selector:
-      istio: ingressgateway
-    servers:
-    - port:
-        name: https
-        protocol: HTTPS
-        number: 443
-        tls:
-          mode: SIMPLE
-          serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-          privateKey: /etc/istio/ingressgateway-certs/tls.key
-      hosts:
-      - "*"
-  ```
-  {: codeblock}
+    ```yaml
+    apiVersion: networking.istio.io/v1alpha3
+    kind: Gateway
+    metadata:
+      name: my-gateway
+      namespace: <namespace>
+    spec:
+      selector:
+        istio: ingressgateway
+      servers:
+      - port:
+          name: https
+          protocol: HTTPS
+          number: 443
+          tls:
+            mode: SIMPLE
+            serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+            privateKey: /etc/istio/ingressgateway-certs/tls.key
+        hosts:
+        - "*"
+    ```
+    {: codeblock}
 
 2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-04-24"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -48,6 +48,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 **Before you begin**
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 * [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
+* **Add-on version 1.5**: [Enable Prometheus, Grafana, Jaeger, and Kiali](#enable_optional_monitor).
 
 ### Prometheus
 {: #prometheus}
@@ -73,13 +74,40 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 ### Grafana
 {: #grafana}
 
-1. Access the Grafana dashboard.
+1. Define the credentials that you want to use to access Grafana.
+  1. Copy and paste the following command. This command starts a text entry for you to enter a username, which is then encoded in base64 and stored in the `GRAFANA_USERNAME` environment variable.
+    ```
+    GRAFANA_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)
+    ```
+    {: pre}
+  2. Copy and paste the following command. This command starts a text entry for you to enter a passphrase, which is then encoded in base64 and stored in the `GRAFANA_PASSPHRASE` environment variable.
+    ```
+    GRAFANA_PASSPHRASE=$(read -p 'Kiali Passphrase: ' pval && echo -n $pval | base64)
+    ```
+    {: pre}
+  3. Apply the following configuration to store the credentials in a Kubernetes secret.
+      ```
+      cat <<EOF | kubectl apply -f -
+      apiVersion: v1
+      kind: Secret
+      metadata:
+        name: grafana
+        namespace: istio-system
+      type: Opaque
+      data:
+        username: $GRAFANA_USERNAME
+        passphrase: $GRAFANA_PASSPHRASE
+      EOF
+      ```
+      {: pre}
+
+2. Access the Grafana dashboard.
   ```
   istioctl dashboard grafana
   ```
   {: pre}
 
-2. If you installed BookInfo, the Istio dashboard shows metrics for the traffic that you generated when you refreshed the product page a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
+3. The Istio dashboard shows metrics for the traffic that you generate when you access your app in the service mesh a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
 
 ### Jaeger
 {: #jaeger}
@@ -142,8 +170,6 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 
 5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
 For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
-
-
 
 <br />
 
