@@ -48,7 +48,6 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 **Before you begin**
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 * [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
-* **Add-on version 1.5**: [Enable Prometheus, Grafana, Jaeger, and Kiali](#enable_optional_monitor).
 
 ### Prometheus
 {: #prometheus}
