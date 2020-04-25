@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-21"
+lastupdated: "2020-04-25"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -421,7 +421,7 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 <dd>The name or ID of the cluster. This value is required.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio version 1.4 is supported only in Kubernetes version 1.16 and later clusters.</dd>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio versions 1.4 and later are supported only in Kubernetes version 1.16 and later clusters.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon enable istio-extras`
