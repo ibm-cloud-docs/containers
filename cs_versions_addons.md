@@ -71,7 +71,7 @@ Refer to the following table for a summary of changes for each image version of 
 <tr>
 <td>627 / 401</td>
 <td>27 Apr 2020</td>
-<td>Adds the `SameSite=None` attribute to cookies to designate them for cross-site access.</td>
+<td><ul><li>Adds the `SameSite=None` attribute to cookies to designate them for cross-site access.</li><li>Fixes OpenSSL vulnerabilities for [CVE-2020-1967 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967).</li></ul></td>
 <td>-</td>
 </tr>
 <tr>
