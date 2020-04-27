@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-04-27"
 
 keywords: kubernetes, iks
 
@@ -52,7 +52,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} s
 Key technologies:    
 * [Multi-regions for business partner ecosystem ](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Horizontal scaling](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
-* [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
+* [Open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
 * [Cloud services for innovation](https://www.ibm.com/cloud/products#analytics)
 * [{{site.data.keyword.messagehub_full}} to feed event data to apps](/docs/EventStreams?topic=eventstreams-about#about)
 
@@ -141,7 +141,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 Key technologies:    
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Chatbot service powered by Watson](https://developer.ibm.com/patterns/create-cognitive-banking-chatbot/)
-* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/garage/toolchains/)
+* [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime)
 
 **Context: Rapidly building and deploying innovative HR benefits site in less than 3 weeks**
