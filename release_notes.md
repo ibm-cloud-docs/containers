@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-23"
+lastupdated: "2020-04-27"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 27 April 2020 | **Ingress ALB changelog**: Updated the [`ingress-auth` image build to 401](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 23 April 2020 | **Version changelogs**: Master patch updates are available for Kubernetes [1.17.5_1522](/docs/containers?topic=containers-changelog#1175_1522), [1.16.9_1529](/docs/containers?topic=containers-changelog#1169_1529), [1.15.11_1536](/docs/containers?topic=containers-changelog#11511_1536), and [1.14.10_1552](/docs/containers?topic=containers-changelog#11410_1552). |
 | 22 April 2020 | <ul><li>**Private network connection to registry**: For accounts that have VRF and service endpoints enabled, image push and pull traffic to {{site.data.keyword.registrylong_notm}} is now on [the private network](/docs/containers?topic=containers-registry#cluster_registry_auth_private).</li></ul>|
 | 17 April 2020 | **Version changelog**: Master patch updates are available for Kubernetes [1.17.4_1521](/docs/containers?topic=containers-changelog#1174_1521_master). |
