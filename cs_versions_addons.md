@@ -71,7 +71,7 @@ Refer to the following table for a summary of changes for each image version of 
 <tr>
 <td>627 / 401</td>
 <td>27 Apr 2020</td>
-<td>Adds the `SameSite=None` to cookies to designate them for cross-site access.</td>
+<td>Adds the `SameSite=None` attribute to cookies to designate them for cross-site access.</td>
 <td>-</td>
 </tr>
 <tr>
