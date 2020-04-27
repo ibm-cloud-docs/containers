@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-24"
+lastupdated: "2020-04-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
