@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-26"
+lastupdated: "2020-04-28"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -236,7 +236,7 @@ Review what information is stored with IBM when you use {{site.data.keyword.cont
 ### What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?
 {: #pi-info}
 
-For each cluster that you create with {{site.data.keyword.containerlong_notm}} cluster, IBM stores the information that is described in the following table: 
+For each cluster that you create with {{site.data.keyword.containerlong_notm}}, IBM stores the information that is described in the following table: 
 
 |Information type|Data|
 |-------|----------|
