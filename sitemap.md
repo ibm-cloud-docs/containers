@@ -1009,6 +1009,8 @@ subcollection: containers
 [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress-manage)
 * [Updating ALBs](/docs/containers?topic=containers-ingress-manage#alb-update)
 * [Scaling ALBs](/docs/containers?topic=containers-ingress-manage#scale_albs)
+  * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-manage#alb_replicas)
+  * [Creating more ALBs](/docs/containers?topic=containers-ingress-manage#create_alb)
 * [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-manage#migrate-alb-vlan)
 * [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-manage#readiness-check)
 
