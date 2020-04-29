@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-04-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -741,12 +741,12 @@ Looking for even more fine-grained control over routing? To create rules that ar
 Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://archive.istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
 {: shortdesc}
 
-1. Create an authentication policy file that is named `mtlspolicy.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
+1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
   ```yaml
   apiVersion: "authentication.istio.io/v1alpha1"
   kind: "Policy"
   metadata:
-    name: "mtlspolicy"
+    name: "default"
   spec:
     peers:
     - mtls: {}
@@ -755,7 +755,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 2. Apply the authentication policy to a namespace.
   ```
-  kubectl apply -f mtlspolicy.yaml -n <namespace>
+  kubectl apply -f default.yaml -n <namespace>
   ```
   {: pre}
 
