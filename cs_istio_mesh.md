@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-24"
+lastupdated: "2020-04-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -562,28 +562,28 @@ In the following steps, you set up a subdomain through which your users can acce
 **To publicly expose your Istio-managed apps with a subdomain using TLS:**
 
 1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 443 for HTTPS. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `443`, add that port. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/v1alpha3/gateway/){: external}.
-    ```yaml
-    apiVersion: networking.istio.io/v1alpha3
-    kind: Gateway
-    metadata:
-      name: my-gateway
-      namespace: <namespace>
-    spec:
-      selector:
-        istio: ingressgateway
-      servers:
-      - port:
-          name: https
-          protocol: HTTPS
-          number: 443
-          tls:
-            mode: SIMPLE
-            serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-            privateKey: /etc/istio/ingressgateway-certs/tls.key
-        hosts:
-        - "*"
-    ```
-    {: codeblock}
+   ```yaml
+   apiVersion: networking.istio.io/v1alpha3
+   kind: Gateway
+   metadata:
+     name: my-gateway
+     namespace: <namespace>
+   spec:
+     selector:
+       istio: ingressgateway
+     servers:
+     - port:
+         name: https
+         protocol: HTTPS
+         number: 443
+         tls:
+           mode: SIMPLE
+           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+           privateKey: /etc/istio/ingressgateway-certs/tls.key
+       hosts:
+       - "*"
+   ```
+   {: codeblock}
 
 2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
   ```
@@ -592,28 +592,28 @@ In the following steps, you set up a subdomain through which your users can acce
   {: pre}
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/v1alpha3/virtual-service/){: external}.
-  ```yaml
-  apiVersion: networking.istio.io/v1alpha3
-  kind: VirtualService
-  metadata:
-    name: my-virtual-service
-    namespace: <namespace>
-  spec:
-    gateways:
-    - my-gateway
-    hosts:
-    - '*'
-    http:
-    - match:
-      - uri:
-          exact: /<service_path>
-      route:
-      - destination:
-          host: <service_name>
-          port:
-            number: 443
-  ```
-  {: codeblock}
+   ```yaml
+   apiVersion: networking.istio.io/v1alpha3
+   kind: VirtualService
+   metadata:
+     name: my-virtual-service
+     namespace: <namespace>
+   spec:
+     gateways:
+     - my-gateway
+     hosts:
+     - '*'
+     http:
+     - match:
+       - uri:
+           exact: /<service_path>
+       route:
+       - destination:
+           host: <service_name>
+           port:
+             number: 443
+   ```
+   {: codeblock}
 
   <table>
   <thead>
@@ -741,12 +741,12 @@ Looking for even more fine-grained control over routing? To create rules that ar
 Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://archive.istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
 {: shortdesc}
 
-1. Create an authentication policy file that is named `mtlspolicy.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
+1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
   ```yaml
   apiVersion: "authentication.istio.io/v1alpha1"
   kind: "Policy"
   metadata:
-    name: "mtlspolicy"
+    name: "default"
   spec:
     peers:
     - mtls: {}
@@ -755,7 +755,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 2. Apply the authentication policy to a namespace.
   ```
-  kubectl apply -f mtlspolicy.yaml -n <namespace>
+  kubectl apply -f default.yaml -n <namespace>
   ```
   {: pre}
 

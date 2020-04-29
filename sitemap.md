@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-04-29"
 
 keywords: containers
 subcollection: containers
@@ -364,6 +364,8 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-access_cluster#prereqs)
 * [Accessing Kubernetes clusters through the public service endpoint](/docs/containers?topic=containers-access_cluster#access_public_se)
 * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
+  * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
+  * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
 * [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
@@ -537,11 +539,11 @@ subcollection: containers
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-* [Allowing the cluster to access resources through ACLs](/docs/containers?topic=containers-vpc-firewall#firewall_acls)
-* [Allowing the cluster to access resources through Calico policies](/docs/containers?topic=containers-vpc-firewall#firewall_calico)
 * [Opening required ports in VPC security groups](/docs/containers?topic=containers-vpc-firewall#security_groups)
   * [Opening security group ports in the console](/docs/containers?topic=containers-vpc-firewall#security_groups_ui)
   * [Opening security group ports from the CLI](/docs/containers?topic=containers-vpc-firewall#security_groups_cli)
+* [Allowing the cluster to access resources through ACLs](/docs/containers?topic=containers-vpc-firewall#firewall_acls)
+* [Allowing the cluster to access resources through Calico policies](/docs/containers?topic=containers-vpc-firewall#firewall_calico)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
 [VPC: Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
@@ -619,22 +621,6 @@ subcollection: containers
   * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
   * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
   * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
-* [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn-setup)
-  * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpc-vpnaas#vpc-strongswan_limitations)
-  * [Using the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_multizone)
-* [Configuring the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_configure)
-  * [Step 1: Enable a public gateway on the subnet](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_1)
-  * [Step 2: Get the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_2)
-  * [Step 3: Configure basic IPSec settings](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_3)
-  * [Step 4: Access cluster resources over the VPN connection](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_4)
-  * [Step 5: Access remote network resources over the VPN connection](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_5)
-  * [Step 6 (optional): Enable monitoring with the Slack webhook integration](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_6)
-  * [Step 7: Deploy the Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc_ss_7)
-* [Testing and verifying strongSwan VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_test)
-* [Limiting strongSwan VPN traffic by namespace or worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit)
-  * [Limiting strongSwan VPN traffic by namespace](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_namespace)
-  * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpc-vpnaas#vpc-limit_worker)
-* [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpn_upgrade)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -1023,6 +1009,8 @@ subcollection: containers
 [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress-manage)
 * [Updating ALBs](/docs/containers?topic=containers-ingress-manage#alb-update)
 * [Scaling ALBs](/docs/containers?topic=containers-ingress-manage#scale_albs)
+  * [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-manage#alb_replicas)
+  * [Creating more ALBs](/docs/containers?topic=containers-ingress-manage#create_alb)
 * [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-manage#migrate-alb-vlan)
 * [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-manage#readiness-check)
 
