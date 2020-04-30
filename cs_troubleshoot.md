@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-23"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, help, debug
 
@@ -514,7 +514,7 @@ Classic clusters only: The {{site.data.keyword.cloud_notm}} account owner or an 
 {: #ts_no_vpc}
 
 {: tsSymptoms}
-You try to create a VPC cluster by using the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/cluster/create){: external}. You have an existing [VPC for Generation 1 compute](https://cloud.ibm.com/vpc){: external} in your account, but when you try to select an existing **Virtual Private Cloud** to create the cluster in, you see the following error message:
+You try to create a VPC cluster by using the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/create){: external}. You have an existing [VPC for Generation 1 compute](https://cloud.ibm.com/vpc){: external} in your account, but when you try to select an existing **Virtual Private Cloud** to create the cluster in, you see the following error message:
 ```
 No VPC is available. Create a VPC.
 ```
@@ -543,7 +543,7 @@ To set an API key for the `default` resource group, use the {{site.data.keyword.
     ```
     {: pre}
 
-4. In the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/cluster/create){: external}, click **Refresh VPCs**. Your available VPCs are now listed in a drop-down menu.
+4. In the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/catalog/create){: external}, click **Refresh VPCs**. Your available VPCs are now listed in a drop-down menu.
 
 <br />
 

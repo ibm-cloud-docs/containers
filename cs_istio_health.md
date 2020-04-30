@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-24"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -42,7 +42,7 @@ To log, monitor, trace, and visualize your apps that are managed by Istio on {{s
 ## Launching the Prometheus, Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
-For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://www.kiali.io/){: external} dashboards.
+For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} dashboards.
 {: shortdesc}
 
 **Before you begin**

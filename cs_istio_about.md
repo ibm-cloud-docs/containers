@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -95,7 +95,7 @@ The Istio add-on installs the core components of Istio. For more information abo
 * `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
 * `Galley` validates configuration changes for the other Istio control plane components.
 
-To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://www.kiali.io/){: external}.
+To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external}.
 
 <br />
 

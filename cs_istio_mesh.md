@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -276,7 +276,7 @@ To enable automatic sidecar injection for a namespace:
     ```
     {: pre}
 
-5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/){: external}.
+5. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/docs/ops/deployment/requirements/){: external}.
 
   1. Define a service for the app.
     ```yaml
@@ -348,7 +348,7 @@ To manually inject sidecars into a deployment:
   ```
   {: pre}
 
-3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/docs/setup/kubernetes/additional-setup/requirements/){: external}.
+3. If you did not create a service to expose your app, create a Kubernetes service. Your app must be exposed by a Kubernetes service to be included as a microservice in the Istio service mesh. Ensure that you follow the [Istio requirements for pods and services](https://istio.io/docs/ops/deployment/requirements/){: external}.
 
   1. Define a service for the app.
     ```yaml
