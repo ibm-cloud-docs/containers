@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-14"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -47,7 +47,7 @@ The Istio managed add-on is generally available for Kubernetes version 1.16 and 
 ## Installing the Istio add-on
 {: #istio_install}
 
-In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4.
+In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on.
 {: shortdesc}
 
 **Before you begin**</br>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-04-30"
 
 keywords: containers
 subcollection: containers
@@ -1718,7 +1718,7 @@ subcollection: containers
 
 [Service limitations](/docs/containers?topic=containers-limitations)
 
-[Service limitations](/docs/containers?topic=containers-limitations#tech_limits)
+[Service and quota limitations](/docs/containers?topic=containers-limitations#tech_limits)
 
 [Classic cluster limitations](/docs/containers?topic=containers-limitations#classic_limits)
 * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)

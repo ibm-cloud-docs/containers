@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, ingress
 
@@ -1170,7 +1170,8 @@ spec:
      name: ssl-my-test
    type: Opaque
    data:
-     ca.crt: <ca_certificate>
+     client.crt: <ca_certificate>
+     client.key: <ca_key>
    ```
    {: codeblock}
 4. Create a Kubernetes secret for your certificate.
