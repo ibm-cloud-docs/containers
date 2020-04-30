@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-04-30"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -43,18 +43,20 @@ subcollection: containers
 If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, contact the IBM team in the [internal](https://test.cloud.ibm.com/docs/containers?topic=containers-cs_internal#internal_help) or [external Slack](https://ibm-cloud-success.slack.com){: external}.
 {: tip}
 
-## Service limitations
+## Service and quota limitations
 {: #tech_limits}
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#vpc_ks_limits) cluster limitations also apply.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations and quotas that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#vpc_ks_limits) cluster limitations also apply.
 {: shortdesc}
 
 | Category | Description |
 | -------- | ----------- |
 | API rate limits | 100 requests per 10 seconds to the {{site.data.keyword.containerlong_notm}} API for each unique source IP address. |
 | App deployment | The apps that you deploy to and services that you integrate with your cluster must be able to run on the operating system of the worker nodes. |
+| Cluster quota | You cannot exceed 100 clusters per region and per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). If you need more than 100 clusters, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support). In the support case, include the new cluster quota limit for the region and infrastructure provider that you want. |
 | Kubernetes | Make sure to review the [Kubernetes project limitations](https://kubernetes.io/docs/setup/best-practices/cluster-large/){: external}. |
 | Kubernetes pod logs | To check the logs for individual app pods, you can use the terminal to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard. |
+| Worker node quota | You cannot exceed 500 worker nodes across all clusters in a region, per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). If you need more than 500 worker nodes in a region, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support). In the support case, include the new worker node quota limit for the region and infrastructure provider that you want.|
 {: summary="This table contains information on general {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="{{site.data.keyword.containerlong_notm}} limitations"}
 
@@ -80,7 +82,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Pod instances | You can run 110 pods per worker node. If you have worker nodes that run Kubernetes 1.14.3_1524 or later, and are provisioned with 11 CPU cores or more, you can support 10 pods per core, up to a limit of 250 pods per worker node. The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity. |
 | Worker node flavors | Worker nodes are available in [select flavors](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node) of compute resources. |
 | Worker node host access | For security, you cannot SSH into the worker node compute host. |
-| Worker node instances | You can have 900 worker nodes per cluster. If you plan to exceed 900 per cluster, contact the {{site.data.keyword.containerlong_notm}} team in the [internal](https://test.cloud.ibm.com/docs/containers?topic=containers-cs_internal#internal_help) or [external Slack](https://ibm-cloud-success.slack.com){: external} first. If you see an IBM Cloud infrastructure capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure representative. |
+| Worker node instances | You cannot exceed 500 worker nodes across all clusters in a region. If you see an IBM Cloud infrastructure capacity limit on the number of instances per data center or that are ordered each month, contact your IBM Cloud infrastructure representative. |
 {: summary="This table contains information on compute limitations for classic clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Classic cluster compute limitations"}
 
