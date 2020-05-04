@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-30"
+lastupdated: "2020-05-04"
 
 keywords: containers
 subcollection: containers
@@ -1393,6 +1393,7 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
 * [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
 * [Changelog for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
 * [Changelog for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
@@ -1648,6 +1649,7 @@ subcollection: containers
   * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ts_ingress_config)
   * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#one_alb)
 * [Ingress application load balancer (ALB) secret issues](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_albsecret_fails)
+* [ALB pods do not deploy to worker nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#alb-pod-affinity)
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
@@ -1686,6 +1688,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[May 2020](/docs/containers?topic=containers-iks-release#may20)
 
 [April 2020](/docs/containers?topic=containers-iks-release#apr20)
 

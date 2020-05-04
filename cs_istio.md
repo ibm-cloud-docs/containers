@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-30"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -302,7 +302,7 @@ For example, the patch version of your add-on might be updated automatically by 
 
 3. In the output of step 1, compare the `client version` (`istioctl`) to the `sidecar injector version`.
   * If the `client version` and `sidecar injector version` match, no further updates are required.
-  * If the `client version` and `sidecar injector version` do not match, [update your sidecars](https://istio.io/docs/setup/kubernetes/upgrade/steps/#sidecar-upgrade){: external}.
+  * If the `client version` and `sidecar injector version` do not match, [update your sidecars](https://istio.io/docs/setup/upgrade/cni-helm-upgrade/#sidecar-upgrade){: external}.
 
 <br />
 
@@ -397,7 +397,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 
   3. The uninstallation process can take up to 10 minutes. Before you install the Istio managed add-on in the cluster, run `kubectl get namespaces` and verify that the `istio-system` namespace is removed.
 
-- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/docs/setup/kubernetes/install/kubernetes/#uninstall-istio-core-components){: external}.
+- If you installed Istio manually or used the Istio community Helm chart, see the [Istio uninstall documentation](https://istio.io/docs/setup/getting-started/#uninstall){: external}.
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
