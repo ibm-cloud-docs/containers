@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-03"
+lastupdated: "2020-05-04"
 
 keywords: containers
 subcollection: containers
@@ -1687,6 +1687,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[May 2020](/docs/containers?topic=containers-iks-release#may20)
 
 [April 2020](/docs/containers?topic=containers-iks-release#apr20)
 
