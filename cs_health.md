@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-23"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -947,7 +947,7 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
 ## Configuring health monitoring for worker nodes in classic clusters with Autorecovery
 {: #autorecovery}
 
-The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post](https://www.ibm.com/blogs/bluemix/2017/12/autorecovery-utilizes-consistent-hashing-high-availability/){: external}.
+The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
 {: shortdesc}
 
 <p class="note">Autorecovery requires at least one healthy node to function properly. Configure Autorecovery with active checks only in clusters with two or more worker nodes.</br></br><img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Autorecovery is supported only for classic clusters, and is not supported for VPC clusters.</p>
@@ -1063,7 +1063,7 @@ To configure Autorecovery:
    </tr>
    <tr>
    <td><code>PodFailureThresholdPercent</code></td>
-   <td>When the resource type is <code>POD</code>, enter the threshold for the percentage of pods on a worker node that can be in a [<strong><code>NotReady</code></strong> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.</td>
+   <td>When the resource type is <code>POD</code>, enter the threshold for the percentage of pods on a worker node that can be in a [<strong><code>NotReady</code></strong> ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/tasks/configure-pod-container/configure-liveness-readiness-startup-probes/#define-readiness-probes) state. This percentage is based on the total number of pods that are scheduled to a worker node. When a check determines that the percentage of unhealthy pods is greater than the threshold, the check counts as one failure.</td>
    </tr>
    <tr>
    <td><code>CorrectiveAction</code></td>

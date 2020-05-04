@@ -1184,7 +1184,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.15.1</td>
 <td>v1.15.2</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967123)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.2). Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
@@ -1240,7 +1240,7 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 <td>Kubernetes</td>
 <td>v1.14.4</td>
 <td>v1.15.1</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1) and [Kubernetes 1.15 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www-01.ibm.com/support/docview.wss?uid=ibm10967113)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.1) and [Kubernetes 1.15 blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/blog/2019/06/19/kubernetes-1-15-release-announcement/). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -1941,7 +1941,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.14.4</td>
 <td>v1.14.5</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5).  Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967123)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.5).  Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
 </tr>
 <tr>
 <td>Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider</td>
@@ -2017,7 +2017,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.14.3</td>
 <td>v1.14.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967113)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.14.4). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
@@ -2050,7 +2050,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.6.1</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10959551).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -2100,13 +2100,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -2133,13 +2133,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -3061,7 +3061,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Kubernetes</td>
 <td>v1.13.8</td>
 <td>v1.13.9</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9).  Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967123)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.9).  Updates resolves [CVE-2019-11247 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11247) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967115)) and [CVE-2019-11249 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11249) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967123)).</td>
 </tr>
 <tr>
 <td>Kubernetes DNS</td>
@@ -3143,7 +3143,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.13.7</td>
 <td>v1.13.8</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967113)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.8). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248) (see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
@@ -3176,7 +3176,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.4.4</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10959551).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -3226,13 +3226,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -3259,13 +3259,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -3572,7 +3572,7 @@ The following table shows the changes that are included in the patch 1.13.5_1517
 <td>Calico</td>
 <td>v3.4.0</td>
 <td>v3.4.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.4/releases/#v344). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10879585).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.4/releases/#v344). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -3722,7 +3722,7 @@ The following table shows the changes that are included in the patch 1.13.4_1513
 <td>containerd</td>
 <td>1.2.4</td>
 <td>1.2.5</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.5). Update includes improved fix for [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10871600).</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.5). Update includes improved fix for [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -3808,7 +3808,7 @@ The following table shows the changes that are included in the patch 1.13.4_1510
 <td>Kubernetes</td>
 <td>v1.13.2</td>
 <td>v1.13.4</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10873324).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.13.4). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/873324).</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -3890,7 +3890,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.2.2</td>
 <td>1.2.4</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.4). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10871600).</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.2.4). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
 </tr>
 <tr>
 <td>Kubernetes `kubelet` configuration</td>
@@ -4439,7 +4439,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Kubernetes</td>
 <td>v1.12.9</td>
 <td>v1.12.10</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10967113)).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.10). Update resolves [CVE-2019-11248 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-11248). For more information, see [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/967113)).</td>
 </tr>
 <tr>
 <td>Ubuntu packages</td>
@@ -4472,7 +4472,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Calico</td>
 <td>v3.3.6</td>
 <td>v3.6.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10959551).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [TTA-2019-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/#TTA-2019-001). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/959551).</td>
 </tr>
 <tr>
 <td>CoreDNS configuration</td>
@@ -4523,13 +4523,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -4555,13 +4555,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -4863,7 +4863,7 @@ The following table shows the changes that are included in the patch 1.12.7_1548
 <td>Calico</td>
 <td>v3.3.1</td>
 <td>v3.3.6</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10879585).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -5088,7 +5088,7 @@ The following table shows the changes that are included in the patch 1.12.6_1541
 <td>Kubernetes</td>
 <td>v1.12.5</td>
 <td>v1.12.6</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10873324).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.6). Update resolves [CVE-2019-6486 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-6486) and [CVE-2019-1002100 ![External link icon](../icons/launch-glyph.svg "External link icon")](http://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1002100). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/873324).</td>
 </tr>
 <tr>
 <td>Kubernetes configuration</td>
@@ -5170,7 +5170,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>containerd</td>
 <td>1.1.5</td>
 <td>1.1.6</td>
-<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10871600).</td>
+<td>See the [containerd release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/containerd/containerd/releases/tag/v1.1.6). Update resolves [CVE-2019-5736 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5736). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/871600).</td>
 </tr>
 <tr>
 <td>Kubernetes `kubelet` configuration</td>
@@ -5423,7 +5423,7 @@ The following table shows the changes that are included in the patch 1.12.3_1531
 <td>Kubernetes</td>
 <td>v1.12.2</td>
 <td>v1.12.3</td>
-<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10743917).</td>
+<td>See the [Kubernetes release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/releases/tag/v1.12.3). Update resolves [CVE-2018-1002105 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/issues/71411). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/743917).</td>
 </tr>
 </tbody>
 </table>
@@ -5477,7 +5477,7 @@ The following table shows the changes that are included in patch 1.12.2_1529.
 <td>Calico</td>
 <td>v3.2.1</td>
 <td>v3.3.1</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/uid/ibm10740799).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/release-notes/). Update resolves [Tigera Technical Advisory TTA-2018-001 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.projectcalico.org/security-bulletins/). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/740799).</td>
 </tr>
 <tr>
 <td>Cluster DNS configuration</td>

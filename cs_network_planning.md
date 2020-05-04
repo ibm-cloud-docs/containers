@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, networking
 
@@ -168,7 +168,7 @@ To make an app publicly available to the internet in a classic cluster, choose a
 {: caption="Characteristics of public network deployment patterns in {{site.data.keyword.containerlong_notm}} classic clusters" caption-side="top"}
 {: summary="This table reads left to right about the name, characteristics, use cases, and deployment steps of public network deployment patterns in classic clusters."}
 
-Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post](https://www.ibm.com/cloud/blog/new-builders/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability){: external}.
+Still want more details about the load-balancing deployment patterns that are available in {{site.data.keyword.containerlong_notm}}? Check out this [blog post](https://www.ibm.com/cloud/blog/ibm-cloud-kubernetes-service-deployment-patterns-for-maximizing-throughput-and-availability){: external}.
 {: tip}
 
 ### Choosing a deployment pattern for VPC clusters
