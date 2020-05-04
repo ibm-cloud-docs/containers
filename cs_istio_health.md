@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-30"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -106,7 +106,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-3. The Istio dashboard shows metrics for the traffic that you generate when you access your app in the service mesh a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/telemetry/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
+3. The Istio dashboard shows metrics for the traffic that you generate when you access your app in the service mesh a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/observability/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
 
 ### Jaeger
 {: #jaeger}
@@ -123,7 +123,7 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
   ```
   {: pre}
 
-3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/docs/tasks/telemetry/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
+3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/docs/tasks/observability/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
 
 ### Kiali
 {: #kiali}

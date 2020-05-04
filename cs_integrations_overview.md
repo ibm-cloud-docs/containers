@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, helm
 
@@ -151,7 +151,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 
 |Service|Description|Classic|VPC|
 |----|----|----|----|
-|Heptio Velero|You can use [Heptio Velero](https://github.com/heptio/velero){:external} to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero [Use cases for disaster recovery and cluster migration](https://github.com/heptio/velero/blob/release-0.9/docs/use-cases.md){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Heptio Velero|You can use [Heptio Velero](https://github.com/vmware-tanzu/velero){:external} to back up and restore cluster resources and persistent volumes. For more information, see the Heptio Velero [Use cases for disaster recovery and cluster migration](https://github.com/vmware-tanzu/velero/blob/release-0.9/docs/use-cases.md){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloud_notm}} Classic Block Storage|[{{site.data.keyword.cloud_notm}} Classic Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |{{site.data.keyword.block_storage_is_short}}|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)||<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cos_full_notm}}|Data that is stored with {{site.data.keyword.cos_short}} is encrypted and dispersed across multiple geographic locations, and accessed over HTTP by using a REST API. You can use the [ibm-backup-restore image](/docs/RegistryImages/ibm-backup-restore?topic=RegistryImages-ibmbackup_restore_starter) to configure the service to make one-time or scheduled backups for data in your clusters. For more information about the service, see the [{{site.data.keyword.cos_short}} documentation](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
