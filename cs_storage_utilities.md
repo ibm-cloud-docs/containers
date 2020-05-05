@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-09"
+lastupdated: "2020-05-05"
 
 keywords: kubernetes, iks
 
@@ -671,7 +671,7 @@ If you want to detach a volume, delete the PV. Detached volumes are still author
 ## VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes
 {: #vpc_api_attach}
 
-You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}](https://containers.cloud.ibm.com/swagger-storage-api/) to a worker node in your VPC cluster.
+You can use the {{site.data.keyword.containershort_notm}} API to attach and detach raw, unformatted [{{site.data.keyword.blockstorageshort}}](https://containers.cloud.ibm.com/global/swagger-global-api/#/storage/GetClassicVolume) to a worker node in your VPC cluster.
 {: shortdesc}
 
 You can attach a volume to one worker node only. Make sure that the volume is in the same zone as the worker node for the attachment to succeed.

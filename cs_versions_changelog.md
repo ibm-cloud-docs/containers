@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-05-05"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -3572,7 +3572,7 @@ The following table shows the changes that are included in the patch 1.13.5_1517
 <td>Calico</td>
 <td>v3.4.0</td>
 <td>v3.4.4</td>
-<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.4/releases/#v344). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
+<td>See the [Calico release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/releases/). Update resolves [CVE-2019-9946 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9946). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/879585).</td>
 </tr>
 <tr>
 <td>Cluster master HA proxy</td>
@@ -8186,7 +8186,7 @@ The following table shows the changes that are included in patch 1.10.5_1517.
 <td>Calico</td>
 <td>v3.1.1</td>
 <td>v3.1.3</td>
-<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/v3.1/releases/#v313).</td>
+<td>See the Calico [release notes ![External link icon](../icons/launch-glyph.svg "External link icon")](https://docs.projectcalico.org/releases/).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
