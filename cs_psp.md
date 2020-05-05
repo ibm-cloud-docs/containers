@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-09"
+lastupdated: "2020-05-05"
 
 keywords: kubernetes, iks
 
@@ -142,13 +142,27 @@ When you modify the default configuration, you can prevent important cluster act
 
 3.  Edit the cluster role binding `.yaml` file. To understand what you can edit, review the [Kubernetes documentation](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}. Example actions:
 
-    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `kube-system` namespace, many important actions such as cluster updates can occur. However, actions in other namespaces are no longer authorized.
+    *   **Service accounts**: You might want to authorize service accounts so that deployments can occur only in specific namespaces. For example, if you scope the policy to allow actions within the `default` namespace, the service account can deploy privileged pods in that namespace. However, actions in other namespaces are no longer authorized because you changed the scope from service accounts generally to service accounts specifically in the `default` namespace.
+
+        Do not scope the policy to namespaces that run system components, such as the `kube-system`, `ibm-system`, or `ibm-operators` namespaces. These namespaces already have [their own policies](/docs/containers?topic=containers-psp#ibm_psp). Changing the system component policies might cause unexpected results, such as all service accounts in all namespaces being able to deploy privileged pods.
+        {: important}
 
         To scope the policy to allow actions in a specific namespace, change the `system:serviceaccounts` to `system:serviceaccount:<namespace>`.
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
-          name: system:serviceaccount:kube-system
+          name: system:serviceaccount:default
+        ```
+        {: codeblock}
+
+        To scope the policy to multiple namespaces, copy the subject group and update the namespace.
+        ```yaml
+        - apiGroup: rbac.authorization.k8s.io
+          kind: Group
+          name: system:serviceaccount:default
+        - apiGroup: rbac.authorization.k8s.io
+          kind: Group
+          name: system:serviceaccount:test
         ```
         {: codeblock}
 

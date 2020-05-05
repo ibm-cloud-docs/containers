@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-05-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 

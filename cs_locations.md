@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-13"
+lastupdated: "2020-05-04"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -77,13 +77,14 @@ The following image is used as an example to explain how {{site.data.keyword.con
 The following tables list the available single and multizone locations in {{site.data.keyword.containerlong_notm}}. Note that in certain metros, you can provision a cluster as a single zone or multizone cluster. Free clusters are only available in select geographies as only single zone clusters with one worker node. Classic clusters are available in both multizone metros and single zones, but VPC clusters are available only in select multizone metros.
 {: shortdesc}
 
-* **Multizone**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure. To determine whether a zone is multizone-capable, your can run `ibmcloud ks locations` and look for the value in the `Multizone Metro` column.
-* **Single zone**: If you create a cluster in a single zone (data center) location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
-* **VPC regions and zones**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
+* **[Multizone](#zones-mz)**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure. To determine whether a zone is multizone-capable, your can run `ibmcloud ks locations` and look for the value in the `Multizone Metro` column.
+* **[Single zone](#zones-sz)**: If you create a cluster in a single zone (data center) location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
+* **[VPC regions and zones](#zones-vpc)**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
 
 {{site.data.keyword.containerlong_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: note}
 
+{: #zones-mz}
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Sydney | syd01, syd04, syd05 | AP South (`ap-south`, `au-syd`) |
@@ -92,12 +93,13 @@ The following tables list the available single and multizone locations in {{site
 | Europe | United Kingdom | London | lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
-{: class="simple-tab-table"}
 {: caption="Available multizone metro locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
-{: #locationtabtablemulti}
-{: tab-title="Multizone metros for classic clusters"}
-{: tab-group="location-multi-single"}
+{: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the data center of the location. The fifth column is the name of the IBM Cloud region that the location is in."}
 
+`*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
+{: note}
+
+{: #zones-sz}
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Melbourne | mel01 | AP South (`ap-south`, `au-syd`) |
@@ -121,12 +123,14 @@ The following tables list the available single and multizone locations in {{site
 | North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
-{: class="simple-tab-table"}
 {: caption="Available single zone data center locations for classic clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
-{: #locationtabtablesingle}
-{: tab-title="Single zones for classic clusters"}
-{: tab-group="location-multi-single"}
+{: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the data center of the location. The fifth column is the name of the IBM Cloud region that the location is in."}
 
+<p class="note">`*` hou02 supports free clusters that are created in US South, and is not available for standard, production clusters.<br><br>`†` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.</p>
+
+
+
+{: #zones-vpc}
 | Geography |  Country  | Metro | Region | Zone | Location |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Sydney | au-syd | au-syd-1<br>au-syd-2<br>au-syd-3 | Sydney 1<br>Sydney 2<br>Sydney 3|
@@ -135,13 +139,8 @@ The following tables list the available single and multizone locations in {{site
 | Europe | United Kingdom | London | eu-gb | eu-gb-1<br>eu-gb-2<br>eu-gb-3 | London 1<br>London 2<br>London 3|
 | North America | United States | Dallas | us-south | us-south-1<br>us-south-2<br>us-south-3 | Dallas 1<br>Dallas 2<br>Dallas 3|
 | North America | United States | Washington DC | us-east | us-east-1<br>us-east-2<br>us-east-3 | Washington DC 1<br>Washington DC 2<br>Washington DC 3|
-{: class="simple-tab-table"}
 {: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
-{: #locationtabtablemultivpc}
-{: tab-title="Multizone metros for VPC clusters"}
-{: tab-group="location-multi-single"}
-
-<p class="note">`*` hou02 supports free clusters that are created in US South, and is not available for standard, production clusters.<br><br>`†` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.</p>
+{: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the zone of the location. The fifth column is the name of the location."}
 
 ### Single zone clusters
 {: #regions_single_zone}
@@ -185,7 +184,7 @@ Free clusters are limited to specific locations and are available for only class
 **Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
 * Frankfurt metro in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
 * London metro in `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`
-* Dallas metro in ``ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
+* Dallas metro in `ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
 
 **Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you cannot select a location. Your cluster is created in one of the following locations.
 * Dallas metro in North America
