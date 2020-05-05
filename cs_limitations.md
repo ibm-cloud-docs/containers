@@ -40,7 +40,7 @@ subcollection: containers
 {: shortdesc}
 <br>
 
-If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support) and provide the cluster ID, the new quota limit, and the region, the region, and infrastructure provider in your support ticket. 
+If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support) and provide the cluster ID, the new quota limit, the region, and infrastructure provider in your support ticket. 
 {: tip}
 
 ## Service and quota limitations
