@@ -392,6 +392,7 @@ subcollection: containers
   * [Assigning infrastructure access through the console](/docs/containers?topic=containers-users#infra_console)
   * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-users#infra_cli)
 * [Removing user permissions](/docs/containers?topic=containers-users#removing)
+  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
 
