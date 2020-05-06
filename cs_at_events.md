@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-04-21"
+lastupdated: "2020-05-06"
 
 keywords: kubernetes, iks, audit
 
@@ -88,6 +88,23 @@ The following list of the cluster management events are sent to {{site.data.keyw
 | `containers-kubernetes.workerpool.update` | A worker pool is updated. |
 | `containers-kubernetes.zone.update` | The networking attributes for a zone that a worker pool uses are updated. |
 {: caption="Cluster management events" caption-side="top"}
+
+
+## Tracking logging and monitoring configuration events
+{: #at-lm}
+
+The following list of the logging and monitoring configuration events are sent to {{site.data.keyword.at_full_notm}} by the {{site.data.keyword.containerlong_notm}} observability plug-in.
+{: shortdesc}
+
+|Action|Description|
+|------|-----------|
+| `containers-kubernetes.observe.logging.create` | A LogDNA logging configuration is created for the cluster. |
+| `containers-kubernetes.observe.logging.modify` | A LogDNA logging configuration is updated. |
+| `containers-kubernetes.observe.logging.remove` | A LogDNA logging configuration is removed from the cluster. |
+| `containers-kubernetes.observe.monitoring.create` | A Sysdig monitoring configuration is created for the cluster. |
+| `containers-kubernetes.observe.monitoring.modify` | A Sysdig monitoring configuration is updated. |
+| `containers-kubernetes.observe.monitoring.remove` | A Sysdig monitoring configuration is removed from the cluster. |
+{: caption="Logging and monitoring management events" caption-side="top"}
 
 
 

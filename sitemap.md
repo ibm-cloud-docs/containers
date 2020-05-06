@@ -1499,6 +1499,8 @@ subcollection: containers
 
 [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
 
+[Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+
 [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 
