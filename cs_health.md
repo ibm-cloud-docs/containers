@@ -810,9 +810,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and container runtime features to monitor the health of your clusters and apps.
 {: shortdesc}
 
-Monitoring of cluster metrics is supported only for standard clusters.
-{: note}
-
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster components.
 
 To avoid conflicts when using metrics services, be sure that clusters across resource groups and regions have unique names.
