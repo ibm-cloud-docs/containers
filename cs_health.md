@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-05-06"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -50,9 +50,8 @@ By default, logs are generated and written locally for all of the following {{si
 You can choose your logging solution based on which cluster components you need to collect logs for. A common implementation is to choose a logging service that you prefer based on its analysis and interface capabilities, such as {{site.data.keyword.la_full_notm}} or a third-party service. You can then use {{site.data.keyword.at_full_notm}} to audit user activity in the cluster and back up cluster master logs to {{site.data.keyword.cos_full_notm}}.
 
 <dl>
-
 <dt>{{site.data.keyword.la_full}}</dt>
-<dd>Manage pod container logs by deploying LogDNA as a third-party service to your cluster. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-kube).
+<dd>Manage pod container logs by deploying an instance of {{site.data.keyword.la_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your {{site.data.keyword.la_full_notm}} service instance. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started) documentation. To enable {{site.data.keyword.la_full_notm}} in your cluster, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](#app_logdna).</dd>
 
 <dt>{{site.data.keyword.at_full}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/Activity-Tracker-with-LogDNA?topic=logdnaat-getting-started). For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</dd>
@@ -80,14 +79,93 @@ You can choose your logging solution based on which cluster components you need 
 Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
 
-
-### Forwarding cluster and app logs
+### Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}
 {: #app_logdna}
 
-To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster.
+Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a logging configuration for {{site.data.keyword.la_full_notm}} in your cluster, and use this logging configuration to automatically collect and forward pod logs to {{site.data.keyword.la_full_notm}}.
 {: shortdesc}
 
-This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started) documentation. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+You can have only one logging configuration for {{site.data.keyword.la_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.la_full_notm}} service instance to send logs to, first remove any existing logging configuration and then follow the steps to create your new one.
+{: note}
+
+Before you begin:
+- Verify that you are assigned the **Editor** platform role and **Manager** server access role for {{site.data.keyword.la_full_notm}}.
+- Verify that you are assigned the **Administrator** platform role and the **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}} to create the logging configuration. To view a logging configuration or launch the LogDNA dashboard after the logging configuration is created, users must be assigned the **Viewer** platform role and **Reader** service access role for the `ibm-observe` Kubernetes namespace in {{site.data.keyword.containerlong_notm}}.
+- If you want to use the CLI to set up the logging configuration:
+  - [Install the {{site.data.keyword.containerlong_notm}} observability CLI plug-in (`ibmcloud ob`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+  - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+To set up a logging configuration for your cluster:
+
+1. Create an [{{site.data.keyword.la_full_notm}} service instance](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
+2. Set up a logging configuration for your cluster. When you create the logging configuration, a Kubernetes namespace `ibm-observe` is created and a LogDNA agent is deployed as a daemonset to all worker nodes in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+
+   - **From the console:**
+     1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a LogDNA logging configuration.
+     2. On the cluster **Overview** page, click **Add logging**.
+     3. Select the region and the {{site.data.keyword.la_full_notm}} service instance that you created earlier, and click **Connect**.
+
+   - **From the CLI:**
+     1.  Create the LogDNA logging configuration. When you create the LogDNA logging configuration, the ingestion key that was last added is retrieved automatically. If you want to use a different ingestion key, add the `--logdna-ingestion-key <ingestion_key>` option to the command.
+
+         ```
+         ibmcloud ob logging config create --cluster <cluster_name_or_ID> --instance <LogDNA_instance_name_or_ID>
+         ```
+         {: pre}
+
+         Example output:
+         ```
+         Creating configuration...
+         OK
+         ```
+         {: screen}
+
+     2. Verify that the logging configuration was added to your cluster.
+        ```
+        ibmcloud ob logging config list --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        Listing configurations...
+
+        OK
+        Instance Name                            Instance ID                            CRN   
+        IBM Cloud Log Analysis with LogDNA-opm   1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:logdna:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
+        ```
+        {: screen}
+
+3. Optional: Verify that the LogDNA agent was set up successfully.
+   1. If you used the console to create the LogDNA logging configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+
+   2. Verify that the daemonset for the LogDNA agent was created and all instances are listed as `AVAILABLE`.
+      ```
+      kubectl get daemonsets -n ibm-observe
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+      logdna-agent   9         9         9       9            9           <none>          14m
+      ```
+      {: screen}
+
+      The number of daemonset instances that are deployed equals the number of worker nodes in your cluster.
+
+   3. Review the configmap that was created for your LogDNA agent.
+      ```
+      kubectl describe configmap -n ibm-observe
+      ```
+      {: pre}
+
+4. Access the logs for your pods from the LogDNA dashboard.
+   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
+   2. On the cluster **Overview** page, click **Launch logging**. The LogDNA dashboard opens.
+   3. Review the pod logs that the LogDNA agent collected from your cluster. It might take a few minutes for your first logs to show.
+
+5. Review how you can [search and filter logs in the LogDNA dashboard](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-view_logs). 
 
 
 ### Forwarding Kubernetes API audit logs
@@ -745,8 +823,8 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 {: tip}
 
 <dl>
-    <dt>{{site.data.keyword.mon_full}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps by deploying Sysdig as a third-party service to your worker nodes to forward metrics to {{site.data.keyword.mon_full_notm}}. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-kubernetes_cluster#kubernetes_cluster).</dd>
+  <dt>{{site.data.keyword.mon_full}}</dt>
+  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a Sysdig agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Sysdig-about). To set up the Sysdig agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
@@ -759,7 +837,94 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 <br />
 
 
+## Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}
+{: #sysdig}
 
+Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
+{: shortdesc}
+
+With {{site.data.keyword.mon_full_notm}}, you can collects cluster and pod metrics, such as the CPU and memory usage of your worker nodes, incoming and outgoing HTTP traffic for your pods, and data about several infrastructure components. In addition, the agent can collect custom application metrics by using either a Prometheus-compatible scraper or a StatsD facade.
+
+You can have only one monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.mon_full_notm}} service instance to send metrics to, first remove any existing monitoring configuration and then follow the steps to create your new one.
+{: note}
+
+Before you begin:
+- Verify that you are assigned the **Editor** platform role and **Manager** server access role for {{site.data.keyword.mon_full_notm}}.
+- Verify that you are assigned the **Administrator** platform role and the **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}} to create the monitoring configuration. To view a monitoring configuration or launch the Sysdig dashboard after the monitoring configuration is created, users must be assigned the **Viewer** platform role and **Reader** service access role for the `ibm-observe` Kubernetes namespace in {{site.data.keyword.containerlong_notm}}.
+- If you want to use the CLI to set up the monitoring configuration:
+  - [Install the {{site.data.keyword.containerlong_notm}} observability CLI plug-in (`ibmcloud ob`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+  - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+To set up a monitoring configuration for your cluster:
+
+1. Create an [{{site.data.keyword.mon_full_notm}} service instance](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
+2. Set up a monitoring configuration for your cluster. When you create the monitoring configuration, a Kubernetes namespace `ibm-observe` is created and a Sysdig agent is deployed as a Kubernetes daemonset to all worker nodes in your cluster. This agent collects cluster and pod metrics, such as the worker node CPU and memory usage, or the amount incoming and outgoing network traffic to your pods.
+
+   - **From the console: **
+     1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a Sysdig monitoring configuration.
+     2. On the cluster **Overview** page, click **Add monitoring**.
+     3. Select the region and the {{site.data.keyword.mon_full_notm}} service instance that you created earlier, and click **Connect**.
+
+   - **From the CLI: **
+     1. Create the Sysdig monitoring configuration. When you create the Sysdig monitoring configuration, the access key that was last added is retrieved automatically. If you want to use a different access key, add the `--sysdig-access-key <access_key>` option to the command.
+
+        ```
+        ibmcloud ob monitoring config create --cluster <cluster_name_or_ID> --instance <Sysdig_instance_name_or_ID>
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        Creating configuration...
+        OK
+        ```
+        {: screen}
+
+     2. Verify that the monitoring configuration was added to your cluster.
+        ```
+        ibmcloud ob monitoring config list --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        Listing configurations...
+
+        OK
+        Instance Name                            Instance ID                            CRN   
+        IBM Cloud Monitornig with Sysdig-aaa     1a111a1a-1111-11a1-a1aa-aaa11111a11a   crn:v1:prod:public:sysdig:us-south:a/a11111a1aaaaa11a111aa11a1aa1111a:1a111a1a-1111-11a1-a1aa-aaa11111a11a::  
+        ```
+        {: screen}
+
+3. Optional: Verify that the Sysdig agent was set up successfully.
+   1. If you used the console to create the Sysdig monitoring configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+   2. Verify that the daemonset for the Sysdig agent was created and all instances are listed as `AVAILABLE`.
+      ```
+      kubectl get daemonsets -n ibm-observe
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      NAME           DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR   AGE
+      sysdig-agent   9         9         9       9            9           <none>          14m
+      ```
+      {: screen}
+
+      The number of daemonset instances that are deployed equals the number of worker nodes in your cluster.
+
+   3. Review the configmap that was created for your Sysdig agent.
+      ```
+      kubectl describe configmap -n ibm-observe
+      ```
+      {: pre}
+
+4. Access the metrics for your pods and cluster from the Sysdig dashboard.
+   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
+   2. On the cluster **Overview** page, click **Launch monitoring**. The Sysdig dashboard opens.
+   3. Review the pod and cluster metrics that the Sysdig agent collected from your cluster. It might take a few minutes for your first metrics to show.
+
+5. Review how you can work with the [Sysdig dashboard](/docs/Monitoring-with-Sysdig?topic=Sysdig-dashboards#dashboards) to further analyze your metrics.
 
 ## Viewing cluster states
 {: #states}

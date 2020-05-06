@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-05"
+lastupdated: "2020-05-06"
 
 keywords: containers
 subcollection: containers
@@ -392,6 +392,7 @@ subcollection: containers
   * [Assigning infrastructure access through the console](/docs/containers?topic=containers-users#infra_console)
   * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-users#infra_cli)
 * [Removing user permissions](/docs/containers?topic=containers-users#removing)
+  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
 
@@ -639,7 +640,7 @@ subcollection: containers
 [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
-* [Forwarding cluster and app logs](/docs/containers?topic=containers-health#app_logdna)
+* [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna)
 * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#webhook_logdna)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
@@ -652,6 +653,8 @@ subcollection: containers
 [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 
 [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
+
+[Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
 
 [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Cluster states](/docs/containers?topic=containers-health#states_cluster)
@@ -1251,6 +1254,16 @@ subcollection: containers
 * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
 * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
+[Observability plug-in CLI](/docs/containers?topic=containers-observability_cli)
+* [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
+* [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+* [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
+* [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
+* [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
+* [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+* [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
+* [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
+
 
 ## Version history
 {: #sitemap_version_history}
@@ -1485,6 +1498,8 @@ subcollection: containers
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
 
 [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+
+[Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
 
 [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
