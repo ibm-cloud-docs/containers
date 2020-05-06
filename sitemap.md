@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-05"
+lastupdated: "2020-05-06"
 
 keywords: containers
 subcollection: containers
@@ -640,7 +640,7 @@ subcollection: containers
 [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
-* [Forwarding cluster and app logs](/docs/containers?topic=containers-health#app_logdna)
+* [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna)
 * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#webhook_logdna)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
@@ -653,6 +653,8 @@ subcollection: containers
 [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 
 [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
+
+[Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
 
 [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Cluster states](/docs/containers?topic=containers-health#states_cluster)
