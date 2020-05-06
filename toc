@@ -180,6 +180,7 @@ Kubernetes Service
     CLI plug-in reference
         /containers-cli-plugin/containers-cli-plugin-kubernetes-service-cli
         cs_cli_changelog.md
+        cs_observability_reference.md
 
     {: .topicgroup}
     Version history
