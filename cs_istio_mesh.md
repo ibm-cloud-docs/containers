@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-06"
+lastupdated: "2020-05-07"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -304,11 +304,11 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
       ```
       {: codeblock}
 
-    3. Create the new `bookinfo-gateway` in your cluster.
-      ```
-      kubectl apply -f bookinfo-gateway.yaml
-      ```
-      {: pre}
+  3. Create the new `bookinfo-gateway` in your cluster.
+    ```
+    kubectl apply -f bookinfo-gateway.yaml
+    ```
+    {: pre}
 
 5. In a web browser, open the BookInfo product page. Ensure that you use HTTPS for the subdomain that you found in step 2.
   ```
