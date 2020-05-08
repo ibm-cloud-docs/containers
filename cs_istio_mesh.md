@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-05-07"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -170,7 +170,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
 4. Try refreshing the page several times. Different versions of the reviews section round-robin through red stars, black stars, and no stars.
 
-### Exposing BookInfo by using an IBM-provided subdomain
+### Exposing BookInfo by using an IBM-provided subdomain without TLS
 {: #istio_expose_bookinfo}
 
 When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a subdomain for the `istio-ingressgateway` load balancer IP address in classic clusters or the hostname in VPC clusters through which you can publicly access BookInfo.
@@ -188,26 +188,135 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
 
-2. Verify that the subdomain is created.
+2. Verify that the subdomain is created and copy the subdomain.
   ```
   ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
   {: pre}
 
-  Example output:
+  Example output for classic clusters:
   ```
   Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
   mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
   ```
   {: screen}
+  Example output for VPC clusters:
+  ```
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+  ```
+  {: screen}
 
-3. In a web browser, open the BookInfo product page.
+3. In a web browser, open the BookInfo product page. Because no TLS is configured, make sure that you use HTTP.
+  ```
+  http://<subdomain>/productpage
+  ```
+  {: codeblock}
+
+4. Try refreshing the page several times. The requests to `http://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+
+### Exposing BookInfo by using an IBM-provided subdomain with TLS
+{: #istio_expose_bookinfo_tls}
+
+When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo-gateway` is created for you. The gateway uses Istio virtual service and destination rules to configure a load balancer, `istio-ingressgateway`, that publicly exposes the BookInfo app. In the following steps, you create a subdomain for the `istio-ingressgateway` load balancer IP address in classic clusters or the hostname in VPC clusters through which you can publicly access BookInfo. You also use the SSL certificate to enable HTTPS connections to the BookInfo app.
+{: shortdesc}
+
+1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
+  * Classic:
+    ```
+    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+  * VPC Gen 1:
+    ```
+    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+
+2. Verify that the subdomain is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
+  ```
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output for classic clusters:
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+  Example output for VPC clusters:
+  ```
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+3. Configure the `istio-ingressgateway` load balancer to use TLS termination.
+
+  1. Retrieve the YAML file of the SSL secret and save it to a `mysecret.yaml` file on your local machine.
+    ```
+    kubectl get secret <secret_name> --namespace default --export -o yaml > mysecret.yaml
+    ```
+    {: pre}
+
+  2. In the `mysecret.yaml` file, change the value of `name:` to `istio-ingressgateway-certs` and save the file.
+
+  3. Apply the modified secret to the `istio-system` namespace in your cluster.
+    ```
+    kubectl apply -f ./mysecret.yaml -n istio-system
+    ```
+    {: pre}
+
+  4. Restart the `istio-ingressgateway` pods so that the pods use the secret and are configured for TLS termination.
+    ```
+    kubectl delete pod -n istio-system -l istio=ingressgateway
+    ```
+    {: pre}
+
+4. Configure the `bookinfo-gateway` to use TLS termination.
+  1. Delete the existing `bookinfo-gateway`, which is not configured to handle TLS connections.
+    ```
+    kubectl delete gateway bookinfo-gateway
+    ```
+    {: pre}
+
+  2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`.
+     ```
+     apiVersion: networking.istio.io/v1alpha3
+     kind: Gateway
+     metadata:
+       name: bookinfo-gateway
+     spec:
+       selector:
+         istio: ingressgateway
+       servers:
+       - port:
+           number: 443
+           name: https
+           protocol: HTTPS
+         tls:
+           mode: SIMPLE
+           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+           privateKey: /etc/istio/ingressgateway-certs/tls.key
+         hosts:
+         - "*"
+      ```
+      {: codeblock}
+
+  3. Create the new `bookinfo-gateway` in your cluster.
+    ```
+    kubectl apply -f bookinfo-gateway.yaml
+    ```
+    {: pre}
+
+5. In a web browser, open the BookInfo product page. Ensure that you use HTTPS for the subdomain that you found in step 2.
   ```
   https://<subdomain>/productpage
   ```
   {: codeblock}
 
-4. Try refreshing the page several times. The requests to `https://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
+6. Try refreshing the page several times. The requests to `https://<subdomain>/productpage` are received by the Istio gateway load balancer. The different versions of the `reviews` microservice are still returned randomly because the Istio gateway manages the virtual service and destination routing rules for microservices.
 
 ### Understanding what happened
 {: #istio_bookinfo_understanding}
@@ -714,7 +823,7 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-11. Restart the Istio ingress pods so that the pods use the secret and are configured for TLS termination.
+11. Restart the `istio-ingressgateway` pods so that the pods use the secret and are configured for TLS termination.
   ```
   kubectl delete pod -n istio-system -l istio=ingressgateway
   ```

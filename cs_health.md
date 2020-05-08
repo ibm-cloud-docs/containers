@@ -63,10 +63,6 @@ You can choose your logging solution based on which cluster components you need 
 <dt>{{site.data.keyword.cos_full_notm}}</dt>
 <dd>To collect, forward, and view logs for your cluster's Kubernetes master, you can take a snapshot of your master logs at any point in time to collect in an {{site.data.keyword.cos_full_notm}} bucket. The snapshot includes anything that is sent through the API server, such as pod scheduling, deployments, or RBAC policies. To get started, see [Collecting master logs](#collect_master).</dd>
 
-<dt>Third-party services or configure your own logging</dt>
-<dd>If you have special requirements, you can set up your own logging solution. Check out third-party logging services that you can add to your cluster in [Logging and monitoring integrations](/docs/containers?topic=containers-supported_integrations#health_services). To check the logs of an individual Kubernetes pod or other resource, you can run `kubectl logs <resource_name>`. By default, logs are stored in `/var/log` for the namespace. For example, you can collect container logs from the `/var/log/pods/` path. You might write a script to export logs to a persistent storage device that you can use to analyze with your own logging solution.<p class="important">To check the logs for individual app pods, run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard.</p></dd>
-</dd>
-
 </dl>
 
 <br />
@@ -814,9 +810,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 Metrics help you monitor the health and performance of your clusters. You can use the standard Kubernetes and container runtime features to monitor the health of your clusters and apps.
 {: shortdesc}
 
-Monitoring of cluster metrics is supported only for standard clusters.
-{: note}
-
 Every Kubernetes master is continuously monitored by IBM. {{site.data.keyword.containerlong_notm}} automatically scans every node where the Kubernetes master is deployed for vulnerabilities that are found in Kubernetes and OS-specific security fixes. If vulnerabilities are found, {{site.data.keyword.containerlong_notm}} automatically applies fixes and resolves vulnerabilities on behalf of the user to ensure master node protection. You are responsible for monitoring and analyzing the logs for the rest of your cluster components.
 
 To avoid conflicts when using metrics services, be sure that clusters across resource groups and regions have unique names.
@@ -828,9 +821,6 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
-
-  <dt>Third-party services</dt>
-  <dd>You can configure other tools for more monitoring capabilities, such as Prometheus. Prometheus is an open source monitoring, logging, and alerting tool that was designed for Kubernetes. The tool retrieves detailed information about the cluster, worker nodes, and deployment health based on the Kubernetes logging information. For more information about the setup, see the [CoreOS instructions ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/coreos/prometheus-operator/tree/master/contrib/kube-prometheus).</dd>
 
 </dl>
 
