@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-09"
+lastupdated: "2020-05-11"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -44,31 +44,26 @@ The cluster DNS provider is [CoreDNS](https://coredns.io/){: external}, which is
 ## Autoscaling the cluster DNS provider
 {: #dns_autoscale}
 
-By default, CoreDNS includes a deployment to autoscale the DNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the DNS autoscaler parameters by editing the DNS autoscaling configmap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of DNS pods to support the app. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external}.
+By default, CoreDNS includes a deployment to autoscale the CoreDNS pods in response to the number of worker nodes and cores within the cluster. You can fine-tune the CoreDNS autoscaler parameters by editing the CoreDNS autoscaling configmap. For example, if your apps heavily use the cluster DNS provider, you might need to increase the minimum number of CoreDNS pods to support the app. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/){: external}.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  Verify that the CoreDNS deployment is available. In your CLI output, verify that one deployment is **AVAILABLE**.
+1.  Verify that the CoreDNS autoscaler deployment is available. In your CLI output, verify that one deployment is **AVAILABLE**.
     ```
-    kubectl get deployment -n kube-system | grep dns-autoscaler
+    kubectl get deployment -n kube-system coredns-autoscaler
     ```
     {: pre}
 
     Example output:
     ```
-    NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    coredns-autoscaler     1         1         1            1           32d
+    NAME                 READY   UP-TO-DATE   AVAILABLE   AGE
+    coredns-autoscaler   1/1     1            1           69d
     ```
     {: screen}
-2.  Get the name of the configmap for the DNS autoscaler parameters.
+2.  Edit the default settings for the CoreDNS autoscaler. Look for the `data.linear` field, which defaults to one CoreDNS pod per 16 worker nodes or 256 cores, with a minimum of two CoreDNS pods regardless of cluster size (`preventSinglePointFailure: true`). For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/#tuning-autoscaling-parameters){: external}.
     ```
-    kubectl get configmap -n kube-system
-    ```
-    {: pre}
-3.  Edit the default settings for the DNS autoscaler. Look for the `data.linear` field, which defaults to one DNS pod per 16 worker nodes or 256 cores, with a minimum of two DNS pods regardless of cluster size (`preventSinglePointFailure: true`). For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-horizontal-autoscaling/#tuning-autoscaling-parameters){: external}.
-    ```
-    kubectl edit configmap -n kube-system <dns-autoscaler>
+    kubectl edit configmap -n kube-system coredns-autoscaler
     ```
     {: pre}
 
@@ -86,21 +81,21 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Customizing the cluster DNS provider
 {: #dns_customize}
 
-You can customize CoreDNS by editing the DNS configmap. For example, you might want to configure `stubdomains` and upstream nameservers to resolve services that point to external hosts. Additionally, you can configure multiple [Corefiles](https://coredns.io/2017/07/23/corefile-explained/){: external} within the CoreDNS configmap. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
+You can customize CoreDNS by editing the CoreDNS configmap. For example, you might want to configure `stubdomains` and upstream nameservers to resolve services that point to external hosts. Additionally, you can configure multiple [Corefiles](https://coredns.io/2017/07/23/corefile-explained/){: external} within the CoreDNS configmap. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1.  Verify that the CoreDNS deployment is available. In your CLI output, verify that one deployment is **AVAILABLE**.
     ```
-    kubectl get deployment -n kube-system | grep dns-autoscaler
+    kubectl get deployment -n kube-system coredns
     ```
     {: pre}
 
     Example output:
     ```
-    NAME                   DESIRED   CURRENT   UP-TO-DATE   AVAILABLE   AGE
-    coredns-autoscaler     1         1         1            1           32d
+    NAME      READY   UP-TO-DATE   AVAILABLE   AGE
+    coredns   3/3     3            3           69d
     ```
     {: screen}
 2.  Edit the default settings for the CoreDNS configmap. Use a Corefile in the `data` section of the configmap to customize `stubdomains` and upstream nameservers. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
@@ -199,21 +194,24 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 <br />
 
 
-## Setting up NodeLocal DNS cache (beta)
+## Setting up NodeLocal DNS cache
 {: #dns_cache}
 
-Set up the `NodeLocal` DNS caching agent on select worker nodes for improved cluster DNS performance in your {{site.data.keyword.containerlong_notm}} cluster. For more information, see the [Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/){: external}.
+Set up the `NodeLocal` DNS caching agent on select worker nodes for improved cluster DNS performance and availability in your {{site.data.keyword.containerlong_notm}} cluster. For more information, see the [Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/){: external}.
 {: shortdesc}
 
-By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable this beta feature on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. Additionally, in clusters that run Kubernetes 1.17 or later, the DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
+By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable `NodeLocal` DNS caching on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. Additionally, in clusters that run Kubernetes 1.17 or later, the DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
 
-`NodeLocal` DNS cache is a beta feature that is subject to change, and available only for select Kubernetes versions that depend on your cluster infrastructure provider.
+Do not enable `NodeLocal` DNS cache when you already use [zone-aware DNS](#dns_zone_aware) in your cluster.
+{: important}
+
+`NodeLocal` DNS cache is generally available in clusters that run Kubernetes 1.18 or later, but still disabled by default. In previous versions, the feature is beta and available only for select Kubernetes versions that depend on your cluster infrastructure provider.
 {: preview}
 
 * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: Kubernetes version 1.15 or later is required.
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Kubernetes version 1.17 or later is required.
 
-### Enable NodeLocal DNS cache (beta)
+### Enable NodeLocal DNS cache
 {: #dns_enablecache}
 
 Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes cluster.
@@ -222,7 +220,7 @@ Enable `NodeLocal` DNS cache for one or more worker nodes in your Kubernetes clu
 The following steps update DNS pods that run on particular worker nodes. You can also [label the worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future nodes inherit the label.
 {: note}
 
-**Before you begin**: Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this beta feature, such as policies that rely on pod or namespace selectors for DNS egress.
+**Before you begin**: Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by this feature, such as policies that rely on pod or namespace selectors for DNS egress.
   ```
   kubectl get networkpolicy --all-namespaces -o yaml
   ```
@@ -238,6 +236,13 @@ The following steps update DNS pods that run on particular worker nodes. You can
    ```
    {: pre}
 3. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
+   **To label all worker nodes in the cluster**:
+   ```
+   kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
+   ```
+   {: pre}
+
+   **To label an individual worker node**:
    ```
    kubectl label node <node_name> --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
    ```
@@ -251,7 +256,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.15.1+IKS   true
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.16.1+IKS   true
       ```
       {: screen}
    2. Verify that the DNS caching agent pod is running on the worker node.
@@ -290,10 +295,10 @@ The following steps update DNS pods that run on particular worker nodes. You can
       {: pre}
 5. Repeat the previous steps for each worker node to enable DNS caching.
 
-### Disable NodeLocal DNS cache (beta)
+### Disable NodeLocal DNS cache
 {: #dns_disablecache}
 
-You can disable the beta feature for one or more worker nodes.
+You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 {: shortdesc}
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -303,6 +308,14 @@ You can disable the beta feature for one or more worker nodes.
    ```
    {: pre}
 3. Remove the `ibm-cloud.kubernetes.io/node-local-dns-enabled` label from the worker node. This action terminates the DNS caching agent pod on the worker node.
+
+   **To remove the label from all worker nodes in the cluster**:
+   ```
+   kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled-"
+   ```
+   {: pre}
+
+   **To remove the label from an individual worker node**:
    ```
    kubectl label node <node_name> "ibm-cloud.kubernetes.io/node-local-dns-enabled-"
    ```
@@ -316,7 +329,7 @@ You can disable the beta feature for one or more worker nodes.
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.15.1+IKS   
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.16.1+IKS   
       ```
       {: screen}
    2. Verify that the pod is no longer running on the node where DNS cache is disabled. The output shows no pods.
@@ -330,9 +343,153 @@ You can disable the beta feature for one or more worker nodes.
       No resources found.
       ```
       {: screen}
-4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Reload the worker node. After the worker node has been reloaded, pods that run on the node won't use the local DNS cache. Instead, the pods revert to the same behavior that they had before you enabled the beta feature. The worker node is also made available for pod scheduling.
+4. **Classic clusters, Kubernetes version 1.15 or 1.16 only**: Reload the worker node. After the worker node has been reloaded, pods that run on the node won't use the local DNS cache. Instead, the pods revert to the same behavior that they had before you enabled the feature. The worker node is also made available for pod scheduling.
    ```
    ibmcloud ks ks worker reload --cluster <cluster_name_or_id> --worker <worker_id>
    ```
    {: pre}
 5.  Repeat the previous steps for each worker node to disable DNS caching.
+
+<br />
+
+
+## Setting up zone-aware DNS (beta)
+{: #dns_zone_aware}
+
+Set up zone-aware DNS for improved cluster DNS performance and availability in your [multizone {{site.data.keyword.containerlong_notm}} cluster](https://cloud.ibm.com/docs/containers?topic=containers-ha_clusters#multizone). This setup extends [`NodeLocal` DNS cache](#dns_cache) to prefer cluster DNS traffic within the same zone.
+{: shortdesc}
+
+By default, your cluster is set up with cluster-wide DNS resources, not zone-aware DNS resources. Even after you set up zone-aware DNS, the cluster-wide DNS resources remain running as a backup DNS. Your zone-aware DNS resources are separate from the cluster-wide DNS, and changing zone-aware DNS does not impact the cluster-wide DNS.
+
+Do not enable [`NodeLocal` DNS cache](#dns_cache) when you use zone-aware DNS in your cluster.
+{: important}
+
+Zone-aware DNS is a beta feature that is subject to change, and available only for clusters that run Kubernetes versions 1.18 and later.
+{: preview}
+
+### Deploying and enabling zone-aware DNS
+{: #dns_zone_aware_deploy}
+
+To use zone-aware DNS, you must first deploy zone-aware DNS resources in your multizone cluster. Then, you can enable zone-aware DNS in each zone.
+{: shortdesc}
+
+**Before you begin:** Update any [DNS egress network policies](https://github.com/kubernetes/kubernetes/tree/master/cluster/addons/dns/nodelocaldns#network-policy-and-dns-connectivity){: external} that are impacted by zone-aware DNS, such as policies that rely on pod or namespace selectors for DNS egress.
+
+```
+kubectl get networkpolicy --all-namespaces -o yaml
+```
+{: pre}
+
+**Step 1: Deploy zone-aware DNS resources:**
+
+1.  Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` configmap in the `kube-system` namespace. 
+    ```
+    kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true"
+    ```
+    {: pre}
+2.  [Refresh the cluster master](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) to the deploy zone-aware DNS resources.
+    ```
+    ibmcloud ks master refresh -c <cluster_name_or_ID>
+    ```
+    {: pre}
+3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
+    ```
+    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ```
+    {: pre}
+
+**Step 2: Enable zone-aware DNS:**
+
+1.  Set an environment variable for the zones of the cluster.
+    ```
+    ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
+    ```
+    {: pre}
+2.  Start the CoreDNS and CoreDNS autoscaler pods in all zones.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl scale deployment -n kube-system "coredns-autoscaler-${ZONE}" --replicas=1
+    done
+    ```
+    {: pre}
+3.  Verify that the CoreDNS and CoreDNS autoscaler pods are running in all zones.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl get pods -n kube-system -l "k8s-app=coredns-autoscaler-${ZONE}" -o wide
+        kubectl get pods -n kube-system -l "k8s-app=coredns-${ZONE}" -o wide
+    done
+    ```
+    {: pre}
+4.  Start the `NodeLocal` DNS cache pods on all workers nodes.
+    ```
+    kubectl label nodes --all --overwrite "ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true"
+    ```
+    {: pre}
+5.  Verify that the `NodeLocal` DNS cache pods are running on all workers nodes.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl get pods -n kube-system -l "k8s-app=node-local-dns-${ZONE}" -o wide
+    done
+    ```
+    {: pre}
+6.  [Label your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels) so that future worker nodes inherit the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` label.
+
+
+### Disabling and deleting zone-aware DNS
+{: #dns_zone_aware_delete}
+
+To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of your multizone cluster. Then, delete the zone-aware DNS resources.
+{: shortdesc}
+
+**Step 1: Disable zone-aware DNS:**
+
+1.  Remove the `ibm-cloud.kubernetes.io/zone-aware-dns-enabled=true` [label from your worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
+2.  Set an environment variable for the zones in the cluster.
+    ```
+    ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
+    ```
+    {: pre}
+3.  Stop the `NodeLocal` DNS cache pods on all worker nodes.
+    ```
+    kubectl label nodes --all --overwrite "ibm-cloud.kubernetes.io/zone-aware-dns-enabled-"
+    ```
+    {: pre}
+4.  Stop the CoreDNS autoscaler pods in all zones.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl scale deployment -n kube-system "coredns-autoscaler-${ZONE}" --replicas=0
+    done
+    ```
+    {: pre}
+5.  Verify that the CoreDNS autoscaler pods are no longer running in all zones.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl get pods -n kube-system -l "k8s-app=coredns-autoscaler-${ZONE}"
+    done
+    ```
+    {: pre}
+6.  Stop the CoreDNS pods in all zones.
+    ```
+    for ZONE in ${ZONES}; do
+        kubectl scale deployment -n kube-system "coredns-${ZONE}" --replicas=0
+    done
+    ```
+    {: pre}
+
+**Step 2: Delete zone-aware DNS resources:**
+
+1.  Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` configmap in the `kube-system` namespace. 
+    ```
+    kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns-"
+    ```
+    {: pre}
+2.  [Refresh the cluster master](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
+    ```
+    ibmcloud ks cluster master refresh --cluster <cluster-name-or-id>
+    ```
+    {: pre}
+3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
+    ```
+    ibmcloud ks cluster get -c <cluster_name_or_ID>
+    ```
+    {: pre}
