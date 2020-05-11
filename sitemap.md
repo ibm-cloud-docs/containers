@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-07"
+lastupdated: "2020-05-11"
 
 keywords: containers
 subcollection: containers
@@ -626,9 +626,12 @@ subcollection: containers
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
 * [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
-* [Setting up NodeLocal DNS cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_cache)
-  * [Enable NodeLocal DNS cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
-  * [Disable NodeLocal DNS cache (beta)](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
+  * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
+  * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+* [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+  * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+  * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
 ## Logging and monitoring cluster health
@@ -1276,6 +1279,10 @@ subcollection: containers
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
+* [Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
+  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#118_after_worker)
 * [Version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117)
   * [Update before master](/docs/containers?topic=containers-cs_versions#117_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#117_after)
@@ -1284,11 +1291,11 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#116_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#116_after)
   * [Preparing private network policies](/docs/containers?topic=containers-cs_versions#116_networkpolicies)
-* [Version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115)
+* [Deprecated: Version 1.15](/docs/containers?topic=containers-cs_versions#cs_v115)
   * [Update before master](/docs/containers?topic=containers-cs_versions#115_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#115_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#115_after_worker)
-* [Version 1.14](/docs/containers?topic=containers-cs_versions#cs_v114)
+* [Deprecated: Version 1.14](/docs/containers?topic=containers-cs_versions#cs_v114)
   * [Update before master](/docs/containers?topic=containers-cs_versions#114_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#114_after)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
@@ -1303,7 +1310,10 @@ subcollection: containers
 
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
   * [Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020](/docs/containers?topic=containers-changelog#1175_1523)
   * [Changelog for master fix pack 1.17.5_1522, released 23 April 2020](/docs/containers?topic=containers-changelog#1175_1522)
   * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog#1174_1521_master)
@@ -1314,6 +1324,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020](/docs/containers?topic=containers-changelog#1169_1531)
   * [Changelog for worker node fix pack 1.16.9_1530, released 27 April 2020](/docs/containers?topic=containers-changelog#1169_1530)
   * [Changelog for master fix pack 1.16.9_1529, released 23 April 2020](/docs/containers?topic=containers-changelog#1169_1529)
   * [Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020](/docs/containers?topic=containers-changelog#1168_1528)
@@ -1330,7 +1341,8 @@ subcollection: containers
   * [Changelog for master fix pack 1.16.3_1518, released 21 November 2019](/docs/containers?topic=containers-changelog#1163_1518)
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
-* [Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+* [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020](/docs/containers?topic=containers-changelog#11511_1538)
   * [Changelog for worker node fix pack 1.15.11_1537, released 27 April 2020](/docs/containers?topic=containers-changelog#11511_1537)
   * [Changelog for master fix pack 1.15.11_1536, released 23 April 2020](/docs/containers?topic=containers-changelog#11511_1536)
   * [Changelog for worker node fix pack 1.15.11_1535, released 13 April 2020](/docs/containers?topic=containers-changelog#11511_1535)
@@ -1358,6 +1370,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.15.2_1513, released 15 August 2019](/docs/containers?topic=containers-changelog#1152_1513)
   * [Changelog for 1.15.1_1511, released 5 August 2019](/docs/containers?topic=containers-changelog#1151_1511)
 * [Deprecated: Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
+  * [Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020](/docs/containers?topic=containers-changelog#11410_1554)
   * [Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020](/docs/containers?topic=containers-changelog#11410_1553)
   * [Changelog for master fix pack 1.14.10_1552, released 23 April 2020](/docs/containers?topic=containers-changelog#11410_1552)
   * [Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020](/docs/containers?topic=containers-changelog#11410_1551)

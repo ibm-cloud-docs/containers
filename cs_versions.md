@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-05-11"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -76,12 +76,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.17.5
+*   Latest: 1.18.2
 *   Default: 1.16.9
-*   Other: 1.15.11
+*   Other: 1.17.5
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.14
+*   Deprecated: 1.15, 1.14
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13
 
 <br>
@@ -126,6 +126,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 </tr>
 </thead>
 <tbody>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.18](#cs_v118)</td>
+  <td>11 May 2020</td>
+  <td>May 2021 `†`</td>
+</tr>
   <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.17](#cs_v117)</td>
@@ -139,10 +145,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>Nov 2020 `†`</td>
 </tr>
   <tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.15](#cs_v115)</td>
   <td>05 Aug 2019</td>
-  <td>Aug 2020 `†`</td>
+  <td>29 Aug 2020 `†`</td>
 </tr>
 <tr>
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
@@ -240,11 +246,63 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG) and [IBM version](/docs/containers?topic=containers-changelog){: external} changelogs.
 {: shortdesc}
 
+-  Version 1.18 [preparation actions](#cs_v118).
 -  Version 1.17 [preparation actions](#cs_v117).
 -  Version 1.16 [preparation actions](#cs_v116).
--  Version 1.15 [preparation actions](#cs_v115).
+-  **Deprecated**: Version 1.15 [preparation actions](#cs_v115).
 -  **Deprecated**: Version 1.14 [preparation actions](#cs_v114).
 -  [Archive](#k8s_version_archive) of unsupported versions.
+
+<br />
+
+
+## Version 1.18
+{: #cs_v118}
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.18.
+{: shortdesc}
+
+### Update before master
+{: #118_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported:** Select `kubelet` metrics | The following `kubelet` metrics that were available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated kubelet metrics](https://kubernetes.io/docs/setup/release/notes/#client-go){: external}, change to use the available replacement metric: `kubelet_cgroup_manager_latency_microseconds`, `kubelet_cgroup_manager_latency_microseconds_count`, `kubelet_cgroup_manager_latency_microseconds_sum`, `kubelet_pleg_relist_interval_microseconds`, `kubelet_pleg_relist_interval_microseconds_count`, `kubelet_pleg_relist_interval_microseconds_sum`, `kubelet_pleg_relist_latency_microseconds`, `kubelet_pleg_relist_latency_microseconds_count`, `kubelet_pleg_relist_latency_microseconds_sum`, `kubelet_pod_start_latency_microseconds`, `kubelet_pod_start_latency_microseconds_count`, `kubelet_pod_start_latency_microseconds_sum`, `kubelet_pod_worker_latency_microseconds`, `kubelet_pod_worker_latency_microseconds_count`, `kubelet_pod_worker_latency_microseconds_sum`, `kubelet_pod_worker_start_latency_microseconds`, `kubelet_pod_worker_start_latency_microseconds_count`, `kubelet_pod_worker_start_latency_microseconds_sum`, `kubelet_runtime_operations`, `kubelet_runtime_operations_errors`, `kubelet_runtime_operations_latency_microseconds`, `kubelet_runtime_operations_latency_microseconds_count`, `kubelet_runtime_operations_latency_microseconds_sum` |
+| **Unsupported:** Kubernetes API `batch/v2alpha1` | Kubernetes API `batch/v2alpha1` is no longer supported. If your apps rely on this API, update them to use `batch/v1beta1` instead. |
+{: caption="Changes to make before you update the master to Kubernetes 1.18" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after master
+{: #118_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| Registry image pull secret includes all domains | Previously, separate image pull secrets were created for each regional, public `icr.io` registry domain to enable your cluster to [pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-registry#cluster_registry_auth). Now, all the public and private `icr.io` registry domains for all regions are stored in a single `all-icr-io` image pull secret that is automatically created in the `default` namespace. Update your apps to use the new single `all-icr-io` image pull secret. |
+| `kubectl diff` return code | The [`kubectl diff` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#diff){: external} now returns `0` when no differences are found, `1` when differences are found, and greater than `1` when an error occurs. If your scripts rely on the previous return code behavior, update them. |
+| `kubectl get` includes `managedFields` | The [Server Side Apply](https://kubernetes.io/docs/reference/using-api/api-concepts/#server-side-apply){: external} feature adds the `managedFields` field that is part of a resource's `metadata`.  If your scripts use `grep`, `awk`, or similar commands to parse the output of the `kubectl get` command, update your scripts to handle the addition of `managedFields`. For example, you might select fields by using the `kubectl get <resource> -o jsonpath` command or by using the [`jq` package](https://stedolan.github.io/jq/){: external} to parse the JSON output from the `kubectl get <resource> -o json` command. |
+| **Unsupported:** `kubectl rolling-update` | The `kubectl rolling-update` command is removed. If your scripts rely on this command, update them to use the [`kubectl rollout` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#rollout){: external} instead. |
+| **Unsupported:** `kubectl run` removed deprecated flags | The [`kubectl run` command](https://kubernetes.io/docs/reference/generated/kubectl/kubectl-commands#run){: external} removed deprecated flags that are not used to create pods. If your scripts use `kubectl run` to create resources other than pods, such as deployments, update them to use the `kubectl create` or `kubectl apply` commands instead. |
+| Kubernetes `Go` client updates | The Kubernetes `Go` client, `k8s.io/client-go` version 0.18.0 and later, is updated.  Signatures on methods in generated `clientsets`, `dynamic`, `metadata`, and `scale` clients are modified to accept `context.Context` as a first argument. Signatures of `Create`, `Update`, and `Patch` methods are updated to accept `CreateOptions`, `UpdateOptions` and `PatchOptions` respectively. Signatures of `Delete` and `DeleteCollection` methods now accept `DeleteOptions` by value instead of by reference. Generated `clientsets` with the previous interface are added in new `deprecated` packages to allow incremental migration to the new APIs. The `deprecated` packages are scheduled to be removed in the Kubernetes version 1.21 release. For help to rewrite method invocations with the new signatures, try the [`clientgofix` tool](http://sigs.k8s.io/clientgofix){: external}. |
+{: caption="Changes to make after you update the master to Kubernetes 1.18" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after worker nodes
+{: #118_after_worker}
+
+The following table shows the actions that you must take after you update your worker nodes.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| Format of the `CPUManager` state file | The format of the [`CPUManager`](https://kubernetes.io/docs/tasks/administer-cluster/cpu-management-policies/){: external} state file is changed. Update any tools that rely on previous format. |
+{: caption="Changes to make after you update the worker nodes to Kubernetes 1.18" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 <br />
 
@@ -384,13 +442,16 @@ To determine whether you must change your policies:
 <br />
 
 
-## Version 1.15
+## Deprecated: Version 1.15
 {: #cs_v115}
 
 <p><img src="images/certified_kubernetes_1x15.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.15 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.15 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.15.
 {: shortdesc}
+
+Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
+{: deprecated}
 
 ### Update before master
 {: #115_before}
@@ -473,7 +534,7 @@ The following table shows the actions that you must take after you update your w
 <br />
 
 
-## Version 1.14
+## Deprecated: Version 1.14
 {: #cs_v114}
 
 <p><img src="images/certified_kubernetes_1x14.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.14 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.14 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
