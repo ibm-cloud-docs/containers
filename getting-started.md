@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-12"
 
 keywords: kubernetes, iks, containers
 
@@ -132,9 +132,9 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
-1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
-2.  Select the **Free** cluster option, and give your cluster a unique name.
-3.  Click **Create Cluster**. A worker pool is created that contains one worker node.   
+1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service**. A cluster configuration page opens.
+2.  From the plan dropdown, select the **Free** cluster option, and give your cluster a unique name, such as `mycluster-free`.
+3.  Review the summary, and click **Create**. A worker pool is created that contains one worker node in the default resource group.
 <br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
@@ -153,16 +153,19 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 
 1. [Create a Virtual Private Cloud (VPC) on generation 1 compute](https://cloud.ibm.com/vpc/provision/vpc){: external} with a subnet that is located in the zone where you want to create the cluster. Make sure to attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.<p class="tip">Make sure that the banner at the beginning of the new VPC page is set to **Gen 1 compute**. If **Gen 2 compute** is set, click **Switch to Gen 1 compute**.</p>
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
-3. Configure your cluster environment.
-   1. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.16.9 or later**.
-   2. Select **VPC infrastructure**.
-   3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
-   4. Fill out the cluster name and resource group.
-   5. For the **Location**, select the zone for which you created a VPC subnet earlier.
-4. Select the **2 vCPUs 4GB RAM** worker node flavor.
-5. For the number of worker nodes, enter **1**.
-6. Review the order summary to verify the estimated costs for your cluster.
-7. Click **Create cluster**.
+3. Configure your VPC environment.
+   1. Select the **Standard** plan.
+   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.16.9 or later**.
+   3. Select **VPC** for the infrastructure.
+   4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
+4.  Configure the **Location** details for your cluster.
+    1. Select the **Resource group** that you want to create your cluster in. You cannot change the resource group later. If you do not select a resource group, your cluster is created in the default resource group.
+    2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
+5.  Configure your **Worker pool** setup.
+    1.  If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.
+    2.  Set how many worker nodes to create per zone, such as **1**.
+6.  Review the rest of the cluster details, such as the service endpoint, cluster name, and tags.
+7.  Review the **Summary**, then click **Create**.
 <br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
