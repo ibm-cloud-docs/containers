@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-12"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -236,6 +236,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
    ```
    {: pre}
 3. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
+   
    **To label all worker nodes in the cluster**:
    ```
    kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
@@ -389,7 +390,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
     {: pre}
 2.  [Refresh the cluster master](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) to the deploy zone-aware DNS resources.
     ```
-    ibmcloud ks master refresh -c <cluster_name_or_ID>
+    ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
     ```
     {: pre}
 3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
