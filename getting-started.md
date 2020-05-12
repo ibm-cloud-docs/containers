@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-12"
 
 keywords: kubernetes, iks, containers
 
@@ -135,6 +135,7 @@ Set up your free classic cluster with one worker node by using the {{site.data.k
 1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
 2.  Select the **Free** cluster option, and give your cluster a unique name.
 3.  Click **Create Cluster**. A worker pool is created that contains one worker node.   
+
 <br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
@@ -163,6 +164,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 5. For the number of worker nodes, enter **1**.
 6. Review the order summary to verify the estimated costs for your cluster.
 7. Click **Create cluster**.
+
 <br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
