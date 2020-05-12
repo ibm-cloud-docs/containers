@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-24"
+lastupdated: "2020-05-12"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -125,7 +125,7 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 
 3. Identify the cluster namespace that you want to use to add your service.
    ```
-   {[kubect]} get namespaces
+   kubectl get namespaces
    ```
    {: pre}
 
@@ -154,7 +154,7 @@ To add an {{site.data.keyword.cloud_notm}} service to your cluster:
 5. Verify the service credentials in your Kubernetes secret.
    1. Get the details of the secret and note the **binding** value. The **binding** value is base64 encoded and holds the credentials for your service instance in JSON format.
       ```
-      {[kubect]} get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+      kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
       ```
       {: pre}
 
@@ -219,7 +219,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 
 1.  List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
     ```
-    {[kubect]} get secrets
+    kubectl get secrets
     ```
     {: pre}
 
@@ -288,13 +288,13 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 
 3.  Create the pod and mount the secret as a volume.
     ```
-    {[kubect]} apply -f secret-test.yaml
+    kubectl apply -f secret-test.yaml
     ```
     {: pre}
 
 4.  Verify that the pod is created.
     ```
-    {[kubect]} get pods
+    kubectl get pods
     ```
     {: pre}
 
@@ -309,7 +309,7 @@ When you mount the secret as a volume to your pod, a file that is named `binding
 5.  Access the service credentials.
     1. Log in to your pod.
        ```
-       {[kubect]} exec <pod_name> -it bash
+       kubectl exec <pod_name> -it bash
        ```
        {: pre}
 
@@ -349,7 +349,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 1. List available secrets in your cluster and note the **name** of your secret. Look for a secret of type **Opaque**. If multiple secrets exist, contact your cluster administrator to identify the correct service secret.
    ```
-   {[kubect]} get secrets
+   kubectl get secrets
    ```
    {: pre}
 
@@ -362,7 +362,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 2. Get the details of your secret to find potential key value pairs that you can reference as environment variables in your pod. The service credentials are stored in the `binding` key of your secret.
    ```
-   {[kubect]} get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
+   kubectl get secrets binding-<service_instance_name> --namespace=<namespace> -o yaml
    ```
    {: pre}
 
@@ -438,13 +438,13 @@ You can add the service credentials and other key value pairs from your Kubernet
 
 4. Create the pod that references the `binding` key of your secret as an environment variable.
    ```
-   {[kubect]} apply -f secret-test.yaml
+   kubectl apply -f secret-test.yaml
    ```
    {: pre}
 
 5. Verify that the pod is created.
    ```
-   {[kubect]} get pods
+   kubectl get pods
    ```
    {: pre}
 
@@ -458,7 +458,7 @@ You can add the service credentials and other key value pairs from your Kubernet
 6. Verify that the environment variable is set correctly.
    1. Log in to your pod.
       ```
-      {[kubect]} exec <pod_name> -it bash
+      kubectl exec <pod_name> -it bash
       ```
       {: pre}
 
@@ -524,7 +524,7 @@ If you do not want to use an {{site.data.keyword.cloud_notm}} service that you b
 
 2. List the Kubernetes secrets in the namespace that your service is bound to and look for the secret with a name that follows the `binding-<service_name>` format.
    ```
-   {[kubect]} get secrets -n <namespace> | grep Opaque
+   kubectl get secrets -n <namespace> | grep Opaque
    ```
    {: pre}
 
@@ -536,7 +536,7 @@ If you do not want to use an {{site.data.keyword.cloud_notm}} service that you b
 
 3. Retrieve all the pods that access the secret.
    ```
-   {[kubect]} get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.secret.secretName}{" "}{end}{end}' | grep "<secret_name>"
+   kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.secret.secretName}{" "}{end}{end}' | grep "<secret_name>"
    ```
    {: pre}
 
@@ -545,59 +545,59 @@ If you do not want to use an {{site.data.keyword.cloud_notm}} service that you b
 4. If you have pods that mount the secret, either remove the pod or the deployment that manages the pod, or update the pod and deployment YAML to use a different secret instead.
    - **To remove a pod or deployment**:
      ```
-     {[kubect]} delete pod <pod_name> -n <namespace>
+     kubectl delete pod <pod_name> -n <namespace>
      ```
      {: pre}
 
      ```
-     {[kubect]} delete deployment <deployment_name> -n <namespace>
+     kubectl delete deployment <deployment_name> -n <namespace>
      ```
      {: pre}
 
    - **To update an existing pod or deployment**:
      1. Get the pod or deployment YAML file.
         ```
-        {[kubect]} get pod <pod_name> -o yaml
+        kubectl get pod <pod_name> -o yaml
         ```
         {: pre}
 
         ```
-        {[kubect]} get deployment <deployment_name> -o yaml
+        kubectl get deployment <deployment_name> -o yaml
         ```
         {: pre}
 
      2. Copy the YAML file and in the `spec.volumes` section, change the name of the secret that you want to use.
      3. Apply the change in your cluster.
         ```
-        {[kubect]} apply -f pod.yaml
+        kubectl apply -f pod.yaml
         ```
         {: pre}
 
         ```
-        {[kubect]} apply -f deployment.yaml
+        kubectl apply -f deployment.yaml
         ```
         {: pre}
 
      4. Verify that a new pod is created with the updated volume specification.
         ```
-        {[kubect]} get pods
+        kubectl get pods
         ```
         {: pre}
 
         ```
-        {[kubect]} describe pod <pod_name>
+        kubectl describe pod <pod_name>
         ```
         {: pre}
 
 5. Remove the secret.
    ```
-   {[kubect]} delete secret <secret_name> -n <namespace>
+   kubectl delete secret <secret_name> -n <namespace>
    ```
    {: pre}
 
 6. Verify that your secret is removed.
    ```
-   {[kubect]} get secrets -n <namespace>
+   kubectl get secrets -n <namespace>
    ```
    {: pre}
 
