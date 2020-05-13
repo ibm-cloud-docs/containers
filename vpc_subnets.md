@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-13"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -304,7 +304,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
   ```
   {: screen}
 
-6. In the deployment file for your app, [add an affinity rule](https://kubernetes.io/docs/concepts/configuration/assign-pod-node/#node-affinity-beta-feature){: external} for the subnet ID label that you found in step 4.
+6. In the deployment file for your app, [add an affinity rule](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} for the subnet ID label that you found in step 4.
 
     In the **affinity** section of this example YAML, `ibm-cloud.kubernetes.io/subnet-id` is the `key` and `<subnet_ID>` is the `value`.
     ```yaml

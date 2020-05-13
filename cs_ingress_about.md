@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-05-12"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,6 +38,8 @@ subcollection: containers
 
 Ingress is a Kubernetes service that balances network traffic workloads in your cluster by forwarding public or private requests to your apps. You can use Ingress to expose multiple app services to the public or to a private network by using a unique public or private route.
 {: shortdesc}
+
+In standard clusters, the Ingress application load balancer (ALB) is a layer 7 load balancer which implements the NGINX Ingress controller. A layer 4 `LoadBalancer` service exposes the ALB so that the ALB can receive external requests that come into your cluster. The ALB then routes requests to app pods in your cluster based on distinguishing layer 7 protocol characteristics, such as headers.
 
 ## What are the components of Ingress?
 {: #ingress_components}
@@ -199,6 +201,9 @@ image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a V
 4. The VPC load balancer service routes the request to an ALB. Each ALB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the ALB routes the requests between the app pods in the zone.
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
+
+<br />
+
 
 
 

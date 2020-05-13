@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-07"
+lastupdated: "2020-05-13"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -43,7 +43,6 @@ A Docker image is the basis for every container that you create with {{site.data
 {:shortdesc}
 
 An image is created from a Dockerfile, which is a file that contains instructions to build the image. A Dockerfile might reference build artifacts in its instructions that are stored separately, such as an app, the app's configuration, and its dependencies.
-
 
 ## Deploying containers from an {{site.data.keyword.registrylong_notm}} image to the `default` Kubernetes namespace
 {: #namespace}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-21"
+lastupdated: "2020-05-13"
 
 keywords: kubernetes, iks, help
 
@@ -181,8 +181,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
     Example output:
     ```
     ...
-    imagePullSecrets:<ff-all-icr>
-    - name: all-icr-io</ff-all-icr>
+    imagePullSecrets:
     - name: default-us-icr-io
     - name: default-uk-icr-io
     - name: default-de-icr-io
