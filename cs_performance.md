@@ -248,7 +248,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       NannyConfiguration: |-
         apiVersion: nannyconfig/v1alpha1
         kind: NannyConfiguration
-        memoryPerNode: 5Mi
+        cpuPerNode: 5m
     kind: ConfigMap
     ...
     ```
@@ -356,7 +356,7 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
   {: pre}
 
   Example output:
-  ```
+  ```yaml
   apiVersion: v1
   data:
     ...
