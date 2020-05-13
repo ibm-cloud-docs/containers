@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-05-13"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -1283,7 +1283,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             ```
             {: screen}
 
-After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints](https://kubernetes.io/docs/concepts/configuration/taint-and-toleration/){: external} to prevent deployments from running on these worker nodes.
+After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} to prevent deployments from running on these worker nodes.
 
 <br />
 
