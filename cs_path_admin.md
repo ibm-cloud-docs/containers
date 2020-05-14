@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-10"
+lastupdated: "2020-05-14"
 
 keywords: kubernetes, iks, containers
 
@@ -231,7 +231,6 @@ Review the following optional topics to manage the network connectivity of your 
 
 * **Connections to other networks and workloads**:
   * Set up VPN connectivity between your [classic cluster](/docs/containers?topic=containers-vpn) or [VPC cluster](/docs/containers?topic=containers-vpc-vpnaas) and remote network environments, other VPCs, and more.
-  * Set up VPN connectivity or {{site.data.keyword.BluDirectLink}} to create a [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) between {{site.data.keyword.cloud_notm}} Private and IBM Public Cloud.
 * **Subnets, service endpoints, and VLANs**:
   * Add or change the available subnets and IP addresses for your [classic cluster](/docs/containers?topic=containers-subnets) or [VPC cluster](/docs/containers?topic=containers-vpc-subnets).
   * Change the [service endpoints that your Kubernetes master is accessible through](/docs/containers?topic=containers-cs_network_cluster).
