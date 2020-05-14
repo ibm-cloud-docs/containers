@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-05-14"
 
 keywords: openshift, roks, rhoks, rhos
 
@@ -38,9 +38,6 @@ subcollection: openshift
 
 [Portworx](https://portworx.com/products/portworx-enterprise//){: external} is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
-
-
-
 
 ## About Portworx
 
