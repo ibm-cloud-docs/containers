@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -201,7 +201,7 @@ Before you can run `kubectl` commands:
 To run `kubectl` commands to manage your cluster:
 
 1. Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you must follow different steps to use `kubectl` commands.
-  * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). Note that any pre-existing `kubeconfig` files are not merged automatically.
+  * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). Note that any pre-existing `kubeconfig` files are not merged automatically.
   * **Version 0.4 (deprecated) or earlier**: In CLI plug-in version 0.4 or earlier, `cluster config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.
 
 2.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
@@ -227,7 +227,7 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the first file in the `KUBECONFIG` environment variable.
+6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the last file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
@@ -273,7 +273,7 @@ To set the Kubernetes context for multiple clusters:
     ibmcloud ks cluster ls
     ```
     {: pre}
-2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [first file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
+2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
@@ -519,7 +519,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 1. In the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){:external} menu bar, click the {{site.data.keyword.cloud-shell_short}} icon ![{{site.data.keyword.cloud-shell_notm}} icon](../icons/terminal-cloud-shell.svg).
 2. A session starts and automatically logs you in to the {{site.data.keyword.cloud_notm}} CLI with your current account credentials.
 3. Target your session context to the cluster that you want to work with so that you can manage the cluster with `kubectl` commands.
-  1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+  1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
       ```
       ibmcloud ks cluster config --cluster <cluster_name_or_ID>
       ```

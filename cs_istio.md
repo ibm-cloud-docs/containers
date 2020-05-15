@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -40,9 +40,6 @@ Istio on {{site.data.keyword.containerlong}} provides a seamless installation of
 {: shortdesc}
 
 With one click, you can get all Istio core components and additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
-
-The Istio managed add-on is generally available for Kubernetes version 1.16 and later clusters as of 19 November 2019. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 14 February 2020. In Kubernetes version 1.16 or later clusters, you can [update your add-on to the latest version](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the Istio version 1.4 add-on.
-{: important}
 
 ## Installing the Istio add-on
 {: #istio_install}
@@ -166,6 +163,9 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   export PATH=$PWD/bin:$PATH
   ```
   {: pre}
+
+<br />
+
 
 ## Updating the Istio add-on
 {: #istio_update}
@@ -333,6 +333,7 @@ The `istio` add-on is a dependency for the [`knative`](/docs/containers?topic=co
 
    2. Save any resources created from these CRDs.
 
+</br>
 ### Uninstalling the Istio add-on from the console
 {: #istio_uninstall_ui}
 
@@ -346,6 +347,7 @@ The `istio` add-on is a dependency for the [`knative`](/docs/containers?topic=co
 
 5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
 
+</br>
 ### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
 
@@ -376,6 +378,7 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
   ```
   {: pre}
 
+  </br>
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}
 

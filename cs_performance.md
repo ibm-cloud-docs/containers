@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-01-14"
+lastupdated: "2020-05-13"
 
-keywords: kubernetes, iks
+keywords: kubernetes, iks, kernel
 
 subcollection: containers
 
@@ -184,7 +184,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 1.  Open the `metrics-server` configmap YAML.
     ```
-    kubectl get configmap metrics-server-config -n kube-system -o yaml
+    kubectl edit configmap metrics-server-config -n kube-system
     ```
     {: pre}
 
@@ -225,13 +225,37 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-3.  Apply your changes.
+3.  Save and close the file. Your changes are applied automatically.
+
+4.  Monitor the metrics provider pods.
+  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers continue to be unstable, continue to the next step to tune the `cpuPerNode` setting.
+  * If you see an error message similar to the following, or if the horizontal pod autoscaler is not scaling correctly, continue to the next step to tune the `cpuPerNode` setting.
     ```
-    kubectl apply -f metrics-server-config.yaml
+    unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
+    ```
+    {: screen}
+
+5. Open the `metrics-server` configmap YAML.
+    ```
+    kubectl edit configmap metrics-server-config -n kube-system
     ```
     {: pre}
 
-4.  Monitor the metrics provider pods to see if containers continue to be restarted due to an `OOMKilled` error message. If so, repeat these steps and increase the `memoryPerNode` size until the pod is stable.
+6. Add the `cpuPerNode` field to the configmap in the `data.NannyConfiguration` section.
+    ```yaml
+    apiVersion: v1
+    data:
+      NannyConfiguration: |-
+        apiVersion: nannyconfig/v1alpha1
+        kind: NannyConfiguration
+        cpuPerNode: 5m
+    kind: ConfigMap
+    ...
+    ```
+    {: codeblock}
+
+7. Monitor the metrics provider pods for at least an hour. It can take several minutes for the metrics server to start collecting metrics.
+  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
 
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}
@@ -251,6 +275,7 @@ By default, the Calico network plug-in in your {{site.data.keyword.containerlong
 * If you have a VPN connection set up for your cluster, some VPN connections require a smaller Calico MTU than the default. Check with the VPN service to determine whether a smaller Calico MTU is required.
 
 You can change the MTU on the tunnel interface `tunl0`, which is used for pod to pod communication, and the MTU on the `caliXXXXXXXX` `veth` interface of each worker node.
+
 
 1. Edit the `calico-config` configmap resource.
   ```
@@ -331,7 +356,7 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
   {: pre}
 
   Example output:
-  ```
+  ```yaml
   apiVersion: v1
   data:
     ...
@@ -354,10 +379,10 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
 ## Disabling the portmap plug-in
 {: #calico-portmap}
 
-The `portmap` plug-in for the Calico container network interface (CNI) enables you to use a `hostPort` to expose your app pods on a specific port on the worker node. Prevent Iptables performance issues by removing the portmap plug-in from your cluster's Calico CNI configuration.
+The `portmap` plug-in for the Calico container network interface (CNI) enables you to use a `hostPort` to expose your app pods on a specific port on the worker node. Prevent iptables performance issues by removing the portmap plug-in from your cluster's Calico CNI configuration.
 {: shortdesc}
 
-When you have a large number of services in your cluster, such as more than 500 services, or a large number of ports on services, such as more than 50 ports per service for 10 or more services, a large number of Iptables rules are generated for the Calico and Kubernetes network policies for these services. A large number of Iptables rules can lead to performance issues for the portmap plug-in, and might prevent future updates of Iptables rules or cause the `calico-node` container to restart when no lock is received to make Iptables rules updates within a specified time. To prevent these performance issues, you can disable the portmap plug-in by removing it from your cluster's Calico CNI configuration.
+When you have a large number of services in your cluster, such as more than 500 services, or a large number of ports on services, such as more than 50 ports per service for 10 or more services, a large number of iptables rules are generated for the Calico and Kubernetes network policies for these services. A large number of iptables rules can lead to performance issues for the portmap plug-in, and might prevent future updates of iptables rules or cause the `calico-node` container to restart when no lock is received to make iptables rules updates within a specified time. To prevent these performance issues, you can disable the portmap plug-in by removing it from your cluster's Calico CNI configuration.
 
 If you must use `hostPorts`, do not disable the portmap plug-in.
 {: note}
@@ -409,19 +434,8 @@ To disable the portmap plug-in:
   {: codeblock}
 
 3. Apply the change to your cluster by restarting all `calico-node` pods.
-  * Clusters that run Kubernetes version 1.15 or later:
     ```
     kubectl rollout restart daemonset -n kube-system calico-node
     ```
     {: pre}
-  * Clusters that run Kubernetes version 1.14 or earlier:
-    1. Get the names of the `calico-node` pods in your cluster.
-      ```
-      kubectl get pods -n kube-system | grep calico-node
-      ```
-      {: pre}
-    2. Restart all `calico-node` pods by manually deleting them. Separate each pod name with one space.
-      ```
-      kubectl delete pods -n kube-system <pod1> <pod2> ...
-      ```
-      {: pre}
+

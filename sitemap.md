@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-05-15"
 
 keywords: containers
 subcollection: containers
@@ -826,9 +826,9 @@ subcollection: containers
 * [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar)
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
   * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
-* [Publicly exposing Istio-managed apps](/docs/containers?topic=containers-istio-mesh#istio_expose)
-  * [Publicly exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
-  * [Publicly exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
+* [Exposing Istio-managed apps](/docs/containers?topic=containers-istio-mesh#istio_expose)
+  * [Exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
+  * [Exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
@@ -1259,14 +1259,14 @@ subcollection: containers
 * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
 [Observability plug-in CLI](/docs/containers?topic=containers-observability_cli)
-* [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
-* [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
-* [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
-* [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
-* [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
-* [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
-* [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
-* [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
+  * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
+  * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+  * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
+  * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
+  * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
+  * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+  * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
+  * [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
 
 
 ## Version history

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-06"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -83,6 +83,8 @@ Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create
 
 You can have only one logging configuration for {{site.data.keyword.la_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.la_full_notm}} service instance to send logs to, first remove any existing logging configuration and then follow the steps to create your new one.
 {: note}
+
+
 
 Before you begin:
 - Verify that you are assigned the **Editor** platform role and **Manager** server access role for {{site.data.keyword.la_full_notm}}.
@@ -837,6 +839,7 @@ With {{site.data.keyword.mon_full_notm}}, you can collects cluster and pod metri
 
 You can have only one monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster at a time. If you want to use a different {{site.data.keyword.mon_full_notm}} service instance to send metrics to, first remove any existing monitoring configuration and then follow the steps to create your new one.
 {: note}
+
 
 Before you begin:
 - Verify that you are assigned the **Editor** platform role and **Manager** server access role for {{site.data.keyword.mon_full_notm}}.

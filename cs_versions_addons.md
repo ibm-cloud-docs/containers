@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 

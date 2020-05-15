@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-05-14"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -156,7 +156,7 @@ Before you begin:
     ```
     {: screen}
 
-2. [Create a cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
+2. [Create a cluster from the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps) by using the VLAN ID that you identified. Include the `--no-subnet` flag to prevent a new portable public IP subnet and a new portable private IP subnet from being created automatically.
 
     ```
     ibmcloud ks cluster create classic --zone dal10 --flavor b3c.4x16 --no-subnet --public-vlan 2234945 --private-vlan 2234947 --workers 3 --name my_cluster
