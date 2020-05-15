@@ -502,7 +502,7 @@ The app pods are now integrated into your Istio service mesh because they have t
 ## Exposing Istio-managed apps
 {: #istio_expose}
 
-Publicly or privately expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
+Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
 {: shortdesc}
 
 In the following steps, you set up a subdomain through which your users can access your app by creating the following resources:
@@ -521,9 +521,9 @@ In the following steps, you set up a subdomain through which your users can acce
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
-To publicly or privately expose apps:
+To publicly expose apps:
 
-1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -532,7 +532,7 @@ To publicly or privately expose apps:
     namespace: <namespace>
   spec:
     selector:
-      istio: <ingressgateway>
+      istio: ingressgateway
     servers:
     - port:
         name: http
@@ -674,9 +674,9 @@ To publicly or privately expose apps:
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
-To publicly or privately expose apps:
+To publicly expose apps:
 
-1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -685,14 +685,18 @@ To publicly or privately expose apps:
     namespace: <namespace>
   spec:
     selector:
-      istio: <ingressgateway>
+      istio: ingressgateway
     servers:
     - port:
-        name: http
-        number: 80
-        protocol: HTTP
+        name: https
+        protocol: HTTPS
+        number: 443
+        tls:
+          mode: SIMPLE
+          serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+          privateKey: /etc/istio/ingressgateway-certs/tls.key
       hosts:
-      - '*'
+      - "*"
   ```
   {: codeblock}
 

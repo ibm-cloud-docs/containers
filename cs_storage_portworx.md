@@ -951,7 +951,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
       <br />
 
-      
+
 
 
 ## Exploring other Portworx features
@@ -1094,7 +1094,6 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 {: #portworx_help}
 
 If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
-
 
 
 
