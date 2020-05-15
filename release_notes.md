@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 14 May 2020 | **Kubernetes version 1.18**: [Kubernetes 1.18 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified.
 | 11 May 2020 | <ul><li>**New! Kubernetes version 1.18**: You can now create clusters that run Kubernetes version 1.18. To update an existing cluster, see the [Version 1.18 preparation actions](/docs/containers?topic=containers-cs_versions#cs_v118).</li><li>**Deprecated: Kubernetes version 1.15**: With the release of version 1.18, clusters that run version 1.15 are deprecated. Consider [updating to at least version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) today.</li><li>**NodeLocal DNS cache**: [NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache) is generally available for clusters that run Kubernetes 1.18, but still not enabled by default.</li><li>**Zone-aware DNS beta**: For multizone clusters that run Kubernetes 1.18, you can set up [zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware) to improve DNS performance and availability.</li><li>**Version changelogs**: Changelog documentation is available for Kubernetes version [1.18.2_1512](/docs/containers?topic=containers-changelog#1182_1512). Worker node patch updates are available for Kubernetes [1.17.5_1524](/docs/containers?topic=containers-changelog#1175_1524), [1.16.9_1531](/docs/containers?topic=containers-changelog#1169_1531), [1.15.11_1538](/docs/containers?topic=containers-changelog#11511_1538), and [1.14.10_1554](/docs/containers?topic=containers-changelog#11410_1554).</li></ul> |
 | 08 May 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.57](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 06 May 2020 | **New! {{site.data.keyword.containerlong_notm}} observability plug-in**: You can now use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a logging or monitoring configuration for your cluster so that you can forward cluster logs and metrics to an {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} service instance. For more information, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna) and [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig). You can also use the command line to create the logging and monitoring configuration. For more information, see the [Observability plug-in CLI](/docs/containers?topic=containers-observability_cli) reference. |
