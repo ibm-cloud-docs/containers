@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-07"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -117,7 +117,6 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
   reviews-v3-5df889bcff-nlmjp              2/2       Running     0          2m
   ```
   {: screen}
-
 
 ### Publicly accessing BookInfo
 {: #istio_access_bookinfo}
@@ -500,10 +499,10 @@ The app pods are now integrated into your Istio service mesh because they have t
 <br />
 
 
-## Publicly exposing Istio-managed apps
+## Exposing Istio-managed apps
 {: #istio_expose}
 
-Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
+Publicly or privately expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
 {: shortdesc}
 
 In the following steps, you set up a subdomain through which your users can access your app by creating the following resources:
@@ -511,18 +510,16 @@ In the following steps, you set up a subdomain through which your users can acce
 * A virtual service that is called `my-virtual-service`. `my-gateway` uses the rules that you define in `my-virtual-service` to route traffic to your app.
 * A subdomain for the `istio-ingressgateway` load balancer. All user requests to the subdomain are forwarded to your app according to your `my-virtual-service` routing rules.
 
-### Publicly exposing Istio-managed apps without TLS termination
-{: #no-tls}
-
 **Before you begin:**
 
 1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
 3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
 
-**To publicly expose your Istio-managed apps with a subdomain without using TLS:**
+### Exposing Istio-managed apps without TLS termination
+{: #no-tls}
 
-1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -531,7 +528,7 @@ In the following steps, you set up a subdomain through which your users can acce
     namespace: <namespace>
   spec:
     selector:
-      istio: ingressgateway
+      istio: <ingressgateway>
     servers:
     - port:
         name: http
@@ -605,94 +602,85 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-5. Get the subdomain for the `istio-ingressgateway` load balancer.
-  * **Classic clusters**: Register a DNS subdomain for the `istio-ingressgateway` load balancer. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, including information about setting up custom health checks for subdomains, see [Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname).
-      1. Get the **EXTERNAL-IP** address for the `istio-ingressgateway` load balancer.
-        ```
-        kubectl get svc -n istio-system
-        ```
-        {: pre}
+5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer.
+  ```
+  kubectl get svc -n istio-system
+  ```
+  {: pre}
 
-        In the following example output, the **EXTERNAL-IP** is `168.1.1.1`.
-        ```
-        NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-        ...
-        istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                                  8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
-        ```
-        {: screen}
+  Example output for classic clusters:
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                                                                                                AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   169.1.1.1       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
+  Example output for VPC clusters:
+  ```
+  NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                 PORT(S)                                                                                                                AGE
+  ...
+  istio-ingressgateway     LoadBalancer   172.21.XXX.XXX   1234abcd-us-south.lb.appdomain.cloud       80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  22m
+  ```
+  {: screen}
 
-      2. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
-        ```
-        ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
-        ```
-        {: pre}
-
-      3. Verify that the subdomain is created.
-        ```
-        ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
-        ```
-        {: pre}
-
-        Example output:
-        ```
-        Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
-        mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
-        ```
-        {: screen}
-
-  * **VPC clusters**: The `istio-ingressgateway` load balancer is automatically assigned a hostname instead of an IP address by the VPC load balancer for your cluster. Get the hostname for `istio-ingressgateway` and look for the **EXTERNAL-IP** in the output.
+6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     ```
-    kubectl -n istio-system get service istio-ingressgateway -o wide
+    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
-    In this example output, the hostname is `6639a113-us-south.lb.appdomain.cloud`:
+  * VPC Gen 1 clusters:
     ```
-    NAME                   TYPE           CLUSTER-IP       EXTERNAL-IP                            PORT(S)                                                                                                                                      AGE       SELECTOR
-    istio-ingressgateway   LoadBalancer   172.21.101.250   6639a113-us-south.lb.appdomain.cloud   15020:32377/TCP,80:31380/TCP,443:31390/TCP,31400:31400/TCP,15029:31360/TCP,15030:31563/TCP,15031:32157/TCP,15032:31072/TCP,15443:31458/TCP   20m       app=istio-ingressgateway,istio=ingressgateway,release=istio
+    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
-    {: screen}
+    {: pre}
 
-6. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
+  ```
+  ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
+  ```
+  {: pre}
+
+  Example output for classic clusters:
+  ```
+  Hostname                                                                                IP(s)              Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["168.1.1.1"]      None             created                   <certificate>
+  ```
+  {: screen}
+  Example output for VPC clusters:
+  ```
+  Subdomain                                                                               Load Balancer Hostname                        Health Monitor   SSL Cert Status           SSL Cert Secret Name
+  mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud     ["1234abcd-us-south.lb.appdomain.cloud"]      None             created                   <certificate>
+  ```
+  {: screen}
+
+6. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
   http://<host_name>/<service_path>
   ```
   {: codeblock}
 
-### Publicly exposing Istio-managed apps with TLS termination
+### Exposing Istio-managed apps with TLS termination
 {: #tls}
 
-**Before you begin:**
-
-1. [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
-2. [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
-3. [Set up sidecar injection for your app microservices, deploy the app microservices into a namespace, and create Kubernetes services for the app microservices so that they can be included in the Istio service mesh](#istio_sidecar).
-
-**To publicly expose your Istio-managed apps with a subdomain using TLS:**
-
-1. Create a gateway. This sample gateway uses the `istio-ingressgateway` load balancer service to expose port 443 for HTTPS. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. If your microservices listen on a different port than `443`, add that port. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
-   ```yaml
-   apiVersion: networking.istio.io/v1alpha3
-   kind: Gateway
-   metadata:
-     name: my-gateway
-     namespace: <namespace>
-   spec:
-     selector:
-       istio: ingressgateway
-     servers:
-     - port:
-         name: https
-         protocol: HTTPS
-         number: 443
-         tls:
-           mode: SIMPLE
-           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-           privateKey: /etc/istio/ingressgateway-certs/tls.key
-       hosts:
-       - "*"
-   ```
-   {: codeblock}
+1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+  ```yaml
+  apiVersion: networking.istio.io/v1alpha3
+  kind: Gateway
+  metadata:
+    name: my-gateway
+    namespace: <namespace>
+  spec:
+    selector:
+      istio: <ingressgateway>
+    servers:
+    - port:
+        name: http
+        number: 80
+        protocol: HTTP
+      hosts:
+      - '*'
+  ```
+  {: codeblock}
 
 2. Apply the gateway in the namespace where your Istio-managed microservices are deployed.
   ```
@@ -757,7 +745,7 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` load balancer.
+5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer.
   ```
   kubectl get svc -n istio-system
   ```
@@ -778,19 +766,18 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: screen}
 
-6. Register the `istio-ingressgateway` load balancer IP by creating a DNS subdomain.
-  * Classic clusters:
+6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
     ```
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
     {: pre}
   * VPC Gen 1 clusters:
     ```
-    ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_ID> --lb-host <LB_hostname>
+    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
     {: pre}
 
-7. Verify that the subdomain is created and note the name of your SSL secret in the **SSL Cert Secret Name** field.
+7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
   ```
   ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id>
   ```
@@ -829,7 +816,7 @@ In the following steps, you set up a subdomain through which your users can acce
   ```
   {: pre}
 
-12. In a web browser, verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+12. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
   https://<host_name>/<service_path>
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-14"
+lastupdated: "2020-05-15"
 
 keywords: containers
 subcollection: containers
@@ -826,9 +826,9 @@ subcollection: containers
 * [Including apps in the Istio service mesh by setting up sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar)
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
   * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
-* [Publicly exposing Istio-managed apps](/docs/containers?topic=containers-istio-mesh#istio_expose)
-  * [Publicly exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
-  * [Publicly exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
+* [Exposing Istio-managed apps](/docs/containers?topic=containers-istio-mesh#istio_expose)
+  * [Exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
+  * [Exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
