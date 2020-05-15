@@ -69,12 +69,6 @@ Refer to the following table for a summary of changes for each image version of 
 </thead>
 <tbody>
 <tr>
-<td>628 / 401</td>
-<td>18 May 2020</td>
-<td><ul><li>Fixes `libxml2` vulnerabilities for [CVE-2019-20388 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20388).</li><li>Fixes `golang` vulnerabilities for [CVE-2020-9283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9283).</li><li>Fixes a vulnerability intorduced by a `file` regression for [USN-3911-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3911-2/).</li></ul></td>
-<td>-</td>
-</tr>
-<tr>
 <td>627 / 401</td>
 <td>27 Apr 2020</td>
 <td><ul><li>Adds the `SameSite=None` attribute to cookies to designate them for cross-site access.</li><li>Fixes OpenSSL vulnerabilities for [CVE-2020-1967 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967).</li></ul></td>
