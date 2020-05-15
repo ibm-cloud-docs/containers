@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, clusters
 
@@ -70,7 +70,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
    3. [Allow your authorized cluster users to run `calicotl` commands](/docs/containers?topic=containers-firewall#firewall_calicoctl) to manage Calico network policies in your cluster.
 
 2. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.
-    1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    1.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
@@ -184,7 +184,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
     8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
   * If you also enabled the public service endpoint, you already have access to the master.
-    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
@@ -231,7 +231,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 6. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection.
 
-7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
@@ -327,7 +327,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
     8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, the hostname exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
   * **If you also enabled the public service**, you already have access to the master.
-    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
         ```
@@ -343,7 +343,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
       ```
       {: pre}
 
-6. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+6. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```

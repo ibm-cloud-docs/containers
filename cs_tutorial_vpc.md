@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-15"
 
 keywords: kubernetes, iks, vpc
 
@@ -125,7 +125,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ibmcloud ks cluster ls --provider vpc-classic
         ```
         {: pre}
-    2.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the first file in the `KUBECONFIG` environment variable.
+    2.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config --cluster myvpc-cluster
         ```
