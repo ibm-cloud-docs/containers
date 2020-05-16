@@ -445,7 +445,7 @@ To achieve this cluster setup, you can create a firewall by creating a [gateway-
 #### Using a gateway-enabled cluster
 {: #gateway}
 
-Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway on the cluster's network..
+Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway on the cluster's network.
 {: shortdesc}
 
 <p>
