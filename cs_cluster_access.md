@@ -266,7 +266,6 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 
 
-
 1. If your network is protected by a company firewall, allow access to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports.
   1. [Allow access to the public endpoints for the `ibmcloud` API and the `ibmcloud ks` API in your firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx).
   2. [Allow your authorized cluster users to run `kubectl` commands](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl). Note that you cannot test the connection to your cluster with `kubectl` commands until you complete all steps in this section.
