@@ -653,8 +653,8 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
 5. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
    2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster.
-   3. Select **VPC infrastructure**.
-   4. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
+   3. Select **VPC** infrastructure.
+   4. From the **Virtual private cloud** drop-down menu, select the Gen 1 VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned 6uring cluster creation blocks the Kubernetes master from managing your cluster.
    6. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
