@@ -55,7 +55,7 @@ Kubernetes is an open source platform for managing containerized workloads and s
 Containers provide a standard way to package your application's code, configurations, and dependencies into a single unit that can run as a resource-isolated process on a compute server. To run your app in Kubernetes on {{site.data.keyword.containerlong_notm}}, you must first containerize your app by creating a container image that you store in a container registry. For an overview of key Docker concepts and benefits, see [Docker containers](#docker_containers). To dive deeper into Docker, see the [Docker documentation](https://docs.docker.com/).
 
 **What compute host infrastructure does the service offer?** </br>
-With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure, VPC Gen 1 compute infrastucture,.
+With {{site.data.keyword.containerlong_notm}}, you can create your cluster of compute hosts on classic {{site.data.keyword.cloud_notm}} infrastructure or VPC Gen 1 compute infrastructure.
 
 [Classic clusters](/docs/containers?topic=containers-getting-started) are created on your choice of virtual or bare metal worker nodes that are connected to VLANs. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for software-defined storage solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes.
 
