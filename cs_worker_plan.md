@@ -54,7 +54,7 @@ The worker node flavors and isolation levels that are available to you depend on
 **What flavors are available to me?** </br>
 Classic standard clusters can be created on [virtual](#vm) and [bare metal](#bm) worker nodes. If you require additional local disks, you can also choose one of the bare metal flavors that are designed for [software-defined storage](#sds) solutions, such as Portworx. Depending on the level of hardware isolation that you need, virtual worker nodes can be set up as shared or dedicated nodes, whereas bare metal machines are always set up as dedicated nodes. If you create a free classic cluster, your cluster is provisioned with the smallest virtual worker node flavor on shared infrastructure.
 
-VPC compute clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone-capable metro cities](/docs/containers?topic=containers-regions-and-zones#zones). Free VPC clusters are not supported.
+VPC clusters can be provisioned as standard clusters on shared [virtual](#vm) worker nodes only, and must be created in one of the supported [multizone-capable metro cities](/docs/containers?topic=containers-regions-and-zones#zones). Free VPC clusters are not supported.
 
 Gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes by default. During cluster creation you can specify the isolation and flavor for the compute worker nodes, but by default the gateway worker nodes are created on shared virtual machines with the `u3c.2x4` flavor. If you want to change the isolation and flavor of the gateway worker nodes, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the `gateway` worker pool.
 
@@ -70,7 +70,7 @@ The secondary disk of the worker node is encrypted. For more information, see [O
 **How do I manage my worker nodes?** </br>
 Worker nodes in classic clusters are provisioned into your {{site.data.keyword.cloud_notm}} account. You can manage your worker nodes by using {{site.data.keyword.containerlong_notm}}, but you can also use the [classic infrastructure dashboard](https://cloud.ibm.com/classic/) in the {{site.data.keyword.cloud_notm}} console to work with your worker node directly.  
 
-Unlike classic clusters, the worker nodes of your VPC compute cluster are not listed in the [VPC infrastructure dashboard](https://cloud.ibm.com/vpc/overview). Instead, you manage your worker nodes with {{site.data.keyword.containerlong_notm}} only. However, your worker nodes might be connected to other VPC infrastructure resources, such as VPC subnets or VPC Block Storage. These resources are included in the VPC infrastructure dashboard and can be managed separately from there. 
+Unlike classic clusters, the worker nodes of your VPC cluster are not listed in the [VPC infrastructure dashboard](https://cloud.ibm.com/vpc/overview). Instead, you manage your worker nodes with {{site.data.keyword.containerlong_notm}} only. However, your worker nodes might be connected to other VPC infrastructure resources, such as VPC subnets or VPC Block Storage. These resources are included in the VPC infrastructure dashboard and can be managed separately from there. 
 
 **What limitations do I need to be aware of?** </br>
 Kubernetes limits the maximum number of worker nodes that you can have in a cluster. Review [worker node and pod quotas](https://kubernetes.io/docs/setup/best-practices/cluster-large/){: external} for more information.
@@ -164,7 +164,7 @@ You can provision your worker node as a single-tenant physical server, also refe
 {: shortdesc}
 
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Physical machines are available for classic clusters only and are not supported in VPC compute clusters.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Physical machines are available for classic clusters only and are not supported in VPC clusters.
 {: note}
 
 

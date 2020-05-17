@@ -271,7 +271,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a VPC load 
 
 {: tsResolve}
 Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. If you use  non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+1. If you use non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
 
 2. Verify that the VPC load balancer for the Kubernetes `LoadBalancer` service exists. In the output, look for the VPC load balancer that is formatted `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. You can get the Kubernetes `LoadBalancer` service UID by running `kubectl get svc <service_name> -o yaml`.
   ```
