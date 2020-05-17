@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-16"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -523,7 +523,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
 To publicly expose apps:
 
-1. Create a gateway that uses the public `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed.For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the public `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
