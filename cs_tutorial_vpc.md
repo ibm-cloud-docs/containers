@@ -68,7 +68,7 @@ Install the command-line tools.
 *   [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}}plug-in (`ibmcloud ks`), and {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
 *   Update your {{site.data.keyword.containerlong_notm}} plug-in to the latest version.
     ```
-    ibmcloud plugin update container-service
+    ibmcloud plugin update kubernetes-service
     ```
     {: pre}
 *   To work with VPC, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
