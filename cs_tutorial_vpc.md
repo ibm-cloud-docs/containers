@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, vpc
 
@@ -107,7 +107,6 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zone ls`.
         *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
         *  **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
-        *  **Network traffic control**: Set up [network access control lists](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) (ACLs) to control inbound and outbound network traffic at the subnet level. Each subnet includes a default ACL that permits all inbound and outbound traffic.
 
         ```
         ibmcloud is subnet-create mysubnet1 <vpc_ID> --zone us-south-1 --ipv4-address-count 256
