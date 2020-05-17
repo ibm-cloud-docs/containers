@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-06"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, containers
 
@@ -299,7 +299,7 @@ Use Kubernetes secrets to store confidential information, such as credentials or
 
 1. **Secrets**:
   1. Store personal or sensitive information in [Kubernetes secrets](/docs/containers?topic=containers-security#pi) that your app can access.
-  2. [Encrypt secrets by using a KMS provider (beta)](/docs/containers?topic=containers-encryption#keyprotect).
+  2. [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect).
   3. [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).
 2. **Pod-to-pod traffic**: [Enable mTLS encryption for traffic between microservices within an Istio service mesh](/docs/containers?topic=containers-istio-mesh#mtls).
 
