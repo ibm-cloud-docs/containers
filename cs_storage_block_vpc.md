@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, vpc
 
@@ -521,7 +521,7 @@ You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabl
   ```
   {: screen}
 
-2. Disable the {{site.data.keyword.block_storage_is_short}} add-on. 
+2. Disable the {{site.data.keyword.block_storage_is_short}} add-on.
   ```
   ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster <cluster_name_or_ID> -f
   ```

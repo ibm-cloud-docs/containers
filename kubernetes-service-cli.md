@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -885,7 +885,6 @@ ibmcloud ks cluster create vpc-classic --name mycluster --zone us-east-1 --vpc-i
 
 </br>
 
-
 ### `ibmcloud ks cluster feature disable public-service-endpoint`
 {: #cs_cluster_feature_disable}
 
@@ -1709,7 +1708,7 @@ View and modify worker nodes for a cluster.
 Add stand-alone worker nodes to a cluster.
 {: shortdesc}
 
-This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create) or [`ibmcloud ks worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
+This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create), [`ibmcloud ks worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
 {: deprecated}
 
 ```
@@ -2252,8 +2251,6 @@ ibmcloud ks worker-pool create vpc-classic --name my_pool --cluster my_cluster -
 {: pre}
 
 </br>
-
-
 
 ### `ibmcloud ks worker-pool get`
 {: #cs_worker_pool_get}
@@ -3185,11 +3182,10 @@ ibmcloud ks alb configure vpc-classic --alb-id public-cr18a61a63a6a94b658596aa93
 
 </br>
 
-
 ### `ibmcloud ks alb create classic`
 {: #cs_alb_create}
 
-Create a public or private ALB in a zone. The ALB that you create is enabled by default.
+Create a public or private ALB in a classic cluster. The ALB that you create is enabled by default.
 {: shortdesc}
 
 ```
@@ -3267,7 +3263,6 @@ ibmcloud ks alb create vpc-classic --cluster mycluster --type public --zone us-s
 {: pre}
 
 </br>
-
 
 ### `ibmcloud ks alb get`
 {: #cs_alb_get}
@@ -5418,7 +5413,8 @@ ibmcloud ks vpcs [--provider vpc-classic] [--json] [-s]
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+**Supported infrastructure provider**:
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
 
 **Minimum required permissions**:
 * **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
