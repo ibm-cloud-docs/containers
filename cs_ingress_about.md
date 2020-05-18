@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-12"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -190,9 +190,9 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
 {: shortdesc}
 
-image <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a VPC cluster by using Ingress" style="width:830px; border-style: none"/>
+<img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a VPC cluster by using Ingress" style="width:830px; border-style: none"/>
 
-1. A user sends a request to your app by accessing your app's URL. This URL is the public URL for your exposed app appended with the Ingress resource path, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
+1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster for your exposed app appended with the Ingress resource path, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
 
 2. A DNS system service resolves the subdomain in the URL to an available ALB IP address that was reported as healthy by the VPC load balancer. The VPC load balancer continuously checks the floating ALB IP addresses that are behind the ALBs' assigned hostname.
 

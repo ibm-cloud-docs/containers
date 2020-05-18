@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, deploy
 
@@ -89,7 +89,7 @@ You can take some general steps to containerize your app as follows.
 1.  Use the [Twelve-Factor App](https://12factor.net/){: external} as a guide for isolating dependencies, separating processes into separate services, and reducing the statefulness of your app as much as possible.
 2.  Find an appropriate base image to use. You can use publicly available images from [Docker Hub](https://hub.docker.com/){: external}, [public IBM images](/docs/Registry?topic=registry-public_images#public_images), or build and manage your own in your private {{site.data.keyword.registrylong_notm}}.
 3.  Add to your Docker image only what is necessary to run the app.
-    
+
     Don't want to make a Dockerfile yourself? Try out the [`ibmcloud dev enable` command](/docs/cli?topic=cloud-cli-idt-cli#enable), which detects your app's programming language and builds a Dockerfile and containerization components for you.
     {: tip}
 4.  Instead of relying on local storage, plan to use persistent storage or cloud database-as-a-service solutions to back up your app's data.
@@ -418,7 +418,7 @@ As you plan and develop your app, consider the following options to maintain a s
 <dt>Kubernetes secrets</dt>
 <dd>When you deploy your app, do not store confidential information, such as credentials or keys, in the YAML configuration file, configmaps, or scripts. Instead, use [Kubernetes secrets](/docs/containers?topic=containers-security#pi), such as an image pull secret for registry credentials. You can then reference these secrets in your deployment YAML file.</dd>
 <dt>Secret encryption</dt>
-<dd>You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider (beta)](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).</dd>
+<dd>You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).</dd>
 <dt>Microservice traffic encryption</dt>
 <dd>After you deploy your app, you can set up a service mesh and enable mTLS encryption for traffic between services in the mesh. To get started, [set up the managed Istio add-on](/docs/containers?topic=containers-istio). Then, follow the steps in [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls).</dd>
 </dl>

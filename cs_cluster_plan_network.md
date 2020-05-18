@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-16"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -445,12 +445,12 @@ To achieve this cluster setup, you can create a firewall by creating a [gateway-
 #### Using a gateway-enabled cluster
 {: #gateway}
 
-Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway.
+Keep your compute workloads private and allow limited public connectivity to your classic cluster by enabling a gateway on the cluster's network.
 {: shortdesc}
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_classic_gateway.png" alt="Architecture image for a cluster that a gateway for secure public access"/>
+ <img src="images/cs_clusters_planning_classic_gateway.png" alt="Architecture image for a cluster that uses a gateway for secure public access"/>
  <figcaption>Network setup for a cluster that uses a gateway for secure public access</figcaption>
 </figure>
 </p>

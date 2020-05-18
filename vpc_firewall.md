@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -44,7 +44,7 @@ Review these situations in which you might need to open specific ports and IP ad
 
 * [Corporate firewalls](#vpc-corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
 * [Access control lists](#firewall_acls): If you use ACLs on your VPC subnets to act as a firewall to restrict all worker node egress, you must allow your worker nodes to access the resources that are required for the cluster to function.
-* [Security groups](#security_groups): If you use use non-default security groups that are applied at the level of the VPC, you must allow traffic requests that are routed to node ports on your worker nodes.
+* [Security groups](#security_groups): If you use non-default security groups that are applied at the level of the VPC, you must allow traffic requests that are routed to node ports on your worker nodes.
 * [Other services or network firewalls](#vpc-whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
 
 <br />
@@ -266,7 +266,7 @@ If you use non-default security groups that are applied at the level of the VPC,
     ```
     {: pre}
 
-2. Target Generation 1 of VPC compute.
+2. Target the VPC generation for your cluster.
    ```
    ibmcloud is target --gen 1
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -523,7 +523,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
 To publicly expose apps:
 
-1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the public `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -628,6 +628,7 @@ To publicly expose apps:
   {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
+  * Classic clusters:
     ```
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
     ```
@@ -676,7 +677,7 @@ To publicly expose apps:
 
 To publicly expose apps:
 
-1. Create a gateway that uses the `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
+1. Create a gateway that uses the public `istio-ingressgateway` load balancer service to expose port 80 for HTTP. Replace `<namespace>` with the namespace where your Istio-managed microservices are deployed. For more information about gateway YAML components, see the [Istio reference documentation](https://istio.io/docs/reference/config/networking/gateway/){: external}.
   ```yaml
   apiVersion: networking.istio.io/v1alpha3
   kind: Gateway
@@ -785,6 +786,7 @@ To publicly expose apps:
   {: screen}
 
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
+  * Classic clusters:
     ```
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
     ```

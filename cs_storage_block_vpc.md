@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-27"
+lastupdated: "2020-05-17"
 
 keywords: kubernetes, iks, vpc
 
@@ -41,7 +41,6 @@ subcollection: containers
 {: shortdesc}
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/cloud/vpc/pricing).
-
 
 The {{site.data.keyword.block_storage_is_short}} add-on is installed and enabled by default on VPC clusters. You can enable or disable the add-on by using the [`addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable) or [`addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) command in the CLI.
 {: note}
@@ -521,7 +520,7 @@ You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabl
   ```
   {: screen}
 
-2. Disable the {{site.data.keyword.block_storage_is_short}} add-on. 
+2. Disable the {{site.data.keyword.block_storage_is_short}} add-on.
   ```
   ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster <cluster_name_or_ID> -f
   ```
