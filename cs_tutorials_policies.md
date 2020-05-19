@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-05"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks
 
@@ -321,7 +321,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
 
 4. Change the externalTrafficPolicy of the LoadBalancer you created in the previous lesson from `Cluster` to `Local`. `Local` ensures that the source IP of your system is preserved when you curl the external IP of the LoadBalancer in the next step.
     ```
-    kubectl patch svc webserver -p '{"spec":{"externalTrafficPolicy":"Local"}}'
+    kubectl patch svc webserver-lb -p '{"spec":{"externalTrafficPolicy":"Local"}}'
     ```
     {: pre}
 
@@ -626,11 +626,19 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
   ```
   {: codeblock}
 
-2. Apply the policy.
-  ```
-  calicoctl apply -f log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
-  ```
-  {: pre}
+2.  Apply the policy.
+    - Linux:
+
+      ```
+      calicoctl apply -f /log-denied-packets.yaml
+      ```
+      {: pre}
+
+    - Windows and OS X:
+
+      ```
+      calicoctl apply -f /log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+      ```
 
 3. Generate log entries by sending requests from your system IP to the NLB IP. These request packets are logged before they are denied.
   ```
