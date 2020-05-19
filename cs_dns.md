@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-12"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -236,7 +236,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
    ```
    {: pre}
 3. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
-   
+
    **To label all worker nodes in the cluster**:
    ```
    kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
@@ -357,7 +357,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 ## Setting up zone-aware DNS (beta)
 {: #dns_zone_aware}
 
-Set up zone-aware DNS for improved cluster DNS performance and availability in your [multizone {{site.data.keyword.containerlong_notm}} cluster](https://cloud.ibm.com/docs/containers?topic=containers-ha_clusters#multizone). This setup extends [`NodeLocal` DNS cache](#dns_cache) to prefer cluster DNS traffic within the same zone.
+Set up zone-aware DNS for improved cluster DNS performance and availability in your [multizone {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-ha_clusters#multizone). This setup extends [`NodeLocal` DNS cache](#dns_cache) to prefer cluster DNS traffic within the same zone.
 {: shortdesc}
 
 By default, your cluster is set up with cluster-wide DNS resources, not zone-aware DNS resources. Even after you set up zone-aware DNS, the cluster-wide DNS resources remain running as a backup DNS. Your zone-aware DNS resources are separate from the cluster-wide DNS, and changing zone-aware DNS does not impact the cluster-wide DNS.
@@ -383,7 +383,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 **Step 1: Deploy zone-aware DNS resources:**
 
-1.  Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` configmap in the `kube-system` namespace. 
+1.  Add the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label to the `coredns` configmap in the `kube-system` namespace.
     ```
     kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true"
     ```
@@ -393,7 +393,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
     ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
     ```
     {: pre}
-3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
+3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
     ```
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```
@@ -479,17 +479,17 @@ To remove zone-aware DNS, you must first disable zone-aware DNS in each zone of 
 
 **Step 2: Delete zone-aware DNS resources:**
 
-1.  Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` configmap in the `kube-system` namespace. 
+1.  Remove the `ibm-cloud.kubernetes.io/deploy-zone-aware-dns=true` label from the `coredns` configmap in the `kube-system` namespace.
     ```
     kubectl label cm -n kube-system coredns --overwrite "ibm-cloud.kubernetes.io/deploy-zone-aware-dns-"
     ```
     {: pre}
-2.  [Refresh the cluster master](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
+2.  [Refresh the cluster master](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) to the delete zone-aware DNS resources.
     ```
     ibmcloud ks cluster master refresh --cluster <cluster-name-or-id>
     ```
     {: pre}
-3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](https://cloud.ibm.com/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
+3.  Watch for the refresh operation to complete by [reviewing the **Master Health** in the cluster details](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get).
     ```
     ibmcloud ks cluster get -c <cluster_name_or_ID>
     ```

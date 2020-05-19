@@ -71,7 +71,7 @@ The following table shows the changes that are included in patch update 1.18.2_1
 | Calico | v3.12.1 | v3.13.3 | See the [Calico release notes](https://docs.projectcalico.org/archive/v3.13/release-notes/){: external}. |
 | Cluster health image | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
 | CoreDNS configuration | N/A | N/A | To improve cluster DNS availability, CoreDNS [pods now prefer evenly distributed scheduling](https://kubernetes.io/blog/2020/05/introducing-podtopologyspread/){: external} across worker nodes and zones.  |
-| etcd | v3.4.3 | v3.4.7 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.7){: external}). |
+| etcd | v3.4.3 | v3.4.7 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.7){: external}). |
 | Gateway-enabled cluster controller | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | 8c6538f | b9a418c | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | IBM Calico extension | 320 | 349 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
