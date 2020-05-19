@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-24"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -51,7 +51,7 @@ You can use multiple registries with {{site.data.keyword.containerlong_notm}} to
 
 |Registry|Description|Benefit|
 |--------|-----------|-------|
-|[{{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registrylong_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
+|[{{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started#getting-started)|With this option, you can set up your own secured Docker image repository in {{site.data.keyword.registrylong_notm}} where you can safely store and share images between cluster users.|<ul><li>Manage access to images in your account.</li><li>Use {{site.data.keyword.IBM_notm}} provided images and sample apps, such as {{site.data.keyword.IBM_notm}} Liberty, as a parent image and add your own app code to it.</li><li>Automatic scanning of images for potential vulnerabilities by Vulnerability Advisor, including OS specific recommendations to fix them.</li></ul>|
 |Any other private registry|Connect any existing private registry to your cluster by creating an [image pull secret](https://kubernetes.io/docs/concepts/containers/images/){: external}. The secret is used to securely save your registry URL and credentials in a Kubernetes secret.|<ul><li>Use existing private registries independent of their source (Docker Hub, organization owned registries, or other private Cloud registries).</li></ul>|
 |[Public Docker Hub](https://hub.docker.com/){: external}{: #dockerhub}|Use this option to use existing public images from Docker Hub directly in your [Kubernetes deployment](https://kubernetes.io/docs/concepts/workloads/controllers/deployment/){: external} when no Dockerfile changes are needed. <p>**Note:** Keep in mind that this option might not meet your organization's security requirements, like access management, vulnerability scanning, or app privacy.</p>|<ul><li>No additional setup is needed for your cluster.</li><li>Includes a variety of open-source applications.</li></ul>|
 {: caption="Public and private image registry options" caption-side="top"}
@@ -69,8 +69,8 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.
 {:shortdesc}
 
-1.  [Sign images for trusted content](/docs/Registry?topic=registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
-2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement](/docs/Registry?topic=registry-security_enforce#security_enforce).
+1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
+2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement](/docs/Registry?topic=Registry-security_enforce#security_enforce).
 3.  Cluster users can deploy apps that are built from trusted images.
     1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
@@ -98,7 +98,7 @@ Generally, your {{site.data.keyword.containerlong_notm}} cluster is set up to pu
 {: shortdesc}
 
 **How is my cluster set up to pull images from the `default` Kubernetes namespace?**<br>
-When you create a cluster, the cluster has an {{site.data.keyword.cloud_notm}} IAM service ID that is given an IAM **Reader** service access role policy to {{site.data.keyword.registrylong_notm}}. The service ID credentials are impersonated in a non-expiring API key that is stored in image pull secrets in your cluster. The image pull secrets are added to the `default` Kubernetes namespace and the list of secrets in the `default` service account for this Kubernetes namespace. By using image pull secrets, your deployments can pull images (read-only access) from the [global and regional {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-registry_overview#registry_regions) to deploy containers in the `default` Kubernetes namespace.
+When you create a cluster, the cluster has an {{site.data.keyword.cloud_notm}} IAM service ID that is given an IAM **Reader** service access role policy to {{site.data.keyword.registrylong_notm}}. The service ID credentials are impersonated in a non-expiring API key that is stored in image pull secrets in your cluster. The image pull secrets are added to the `default` Kubernetes namespace and the list of secrets in the `default` service account for this Kubernetes namespace. By using image pull secrets, your deployments can pull images (read-only access) from the [global and regional {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-registry_overview#registry_regions) to deploy containers in the `default` Kubernetes namespace.
 
 * The global registry securely stores public images that are provided by IBM. You can refer to these public images across your deployments instead of having different references for images that are stored in each regional registry. 
 * The regional registry securely stores your own private Docker images.
@@ -107,7 +107,7 @@ When you create a cluster, the cluster has an {{site.data.keyword.cloud_notm}} I
 You can check the image pull secrets by [logging in to your cluster](/docs/containers?topic=containers-access_cluster) and running `kubectl get secrets -n default | grep "icr-io"`. If no `icr` secrets are listed, the person who created the cluster might not have had the required permissions to {{site.data.keyword.registrylong_notm}} in IAM. See [Updating existing clusters to use the API key image pull secret](#imagePullSecret_migrate_api_key).
 
 **Can I restrict pull access to a certain regional registry?**<br>
-Yes, you can [edit the existing IAM policy of the service ID](/docs/iam?topic=iam-serviceidpolicy#access_edit) that restricts the **Reader** service access role to that regional registry or a registry resource such as a namespace. Before you can customize registry IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-user#existing_users).
+Yes, you can [edit the existing IAM policy of the service ID](/docs/iam?topic=iam-serviceidpolicy#access_edit) that restricts the **Reader** service access role to that regional registry or a registry resource such as a namespace. Before you can customize registry IAM policies, you must [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-user#existing_users).
 
   Want to make your registry credentials even more secured? Ask your cluster admin to [enable a key management service provider](/docs/containers?topic=containers-encryption#keyprotect) in your cluster to encrypt Kubernetes secrets in your cluster, such as the image pull secret that stores your registry credentials.
   {: tip}
@@ -140,7 +140,7 @@ Not quite. Your containers must be authorized to pull images by using the secret
 ### Private network connection to `icr.io` registries
 {: #cluster_registry_auth_private}
 
-When you set up your {{site.data.keyword.cloud_notm}} account to use service endpoints, you can use a private network connection to push images to and to pull images from {{site.data.keyword.registrylong_notm}}. When you use the private network to pull images, your image pull traffic is not charged as [public bandwidth](/docs/containers?topic=containers-faqs#bandwidth), because the traffic is on the private network. For more information, see the [{{site.data.keyword.registrylong_notm}} private network documentation](/docs/Registry?topic=registry-registry_private).
+When you set up your {{site.data.keyword.cloud_notm}} account to use service endpoints, you can use a private network connection to push images to and to pull images from {{site.data.keyword.registrylong_notm}}. When you use the private network to pull images, your image pull traffic is not charged as [public bandwidth](/docs/containers?topic=containers-faqs#bandwidth), because the traffic is on the private network. For more information, see the [{{site.data.keyword.registrylong_notm}} private network documentation](/docs/Registry?topic=Registry-registry_private).
 {: shortdesc}
 
 **What do I need to do to set up my cluster to use the private connection to `icr.io` registries?**<br>
@@ -153,7 +153,7 @@ Now, {{site.data.keyword.registrylong_notm}} automatically uses the private serv
 The image push and pull traffic is automatically on the private network. {{site.data.keyword.containerlong_notm}} can use the public `icr.io` registry domains in existing image pull secrets to authenticate requests to {{site.data.keyword.registrylong_notm}}. These requests are automatically redirected to the private `icr.io` registry domains. You do not need to modify the image pull secrets or configure additional settings.
 
 **Do I have to use the private `icr.io` registry addresses for anything else?**<br>
-Yes, if you [sign your images for trusted content](/docs/Registry?topic=registry-registry_trustedcontent), the signatures contain the registry domain name. If you want to use the private `icr.io` domain for your signed images, resign your images with the private `icr.io` domains.
+Yes, if you [sign your images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent), the signatures contain the registry domain name. If you want to use the private `icr.io` domain for your signed images, resign your images with the private `icr.io` domains.
 
 <br />
 
@@ -215,7 +215,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
 **What's next?**
 *   To pull images in Kubernetes namespaces other than `default` or from other {{site.data.keyword.cloud_notm}} accounts, [copy or create another image pull secret](#other).
 *   To restrict the image pull secret access to particular registry resources such as namespaces or regions:
-    1.  Make sure that [{{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/Registry?topic=registry-user#existing_users).
+    1.  Make sure that [{{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}} are enabled](/docs/Registry?topic=Registry-user#existing_users).
     2.  [Edit the {{site.data.keyword.cloud_notm}} IAM policies](/docs/iam?topic=iam-serviceidpolicy#access_edit) for the service ID, or [create another image pull secret](#other_registry_accounts).
 
 <br />
@@ -234,7 +234,7 @@ Image pull secrets are valid only for the Kubernetes namespaces that they were c
 
 Before you begin:
 
-1.  [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=registry-getting-started#gs_registry_namespace_add).
+1.  [Set up a namespace in {{site.data.keyword.registrylong_notm}} and push images to this namespace](/docs/Registry?topic=Registry-getting-started#gs_registry_namespace_add).
 2.  [Create a Kubernetes cluster](/docs/containers?topic=containers-clusters).
 3.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -379,15 +379,15 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--roles <em>&lt;service_access_role&gt;</em></code></td>
-    <td>Required. Enter the [service access role for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-iam#service_access_roles) that you want to scope the service ID access to. Possible values are `Reader`, `Writer`, and `Manager`.</td>
+    <td>Required. Enter the [service access role for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-iam#service_access_roles) that you want to scope the service ID access to. Possible values are `Reader`, `Writer`, and `Manager`.</td>
     </tr>
     <tr>
     <td><code>--region <em>&lt;IAM_region&gt;</em></code></td>
-    <td>Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are `global` and the [local registry regions](/docs/Registry?topic=registry-registry_overview#registry_regions_local).</td>
+    <td>Optional. If you want to scope the access policy to certain IAM regions, enter the regions in a comma-separated list. Possible values are `global` and the [local registry regions](/docs/Registry?topic=Registry-registry_overview#registry_regions_local).</td>
     </tr>
     <tr>
     <td><code>--resource-type <em>namespace</em> --resource <em>&lt;registry_namespace&gt;</em></code></td>
-    <td>Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.</td>
+    <td>Optional. If you want to limit access to only images in certain [{{site.data.keyword.registrylong_notm}} namespaces](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_setup_cli_namespace_plan), enter `namespace` for the resource type and specify the `<registry_namespace>`. To list registry namespaces, run `ibmcloud cr namespaces`.</td>
     </tr>
     </tbody></table>
 4.  Create an API key for the service ID. Name the API key similar to your service ID, and include the service ID that you previously created, ``<cluster_name>-<kube_namespace>-id`. Be sure to give the API key a description that helps you retrieve the key later.
@@ -430,7 +430,7 @@ The following steps create an API key that stores the credentials of an {{site.d
     </tr>
     <tr>
     <td><code>--docker-server <em>&lt;registry_URL&gt;</em></code></td>
-    <td>Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see [Local regions](/docs/Registry?topic=registry-registry_overview#registry_regions).</td>
+    <td>Required. Set the URL to the image registry where your registry namespace is set up. For available domains, see [Local regions](/docs/Registry?topic=Registry-registry_overview#registry_regions).</td>
     </tr>
     <tr>
     <td><code>--docker-username iamapikey</code></td>

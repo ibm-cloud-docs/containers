@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-06"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks
 
@@ -423,7 +423,7 @@ subcollection: containers
 {: #tutorials-ov-monitor-log}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/Log-Analysis-with-LogDNA?topic=LogDNA-kube#kube">
+    <a href = "/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}
@@ -438,7 +438,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-  <a href = "/docs/Monitoring-with-Sysdig?topic=Sysdig-kubernetes_cluster#kubernetes_cluster">
+  <a href = "/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Analyze cluster metrics with {{site.data.keyword.mon_full_notm}}

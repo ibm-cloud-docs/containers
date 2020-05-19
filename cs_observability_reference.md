@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-19"
 
 keywords: observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logdna commands, sysdig commands, logging config, monitoring config
 
@@ -53,7 +53,7 @@ Looking for `ibmcloud ks` commands? See the [{{site.data.keyword.containerlong_n
 Create a logging configuration for your cluster to automatically collect pod logs and send them to {{site.data.keyword.la_full_notm}}. 
 {: shortdesc}
 
-This command deploys a LogDNA agent as a Kubernetes daemonset in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-mng-data).  
+This command deploys a LogDNA agent as a Kubernetes daemonset in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-mng-data).  
 
 ```
 ibmcloud ob logging config create --cluster CLUSTER --instance LOGDNA_INSTANCE [--logdna-ingestion-key INGESTION_KEY] [--private-endpoint]  
@@ -74,7 +74,7 @@ ibmcloud ob logging config create --cluster CLUSTER --instance LOGDNA_INSTANCE [
 <dd>The name or ID of the cluster for which you want to create a logging configuration for {{site.data.keyword.la_full_notm}}. To retrieve your cluster name or ID, run `ibmcloud ks clusters`. This value is required.</dd>
 
 <dt><code>--instance <em>LOGDNA_INSTANCE</em></code></dt>
-<dd>The ID or name of the {{site.data.keyword.la_full_notm}} service instance that you want to use to create the logging configuration. The service instance must be in the same {{site.data.keyword.cloud_notm}} account as your cluster, but can be in a different resource group or region than you cluster. To create a service instance, follow the steps in [Provision an instance](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-provision). This value is required.</dd>
+<dd>The ID or name of the {{site.data.keyword.la_full_notm}} service instance that you want to use to create the logging configuration. The service instance must be in the same {{site.data.keyword.cloud_notm}} account as your cluster, but can be in a different resource group or region than you cluster. To create a service instance, follow the steps in [Provision an instance](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-provision). This value is required.</dd>
 
 <dt><code>--logdna-ingestion-key <em>INGESTION_KEY</em></code></dt>
 <dd>The LogDNA ingestion key that you want to use for your configuration. This value is optional. If you do not specify this option, the latest ingestion key is automatically retrieved.   </dd>
@@ -207,7 +207,7 @@ ibmcloud ob logging config show --cluster CLUSTER --instance LOGDNA_INSTANCE
 Create a monitoring configuration for your cluster to automatically collect cluster and pod metrics, and send them to {{site.data.keyword.mon_full_notm}}. 
 {: shortdesc}
 
-This command deploys a Sysdig agent as a Kubernetes daemonset in your cluster. The agent collects cluster and pod metrics, such as the worker node CPU and memory usage, and the mount of incoming and outgoing network traffic for your pods. For more information, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig). For more information, see [{{site.data.keyword.mon_full_notm}}](/docs/Monitoring-with-Sysdig?topic=Sysdig-about).  
+This command deploys a Sysdig agent as a Kubernetes daemonset in your cluster. The agent collects cluster and pod metrics, such as the worker node CPU and memory usage, and the mount of incoming and outgoing network traffic for your pods. For more information, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig). For more information, see [{{site.data.keyword.mon_full_notm}}](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-about).  
 
 ```
 ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANCE [--sysdig-access-key ACCESS_KEY] [--private-endpoint] 
@@ -228,7 +228,7 @@ ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANC
 <dd>The name or ID of the cluster for which you want to create a monitoring configuration for {{site.data.keyword.mon_full_notm}}. To retrieve your cluster name or ID, run `ibmcloud ks clusters`. This value is required.</dd>
 
 <dt><code>--instance <em>SYSDIG_INSTANCE</em></code></dt>
-<dd>The ID or name of the {{site.data.keyword.mon_full_notm}} service instance that you want to use to create the monitoring configuration. The service instance must be in the same {{site.data.keyword.cloud_notm}} account as your cluster, but can be in a different resource group or region than you cluster. To create a service instance, follow the steps in [Provision an instance](/docs/Monitoring-with-Sysdig?topic=Sysdig-provision). This value is required.</dd>
+<dd>The ID or name of the {{site.data.keyword.mon_full_notm}} service instance that you want to use to create the monitoring configuration. The service instance must be in the same {{site.data.keyword.cloud_notm}} account as your cluster, but can be in a different resource group or region than you cluster. To create a service instance, follow the steps in [Provision an instance](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-provision). This value is required.</dd>
 
 <dt><code>--sysdig-access-key <em>ACCESS_KEY</em></code></dt>
 <dd>The Sysdig access key that you want to use for your configuration. This value is optional. If you do not specify this option, the latest access key is used for your configuration. </dd>

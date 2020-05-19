@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks
 
@@ -60,7 +60,7 @@ This tutorial is intended for Cloud Foundry app developers.
 ## Prerequisites
 {: #cf_prereqs}
 
-- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-getting-started).
+- [Create a private image registry in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started).
 - [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:

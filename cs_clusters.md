@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -118,7 +118,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
   **Services**:
     * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}} at the account level.
     * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-    * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
+    * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry at the account level. If your account predates 4 October 2018, you need to [enable {{site.data.keyword.cloud_notm}} IAM policies for {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-user#existing_users). With IAM policies, you can control access to resources such as registry namespaces.
 
   **Infrastructure**:
     * Classic clusters only: **Super User** role or the [minimum required permissions](/docs/containers?topic=containers-access_reference#infra) for classic infrastructure.
@@ -812,7 +812,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 When the cluster is up and running, you can check out the following cluster administration tasks:
 - If you created the cluster in a multizone capable zone, [spread worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers).
 - [Deploy an app in your cluster.](/docs/containers?topic=containers-deploy_app#app_cli)
-- [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/Registry?topic=registry-getting-started)
+- [Set up your own private registry in {{site.data.keyword.cloud_notm}} to store and share Docker images with other users.](/docs/Registry?topic=Registry-getting-started)
 - [Set up the cluster autoscaler](/docs/containers?topic=containers-ca#ca) to automatically add or remove worker nodes from your worker pools based on your workload resource requests.
 - Control who can create pods in your cluster with [pod security policies](/docs/containers?topic=containers-psp).
 - Enable the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons to extend your cluster capabilities.

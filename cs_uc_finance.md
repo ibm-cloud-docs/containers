@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks
 
@@ -53,7 +53,7 @@ Why {{site.data.keyword.cloud_notm}}: To improve risk analysis, the company look
 * [Multiple regions for high availability](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant)
 * [SDK for Node.js](/docs/runtimes/nodejs?topic=Nodejs-nodejs_runtime)
 
 **The solution**
