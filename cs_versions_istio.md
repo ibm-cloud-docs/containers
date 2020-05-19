@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -43,6 +43,18 @@ View information for patch updates to the [managed Istio add-on](/docs/container
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
 
+
+## Changelog for 1.4.9, released 18 May 2020
+{: #149}
+
+The following table shows the changes that are included in version 1.4.9 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.4.8 | 1.4.9 | <ul><li>See the Istio release notes for [Istio 1.4.9](https://istio.io/news/releases/1.4.x/announcing-1.4.9/){:external}.</li><li>Resolves [CVE-2019-18348](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-18348){: external}, [CVE-2020-3810](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-3810){: external}, [CVE-2020-8492](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8492){: external}, [usn-4359-1](https://usn.ubuntu.com/4359-1/){: external}, and [usn-4333-1](https://usn.ubuntu.com/4333-1/){: external}. For more information, see the [Istio security bulletin](https://istio.io/news/security/istio-security-2020-005/){: external}.</li>></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.4.8" caption-side="top"}
 
 ## Changelog for 1.4.8, released 30 April 2020
 {: #148}
