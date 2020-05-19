@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-10"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -154,14 +154,14 @@ The following table is an overview of available {{site.data.keyword.cloud_notm}}
 {: caption="Table. Supported {{site.data.keyword.cloud_notm}} Private products to be used in {{site.data.keyword.cloud_notm}} Public." caption-side="top"}
 
 Before you begin:
-- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/Registry?topic=registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
-- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/Registry?topic=registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
+- [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/Registry?topic=Registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
+- [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
 - [Target your `kubectl` CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install the Helm CLI and set up tiller in your cluster](/docs/containers?topic=containers-helm#public_helm_install).
 
 To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{site.data.keyword.cloud_notm}} Public:
 
-1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/Registry?topic=registry-ts_index#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
+1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/Registry?topic=Registry-ts_index#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
 
     **For IBM WebSphere Application Server Liberty**:
 

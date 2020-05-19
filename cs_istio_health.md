@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -39,15 +39,45 @@ subcollection: containers
 To log, monitor, trace, and visualize your apps that are managed by Istio on {{site.data.keyword.containerlong_notm}}, you can launch the Grafana, Jaeger, and Kiali dashboards or deploy LogDNA and Sysdig as third-party services to your worker nodes. You can also launch ControlZ and Envoy dashboards to inspect the performance of the core Istio components, such as Galley, Pilot, Mixer, and Envoy.
 {: shortdesc}
 
+## Enabling Prometheus, Grafana, Jaeger, and Kiali
+{: #enable_optional_monitor}
+
+In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} monitoring components are included in your Istio installation, but are disabled by default. To enable these components, follow these steps.
+
+1. Edit the `managed-istio-custom` configmap resource.
+  ```
+  kubectl edit cm managed-istio-custom -n ibm-operators
+  ```
+  {: pre}
+
+2. Set the `istio-monitoring` setting to `"true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
+
+3. Save the configuration file.
+
+4. Apply the changes to your Istio installation. Changes might take up to 10 minutes to take effect.
+  ```
+  kubectl annotate iop -n ibm-operators managed-istio --overwrite version="custom-applied-at: $(date)"
+  ```
+  {: pre}
+
+Next, you can launch the dashboard for each monitoring component.
+
+<br />
+
+
 ## Launching the Prometheus, Grafana, Jaeger, and Kiali dashboards
 {: #istio_health_extras}
 
 For extra monitoring, tracing, and visualization of Istio, launch the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} dashboards.
 {: shortdesc}
 
+Authentication is required in order to view the Grafana and Kiali dashboards, but Prometheus and Jaeger can be accessed by any user who has access to your cluster.
+{: note}
+
 **Before you begin**
 * [Install the `istio` managed add-on](/docs/containers?topic=containers-istio#istio_install) in a cluster.
 * [Install the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl).
+* **Add-on version 1.5**: [Enable Prometheus, Grafana, Jaeger, and Kiali](#enable_optional_monitor).
 
 ### Prometheus
 {: #prometheus}
@@ -125,6 +155,10 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 
 3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/docs/tasks/observability/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
 
+Want to change the 1% trace sampling rate? You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize).
+{: tip}
+
+
 ### Kiali
 {: #kiali}
 
@@ -169,6 +203,10 @@ For extra monitoring, tracing, and visualization of Istio, launch the [Prometheu
 
 5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
 For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
+
+By default, no changes can be made to the Kiali dashboard in view-only mode. You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize).
+{: tip}
+
 
 <br />
 
@@ -239,9 +277,9 @@ The ControlZ dashboard accesses the Istio component ports to provide an interact
 Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying LogDNA to your worker nodes to forward logs to {{site.data.keyword.la_full}}.
 {: shortdesc}
 
-To use [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=LogDNA-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+To use [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
-To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA/tutorials?topic=LogDNA-kube#kube).
+To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube).
 
 
 
@@ -261,7 +299,7 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
-2. [Configure a Sysdig agent in your cluster.](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-config_agent#config_agent_kube_script)
+2. [Configure a Sysdig agent in your cluster.](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-config_agent#config_agent_kube_script)
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
 
@@ -271,3 +309,36 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} on the Sysdig blog.
 
+
+### Updating Sysdig for Istio add-on version 1.5
+{: #sysdig-15}
+
+If you use Sysdig to monitor your Istio-managed apps and updated your add-on to version. 1.5, you must update the `sysdig-agent` configmap so that sidecar metrics are tracked.
+{: shortdesc}
+
+1. Edit the `sysdig-agent` configmap resource.
+  ```
+  kubectl edit cm sysdig-agent -n ibm-observe
+  ```
+  {: pre}
+
+2. In the `prometheus` section, ensure that `enabled` is set to `true`, and add the following <code>process_filter</code> section.
+    ```yaml
+    prometheus:
+      enabled: true
+      process_filter:
+         - include:
+             process.name: envoy
+             conf:
+               port: 15090
+               path: "/stats/prometheus"
+    ```
+    {: codeblock}
+
+3. Save the configuration file.
+
+4. Verify that the configmap changes were applied.
+  ```
+  kubectl get cm sysdig-agent -n ibm-observe -o yaml
+  ```
+  {: pre}

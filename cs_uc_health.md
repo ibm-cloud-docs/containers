@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-27"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks
 
@@ -129,10 +129,10 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} d
 
 Key technologies:
 * [Intelligent scheduling places workloads where needed](/docs/containers?topic=containers-regions-and-zones#regions-and-zones)
-* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/Cloudant?topic=cloudant-getting-started-with-cloudant)
+* [{{site.data.keyword.cloudant}} to persist and sync data across apps](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant)
 * [Vulnerability scanning  and isolation for workloads](/docs/Registry?topic=va-va_index#va_index)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
-* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk?topic=cloud-functions-pkg_cloudant)
+* [{{site.data.keyword.openwhisk}} to sanitize data and notify researchers about data structure changes](/docs/openwhisk?topic=openwhisk-pkg_cloudant)
 
 **Context: Securely hosting and sharing disease data for Research Nonprofit**
 

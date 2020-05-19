@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-29"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -62,7 +62,7 @@ Set up the managed Istio add-on in your cluster.
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.4.5       normal         Addon Ready
+  istio           1.5       normal         Addon Ready
   ```
   {: screen}
 
@@ -117,7 +117,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.5
+    cd istio-1.5
     ```
     {: pre}
 
@@ -370,7 +370,7 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
-2. [Configure a Sysdig agent in your cluster.](/docs/Monitoring-with-Sysdig/tutorials?topic=Sysdig-config_agent#config_agent_kube_script)
+2. [Configure a Sysdig agent in your cluster.](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-config_agent#config_agent_kube_script)
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
 

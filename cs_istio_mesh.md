@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-19"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -70,7 +70,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.4.5
+    cd istio-1.5
     ```
     {: pre}
   3. Label the `default` namespace for automatic sidecar injection.
@@ -438,7 +438,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.4.5
+  cd istio-1.5
   ```
   {: pre}
 
@@ -497,6 +497,69 @@ To manually inject sidecars into a deployment:
 The app pods are now integrated into your Istio service mesh because they have the Istio sidecar container that runs alongside your app container.
 
 <br />
+
+
+## Enabling or disabling public Istio load balancers
+{: #config-gateways}
+
+By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster to load balance incoming requests from the internet to your Istio-managed apps. In version 1.5 and later of the Istio add-on, you can achieve higher availability by enabling an Istio load balancer in each zone of your cluster.
+{: shortdesc}
+
+<img src="images/icon-beta-flair.png" alt="Beta icon" width="30" style="width:30px; border-style: none"/> Enabling and disabling public Istio load balancers in multiple zones is a currently beta feature that is subject to change. Do not use it for production workloads.
+{: preview}
+
+1. Edit the `managed-istio-custom` configmap resource.
+  ```
+  kubectl edit cm managed-istio-custom -n ibm-operators
+  ```
+  {: pre}
+
+2. Check or add your cluster's zones in the `istio-ingressgateway-zone` fields.
+  * If you installed the Istio add-on at version 1.5, verify that all of your cluster zones are included in the `istio-ingressgateway-zone` fields.
+  * If you updated your Istio add-on from version 1.4 to 1.5, add your cluster's zones to the configmap.
+      1. Get the zones that your worker nodes are deployed to.
+        ```
+        ibmcloud ks cluster get -c <cluster_name_or_ID> | grep Zones
+        ```
+        {: pre}
+      2. Add the zones to the `istio-ingressgateway-zone` fields.
+
+   Example for a classic, multizone cluster in Dallas:
+   ```yaml
+   istio-ingressgateway-zone-1: "dal10"
+   istio-ingressgateway-zone-2: "dal12"
+   istio-ingressgateway-zone-3: "dal13"
+   ```
+   {: screen}
+
+3. Enable or disable an Istio load balancer in each zone by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"true"` or `"false"`.<p class="note">If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled. If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.</p>
+   Example to enable a public gateway in each zone:
+   ```yaml
+   istio-ingressgateway-public-1-enabled: "true"
+   istio-ingressgateway-public-2-enabled: "true"
+   istio-ingressgateway-public-3-enabled: "true"
+   istio-ingressgateway-private-1-enabled: "false"
+   istio-ingressgateway-private-2-enabled: "false"
+   istio-ingressgateway-private-3-enabled: "false"
+   ```
+   {: codeblock}
+
+4. Save and close the configuration file.
+
+5. Apply the changes to your Istio installation. Changes might take up to 10 minutes to take effect.
+   ```
+   kubectl annotate iop -n ibm-operators managed-istio --overwrite version="custom-applied-at: $(date)"
+   ```
+   {: pre}
+
+6. Verify that the new `istio-ingressgateway` load balancer services are created.
+  ```
+  kubectl get svc -n istio-system
+  ```
+  {: pre}
+
+To expose Istio-managed apps by using the `istio-ingressgateway` load balancer services, specify the `istio: ingressgateway` selector in your `Gateway` resource. For more information, see [Exposing Istio-managed apps](#istio_expose).
+
 
 
 ## Exposing Istio-managed apps
@@ -606,7 +669,7 @@ To publicly expose apps:
   ```
   {: pre}
 
-5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer.
+5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
   ```
   kubectl get svc -n istio-system
   ```
@@ -630,12 +693,12 @@ To publicly expose apps:
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
   * Classic clusters:
     ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```
     {: pre}
   * VPC Gen 1 clusters:
     ```
-    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname>
+    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```
     {: pre}
 
@@ -764,7 +827,7 @@ To publicly expose apps:
   ```
   {: pre}
 
-5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer.
+5. Get the **EXTERNAL-IP** address (classic clusters) or the hostname (VPC clusters) for the `istio-ingressgateway` public load balancer. If you [enabled an Istio load balancer in each zone of your cluster](#config-gateways), get the IP address or hostname of the load balancer service in each zone.
   ```
   kubectl get svc -n istio-system
   ```
@@ -788,12 +851,12 @@ To publicly expose apps:
 6. Register the load balancer IP or hostname by creating a DNS subdomain. For more information about registering DNS subdomains in {{site.data.keyword.containerlong_notm}}, see [Classic: Registering an NLB subdomain](/docs/containers?topic=containers-loadbalancer_hostname) or [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns).
   * Classic clusters:
     ```
-    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP>
+    ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```
     {: pre}
   * VPC Gen 1 clusters:
     ```
-    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname>
+    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```
     {: pre}
 
