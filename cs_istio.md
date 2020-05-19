@@ -301,8 +301,8 @@ You cannot revert your managed Istio add-on to a previous version. If you want t
 5. [Update your `istioctl` client and sidecars](#update_client_sidecar).
 
 6. **Version 1.5**: Review the following changes that are required for monitoring setups in your service mesh.
-    * In version 1.5, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are included in your Istio installation but are **disabled** by default. To securely enable these monitoring components, see [Enabling Prometheus, Grafana, Jaeger, and Kiali](/docs/containers?topic=containers-isto-health#enable_optional_monitor).
-    * If you use Sysdig to monitor your Istio-managed apps, [update the `sysdig-agent` configmap so that sidecar metrics are tracked](/docs/containers?topic=containers-isto-health#sysdig-15).
+    * In version 1.5, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are included in your Istio installation but are **disabled** by default. To securely enable these monitoring components, see [Enabling Prometheus, Grafana, Jaeger, and Kiali](/docs/containers?topic=containers-istio-health#enable_optional_monitor).
+    * If you use Sysdig to monitor your Istio-managed apps, [update the `sysdig-agent` configmap so that sidecar metrics are tracked](/docs/containers?topic=containers-istio-health#sysdig-15).
 
 ### Updating your add-on from beta versions to the generally available version
 {: #istio-ga}

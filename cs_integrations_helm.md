@@ -333,7 +333,7 @@ If you want to install a Helm chart without using Tiller, see [Private clusters:
 {: tip}
 
 Before you begin:
-- Install Docker on your local machine. If you installed the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cloud-cli-getting-started), Docker is already installed.
+- Install Docker on your local machine. If you installed the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started), Docker is already installed.
 - [Install the {{site.data.keyword.registrylong_notm}} CLI plug-in and set up a namespace](/docs/Registry?topic=Registry-getting-started#gs_registry_cli_install).
 - To install Tiller with a Kubernetes service account and cluster role binding in the `kube-system` namespace, make sure that you have the [`cluster-admin` role](/docs/containers?topic=containers-users#access_policies).
 
