@@ -47,7 +47,7 @@ With one click, you can get all Istio core components and additional tracing, mo
 In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on.
 {: shortdesc}
 
-Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only.
+Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only. Currently, the Istio add-on is not supported for version 1.18 clusters.
 {: note}
 
 **Before you begin**</br>

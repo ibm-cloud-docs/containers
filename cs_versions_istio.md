@@ -49,7 +49,7 @@ View information for patch and minor version updates to the [managed Istio add-o
 The following table shows the changes that are included in version 1.5 of the managed Istio add-on.
 {: shortdesc}
 
-Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only.
+Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only. Currently, the Istio add-on is not supported for version 1.18 clusters.
 {: note}
 
 | Previous | Current | Description |
