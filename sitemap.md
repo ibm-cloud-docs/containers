@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: containers
 subcollection: containers
@@ -205,6 +205,14 @@ subcollection: containers
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial)
+* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
+* [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
+* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
+* [Lesson 1: Creating a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
+* [Lesson 2: Deploying a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
+* [Lesson 3: Setting up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
+* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 * [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
