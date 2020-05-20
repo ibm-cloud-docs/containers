@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -186,6 +186,11 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
     ```
     {: pre}
+  * VPC Gen 2:
+    ```
+    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+    ```
+    {: pre}
 
 2. Verify that the subdomain is created and copy the subdomain.
   ```
@@ -229,6 +234,11 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
   * VPC Gen 1:
     ```
     ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+    ```
+    {: pre}
+  * VPC Gen 2:
+    ```
+    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
     ```
     {: pre}
 
@@ -701,6 +711,11 @@ To publicly expose apps:
     ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```
     {: pre}
+  * VPC Gen 2 clusters:
+    ```
+    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
+    ```
+    {: pre}
 
 7. Verify that the subdomain is created. In the output, copy the name of your SSL secret in the **SSL Cert Secret Name** field.
   ```
@@ -857,6 +872,11 @@ To publicly expose apps:
   * VPC Gen 1 clusters:
     ```
     ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
+    ```
+    {: pre}
+  * VPC Gen 2 clusters:
+    ```
+    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```
     {: pre}
 

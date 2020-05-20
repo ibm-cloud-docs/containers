@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: containers
 subcollection: containers
@@ -47,7 +47,7 @@ subcollection: containers
 
 [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-[Creating a VPC Gen 1 compute cluster](/docs/containers?topic=containers-getting-started#vpc-classic-gs)
+[Creating a VPC Gen 2 compute cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
@@ -204,7 +204,7 @@ subcollection: containers
   * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial)
+[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 * [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
@@ -355,6 +355,9 @@ subcollection: containers
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
   * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
+* [Creating a standard VPC Gen 2 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
+  * [Creating a standard VPC Gen 2 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
+  * [Creating standard VPC Gen 2 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 * [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard)
   * [Creating a standard VPC Gen 1 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpc_ui)
   * [Creating standard VPC Gen 1 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpc_cli)
@@ -1111,7 +1114,7 @@ subcollection: containers
   * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options)
   * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove)
 
-[Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)
+[Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 and Gen 2 compute)](/docs/containers?topic=containers-vpc-block)
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 * [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
@@ -1765,6 +1768,11 @@ subcollection: containers
 * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
 * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
+
+[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+* [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
+* [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
+* [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
 
 [VPC Gen 1 compute cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
 * [Compute](/docs/containers?topic=containers-limitations#vpc_compute_limit)

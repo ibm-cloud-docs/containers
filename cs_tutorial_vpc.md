@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, vpc
 
@@ -33,16 +33,19 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Creating a cluster in your Virtual Private Cloud (VPC)
+# Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
 {: #vpc_ks_tutorial}
 
-With **{{site.data.keyword.containerlong}} clusters in VPC Generation 1 compute**, you can create your cluster on classic infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc-on-classic?topic=vpc-on-classic-about). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+With **{{site.data.keyword.containerlong}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 {: shortdesc}
+
+<img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> Want to create a cluster in your Virtual Private Cloud (VPC) on generation 1 compute instead? See [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
+{: tip}
 
 ## Objectives
 {: #vpc_ks_objectives}
 
-In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly through a load balancer.
+In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Gen 2 Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
 
 ## Time required
 {: #vpc_ks_time}
@@ -51,17 +54,19 @@ In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} 
 ## Audience
 {: #vpc_ks_audience}
 
-This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC Generation 1 compute for the first time.
+This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC Generation 2 compute for the first time.
 {: shortdesc}
 
 ## Prerequisites
 {: #vpc_ks_prereqs}
 
 Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
-* VPC clusters: [**Administrator** platform role for VPC Infrastructure](/docs/vpc-on-classic?topic=vpc-on-classic-managing-user-permissions-for-vpc-resources).
+* [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
 * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry.
+
+If this cluster is not the first cluster in the region and resource group, make sure that the API key for the region and resource group that you plan to create the cluster in is set up with the correct [infrastructure permissions](/docs/containers?topic=containers-users#api_key).
 
 <br>
 Install the command-line tools.
@@ -76,7 +81,7 @@ Install the command-line tools.
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
-*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version 1.16.9.
+*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.17.3**.
 
 <br />
 
@@ -84,7 +89,7 @@ Install the command-line tools.
 ## Lesson 1: Creating a cluster in VPC
 {: #vpc_ks_create_vpc_cluster}
 
-Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud (Gen 1 compute)](/docs/vpc-on-classic?topic=vpc-on-classic-getting-started).
+Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
 {:shortdesc}
 
 1.  Log in to the {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). The VPC can be in a separate resource group than the resource group of your cluster. If you have a federated ID, include the `--sso` flag.
@@ -92,10 +97,11 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     ibmcloud login -r us-south [--sso]
     ```
     {: pre}
-2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli).
-    1.  Target the VPC infrastructure generation 1.
+
+2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli).
+    1.  Target the VPC infrastructure generation 2.
         ```
-        ibmcloud is target --gen 1
+        ibmcloud is target --gen 2
         ```
         {: pre}
     2.  Create a VPC that is called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
@@ -104,44 +110,64 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
     3.  Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
-        *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zone ls`.
-        *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
+        *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
+        *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
         *  **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
+        *  **Network traffic control**: Set up [network access control lists](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) (ACLs) to control inbound and outbound network traffic at the subnet level. Each subnet includes a default ACL that permits all inbound and outbound traffic.
 
         ```
         ibmcloud is subnet-create mysubnet1 <vpc_ID> --zone us-south-1 --ipv4-address-count 256
         ```
         {: pre}
 
-3.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-classic` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic).
+3. To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
+    1. List your security groups. For the **VPC** that you created, note the ID of the default security group.
+      ```
+      ibmcloud is security-groups
+      ```
+      {: pre}
+      Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
+      ```
+      ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
+      1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
+      ```
+      {: screen}
+
+    2. Add a security group rule to allow inbound TCP traffic on ports 30000-32767.
+      ```
+      ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+      ```
+      {: pre}
+
+4.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
     ```
-    ibmcloud ks cluster create vpc-classic --name myvpc-cluster --zone us-south-1 --flavor b2.4x16 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
+    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.17 --flavor bx1.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
-4.  Check the state of your cluster. The cluster might take a few minutes to provision.
+
+5.  Check the state of your cluster. The cluster might take a few minutes to provision.
     1.  Verify that the cluster **State** is **normal**.
         ```
-        ibmcloud ks cluster ls --provider vpc-classic
+        ibmcloud ks cluster ls --provider vpc-gen2
         ```
         {: pre}
-    2.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+
+    2.  Download the Kubernetes configuration files.
         ```
         ibmcloud ks cluster config --cluster myvpc-cluster
         ```
         {: pre}
 
-    4.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
-
+    3.  Verify that the `kubectl` commands run properly with your cluster by checking the Kubernetes CLI server version.
         ```
         kubectl version  --short
         ```
         {: pre}
 
         Example output:
-
         ```
-        Client Version: v1.16.9
-        Server Version: v1.16.9+IKS
+        Client Version: v1.17.3
+        Server Version: v1.17.3+IKS
         ```
         {: screen}
 
@@ -149,7 +175,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 
 ## Lesson 2: Deploying a privately available app
-{: #vpc_ks_app}      
+{: #vpc_ks_app}
 
 Create a Kubernetes deployment to deploy a single app instance as a pod to your worker node in your VPC cluster.
 {:shortdesc}
@@ -177,17 +203,17 @@ To deploy the app:
     ```
     {: pre}
 
-3.  Use an existing registry namespace or create one, such as `myvpc`.
+3.  Use an existing registry namespace or create one, such as `vpc-gen2`.
     ```
     ibmcloud cr namespace-list
     ```
     {: pre}
     ```
-    ibmcloud cr namespace-add myvpc
+    ibmcloud cr namespace-add vpc-gen2
     ```
     {: pre}
 
-4.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created in the previous tutorial. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
+4.  Build a Docker image that includes the app files of the `Lab 1` directory, and push the image to the {{site.data.keyword.registrylong_notm}} namespace that you created. If you need to change the app in the future, repeat these steps to create another version of the image. **Note**: Learn more about [securing your personal information](/docs/containers?topic=containers-security#pi) when you work with container images.
 
     Use lowercase alphanumeric characters or underscores (`_`) only in the image name. Don't forget the period (`.`) at the end of the command. The period tells Docker to look inside the current directory for the Dockerfile and build artifacts to build the image.
 
@@ -201,7 +227,7 @@ To deploy the app:
     ```
     Successfully built <image_ID>
     Successfully tagged us.icr.io/<namespace>/hello-world:1
-    The push refers to a repository [us.icr.io/myvpc/hello-world]
+    The push refers to a repository [us.icr.io/vpc-gen2/hello-world]
     29042bc0b00c: Pushed
     f31d9ee9db57: Pushed
     33c64488a635: Pushed
@@ -215,14 +241,14 @@ To deploy the app:
 5.  Create a deployment for your app. Deployments are used to manage pods, which include containerized instances of an app. The following command deploys the app in a single pod. For the purposes of this tutorial, the deployment is named **hello-world-deployment**, but you can give the deployment any name that you want.
 
     ```
-    kubectl create deployment hello-world-deployment --image=us.icr.io/myvpc/hello-world:1
+    kubectl create deployment hello-world-deployment --image=us.icr.io/vpc-gen2/hello-world:1
     ```
     {: pre}
 
     Example output:
 
     ```
-    deployment "hello-world-deployment" created
+    deployment.apps/hello-world-deployment created
     ```
     {: screen}
 
@@ -238,7 +264,7 @@ To deploy the app:
     Example output:
 
     ```
-    service "hello-world-service" exposed
+    service/hello-world-service exposed
     ```
     {: screen}
 
@@ -250,7 +276,7 @@ To deploy the app:
     <tbody>
     <tr>
     <td><code>expose</code></td>
-    <td>Expose a resource as a Kubernetes service so that users can access the resource by using the IP address of the service.</td>
+    <td>Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the IP address of the service.</td>
     </tr>
     <tr>
     <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
@@ -365,7 +391,7 @@ To deploy the app:
 Set up a VPC load balancer to expose your app on the public network.
 {: shortdesc}
 
-When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's services through the load balancer, even though your worker node is connected to only a private subnet.
+When you create a Kubernetes `LoadBalancer` service in your cluster, a load balancer for VPC is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes. The following diagram illustrates how a user accesses an app's service through the load balancer, even though your worker node is connected to only a private subnet.
 
 <img src="images/vpc_tutorial_lesson4_lb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
 
@@ -390,7 +416,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     <tbody>
     <tr>
     <td><code>expose</code></td>
-    <td>Expose a resource as a Kubernetes service so that users can access the resource by using the VPC load balancer hostname.</td>
+    <td>Expose a Kubernetes resource, such as a deployment, as a Kubernetes service so that users can access the resource by using the VPC load balancer hostname.</td>
     </tr>
     <tr>
     <td><code>deployment/<em>&lt;hello-world-deployment&gt;</em></code></td>
@@ -414,7 +440,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     </tr>
     </tbody></table>
 
-2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When the Kubernetes `LoadBalancer` service is created, the **LoadBalancer Ingress** field is populated with a hostname that is assigned by the VPC load balancer that is automatically created.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
+2.  Verify that the Kubernetes `LoadBalancer` service is created successfully in your cluster. When you create the Kubernetes `LoadBalancer` service, a VPC load balancer is automatically created for you. The VPC load balancer assigns a hostname to your Kubernetes LoadBalancer service that you can see in the **LoadBalancer Ingress** field of your CLI output.<p class="note">The VPC load balancer takes a few minutes to provision in your VPC. Until the VPC load balancer is ready, you cannot access the Kubernetes `LoadBalancer` service through its hostname.</p>
 
     ```
     kubectl describe service hw-lb-svc
@@ -434,7 +460,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     Port:                     <unset> 8080/TCP
     TargetPort:               8080/TCP
     NodePort:                 <unset> 32040/TCP
-    Endpoints:              
+    Endpoints:
     Session Affinity:         None
     External Traffic Policy:  Cluster
     Events:
@@ -456,12 +482,12 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
 
     In the following example CLI output, the VPC load balancer that is named `kube-bh077ne10vqpekt0domg-046e0f754d624dca8b287a033d55f96e` is created for the `hw-lb-svc` Kubernetes `LoadBalancer` service:
     ```
-    ID                                     Name                                                         Created          Host Name                              Is Public   Listeners                               Operating Status   Pools                                   Private IPs              Provision Status   Public IPs                    Subnets                                Resource Group   
+    ID                                     Name                                                         Created          Host Name                              Is Public   Listeners                               Operating Status   Pools                                   Private IPs              Provision Status   Public IPs                    Subnets                                Resource Group
     06496f64-a689-4693-ba23-320959b7b677   kube-bh077ne10vqpekt0domg-046e0f754d624dca8b287a033d55f96e   8 minutes ago    1234abcd-us-south.lb.appdomain.cloud   yes         95482dcf-6b9b-4c6a-be54-04d3c46cf017    online             717f2122-5431-403c-b21d-630a12fc3a5a    10.1.1.1,10.1.1.2        active             169.1.1.1,169.1.1.2   c6540331-1c1c-40f4-9c35-aa42a98fe0d9   00809211b934565df546a95f86160f62
     ```
     {: screen}
 
-4. Curl the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer. Example:
+4. Send a request to your app by curling the hostname and port of the Kubernetes `LoadBalancer` service that is assigned by the VPC load balancer. Example:
     ```
     curl 1234abcd-us-south.lb.appdomain.cloud:8080
     ```
@@ -492,4 +518,3 @@ Need help, have questions, or want to give feedback on VPC clusters? Try posting
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
 {: tip}
-

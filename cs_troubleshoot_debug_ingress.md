@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -213,6 +213,15 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
       ```
       {: pre}
+    * VPC Gen 2 clusters:
+      ```
+      ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
+      ```
+      {: pre}
+      ```
+      ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --enable
+      ```
+      {: pre}
   * If no ALBs are created after several minutes, [review ways to get help](#getting_help_ingress).
 
 4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address (classic clusters) or hostname (VPC clusters) as the public ALB.
@@ -293,7 +302,7 @@ When you create a VPC cluster, one public and one private VPC load balancer is a
 
 {: tsResolve}
 Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. If you use use non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+1. If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
 
 2. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
   ```
@@ -426,6 +435,15 @@ Start by checking for error messages in the Ingress resource deployment events a
         {: pre}
         ```
         ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
+        ```
+        {: pre}
+      * VPC Gen 2 clusters:
+        ```
+        ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
+        ```
+        {: pre}
+        ```
+        ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --enable
         ```
         {: pre}
 

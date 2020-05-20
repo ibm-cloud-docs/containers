@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -51,6 +51,9 @@ After you connect your public and private cloud, you can [reuse your private pac
 
 Establish VPN connectivity between your public Kubernetes cluster and your {{site.data.keyword.Bluemix}} Private instance to allow two-way communication.
 {: shortdesc}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> These steps are supported for classic clusters only. For VPC clusters, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example).
+{: note}
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.cloud_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).

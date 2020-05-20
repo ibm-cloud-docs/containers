@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -73,9 +73,11 @@ Keep in mind the following IP address reservations.
 {: #vpc-ip-range}
 The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. Your worker nodes are assigned an IP address from this range. For a list of IP address ranges per VPC zone, see [VPC default address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#default-vpc-address-prefixes).
 
-If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation:
+If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation and your cluster's infrastructure type:
 * If you specified your own pod subnet in the `--pod-subnet` flag during cluster creation, your pods are assigned IP addresses from this range.
-* If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet, `172.30.0.0/16`.
+* If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet.
+  * For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`.
+  * In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
 
 ### Public gateways
 {: #vpc_basics_pgw}

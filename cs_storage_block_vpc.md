@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, vpc
 
@@ -34,10 +34,10 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)
+# Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 and Gen 2 compute)
 {: #vpc-block}
 
-[{{site.data.keyword.block_storage_is_full}} (Gen 1 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
+[{{site.data.keyword.block_storage_is_full}} (Gen 1 and Gen 2 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
 {: shortdesc}
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/cloud/vpc/pricing).
@@ -436,7 +436,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.zone</code></td>
-   <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zone`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region).</td>
+   <td>Enter the VPC block zone that matches the location that you retrieved earlier. For example, if your location is **Washington DC-1**, then use `us-east-1` as your zone. To list available zones, run `ibmcloud is zones`. To find an overview of available VPC zones and locations, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region).</td>
    </tr>
    <tr>
    <td><code>spec.csi.volumeAttributes.volumeId</code></br><code>spec.csi.volumeHandle</code></td>
