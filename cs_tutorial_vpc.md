@@ -98,7 +98,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     ```
     {: pre}
 
-2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-cli).
+2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli).
     1.  Target the VPC infrastructure generation 2.
         ```
         ibmcloud is target --gen 2

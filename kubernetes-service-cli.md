@@ -111,7 +111,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`alb configure vpc-classic`](#cli_alb_configure_vpc_classic)</li>
    <li>[`alb configure vpc-gen2`](#cli_alb_configure_vpc_gen2)</li>
    <li>[`alb create vpc-classic`](#cli_alb-create-vpc-classic)</li>
-   <li>[`alb create vpc-gen2`](#cli_alb_create_vpc_gen2)</li>
+   <li>[`alb create vpc-gen2`](#cli_alb-create-vpc-gen2)</li>
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
    <li>[`cluster create vpc-gen2`](#cli_cluster-create-vpc-gen2)</li>
    <li>[`nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc)</li>
