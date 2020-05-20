@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-15"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks
 
@@ -82,7 +82,7 @@ Version 1.0 of the CLI plug-in was released on 16 March 2020. This version conta
 | 1.0.15 | 24 Mar 2020 | <ul><li>Adds the [`ibmcloud ks nlb-dns secret regenerate`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-secret-regenerate) and [`ibmcloud ks nlb-dns secret rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-secret-rm) commands to help you manage secrets for NLB subdomains.</li><li>Adds the optional `--pool WORKER_POOL` flag to `ibmcloud ks zone rm`.</li><li>Deprecates the option to specify a YAML file in the `--file` flag of the `ibmcloud ks cluster create` and `ibmcloud ks worker add` commands. Instead, specify values for your cluster in the supported flags for these commands.</li><li>Fixes the following bugs:<ul><li>For `ibmcloud ks cluster rm`, the `--force-delete-storage` flag no longer sets the `-f` flag.</li><li>For `ibmcloud ks cluster create`, the `--private-only` flag no longer requires the `--private-vlan` flag.</li></ul></li><li>Updates the help text in various languages.</li></ul>|
 | 1.0.0 | 16 Mar 2020 | Introduces permanent behavior and syntax changes that are not backwards compatible. For a summary of the changes in version 1.0, see [Using version 1.0 of the plug-in](#changelog_beta).|
 {: caption="Overview of version changes for version 1.0 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="Overview of version changes for version 1.0 of the {{site.data.keyword.containerlong_notm}} CLI plug-in"}
+{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
 <br />
 
@@ -108,7 +108,7 @@ Review the following changes for 0.4 versions of the CLI plug-in.
 | 0.4.3 | 04 Sep 2019 | Adds deprecation warnings for legacy commands to error messages that are sent to `stderr`. |
 | 0.4.1 | 03 Sep 2019 |<ul><li>Sets the {{site.data.keyword.containerlong_notm}} plug-in to the redesigned format by default. This redesigned version includes changes such as categorical lists instead of an alphabetical list of commands in the output of `ibmcloud ks help`, spaced-structured commands instead of hyphenated-structure commands, repeated flags instead of multiple values in comma-separated lists, and more. For a full list of the changes between version `0.3` and `0.4`, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li><li>Adds the [`ibmcloud ks script update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) command to rewrite scripts that call `ibmcloud ks` commands.</li><li>Improves error handling for `ibmcloud ks cluster ls`.</li><li>Updates help text.</li></ul>|
 {: caption="Overview of version changes for version 0.4 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="Overview of version changes for version 0.4 of the {{site.data.keyword.containerlong_notm}} CLI plug-in"}
+{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
 <br />
 
@@ -136,7 +136,7 @@ Version 0.3 of the CLI plug-in is deprecated. Ensure that your {{site.data.keywo
 | 0.3.28 | 23 May 2019 | <ul><li>Adds the [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li><li>Adds the `--private-only` flag to the `zone network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li><li>Removes the `--force-update` flag from the `worker update` command.</li><li>Adds the **VLAN ID** column to the output of the `alb ls` and `alb get` commands.</li><li>Adds the **Multizone Metro** column to the output of the `locations` command to designate zones that are multizone-capable.</li><li>Adds the **Master State** and **Master Health** fields to the output of the `cluster get` command. For more information, see [Master states](/docs/containers?topic=containers-health#states_master).</li><li>Updates the help text in various languages.</li></ul> |
 | 0.3.8 | 30 Apr 2019 | Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.<ul><li>Adds the [`ibmcloud ks locations`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) command to list all locations that {{site.data.keyword.containerlong_notm}} supports.</li><li>Adds the `--location` flag to the `cluster ls` and `zone ls` commands to filter resources by one or more locations.</li><li>Adds the `--region` flag to the `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands. To run these commands, you must specify a region in the `--region` flag.</li></ul> |
 {: caption="Overview of version changes for version 0.3 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="Overview of version changes for version 0.3 of the {{site.data.keyword.containerlong_notm}} CLI plug-in"}
+{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
 <br />
 
@@ -164,7 +164,7 @@ Version 0.2 of the CLI plug-in is deprecated. Ensure that your {{site.data.keywo
 | 0.2.30 | 31 Jan 2019 | Increases the default timeout value for `ibmcloud ks cluster config` to `500s`. |
 | 0.2.19 | 16 Jan 2019 | <ul><li>Adds the `IKS_BETA_VERSION` environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see [Using the beta command structure](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta).</li><li>Increases the default timeout value for `ibmcloud ks subnets` to `60s`.</li><li>Fixes a minor bug and updates the help text in various languages.</li></ul> |
 {: caption="Overview of version changes for version 0.2 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="Overview of version changes for version 0.2 of the {{site.data.keyword.containerlong_notm}} CLI plug-in"}
+{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
 <br />
 
@@ -189,5 +189,5 @@ Version 0.1 of the CLI plug-in is deprecated. Ensure that your {{site.data.keywo
 | 0.1.591 | 02 Oct 2018 | Adds support for [resource groups](/docs/containers?topic=containers-clusters#cluster_prepare). |
 | 0.1.590 | 01 Oct 2018 | <ul><li>Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status) commands for collecting API server logs in your cluster.</li><li>Adds the [`ibmcloud ks key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li><li>Adds the `--skip-master-health` flag to the [ibmcloud ks worker reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) and [ibmcloud ks worker reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload.</li><li>Renames `Owner Email` to `Owner` in the output of `ibmcloud ks cluster get`.</li></ul> |
 {: caption="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
-{: summary="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in"}
+{: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
