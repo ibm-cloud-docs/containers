@@ -192,8 +192,6 @@ After you set up your account to create clusters, decide on the setup for your c
 <br />
 
 
-
-
 ## Creating a standard classic cluster
 {: #clusters_standard}
 

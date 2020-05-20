@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-18"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -263,6 +263,7 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
     <p><strong>Physical machines, or bare metal, (not available for VPC clusters)</strong> yield high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs:</p>
     <ul><li><strong>Monthly billing only</strong>: All bare metals are charged monthly.</li>
     <li><strong>Longer ordering process</strong>:  After you order or cancel a bare metal server, the process is completed manually in your IBM Cloud infrastructure account. Therefore, it can take more than one business day to complete.</li></ul>
+    <p class="important"><img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> <strong>VPC Generation 2 compute only</strong>: Prices vary by region where the underlying worker node infrastructure resides. For more information, see [What are the regional uplift charges for VPC Generation 2 compute worker nodes?](#charges_vpc_gen2).
     <p>For more information about the machine specifications, see [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).</p></dd>
   <dt id="bandwidth">Public bandwidth</dt>
     <dd><p>Bandwidth refers to the public data transfer of inbound and outbound network traffic, both to and from {{site.data.keyword.cloud_notm}} resources in data centers around the globe.</p>
@@ -290,6 +291,15 @@ With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud in
 Monthly resources are billed based on the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
 {: note}
 
+
+## What are the regional uplift charges for VPC Generation 2 compute worker nodes?
+{: #charges_vpc_gen2}
+{: faq}
+
+When you create a cluster on VPC generation 2 compute infrastructure, the worker nodes might incur an uplift charge that varies by the [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones) that you create the cluster in. The uplift charge is a percentage (`%`) of the hourly rate (`r`), and is added to the hourly rate of the worker node. The total hourly rate cost for a worker node can be calculated as `r + (r × %)`. In the [Kubernetes cluster creation console](https://cloud.ibm.com/kubernetes/catalog/create){: external}, this uplift is reflected in the pricing calculator as you configure your cluster details. The following table describes the pricing uplift by region.
+{: shortdesc}
+
+For a table that describes the pricing uplift by region, see [Regional pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
 
 
 ## Are my platform and infrastructure resources consolidated in one bill?

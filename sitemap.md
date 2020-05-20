@@ -1588,6 +1588,8 @@ subcollection: containers
 
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
 
+[What are the regional uplift charges for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
+
 [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
 
 [Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
