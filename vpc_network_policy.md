@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -39,7 +39,8 @@ subcollection: containers
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This ACL information is specific to VPC clusters. For network policy information for classic clusters, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}
 
-
+<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Because IP in IP encapsulation is used for traffic across pods in VPC generation 2 compute, you cannot filter pod traffic by using VPC security group egress rules or access control lists (ACLs). If you want to control pod network traffic, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies).
+{: important}
 
 If you have unique security requirements, you can control traffic to and from your cluster with VPC access control lists (ACLs) and traffic between pods in your cluster with Kubernetes network policies.
 {: shortdesc}

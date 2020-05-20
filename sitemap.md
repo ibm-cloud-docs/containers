@@ -1114,7 +1114,7 @@ subcollection: containers
   * [Understanding your storage removal options](/docs/containers?topic=containers-block_storage#storage_delete_options)
   * [Cleaning up persistent storage](/docs/containers?topic=containers-block_storage#storage_remove)
 
-[Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)
+[Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 and Gen 2 compute)](/docs/containers?topic=containers-vpc-block)
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc_block_qs)
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 * [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
@@ -1768,6 +1768,11 @@ subcollection: containers
 * [Compute](/docs/containers?topic=containers-limitations#classic_compute_limit)
 * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
+
+[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+* [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
+* [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
+* [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
 
 [VPC Gen 1 compute cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
 * [Compute](/docs/containers?topic=containers-limitations#vpc_compute_limit)

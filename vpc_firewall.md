@@ -249,10 +249,8 @@ If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and 
 
 When you create a Generation 2 VPC, the VPC is created with a default security group that does not allow incoming traffic requests to apps on your worker nodes. You must modify the security group for the VPC to allow incoming TCP traffic to ports `30000 - 32767`. Additionally, if you create a non-default security group for a Gen 1 or Gen 2 VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`.
 
-
 <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> You must allow inbound traffic to your worker nodes.</br></br>Because IP in IP encapsulation is used for traffic across pods in VPC generation 2 compute, you cannot filter pod traffic by using VPC security group egress rules or access control lists (ACLs). If you want to control pod network traffic, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies).
 {: important}
-
 
 ### Opening security group ports in the console
 {: #security_groups_ui}
@@ -306,7 +304,6 @@ When you create a Generation 2 VPC, the VPC is created with a default security g
 
 You can use access control lists (ACLs) on your VPC subnets to act as a firewall to restrict worker node ingress and egress. However, you must allow your worker nodes to access the resources that are required for the cluster to function by following the steps in [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls).
 {: shortdesc}
-
 
 <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Because IP in IP encapsulation is used for traffic across pods in VPC generation 2 compute, you cannot filter pod traffic by using VPC security group egress rules or access control lists (ACLs). If you want to control pod network traffic, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies).
 {: important}

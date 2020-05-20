@@ -151,9 +151,6 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: tab-title="VPC Gen 1 compute"}
 {: tab-group="vm-worker-flavors"}
 
-`*` VPC Gen 1: For more information about network performance caps for virtual machines, see [VPC Gen 1 compute profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
-
-
 
 | Name and use case | Cores / Memory | Primary disk | Network speed `*` |
 |:-----------------|:-----------------|:------------------|:-------------|
@@ -179,6 +176,8 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: #vpc-gen2-worker-vm-flavors}
 {: tab-title="VPC Gen 2 compute"}
 {: tab-group="vm-worker-flavors"}
+
+`*` VPC Gen 1: For more information about network performance caps for virtual machines, see [VPC Gen 1 compute profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
 
 `*` VPC Gen 2: For more information about network performance caps for virtual machines, see [VPC Gen 2 compute profiles](/docs/vpc?topic=vpc-profiles). The network speeds refer to the speeds of the worker node interfaces. The maximum speed available to your worker nodes is `16Gbps`. Because IP in IP encapsulation is required for traffic between pods that are on different VPC Gen 2 worker nodes, data transfer speeds between pods on different worker nodes might be slower, about half the compute profile network speed. Overall network speeds for apps that you deploy to your cluster depend on the worker node size and application's architecture.
 

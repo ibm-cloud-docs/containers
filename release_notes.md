@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,6 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 20 May 2020 | **New! Virtual Private Cloud Generation 2**: You can now create standard Kubernetes clusters in your [Gen 2 Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC Gen 2 clusters are available for only standard, Kubernetes clusters and are not supported in free or OpenShift clusters.<br><br> For more information, check out the following links:<ul><li>[Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)</li><li>[Supported virtual machine flavors for VPC Gen 2 worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm)</li><li>[New VPC Gen 2 commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)</li><li>[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)</li></ul>Ready to get started? Try out the [Creating a cluster in your VPC on generation 2 compute tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).|
 | 19 May 2020 | **Istio add-on**: [Version 1.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#15) is released.|
 | 18 May 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 628](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).|
 | 14 May 2020 | **Kubernetes version 1.18**: [Kubernetes 1.18 release](/docs/containers?topic=containers-cs_versions#cs_v118) is certified.|

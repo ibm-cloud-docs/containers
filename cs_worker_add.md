@@ -125,7 +125,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
    ```
-   ibmcloud ks subnets --zone <zone> --provider (vpc-classic|vpc-gen2) --vpc-id <VPC_ID>
+   ibmcloud ks subnets --zone <zone> --provider >(vpc-classic|vpc-gen2) --vpc-id <VPC_ID>
    ```
    {: pre}
 

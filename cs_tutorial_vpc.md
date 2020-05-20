@@ -518,4 +518,3 @@ Need help, have questions, or want to give feedback on VPC clusters? Try posting
 
 If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack) to this Slack.
 {: tip}
-

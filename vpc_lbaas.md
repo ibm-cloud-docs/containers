@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -69,7 +69,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 **Before you begin**:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* If you use non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+* If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
 
 </br>**To enable your app to receive public or private requests:**
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-deploy_app#app_cli). Ensure that you add a label in the metadata section of your deployment configuration file. This custom label identifies all pods where your app runs to include them in the load balancing.
@@ -221,8 +221,14 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 2. Create a DNS subdomain for the load balancer hostname.
   * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with an SSL certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you.
     1. Create a DNS subdomain and SSL certificate.
+      * VPC Gen 1:
         ```
         ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
+        ```
+        {: pre}
+      * VPC Gen 2:
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
         ```
         {: pre}
 
