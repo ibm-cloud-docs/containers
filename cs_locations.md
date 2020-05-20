@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -79,12 +79,14 @@ The following tables list the available single and multizone locations in {{site
 
 * **[Multizone](#zones-mz)**: If you create a cluster in a multizone metro location, the replicas of your highly available Kubernetes master are automatically spread across zones. You have the option to spread your worker nodes across zones to protect your apps from a zone failure. To determine whether a zone is multizone-capable, your can run `ibmcloud ks locations` and look for the value in the `Multizone Metro` column.
 * **[Single zone](#zones-sz)**: If you create a cluster in a single zone (data center) location, you can create multiple worker nodes but you cannot spread them across zones. The highly available master includes three replicas on separate hosts, but is not spread across zones.
-* **[VPC regions and zones](#zones-vpc)**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
+* **[VPC Gen 2](#zones-vpc-gen2) and [VPC Gen 1](#zones-vpc) regions and zones**: VPC resources are provisioned in a region, which is a separate group of zones within a metro. The zones are mapped to separate data centers that can vary depending on your account, to ensure that resources are distributed evenly across zones in a multizone architecture. As such, the zones are noted with the region name in the API and CLI (`us-south-1`), and by the metro location in the console (`Dallas 1`).
 
 {{site.data.keyword.containerlong_notm}} resources used to be organized into regions that were accessed via [region-specific endpoints](#bluemix_regions). The tables list the previous regions for informational purposes. Going forward, you can use the [global endpoint](#endpoint) to move toward a region-less architecture.
 {: note}
 
+#### Classic multizone metro locations
 {: #zones-mz}
+
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Sydney | syd01, syd04, syd05 | AP South (`ap-south`, `au-syd`) |
@@ -99,7 +101,9 @@ The following tables list the available single and multizone locations in {{site
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
+#### Classic single zone data center locations
 {: #zones-sz}
+
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Melbourne | mel01 | AP South (`ap-south`, `au-syd`) |
@@ -129,8 +133,23 @@ The following tables list the available single and multizone locations in {{site
 <p class="note">`*` hou02 supports free clusters that are created in US South, and is not available for standard, production clusters.<br><br>`†` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.</p>
 
 
+#### VPC Gen 2 multizone metro locations
+{: #zones-vpc-gen2}
 
+| Geography |  Country  | Metro | Region | Zone | Location |
+|-----|-----|-----|-----|-----|
+| Europe | Germany | Frankfurt | eu-de | eu-de-1<br>eu-de-2<br>eu-de-3 | Frankfurt 1<br>Frankfurt 2<br>Frankfurt 3|
+| Europe | United Kingdom | London | eu-gb | eu-gb-1<br>eu-gb-2<br>eu-gb-3 | London 1<br>London 2<br>London 3|
+| North America | United States | Dallas | us-south | us-south-1<br>us-south-2<br>us-south-3 | Dallas 1<br>Dallas 2<br>Dallas 3|
+| North America | United States | Washington DC | us-east | us-east-1<br>us-east-2<br>us-east-3 | Washington DC 1<br>Washington DC 2<br>Washington DC 3|
+{: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
+{: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the zone of the location. The fifth column is the name of the location."}
+
+
+
+#### VPC Gen 1 multizone metro locations
 {: #zones-vpc}
+
 | Geography |  Country  | Metro | Region | Zone | Location |
 |-----|-----|-----|-----|-----|
 | Asia Pacific | Australia | Sydney | au-syd | au-syd-1<br>au-syd-2<br>au-syd-3 | Sydney 1<br>Sydney 2<br>Sydney 3|
@@ -141,6 +160,7 @@ The following tables list the available single and multizone locations in {{site
 | North America | United States | Washington DC | us-east | us-east-1<br>us-east-2<br>us-east-3 | Washington DC 1<br>Washington DC 2<br>Washington DC 3|
 {: caption="Available multizone metro locations for VPC clusters in {{site.data.keyword.containerlong_notm}}." caption-side="top"}
 {: summary="The rows are read from left to right. The first column is the IBM Cloud geography of the location. The second column is where the country of the location. The third column is the metro that the location is in. The fourth column is the zone of the location. The fifth column is the name of the location."}
+
 
 ### Single zone clusters
 {: #regions_single_zone}

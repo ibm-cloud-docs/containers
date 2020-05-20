@@ -131,7 +131,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
-| Location | VPC clusters are available only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). |
+| Location | VPC Gen 2 clusters are available only in [select multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc-gen2). |
 | Operating system | You cannot create a cluster with worker nodes that run multiple operating systems, such as OpenShift on Red Hat Enterprise Linux and community Kubernetes on Ubuntu. |
 | Pod instances | You can run 110 pods per worker node. If you have worker nodes that are provisioned with 11 CPU cores or more, you can support 10 pods per core, up to a limit of 250 pods per worker node. The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity. |
 | Versions | VPC Gen 2 clusters must run Kubernetes version 1.17 or later. |
