@@ -47,7 +47,7 @@ subcollection: containers
 
 [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-[Creating a VPC Gen 1 compute cluster](/docs/containers?topic=containers-getting-started#vpc-classic-gs)
+[Creating a VPC Gen 2 compute cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
@@ -204,15 +204,7 @@ subcollection: containers
   * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial)
-* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-* [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
-* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-* [Lesson 1: Creating a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-* [Lesson 2: Deploying a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-* [Lesson 3: Setting up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
-* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
+[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 * [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
@@ -363,6 +355,9 @@ subcollection: containers
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
   * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
+* [Creating a standard VPC Gen 2 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
+  * [Creating a standard VPC Gen 2 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
+  * [Creating standard VPC Gen 2 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 * [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard)
   * [Creating a standard VPC Gen 1 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpc_ui)
   * [Creating standard VPC Gen 1 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpc_cli)

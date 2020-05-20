@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -109,12 +109,19 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    </td>
    <td>Uses the v2 API.<ul>
    <li>[`alb configure vpc-classic`](#cli_alb_configure_vpc_classic)</li>
+   <li>[`alb configure vpc-gen2`](#cli_alb_configure_vpc_gen2)</li>
    <li>[`alb create vpc-classic`](#cli_alb-create-vpc-classic)</li>
+   <li>[`alb create vpc-gen2`](#cli_alb_create_vpc_gen2)</li>
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
+   <li>[`cluster create vpc-gen2`](#cli_cluster-create-vpc-gen2)</li>
    <li>[`nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc)</li>
+   <li>[`nlb-dns create vpc-gen2`](#cs_nlb-dns-create-vpc-gen2)
    <li>[`nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc)</li>
+   <li>[`nlb-dns rm vpc-gen2`](#cs_nlb-dns-rm-vpc-gen2)
    <li>[`worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic)</li>
-   <li>[`zone add vpc-classic`](#cli_zone-add-vpc-classic)</li></ul></ul></td>
+   <li>[`worker-pool create vpc-gen2`](#cli_worker_pool_create_vpc_gen2)</li>
+   <li>[`zone add vpc-classic`](#cli_zone-add-vpc-classic)</li>
+   <li>[`zone add vpc-gen2`](#cli_zone-add-vpc-gen2)</li></ul></ul></td>
  </tr>
  <tr>
    <td>**Provider-exclusive**: You can use these commands only in the particular infrastructure provider.</td>
@@ -144,6 +151,7 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`subnets`](#cs_subnets)</li>
    <li>[`zone ls`](#cs_datacenters)</li></ul></td>
    <td>Required. Uses the v2 API.<ul>
+   <li>[`flavors`](#cs_machine_types)</li>
    <li>[`subnets`](#cs_subnets)</li>
    <li>[`zone ls`](#cs_datacenters)</li></ul></td>
  </tr>
@@ -193,6 +201,7 @@ ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -320,6 +329,7 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -380,6 +390,7 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -531,6 +542,7 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -620,6 +632,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--export] [--network] [-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** or **Reader** {{site.data.keyword.cloud_notm}} IAM service role for the cluster in {{site.data.keyword.containerlong_notm}}. Further, if you have only a platform role or only a service role, additional constraints apply.
 * **Platform**: If you have only a platform role, you can perform this command, but you need a [service role](/docs/containers?topic=containers-users#platform) or a [custom RBAC policy](/docs/containers?topic=containers-users#role-binding) to perform Kubernetes actions in the cluster.
@@ -671,7 +684,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a VPC Generation 1 compute cluster, use the [`ibmcloud ks cluster create vpc-classic` command](#cli_cluster-create-vpc-classic) instead.
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a VPC Generation 1 compute cluster, use the [`ibmcloud ks cluster create vpc-classic` command](#cli_cluster-create-vpc-classic) instead.To create a VPC Generation 2 compute cluster, use the [`ibmcloud ks cluster create vpc-gen2` command](#cli_cluster-create-vpc-gen2) instead.
 
 **Minimum required permissions**:
 * **Administrator** platform role for {{site.data.keyword.containerlong_notm}} at the account level
@@ -885,6 +898,93 @@ ibmcloud ks cluster create vpc-classic --name mycluster --zone us-east-1 --vpc-i
 
 </br>
 
+### `ibmcloud ks cluster create vpc-gen2`
+{: #cli_cluster-create-vpc-gen2}
+
+Create a Virtual Private Cloud (VPC) cluster with worker nodes on Generation 2 infrastructure. When you log in to your {{site.data.keyword.cloud_notm}} account, target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group.
+{: shortdesc}
+
+Free clusters are not available in VPC.
+{: note}
+
+```
+ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --subnet-id VPC_SUBNET_ID --flavor WORKER_FLAVOR [--version MAJOR.MINOR.PATCH --workers NUMBER_WORKERS_PER_ZONE] [--disable-public-service-endpoint] [--pod-subnet SUBNET] [--service-subnet SUBNET] [--skip-advance-permissions-check] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**:
+* [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
+* [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}} at the account level.
+* [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}} at the account level.
+
+**Command options**
+
+<dl>
+<dt><code>--name <em>NAME</em></code></dt>
+<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+</dd>
+
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. This value is required. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.</p>
+
+<p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
+</dd>
+
+<dt><code>--vpc-id <em>VPC_ID</em></code></dt>
+<dd>The ID of the VPC in which to create the cluster and worker nodes. This value is required. To list available IDs, run `ibmcloud ks vpcs`.</dd>
+
+<dt><code>--subnet-id <em>VPC_SUBNET_ID</em></code></dt>
+<dd>The VPC subnet to assign the cluster. This value is required. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2`.</dd>
+
+<dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
+<dd>The Kubernetes version for the cluster master node. Note that VPC Gen 2 clusters are supported for Kubernetes versions 1.17 and later only. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
+
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.</dd>
+
+<dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
+<dd>The number of worker nodes that you want to deploy in your cluster.If you do not specify this option, a cluster with one worker node is created. This value is optional.
+<p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
+
+<dt><code>--disable-public-service-endpoint</code></dt>
+<dd>To ensure that worker nodes and authorized cluster users communicate with the master through the private service endpoint only, include this flag to create the cluster without the public service endpoint.</dd>
+
+<dt><code>--pod-subnet <em>SUBNET</em></code></dt>
+<dd>All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for pods.
+<p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pods for eight workers, use <code>/21</code> to have enough pods for 16 workers, and so on.</p>
+<p>The subnet must be within one of the following ranges:
+<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
+<li><code>172.21.0.0 - 172.31.255.255</code></li>
+<li><code>192.168.0.0 - 192.168.254.255</code></li>
+<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets do not overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).</p></dd>
+
+<dt><code>--service-subnet <em>SUBNET</em></code></dt>
+<dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.cloud_notm}} Direct Link or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR to provide the private IP addresses for services.
+<p>The subnet must be specified in CIDR format with a size of at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet must be within one of the following ranges:
+<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
+<li><code>172.21.0.0 - 172.31.255.255</code></li>
+<li><code>192.168.0.0 - 192.168.254.255</code></li>
+<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.</p></dd>
+
+<dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
+<dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+</dl>
+
+**Example**:
+```
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.17 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+```
+{: pre}
+
+</br>
+
 ### `ibmcloud ks cluster feature disable public-service-endpoint`
 {: #cs_cluster_feature_disable}
 
@@ -904,6 +1004,7 @@ ibmcloud ks cluster feature disable public-service-endpoint --cluster CLUSTER [-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -991,6 +1092,7 @@ ibmcloud ks cluster feature enable public-service-endpoint --cluster CLUSTER [-s
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1028,6 +1130,7 @@ ibmcloud ks cluster get --cluster CLUSTER [--show-resources] [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1063,19 +1166,20 @@ List all clusters in your {{site.data.keyword.cloud_notm}} account.
 Clusters in all locations are returned. To filter clusters by a specific location, include the `--location` flag. For example, if you filter clusters for the `dal` metro, multizone clusters in that metro and single-zone clusters in data centers (zones) within that metro are returned. If you filter clusters for the `dal10` data center (zone), multizone clusters that have a worker node in that zone and single-zone clusters in that zone are returned. You can pass one location or a comma-separated list of locations.
 
 ```
-ibmcloud ks cluster ls [--provider (classic | vpc-classic)] [--location LOCATION] [--json] [-s]
+ibmcloud ks cluster ls [--provider (classic | vpc-classic | vpc-gen2)] [--location LOCATION] [--json] [-s]
 ```
 {: pre}
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
-<dt><code>--provider <em>(classic | vpc-classic)</em></code></dt>
+<dt><code>--provider <em>(classic | vpc-classic | vpc-gen2)</em></code></dt>
 <dd>Optional: Filter output based on infrastructure provider type.</dd>
 
 <dt><code>-l, --location <em>LOCATION</em></code></dt>
@@ -1228,6 +1332,7 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1261,6 +1366,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1310,6 +1416,7 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**:
 *  **Operator or Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -1338,6 +1445,7 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1383,6 +1491,7 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1430,6 +1539,7 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPA
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1476,6 +1586,7 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}} and **Developer** Cloud Foundry role
 
@@ -1708,7 +1819,7 @@ View and modify worker nodes for a cluster.
 Add stand-alone worker nodes to a cluster.
 {: shortdesc}
 
-This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create), [`ibmcloud ks worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
+This command is deprecated. Create a worker pool by running [`ibmcloud ks worker-pool create classic`](#cs_worker_pool_create), [`ibmcloud ks worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic), or [`ibmcloud ks worker-pool create vpc-gen2`](#cli_worker_pool_create_vpc_gen2), or add workers to an existing worker pool by running [`ibmcloud ks worker-pool resize`](#cs_worker_pool_resize).
 {: deprecated}
 
 ```
@@ -1719,6 +1830,7 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1771,6 +1883,7 @@ ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--j
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1811,6 +1924,7 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -1891,6 +2005,7 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2028,6 +2143,7 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}.
 
@@ -2071,6 +2187,7 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2158,7 +2275,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a worker pool in a VPC Generation 1 compute cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker_pool_create_vpc_classic).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To create a worker pool in a VPC Generation 1 compute cluster, use the [`ibmcloud ks worker-pool create vpc-classic` command](#cli_worker_pool_create_vpc_classic). To create a worker pool in a VPC Generation 2 compute cluster, use the [`ibmcloud ks worker-pool create vpc-gen2` command](#cli_worker_pool_create_vpc_gen2).
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2252,6 +2369,58 @@ ibmcloud ks worker-pool create vpc-classic --name my_pool --cluster my_cluster -
 
 </br>
 
+### `ibmcloud ks worker-pool create vpc-gen2`
+{: #cli_worker_pool_create_vpc_gen2}
+
+Add a worker pool to a VPC Generation 2 compute cluster. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool.
+{: shortdesc}
+
+```
+ibmcloud ks worker-pool create vpc-gen2 --name <worker pool name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> [--vpc-id <VPC ID>] [--label KEY1=VALUE1] [-s] [--json]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}.
+
+**Command options**
+
+<dl>
+<dt><code>--name <em>NAME</em></code></dt>
+<dd>Set the name for the worker pool. This value is required.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`. This value is required.</dd>
+
+<dt><code>--size-per-zone <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
+<dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool. This value is required, and must be 1 or greater.</dd>
+
+<dt><code>--flavor <em>FLAVOR</em></code></dt>
+<dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.</dd>
+
+<dt><code>--vpc-id <em>VPC_ID</em></code></dt>
+<dd>Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. This value is optional. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
+
+<dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
+<dd>Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`. This value is optional.</ul></dd>
+
+<dt><code>-s</code>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+
+<dt><code>--json</code>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+</dl>
+
+**Example**:
+```
+ibmcloud ks worker-pool create vpc-gen2 --name my_pool --cluster my_cluster --flavor bx2.4x16 --size-per-zone 3
+```
+{: pre}
+
+</br>
+
 ### `ibmcloud ks worker-pool get`
 {: #cs_worker_pool_get}
 
@@ -2266,6 +2435,7 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--json]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2306,6 +2476,7 @@ ibmcloud ks worker-pool ls --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2343,6 +2514,7 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2379,6 +2551,7 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --worker-pool WORKER_POOL --siz
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2420,6 +2593,7 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-s] [-f]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2460,6 +2634,7 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-s] [
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2501,7 +2676,7 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 ```
 {: pre}
 
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To add a zone to worker pools in a VPC Generation 1 compute cluster, use the [`ibmcloud ks zone add vpc-classic` command](#cli_zone-add-vpc-classic).
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. To add a zone to worker pools in a VPC Generation 1 compute cluster, use the [`ibmcloud ks zone add vpc-classic` command](#cli_zone-add-vpc-classic). To add a zone to worker pools in a VPC Generation 2 compute cluster, use the [`ibmcloud ks zone add vpc-gen2` command](#cli_zone-add-vpc-gen2).
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2591,6 +2766,52 @@ ibmcloud ks zone add vpc-classic --zone us-south-3 --cluster my_cluster -w pool1
 
 
 
+### `ibmcloud ks zone add vpc-gen2`
+{: #cli_zone-add-vpc-gen2}
+
+After you create a Generation 2 VPC cluster or worker pool, you can add a zone. When you add a zone, worker nodes are added to the new zone to match the number of workers per zone that you specified for the worker pool. You can add more than one zone only if your cluster is in a multizone metro.
+{: shortdesc}
+
+```
+ibmcloud ks zone add vpc-gen2 --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CLUSTER --worker-pool WORKER_POOL [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`. This value is required.</dd>
+
+<dt><code>--subnet-id <em>SUBNET_ID</em></code></dt>
+<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a [VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. This value is required.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`. This value is required.</dd>
+
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>The name of the worker pool to add the zone to. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -w pool1 -w pool2
+```
+{: pre}
+
+</br>
+
+
+
 
 ### `ibmcloud ks zone ls`
 {: #cs_datacenters}
@@ -2604,7 +2825,7 @@ The `locations` alias for this command is deprecated.
 {: deprecated}
 
 ```
-ibmcloud ks zone ls --provider (classic | vpc-classic) [--location LOCATION] [--region-only] [--json] [-s]
+ibmcloud ks zone ls --provider (classic | vpc-classic | vpc-gen2) [--location LOCATION] [--region-only] [--json] [-s]
 ```
 {: pre}
 
@@ -2612,7 +2833,7 @@ ibmcloud ks zone ls --provider (classic | vpc-classic) [--location LOCATION] [--
 
 **Command options**:
 <dl>
-<dt><code>--provider <em>(classic | vpc-classic)</em></code></dt>
+<dt><code>--provider <em>(classic | vpc-classic | vpc-gen2)</em></code></dt>
 <dd>The infrastructure provider type to list zones for. This flag is required.</dd>
 
 <dt><code>-l, --location <em>LOCATION</em></code></dt>
@@ -2736,6 +2957,7 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--pool WORKER_POOL] [-f] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2790,6 +3012,7 @@ ibmcloud ks alb autoupdate disable --cluster CLUSTER [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2826,6 +3049,7 @@ ibmcloud ks alb autoupdate enable --cluster CLUSTER [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2854,6 +3078,7 @@ ibmcloud ks alb autoupdate get --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2892,6 +3117,7 @@ ibmcloud ks alb cert deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2944,6 +3170,7 @@ ibmcloud ks alb cert get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-c
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -2996,6 +3223,7 @@ ibmcloud ks alb cert ls --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3037,6 +3265,7 @@ ibmcloud ks alb cert rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-cr
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3182,6 +3411,59 @@ ibmcloud ks alb configure vpc-classic --alb-id public-cr18a61a63a6a94b658596aa93
 
 </br>
 
+### `ibmcloud ks alb configure vpc-gen2`
+{: #cli_alb_configure_vpc_gen2}
+
+Enable or disable an ALB in a VPC Generation 2 compute cluster.
+{: shortdesc}
+
+You can use this command to:
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb create vpc-gen2` command are enabled by default too.
+* Enable an ALB that you previously disabled.
+* Disable an ALB.
+* Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
+
+```
+ibmcloud ks alb configure vpc-gen2 --alb-id ALB_ID --enable|--disable [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--alb-id <em>ALB_ID</em></code></dt>
+<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks alb ls --cluster <em>CLUSTER</em></code>. This value is required.</dd>
+
+<dt><code>--enable</code></dt>
+<dd>Include this flag to enable an ALB in a cluster.</dd>
+
+<dt><code>--disable</code></dt>
+<dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Examples**:
+
+Example for enabling an ALB:
+```
+ibmcloud ks alb configure vpc-gen2 --alb-id private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
+```
+{: pre}
+
+Example for disabling an ALB:
+```
+ibmcloud ks alb configure vpc-gen2 --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
+```
+{: pre}
+
+</br>
+
+
 ### `ibmcloud ks alb create classic`
 {: #cs_alb_create}
 
@@ -3264,6 +3546,45 @@ ibmcloud ks alb create vpc-classic --cluster mycluster --type public --zone us-s
 
 </br>
 
+### `ibmcloud ks alb create vpc-gen2`
+{: #cli_alb-create-vpc-gen2}
+
+Create a public or private ALB in a VPC Generation 2 compute cluster. The ALB that you create is enabled by default.
+{: shortdesc}
+
+```
+ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. To view VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`.</dd>
+
+<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
+<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
+
+<dt><code>--zone<em> ZONE</em></code></dt>
+<dd>The VPC zone to deploy the ALB to.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1
+```
+{: pre}
+
+</br>
+
+
 ### `ibmcloud ks alb get`
 {: #cs_alb_get}
 
@@ -3278,6 +3599,7 @@ ibmcloud ks alb get --alb-id ALB_ID [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3318,6 +3640,7 @@ ibmcloud ks alb ls --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3359,6 +3682,7 @@ ibmcloud ks alb rollback --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3390,6 +3714,7 @@ ibmcloud ks alb types [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3424,6 +3749,7 @@ ibmcloud ks alb update --cluster CLUSTER [--alb-id ALB1_ID --alb-id ALB2_ID ...]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3544,6 +3870,7 @@ ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3593,6 +3920,7 @@ ibmcloud ks logging collect-status --cluster CLUSTER [--json]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3626,6 +3954,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster
 
@@ -3707,6 +4036,7 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--jso
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3750,6 +4080,7 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster
 
@@ -3796,6 +4127,7 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3874,6 +4206,7 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3943,6 +4276,7 @@ ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matchi
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -3989,6 +4323,7 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--forc
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4032,6 +4367,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4107,6 +4443,7 @@ ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4274,6 +4611,57 @@ ibmcloud ks nlb-dns create vpc-classic --cluster mycluster --lb-host 1234abcd-us
 
 </br>
 
+### `ibmcloud ks nlb-dns create vpc-gen2`
+{: #cs_nlb-dns-create-vpc-gen2}
+
+Create a DNS entry for a VPC Gen 2 load balancer hostname.
+{: shortdesc}
+
+When you create a VPC load balancer, the load balancer is assigned a hostname instead of an external IP address. Additionally, a default public VPC load balancer provides a hostname for all public ALBs in your cluster, and a default private VPC load balancer provides a hostname for all private ALBs in your cluster. If you created a VPC load balancer, you can use this hostname to access your app directly. If you use Ingress, you can specify this hostname in your Ingress resource files to register your app with Ingress.
+
+However, this VPC load balancer hostname does not support TLS termination. If you want an SSL certificate for your app domain, you can use the `ibmcloud ks nlb-dns create vpc-gen2` command to create a DNS subdomain for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
+
+You can also use this command to create a DNS entry for the hostname for your private ALBs, which is a required step for setting up a private Ingress service in a VPC cluster. For more information, see the [private Ingress setup documentation](/docs/containers?topic=containers-ingress#vpc_private_3).</br>
+
+```
+ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER --lb-host VPC_LB_HOSTNAME [--secret-namespace NAMESPACE] [--type (public|private)] [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--lb-host <em>VPC_LB_HOSTNAME</em></code></dt>
+<dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
+
+<dt><code>--secret-namespace <em>NAMESPACE</em></code></dt>
+<dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
+
+<dt><code>--type <em>(public|private)</em></code></dt>
+<dd>The subdomain type: public or private.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns create vpc-gen2 --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud
+```
+{: pre}
+
+</br>
+
+
 ### `ibmcloud ks nlb-dns ls`
 {: #cs_nlb-dns-ls}
 
@@ -4288,6 +4676,7 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4702,6 +5091,45 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster mycluster --nlb-subdomain mycluster
 
 </br>
 
+### `ibmcloud ks nlb-dns rm vpc-gen2`
+{: #cs_nlb-dns-rm-vpc-gen2}
+
+Remove the VPC Gen 2 load balancer hostname that is registered with a DNS subdomain. After you remove the hostname, the DNS subdomain still exists, but no VPC load balancer is registered with it.
+{: shortdesc}
+
+```
+ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
+<dd>The subdomain that you want to disassociate from the VPC load balancer hostname. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks nlb-dns rm vpc-gen2 --cluster mycluster --nlb-subdomain mycluster-a1b2cdef345678g9hi012j3kl4567890-0001.us-south.containers.appdomain.cloud
+```
+{: pre}
+
+</br>
+
+
 ### Experimental: `ibmcloud ks nlb-dns secret regenerate`
 {: #cs_nlb-dns-secret-regenerate}
 
@@ -4721,6 +5149,7 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4763,6 +5192,7 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4809,6 +5239,7 @@ ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url UR
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4867,6 +5298,7 @@ ibmcloud ks api-key info --cluster CLUSTER [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -4912,6 +5344,7 @@ ibmcloud ks api-key reset --region REGION [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5081,6 +5514,7 @@ ibmcloud ks kms crk ls --instance-id KMS_INSTANCE_ID [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role in {{site.data.keyword.containerlong_notm}}
 
@@ -5119,6 +5553,7 @@ ibmcloud ks kms enable --cluster CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_I
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
@@ -5160,6 +5595,7 @@ ibmcloud ks kms instance ls [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role in {{site.data.keyword.containerlong_notm}}
 
@@ -5275,19 +5711,20 @@ List available subnets in your IBM Cloud infrastructure account.
 {: shortdesc}
 
 ```
-ibmcloud ks subnets [--provider (classic | vpc-classic)] [--vpc-id <VPC_ID> --zone <VPC_ZONE>] [--location LOCATION] [--json] [-s]
+ibmcloud ks subnets [--provider (classic | vpc-classic | vpc-gen2)] [--vpc-id <VPC_ID> --zone <VPC_ZONE>] [--location LOCATION] [--json] [-s]
 ```
 {: pre}
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
-<dt><code>--provider <em>(classic | vpc-classic)</em></code></dt>
+<dt><code>--provider <em>(classic | vpc-classic | vpc-gen2)</em></code></dt>
 <dd>The infrastructure provider type to list subnets for. This flag is required to list VPC subnets.</dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
@@ -5409,20 +5846,21 @@ List all VPCs in the targeted resource group. If no resource group is targeted, 
 {: shortdesc}
 
 ```
-ibmcloud ks vpcs [--provider vpc-classic] [--json] [-s]
+ibmcloud ks vpcs [--provider (vpc-classic | vpc-gen2)] [--json] [-s]
 ```
 {: pre}
 
 **Supported infrastructure provider**:
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**:
 * **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
-<dt><code>--provider <em>vpc-classic</em></code></dt>
-<dd>The infrastructure provider type ID for the VPC worker node machine. Currently, `vpc-classic` for VPC Generation 1 compute is supported.</dd>
+<dt><code>--provider <em>(vpc-classic | vpc-gen2)</em></code></dt>
+<dd>The infrastructure provider type ID for the VPC worker node machine. Supported values are `vpc-classic` and `vpc-gen2`. If this flag is not specified, VPCs of all providers are returned.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Prints the command output in JSON format. This value is optional.</dd>
@@ -5455,6 +5893,7 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5494,22 +5933,23 @@ Each flavor includes the amount of virtual CPU, memory, and disk space for each 
 You can provision your worker node as a virtual machine on shared or dedicated hardware, or for classic clusters only, as a physical machine on bare metal. [Learn more about your flavor options](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
 ```
-ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic) [--show-storage] [--json] [-s]
+ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic | vpc-gen2) [--show-storage] [--json] [-s]
 ```
 {: pre}
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Enter the zone where you want to list available flavors. This value is required. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute.</dd>
+<dd>Enter the zone where you want to list available flavors. This value is required. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute or `ibmcloud ks zone ls --provider vpc-gen2` for Generation 2 compute.</dd>
 
-<dt><code>--provider <em>(classic | vpc-classic)</em></code></dt>
+<dt><code>--provider <em>(classic | vpc-classic | vpc-gen2)</em></code></dt>
 <dd>The infrastructure provider for which you want to list available flavors.</dd>
 
 <dt><code>--show-storage</code></dt>
@@ -5534,6 +5974,12 @@ ibmcloud ks flavors --zone us-south-1 --provider vpc-classic
 ```
 {: pre}
 
+**Example for VPC Generation 2 compute clusters**:
+```
+ibmcloud ks flavors --zone us-south-1 --provider vpc-gen2
+```
+{: pre}
+
 
 <br />
 
@@ -5552,6 +5998,7 @@ ibmcloud ks messages
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5577,6 +6024,7 @@ ibmcloud ks locations [--json]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5606,6 +6054,7 @@ ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--json] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5657,6 +6106,7 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5725,6 +6175,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-s]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 
@@ -5781,6 +6232,7 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 **Minimum required permissions**: None
 

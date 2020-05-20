@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -108,7 +108,7 @@ You can add worker nodes to your VPC cluster by creating a new worker pool.
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
 
-1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-classic`.
+1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute or `ibmcloud ks zone ls --provider vpc-gen2` for Generation 2 compute.
    ```
    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
    ```
@@ -125,20 +125,26 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
    ```
-   ibmcloud ks subnets --zone <zone> --provider vpc-classic --vpc-id <VPC_ID>
+   ibmcloud ks subnets --zone <zone> --provider (vpc-classic|vpc-gen2) --vpc-id <VPC_ID>
    ```
    {: pre}
 
 3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
 
     ```
-    ibmcloud ks flavors --zone <zone> --provider vpc-classic
+    ibmcloud ks flavors --zone <zone> --provider (vpc-classic|vpc-gen2)
     ```
     {: pre}
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster.
+   * VPC Generation 1 clusters:
      ```
      ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+     ```
+     {: pre}
+   * VPC Generation 2 clusters:
+     ```
+     ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
      ```
      {: pre}
 
@@ -149,8 +155,14 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
+ * VPC Generation 1 clusters:
    ```
    ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+   ```
+   {: pre}
+ * VPC Generation 2 clusters:
+   ```
+   ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
    ```
    {: pre}
 
@@ -199,13 +211,13 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 2. List available zones for your cluster's location to see what other zones you can add.
    ```
-   ibmcloud ks zone ls --provider vpc-classic | grep <location>
+   ibmcloud ks zone ls --provider (vpc-classic|vpc-gen2) | grep <location>
    ```
    {: pre}
 
 3. List available VPC subnets for each zone that you want to add. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
    ```
-   ibmcloud ks subnets --zone <zone> --provider vpc-classic --vpc-id <VPC_ID>
+   ibmcloud ks subnets --zone <zone> --provider (vpc-classic|vpc-gen2) --vpc-id <VPC_ID>
    ```
    {: pre}
 
@@ -219,8 +231,14 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
    If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
    {: tip}
+   * VPC Generation 1 clusters:
      ```
      ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+     ```
+     {: pre}
+   * VPC Generation 2 clusters:
+     ```
+     ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
      ```
      {: pre}
 

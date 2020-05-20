@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-22"
+lastupdated: "2020-05-20"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -89,7 +89,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
    <td>Supported infrastructure providers</td>
    <td>`classic`</td>
    <td>`vpc` and `classic`<ul>
-   <li>The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subprovider is `vpc-classic`, which corresponds to a VPC cluster for Generation 1 compute resources.</li>
+   <li>The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subproviders are `vpc-classic`, which corresponds to a VPC cluster for Generation 1 compute resources, and `vpc-gen2`, which corresponds to a VPC cluster for Generation 2 compute resources.</li>
    <li>Provider-specific requests have a path parameter in the URL, such as `v2/vpc/createCluster`. Some APIs are only available to a particular provider, such as `GET vlan` for classic or `GET vpcs` for VPC.</li>
    <li>Provider-agnostic requests can include a provider-specific body parameter that you specify, usually in JSON, such as `{"provider": "vpc"}`, if you want to return responses for only the specified provider.</li></ul></td>
  </tr>
@@ -107,6 +107,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
 </tbody>
 </table>
 
+
 <br />
 
 
@@ -115,7 +116,6 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
 
 You can use the {{site.data.keyword.containerlong_notm}} API to automate the creation, deployment, and management of your Kubernetes clusters.
 {:shortdesc}
-
 
 The {{site.data.keyword.containerlong_notm}} API requires header information that you must provide in your API request and that can vary depending on the API that you want to use. To determine what header information is needed for your API, see the [{{site.data.keyword.containerlong_notm}} API documentation](https://containers.cloud.ibm.com/global/swagger-global-api/#/){: external}.
 
