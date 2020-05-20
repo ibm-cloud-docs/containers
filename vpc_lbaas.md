@@ -114,7 +114,7 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
 3. Create the Kubernetes `LoadBalancer` service in your cluster.
   ```
-  kubectl apply -f myloadbalancer.yaml
+  kubectl apply -f myloadbalancer.yaml -n <namespace>
   ```
   {: pre}
 
