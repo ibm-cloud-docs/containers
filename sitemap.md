@@ -761,7 +761,7 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
-[Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative)
+[Deploying serverless apps with Knative (beta)](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
   * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
 * [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
@@ -1448,6 +1448,7 @@ subcollection: containers
 * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
+* [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
 
