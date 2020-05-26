@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -60,6 +60,26 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.18 changelog.
 {: shortdesc}
 
+### Changelog for 1.18.3_1514, released 26 May 2020
+{: #1183_1514}
+
+The following table shows the changes that are included in the master and worker node update `1.18.3_1514`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| IBM Calico extension | Master | 349 | 353 |  Skips creating a Calico host endpoint when no endpoint is needed. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | Master | v1.18.2-3 | v1.18.3-1 | Updated to support the Kubernetes 1.18.3 release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | Master | 371 | 373 | Image updated for [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| Kubernetes | Both | v1.18.2 | v1.18.3 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.3){: external}. |
+| Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
+| Kubernetes `NodeLocal` DNS cache | Master | 1.15.12 | 1.15.13 | See the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}. Updated the `node-local-dns` daemon set to include the `prometheus.io/port` and `prometheus.io/scrape` annotations on the pods. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 207 | 211 | Updated the version 2.0 network load balancers (NLB) to clean up unnecessary IPVS rules. |
+| Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+| Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.2_1512" caption-side="top"}
+
 ### Changelog for 1.18.2_1512, released 11 May 2020
 {: #1182_1512}
 
@@ -75,7 +95,7 @@ The following table shows the changes that are included in patch update 1.18.2_1
 | Gateway-enabled cluster controller | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | 8c6538f | b9a418c | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | IBM Calico extension | 320 | 349 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
-| {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.5-1 | v1.18.2-3 | Updated to support the Kubernetes 1.18.2 release and to use `calicoctl` version 3.13.3. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.5-1 | v1.18.2-3 | Updated to support the Kubernetes 1.18.2 release and to use `calicoctl` version 3.13.3. Updated network load balancer (NLB) events to use the latest {{site.data.keyword.cloud_notm}} troubleshooting documentation. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 358 | 371 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | Kubernetes | v1.17.5 | v1.18.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.2){: external}. |
 | Kubernetes admission controllers configuration | N/A | N/A | Added `CertificateApproval`, `CertificateSigning`, `CertificateSubjectRestriction` and `DefaultIngressClass` to the `--enable-admission-plugins` option for the cluster's [Kubernetes API server](/docs/containers?topic=containers-service-settings#kube-apiserver). |
@@ -95,6 +115,31 @@ The following table shows the changes that are included in patch update 1.18.2_1
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+### Changelog for 1.17.6_1526, released 26 May 2020
+{: #1176_1526}
+
+The following table shows the changes that are included in the master and worker node update `1.17.6_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
+| etcd | Master | v3.4.3 | v3.4.7 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.7){: external}. |
+| Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| IBM Calico extension | Master | 320 | 353 | Skips creating a Calico host endpoint when no endpoint is needed. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | Master | v1.17.5-1 | v1.17.6-1 | Updated to support the Kubernetes 1.17.6 release. Updated network load balancer (NLB) events to use the latest {{site.data.keyword.cloud_notm}} troubleshooting documentation. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| Kubernetes | Both | v1.17.5 | v1.17.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.6){: external}. |
+| Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
+| Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
+| Kubernetes NodeLocal DNS cache | Master | 1.15.8 | 1.15.13 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}. Updated the `node-local-dns` daemon set to include the `prometheus.io/port` and `prometheus.io/scrape` annotations on the pods. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 177 | 208 | Updated the version 2.0 network load balancers (NLB) to clean up unnecessary IPVS rules. Improved application logging. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+| Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.5_1524" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020
 {: #1175_1524}
@@ -270,6 +315,31 @@ The following table shows the changes that are included in patch update 1.17.2_1
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for 1.16.10_1533, released 26 May 2020
+{: #11610_1533}
+
+The following table shows the changes that are included in the master and worker node update `1.16.10_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
+| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.20){: external}. |
+| Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| IBM Calico extension | Master | 320 | 353 | Skips creating a Calico host endpoint when no endpoint is needed. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| {{site.data.keyword.cloud_notm}} Provider | Master | v1.16.9-219 | v1.16.10-243 | Updated to support the Kubernetes 1.16.10 release. Updated network load balancer (NLB) events to use the latest {{site.data.keyword.cloud_notm}} troubleshooting documentation. |
+| Kubernetes | Both | v1.16.9 | v1.16.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.10){: external}. |
+| Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
+| Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
+| Kubernetes `NodeLocal` DNS cache | Master | 1.15.4 | 1.15.13 | <ul><li>See the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}</li><li>Now, when you [apply the label to set up node local DNS caching](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes.</li><li>The `NodeLocal` DNS cache configuration now allows customization of stub domains and upstream DNS servers.</li><li>The `node-local-dns` daemon set is updated to include the `prometheus.io/port` and `prometheus.io/scrape` annotations on the pods.</li></ul> |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 177 | 208 | Updated the version 2.0 network load balancers (NLB) to clean up unnecessary IPVS rules. Improved application logging. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+| Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.9_1531" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020
 {: #1169_1531}
@@ -585,6 +655,28 @@ Review the version 1.15 changelog.
 
 Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
 {: deprecated}
+
+### Changelog for 1.15.12_1540, released 26 May 2020
+{: #11512_1540}
+
+The following table shows the changes that are included in the master and worker node update `1.15.12_1540`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+{: shortdesc}
+
+| Component | Location | Previous | Current | Description |
+| --------- | -------- | ------- | -------- | ----------- |
+| Cluster health image | Master | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
+| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.20){: external}. |
+| Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| {{site.data.keyword.cloud_notm}} Provider | Master | v1.15.11-274 | v1.15.12-316 | Updated to support the Kubernetes 1.15.2 release. |
+| Kubernetes | Both | v1.15.11 | v1.15.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.12){: external}. |
+| Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 169 | 203 | Updated the version 2.0 network load balancers (NLB) to fix problems with long-lived network connections to endpoints that failed readiness probes. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
+| Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+| Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.11_1538" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020
 {: #11511_1538}
@@ -1379,6 +1471,19 @@ Review the version 1.14 changelog.
 
 Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020
+{: #11410_1555}
+
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1555`. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 18.04 packages | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+| Ubuntu 16.04 packages | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.14.10_1554" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020
 {: #11410_1554}
@@ -2570,44 +2675,44 @@ Unsupported Kubernetes versions:
 Version 1.13 is unsupported. You can review the following archive of 1.12 changelogs.
 {: shortdesc}
 
-*   [Changelog for fix pack 1.13.12_1550, released 17 February 2020](#11312_1550)
-*   [Changelog for worker node fix pack 1.13.12_1549, released 3 February 2020](#11312_1549)
-*   [Changelog for 1.13.12_1548, released 20 January 2020](#11312_1548)
-*   [Changelog for worker node fix pack 1.13.12_1547, released 23 December 2019](#11312_1547)
-*   [Changelog for master fix pack 1.13.12_1546, released 17 December 2019](#11312_1546)
-*   [Changelog for worker node fix pack 1.13.12_1545, released 9 December 2019](#11312_1545_worker)
-*   [Changelog for worker node fix pack 1.13.12_1544, released 25 November 2019](#11312_1544_worker)
-*   [Changelog for master fix pack 1.13.12_1544, released 21 November 2019](#11312_1544)
-*   [Changelog for worker node fix pack 1.13.12_1541, released 11 November 2019](#11312_1541_worker)
-*   [Changelog for worker node fix pack 1.13.12_1540, released 28 October 2019](#11312_1540)
-*   [Changelog for master fix pack 1.13.12_1539, released 22 October 2019](#11312_1539)
-*   [Changelog for worker node fix pack 1.13.11_1538, released 14 October 2019](#11311_1538_worker)
-*   [Changelog for 1.13.11_1537, released 1 October 2019](#11311_1537)
-*   [Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019](#11310_1536_worker)
-*   [Changelog for worker node fix pack 1.13.10_1535, released 3 September 2019](#11310_1535_worker)
-*   [Changelog for master fix pack 1.13.10_1534, released 28 August 2019](#11310_1534)
-*   [Changelog for worker node fix pack 1.13.9_1533, released 19 August 2019](#1139_1533_worker)
-*   [Changelog for master fix pack 1.13.9_1533, released 17 August 2019](#1139_1533)
-*   [Changelog for master fix pack 1.13.9_1532, released 15 August 2019](#1139_1532)
-*   [Changelog for worker node fix pack 1.13.8_1530, released 5 August 2019](#1138_1530_worker)
-*   [Changelog for worker node fix pack 1.13.8_1529, released 22 July 2019](#1138_1529_worker)
-*   [Changelog for master fix pack 1.13.8_1529, released 15 July 2019](#1138_1529)
-*   [Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019](#1137_1528)
-*   [Changelog for worker node fix pack 1.13.7_1527, released 24 June 2019](#1137_1527)
-*   [Changelog for 1.13.7_1526, released 17 June 2019](#1137_1526)
-*   [Changelog for 1.13.6_1524, released 4 June 2019](#1136_1524)
-*   [Changelog for worker node fix pack 1.13.6_1522, released 20 May 2019](#1136_1522)
-*   [Changelog for 1.13.6_1521, released 13 May 2019](#1136_1521)
-*   [Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019](#1135_1519)
-*   [Changelog for worker node fix pack 1.13.5_1518, released 15 April 2019](#1135_1518)
-*   [Changelog for 1.13.5_1517, released 8 April 2019](#1135_1517)
-*   [Changelog for worker node fix pack 1.13.4_1516, released 1 April 2019](#1134_1516)
-*   [Changelog for master fix pack 1.13.4_1515, released 26 March 2019](#1134_1515)
-*   [Changelog for 1.13.4_1513, released 20 March 2019](#1134_1513)
-*   [Changelog for 1.13.4_1510, released 4 March 2019](#1134_1510)
-*   [Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019](#1132_1509)
-*   [Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019](#1132_1508)
-*   [Changelog for 1.13.2_1507, released 5 February 2019](#1132_1507)
+* [Changelog for fix pack 1.13.12_1550, released 17 February 2020](#11312_1550)
+* [Changelog for worker node fix pack 1.13.12_1549, released 3 February 2020](#11312_1549)
+* [Changelog for 1.13.12_1548, released 20 January 2020](#11312_1548)
+* [Changelog for worker node fix pack 1.13.12_1547, released 23 December 2019](#11312_1547)
+* [Changelog for master fix pack 1.13.12_1546, released 17 December 2019](#11312_1546)
+* [Changelog for worker node fix pack 1.13.12_1545, released 9 December 2019](#11312_1545_worker)
+* [Changelog for worker node fix pack 1.13.12_1544, released 25 November 2019](#11312_1544_worker)
+* [Changelog for master fix pack 1.13.12_1544, released 21 November 2019](#11312_1544)
+* [Changelog for worker node fix pack 1.13.12_1541, released 11 November 2019](#11312_1541_worker)
+* [Changelog for worker node fix pack 1.13.12_1540, released 28 October 2019](#11312_1540)
+* [Changelog for master fix pack 1.13.12_1539, released 22 October 2019](#11312_1539)
+* [Changelog for worker node fix pack 1.13.11_1538, released 14 October 2019](#11311_1538_worker)
+* [Changelog for 1.13.11_1537, released 1 October 2019](#11311_1537)
+* [Changelog for worker node fix pack 1.13.10_1536, released 16 September 2019](#11310_1536_worker)
+* [Changelog for worker node fix pack 1.13.10_1535, released 3 September 2019](#11310_1535_worker)
+* [Changelog for master fix pack 1.13.10_1534, released 28 August 2019](#11310_1534)
+* [Changelog for worker node fix pack 1.13.9_1533, released 19 August 2019](#1139_1533_worker)
+* [Changelog for master fix pack 1.13.9_1533, released 17 August 2019](#1139_1533)
+* [Changelog for master fix pack 1.13.9_1532, released 15 August 2019](#1139_1532)
+* [Changelog for worker node fix pack 1.13.8_1530, released 5 August 2019](#1138_1530_worker)
+* [Changelog for worker node fix pack 1.13.8_1529, released 22 July 2019](#1138_1529_worker)
+* [Changelog for master fix pack 1.13.8_1529, released 15 July 2019](#1138_1529)
+* [Changelog for worker node fix pack 1.13.7_1528, released 8 July 2019](#1137_1528)
+* [Changelog for worker node fix pack 1.13.7_1527, released 24 June 2019](#1137_1527)
+* [Changelog for 1.13.7_1526, released 17 June 2019](#1137_1526)
+* [Changelog for 1.13.6_1524, released 4 June 2019](#1136_1524)
+* [Changelog for worker node fix pack 1.13.6_1522, released 20 May 2019](#1136_1522)
+* [Changelog for 1.13.6_1521, released 13 May 2019](#1136_1521)
+* [Changelog for worker node fix pack 1.13.5_1519, released 29 April 2019](#1135_1519)
+* [Changelog for worker node fix pack 1.13.5_1518, released 15 April 2019](#1135_1518)
+* [Changelog for 1.13.5_1517, released 8 April 2019](#1135_1517)
+* [Changelog for worker node fix pack 1.13.4_1516, released 1 April 2019](#1134_1516)
+* [Changelog for master fix pack 1.13.4_1515, released 26 March 2019](#1134_1515)
+* [Changelog for 1.13.4_1513, released 20 March 2019](#1134_1513)
+* [Changelog for 1.13.4_1510, released 4 March 2019](#1134_1510)
+* [Changelog for worker node fix pack 1.13.2_1509, released 27 February 2019](#1132_1509)
+* [Changelog for worker node fix pack 1.13.2_1508, released 15 February 2019](#1132_1508)
+* [Changelog for 1.13.2_1507, released 5 February 2019](#1132_1507)
 
 #### Changelog for fix pack 1.13.12_1550, released 17 February 2020
 {: #11312_1550}
@@ -4117,43 +4222,43 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 Version 1.12 is unsupported. You can review the following archive of 1.12 changelogs.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.12.10_1570, released 28 October 2019](#11210_1570)
-*   [Changelog for worker node fix pack 1.12.10_1569, released 14 October 2019](#11210_1569_worker)
-*   [Changelog for worker node fix pack 1.12.10_1568, released 1 October 2019](#11210_1568_worker)
-*   [Changelog for worker node fix pack 1.12.10_1567, released 16 September 2019](#11210_1567_worker)
-*   [Changelog for worker node fix pack 1.12.10_1566, released 3 September 2019](#11210_1566_worker)
-*   [Changelog for master fix pack 1.12.10_1565, released 28 August 2019](#11210_1565)
-*   [Changelog for worker node fix pack 1.12.10_1564, released 19 August 2019](#11210_1564_worker)
-*   [Changelog for master fix pack 1.12.10_1564, released 17 August 2019](#11210_1564)
-*   [Changelog for master fix pack 1.12.10_1563, released 15 August 2019](#11210_1563)
-*   [Changelog for worker node fix pack 1.12.10_1561, released 5 August 2019](#11210_1561_worker)
-*   [Changelog for worker node fix pack 1.12.10_1560, released 22 July 2019](#11210_1560_worker)
-*   [Changelog for master fix pack 1.12.10_1560, released 15 July 2019](#11210_1560)
-*   [Changelog for worker node fix pack 1.12.9_1559, released 8 July 2019](#1129_1559)
-*   [Changelog for worker node fix pack 1.12.9_1558, released 24 June 2019](#1129_1558)
-*   [Changelog for 1.12.9_1557, released 17 June 2019](#1129_1557)
-*   [Changelog for 1.12.9_1555, released 4 June 2019](#1129_1555)
-*   [Changelog for worker node fix pack 1.12.8_1553, released 20 May 2019](#1128_1533)
-*   [Changelog for 1.12.8_1552, released 13 May 2019](#1128_1552)
-*   [Changelog for worker node fix pack 1.12.7_1550, released 29 April 2019](#1127_1550)
-*   [Changelog for worker node fix pack 1.12.7_1549, released 15 April 2019](#1127_1549)
-*   [Changelog for 1.12.7_1548, released 8 April 2019](#1127_1548)
-*   [Changelog for worker node fix pack 1.12.6_1547, released 1 April 2019](#1126_1547)
-*   [Changelog for master fix pack 1.12.6_1546, released 26 March 2019](#1126_1546)
-*   [Changelog for 1.12.6_1544, released 20 March 2019](#1126_1544)
-*   [Changelog for 1.12.6_1541, released 4 March 2019](#1126_1541)
-*   [Changelog for worker node fix pack 1.12.5_1540, released 27 February 2019](#1125_1540)
-*   [Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019](#1125_1538)
-*   [Changelog for 1.12.5_1537, released 5 February 2019](#1125_1537)
-*   [Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019](#1124_1535)
-*   [Changelog for 1.12.4_1534, released 21 January 2019](#1124_1534)
-*   [Changelog for worker node fix pack 1.12.3_1533, released 7 January 2019](#1123_1533)
-*   [Changelog for worker node fix pack 1.12.3_1532, released 17 December 2018](#1123_1532)
-*   [Changelog for 1.12.3_1531, released 5 December 2018](#1123_1531)
-*   [Changelog for worker node fix pack 1.12.2_1530, released 4 December 2018](#1122_1530)
-*   [Changelog for 1.12.2_1529, released 27 November 2018](#1122_1529)
-*   [Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018](#1122_1528)
-*   [Changelog for 1.12.2_1527, released 7 November 2018](#1122_1527)
+* [Changelog for worker node fix pack 1.12.10_1570, released 28 October 2019](#11210_1570)
+* [Changelog for worker node fix pack 1.12.10_1569, released 14 October 2019](#11210_1569_worker)
+* [Changelog for worker node fix pack 1.12.10_1568, released 1 October 2019](#11210_1568_worker)
+* [Changelog for worker node fix pack 1.12.10_1567, released 16 September 2019](#11210_1567_worker)
+* [Changelog for worker node fix pack 1.12.10_1566, released 3 September 2019](#11210_1566_worker)
+* [Changelog for master fix pack 1.12.10_1565, released 28 August 2019](#11210_1565)
+* [Changelog for worker node fix pack 1.12.10_1564, released 19 August 2019](#11210_1564_worker)
+* [Changelog for master fix pack 1.12.10_1564, released 17 August 2019](#11210_1564)
+* [Changelog for master fix pack 1.12.10_1563, released 15 August 2019](#11210_1563)
+* [Changelog for worker node fix pack 1.12.10_1561, released 5 August 2019](#11210_1561_worker)
+* [Changelog for worker node fix pack 1.12.10_1560, released 22 July 2019](#11210_1560_worker)
+* [Changelog for master fix pack 1.12.10_1560, released 15 July 2019](#11210_1560)
+* [Changelog for worker node fix pack 1.12.9_1559, released 8 July 2019](#1129_1559)
+* [Changelog for worker node fix pack 1.12.9_1558, released 24 June 2019](#1129_1558)
+* [Changelog for 1.12.9_1557, released 17 June 2019](#1129_1557)
+* [Changelog for 1.12.9_1555, released 4 June 2019](#1129_1555)
+* [Changelog for worker node fix pack 1.12.8_1553, released 20 May 2019](#1128_1533)
+* [Changelog for 1.12.8_1552, released 13 May 2019](#1128_1552)
+* [Changelog for worker node fix pack 1.12.7_1550, released 29 April 2019](#1127_1550)
+* [Changelog for worker node fix pack 1.12.7_1549, released 15 April 2019](#1127_1549)
+* [Changelog for 1.12.7_1548, released 8 April 2019](#1127_1548)
+* [Changelog for worker node fix pack 1.12.6_1547, released 1 April 2019](#1126_1547)
+* [Changelog for master fix pack 1.12.6_1546, released 26 March 2019](#1126_1546)
+* [Changelog for 1.12.6_1544, released 20 March 2019](#1126_1544)
+* [Changelog for 1.12.6_1541, released 4 March 2019](#1126_1541)
+* [Changelog for worker node fix pack 1.12.5_1540, released 27 February 2019](#1125_1540)
+* [Changelog for worker node fix pack 1.12.5_1538, released 15 February 2019](#1125_1538)
+* [Changelog for 1.12.5_1537, released 5 February 2019](#1125_1537)
+* [Changelog for worker node fix pack 1.12.4_1535, released 28 January 2019](#1124_1535)
+* [Changelog for 1.12.4_1534, released 21 January 2019](#1124_1534)
+* [Changelog for worker node fix pack 1.12.3_1533, released 7 January 2019](#1123_1533)
+* [Changelog for worker node fix pack 1.12.3_1532, released 17 December 2018](#1123_1532)
+* [Changelog for 1.12.3_1531, released 5 December 2018](#1123_1531)
+* [Changelog for worker node fix pack 1.12.2_1530, released 4 December 2018](#1122_1530)
+* [Changelog for 1.12.2_1529, released 27 November 2018](#1122_1529)
+* [Changelog for worker node fix pack 1.12.2_1528, released 19 November 2018](#1122_1528)
+* [Changelog for 1.12.2_1527, released 7 November 2018](#1122_1527)
 
 #### Changelog for worker node fix pack 1.12.10_1570, released 28 October 2019
 {: #11210_1570}
@@ -5720,40 +5825,40 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 Review the version 1.11 changelog.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019](#11110_1564)
-*   [Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019](#11110_1563)
-*   [Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019](#11110_1562)
-*   [Changelog for 1.11.10_1561, released 4 June 2019](#11110_1561)
-*   [Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019](#11110_1559)
-*   [Changelog for 1.11.10_1558, released 13 May 2019](#11110_1558)
-*   [Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019](#1119_1556)
-*   [Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019](#1119_1555)
-*   [Changelog for 1.11.9_1554, released 8 April 2019](#1119_1554)
-*   [Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019](#1118_1553)
-*   [Changelog for master fix pack 1.11.8_1552, released 26 March 2019](#1118_1552)
-*   [Changelog for 1.11.8_1550, released 20 March 2019](#1118_1550)
-*   [Changelog for 1.11.8_1547, released 4 March 2019](#1118_1547)
-*   [Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019](#1117_1546)
-*   [Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019](#1117_1544)
-*   [Changelog for 1.11.7_1543, released 5 February 2019](#1117_1543)
-*   [Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019](#1116_1541)
-*   [Changelog for 1.11.6_1540, released 21 January 2019](#1116_1540)
-*   [Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019](#1115_1539)
-*   [Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018](#1115_1538)
-*   [Changelog for 1.11.5_1537, released 5 December 2018](#1115_1537)
-*   [Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018](#1114_1536)
-*   [Changelog for 1.11.4_1535, released 27 November 2018](#1114_1535)
-*   [Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018](#1113_1534)
-*   [Changelog for 1.11.3_1533, released 7 November 2018](#1113_1533)
-*   [Changelog for master fix pack 1.11.3_1531, released 1 November 2018](#1113_1531_ha-master)
-*   [Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018](#1113_1531)
-*   [Changelog for master fix pack 1.11.3_1527, released 15 October 2018](#1113_1527)
-*   [Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018](#1113_1525)
-*   [Changelog for 1.11.3_1524, released 2 October 2018](#1113_1524)
-*   [Changelog for 1.11.3_1521, released 20 September 2018](#1113_1521)
-*   [Changelog for 1.11.2_1516, released 4 September 2018](#1112_1516)
-*   [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](#1112_1514)
-*   [Changelog for 1.11.2_1513, released 14 August 2018](#1112_1513)
+* [Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019](#11110_1564)
+* [Changelog for worker node fix pack 1.11.10_1563, released 24 June 2019](#11110_1563)
+* [Changelog for worker node fix pack 1.11.10_1562, released 17 June 2019](#11110_1562)
+* [Changelog for 1.11.10_1561, released 4 June 2019](#11110_1561)
+* [Changelog for worker node fix pack 1.11.10_1559, released 20 May 2019](#11110_1559)
+* [Changelog for 1.11.10_1558, released 13 May 2019](#11110_1558)
+* [Changelog for worker node fix pack 1.11.9_1556, released 29 April 2019](#1119_1556)
+* [Changelog for worker node fix pack 1.11.9_1555, released 15 April 2019](#1119_1555)
+* [Changelog for 1.11.9_1554, released 8 April 2019](#1119_1554)
+* [Changelog for worker node fix pack 1.11.8_1553, released 1 April 2019](#1118_1553)
+* [Changelog for master fix pack 1.11.8_1552, released 26 March 2019](#1118_1552)
+* [Changelog for 1.11.8_1550, released 20 March 2019](#1118_1550)
+* [Changelog for 1.11.8_1547, released 4 March 2019](#1118_1547)
+* [Changelog for worker node fix pack 1.11.7_1546, released 27 February 2019](#1117_1546)
+* [Changelog for worker node fix pack 1.11.7_1544, released 15 February 2019](#1117_1544)
+* [Changelog for 1.11.7_1543, released 5 February 2019](#1117_1543)
+* [Changelog for worker node fix pack 1.11.6_1541, released 28 January 2019](#1116_1541)
+* [Changelog for 1.11.6_1540, released 21 January 2019](#1116_1540)
+* [Changelog for worker node fix pack 1.11.5_1539, released 7 January 2019](#1115_1539)
+* [Changelog for worker node fix pack 1.11.5_1538, released 17 December 2018](#1115_1538)
+* [Changelog for 1.11.5_1537, released 5 December 2018](#1115_1537)
+* [Changelog for worker node fix pack 1.11.4_1536, released 4 December 2018](#1114_1536)
+* [Changelog for 1.11.4_1535, released 27 November 2018](#1114_1535)
+* [Changelog for worker node fix pack 1.11.3_1534, released 19 November 2018](#1113_1534)
+* [Changelog for 1.11.3_1533, released 7 November 2018](#1113_1533)
+* [Changelog for master fix pack 1.11.3_1531, released 1 November 2018](#1113_1531_ha-master)
+* [Changelog for worker node fix pack 1.11.3_1531, released 26 October 2018](#1113_1531)
+* [Changelog for master fix pack 1.11.3_1527, released 15 October 2018](#1113_1527)
+* [Changelog for worker node fix pack 1.11.3_1525, released 10 October 2018](#1113_1525)
+* [Changelog for 1.11.3_1524, released 2 October 2018](#1113_1524)
+* [Changelog for 1.11.3_1521, released 20 September 2018](#1113_1521)
+* [Changelog for 1.11.2_1516, released 4 September 2018](#1112_1516)
+* [Changelog for worker node fix pack 1.11.2_1514, released 23 August 2018](#1112_1514)
+* [Changelog for 1.11.2_1513, released 14 August 2018](#1112_1513)
 
 #### Changelog for worker node fix pack 1.11.10_1564, released 8 July 2019
 {: #11110_1564}
@@ -7177,39 +7282,39 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 Review the version 1.10 changelogs.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019](#11013_1558)
-*   [Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019](#11013_1557)
-*   [Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019](#11013_1556)
-*   [Changelog for 1.10.13_1555, released 8 April 2019](#11013_1555)
-*   [Changelog for worker node fix pack 1.10.13_1554, released 1 April 2019](#11013_1554)
-*   [Changelog for master fix pack 1.10.13_1553, released 26 March 2019](#11118_1553)
-*   [Changelog for 1.10.13_1551, released 20 March 2019](#11013_1551)
-*   [Changelog for 1.10.13_1548, released 4 March 2019](#11013_1548)
-*   [Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019](#11012_1546)
-*   [Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019](#11012_1544)
-*   [Changelog for 1.10.12_1543, released 5 February 2019](#11012_1543)
-*   [Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019](#11012_1541)
-*   [Changelog for 1.10.12_1540, released 21 January 2019](#11012_1540)
-*   [Changelog for worker node fix pack 1.10.11_1538, released 7 January 2019](#11011_1538)
-*   [Changelog for worker node fix pack 1.10.11_1537, released 17 December 2018](#11011_1537)
-*   [Changelog for 1.10.11_1536, released 4 December 2018](#11011_1536)
-*   [Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018](#1108_1532)
-*   [Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018](#1108_1531)
-*   [Changelog for 1.10.8_1530, released 7 November 2018](#1108_1530_ha-master)
-*   [Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018](#1108_1528)
-*   [Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018](#1108_1525)
-*   [Changelog for 1.10.8_1524, released 2 October 2018](#1108_1524)
-*   [Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018](#1107_1521)
-*   [Changelog for 1.10.7_1520, released 4 September 2018](#1107_1520)
-*   [Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018](#1105_1519)
-*   [Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018](#1105_1518)
-*   [Changelog for 1.10.5_1517, released 27 July 2018](#1105_1517)
-*   [Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018](#1103_1514)
-*   [Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018](#1103_1513)
-*   [Changelog for 1.10.3_1512, released 12 June 2018](#1103_1512)
-*   [Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018](#1101_1510)
-*   [Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018](#1101_1509)
-*   [Changelog for 1.10.1_1508, released 01 May 2018](#1101_1508)
+* [Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019](#11013_1558)
+* [Changelog for worker node fix pack 1.10.13_1557, released 29 April 2019](#11013_1557)
+* [Changelog for worker node fix pack 1.10.13_1556, released 15 April 2019](#11013_1556)
+* [Changelog for 1.10.13_1555, released 8 April 2019](#11013_1555)
+* [Changelog for worker node fix pack 1.10.13_1554, released 1 April 2019](#11013_1554)
+* [Changelog for master fix pack 1.10.13_1553, released 26 March 2019](#11118_1553)
+* [Changelog for 1.10.13_1551, released 20 March 2019](#11013_1551)
+* [Changelog for 1.10.13_1548, released 4 March 2019](#11013_1548)
+* [Changelog for worker node fix pack 1.10.12_1546, released 27 February 2019](#11012_1546)
+* [Changelog for worker node fix pack 1.10.12_1544, released 15 February 2019](#11012_1544)
+* [Changelog for 1.10.12_1543, released 5 February 2019](#11012_1543)
+* [Changelog for worker node fix pack 1.10.12_1541, released 28 January 2019](#11012_1541)
+* [Changelog for 1.10.12_1540, released 21 January 2019](#11012_1540)
+* [Changelog for worker node fix pack 1.10.11_1538, released 7 January 2019](#11011_1538)
+* [Changelog for worker node fix pack 1.10.11_1537, released 17 December 2018](#11011_1537)
+* [Changelog for 1.10.11_1536, released 4 December 2018](#11011_1536)
+* [Changelog for worker node fix pack 1.10.8_1532, released 27 November 2018](#1108_1532)
+* [Changelog for worker node fix pack 1.10.8_1531, released 19 November 2018](#1108_1531)
+* [Changelog for 1.10.8_1530, released 7 November 2018](#1108_1530_ha-master)
+* [Changelog for worker node fix pack 1.10.8_1528, released 26 October 2018](#1108_1528)
+* [Changelog for worker node fix pack 1.10.8_1525, released 10 October 2018](#1108_1525)
+* [Changelog for 1.10.8_1524, released 2 October 2018](#1108_1524)
+* [Changelog for worker node fix pack 1.10.7_1521, released 20 September 2018](#1107_1521)
+* [Changelog for 1.10.7_1520, released 4 September 2018](#1107_1520)
+* [Changelog for worker node fix pack 1.10.5_1519, released 23 August 2018](#1105_1519)
+* [Changelog for worker node fix pack 1.10.5_1518, released 13 August 2018](#1105_1518)
+* [Changelog for 1.10.5_1517, released 27 July 2018](#1105_1517)
+* [Changelog for worker node fix pack 1.10.3_1514, released 3 July 2018](#1103_1514)
+* [Changelog for worker node fix pack 1.10.3_1513, released 21 June 2018](#1103_1513)
+* [Changelog for 1.10.3_1512, released 12 June 2018](#1103_1512)
+* [Changelog for worker node fix pack 1.10.1_1510, released 18 May 2018](#1101_1510)
+* [Changelog for worker node fix pack 1.10.1_1509, released 16 May 2018](#1101_1509)
+* [Changelog for 1.10.1_1508, released 01 May 2018](#1101_1508)
 
 #### Changelog for worker node fix pack 1.10.13_1558, released 13 May 2019
 {: #11013_1558}
@@ -8546,27 +8651,27 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 Review the version 1.9 changelogs.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018](#1911_1539)
-*   [Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018](#1911_1538)
-*   [Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018](#1911_1537)
-*   [Changelog for 1.9.11_1536, released 19 November 2018](#1911_1536)
-*   [Changelog for worker node fix 1.9.10_1532, released 7 November 2018](#1910_1532)
-*   [Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018](#1910_1531)
-*   [Changelog for master fix pack 1.9.10_1530 released 15 October 2018](#1910_1530)
-*   [Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018](#1910_1528)
-*   [Changelog for 1.9.10_1527, released 2 October 2018](#1910_1527)
-*   [Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018](#1910_1524)
-*   [Changelog for 1.9.10_1523, released 4 September 2018](#1910_1523)
-*   [Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018](#199_1522)
-*   [Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018](#199_1521)
-*   [Changelog for 1.9.9_1520, released 27 July 2018](#199_1520)
-*   [Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018](#198_1517)
-*   [Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018](#198_1516)
-*   [Changelog for 1.9.8_1515, released 19 June 2018](#198_1515)
-*   [Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018](#197_1513)
-*   [Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018](#197_1512)
-*   [Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018](#197_1511)
-*   [Changelog for 1.9.7_1510, released 30 April 2018](#197_1510)
+* [Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018](#1911_1539)
+* [Changelog for worker node fix pack 1.9.11_1538, released 4 December 2018](#1911_1538)
+* [Changelog for worker node fix pack 1.9.11_1537, released 27 November 2018](#1911_1537)
+* [Changelog for 1.9.11_1536, released 19 November 2018](#1911_1536)
+* [Changelog for worker node fix 1.9.10_1532, released 7 November 2018](#1910_1532)
+* [Changelog for worker node fix pack 1.9.10_1531, released 26 October 2018](#1910_1531)
+* [Changelog for master fix pack 1.9.10_1530 released 15 October 2018](#1910_1530)
+* [Changelog for worker node fix pack 1.9.10_1528, released 10 October 2018](#1910_1528)
+* [Changelog for 1.9.10_1527, released 2 October 2018](#1910_1527)
+* [Changelog for worker node fix pack 1.9.10_1524, released 20 September 2018](#1910_1524)
+* [Changelog for 1.9.10_1523, released 4 September 2018](#1910_1523)
+* [Changelog for worker node fix pack 1.9.9_1522, released 23 August 2018](#199_1522)
+* [Changelog for worker node fix pack 1.9.9_1521, released 13 August 2018](#199_1521)
+* [Changelog for 1.9.9_1520, released 27 July 2018](#199_1520)
+* [Changelog for worker node fix pack 1.9.8_1517, released 3 July 2018](#198_1517)
+* [Changelog for worker node fix pack 1.9.8_1516, released 21 June 2018](#198_1516)
+* [Changelog for 1.9.8_1515, released 19 June 2018](#198_1515)
+* [Changelog for worker node fix pack 1.9.7_1513, released 11 June 2018](#197_1513)
+* [Changelog for worker node fix pack 1.9.7_1512, released 18 May 2018](#197_1512)
+* [Changelog for worker node fix pack 1.9.7_1511, released 16 May 2018](#197_1511)
+* [Changelog for 1.9.7_1510, released 30 April 2018](#197_1510)
 
 #### Changelog for worker node fix pack 1.9.11_1539, released 17 December 2018
 {: #1911_1539}
@@ -9274,17 +9379,17 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 Review the version 1.8 changelogs.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018](#1815_1521)
-*   [Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018](#1815_1520)
-*   [Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018](#1815_1519)
-*   [Changelog for 1.8.15_1518, released 27 July 2018](#1815_1518)
-*   [Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018](#1813_1516)
-*   [Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018](#1813_1515)
-*   [Changelog 1.8.13_1514, released 19 June 2018](#1813_1514)
-*   [Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018](#1811_1512)
-*   [Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018](#1811_1511)
-*   [Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018](#1811_1510)
-*   [Changelog for 1.8.11_1509, released 19 April 2018](#1811_1509)
+* [Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018](#1815_1521)
+* [Changelog for worker node fix pack 1.8.15_1520, released 23 August 2018](#1815_1520)
+* [Changelog for worker node fix pack 1.8.15_1519, released 13 August 2018](#1815_1519)
+* [Changelog for 1.8.15_1518, released 27 July 2018](#1815_1518)
+* [Changelog for worker node fix pack 1.8.13_1516, released 3 July 2018](#1813_1516)
+* [Changelog for worker node fix pack 1.8.13_1515, released 21 June 2018](#1813_1515)
+* [Changelog 1.8.13_1514, released 19 June 2018](#1813_1514)
+* [Changelog for worker node fix pack 1.8.11_1512, released 11 June 2018](#1811_1512)
+* [Changelog for worker node fix pack 1.8.11_1511, released 18 May 2018](#1811_1511)
+* [Changelog for worker node fix pack 1.8.11_1510, released 16 May 2018](#1811_1510)
+* [Changelog for 1.8.11_1509, released 19 April 2018](#1811_1509)
 
 #### Changelog for worker node fix pack 1.8.15_1521, released 20 September 2018
 {: #1815_1521}
@@ -9636,10 +9741,10 @@ Review the version 1.8 changelogs.
 Review the version 1.7 changelogs.
 {: shortdesc}
 
-*   [Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018](#1716_1514)
-*   [Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018](#1716_1513)
-*   [Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018](#1716_1512)
-*   [Changelog for 1.7.16_1511, released 19 April 2018](#1716_1511)
+* [Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018](#1716_1514)
+* [Changelog for worker node fix pack 1.7.16_1513, released 18 May 2018](#1716_1513)
+* [Changelog for worker node fix pack 1.7.16_1512, released 16 May 2018](#1716_1512)
+* [Changelog for 1.7.16_1511, released 19 April 2018](#1716_1511)
 
 #### Changelog for worker node fix pack 1.7.16_1514, released 11 June 2018
 {: #1716_1514}

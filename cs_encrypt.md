@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-05-21"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 

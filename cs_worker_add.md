@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -83,10 +83,10 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.16.9
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.16.9
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.16.9
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.16.9
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.16.10
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.16.10
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.16.10
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.16.10
     ```
     {: screen}
 
@@ -325,8 +325,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.9
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.9
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.10
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.10
    ```
    {: screen}
 
@@ -402,7 +402,7 @@ To add a zone with worker nodes to your worker pool:
   Ingress Secret:                 mycluster-<hash>-0000
   Workers:                        6
   Worker Zones:                   dal10, dal12
-  Version:                        1.16.9_1524
+  Version:                        1.16.10_1524
   Owner:                          owner@email.com
   Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
   Resource Group Name:            Default
@@ -554,8 +554,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.9
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.16.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.16.10
    ```
    {: screen}
 
@@ -619,8 +619,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.9
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.16.9
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.16.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.16.10
    ```
    {: screen}
 
@@ -868,9 +868,9 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
   ```
   {: screen}
 
-8. Copy the `default-us-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
+8. Copy the `all-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
   ```
-  kubectl get secret default-us-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/default-us-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
+  kubectl get secret all-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/all-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
   ```
   {: pre}
 

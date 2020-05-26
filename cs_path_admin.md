@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-14"
+lastupdated: "2020-05-21"
 
 keywords: kubernetes, iks, containers
 
@@ -84,6 +84,9 @@ subcollection: containers
         flex-grow: 1 !important;
         display: flex !important;
         flex-direction: column !important;
+    }
+    .bx--type-caption {
+        text-decoration: none;
     }
 -->
 </style>

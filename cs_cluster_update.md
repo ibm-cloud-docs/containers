@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-11"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -355,7 +355,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.16.9 to 1.18.2, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.16.10 to 1.18.3, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```
@@ -448,6 +448,11 @@ To update flavors:
           ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
           ```
           {: pre}
+        * VPC Generation 2 clusters:
+          ```
+          ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+          ```
+          {: pre}
 
      2. Verify that the worker pool is created.
         ```
@@ -464,6 +469,11 @@ To update flavors:
        * VPC Generation 1 clusters:
          ```
          ibmcloud ks zone add vpc-classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
+         ```
+         {: pre}
+       * VPC Generation 2 clusters:
+         ```
+         ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <vpc_subnet_id>
          ```
          {: pre}
 

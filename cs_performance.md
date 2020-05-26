@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-13"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, kernel
 
@@ -228,7 +228,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 3.  Save and close the file. Your changes are applied automatically.
 
 4.  Monitor the metrics provider pods.
-  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers continue to be unstable, continue to the next step to tune the `cpuPerNode` setting.
+  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers are now stable but metrics are often not available or are incomplete, continue to the next step to tune the `cpuPerNode` setting.
   * If you see an error message similar to the following, or if the horizontal pod autoscaler is not scaling correctly, continue to the next step to tune the `cpuPerNode` setting.
     ```
     unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
@@ -255,7 +255,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 7. Monitor the metrics provider pods for at least an hour. It can take several minutes for the metrics server to start collecting metrics.
-  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
+  * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
 
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}

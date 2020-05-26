@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, help
 
@@ -182,12 +182,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
     ```
     ...
     imagePullSecrets:
-    - name: default-us-icr-io
-    - name: default-uk-icr-io
-    - name: default-de-icr-io
-    - name: default-au-icr-io
-    - name: default-jp-icr-io
-    - name: default-icr-io
+    - name: all-icr-io
     ...
     ```
     {: screen}
@@ -197,7 +192,7 @@ For clusters that were created before **1 July 2019**, the cluster might have an
         kubectl get secrets -n default | grep "icr-io"
         ```
         {: pre}
-    2.  [Copy the image pull secrets from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-registry#copy_imagePullSecret).
+    2.  [Copy the `all-icr-io` image pull secret from the `default` Kubernetes namespace to the namespace where you want to deploy your workload](/docs/containers?topic=containers-registry#copy_imagePullSecret).
     3.  [Add the image pull secret to the service account for this Kubernetes namespace](/docs/containers?topic=containers-registry#store_imagePullSecret) so that all pods in the namespace can use the image pull secret credentials.
 5.  If image pull secrets are listed in the pod, determine what type of credentials you use to access {{site.data.keyword.registrylong_notm}}.
     *   **Deprecated**: If the secret has `bluemix` in the name, you use a registry token to authenticate with the deprecated `registry.<region>.bluemix.net` domain names. Continue with [Troubleshooting image pull secrets that use tokens](#ts_image_pull_token).

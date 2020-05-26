@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-19"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, knative, add-on, knative changelog
 
@@ -38,6 +38,18 @@ subcollection: containers
 
 View information for patch updates to the [managed Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) in your {{site.data.keyword.containerlong_notm}} clusters.
 {:shortdesc}
+
+## Changelog for 0.14.0, released 20 May 2020
+{: #0140}
+
+The following table shows the changes that are included in version 0.14.0 of the managed Knative add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 0.12.1 | 0.14.0| <ul><li>See the Knative release notes for version 0.14.0 of the [`eventing`](https://github.com/knative/eventing/releases/tag/v0.14.0){: external}, [`serving`](https://github.com/knative/serving/releases/tag/v0.14.0){: external}, and [`event-contrib`](https://github.com/knative/eventing-contrib/releases/tag/v0.14.0){: external} components.</li><li>In version 0.14.0 of the Knative managed add-on, you must use Istio version 1.15 or later.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Knative 0.14.0" caption-side="top"}
 
 ## Changelog for 0.12.1, released 10 February 2020
 {: #0121}

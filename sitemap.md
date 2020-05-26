@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-26"
 
 keywords: containers
 subcollection: containers
@@ -34,6 +34,7 @@ subcollection: containers
 
 # Site map
 {: #cs_sitemap}
+
 
 
 
@@ -632,6 +633,7 @@ subcollection: containers
 * [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
   * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
   * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
 * [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
@@ -759,7 +761,7 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
-[Deploying serverless apps with Knative](/docs/containers?topic=containers-serverless-apps-knative)
+[Deploying serverless apps with Knative (beta)](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
   * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
 * [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
@@ -1237,7 +1239,9 @@ subcollection: containers
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
-##[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
+## Community Kubernetes documentation
+
+[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
 
 
 ## API reference
@@ -1320,8 +1324,10 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog#1176_1526)
   * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
   * [Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020](/docs/containers?topic=containers-changelog#1175_1523)
   * [Changelog for master fix pack 1.17.5_1522, released 23 April 2020](/docs/containers?topic=containers-changelog#1175_1522)
@@ -1333,6 +1339,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for 1.16.10_1533, released 26 May 2020](/docs/containers?topic=containers-changelog#11610_1533)
   * [Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020](/docs/containers?topic=containers-changelog#1169_1531)
   * [Changelog for worker node fix pack 1.16.9_1530, released 27 April 2020](/docs/containers?topic=containers-changelog#1169_1530)
   * [Changelog for master fix pack 1.16.9_1529, released 23 April 2020](/docs/containers?topic=containers-changelog#1169_1529)
@@ -1351,6 +1358,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for 1.15.12_1540, released 26 May 2020](/docs/containers?topic=containers-changelog#11512_1540)
   * [Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020](/docs/containers?topic=containers-changelog#11511_1538)
   * [Changelog for worker node fix pack 1.15.11_1537, released 27 April 2020](/docs/containers?topic=containers-changelog#11511_1537)
   * [Changelog for master fix pack 1.15.11_1536, released 23 April 2020](/docs/containers?topic=containers-changelog#11511_1536)
@@ -1379,6 +1387,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.15.2_1513, released 15 August 2019](/docs/containers?topic=containers-changelog#1152_1513)
   * [Changelog for 1.15.1_1511, released 5 August 2019](/docs/containers?topic=containers-changelog#1151_1511)
 * [Deprecated: Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
+  * [Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020](/docs/containers?topic=containers-changelog#11410_1555)
   * [Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020](/docs/containers?topic=containers-changelog#11410_1554)
   * [Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020](/docs/containers?topic=containers-changelog#11410_1553)
   * [Changelog for master fix pack 1.14.10_1552, released 23 April 2020](/docs/containers?topic=containers-changelog#11410_1552)
@@ -1440,6 +1449,7 @@ subcollection: containers
 * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
+* [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
 
@@ -1588,6 +1598,8 @@ subcollection: containers
 
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
 
+[What are the regional uplift charges for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
+
 [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
 
 [Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
@@ -1677,6 +1689,7 @@ subcollection: containers
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_lb#getting_help_lb)
 
 [Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
+* [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
 * [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
