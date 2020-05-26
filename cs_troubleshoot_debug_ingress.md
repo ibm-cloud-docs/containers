@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -41,6 +41,58 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
 
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](#debug-tool-ingress) to run tests and gather pertinent Ingress information from your cluster.
 {: tip}
+
+## Checking the status of Ingress components
+{: #ingress-status}
+
+Check the overall health and status of your cluster's Ingress components by running the `ibmcloud ks ingress status` command.
+{: shortdesc}
+
+The state of the Ingress components are reported in an **Ingress Status** and **Ingress Message**. Example output:
+```
+Ingress Status:   healthy
+Message:          All Ingress components are healthy
+
+Component                                        Status    Type
+public-crdf253b6025d64944ab99ed63bb4567b6-alb1   healthy   alb
+public-crdf253b6025d64944ab99ed63bb4567b6-alb2   healthy   alb
+```
+{: screen}
+
+The **Ingress Status** and **Ingress Message** fields are also returned in the output of the `ibmcloud ks cluster get` command. The health of your Ingress components might impact the health of your cluster master. For example,  if your Ingress components are unhealthy, your cluster master might show a `warning` state. However, the health of your Ingress components does not cause your master health to become `critical`.
+{: tip}
+
+The **Ingress Status** reflects the overall health of the Ingress components. The **Ingress Message** provides details of what operation is in progress or information about any components that are unhealthy. Each status and message is described in the following tables.
+
+|Ingress status|Description|
+|--- |--- |
+|`healthy`|The Ingress components are healthy. Check the **Ingress Message** field to verify that all operations for the Ingress components are complete.|
+|`warning`|The Ingress components might not function properly due to errors. Check the **Ingress Message** field for more information and troubleshooting.|
+{: caption="Ingress statuses"}
+{: summary="Table rows read from left to right, with the Ingress status in column one and a description in column two."}
+
+</br>
+
+|Ingress message|Description|
+|--- |--- |
+|`ALB is disabled`|Your public ALBs were manually disabled. For more information, see the [`ibmcloud ks alb configure` CLI command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure).|
+|`ALB is unhealthy or unreachable`|One or more ALB IP addresses cannot be reached. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](#ping).|
+|`ALBs are not health checked in clusters created with no subnets`|Ingress health reporting is not supported for clusters that were created with the `--no-subnet` flag.|
+|`ALBs are not health checked in private-only clusters`|Ingress health reporting is not supported for clusters that are connected to private VLANs only.|
+|`ALBs cannot be created because no portable subnet is available`|Each ALB is created with a portable public or private IP address from the public or private subnet on the VLANs that your cluster is connected to. If no portable IP address is available, the ALB is not created. You might need to add a new subnet to your cluster or order a new VLAN. For troubleshooting information, see [Classic clusters: ALB does not deploy in a zone](#cs_subnet_limit).|
+|`All Ingress components are healthy`|The Ingress components are successfully deployed and are healthy.|
+|`Creating Ingress ALBs`|Your ALBs are currently deploying. Wait until your ALBs are fully deployed to review the health of your Ingress components. Note that ALB creation can take up to 15 minutes to complete. |
+|`Creating TLS certificate for Ingress subdomain`|The default Ingress subdomain for your cluster is created with a default TLS certificate, which is stored in the **Ingress Secret**. The certificate is currently being created. If you specify the default TLS secret in your Ingress resources, you cannot use HTTPS to access your apps through your ALBs until the secret is fully deployed. |
+|`Ingress is not supported for free clusters`|In a free cluster, you can expose your app only by using a [NodePort service](/docs/containers?topic=containers-nodeport).|
+|`Ingress subdomain is unreachable`|Your cluster is assigned an Ingress subdomain in the format `<cluster_name>.<region>.containers.mybluemix.net` that cannot be reached. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](#ping).|
+|`Load balancer service for ALB or router is not ready`|<ul><li>VPC clusters: The VPC load balancer that routes requests to the apps that your ALBs expose either might still be creating or did not correctly deploy to your VPC. For troubleshooting information, see [VPC clusters: Cannot connect to an app via Ingress](#vpc_ts_alb).</li><li>Classic clusters: The load balancer service that exposes your ALB did not correctly deploy to your cluster. For troubleshooting information, see [Classic clusters: ALB does not deploy in a zone](#cs_subnet_limit).</li></ul>|
+|`One or more ALBs are unhealthy`|The external IP address for one or more of your ALBs was reported as unhealthy. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](#ping).|
+|`Pending update or enable operation for ALB in progress`|Your ALB is currently updating to a new version, or your ALB that was previously disabled is enabling. For information about updating ALBs, see [Updating ALBs](/docs/containers?topic=containers-ingress-manage#alb-update). For information about enabling ALBs, see the [`ibmcloud ks alb configure` CLI command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure).|
+|`Registering Ingress subdomain`|The default **Ingress Subdomain** for your cluster is currently being created. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete. For troubleshooting information, see [No Ingress subdomain exists after cluster creation](#ingress_subdomain).|
+{: caption="Ingress messages"}
+{: summary="Table rows read from left to right, with the Ingress message in column one and a description in column two."}
+
+<br />
 
 
 

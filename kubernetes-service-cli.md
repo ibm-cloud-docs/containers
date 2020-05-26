@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -115,13 +115,13 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
    <li>[`cluster create vpc-gen2`](#cli_cluster-create-vpc-gen2)</li>
    <li>[`nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc)</li>
-   <li>[`nlb-dns create vpc-gen2`](#cs_nlb-dns-create-vpc-gen2)
+   <li>[`nlb-dns create vpc-gen2`](#cs_nlb-dns-create-vpc-gen2)</li>
    <li>[`nlb-dns rm vpc-classic`](#cs_nlb-dns-rm-vpc)</li>
-   <li>[`nlb-dns rm vpc-gen2`](#cs_nlb-dns-rm-vpc-gen2)
+   <li>[`nlb-dns rm vpc-gen2`](#cs_nlb-dns-rm-vpc-gen2)</li>
    <li>[`worker-pool create vpc-classic`](#cli_worker_pool_create_vpc_classic)</li>
    <li>[`worker-pool create vpc-gen2`](#cli_worker_pool_create_vpc_gen2)</li>
    <li>[`zone add vpc-classic`](#cli_zone-add-vpc-classic)</li>
-   <li>[`zone add vpc-gen2`](#cli_zone-add-vpc-gen2)</li></ul></ul></td>
+   <li>[`zone add vpc-gen2`](#cli_zone-add-vpc-gen2)</li></ul></td>
  </tr>
  <tr>
    <td>**Provider-exclusive**: You can use these commands only in the particular infrastructure provider.</td>
@@ -3769,6 +3769,53 @@ ibmcloud ks alb update --cluster CLUSTER [--alb-id ALB1_ID --alb-id ALB2_ID ...]
 </dl>
 
 
+
+<br />
+
+
+## `ingress` commands
+{: #ingress-commands}
+
+View and modify Ingress services and settings.
+{: shortdesc}
+
+### `ibmcloud ks ingress status`
+{: #cs_ingress_status}
+
+Get the status of the health of Ingress resources for a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks ingress status --cluster CLUSTER [--json] [-s]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Prints the command output in JSON format. This value is optional.</dd>
+
+<dt><code>-s</code></dt>
+<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress status --cluster mycluster
+```
+{: pre}
+
+</br>
 
 <br />
 

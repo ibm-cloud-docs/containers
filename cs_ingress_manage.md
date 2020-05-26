@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-04-28"
+lastupdated: "2020-05-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,6 +44,11 @@ Looking to change your ALBs' basic behavior or tune ALB performance? See [Modify
 
 ## Updating ALBs
 {: #alb-update}
+
+
+To see the changes that are included in each version of Ingress, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).
+{: tip}
+
 
 
 Manage automatic updates of all Ingress ALB pods in a cluster.
@@ -190,8 +195,14 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB.
+  * VPC Gen 1:
     ```
     ibmcloud ks alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone>
+    ```
+    {: pre}
+  * VPC Gen 2:
+    ```
+    ibmcloud ks alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone>
     ```
     {: pre}
 
@@ -235,8 +246,14 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   {: screen}
 
 3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster.
+  * VPC Gen 1:
     ```
     ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
+    ```
+    {: pre}
+  * VPC Gen 2:
+    ```
+    ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
     ```
     {: pre}
 

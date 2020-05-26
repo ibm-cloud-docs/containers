@@ -1682,6 +1682,7 @@ subcollection: containers
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_lb#getting_help_lb)
 
 [Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
+* [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
 * [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
