@@ -209,7 +209,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     ```
     {: screen}
 
-    To maintain backwards compatibility, your Kubernetes version 1.15 - 1.17 cluster has a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region. However, you can copy and refer to only the `all-icr-io` image pull secret, which has credentials to the public and private `icr.io` registry domains for all regions.
+    To maintain backwards compatibility, your Kubernetes version 1.15 - 1.17 clusters have a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region. However, you can copy and refer to only the `all-icr-io` image pull secret, which has credentials to the public and private `icr.io` registry domains for all regions.
     {: note}
 
 4.  Update your [container deployments](/docs/containers?topic=containers-app#image) to pull images from the `icr.io` domain name.
