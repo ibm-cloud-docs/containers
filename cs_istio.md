@@ -413,9 +413,7 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   {: screen}
 
-2. In the output of step 1, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`.
-  * If the `client version` and control plane component versions match, continue to the next step.
-  * If the `client version` and control plane component versions do not match:
+2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
       ```
       curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.0 sh -
@@ -431,10 +429,6 @@ For example, the patch version of your add-on might be updated automatically by 
       export PATH=$PWD/bin:$PATH
       ```
       {: pre}
-
-3. In the output of step 1, compare the `pilot version` to the `data plane version` for each data plane pod.
-  * If the `pilot version` and the `data plane version` match, no further updates are required.
-  * If the `pilot version` and the `data plane version` do not match, [update your sidecars](https://istio.io/docs/setup/upgrade/cni-helm-upgrade/#sidecar-upgrade){: external}.
 
 <br />
 
