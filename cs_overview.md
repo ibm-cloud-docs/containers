@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-27"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -36,7 +36,7 @@ subcollection: containers
 # Overview
 {: #overview}
 
-Learn more about {{site.data.keyword.containerlong}}, its capabilities and the options that are available to you to customize the cluster to your needs.
+Learn more about [{{site.data.keyword.containerlong_notm}}](https://www.ibm.com/cloud/container-service){: external}, its capabilities and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
 ## Understanding {{site.data.keyword.containerlong_notm}}
