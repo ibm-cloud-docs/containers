@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-27"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -39,7 +39,7 @@ subcollection: containers
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This ACL information is specific to VPC clusters. For network policy information for classic clusters, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}
 
-<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Because IP in IP encapsulation is used for traffic across pods in VPC generation 2 compute, you cannot filter pod traffic by using VPC security group egress rules or access control lists (ACLs). If you want to control pod network traffic, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies).
+<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> ACLs filter incoming and outgoing traffic for your cluster at the subnet level, such as traffic through the VPC load balancer. To control traffic within the cluster at the pod-to-pod level, you cannot use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies), which can control the pod-level network traffic that uses IP in IP encapsulation.
 {: important}
 
 If you have unique security requirements, you can control traffic to and from your cluster with VPC access control lists (ACLs) and traffic between pods in your cluster with Kubernetes network policies.
@@ -88,8 +88,8 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.18.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.18.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.18.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.18.3
   ```
   {: screen}
 
@@ -109,7 +109,7 @@ When you use the following steps to create custom ACLs, only network traffic tha
   Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
   Worker Pool Name:   default
   Flavor:             c2.2x4
-  Version:            1.18.2
+  Version:            1.18.3
 
   Health
   State:     normal
