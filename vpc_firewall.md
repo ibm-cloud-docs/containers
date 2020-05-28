@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-27"
+lastupdated: "2020-05-28"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -304,9 +304,6 @@ When you create a Generation 2 VPC, the VPC is created with a default security g
 
 You can use access control lists (ACLs) on your VPC subnets to act as a firewall to restrict worker node ingress and egress. However, you must allow your worker nodes to access the resources that are required for the cluster to function by following the steps in [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls).
 {: shortdesc}
-
-<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> ACLs filter incoming and outgoing traffic for your cluster at the subnet level, such as traffic through the VPC load balancer. To control traffic within the cluster at the pod-to-pod level, you cannot use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies), which can control the pod-level network traffic that uses IP in IP encapsulation.
-{: important}
 
 <br />
 
