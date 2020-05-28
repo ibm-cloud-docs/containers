@@ -350,7 +350,7 @@ subcollection: containers
 
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
-* [Prepare to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
+* [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 * [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
 * [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
