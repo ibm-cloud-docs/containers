@@ -553,6 +553,8 @@ subcollection: containers
 
 [VPC: Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
+  * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
+  * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
 * [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
