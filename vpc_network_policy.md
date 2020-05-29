@@ -85,284 +85,279 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to create an ACL for each s
 4. In the **Rules** section, delete the default inbound rule and outbound rule that allow all inbound and outbound traffic.
 5. In the **Inbound rules** section, create the following rules by clicking **New rule**.
 
-    <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
-
-    <table>
-    <caption>Inbound rule</caption>
-    <thead>
-    <th>Rule purpose</th>
-    <th>Allow/Deny</th>
-    <th>Protocol</th>
-    <th>Source Type</th>
-    <th>Source IP or CIDR</th>
-    <th>Source Port min</th>
-    <th>Source Port max</th>
-    <th>Destination Type</th>
-    <th>Destination IP or CIDR</th>
-    <th>Destination Port min</th>
-    <th>Destination Port max</th>
-    <th>Priority</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Allow worker nodes to be created in your cluster.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>161.26.0.0/16</td>
-    <td>-</td>    
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>   
-    <td>-</td>   
-    <td>-</td>
-    <td>Set to top</td>
-    </tr>
-    <tr>
-    <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and with other {{site.data.keyword.cloud_notm}} services that support private service endpoints.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>166.8.0.0/14</td>
-    <td>-</td>    
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>   
-    <td>-</td>   
-    <td>-</td>
-    <td>After 1</td>
-    </tr>
-    <tr>
-    <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>Other subnet's CIDR</td>
-    <td>-</td>  
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>   
-    <td>-</td>   
-    <td>-</td>
-    <td>After 2</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>56501</td>
-    <td>56501</td>
-    <td>After 3</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>443</td>
-    <td>443</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>After 4</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>8834</td>
-    <td>8834</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>After 5</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>10514</td>
-    <td>10514</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>After 6</td>
-    </tr>
-    <tr>
-    <td>Deny all other traffic that does not match the previous rules.</td>
-    <td>Deny</td>
-    <td>ALL</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Set to bottom</td>
-    </tr>
-    </tbody>
-    </table>
+  <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
+  <table>
+  <caption>Inbound rule</caption>
+  <thead>
+  <th>Rule purpose</th>
+  <th>Allow/Deny</th>
+  <th>Protocol</th>
+  <th>Source Type</th>
+  <th>Source IP or CIDR</th>
+  <th>Source Port min</th>
+  <th>Source Port max</th>
+  <th>Destination Type</th>
+  <th>Destination IP or CIDR</th>
+  <th>Destination Port min</th>
+  <th>Destination Port max</th>
+  <th>Priority</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Allow worker nodes to be created in your cluster.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>161.26.0.0/16</td>
+  <td>-</td>    
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>   
+  <td>-</td>   
+  <td>-</td>
+  <td>Set to top</td>
+  </tr>
+  <tr>
+  <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and with other {{site.data.keyword.cloud_notm}} services that support private service endpoints.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>166.8.0.0/14</td>
+  <td>-</td>    
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>   
+  <td>-</td>   
+  <td>-</td>
+  <td>After 1</td>
+  </tr>
+  <tr>
+  <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>Other subnet's CIDR</td>
+  <td>-</td>  
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>   
+  <td>-</td>   
+  <td>-</td>
+  <td>After 2</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>56501</td>
+  <td>56501</td>
+  <td>After 3</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>443</td>
+  <td>443</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>After 4</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>8834</td>
+  <td>8834</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>After 5</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>10514</td>
+  <td>10514</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>After 6</td>
+  </tr>
+  <tr>
+  <td>Deny all other traffic that does not match the previous rules.</td>
+  <td>Deny</td>
+  <td>ALL</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Set to bottom</td>
+  </tr>
+  </tbody>
+  </table>
 
 6. In the **Outbound rules** section, create the following rules by clicking **New rule**.
 
-    <p class="important">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
-
-    <table>
-    <caption>Inbound rule</caption>
-    <thead>
-    <th>Rule purpose</th>
-    <th>Allow/Deny</th>
-    <th>Protocol</th>
-    <th>Source Type</th>
-    <th>Source IP or CIDR</th>
-    <th>Source Port min</th>
-    <th>Source Port max</th>
-    <th>Destination Type</th>
-    <th>Destination IP or CIDR</th>
-    <th>Destination Port min</th>
-    <th>Destination Port max</th>
-    <th>Priority</th>
-    </thead>
-    <tbody>
-    <tr>
-    <td>Allow worker nodes to be created in your cluster.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>Any</td>
-    <td>-</td>    
-    <td>-</td>
-    <td>161.26.0.0/16</td>
-    <td>-</td>   
-    <td>-</td>   
-    <td>-</td>
-    <td>Set to top</td>
-    </tr>
-    <tr>
-    <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and to communicate with other {{site.data.keyword.cloud_notm}} services that support private service endpoints, such as {{site.data.keyword.registrylong_notm}}.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>Any</td>
-    <td>-</td>    
-    <td>-</td>
-    <td>166.8.0.0/14</td>
-    <td>-</td>   
-    <td>-</td>   
-    <td>-</td>
-    <td>After 1</td>
-    </tr>
-    <tr>
-    <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in all other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
-    <td>Allow</td>
-    <td>ALL</td>
-    <td>IP or CIDR</td>
-    <td>Any</td>
-    <td>-</td>  
-    <td>-</td>
-    <td>Other subnet's CIDR</td>
-    <td>-</td>
-    <td>-</td>  
-    <td>-</td>
-    <td>After 2</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>56501</td>
-    <td>56501</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>After 3</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>443</td>
-    <td>443</td>
-    <td>After 4</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>8834</td>
-    <td>8834</td>
-    <td>After 5</td>
-    </tr>
-    <tr>
-    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
-    <td>Allow</td>
-    <td>TCP</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>10514</td>
-    <td>10514</td>
-    <td>After 6</td>
-    </tr>
-    <tr>
-    <td>Deny all other traffic that does not match the previous rules.</td>
-    <td>Deny</td>
-    <td>ALL</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Any</td>
-    <td>-</td>
-    <td>-</td>
-    <td>-</td>
-    <td>Set to bottom</td>
-    </tr>
-    </tbody>
-    </table>
+  <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
+  <table>
+  <caption>Inbound rule</caption>
+  <thead>
+  <th>Rule purpose</th>
+  <th>Allow/Deny</th>
+  <th>Protocol</th>
+  <th>Source Type</th>
+  <th>Source IP or CIDR</th>
+  <th>Source Port min</th>
+  <th>Source Port max</th>
+  <th>Destination Type</th>
+  <th>Destination IP or CIDR</th>
+  <th>Destination Port min</th>
+  <th>Destination Port max</th>
+  <th>Priority</th>
+  </thead>
+  <tbody>
+  <tr>
+  <td>Allow worker nodes to be created in your cluster.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>Any</td>
+  <td>-</td>    
+  <td>-</td>
+  <td>161.26.0.0/16</td>
+  <td>-</td>   
+  <td>-</td>   
+  <td>-</td>
+  <td>Set to top</td>
+  </tr>
+  <tr>
+  <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and to communicate with other {{site.data.keyword.cloud_notm}} services that support private service endpoints, such as {{site.data.keyword.registrylong_notm}}.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>Any</td>
+  <td>-</td>    
+  <td>-</td>
+  <td>166.8.0.0/14</td>
+  <td>-</td>   
+  <td>-</td>   
+  <td>-</td>
+  <td>After 1</td>
+  </tr>
+  <tr>
+  <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in all other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
+  <td>Allow</td>
+  <td>ALL</td>
+  <td>IP or CIDR</td>
+  <td>Any</td>
+  <td>-</td>  
+  <td>-</td>
+  <td>Other subnet's CIDR</td>
+  <td>-</td>
+  <td>-</td>  
+  <td>-</td>
+  <td>After 2</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>56501</td>
+  <td>56501</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>After 3</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>443</td>
+  <td>443</td>
+  <td>After 4</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>8834</td>
+  <td>8834</td>
+  <td>After 5</td>
+  </tr>
+  <tr>
+  <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+  <td>Allow</td>
+  <td>TCP</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>10514</td>
+  <td>10514</td>
+  <td>After 6</td>
+  </tr>
+  <tr>
+  <td>Deny all other traffic that does not match the previous rules.</td>
+  <td>Deny</td>
+  <td>ALL</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Any</td>
+  <td>-</td>
+  <td>-</td>
+  <td>-</td>
+  <td>Set to bottom</td>
+  </tr>
+  </tbody>
+  </table>
 
 7. In the **Attach subnets** section, choose the name of the subnet for which you created this ACL.
 
 8. Click **Create access control list**.
 
 9. Multizone clusters: Repeat steps 2 - 8 to create an ACL for each subnet that your cluster is attached to.
-
-ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the rules that deny all inbound and outbound traffic.
-{: note}
 
 ### Creating ACLs from the CLI
 {: #acls_cli}
