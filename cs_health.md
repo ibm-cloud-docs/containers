@@ -890,7 +890,7 @@ To set up a monitoring configuration for your cluster:
         {: screen}
 
 3. Optional: Verify that the Sysdig agent was set up successfully.
-   1. If you used the console to create the Sysdig monitoring configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
+   1. If you used the console to create the Sysdig monitoring configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
    2. Verify that the daemonset for the Sysdig agent was created and all instances are listed as `AVAILABLE`.
       ```
       kubectl get daemonsets -n ibm-observe
