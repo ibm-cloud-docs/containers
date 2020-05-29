@@ -1582,7 +1582,7 @@ subcollection: containers
 
 [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
 
-[What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
+[What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
 
 [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 

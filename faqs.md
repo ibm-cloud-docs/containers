@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-28"
+lastupdated: "2020-05-29"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -36,7 +36,7 @@ subcollection: containers
 # FAQs
 {: #faqs}
 
-Review frequently asked questions for using {{site.data.keyword.containerlong}}.
+Review frequently asked questions (FAQs) for using {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 
@@ -129,7 +129,7 @@ For more information about how to achieve high availability for your cluster, se
 
 You can use built-in security features in {{site.data.keyword.containerlong_notm}} to protect the components in your cluster, your data, and app deployments to ensure security compliance and data integrity. Use these features to secure your Kubernetes API server, etcd data store, worker node, network, storage, images, and deployments against malicious attacks. You can also leverage built-in logging and monitoring tools to detect malicious attacks and suspicious usage patterns.
 
-For more information about the components of your cluster and how you can secure each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
+For more information about the components of your cluster and how you can meet security standards for each component, see [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security#security).
 
 ## What access policies do I give my cluster users?
 {: #faq_access}
@@ -204,7 +204,7 @@ Yes. By default, {{site.data.keyword.containerlong_notm}} sets up many component
 
 For the latest HA service level agreement terms, refer to the [{{site.data.keyword.cloud_notm}} terms of service](/docs/overview/terms-of-use?topic=overview-terms#terms). Generally, the SLA availability terms require that when you configure your infrastructure resources in an HA architecture, you must distribute them evenly across three different availability zones. For example, to receive full HA coverage under the SLA terms, you must [set up a multizone cluster](/docs/containers?topic=containers-ha_clusters#multizone) with a total of at least 9 worker nodes, three worker nodes per zone that are evenly spread across three zones.
 
-## What standards does the service comply to?
+## What compliance standards does the service meet?
 {: #standards}
 {: faq}
 
@@ -212,7 +212,7 @@ For the latest HA service level agreement terms, refer to the [{{site.data.keywo
 
 To view detailed system requirements, you can run a [software product compatibility report for {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/software/reports/compatibility/clarity-reports/report/html/softwareReqsForProduct?deliverableId=4440E450C2C811E6A98AAE81A233E762){: external}. Note that compliance depends on the underlying [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) for the cluster worker nodes, networking, and storage resources.
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards:
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - Health Insurance Portability and Accountability Act (HIPAA)
 - Service Organization Control standards (SOC 1 Type 2, SOC 2 Type 2)
@@ -220,7 +220,7 @@ To view detailed system requirements, you can run a [software product compatibil
 - International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
 - Payment Card Industry Data Security Standard (PCI DSS)
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following standards:
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
 
