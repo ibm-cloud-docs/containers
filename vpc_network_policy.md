@@ -76,15 +76,17 @@ When you use the following steps to create custom ACLs, only network traffic tha
 ### Creating ACLs in the console
 {: #acls_ui}
 
-ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the rules that deny all inbound and outbound traffic.
-{: important}
+Use the {{site.data.keyword.cloud_notm}} VPC console to create an ACL for each subnet that your cluster is attached to.
+{: shortdec}
 
 1. Multizone clusters only: In the [Subnets for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/subnets){: external}, note the **IP Range** of each subnet that your cluster is attached to.
 2. In the [Access control lists for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/acl){: external}, click **New access control list**.
 3. Give your ACL a name and choose the VPC and resource group that your subnets are in.
 4. In the **Rules** section, delete the default inbound rule and outbound rule that allow all inbound and outbound traffic.
 5. In the **Inbound rules** section, create the following rules by clicking **New rule**.
+
     <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
+
     <table>
     <caption>Inbound rule</caption>
     <thead>
@@ -117,7 +119,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>Set to top</td>
     </tr>
     <tr>
-    <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and to communicate with other {{site.data.keyword.cloud_notm}} services that support private service endpoints, such as {{site.data.keyword.registrylong_notm}}.</td>
+    <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and with other {{site.data.keyword.cloud_notm}} services that support private service endpoints.</td>
     <td>Allow</td>
     <td>ALL</td>
     <td>IP or CIDR</td>
@@ -131,7 +133,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 1</td>
     </tr>
     <tr>
-    <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in all other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
+    <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
     <td>Allow</td>
     <td>ALL</td>
     <td>IP or CIDR</td>
@@ -145,7 +147,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 2</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -159,7 +161,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 3</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -173,7 +175,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 4</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -187,7 +189,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 5</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -218,7 +220,9 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     </table>
 
 6. In the **Outbound rules** section, create the following rules by clicking **New rule**.
+
     <p class="important">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
+
     <table>
     <caption>Inbound rule</caption>
     <thead>
@@ -279,7 +283,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 2</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -293,7 +297,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 3</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -307,7 +311,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 4</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -321,7 +325,7 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     <td>After 5</td>
     </tr>
     <tr>
-    <td>Optional: If you plan to expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+    <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
     <td>Allow</td>
     <td>TCP</td>
     <td>Any</td>
@@ -357,11 +361,14 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
 
 9. Multizone clusters: Repeat steps 2 - 8 to create an ACL for each subnet that your cluster is attached to.
 
+ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the rules that deny all inbound and outbound traffic.
+{: note}
+
 ### Creating ACLs from the CLI
 {: #acls_cli}
 
-ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by including the `--before-rule-name deny-all-(inbound|outbound)` flag.
-{: important}
+Use the {{site.data.keyword.cloud_notm}} CLI to create an ACL for each subnet that your cluster is attached to.
+{: shortdec}
 
 1. Target the region of the VPC that your cluster is deployed to.
   ```
@@ -370,7 +377,9 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
   {: pre}
 
 2. List your VPC subnets. For each subnet that your cluster is attached to, get the **ID** and **Subnet CIDR**.
+
   <p class="tip">If you can't remember which subnets your cluster is attached to, you can run `ibmcloud ks worker get -c <cluster_name_or_ID> -w <worker_node_ID>` for one worker node in each zone of your cluster, and get the **ID** and **CIDR** of the subnet that the worker is attached to.</p>
+
   ```
   ibmcloud is subnets
   ```
@@ -512,6 +521,9 @@ ACL rules are applied to traffic in a specific order. If you want to add a rule 
     {: screen}
 
   9. Repeat these steps for each subnet.
+
+ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by including the `--before-rule-name deny-all-(inbound|outbound)` flag.
+{: note}
 
 <br />
 
