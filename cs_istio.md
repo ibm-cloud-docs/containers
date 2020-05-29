@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-26"
+lastupdated: "2020-05-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -408,7 +408,9 @@ For example, the patch version of your add-on might be updated automatically by 
   policy version: 1.5.0
   sidecar-injector version: 1.4.8
   telemetry version: 1.5.0
-  data plane version: version.ProxyInfo{ID:"activator-86d6486f46-6t8lw.knative-serving", IstioVersion:"1.4.8"}
+  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.4.8"}
+  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.4.9"}
+  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.4.8"}
   ...
   ```
   {: screen}
@@ -429,6 +431,14 @@ For example, the patch version of your add-on might be updated automatically by 
       export PATH=$PWD/bin:$PATH
       ```
       {: pre}
+
+3. In the output of step 1, compare the `pilot version` to the `data plane version` for each data plane pod.
+  * If the `pilot version` and the `data plane version` match, no further updates are required.
+  * If the `pilot version` and the `data plane version` do not match, restart each data plane pod that runs the old version by deleting it. The pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.5"}`.
+    ```
+    kubectl delete pod <pod_name> -n <namespace>
+    ```
+    {: pre}
 
 <br />
 
