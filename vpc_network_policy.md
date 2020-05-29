@@ -218,7 +218,6 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to create an ACL for each s
    </tr>
    </tbody>
    </table>
-
 6. In the **Outbound rules** section, create the following rules by clicking **New rule**.
 
    <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p><table>
@@ -352,7 +351,6 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to create an ACL for each s
    </tr>
    </tbody>
    </table>
-
 7. In the **Attach subnets** section, choose the name of the subnet for which you created this ACL.
 
 8. Click **Create access control list**.
