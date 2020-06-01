@@ -44,7 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 01 June 2020 | <ul><li>**Kubernetes 1.17**: [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.</li><li>**VPC ACLs**: Added required rules for using VPC load balancers to steps for [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](#acls).</li></ul>|
+| 01 June 2020 | <ul><li>**Kubernetes 1.17**: [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.</li><li>**VPC ACLs**: Added required rules for using VPC load balancers to steps for [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls).</li></ul>|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in June 2020"}
 
