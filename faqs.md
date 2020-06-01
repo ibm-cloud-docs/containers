@@ -179,8 +179,8 @@ For more information about available bare metal flavors and how bare metal is di
 
 **Supported Kubernetes versions**:
 *   Latest: 1.18.3
-*   Default: 1.16.10
-*   Other: 1.17.6
+*   Default: 1.17.6
+*   Other: 1.16.10
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

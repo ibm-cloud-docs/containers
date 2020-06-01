@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-26"
+lastupdated: "2020-06-01"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -77,8 +77,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 *   Latest: 1.18.3
-*   Default: 1.16.10
-*   Other: 1.17.6
+*   Default: 1.17.6
+*   Other: 1.16.10
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.15, 1.14
@@ -94,7 +94,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.16.10+IKS
+Server Version: v1.17.6+IKS
 ```
 {: screen}
 
