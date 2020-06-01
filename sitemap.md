@@ -288,9 +288,28 @@ subcollection: containers
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
 
-## Setting up clusters
-{: #sitemap_setting_up_clusters}
+## Planning your cluster
+{: #sitemap_planning_your_cluster}
 
+
+[Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy)
+* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
+  * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
+  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
+* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
+  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+  * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
+* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
+  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
+  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
+* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
 
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
@@ -323,6 +342,11 @@ subcollection: containers
 * [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
 * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
+
+
+## Creating and accessing clusters
+{: #sitemap_creating_and_accessing_clusters}
+
 
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
@@ -375,6 +399,11 @@ subcollection: containers
   * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+
+
+## Managing the cluster lifecycle
+{: #sitemap_managing_the_cluster_lifecycle}
+
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
@@ -752,6 +781,22 @@ subcollection: containers
   * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
+[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
+* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
+* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
+
+[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
+* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
+* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
+* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
+* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
+* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
+
+## Setting up a service mesh with Istio
+{: #sitemap_setting_up_a_service_mesh_with_istio}
+
+
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs)
 * [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
 * [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
@@ -811,31 +856,29 @@ subcollection: containers
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
   * [Updating Sysdig for Istio add-on version 1.5](/docs/containers?topic=containers-istio-health#sysdig-15)
 
-[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
-* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
-* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
-* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
-* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
-* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
-* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
-* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
-
-
-## Exposing apps
-{: #sitemap_exposing_apps}
+## Choosing an app exposure service
+{: #sitemap_choosing_an_app_exposure_service}
 
 
 [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning)
-* [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
-* [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
-* [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
-  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
-  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
-* [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
-  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
-  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
+
+[Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
+
+[Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
+
+[Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
+* [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
+* [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
+
+[Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
+* [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
+* [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
+
+
+## Exposing apps with load balancers
+{: #sitemap_exposing_apps_with_load_balancers}
+
 
 [Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs)
 * [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
@@ -878,6 +921,11 @@ subcollection: containers
 * [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
   * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+
+
+## Exposing apps with Ingress ALBs
+{: #sitemap_exposing_apps_with_ingress_albs}
+
 
 [Quick start for Ingress](/docs/containers?topic=containers-ingress-qs)
 
