@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-26"
+lastupdated: "2020-06-01"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1463,16 +1463,67 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 </tbody>
 </table>
 
-## Deprecated: Version 1.14 changelog
+<br />
+
+
+## Archive
+{: #changelog_archive}
+
+Unsupported Kubernetes versions:
+*  [Version 1.14](#114_changelog)
+*  [Version 1.13](#113_changelog)
+*  [Version 1.12](#112_changelog)
+*  [Version 1.11](#111_changelog)
+*  [Version 1.10](#110_changelog)
+*  [Version 1.9](#19_changelog)
+*  [Version 1.8](#18_changelog)
+*  [Version 1.7](#17_changelog)
+
+### Version 1.14 changelog (unsupported 31 May 2020)
 {: #114_changelog}
 
-Review the version 1.14 changelog.
+Version 1.14 is unsupported. You can review the following archive of 1.14 changelogs.
 {: shortdesc}
 
-Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
-{: deprecated}
+*   [Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020](#11410_1555)
+*   [Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020](#11410_1554)
+*   [Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020](#11410_1553)
+*   [Changelog for master fix pack 1.14.10_1552, released 23 April 2020](#11410_1552)
+*   [Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020](#11410_1551)
+*   [Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020](#11410_1550)
+*   [Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020](#11410_1549)
+*   [Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020](#11410_1548)
+*   [Changelog for fix pack 1.14.10_1547, released 17 February 2020](#11410_1547)
+*   [Changelog for worker node fix pack 1.14.10_1546, released 3 February 2020](#11410_1546)
+*   [Changelog for 1.14.10_1545, released 20 January 2020](#11410_1545)
+*   [Changelog for worker node fix pack 1.14.9_1544, released 23 December 2019](#1149_1544)
+*   [Changelog for master fix pack 1.14.9_1543, released 17 December 2019](#1149_1543)
+*   [Changelog for worker node fix pack 1.14.9_1542, released 9 December 2019](#1149_1542_worker)
+*   [Changelog for worker node fix pack 1.14.9_1541, released 25 November 2019](#1149_1541_worker)
+*   [Changelog for master fix pack 1.14.9_1541, released 21 November 2019](#1149_1541)
+*   [Changelog for worker node fix pack 1.14.8_1538, released 11 November 2019](#1148_1538_worker)
+*   [Changelog for worker node fix pack 1.14.8_1537, released 28 October 2019](#1148_1537)
+*   [Changelog for master fix pack 1.14.8_1536, released 22 October 2019](#1148_1536)
+*   [Changelog for worker node fix pack 1.14.7_1535, released 14 October 2019](#1147_1535_worker)
+*   [Changelog for 1.14.7_1534, released 1 October 2019](#1147_1534)
+*   [Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019](#1146_1533_worker)
+*   [Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019](#1146_1532_worker)
+*   [Changelog for master fix pack 1.14.6_1531, released 28 August 2019](#1146_1531)
+*   [Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019](#1145_1530_worker)
+*   [Changelog for master fix pack 1.14.5_1530, released 17 August 2019](#1145_1530)
+*   [Changelog for master fix pack 1.14.5_1529, released 15 August 2019](#1145_1529)
+*   [Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019](#1144_1527_worker)
+*   [Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019](#1144_1526_worker)
+*   [Changelog for master fix pack 1.14.4_1526, released 15 July 2019](#1144_1526)
+*   [Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019](#1143_1525)
+*   [Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019](#1143_1524)
+*   [Changelog for 1.14.3_1523, released 17 June 2019](#1143_1523)
+*   [Changelog for 1.14.2_1521, released 4 June 2019](#1142_1521)
+*   [Changelog for worker node fix pack 1.14.1_1519, released 20 May 2019](#1141_1519)
+*   [Changelog for 1.14.1_1518, released 13 May 2019](#1141_1518)
+*   [Changelog for 1.14.1_1516, released 7 May 2019](#1141_1516)
 
-### Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020
+#### Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020
 {: #11410_1555}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.10_1555`. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1485,7 +1536,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1554" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020
+#### Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020
 {: #11410_1554}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.10_1554`. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1498,7 +1549,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1553" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020
+#### Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020
 {: #11410_1553}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.10_1553`. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1512,7 +1563,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1551" caption-side="top"}
 
-### Changelog for master fix pack 1.14.10_1552, released 23 April 2020
+#### Changelog for master fix pack 1.14.10_1552, released 23 April 2020
 {: #11410_1552}
 
 The following table shows the changes that are included in the master fix pack patch update `1.14.10_1552`. Master patch updates are applied automatically.
@@ -1528,7 +1579,7 @@ The following table shows the changes that are included in the master fix pack p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1551" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020
+#### Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020
 {: #11410_1551}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.10_1551`. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1542,7 +1593,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1550" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020
+#### Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020
 {: #11410_1550}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.10_1550`. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1555,7 +1606,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1549" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020
+#### Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020
 {: #11410_1549}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.10_1549. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1568,7 +1619,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1548" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020
+#### Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020
 {: #11410_1548}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.10_1548. Worker node patch updates can be applied by updating or reloading the worker node.
@@ -1582,7 +1633,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1547" caption-side="top"}
 
-### Changelog for fix pack 1.14.10_1547, released 17 February 2020
+#### Changelog for fix pack 1.14.10_1547, released 17 February 2020
 {: #11410_1547}
 
 The following table shows the changes that are included in the master and worker node fix pack update `1.14.10_1547`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -1599,7 +1650,7 @@ The following table shows the changes that are included in the master and worker
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is where the component is located, the master, worker node, or both. The third column is the previous version number of the component. The fourth column is the current version number of the component. The fifth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1546" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.10_1546, released 3 February 2020
+#### Changelog for worker node fix pack 1.14.10_1546, released 3 February 2020
 {: #11410_1546}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.10_1546.
@@ -1612,7 +1663,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.10_1545" caption-side="top"}
 
-### Changelog for 1.14.10_1545, released 20 January 2020
+#### Changelog for 1.14.10_1545, released 20 January 2020
 {: #11410_1545}
 
 The following table shows the changes that are included in the master and worker node patch update 1.14.10_1545. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
@@ -1635,7 +1686,7 @@ The following table shows the changes that are included in the master and worker
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.9_1544" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.9_1544, released 23 December 2019
+#### Changelog for worker node fix pack 1.14.9_1544, released 23 December 2019
 {: #1149_1544}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.9_1544.
@@ -1648,7 +1699,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.9_1542" caption-side="top"}
 
-### Changelog for master fix pack 1.14.9_1543, released 17 December 2019
+#### Changelog for master fix pack 1.14.9_1543, released 17 December 2019
 {: #1149_1543}
 
 The following table shows the changes that are included in the master fix pack 1.14.9_1543.
@@ -1661,7 +1712,7 @@ The following table shows the changes that are included in the master fix pack 1
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.9_1542" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.9_1542, released 9 December 2019
+#### Changelog for worker node fix pack 1.14.9_1542, released 9 December 2019
 {: #1149_1542_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.9_1542.
@@ -1675,7 +1726,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.9_1541" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.9_1541, released 25 November 2019
+#### Changelog for worker node fix pack 1.14.9_1541, released 25 November 2019
 {: #1149_1541_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.9_1541.
@@ -1689,7 +1740,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.8_1538" caption-side="top"}
 
-### Changelog for master fix pack 1.14.9_1541, released 21 November 2019
+#### Changelog for master fix pack 1.14.9_1541, released 21 November 2019
 {: #1149_1541}
 
 The following table shows the changes that are included in the master fix pack 1.14.9_1541.
@@ -1705,7 +1756,7 @@ The following table shows the changes that are included in the master fix pack 1
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.8_1538" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.8_1538, released 11 November 2019
+#### Changelog for worker node fix pack 1.14.8_1538, released 11 November 2019
 {: #1148_1538_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.8_1538.
@@ -1719,7 +1770,7 @@ The following table shows the changes that are included in the worker node fix p
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.14.8_1537" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.8_1537, released 28 October 2019
+#### Changelog for worker node fix pack 1.14.8_1537, released 28 October 2019
 {: #1148_1537}
 
 The following table shows the changes that are included in the worker node fix pack `1.14.8_1537`.
@@ -1732,7 +1783,7 @@ The following table shows the changes that are included in the worker node fix p
 | Ubuntu 16.04 packages and kernel | 4.4.0-165-generic | 4.4.0-166-generic | Updated worker node images with kernel and package updates for [CVE-2017-18232](https://nvd.nist.gov/vuln/detail/CVE-2017-18232){: external}, [CVE-2018-21008](https://nvd.nist.gov/vuln/detail/CVE-2018-21008){: external}, [CVE-2019-13117](https://nvd.nist.gov/vuln/detail/CVE-2019-13117){: external}, [CVE-2019-13118](https://nvd.nist.gov/vuln/detail/CVE-2019-13118){: external}, [CVE-2019-14287](https://nvd.nist.gov/vuln/detail/CVE-2019-14287){: external}, [CVE-2019-14821](https://nvd.nist.gov/vuln/detail/CVE-2019-14821){: external}, and [CVE-2019-18197](https://nvd.nist.gov/vuln/detail/CVE-2019-18197){: external}. |
 {: caption="Changes since version 1.14.8_1536" caption-side="top"}
 
-### Changelog for master fix pack 1.14.8_1536, released 22 October 2019
+#### Changelog for master fix pack 1.14.8_1536, released 22 October 2019
 {: #1148_1536}
 
 The following table shows the changes that are included in the master fix pack `1.14.8_1536`.
@@ -1750,7 +1801,7 @@ The following table shows the changes that are included in the master fix pack `
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 153 | 159 | Updated image for [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 {: caption="Changes since version 1.14.7_1535" caption-side="top"}
 
-### Changelog for worker node fix pack 1.14.7_1535, released 14 October 2019
+#### Changelog for worker node fix pack 1.14.7_1535, released 14 October 2019
 {: #1147_1535_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.7_1535.
@@ -1782,7 +1833,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for 1.14.7_1534, released 1 October 2019
+#### Changelog for 1.14.7_1534, released 1 October 2019
 {: #1147_1534}
 
 The following table shows the changes that are included in the patch 1.14.7_1534.
@@ -1872,7 +1923,7 @@ The following table shows the changes that are included in the patch 1.14.7_1534
 </table>
 
 
-### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
+#### Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019
 {: #1146_1533_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.6_1533.
@@ -1910,7 +1961,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019
+#### Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019
 {: #1146_1532_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.6_1532.
@@ -1954,7 +2005,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.14.6_1531, released 28 August 2019
+#### Changelog for master fix pack 1.14.6_1531, released 28 August 2019
 {: #1146_1531}
 
 The following table shows the changes that are included in the master fix pack 1.14.6_1531.
@@ -2016,7 +2067,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019
+#### Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019
 {: #1145_1530_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.5_1530.
@@ -2060,7 +2111,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.14.5_1530, released 17 August 2019
+#### Changelog for master fix pack 1.14.5_1530, released 17 August 2019
 {: #1145_1530}
 
 The following table shows the changes that are included in the master fix pack 1.14.5_1530.
@@ -2086,7 +2137,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for master fix pack 1.14.5_1529, released 15 August 2019
+#### Changelog for master fix pack 1.14.5_1529, released 15 August 2019
 {: #1145_1529}
 
 The following table shows the changes that are included in the master fix pack 1.14.5_1529.
@@ -2160,7 +2211,7 @@ The following table shows the changes that are included in the master fix pack 1
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019
+#### Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019
 {: #1144_1527_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.4_1527.
@@ -2192,7 +2243,7 @@ The following table shows the changes that are included in the worker node fix p
 </tbody>  
 </table>
 
-### Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019
+#### Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019
 {: #1144_1526_worker}
 
 The following table shows the changes that are included in the worker node fix pack 1.14.4_1526.
@@ -2225,7 +2276,7 @@ The following table shows the changes that are included in the worker node fix p
 </table>
 
 
-### Changelog for master fix pack 1.14.4_1526, released 15 July 2019
+#### Changelog for master fix pack 1.14.4_1526, released 15 July 2019
 {: #1144_1526}
 
 The following table shows the changes that are included in the master fix pack 1.14.4_1526.
@@ -2275,7 +2326,7 @@ The following table shows the changes that are included in the master fix pack 1
   </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019
+#### Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019
 {: #1143_1525}
 
 The following table shows the changes that are included in the worker node patch 1.14.3_1525.
@@ -2308,7 +2359,7 @@ The following table shows the changes that are included in the worker node patch
 </table>
 
 
-### Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019
+#### Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019
 {: #1143_1524}
 
 The following table shows the changes that are included in the worker node patch 1.14.3_1524.
@@ -2352,7 +2403,7 @@ The following table shows the changes that are included in the worker node patch
 </tbody>
 </table>
 
-### Changelog for 1.14.3_1523, released 17 June 2019
+#### Changelog for 1.14.3_1523, released 17 June 2019
 {: #1143_1523}
 
 The following table shows the changes that are included in the patch 1.14.3_1523.
@@ -2420,7 +2471,7 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 </tbody>
 </table>
 
-### Changelog for 1.14.2_1521, released 4 June 2019
+#### Changelog for 1.14.2_1521, released 4 June 2019
 {: #1142_1521}
 
 The following table shows the changes that are included in the patch 1.14.2_1521.
@@ -2488,7 +2539,7 @@ The following table shows the changes that are included in the patch 1.14.2_1521
 </tbody>
 </table>
 
-### Changelog for worker node fix pack 1.14.1_1519, released 20 May 2019
+#### Changelog for worker node fix pack 1.14.1_1519, released 20 May 2019
 {: #1141_1519}
 
 The following table shows the changes that are included in the patch 1.14.1_1519.
@@ -2520,7 +2571,7 @@ The following table shows the changes that are included in the patch 1.14.1_1519
 </tbody>
 </table>
 
-### Changelog for 1.14.1_1518, released 13 May 2019
+#### Changelog for 1.14.1_1518, released 13 May 2019
 {: #1141_1518}
 
 The following table shows the changes that are included in the patch 1.14.1_1518.
@@ -2564,7 +2615,7 @@ The following table shows the changes that are included in the patch 1.14.1_1518
 </tbody>
 </table>
 
-### Changelog for 1.14.1_1516, released 7 May 2019
+#### Changelog for 1.14.1_1516, released 7 May 2019
 {: #1141_1516}
 
 The following table shows the changes that are included in the patch 1.14.1_1516.
@@ -2654,25 +2705,10 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 </tbody>
 </table>
 
-<br />
-
-
-## Archive
-{: #changelog_archive}
-
-Unsupported Kubernetes versions:
-*  [Version 1.13](#113_changelog)
-*  [Version 1.12](#112_changelog)
-*  [Version 1.11](#111_changelog)
-*  [Version 1.10](#110_changelog)
-*  [Version 1.9](#19_changelog)
-*  [Version 1.8](#18_changelog)
-*  [Version 1.7](#17_changelog)
-
 ### Version 1.13 changelog (unsupported 22 February 2020)
 {: #113_changelog}
 
-Version 1.13 is unsupported. You can review the following archive of 1.12 changelogs.
+Version 1.13 is unsupported. You can review the following archive of 1.13 changelogs.
 {: shortdesc}
 
 * [Changelog for fix pack 1.13.12_1550, released 17 February 2020](#11312_1550)

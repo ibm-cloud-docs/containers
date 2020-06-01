@@ -81,8 +81,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 *   Other: 1.16.10
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.15, 1.14
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13
+*   Deprecated: 1.15
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14
 
 <br>
 
@@ -151,10 +151,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>29 Aug 2020 `†`</td>
 </tr>
 <tr>
-  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.14](#cs_v114)</td>
   <td>07 May 2019</td>
-  <td>31 May 2020 `†`</td>
+  <td>31 May 2020</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -250,7 +250,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.17 [preparation actions](#cs_v117).
 -  Version 1.16 [preparation actions](#cs_v116).
 -  **Deprecated**: Version 1.15 [preparation actions](#cs_v115).
--  **Deprecated**: Version 1.14 [preparation actions](#cs_v114).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
@@ -536,108 +535,19 @@ The following table shows the actions that you must take after you update your w
 <br />
 
 
-## Deprecated: Version 1.14
-{: #cs_v114}
-
-<p><img src="images/certified_kubernetes_1x14.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.14 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.14 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
-
-Review changes that you might need to make when you update from the previous Kubernetes version to 1.14.
-{: shortdesc}
-
-Version 1.14 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.15.
-{: deprecated}
-
-Kubernetes 1.14 introduces new capabilities for you to explore. Try out the new [`kustomize` project](https://github.com/kubernetes-sigs/kustomize){: external} that you can use to hep write, customize, and reuse your Kubernetes resource YAML configurations. Or take a look at the new [`kubectl` CLI docs](https://kubectl.docs.kubernetes.io/){: external}.
-{: tip}
-
-### Update before master
-{: #114_before}
-
-The following table shows the actions that you must take before you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.14">
-<caption>Changes to make before you update the master to Kubernetes 1.14</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>CRI pod log directory structure change</td>
-<td>The container runtime interface (CRI) changed the pod log directory structure from `/var/log/pods/<UID>` to `/var/log/pods/<NAMESPACE_NAME_UID>`. If your apps bypass Kubernetes and the CRI to access pod logs directly on worker nodes, update them to handle both directory structures. Accessing pod logs via Kubernetes, for example by running `kubectl logs`, is not impacted by this change.</td>
-</tr>
-<tr>
-<td>Health checks no longer follow redirects</td>
-<td>Health check liveness and readiness probes that use an `HTTPGetAction` no longer follow redirects to hostnames that are different from the original probe request. Instead, these non-local redirects return a `Success` response and an event with reason `ProbeWarning` is generated to indicate that the redirect was ignored. If you previously relied on the redirect to run health checks against different hostname endpoints, you must perform the health check logic outside the `kubelet`. For example, you might proxy the external endpoint instead of redirecting the probe request.</td>
-</tr>
-<tr>
-<td>Unsupported: KubeDNS cluster DNS provider</td>
-<td>CoreDNS is now the only supported cluster DNS provider for clusters that run Kubernetes version 1.14 and later. If you update an existing cluster that uses KubeDNS as the cluster DNS provider to version 1.14, KubeDNS is automatically migrated to CoreDNS during the update. Thus before you update the cluster, consider setting up CoreDNS as the cluster DNS provider and testing it. For example, if your app relies on an older DNS client, you might need to [update the app or customize CoreDNS](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues).<br><br>CoreDNS supports [cluster DNS specification ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/dns/blob/master/docs/specification.md#25---records-for-external-name-services) to enter a domain name as the Kubernetes service `ExternalName` field. The previous cluster DNS provider, KubeDNS, does not follow the cluster DNS specification, and as such, allows IP addresses for `ExternalName`. If any Kubernetes services use IP addresses instead of DNS, you must update the `ExternalName` to DNS for continued functionality.</td>
-</tr>
-<tr>
-<td>Unsupported: Kubernetes `Initializers` alpha feature</td>
-<td>The Kubernetes `Initializers` alpha feature, `admissionregistration.k8s.io/v1alpha1` API version, `Initializers` admission controller plug-in, and use of the `metadata.initializers` API field are removed. If you use `Initializers`, switch to use [Kubernetes admission webhooks ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/) and delete any existing `InitializerConfiguration` API objects before you update the cluster.</td>
-</tr>
-<tr>
-<td>Unsupported: Node alpha taints</td>
-<td>The use of taints `node.alpha.kubernetes.io/notReady` and `node.alpha.kubernetes.io/unreachable` are no longer supported. If you rely on these taints, update your apps to use the `node.kubernetes.io/not-ready` and `node.kubernetes.io/unreachable` taints instead.</td>
-</tr>
-<tr>
-<td>Unsupported: The Kubernetes API swagger documents</td>
-<td>The `swagger/*`, `/swagger.json`, and `/swagger-2.0.0.pb-v1` schema API docs are now removed in favor of the `/openapi/v2` schema API docs. The swagger docs were deprecated when the OpenAPI docs became available in Kubernetes version 1.10. Additionally, the Kubernetes API server now aggregates only OpenAPI schemas from `/openapi/v2` endpoints of aggregated API servers. The fallback to aggregate from `/swagger.json` is removed. If you installed apps that provide Kubernetes API extensions, ensure that your apps support the `/openapi/v2` schema API docs.</td>
-</tr>
-<tr>
-<td>Unsupported and deprecated: Select metrics</td>
-<td>Review the [removed and deprecated Kubernetes metrics ![External link icon](../icons/launch-glyph.svg "External link icon")](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.14.md#removed-and-deprecated-metrics). If you use any of these deprecated metrics, change to the available replacement metric.</td>
-</tr>
-</tbody>
-</table>
-
-### Update after master
-{: #114_after}
-
-The following table shows the actions that you must take after you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.14">
-<caption>Changes to make after you update the master to Kubernetes 1.14</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unsupported: `kubectl --show-all`</td>
-<td>The `--show-all` and shorthand `-a` flags are no longer supported. If your scripts rely on these flags, update them.</td>
-</tr>
-<tr>
-<td>Kubernetes default RBAC policies for unauthenticated users</td>
-<td>The Kubernetes default role-based access control (RBAC) policies no longer grant access to [discovery and permission-checking APIs to unauthenticated users ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/rbac/#discovery-roles). This change applies only to new version 1.14 clusters. If you update a cluster from a prior version, unauthenticated users still have access to the discovery and permission-checking APIs. If you want to update to the more secure default for unauthenticated users, remove the `system:unauthenticated` group from the `system:basic-user` and `system:discovery` cluster role bindings.</td>
-</tr>
-<tr>
-<td>Process ID (PID) reservations and limits</td>
-<td>Worker nodes now reserve PIDs for the `kubelet` and other {{site.data.keyword.containerlong_notm}} system components. Similarly, worker nodes now limit the number of PIDs that are available to pods. These reservations and limits help prevent malicious or runaway apps from consuming all available PIDs on a worker node. The values for these reservations and limits are based on the [worker node flavor](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node).</td>
-</tr>
-<tr>
-<td>Deprecated: Prometheus queries that use `pod_name` and `container_name` labels</td>
-<td>Update any Prometheus queries that match `pod_name` or `container_name` labels to use `pod` or `container` labels instead. Example queries that might use these deprecated labels include kubelet probe metrics. The deprecated `pod_name` and `container_name` labels become unsupported in the next Kubernetes release.</td>
-</tr>
-</tbody>
-</table>
-
-<br />
-
-
 ## Archive
 {: #k8s_version_archive}
 
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
+
+### Version 1.14 (Unsupported)
+{: #cs_v114}
+
+As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.14](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.14 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+{: shortdesc}
+
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to [Kubernetes 1.15](#cs_v115), and then to a supported version, such as [Kubernetes 1.16](#cs_v116).
 
 ### Version 1.13 (Unsupported)
 {: #cs_v113}
@@ -645,7 +555,7 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support unless they are updated to the next most recent version.
 {: shortdesc}
 
-[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to [Kubernetes 1.14](#cs_v114), and then to a supported version, such as [Kubernetes 1.15](#cs_v115).
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
 
 ### Version 1.12 (Unsupported)
 {: #cs_v112}
