@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-27"
+lastupdated: "2020-06-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -39,11 +39,21 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
+## June 2020
+{: #june20}
+
+| Date | Description |
+| ---- | ----------- |
+| 01 June 2020 | <ul><li>**Kubernetes 1.17**: [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.</li><li>**VPC ACLs**: Added required rules for using VPC load balancers to steps for [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls).</li></ul>|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in June 2020"}
+
 ## May 2020
 {: #may20}
 
 | Date | Description |
 | ---- | ----------- |
+| 31 May 2020 | **Unsupported: Kubernetes version 1.14**: With the release of version 1.18, clusters that run version 1.14 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. |
 | 26 May 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.84](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Image pull secrets**: Now, the `default-icr-io` and `default-<region>-icr-io` image pull secrets in the `default` project are replaced by a single `all-icr-io` image pull secret that has credentials to all the public and private regional registry domains. Clusters that run Kubernetes 1.15 - 1.17 still have the previous `default-<region>-icr-io` image pull secrets for backwards compatibility.</li><li>**Ingress status**: Added information about [health reporting for your Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status).</li><li>**NodeLocal DNS cache**: Added how to customize the [NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize).<li>**Version changelogs**: Master and worker node changelog documentation is available for Kubernetes [1.18.3_1514](/docs/containers?topic=containers-changelog#1183_1514), [1.17.6_1526](/docs/containers?topic=containers-changelog#1176_1526), [1.16.10_1533](/docs/containers?topic=containers-changelog#11610_1533), [1.15.12_1540](/docs/containers?topic=containers-changelog#11512_1540), and [1.14.10_1555](/docs/containers?topic=containers-changelog#11410_1555).</li></ul> |
 | 20 May 2020 | **New! Virtual Private Cloud Generation 2**: You can now create standard Kubernetes clusters in your [Gen 2 Virtual Private Cloud (VPC)](/docs/vpc?topic=vpc-getting-started). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC Gen 2 clusters are available for only standard, Kubernetes clusters and are not supported in free or OpenShift clusters.<br><br> For more information, check out the following links:<ul><li>[Overview of Classic and VPC infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)</li><li>[Supported virtual machine flavors for VPC Gen 2 worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm)</li><li>[New VPC Gen 2 commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)</li><li>[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)</li></ul>Ready to get started? Try out the [Creating a cluster in your VPC on generation 2 compute tutorial](/docs/containers?topic=containers-vpc_ks_tutorial).|
 | 19 May 2020 | **Istio add-on**: [Version 1.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#15) is released.|

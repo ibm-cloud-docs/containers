@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-05-27"
+lastupdated: "2020-06-01"
 
 keywords: containers
 subcollection: containers
@@ -350,7 +350,7 @@ subcollection: containers
 
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
-* [Prepare to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
+* [Preparing to create clusters at the account level](/docs/containers?topic=containers-clusters#cluster_prepare)
 * [Deciding on your cluster setup](/docs/containers?topic=containers-clusters#prepare_cluster_level)
 * [Creating a standard classic cluster](/docs/containers?topic=containers-clusters#clusters_standard)
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
@@ -553,6 +553,8 @@ subcollection: containers
 
 [VPC: Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
+  * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
+  * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
 * [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
@@ -662,7 +664,7 @@ subcollection: containers
 
 [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
 
-[Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
+[Creating a monitoring configuration to forward cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
 
 [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Cluster states](/docs/containers?topic=containers-health#states_cluster)
@@ -1308,10 +1310,8 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#115_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#115_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#115_after_worker)
-* [Deprecated: Version 1.14](/docs/containers?topic=containers-cs_versions#cs_v114)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#114_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#114_after)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.14 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
   * [Version 1.13 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v113)
   * [Version 1.12 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v112)
   * [Version 1.11 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v111)
@@ -1386,45 +1386,8 @@ subcollection: containers
   * [Changelog for master fix pack 1.15.2_1514, released 17 August 2019](/docs/containers?topic=containers-changelog#1152_1514)
   * [Changelog for master fix pack 1.15.2_1513, released 15 August 2019](/docs/containers?topic=containers-changelog#1152_1513)
   * [Changelog for 1.15.1_1511, released 5 August 2019](/docs/containers?topic=containers-changelog#1151_1511)
-* [Deprecated: Version 1.14 changelog](/docs/containers?topic=containers-changelog#114_changelog)
-  * [Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020](/docs/containers?topic=containers-changelog#11410_1555)
-  * [Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020](/docs/containers?topic=containers-changelog#11410_1554)
-  * [Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020](/docs/containers?topic=containers-changelog#11410_1553)
-  * [Changelog for master fix pack 1.14.10_1552, released 23 April 2020](/docs/containers?topic=containers-changelog#11410_1552)
-  * [Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020](/docs/containers?topic=containers-changelog#11410_1551)
-  * [Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020](/docs/containers?topic=containers-changelog#11410_1550)
-  * [Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020](/docs/containers?topic=containers-changelog#11410_1549)
-  * [Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020](/docs/containers?topic=containers-changelog#11410_1548)
-  * [Changelog for fix pack 1.14.10_1547, released 17 February 2020](/docs/containers?topic=containers-changelog#11410_1547)
-  * [Changelog for worker node fix pack 1.14.10_1546, released 3 February 2020](/docs/containers?topic=containers-changelog#11410_1546)
-  * [Changelog for 1.14.10_1545, released 20 January 2020](/docs/containers?topic=containers-changelog#11410_1545)
-  * [Changelog for worker node fix pack 1.14.9_1544, released 23 December 2019](/docs/containers?topic=containers-changelog#1149_1544)
-  * [Changelog for master fix pack 1.14.9_1543, released 17 December 2019](/docs/containers?topic=containers-changelog#1149_1543)
-  * [Changelog for worker node fix pack 1.14.9_1542, released 9 December 2019](/docs/containers?topic=containers-changelog#1149_1542_worker)
-  * [Changelog for worker node fix pack 1.14.9_1541, released 25 November 2019](/docs/containers?topic=containers-changelog#1149_1541_worker)
-  * [Changelog for master fix pack 1.14.9_1541, released 21 November 2019](/docs/containers?topic=containers-changelog#1149_1541)
-  * [Changelog for worker node fix pack 1.14.8_1538, released 11 November 2019](/docs/containers?topic=containers-changelog#1148_1538_worker)
-  * [Changelog for worker node fix pack 1.14.8_1537, released 28 October 2019](/docs/containers?topic=containers-changelog#1148_1537)
-  * [Changelog for master fix pack 1.14.8_1536, released 22 October 2019](/docs/containers?topic=containers-changelog#1148_1536)
-  * [Changelog for worker node fix pack 1.14.7_1535, released 14 October 2019](/docs/containers?topic=containers-changelog#1147_1535_worker)
-  * [Changelog for 1.14.7_1534, released 1 October 2019](/docs/containers?topic=containers-changelog#1147_1534)
-  * [Changelog for worker node fix pack 1.14.6_1533, released 16 September 2019](/docs/containers?topic=containers-changelog#1146_1533_worker)
-  * [Changelog for worker node fix pack 1.14.6_1532, released 3 September 2019](/docs/containers?topic=containers-changelog#1146_1532_worker)
-  * [Changelog for master fix pack 1.14.6_1531, released 28 August 2019](/docs/containers?topic=containers-changelog#1146_1531)
-  * [Changelog for worker node fix pack 1.14.5_1530, released 19 August 2019](/docs/containers?topic=containers-changelog#1145_1530_worker)
-  * [Changelog for master fix pack 1.14.5_1530, released 17 August 2019](/docs/containers?topic=containers-changelog#1145_1530)
-  * [Changelog for master fix pack 1.14.5_1529, released 15 August 2019](/docs/containers?topic=containers-changelog#1145_1529)
-  * [Changelog for worker node fix pack 1.14.4_1527, released 5 August 2019](/docs/containers?topic=containers-changelog#1144_1527_worker)
-  * [Changelog for worker node fix pack 1.14.4_1526, released 22 July 2019](/docs/containers?topic=containers-changelog#1144_1526_worker)
-  * [Changelog for master fix pack 1.14.4_1526, released 15 July 2019](/docs/containers?topic=containers-changelog#1144_1526)
-  * [Changelog for worker node fix pack 1.14.3_1525, released 8 July 2019](/docs/containers?topic=containers-changelog#1143_1525)
-  * [Changelog for worker node fix pack 1.14.3_1524, released 24 June 2019](/docs/containers?topic=containers-changelog#1143_1524)
-  * [Changelog for 1.14.3_1523, released 17 June 2019](/docs/containers?topic=containers-changelog#1143_1523)
-  * [Changelog for 1.14.2_1521, released 4 June 2019](/docs/containers?topic=containers-changelog#1142_1521)
-  * [Changelog for worker node fix pack 1.14.1_1519, released 20 May 2019](/docs/containers?topic=containers-changelog#1141_1519)
-  * [Changelog for 1.14.1_1518, released 13 May 2019](/docs/containers?topic=containers-changelog#1141_1518)
-  * [Changelog for 1.14.1_1516, released 7 May 2019](/docs/containers?topic=containers-changelog#1141_1516)
 * [Archive](/docs/containers?topic=containers-changelog#changelog_archive)
+  * [Version 1.14 changelog (unsupported 31 May 2020)](/docs/containers?topic=containers-changelog#114_changelog)
   * [Version 1.13 changelog (unsupported 22 February 2020)](/docs/containers?topic=containers-changelog#113_changelog)
   * [Version 1.12 changelog (unsupported 3 November 2019)](/docs/containers?topic=containers-changelog#112_changelog)
   * [Version 1.11 changelog (unsupported as of 20 July 2019)](/docs/containers?topic=containers-changelog#111_changelog)
@@ -1590,7 +1553,7 @@ subcollection: containers
 
 [Is the service highly available?](/docs/containers?topic=containers-faqs#ha_sla)
 
-[What standards does the service comply to?](/docs/containers?topic=containers-faqs#standards)
+[What compliance standards does the service meet?](/docs/containers?topic=containers-faqs#standards)
 
 [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
@@ -1741,6 +1704,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[June 2020](/docs/containers?topic=containers-iks-release#june20)
 
 [May 2020](/docs/containers?topic=containers-iks-release#may20)
 

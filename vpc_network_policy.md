@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-05-29"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -39,7 +39,7 @@ subcollection: containers
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This ACL information is specific to VPC clusters. For network policy information for classic clusters, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 {: note}
 
-<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Because IP in IP encapsulation is used for traffic across pods in VPC generation 2 compute, you cannot filter pod traffic by using VPC security group egress rules or access control lists (ACLs). If you want to control pod network traffic, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies).
+<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> ACLs filter incoming and outgoing traffic for your cluster at the subnet level, such as traffic through the VPC load balancer. To control traffic within the cluster at the pod-to-pod level, you cannot use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies), which can control the pod-level network traffic that uses IP in IP encapsulation.
 {: important}
 
 If you have unique security requirements, you can control traffic to and from your cluster with VPC access control lists (ACLs) and traffic between pods in your cluster with Kubernetes network policies.
@@ -70,8 +70,298 @@ When you create a VPC, a default ACL is created in the format `allow-all-network
 
 For example, you can create the following set of ACL rules to block most inbound and outbound network traffic of a cluster, while allowing communication that is necessary for the cluster to function.
 
-When you use the following steps to create custom ACLs, only network traffic that is specified in the ACL rules is permitted to and from your VPC subnets. All other traffic that is not specified in the ACLs is blocked for the subnets, such as cluster integrations with third party services. If you must allow other traffic to or from your worker nodes, you can add rules for that traffic in step 4.f.</br></br>ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete the steps in this topic, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by running `ibmcloud is network-acl-rule-add <new_rule_name> $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR> --before-rule-name deny-all-(inbound|outbound)`. For more information about ACL rule requirements and limitations, see [Setting up network ACLs](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls).
+When you use the following steps to create custom ACLs, only network traffic that is specified in the ACL rules is permitted to and from your VPC subnets. All other traffic that is not specified in the ACLs is blocked for the subnets, such as cluster integrations with third party services. If you must allow other traffic to or from your worker nodes, be sure to specify those rules where noted in the following steps. For more information about ACL rule requirements and limitations, see [Setting up network ACLs](/docs/vpc?topic=vpc-using-acls).
 {: important}
+
+### Creating ACLs in the console
+{: #acls_ui}
+
+Use the {{site.data.keyword.cloud_notm}} VPC console to create an ACL for each subnet that your cluster is attached to.
+{: shortdec}
+
+1. Multizone clusters only: In the [Subnets for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/subnets){: external}, note the **IP Range** of each subnet that your cluster is attached to.
+2. In the [Access control lists for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/acl){: external}, click **New access control list**.
+3. Give your ACL a name and choose the VPC and resource group that your subnets are in.
+4. In the **Rules** section, delete the default inbound rule and outbound rule that allow all inbound and outbound traffic.
+5. In the **Inbound rules** section, create the following rules by clicking **New rule**.
+
+   <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
+
+   <table>
+   <caption>Inbound rule</caption>
+   <thead>
+   <th>Rule purpose</th>
+   <th>Allow/Deny</th>
+   <th>Protocol</th>
+   <th>Source Type</th>
+   <th>Source IP or CIDR</th>
+   <th>Source Port min</th>
+   <th>Source Port max</th>
+   <th>Destination Type</th>
+   <th>Destination IP or CIDR</th>
+   <th>Destination Port min</th>
+   <th>Destination Port max</th>
+   <th>Priority</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Allow worker nodes to be created in your cluster.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>161.26.0.0/16</td>
+   <td>-</td>    
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>   
+   <td>-</td>   
+   <td>-</td>
+   <td>Set to top</td>
+   </tr>
+   <tr>
+   <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and with other {{site.data.keyword.cloud_notm}} services that support private service endpoints.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>166.8.0.0/14</td>
+   <td>-</td>    
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>   
+   <td>-</td>   
+   <td>-</td>
+   <td>After 1</td>
+   </tr>
+   <tr>
+   <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>Other subnet's CIDR</td>
+   <td>-</td>  
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>   
+   <td>-</td>   
+   <td>-</td>
+   <td>After 2</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>56501</td>
+   <td>56501</td>
+   <td>After 3</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>443</td>
+   <td>443</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>After 4</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>8834</td>
+   <td>8834</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>After 5</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>10514</td>
+   <td>10514</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>After 6</td>
+   </tr>
+   <tr>
+   <td>Deny all other traffic that does not match the previous rules.</td>
+   <td>Deny</td>
+   <td>ALL</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Set to bottom</td>
+   </tr>
+   </tbody>
+   </table>
+6. In the **Outbound rules** section, create the following rules by clicking **New rule**.
+
+   <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p><table>
+   <caption>Inbound rule</caption>
+   <thead>
+   <th>Rule purpose</th>
+   <th>Allow/Deny</th>
+   <th>Protocol</th>
+   <th>Source Type</th>
+   <th>Source IP or CIDR</th>
+   <th>Source Port min</th>
+   <th>Source Port max</th>
+   <th>Destination Type</th>
+   <th>Destination IP or CIDR</th>
+   <th>Destination Port min</th>
+   <th>Destination Port max</th>
+   <th>Priority</th>
+   </thead>
+   <tbody>
+   <tr>
+   <td>Allow worker nodes to be created in your cluster.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>Any</td>
+   <td>-</td>    
+   <td>-</td>
+   <td>161.26.0.0/16</td>
+   <td>-</td>   
+   <td>-</td>   
+   <td>-</td>
+   <td>Set to top</td>
+   </tr>
+   <tr>
+   <td>Allow worker nodes to communicate with the cluster master through the private service endpoint and to communicate with other {{site.data.keyword.cloud_notm}} services that support private service endpoints, such as {{site.data.keyword.registrylong_notm}}.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>Any</td>
+   <td>-</td>    
+   <td>-</td>
+   <td>166.8.0.0/14</td>
+   <td>-</td>   
+   <td>-</td>   
+   <td>-</td>
+   <td>After 1</td>
+   </tr>
+   <tr>
+   <td>Multizone clusters: Allow worker nodes in one subnet to communicate with the worker nodes in all other subnets within the cluster. Create one rule for each subnet that you want to connect to.</td>
+   <td>Allow</td>
+   <td>ALL</td>
+   <td>IP or CIDR</td>
+   <td>Any</td>
+   <td>-</td>  
+   <td>-</td>
+   <td>Other subnet's CIDR</td>
+   <td>-</td>
+   <td>-</td>  
+   <td>-</td>
+   <td>After 2</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>56501</td>
+   <td>56501</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>After 3</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>443</td>
+   <td>443</td>
+   <td>After 4</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>8834</td>
+   <td>8834</td>
+   <td>After 5</td>
+   </tr>
+   <tr>
+   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>10514</td>
+   <td>10514</td>
+   <td>After 6</td>
+   </tr>
+   <tr>
+   <td>Deny all other traffic that does not match the previous rules.</td>
+   <td>Deny</td>
+   <td>ALL</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>-</td>
+   <td>-</td>
+   <td>Set to bottom</td>
+   </tr>
+   </tbody>
+   </table>
+7. In the **Attach subnets** section, choose the name of the subnet for which you created this ACL.
+
+8. Click **Create access control list**.
+
+9. Multizone clusters: Repeat steps 2 - 8 to create an ACL for each subnet that your cluster is attached to.
+
+### Creating ACLs from the CLI
+{: #acls_cli}
+
+Use the {{site.data.keyword.cloud_notm}} CLI to create an ACL for each subnet that your cluster is attached to.
+{: shortdec}
 
 1. Target the region of the VPC that your cluster is deployed to.
   ```
@@ -79,66 +369,37 @@ When you use the following steps to create custom ACLs, only network traffic tha
   ```
   {: pre}
 
-2. List the worker nodes in your cluster. Note the ID of one worker node in each zone of your cluster.
+2. List your VPC subnets. For each subnet that your cluster is attached to, get the **ID** and **Subnet CIDR**.
+
+  <p class="tip">If you can't remember which subnets your cluster is attached to, you can run `ibmcloud ks worker get -c <cluster_name_or_ID> -w <worker_node_ID>` for one worker node in each zone of your cluster, and get the **ID** and **CIDR** of the subnet that the worker is attached to.</p>
+
   ```
-  ibmcloud ks worker ls -c <cluster_name_or_ID>
+  ibmcloud is subnets
   ```
   {: pre}
 
   Example output:
   ```
-  ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.64.10   c2.2x4   normal   Ready    us-south-2   1.18.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.0.5     c2.2x4   normal   Ready    us-south-1   1.18.2
+  ID                                          Name          Status      Subnet CIDR        Addresses   ACL                                                  Public Gateway                             VPC       Zone         Resource group
+  0717-2224d664-d435-425e-b5ec-f324af2df445   mysubnet1     available   10.240.0.0/28      11/16       armored-never-chitchat-gangly-skylight-prototype     -                                          myvpc     us-south-1   default
+  0717-1eff410a-a47e-4bc2-b4a3-5f742f320008   mysubnet2     available   10.240.1.0/24      251/256     armored-never-chitchat-gangly-skylight-prototype     pgw-ed8f6970-9b71-11ea-b94a-956de1af1ccd   myvpc     us-south-2   default
   ```
   {: screen}
 
-3. For one worker node in each zone, get the **ID** and **CIDR** of the subnet that the worker is attached to. After you complete this step for each zone where you have worker nodes, you have a list of the subnets that your cluster is attached to.
-  ```
-  ibmcloud ks worker get -c <cluster_name_or_ID> -w <worker_node_ID>
-  ```
-  {: pre}
-
-  In this example output, the ID for the subnet in `us-south-1` is `a1b2c3d4-f560-471b-b6ce-20067ac93439` and the CIDR is `10.240.0.0/24`:
-  ```
-  Retrieving worker kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623...
-  OK
-
-  ID:                 kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623
-  Zone:               us-south-1
-  Worker Pool ID:     bl25g33d0if1cmfn0p8g-5aa474f
-  Worker Pool Name:   default
-  Flavor:             c2.2x4
-  Version:            1.18.2
-
-  Health
-  State:     normal
-  Message:   Ready
-
-  Lifecycle
-  State:      deployed
-  Message:    -
-
-  Subnets
-  ID                                     IP Address               CIDR
-  a1b2c3d4-f560-471b-b6ce-20067ac93439   10.240.0.67 (primary)    10.240.0.0/24
-  ```
-  {: screen}
-
-4. For **each** subnet that you identified in the previous step, create a custom ACL with rules that limit inbound and outbound network traffic to only communication that is necessary for the cluster to function.
+3. For **each** subnet that you identified in the previous step, create a custom ACL with rules that limit inbound and outbound network traffic to only communication that is necessary for the cluster to function.
 
   1. Create an ACL. After you create the ACL, you can add rules to your ACL and apply the ACL to one subnet. Because the rules that you add to your ACL are specific to one subnet, consider naming the ACL in the format `<cluster>-<zone>-acl`, such as `mycluster-us-south-1-acl`, for easy identification. When you create the ACL, two rules are automatically created that allow all inbound and all outbound network traffic. In the output, note the ACL ID and the IDs of the two default rules.
     ```
-    ibmcloud is network-acl-create <ACL_name>
+    ibmcloud is network-acl-create <cluster>-<zone>-acl
     ```
     {: pre}
 
      Example output:
     ```
-    Creating network ACL vpctest-us-south-1-acl under account Account as user user@email.com...
+    Creating network ACL mycluster-us-south-1-acl under account Account as user user@email.com...
 
     ID        740b07cb-4e69-4ef2-b667-42ed27d8b29e
-    Name      vpctest-us-south-1-acl
+    Name      mycluster-us-south-1-acl
     Created   2019-09-18T15:09:45-05:00
 
     Rules
@@ -171,11 +432,11 @@ When you use the following steps to create custom ACLs, only network traffic tha
 
   4. Multizone clusters: Add rules to your ACL to allow worker nodes in one subnet to communicate with the worker nodes in all other subnets within the cluster. The subnet for which you create the ACL rule is defined as `0.0.0.0/0` and you use the CIDRs of the other subnets as your destination CIDR. Make sure to create one inbound and one outbound rule for each of the subnets that you want to connect to.
     ```
-    ibmcloud is network-acl-rule-add allow-workers-outbound $acl_id allow outbound all 0.0.0.0/0 <other_zone_subnet_CIDR>
+    ibmcloud is network-acl-rule-add $acl_id allow outbound all 0.0.0.0/0 <other_zone_subnet_CIDR> --name allow-workers-outbound
     ```
     {: pre}
     ```
-    ibmcloud is network-acl-rule-add allow-workers-inbound $acl_id allow inbound all <other_zone_subnet_CIDR> 0.0.0.0/0
+    ibmcloud is network-acl-rule-add $acl_id allow inbound all <other_zone_subnet_CIDR> 0.0.0.0/0 --name allow-workers-inbound
     ```
     {: pre}
 
@@ -184,37 +445,51 @@ When you use the following steps to create custom ACLs, only network traffic tha
     <p class="tip">Need to connect your worker nodes to {{site.data.keyword.cloud_notm}} services that support only public service endpoints? [Attach a public gateway to the subnet ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/kubernetes/clusters) so that worker nodes can connect to a public external endpoint. Then, create inbound and outbound rules to allow ingress from and egress to the services' public service endpoints.</p>
 
     ```
-    ibmcloud is network-acl-rule-add allow-ibm-private-network2-outbound $acl_id allow outbound all 0.0.0.0/0 161.26.0.0/16
-    ibmcloud is network-acl-rule-add allow-ibm-private-network2-inbound $acl_id allow inbound all 161.26.0.0/16 0.0.0.0/0
-    ibmcloud is network-acl-rule-add allow-ibm-private-network-outbound $acl_id allow outbound all 0.0.0.0/0 166.8.0.0/14
-    ibmcloud is network-acl-rule-add allow-ibm-private-network-inbound $acl_id allow inbound all 166.8.0.0/14 0.0.0.0/0
+    ibmcloud is network-acl-rule-add $acl_id allow outbound all 0.0.0.0/0 161.26.0.0/16 --name allow-ibm-private-network-outbound1
+    ibmcloud is network-acl-rule-add $acl_id allow outbound all 0.0.0.0/0 166.8.0.0/14 --name allow-ibm-private-network-outbound2
+    ibmcloud is network-acl-rule-add $acl_id allow inbound all 161.26.0.0/16 0.0.0.0/0 --name allow-ibm-private-network-inbound1
+    ibmcloud is network-acl-rule-add $acl_id allow inbound all 166.8.0.0/14 0.0.0.0/0 --name allow-ibm-private-network-inbound2
     ```
     {: pre}
 
-  6. If you must allow other traffic to or from your worker nodes on this subnet, add rules for that traffic.
+  6. Optional: If you plan to expose apps by using load balancers or Ingress, create rules to allow inbound and outbound traffic through TCP ports `56501`, `443`, `8834`, and `10514`. For more information, see the [VPC load balancer documentation](/docs/vpc?topic=vpc-load-balancers#configuring-acls-for-use-with-load-balancers).
+
+    ```
+    ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-outbound1 --source-port-min 56501 --source-port-max 56501
+    ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-outbound2 --destination-port-min 443 --destination-port-max 443
+    ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-outbound3 --destination-port-min 8834 --destination-port-max 8834
+    ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-outbound4 --destination-port-min 10514 --destination-port-max 10514
+    ibmcloud is network-acl-rule-add $acl_id allow inbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-inbound1 --destination-port-min 56501 --destination-port-max 56501
+    ibmcloud is network-acl-rule-add $acl_id allow inbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-inbound2 --source-port-min 443 --source-port-max 443
+    ibmcloud is network-acl-rule-add $acl_id allow inbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-inbound3 --source-port-min 8834 --source-port-max 8834
+    ibmcloud is network-acl-rule-add $acl_id allow inbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-inbound4 --source-port-min 10514 --source-port-max 10514
+    ```
+    {: pre}
+
+  7. Optional: If you must allow other traffic to or from your worker nodes on this subnet, add rules for that traffic.
 
     <p class="note">When you refer to the VPC subnet that your worker nodes are on, you must use `0.0.0.0/0`. For more tips on how to create your rule, see the [VPC CLI reference documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-vpc-reference#network-acls-section).</p>
 
     ```
-    ibmcloud is network-acl-rule-add <new_rule_name> $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR>
+    ibmcloud is network-acl-rule-add $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR> --name <new_rule_name>
     ```
     {: pre}
 
     For example, say that you want your worker nodes to communicate with a subnet in your organization's network, `207.42.8.0/24`. Your worker nodes must be able to both send and receive information from devices or services on this subnet. You can create an outbound rule for traffic to and an inbound rule for traffic from your organization's subnet:
     ```
-    ibmcloud is network-acl-rule-add corporate-network-outbound $acl_id allow outbound all 0.0.0.0/0 207.42.8.0/24
-    ibmcloud is network-acl-rule-add corporate-network-inbound $acl_id allow inbound all 207.42.8.0/24 0.0.0.0/0
+    ibmcloud is network-acl-rule-add $acl_id allow outbound all 0.0.0.0/0 207.42.8.0/24 --name corporate-network-outbound
+    ibmcloud is network-acl-rule-add $acl_id allow inbound all 207.42.8.0/24 0.0.0.0/0 --name corporate-network-inbound
     ```
     {: screen}
 
-  7. Create rules to deny all other egress from and ingress to worker nodes that is not permitted by the previous rules that you created. Because these rules are created last in the chain of rules, they deny an incoming or outgoing connection only if the connection does not match any other rule that is earlier in the rule chain.
+  8. Create rules to deny all other egress from and ingress to worker nodes that is not permitted by the previous rules that you created. Because these rules are created last in the chain of rules, they deny an incoming or outgoing connection only if the connection does not match any other rule that is earlier in the rule chain.
     ```
-    ibmcloud is network-acl-rule-add deny-all-outbound $acl_id deny outbound all 0.0.0.0/0 0.0.0.0/0
-    ibmcloud is network-acl-rule-add deny-all-inbound $acl_id deny inbound all 0.0.0.0/0 0.0.0.0/0
+    ibmcloud is network-acl-rule-add $acl_id deny outbound all 0.0.0.0/0 0.0.0.0/0 --name deny-all-outbound
+    ibmcloud is network-acl-rule-add $acl_id deny inbound all 0.0.0.0/0 0.0.0.0/0 --name deny-all-inbound
     ```
     {: pre}
 
-  8. Apply this ACL to the subnet. When you apply this ACL, the rules that you defined are immediately applied to the worker nodes on the subnet.
+  9. Apply this ACL to the subnet. When you apply this ACL, the rules that you defined are immediately applied to the worker nodes on the subnet.
     ```
     ibmcloud is subnet-update <subnet_ID> --network-acl-id $acl_id
     ```
@@ -239,6 +514,9 @@ When you use the following steps to create custom ACLs, only network traffic tha
     {: screen}
 
   9. Repeat these steps for each subnet.
+
+ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by including the `--before-rule-name deny-all-(inbound|outbound)` flag.
+{: note}
 
 <br />
 
