@@ -160,7 +160,7 @@ To set up a logging configuration for your cluster:
 
 4. Access the logs for your pods from the LogDNA dashboard.
    1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
-   2. On the cluster **Overview** page, click **Launch logging**. The LogDNA dashboard opens.
+   2. On the cluster **Overview** page, click **Launch**. The LogDNA dashboard opens.
    3. Review the pod logs that the LogDNA agent collected from your cluster. It might take a few minutes for your first logs to show.
 
 5. Review how you can [search and filter logs in the LogDNA dashboard](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-view_logs). 
@@ -914,7 +914,7 @@ To set up a monitoring configuration for your cluster:
 
 4. Access the metrics for your pods and cluster from the Sysdig dashboard.
    1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
-   2. On the cluster **Overview** page, click **Launch monitoring**. The Sysdig dashboard opens.
+   2. On the cluster **Overview** page, click **Launch**. The Sysdig dashboard opens.
    3. Review the pod and cluster metrics that the Sysdig agent collected from your cluster. It might take a few minutes for your first metrics to show.
 
 5. Review how you can work with the [Sysdig dashboard](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-dashboards#dashboards) to further analyze your metrics.
