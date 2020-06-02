@@ -159,7 +159,7 @@ To set up a logging configuration for your cluster:
       {: pre}
 
 4. Access the logs for your pods from the LogDNA dashboard.
-   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
+   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.  
    2. On the cluster **Overview** page, click **Launch**. The LogDNA dashboard opens.
    3. Review the pod logs that the LogDNA agent collected from your cluster. It might take a few minutes for your first logs to show.
 
