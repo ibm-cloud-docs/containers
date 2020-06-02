@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-26"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -389,13 +389,13 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
   ```yaml
-  apiVersion: "authentication.istio.io/v1alpha1"
-  kind: "Policy"
+  apiVersion: "security.istio.io/v1beta1"
+  kind: "PeerAuthentication"
   metadata:
     name: "default"
   spec:
-    peers:
-    - mtls: {}
+    mtls:
+      mode: STRICT
   ```
   {: codeblock}
 

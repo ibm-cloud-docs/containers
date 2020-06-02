@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -182,7 +182,7 @@ In version 1.5 and later of the Istio add-on, you can customize a set of Istio c
   ```
   {: pre}
 
-2. Change one or more of the following configuration options.
+2. In the `data` section, add the `<key>: "<value>"` pair of one or more of the following configuration options.
     <table summary="The rows are read from left to right. The first column is the configuration option name. The second column is the default value of the option. The third column contains a brief description of the option.">
     <caption>Istio add-on configuration options</caption>
     <thead>
@@ -197,7 +197,7 @@ In version 1.5 and later of the Istio add-on, you can customize a set of Istio c
     <tr><td>**Beta**: `istio-ingressgateway-public-1|2|3-enabled`</td><td>`"true"` in zone 1 only</td><td>To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created.</td></tr>
     <tr><td>**Beta**: `istio-ingressgateway-zone-1|2|3`</td><td>`"<zone>"`</td><td>The zones where your worker nodes are deployed. These fields applies your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields.<ul><li>If you installed the Istio add-on at version 1.5, your cluster's zones are already listed.</li><li>If you updated your Istio add-on from version 1.4 to 1.5, you must add your cluster's zones.</li></ul></td></tr>
     <tr><td>`istio-kiali-dashboard-viewOnlyMode`</td><td>`"true"`</td><td>No changes can be made to the Kiali dashboard in view-only mode by default. To allow changes in view-only mode, set to `false`.</td></tr>
-    <tr><td>`istio-monitoring`</td><td>`"false"`</td><td>Optional monitoring components are disabled by default. To enable Prometheus, Grafana, Jaeger, and Kiali monitoring components, set to `true`.</td></tr>
+    <tr><td>`istio-monitoring`</td><td>`"false"`</td><td>The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that are not adequately addressed for a production environment. To enable these monitoring components, set to `true`.</td></tr>
     <tr><td>`istio-pilot-traceSampling`</td><td>`"1.0"`</td><td>By default, Istio [generates trace spans for 1 out of every 100 requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/docs/tasks/observability/distributed-tracing/overview/#trace-sampling), which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.</td></tr>
     </tbody>
     </table>
@@ -232,6 +232,8 @@ In version 1.5 and later of the Istio add-on, you can customize a set of Istio c
     kubectl delete pod <pod_name> -n <namespace>
     ```
     {: pre}
+
+<p class="tip">If you later want to change a setting that you added to the configmap, you can use a patch script. For example, if you added the `istio-monitoring: "true"` setting and later want to change it back to `"false"`, you can run `kubectl patch cm managed-istio-custom -n ibm-operators --type='json' -p='[{"op": "add", "path": "/data/istio-monitoring", "value":"false"}]'`. Then, apply your changes by running `kubectl annotate iop -n ibm-operators managed-istio --overwrite version="custom-applied-at: $(date)"`.</p>
 
 <p class="note">If you disable the Istio add-on, the `managed-istio-custom` configmap is not removed during uninstallation. When you re-enable the Istio add-on, your customized configmap is applied during installation.</br></br>If you do not want to re-use your custom settings in a later installation of Istio, you must delete the configmap after you disable the Istio add-on by running `kubectl delete cm -n ibm-operators managed-istio-custom`. When you re-enable the Istio add-on, the default configmap is applied during installation.</p>
 
