@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-27"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -57,6 +57,7 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 | Kubernetes | Make sure to review the [Kubernetes project limitations](https://kubernetes.io/docs/setup/best-practices/cluster-large/){: external}. |
 | Kubernetes pod logs | To check the logs for individual app pods, you can use the terminal to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard. |
 | Worker node quota | You cannot exceed 500 worker nodes across all clusters in a region, per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). If you need more than 500 worker nodes in a region, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support). In the support case, include the new worker node quota limit for the region and infrastructure provider that you want.|
+| Worker pool size | You must have a minimum of 1 worker node in your worker pool at all times. You cannot scale worker pools down to zero. |
 {: summary="This table contains information on general {{site.data.keyword.containerlong_notm}} limitations. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="{{site.data.keyword.containerlong_notm}} limitations"}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -2540,7 +2540,7 @@ ibmcloud ks worker-pool rebalance --cluster my_cluster --worker-pool my_pool
 ### `ibmcloud ks worker-pool resize`
 {: #cs_worker_pool_resize}
 
-Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster. Your worker pool must have at least one worker node.
+Resize your worker pool to increase or decrease the number of worker nodes that are in each zone of your cluster. Your worker pool must have at least 1 worker node.
 {: shortdesc}
 
 ```
