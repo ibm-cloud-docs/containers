@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -202,13 +202,12 @@ Free clusters are limited to specific locations and are available for only class
 {: shortdesc}
 
 **Creating a free cluster in the CLI**: You can create a free cluster in select regions only. Your cluster is created in a data center within the region that you target. You cannot specify the data center. The following regions are available.
-* Frankfurt metro in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
-* London metro in `ibmcloud ks init --host https://eu-gb.containers.cloud.ibm.com`
-* Dallas metro in `ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
+* Frankfurt region in `ibmcloud ks init --host https://eu-de.containers.cloud.ibm.com`
+* Dallas region in `ibmcloud ks init --host https://us-south.containers.cloud.ibm.com`
 
 **Creating a free cluster in the {{site.data.keyword.cloud_notm}} console**: When you use the console, you cannot select a location. Your cluster is created in one of the following locations.
-* Dallas metro in North America
-* Frankfurt or London metros in Europe
+* Dallas region in North America
+* Frankfurt region in Europe
 
 
 
