@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -100,7 +100,7 @@ To set up a logging configuration for your cluster:
 
    - **From the console:**
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a LogDNA logging configuration.
-     2. On the cluster **Overview** page, click **Add logging**.
+     2. On the cluster **Overview** page, click **Connect**.
      3. Select the region and the {{site.data.keyword.la_full_notm}} service instance that you created earlier, and click **Connect**.
 
    - **From the CLI:**
@@ -855,7 +855,7 @@ To set up a monitoring configuration for your cluster:
 
    - **From the console: **
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a Sysdig monitoring configuration.
-     2. On the cluster **Overview** page, click **Add monitoring**.
+     2. On the cluster **Overview** page, click **Connect**.
      3. Select the region and the {{site.data.keyword.mon_full_notm}} service instance that you created earlier, and click **Connect**.
 
    - **From the CLI: **
