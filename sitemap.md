@@ -292,6 +292,11 @@ subcollection: containers
 {: #sitemap_setting_up_clusters}
 
 
+
+## Planning your cluster environment
+{: #sitemap_planning_your_cluster_environment}
+
+
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
   * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
@@ -323,6 +328,11 @@ subcollection: containers
 * [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
 * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
+
+
+## Creating and accessing clusters
+{: #sitemap_creating_and_accessing_clusters}
+
 
 [Creating clusters](/docs/containers?topic=containers-clusters)
 * [Sample commands](/docs/containers?topic=containers-clusters#cluster_create_samples)
@@ -375,6 +385,11 @@ subcollection: containers
   * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+
+
+## Managing the cluster lifecycle
+{: #sitemap_managing_the_cluster_lifecycle}
+
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
 * [Adding worker nodes by resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool)
@@ -479,6 +494,11 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
+
+## Classic clusters
+{: #sitemap_classic_clusters}
+
+
 [Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_bx)
@@ -510,6 +530,11 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#vpc-services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
+
+## VPC clusters
+{: #sitemap_vpc_clusters}
+
+
 [VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
@@ -532,6 +557,11 @@ subcollection: containers
 
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
+
+
+
+## Classic clusters
+{: #sitemap_classic_clusters}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -581,6 +611,11 @@ subcollection: containers
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
 * [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
+
+
+## VPC clusters
+{: #sitemap_vpc_clusters}
+
 
 [VPC: Configuring subnets and IP addresses](/docs/containers?topic=containers-vpc-subnets)
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
@@ -751,6 +786,11 @@ subcollection: containers
   * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
+
+## Setting up a service mesh with Istio
+{: #sitemap_setting_up_a_service_mesh_with_istio}
+
+
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs)
 * [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
 * [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
@@ -835,6 +875,11 @@ subcollection: containers
 * [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
   * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
   * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
+
+
+## Exposing apps with load balancers
+{: #sitemap_exposing_apps_with_load_balancers}
+
 
 [Quick start for load balancers](/docs/containers?topic=containers-loadbalancer-qs)
 * [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)

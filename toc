@@ -56,16 +56,19 @@ Kubernetes Service
 
     {: .topicgroup}
     Setting up clusters
+
         {: .topicgroup}
         Planning your cluster environment
             cs_cluster_plan_network.md
             cs_cluster_plan_ha.md
             cs_worker_plan.md
+
         {: .topicgroup}
         Creating and accessing clusters
             cs_clusters.md
             cs_cluster_access.md
             cs_users.md
+
         {: .topicgroup}
         Managing the cluster lifecycle
             cs_worker_add.md
@@ -82,11 +85,13 @@ Kubernetes Service
 
     {: .topicgroup}
     Securing the cluster network
+
         {: .topicgroup}
         Classic clusters
             cs_firewall.md
             cs_edge.md
             cs_network_policy.md
+
         {: .topicgroup}
         VPC clusters
             vpc_firewall.md
@@ -94,11 +99,13 @@ Kubernetes Service
 
     {: .topicgroup}
     Managing the cluster network
+
         {: .topicgroup}
         Classic clusters
             cs_subnets.md
             cs_network_cluster.md
             cs_vpn.md
+
         {: .topicgroup}
         VPC clusters
             vpc_subnets.md
@@ -119,6 +126,7 @@ Kubernetes Service
         cs_app.md
         cs_app_deploy.md
         cs_app_knative.md
+
         {: .topicgroup}
         Setting up a service mesh with Istio
             cs_istio_qs.md
@@ -132,6 +140,7 @@ Kubernetes Service
     {: .topicgroup}
     Exposing apps
         cs_network_planning.md
+
         {: .topicgroup}
         Exposing apps with load balancers
             cs_loadbalancer_qs.md
@@ -140,6 +149,7 @@ Kubernetes Service
             cs_loadbalancer.md
             cs_loadbalancer_v2.md
             cs_loadbalancer_dns.md
+            
         {: .topicgroup}
         Exposing apps with Ingress ALBs
             cs_ingress_qs.md
