@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-02"
+lastupdated: "2020-06-03"
 
 keywords: containers
 subcollection: containers
@@ -535,28 +535,27 @@ subcollection: containers
 * [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public)
 * [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers)
 * [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-  * [Isolate app services within a namespace](/docs/containers?topic=containers-network_policies#services_one_ns)
-  * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
+  * [Isolating app services within a namespace](/docs/containers?topic=containers-network_policies#vpc-services_one_ns)
+  * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#vpc-services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-[VPC: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-vpc-firewall)
+[VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-* [Opening required ports in VPC security groups](/docs/containers?topic=containers-vpc-firewall#security_groups)
-  * [Opening security group ports in the console](/docs/containers?topic=containers-vpc-firewall#security_groups_ui)
-  * [Opening security group ports from the CLI](/docs/containers?topic=containers-vpc-firewall#security_groups_cli)
-* [Allowing the cluster to access resources through ACLs](/docs/containers?topic=containers-vpc-firewall#firewall_acls)
-* [Allowing the cluster to access resources through Calico policies](/docs/containers?topic=containers-vpc-firewall#firewall_calico)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
-[VPC: Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
-* [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
+[VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
+* [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
+* [Step 1: Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
   * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
   * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
-* [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
-  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
+* [Step 2: Opening required ports in the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
+  * [Opening required ports in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+  * [Opening required ports from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
+* [Step 3: Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
+  * [Isolating app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
 
 

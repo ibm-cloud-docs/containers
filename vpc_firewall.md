@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-28"
+lastupdated: "2020-06-03"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -33,22 +33,11 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# VPC: Opening required ports and IP addresses in your firewall
+# VPC: Opening required ports and IP addresses in other network firewalls
 {: #vpc-firewall}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This firewall information is specific to VPC clusters. For firewall information for classic clusters, see [Opening required ports and IP addresses in your firewall for classic clusters](/docs/containers?topic=containers-firewall).
 {: note}
-
-Review these situations in which you might need to open specific ports and IP addresses in your firewalls for your {{site.data.keyword.containerlong}} clusters.
-{:shortdesc}
-
-* [Corporate firewalls](#vpc-corporate): If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, you must allow access to run `ibmcloud`, `ibmcloud ks`, `ibmcloud cr`, `kubectl`, and `calicoctl` commands from your local system.
-* [Access control lists](#firewall_acls): If you use ACLs on your VPC subnets to act as a firewall to restrict all worker node egress, you must allow your worker nodes to access the resources that are required for the cluster to function.
-* [Security groups](#security_groups): If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default security groups that are applied at the level of the VPC, you must allow traffic requests that are routed to node ports on your worker nodes.
-* [Other services or network firewalls](#vpc-whitelist_workers): To allow your cluster to access services that run inside or outside {{site.data.keyword.cloud_notm}} or in on-premises networks and that are protected by a firewall, you must add the IP addresses of your worker nodes in that firewall.
-
-<br />
-
 
 ## Opening ports in a corporate firewall
 {: #vpc-corporate}
@@ -235,84 +224,6 @@ Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) an
   {: pre}
 
 3. Allow access for the Calico policies via the master URL IP address and the etcd port.
-
-<br />
-
-
-## Opening required ports in VPC security groups
-{: #security_groups}
-
-If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default security groups that are applied at the level of the VPC, incoming traffic requests to apps in your cluster are denied by default. You must modify the security group rules to allow traffic requests that are routed to node ports on your worker nodes.
-{: shortdesc}
-
-[VPC security groups](/docs/vpc?topic=vpc-using-security-groups) are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker nodes instances. However, you can use security groups at the level of the VPC.
-
-When you create a Generation 2 VPC, the VPC is created with a default security group that does not allow incoming traffic requests to apps on your worker nodes. You must modify the security group for the VPC to allow incoming TCP traffic to ports `30000 - 32767`. Additionally, if you create a non-default security group for a Gen 1 or Gen 2 VPC, you must include an inbound rule that allows incoming TCP traffic to ports `30000 - 32767`.
-
-<img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> You must allow inbound traffic to your worker nodes.</br></br>ACLs filter incoming and outgoing traffic for your cluster at the subnet level, such as traffic through the VPC load balancer. To control traffic within the cluster at the pod-to-pod level, you cannot use VPC security groups or ACLs. Instead, use [Calico](/docs/containers?topic=containers-network_policies) and [Kubernetes network policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies), which can control the pod-level network traffic that uses IP in IP encapsulation.
-{: important}
-
-### Opening security group ports in the console
-{: #security_groups_ui}
-
-1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
-2. In the **Inbound rules** section, click **New rule**. The **TCP** protocol and **Any** source type are pre-selected.
-3. Type `30000` for the **Port min** and `32767` for the **Port max**.
-4. Click **Save**.
-5. VPC Gen 2: If you created non-default security groups for your VPC, repeat these steps for each security group.
-
-### Opening security group ports from the CLI
-{: #security_groups_cli}
-
-1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
-    ```
-    ibmcloud plugin install infrastructure-service
-    ```
-    {: pre}
-
-2. Target the VPC generation for your cluster.
-   ```
-   ibmcloud is target --gen (1|2)
-   ```
-   {: pre}
-
-3. List your security groups.
-    * VPC Gen 1: For your **VPC**, if only the default security group with a randomly generated name is listed, inbound traffic to the node ports on the worker is already allowed. If you have another security group, note its ID.
-    * VPC Gen 2: For your **VPC**, note the IDs of all security groups, including the default security group.
-  ```
-  ibmcloud is security-groups
-  ```
-  {: pre}
-  Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
-  ```
-  ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
-  1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
-  ```
-  {: screen}
-
-4. For each security group, add a rule to allow inbound TCP traffic on ports 30000-32767.
-  ```
-  ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
-  ```
-  {: pre}
-
-<br />
-
-
-## Allowing the cluster to access resources through ACLs
-{: #firewall_acls}
-
-You can use access control lists (ACLs) on your VPC subnets to act as a firewall to restrict worker node ingress and egress. However, you must allow your worker nodes to access the resources that are required for the cluster to function by following the steps in [Creating access control lists (ACLs) to control traffic to and from your cluster](/docs/containers?topic=containers-vpc-network-policy#acls).
-{: shortdesc}
-
-<br />
-
-
-## Allowing the cluster to access resources through Calico policies
-{: #firewall_calico}
-
-Although Calico policies are supported in VPC clusters, you can remain VPC-native by using [VPC ACLs](/docs/containers?topic=containers-vpc-network-policy#acls) for your subnets instead. However, if you create multiple clusters that use the same subnets in one VPC, you cannot use ACLs to control traffic between the clusters because they share the same subnets. You can use [Calico network policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.
-{: shortdesc}
 
 <br />
 
