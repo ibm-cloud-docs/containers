@@ -53,7 +53,7 @@ The following table describes the basic characteristics of each network security
 |Policy type|Application level|Default behavior|Use case|Limitations|
 |-----------|-----------------|----------------|--------|-----------|
 |[VPC access control lists (ACLs)](#acls)|VPC subnet|The default ACL for the VPC, `allow-all-network-acl-<VPC_ID>`, allows all traffic to and from your subnets.|Control inbound and outbound traffic to your cluster. Inbound rules allow or deny traffic from a source IP range with specified protocols and ports to subnet that you attach the ACL to. Outbound rules allow or deny traffic to a destination IP range with specified protocols and ports from the subnet that you attach the ACL to.|Cannot be used to control traffic between the clusters that share the same VPC subnets. Instead, you can [create Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.|
-|[VPC security groups](#security_groups)|Worker node|<ul><li>VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</li><li>VPC Gen 2: The default security group denies all incoming traffic requests to your worker nodes.</li></ul>|Allow inbound traffic to node ports on your worker nodes.|You cannot manually attach worker nodes to security groups because VPC worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. The default security group for the VPC is applied to worker nodes. However, you can add rules to the default security group for the VPC, or create non-default security groups for the VPC.|
+|[VPC security groups](#security_groups)|Worker node|VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</br>The default security group denies all incoming traffic requests to your worker nodes.|Allow inbound traffic to node ports on your worker nodes.|You cannot manually attach worker nodes to security groups because VPC worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. However, you can add rules to the default security group for the VPC, or create non-default security groups for the VPC.|
 |[Kubernetes network policies](#kubernetes_policies)|Worker node host endpoint|None|Control traffic within the cluster at the pod level by using pod and namespace labels. Protect pods from internal network traffic, such as isolating app microservices from each other within a namespace or across namespaces.||
 {: caption="Network security options for VPC clusters"}
 
@@ -78,6 +78,8 @@ Control inbound and outbound traffic to your cluster by creating and applying ac
 
 When you use the following steps to create custom ACLs, only network traffic that is specified in the ACL rules is permitted to and from your VPC subnets. All other traffic that is not specified in the ACLs is blocked for the subnets, such as cluster integrations with third party services. If you must allow other traffic to or from your worker nodes, be sure to specify those rules where noted in the following steps. For more information about ACL rule requirements and limitations, see [Setting up network ACLs](/docs/vpc?topic=vpc-using-acls).
 {: important}
+
+For more information, see the [VPC documentation](/docs/vpc?topic=vpc-using-acls){: external}.
 
 ### Creating ACLs in the console
 {: #acls_ui}
@@ -547,7 +549,7 @@ After you use ACLs to control traffic for VPC subnets, modify your VPC's default
 
 **Level of application**: Worker node
 
-**Default behavior**: [VPC security groups](/docs/vpc?topic=vpc-using-security-groups){: external} are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. When you create a VPC cluster, a default security group is automatically created for your VPC is and applied to the worker nodes in your cluster.
+**Default behavior**: VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. When you create a VPC cluster, a default security group is automatically created for your VPC is and applied to the worker nodes in your cluster.
 * Gen 2: The default security group denies all incoming traffic requests to your worker nodes.
 * Gen 1: The default security group allows all incoming traffic to your worker nodes by default.
 
@@ -557,10 +559,15 @@ After you use ACLs to control traffic for VPC subnets, modify your VPC's default
 
 Additionally, for either VPC generation, if you create non-default security groups and attach them to your VPC, the security group rules are also applied to your worker nodes. To allow any incoming requests to apps in your cluster, you must add a rule to any non-default security groups to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes.
 
+You must modify your security groups to allow inbound traffic to ports `30000 - 32767` your worker nodes, even if you allowed inbound traffic in your ACLs. ACLs are applied at the level of the VPC subnet, but security groups allow the necessary inbound traffic for each worker node interface.
+{: important}
+
 **Limitations**: Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker node instances. However, you can add rules to the default security group for the VPC, or create non-default security groups for the VPC.
 
 When you modify the default security group, do not remove or modify the existing default rules.
 {: important}
+
+For more information, see the [VPC documentation](/docs/vpc?topic=vpc-using-security-groups){: external}.
 
 ### Opening required ports in the console
 {: #security_groups_ui}
