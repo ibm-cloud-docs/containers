@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, containers
 
@@ -343,7 +343,7 @@ Review supported options for encrypting and protecting your data on persistent s
 By default, all {{site.data.keyword.cloud_notm}} storage solutions automatically encrypt your data at rest with an IBM-managed encryption key at no additional cost. For more information, see the following links.
 - [Classic NFS File Storage](/docs/FileStorage?topic=FileStorage-encryption#encryption)
 - [Classic Block Storage](/docs/BlockStorage?topic=BlockStorage-encryption#block-storage-encryption-at-rest)
-- [VPC Block Storage](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#encryption)
+- [VPC Block Storage](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption)
 - [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-encryption)
 
 

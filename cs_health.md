@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-02"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -819,7 +819,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
 <dl>
   <dt>{{site.data.keyword.mon_full}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a Sysdig agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-about). To set up the Sysdig agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
+  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a Sysdig agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started). To set up the Sysdig agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
