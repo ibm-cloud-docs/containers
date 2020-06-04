@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -123,7 +123,7 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* VPC clusters: If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+* VPC clusters: If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -420,7 +420,7 @@ Forward requests directly to the IP address of your external service by setting 
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
-* VPC clusters: If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+* VPC clusters: If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 To expose apps that are outside of your cluster to the public:
 1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service forwards incoming requests to an external endpoint that you create in subsequent steps.
@@ -833,7 +833,7 @@ To use a private ALB, you must first enable the private ALB. Then, to expose you
 **Before you begin**:
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+* If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 ### Step 1: Deploy apps and create app services
 {: #vpc_private_1}

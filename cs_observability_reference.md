@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-29"
+lastupdated: "2020-06-02"
 
 keywords: observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logdna commands, sysdig commands, logging config, monitoring config
 
@@ -33,10 +33,10 @@ subcollection: containers
 {:tsSymptoms: .tsSymptoms}
 
 
-# Observability plug-in CLI 
+# Observability plug-in CLI
 {: #observability_cli}
 
-Refer to these commands to create and manage logging and monitoring configurations for your {{site.data.keyword.containerlong_notm}} cluster. 
+Refer to these commands to create and manage logging and monitoring configurations for your {{site.data.keyword.containerlong_notm}} cluster.
 {: shortdesc}
 
 Looking for `ibmcloud ks` commands? See the [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli).
@@ -50,10 +50,10 @@ Looking for `ibmcloud ks` commands? See the [{{site.data.keyword.containerlong_n
 ### `ibmcloud ob logging config create`
 {: #logging_config_create}
 
-Create a logging configuration for your cluster to automatically collect pod logs and send them to {{site.data.keyword.la_full_notm}}. 
+Create a logging configuration for your cluster to automatically collect pod logs and send them to {{site.data.keyword.la_full_notm}}.
 {: shortdesc}
 
-This command deploys a LogDNA agent as a Kubernetes daemonset in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-mng-data).  
+This command deploys a LogDNA agent as a Kubernetes daemonset in your cluster. The agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. For more information, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna). For more information about {{site.data.keyword.la_full_notm}}, see [Securing your data](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-mng-data).   
 
 ```
 ibmcloud ob logging config create --cluster CLUSTER --instance LOGDNA_INSTANCE [--logdna-ingestion-key INGESTION_KEY] [--private-endpoint]  
@@ -65,7 +65,7 @@ ibmcloud ob logging config create --cluster CLUSTER --instance LOGDNA_INSTANCE [
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: 
+**Minimum required permissions**:
 - **Administrator** platform role and **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}
 - **Editor** platform role and **Manager** server access role for {{site.data.keyword.la_full_notm}}
 
@@ -85,7 +85,7 @@ ibmcloud ob logging config create --cluster CLUSTER --instance LOGDNA_INSTANCE [
 
 </dl>
 
-**Example**: 
+**Example**:
 ```
 ibmcloud ob logging config create --cluster mycluster --instance mylogna
 ```
@@ -94,12 +94,12 @@ ibmcloud ob logging config create --cluster mycluster --instance mylogna
 ### `ibmcloud ob logging config delete`
 {: #logging_config_delete}
 
-Delete a LogDNA logging configuration from your cluster. 
+Delete a LogDNA logging configuration from your cluster.
 {: shortdesc}
 
 
 
-Existing logging configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are cannot be deleted with this command. 
+Existing logging configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are cannot be deleted with this command.
 
 
 
@@ -108,7 +108,7 @@ When you delete the logging configuration, the daemonset for the LogDNA agent, t
 
 
 ```
-ibmcloud ob logging config delete --cluster CLUSTER --instance LOGDNA_INSTANCE 
+ibmcloud ob logging config delete --cluster CLUSTER --instance LOGDNA_INSTANCE
 ```
 {: pre}
 
@@ -117,8 +117,8 @@ ibmcloud ob logging config delete --cluster CLUSTER --instance LOGDNA_INSTANCE
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: 
-- **Administrator** platform role and **Manager** service access role for the `ibm-observe` Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}. 
+**Minimum required permissions**:
+- **Administrator** platform role and **Manager** service access role for the `ibm-observe` Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}.
 - **Viewer** platform role for {{site.data.keyword.la_full_notm}}
 
 **Command options**:
@@ -131,7 +131,7 @@ ibmcloud ob logging config delete --cluster CLUSTER --instance LOGDNA_INSTANCE
 
 </dl>
 
-**Example**: 
+**Example**:
 ```
 ibmcloud ob logging config delete --cluster mycluster --instance mylogdna
 ```
@@ -140,11 +140,11 @@ ibmcloud ob logging config delete --cluster mycluster --instance mylogdna
 ### `ibmcloud ob logging config list`
 {: #logging_config_list}
 
-List all LogDNA logging configurations that were created for your cluster with the {{site.data.keyword.containerlong_notm}} observability plug-in. 
+List all LogDNA logging configurations that were created for your cluster with the {{site.data.keyword.containerlong_notm}} observability plug-in.
 {: shortdesc}
 
 
-Existing logging configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are not listed with this command. 
+Existing logging configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are not listed with this command.
 {: note}
 
 ```
@@ -172,7 +172,7 @@ ibmcloud ob logging config list --cluster CLUSTER
 ### `ibmcloud ob logging config show`
 {: #logging_config_show}
 
-Show the details of a LogDNA logging configuration. 
+Show the details of a LogDNA logging configuration.
 {: shortdesc}
 
 You cannot use this command to show the details of an existing logging configuration that you manually set up without the {{site.data.keyword.containerlong_notm}} observability plug-in.
@@ -208,13 +208,13 @@ ibmcloud ob logging config show --cluster CLUSTER --instance LOGDNA_INSTANCE
 ### `ibmcloud ob monitoring config create`
 {: #monitoring_config_create}
 
-Create a monitoring configuration for your cluster to automatically collect cluster and pod metrics, and send them to {{site.data.keyword.mon_full_notm}}. 
+Create a monitoring configuration for your cluster to automatically collect cluster and pod metrics, and send them to {{site.data.keyword.mon_full_notm}}.
 {: shortdesc}
 
 This command deploys a Sysdig agent as a Kubernetes daemonset in your cluster. The agent collects cluster and pod metrics, such as the worker node CPU and memory usage, and the amount of incoming and outgoing network traffic for your pods. For more information, see [Creating a monitoring configuration to forward cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig).
 
 ```
-ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANCE [--sysdig-access-key ACCESS_KEY] [--private-endpoint] 
+ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANCE [--sysdig-access-key ACCESS_KEY] [--private-endpoint]
 ```
 {: pre}
 
@@ -223,7 +223,7 @@ ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANC
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: 
+**Minimum required permissions**:
 - **Administrator** platform role and **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}
 - **Editor** platform role and **Manager** server access role for {{site.data.keyword.mon_full_notm}}
 
@@ -243,7 +243,7 @@ ibmcloud ob monitoring config create --cluster CLUSTER --instance SYSDIG_INSTANC
 
 </dl>
 
-**Example**: 
+**Example**:
 ```
 ibmcloud ob monitoring config create --cluster mycluster --instance mysysdig
 ```
@@ -252,11 +252,11 @@ ibmcloud ob monitoring config create --cluster mycluster --instance mysysdig
 ### `ibmcloud ob monitoring config delete`
 {: #monitoring_config_delete}
 
-Delete a Sysdig monitoring configuration from your cluster. 
+Delete a Sysdig monitoring configuration from your cluster.
 {: shortdesc}
 
 
-Existing monitoring configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in cannot be deleted with this command. 
+Existing monitoring configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in cannot be deleted with this command.
 {: note}
 
 
@@ -264,7 +264,7 @@ When you delete the monitoring configuration, the daemonset for the Sysdig agent
 {: important} 
 
 ```
-ibmcloud ob monitoring config delete --cluster CLUSTER --instance SYSDIG_INSTANCE 
+ibmcloud ob monitoring config delete --cluster CLUSTER --instance SYSDIG_INSTANCE
 ```
 {: pre}
 
@@ -273,8 +273,8 @@ ibmcloud ob monitoring config delete --cluster CLUSTER --instance SYSDIG_INSTANC
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: 
-- **Administrator** platform role and **Manager** service access role for the `ibm-observe` Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}. 
+**Minimum required permissions**:
+- **Administrator** platform role and **Manager** service access role for the `ibm-observe` Kubernetes namespaces in {{site.data.keyword.containerlong_notm}}.
 - **Viewer** platform role for {{site.data.keyword.la_full_notm}}
 
 **Command options**:
@@ -287,7 +287,7 @@ ibmcloud ob monitoring config delete --cluster CLUSTER --instance SYSDIG_INSTANC
 
 </dl>
 
-**Example**: 
+**Example**:
 ```
 ibmcloud ob monitoring config delete --cluster mycluster --instance mysysdig
 ```
@@ -296,11 +296,11 @@ ibmcloud ob monitoring config delete --cluster mycluster --instance mysysdig
 ### `ibmcloud ob monitoring config list`
 {: #monitoring_config_list}
 
-List all Sysdig monitoring configurations that were created for your cluster with the {{site.data.keyword.containerlong_notm}} observability plug-in. 
+List all Sysdig monitoring configurations that were created for your cluster with the {{site.data.keyword.containerlong_notm}} observability plug-in.
 {: shortdesc}
 
 
-Existing monitoring configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are not listed with this command. 
+Existing monitoring configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are not listed with this command.
 {: note}
 
 ```
@@ -329,7 +329,7 @@ ibmcloud ob monitoring config list --cluster CLUSTER
 ### `ibmcloud ob monitoring config show`
 {: #monitoring_config_show}
 
-Show the details of a Sysdig monitoring configuration. 
+Show the details of a Sysdig monitoring configuration.
 {: shortdesc}
 
 

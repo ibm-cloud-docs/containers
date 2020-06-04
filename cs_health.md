@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -100,7 +100,7 @@ To set up a logging configuration for your cluster:
 
    - **From the console:**
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a LogDNA logging configuration.
-     2. On the cluster **Overview** page, click **Add logging**.
+     2. On the cluster **Overview** page, click **Connect**.
      3. Select the region and the {{site.data.keyword.la_full_notm}} service instance that you created earlier, and click **Connect**.
 
    - **From the CLI:**
@@ -159,8 +159,8 @@ To set up a logging configuration for your cluster:
       {: pre}
 
 4. Access the logs for your pods from the LogDNA dashboard.
-   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
-   2. On the cluster **Overview** page, click **Launch logging**. The LogDNA dashboard opens.
+   1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.  
+   2. On the cluster **Overview** page, click **Launch**. The LogDNA dashboard opens.
    3. Review the pod logs that the LogDNA agent collected from your cluster. It might take a few minutes for your first logs to show.
 
 5. Review how you can [search and filter logs in the LogDNA dashboard](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-view_logs). 
@@ -819,7 +819,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
 <dl>
   <dt>{{site.data.keyword.mon_full}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a Sysdig agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-about). To set up the Sysdig agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
+  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a Sysdig agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started). To set up the Sysdig agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
@@ -855,7 +855,7 @@ To set up a monitoring configuration for your cluster:
 
    - **From the console: **
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a Sysdig monitoring configuration.
-     2. On the cluster **Overview** page, click **Add monitoring**.
+     2. On the cluster **Overview** page, click **Connect**.
      3. Select the region and the {{site.data.keyword.mon_full_notm}} service instance that you created earlier, and click **Connect**.
 
    - **From the CLI: **
@@ -914,7 +914,7 @@ To set up a monitoring configuration for your cluster:
 
 4. Access the metrics for your pods and cluster from the Sysdig dashboard.
    1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster that you configured.
-   2. On the cluster **Overview** page, click **Launch monitoring**. The Sysdig dashboard opens.
+   2. On the cluster **Overview** page, click **Launch**. The Sysdig dashboard opens.
    3. Review the pod and cluster metrics that the Sysdig agent collected from your cluster. It might take a few minutes for your first metrics to show.
 
 5. Review how you can work with the [Sysdig dashboard](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-dashboards#dashboards) to further analyze your metrics.

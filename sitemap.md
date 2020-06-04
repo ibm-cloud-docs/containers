@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: containers
 subcollection: containers
@@ -288,28 +288,14 @@ subcollection: containers
 * [Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the CLI](/docs/containers?topic=containers-cs_api_install#cs_cli_refresh)
 
 
-## Planning your cluster
-{: #sitemap_planning_your_cluster}
+## Setting up clusters
+{: #sitemap_setting_up_clusters}
 
 
-[Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy)
-* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
-  * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
-  * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
-  * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
-  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
-* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
-  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
-  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
-  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
-  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
-  * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
-* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
-  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
-  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
-  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
-  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
-* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
+
+## Planning your cluster environment
+{: #sitemap_planning_your_cluster_environment}
+
 
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
@@ -508,6 +494,11 @@ subcollection: containers
 {: #sitemap_securing_the_cluster_network}
 
 
+
+## Classic clusters
+{: #sitemap_classic_clusters}
+
+
 [Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-firewall#corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-firewall#firewall_bx)
@@ -539,29 +530,38 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-[VPC: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-vpc-firewall)
+
+## VPC clusters
+{: #sitemap_vpc_clusters}
+
+
+[VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-* [Opening required ports in VPC security groups](/docs/containers?topic=containers-vpc-firewall#security_groups)
-  * [Opening security group ports in the console](/docs/containers?topic=containers-vpc-firewall#security_groups_ui)
-  * [Opening security group ports from the CLI](/docs/containers?topic=containers-vpc-firewall#security_groups_cli)
-* [Allowing the cluster to access resources through ACLs](/docs/containers?topic=containers-vpc-firewall#firewall_acls)
-* [Allowing the cluster to access resources through Calico policies](/docs/containers?topic=containers-vpc-firewall#firewall_calico)
 * [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
-[VPC: Controlling traffic with VPC ACLs and network policies](/docs/containers?topic=containers-vpc-network-policy)
-* [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls)
+[VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
+* [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
+* [Step 1: Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
   * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
   * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
-* [Creating Kubernetes policies to control traffic between pods](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
-  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
-  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
+* [Step 2: Opening required ports in the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
+  * [Opening required ports in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+  * [Opening required ports from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
+* [Step 3: Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
+  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
+  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
 
 
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
+
+
+
+## Classic clusters
+{: #sitemap_classic_clusters}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -611,6 +611,22 @@ subcollection: containers
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
 * [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
+
+[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
+* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
+* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
+* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
+  * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
+  * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
+* [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+  * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+  * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
+
+
+## VPC clusters
+{: #sitemap_vpc_clusters}
+
 
 [VPC: Configuring subnets and IP addresses](/docs/containers?topic=containers-vpc-subnets)
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
@@ -781,17 +797,6 @@ subcollection: containers
   * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
-[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
-* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
-* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
-* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
-* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
-* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
-* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
-* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
-
 
 ## Setting up a service mesh with Istio
 {: #sitemap_setting_up_a_service_mesh_with_istio}
@@ -856,24 +861,31 @@ subcollection: containers
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
   * [Updating Sysdig for Istio add-on version 1.5](/docs/containers?topic=containers-istio-health#sysdig-15)
 
+[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
+* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
+* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
 
-## Choosing an app exposure service
-{: #sitemap_choosing_an_app_exposure_service}
+[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
+* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
+* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
+* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
+* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
+* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
+
+## Exposing apps
+{: #sitemap_exposing_apps}
 
 
 [Choosing an app exposure service](/docs/containers?topic=containers-cs_network_planning)
-
-[Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
-
-[Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
-
-[Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
-* [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
-* [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
-
-[Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
-* [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
-* [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
+* [Understanding load balancing for apps through Kubernetes service discovery](/docs/containers?topic=containers-cs_network_planning#in-cluster)
+* [Understanding Kubernetes service types](/docs/containers?topic=containers-cs_network_planning#external)
+* [Planning public external load balancing](/docs/containers?topic=containers-cs_network_planning#public_access)
+  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public)
+  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_public_vpc)
+* [Planning private external load balancing](/docs/containers?topic=containers-cs_network_planning#private_access)
+  * [Choosing a deployment pattern for classic clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_classic)
+  * [Choosing a deployment pattern for VPC clusters](/docs/containers?topic=containers-cs_network_planning#pattern_private_vpc)
 
 
 ## Exposing apps with load balancers

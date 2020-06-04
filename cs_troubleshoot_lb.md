@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-06-03"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -271,7 +271,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a VPC load 
 
 {: tsResolve}
 Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. If you use non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+1. If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 2. Verify that the VPC load balancer for the Kubernetes `LoadBalancer` service exists. In the output, look for the VPC load balancer that is formatted `kube-<cluster_ID>-<kubernetes_lb_service_UID>`. You can get the Kubernetes `LoadBalancer` service UID by running `kubectl get svc <service_name> -o yaml`.
   ```
@@ -310,14 +310,26 @@ After you create a VPC subnet, you cannot resize it or change its IP range. Inst
 1. [Create a new VPC subnet](https://cloud.ibm.com/vpc/provision/network){: external} in the same VPC and in one or more zones where your cluster has worker nodes. Make sure that you create a subnet that can support both the number of worker nodes and services that you plan to create in your cluster. The default CIDR size of each VPC subnet is `/24`, which can support up to 253 worker nodes and services. To check your cluster's VPC and zones, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.
 
 2. Create a new worker pool in your cluster.
+   * VPC Generation 1 clusters:
      ```
      ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
      ```
      {: pre}
+   * VPC Generation 2 clusters:
+     ```
+     ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+     ```
+     {: pre}
 
 3. Using the ID for the larger subnets that you created in step 1, add the zones to the worker pool. Repeat the following command for each zone and subnet.
+  * VPC Generation 1 clusters:
     ```
     ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+    ```
+    {: pre}
+  * VPC Generation 2 clusters:
+    ```
+    ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
     ```
     {: pre}
 

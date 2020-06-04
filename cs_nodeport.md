@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-17"
+lastupdated: "2020-06-03"
 
 keywords: kubernetes, iks, app access
 
@@ -83,7 +83,7 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
 
 **Before you begin**: 
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* VPC clusters: If you use non-default VPC security groups, [allow traffic requests that are routed to node ports on your worker nodes](/docs/containers?topic=containers-vpc-firewall#security_groups).
+* VPC clusters: If you use VPC Generation 2 compute, or if you use VPC Generation 1 compute and created non-default VPC security groups, [allow traffic requests that are routed to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 **To use a NodePort**:
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks
 
@@ -690,9 +690,9 @@ Before you begin:
   ```
   {: pre}
 
-2. Decide on the [{{site.data.keyword.blockstorageshort}} profile](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started#determine-storage-requirements) that best meets the capacity and performance requirements that you have.
+2. Decide on the [{{site.data.keyword.blockstorageshort}} profile](/docs/vpc?topic=vpc-creating-block-storage#determine-storage-requirements) that best meets the capacity and performance requirements that you have.
 
-2. [Provision a {{site.data.keyword.blockstorageshort}} volume](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started){: new_window}. The volume that you provision must be in the same resource group, region, and zone as the worker node.
+2. [Provision a {{site.data.keyword.blockstorageshort}} volume](/docs/vpc?topic=vpc-creating-block-storage){: new_window}. The volume that you provision must be in the same resource group, region, and zone as the worker node.
 
 3. Retrieve your IAM token.
 
@@ -753,7 +753,7 @@ Before you begin:
 You can use a `DELETE` request to detach storage from a VPC worker node.
 {: shortdesc}
 
-Detaching storage from your VPC cluster does not remove your {{site.data.keyword.blockstorageshort}} volume or the data that is stored in the volume. You continue to get billed until [you manually delete the volume](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-managing-block-storage).
+Detaching storage from your VPC cluster does not remove your {{site.data.keyword.blockstorageshort}} volume or the data that is stored in the volume. You continue to get billed until [you manually delete the volume](/docs/vpc?topic=vpc-managing-block-storage).
 {: important}
 
 1. Identify the storage volume that you want to remove and note the volume ID.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -325,7 +325,7 @@ The following table shows the changes that are included in the master and worker
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
 | Cluster health image | Master | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
-| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.20){: external}. |
+| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.20){: external}. |
 | Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | IBM Calico extension | Master | 320 | 353 | Skips creating a Calico host endpoint when no endpoint is needed. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
@@ -334,7 +334,7 @@ The following table shows the changes that are included in the master and worker
 | Kubernetes | Both | v1.16.9 | v1.16.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.10){: external}. |
 | Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
 | Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
-| Kubernetes `NodeLocal` DNS cache | Master | 1.15.4 | 1.15.13 | <ul><li>See the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}</li><li>Now, when you [apply the label to set up node local DNS caching](https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes.</li><li>The `NodeLocal` DNS cache configuration now allows customization of stub domains and upstream DNS servers.</li><li>The `node-local-dns` daemon set is updated to include the `prometheus.io/port` and `prometheus.io/scrape` annotations on the pods.</li></ul> |
+| Kubernetes `NodeLocal` DNS cache | Master | 1.15.4 | 1.15.13 | <ul><li>See the [Kubernetes `NodeLocal` DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.13){: external}</li><li>Now, when you [apply the label to set up node local DNS caching](/docs/containers?topic=containers-cluster_dns#dns_cache), the requests are handled immediately and you do not need to reload the worker nodes.</li><li>The `NodeLocal` DNS cache configuration now allows customization of stub domains and upstream DNS servers.</li><li>The `node-local-dns` daemon set is updated to include the `prometheus.io/port` and `prometheus.io/scrape` annotations on the pods.</li></ul> |
 | Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | Master | 177 | 208 | Updated the version 2.0 network load balancers (NLB) to clean up unnecessary IPVS rules. Improved application logging. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | Ubuntu 18.04 packages | Worker | 4.15.0-99-generic | 4.15.0-101-generic | Updated worker node images with kernel and package updates for [CVE-2019-20795](https://nvd.nist.gov/vuln/detail/CVE-2019-20795){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616){: external}, and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
 | Ubuntu 16.04 packages | Worker | 4.4.0-178-generic | 4.4.0-179-generic | Updated worker node images with package and kernel updates for [CVE-2019-19060](https://nvd.nist.gov/vuln/detail/CVE-2019-19060){: external}, [CVE-2020-11494](https://nvd.nist.gov/vuln/detail/CVE-2020-11494){: external}, [CVE-2020-11608](https://nvd.nist.gov/vuln/detail/CVE-2020-11608){: external}, [CVE-2020-12762](https://nvd.nist.gov/vuln/detail/CVE-2020-12762){: external}, [CVE-2020-3810](https://nvd.nist.gov/vuln/detail/CVE-2020-3810){: external}, [CVE-2020-8616](https://nvd.nist.gov/vuln/detail/CVE-2020-8616), and [CVE-2020-8617](https://nvd.nist.gov/vuln/detail/CVE-2020-8617){: external}. |
@@ -665,7 +665,7 @@ The following table shows the changes that are included in the master and worker
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
 | Cluster health image | Master | v1.1.1 | v1.1.4 | When cluster add-ons do not support the current cluster version, a warning is now returned in the cluster health state. |
-| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.20){: external}. |
+| etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.20){: external}. |
 | Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |

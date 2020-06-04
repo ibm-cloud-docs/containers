@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, vpc
 
@@ -37,7 +37,7 @@ subcollection: containers
 # Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 and Gen 2 compute)
 {: #vpc-block}
 
-[{{site.data.keyword.block_storage_is_full}} (Gen 1 and Gen 2 compute)](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
+[{{site.data.keyword.block_storage_is_full}} (Gen 1 and Gen 2 compute)](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you can provision within a VPC.
 {: shortdesc}
 
 You can choose between predefined storage tiers with GB sizes and IOPS that meet the requirements of your workloads. To find out if {{site.data.keyword.block_storage_is_short}} is the right storage option for you, see [Choosing a storage solution](/docs/containers?topic=containers-storage_planning#choose_storage_solution). For pricing information, see [Pricing for {{site.data.keyword.block_storage_is_short}}](https://www.ibm.com/cloud/vpc/pricing).
@@ -122,7 +122,7 @@ For more information, see:
 Choose your {{site.data.keyword.block_storage_is_short}} profile and create a persistent volume claim to dynamically provision {{site.data.keyword.block_storage_is_short}} for your cluster. Dynamic provisioning automatically creates the matching persistent volume and orders the physical storage device in your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-1. Decide on the [{{site.data.keyword.block_storage_is_short}} profile](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-getting-started#determine-storage-requirements) that best meets the capacity and performance requirements that you want.
+1. Decide on the [{{site.data.keyword.block_storage_is_short}} profile](/docs/vpc?topic=vpc-creating-block-storage#determine-storage-requirements) that best meets the capacity and performance requirements that you want.
 
 2. Select the corresponding storage class for your {{site.data.keyword.block_storage_is_short}} profile.
 
@@ -909,7 +909,7 @@ Use one of the IBM-provided storage classes as a basis to create your own custom
        </tr>
        <tr>
           <td><code>parameters.sizeRange</code></td>
-          <td>Enter the size range for your storage in gigabytes (GiB), such as <code>[10-2000]GiB</code>. The size range must match the {{site.data.keyword.block_storage_is_short}} profile that you specify in <code>parameters.profile</code>. To find supported storage sizes for a specific profile, see [Tiered IOPs profiles](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles). Any PVC that uses this storage class must specify a size value that is within this range. </td>
+          <td>Enter the size range for your storage in gigabytes (GiB), such as <code>[10-2000]GiB</code>. The size range must match the {{site.data.keyword.block_storage_is_short}} profile that you specify in <code>parameters.profile</code>. To find supported storage sizes for a specific profile, see [Tiered IOPs profiles](/docs/vpc?topic=vpc-block-storage-profiles). Any PVC that uses this storage class must specify a size value that is within this range. </td>
        </tr>
        <tr>
           <td><code>parameters.csi.storage.k8s.io/fstype</code></td>
@@ -1175,7 +1175,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 |:-----------------|:-----------------|
 | Name | <code>ibmc-vpc-block-10iops-tier</code></br><code>ibmc-vpc-block-retain-10iops-tier</code> |
 | File system | `ext4` |
-| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [10 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [10 IOPS/GB](/docs/vpc?topic=vpc-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-10iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-10iops-tier</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
@@ -1189,7 +1189,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 |:-----------------|:-----------------|
 | Name | <code>ibmc-vpc-block-5iops-tier</code></br><code>ibmc-vpc-block-retain-5iops-tier</code> |
 | File system | `ext4` |
-| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [5 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [5 IOPS/GB](/docs/vpc?topic=vpc-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-5iops-tier</code>: Delete</br><code>ibmc-vpc-block-retain-5iops-tier</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
@@ -1203,7 +1203,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 |:-----------------|:-----------------|
 | Name | <code>ibmc-vpc-block-custom</code></br><code>ibmc-vpc-block-retain-custom</code> |
 | File system | `ext4` |
-| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [Custom](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#custom) |
+| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [Custom](/docs/vpc?topic=vpc-block-storage-profiles#custom) |
 | Reclaim policy | <code>ibmc-vpc-block-custom</code>: Delete</br><code>ibmc-vpc-block-retain-custom</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|
@@ -1217,7 +1217,7 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 |:-----------------|:-----------------|
 | Name | <code>ibmc-vpc-block-general-purpose</code></br><code>ibmc-vpc-block-retain-general-purpose</code> |
 | File system | `ext4` |
-| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [3 IOPS/GB](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-profiles#tiers) |
+| Corresponding {{site.data.keyword.block_storage_is_short}} tier | [3 IOPS/GB](/docs/vpc?topic=vpc-block-storage-profiles#tiers) |
 | Reclaim policy | <code>ibmc-vpc-block-general-purpose</code>: Delete</br><code>ibmc-vpc-block-retain-general-purpose</code>: Retain |
 | Billing | Hourly |
 | Pricing | [Pricing information](https://www.ibm.com/cloud/vpc/pricing)|

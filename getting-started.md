@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, containers
 
@@ -164,9 +164,10 @@ Want to create a cluster in your Virtual Private Cloud (VPC) on generation 1 com
   6. Click **Create virtual private cloud**.
 2. Allow traffic requests to apps that you deploy by modifying the VPC's default security group.
     1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
-    2. In the **Inbound rules** section, click **New rule**. The **TCP** protocol and **Any** source type are pre-selected.
-    3. Type `30000` for the **Port min** and `32767` for the **Port max**.
+    2. In the **Inbound rules** section, click **New rule**.
+    3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
     4. Click **Save**.
+    5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 3. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 4. Configure your cluster environment.
    1. Select **Kubernetes** as your container platform and select Kubernetes **version 1.17 or later**.

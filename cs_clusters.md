@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -656,9 +656,10 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
    7. Click **Create subnet**.
 4. To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
     1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
-    2. In the **Inbound rules** section, click **New rule**. The **TCP** protocol and **Any** source type are pre-selected.
-    3. Type `30000` for the **Port min** and `32767` for the **Port max**.
+    2. In the **Inbound rules** section, click **New rule**.
+    3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
     4. Click **Save**.
+    5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 5. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 6. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
@@ -737,6 +738,12 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     2. Add a security group rule to allow inbound TCP traffic on ports 30000-32767.
       ```
       ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+      ```
+      {: pre}
+
+    3. If you require VPC VPN access or classic infrastructure access into this cluster, add a security group rule to allow inbound UDP traffic on ports 30000-32767.
+      ```
+      ibmcloud is security-group-rule-add <security_group_ID> inbound udp --port-min 30000 --port-max 32767
       ```
       {: pre}
 6. Create the cluster in your VPC. You can use the `cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.

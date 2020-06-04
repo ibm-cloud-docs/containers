@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -552,7 +552,7 @@ As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [K
 ### Version 1.13 (Unsupported)
 {: #cs_v113}
 
-As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.

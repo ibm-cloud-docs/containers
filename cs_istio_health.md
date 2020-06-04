@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-06-02"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -42,7 +42,8 @@ To log, monitor, trace, and visualize your apps that are managed by Istio on {{s
 ## Enabling Prometheus, Grafana, Jaeger, and Kiali
 {: #enable_optional_monitor}
 
-In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} monitoring components are included in your Istio installation, but are disabled by default. To enable these components, follow these steps.
+In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} monitoring components are included in your Istio installation, but are disabled by default due to current security concerns in the community release of Istio that are not adequately addressed for a production environment. To enable these components, follow these steps.
+{: shortdesc}
 
 1. Edit the `managed-istio-custom` configmap resource.
   ```
@@ -50,7 +51,7 @@ In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheu
   ```
   {: pre}
 
-2. Set the `istio-monitoring` setting to `"true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
+2. Set the `istio-monitoring` setting to `"true"`. If the setting is not listed, add the setting as `istio-monitoring: "true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
 
 3. Save the configuration file.
 
@@ -280,9 +281,6 @@ Seamlessly manage logs for your app container and the Envoy proxy sidecar contai
 To use [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
 To get started, set up LogDNA for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube).
-
-
-
 
 <br />
 

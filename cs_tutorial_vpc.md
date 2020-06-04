@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-21"
+lastupdated: "2020-06-03"
 
 keywords: kubernetes, iks, vpc
 
@@ -136,6 +136,12 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     2. Add a security group rule to allow inbound TCP traffic on ports 30000-32767.
       ```
       ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
+      ```
+      {: pre}
+    
+    3. If you require VPC VPN access or classic infrastructure access into this cluster, add a security group rule to allow inbound UDP traffic on ports 30000-32767.
+      ```
+      ibmcloud is security-group-rule-add <security_group_ID> inbound udp --port-min 30000 --port-max 32767
       ```
       {: pre}
 
