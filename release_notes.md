@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-03"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -44,7 +44,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 03 June 2020 | |
+| 04 June 2020 | <ul><li>**Gateway appliance firewalls**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) that you must open in a public gateway device firewall for {{site.data.keyword.registrylong_notm}}.</li><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 637](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>**Istio mTLS**: Changed the sample [mTLS policy](/docs/containers?topic=containers-istio-mesh#mtls) to use `kind: "PeerAuthentication"`.</li><li>**VPC network security**: Expanded information about your options for using access control lists (ACLs), secrutiy groups, and other network policies to [control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy).</li></ul>|
 | 01 June 2020 | <ul><li>**Kubernetes 1.17**: [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#version_types) is now the default version.</li><li>**VPC ACLs**: Added required rules for using VPC load balancers to steps for [Creating access control lists (ACLs) to control traffic to and from your VPC cluster](/docs/containers?topic=containers-vpc-network-policy#acls).</li></ul>|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in June 2020"}

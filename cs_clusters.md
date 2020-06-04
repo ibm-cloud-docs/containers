@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-03"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -657,7 +657,7 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
 4. To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
     1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
     2. In the **Inbound rules** section, click **New rule**.
-    3. Choose the **TCP** protocol, type `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
+    3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
     4. Click **Save**.
     5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 5. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.

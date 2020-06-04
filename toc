@@ -105,12 +105,13 @@ Kubernetes Service
             cs_subnets.md
             cs_network_cluster.md
             cs_vpn.md
+            cs_dns.md
 
         {: .topicgroup}
         VPC clusters
             vpc_subnets.md
             vpc_vpn.md
-        cs_dns.md
+            cs_dns.md
 
     cs_health.md
 
@@ -149,7 +150,7 @@ Kubernetes Service
             cs_loadbalancer.md
             cs_loadbalancer_v2.md
             cs_loadbalancer_dns.md
-            
+
         {: .topicgroup}
         Exposing apps with Ingress ALBs
             cs_ingress_qs.md

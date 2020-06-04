@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-03"
+lastupdated: "2020-06-04"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -52,9 +52,9 @@ The following table describes the basic characteristics of each network security
 
 |Policy type|Application level|Default behavior|Use case|Limitations|
 |-----------|-----------------|----------------|--------|-----------|
-|[VPC access control lists (ACLs)](#acls)|VPC subnet|The default ACL for the VPC, `allow-all-network-acl-<VPC_ID>`, allows all traffic to and from your subnets.|Control inbound and outbound traffic to your cluster. Inbound rules allow or deny traffic from a source IP range with specified protocols and ports to subnet that you attach the ACL to. Outbound rules allow or deny traffic to a destination IP range with specified protocols and ports from the subnet that you attach the ACL to.|Cannot be used to control traffic between the clusters that share the same VPC subnets. Instead, you can [create Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.|
-|[VPC security groups](#security_groups)|Worker node|VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</br>The default security group denies all incoming traffic requests to your worker nodes.|Allow inbound traffic to node ports on your worker nodes.|You cannot manually attach worker nodes to security groups because VPC worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. However, you can add rules to the default security group or create non-default security groups for the VPC.|
-|[Kubernetes network policies](#kubernetes_policies)|Worker node host endpoint|None|Control traffic within the cluster at the pod level by using pod and namespace labels. Protect pods from internal network traffic, such as isolating app microservices from each other within a namespace or across namespaces.||
+|[VPC access control lists (ACLs)](#acls)|VPC subnet|The default ACL for the VPC, `allow-all-network-acl-<VPC_ID>`, allows all traffic to and from your subnets.|Control inbound and outbound traffic to your cluster. Inbound rules allow or deny traffic from a source IP range with specified protocols and ports to the subnet that you attach the ACL to. Outbound rules allow or deny traffic to a destination IP range with specified protocols and ports from the subnet that you attach the ACL to.|Cannot be used to control traffic between the clusters that share the same VPC subnets. Instead, you can [create Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.|
+|[VPC security groups](#security_groups)|Worker node|VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</br>VPC Gen 2: The default security group denies all incoming traffic requests to your worker nodes.|Allow inbound traffic to node ports on your worker nodes.|You cannot manually attach worker nodes to security groups because VPC worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. However, you can add rules to the default security group or create non-default security groups for the VPC.|
+|[Kubernetes network policies](#kubernetes_policies)|Worker node host endpoint|None|Control traffic within the cluster at the pod level by using pod and namespace labels. Protect pods from internal network traffic, such as isolating app microservices from each other within a namespace or across namespaces.|None|
 {: caption="Network security options for VPC clusters"}
 
 <br />
@@ -442,7 +442,7 @@ To create an ACL for each subnet that your cluster is attached to:
   ```
   {: pre}
 
-4. Delete the default rules that allow all inbound and outbound traffic. After, your ACL is not removed, but it does not contain any rules.
+4. Delete the default rules that allow all inbound and outbound traffic. After, your ACL still exists, but does not container any networking rules.
   ```
   ibmcloud is network-acl-rule-delete $acl_id <default_inbound_rule_ID> -f
   ```
@@ -551,15 +551,15 @@ After you use ACLs to control traffic for VPC subnets, modify your VPC's default
 
 **Level of application**: Worker node
 
-**Default behavior**: VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. When you create a VPC cluster, a default security group is automatically created for your VPC is and applied to the worker nodes in your cluster.
+**Default behavior**: VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. When you create a VPC cluster, a default security group is automatically created for your VPC and is applied to the worker nodes in your cluster.
 * Gen 2: The default security group denies all incoming traffic requests to your worker nodes.
 * Gen 1: The default security group allows all incoming traffic to your worker nodes by default.
 
 **Use case**:
-* Gen 2: To allow any incoming requests to apps your worker nodes, you must modify the default security group to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes. 
+* Gen 2: To allow any incoming requests to apps that run on your worker nodes, you must modify the default security group to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes. 
 * Gen 1: The default security group allows all incoming traffic to your worker nodes by default. No action is needed for the default security group.
 
-Additionally, for either VPC generation, if you create non-default security groups and attach them to your VPC, the security group rules are also applied to your worker nodes. To allow any incoming requests to apps in your cluster, you must add a rule to any non-default security groups to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes.
+Additionally, for either VPC generation, if you create non-default security groups and attach them to your VPC, the security group rules are also applied to your worker nodes. To allow any incoming requests to apps that run in your cluster, you must add a rule to any non-default security groups to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes.
 
 You must modify your security groups to allow inbound traffic to ports `30000 - 32767` your worker nodes, even if you allowed inbound traffic in your ACLs. ACLs are applied at the level of the VPC subnet, but security groups allow the necessary inbound traffic for each worker node interface.
 {: important}
@@ -583,7 +583,7 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to add a rule to your VPC's
     * If you did not create any non-default security groups for your VPC, no action is required.
     * If you created non-default security groups for your VPC, from the [Security groups for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the **Name** of the security group that you created and attached to your VPC.
 2. In the **Inbound rules** section, click **New rule**.
-3. Choose the **TCP** protocol, type `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
+3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source enter selected.
 4. Click **Save**.
 5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 6. Repeat these steps for each non-default security group that you created for this VPC.
@@ -615,8 +615,8 @@ Before you begin:
 
 To open required ports in your security group:
 1. List your security groups.
-    * VPC Gen 1: If you created a non-default security group and attached it to your **VPC**, note its ID. If only the default security group with a randomly generated name is listed, no further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
     * VPC Gen 2: For your **VPC**, note the IDs of all security groups, including the default security group because inbound traffic to the node ports on the worker is denied by default.
+    * VPC Gen 1: If you created a non-default security group and attached it to your **VPC**, note its ID. If only the default security group with a randomly generated name is listed, no further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
   ```
   ibmcloud is security-groups
   ```
@@ -648,7 +648,7 @@ To open required ports in your security group:
 ## Step 3: Controlling traffic between pods with Kubernetes policies
 {: #kubernetes_policies}
 
-Kubernetes policies protect pods from internal network traffic. You can create simple Kubernetes network policies to isolate app microservices from each other within a namespace or across namespaces.
+You can use Kubernetes policies to control network traffic between pods in your cluster and to isolate app microservices from each other within a namespace or across namespaces.
 {: shortdesc}
 
 **Level of application**: Worker node host endpoint
@@ -660,8 +660,8 @@ Kubernetes policies protect pods from internal network traffic. You can create s
 For more information about how Kubernetes network policies control pod-to-pod traffic and for more example policies, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/){: external}.
 {: tip}
 
-### Isolating app services within a namespace
-{: #vpc-services_one_ns}
+### Isolate app services within a namespace
+{: #services_one_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices within one namespace.
 
@@ -720,7 +720,7 @@ The `spec.podSelector.matchLabels` section lists the labels for the Srv1 databas
 Traffic can now flow from the front end to the back end, and from the back end to the database. The database can respond to the back end, and the back end can respond to the front end, but no reverse traffic connections can be established.
 
 ### Isolate app services between namespaces
-{: #vpc-services_across_ns}
+{: #services_across_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
 

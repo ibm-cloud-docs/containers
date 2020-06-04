@@ -526,8 +526,8 @@ subcollection: containers
 * [Isolating clusters on the public network](/docs/containers?topic=containers-network_policies#isolate_workers_public)
 * [Isolating clusters on the private network](/docs/containers?topic=containers-network_policies#isolate_workers)
 * [Controlling traffic between pods](/docs/containers?topic=containers-network_policies#isolate_services)
-  * [Isolating app services within a namespace](/docs/containers?topic=containers-network_policies#vpc-services_one_ns)
-  * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#vpc-services_across_ns)
+  * [Isolate app services within a namespace](/docs/containers?topic=containers-network_policies#services_one_ns)
+  * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
 
@@ -551,8 +551,8 @@ subcollection: containers
   * [Opening required ports in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
   * [Opening required ports from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
 * [Step 3: Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
-  * [Isolating app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#vpc-services_one_ns)
-  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#vpc-services_across_ns)
+  * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
+  * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
 
 
 ## Managing the cluster network
@@ -611,6 +611,17 @@ subcollection: containers
   * [Limiting strongSwan VPN traffic by worker node](/docs/containers?topic=containers-vpn#limit_worker)
 * [Upgrading or disabling the strongSwan Helm chart](/docs/containers?topic=containers-vpn#vpn_upgrade)
 * [Using a Virtual Router Appliance](/docs/containers?topic=containers-vpn#vyatta)
+
+[Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
+* [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
+* [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize)
+* [Setting up NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_cache)
+  * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
+  * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
+* [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
+* [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+  * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
+  * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
 
 ## VPC clusters
@@ -922,6 +933,11 @@ subcollection: containers
 * [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format)
 * [Enable health checks on a subdomain by creating a health monitor](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_monitor)
   * [Updating and removing IPs and monitors from subdomains](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_delete)
+
+
+## Exposing apps with Ingress ALBs
+{: #sitemap_exposing_apps_with_ingress_albs}
+
 
 [Quick start for Ingress](/docs/containers?topic=containers-ingress-qs)
 
