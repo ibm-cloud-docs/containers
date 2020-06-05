@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks
 
@@ -160,8 +160,10 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
   <table>
   <caption>Understanding this command's components</caption>
+  <col width="15%">
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="This icon indicates that there is more information to learn about this command's components."/> Understanding this command's components</th>
+  <th>Parameter</th>
+  <th>Description</th>
   </thead>
   <tbody>
   <tr>
@@ -244,8 +246,10 @@ Deploy your app as a container in a Kubernetes cluster.
 
   <table>
   <caption>Understanding the YAML file components</caption>
+  <col width="15%">
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th>Parameter</th>
+  <th>Description</th>
   </thead>
   <tbody>
   <tr>

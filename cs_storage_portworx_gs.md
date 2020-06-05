@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-03-18"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -169,7 +169,10 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
       <table>
       <caption>Understanding the YAML file components</caption>
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      <col width="30%">
+      <thead>
+      <th>Parameter</th>
+      <th>Description</th>
       </thead>
       <tbody>
       <tr>
@@ -226,8 +229,10 @@ Start creating Portworx volumes by using [Kubernetes dynamic provisioning](/docs
 
       <table>
       <caption>Understanding the YAML file components</caption>
+      <col width="30%">
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+      <th>Parameter</th>
+      <th>Description</th>
       </thead>
       <tbody>
       <tr>
@@ -306,8 +311,10 @@ To access the storage from your app, you must mount the PVC to your app.
 
    <table>
     <caption>Understanding the YAML file components</caption>
+    <col width="40%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
         <tr>

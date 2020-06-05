@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -84,6 +84,7 @@ The following table describes the components of the Kubernetes master.
 
 <table>
 <caption>Components of the Kubernetes master</caption>
+<col width="25%">
 <thead>
 <th>Master component</th>
 <th>Description</th>
@@ -126,6 +127,7 @@ Modifying default worker node components such as the `kubelet` is not supported 
 The following table describes the components of a worker node.
     <table>
     <caption>Components of worker nodes</caption>
+    <col width="15%">
     <thead>
     <th>Worker component</th>
     <th>Namespace</th>

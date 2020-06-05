@@ -393,8 +393,10 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
 
     <table>
     <caption>Understanding this command's components</caption>
+    <col width="35%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
