@@ -36,7 +36,7 @@ subcollection: containers
 # Overview
 {: #overview}
 
-Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/container-service){: external}, its capabilities and the options that are available to you to customize the cluster to your needs.
+Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/container-service){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
 ## Understanding {{site.data.keyword.containerlong_notm}}
