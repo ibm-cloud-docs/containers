@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-05"
 
 keywords: containers
 subcollection: containers
@@ -1177,6 +1177,7 @@ subcollection: containers
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+* [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
