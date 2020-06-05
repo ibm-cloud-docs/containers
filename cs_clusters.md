@@ -336,7 +336,8 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    <caption>`cluster create classic` command components</caption>
    <col width="25%">
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+   <th>Parameter</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>
@@ -514,13 +515,10 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    <caption>cluster create classic components</caption>
    <col width="25%">
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+   <th>Parameter</th>
+   <th>Description</th>
    </thead>
    <tbody>
-   <tr>
-   <td><code>cluster-create</code></td>
-   <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-   </tr>
    <tr>
    <td><code>--zone <em>&lt;zone&gt;</em></code></td>
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID that you chose earlier and that you want to use to create your cluster.</td>
@@ -754,13 +752,10 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     <caption>Cluster create components</caption>
     <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code>cluster create vpc-gen2</code></td>
-    <td>The command to create a standard VPC Gen 2 compute cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-    </tr>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
     <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
@@ -942,13 +937,10 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     <caption>Cluster create components</caption>
     <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code>cluster create vpc-classic</code></td>
-    <td>The command to create a standard VPC Gen 1 compute cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-    </tr>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
     <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
