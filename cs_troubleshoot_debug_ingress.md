@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-03"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -805,6 +805,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
 
 <table>
 <caption>Troubleshooting Ingress application load balancer secrets</caption>
+ <col width="25%">
  <thead>
  <th>Why it's happening</th>
  <th>How to fix it</th>

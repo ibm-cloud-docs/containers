@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -231,6 +231,7 @@ Choose a flavor, or machine type, with the right storage configuration to suppor
 {: #bm-table}
 <table>
 <caption>Available bare metal flavors in {{site.data.keyword.containerlong_notm}}.</caption>
+<col width="25%">
 <thead>
 <th>Name and use case</th>
 <th>Cores / Memory</th>
@@ -320,6 +321,7 @@ Choose a flavor, or machine type, with the right storage configuration to suppor
 {: #sds-table}
 <table>
 <caption>Available SDS flavors in {{site.data.keyword.containerlong_notm}}.</caption>
+<col width="25%">
 <thead>
 <th>Name and use case</th>
 <th>Cores / Memory</th>

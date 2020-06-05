@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -97,6 +97,7 @@ For each subnet that your cluster is attached to, use the {{site.data.keyword.cl
 
    <table>
    <caption>Inbound rule</caption>
+   <col width="25%">
    <thead>
    <th>Rule purpose</th>
    <th>Allow/Deny</th>
@@ -232,6 +233,7 @@ For each subnet that your cluster is attached to, use the {{site.data.keyword.cl
 
    <table>
    <caption>Inbound rule</caption>
+   <col width="25%">
    <thead>
    <th>Rule purpose</th>
    <th>Allow/Deny</th>
