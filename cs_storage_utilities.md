@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks
 
@@ -260,8 +260,11 @@ To add different block storage configurations, add block storage to a subset of 
 
    <table>
    <caption>Understanding the YAML file components</caption>
-   <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   <col style="width:30%">
+	<col style="width:70%">
+      <thead>
+	      <th>Parameter</th>
+	      <th>Description</th>
    </thead>
    <tbody>
    <tr>
@@ -566,8 +569,11 @@ The instructions in this topic are available for classic worker nodes only. If y
 
         <table>
         <caption>Understanding the YAML file components</caption>
+         <col style="width:30%">
+	      <col style="width:70%">
         <thead>
-        <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+	      <th>Parameter</th>
+	      <th>Description</th>
         </thead>
         <tbody>
       	<tr>
@@ -717,8 +723,11 @@ Before you begin:
   <br>
   <table>
       <caption>Understanding the POST request</caption>
+      <col style="width:30%">
+	   <col style="width:70%">
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>POST</code> request</th>
+	      <th>Parameter</th>
+	      <th>Description</th>
       </thead>
       <tbody>
       <tr>
@@ -827,8 +836,11 @@ Detaching storage from your VPC cluster does not remove your {{site.data.keyword
   <br>
     <table>
       <caption>Understanding the DELETE request</caption>
+      <col style="width:30%">
+	   <col style="width:70%">
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>DELETE</code> request</th>
+	      <th>Parameter</th>
+	      <th>Description</th>
       </thead>
       <tbody>
       <tr>
@@ -901,8 +913,11 @@ You can use a `GET` request to retrieve volume attachment details for a VPC work
   <br>
     <table>
       <caption>Understanding the GET request</caption>
+      <col style="width:30%">
+	   <col style="width:70%">
       <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the <code>GET</code> request</th>
+	      <th>Parameter</th>
+	      <th>Description</th>
       </thead>
       <tbody>
       <tr>
@@ -1033,8 +1048,11 @@ To back up or restore a PVC by editing the `values.yaml` file:
 
   <table>
     <caption>Understanding the <code>values.yaml</code> file</caption>
-    <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the `values.yaml` file components</th>
+    <col style="width:30%">
+	 <col style="width:70%">
+      <thead>
+	      <th>Parameter</th>
+	      <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -1209,8 +1227,11 @@ To back up or restore a PVC by editing the `values.yaml` file:
 
             <table>
             <caption>Understanding the <code>deployment.yaml</code> file components</caption>
-            <thead>
-            <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+            <col style="width:30%">
+	         <col style="width:70%">
+             <thead>
+	           <th>Parameter</th>
+	           <th>Description</th>
             </thead>
             <tbody>
             <tr>
