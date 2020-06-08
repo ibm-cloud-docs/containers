@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-05"
+lastupdated: "2020-06-08"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -608,7 +608,7 @@ You can choose which logs to forward to your external server by filtering out sp
   </thead>
   <tbody>
     <tr>
-      <td>&lt;cluster_name_or_ID&gt;</td>
+      <td><code>&lt;cluster_name_or_ID&gt;</code></td>
       <td>Required: The name or ID of the cluster that you want to filter logs for.</td>
     </tr>
     <tr>
