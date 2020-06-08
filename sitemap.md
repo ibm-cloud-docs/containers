@@ -59,14 +59,14 @@ subcollection: containers
 {: #sitemap_about}
 
 
-[Overview](/docs/containers?topic=containers-overview)
-* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#service-concepts)
-* [Docker containers](/docs/containers?topic=containers-overview#docker_containers)
-  * [Key concepts](/docs/containers?topic=containers-overview#docker-concepts)
-  * [Benefits](/docs/containers?topic=containers-overview#docker-benefits)
-* [Kubernetes clusters](/docs/containers?topic=containers-overview#kubernetes_basics)
-  * [Key concepts](/docs/containers?topic=containers-overview#kubernetes-concepts)
-  * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
+[Overview](/docs/containers?topic=containers-iks-overview)
+* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
+* [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
+  * [Key concepts](/docs/containers?topic=containers-iks-overview#docker-concepts)
+  * [Benefits](/docs/containers?topic=containers-iks-overview#docker-benefits)
+* [Kubernetes clusters](/docs/containers?topic=containers-iks-overview#kubernetes_basics)
+  * [Key concepts](/docs/containers?topic=containers-iks-overview#kubernetes-concepts)
+  * [Related resources](/docs/containers?topic=containers-iks-overview#kubernetes-resources)
 
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov)
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)

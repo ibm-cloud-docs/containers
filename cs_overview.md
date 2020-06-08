@@ -34,7 +34,7 @@ subcollection: containers
 s
 
 # Overview
-{: #overview}
+{: #iks-overview}
 
 Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/container-service/){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
