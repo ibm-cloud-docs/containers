@@ -297,6 +297,25 @@ subcollection: containers
 {: #sitemap_planning_your_cluster_environment}
 
 
+[Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy)
+* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
+  * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
+  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
+* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
+  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+  * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
+* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
+  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
+  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
+* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
+
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
   * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
