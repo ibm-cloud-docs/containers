@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-20"
+lastupdated: "2020-06-08"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -71,23 +71,23 @@ Keep in mind the following IP address reservations.
 
 **What IP ranges can I use for my VPC subnets?**<br>
 {: #vpc-ip-range}
-The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. Your worker nodes are assigned an IP address from this range. For a list of IP address ranges per VPC zone, see [VPC default address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#default-vpc-address-prefixes).
+The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. For a list of IP address ranges per VPC zone, see the [VPC default address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes). If you enable your VPC with classic access, or access to classic infrastructure resources, the default IP ranges per VPC zone are different. For more information, see [Classic access VPC default address prefixes](/docs/vpc?topic=vpc-setting-up-access-to-classic-infrastructure#classic-access-default-address-prefixes).
 
-If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-working-with-ip-address-ranges-address-prefixes-regions-and-subnets#address-prefixes-and-the-ibm-cloud-console-ui). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation and your cluster's infrastructure type:
+If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation and your cluster's infrastructure type:
 * If you specified your own pod subnet in the `--pod-subnet` flag during cluster creation, your pods are assigned IP addresses from this range.
-* If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet.
+* If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet. 
   * For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`.
   * In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
 
 ### Public gateways
 {: #vpc_basics_pgw}
 
-If your worker nodes must access a public endpoint outside of the cluster, you can enable a public gateway on the VPC subnet that the worker nodes are deployed to. A public gateway enables a subnet and all worker nodes that are attached to the subnet to establish outbound connections to the internet.
+A public gateway enables a subnet and all worker nodes that are attached to the subnet to establish outbound connections to the internet. If your worker nodes must access a public endpoint outside of the cluster, you can enable a [public gateway](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity) on the VPC subnets that worker nodes are deployed to.
 {: shortdesc}
 
 For example, if an {{site.data.keyword.cloud_notm}} service does not support private service endpoints, your worker nodes must be connected to a subnet that has a public gateway attached to it. The pods on those worker nodes can securely communicate with the services over the public network through the subnet's public gateway. Note that a public gateway is not required on your subnets to allow inbound network traffic from the internet to `LoadBalancer` services or ALBs.
 
-A public gateway can be attached to or detached from a subnet at any time, and you can enable a public gateway only for one subnet per zone. For more information about public gateways, see the [Networking for Virtual Private Cloud (Gen 1 compute) documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-about-networking-for-vpc#use-a-public-gateway).
+Within one VPC, you can create only one public gateway per zone, but that public gateway can be attached to multiple subnets within the zone. For more information about public gateways, see the [Networking for VPC documentation](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity).
 
 ### Network segmentation
 {: #vpc_basics_segmentation}
@@ -97,7 +97,7 @@ Network segmentation describes the approach to divide a network into multiple su
 
 Subnets provide a channel for connectivity among the worker nodes within the cluster. Additionally, any system that is connected to any of the private subnets in the same VPC can communicate with workers. For example, all subnets in one VPC can communicate through private layer 3 routing with a built-in VPC router.
 
-If you have multiple clusters that must communicate with each other, you can create the clusters in the same VPC. However, if your clusters do not need to communicate, you can achieve better network segmentation by creating the clusters in separate VPCs. You can also create [access control lists (ACLs)](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) for your VPC subnets to mediate traffic on the private network. ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for each VPC subnet.
+If you have multiple clusters that must communicate with each other, you can create the clusters in the same VPC. However, if your clusters do not need to communicate, you can achieve better network segmentation by creating the clusters in separate VPCs. You can also create [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) for your VPC subnets to mediate traffic on the private network. ACLs consist of inbound and outbound rules that define which ingress and egress is permitted for each VPC subnet.
 
 ### VPC networking limitations
 {: #vpc_basics_limitations}
@@ -112,7 +112,7 @@ When you create VPC subnets for your clusters, keep in mind the following featur
 * After you create a subnet, you cannot move it to a different zone, region, or VPC.
 * If you have worker nodes that are attached to an existing subnet in a zone, you cannot change the subnet for that zone in the cluster.
 * The `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16` ranges are prohibited.
-* You can enable a public gateway only one subnet per zone.
+* Within one VPC, you can create only one public gateway per zone, but that public gateway can be attached to multiple subnets within the zone.
 
 <br />
 
@@ -152,11 +152,11 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
    ```
    {: pre}
 
-2. Target the {{site.data.keyword.cloud_notm}} infrastructure generation **1** for VPC.
-   ```
-   ibmcloud is target --gen 1
-   ```
-   {: pre}
+2. Target the VPC compute generation for your cluster.
+  ```
+  ibmcloud is target --gen (1|2)
+  ```
+  {: pre}
 
 3. [Create a VPC](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli) in the same region where you want to create the cluster.
 
@@ -176,7 +176,63 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
     * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
     * Do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
 
-3. Use the subnet to [create a cluster](/docs/containers?topic=containers-clusters#cluster_vpc_cli), [create a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [add the subnet to an existing worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone).<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
+3. Check whether you have a public gateway in the zones where you want to create a cluster. Within one VPC, you can create only one public gateway per zone, but that public gateway can be attached to multiple subnets within the zone.
+  ```
+  ibmcloud is public-gateways
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ID                                     Name                                       VPC                          Zone         Floating IP                  Created                     Status      Resource group
+  26426426-6065-4716-a90b-ac7ed7917c63   test-pgw                                   testvpc(36c8f522-.)          us-south-1   169.xx.xxx.xxx(26466378-.)   2019-09-20T16:27:32-05:00   available   -
+  2ba2ba2b-fffa-4b0c-bdca-7970f09f9b8a   pgw-73b62bc0-b53a-11e9-9838-f3f4efa02374   team3(ff537d43-.)            us-south-2   169.xx.xxx.xxx(2ba9a280-.)   2019-08-02T10:30:29-05:00   available   -
+  ```
+  {: screen}
+  * If you already have a public gateway in each zone, note the **ID**s of the public gateways.
+  * If you do not have a public gateway in each zone, create a public gateway. Consider naming the public gateway in the format `<cluster>-<zone>-gateway`. In the output, note the public gateway's **ID**.
+    ```
+    ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    ID               26466378-6065-4716-a90b-ac7ed7917c63
+    Name             mycluster-us-south-1-gateway
+    Floating IP      169.xx.xx.xxx(26466378-6065-4716-a90b-ac7ed7917c63)
+    Status           pending
+    Created          2019-09-20T16:27:32-05:00
+    Zone             us-south-1
+    VPC              myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
+    Resource group   -
+    ```
+    {: screen}
+
+4. Using the IDs of the public gateway and the subnet, attach the public gateway to the subnet.
+  ```
+  ibmcloud is subnet-update <subnet_ID> --public-gateway-id <gateway_ID>
+  ```
+  {: pre}
+
+  Example output:
+  ```
+  ID                  91e946b4-7094-46d0-9223-5c2dea2e5023
+  Name                mysubnet1
+  IPv4 CIDR           10.240.xx.xx/24
+  Address available   250
+  Address total       256
+  ACL                 allow-all-network-acl-36c8f522-4f0d-400c-8226-299f0b8198cf(585bc142-5392-45d4-afdd-d9b59ef2d906)
+  Gateway             mycluster-us-south-1-gateway(26466378-6065-4716-a90b-ac7ed7917c63)
+  Created             2019-08-21T09:43:11-05:00
+  Status              available
+  Zone                us-south-1
+  VPC                 myvpc(36c8f522-4f0d-400c-8226-299f0b8198cf)
+  ```
+  {: screen}
+
+
+5. Use the subnet to [create a cluster](/docs/containers?topic=containers-clusters#cluster_vpc_cli), [create a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [add the subnet to an existing worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone).<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
 
 <br />
 
@@ -200,7 +256,7 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
   ```
   {: pre}
 
-2. Check whether you have a public gateway in a zone where you have worker nodes. Within one VPC, you can create only one public gateway per zone.
+2. Check whether you have a public gateway in a zone where you have worker nodes. Within one VPC, you can create only one public gateway per zone, but that public gateway can be attached to multiple subnets within the zone.
   ```
   ibmcloud is public-gateways
   ```
@@ -242,8 +298,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.2
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.3
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.3
   ```
   {: screen}
 
@@ -361,10 +417,11 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         Example output:
         ```
         ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.2
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.2
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.3
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.3
         ```
         {: screen}
 
-9. Optional: If you use [access control lists (ACLs)](/docs/vpc-on-classic-network?topic=vpc-on-classic-network-setting-up-network-acls) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
+9. Optional: If you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) to control your cluster network traffic, create inbound and outbound rules in this subnet's ACL to allow ingress from and egress to the external public endpoints that your pods must access.
+
 
