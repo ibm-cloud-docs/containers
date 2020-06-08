@@ -602,6 +602,7 @@ You can choose which logs to forward to your external server by filtering out sp
 <table>
 <caption>Understanding the options for log filtering</caption>
 <col width="25%">
+<col width="75%">
 <thead>
 <th>Parameter</th>
 <th>Description</th>
