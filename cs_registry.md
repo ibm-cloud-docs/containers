@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -343,8 +343,10 @@ The following steps create an API key that stores the credentials of an {{site.d
     {: pre}
     <table>
     <caption>Understanding this command's components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Component</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -394,8 +396,10 @@ The following steps create an API key that stores the credentials of an {{site.d
 
     <table>
     <caption>Understanding this command's components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Component</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -453,8 +457,10 @@ To create an image pull secret:
 
     <table>
     <caption>Understanding this command's components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Component</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>

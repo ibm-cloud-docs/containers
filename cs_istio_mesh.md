@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-02"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -413,7 +413,10 @@ To enable automatic sidecar injection for a namespace:
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the service YAML file components</th>
+    <col width="25%">
+    <thead>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -485,7 +488,10 @@ To manually inject sidecars into a deployment:
 
     <table>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the service YAML file components</th>
+    <col width="20%">
+    <thead>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -648,7 +654,10 @@ To publicly expose apps:
 
   <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <col width="30%">
+  <thead>
+  <th>Parameter</th>
+  <th>Description</th>
   </thead>
   <tbody>
   <tr>
@@ -811,7 +820,10 @@ To publicly expose apps:
 
   <table>
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <col width="30%">
+  <thead>
+  <th>Parameter</th>
+  <th>Description</th>
   </thead>
   <tbody>
   <tr>

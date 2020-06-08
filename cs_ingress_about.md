@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -194,11 +194,11 @@ The following diagram shows how Ingress directs communication from the internet 
 
 1. A user sends a request to your app by accessing your app's URL. This URL is the Ingress subdomain for your cluster for your exposed app appended with the Ingress resource path, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`.
 
-2. A DNS system service resolves the subdomain in the URL to an available ALB IP address that was reported as healthy by the VPC load balancer. The VPC load balancer continuously checks the floating ALB IP addresses that are behind the ALBs' assigned hostname.
+2. A DNS service resolves the route subdomain to the VPC load balancer hostname that is assigned to the services for the ALBs. In VPC clusters, your ALB services' external IP addresses are floating, and are kept behind a VPC-assigned hostname.
 
-3. Based on the resolved IP address, the client sends the request to the VPC load balancer that exposes your cluster's ALBs.
+3. The VPC load balancer resolves the VPC hostname to an available external IP address of an ALB service that was reported as healthy. The VPC load balancer continuously checks the external IP addresses of the ALBs in each zone in your cluster.
 
-4. The VPC load balancer service routes the request to an ALB. Each ALB routes requests to the app instances in its own zone and to app instances in other zones. Additionally, if multiple app instances are deployed in one zone, the ALB routes the requests between the app pods in the zone.
+4. Based on the resolved IP address, the VPC load balancer sends the request to an ALB.
 
 5. The ALB checks if a routing rule for the `myapp` path in the cluster exists. If a matching rule is found, the request is proxied according to the rules that you defined in the Ingress resource to the pod where the app is deployed. The source IP address of the package is changed to the IP address of the worker node where the app pod runs. If multiple app instances are deployed in the cluster, the ALB load balances the requests between app pods across all zones.
 

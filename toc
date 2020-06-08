@@ -59,6 +59,7 @@ Kubernetes Service
 
         {: .topicgroup}
         Planning your cluster environment
+            cs_kube_strategy.md
             cs_cluster_plan_network.md
             cs_cluster_plan_ha.md
             cs_worker_plan.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-19"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -413,6 +413,7 @@ After you edit the configmap to enable a worker pool, the cluster autoscaler sca
 
     <table>
     <caption>Cluster autoscaler configmap parameters</caption>
+    <col width="20%">
     <thead>
     <th id="parameter-with-default">Parameter with default value</th>
     <th id="parameter-with-description">Description</th>
@@ -537,6 +538,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
     Understanding the parameters and default values:
     <table>
     <caption>Cluster autoscaler configuration values</caption>
+    <col width="25%">
     <thead>
     <th>Parameter</th>
     <th>Description</th>
@@ -759,6 +761,11 @@ To limit a pod deployment to a specific worker pool that is managed by the clust
   * VPC Generation 1 clusters:
     ```
     ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
+    ```
+    {: pre}
+  * VPC Generation 2 clusters:
+    ```
+    ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes> --label <key>=<value>
     ```
     {: pre}
     

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-27"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, containers
 
@@ -76,8 +76,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 
 <table>
 <caption>Differences between {{site.data.keyword.containershort_notm}} setups</caption>
-<col width="22%">
-<col width="78%">
+<col width="25%">
  <thead>
  <th>{{site.data.keyword.containershort_notm}} setup</th>
  <th>Description</th>

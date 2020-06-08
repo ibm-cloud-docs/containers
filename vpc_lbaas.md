@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-03"
+lastupdated: "2020-06-08"
 
 keywords: kubernetes, iks, vpc lbaas,
 
@@ -44,7 +44,7 @@ Set up a Load Balancer for VPC to expose your app on the public or private netwo
 ## About VPC load balancing in {{site.data.keyword.containerlong_notm}}
 {: #lbaas_about}
 
-When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc) is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes.
+When you create a Kubernetes `LoadBalancer` service for an app in your cluster, a layer 7 [Load Balancer for VPC](/docs/vpc?topic=vpc-load-balancers) is automatically created in your VPC outside of your cluster. The load balancer is multizonal and routes requests for your app through the private NodePorts that are automatically opened on your worker nodes.
 {: shortdesc}
 
 The VPC load balancer serves as the external entry point for incoming requests for the app.
@@ -94,8 +94,10 @@ Expose your app to the public or to the private network by setting up a Kubernet
 
   <table>
   <caption>Understanding the YAML file components</caption>
+  <col width="25%">
   <thead>
-  <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+  <th>Parameter</th>
+  <th>Description</th>
   </thead>
   <tbody>
   <tr>
@@ -199,7 +201,7 @@ Do not delete the subnets that you attached to your cluster during cluster creat
 The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain. Note that in VPC clusters, you can create subdomains for both public and private VPC load balancers.
 {: shortdesc}
 
-After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#health-checks).
+After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc?topic=vpc-load-balancers#health-checks).
 {: note}
 
 Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
@@ -257,7 +259,7 @@ Before you begin, [set up a Load Balancer for VPC](#setup_vpc_ks_vpc_lb).
 ## Limitations
 {: #lbaas_limitations}
 
-For more information about using load balancers for VPC, see the VPC docs for [public and private](/docs/vpc-on-classic-network?topic=vpc-on-classic-network---using-load-balancers-in-ibm-cloud-vpc#private-load-balancer) load balancers.
+For more information about using load balancers for VPC, see the VPC docs for [public and private](/docs/vpc?topic=vpc-load-balancers#private-load-balancer) load balancers.
 {: shortdesc}
 
 * VPC load balancers do not currently support UDP.

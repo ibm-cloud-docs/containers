@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-08"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -387,9 +387,10 @@ The following table shows the different options that you have when you configure
 
 <table>
 <caption> Understanding logging configuration options</caption>
-  <thead>
-    <th>Option</th>
-    <th>Description</th>
+<col width="20%">
+<thead>
+<th>Parameter</th>
+<th>Description</th>
   </thead>
   <tbody>
     <tr>
@@ -526,8 +527,10 @@ To forward Kubernetes API audit logs:
 
   <table>
   <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+  <col width="20%">
+  <thead>
+  <th>Parameter</th>
+  <th>Description</th>
     </thead>
     <tbody>
       <tr>
@@ -598,12 +601,15 @@ You can choose which logs to forward to your external server by filtering out sp
 
 <table>
 <caption>Understanding the options for log filtering</caption>
-  <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding log filtering options</th>
+<col width="25%">
+<col width="75%">
+<thead>
+<th>Parameter</th>
+<th>Description</th>
   </thead>
   <tbody>
     <tr>
-      <td>&lt;cluster_name_or_ID&gt;</td>
+      <td><code>&lt;cluster_name_or_ID&gt;</code></td>
       <td>Required: The name or ID of the cluster that you want to filter logs for.</td>
     </tr>
     <tr>
@@ -745,8 +751,10 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
   <table>
   <caption>Understanding this command's components</caption>
-    <thead>
-      <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+  <col width="30%">
+  <thead>
+  <th>Parameter</th>
+  <th>Description</th>
     </thead>
     <tbody>
       <tr>

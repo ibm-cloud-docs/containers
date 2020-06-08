@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-04"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks
 
@@ -122,7 +122,7 @@ The following image shows available non-persistent data storage options in {{sit
 <td style="text-align:left">No</td>
 </tr>
 <tr>
-<td style="text-align:left">Supported in VPC on Classic clusters</td>
+<td style="text-align:left">Supported in VPC clusters</td>
 <td style="text-align:left">Yes</td>
 <td style="text-align:left">Yes</td>
 </tr>
@@ -219,7 +219,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">No, as specific to a data center. Data cannot be shared across zones, unless you implement your own data replication.</td>
 </tr>
 <tr>
-<td style="text-align:left">Supported in VPC on Classic clusters</td>
+<td style="text-align:left">Supported in VPC clusters</td>
 <td style="text-align:left">No</td>
 <td style="text-align:left">Yes</td>
 </tr>
@@ -332,7 +332,7 @@ The following image shows the options that you have in {{site.data.keyword.conta
 <td style="text-align:left">Yes</td>
 </tr>
 <tr>
-<td style="text-align:left">Supported in VPC on Classic clusters</td>
+<td style="text-align:left">Supported in VPC clusters</td>
 <td style="text-align:left">Yes</td>
 <td style="text-align:left">Yes</td>
 <td style="text-align:left">Yes</td>

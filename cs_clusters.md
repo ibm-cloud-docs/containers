@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-08"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -334,14 +334,12 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
 
    <table>
    <caption>`cluster create classic` command components</caption>
+   <col width="25%">
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+   <th>Parameter</th>
+   <th>Description</th>
    </thead>
    <tbody>
-   <tr>
-   <td><code>cluster-create</code></td>
-   <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-   </tr>
    <tr>
    <td><code>--zone <em>&lt;zone&gt;</em></code></td>
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID that you chose earlier and that you want to use to create your cluster.</td>
@@ -515,14 +513,12 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
    <table>
    <caption>cluster create classic components</caption>
+   <col width="25%">
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+   <th>Parameter</th>
+   <th>Description</th>
    </thead>
    <tbody>
-   <tr>
-   <td><code>cluster-create</code></td>
-   <td>The command to create a cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-   </tr>
    <tr>
    <td><code>--zone <em>&lt;zone&gt;</em></code></td>
    <td>Specify the {{site.data.keyword.cloud_notm}} zone ID that you chose earlier and that you want to use to create your cluster.</td>
@@ -644,7 +640,7 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
 2. [Create a Virtual Private Cloud (VPC) on generation 2 compute](https://cloud.ibm.com/vpc/provision/vpc){: external} with a subnet that is located in the VPC zone where you want to create the cluster.
   * Verify that the banner at the beginning of the new VPC page is set to **Gen 2 compute**. If **Gen 1 compute** is set, click **Switch to Gen 2 compute**.
   * During the VPC creation, you can create one subnet only. Subnets are specific to a zone. If you want to create a multizone cluster, create the subnet in one of the multizone-capable zones that you want to use. Later, you manually create the subnets for the remaining zones that you want to include in your cluster.<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
-  * If worker nodes must access an external endpoint, make sure to attach a **Public gateway** to your subnet.
+  * If worker nodes must access public endpoints, attach a public gateway to one or more subnets.
   * For more information, see [Creating a VPC using the IBM Cloud console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) and [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}: Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).
 3. If you want to create a multizone cluster, create the subnets for all of the remaining zones that you want to include in your cluster. You must have one VPC subnet in all of the zones where you want to create your multizone cluster.
    1. From the [VPC subnet dashboard](https://cloud.ibm.com/vpc/network/subnets){: external}, click **New subnet**.
@@ -754,14 +750,12 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
 
     <table>
     <caption>Cluster create components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code>cluster create vpc-gen2</code></td>
-    <td>The command to create a standard VPC Gen 2 compute cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-    </tr>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
     <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
@@ -941,14 +935,12 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
 
     <table>
     <caption>Cluster create components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding this command's components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
-    <tr>
-    <td><code>cluster create vpc-classic</code></td>
-    <td>The command to create a standard VPC Gen 1 compute cluster in your {{site.data.keyword.cloud_notm}} organization.</td>
-    </tr>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
     <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.

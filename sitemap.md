@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-08"
 
 keywords: containers
 subcollection: containers
@@ -59,14 +59,14 @@ subcollection: containers
 {: #sitemap_about}
 
 
-[Overview](/docs/containers?topic=containers-overview)
-* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-overview#service-concepts)
-* [Docker containers](/docs/containers?topic=containers-overview#docker_containers)
-  * [Key concepts](/docs/containers?topic=containers-overview#docker-concepts)
-  * [Benefits](/docs/containers?topic=containers-overview#docker-benefits)
-* [Kubernetes clusters](/docs/containers?topic=containers-overview#kubernetes_basics)
-  * [Key concepts](/docs/containers?topic=containers-overview#kubernetes-concepts)
-  * [Related resources](/docs/containers?topic=containers-overview#kubernetes-resources)
+[Overview](/docs/containers?topic=containers-iks-overview)
+* [Understanding {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-iks-overview#service-concepts)
+* [Docker containers](/docs/containers?topic=containers-iks-overview#docker_containers)
+  * [Key concepts](/docs/containers?topic=containers-iks-overview#docker-concepts)
+  * [Benefits](/docs/containers?topic=containers-iks-overview#docker-benefits)
+* [Kubernetes clusters](/docs/containers?topic=containers-iks-overview#kubernetes_basics)
+  * [Key concepts](/docs/containers?topic=containers-iks-overview#kubernetes-concepts)
+  * [Related resources](/docs/containers?topic=containers-iks-overview#kubernetes-resources)
 
 [Benefits and service offerings](/docs/containers?topic=containers-cs_ov)
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
@@ -296,6 +296,25 @@ subcollection: containers
 ## Planning your cluster environment
 {: #sitemap_planning_your_cluster_environment}
 
+
+[Moving your environment to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-strategy)
+* [Moving your workloads to the {{site.data.keyword.cloud_notm}}](/docs/containers?topic=containers-strategy#cloud_workloads)
+  * [What can I move to the {{site.data.keyword.cloud_notm}}?](/docs/containers?topic=containers-strategy#move_to_cloud)
+  * [Can I automate my infrastructure deployments?](/docs/containers?topic=containers-strategy#infra_packaging)
+  * [What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?](/docs/containers?topic=containers-strategy#app_kinds)
+  * [What knowledge and technical skills are good to have before I move my apps to {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-strategy#knowledge)
+* [Sizing your Kubernetes cluster to support your workload](/docs/containers?topic=containers-strategy#sizing)
+  * [How many resources does my app require?](/docs/containers?topic=containers-strategy#sizing_resources)
+  * [What else besides my app might use resources in the cluster?](/docs/containers?topic=containers-strategy#sizing_other)
+  * [What type of availability do I want my workload to have?](/docs/containers?topic=containers-strategy#sizing_availability)
+  * [How many worker nodes do I need to handle my workload?](/docs/containers?topic=containers-strategy#sizing_workers)
+  * [How do I monitor resource usage and capacity in my cluster?](/docs/containers?topic=containers-strategy#sizing_manage)
+* [Structuring your Kubernetes environment](/docs/containers?topic=containers-strategy#kube_env)
+  * [What type of cluster and flavors should I get?](/docs/containers?topic=containers-strategy#env_flavors)
+  * [Do I use multiple clusters, or just add more workers to an existing cluster?](/docs/containers?topic=containers-strategy#env_multicluster)
+  * [How can I set up my resources within the cluster?](/docs/containers?topic=containers-strategy#env_resources)
+  * [How can I keep my cluster in a supported state?](/docs/containers?topic=containers-strategy#updating_kube)
+* [Making your resources highly available](/docs/containers?topic=containers-strategy#kube_ha)
 
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
@@ -916,7 +935,7 @@ subcollection: containers
 [Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
 * [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
-* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
+* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
@@ -1177,6 +1196,7 @@ subcollection: containers
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+* [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
@@ -1336,9 +1356,11 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog#1176_1527)
   * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog#1176_1526)
   * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
   * [Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020](/docs/containers?topic=containers-changelog#1175_1523)
@@ -1351,6 +1373,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.10_1534, released 8 June 2020](/docs/containers?topic=containers-changelog#11610_1534)
   * [Changelog for 1.16.10_1533, released 26 May 2020](/docs/containers?topic=containers-changelog#11610_1533)
   * [Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020](/docs/containers?topic=containers-changelog#1169_1531)
   * [Changelog for worker node fix pack 1.16.9_1530, released 27 April 2020](/docs/containers?topic=containers-changelog#1169_1530)
@@ -1370,6 +1393,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.12_1541, released 8 June 2020](/docs/containers?topic=containers-changelog#11512_1541)
   * [Changelog for 1.15.12_1540, released 26 May 2020](/docs/containers?topic=containers-changelog#11512_1540)
   * [Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020](/docs/containers?topic=containers-changelog#11511_1538)
   * [Changelog for worker node fix pack 1.15.11_1537, released 27 April 2020](/docs/containers?topic=containers-changelog#11511_1537)

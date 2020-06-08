@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-05-26"
+lastupdated: "2020-06-05"
 
 keywords: kubernetes, iks, knative
 
@@ -39,7 +39,7 @@ subcollection: containers
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-The Knative managed add-on is available as a beta feature for Kubernetes version 1.16 and later clusters, and might change without prior notice. Do not use use this feature for production workloads. 
+The Knative managed add-on is available as a beta feature for Kubernetes version 1.16 and later clusters, and might change without prior notice. Do not use use this feature for production workloads.
 {: preview}
 
 **What is Knative and why do I want use it?**
@@ -357,8 +357,10 @@ To deploy your serverless app as a Knative service:
 
     <table>
     <caption>Understanding the YAML file components</caption>
+    <col width="25%">
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -704,13 +706,15 @@ Knative services support the Kubernetes `volume` specification to mount an exist
 
    <table>
    <caption>Understanding the YAML file components</caption>
+   <col width="25%">
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+   <th>Parameter</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>
      <td><code>spec.containers.volumeMounts.name</code></td>
-   <td>Enter a name for the volume that you want to mount to your pod.     </td>
+   <td>Enter a name for the volume that you want to mount to your pod.</td>
    </tr>
    <tr>
    <td><code>spec.containers.volumeMounts.mountPath</code></td>
@@ -861,8 +865,10 @@ spec:
 
 <table>
 <caption>Understanding the YAML file components</caption>
+<col width="25%">
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th>Parameter</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -902,8 +908,10 @@ spec:
 
 <table>
 <caption>Understanding the YAML file components</caption>
+<col width="25%">
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th>Parameter</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -940,8 +948,10 @@ spec:
 
 <table>
 <caption>Understanding the YAML file components</caption>
+<col width="25%">
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th>Parameter</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
@@ -1027,8 +1037,10 @@ spec:
 
 <table>
 <caption>Understanding the YAML file components</caption>
+<col width="25%">
 <thead>
-<th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+<th>Parameter</th>
+<th>Description</th>
 </thead>
 <tbody>
 <tr>
