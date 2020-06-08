@@ -9395,7 +9395,7 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.9.3-71</td>
 <td>v1.9.7-102</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>
@@ -9757,7 +9757,7 @@ Review the version 1.8 changelogs.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.8.8-86</td>
 <td>v1.8.11-126</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>
@@ -9874,7 +9874,7 @@ Review the version 1.7 changelogs.
 <td>{{site.data.keyword.cloud_notm}} Provider</td>
 <td>v1.7.4-133</td>
 <td>v1.7.16-17</td>
-<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
+<td>`NodePort` and `LoadBalancer` services now support [preserving the client source IP](/docs/containers?topic=containers-loadbalancer#lb_source_ip) by setting `service.spec.externalTrafficPolicy` to `Local`.</td>
 </tr>
 <tr>
 <td></td>

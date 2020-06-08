@@ -916,7 +916,7 @@ subcollection: containers
 [Classic: Setting up basic load balancing with an NLB 1.0](/docs/containers?topic=containers-loadbalancer)
 * [Setting up an NLB 1.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer#multi_zone_config)
 * [Setting up an NLB 1.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer#lb_config)
-* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#node_affinity_tolerations)
+* [Enabling source IP preservation](/docs/containers?topic=containers-loadbalancer#lb_source_ip)
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
