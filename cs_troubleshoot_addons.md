@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-02"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks, help
 
@@ -74,6 +74,7 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 |Add-on health status|Description|
 |--- |--- |
 |`Addon Not Ready`|Some or all of the add-on components are unhealthy. Check whether all add-on component pods are running. For example, for the Istio add-on, check whether all pods in the `istio-system` namespace are `Running` by running `kubectl get pods -n istio-system`.|
+|`Addon daemonset may not be available on all Ready nodes.`|For the static route add-on: The static route operator `DaemonSet` is not available on any worker nodes, which prevents you from applying static route resources. Your worker nodes cannot run the static route operator `DaemonSet` for the following reasons:<ul><li>One or more worker nodes reached their [resource limits](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes).</li><li>One or more worker nodes are running the [maximum number of pods per worker node](/docs/containers?topic=containers-limitations#classic_limits).</li></ul>|
 |`Addon Ready`|The add-on is successfully deployed and is healthy.|
 |`Addon Unsupported`|The add-on runs an unsupported version, or the add-on version is unsupported for your cluster version. [Update your add-on to the latest version](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons), or see specific update steps for [Istio](/docs/containers?topic=containers-istio#istio_update) or [Knative](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon).|
 |`Cluster resources low, not enough workers in Ready state.`|The add-on is not ready to be used for one of the following reasons:<ul><li>The cluster does not meet the size criteria for the add-on. For example, check the size requirements for [Istio](/docs/containers?topic=containers-istio#istio_install) or [Knative](/docs/containers?topic=containers-serverless-apps-knative#knative-setup).</li><li>Worker nodes in your cluster are not in a `Normal` state. [Review the worker nodes' state and status](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes).</li></ul>|
@@ -116,7 +117,7 @@ While you troubleshoot the [managed Istio add-on](/docs/containers?topic=contain
 {: #control_plane}
 
 {: tsSymptoms}
-One or more of the Istio control plane components, such as `istio-citadel` or `istio-telemetry`, does not exist in your cluster.
+One or more of the Istio control plane components, such as `istio-telemetry`, does not exist in your cluster.
 
 {: tsCauses}
 * You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.

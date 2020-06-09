@@ -642,6 +642,11 @@ subcollection: containers
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
 
 ## VPC clusters
 {: #sitemap_vpc_clusters}
@@ -674,6 +679,11 @@ subcollection: containers
 * [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
+
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
 ## Logging and monitoring cluster health

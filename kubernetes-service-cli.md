@@ -342,6 +342,26 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 <dd>Force the command to run with no user prompts. This value is optional.</dd>
 </dl>
 
+#### `ibmcloud ks cluster addon disable static-route`
+{: #cs_cluster_addon_disable_static-route}
+
+Disable the [static route](/docs/containers?topic=containers-static-routes) add-on.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon disable static-route --cluster CLUSTER
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+</br>
+
 #### `ibmcloud ks cluster addon disable vpc-block-csi-driver`
 {: #cs_cluster_addon_disable_vpc-block-csi-driver}
 
@@ -554,6 +574,35 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
+
+#### `ibmcloud ks cluster addon enable static-route`
+{: #cs_cluster_addon_enable_static-route}
+
+Enable the [static route](/docs/containers?topic=containers-static-routes) add-on.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon enable static-route --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt>`--cluster <em>CLUSTER</em>`</dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+</br>
 
 #### `ibmcloud ks cluster addon enable vpc-block-csi-driver`
 {: #cs_cluster_addon_enable_vpc-block-csi-driver}
@@ -4864,7 +4913,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 <dd>The subdomain to configure a health check monitor for. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--enable</code></dt>
-<dd>Include this flag to create and enable a new health check monitor for a subdomain.</dd>
+<dd>Include this flag to enable a new health check monitor for a subdomain.</dd>
 
 <dt><code>--description <em>DESCRIPTION</em></code></dt>
 <dd>A description of the health monitor.</dd>
@@ -4891,7 +4940,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 <dd>The port number to connect to for the health check. When <code>type</code> is <code>TCP</code>, this parameter is required. When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: <code>0</code>. Default for HTTP: <code>80</code>. Default for HTTPS: <code>443</code>.</dd>
 
 <dt><code>--header <em>HEADER</em></code></dt>
-<dd>Required when <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: The HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden.</dd>
+<dd>Required when <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.</dd>
 
 <dt><code>--expected-body <em>BODY STRING</em></code></dt>
 <dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</dd>
