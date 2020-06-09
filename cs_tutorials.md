@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks
 
@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -31,6 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # Creating Kubernetes clusters
@@ -283,7 +285,9 @@ To deploy the app:
     <table summary="Information about the expose command parameters.">
     <caption>More about the expose parameters</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> More about the expose parameters</th>
+    <col width="25%">
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>

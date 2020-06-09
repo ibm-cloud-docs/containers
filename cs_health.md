@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-08"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -31,6 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # Logging and monitoring cluster health
@@ -1180,7 +1182,9 @@ To configure Autorecovery:
    <table summary="Understanding the components of the configmap">
    <caption>Understanding the configmap components</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the configmap components</th>
+   <col width="25%">
+   <th>Component</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>
@@ -1213,7 +1217,9 @@ To configure Autorecovery:
    <table summary="Understanding individual components of checks">
    <caption>Understanding the individual components of checks</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the individual components of checks </th>
+   <col width="25%">
+   <th>Component</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>

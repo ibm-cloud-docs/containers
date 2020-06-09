@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-08"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -31,6 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # {{site.data.keyword.containerlong_notm}} CLI
@@ -342,6 +344,26 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 <dd>Force the command to run with no user prompts. This value is optional.</dd>
 </dl>
 
+#### `ibmcloud ks cluster addon disable static-route`
+{: #cs_cluster_addon_disable_static-route}
+
+Disable the [static route](/docs/containers?topic=containers-static-routes) add-on.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon disable static-route --cluster CLUSTER
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+</br>
+
 #### `ibmcloud ks cluster addon disable vpc-block-csi-driver`
 {: #cs_cluster_addon_disable_vpc-block-csi-driver}
 
@@ -554,6 +576,35 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
+
+#### `ibmcloud ks cluster addon enable static-route`
+{: #cs_cluster_addon_enable_static-route}
+
+Enable the [static route](/docs/containers?topic=containers-static-routes) add-on.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon enable static-route --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt>`--cluster <em>CLUSTER</em>`</dt>
+<dd>The name or ID of the cluster. This value is required.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+</br>
 
 #### `ibmcloud ks cluster addon enable vpc-block-csi-driver`
 {: #cs_cluster_addon_enable_vpc-block-csi-driver}
@@ -1931,7 +1982,7 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
 
-<dt><code>--worker-pool <em>POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>POOL</em></code></dt>
 <dd>View only worker nodes that belong to the worker pool. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is optional.</dd>
 
 <dt><code>--show-pools</code></dt>
@@ -2439,7 +2490,7 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--json]
 
 **Command options**:
 <dl>
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is required.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
@@ -2521,7 +2572,7 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 <dt><code><em>-c, --cluster CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
+<dt><code><em>-p, --worker-pool WORKER_POOL</em></code></dt>
 <dd>The worker pool that you want to rebalance. This value is required.</dd>
 
 <dt><code>-s</code></dt>
@@ -2597,7 +2648,7 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-s] [-f]
 
 **Command options**:
 <dl>
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
@@ -2617,6 +2668,96 @@ ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 {: pre}
 
 </br>
+
+### `ibmcloud ks worker-pool taint`
+{: #worker_pool_taint}
+
+Set or remove Kubernetes taints for all the worker nodes in a worker pool. After you set up taints, pods without a matching toleration cannot run on the worker pool. You might use taints to dedicate your worker pool exclusively for a certain type of workload, such as for networking edge nodes or the cluster autoscaler. For more information about how taints and tolerations work, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
+{: shortdesc}
+
+#### `ibmcloud ks worker-pool taint set`
+{: #worker_pool_taint_set}
+
+Set Kubernetes taints for all the worker nodes in a worker pool. Taints prevent pods without matching tolerations from running on the worker nodes. After you set your custom taint for the worker pool, confirm that the taints are set on the worker nodes by getting the private IP address of the worker node (`ibmcloud ks worker ls -c <cluster_name_or_ID>`) and running `kubectl describe node <worker_private_IP>`.
+{: shortdesc}
+
+When you set taints for the worker pool, any custom taints that you previously set with this command are overwritten. To keep your existing custom taints and set new taints, check the worker pool's existing taints and include them when you rerun this command.
+{: important}
+
+```
+ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --taint KEY=VALUE:EFFECT [--taint KEY=VALUE2:EFFECT] [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+
+<dt><code>--taint <em>KEY=VALUE:EFFECT</em></code></dt>
+<dd>The label and effect for the Kubernetes taint that you want to set for the worker pool. This value is required. Specify the taint in the format `key=value:effect`. The `key=value` is a label pair such as `env=prod` that you use to manage the worker node taint and matching pod tolerations. The `effect` is a [Kubernetes taint effect](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} such as `NoSchedule`, `PreferNoSchedule`, or `NoExecute` that describes how the taint works.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks worker-pool taint set --cluster my_cluster --worker-pool pool1 --taint env=prod:NoSchedule
+```
+{: pre}
+
+</br>
+
+#### `ibmcloud ks worker-pool taint rm`
+{: #worker_pool_taint_rm}
+
+Remove all Kubernetes taints for all the worker nodes in a worker pool. To check the taints before you remove them, run `ibmcloud ks worker-pool get -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>`.
+{: shortdesc}
+
+When you remove taints for the worker pool, all Kubernetes taints are removed from the worker pool and its worker nodes. To remove an individual taint from all worker nodes, rerun the `ibmcloud ks worker-pool taint set` command and include only the taints that you want to keep. Or, use `kubectl taint node <worker_privateIP> key:effect-` command to remove a taint from an individual worker node.
+{: important}
+
+```
+ibmcloud ks worker-pool taint rm --worker-pool WORKER_POOL --cluster CLUSTER [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks worker-pool taint rm --cluster my_cluster --worker-pool pool1
+```
+{: pre}
+
 
 ### `ibmcloud ks worker-pool zones`
 {: #cs_worker_pool_zones}
@@ -2641,7 +2782,7 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-s] [
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where the worker pool exists. This value is required.</dd>
 
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to see zones for. This value is required.</dd>
 
 <dt><code>--json</code></dt>
@@ -4774,7 +4915,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 <dd>The subdomain to configure a health check monitor for. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--enable</code></dt>
-<dd>Include this flag to create and enable a new health check monitor for a subdomain.</dd>
+<dd>Include this flag to enable a new health check monitor for a subdomain.</dd>
 
 <dt><code>--description <em>DESCRIPTION</em></code></dt>
 <dd>A description of the health monitor.</dd>
@@ -4801,7 +4942,7 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 <dd>The port number to connect to for the health check. When <code>type</code> is <code>TCP</code>, this parameter is required. When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>, define the port only if you use a port other than 80 for HTTP or 443 for HTTPS. Default for TCP: <code>0</code>. Default for HTTP: <code>80</code>. Default for HTTPS: <code>443</code>.</dd>
 
 <dt><code>--header <em>HEADER</em></code></dt>
-<dd>Required when <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: The HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden.</dd>
+<dd>Required when <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: HTTP request headers to send in the health check, such as a Host header. The User-Agent header cannot be overridden. This flag is valid only for type 'HTTP' or 'HTTPS'. To add more than one header to the requests, specify this flag multiple times. This flag accepts values in the following format: '--header Header-Name=value'. When updating a monitor, the existing headers are replaced by the ones you specify. To delete all existing headers specify the flag with an empty value '--header ""'.</dd>
 
 <dt><code>--expected-body <em>BODY STRING</em></code></dt>
 <dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: A case-insensitive substring that the health check looks for in the response body. If this string is not found, the IP is considered unhealthy.</dd>
@@ -6282,6 +6423,7 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 **Minimum required permissions**: None
 
 **Command options**:
+
 <dl>
 <dt><code>--in-place</code></dt>
 <dd>Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.</dd>
@@ -6289,16 +6431,16 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 <dt><code><em>FILE [FILE ...]</em></code></dt>
 <dd>The file that contains the scripts that you want to update.</dd>
 </dl>
+
 </br>
 
 To use this command to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in:
 1. Run the command on a test script without the `--in-place` flag.
-  ```
-  ibmcloud ks script update ./mytestscript.sh
-  ```
-  {: pre}
-2.  Review the proposed changes to the script in the difference that is shown in the terminal STDOUT.
-    Example output:
+    ```
+    ibmcloud ks script update ./mytestscript.sh
+    ```
+    {: pre}
+2.  Review the proposed changes to the script in the difference that is shown in the terminal STDOUT.Example output:
     ```
     --- a/script-test-2
     +++ b/script-test-2
@@ -6316,26 +6458,268 @@ To use this command to prepare your automation scripts for the release of versio
     ```
     {: screen}
 3. To rewrite the script with the proposed updates, run the command again with the `--in-place` flag.
-  ```
-  ibmcloud ks script update ./mytestscript.sh --in-place
-  ```
-  {: pre}
+    ```
+    ibmcloud ks script update ./mytestscript.sh --in-place
+    ```
+    {: pre}
 4. Search for and address any commands that are flagged in the script with `# WARNING` messages. For example, some commands are deprecated and do not have a replacement command.
 5. Within the script or the environment where the script is run, set the `IKS_BETA_VERSION` environment variable to `1.0`.
-  ```
-  export IKS_BETA_VERSION=1.0
-  ```
-  {: pre}
+    ```
+    export IKS_BETA_VERSION=1.0
+    ```
+    {: pre}
 6. Test your automation with the updated script. Note that you might incur charges if your automation includes creating clusters.
 7. Update all of your scripts.
 8. Update your CLI plug-in to version 1.0.
-  ```
-  ibmcloud plugin update kubernetes-service
-  ```
-  {: pre}
+    ```
+    ibmcloud plugin update kubernetes-service
+    ```
+    {: pre}
 
 <br />
 
+
+## Beta: `storage` commands
+{: #cs_storage}
+
+Create, get, list, or remove storage volume attachments.
+{: shortdesc}
+
+The `storage` commands are available in beta.
+{: beta}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+### `ibmcloud ks storage attachment create`
+{: #cs_storage_att_cr}
+
+Attach a storage volume to a worker node in your cluster.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage attachment create --cluster CLUSTER --volume-id VOLUME_ID --worker WORKER [--json]
+```
+{: pre}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Required: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dt><code>--volume-id <em>VOLUME_ID</em></code></dt>
+<dd>Required: Specify the volume ID. To list available workers, run <code>ibmcloud ks storage volume ls</code>.</dd>
+
+<dt><code>--worker <em>WORKER</em></code></dt>
+<dd>Required: Specify the worker ID. To list available workers, run <code>ibmcloud ks worker ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage attachment create --cluster my_cluster --volume-id 111111111 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--json]
+```
+{: pre}
+
+### `ibmcloud ks storage attachment get`
+{: #cs_storage_att_get}
+
+Get the details of a storage volume attachment in your cluster.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage attachment get --cluster CLUSTER --volume-attachment-id ID --worker WORKER [--json]
+```
+{: pre}
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Required: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dt><code>--volume-attachment-id <em>ID</em></code></dt>
+<dd>Required: Specify the volume attachment ID. To list available attachments, run <code>ibmcloud ks storage attachment ls</code>.</dd>
+
+<dt><code>--worker <em>WORKER</em></code></dt>
+<dd>Required: Specify the worker ID. To list available workers, run <code>ibmcloud ks worker ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage attachment get --cluster my_cluster --volume-attachment-id 0111-1a111aaa-1111-1111-111a-aaa1a1a11a11 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--json]
+```
+{: pre}
+
+### `ibmcloud ks storage attachment ls`
+{: #cs_storage_att_ls}
+
+List the storage volume attachments for a worker node in your cluster.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage attachment ls --cluster CLUSTER --worker WORKER [--json]
+```
+{: pre}
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Required: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dt><code>--worker <em>WORKER</em></code></dt>
+<dd>Required: Specify the worker ID. To list available workers, run <code>ibmcloud ks worker ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage attachment ls --cluster my_cluster --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--json]
+```
+{: pre}
+
+
+### `ibmcloud ks storage attachment rm`
+{: #cs_storage_att_rm}
+
+Remove a storage volume from a worker node in your cluster.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage attachment rm --cluster CLUSTER --volume-attachment-id VOLUME_ATTACHMENT_ID --worker WORKER [--json]
+```
+{: pre}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Required: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dt><code>--volume-attachment-id <em>ID</em></code></dt>
+<dd>Required: Specify the volume attachment ID. To list available attachments, run <code>ibmcloud ks storage attachment ls</code>.</dd>
+
+<dt><code>--worker <em>WORKER</em></code></dt>
+<dd>Required: Specify the worker ID. To list available workers, run <code>ibmcloud ks worker ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage attachment rm --cluster my_cluster --volume-attachment-id 0111-1a111aaa-1111-1111-111a-aaa1a1a11a11 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--json]
+```
+{: pre}
+
+### `ibmcloud ks storage volume get`
+{: #cs_storage_att_ls_c}
+
+List storage volumes for your classic clusters.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage volume get --volume_ID VOLUME_ID
+```
+{: pre}
+
+**Command options**:
+
+<dl>
+<dt><code>--volume_ID <em>VOLUME_ID</em></code></dt>
+<dd>Required: Specify the volume ID. To list available volumes, run <code>ibmcloud ks storage volume ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage volume get --volume_ID 111111111
+```
+{: pre}
+
+### `ibmcloud ks storage volume ls `
+{: #cs_storage_att_ls_2}
+
+Get a list of storage volumes.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+```
+ibmcloud ks storage volume ls [--cluster CLUSTER]
+```
+{: pre}
+
+**Command options**:
+
+<dl>
+<dt><code>--cluster <em>CLUSTER</em></code></dt>
+<dd>Optional: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dt><code>--json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+</dl>
+
+**Example**:
+
+```
+ibmcloud ks storage volume ls --cluster my_cluster
+```
+{: pre}
 
 
 

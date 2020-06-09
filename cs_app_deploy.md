@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-01"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks
 
@@ -10,6 +10,7 @@ subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -31,6 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # Deploying Kubernetes-native apps in clusters
@@ -388,7 +390,9 @@ To execute a workload on a GPU machine:
     <table summary="A table that describes in Column 1 the YAML file fields and in Column 2 how to fill out those fields.">
     <caption>YAML components</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> Understanding the YAML file components</th>
+    <col width="25%">
+    <th>Component</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>

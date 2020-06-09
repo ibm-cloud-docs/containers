@@ -2,13 +2,14 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-08"
+lastupdated: "2020-06-09"
 
 keywords: containers
 subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -30,6 +31,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # Site map
@@ -642,6 +644,11 @@ subcollection: containers
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
+
 
 ## VPC clusters
 {: #sitemap_vpc_clusters}
@@ -674,6 +681,11 @@ subcollection: containers
 * [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
+
+[Adding static routes to worker nodes](/docs/containers?topic=containers-static-routes)
+* [About static routes](/docs/containers?topic=containers-static-routes#about-static-routes)
+* [Enabling the static route add-on](/docs/containers?topic=containers-static-routes#enable-add-on)
+* [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
 ## Logging and monitoring cluster health
@@ -816,6 +828,17 @@ subcollection: containers
   * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
+[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
+* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
+* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
+
+[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
+* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
+* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
+* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
+* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
+* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
 
 ## Setting up a service mesh with Istio
 {: #sitemap_setting_up_a_service_mesh_with_istio}
@@ -879,17 +902,6 @@ subcollection: containers
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
   * [Updating Sysdig for Istio add-on version 1.5](/docs/containers?topic=containers-istio-health#sysdig-15)
-
-[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
-* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
-* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
-* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
-* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
-* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
-* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
-* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 
 ## Exposing apps
@@ -1511,6 +1523,8 @@ subcollection: containers
 
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
+
+[Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
 
 [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
 
