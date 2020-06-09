@@ -130,16 +130,16 @@ Kubernetes Service
         cs_app.md
         cs_app_deploy.md
         cs_app_knative.md
-
-        {: .topicgroup}
-        Setting up a service mesh with Istio
-            cs_istio_qs.md
-            cs_istio_about.md
-            cs_istio.md
-            cs_istio_mesh.md
-            cs_istio_health.md
         cs_nodeport.md
         cs_app_update.md
+
+    {: .topicgroup}
+    Setting up a service mesh with Istio
+        cs_istio_qs.md
+        cs_istio_about.md
+        cs_istio.md
+        cs_istio_mesh.md
+        cs_istio_health.md
 
     {: .topicgroup}
     Exposing apps

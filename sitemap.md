@@ -828,6 +828,17 @@ subcollection: containers
   * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
 * [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
 
+[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
+* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
+* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
+
+[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
+* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
+* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
+* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
+* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
+* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
+
 
 ## Setting up a service mesh with Istio
 {: #sitemap_setting_up_a_service_mesh_with_istio}
@@ -891,17 +902,6 @@ subcollection: containers
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
   * [Updating Sysdig for Istio add-on version 1.5](/docs/containers?topic=containers-istio-health#sysdig-15)
-
-[Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
-* [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
-* [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
-
-[Managing the app lifecycle](/docs/containers?topic=containers-update_app)
-* [Update strategies](/docs/containers?topic=containers-update_app#updating_apps)
-* [Scaling apps](/docs/containers?topic=containers-update_app#app_scaling)
-* [Managing rolling deployments to update your apps](/docs/containers?topic=containers-update_app#app_rolling)
-* [Setting up continuous integration and delivery](/docs/containers?topic=containers-update_app#app_cicd)
-* [Copying deployments to another cluster](/docs/containers?topic=containers-update_app#copy_apps_cluster)
 
 
 ## Exposing apps

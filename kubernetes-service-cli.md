@@ -6423,6 +6423,7 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 **Minimum required permissions**: None
 
 **Command options**:
+
 <dl>
 <dt><code>--in-place</code></dt>
 <dd>Optional: Rewrite the source file with the updated command structure. If this flag is not specified, you can see a summary of the changes to the script file in STDOUT.</dd>
@@ -6430,16 +6431,16 @@ ibmcloud ks script update [--in-place] FILE [FILE ...]
 <dt><code><em>FILE [FILE ...]</em></code></dt>
 <dd>The file that contains the scripts that you want to update.</dd>
 </dl>
+
 </br>
 
 To use this command to prepare your automation scripts for the release of version 1.0 of the {{site.data.keyword.containerlong_notm}} plug-in:
 1. Run the command on a test script without the `--in-place` flag.
-  ```
-  ibmcloud ks script update ./mytestscript.sh
-  ```
-  {: pre}
-2.  Review the proposed changes to the script in the difference that is shown in the terminal STDOUT.
-    Example output:
+    ```
+    ibmcloud ks script update ./mytestscript.sh
+    ```
+    {: pre}
+2.  Review the proposed changes to the script in the difference that is shown in the terminal STDOUT.Example output:
     ```
     --- a/script-test-2
     +++ b/script-test-2
@@ -6457,26 +6458,25 @@ To use this command to prepare your automation scripts for the release of versio
     ```
     {: screen}
 3. To rewrite the script with the proposed updates, run the command again with the `--in-place` flag.
-  ```
-  ibmcloud ks script update ./mytestscript.sh --in-place
-  ```
-  {: pre}
+    ```
+    ibmcloud ks script update ./mytestscript.sh --in-place
+    ```
+    {: pre}
 4. Search for and address any commands that are flagged in the script with `# WARNING` messages. For example, some commands are deprecated and do not have a replacement command.
 5. Within the script or the environment where the script is run, set the `IKS_BETA_VERSION` environment variable to `1.0`.
-  ```
-  export IKS_BETA_VERSION=1.0
-  ```
-  {: pre}
+    ```
+    export IKS_BETA_VERSION=1.0
+    ```
+    {: pre}
 6. Test your automation with the updated script. Note that you might incur charges if your automation includes creating clusters.
 7. Update all of your scripts.
 8. Update your CLI plug-in to version 1.0.
-  ```
-  ibmcloud plugin update kubernetes-service
-  ```
-  {: pre}
+    ```
+    ibmcloud plugin update kubernetes-service
+    ```
+    {: pre}
 
 <br />
-
 
 
 ## Beta: `storage` commands
@@ -6492,7 +6492,6 @@ The `storage` commands are available in beta.
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
 
 ### `ibmcloud ks storage attachment create`
 {: #cs_storage_att_cr}
@@ -6534,7 +6533,6 @@ ibmcloud ks storage attachment create --cluster CLUSTER --volume-id VOLUME_ID --
 ibmcloud ks storage attachment create --cluster my_cluster --volume-id 111111111 --worker kube-aa1111aa11aaaaa11aa1-my_cluster-default-00000110 [--json]
 ```
 {: pre}
-
 
 ### `ibmcloud ks storage attachment get`
 {: #cs_storage_att_get}
@@ -6684,7 +6682,7 @@ ibmcloud ks storage volume get --volume_ID VOLUME_ID
 **Example**:
 
 ```
-ibmcloud ks storage volume get --volume_ID 111111111 
+ibmcloud ks storage volume get --volume_ID 111111111
 ```
 {: pre}
 
@@ -6722,5 +6720,6 @@ ibmcloud ks storage volume ls [--cluster CLUSTER]
 ibmcloud ks storage volume ls --cluster my_cluster
 ```
 {: pre}
+
 
 
