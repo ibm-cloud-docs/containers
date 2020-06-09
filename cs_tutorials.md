@@ -285,7 +285,9 @@ To deploy the app:
     <table summary="Information about the expose command parameters.">
     <caption>More about the expose parameters</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> More about the expose parameters</th>
+    <col width="25%">
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>

@@ -279,7 +279,9 @@ To deploy the app:
     <table summary=“Information about the expose command parameters. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter.”>
     <caption>More about the expose parameters</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> More about the expose parameters</th>
+    <col width="25%">
+    <th>Parameter</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -419,7 +421,9 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     <table summary=“Information about the expose command parameters. Columns are read left to right, with the first column the command parameter and the second column the description of the parameter.”>
     <caption>More about the expose parameters</caption>
     <thead>
-    <th colspan=2><img src="images/idea.png" alt="Idea icon"/> More about the expose parameters</th>
+    <col width="25%">
+    <th>Component</th>
+    <th>Description</th>
     </thead>
     <tbody>
     <tr>

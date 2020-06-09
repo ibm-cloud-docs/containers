@@ -1182,7 +1182,9 @@ To configure Autorecovery:
    <table summary="Understanding the components of the configmap">
    <caption>Understanding the configmap components</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the configmap components</th>
+   <col width="25%">
+   <th>Component</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>
@@ -1215,7 +1217,9 @@ To configure Autorecovery:
    <table summary="Understanding individual components of checks">
    <caption>Understanding the individual components of checks</caption>
    <thead>
-   <th colspan=2><img src="images/idea.png" alt="Idea icon"/>Understanding the individual components of checks </th>
+   <col width="25%">
+   <th>Component</th>
+   <th>Description</th>
    </thead>
    <tbody>
    <tr>
