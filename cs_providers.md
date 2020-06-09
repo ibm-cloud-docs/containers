@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-04"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -11,6 +11,7 @@ subcollection: containers
 
 ---
 
+{:beta: .beta}
 {:codeblock: .codeblock}
 {:deprecated: .deprecated}
 {:download: .download}
@@ -32,6 +33,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
 
 
 # Supported infrastructure providers
