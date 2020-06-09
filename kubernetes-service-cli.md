@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-08"
+lastupdated: "2020-06-09"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1931,7 +1931,7 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
 
-<dt><code>--worker-pool <em>POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>POOL</em></code></dt>
 <dd>View only worker nodes that belong to the worker pool. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is optional.</dd>
 
 <dt><code>--show-pools</code></dt>
@@ -2439,7 +2439,7 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--json]
 
 **Command options**:
 <dl>
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is required.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
@@ -2521,7 +2521,7 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 <dt><code><em>-c, --cluster CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster. This value is required.</dd>
 
-<dt><code><em>--worker-pool WORKER_POOL</em></code></dt>
+<dt><code><em>-p, --worker-pool WORKER_POOL</em></code></dt>
 <dd>The worker pool that you want to rebalance. This value is required.</dd>
 
 <dt><code>-s</code></dt>
@@ -2597,7 +2597,7 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-s] [-f]
 
 **Command options**:
 <dl>
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to remove. This value is required.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
@@ -2617,6 +2617,96 @@ ibmcloud ks worker-pool rm --cluster my_cluster --worker-pool pool1
 {: pre}
 
 </br>
+
+### `ibmcloud ks worker-pool taint`
+{: #worker_pool_taint}
+
+Set or remove Kubernetes taints for all the worker nodes in a worker pool. After you set up taints, pods without a matching toleration cannot run on the worker pool. You might use taints to dedicate your worker pool exclusively for a certain type of workload, such as for networking edge nodes or the cluster autoscaler. For more information about how taints and tolerations work, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
+{: shortdesc}
+
+#### `ibmcloud ks worker-pool taint set`
+{: #worker_pool_taint_set}
+
+Set Kubernetes taints for all the worker nodes in a worker pool. Taints prevent pods without matching tolerations from running on the worker nodes. After you set your custom taint for the worker pool, confirm that the taints are set on the worker nodes by getting the private IP address of the worker node (`ibmcloud ks worker ls -c <cluster_name_or_ID>`) and running `kubectl describe node <worker_private_IP>`.
+{: shortdesc}
+
+When you set taints for the worker pool, any custom taints that you previously set with this command are overwritten. To keep your existing custom taints and set new taints, check the worker pool's existing taints and include them when you rerun this command.
+{: important}
+
+```
+ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --taint KEY=VALUE:EFFECT [--taint KEY=VALUE2:EFFECT] [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+
+<dt><code>--taint <em>KEY=VALUE:EFFECT</em></code></dt>
+<dd>The label and effect for the Kubernetes taint that you want to set for the worker pool. This value is required. Specify the taint in the format `key=value:effect`. The `key=value` is a label pair such as `env=prod` that you use to manage the worker node taint and matching pod tolerations. The `effect` is a [Kubernetes taint effect](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} such as `NoSchedule`, `PreferNoSchedule`, or `NoExecute` that describes how the taint works.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks worker-pool taint set --cluster my_cluster --worker-pool pool1 --taint env=prod:NoSchedule
+```
+{: pre}
+
+</br>
+
+#### `ibmcloud ks worker-pool taint rm`
+{: #worker_pool_taint_rm}
+
+Remove all Kubernetes taints for all the worker nodes in a worker pool. To check the taints before you remove them, run `ibmcloud ks worker-pool get -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>`.
+{: shortdesc}
+
+When you remove taints for the worker pool, all Kubernetes taints are removed from the worker pool and its worker nodes. To remove an individual taint from all worker nodes, rerun the `ibmcloud ks worker-pool taint set` command and include only the taints that you want to keep. Or, use `kubectl taint node <worker_privateIP> key:effect-` command to remove a taint from an individual worker node.
+{: important}
+
+```
+ibmcloud ks worker-pool taint rm --worker-pool WORKER_POOL --cluster CLUSTER [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Force the command to run with no user prompts. This value is optional.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks worker-pool taint rm --cluster my_cluster --worker-pool pool1
+```
+{: pre}
+
 
 ### `ibmcloud ks worker-pool zones`
 {: #cs_worker_pool_zones}
@@ -2641,7 +2731,7 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-s] [
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster where the worker pool exists. This value is required.</dd>
 
-<dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker node pool that you want to see zones for. This value is required.</dd>
 
 <dt><code>--json</code></dt>
