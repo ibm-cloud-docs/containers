@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-12"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -833,7 +833,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 ## Creating a standard VPC Gen 1 compute cluster
 {: #clusters_vpc_standard}
 
-Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC Generation 1 compute cluster, and customize your cluster to meet the high availability and security requirements of your apps.
+Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC Generation 1 compute cluster, and customize your cluster to meet the high availability and security requirements of your apps. 
 {: shortdesc}
 
 <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Want to create a cluster in your Virtual Private Cloud (VPC) on generation 2 compute instead? See [Creating a standard VPC Gen 2 compute cluster](#clusters_vpcg2).
