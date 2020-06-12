@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-12"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -33,7 +33,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 
-s
+
 
 # Overview
 {: #iks-overview}
