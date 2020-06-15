@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -80,7 +80,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
  <tr>
     <td>Supported container platforms</td>
     <td>Use the {{site.data.keyword.containerlong_notm}} API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and OpenShift clusters**.</td>
-    <td>VPC clusters are available for **only community Kubernetes clusters**, not OpenShift clusters. As such, provider-specific `v2` API calls against OpenShift clusters fail.</td>
+    <td>Use the {{site.data.keyword.containerlong_notm}} `v2` API to manage your {{site.data.keyword.cloud_notm}} infrastructure resources, such as worker nodes, for **both community Kubernetes and OpenShift VPC clusters**.</td>
  </tr>
  <tr>
   <td>Kubernetes API</td>

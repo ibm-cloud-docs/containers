@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-12"
+lastupdated: "2020-06-15"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -164,7 +164,6 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 
 After you set up your account to create clusters, decide on the setup for your cluster. You must make these decisions every time that you create a cluster. You can click on the options in the following decision tree image for more information, such as comparisons of free and standard, Kubernetes and OpenShift, or VPC and classic clusters.
 {: shortdesc}
-
 
 
 
@@ -609,8 +608,6 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 
 <br />
-
-
 
 
 ## Creating a standard VPC Gen 2 compute cluster
