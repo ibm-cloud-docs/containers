@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-11"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -299,8 +299,6 @@ To access the storage from your app, you must mount the PVC to your app.
          containers:
          - image: <image_name>
            name: <container_name>
-       securityContext:
-             fsGroup: <group_ID>
            volumeMounts:
            - name: <volume_name>
              mountPath: /<file_path>
@@ -308,6 +306,8 @@ To access the storage from your app, you must mount the PVC to your app.
          - name: <volume_name>
            persistentVolumeClaim:
              claimName: <pvc_name>
+         securityContext:
+           fsGroup: <group_ID>
    ```
    {: codeblock}
 
