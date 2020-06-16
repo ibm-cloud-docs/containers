@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-15"
+lastupdated: "2020-06-16"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -781,7 +781,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     </tr>
     <tr>
     <td><code>--disable-public-service-endpoint</code></td>
-    <td>Include this option in your command to create your VPC cluster with a private service endpoint only. If you do not include this option, your cluster is set up with a public and a private service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters#vpc-pgw).</td>
+    <td>Include this option in your command to create your VPC cluster with a private service endpoint only. If you do not include this option, your cluster is set up with a public and a private service endpoint. The service endpoint determines how your Kubernetes master and the worker nodes communicate, how your cluster access other {{site.data.keyword.cloud_notm}} services and apps outside the cluster, and how your users connect to your cluster. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).</td>
     </tr>
     </tbody></table>
 7. Verify that the creation of the cluster was requested. It can take a few minutes for the worker node machines to be ordered, and for the cluster to be set up and provisioned in your account.
@@ -830,7 +830,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 ## Creating a standard VPC Gen 1 compute cluster
 {: #clusters_vpc_standard}
 
-Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC Generation 1 compute cluster, and customize your cluster to meet the high availability and security requirements of your apps. 
+Use the {{site.data.keyword.cloud_notm}} CLI or the {{site.data.keyword.cloud_notm}} console to create a standard VPC Generation 1 compute cluster, and customize your cluster to meet the high availability and security requirements of your apps.
 {: shortdesc}
 
 <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> Want to create a cluster in your Virtual Private Cloud (VPC) on generation 2 compute instead? See [Creating a standard VPC Gen 2 compute cluster](#clusters_vpcg2).

@@ -48,7 +48,7 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 ## Service and quota limitations
 {: #tech_limits}
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations and quotas that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#vpc_ks_limits) cluster limitations also apply.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations and quotas that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#ks_vpc_gen2_limits) cluster limitations also apply.
 {: shortdesc}
 
 | Category | Description |
@@ -117,8 +117,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 {: caption="Classic cluster storage limitations"}
 
 <br />
-
-
 
 
 ## VPC Gen 2 compute cluster limitations
