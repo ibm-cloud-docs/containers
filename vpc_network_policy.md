@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-16"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -55,7 +55,7 @@ The following table describes the basic characteristics of each network security
 |Policy type|Application level|Default behavior|Use case|Limitations|
 |-----------|-----------------|----------------|--------|-----------|
 |[VPC access control lists (ACLs)](#acls)|VPC subnet|The default ACL for the VPC, `allow-all-network-acl-<VPC_ID>`, allows all traffic to and from your subnets.|Control inbound and outbound traffic to your cluster. Inbound rules allow or deny traffic from a source IP range with specified protocols and ports to the subnet that you attach the ACL to. Outbound rules allow or deny traffic to a destination IP range with specified protocols and ports from the subnet that you attach the ACL to.|Cannot be used to control traffic between the clusters that share the same VPC subnets. Instead, you can [create Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers) to isolate your clusters on the private network.|
-|[VPC security groups](#security_groups)|Worker node|VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</br>VPC Gen 2: The default security group denies all incoming traffic requests to your worker nodes.|Allow inbound traffic to node ports on your worker nodes.|You cannot manually attach worker nodes to security groups because VPC worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. However, you can add rules to the default security group or create non-default security groups for the VPC.|
+|[VPC security groups](#security_groups)|Worker node|VPC Gen 1: The default security group allows all incoming traffic requests to your worker nodes.</br>VPC Gen 2: The default security group denies all incoming traffic requests to your worker nodes.|Allow inbound traffic to node ports on your worker nodes.|You can add or change rules in the default security group that is applied to your worker nodes. However, because your worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot add more security groups and apply them to your worker nodes.|
 |[Kubernetes network policies](#kubernetes_policies)|Worker node host endpoint|None|Control traffic within the cluster at the pod level by using pod and namespace labels. Protect pods from internal network traffic, such as isolating app microservices from each other within a namespace or across namespaces.|None|
 {: caption="Network security options for VPC clusters"}
 
@@ -563,12 +563,12 @@ After you use ACLs to control traffic for VPC subnets, modify your VPC's default
 * Gen 2: To allow any incoming requests to apps that run on your worker nodes, you must modify the default security group to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes. 
 * Gen 1: The default security group allows all incoming traffic to your worker nodes by default. No action is needed for the default security group.
 
-Additionally, for either VPC generation, if you create non-default security groups and attach them to your VPC, the security group rules are also applied to your worker nodes. To allow any incoming requests to apps that run in your cluster, you must add a rule to any non-default security groups to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes.
 
-You must modify your security groups to allow inbound traffic to ports `30000 - 32767` your worker nodes, even if you allowed inbound traffic in your ACLs. ACLs are applied at the level of the VPC subnet, but security groups allow the necessary inbound traffic for each worker node interface.
+
+You must modify your default security group to allow inbound traffic to ports `30000 - 32767` of your worker nodes, even if you allowed inbound traffic in your ACLs. ACLs are applied at the level of the VPC subnet, but the default security group allows the necessary inbound traffic for each worker node interface.
 {: important}
 
-**Limitations**: Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot attach a security group to your individual worker node instances. However, you can add rules to the default security group for the VPC, or create non-default security groups for the VPC.
+**Limitations**: Because the worker nodes of your VPC cluster exist in a service account and are not listed in the VPC infrastructure dashboard, you cannot create a security group and apply it to your worker node instances. However, you can add rules to the default security group that is automatically created when you create a VPC cluster.
 
 When you modify the default security group, do not remove or modify the existing default rules.
 {: important}
@@ -583,14 +583,11 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to add a rule to your VPC's
 
 1. Open the security group for your VPC.
   * VPC Gen 2: From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
-  * VPC Gen 1:
-    * If you did not create any non-default security groups for your VPC, no action is required.
-    * If you created non-default security groups for your VPC, from the [Security groups for VPC dashboard](https://cloud.ibm.com/vpc-ext/network/securityGroups){: external}, click the **Name** of the security group that you created and attached to your VPC.
+  * VPC Gen 1: No action is required.
 2. In the **Inbound rules** section, click **New rule**.
 3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source enter selected.
 4. Click **Save**.
 5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
-6. Repeat these steps for each non-default security group that you created for this VPC.
 
 ### Opening required ports from the CLI
 {: #security_groups_cli}
@@ -619,8 +616,8 @@ Before you begin:
 
 To open required ports in your security group:
 1. List your security groups.
-    * VPC Gen 2: For your **VPC**, note the IDs of all security groups, including the default security group because inbound traffic to the node ports on the worker is denied by default.
-    * VPC Gen 1: If you created a non-default security group and attached it to your **VPC**, note its ID. If only the default security group with a randomly generated name is listed, no further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
+    * VPC Gen 2: For your **VPC**, note the IDs of the default security group because inbound traffic to the node ports on the worker is denied by default.
+    * VPC Gen 1: No further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
   ```
   ibmcloud is security-groups
   ```
@@ -643,8 +640,6 @@ To open required ports in your security group:
   ibmcloud is security-group-rule-add <security_group_ID> inbound udp --port-min 30000 --port-max 32767
   ```
   {: pre}
-
-4. Repeat these steps for each non-default security group that you created for this VPC.
 
 <br />
 
