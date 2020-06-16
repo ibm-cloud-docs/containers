@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-15"
+lastupdated: "2020-06-16"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -48,7 +48,7 @@ If you anticipate reaching any of the following {{site.data.keyword.containerlon
 ## Service and quota limitations
 {: #tech_limits}
 
-{{site.data.keyword.containerlong_notm}} comes with the following service limitations and quotas that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#vpc_ks_limits) cluster limitations also apply.
+{{site.data.keyword.containerlong_notm}} comes with the following service limitations and quotas that apply to all clusters, independent of what infrastructure provider you plan to use. Keep in mind that the [classic](#classic_limits) and [VPC](#ks_vpc_gen2_limits) cluster limitations also apply.
 {: shortdesc}
 
 | Category | Description |
@@ -119,8 +119,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 <br />
 
 
-
-
 ## VPC Gen 2 compute cluster limitations
 {: #ks_vpc_gen2_limits}
 
@@ -134,6 +132,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
+| Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc?topic=vpc-block-storage-about#about-vpc-provider-managed-encryption). However, you cannot [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-creating-instances-byok).|
 | Location | VPC Gen 2 clusters are available only in [select multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc-gen2). |
 | Operating system | You cannot create a cluster with worker nodes that run multiple operating systems, such as OpenShift on Red Hat Enterprise Linux and community Kubernetes on Ubuntu. |
 | Versions | VPC Gen 2 clusters must run Kubernetes version 1.17 or later. |
@@ -192,6 +191,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Category | Description |
 | -------- | ----------- |
 | Container platforms | VPC Gen 1 clusters are available for only community Kubernetes clusters, not OpenShift clusters. |
+| Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#about-provider-managed-encryption-gen1). However, you cannot [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-creating-instances-byok).|
 | Location | VPC clusters are available only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). |
 | v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about). |
 | Versions | VPC clusters must run Kubernetes version 1.15 or later. |
@@ -213,7 +213,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | -------- | ----------- |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
-| Security groups | You cannot attach worker nodes to [VPC security groups](/docs/vpc?topic=vpc-using-security-groups) because your worker nodes exist in a service account and are not listed in the VPC infrastructure dashboard. Although you cannot attach a security group to your worker nodes instances, you can create security groups at the level of the VPC. If you use non-default security groups, you must [allow traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups). |
+| Security groups | The default [VPC security group](/docs/vpc?topic=vpc-using-security-groups) that is created for you is automatically applied to your worker nodes. You can make changes to the default security group, such as to [allow traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups). However, you cannot create other security groups to apply to your worker nodes. |
 | strongSwan VPN service | <ul><li>Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established.</li><li>Because VPC clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC clusters: <ul><li>`enableServiceSourceIP`</li><li>`loadBalancerIP`</li><li>`zoneLoadBalancer`</li><li>`connectUsingLoadBalancerIP`</li></ul></li></ul> |
 | Subnets | <ul><li>See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations).</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
 | VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations). |
