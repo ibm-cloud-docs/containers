@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-15"
+lastupdated: "2020-06-17"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -44,6 +44,18 @@ View information for patch and minor version updates to the [managed Istio add-o
 * **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}.
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.4 to 1.5, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor).
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
+
+## Changelog for 1.5.5, released XX June 2020
+{: #155}
+
+The following table shows the changes that are included in version 1.5.5 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.5.4 | 1.5.5 | <ul><li>See the Istio release notes for [Istio 1.5.5](https://istio.io/news/releases/1.5.x/announcing-1.5.5/){:external}.</li><li>Resolves [CVE-2020-11080](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11080){: external}. For more information, see the [Istio security bulletin 2020-006](https://istio.io/news/security/istio-security-2020-006/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.5" caption-side="top"}
 
 ## Changelog for 1.5, released 19 May 2020
 {: #15}
