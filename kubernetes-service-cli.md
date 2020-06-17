@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -6696,7 +6696,7 @@ Get a list of storage volumes.
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```
-ibmcloud ks storage volume ls [--cluster CLUSTER_ID]
+ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zone ZONE] [--json]
 ```
 {: pre}
 
@@ -6705,6 +6705,14 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID]
 <dl>
 <dt><code>--cluster <em>CLUSTER_ID</em></code></dt>
 <dd>Optional: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dl>
+<dt><code>--provider <em>PROVIDER</em></code></dt>
+<dd>Optional: Specify the provider. Supported values are <code>classic</code>, <code>vpc-classic</code>, and <code>vpc-gen2</code>.</dd>
+
+<dl>
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>Optional: Specify the zone. To list available zones, run <code>ibmcloud ks locations</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
