@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, containers
 
@@ -326,7 +326,7 @@ The Ingress service offers TLS termination at two points in the traffic flow:
 * [Decrypt package upon arrival](/docs/containers?topic=containers-ingress#public_inside_2): By default, the Ingress ALB load balances HTTP network traffic to the apps in your cluster. To also load balance incoming HTTPS connections, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster. If you use the IBM-provided Ingress subdomain, you can use the IBM-provided TLS certificate. If you use a custom domain, you can use your own TLS certificate to manage TLS termination.
 * [Re-encrypt package before you forward it to upstream apps](/docs/containers?topic=containers-ingress_annotation#ssl-services): The ALB decrypts HTTPS requests before forwarding traffic to your apps. If you have apps that require HTTPS and need traffic to be encrypted before it is forwarded to those upstream apps, you can use the `ssl-services` annotation. If your upstream apps can handle TLS, you can optionally provide a certificate that is contained in a one-way or mutual-authentication TLS secret.
 
-To secure the service-to-service communication, you can use [Istio's mutual TLS authentication](https://istio.io/docs/concepts/security/#mutual-tls-authentication){: external}. Istio is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes.
+To secure the service-to-service communication, you can use [Istio's mutual TLS authentication](https://istio.io/latest/docs/concepts/security/#mutual-tls-authentication){: external}. Istio is an open source service that gives developers a way to connect, secure, manage, and monitor a network of microservices, also known a service mesh, on cloud orchestration platforms like Kubernetes.
 
 <br />
 
@@ -378,7 +378,7 @@ To access cluster component logs, you can choose to forward your logs to {{site.
 **How can I monitor the health and performance of my cluster?**</br>
 You can verify the health, capacity, and performance of your apps, services, and worker nodes by monitoring your cluster components and compute resources from the {{site.data.keyword.containerlong_notm}} console or CLI, such as the CPU and memory usage. To view more in-depth metrics for a standard cluster or your apps, you can configure a monitoring agent in your cluster to send metrics to {{site.data.keyword.mon_full_notm}}. You can also install third-party monitoring solutions, such as Prometheus or Weave Scope, or use the metrics that are provided in the Kubernetes dashboard. For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics).
 
-To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third-party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock](https://www.twistlock.com/){: external} or the [Sysdig Falco project](https://sysdig.com/opensource/falco/){: external}. Sysdig Falco is a separate tool and is not included if you choose to install the IBM-provided [Sysdig add-on](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster){: external} in your cluster.  
+To set up a host-based intrusion detection system (HIDS) and security event log monitoring (SELM), install third-party tools that are designed to monitor your cluster and containerized apps to detect intrusion or misuse, such as [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} or the [Sysdig Falco project](https://sysdig.com/opensource/falco/){: external}. Sysdig Falco is a separate tool and is not included if you choose to install the IBM-provided [Sysdig add-on](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster){: external} in your cluster.  
 
 **How can I audit events that happen in my cluster?**</br>
 You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-at_events#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
@@ -460,7 +460,7 @@ Even if you deployed a container from an image that passes the vulnerability che
   </br>
 
 **What options do I have to scan running containers for vulnerabilities?** </br>
-You can install third-party solutions in your cluster, such as [Twistlock](https://www.twistlock.com/){: external} or [StackRox](https://www.stackrox.com){: external} to scan running containers and block malicious activities when they are detected.
+You can install third-party solutions in your cluster, such as [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){: external} or [StackRox](https://www.stackrox.com){: external} to scan running containers and block malicious activities when they are detected.
 
 <br />
 

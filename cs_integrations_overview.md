@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, helm
 
@@ -144,7 +144,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |{{site.data.keyword.registrylong_notm}}|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.keymanagementservicefull_notm}}|Encrypt the Kubernetes secrets that are in your cluster by enabling {{site.data.keyword.keymanagementserviceshort}}. Encrypting your Kubernetes secrets prevents unauthorized users from accessing sensitive cluster information. To set up, see [Encrypting Kubernetes secrets by using {{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect). For more information, see the [{{site.data.keyword.keymanagementserviceshort}} documentation](/docs/key-protect?topic=key-protect-getting-started-tutorial){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |NeuVector|Protect containers with a cloud-native firewall by using [NeuVector](https://neuvector.com/){:external}. For more information, see [NeuVector Container Security](https://www.ibm.com/us-en/marketplace/neuvector-container-security){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|Twistlock|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){: external}, you can use [Twistlock](https://www.twistlock.com/){:external} to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|Twistlock|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){: external}, you can use [Twistlock](https://www.paloaltonetworks.com/prisma/cloud){:external} to manage firewalls, threat protection, and incident response. For more information, see [Twistlock on {{site.data.keyword.containerlong_notm}}](https://www.ibm.com/blogs/cloud-archive/2017/07/twistlock-ibm-bluemix-container-service/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Security services"}
 {: summary="The table shows available services that you can add to your cluster to add extra security capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 

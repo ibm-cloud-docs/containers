@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 18 June 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul>|
 | 16 June 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#10).|
 | 09 June 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Permissions**: Added a [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions) reference topic, and restructured cluster creation and user access topics to refer to this reference topic.</li><li>**New! Static routes add-on**: Added information about creating static routes on your worker nodes by enabling the [static routes cluster add-on](/docs/containers?topic=containers-static-routes).</li></ul> |
 | 08 June 2020 | **Version changelogs**: Worker node changelog documentation is available for Kubernetes [1.18.3_1515](/docs/containers?topic=containers-changelog#1183_1515), [1.17.6_1527](/docs/containers?topic=containers-changelog#1176_1527), [1.16.10_1534](/docs/containers?topic=containers-changelog#11610_1534), and [1.15.12_1541](/docs/containers?topic=containers-changelog#11512_1541). |

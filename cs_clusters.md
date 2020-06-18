@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-17"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -209,7 +209,7 @@ Create your single zone or multizone classic Kubernetes cluster by using the {{s
    1. Select the **Standard** cluster plan.
    2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster.
    3. Select **Classic infrastructure**.
-   4. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+   4. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned during cluster creation blocks the Kubernetes master from managing your cluster.
    5. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
    6. Select a resource group in which to create your cluster.
@@ -358,7 +358,7 @@ Create your single zone or multizone classic cluster by using the {{site.data.ke
    </tr>
    <tr>
    <td><code>--name <em>&lt;name&gt;</em></code></td>
-   <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+   <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </td>
    </tr>
    <tr>
@@ -537,7 +537,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    </tr>
    <tr>
    <td><code>--name <em>&lt;name&gt;</em></code></td>
-   <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+   <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </td>
    </tr>
    <tr>
@@ -652,7 +652,7 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
    2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster. To create a VPC cluster, you must select **Kubernetes version 1.17 or later**.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the Gen 2 VPC that you created earlier.
-   5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+   5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned during cluster creation blocks the Kubernetes master from managing your cluster.
    6. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
    7. Select a resource group in which to create your cluster.
@@ -748,7 +748,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     <tbody>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
-    <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+    <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </td>
     </tr>
     <tr>
@@ -862,7 +862,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    2. Select **Kubernetes** as your container platform and use the drop-down list to select the Kubernetes version that you want to use in your cluster.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the Gen 1 VPC that you created earlier.
-   5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+   5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned 6uring cluster creation blocks the Kubernetes master from managing your cluster.
    6. **Optional**: Add a [tag](/docs/resources?topic=resources-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
    7. Select a resource group in which to create your cluster.
@@ -933,7 +933,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
     <tbody>
     <tr>
     <td><code>--name <em>&lt;cluster_name&gt;</em></code></td>
-    <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+    <td>Specify a name for your cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </td>
     </tr>
     <tr>

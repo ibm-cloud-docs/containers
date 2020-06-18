@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -108,7 +108,7 @@ The four BookInfo microservices include:
   * `v2` calls the `ratings` microservice and displays ratings as 1 to 5 black stars.
   * `v3` calls the `ratings` microservice and displays ratings as 1 to 5 red stars.
 
-The BookInfo app is also already exposed on a public IP address by an Istio Gateway. To see the BookInfo architecture, check out the [Istio documentation](https://istio.io/docs/examples/bookinfo/){: external}.
+The BookInfo app is also already exposed on a public IP address by an Istio Gateway. To see the BookInfo architecture, check out the [Istio documentation](https://istio.io/latest/docs/examples/bookinfo/){: external}.
 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package, which includes the configuration files for the BookInfo app.

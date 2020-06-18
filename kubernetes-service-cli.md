@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -492,7 +492,7 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSI
 #### `ibmcloud ks cluster addon enable istio-sample-bookinfo`
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
 
-Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio](https://istio.io/docs/examples/bookinfo/){: external} into the <code>default</code> namespace.
+Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio](https://istio.io/latest/docs/examples/bookinfo/){: external} into the <code>default</code> namespace.
 {: shortdesc}
 
 This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio-mesh#bookinfo_setup).
@@ -761,7 +761,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <dd>Choose a flavor, or machine type, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual flavors vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters. In gateway-enabled classic clusters, you can choose the flavor for compute worker nodes only. Gateway worker nodes are created with the `u3c.2x4` flavor by default.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
@@ -887,7 +887,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
@@ -975,7 +975,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
@@ -6696,7 +6696,7 @@ Get a list of storage volumes.
 **Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 ```
-ibmcloud ks storage volume ls [--cluster CLUSTER_ID]
+ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zone ZONE] [--json]
 ```
 {: pre}
 
@@ -6705,6 +6705,14 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID]
 <dl>
 <dt><code>--cluster <em>CLUSTER_ID</em></code></dt>
 <dd>Optional: Specify the cluster ID. To list available clusters, run <code>ibmcloud ks cluster ls</code>.</dd>
+
+<dl>
+<dt><code>--provider <em>PROVIDER</em></code></dt>
+<dd>Optional: Specify the provider. Supported values are <code>classic</code>, <code>vpc-classic</code>, and <code>vpc-gen2</code>.</dd>
+
+<dl>
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>Optional: Specify the zone. To list available zones, run <code>ibmcloud ks locations</code>.</dd>
 
 <dt><code>--json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
