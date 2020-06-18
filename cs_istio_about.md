@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -76,7 +76,7 @@ The Istio version in the managed add-on is tested by {{site.data.keyword.cloud_n
 
 Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
-If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/docs/setup/platform-setup/ibm/){: external}.
+If you need to use the latest version of Istio or customize your Istio installation, you can install the open source version of Istio by following the steps in the [Quick Start with {{site.data.keyword.cloud_notm}} tutorial](https://istio.io/latest/docs/setup/platform-setup/ibm/){: external}.
 {: tip}
 
 <br />
@@ -88,7 +88,7 @@ If you need to use the latest version of Istio or customize your Istio installat
 In Kubernetes version 1.16 and later clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.4 or later.
 {: shortdesc}
 
-The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/docs/concepts/what-is-istio/){: external}.
+The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/docs/concepts/what-is-istio/){: external}.
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `Mixer` provides telemetry collection and policy controls.
   * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
@@ -111,5 +111,5 @@ Review the following limitations for the managed Istio add-on.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
-  * [Policy enforcement](https://istio.io/docs/tasks/policy-enforcement/enabling-policy/){: external}
+  * [Policy enforcement](https://istio.io/latest/docs/tasks/policy-enforcement/enabling-policy/){: external}
   * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/){: external}

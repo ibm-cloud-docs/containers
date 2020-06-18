@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -139,7 +139,7 @@ Authentication is required in order to view the Grafana and Kiali dashboards, bu
   ```
   {: pre}
 
-3. The Istio dashboard shows metrics for the traffic that you generate when you access your app in the service mesh a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/docs/tasks/observability/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
+3. The Istio dashboard shows metrics for the traffic that you generate when you access your app in the service mesh a few times. For more information about using the Istio Grafana dashboard, see [Viewing the Istio Dashboard](https://istio.io/latest/docs/tasks/observability/metrics/using-istio-dashboard/){: external} in the Istio open source documentation.
 
 ### Jaeger
 {: #jaeger}
@@ -156,7 +156,7 @@ Authentication is required in order to view the Grafana and Kiali dashboards, bu
   ```
   {: pre}
 
-3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/docs/tasks/observability/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
+3. If you installed BookInfo, you can select `productpage` from the **Service** list and click **Find Traces**. Traces for the traffic that you generated when you refreshed the product page a few times are shown. For more information about using Jaeger with Istio, see [Generating traces using the BookInfo sample](https://istio.io/latest/docs/tasks/observability/distributed-tracing/#generating-traces-using-the-bookinfo-sample){: external} in the Istio open source documentation.
 
 Want to change the 1% trace sampling rate? You can change this setting by [editing the `managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize).
 {: tip}
@@ -217,7 +217,7 @@ By default, no changes can be made to the Kiali dashboard in view-only mode. You
 ## Launching the ControlZ component inspection and Envoy sidecar dashboards
 {: #istio_inspect}
 
-To inspect specific components of Istio, launch the [ControlZ](https://istio.io/docs/ops/diagnostic-tools/controlz/){: external} and [Envoy](https://istio.io/docs/reference/commands/istioctl/#istioctl-dashboard-envoy){: external} dashboards.
+To inspect specific components of Istio, launch the [ControlZ](https://istio.io/latest/docs/ops/diagnostic-tools/controlz/){: external} and [Envoy](https://istio.io/latest/docs/reference/commands/istioctl/#istioctl-dashboard-envoy){: external} dashboards.
 {: shortdesc}
 
 The ControlZ dashboard accesses the Istio component ports to provide an interactive view into the internal state of each component. The Envoy dashboard provides configuration information and metrics for an Envoy sidecar proxy that runs in an app pod.

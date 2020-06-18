@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-17"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -492,7 +492,7 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSI
 #### `ibmcloud ks cluster addon enable istio-sample-bookinfo`
 {: #cs_cluster_addon_enable_istio_sample_bookinfo}
 
-Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio](https://istio.io/docs/examples/bookinfo/){: external} into the <code>default</code> namespace.
+Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio](https://istio.io/latest/docs/examples/bookinfo/){: external} into the <code>default</code> namespace.
 {: shortdesc}
 
 This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio-mesh#bookinfo_setup).
