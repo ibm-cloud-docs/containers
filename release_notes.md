@@ -46,7 +46,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| XX June 2020 | <ul><li>**Istio add-on**: [Version 1.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#15) is released.</li></ul>|
 | 18 June 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul>|
 | 16 June 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#10).|
 | 09 June 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Permissions**: Added a [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions) reference topic, and restructured cluster creation and user access topics to refer to this reference topic.</li><li>**New! Static routes add-on**: Added information about creating static routes on your worker nodes by enabling the [static routes cluster add-on](/docs/containers?topic=containers-static-routes).</li></ul> |
