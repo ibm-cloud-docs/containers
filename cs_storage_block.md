@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-18"
 
 keywords: kubernetes, iks
 
@@ -172,7 +172,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    {: note}
    
    ```
-   helm repo add iks-charts https://private.icr.io/helm/iks-charts
+   helm repo add iks-charts https://icr.io/helm/iks-charts
    ```
    {: pre}
 
