@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-19"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -579,8 +579,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
 To expose Istio-managed apps by using the `istio-ingressgateway` load balancer services, specify the `istio: ingressgateway` selector in your `Gateway` resource. For more information, see [Exposing Istio-managed apps](#istio_expose).
 
 
-
-## Exposing Istio-managed apps
+## Exposing the Istio ingress gateway with DNS
 {: #istio_expose}
 
 Publicly expose your Istio-managed apps by creating a DNS entry for the `istio-ingressgateway` load balancer and configuring the load balancer to forward traffic to your app.
@@ -593,7 +592,7 @@ In the following steps, you set up a subdomain through which your users can acce
 
 </br>
 
-### Exposing Istio-managed apps without TLS termination
+### Exposing the Istio ingress gateway with DNS without TLS termination
 {: #no-tls}
 
 **Before you begin:**
@@ -755,7 +754,7 @@ To publicly expose apps:
 
 </br>
 
-### Exposing Istio-managed apps with TLS termination
+### Exposing the Istio ingress gateway with DNS with TLS termination
 {: #tls}
 
 **Before you begin:**
