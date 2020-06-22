@@ -581,6 +581,8 @@ Steps:
 <br />
 
 
+
+
 ## Cluster remains in a pending State
 {: #cs_cluster_pending}
 
