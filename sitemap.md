@@ -654,7 +654,7 @@ subcollection: containers
 {: #sitemap_vpc_clusters}
 
 
-[VPC: Configuring subnets and IP addresses](/docs/containers?topic=containers-vpc-subnets)
+[Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
   * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
   * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
@@ -665,11 +665,10 @@ subcollection: containers
   * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
 * [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
 
-[VPC: Setting up VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
-* [Choosing a VPN solution](/docs/containers?topic=containers-vpc-vpnaas#options)
-  * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
-  * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
-  * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
+[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
+* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
+* [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
+* [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -1368,10 +1367,12 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for 1.18.4_1517, released 22 June 2020](/docs/containers?topic=containers-changelog#1184_1517)
   * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for 1.17.7_1529, released 22 June 2020](/docs/containers?topic=containers-changelog#1177_1529)
   * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog#1176_1527)
   * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog#1176_1526)
   * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
@@ -1385,6 +1386,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for 1.16.11_1536, released 22 June 2020](/docs/containers?topic=containers-changelog#11611_1536)
   * [Changelog for worker node fix pack 1.16.10_1534, released 8 June 2020](/docs/containers?topic=containers-changelog#11610_1534)
   * [Changelog for 1.16.10_1533, released 26 May 2020](/docs/containers?topic=containers-changelog#11610_1533)
   * [Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020](/docs/containers?topic=containers-changelog#1169_1531)
@@ -1405,6 +1407,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for 1.15.12_1543, released 22 June 2020](/docs/containers?topic=containers-changelog#11512_1543)
   * [Changelog for worker node fix pack 1.15.12_1541, released 8 June 2020](/docs/containers?topic=containers-changelog#11512_1541)
   * [Changelog for 1.15.12_1540, released 26 May 2020](/docs/containers?topic=containers-changelog#11512_1540)
   * [Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020](/docs/containers?topic=containers-changelog#11511_1538)
@@ -1495,7 +1498,7 @@ subcollection: containers
 
 [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 
-[Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
+[Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
 
 [Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
