@@ -585,7 +585,7 @@ Steps:
 {: #webhooks_update}
 
 {: tsSymptoms}
-During a master operation such as updating your cluster version, the cluster had a broken webhook application. Now, master operations cannot complete. You see an error seimilar to the following:
+During a master operation such as updating your cluster version, the cluster had a broken webhook application. Now, master operations cannot complete. You see an error similar to the following:
 
 ```
 Cannot complete cluster master operations because the cluster has a broken webhook application. For more information, see the troubleshooting docs: 'https://ibm.biz/master_webhook'
@@ -593,7 +593,7 @@ Cannot complete cluster master operations because the cluster has a broken webho
 {: screen}
 
 {: tsCauses}
-Your Kubernetes cluster has configurable webhook resources, validating or mutating admission webhooks, that can intercept and modify requests from various services in the cluster to the API server in the cluster master. Because webhooks can change or reject requests, broken webhooks can impact the functionality of the cluster in various ways, such as preventing you from updating the master version or other maintenance operations. For more information, see the [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
+Your cluster has configurable Kubernetes webhook resources, validating or mutating admission webhooks, that can intercept and modify requests from various services in the cluster to the API server in the cluster master. Because webhooks can change or reject requests, broken webhooks can impact the functionality of the cluster in various ways, such as preventing you from updating the master version or other maintenance operations. For more information, see the [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
 
 Potential causes for broken webhooks include:
 *   The underlying resource that issues the request is missing or unhealthy, such as a Kubernetes service, endpoint, or pod. 
