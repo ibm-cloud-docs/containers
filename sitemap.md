@@ -377,6 +377,7 @@ subcollection: containers
 * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
   * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
   * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
+* [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
 * [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
@@ -1644,6 +1645,7 @@ subcollection: containers
 * [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
+* [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update)
 * [Cluster remains in a pending State](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_pending)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_access)
 * [Cannot access resources in a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall)
