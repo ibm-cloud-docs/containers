@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -290,7 +290,7 @@ GET https://containers.cloud.ibm.com/global/v1/clusters
 
 </br>
 
-If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, review the [Deprecated region](#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.
+If you need to specify a region in an API call, remove the `/global` parameter from the path and pass the region name in the `X-Region` header. To list available regions, review the [Previous region](#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.
 
 <br />
 

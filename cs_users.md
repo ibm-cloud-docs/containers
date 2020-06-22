@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -536,7 +536,7 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
         <tr>
         <td>Region</td>
         <td>`--region`</td>
-        <td>You can scope the policy to apply to clusters within a particular region. If you do not specify a region or specific cluster ID, the policy applies to all clusters for all regions. To list available regions, review the [Deprecated region](/docs/containers?topic=containers-regions-and-zones#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.</td>
+        <td>You can scope the policy to apply to clusters within a particular region. If you do not specify a region or specific cluster ID, the policy applies to all clusters for all regions. To list available regions, review the [Previous region](/docs/containers?topic=containers-regions-and-zones#zones) column in the {{site.data.keyword.containerlong_notm}} locations table.</td>
         </tr>
         <tr>
         <td>Role</td>
