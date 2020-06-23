@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -1075,6 +1075,10 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
           <td>`Deploying`</td>
           <td>When you update the Kubernetes version of your worker node, your worker node is redeployed to install the updates. If you reload or reboot your worker node, the worker node is redeployed to automatically install the latest patch version. If your worker node is stuck in this state for a long time, continue with the next step to see whether a problem occurred during the deployment. </td>
        </tr>
+       <tr>
+         <td>`Deploy_failed`</td>
+         <td>Your worker node could not be deployed. List the details for the worker node to find the details for the failure by running `ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>`.</td>
+       </tr>
           <tr>
           <td>`Normal`</td>
           <td>Your worker node is fully provisioned and ready to be used in the cluster. This state is considered healthy and does not require an action from the user. **Note**: Although the worker nodes might be normal, other infrastructure resources, such as [networking](/docs/containers?topic=containers-cs_troubleshoot_network) and [storage](/docs/containers?topic=containers-cs_troubleshoot_storage), might still need attention.</td>
@@ -1085,7 +1089,7 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
         </tr>
         <tr>
           <td>`Provision_failed`</td>
-          <td>Your worker node could not be provisioned. Continue with the next step to find the details for the failure.</td>
+          <td>Your worker node could not be provisioned. List the details for the worker node to find the details for the failure by running `ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>`.</td>
         </tr>
      <tr>
           <td>`Reloading`</td>
@@ -1093,7 +1097,7 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
          </tr>
          <tr>
           <td>`Reloading_failed`</td>
-          <td>Your worker node could not be reloaded. Continue with the next step to find the details for the failure.</td>
+          <td>Your worker node could not be reloaded. List the details for the worker node to find the details for the failure by running `ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>`.</td>
         </tr>
         <tr>
           <td>`Reload_pending`</td>
