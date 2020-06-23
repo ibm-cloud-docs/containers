@@ -1455,6 +1455,7 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
+* [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
 * [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)
   * [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)

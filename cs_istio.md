@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -74,7 +74,7 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.5.0, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.5.6, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -89,7 +89,7 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.5.0       normal         Addon Ready
+  istio           1.5.6       normal         Addon Ready
   ```
   {: screen}
 
@@ -100,42 +100,9 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
     {: pre}
 
     ```
-    NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP                                                                    AGE
-    grafana                  ClusterIP      172.21.98.154    <none>          3000/TCP                                                       2m
-    istio-citadel            ClusterIP      172.21.221.65    <none>          8060/TCP,9093/TCP                                              2m
-    istio-egressgateway      ClusterIP      172.21.46.253    <none>          80/TCP,443/TCP                                                 2m
-    istio-galley             ClusterIP      172.21.125.77    <none>          443/TCP,9093/TCP                                               2m
-    istio-ingressgateway     LoadBalancer   172.21.230.230   169.46.56.125   80:31380/TCP,443:31390/TCP,31400:31400/TCP,5011:31323/TCP,
-                                                                              8060:32483/TCP,853:32628/TCP,15030:31601/TCP,15031:31915/TCP  2m
-    istio-pilot              ClusterIP      172.21.171.29    <none>          15010/TCP,15011/TCP,8080/TCP,9093/TCP                          2m
-    istio-policy             ClusterIP      172.21.140.180   <none>          9091/TCP,15004/TCP,9093/TCP                                    2m
-    istio-sidecar-injector   ClusterIP      172.21.248.36    <none>          443/TCP                                                        2m
-    istio-telemetry          ClusterIP      172.21.204.173   <none>          9091/TCP,15004/TCP,9093/TCP,42422/TCP                          2m
-    jaeger-agent             ClusterIP      None             <none>          5775/UDP,6831/UDP,6832/UDP                                     2m
-    jaeger-collector         ClusterIP      172.21.65.195    <none>          14267/TCP,14268/TCP                                            2m
-    jaeger-query             ClusterIP      172.21.171.199   <none>          16686/TCP                                                      2m
-    kiali                    ClusterIP      172.21.13.35     <none>          20001/TCP                                                      2m
-    prometheus               ClusterIP      172.21.105.229   <none>          9090/TCP                                                       2m
-    tracing                  ClusterIP      172.21.125.177   <none>          80/TCP                                                         2m
-    zipkin                   ClusterIP      172.21.1.77      <none>          9411/TCP                                                       2m
-    ```
-    {: screen}
-
-    ```
     kubectl get pods -n istio-system
     ```
     {: pre}
-
-    ```
-    NAME                                      READY   STATUS    RESTARTS   AGE
-    istio-system    istio-egressgateway-6d4667f999-gjh94                  1/1     Running     0          61m
-    istio-system    istio-egressgateway-6d4667f999-txh56                  1/1     Running     0          61m
-    istio-system    istio-ingressgateway-7bbf8d885-b9xgp                  1/1     Running     0          61m
-    istio-system    istio-ingressgateway-7bbf8d885-xhkv6                  1/1     Running     0          61m
-    istio-system    istiod-5b9b5bfbb7-jvcjz                               1/1     Running     0          60m
-    istio-system    istiod-5b9b5bfbb7-khcht                               1/1     Running     0          60m
-    ```
-    {: screen}
 
 5. Next, you can include your apps in the [Istio service mesh](/docs/containers?topic=containers-istio-mesh#istio_sidecar) or set up visualization of your Istio mesh by [creating a secret for Kiali](/docs/containers?topic=containers-istio-health#kiali).
 
@@ -155,12 +122,12 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 
 2. Download the version of `istioctl` that matches your cluster's Istio version.
   ```
-  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.0 sh -
+  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
   ```
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.5.0
+  cd istio-1.5.6
   ```
   {: pre}
 4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -402,16 +369,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.4.8
   cluster-local-gateway version:
-  citadel version: 1.5.0
-  egressgateway version: 1.5.0
-  egressgateway version: 1.5.0
-  galley version: 1.5.0
-  ingressgateway version: 1.5.0
-  ingressgateway version: 1.5.0
-  pilot version: 1.5.0
-  policy version: 1.5.0
+  citadel version: 1.5.6
+  egressgateway version: 1.5.6
+  egressgateway version: 1.5.6
+  galley version: 1.5.6
+  ingressgateway version: 1.5.6
+  ingressgateway version: 1.5.6
+  pilot version: 1.5.6
+  policy version: 1.5.6
   sidecar-injector version: 1.4.8
-  telemetry version: 1.5.0
+  telemetry version: 1.5.6
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.4.8"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.4.9"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.4.8"}
@@ -422,12 +389,12 @@ For example, the patch version of your add-on might be updated automatically by 
 2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.0 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.5.0
+      cd istio-1.5.6
       ```
       {: pre}
     3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -555,7 +522,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.5.0
+    cd <filepath>/istio-1.5.6
     ```
     {: pre}
 
