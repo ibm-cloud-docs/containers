@@ -235,9 +235,9 @@ subcollection: containers
 * [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
 * [Lesson 1: Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
 * [Lesson 2: Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-* [Lesson 3: Allow incoming traffic from a whitelisted IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-* [Lesson 4: Deny incoming traffic from blacklisted IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-* [Lesson 5: Logging blocked traffic from blacklisted IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+* [Lesson 3: Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+* [Lesson 4: Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+* [Lesson 5: Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
@@ -531,8 +531,8 @@ subcollection: containers
   * [Opening required ports in a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
   * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
-* [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
-* [Updating IAM whitelists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_whitelist)
+* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_whitelist)
 
 [Classic: Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge)
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
@@ -562,7 +562,7 @@ subcollection: containers
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-* [Whitelisting your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
+* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)

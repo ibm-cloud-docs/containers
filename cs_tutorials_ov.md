@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks
 
@@ -280,7 +280,7 @@ subcollection: containers
                 Block unwanted network traffic with Calico policies
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn how to use Calico policies to whitelist or blacklist network traffic from and to certain IP addresses. </p></br>
+                  </br> <p>Learn how to use Calico policies to allow network traffic from and to certain IP addresses. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/cs_tutorial_policies_L4.png" alt="Block incoming network traffic with Calico network policies" />
