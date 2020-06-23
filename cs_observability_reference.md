@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-23"
 
 keywords: observability commands, observability cli, observability plug-in, logging commands, monitoring commands, logging cli, monitoring cli, logdna commands, sysdig commands, logging config, monitoring config
 
@@ -102,6 +102,7 @@ Delete a LogDNA logging configuration from your cluster.
 
 
 Existing logging configurations that you manually set up and that were not created with the {{site.data.keyword.containerlong_notm}} observability plug-in are cannot be deleted with this command.
+{: note}
 
 
 
