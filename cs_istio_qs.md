@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -64,7 +64,7 @@ Set up the managed Istio add-on in your cluster.
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.5.0       normal         Addon Ready
+  istio           1.5.6       normal         Addon Ready
   ```
   {: screen}
 
@@ -119,7 +119,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.5.0
+    cd istio-1.5.6
     ```
     {: pre}
 

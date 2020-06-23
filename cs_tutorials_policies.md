@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks
 
@@ -41,16 +41,16 @@ subcollection: containers
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 {: shortdesc}
 
-However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://docs.projectcalico.org/security/host-forwarded-traffic){: external} to whitelist or blacklist traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to whitelist or blacklist source IP addresses. For most scenarios, whitelisting provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. Blacklisting is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
+However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://docs.projectcalico.org/security/host-forwarded-traffic){: external} to allow or block traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to allow or block source IP addresses. For most scenarios, allowing specific traffic provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. denying specific traffic is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 
-In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic that hits your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both whitelist and blacklist Calico policies.
+In this scenario, you play the role of a networking administrator for a PR firm, and you notice some unusual traffic that hits your apps. The lessons in this tutorial walk you through creating a sample web server app, exposing the app by using a network load balancer (NLB) service, and protecting the app from unwanted unusual traffic with both allowlist and blocklist Calico policies.
 
 ## Objectives
 {: #policies_objectives}
 
 - Learn to block all incoming traffic to all node ports by creating a high-order Pre-DNAT policy.
-- Learn to allow whitelisted source IP addresses to access the NLB public IP and port by creating a low-order Pre-DNAT policy. Lower-order policies override higher-order policies.
-- Learn to block blacklisted source IP addresses from accessing the NLB public IP and port by creating a low-order Pre-DNAT policy.
+- Learn to allow specific source IP addresses to access the NLB public IP and port by creating a low-order Pre-DNAT policy. Lower-order policies override higher-order policies.
+- Learn to block specific source IP addresses from accessing the NLB public IP and port by creating a low-order Pre-DNAT policy.
 
 ## Time required
 {: #policies_time}
@@ -362,16 +362,15 @@ The following image shows how traffic is permitted to the NLB but not to node po
 
 Great! At this point, your app is exposed to the public internet from the public NLB port only. Traffic to the public node ports is blocked. Your cluster is partially locked down from unwanted traffic.
 
-Next, you can create and apply Calico policies to whitelist traffic from certain source IPs.
+Next, you can create and apply Calico policies to allow traffic from only certain source IPs.
 
-## Lesson 3: Allow incoming traffic from a whitelisted IP to the NLB
+## Lesson 3: Allow incoming traffic from a specific IP to the NLB
 {: #lesson3}
 
-You now decide to completely lock down traffic to the PR firm's cluster and test access by whitelisting only your own computer's IP address.
+You now decide to completely lock down traffic to the PR firm's cluster and test access by allowing only your own computer's IP address.
 {: shortdesc}
 
-First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that whitelists your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is
-blocked and only traffic from your whitelisted system IP is allowed:
+First, in addition to the node ports, you must block all incoming traffic to the NLB exposing the app. Then, you can create a policy that allows your system's IP address. At the end of Lesson 3, all traffic to the public node ports and NLB is blocked and only traffic from your allowed system IP is allowed:
 
 <img src="images/cs_tutorial_policies_L3.png" width="500" alt="The webserver app is exposed by public NLB to your system IP only." style="width:550px; border-style: none"/>
 
@@ -430,12 +429,12 @@ blocked and only traffic from your whitelisted system IP is allowed:
     ```
     {: pre}
 
-4. In a text editor, create a low-order Pre-DNAT policy called `whitelist.yaml` to allow traffic from your system's IP to the NLB IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP. If you can't remember your system IP, you can run `curl ifconfig.co`.
+4. In a text editor, create a low-order Pre-DNAT policy called `allowlist.yaml` to allow traffic from your system's IP to the NLB IP address and port. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP. If you can't remember your system IP, you can run `curl ifconfig.co`.
     ```yaml
     apiVersion: projectcalico.org/v3
     kind: GlobalNetworkPolicy
     metadata:
-      name: whitelist
+      name: allowlist
     spec:
       applyOnForward: true
       preDNAT: true
@@ -461,17 +460,17 @@ blocked and only traffic from your whitelisted system IP is allowed:
     - Linux:
 
       ```
-      calicoctl apply -f filepath/whitelist.yaml
+      calicoctl apply -f filepath/allowlist.yaml
       ```
       {: pre}
 
     - Windows and OS X:
 
       ```
-      calicoctl apply -f filepath/whitelist.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f filepath/allowlist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-  Your system's IP address is now whitelisted.
+  Your system's IP address is now allowed.
 
 6. Using the value from your cheat sheet, verify that you now can access the public NLB IP address.
     ```
@@ -484,28 +483,28 @@ blocked and only traffic from your whitelisted system IP is allowed:
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    The connection times out because that system's IP address isn't whitelisted.
+    The connection times out because that system's IP address isn't allowed.
 
-At this point, all traffic to the public node ports and NLB is blocked. Only traffic from your whitelisted system IP is allowed.
+At this point, all traffic to the public node ports and NLB is blocked. Only traffic from your allowed system IP is allowed.
 
-## Lesson 4: Deny incoming traffic from blacklisted IPs to the NLB
+## Lesson 4: Deny incoming traffic from specific IPs to the NLB
 {: #lesson4}
 
-In the previous lesson, you blocked all traffic and whitelisted only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blacklisting is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
+In the previous lesson, you blocked all traffic and allowed only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blocklisting is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
 {: shortdesc}
 
-In this lesson, test blacklisting by blocking traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your blacklisted system IP to the NLB is blocked:
+In this lesson, block traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked:
 
 <img src="images/cs_tutorial_policies_L4.png" width="550" alt="The webserver app is exposed by public NLB to the internet. Only traffic from your system IP is blocked." style="width:550px; border-style: none"/>
 
-1. Clean up the whitelist policies you created in the previous lesson.
+1. Clean up the allowlist policies you created in the previous lesson.
     - Linux:
       ```
       calicoctl delete GlobalNetworkPolicy deny-lb-port-80
       ```
       {: pre}
       ```
-      calicoctl delete GlobalNetworkPolicy whitelist
+      calicoctl delete GlobalNetworkPolicy allowlist
       ```
       {: pre}
 
@@ -515,18 +514,18 @@ In this lesson, test blacklisting by blocking traffic from your own system's sou
       ```
       {: pre}
       ```
-      calicoctl delete GlobalNetworkPolicy whitelist --config=filepath/calicoctl.cfg
+      calicoctl delete GlobalNetworkPolicy allowlist --config=filepath/calicoctl.cfg
       ```
       {: pre}
 
     Now, all incoming TCP and UDP traffic from any source IP to the NLB IP address and port is permitted again.
 
-2. To deny all incoming TCP and UDP traffic from your system's source IP address to the NLB IP address and port, create a low-order pre-DNAT policy called `blacklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP.
+2. To deny all incoming TCP and UDP traffic from your system's source IP address to the NLB IP address and port, create a low-order pre-DNAT policy called `blocklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP.
   ```yaml
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
   metadata:
-    name: blacklist
+    name: blocklist
   spec:
     applyOnForward: true
     preDNAT: true
@@ -562,36 +561,36 @@ In this lesson, test blacklisting by blocking traffic from your own system's sou
     - Linux:
 
       ```
-      calicoctl apply -f filepath/blacklist.yaml
+      calicoctl apply -f filepath/blocklist.yaml
       ```
       {: pre}
 
     - Windows and OS X:
 
       ```
-      calicoctl apply -f filepath/blacklist.yaml --config=filepath/calicoctl.cfg
+      calicoctl apply -f filepath/blocklist.yaml --config=filepath/calicoctl.cfg
       ```
       {: pre}
-  Your system's IP address is now blacklisted.
+  Your system's IP address is now blocked.
 
-4. Using the value from your cheat sheet, verify from your system that you can't access the NLB IP because your system's IP is blacklisted.
+4. Using the value from your cheat sheet, verify from your system that you can't access the NLB IP because your system's IP is blocked.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
-    At this point, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your blacklisted system IP to the NLB is blocked.
+    At this point, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked.
 
-Great work! You successfully controlled traffic into your app by using Calico Pre-DNAT policies to blacklist source IPs.
+Great work! You successfully controlled traffic into your app by using Calico Pre-DNAT policies to block source IPs.
 
-## Lesson 5: Logging blocked traffic from blacklisted IPs to the NLB
+## Lesson 5: Logging blocked traffic from specific IPs to the NLB
 {: #lesson5}
 
-In the previous lesson, you blacklisted traffic from your system IP to the NLB. In this lesson, you can learn how to log the denied traffic requests.
+In the previous lesson, you blocked traffic from your system IP to the NLB. In this lesson, you can learn how to log the denied traffic requests.
 {: shortdesc}
 
-In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blacklist policy denies an attempted action on the NLB IP.
+In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blocklist policy denies an attempted action on the NLB IP.
 
-1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blacklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower-order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blacklist policy. Packets from your IP are logged by this policy before they try to match the `blacklist` policy rule and are denied.
+1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blocklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower-order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blocklist policy. Packets from your IP are logged by this policy before they try to match the `blocklist` policy rule and are denied.
   ```yaml
   apiVersion: projectcalico.org/v3
   kind: GlobalNetworkPolicy
@@ -654,19 +653,19 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
   ```
   {: screen}
 
-Nice! You set up logging so that blacklisted traffic can be monitored more easily.
+Nice! You set up logging so that blocked traffic can be monitored more easily.
 
-If you want to clean up the blacklist and the log policies:
-1. Clean up the blacklist policy.
+If you want to clean up the blocklist and the log policies:
+1. Clean up the blocklist policy.
     - Linux:
       ```
-      calicoctl delete GlobalNetworkPolicy blacklist
+      calicoctl delete GlobalNetworkPolicy blocklist
       ```
       {: pre}
 
     - Windows and OS X:
       ```
-      calicoctl delete GlobalNetworkPolicy blacklist --config=filepath/calicoctl.cfg
+      calicoctl delete GlobalNetworkPolicy blocklist --config=filepath/calicoctl.cfg
       ```
       {: pre}
 

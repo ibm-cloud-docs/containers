@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-19"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -55,7 +55,7 @@ For example, using Istio in your microservice mesh can help you:
 - Achieve better visibility into the apps that run in your cluster.
 - Deploy canary versions of apps and control the traffic that is sent to them.
 - Enable automatic encryption of data that is transferred between microservices.
-- Enforce rate limiting and attribute-based whitelist and blacklist policies.
+- Enforce rate limiting and attribute-based allowlist and blocklist policies.
 
 An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components).
 
@@ -92,7 +92,7 @@ The Istio add-on installs the core components of Istio. For more information abo
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `Mixer` provides telemetry collection and policy controls.
   * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
-  * Policy pods enforce access control, including rate limiting and applying whitelist and blacklist policies.
+  * Policy pods enforce access control, including rate limiting and applying allowlist and blocklist policies.
 * `Pilot` provides service discovery for the Envoy sidecars and configures the traffic management routing rules for sidecars.
 * `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
 * `Galley` validates configuration changes for the other Istio control plane components.

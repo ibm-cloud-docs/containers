@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-23"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -119,10 +119,10 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 ## Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}
 {: #hybrid_dl}
 
-With [{{site.data.keyword.BluDirectLink}}](/docs/dl?topic=dl-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+With [{{site.data.keyword.BluDirectLink}}](/docs/dl?topic=dl-dl-about), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 {: shortdesc}
 
-To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.data.keyword.dl_full_notm}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl#get-started-solution-to-order) in the {{site.data.keyword.dl_full_notm}} documentation.
+To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.data.keyword.dl_full_notm}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) in the {{site.data.keyword.dl_full_notm}} documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
