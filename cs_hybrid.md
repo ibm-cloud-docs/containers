@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, vpn, private cloud, icp
 
@@ -44,7 +44,7 @@ If you have an {{site.data.keyword.cloud}} Private account, you can use it with 
 You understand the [{{site.data.keyword.cloud_notm}} offerings](/docs/containers?topic=containers-cs_ov#differentiation) and developed your Kubernetes strategy for what [workloads to run on the cloud](/docs/containers?topic=containers-strategy#cloud_workloads). Now, you can connect your public and private cloud by using the strongSwan VPN service or {{site.data.keyword.BluDirectLink}}.
 
 * The [strongSwan VPN service](#hybrid_vpn) securely connects your Kubernetes cluster with an on-premises network through a secure end-to-end communication channel over the internet that is based on the industry-standard Internet Protocol Security (IPSec) protocol suite.
-* With [{{site.data.keyword.cloud_notm}} Direct Link](#hybrid_dl), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+* With [{{site.data.keyword.dl_full_notm}}](#hybrid_dl), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 
 After you connect your public and private cloud, you can [reuse your private packages for public containers](#hybrid_ppa_importer).
 
@@ -116,19 +116,13 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 *   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 
 
-## Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link
+## Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}
 {: #hybrid_dl}
 
-With [{{site.data.keyword.BluDirectLink}}](/docs/direct-link?topic=direct-link-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
+With [{{site.data.keyword.BluDirectLink}}](/docs/dl?topic=dl-about-ibm-cloud-direct-link), you can create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.
 {: shortdesc}
 
-To connect your public cloud and your on-premises {{site.data.keyword.Bluemix}} Private instance, you can use one of the four offerings:
-* {{site.data.keyword.cloud_notm}} Direct Link Connect
-* {{site.data.keyword.cloud_notm}} Direct Link Exchange
-* {{site.data.keyword.cloud_notm}} Direct Link Dedicated
-* {{site.data.keyword.cloud_notm}} Direct Link Dedicated Hosting
-
-To choose an {{site.data.keyword.cloud_notm}} Direct Link offering and set up an {{site.data.keyword.cloud_notm}} Direct Link connection, see [Get Started with {{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link#get-started-solution-to-order) in the {{site.data.keyword.cloud_notm}} Direct Link documentation.
+To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.data.keyword.dl_full_notm}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl#get-started-solution-to-order) in the {{site.data.keyword.dl_full_notm}} documentation.
 
 **What's next?**</br>
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).

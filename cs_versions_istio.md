@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-19"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -45,7 +45,30 @@ View information for patch and minor version updates to the [managed Istio add-o
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.4 to 1.5, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor).
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
-## Changelog for 1.5, released 19 May 2020
+## Version 1.5
+{: #v15}
+
+### Differences between version 1.5 of managed and community Istio
+{: #diff-managed-comm}
+
+Review the following differences between the installation profiles of version 1.5 of the managed {{site.data.keyword.containerlong_notm}} Istio and version 1.5 of the community Istio.
+{: shortdesc}
+
+To see options for changing settings in the managed version of Istio, see [Customizing the version 1.5 Istio installation](/docs/containers?topic=containers-istio#customize).
+{: tip}
+
+| Setting | Differences in the managed Istio add-on |
+| ------- | --------------------------------------- |
+| `egressGateways[name: istio-egressgateway].enabled: true` | In the managed Istio add-on, the egress gateway is enabled by default. |
+| `istiod`, `istio-ingressgateway`, and `istio-egressgateway` | In the managed Istio add-on, `istiod` and all Istio ingress and egress gateways are set up for basic high availability support. High availability support on these components includes the following settings by default: node anti-affinity, `HorizontalPodAutoscaler`, `PodDisruptionBudget`, and automatic scaling of replicas. |
+| `prometheus.enabled: false` | In the managed Istio add-on, the Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that cannot be adequately addressed for a production environment. |
+| `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio. |
+{: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
+{: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+
+
+### Changelog for 1.5, released 19 May 2020
 {: #15}
 
 The following table shows the changes that are included in version 1.5 of the managed Istio add-on.
@@ -60,7 +83,10 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.9" caption-side="top"}
 
-## Changelog for 1.4.9, released 18 May 2020
+## Version 1.4
+{: #v14}
+
+### Changelog for 1.4.9, released 18 May 2020
 {: #149}
 
 The following table shows the changes that are included in version 1.4.9 of the managed Istio add-on.
@@ -72,7 +98,7 @@ The following table shows the changes that are included in version 1.4.9 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.8" caption-side="top"}
 
-## Changelog for 1.4.8, released 30 April 2020
+### Changelog for 1.4.8, released 30 April 2020
 {: #148}
 
 The following table shows the changes that are included in version 1.4.8 of the managed Istio add-on.
@@ -84,7 +110,7 @@ The following table shows the changes that are included in version 1.4.8 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.7" caption-side="top"}
 
-## Changelog for 1.4.7, released 01 April 2020
+### Changelog for 1.4.7, released 01 April 2020
 {: #147}
 
 The following table shows the changes that are included in version 1.4.7 of the managed Istio add-on.
@@ -96,7 +122,7 @@ The following table shows the changes that are included in version 1.4.7 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.6" caption-side="top"}
 
-## Changelog for 1.4.6, released 09 March 2020
+### Changelog for 1.4.6, released 09 March 2020
 {: #146}
 
 The following table shows the changes that are included in version 1.4.6 of the managed Istio add-on.
@@ -108,7 +134,7 @@ The following table shows the changes that are included in version 1.4.6 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.5" caption-side="top"}
 
-## Changelog for 1.4.5, released 21 February 2020
+### Changelog for 1.4.5, released 21 February 2020
 {: #145}
 
 The following table shows the changes that are included in version 1.4.5 of the managed Istio add-on.
@@ -120,7 +146,7 @@ The following table shows the changes that are included in version 1.4.5 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.4" caption-side="top"}
 
-## Changelog for 1.4.4, released 14 February 2020
+### Changelog for 1.4.4, released 14 February 2020
 {: #144}
 
 The following table shows the changes that are included in version 1.4.4 of the managed Istio add-on.
@@ -132,7 +158,7 @@ The following table shows the changes that are included in version 1.4.4 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.3" caption-side="top"}
 
-## Changelog for 1.4.3, released 16 January 2020
+### Changelog for 1.4.3, released 16 January 2020
 {: #143}
 
 The following table shows the changes that are included in version 1.4.3 of the managed Istio add-on.
@@ -144,7 +170,7 @@ The following table shows the changes that are included in version 1.4.3 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.2" caption-side="top"}
 
-## Changelog for 1.4.2, released 16 December 2020
+### Changelog for 1.4.2, released 16 December 2020
 {: #142}
 
 The following table shows the changes that are included in version 1.4.2 of the managed Istio add-on.

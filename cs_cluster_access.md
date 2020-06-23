@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, clusters
 
@@ -113,7 +113,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 ## Accessing clusters through the private service endpoint
 {: #access_private_se}
 
-The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example) for VPC infrastructure, or for classic infrastructure, a [VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.cloud_notm}} Direct Link. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.cloud_notm}} Direct Link connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
+The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example) for VPC infrastructure, or for classic infrastructure, a [VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.dl_full_notm}}. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.dl_full_notm}} connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
 {: shortdesc}
 
 ### Accessing classic clusters through the private service endpoint
@@ -176,7 +176,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
    ```
    {: codeblock}
 
-4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.cloud_notm}} Direct Link, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
+4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
   * If you enabled the private service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
     1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2.  From the menu bar, select the account that you want to use.
@@ -233,7 +233,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: codeblock}
 
-6. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.cloud_notm}} Direct Link](/docs/direct-link?topic=direct-link-get-started-with-ibm-cloud-direct-link) connection.
+6. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) connection.
 
 7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
@@ -258,8 +258,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.17.6
-  Server Version: v1.17.6
+  Client Version: v1.17.7
+  Server Version: v1.17.7
   ```
   {: screen}
 
@@ -321,7 +321,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
    ```
    {: codeblock}
 
-5. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.cloud_notm}} Direct Link, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
+5. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
   * **If you enabled the private service endpoint only**, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
     1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2.  From the menu bar, select the account that you want to use.
@@ -372,8 +372,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.17.6
-  Server Version: v1.17.6
+  Client Version: v1.17.7
+  Server Version: v1.17.7
   ```
   {: screen}
 
@@ -382,6 +382,48 @@ The Kubernetes master is accessible through the private service endpoint if auth
 <br />
 
 
+
+<br />
+
+
+## Accessing the cluster master via admission controllers and webhooks
+{: #access_webhooks}
+
+Admission controllers intercept authorized API requests from various Kubernetes resources before the requests reach the API server that runs in your {{site.data.keyword.containerlong_notm}} cluster master. Mutating admission webhooks might modify the request, and validating admission webhooks check the request. If either webhook rejects a request, the entire request fails. Advanced features, whether built-in or added on, often require admission controllers as a security precaution and to control what requests are sent to the API server. For more information, see [Using Admission Controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/){: external} and [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
+
+**What are the default admission controllers in my cluster?**<br>
+Review the order of default admission controllers by cluster version in the [`kube-apiserver` component reference information](/docs/containers?topic=containers-service-settings#kube-apiserver).
+
+<br>
+
+**Can I create my own admission controllers?**<br>
+Yes, see the [Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} documentation for more information. 
+
+As noted in the Kubernetes documentation, you can use admission controllers for operations that are otherwise handled by the control plane. As such, take great caution when you configure a custom admission controller. You are responsible for any changes that happen in your cluster because of a custom admission controller.
+{: important}
+
+Keep in mind the following considerations when you configure a webhook.
+
+* Create [replica pods](/docs/containers?topic=containers-app#replicaset) for the webhook so that if one pod goes down, the webhook can still process requests from your resources. Spread the replica pods across zones, if possible.
+* Set appropriate CPU and memory [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) for your webhook.
+* Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
+* Set pod [anti-affinity scheduling rules](/docs/containers?topic=containers-app#affinity) to prefer that your webhook pods run on different worker nodes and zones when possible. In clusters that run Kubernetes version 1.18 or later, you might use [pod topology](https://kubernetes.io/docs/concepts/workloads/pods/pod-topology-spread-constraints/){: external} instead. However, avoid [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} or forced affinity that might restrict where the webhook pods can be scheduled.
+* [Set pod priority](/docs/containers?topic=containers-pod_priority) to `system-cluster-critical` for the webhook pods so that other pods cannot take resources from your webhook pods.
+* Scope your webhook to the appropriate namespace. Avoid webhooks that process resources that run in system-critical namespaces that are set up in your cluster by default, such as `kube-system`, `ibm-system`, `ibm-operators`, `calico-system`, `tigera-operator` and `openshift-*` namespaces.
+* Make sure that the worker nodes in your cluster are [the right size for running your webhook applications](/docs/containers?topic=containers-strategy#sizing). For example, if your pods request more CPU or memory than the worker node can provide, the pods are not scheduled.
+
+<br>
+
+**What other types of apps use admission controllers?**<br>
+Many cluster add-ons, plug-ins, and other third-party extensions create custom admission controllers. Some common ones include:
+*   [Container image security enforcement](/docs/Registry?topic=Registry-security_enforce).
+*   [Istio](/docs/containers?topic=containers-istio-about).
+*   [Knative](/docs/containers?topic=containers-serverless-apps-knative).
+
+<br>
+
+**I need help with a broken webhook. What can I do?**<br>
+See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update).
 
 
 

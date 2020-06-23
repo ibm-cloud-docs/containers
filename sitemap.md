@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-19"
+lastupdated: "2020-06-22"
 
 keywords: containers
 subcollection: containers
@@ -377,6 +377,7 @@ subcollection: containers
 * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
   * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
   * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
+* [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
 * [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
@@ -654,7 +655,7 @@ subcollection: containers
 {: #sitemap_vpc_clusters}
 
 
-[VPC: Configuring subnets and IP addresses](/docs/containers?topic=containers-vpc-subnets)
+[Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
   * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
   * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
@@ -665,11 +666,10 @@ subcollection: containers
   * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
 * [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
 
-[VPC: Setting up VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
-* [Choosing a VPN solution](/docs/containers?topic=containers-vpc-vpnaas#options)
-  * [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
-  * [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
-  * [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
+[Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
+* [Communication with resources in on-premises data centers](/docs/containers?topic=containers-vpc-vpnaas#onprem)
+* [Communication with resources in other VPCs](/docs/containers?topic=containers-vpc-vpnaas#vpc-vpc)
+* [Communication with {{site.data.keyword.cloud_notm}} classic resources](/docs/containers?topic=containers-vpc-vpnaas#vpc-classic)
 
 [Configuring the cluster DNS provider](/docs/containers?topic=containers-cluster_dns)
 * [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale)
@@ -884,9 +884,9 @@ subcollection: containers
   * [Enabling automatic sidecar injection](/docs/containers?topic=containers-istio-mesh#istio_sidecar_automatic)
   * [Manually injecting sidecars](/docs/containers?topic=containers-istio-mesh#istio_sidecar_manual)
 * [Enabling or disabling public Istio load balancers](/docs/containers?topic=containers-istio-mesh#config-gateways)
-* [Exposing Istio-managed apps](/docs/containers?topic=containers-istio-mesh#istio_expose)
-  * [Exposing Istio-managed apps without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
-  * [Exposing Istio-managed apps with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
+* [Exposing the Istio ingress gateway with DNS](/docs/containers?topic=containers-istio-mesh#istio_expose)
+  * [Exposing the Istio ingress gateway with DNS without TLS termination](/docs/containers?topic=containers-istio-mesh#no-tls)
+  * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
@@ -1368,10 +1368,12 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for 1.18.4_1517, released 22 June 2020](/docs/containers?topic=containers-changelog#1184_1517)
   * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for 1.17.7_1529, released 22 June 2020](/docs/containers?topic=containers-changelog#1177_1529)
   * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog#1176_1527)
   * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog#1176_1526)
   * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
@@ -1385,6 +1387,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for 1.16.11_1536, released 22 June 2020](/docs/containers?topic=containers-changelog#11611_1536)
   * [Changelog for worker node fix pack 1.16.10_1534, released 8 June 2020](/docs/containers?topic=containers-changelog#11610_1534)
   * [Changelog for 1.16.10_1533, released 26 May 2020](/docs/containers?topic=containers-changelog#11610_1533)
   * [Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020](/docs/containers?topic=containers-changelog#1169_1531)
@@ -1405,6 +1408,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for 1.15.12_1543, released 22 June 2020](/docs/containers?topic=containers-changelog#11512_1543)
   * [Changelog for worker node fix pack 1.15.12_1541, released 8 June 2020](/docs/containers?topic=containers-changelog#11512_1541)
   * [Changelog for 1.15.12_1540, released 26 May 2020](/docs/containers?topic=containers-changelog#11512_1540)
   * [Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020](/docs/containers?topic=containers-changelog#11511_1538)
@@ -1449,15 +1453,18 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
-* [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
-* [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
-* [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
-* [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
-* [Changelog for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
-* [Changelog for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
-* [Changelog for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
-* [Changelog for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
-* [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
+* [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
+  * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
+  * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
+* [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)
+  * [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
+  * [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
+  * [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
+  * [Changelog for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
+  * [Changelog for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
+  * [Changelog for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
+  * [Changelog for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
+  * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
 * [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
@@ -1492,7 +1499,7 @@ subcollection: containers
 
 [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
 
-[Connecting your public and private cloud with {{site.data.keyword.cloud_notm}} Direct Link](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
+[Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
 
 [Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
 
@@ -1638,6 +1645,7 @@ subcollection: containers
 * [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
+* [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update)
 * [Cluster remains in a pending State](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_pending)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_access)
 * [Cannot access resources in a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall)

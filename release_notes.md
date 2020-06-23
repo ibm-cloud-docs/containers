@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 22 June 2020 | **Version changelogs**: Changelog documentation is available for Kubernetes version [1.18.4_1517](/docs/containers?topic=containers-changelog#1184_1517), [1.17.7_1529](/docs/containers?topic=containers-changelog#1177_1529), [1.16.11_1536](/docs/containers?topic=containers-changelog#11611_1536), and [1.15.12_1543](/docs/containers?topic=containers-changelog#11512_1543).
 | 18 June 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`ingress-auth` image build to 413](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li></ul>|
 | 16 June 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.99](/docs/containers?topic=containers-cs_cli_changelog#10).|
 | 09 June 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.94](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Permissions**: Added a [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions) reference topic, and restructured cluster creation and user access topics to refer to this reference topic.</li><li>**New! Static routes add-on**: Added information about creating static routes on your worker nodes by enabling the [static routes cluster add-on](/docs/containers?topic=containers-static-routes).</li></ul> |
@@ -574,8 +575,8 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 <tr>
   <td>07 June 2019</td>
   <td><ul>
-  <li><strong>Access to the Kubernetes master through the private service endpoint</strong>: Added [steps](/docs/containers?topic=containers-access_cluster#access_private_se) to expose the private service endpoint through a private load balancer. After you complete these steps, your authorized cluster users can access the Kubernetes master from a VPN or {{site.data.keyword.cloud_notm}} Direct Link connection.</li>
-  <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.cloud_notm}} Direct Link to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
+  <li><strong>Access to the Kubernetes master through the private service endpoint</strong>: Added [steps](/docs/containers?topic=containers-access_cluster#access_private_se) to expose the private service endpoint through a private load balancer. After you complete these steps, your authorized cluster users can access the Kubernetes master from a VPN or {{site.data.keyword.dl_full_notm}} connection.</li>
+  <li><strong>{{site.data.keyword.BluDirectLink}}</strong>: Added {{site.data.keyword.dl_full_notm}} to the [VPN connectivity](/docs/containers?topic=containers-vpn) and [hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp) pages as a way to create a direct, private connection between your remote network environments and {{site.data.keyword.containerlong_notm}} without routing over the public internet.</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `ingress-auth` image to build 330](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   </ul></td>
 </tr>

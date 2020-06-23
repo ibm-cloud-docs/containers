@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, vpc
 
@@ -140,7 +140,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
       ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
       ```
       {: pre}
-    
+
     3. If you require VPC VPN access or classic infrastructure access into this cluster, add a security group rule to allow inbound UDP traffic on ports 30000-32767.
       ```
       ibmcloud is security-group-rule-add <security_group_ID> inbound udp --port-min 30000 --port-max 32767
@@ -448,7 +448,7 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     </tr>
     <tr>
     <td><code>--target-port=<em>&lt;8080&gt;</em></code></td>
-    <td>The port that your app listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port.</td>
+    <td>The port that your app endpoint listens on and to which the service directs incoming network traffic. In this example, the `target-port` is the same as the `port`, but other apps that you create might use a different port.</td>
     </tr>
     </tbody></table>
 

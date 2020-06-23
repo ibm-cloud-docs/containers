@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-16"
+lastupdated: "2020-06-22"
 
 keywords: kubernetes, iks, containers
 
@@ -126,7 +126,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 |[Ability to create cluster in every {{site.data.keyword.containerlong_notm}} region](/docs/containers?topic=containers-regions-and-zones)| | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 |[Multizone clusters to increase app high availability](/docs/containers?topic=containers-ha_clusters#multizone)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Replicated masters for higher availability| | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
-|[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-update_app#app_scaling)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|[Scalable number of worker nodes to increase capacity](/docs/containers?topic=containers-ca)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Persistent NFS file-based storage with volumes](/docs/containers?topic=containers-file_storage#file_storage)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public or private network app access by a network load balancer (NLB) service to a stable IP address](/docs/containers?topic=containers-loadbalancer)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |[Public network app access by an Ingress service to a stable IP address and customizable URL](/docs/containers?topic=containers-ingress-about)| |<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
@@ -142,7 +142,7 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 ## Comparison between OpenShift and community Kubernetes clusters
 {: #openshift_kubernetes}
 
-Both OpenShift and community Kubernetes clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
+Both Red Hat OpenShift on IBM Cloud and {{site.data.keyword.containerlong_notm}} clusters are production-ready container platforms that are tailored for enterprise workloads. The following table compares and contrasts some common characteristics that can help you choose which container platform is right for your use case.
 {: shortdesc}
 
 |Characteristics|Community Kubernetes clusters|OpenShift clusters|
