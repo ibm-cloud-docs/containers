@@ -596,7 +596,7 @@ Cannot complete cluster master operations because the cluster has a broken webho
 Your cluster has configurable Kubernetes webhook resources, validating or mutating admission webhooks, that can intercept and modify requests from various services in the cluster to the API server in the cluster master. Because webhooks can change or reject requests, broken webhooks can impact the functionality of the cluster in various ways, such as preventing you from updating the master version or other maintenance operations. For more information, see the [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
 
 Potential causes for broken webhooks include:
-*   The underlying resource that issues the request is missing or unhealthy, such as a Kubernetes service, endpoint, or pod. 
+*   The underlying resource that issues the request is missing or unhealthy, such as a Kubernetes service, endpoint, or pod.
 *   The webhook is part of an add-on or other plug-in application that did not install correctly or is unhealthy.
 *   Your cluster might have a networking connectivity issue that prevents the webhook from communicating with the Kubernetes API server in the cluster master.
 
@@ -614,7 +614,7 @@ Identify and restore the resource that causes the broken webhook.
     Error from server (InternalError): Internal error occurred: failed calling webhook "trust.hooks.securityenforcementadmission.cloud.ibm.com": Post https://ibmcloud-image-enforcement.ibm-system.svc:443/mutating-pods?timeout=30s: dialtcp 172.21.xxx.xxx:443: connect: connection timed out
     ```
     {: screen}
-2.  Get the name of the broken webhook. 
+2.  Get the name of the broken webhook.
     *   If the error message has a broken webhook, replace `trust.hooks.securityenforcement.admission.cloud.ibm.com` with the broken webhook that you previously identified.
         ```
         kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations -o jsonpath='{.items[?(@.webhooks[*].name=="trust.hooks.securityenforcement.admission.cloud.ibm.com")].metadata.name}{"\n"}'
