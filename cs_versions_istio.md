@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-24"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -66,7 +66,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
 
-## Changelog for 1.5.6, released 23 June 2020
+### Changelog for 1.5.6, released 23 June 2020
 {: #156}
 
 The following table shows the changes that are included in version 1.5.6 of the managed Istio add-on.
