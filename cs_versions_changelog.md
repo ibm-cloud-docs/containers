@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-25"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -70,7 +70,7 @@ The following table shows the changes that are included in the master and worker
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.13.3 | v3.13.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | Master | v3.13.3 | v3.13.4 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.4.7 | v3.4.9 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.9){: external}. |
@@ -164,7 +164,7 @@ The following table shows the changes that are included in the master and worker
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.12.1 | v3.12.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | Master | v3.12.1 | v3.12.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.4.7 | v3.4.9 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.9){: external}. |
@@ -400,7 +400,7 @@ The following table shows the changes that are included in the master and worker
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.9.5 | v3.9.6 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | Master | v3.9.5 | v3.9.6 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.3.20 | v3.3.22 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.22){: external}. |
@@ -776,7 +776,7 @@ The following table shows the changes that are included in the master and worker
 
 | Component | Location | Previous | Current | Description |
 | --------- | -------- | ------- | -------- | ----------- |
-| Calico | Master | v3.8.6 | v3.8.9 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Calico | Master | v3.8.6 | v3.8.9 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. The master update resolves CVE-2020-13597 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6226322){: external}). |
 | Cluster health image | Master | v1.1.5 | v1.1.8 | Additional status information is included when an add-on health state is `critical`. Improved performance when handling cluster status updates. |
 | Cluster master operations | Master | N/A | N/A | Cluster master operations such as `refresh` or `update` are now canceled if a broken [Kubernetes admission webhook](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} is detected. |
 | etcd | Master | v3.3.20 | v3.3.22 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.3.22){: external}. |
