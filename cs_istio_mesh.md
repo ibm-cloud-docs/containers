@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-25"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -656,7 +656,7 @@ To publicly expose apps:
   <table>
   <thead>
   <col width="30%">
-  <thead>
+  </thead>
   <th>Parameter</th>
   <th>Description</th>
   </thead>
@@ -822,7 +822,7 @@ To publicly expose apps:
   <table>
   <thead>
   <col width="30%">
-  <thead>
+  </thead>
   <th>Parameter</th>
   <th>Description</th>
   </thead>
