@@ -656,7 +656,6 @@ To publicly expose apps:
   <table>
   <thead>
   <col width="30%">
-  </thead>
   <th>Parameter</th>
   <th>Description</th>
   </thead>
@@ -822,7 +821,6 @@ To publicly expose apps:
   <table>
   <thead>
   <col width="30%">
-  </thead>
   <th>Parameter</th>
   <th>Description</th>
   </thead>
