@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-26"
 
 keywords: kubernetes, iks, helm
 
@@ -133,7 +133,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 ## Security services
 {: #security_services}
 
-Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/tutorials?topic=solution-tutorials-cloud-e2e-security).
+Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} security services with your cluster? Check out the [Apply end-to-end security to a cloud application tutorial](/docs/solution-tutorials?topic=solution-tutorials-cloud-e2e-security).
 {: shortdesc}
 
 |Service|Description|Classic|VPC|
