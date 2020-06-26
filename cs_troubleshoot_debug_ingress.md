@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-26"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -122,7 +122,7 @@ If you create a classic cluster that is connected to private VLANs only, or if y
 
 **VPC clusters**:
 
-1. When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC.
+1. When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC.
 2. One public ALB per zone is triggered for creation.
 3. A load balancer service that exposes the ALB is created and assigned a hostname.
 4. The load balancer hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
@@ -348,7 +348,7 @@ If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/
 You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
 {: tsCauses}
-When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
+When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
 * A VPC security group is blocking incoming traffic to your worker nodes, including incoming requests to your app.
 * The VPC load balancer is offline, such as due to load balancer provisioning errors or VSI connection errors.
 * The VPC load balancer is deleted through the VPC console or the CLI.
