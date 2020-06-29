@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -151,7 +151,7 @@ In version 1.5 and later of the Istio add-on, you can customize a set of Istio c
   ```
   {: pre}
 
-2. In the `data` section, add the `<key>: "<value>"` pair of one or more of the following configuration options.
+2. Add a `data` section, and add the `<key>: "<value>"` pair of one or more of the following configuration options.
     <table summary="The rows are read from left to right. The first column is the configuration option name. The second column is the default value of the option. The third column contains a brief description of the option.">
     <caption>Istio add-on configuration options</caption>
     <thead>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-18"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -53,7 +53,7 @@ In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheu
   ```
   {: pre}
 
-2. Set the `istio-monitoring` setting to `"true"`. If the setting is not listed, add the setting as `istio-monitoring: "true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
+2. In the `data` section, set the `istio-monitoring` setting to `"true"`. If the setting is not listed, add a `data` section and add the setting as `istio-monitoring: "true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
 
 3. Save the configuration file.
 
@@ -119,7 +119,7 @@ Authentication is required in order to view the Grafana and Kiali dashboards, bu
     {: pre}
   3. Apply the following configuration to store the credentials in a Kubernetes secret.
       ```
-      cat <<EOF | kubectl apply -f -
+      cat <<EOF | kubectl apply -n istio-system -f -
       apiVersion: v1
       kind: Secret
       metadata:
@@ -132,6 +132,16 @@ Authentication is required in order to view the Grafana and Kiali dashboards, bu
       EOF
       ```
       {: pre}
+  4. Get the name of the Grafana pod in your cluster.
+    ```
+    kubectl get pods -n istio-system | grep grafana
+    ```
+    {: pre}
+  5. Restart the Grafana pod to pick up the credential changes.
+    ```
+    kubectl delete pod <grafana_pod_name> -n istio-system
+    ```
+    {: pre}
 
 2. Access the Grafana dashboard.
   ```
