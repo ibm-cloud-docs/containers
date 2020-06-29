@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-25"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -66,7 +66,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
     ```
     {: pre}
 
@@ -293,7 +293,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     {: pre}
 
   2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`.
-     ```
+     ```yaml
      apiVersion: networking.istio.io/v1alpha3
      kind: Gateway
      metadata:
