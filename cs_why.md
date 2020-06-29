@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks, containers
 
@@ -164,6 +164,8 @@ Both Red Hat OpenShift on IBM Cloud and {{site.data.keyword.containerlong_notm}}
 |Supported operating system| Ubuntu 16.64, 18.64 |Red Hat Enterprise Linux 7|
 |Preferred external traffic networking| Ingress | Router |
 {: caption="Characteristics of community Kubernetes and OpenShift clusters" caption-side="top"}
+
+
 
 
 
