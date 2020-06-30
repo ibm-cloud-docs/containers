@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-25"
+lastupdated: "2020-06-30"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -854,6 +854,11 @@ ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID 
 {: pre}
 
 </br>
+
+
+
+
+
 
 ### `ibmcloud ks cluster create vpc-classic`
 {: #cli_cluster-create-vpc-classic}
