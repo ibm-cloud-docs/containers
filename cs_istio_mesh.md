@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-29"
+lastupdated: "2020-06-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -291,30 +291,28 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     kubectl delete gateway bookinfo-gateway
     ```
     {: pre}
-
   2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`.
-     ```yaml
-     apiVersion: networking.istio.io/v1alpha3
-     kind: Gateway
-     metadata:
-       name: bookinfo-gateway
-     spec:
-       selector:
-         istio: ingressgateway
-       servers:
-       - port:
-           number: 443
-           name: https
-           protocol: HTTPS
-         tls:
-           mode: SIMPLE
-           serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
-           privateKey: /etc/istio/ingressgateway-certs/tls.key
-         hosts:
-         - "*"
-      ```
-      {: codeblock}
-
+       ```yaml
+       apiVersion: networking.istio.io/v1alpha3
+       kind: Gateway
+       metadata:
+         name: bookinfo-gateway
+       spec:
+         selector:
+           istio: ingressgateway
+         servers:
+         - port:
+             number: 443
+             name: https
+             protocol: HTTPS
+           tls:
+             mode: SIMPLE
+             serverCertificate: /etc/istio/ingressgateway-certs/tls.crt
+             privateKey: /etc/istio/ingressgateway-certs/tls.key
+           hosts:
+           - "*"
+        ```
+        {: codeblock}
   3. Create the new `bookinfo-gateway` in your cluster.
     ```
     kubectl apply -f bookinfo-gateway.yaml
