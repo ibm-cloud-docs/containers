@@ -1219,7 +1219,6 @@ subcollection: containers
 * [Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)](/docs/containers?topic=containers-utilities#block_storage_attacher)
   * [Updating the IBM Cloud Block Storage Attacher plug-in](/docs/containers?topic=containers-utilities#update_block_attacher)
   * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
-* [Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage](/docs/containers?topic=containers-utilities#automatic_block)
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
 * [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach)
