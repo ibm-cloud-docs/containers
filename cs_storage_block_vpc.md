@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-02"
 
 keywords: kubernetes, iks, vpc
 
@@ -125,7 +125,7 @@ For more information, see:
 Choose your {{site.data.keyword.block_storage_is_short}} profile and create a persistent volume claim to dynamically provision {{site.data.keyword.block_storage_is_short}} for your cluster. Dynamic provisioning automatically creates the matching persistent volume and orders the physical storage device in your {{site.data.keyword.cloud_notm}} account.
 {: shortdesc}
 
-1. Decide on the [{{site.data.keyword.block_storage_is_short}} profile](/docs/vpc?topic=vpc-creating-block-storage#determine-storage-requirements) that best meets the capacity and performance requirements that you want.
+1. Decide on the [{{site.data.keyword.block_storage_is_short}} profile](/docs/vpc?topic=vpc-block-storage-profiles) that best meets the capacity and performance requirements that you want.
 
 2. Select the corresponding storage class for your {{site.data.keyword.block_storage_is_short}} profile.
 

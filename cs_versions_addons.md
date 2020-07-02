@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-24"
+lastupdated: "2020-07-02"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -85,13 +85,13 @@ Refer to the following table for a summary of changes for each image version of 
 <tr>
 <td>637 / 401</td>
 <td>04 Jun 2020</td>
-<td>Fixes vulnerabilities for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547), [CVE-2019-1549 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549), [CVE-2019-1551 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551), [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563), [USN-4376-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4376-1/), and [USN-4377-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4377-1/).</td>
+<td>Fixes vulnerabilities for [CVE-2019-1547 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547), [CVE-2019-1549 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549), [CVE-2019-1551 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1551), [CVE-2019-1563 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563), [USN-4376-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4376-1/), and [USN-4377-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4377-1/).</td>
 <td>-</td>
 </tr>
 <tr>
 <td>628 / 401</td>
 <td>18 May 2020</td>
-<td><ul><li>Fixes `libxml2` vulnerabilities for [CVE-2019-20388 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20388).</li><li>Fixes `golang` vulnerabilities for [CVE-2020-9283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9283).</li><li>Fixes a vulnerability introduced by a `file` regression for [USN-3911-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/3911-2/).</li></ul></td>
+<td><ul><li>Fixes `libxml2` vulnerabilities for [CVE-2019-20388 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20388).</li><li>Fixes `golang` vulnerabilities for [CVE-2020-9283 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-9283).</li><li>Fixes a vulnerability introduced by a `file` regression for [USN-3911-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-3911-2/).</li></ul></td>
 <td>-</td>
 </tr>
 <tr>
@@ -123,7 +123,7 @@ Refer to the following table for a summary of changes for each image version of 
 <td>30 Jan 2020</td>
 <td><ul>
 <li>Fixes a bug so that online certificate status protocol (OCSP) stapling works when the OCSP responder sends its own certificate in the OCSP response, which the NGINX validates.</li>
-<li>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-2/).</li>
+<li>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-2 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4233-2/).</li>
 <li>Fixes `E2fsprogs` `e2fsck` vulnerabilities for [CVE-2019-5188 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5188).</li></ul>
 </td>
 <td>-</td>
@@ -131,7 +131,7 @@ Refer to the following table for a summary of changes for each image version of 
 <tr>
 <td>621 / 373</td>
 <td>20 Jan 2020</td>
-<td>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://usn.ubuntu.com/4233-1/) and error page HTTP request vulnerabilities for [CVE-2019-20372 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20372).</td>
+<td>Fixes SHA1 vulnerabilities in GnuTLS for [USN-4233-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4233-1/) and error page HTTP request vulnerabilities for [CVE-2019-20372 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20372).</td>
 <td>-</td>
 </tr>
 <tr>
