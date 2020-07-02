@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks
 
@@ -54,6 +54,7 @@ Review the default settings for the `kube-apiserver` master component in {{site.
 | Default pod tolerations | <ul><li><code>default-not-ready-toleration-seconds=600s</code></li><li><code>default-unreachable-toleration-seconds=600s</code></li></ul> | 
 | Privileged pods | `allow-privileged=true` | 
 | Request headers | <ul><li><code>requestheader-client-ca-file=/mnt/etc/kubernetes-cert/ca.pem</code></li><li><code>requestheader-username-headers=X-Remote-User</code></li><li><code>requestheader-group-headers=X-Remote-Group</code></li><li><code>requestheader-extra-headers-prefix=X-Remote-Extra-</code></li></ul> | 
+| Number of client requests | <ul><li><code>k8s_max_requests_inflight: 1600</code></li><li><code>k8s_max_mutating_requests_inflight: 800</code></li></ul>|
 | Admission controllers | <ul><li><code>NamespaceLifecycle</code></li><li><code>LimitRanger</code></li><li><code>ServiceAccount</code></li><li><code>DefaultStorageClass</code></li><li><code>Initializers</code> (Kubernetes 1.13 or earlier)</li><li><code>MutatingAdmissionWebhook</code></li><li><code>ValidatingAdmissionWebhook</code></li><li><code>ResourceQuota</code></li><li><code>PodSecurityPolicy</code></li><li><code>DefaultTolerationSeconds</code></li><li><code>StorageObjectInUseProtection</code></li><li><code>PersistentVolumeClaimResize</code></li><li><code>Priority</code> (Kubernetes 1.11 or later)</li><li><code>NodeRestriction</code> (Kubernetes 1.14 or later)</li><li><code>TaintNodesByCondition</code> (Kubernetes 1.14 or later)</li><li><code>CertificateApproval</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSigning</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSubjectRestriction</code> (Kubernetes 1.18 or later)</li><li><code>DefaultIngressClass</code> (Kubernetes 1.18 or later)</li></ul> |
 | Kube audit log config | <ul><li><code>audit-log-maxsize=128</code></li><li><code>audit-log-maxage=2</code></li><li><code>audit-log-maxbackup=2</code></li></ul> | 
 | Feature gates | See [Feature gates](#feature-gates) | 
@@ -127,3 +128,4 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
 {: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
+

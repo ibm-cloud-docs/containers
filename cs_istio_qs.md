@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -72,24 +72,11 @@ Set up the managed Istio add-on in your cluster.
     ```
     kubectl get pods -n istio-system
     ```
+    {: pre}  
+    ```
+    kubectl get svc -n istio-system
+    ```
     {: pre}
-
-    ```
-    NAME                                      READY   STATUS    RESTARTS   AGE
-    grafana-76dcdfc987-94ldq                  1/1     Running   0          2m
-    istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
-    istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
-    istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
-    istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
-    istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
-    istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
-    istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
-    istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
-    istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
-    kiali-77566cc66c-kh6lm                    1/1     Running   0          2m
-    prometheus-5d5cb44877-lwrqx               1/1     Running   0          2m
-    ```
-    {: screen}
 
 For more information about Istio in {{site.data.keyword.containerlong_notm}}, see [About the managed Istio add-on](/docs/containers?topic=containers-istio-about).
 
@@ -113,7 +100,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
     ```
     {: pre}
 

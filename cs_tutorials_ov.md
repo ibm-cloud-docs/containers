@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-26"
 
 keywords: kubernetes, iks
 
@@ -177,7 +177,7 @@ subcollection: containers
 {: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Scalable web application on Kubernetes
@@ -207,7 +207,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Asynchronous data processing for apps
@@ -244,7 +244,7 @@ subcollection: containers
 {: #tutorials-ov-ha-network-security}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Resilient and secure multi-region clusters with Cloud Internet Services
@@ -259,7 +259,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Strategies for resilient applications in the cloud
@@ -304,7 +304,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Apply end to end security to an {{site.data.keyword.cloud_notm}} app
@@ -319,7 +319,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Organizing users and teams with {{site.data.keyword.cloud_notm}} Identity and Access Management
@@ -357,7 +357,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Continuous deployment to Kubernetes clusters
@@ -403,7 +403,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-    <a href = "/docs/tutorials?topic=solution-tutorials-plan-create-update-deployments">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-plan-create-update-deployments">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Automate cluster deployments across environments with Terraform
@@ -477,7 +477,7 @@ subcollection: containers
         </div>
     </div>
     </a>
-  <a href = "/docs/tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes">
+  <a href = "/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
                 Migrate a VM-based app

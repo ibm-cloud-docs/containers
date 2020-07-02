@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-06-24"
+lastupdated: "2020-07-02"
 
 keywords: containers
 subcollection: containers
@@ -531,8 +531,8 @@ subcollection: containers
   * [Opening required ports in a private firewall](/docs/containers?topic=containers-firewall#firewall_private)
   * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
-* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#whitelist_workers)
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_whitelist)
+* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#allowlist_workers)
+* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
 
 [Classic: Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge)
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
@@ -562,7 +562,7 @@ subcollection: containers
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
-* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-whitelist_workers)
+* [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
@@ -1219,7 +1219,6 @@ subcollection: containers
 * [Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)](/docs/containers?topic=containers-utilities#block_storage_attacher)
   * [Updating the IBM Cloud Block Storage Attacher plug-in](/docs/containers?topic=containers-utilities#update_block_attacher)
   * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
-* [Classic: Automatically provisioning unformatted block storage and authorizing your worker nodes to access the storage](/docs/containers?topic=containers-utilities#automatic_block)
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
 * [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach)
@@ -1455,7 +1454,7 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
-* [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
+  * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
 * [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)
   * [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
@@ -1763,6 +1762,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[June 2020](/docs/containers?topic=containers-iks-release#june20)
 
 [June 2020](/docs/containers?topic=containers-iks-release#june20)
 

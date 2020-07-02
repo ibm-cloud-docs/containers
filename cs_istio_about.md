@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-07-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -112,4 +112,4 @@ Review the following limitations for the managed Istio add-on.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
   * [Policy enforcement](https://istio.io/latest/docs/tasks/policy-enforcement/enabling-policy/){: external}
-  * [Any features by the community that are in alpha or beta release stages](https://istio.io/about/feature-stages/){: external}
+  * [Any features by the community that are in alpha or beta release stages](https://istio.io/latest/about/feature-stages/){: external}

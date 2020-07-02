@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-07-01"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -122,7 +122,7 @@ If you create a classic cluster that is connected to private VLANs only, or if y
 
 **VPC clusters**:
 
-1. When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC.
+1. When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC.
 2. One public ALB per zone is triggered for creation.
 3. A load balancer service that exposes the ALB is created and assigned a hostname.
 4. The load balancer hostname is used to register the Ingress subdomain in Cloudflare. Cloudflare might have latency during the registration process.
@@ -348,7 +348,7 @@ If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/
 You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
 {: tsCauses}
-When you create a VPC cluster, one public and one private VPC load balancer is automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
+When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
 * A VPC security group is blocking incoming traffic to your worker nodes, including incoming requests to your app.
 * The VPC load balancer is offline, such as due to load balancer provisioning errors or VSI connection errors.
 * The VPC load balancer is deleted through the VPC console or the CLI.
@@ -1043,7 +1043,7 @@ Still having issues with your cluster? Review different ways to get help and sup
 **Feedback and questions**<br>
 1. Post in the {{site.data.keyword.containershort}} Slack.
    * If you are an external user, post in the [#general](https://ibm-cloud-success.slack.com/archives/C4G6362ER){: external} channel.
-   * If you are an IBMer, use the [#armada-users](https://ibm-argonauts.slack.com/archives/C4S4NUCB1) channel.<p class="tip">If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack){: external} to this Slack.</p>
+   * If you are an IBMer, use the [internal Slack channel](/docs/containers?topic=containers-cs_internal#internal_help).<p class="tip">If you do not use an IBMid for your {{site.data.keyword.cloud_notm}} account, [request an invitation](https://cloud.ibm.com/kubernetes/slack){: external} to this Slack.</p>
 2. Review forums such as {{site.data.keyword.containershort}} help or Stack Overflow to see whether other users ran into the same issue. When you use the forums to ask a question, tag your question so that it is seen by the {{site.data.keyword.cloud_notm}} development teams.
    * If you have technical questions about developing or deploying clusters or apps with {{site.data.keyword.containerlong_notm}}, post your question on [Stack Overflow](https://stackoverflow.com/questions/tagged/ibm-cloud+containers){: external} and tag your question with `ibm-cloud` and `containers`.
    * See [Getting help](/docs/get-support?topic=get-support-getting-customer-support#using-avatar) for more details about using the forums.

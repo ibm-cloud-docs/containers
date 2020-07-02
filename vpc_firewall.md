@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-06-26"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -128,7 +128,6 @@ To allow access for a specific cluster:
    {: pre}
 
 5. Retrieve the service endpoint URLs for your cluster.
- * If only the **Public Service Endpoint URL** is populated, get this URL. Your authorized cluster users can access the master through this endpoint on the public network.
  * If only the **Private Service Endpoint URL** is populated, get this URL. Your authorized cluster users can access the master through this endpoint on the private network.
  * If both the **Public Service Endpoint URL** and **Private Service Endpoint URL** are populated, get both URLs. Your authorized cluster users can access the master through the public endpoint on the public network or the private endpoint on the private network.
 
@@ -176,7 +175,7 @@ To allow access for a specific cluster:
     }
     ```
     {: screen}
-  * If the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
+  * If only the private service endpoint is enabled, you must be in your {{site.data.keyword.cloud_notm}} private network or connect to the private network through a VPN connection to verify your connection to the master. **Note**: You must [expose the master endpoint through a private load balancer](/docs/containers?topic=containers-access_cluster#access_private_se) so that users can access the master through a VPN or {{site.data.keyword.BluDirectLink}} connection.
     ```
     curl --insecure <private_service_endpoint_URL>/version
     ```
@@ -231,7 +230,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) an
 
 
 ## Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls
-{: #vpc-whitelist_workers}
+{: #vpc-allowlist_workers}
 
 Allow your worker nodes to communicate with services that are protected by firewalls.
 {:shortdesc}
