@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-29"
+lastupdated: "2020-07-03"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -203,7 +203,24 @@ For more information about how routing works in Istio, see [Understanding what h
 To visualize the BookInfo microservices in the Istio service mesh, launch the Kiali dashboard.
 {: shortdesc}
 
-1. Generate 100 requests to the `productpage` service of BookInfo.
+1. Enable Kiali for your Istio installation.
+  1. Edit the `managed-istio-custom` configmap resource.
+    ```
+    kubectl edit cm managed-istio-custom -n ibm-operators
+    ```
+    {: pre}
+
+  2. In the `data` section, set the `istio-monitoring` setting to `"true"`. If the setting is not listed, add a `data` section and add the setting as `istio-monitoring: "true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
+
+  3. Save the configuration file.
+
+  4. Apply the changes to your Istio installation. Changes might take up to 10 minutes to take effect.
+    ```
+    kubectl annotate iop -n ibm-operators managed-istio --overwrite version="custom-applied-at: $(date)"
+    ```
+    {: pre}
+
+2. Generate 100 requests to the `productpage` service of BookInfo.
   ```
   for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
   ```
@@ -249,12 +266,12 @@ To visualize the BookInfo microservices in the Istio service mesh, launch the Ki
 
 5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
 
-6. In the **No edge labels** drop-down list, select **Requests percentage**.
+7. In the **No edge labels** drop-down list, select **Requests percentage**.
 
     If you do not see any percentages in the graph, in the upper-right corner of the dashboard, change the timeframe to **Last 5m** or **Last 10m**.
     {: tip}
 
-7. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
+8. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
 
 For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
 
