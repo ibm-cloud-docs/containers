@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -41,12 +41,13 @@ subcollection: containers
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
 
-## June 2020
-{: #june20}
+## July 2020
+{: #july20}
 
 | Date | Description |
 | ---- | ----------- |
-| 02 July 2020 | **VPC load balancer**: Added support for specifying the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` and `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotations in the [configuration file for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb). |
+| 06 July 2020 | **Version changelogs**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-changelog#11512_1544). |
+| 02 July 2020 | **VPC load balancer**: Added support for specifying the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation in the [configuration file for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in July 2020"}
 
@@ -162,7 +163,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 | 18 December 2019 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 615 and the `ingress-auth` image to build 372](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 17 December 2019 | <ul><li>**Version changelog**: Master patch updates are available for Kubernetes [1.16.3_1520](/docs/containers?topic=containers-changelog#1163_1520), [1.15.6_1527](/docs/containers?topic=containers-changelog#1156_1527), [1.14.9_1543](/docs/containers?topic=containers-changelog#1149_1543), and [1.13.12_1546](/docs/containers?topic=containers-changelog#11312_1546).</li><li>**Adding classic infrastructure servers to gateway-enabled clusters**: [Adding classic IBM Cloud infrastructure server instances to your cluster network](/docs/containers?topic=containers-add_workers#gateway_vsi) is now generally available for classic gateway-enabled clusters.</li><li>**Assigning access**: Updated the steps to [assign access to your clusters through the {{site.data.keyword.cloud_notm}} IAM console](/docs/containers?topic=containers-users#add_users).</li></ul>|
 | 12 December 2019 | **Setting up a service mesh with Istio**: Includes the following new pages:<ul><li>[About the managed Istio add-on](/docs/containers?topic=containers-istio-about)</li><li>[Setting up Istio](/docs/containers?topic=containers-istio)</li><li>[Managing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)</li><li>[Observing Istio traffic](/docs/containers?topic=containers-istio-health)</li></ul>|
-| 11 December 2019 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.64](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Configuring VPC subnets**: [Added information](/docs/containers?topic=containers-vpc-subnets) about configuring VPC subnets, public gateways, and network segmentation for your VPC clusters.</li><li>**Kubernetes version lifecyles**: Added information about [the release lifecycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).</li><li>**Managed Knative add-on**: Added information about Istio version support.</li></ul>|
+| 11 December 2019 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.4.64](/docs/containers?topic=containers-cs_cli_changelog).</li><li>**Configuring VPC subnets**: [Added information](/docs/containers?topic=containers-vpc-subnets) about configuring VPC subnets, public gateways, and network segmentation for your VPC clusters.</li><li>**Kubernetes version lifecycles**: Added information about [the release lifecycle of supported Kubernetes versions](/docs/containers?topic=containers-cs_versions#release_lifecycle).</li><li>**Managed Knative add-on**: Added information about Istio version support.</li></ul>|
 | 09 December 2019 | **Version changelog**: Worker node patch updates are available for Kubernetes [1.16.3_1519](/docs/containers?topic=containers-changelog#1163_1519_worker), [1.15.6_1526](/docs/containers?topic=containers-changelog#1156_1526_worker), [1.14.9_1542](/docs/containers?topic=containers-changelog#1149_1542_worker), and [1.13.12_1545](/docs/containers?topic=containers-changelog#11312_1545_worker). |
 | 04 December 2019 | <ul><li>**Exposing apps with load balancers or Ingress ALBs**: Added quick start pages to help you get up and running with [load balancers](/docs/containers?topic=containers-loadbalancer-qs) and [Ingress ALBs](/docs/containers?topic=containers-ingress-qs).</li><li>**Kubernetes web terminal for VPC clusters**: To use the Kubernetes web terminal for VPC clusters, make sure to [configure access to external endpoints](/docs/containers?topic=containers-cs_cli_install#cli_web).</li><li>**Monitoring Istio**: Added [steps](/docs/containers?topic=containers-istio-health#istio_inspect) to launch the ControlZ component inspection and Envoy sidecar dashboards for the Istio managed add-on.</li><li>**Tuning network performance**: Added [steps](/docs/containers?topic=containers-kernel#calico-portmap) for disabling the `portmap` plug-in for for the Calico container network interface (CNI).</li><li>**Use the internal KVDB in Portworx**: Automatically set up a key-value database (KVDB) during the Portworx installation to store your Portworx metadata. For more information, see [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb).</li></ul>|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}

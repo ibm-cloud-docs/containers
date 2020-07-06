@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -425,6 +425,7 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
+
 
 
 

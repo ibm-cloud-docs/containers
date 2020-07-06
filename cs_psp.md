@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks
 
@@ -42,9 +42,9 @@ With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/policy/p
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
 **Why do I set pod security policies?**</br>
-As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, Linux permissions such as read-only or group IDs, and more.
+As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root privileges, host networking and ports, volume types, host file systems, Linux capabilities, and more.
 
-With the `PodSecurityPolicy` admission controller, no pods can be created until after you [authorize policies](#customize_psp). Setting up pod security policies can have unintended side-effects, so make sure to test out a deployment after you change the policy. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [version 2 of Helm](/docs/containers?topic=containers-helm#public_helm_install), the `tiller` component creates pods, and so you must have the correct pod security policy authorization.
+With the `PodSecurityPolicy` admission controller, pod creation is controlled by pod security policies and related role-based access control (RBAC). By default, {{site.data.keyword.containerlong_notm}} clusters do not restrict pod creation for any authenticated users or service accounts. To secure your cluster, customize the pod security policies. This customization can have unintended side-effects, so make sure to thoroughly test your customizations. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods. For example, if you install apps by using [version 2 of Helm](/docs/containers?topic=containers-helm#public_helm_install), the `tiller` component creates pods, and so you must have the correct pod security policy authorization.
 
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}
@@ -73,10 +73,7 @@ To prevent unauthorized pod actions, you can modify existing pod security policy
 {: shortdesc}
 
 **What existing policies can I modify?**</br>
-By default, your cluster contains the following RBAC resources that enable cluster
-administrators, authenticated users, service accounts, and nodes to use the
-`ibm-privileged-psp` and `ibm-restricted-psp` pod security policies. These
-policies allow the users to create and update privileged and unprivileged (restricted) pods.
+By default, your cluster contains the following RBAC resources that enable cluster administrators, authenticated users, service accounts, and nodes to use the `ibm-privileged-psp` and `ibm-restricted-psp` pod security policies. These policies allow the users to create and update privileged and unprivileged (restricted) pods.
 
 | Name | Namespace | Type | Purpose |
 |---|---|---|---|
@@ -84,7 +81,7 @@ policies allow the users to create and update privileged and unprivileged (restr
 | `restricted-psp-user` | All | `ClusterRoleBinding` | Enables cluster administrators, authenticated users, service accounts, and nodes to use `ibm-restricted-psp` pod security policy. |
 {: caption="Default RBAC resources that you can modify" caption-side="top"}
 
-You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy.
+You can modify these RBAC roles to remove or add administrators, users, services, or nodes to the policy. These modifications do not prevent cluster administrators, service accounts, and nodes from using the privileged pod security policy in the `kube-system`, `ibm-system`, and `ibm-operators` namespaces. Do not modify these system namespaces, which are privileged namespaces.
 
 Before you begin:
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -95,7 +92,7 @@ When you modify the default configuration, you can prevent important cluster act
 {: important}
 
 **To modify the RBAC resources**:
-1.  Get the name of the RBAC cluster role binding.
+1.  Get the name of the RBAC cluster role binding. The following steps use the the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
     ```
     kubectl get clusterrolebinding
     ```
@@ -153,7 +150,7 @@ When you modify the default configuration, you can prevent important cluster act
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
-          name: system:serviceaccount:default
+          name: system:serviceaccounts:default
         ```
         {: codeblock}
 
@@ -161,10 +158,10 @@ When you modify the default configuration, you can prevent important cluster act
         ```yaml
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
-          name: system:serviceaccount:default
+          name: system:serviceaccounts:default
         - apiGroup: rbac.authorization.k8s.io
           kind: Group
-          name: system:serviceaccount:test
+          name: system:serviceaccounts:test
         ```
         {: codeblock}
 
@@ -176,7 +173,7 @@ When you modify the default configuration, you can prevent important cluster act
         ```
         {: codeblock}
 
-4.  Create the modified cluster role binding resource in your cluster.
+4.  Create the modified cluster role binding resource in your cluster. Now, any users and service accounts that are not explicitly authorized to the privileged pod security policy can create pods only by using the restricted pod security policy.
 
     ```
     kubectl apply -f privileged-psp-user.yaml
@@ -191,14 +188,15 @@ When you modify the default configuration, you can prevent important cluster act
     {: pre}
 
 </br>
+
 **To delete the RBAC resources**:
-1.  Get the name of the RBAC cluster role binding.
+1.  Get the name of the RBAC cluster role binding. The following steps use the the `privileged-psp-user` RBAC as an example, but you can take similar steps for the `restricted-psp-user` RBAC or custom pod security policies.
     ```
     kubectl get clusterrolebinding
     ```
     {: pre}
 
-2.  Delete the RBAC role that you want to remove.
+2.  Delete the RBAC role that you want to remove. Now, any users and service accounts can create pods only by using the restricted pod security policy.
     ```
     kubectl delete clusterrolebinding privileged-psp-user
     ```

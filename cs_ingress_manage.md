@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -38,7 +38,7 @@ subcollection: containers
 # Managing the Ingress ALB lifecycle
 {: #ingress-manage}
 
-Manage the lifecyle of your Ingress application load balancers (ALBs).
+Manage the lifecycle of your Ingress application load balancers (ALBs).
 {: shortdesc}
 
 Looking to change your ALBs' basic behavior or tune ALB performance? See [Modifying default Ingress settings](/docs/containers?topic=containers-ingress-settings).
@@ -433,4 +433,5 @@ If you have very large Ingress resource files, it might take longer than 5 minut
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
+
 
