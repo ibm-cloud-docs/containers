@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, containers
 
@@ -32,6 +32,9 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
+
+
 
 
 
@@ -92,6 +95,8 @@ subcollection: containers
     }
 -->
 </style>
+
+
 
 # Learning path for administrators
 {: #learning-path-admin}
