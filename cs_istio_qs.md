@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-03"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -266,12 +266,12 @@ To visualize the BookInfo microservices in the Istio service mesh, launch the Ki
 
 5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
 
-7. In the **No edge labels** drop-down list, select **Requests percentage**.
+8. In the **No edge labels** drop-down list, select **Requests percentage**.
 
     If you do not see any percentages in the graph, in the upper-right corner of the dashboard, change the timeframe to **Last 5m** or **Last 10m**.
     {: tip}
 
-8. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
+9. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
 
 For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
 

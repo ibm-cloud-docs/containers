@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-07-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -40,6 +40,8 @@ subcollection: containers
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {:shortdesc}
+
+
 
 ## Prerequisites
 {: #config_prereqs}
