@@ -1767,7 +1767,7 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release)
 
-[June 2020](/docs/containers?topic=containers-iks-release#june20)
+[July 2020](/docs/containers?topic=containers-iks-release#july20)
 
 [June 2020](/docs/containers?topic=containers-iks-release#june20)
 
