@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-07"
 
 keywords: kubernetes, iks
 
@@ -71,7 +71,13 @@ This tutorial is intended for experienced software developers and DevOps enginee
 * Containerize your app and store the Dockerfile and related app code in a GitHub repository. For more information about how to create a Dockerfile, see the [Dockerfile reference](https://docs.docker.com/engine/reference/builder/){: external}.
 * [Install the {{site.data.keyword.cloud_notm}} CLI, the {{site.data.keyword.containerlong_notm}} CLI plug-in, and the Kubernetes CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_install).
 * [Set up a namespace in {{site.data.keyword.registrylong_notm}}](/docs/Registry?topic=Registry-getting-started) to store your container image.
-* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster to deploy and run your app.
+* Get the details of a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster to deploy and run your app.
+*  Make sure that you have at least the following permissions in {{site.data.keyword.cloud_notm}} IAM:
+   *  **Editor** platform role and **Writer** service role to the **Kubernetes Service** cluster. For more information, see [User access permissions](/docs/containers?topic=containers-access_reference).
+   *  **Writer** service role to the **Container Registry** service.
+   *  **Viewer** platform role to the resource group of the cluster where you want to create the toolchain.
+   *  **Editor** platform role to the **Toolchain** service.
+   *  **Editor** platform role to the **Continuous Delivery** service.
 * Create or retrieve an [{{site.data.keyword.cloud_notm}} API key](/docs/iam?topic=iam-userapikey).
 
 ## Lesson 1: Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton
