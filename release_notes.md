@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-06"
+lastupdated: "2020-07-07"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 07 July 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 06 July 2020 | **Version changelogs**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-changelog#11512_1544). |
 | 02 July 2020 | **VPC load balancer**: Added support for specifying the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation in the [configuration file for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
@@ -486,7 +487,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td><ul>
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 0.3.95](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the ALB `nginx-ingress` image to build 515 for the [ALB pod readiness check](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
-  <li><strong>Removing subnets from a cluster</strong>: Added steps for removing subnets [in an IBM Cloud infrastructure account](/docs/containers?topic=containers-subnets#remove-sl-subnets) or [in an on-premises network](/docs/containers?topic=containers-subnets#remove-user-subnets) from a cluster. </li>
+  <li><strong>Removing subnets from a cluster</strong>: Added steps for removing subnets [in an IBM Cloud infrastructure account](/docs/containers?topic=containers-subnets#remove-subnets) from a cluster. </li>
   </ul></td>
 </tr>
 <tr>

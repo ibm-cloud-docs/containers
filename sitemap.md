@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-06"
+lastupdated: "2020-07-07"
 
 keywords: containers
 subcollection: containers
@@ -598,13 +598,10 @@ subcollection: containers
 * [Adding portable IP addresses](/docs/containers?topic=containers-subnets#adding_ips)
   * [Adding portable IPs by ordering more subnets](/docs/containers?topic=containers-subnets#request)
   * [Adding portable IPs by adding existing subnets to your cluster](/docs/containers?topic=containers-subnets#add-existing)
-  * [Adding portable private IPs by adding user-managed subnets to private VLANs](/docs/containers?topic=containers-subnets#subnet_user_managed)
 * [Managing subnet routing](/docs/containers?topic=containers-subnets#subnet-routing)
   * [Enabling routing between primary subnets on the same VLAN](/docs/containers?topic=containers-subnets#vlan-spanning)
   * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
-  * [Removing a subnet in an IBM Cloud infrastructure account from a cluster](/docs/containers?topic=containers-subnets#remove-sl-subnets)
-  * [Removing a subnet in an on-premises network from a cluster](/docs/containers?topic=containers-subnets#remove-user-subnets)
 
 [Classic: Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
 * [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
