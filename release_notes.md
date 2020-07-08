@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-07"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 08 July 2020 | <ul><li>**Istio add-on**: [Version 1.6 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#16) is released.</li><li>**Knative add-on**: [Version 0.15.1 of the Knative managed add-on](/docs/containers?topic=containers-knative-changelog) is released. If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.</li><ul> |
 | 07 July 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 06 July 2020 | **Version changelogs**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-changelog#11512_1544). |
 | 02 July 2020 | **VPC load balancer**: Added support for specifying the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation in the [configuration file for VPC load balancers](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb). |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-29"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -323,8 +323,11 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 ### Updating Sysdig for Istio add-on version 1.5
 {: #sysdig-15}
 
-If you use Sysdig to monitor your Istio-managed apps and updated your add-on to version. 1.5, you must update the `sysdig-agent` configmap so that sidecar metrics are tracked.
+If you use Sysdig to monitor your Istio-managed apps and updated your add-on from a previous version to version 1.5, you must update the `sysdig-agent` configmap so that sidecar metrics are tracked.
 {: shortdesc}
+
+These steps are required only for version 1.5. If you install or update your Istio add-on to version 1.6, Sysdig support is enabled for your Istio add-on by default.
+{: tip}
 
 1. Edit the `sysdig-agent` configmap resource.
   ```

@@ -858,7 +858,7 @@ subcollection: containers
 [Setting up Istio](/docs/containers?topic=containers-istio)
 * [Installing the Istio add-on](/docs/containers?topic=containers-istio#istio_install)
 * [Installing the `istioctl` CLI](/docs/containers?topic=containers-istio#istioctl)
-* [Customizing the version 1.5 Istio installation](/docs/containers?topic=containers-istio#customize)
+* [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
 * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)
   * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor)
   * [Updating your add-on from beta versions to the generally available version](/docs/containers?topic=containers-istio#istio-ga)
@@ -1453,8 +1453,12 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
+  * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
+  * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
+* [Changelog for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
   * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
 * [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)
@@ -1468,6 +1472,7 @@ subcollection: containers
   * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
+* [Changelog for 0.15.1, released 08 July 2020](/docs/containers?topic=containers-knative-changelog#0151)
 * [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
