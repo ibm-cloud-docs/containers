@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-07"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -45,6 +45,38 @@ View information for patch and minor version updates to the [managed Istio add-o
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.4 to 1.5, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor).
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
+## Version 1.6
+{: #v16}
+
+### Differences between version 1.6 of managed and community Istio
+{: #diff-managed-comm-16}
+
+Review the following differences between the installation profiles of version 1.6 of the managed {{site.data.keyword.containerlong_notm}} Istio and version 1.6 of the community Istio.
+{: shortdesc}
+
+To see options for changing settings in the managed version of Istio, see [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize).
+{: tip}
+
+| Setting | Differences in the managed Istio add-on |
+| ------- | --------------------------------------- |
+| `meshConfig.enablePrometheusMerge=true` and `values.telemetry.v2.enabled=true` | In the managed Istio add-on, support for telemetry with Sysdig is enabled by default. This support can be disabled by [customizing the Istio installation](/docs/containers?topic=containers-istio#customize). |
+| `istio-ingressgateway` and `istio-egressgateway` | In the managed Istio add-on, placement of gateways on edge worker nodes is preferred, but not required. |
+| Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
+{: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
+{: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+### Changelog for 1.6, released 08 July 2020
+{: #16}
+
+The following table shows the changes that are included in version 1.6 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.5.7 | 1.6 | <ul><li>See the Istio release notes for [Istio 1.6](https://istio.io/latest/news/releases/1.6.x/announcing-1.6/){:external}.</li><li>Support is added for the `istio-knative-cluster-local-gateway-enabled` and `istio-monitoring-telemetry` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize). You can use these options to manage inclusion of Knative apps in the service mesh and the Istio telemetry enablement.</li><li>Support for {{site.data.keyword.mon_full_notm}} is enabled for Istio by default.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.5.7" caption-side="top"}
+
 ## Version 1.5
 {: #v15}
 
@@ -65,6 +97,18 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | `values.global.pilot.enableProtocolSniffingForInbound` and `values.global.pilot.enableProtocolSniffingForOutbound` | In the managed Istio add-on, protocol sniffing is disabled by default until the feature becomes more stable in the community Istio. |
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+## Changelog for 1.5.7, released 8 July 2020
+{: #157}
+
+The following table shows the changes that are included in version 1.5.7 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.5.6 | 1.5.7 | <ul><li>See the Istio release notes for [Istio 1.5.7](https://istio.io/news/releases/1.5.x/announcing-1.5.7/){:external}.</li><li>Resolves [CVE-2020-12603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12603){: external}, [CVE-2020-12605](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12605){: external}, [CVE-2020-8663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8663){: external}, [CVE-2020-12604](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12604){: external}, [CVE-2020-8169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8169){: external}, [CVE-2020-8177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8177){: external}, and [usn-4402-1](https://usn.ubuntu.com/4402-1/){: external}. For more information, see the [Istio security bulletin 2020-007](https://istio.io/news/security/istio-security-2020-007/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.5.7" caption-side="top"}
 
 ### Changelog for 1.5.6, released 23 June 2020
 {: #156}

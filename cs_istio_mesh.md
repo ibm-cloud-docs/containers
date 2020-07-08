@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-30"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -66,13 +66,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.5.6 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.5.6
+    cd istio-1.6
     ```
     {: pre}
   3. Label the `default` namespace for automatic sidecar injection.
@@ -451,7 +451,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.5.6
+  cd istio-1.6
   ```
   {: pre}
 

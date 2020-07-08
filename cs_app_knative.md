@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, knative
 
@@ -67,7 +67,7 @@ Managed Knative on {{site.data.keyword.containerlong_notm}} is a [managed add-on
 **Are there any limitations?**
 {: #knative_limitations}
 
-* The managed Knative add-on version 0.14.0 requires and installs Istio 1.5 or later with the add-on. You cannot use the Knative add-on with earlier versions of Istio. Before you install Knative, check if Istio is already installed in your cluster by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`. If you have an older version of Istio installed in your cluster, you must [update Istio first](/docs/containers?topic=containers-istio#istio_update).
+* Version 0.15.1 of the managed Knative add-on version requires and installs Istio version 1.6, and version 0.14.0 of the managed Knative add-on version requires and installs Istio version 1.5. You cannot use the Knative add-on with earlier versions of Istio. Before you install Knative, check if Istio is already installed in your cluster by running `ibmcloud ks cluster addons -c <cluster_name_or_ID>`. If you have a version of Istio that is installed in your cluster but that does not match the version of Knative that you want to install, you must [update Istio first](/docs/containers?topic=containers-istio#istio_update).
 * The Knative add-on can be enabled in clusters that run Kubernetes version 1.16 or later only.
 
 ## Setting up Knative in your cluster
@@ -104,27 +104,11 @@ To install Knative in your cluster:
 
    The installation of all Knative components might take a few minutes to complete.
 
-2. Verify that Istio is successfully installed. All pods for the nine Istio services and the pod for Prometheus must be in a `Running` status.
+2. Verify that Istio is successfully installed. All pods for the Istio services must be in a `Running` status.
    ```
    kubectl get pods --namespace istio-system
    ```
    {: pre}
-
-   Example output:
-   ```
-   NAME                                       READY     STATUS      RESTARTS   AGE
-   istio-citadel-748d656b-pj9bw               1/1       Running     0          2m
-   istio-egressgateway-6c65d7c98d-l54kg       1/1       Running     0          2m
-   istio-galley-65cfbc6fd7-bpnqx              1/1       Running     0          2m
-   istio-ingressgateway-f8dd85989-6w6nj       1/1       Running     0          2m
-   istio-pilot-5fd885964b-l4df6               2/2       Running     0          2m
-   istio-policy-56f4f4cbbd-2z2bk              2/2       Running     0          2m
-   istio-sidecar-injector-646655c8cd-rwvsx    1/1       Running     0          2m
-   istio-statsd-prom-bridge-7fdbbf769-8k42l   1/1       Running     0          2m
-   istio-telemetry-8687d9d745-mwjbf           2/2       Running     0          2m
-   prometheus-55c7c698d6-f4drj                1/1       Running     0          2m
-   ```
-   {: screen}
 
 3. Optional: If you want to use Istio for all other apps in the `default` namespace, add the `istio-injection=enabled` label to the namespace. Each serverless app pod that you create with Knative automatically runs an Envoy proxy sidecar so that the app can be included in the Istio service mesh. However, other apps in your namespaces are not included in the Istio service mesh by default. To include these apps, you must apply the label.
    ```
@@ -167,7 +151,7 @@ Update your Knative add-on to the latest versions.
    ```
    OK
    Name      Version              
-   knative   0.14.0* (<version> latest)
+   knative   0.15.1* (<version> latest)
    ```
    {: screen}
 
@@ -262,7 +246,7 @@ Update your Knative add-on to the latest versions.
     ```
     OK
     Name      Version              
-    knative   0.14.0
+    knative   0.15.1
     ```
     {: screen}
 
@@ -284,7 +268,7 @@ Update your Knative add-on to the latest versions.
       {: pre}
     3. Navigate to the Istio package directory.
       ```
-      cd istio-1.5.6
+      cd istio-1.6
       ```
       {: pre}
     4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.

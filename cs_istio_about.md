@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-08"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -90,14 +90,9 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/docs/concepts/what-is-istio/){: external}.
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
-* `Mixer` provides telemetry collection and policy controls.
-  * Telemetry pods are enabled with a Prometheus endpoint, which aggregates all telemetry data from the Envoy proxy sidecars and services in your app pods.
-  * Policy pods enforce access control, including rate limiting and applying allowlist and blocklist policies.
-* `Pilot` provides service discovery for the Envoy sidecars and configures the traffic management routing rules for sidecars.
-* `Citadel` uses identity and credential management to provide service-to-service and end-user authentication.
-* `Galley` validates configuration changes for the other Istio control plane components.
-
-To provide extra monitoring, tracing, and visualization for Istio, the add-on also installs [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external}.
+* `istiod` unifies functionality that Pilot, Galley, Citadel, and the sidecar injector previously performed into a single control plane package.
+* `istio-ingressgateway` and `istio-egressgateway` control incoming traffic to and outgoing traffic from your Istio-managed apps.
+* To provide extra monitoring, tracing, and visualization for Istio, you can optionally install [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external}.
 
 <br />
 
@@ -108,6 +103,7 @@ To provide extra monitoring, tracing, and visualization for Istio, the add-on al
 Review the following limitations for the managed Istio add-on.
 {: shortdesc}
 
+* In Istio versions 1.5 and later, the `IstioControlPlane` is deprecated and replaced with the `IstioOperator` resource.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
