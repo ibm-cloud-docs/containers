@@ -104,8 +104,6 @@ subcollection: containers
 Following a curated learning path through {{site.data.keyword.containerlong}} to create a Kubernetes cluster, manage the cluster's resources and lifecycle, and use the powerful tools of {{site.data.keyword.containerlong_notm}} to secure, manage, and monitor your cluster workloads.
 {: shortdesc}
 
-
-
 <div class=solutionBoxContainer>
   <div class="solutionBox">
     <a href = "#admin_plan">
