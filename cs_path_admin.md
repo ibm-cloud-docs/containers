@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-07"
+lastupdated: "2020-07-09"
 
 keywords: kubernetes, iks, containers
 
@@ -103,6 +103,8 @@ subcollection: containers
 
 Following a curated learning path through {{site.data.keyword.containerlong}} to create a Kubernetes cluster, manage the cluster's resources and lifecycle, and use the powerful tools of {{site.data.keyword.containerlong_notm}} to secure, manage, and monitor your cluster workloads.
 {: shortdesc}
+
+
 
 <div class=solutionBoxContainer>
   <div class="solutionBox">
