@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-09"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -366,7 +366,7 @@ For example, the patch version of your add-on might be updated automatically by 
   {: pre}
   Example output:
   ```
-  client version: 1.4.8
+  client version: 1.5.7
   cluster-local-gateway version:
   citadel version: 1.6
   egressgateway version: 1.6
@@ -376,11 +376,11 @@ For example, the patch version of your add-on might be updated automatically by 
   ingressgateway version: 1.6
   pilot version: 1.6
   policy version: 1.6
-  sidecar-injector version: 1.4.8
+  sidecar-injector version: 1.5.7
   telemetry version: 1.6
-  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.4.8"}
-  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.4.9"}
-  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.4.8"}
+  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.5.7"}
+  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.5.7"}
+  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.5.7"}
   ...
   ```
   {: screen}
