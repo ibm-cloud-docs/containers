@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, release notes
 
@@ -726,6 +726,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
+
 
 
 
