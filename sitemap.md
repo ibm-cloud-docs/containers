@@ -734,6 +734,7 @@ subcollection: containers
   * [Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts](/docs/containers?topic=containers-registry#other_registry_accounts)
   * [Accessing images that are stored in other private registries](/docs/containers?topic=containers-registry#private_images)
 * [Using the image pull secret to deploy containers](/docs/containers?topic=containers-registry#use_imagePullSecret)
+  * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-registry#store_imagePullSecret)
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd)
