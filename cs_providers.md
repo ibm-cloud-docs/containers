@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, vpc, classic
 
@@ -65,6 +65,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from the foll
 |Troubleshooting and support|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-cs_troubleshoot) guide. For questions, try posting in the [internal](https://ibm-argonauts.slack.com/messages/C4S4NUCB1) or [external](https://ibm-cloud-success.slack.com/messages/C4G6362ER) Slack channels.|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [troubleshooting documentation](/docs/containers?topic=containers-cs_troubleshoot) for VPC-specific topics. For questions, try posting in the [internal](https://test.cloud.ibm.com/docs/containers?topic=containers-cs_internal#internal_help) or [external](https://ibm-cloud-success.slack.com/messages/C4G6362ER) Slack channels.|
 {: caption="Infrastructure providers for {{site.data.keyword.containerlong_notm}} clusters"}
 {: summary="The rows are read from left to right, with the area of comparison in column one, classic infrastructure provider in column two, and VPC infrastructure provider in column three."}
+
 
 
 

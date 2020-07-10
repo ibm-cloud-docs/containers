@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-09"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -1109,6 +1109,7 @@ Then, you can check out the following network configuration steps for your clust
   * Expose your apps with [public networking services](/docs/containers?topic=containers-cs_network_planning#public_access) or [private networking services](/docs/containers?topic=containers-cs_network_planning#private_access).
   * Connect your cluster with services in private networks outside of your {{site.data.keyword.cloud_notm}} account or with resources in other VPCs by [setting up the {{site.data.keyword.vpc_short}} VPN](/docs/containers?topic=containers-vpc-vpnaas).
   * [Create access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy) to control ingress and egress traffic to your VPC subnets.
+
 
 
 

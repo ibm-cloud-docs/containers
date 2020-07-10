@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-26"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -1377,6 +1377,7 @@ Classic infrastructure permissions apply only to classic clusters. For VPC clust
 3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
 4. In each tab, deselect specific permissions.
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
+
 
 
 

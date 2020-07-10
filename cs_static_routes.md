@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-06"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 
@@ -239,5 +239,6 @@ After you [enable the static route add-on](#enable-add-on), you can create and a
         subnet: 10.94.227.46/24
   ```
   {: screen}
+
 
 

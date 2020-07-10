@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-06"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks
 
@@ -326,5 +326,6 @@ Before you begin, you need two clusters and the **Manager** [service role](/docs
     kubectl get all
     ```
     {: pre}
+
 
 

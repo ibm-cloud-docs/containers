@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-09"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks
 
@@ -196,4 +196,5 @@ Version 0.1 of the CLI plug-in is deprecated. Ensure that your {{site.data.keywo
 | 0.1.590 | 01 Oct 2018 | <ul><li>Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status) commands for collecting API server logs in your cluster.</li><li>Adds the [`ibmcloud ks key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li><li>Adds the `--skip-master-health` flag to the [ibmcloud ks worker reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) and [ibmcloud ks worker reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload.</li><li>Renames `Owner Email` to `Owner` in the output of `ibmcloud ks cluster get`.</li></ul> |
 {: caption="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
+
 

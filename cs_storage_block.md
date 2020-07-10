@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks
 
@@ -2235,6 +2235,7 @@ To clean up persistent data:
     ibmcloud sl block volume-list
     ```
     {: pre}
+
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-01"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks, help, debug
 
@@ -950,5 +950,6 @@ Still having issues with your cluster? Review different ways to get help and sup
 2.  Contact IBM Support by opening a case. To learn about opening an IBM support case, or about support levels and case severities, see [Contacting support](/docs/get-support?topic=get-support-getting-customer-support).
 3.  In your support case, for **Category**, select **Containers**.
 4.  For the **Offering**, select your {{site.data.keyword.containershort}} cluster. Include the relevant information that you previously gathered.
+
 
 
