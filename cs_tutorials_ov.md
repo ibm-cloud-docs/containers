@@ -128,6 +128,7 @@ subcollection: containers
 {: #tutorials-create-cluster-deploy-app}
 
 <div class = "solutionBoxContainer">
+  
   <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
   <div class = "solutionBox">
       <div class = "solutionBoxContent">
