@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-11"
 
 keywords: kubernetes, iks, containers
 
@@ -32,6 +32,8 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+
+
 
 
 
@@ -89,6 +91,7 @@ subcollection: containers
     }
 -->
 </style>
+
 
 # Getting started with {{site.data.keyword.containerlong_notm}}
 {: #getting-started}
