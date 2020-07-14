@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-11"
+lastupdated: "2020-07-14"
 
 keywords: kubernetes, iks
 
@@ -181,8 +181,8 @@ subcollection: containers
 {: #tutorials-deploy-app}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
         <div class = "solutionBoxContent">
                 Scalable web application on Kubernetes
           <div class="solutionBoxDescription">
@@ -194,8 +194,8 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
     <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
     <div class = "solutionBox">
         <div class = "solutionBoxContent">
