@@ -184,7 +184,7 @@ subcollection: containers
     <div class = "solutionBox">
     <a href = "/docs/solution-tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
         <div class = "solutionBoxContent">
-                Scalable web application on Kubernetes
+        <div class="solutionBoxTitle">Scalable web application on Kubernetes</div>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
