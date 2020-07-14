@@ -267,9 +267,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-6. Get the name of any secret in the `default` namespace in your cluster.
+6. Get the name of a secret in your cluster.
     ```
-    kubectl get secrets
+    kubectl get secrets [-n <namespace>]
     ```
     {: pre}
 
