@@ -40,142 +40,53 @@ subcollection: containers
 
 
 
-
-<style>
-<!--
-    #tutorials { /* hide the page header */
-        display: none !important
-    }
-    .allCategories {
-        display: flex !important;
-        flex-direction: row !important;
-        flex-wrap: wrap !important;
-    }
-    .solutionBoxContainer {}
-    .solutionBoxContainer a {
-        text-decoration: none !important;
-        border: none !important;
-    }
-    .solutionBox {
-        display: inline-block !important;
-        width: 600px !important;
-        margin: 0 10px 20px 0 !important;
-        padding: 10px !important;
-        border: 1px #dfe6eb solid !important;
-        box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.2) !important;
-    }
-    @media screen and (min-width: 960px) {
-        .solutionBox {
-        width: 27% !important;
-        }
-        .solutionBoxContent {
-        height: 320px !important;
-        }
-    }
-    @media screen and (min-width: 1298px) {
-        .solutionBox {
-        width: calc(33% - 2%) !important;
-        }
-        .solutionBoxContent {
-        min-height: 320px !important;
-        }
-    }
-    .solutionBox:hover {
-        border-color: rgb(136, 151, 162) !important;
-    }
-    .solutionBoxContent {
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    .solutionBoxDescription {
-        flex-grow: 1 !important;
-        display: flex !important;
-        flex-direction: column !important;
-    }
-    .descriptionContainer {
-    }
-    .descriptionContainer p {
-        margin: 2px !important;
-        overflow: hidden !important;
-        display: -webkit-box !important;
-        -webkit-line-clamp: 4 !important;
-        -webkit-box-orient: vertical !important;
-        font-size: 12px !important;
-        font-weight: 400 !important;
-        line-height: 1.5 !important;
-        letter-spacing: 0 !important;
-        max-height: 70px !important;
-    }
-    .architectureDiagramContainer {
-        flex-grow: 1 !important;
-        min-width: 200px !important;
-        padding: 0 10px !important;
-        text-align: center !important;
-        display: flex !important;
-        flex-direction: column !important;
-        justify-content: center !important;
-    }
-    .architectureDiagram {
-        max-height: 170px !important;
-        padding: 5px !important;
-        margin: 0 auto !important;
-    }
--->
-</style>
-
-
 ## Create a cluster and deploy your first app
 {: #tutorials-create-cluster-deploy-app}
 
 <div class = "solutionBoxContainer">
-  
-  <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
   <div class = "solutionBox">
-      <div class = "solutionBoxContent">
-        Community Kubernetes cluster
+    <a href = "/docs/containers?topic=containers-cs_cluster_tutorial">
+      <div class="solutionBoxContent">
+      <div class="solutionBoxTitle">
+        <p><strong>Community Kubernetes cluster</strong></p></div>
         <div class="solutionBoxDescription">
-              <div class="descriptionContainer">
-                </br><p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system. </p></br>
-              </div>
-              <div class="architectureDiagramContainer">
-                  <img class="architectureDiagram" src="images/tutorial_ov.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
-              </div>
-          </div>
-      </div>
-  </div>
-  </a>
-  <a href = "/docs/containers?topic=containers-vpc_ks_tutorial">
-    <div class = "solutionBox">
-        <div class = "solutionBoxContent">
-          Virtual Private Cloud cluster
-            <div class="solutionBoxDescription">
-                <div class="descriptionContainer">
-                  </br><p>Create a classic cluster in your Virtual Private Cloud (VPC). </p></br>
-                </div>
-                <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC cluster tutorial diagram" /></br>
-                </div>
+            <p>Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system.</p>
+            <div class="architectureDiagramContainer">
+                <img class="architectureDiagram" src="images/tutorial_ov.png" alt="Architecture diagram for the solution Create a Kubernetes cluster" />
             </div>
         </div>
-    </div>
-  </a>
-  <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
-    <div class = "solutionBox">
-        <div class = "solutionBoxContent">
-          OpenShift cluster
-            <div class="solutionBoxDescription">
-                <div class="descriptionContainer">
-                  </br><p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software. </p></br>
-                </div>
-                <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="images/roks_tutorial2.png" alt="OpenShift tutorial flow diagram" /></br>
-                </div>
-            </div>
         </div>
-    </div>
     </a>
+  </div>
+    <div class = "solutionBox">
+        <a href = "/docs/containers?topic=containers-vpc_ks_tutorial">
+        <div class="solutionBoxContent">
+        <div class = "solutionBoxTitle">
+          <p><strong>Virtual Private Cloud cluster</strong></p></div>
+            <div class="solutionBoxDescription">
+                <p>Create a classic cluster in your Virtual Private Cloud (VPC).</p>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src="images/cs_org_ov_vpc.png" alt="VPC cluster tutorial diagram" />
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
+    <div class = "solutionBox">
+        <a href = "/docs/openshift?topic=openshift-openshift_tutorial">
+        <div class="solutionBoxContent">
+        <div class = "solutionBoxTitle">
+          <p><strong>OpenShift cluster</strong></p></div>
+            <div class="solutionBoxDescription">
+                <p>Create an {{site.data.keyword.containerlong_notm}} cluster with worker nodes that come installed with the OpenShift container orchestration platform software.</p>
+                <div class="architectureDiagramContainer">
+                    <img class="architectureDiagram" src="images/roks_tutorial2.png" alt="OpenShift tutorial flow diagram" />
+                </div>
+            </div>
+        </div>
+        </a>
+    </div>
 </div>
-
 
 ## Deploy apps to a cluster
 {: #tutorials-deploy-app}
@@ -196,10 +107,10 @@ subcollection: containers
         </div>
     </a>
     </div>
-    <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
     <div class = "solutionBox">
+    <a href = "https://github.com/IBM-Cloud/logistics-wizard-kubernetes">
         <div class = "solutionBoxContent">
-                Run Kubernetes and Cloud Foundry apps
+               <p><strong>Run Kubernetes and Cloud Foundry apps</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Create a Logistics Wizard deployment where the ERP and Controller services are deployed in Kubernetes, and the web user interface stays deployed as a Cloud Foundry app. </p></br>
@@ -209,27 +120,27 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-pub-sub-object-storage#pub-sub-object-storage">
         <div class = "solutionBoxContent">
-                Asynchronous data processing for apps
+               <p><strong>Asynchronous data processing for apps</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Use an Apache Kafka-based messaging service to orchestrate long running workloads to apps that run in a Kubernetes cluster. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
-                    <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution25/Architecture.png" alt="Asynchronous data processing architecture" />
+                    <img class="architectureDiagram" src="https://raw.githubusercontent.com/ibm-cloud-docs/solution-tutorials/master/images/solution25/Architecture.png" alt="Asynchronous data processing architecture" />
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/containers?topic=containers-tutorial-starterkit-kube">
+    </div>
     <div class = "solutionBox">
+        <a href = "/docs/containers?topic=containers-tutorial-starterkit-kube">
         <div class = "solutionBoxContent">
-                Deploy a starter kit app to a cluster
+                <p><strong>Deploy a starter kit app to a cluster</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain. </p></br>
@@ -239,8 +150,8 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
 </div>
 
 
@@ -248,10 +159,10 @@ subcollection: containers
 {: #tutorials-ov-ha-network-security}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis">
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis">
         <div class = "solutionBoxContent">
-                Resilient and secure multi-region clusters with Cloud Internet Services
+                <p><strong>Resilient and secure multi-region clusters with Cloud Internet Services</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Integrate Cloud Internet Services with Kubernetes clusters to deliver a resilient and secure solution across multiple {{site.data.keyword.cloud_notm}} regions. </p></br>
@@ -261,12 +172,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-strategies-for-resilient-applications">
         <div class = "solutionBoxContent">
-                Strategies for resilient applications in the cloud
+                <p><strong>Strategies for resilient applications in the cloud</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn what to consider when creating resilient apps in the cloud and what {{site.data.keyword.cloud_notm}} services you can use. </p></br>
@@ -276,12 +187,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/containers?topic=containers-policy_tutorial">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/containers?topic=containers-policy_tutorial">
         <div class = "solutionBoxContent">
-                Block unwanted network traffic with Calico policies
+                <p><strong>Block unwanted network traffic with Calico policies</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn how to use Calico policies to allow network traffic from and to certain IP addresses. </p></br>
@@ -291,12 +202,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/containers?topic=containers-istio">
+    </div>
     <div class = "solutionBox">
+        <a href = "/docs/containers?topic=containers-istio">
         <div class = "solutionBoxContent">
-                Secure, manage, and monitor a network of microservices with Istio
+                <p><strong>Secure, manage, and monitor a network of microservices with Istio</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Explore the intelligent routing and monitoring capability of Istio to control and secure your microservices in the cloud. </p></br>
@@ -306,12 +217,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-cloud-e2e-security#cloud-e2e-security">
         <div class = "solutionBoxContent">
-                Apply end to end security to an {{site.data.keyword.cloud_notm}} app
+                <p><strong>Apply end to end security to an {{site.data.keyword.cloud_notm}} app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn how to use authentication and encryption to protect your app, and how to monitor and audit cluster activities. </p></br>
@@ -321,12 +232,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-users-teams-applications#users-teams-applications">
         <div class = "solutionBoxContent">
-                Organizing users and teams with {{site.data.keyword.cloud_notm}} Identity and Access Management
+                <p><strong>Organize users and teams with {{site.data.keyword.cloud_notm}} Identity and Access Management</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Set up cluster access for users and teams and learn how to replicate this setup across environments. </p></br>
@@ -336,8 +247,8 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
 </div>
 
 
@@ -346,10 +257,10 @@ subcollection: containers
 {: #tutorials-ov-app-cluster-deployments}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/containers?topic=containers-serverless-apps-knative">
     <div class = "solutionBox">
+    <a href = "/docs/containers?topic=containers-serverless-apps-knative">
         <div class = "solutionBoxContent">
-                Deploy serverless apps with Knative services
+                <p><strong>Deploy serverless apps with Knative services</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Create modern, source-centric, containerized, and serverless apps on top of your Kubernetes cluster. </p></br>
@@ -359,12 +270,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes">
         <div class = "solutionBoxContent">
-                Continuous deployment to Kubernetes clusters
+                <p><strong>Continuous deployment to Kubernetes clusters</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br>  <p>Set up a DevOps pipeline for containerized apps that run in Kubernetes and add integrations such as security scanner, Slack notifications, and analytics.  </p></br>
@@ -374,12 +285,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/containers?topic=containers-tutorial-byoc-kube">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/containers?topic=containers-tutorial-byoc-kube">
         <div class = "solutionBoxContent">
-                Set up a DevOps delivery pipeline for your app
+                <p><strong>Set up a DevOps delivery pipeline for your app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br>  <p>Set up a DevOps toolchain for your GitHub app and learn how to configure pipeline stages to build an image from a Dockerfile, push it to a container registry, and deploy the app to a cluster.
@@ -390,12 +301,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "https://github.com/razee-io/Razee">
+    </div>
     <div class = "solutionBox">
+    <a href = "https://github.com/razee-io/Razee">
         <div class = "solutionBoxContent">
-                Automate multi-cluster deployments with Razee
+                <p><strong>Automate multi-cluster deployments with Razee</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br>  <p>Automate, manage, and visualize the deployment of Kubernetes resources across clusters, environments, and cloud providers with Razee.</p></br>
@@ -405,12 +316,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "/docs/solution-tutorials?topic=solution-tutorials-plan-create-update-deployments">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-plan-create-update-deployments">
         <div class = "solutionBoxContent">
-                Automate cluster deployments across environments with Terraform
+                <p><strong>Automate cluster deployments across environments with Terraform</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Plan, create, and update Kubernetes resources across multiple deployment environments with Terraform.</p></br>
@@ -420,8 +331,8 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
 </div>
 
 
@@ -429,10 +340,10 @@ subcollection: containers
 {: #tutorials-ov-monitor-log}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube">
     <div class = "solutionBox">
+    <a href = "/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube">
         <div class = "solutionBoxContent">
-                Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}
+                <p><strong>Manage Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Configure a logging agent in your cluster and monitor different log sources with  {{site.data.keyword.la_full_notm}}. </p></br>
@@ -442,12 +353,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-  <a href = "/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster">
         <div class = "solutionBoxContent">
-                Analyze cluster metrics with {{site.data.keyword.mon_full_notm}}
+                <p><strong>Analyze cluster metrics with {{site.data.keyword.mon_full_notm}}</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Set up a Sysdig metrics agent in your cluster and explore how you can monitor your cluster's health.  </p></br>
@@ -457,8 +368,8 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
 </div>
 
 
@@ -466,10 +377,10 @@ subcollection: containers
 {: #tutorials-ov-migrate-apps}
 
 <div class = "solutionBoxContainer">
-    <a href = "/docs/containers?topic=containers-cf_tutorial">
     <div class = "solutionBox">
+    <a href = "/docs/containers?topic=containers-cf_tutorial">
         <div class = "solutionBoxContent">
-                Containerize a Cloud Foundry app
+                <p><strong>Containerize a Cloud Foundry app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Learn how to create a Docker image from a Python Cloud Foundry app, push this image to {{site.data.keyword.registrylong_notm}}, and deploy your app to a Kubernetes cluster.  </p></br>
@@ -479,12 +390,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-  <a href = "/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes">
+    </div>
     <div class = "solutionBox">
+    <a href = "/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes">
         <div class = "solutionBoxContent">
-                Migrate a VM-based app
+                <p><strong>Migrate a VM-based app</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Prepare your app code, containerize your VM-based app, and deploy this app to a Kubernetes cluster.  </p></br>
@@ -494,12 +405,12 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
-    <a href = "https://github.com/IBM-Cloud/jpetstore-kubernetes">
+    </div>
     <div class = "solutionBox">
+    <a href = "https://github.com/IBM-Cloud/jpetstore-kubernetes">
         <div class = "solutionBoxContent">
-                Modernize a Java web app
+                <p><strong>Modernize a Java web app</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br><p>Containerize the JPetStore app and extend it with Watson Visual Recognition and Twilio text messaging.</p></br>
@@ -509,6 +420,6 @@ subcollection: containers
                 </div>
             </div>
         </div>
-    </div>
     </a>
+    </div>
 </div>
