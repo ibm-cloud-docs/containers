@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-14"
+lastupdated: "2020-07-15"
 
 keywords: kubernetes, iks
 
@@ -184,7 +184,7 @@ subcollection: containers
     <div class = "solutionBox">
     <a href = "/docs/solution-tutorials?topic=solution-tutorials-scalable-webapp-kubernetes">
         <div class = "solutionBoxContent">
-        <div class="solutionBoxTitle">Scalable web application on Kubernetes</div>
+        <p><strong>Scalable web application on Kubernetes</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
                   </br> <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
