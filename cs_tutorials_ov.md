@@ -98,7 +98,7 @@ subcollection: containers
         <p><strong>Scalable web application on Kubernetes</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
+                  <p>Scaffold a web app, deploy it to a cluster, and learn how to scale your app and monitor its health. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/ibm-cloud-docs/tutorials/master/images/solution2/Architecture.png" alt="Architecture diagram for deploying web apps with {{site.data.keyword.containerlong_notm}}" />
@@ -113,7 +113,7 @@ subcollection: containers
                <p><strong>Run Kubernetes and Cloud Foundry apps</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Create a Logistics Wizard deployment where the ERP and Controller services are deployed in Kubernetes, and the web user interface stays deployed as a Cloud Foundry app. </p></br>
+                  <p>Create a Logistics Wizard where the ERP and Controller services are in Kubernetes and the web UI in a Cloud Foundry app. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Cloud/logistics-wizard-kubernetes/master/lw_kube_architecture.png" alt="Logistics Wizard architecture overview" />
@@ -128,7 +128,7 @@ subcollection: containers
                <p><strong>Asynchronous data processing for apps</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Use an Apache Kafka-based messaging service to orchestrate long running workloads to apps that run in a Kubernetes cluster. </p></br>
+                  <p>Use an Apache Kafka-based messaging service to orchestrate long running workloads in Kubernetes apps.</p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/ibm-cloud-docs/solution-tutorials/master/images/solution25/Architecture.png" alt="Asynchronous data processing architecture" />
@@ -143,7 +143,7 @@ subcollection: containers
                 <p><strong>Deploy a starter kit app to a cluster</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain. </p></br>
+                  <p>Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/starterkit-app.png" alt="Starter kit app flow" />
@@ -165,7 +165,7 @@ subcollection: containers
                 <p><strong>Resilient and secure multi-region clusters with Cloud Internet Services</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Integrate Cloud Internet Services with Kubernetes clusters to deliver a resilient and secure solution across multiple {{site.data.keyword.cloud_notm}} regions. </p></br>
+                  <p>Integrate Cloud Internet Services with Kubernetes clusters to deliver a resilient and secure solution across multiple {{site.data.keyword.cloud_notm}} regions. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution32-multi-region-k8s-cis/Architecture.png" alt="Architecture diagram for using Cloud Internet Service with {{site.data.keyword.containerlong_notm}}" />
@@ -180,7 +180,7 @@ subcollection: containers
                 <p><strong>Strategies for resilient applications in the cloud</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn what to consider when creating resilient apps in the cloud and what {{site.data.keyword.cloud_notm}} services you can use. </p></br>
+                  <p>Learn what to consider when creating resilient apps in the cloud and what {{site.data.keyword.cloud_notm}} services you can use. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution39/Architecture.png" alt="Architecture diagram for creating resilient applications" />
@@ -195,7 +195,7 @@ subcollection: containers
                 <p><strong>Block unwanted network traffic with Calico policies</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn how to use Calico policies to allow network traffic from and to certain IP addresses. </p></br>
+                  <p>Learn how to use Calico policies to allow network traffic from and to certain IP addresses. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/cs_tutorial_policies_L4.png" alt="Block incoming network traffic with Calico network policies" />
@@ -210,7 +210,7 @@ subcollection: containers
                 <p><strong>Secure, manage, and monitor a network of microservices with Istio</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Explore the intelligent routing and monitoring capability of Istio to control and secure your microservices in the cloud. </p></br>
+                  <p>Use Istio for intelligent routing and monitoring of your microservices in the cloud. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/istio_ov.png" alt="Overview of Istio components and dependencies" /></br>
@@ -225,7 +225,7 @@ subcollection: containers
                 <p><strong>Apply end to end security to an {{site.data.keyword.cloud_notm}} app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn how to use authentication and encryption to protect your app, and how to monitor and audit cluster activities. </p></br>
+                  <p>Learn how to use authentication and encryption to protect your app, and how to monitor and audit cluster activities. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://github.com/IBM-Bluemix-Docs/tutorials/blob/master/images/solution34-cloud-e2e-security/Architecture.png?raw=true" alt="Architecture diagram for applying end-to-end security to a cloud app" /></br>
@@ -240,7 +240,7 @@ subcollection: containers
                 <p><strong>Organize users and teams with {{site.data.keyword.cloud_notm}} Identity and Access Management</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Set up cluster access for users and teams and learn how to replicate this setup across environments. </p></br>
+                  <p>Set up cluster access for users and teams and learn how to replicate this setup across environments. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution20-users-teams-applications/architecture.png" alt="Architecture diagram for organizing users and teams" /></br>
@@ -278,7 +278,7 @@ subcollection: containers
                 <p><strong>Continuous deployment to Kubernetes clusters</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br>  <p>Set up a DevOps pipeline for containerized apps that run in Kubernetes and add integrations such as security scanner, Slack notifications, and analytics.  </p></br>
+                   <p>Set up a DevOps pipeline for Kubernetes apps and integrate with security scanner, Slack notifications, and analytics.</p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/tutorials/master/images/solution21/Architecture.png" alt="Architecture diagram for setting up a continuous delivery and continuous integration pipeline" />
@@ -290,10 +290,10 @@ subcollection: containers
     <div class = "solutionBox">
     <a href = "/docs/containers?topic=containers-tutorial-byoc-kube">
         <div class = "solutionBoxContent">
-                <p><strong>Set up a DevOps delivery pipeline for your app</strong></p>
+                <p><strong>Set up a DevOps delivery pipeline for your GitHub app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br>  <p>Set up a DevOps toolchain for your GitHub app and learn how to configure pipeline stages to build an image from a Dockerfile, push it to a container registry, and deploy the app to a cluster.
+                  <p>Configure pipelines to build an image from a Dockerfile, push it to a container registry, and deploy the app to a cluster.
              </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
@@ -309,7 +309,7 @@ subcollection: containers
                 <p><strong>Automate multi-cluster deployments with Razee</strong></p>
             <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br>  <p>Automate, manage, and visualize the deployment of Kubernetes resources across clusters, environments, and cloud providers with Razee.</p></br>
+                  <p>Automate, deploy, manage, and visualize Kubernetes resources across clusters, environments, and cloud providers with Razee.</p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/razee_ov_no_txt.png" alt="Razee deployment automation architecture" />
@@ -346,7 +346,7 @@ subcollection: containers
                 <p><strong>Manage Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Configure a logging agent in your cluster and monitor different log sources with  {{site.data.keyword.la_full_notm}}. </p></br>
+                  <p>Configure a logging agent in your cluster and monitor different log sources with  {{site.data.keyword.la_full_notm}}. </p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="https://raw.githubusercontent.com/IBM-Bluemix-Docs/Log-Analysis-with-LogDNA/master/images/kube.png" alt="LogDNA architecture overview" />
@@ -383,7 +383,7 @@ subcollection: containers
                 <p><strong>Containerize a Cloud Foundry app</strong></p>
           <div class="solutionBoxDescription">
                 <div class="descriptionContainer">
-                  </br> <p>Learn how to create a Docker image from a Python Cloud Foundry app, push this image to {{site.data.keyword.registrylong_notm}}, and deploy your app to a Kubernetes cluster.  </p></br>
+                  <p>Create a Docker image from a Python Cloud Foundry app, push the image to a container registry, and deploy your app to a Kubernetes cluster.</p></br>
                 </div>
                 <div class="architectureDiagramContainer">
                     <img class="architectureDiagram" src="images/python_flask.png" alt="Python hello world welcome screen" />
