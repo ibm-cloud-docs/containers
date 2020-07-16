@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-09"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -269,7 +269,7 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
 Improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to have external access through a VPC subnet public gateway.
 {:shortdesc}
 
-If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/resources?topic=resources-private-network-endpoints), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
+If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
 
 You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to deploy app pods that require access to external endpoints to only the subnet with an attached public gateway.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-14"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -106,7 +106,7 @@ The following table shows the changes that are included in version 1.5.7 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.5.6 | 1.5.7 | <ul><li>See the Istio release notes for [Istio 1.5.7](https://istio.io/news/releases/1.5.x/announcing-1.5.7/){:external}.</li><li>Resolves [CVE-2020-12603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12603){: external}, [CVE-2020-12605](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12605){: external}, [CVE-2020-8663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8663){: external}, [CVE-2020-12604](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12604){: external}, [CVE-2020-8169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8169){: external}, [CVE-2020-8177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8177){: external}, and [usn-4402-1](https://usn.ubuntu.com/4402-1/){: external}. For more information, see the [Istio security bulletin 2020-007](https://istio.io/news/security/istio-security-2020-007/){:external}.</li></ul> |
+| 1.5.6 | 1.5.7 | <ul><li>See the Istio release notes for [Istio 1.5.7](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.7/){:external}.</li><li>Resolves [CVE-2020-12603](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12603){: external}, [CVE-2020-12605](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12605){: external}, [CVE-2020-8663](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8663){: external}, [CVE-2020-12604](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12604){: external}, [CVE-2020-8169](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8169){: external}, [CVE-2020-8177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8177){: external}, and [usn-4402-1](https://ubuntu.com/security/notices/USN-4402-1){: external}. For more information, see the [Istio security bulletin 2020-007](https://istio.io/latest/news/security/istio-security-2020-007/){:external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.5.7" caption-side="top"}
 

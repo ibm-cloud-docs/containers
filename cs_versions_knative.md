@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, knative, add-on, knative changelog
 
@@ -49,7 +49,7 @@ The following table shows the changes that are included in version 0.15.1 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 0.14.0 | 0.15.1 | <ul><li>See the [Knative release notes for version 0.14.0](https://cloud.ibm.com/docs/containers?topic=containers-cs_versions#release-history){:external}.</li><li>In version 0.15.1 of the Knative managed add-on, you must use [Istio version 1.16](/docs/containers?topic=containers-istio).</li></ul> |
+| 0.14.0 | 0.15.1 | <ul><li>See the [Knative release notes for version 0.14.0](/docs/containers?topic=containers-cs_versions#release-history){:external}.</li><li>In version 0.15.1 of the Knative managed add-on, you must use [Istio version 1.16](/docs/containers?topic=containers-istio).</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Knative 0.15.1" caption-side="top"}
 

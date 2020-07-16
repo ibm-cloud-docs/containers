@@ -259,11 +259,11 @@ subcollection: containers
 * [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
 * [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
 
-[Move a VM-based application to Kubernetes](/solution-tutorials/solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Move a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes){: external}
 
-[Create a multi-region cluster using Cloud Internet Services](/solution-tutorials/solution-tutorials-multi-region-k8s-cis){: external}
+[Create a multi-region cluster using Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis){: external}
 
-[Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/solution-tutorials/solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
