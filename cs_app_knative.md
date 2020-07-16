@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, knative
 
@@ -258,7 +258,7 @@ Update your Knative add-on to the latest versions.
       {: pre}
       Example output:
       ```
-      icr.io/ext/istio/pilot:1.4.5
+      icr.io/ext/istio/pilot:1.5.8
       ```
       {: screen}
     2. Using the Istio control plane version, download the `istioctl` client.

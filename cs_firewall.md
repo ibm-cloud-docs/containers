@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-25"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -372,7 +372,12 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logDNA_public_IP&gt;</pre>
         Replace &gt;<em>logDNA_public_IP&gt;</em> with the [LogDNA IP addresses](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-service-connection#network_outgoing_traffic).
 
-6. If you use load balancer services, ensure that all traffic that uses the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
+6. Optional: Allow incoming and outgoing network traffic for the managed Istio add-on.
+  * Allow outgoing network traffic from the `istio-egressgateway` load balancer through the following ports: `TCP port 80, port 15443 FROM <each_worker_node_publicIP>`
+  * Allow incoming network traffic to the `istiod` control plane and the `istio-ingressgateway` load balancer through the following ports: `TCP port 443, port 853, port 15010, port 15012, port 15014 FROM <each_worker_node_publicIP>`
+  * If you [enabled the Knative cluster local gateway](/docs/containers?topic=containers-istio#customize), allow incoming network traffic to the cluster local gateway through the following ports: `TCP port 80, port 15021, port 15443 TO <each_worker_node_publicIP>`
+
+7. If you use load balancer services, ensure that all traffic that uses the VRRP protocol is allowed between worker nodes on the public and private interfaces. {{site.data.keyword.containerlong_notm}} uses the VRRP protocol to manage IP addresses for public and private load balancers.
 
 </br>
 
