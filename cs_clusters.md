@@ -692,7 +692,9 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
    4. From the **Virtual private cloud** drop-down menu, select the Gen 2 VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned during cluster creation blocks the Kubernetes master from managing your cluster.
+
    6. **Optional**: Add a [tag](/docs/account?topic=account-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
+
    7. Select a resource group in which to create your cluster.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
@@ -921,7 +923,9 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    4. From the **Virtual private cloud** drop-down menu, select the Gen 1 VPC that you created earlier.
    5. Give your cluster a unique name. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
  **Note**: Changing the unique ID or domain name that is assigned 6uring cluster creation blocks the Kubernetes master from managing your cluster.
+
    6. **Optional**: Add a [tag](/docs/account?topic=account-tag) to your cluster to help manage {{site.data.keyword.cloud_notm}} resources, such as the team or billing department that uses the cluster.
+
    7. Select a resource group in which to create your cluster.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
       * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-07"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks
 
@@ -78,7 +78,7 @@ This tutorial is intended for experienced software developers and DevOps enginee
    *  **Viewer** platform role to the resource group of the cluster where you want to create the toolchain.
    *  **Editor** platform role to the **Toolchain** service.
    *  **Editor** platform role to the **Continuous Delivery** service.
-* Create or retrieve an [{{site.data.keyword.cloud_notm}} API key](/docs/iam?topic=iam-userapikey).
+* Create or retrieve an [{{site.data.keyword.cloud_notm}} API key](/docs/account?topic=account-userapikey).
 
 ## Lesson 1: Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton
 {: #create-devops-toolchain}
@@ -146,7 +146,7 @@ To set up your delivery pipeline:
    4. Select the **Jobs** tab.
    5. Click **Add Job '+'**, select **Build** for the job type, and complete the fields as follows:
       * Select **Container Registry** for the builder type.
-      * Enter an existing {{site.data.keyword.cloud_notm}} API key. If you don't have an API key, see [Creating an API key](/docs/iam?topic=iam-userapikey#create_user_key).
+      * Enter an existing {{site.data.keyword.cloud_notm}} API key. If you don't have an API key, see [Creating an API key](/docs/account?topic=account-userapikey#create_user_key).
       * Select the region and the {{site.data.keyword.cloud_notm}} account where you set up the namespace in {{site.data.keyword.registrylong_notm}}.
       * Select the namespace in {{site.data.keyword.registrylong_notm}} where you want to push your container image to.
       * Enter a name for your Docker image.

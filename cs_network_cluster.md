@@ -259,6 +259,7 @@ To change the VLANs that a worker pool uses to provision worker nodes:
       {: pre}
 
     * Example to add only a private VLAN, such as if you change from public and private VLANs to private-only when you have a [VRF-enabled account that uses service endpoints](/docs/account?topic=account-vrf-service-endpoint):
+
       ```
       ibmcloud ks zone network-set --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_vlan_id> --private-only
       ```

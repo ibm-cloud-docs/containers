@@ -120,7 +120,9 @@ Allow your worker nodes to securely communicate with other {{site.data.keyword.c
 {: shortdesc}
 
 **Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network**</br>
+
 Your worker nodes can automatically and securely communicate with other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong}}, over the private network. If an {{site.data.keyword.cloud_notm}} service does not support private service endpoints, your worker nodes must be connected to a subnet that has a public gateway attached to it. The pods on those worker nodes can securely communicate with the services over the public network through the subnet's public gateway.
+
 
 Note that if you use [access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) for your VPC subnets, you must create inbound or outbound rules to allow your worker nodes to communicate with these services.
 * If you do not attach public gateways to your subnets, you can create inbound rules to allow ingress from services that support private service endpoints.
@@ -354,7 +356,9 @@ Allow your worker nodes to securely communicate with other {{site.data.keyword.c
 {: shortdesc}
 
 **Communication with other {{site.data.keyword.cloud_notm}} services over the private or public network**</br>
+
 Your worker nodes can automatically and securely communicate with other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong}}, over your IBM Cloud infrastructure private network. If an {{site.data.keyword.cloud_notm}} service does not support private service endpoints, your worker nodes must be connected to a public VLAN so that they can securely communicate with the services over the public network.
+
 
 If you use Calico policies or a gateway appliance to control the public or private networks of your worker nodes, you must allow access to the public IP addresses of the services that support public service endpoints, and optionally to the private IP addresses of the services that support private service endpoints.
 * [Allow access to services' public IP addresses in Calico policies](/docs/containers?topic=containers-network_policies#isolate_workers_public)
