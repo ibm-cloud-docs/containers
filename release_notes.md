@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-10"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 16 July 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 645 and the `ingress-auth` image build to 420](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>**Istio ports**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) that you must open in a public gateway device to use the managed Istio add-on.</li><li>**Pod and service subnets**: Added information about bringing your own pod and service subnets in [classic](/docs/containers?topic=containers-subnets#basics_subnets) or [VPC clusters](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).</li></ul> |
 | 08 July 2020 | <ul><li>**Istio add-on**: [Version 1.6 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#16) is released.</li><li>**Knative add-on**: [Version 0.15.1 of the Knative managed add-on](/docs/containers?topic=containers-knative-changelog) is released. If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.</li><ul> |
 | 07 July 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 06 July 2020 | **Version changelogs**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-changelog#11512_1544). |
@@ -726,7 +727,6 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <td><strong>Assigning infrastructure access</strong>: Revised the [steps to assign IAM permissions for opening support cases](/docs/containers?topic=containers-users#infra_access).</td>
 </tr>
 </tbody></table>
-
 
 
 
