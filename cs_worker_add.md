@@ -70,7 +70,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     ```
     {: pre}
 
-2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. Keep in mind that you must have a minimum of 1 worker node in your worker pool at all times.
+2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. The minimum value is 1.
     ```
     ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
     ```
@@ -300,7 +300,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: pre}
 
-4. Create a worker pool. Keep in mind that you must have a minimum of 1 worker node in your worker pool at all times. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
+4. Create a worker pool. The minimum number of worker nodes per zone is 1. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
    ```
    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
    ```
