@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -66,7 +66,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.5 sh -
     ```
     {: pre}
 
@@ -230,17 +230,17 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
 1. Register the IP address in classic clusters or the hostname in VPC clusters for the `istio-ingressgateway` load balancer by creating a DNS subdomain.
   * Classic:
     ```
-    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
+    ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
     ```
     {: pre}
   * VPC Gen 1:
     ```
-    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
     ```
     {: pre}
   * VPC Gen 2:
     ```
-    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
+    ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
     ```
     {: pre}
 
@@ -263,11 +263,11 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
   ```
   {: screen}
 
-3. Configure the `istio-ingressgateway` load balancer to use TLS termination.
+3. **Add-on version 1.5 and earlier only**: Configure the `istio-ingressgateway` load balancer to use TLS termination.
 
   1. Retrieve the YAML file of the SSL secret and save it to a `mysecret.yaml` file on your local machine.
     ```
-    kubectl get secret <secret_name> --namespace default --export -o yaml > mysecret.yaml
+    kubectl get secret <secret_name> --namespace istio-system --export -o yaml > mysecret.yaml
     ```
     {: pre}
 
@@ -292,12 +292,35 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ```
     {: pre}
   2. Create a new `bookinfo-gateway` configuration file that uses TLS termination. Save the following YAML file as `bookinfo-gateway.yaml`.
-       ```yaml
-       apiVersion: networking.istio.io/v1alpha3
-       kind: Gateway
-       metadata:
+      * **Add-on version 1.6 and later**: Replace `<secret_name>` with the name of the SSL secret that you previously found.
+        ```yaml
+        apiVersion: networking.istio.io/v1alpha3
+        kind: Gateway
+        metadata:
+          name: bookinfo-gateway
+        spec:
+          selector:
+            istio: ingressgateway
+          servers:
+          - port:
+              number: 443
+              name: https
+              protocol: HTTPS
+            tls:
+              mode: SIMPLE
+              credentialName: <secret_name>
+            hosts:
+            - "*"
+        ```
+        {: codeblock}
+
+      * **Add-on version 1.5 and earlier**:
+        ```yaml
+        apiVersion: networking.istio.io/v1alpha3
+        kind: Gateway
+        metadata:
          name: bookinfo-gateway
-       spec:
+        spec:
          selector:
            istio: ingressgateway
          servers:
@@ -908,27 +931,29 @@ To publicly expose apps:
   ```
   {: screen}
 
-8. Retrieve the YAML file of the SSL secret and save it to a `mysecret.yaml` file on your local machine.
-  ```
-  kubectl get secret <secret_name> --namespace default --export -o yaml > mysecret.yaml
-  ```
-  {: pre}
+8. **Add-on version 1.5 and earlier only**: Configure the `istio-ingressgateway` load balancer to use TLS termination.
 
-9. In the `mysecret.yaml` file, change the value of `name:` to `istio-ingressgateway-certs` and save the file.
+  1. Retrieve the YAML file of the SSL secret and save it to a `mysecret.yaml` file on your local machine.
+    ```
+    kubectl get secret <secret_name> --namespace istio-system --export -o yaml > mysecret.yaml
+    ```
+    {: pre}
 
-10. Apply the modified secret to the `istio-system` namespace in your cluster.
-  ```
-  kubectl apply -f ./mysecret.yaml -n istio-system
-  ```
-  {: pre}
+  2. In the `mysecret.yaml` file, change the value of `name:` to `istio-ingressgateway-certs` and save the file.
 
-11. Restart the `istio-ingressgateway` pods so that the pods use the secret and are configured for TLS termination.
-  ```
-  kubectl delete pod -n istio-system -l istio=ingressgateway
-  ```
-  {: pre}
+  3. Apply the modified secret to the `istio-system` namespace in your cluster.
+    ```
+    kubectl apply -f ./mysecret.yaml -n istio-system
+    ```
+    {: pre}
 
-12. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
+  4. Restart the `istio-ingressgateway` pods so that the pods use the secret and are configured for TLS termination.
+    ```
+    kubectl delete pod -n istio-system -l istio=ingressgateway
+    ```
+    {: pre}
+
+9. Verify that traffic is routed to your Istio-managed microservices by entering the URL of the app microservice.
   ```
   https://<host_name>/<service_path>
   ```

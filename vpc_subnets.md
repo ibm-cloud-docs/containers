@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-22"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
 
@@ -80,6 +80,30 @@ If you need to create your cluster by using custom-range subnets, see the guidan
 * If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet. 
   * For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`.
   * In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
+
+**Can I specify subnets for pods and services in my cluster?**
+
+If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods, and a custom subnet CIDR to provide the private IP addresses for services.
+
+To specify custom pod and service subnets during cluster creation, use the `--pod-subnet` and `--service-subnet` flags in the `ibmcloud ks cluster create` CLI command.
+
+**Pods**:
+* Default range: For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`. In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
+* Size requirements: When you specify a custom subnet, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least `/23`, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use `/22` to have enough pod IP addresses for eight worker nodes, `/21` to have enough pod IP addresses for 16 worker nodes, and so on.
+* Range requirements: The pod and service subnets cannot overlap each other, and the pod subnet cannot overlap the VPC subnets for your worker nodes. The subnet that you choose must be within one of the following ranges:
+    * `172.17.0.0 - 172.17.255.255`
+    * `172.21.0.0 - 172.31.255.255`
+    * `192.168.0.0 - 192.168.254.255`
+    * `198.18.0.0 - 198.19.255.255`
+
+**Services**:
+* Default range: All services that are deployed to the cluster are assigned a private IP address in the `172.21.0.0/16` range by default.
+* Size requirements: When you specify a custom subnet, the subnet must be specified in CIDR format with a size of at least `/24`, which allows a maximum of 255 services in the cluster, or larger.
+* Range requirements: The pod and service subnets cannot overlap each other. The subnet that you choose must be within one of the following ranges:
+    * `172.17.0.0 - 172.17.255.255`
+    * `172.21.0.0 - 172.31.255.255`
+    * `192.168.0.0 - 192.168.254.255`
+    * `198.18.0.0 - 198.19.255.255`
 
 ### Public gateways
 {: #vpc_basics_pgw}
@@ -245,7 +269,9 @@ Use the {{site.data.keyword.cloud_notm}} CLI to create a VPC subnet for your clu
 Improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to have external access through a VPC subnet public gateway.
 {:shortdesc}
 
-If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/resources?topic=resources-private-network-endpoints), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
+
+If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
+
 
 You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to deploy app pods that require access to external endpoints to only the subnet with an attached public gateway.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 16 July 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 645 and the `ingress-auth` image build to 420](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>**Istio add-on**: [Version 1.5.8 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#158) is released.</li><li>**Istio ports**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) that you must open in a public gateway device to use the managed Istio add-on.</li><li>**Pod and service subnets**: Added information about bringing your own pod and service subnets in [classic](/docs/containers?topic=containers-subnets#basics_subnets) or [VPC clusters](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).</li></ul> |
 | 08 July 2020 | <ul><li>**Istio add-on**: [Version 1.6 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#16) is released.</li><li>**Knative add-on**: [Version 0.15.1 of the Knative managed add-on](/docs/containers?topic=containers-knative-changelog) is released. If you installed the Knative add-on before, you must uninstall and reinstall the add-on to apply these changes in your cluster.</li><ul> |
 | 07 July 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.118](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 06 July 2020 | **Version changelogs**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.4_1518](/docs/containers?topic=containers-changelog#1184_1518), [1.17.7_1530](/docs/containers?topic=containers-changelog#1177_1530), [1.16.11_1537](/docs/containers?topic=containers-changelog#11611_1537), and [1.15.12_1544](/docs/containers?topic=containers-changelog#11512_1544). |
@@ -568,7 +569,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
   <li><strong>CLI changelog</strong>: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of versions 0.3.47 and 0.3.49](/docs/containers?topic=containers-cs_cli_changelog).</li>
   <li><strong>Ingress ALB changelog</strong>: Updated the [ALB `nginx-ingress` image to build 473 and `ingress-auth` image to build 331](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li>
   <li><strong>Managed add-on versions</strong>: Updated the version of the Istio managed add-on to 1.1.7 and the Knative managed add-on to 0.6.0.</li>
-  <li><strong>Removing persistent storage</strong>: Updated the information for how you are billed when you [delete persistent storage](/docs/containers?topic=containers-cleanup).</li>
+  <li><strong>Removing persistent storage</strong>: Updated the information for how you are billed when you delete persistent storage.</li>
   <li><strong>Service bindings with private endpoint</strong>: [Added steps](/docs/containers?topic=containers-service-binding) for how to manually create service credentials with the private service endpoint when you bind the service to your cluster.</li>
   <li><strong>Version changelogs</strong>: Updated the changelogs for [1.14.3_1523](/docs/containers?topic=containers-changelog#1143_1523), [1.13.7_1526](/docs/containers?topic=containers-changelog#1137_1526), [1.12.9_1557](/docs/containers?topic=containers-changelog#1129_1557), and [1.11.10_1562](/docs/containers?topic=containers-changelog#11110_1562) patch updates.</li>
   </ul></td>

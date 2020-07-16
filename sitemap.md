@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-08"
+lastupdated: "2020-07-16"
 
 keywords: containers
 subcollection: containers
@@ -259,11 +259,11 @@ subcollection: containers
 * [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
 * [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
 
-[Move a VM-based application to Kubernetes](/tutorials/solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Move a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes){: external}
 
-[Create a multi-region cluster using Cloud Internet Services](/tutorials/solution-tutorials-multi-region-k8s-cis){: external}
+[Create a multi-region cluster using Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis){: external}
 
-[Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/tutorials/solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
@@ -566,13 +566,13 @@ subcollection: containers
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
-* [Step 1: Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
+* [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
   * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
   * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
-* [Step 2: Opening required ports in the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
+* [Opening required ports in the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
   * [Opening required ports in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
   * [Opening required ports from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
-* [Step 3: Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
+* [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
 
@@ -734,6 +734,7 @@ subcollection: containers
   * [Creating an image pull secret with different IAM API key credentials for more control or access to images in other {{site.data.keyword.cloud_notm}} accounts](/docs/containers?topic=containers-registry#other_registry_accounts)
   * [Accessing images that are stored in other private registries](/docs/containers?topic=containers-registry#private_images)
 * [Using the image pull secret to deploy containers](/docs/containers?topic=containers-registry#use_imagePullSecret)
+  * [Storing the image pull secret in the Kubernetes service account for the selected namespace](/docs/containers?topic=containers-registry#store_imagePullSecret)
 * [Setting up a cluster to pull entitled software](/docs/containers?topic=containers-registry#secret_entitled_software)
 
 [Setting up continuous integration and delivery](/docs/containers?topic=containers-cicd)
@@ -1458,7 +1459,8 @@ subcollection: containers
   * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
-* [Changelog for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
+  * [Changelog for 1.5.8, released 16 July 2020](/docs/containers?topic=containers-istio-changelog#158)
+  * [Changelog for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
   * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
 * [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)

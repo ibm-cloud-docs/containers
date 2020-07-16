@@ -43,9 +43,9 @@ Kubernetes Service
         cs_tutorials_policies.md
         cs_tutorials_cf.md
         cs_tutorials_byoc.md
-        [Move a VM-based application to Kubernetes](/tutorials/solution-tutorials-vm-to-containers-and-kubernetes)
-        [Create a multi-region cluster using Cloud Internet Services](/tutorials/solution-tutorials-multi-region-k8s-cis)
-        [Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/tutorials/solution-tutorials-continuous-deployment-to-kubernetes)
+        [Move a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes)
+        [Create a multi-region cluster using Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis)
+        [Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}

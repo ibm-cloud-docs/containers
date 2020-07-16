@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-16"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -70,6 +70,12 @@ Refer to the following table for a summary of changes for each image version of 
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>645 / 420</td>
+<td>16 Jul 2020</td>
+<td>Updates the `go` version to 1.13.7 for [CVE-2020-7919 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7919).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>642 / 413</td>
 <td>24 Jun 2020</td>

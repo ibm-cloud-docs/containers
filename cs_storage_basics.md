@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-10"
 
 keywords: kubernetes, iks
 
@@ -271,6 +271,7 @@ To change the default storage class for a cluster:
     kubectl get storageclasses | grep "(default)"
     ```
     {: pre}
+
 
 
 
