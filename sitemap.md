@@ -583,7 +583,7 @@ subcollection: containers
 
 
 ## Classic clusters
-{: #sitemap_classic_clusters}
+{: #sitemap_classic_clusters_}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -649,7 +649,7 @@ subcollection: containers
 
 
 ## VPC clusters
-{: #sitemap_vpc_clusters}
+{: #sitemap_vpc_clusters_}
 
 
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
