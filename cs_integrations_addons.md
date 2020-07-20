@@ -66,6 +66,8 @@ For more information about the prerequisites for each add-on, see:
 - [Knative](/docs/containers?topic=containers-serverless-apps-knative)
 - [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
+- [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
+- [Static routes](/docs/containers?topic=containers-static-routes)
 
 ## Updating managed add-ons
 {: #updating-managed-add-ons}
