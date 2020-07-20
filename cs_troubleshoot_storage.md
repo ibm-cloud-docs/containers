@@ -155,7 +155,6 @@ Review the options to debug persistent storage and find the root causes for fail
          kubectl get pod <pod_name> -n kube-system -o jsonpath="{.spec['containers','initContainers'][*].name}" | tr -s '[[:space:]]' '\n'
          ```
          {: pre}
-
          
          Example output for {{site.data.keyword.block_storage_is_short}} with three containers:
          ```
@@ -165,7 +164,6 @@ Review the options to debug persistent storage and find the root causes for fail
          ```
          {: screen}
          
-
          Example output for {{site.data.keyword.blockstorageshort}}:
          ```
          ibmcloud-block-storage-driver-container
@@ -186,8 +184,6 @@ Review the options to debug persistent storage and find the root causes for fail
          {: pre}
 
    3. Analyze the **Events** section of the CLI output of the `kubectl describe pod` command and the latest logs to find the root cause for the error.
-
-
 
 6. Check whether your PVC is successfully provisioned.
    1. Check the state of your PVC. A PVC is successfully provisioned if the PVC shows a status of **Bound**.
