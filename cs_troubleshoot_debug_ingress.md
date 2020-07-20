@@ -276,11 +276,11 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --enable
       ```
       {: pre}
-  * If no ALBs are created after several minutes, [review ways to get help](#getting_help_ingress).
+  * If no ALBs are created after several minutes, [review ways to get help](/docs/containers?topic=containers-get-help).
 
 4. Check whether the `LoadBalancer` service that exposes the ALB exists and is assigned the same IP address (classic clusters) or hostname (VPC clusters) as the public ALB.
   * If a `LoadBalancer` service is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
-  * If no `LoadBalancer` services are created after several minutes, [review ways to get help](#getting_help_ingress).
+  * If no `LoadBalancer` services are created after several minutes, [review ways to get help](/docs/containers?topic=containers-get-help).
 
     ```
     kubectl get svc -n kube-system | grep LoadBalancer
@@ -293,7 +293,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     ```
     {: screen}
 
-5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [review ways to get help](#getting_help_ingress).
+5. Check again whether the Ingress subdomain and secret are created. If they are not available, but you verified that all of the components in steps 1 - 4 exist, [review ways to get help](/docs/containers?topic=containers-get-help).
   ```
   ibmcloud ks cluster get -c <cluster_name_or_ID>
   ```
