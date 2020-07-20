@@ -233,6 +233,7 @@ Kubernetes Service
         cs_troubleshoot_lb.md
         cs_troubleshoot_debug_ingress.md
         cs_troubleshoot_storage.md
+        get_help.md
 
     release_notes.md
     cs_limitations.md

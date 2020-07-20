@@ -1622,6 +1622,8 @@ subcollection: containers
 
 [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
+[Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
+
 [Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
 
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
@@ -1657,7 +1659,6 @@ subcollection: containers
 * [Cluster remains in a pending State](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_pending)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_access)
 * [Cannot access resources in a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot#getting_help)
 
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
@@ -1670,11 +1671,9 @@ subcollection: containers
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
 * [Accessing a pod on a new worker node fails with a timeout](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#getting_help_workers)
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
 * [Debugging the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#debug_cluster_autoscaler)
-* [Feedback, questions, and support](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#getting_help_ca)
 
 [Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network)
 * [Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck)
@@ -1683,7 +1682,6 @@ subcollection: containers
 * [Cannot install a new strongSwan Helm chart release](/docs/containers?topic=containers-cs_troubleshoot_network#cs_strongswan_release)
 * [strongSwan VPN connectivity fails after you add or delete worker nodes](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails_worker_add)
 * [Cannot retrieve Calico network policies](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_network#getting_help_network)
 
 [Logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health)
 * [Kubernetes dashboard does not display utilization graphs](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)
@@ -1702,7 +1700,6 @@ subcollection: containers
 * [Binding a service to a cluster results in service does not support service keys error](/docs/containers?topic=containers-cs_troubleshoot_app#cs_service_keys)
 * [Cannot install a Helm chart with updated configuration values](/docs/containers?topic=containers-cs_troubleshoot_app#cs_helm_install)
 * [Cannot install Tiller for Helm version 2 or deploy containers from public images in a cluster](/docs/containers?topic=containers-cs_troubleshoot_app#cs_tiller_install)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_app#getting_help_app)
 
 [Managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons)
@@ -1715,7 +1712,6 @@ subcollection: containers
 * [Classic clusters: Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_lb#cs_source_ip_fails_lb)
 * [VPC clusters: Cannot connect to an app via load balancer](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_ts_lb)
 * [VPC clusters: Kubernetes `LoadBalancer` service fails because no IPs are available](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_no_lb)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_lb#getting_help_lb)
 
 [Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
 * [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
@@ -1736,7 +1732,6 @@ subcollection: containers
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#getting_help_ingress)
 
 [Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage)
 * [Debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
@@ -1763,6 +1758,12 @@ subcollection: containers
   * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-cluster)
   * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-cs_troubleshoot_storage#px-support)
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help_storage)
+
+[Getting help](/docs/containers?topic=containers-get-help)
+* [General ways to resolve cluster issues](/docs/containers?topic=containers-get-help#help-general)
+* [Reviewing issues and status](/docs/containers?topic=containers-get-help#help-cloud-status)
+* [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
+* [Contacting support](/docs/containers?topic=containers-get-help#help-support)
 
 
 ## Release notes

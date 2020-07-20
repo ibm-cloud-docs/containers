@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-17"
+lastupdated: "2020-07-20"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -237,6 +237,13 @@ To achieve HIPAA and PCI compliance for your environment, make sure to use [dedi
 You can add {{site.data.keyword.cloud_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
 
 For a list of supported services, see [Integrating services](/docs/containers?topic=containers-supported_integrations#supported_integrations).
+
+
+## Does IBM support third-party and open source tools that I use with my cluster?
+{: #faq_thirdparty_oss}
+{: faq}
+
+See the [IBM Open Source and Third Party policy](https://www.ibm.com/support/pages/node/737271){: external}.
 
 
 
