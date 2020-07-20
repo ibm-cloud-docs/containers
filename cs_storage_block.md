@@ -2193,9 +2193,6 @@ To clean up persistent data:
    kubectl get pv
    ```
    {: pre}
-
-   
-
 8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance.
 
     ```
