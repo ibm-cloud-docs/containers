@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-20"
 
 keywords: containers
 subcollection: containers
@@ -583,7 +583,7 @@ subcollection: containers
 
 
 ## Classic clusters
-{: #sitemap_classic_clusters}
+{: #sitemap_classic_clusters_}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -649,7 +649,7 @@ subcollection: containers
 
 
 ## VPC clusters
-{: #sitemap_vpc_clusters}
+{: #sitemap_vpc_clusters_}
 
 
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
@@ -1365,12 +1365,16 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1521)
+  * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1520)
   * [Changelog for worker node fix pack 1.18.4_1518, released 6 July 2020](/docs/containers?topic=containers-changelog#1184_1518)
   * [Changelog for 1.18.4_1517, released 22 June 2020](/docs/containers?topic=containers-changelog#1184_1517)
   * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1533)
+  * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1532)
   * [Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020](/docs/containers?topic=containers-changelog#1177_1530)
   * [Changelog for 1.17.7_1529, released 22 June 2020](/docs/containers?topic=containers-changelog#1177_1529)
   * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog#1176_1527)
@@ -1386,6 +1390,8 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for master fix pack 1.16.13_1540, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1540)
+  * [Changelog for worker node fix pack 1.16.13_1539, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1539)
   * [Changelog for worker node fix pack 1.16.11_1537, released 6 July 2020](/docs/containers?topic=containers-changelog#11611_1537)
   * [Changelog for 1.16.11_1536, released 22 June 2020](/docs/containers?topic=containers-changelog#11611_1536)
   * [Changelog for worker node fix pack 1.16.10_1534, released 8 June 2020](/docs/containers?topic=containers-changelog#11610_1534)
@@ -1408,6 +1414,8 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for master fix pack 1.15.12_1547, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1547)
+  * [Changelog for worker node fix pack 1.15.12_1546, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1546)
   * [Changelog for worker node fix pack 1.15.12_1544, released 6 July 2020](/docs/containers?topic=containers-changelog#11512_1544)
   * [Changelog for 1.15.12_1543, released 22 June 2020](/docs/containers?topic=containers-changelog#11512_1543)
   * [Changelog for worker node fix pack 1.15.12_1541, released 8 June 2020](/docs/containers?topic=containers-changelog#11512_1541)
@@ -1456,6 +1464,7 @@ subcollection: containers
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
+  * [Changelog for 1.6.5, released 17 July 2020](/docs/containers?topic=containers-istio-changelog#165)
   * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
@@ -1622,6 +1631,8 @@ subcollection: containers
 
 [Can I use IBM Cloud and other services with my cluster?](/docs/containers?topic=containers-faqs#faq_integrations)
 
+[Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
+
 [Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
 
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
@@ -1657,7 +1668,6 @@ subcollection: containers
 * [Cluster remains in a pending State](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_pending)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_access)
 * [Cannot access resources in a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot#getting_help)
 
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
@@ -1670,11 +1680,9 @@ subcollection: containers
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
 * [Accessing a pod on a new worker node fails with a timeout](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_clusters#getting_help_workers)
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
 * [Debugging the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#debug_cluster_autoscaler)
-* [Feedback, questions, and support](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#getting_help_ca)
 
 [Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network)
 * [Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck)
@@ -1683,7 +1691,6 @@ subcollection: containers
 * [Cannot install a new strongSwan Helm chart release](/docs/containers?topic=containers-cs_troubleshoot_network#cs_strongswan_release)
 * [strongSwan VPN connectivity fails after you add or delete worker nodes](/docs/containers?topic=containers-cs_troubleshoot_network#cs_vpn_fails_worker_add)
 * [Cannot retrieve Calico network policies](/docs/containers?topic=containers-cs_troubleshoot_network#cs_calico_fails)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_network#getting_help_network)
 
 [Logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health)
 * [Kubernetes dashboard does not display utilization graphs](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)
@@ -1702,7 +1709,6 @@ subcollection: containers
 * [Binding a service to a cluster results in service does not support service keys error](/docs/containers?topic=containers-cs_troubleshoot_app#cs_service_keys)
 * [Cannot install a Helm chart with updated configuration values](/docs/containers?topic=containers-cs_troubleshoot_app#cs_helm_install)
 * [Cannot install Tiller for Helm version 2 or deploy containers from public images in a cluster](/docs/containers?topic=containers-cs_troubleshoot_app#cs_tiller_install)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_app#getting_help_app)
 
 [Managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons)
@@ -1715,7 +1721,6 @@ subcollection: containers
 * [Classic clusters: Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_lb#cs_source_ip_fails_lb)
 * [VPC clusters: Cannot connect to an app via load balancer](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_ts_lb)
 * [VPC clusters: Kubernetes `LoadBalancer` service fails because no IPs are available](/docs/containers?topic=containers-cs_troubleshoot_lb#vpc_no_lb)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_lb#getting_help_lb)
 
 [Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
 * [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
@@ -1736,7 +1741,6 @@ subcollection: containers
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#getting_help_ingress)
 
 [Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage)
 * [Debugging persistent storage failures](/docs/containers?topic=containers-cs_troubleshoot_storage#debug_storage)
@@ -1763,6 +1767,12 @@ subcollection: containers
   * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-cluster)
   * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-cs_troubleshoot_storage#px-support)
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help_storage)
+
+[Getting help](/docs/containers?topic=containers-get-help)
+* [General ways to resolve cluster issues](/docs/containers?topic=containers-get-help#help-general)
+* [Reviewing issues and status](/docs/containers?topic=containers-get-help#help-cloud-status)
+* [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
+* [Contacting support](/docs/containers?topic=containers-get-help#help-support)
 
 
 ## Release notes

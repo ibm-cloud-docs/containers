@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-13"
+lastupdated: "2020-07-20"
 
 keywords: kubernetes, iks, help, debug
 
@@ -73,8 +73,8 @@ Review the options to debug persistent storage and find the root causes for fail
 
       Example output:
       ```
-      Client Version: version.Info{Major:"1", Minor:"1.17", GitVersion:"v1.17.7", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
-      Server Version: version.Info{Major:"1", Minor:"1.17", GitVersion:"v1.17.7+IKS", GitCommit:"e15454c2216a73b59e9a059fd2def4e6712a7cf0", GitTreeState:"clean", BuildDate:"2019-04-01T10:08:07Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
+      Client Version: version.Info{Major:"1", Minor:"1.17", GitVersion:"v1.17.9", GitCommit:"641856db18352033a0d96dbc99153fa3b27298e5", GitTreeState:"clean", BuildDate:"2019-03-25T15:53:57Z", GoVersion:"go1.12.1", Compiler:"gc", Platform:"darwin/amd64"}
+      Server Version: version.Info{Major:"1", Minor:"1.17", GitVersion:"v1.17.9+IKS", GitCommit:"e15454c2216a73b59e9a059fd2def4e6712a7cf0", GitTreeState:"clean", BuildDate:"2019-04-01T10:08:07Z", GoVersion:"go1.11.5", Compiler:"gc", Platform:"linux/amd64"}
       ```
       {: screen}
 
@@ -155,7 +155,6 @@ Review the options to debug persistent storage and find the root causes for fail
          kubectl get pod <pod_name> -n kube-system -o jsonpath="{.spec['containers','initContainers'][*].name}" | tr -s '[[:space:]]' '\n'
          ```
          {: pre}
-
          
          Example output for {{site.data.keyword.block_storage_is_short}} with three containers:
          ```
@@ -165,7 +164,6 @@ Review the options to debug persistent storage and find the root causes for fail
          ```
          {: screen}
          
-
          Example output for {{site.data.keyword.blockstorageshort}}:
          ```
          ibmcloud-block-storage-driver-container
@@ -186,8 +184,6 @@ Review the options to debug persistent storage and find the root causes for fail
          {: pre}
 
    3. Analyze the **Events** section of the CLI output of the `kubectl describe pod` command and the latest logs to find the root cause for the error.
-
-
 
 6. Check whether your PVC is successfully provisioned.
    1. Check the state of your PVC. A PVC is successfully provisioned if the PVC shows a status of **Bound**.
@@ -1705,7 +1701,7 @@ If you run into an issue with using Portworx, you can open an issue in the [Port
 
 If you still experience issues with persistent storage in your cluster, review the following options to receive further support or ask questions. 
 
-- For issues with {{site.data.keyword.cloud_notm}} File, Block, or Object Storage, see [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot#getting_help) to find information about how to contact the IBM team on Slack or open an {{site.data.keyword.cloud_notm}} support case. 
+- For issues with {{site.data.keyword.cloud_notm}} File, Block, or Object Storage, see [Getting help](/docs/containers?topic=containers-get-help) to find information about how to contact the IBM team on Slack or open an {{site.data.keyword.cloud_notm}} support case. 
 - For issues with Portworx, open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
 
 

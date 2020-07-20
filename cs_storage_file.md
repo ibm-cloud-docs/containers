@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-10"
+lastupdated: "2020-07-20"
 
 keywords: kubernetes, iks
 
@@ -1770,9 +1770,6 @@ To clean up persistent data:
    kubectl get pv
    ```
    {: pre}
-
-   
-
 8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance.
     ```
     ibmcloud sl file volume-list --columns id  --columns notes | grep <pv_name>

@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-06"
+lastupdated: "2020-07-20"
 
 keywords: kubernetes, iks, vpc
 
@@ -1379,9 +1379,6 @@ To clean up persistent data:
    kubectl get pv
    ```
    {: pre}
-
-   
-
 8. {: #sl_delete_storage}List the physical storage instance that your PV pointed to and note the **`id`** of the physical storage instance.
 
     ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-20"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -180,9 +180,9 @@ For more information about available bare metal flavors and how bare metal is di
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
 **Supported Kubernetes versions**:
-*   Latest: 1.18.4
-*   Default: 1.17.7
-*   Other: 1.16.11
+*   Latest: 1.18.6
+*   Default: 1.17.9
+*   Other: 1.16.13
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
@@ -237,6 +237,13 @@ To achieve HIPAA and PCI compliance for your environment, make sure to use [dedi
 You can add {{site.data.keyword.cloud_notm}} platform and infrastructure services as well as services from third-party vendors to your {{site.data.keyword.containerlong_notm}} cluster to enable automation, improve security, or enhance your monitoring and logging capabilities in the cluster.
 
 For a list of supported services, see [Integrating services](/docs/containers?topic=containers-supported_integrations#supported_integrations).
+
+
+## Does IBM support third-party and open source tools that I use with my cluster?
+{: #faq_thirdparty_oss}
+{: faq}
+
+See the [IBM Open Source and Third Party policy](https://www.ibm.com/support/pages/node/737271){: external}.
 
 
 
@@ -329,7 +336,7 @@ Yes, see [Estimating your costs](/docs/billing-usage?topic=billing-usage-cost#co
 {: #usage}
 {: faq}
 
-You can check your current usage and estimated monthly totals for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources. For more information, see [Viewing your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage). To organize your billing, you can group your resources with [resource groups](/docs/account?topic=resources-bp_resourcegroups#bp_resourcegroups).
+You can check your current usage and estimated monthly totals for your {{site.data.keyword.cloud_notm}} platform and infrastructure resources. For more information, see [Viewing your usage](/docs/billing-usage?topic=billing-usage-viewingusage#viewingusage). To organize your billing, you can group your resources with [resource groups](/docs/account?topic=account-rgs).
 
 ## Can I add tags to my cluster?
 {: #faq_tags}
