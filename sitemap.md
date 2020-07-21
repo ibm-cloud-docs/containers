@@ -1695,7 +1695,6 @@ subcollection: containers
 [Logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health)
 * [Kubernetes dashboard does not display utilization graphs](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs)
 * [Log lines are too long](/docs/containers?topic=containers-cs_troubleshoot_health#long_lines)
-* [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_health#getting_help_health)
 
 [Apps and services](/docs/containers?topic=containers-cs_troubleshoot_app)
 * [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps)
