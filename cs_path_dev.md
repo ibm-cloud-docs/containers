@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-15"
+lastupdated: "2020-07-21"
 
 keywords: kubernetes, iks, containers
 
@@ -284,7 +284,7 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
   2. Build app containers from [images in public or private image registries](/docs/containers?topic=containers-images).
   3. Specify your [app requirements in a YAML file](/docs/containers?topic=containers-app#app_yaml), which declares the configuration of the Kubernetes object.
 2. **Version your app**:
-  1. <ff-roks>Version 4.3 and later clusters: </ff-roks>To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
+  1. <ff-roks>Version 4: </ff-roks>To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
   2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
 
 </br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app).
