@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-22"
 
 keywords: kubernetes, iks, ingress
 
@@ -1030,7 +1030,7 @@ kind: Ingress
 metadata:
   name: myingress
   annotations:
-    ingress.bluemix.net/mutual-auth: "secretName=<mysecret> port=<port> serviceName=<servicename1>,<servicename2>"
+    ingress.bluemix.net/mutual-auth: "secretName=<mysecret> port=<port>"
 spec:
   tls:
   - hosts:
@@ -1051,7 +1051,6 @@ spec:
 |----------------|-----|
 | `secretName` | Replace `<mysecret>` with a name for the secret resource. |
 | `port` | Replace `<port>` with the ALB port number. |
-| `serviceName` | Replace `<servicename>` with the name of one or more Ingress resources. This parameter is optional. |
 {: caption="Understanding the annotation components" caption-side="top"}
 
 **To create a mutual authentication secret:**
