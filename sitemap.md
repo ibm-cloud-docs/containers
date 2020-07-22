@@ -1677,6 +1677,7 @@ subcollection: containers
 * [Unable to create a cluster or manage worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
 * [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
+* [Replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off)
 * [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
