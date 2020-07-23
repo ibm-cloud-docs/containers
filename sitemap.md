@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-22"
+lastupdated: "2020-07-23"
 
 keywords: containers
 subcollection: containers
@@ -449,10 +449,11 @@ subcollection: containers
   * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
   * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
   * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
-* [Deploying the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
+* [Installing the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
 * [Customizing the cluster autoscaler Helm chart configuration values](/docs/containers?topic=containers-ca#ca_chart_values)
-* [Limiting apps to run on only certain autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
+* [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
 * [Upgrading a cluster autoscaler release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
