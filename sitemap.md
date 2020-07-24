@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-21"
+lastupdated: "2020-07-24"
 
 keywords: containers
 subcollection: containers
@@ -259,11 +259,11 @@ subcollection: containers
 * [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
 * [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
 
-[Move a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes#vm-to-containers-and-kubernetes){: external}
+[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
-[Create a multi-region cluster using Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis#multi-region-k8s-cis){: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
-[Set up a continuous integration and delivery pipeline for containerized apps that run in Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes#continuous-deployment-to-kubernetes){: external}
+[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
@@ -449,10 +449,11 @@ subcollection: containers
   * [Can I use taints and tolerations with autoscaled worker pools?](/docs/containers?topic=containers-ca#scalable-practices-taints)
   * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
   * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
-* [Deploying the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
+* [Installing the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
 * [Customizing the cluster autoscaler Helm chart configuration values](/docs/containers?topic=containers-ca#ca_chart_values)
-* [Limiting apps to run on only certain autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
+* [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
 * [Upgrading a cluster autoscaler release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
@@ -1365,6 +1366,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.6_1522, released 24 July 2020](/docs/containers?topic=containers-changelog#1186_1522)
   * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1521)
   * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1520)
   * [Changelog for worker node fix pack 1.18.4_1518, released 6 July 2020](/docs/containers?topic=containers-changelog#1184_1518)
@@ -1373,6 +1375,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.9_1534, released 24 July 2020](/docs/containers?topic=containers-changelog#1179_1534)
   * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1533)
   * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1532)
   * [Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020](/docs/containers?topic=containers-changelog#1177_1530)
@@ -1390,6 +1393,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for master fix pack 1.16.13_1541, released 24 July 2020](/docs/containers?topic=containers-changelog#11613_1541)
   * [Changelog for master fix pack 1.16.13_1540, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1540)
   * [Changelog for worker node fix pack 1.16.13_1539, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1539)
   * [Changelog for worker node fix pack 1.16.11_1537, released 6 July 2020](/docs/containers?topic=containers-changelog#11611_1537)
@@ -1414,6 +1418,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for master fix pack 1.15.12_1548, released 24 July 2020](/docs/containers?topic=containers-changelog#11512_1548)
   * [Changelog for master fix pack 1.15.12_1547, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1547)
   * [Changelog for worker node fix pack 1.15.12_1546, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1546)
   * [Changelog for worker node fix pack 1.15.12_1544, released 6 July 2020](/docs/containers?topic=containers-changelog#11512_1544)
@@ -1621,6 +1626,8 @@ subcollection: containers
 
 [Does the service offer support for bare metal and GPU?](/docs/containers?topic=containers-faqs#bare_metal_gpu)
 
+[What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster)
+
 [Which Kubernetes versions does the service support?](/docs/containers?topic=containers-faqs#supported_kube_versions)
 
 [Where is the service available?](/docs/containers?topic=containers-faqs#supported_regions)
@@ -1675,6 +1682,7 @@ subcollection: containers
 * [Unable to create a cluster or manage worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
 * [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
+* [Replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off)
 * [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)

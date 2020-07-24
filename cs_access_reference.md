@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-24"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 

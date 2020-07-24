@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-07-24"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -70,7 +70,7 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     ```
     {: pre}
 
-2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. The minimum value is 1.
+2. Resize the worker pool by designating the number of worker nodes that you want to deploy in each zone. The minimum value is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
     ```
     ibmcloud ks worker-pool resize --cluster <cluster_name_or_ID> --worker-pool <pool_name>  --size-per-zone <number_of_workers_per_zone>
     ```
@@ -300,7 +300,11 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     ```
     {: pre}
 
-4. Create a worker pool. The minimum number of worker nodes per zone is 1. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).
+4. Create a worker pool. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).  
+   * The minimum number of worker nodes per zone is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). 
+   * Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. 
+   * If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
+   
    ```
    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
    ```
@@ -1205,7 +1209,7 @@ Choose among the following options:
 
 | Adding tags to clusters with the CLI. |
 |:-----------------|
-| <p><ol><li>Log in to the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login).<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li>[Tag your cluster](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach). Replace the `--resource-name` wit the name of your cluster. To list available clusters, run `ibmcloud ks cluster ls`. If you want to check your existing tags so as not to duplicate any, run `ibmcloud resource tags`.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names <tag1,tag2></code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the `--resource-id` flag.</p></li></ol></p> |
+| <p><ol><li>Log in to the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login).<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li>[Tag your cluster](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach). Replace the `--resource-name` with the name of your cluster. To list available clusters, run `ibmcloud ks cluster ls`. If you want to check your existing tags so as not to duplicate any, run `ibmcloud resource tags`.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names <tag1,tag2></code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the `--resource-id` flag.</p></li></ol></p> |
 {: caption="Adding tags to clusters with the CLI." caption-side="top"}
 {: #tags-2}
 {: tab-title="CLI"}

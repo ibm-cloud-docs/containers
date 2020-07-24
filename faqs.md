@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-07-22"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -171,6 +171,20 @@ Some CVEs require the latest patch update for a version that you can install as 
 Yes, you can provision your worker node as a single-tenant physical bare metal server. Bare metal servers come with high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have to worry about "noisy neighbors".
 
 For more information about available bare metal flavors and how bare metal is different from virtual machines, see [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm).
+
+## What is the smallest size cluster that I can make?
+{: #smallest_cluster}
+{: faq}
+
+Your cluster must have at least 1 worker node to run default Kubernetes components. You cannot have a cluster with 0 worker nodes, and you cannot power off or suspend billing for your worker nodes. Additionally, the type of cluster and the number of worker pools that you have can impact the size of your cluster.
+
+* **Single zone clusters**: You can [create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node in the default worker pool.
+* **Multizone clusters**: You must [create a cluster](/docs/containers?topic=containers-clusters) with 1 worker node per zone in the worker pool. Later, you can [remove zones](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_zone_rm) from the worker pool or [remove individual worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) so that your cluster size reduces to the minimum size of 1.
+* **Free clusters**: Free clusters have only 1 worker node.
+* **Worker pools**: For any type of cluster, each worker pool must have at least 1 worker node at all times. For the smallest size cluster possible, you can have only 1 worker pool.
+
+Keep in mind that some services such as Ingress or Knative might require multiple worker nodes for high availability, and you might not be able to run these services or your apps in the smallest size cluster possible.
+{: important}
 
 ## Which Kubernetes versions does the service support?
 {: #supported_kube_versions}

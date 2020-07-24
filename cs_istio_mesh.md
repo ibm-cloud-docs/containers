@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-24"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -994,7 +994,7 @@ Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) insi
 
 3. Create a destination rule file that is named `destination-mtls.yaml`. This policy configures service mesh workloads in a namespace to send traffic by using TLS. Note that the `host: *.local` wildcard applies this destination rule to all services in the mesh.
   ```yaml
-  apiVersion: "networking.istio.io/v1alpha3"
+  apiVersion: "networking.istio.io/v1beta1"
   kind: "DestinationRule"
   metadata:
     name: "destination-mtls"
