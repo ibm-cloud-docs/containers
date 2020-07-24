@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-19"
+lastupdated: "2020-07-24"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -196,6 +196,7 @@ Expose your custom Ingress controller deployment to the public or to the private
 1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/mandatory.yaml){: external}. If you use the community controller, edit the `mandatory.yaml` file by following these steps.
   1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
   2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/part-of: ingress-nginx` labels with one `app: ingress-nginx` label.
+  3. Remove the `LimitRange` object.
 
 2. Deploy your own Ingress controller. For example, to use the cloud-generic NGINX community Ingress controller, run the following command.
     ```
