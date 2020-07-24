@@ -3453,7 +3453,7 @@ You can use this command to:
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
 
 ```
-ibmcloud ks alb configure classic --alb-id ALB_ID (--disable|--enable [--user-ip USER_IP]|--disable-deployment) [--version IMAGE_VERSION] [-s]
+ibmcloud ks alb configure classic --alb-id ALB_ID (--disable|--enable [--user-ip USER_IP]|--disable-deployment) [-s]
 ```
 {: pre}
 
@@ -3477,9 +3477,6 @@ ibmcloud ks alb configure classic --alb-id ALB_ID (--disable|--enable [--user-ip
 
 <dt><code>--disable-deployment</code></dt>
 <dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3513,7 +3510,7 @@ You can use this command to:
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
 
 ```
-ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [--version IMAGE_VERSION] [-s]
+ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [-s]
 ```
 {: pre}
 
@@ -3531,9 +3528,6 @@ ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [--vers
 
 <dt><code>--disable</code></dt>
 <dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3568,7 +3562,7 @@ You can use this command to:
 * Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
 
 ```
-ibmcloud ks alb configure vpc-gen2 --alb-id ALB_ID --enable|--disable [--version IMAGE_VERSION] [-s]
+ibmcloud ks alb configure vpc-gen2 --alb-id ALB_ID --enable|--disable [-s]
 ```
 {: pre}
 
@@ -3586,9 +3580,6 @@ ibmcloud ks alb configure vpc-gen2 --alb-id ALB_ID --enable|--disable [--version
 
 <dt><code>--disable</code></dt>
 <dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3618,7 +3609,7 @@ Create a public or private ALB in a classic cluster. The ALB that you create is 
 {: shortdesc}
 
 ```
-ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--version IMAGE_VERSION] [--user-ip IP] [-s]
+ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--user-ip IP] [-s]
 ```
 {: pre}
 
@@ -3643,9 +3634,6 @@ ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZO
 <dt><code>--user-ip <em>IP</em></code></dt>
 <dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. This IP address must not be in use by another load balancer or ALB in the cluster.</dd>
 
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
-
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
@@ -3665,7 +3653,7 @@ Create a public or private ALB in a VPC Generation 1 compute cluster. The ALB th
 {: shortdesc}
 
 ```
-ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-s]
+ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [-s]
 ```
 {: pre}
 
@@ -3683,9 +3671,6 @@ ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zon
 
 <dt><code>--zone<em> ZONE</em></code></dt>
 <dd>The VPC zone to deploy the ALB to.</dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3706,7 +3691,7 @@ Create a public or private ALB in a VPC Generation 2 compute cluster. The ALB th
 {: shortdesc}
 
 ```
-ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-s]
+ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [-s]
 ```
 {: pre}
 
@@ -3724,9 +3709,6 @@ ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone Z
 
 <dt><code>--zone<em> ZONE</em></code></dt>
 <dd>The VPC zone to deploy the ALB to.</dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
 
 <dt><code>-s</code></dt>
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
@@ -3823,8 +3805,7 @@ ibmcloud ks alb ls --cluster my_cluster
 ### `ibmcloud ks alb rollback`
 {: #cs_alb_rollback}
 
-This command is deprecated. If you need to roll back an update of your ALB pods, you can specify one of the supported image versions in the [`ibmcloud ks alb update` command](#cs_alb_update).
-{: deprecated}
+
 
 If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. All ALB pods in your cluster revert to their previously running state.
 {: shortdesc}
@@ -3889,16 +3870,17 @@ ibmcloud ks alb types [--json] [-s]
 ### `ibmcloud ks alb update`
 {: #cs_alb_update}
 
+
+
 Force an update of the pods for individual or all Ingress ALBs in the cluster to the latest or a specific version.
 {: shortdesc}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can also use this command to roll back ALB pods to an earlier, supported version. After you force a one-time update, automatic updates remain disabled.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest build. You cannot update an individual ALB or choose which build to update the add-on to. Automatic updates remain disabled.
 
 When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the image version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
-{: note}
 
 ```
-ibmcloud ks alb update --cluster CLUSTER [--version IMAGE_VERSION] [--alb-id ALB1_ID --alb-id ALB2_ID ...] [--json] [-s]
+ibmcloud ks alb update --cluster CLUSTER [--alb-id ALB1_ID --alb-id ALB2_ID ...] [--json] [-s]
 ```
 {: pre}
 
@@ -3912,10 +3894,7 @@ ibmcloud ks alb update --cluster CLUSTER [--version IMAGE_VERSION] [--alb-id ALB
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to update the ALBs. This value is required.</dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want to update ALBs to. To list available versions, run `ibmcloud ks alb versions`. If you omit this flag, ALBs are updated to the latest version of the image type.</dd>
+<dd>The name or ID of the cluster where you want to roll back the ALB builds. This value is required.</dd>
 
 <dt><code>--alb-id <em>CLUSTER</em></code></dt>
 <dd>Optional: The ID of the individual ALB to update. To list ALB IDs, run `ibmcloud ks alb ls -c <cluster>`. To update multiple ALBs, use multiple flags, such as `--alb-id ALB1_ID --alb-id ALB2_ID`. If you omit this flag, all ALBs in the cluster are updated.</dd>
@@ -3927,45 +3906,6 @@ ibmcloud ks alb update --cluster CLUSTER [--version IMAGE_VERSION] [--alb-id ALB
 <dd>Do not show the message of the day or update reminders. This value is optional.</dd>
 </dl>
 
-**Example commands:**
-* To update all ALB pods in the cluster:
-  ```
-  ibmcloud ks alb update -c mycluster --version 626
-  ```
-  {: pre}
-* To update the ALB pods for one or more specific ALBs:
-  ```
-  ibmcloud ks alb update -c mycluster --version 626 --alb-id public-crdf253b6025d64944ab99ed63bb4567b6-alb1
-  ```
-  {: pre}
-
-### `ibmcloud ks alb versions`
-{: #cs_alb_versions}
-
-View the available image versions for Ingress ALBs in your cluster.
-{: shortdesc}
-
-
-```
-ibmcloud ks alb versions [--json] [-s]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-s</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
 
 
 <br />
@@ -6781,6 +6721,7 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
+
 
 
 
