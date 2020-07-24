@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-07-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 24 July 2020 | <ul><li>**Versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.6_1522](/docs/containers?topic=containers-changelog#1186_1522), [1.17.9_1534](/docs/containers?topic=containers-changelog#1179_1534), [1.16.13_1541](/docs/containers?topic=containers-changelog#11613_1541), and [1.15.12_1548](/docs/containers?topic=containers-changelog#11512_1548).</li></ul>|
 | 20 July 2020 | <ul><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.6_1521](/docs/containers?topic=containers-changelog#1186_1521), [1.17.9_1533](/docs/containers?topic=containers-changelog#1179_1533), [1.16.13_1540](/docs/containers?topic=containers-changelog#11613_1540), and [1.15.12_1547](/docs/containers?topic=containers-changelog#11512_1547).</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.6_1520](/docs/containers?topic=containers-changelog#1186_1520), [1.17.9_1532](/docs/containers?topic=containers-changelog#1179_1532), [1.16.13_1539](/docs/containers?topic=containers-changelog#11613_1539), and [1.15.12_1546](/docs/containers?topic=containers-changelog#11512_1546).</li></ul> |
 | 17 July 2020 | **Istio add-on**: [Version 1.6.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#165) is released. |
 | 16 July 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 645 and the `ingress-auth` image build to 420](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).</li><li>**Istio add-on**: [Version 1.5.8 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#158) is released.</li><li>**Istio ports**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) that you must open in a public gateway device to use the managed Istio add-on.</li><li>**Pod and service subnets**: Added information about bringing your own pod and service subnets in [classic](/docs/containers?topic=containers-subnets#basics_subnets) or [VPC clusters](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets).</li></ul> |
