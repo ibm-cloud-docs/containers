@@ -3269,7 +3269,7 @@ ibmcloud ks alb cert deploy [--update] --cluster CLUSTER --secret-name SECRET_NA
 <dd>Update the certificate for an ALB secret in a cluster. You can use this parameter to update the certificate after you renew it in {{site.data.keyword.cloudcerts_short}}.</dd>
 
 <dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-<dd>Specify a name for the ALB secret when it is created in the cluster. This value is required. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running <code>ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress</code>.</dd>
+<dd>Specify a name for the ALB secret when it is created in the cluster. This value is required. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running <code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; | grep Ingress</code>.</dd>
 
 <dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
 <dd>The certificate CRN. This value is required.</dd>
