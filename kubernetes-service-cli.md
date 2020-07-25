@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-24"
+lastupdated: "2020-07-25"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -6680,6 +6680,7 @@ ibmcloud ks storage volume get --volume VOLUME
 ibmcloud ks storage volume get --volume 111111111
 ```
 {: pre}
+
 
 ### `ibmcloud ks storage volume ls `
 {: #cs_storage_att_ls_2}
