@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-24"
+lastupdated: "2020-07-28"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,6 +46,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 28 July 2020 | <ul><li>**Ingress ALB versions**: Added the `ibmcloud ks alb versions` CLI command to show the available versions for the ALBs in your cluster and the `ibmcloud ks alb update` CLI command to update or rollback ALBs to a specific version.</li></ul> |
 | 24 July 2020 | <ul><li>**Minimum cluster size**: Added an FAQ about [the smallest size cluster that you can make](/docs/containers?topic=containers-faqs#smallest_cluster).</li><li>**Versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.6_1522](/docs/containers?topic=containers-changelog#1186_1522), [1.17.9_1534](/docs/containers?topic=containers-changelog#1179_1534), [1.16.13_1541](/docs/containers?topic=containers-changelog#11613_1541), and [1.15.12_1548](/docs/containers?topic=containers-changelog#11512_1548).</li><li>**Worker node replacement**: Added a troubleshooting topic for when [replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off).</li></ul>|
 | 20 July 2020 | <ul><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.6_1521](/docs/containers?topic=containers-changelog#1186_1521), [1.17.9_1533](/docs/containers?topic=containers-changelog#1179_1533), [1.16.13_1540](/docs/containers?topic=containers-changelog#11613_1540), and [1.15.12_1547](/docs/containers?topic=containers-changelog#11512_1547).</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.6_1520](/docs/containers?topic=containers-changelog#1186_1520), [1.17.9_1532](/docs/containers?topic=containers-changelog#1179_1532), [1.16.13_1539](/docs/containers?topic=containers-changelog#11613_1539), and [1.15.12_1546](/docs/containers?topic=containers-changelog#11512_1546).</li></ul> |
 | 17 July 2020 | **Istio add-on**: [Version 1.6.5 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#165) is released. |
