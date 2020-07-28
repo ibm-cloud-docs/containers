@@ -1032,7 +1032,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     </tr>
     <tr>
     <td><code>tls.secretName</code></td>
-    <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier. To see the name of the certificate that was created for your DNS subdomain, run <code>ibmcloud ks nlb-dns ls --cluster <cluster_name_or_id></code>.
+    <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the secret that you created earlier. To see the name of the certificate that was created for your DNS subdomain, run <code>ibmcloud ks nlb-dns ls --cluster &lt;cluster_name_or_id&gt;</code>.
     </tr>
     <tr>
     <td><code>host</code></td>
