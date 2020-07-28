@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-28"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -237,12 +237,10 @@ When you add an image to a namespace, the image is automatically scanned by Vuln
 ## Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image
 {: #namespace_token}
 
-You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registrylong_notm}}. Existing clusters use a registry [token](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-registry-and-uaa-tokens){: external} that is stored in a cluster image Pull Secret to authorize access to pull images from the `registry.bluemix.net` domain names.
+You can deploy containers to your cluster from an IBM-provided public image or a private image that is stored in your namespace in {{site.data.keyword.registrylong_notm}}. Existing clusters use a registry [token](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-registry-and-uaa-tokens){: external} that is stored in a cluster image pull secret to authorize access to pull images from the `registry.bluemix.net` [domain names](/docs/Registry?topic=Registry-registry_overview#registry_regions). 
 {:shortdesc}
 
-For clusters that were created before **1 July 2019**, non-expiring registry tokens and secrets were automatically created for both the [nearest regional registry and the global registry](/docs/Registry?topic=Registry-registry_overview#registry_regions). The global registry securely stores public, IBM-provided images that you can refer to across your deployments instead of having different references for images that are stored in each regional registry. The regional registry securely stores your own private Docker images. The tokens are used to authorize read-only access to any of your namespaces that you set up in {{site.data.keyword.registrylong_notm}} so that you can work with these public (global registry) and private (regional registry) images.
-
-Each token must be stored in a Kubernetes image pull secret so that it is accessible to a Kubernetes cluster when you deploy a containerized app. When your cluster is created, {{site.data.keyword.containerlong_notm}} automatically stores the tokens for the global (IBM-provided public images) and regional registries in Kubernetes image pull secrets. The image pull secrets are added to the `default` Kubernetes namespace, the `kube-system` namespace, and the list of secrets in the `default` service account for those namespaces.
+The image pull secrets are added to the `default` Kubernetes namespace, the `kube-system` namespace, and the list of secrets in the `default` service account for those namespaces. By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-registry#other).
 
 This method of using a token to authorize cluster access to {{site.data.keyword.registrylong_notm}} for the `registry.bluemix.net` domain names is deprecated. Before tokens become unsupported, update your deployments to [use the API key method](/docs/containers?topic=containers-registry#cluster_registry_auth) to authorize cluster access to the new `icr.io` registry domain names.
 {: deprecated}
@@ -252,9 +250,6 @@ Depending on where the image is and where the container is, you must deploy cont
 *   [Deploy a container to a different Kubernetes namespace than `default`](#token_copy_imagePullSecret)
 *   [Deploy a container with an image that is in a different region or {{site.data.keyword.cloud_notm}} account than your cluster](#token_other_regions_accounts)
 *   [Deploy a container with an image that is from a private, non-IBM registry](/docs/containers?topic=containers-registry#private_images)
-
-By using this initial setup, you can deploy containers from any image that is available in a namespace in your {{site.data.keyword.cloud_notm}} account into the **default** namespace of your cluster. To deploy a container into other namespaces of your cluster, or to use an image that is stored in another {{site.data.keyword.cloud_notm}} region or in another {{site.data.keyword.cloud_notm}} account, you must [create your own image pull secret for your cluster](/docs/containers?topic=containers-registry#other).
-{: note}
 
 ### Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token
 {: #token_default_namespace}
