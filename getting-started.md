@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-28"
 
 keywords: kubernetes, iks, containers
 
@@ -191,10 +191,11 @@ To complete the getting started tutorial, use a [Pay-As-You-Go or Subscription {
 Set up your free classic cluster with one worker node by using the {{site.data.keyword.cloud_notm}} console. For more information about free clusters, such as expiration and limited capabilities, see the [FAQ](/docs/containers?topic=containers-faqs#faq_free).
 {: shortdesc}
 
-1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service** and click **Create**. A cluster configuration page opens.
-2.  Select the **Free** cluster option, and give your cluster a unique name.
-3.  Click **Create Cluster**. A worker pool is created that contains one worker node.   
-
+1.  In the [{{site.data.keyword.cloud_notm}} **Catalog**](https://cloud.ibm.com/catalog?category=containers){: external}, select **Kubernetes Service**. A cluster configuration page opens.
+2.  From the plan dropdown, select the **Free** cluster option.
+3.  Give your cluster a unique name, such as `mycluster-free`.
+4.  Select a resource group to create the cluster in, such as `default`.
+3.  In the **Summary** pane, review the order summary and then click **Create**. A worker pool is created that contains one worker node in the default resource group.
 <br>
 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
@@ -228,16 +229,19 @@ Want to create a cluster in your Virtual Private Cloud (VPC) on generation 1 com
     4. Click **Save**.
     5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 3. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
-4. Configure your cluster environment.
-   1. Select **Kubernetes** as your container platform and select Kubernetes **version 1.17 or later**.
-   2. Select **VPC** infrastructure.
-   3. From the **Virtual Private Cloud** drop-down menu, select the VPC that you created earlier.
-   4. Fill out the cluster name and resource group.
-   5. For the **Location**, select the zone where you created the VPC subnet earlier.
-5. Select the **2 vCPUs 4GB RAM** worker node flavor.
-6. For the number of worker nodes, enter **1**.
-7. Review the order summary to verify the estimated costs for your cluster.
-8. Click **Create cluster**.
+3. Configure your VPC environment.
+   1. Select the **Standard** plan.
+   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.17.9 or later**.
+   3. Select **VPC** infrastructure.
+   4. From the **Virtual private cloud** drop-down menu, select the **Gen 2** VPC that you created earlier.
+4.  Configure the **Location** details for your cluster.
+    1. Select the **Resource group** that you want to create your cluster in. You cannot change the resource group later.
+    2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
+5.  Configure your **Worker pool** setup.
+    1.  If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.
+    2.  Set how many worker nodes to create per zone, such as **1**.
+6.  Review the rest of the cluster details, such as the service endpoint, cluster name, and tags.
+7.  In the **Summary** pane, review your order summary and then click **Create**.
 
 <br>
 
