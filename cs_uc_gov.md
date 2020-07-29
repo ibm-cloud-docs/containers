@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-02"
+lastupdated: "2020-07-29"
 
 keywords: kubernetes, iks
 
@@ -131,7 +131,7 @@ Key technologies:
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
 * [Container security and isolation](/docs/containers?topic=containers-security#security)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
-* [SDK for Node.js](/docs/cloud-foundry?topic=cloud-foundry-nodejs_runtime)
+* [SDK for Node.js](/docs/cloud-foundry-public?topic=cloud-foundry-nodejs_runtime)
 
 **Context: Port secures exchange of port data and shipping manifests that connects public and private organizations.**
 
