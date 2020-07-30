@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-28"
+lastupdated: "2020-07-30"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -204,7 +204,7 @@ Create your single zone or multizone classic Kubernetes cluster by using the {{s
 {: shortdesc}
 
 1. Make sure that you complete the prerequisites to [prepare your account](#cluster_prepare) and decide on your [cluster setup](#prepare_cluster_level).
-2. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
+2. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster, such as 1.17.9.
@@ -687,7 +687,7 @@ Create your single zone or multizone VPC Generation 2 compute cluster by using t
     3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
     4. Click **Save**.
     5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
-5. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
+5. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 6. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster. You must choose **Kubernetes 1.17 or later**.
@@ -922,7 +922,7 @@ Create your single zone or multizone VPC Generation 1 compute cluster by using t
    5. Specify the number of IP addresses to create. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later. If you enter a specific IP range, do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
    6. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only. Make sure to review the [VPC networking basics](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics) to understand when a public network gateway is required and how you can set up your cluster to limit public access to one or more subnets only.
    7. Click **Create subnet**.  
-5. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
+5. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 6. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
    2. From the Kubernetes drop-down list, select the version that you want to use in your cluster. You must choose **Kubernetes 1.17 or later**.
