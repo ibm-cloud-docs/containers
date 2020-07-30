@@ -1167,10 +1167,10 @@ When an alert is triggered, review the alert details in {{site.data.keyword.mon_
 {: shortdesc}
 
 
-* [Troubleshooting persistant storage volumes](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot_storage).
+* [Troubleshooting persistant storage volumes](/docs/containers?topic=containers-cs_troubleshoot_storage).
 * [Troubleshooting worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).
 * [Troubleshooting apps](/docs/containers?topic=containers-cs_troubleshoot_app).
-* [Troubleshooting clusters](https://cloud.ibm.com/docs/containers?topic=containers-cs_troubleshoot).
+* [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot).
 * [Open a support case](/docs/get-support?topic=get-support-getting-customer-support).
 
 
