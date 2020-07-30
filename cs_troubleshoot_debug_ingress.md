@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-07-30"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -519,16 +519,16 @@ Start by checking for error messages in the Ingress resource deployment events a
 ### Step 4: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
-Check the availability of your Ingress subdomain and ALBs' public IP addresses.
+Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Cloudflare multizone load balancer can access your ALBs to health check them.
 {: shortdesc}
 
-1. Get the IP addresses that your public ALBs are listening on.
+1. Get the IP addresses (classic) or hostname (VPC) that your public ALBs are listening on.
     ```
     ibmcloud ks alb ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-    Example output for a multizone cluster with worker nodes in `dal10` and `dal13`:
+    Example output for a classic multizone cluster with worker nodes in `dal10` and `dal13`:
 
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
@@ -539,11 +539,13 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-    * If a public ALB has no IP address, see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit).
+    * If a public ALB has no IP address(classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit).
 
-2. Check the health of your ALB IPs.
+2. If you use Calico pre-DNAT network policies, VPC access control lists (ACLs), or another custom firewall to block incoming traffic to Ingress ALBs, you must allow inbound access from Cloudflare's IPv4 IPs to the IP addresses of your ALBs so that your ALBs can be health checked. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALBs from  [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} that are used to check the health of your ALBs.
 
-    * For single zone cluster and multizone clusters: Ping the IP address of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses only from the private network.
+3. Check the health of your ALB IPs (classic) or hostname (VPC).
+
+    * For single zone cluster and multizone clusters: Ping the IP address (classic) or hostname (VPC) of each public ALB to ensure that each ALB is able to successfully receive packets. If you are using private ALBs, you can ping their IP addresses (classic) or hostname (VPC) only from the private network.
         ```
         ping <ALB_IP>
         ```
@@ -552,9 +554,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         * If the CLI returns a timeout and you have a custom firewall that is protecting your worker nodes, make sure that you allow ICMP in your firewall.
         * If you don't have a firewall or your firewall does not block the pings and the pings still timeout, [check the status of your ALB pods](#check_pods).
 
-    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs. For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The MZLB health check is available only for clusters that have the new Ingress subdomain in the format `<cluster_name>.<region_or_zone>.containers.appdomain.cloud`. If your cluster still uses the older format of `<cluster_name>.<region>.containers.mybluemix.net`, [convert your single zone cluster to multizone](/docs/containers?topic=containers-add_workers#add_zone). Your cluster is assigned a subdomain with the new format, but can also continue to use the older subdomain format. Alternatively, you can order a new cluster that is automatically assigned the new subdomain format.
-
-    The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
+    * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs (classic) or hostname (VPC). For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
         ```
@@ -567,7 +567,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
         {: screen}
         If one or more of the IPs returns `unhealthy`, [check the status of your ALB pods](#check_pods).
 
-3. Get the IBM-provided Ingress subdomain.
+4. Get the IBM-provided Ingress subdomain.
     ```
     ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
     ```
@@ -580,7 +580,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses.
     ```
     {: screen}
 
-4. Ensure that the IPs for each public ALB that you got in step 2 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same subdomain.
+5. Ensure that the IPs (classic) or hostname (VPC) for each public ALB that you got in step 1 of this section are registered with your cluster's IBM-provided Ingress subdomain. For example, in a classic multizone cluster, the public ALB IP in each zone where you have worker nodes must be registered under the same subdomain.
 
     ```
     kubectl get ingress -o wide
