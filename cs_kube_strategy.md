@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-10"
+lastupdated: "2020-07-30"
 
 keywords: kubernetes, iks, containers
 
@@ -175,7 +175,7 @@ Now that you have a good estimate of your app size and the worker nodes that you
 1.  [Create your cluster](/docs/containers?topic=containers-clusters) with the worker pool flavor and number of worker nodes that you [previously estimated](#sizing_workers).
 2.  Review what compute resources your cluster uses by default and calculate the remaining cluster capacity that you can use for your workloads.
     1.  With the {{site.data.keyword.cloud_notm}} IAM **Manager** service role for the cluster in all namespaces: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-    2.  Find the CPU and memory usage across all worker nodes. From the [{{site.data.keyword.cloud_notm}} Kubernetes Clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
+    2.  Find the CPU and memory usage across all worker nodes. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, you can also click your cluster and review the **Cluster Insights** card.
         ```
         kubectl top nodes
         ```
