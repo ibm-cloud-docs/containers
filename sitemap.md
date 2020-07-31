@@ -31,6 +31,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:step: data-tutorial-type='step'}
 
 
 # Site map
@@ -194,16 +195,15 @@ subcollection: containers
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-* [Time required](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_time)
 * [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
 * [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-* [Lesson 1: Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-* [Lesson 2: Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-* [Lesson 3: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-* [Lesson 4: Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-* [Lesson 5: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-  * [Lesson 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-  * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
+* [Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+* [Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+* [Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+* [Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+  * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+  * [Step 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
@@ -217,45 +217,42 @@ subcollection: containers
 
 [Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-* [Time required](/docs/containers?topic=containers-tutorial-starterkit-kube#time-starterkit-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
 * [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-* [Lesson 1: Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-* [Lesson 2: Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-* [Lesson 3: Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-* [Lesson 4: Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [Next steps](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
+* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
+* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
+* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
+* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
+* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
 
 [Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-* [Time required](/docs/containers?topic=containers-policy_tutorial#policies_time)
 * [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
 * [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-* [Lesson 1: Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-* [Lesson 2: Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-* [Lesson 3: Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-* [Lesson 4: Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-* [Lesson 5: Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
 * [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-* [Time required](/docs/containers?topic=containers-cf_tutorial#cf_time)
 * [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
 * [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-* [Lesson 1: Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-* [Lesson 2: Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-* [Lesson 3: Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+* [Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+* [Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 [Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
-* [Time required](/docs/containers?topic=containers-tutorial-byoc-kube#time-byoc-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
 * [Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
-* [Lesson 1: Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
-* [Lesson 2: Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
-* [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
-* [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
+* [Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
+* [Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
+* [Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
+* [Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
+* [What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
 
 [Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 

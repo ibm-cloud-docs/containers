@@ -9,7 +9,7 @@ keywords: kubernetes, iks, vpc
 subcollection: containers
 
 content-type: tutorial
-services: containers
+services: containers, vpc
 account-plan:
 completion-time: 30m
 
@@ -37,8 +37,8 @@ completion-time: 30m
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
 {:step: data-tutorial-type='step'}
+
 
 # Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
 {: #vpc_ks_tutorial}
