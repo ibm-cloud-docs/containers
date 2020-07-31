@@ -76,6 +76,7 @@ You can choose your logging solution based on which cluster components you need 
 Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
 
+
 ### Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}
 {: #app_logdna}
 
