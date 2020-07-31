@@ -8,6 +8,11 @@ keywords: kubernetes, iks, vpc
 
 subcollection: containers
 
+content-type: tutorial
+services: containers
+account-plan:
+completion-time: 30m
+
 ---
 
 {:beta: .beta}
@@ -33,9 +38,13 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 
+{:step: data-tutorial-type='step'}
 
 # Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
 {: #vpc_ks_tutorial}
+{: toc-content-type="tutorial"}
+{: toc-services="containers"}
+{: toc-completion-time="30m"}
 
 With **{{site.data.keyword.containerlong}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 {: shortdesc}
@@ -47,10 +56,6 @@ With **{{site.data.keyword.containerlong}} clusters on VPC Generation 2 compute*
 {: #vpc_ks_objectives}
 
 In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Gen 2 Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
-
-## Time required
-{: #vpc_ks_time}
-30 minutes
 
 ## Audience
 {: #vpc_ks_audience}
@@ -87,8 +92,9 @@ Install the command-line tools.
 <br />
 
 
-## Lesson 1: Creating a cluster in VPC
+## Create a cluster in VPC
 {: #vpc_ks_create_vpc_cluster}
+{: step}
 
 Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
 {:shortdesc}
@@ -181,8 +187,9 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 <br />
 
 
-## Lesson 2: Deploying a privately available app
+## Deploy a privately available app
 {: #vpc_ks_app}
+{: step}
 
 Create a Kubernetes deployment to deploy a single app instance as a pod to your worker node in your VPC cluster.
 {:shortdesc}
@@ -394,8 +401,9 @@ To deploy the app:
 <br />
 
 
-## Lesson 3: Setting up a Load Balancer for VPC to expose your app publicly
+## Set up a Load Balancer for VPC to expose your app publicly
 {: #vpc_ks_vpc_lb}
+{: step}
 
 Set up a VPC load balancer to expose your app on the public network.
 {: shortdesc}
