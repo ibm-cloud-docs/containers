@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
-keywords: kubernetes, iks, vpc subnets, ips, vlans, networking, public gateway
+keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
 subcollection: containers
 
