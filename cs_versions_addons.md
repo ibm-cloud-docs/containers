@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -49,7 +49,7 @@ For more information about managing updates for Fluentd and Ingress ALBs, see [U
 {: #alb_changelog}
 
 View image version changes for Ingress application load balancers (ALBs) in your {{site.data.keyword.containerlong_notm}} clusters.
-{:shortdesc}
+{: shortdesc}
 
 When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest image version. By default, automatic updates to the component are enabled, but you can disable automatic updates and manually update the component. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-manage#alb-update).
 
@@ -396,7 +396,7 @@ Refer to the following table for a summary of changes for each image version of 
 {: #fluentd_changelog}
 
 View image version changes for the Fluentd component for logging in your {{site.data.keyword.containerlong_notm}} clusters.
-{:shortdesc}
+{: shortdesc}
 
 As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, [automatic updates to Fluentd must be enabled](/docs/containers?topic=containers-update#logging-up).
 {: important}

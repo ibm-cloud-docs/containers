@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -936,7 +936,7 @@ To set up a monitoring configuration for your cluster:
 {: #states}
 
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might occur.
-{:shortdesc}
+{: shortdesc}
 
 To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get). Include the `--show-resources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 

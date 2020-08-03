@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, helm, without tiller, private cluster tiller, integrations, helm chart
 
@@ -39,7 +39,7 @@ subcollection: containers
 {: #service-binding}
 
 Add {{site.data.keyword.cloud_notm}} services to enhance your Kubernetes cluster with extra capabilities in areas such as Watson AI, data, security, and Internet of Things (IoT).
-{:shortdesc}
+{: shortdesc}
 
 **What types of services can I bind to my cluster?** </br>
 

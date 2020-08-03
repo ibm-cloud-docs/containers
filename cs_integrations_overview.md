@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, helm
 
@@ -40,7 +40,7 @@ subcollection: containers
 
 
 You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and external services with a standard cluster in {{site.data.keyword.containerlong_notm}}.
-{:shortdesc}
+{: shortdesc}
 
 ## Popular integrations
 {: #popular_services}

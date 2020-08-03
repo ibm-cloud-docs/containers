@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -67,7 +67,7 @@ Calico enforces these policies, including any Kubernetes network policies that a
 {: support}
 
 When a cluster with a public VLAN is created, a `HostEndpoint` resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
-{:shortdesc}
+{: shortdesc}
 
 In clusters that run Kubernetes version 1.16 or later, a `HostEndpoint` resource with the `ibm.role: worker_private` label is also created automatically for each worker node and its private network interface. To protect the private network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_private` label.
 
@@ -108,7 +108,7 @@ A default Kubernetes policy that limits access to the Kubernetes Dashboard is al
 {: #cli_install}
 
 To view, manage, and add Calico policies, install and configure the Calico CLI.
-{:shortdesc}
+{: shortdesc}
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. The `--admin` option downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. The `--network` option downloads the Calico configuration file to run all Calico commands.
   ```
@@ -183,7 +183,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 {: #view_policies}
 
 View the details for default and any added network policies that are applied to your cluster.
-{:shortdesc}
+{: shortdesc}
 
 **Before you begin:**
 1. [Install and configure the Calico CLI.](#cli_install)
@@ -238,7 +238,7 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
 {: #adding_network_policies}
 
 In most cases, the default policies do not need to be changed. Only advanced scenarios might require changes. If you find that you must make changes, you can create your own network policies.
-{:shortdesc}
+{: shortdesc}
 
 To create Kubernetes network policies, see the [Kubernetes network policy documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/){: external}.
 
@@ -267,7 +267,7 @@ To create Calico policies, use the following steps.
 {: #block_ingress}
 
 [By default](#default_policy), Kubernetes NodePort and LoadBalancer services are designed to make your app available on all public and private cluster interfaces. However, you can use Calico policies to block incoming traffic to your services based on traffic source or destination.
-{:shortdesc}
+{: shortdesc}
 
 Default Kubernetes and Calico policies are difficult to apply to protecting Kubernetes NodePort and LoadBalancer services due to the DNAT Iptables rules generated for these services. However, pre-DNAT policies prevent specified traffic from reaching your apps because they generate and apply Iptables rules before Kubernetes uses regular DNAT to forward traffic to pods.
 

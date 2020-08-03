@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, firewall, ips
 
@@ -51,7 +51,7 @@ If corporate network policies prevent access from your local system to public en
 {: #vpc-firewall_bx}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `ibmcloud`, `ibmcloud ks` and `ibmcloud cr` commands, you must allow TCP access for {{site.data.keyword.cloud_notm}}, {{site.data.keyword.containerlong_notm}}, and {{site.data.keyword.registrylong_notm}}.
-{:shortdesc}
+{: shortdesc}
 
 1. Allow access to `cloud.ibm.com` on port 443 in your firewall.
 2. Verify your connection by logging in to {{site.data.keyword.cloud_notm}} through this API endpoint.
@@ -99,7 +99,7 @@ If corporate network policies prevent access from your local system to public en
 {: #vpc-firewall_kubectl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `kubectl` commands, you must allow TCP access for the cluster.
-{:shortdesc}
+{: shortdesc}
 
 When a cluster is created, the port in the service endpoint URLs is randomly assigned from within 20000-32767. You can either choose to open port range 20000-32767 for any cluster that might get created or you can choose to allow access for a specific existing cluster.
 
@@ -211,7 +211,7 @@ To allow access for a specific cluster:
 {: #vpc-firewall_calicoctl}
 
 If corporate network policies prevent access from your local system to public endpoints via proxies or firewalls, to run `calicoctl` commands, you must allow TCP access for the Calico commands.
-{:shortdesc}
+{: shortdesc}
 
 Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) and [`kubectl` commands](#vpc-firewall_kubectl).
 
@@ -233,7 +233,7 @@ Before you begin, allow access to run [`ibmcloud` commands](#vpc-firewall_bx) an
 {: #vpc-allowlist_workers}
 
 Allow your worker nodes to communicate with services that are protected by firewalls.
-{:shortdesc}
+{: shortdesc}
 
 For example, you might have services that run inside or outside {{site.data.keyword.cloud_notm}}, or services that run on-premises, that are protected by a firewall. You want to permit incoming network traffic to those services from your cluster. In your service's firewall, you must add the external IP addresses of the public gateways on your cluster's VPC subnets.
 

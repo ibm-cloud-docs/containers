@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks
 
@@ -47,13 +47,13 @@ completion-time: 60m
 {: toc-completion-time="60m"}
 
 With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Follow along with a fictional public relations firm to learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster that integrate with other cloud services such as {{site.data.keyword.ibmwatson}}.
-{:shortdesc}
+{: shortdesc}
 
 ## Objectives
 {: #tutorials_objectives}
 
 In this tutorial, you work for a public relations (PR) firm and complete a series of lessons to set up and configure a custom Kubernetes cluster environment. First, you set up your {{site.data.keyword.cloud_notm}} CLI, create a {{site.data.keyword.containershort_notm}} cluster, and store your PR firm's images in a private {{site.data.keyword.registrylong}}. Then, you provision a {{site.data.keyword.toneanalyzerfull}} service and bind it to your cluster. After you deploy and test a Hello World app in your cluster, you deploy progressively more complex and highly available versions of your {{site.data.keyword.watson}} app so that your PR firm can analyze press releases and receive feedback with the latest AI technology.
-{:shortdesc}
+{: shortdesc}
 
 The following diagram provides an overview of what you set up in this tutorial.
 
@@ -214,7 +214,7 @@ Before you continue with the next lesson, why not test your knowledge and [take 
 {: step}
 
 In the previous lesson, you set up a cluster with one worker node. In this lesson, you configure a deployment and deploy a single instance of the app into a Kubernetes pod within the worker node.
-{:shortdesc}
+{: shortdesc}
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
@@ -408,7 +408,7 @@ Want to delete the resources that you created in this lesson before you move on?
 {: step}
 
 In this lesson, you deploy three instances of the Hello World app into a cluster for higher availability than the first version of the app.
-{:shortdesc}
+{: shortdesc}
 
 Higher availability means that user access is divided across the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
 
@@ -543,7 +543,7 @@ Ready to delete what you created before you continue to the next lesson? This ti
 {: step}
 
 In the previous lessons, the apps were deployed as single components in one worker node. In this lesson, you can deploy two components of an app into a cluster that use the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service.
-{:shortdesc}
+{: shortdesc}
 
 Separating components into different containers ensures that you can update one without affecting the others. Then, you update the app to scale it up with more replicas to make it more highly available. The following diagram includes the components that you deploy by completing this lesson.
 

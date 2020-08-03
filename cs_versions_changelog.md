@@ -39,7 +39,7 @@ subcollection: containers
 {: #changelog}
 
 View information of version changes for major, minor, and patch updates that are available for your {{site.data.keyword.containerlong}} Kubernetes clusters. Changes include updates to Kubernetes and {{site.data.keyword.cloud_notm}} Provider components.
-{:shortdesc}
+{: shortdesc}
 
 ## Overview
 {: #changelog_overview}

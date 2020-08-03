@@ -51,7 +51,7 @@ For more information about the Kubernetes project versions, see the Kubernetes c
 {: #update_types}
 
 Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
-{:shortdesc}
+{: shortdesc}
 
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
@@ -76,7 +76,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 {: #version_types}
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. For more information, see [Release lifecycle](#release_lifecycle).
-{:shortdesc}
+{: shortdesc}
 
 To continue receiving important security patch updates, make sure that your clusters run a supported Kubernetes version at all times. Deprecated clusters might not receive security updates.
 {: important}

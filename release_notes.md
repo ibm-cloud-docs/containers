@@ -39,7 +39,7 @@ subcollection: containers
 {: #iks-release}
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
-{:shortdesc}
+{: shortdesc}
 
 ## August 2020
 {: #aug20}

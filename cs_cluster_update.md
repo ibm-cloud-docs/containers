@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -39,13 +39,13 @@ subcollection: containers
 {: #update}
 
 You can install updates to keep your Kubernetes clusters up-to-date in {{site.data.keyword.containerlong}}.
-{:shortdesc}
+{: shortdesc}
 
 ## Updating the Kubernetes master
 {: #master}
 
 Periodically, the Kubernetes project releases [major, minor, or patch updates](/docs/containers?topic=containers-cs_versions#version_types). Updates can affect the Kubernetes API server version or other components in your Kubernetes master. IBM updates the patch version, but you must update the master major and minor versions.
-{:shortdesc}
+{: shortdesc}
 
 **How do I know when to update the master?**</br>
 You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.

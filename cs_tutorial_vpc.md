@@ -97,7 +97,7 @@ Install the command-line tools.
 {: step}
 
 Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
-{:shortdesc}
+{: shortdesc}
 
 1.  Log in to the {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). The VPC can be in a separate resource group than the resource group of your cluster. If you have a federated ID, include the `--sso` flag.
     ```
@@ -192,7 +192,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 {: step}
 
 Create a Kubernetes deployment to deploy a single app instance as a pod to your worker node in your VPC cluster.
-{:shortdesc}
+{: shortdesc}
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 

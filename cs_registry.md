@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -45,7 +45,7 @@ Plan and set up an image registry so that developers can create app containers i
 {: #planning_images}
 
 Images are typically stored in a registry that can either be accessible by the public (public registry) or set up with limited access for a small group of users (private registry).
-{:shortdesc}
+{: shortdesc}
 
 Public registries, such as Docker Hub, can be used to get started with Docker and Kubernetes to create your first containerized app in a cluster. But when it comes to enterprise applications, use a private registry, like the one provided in {{site.data.keyword.registrylong_notm}} to protect your images from being used and changed by unauthorized users. Private registries must be set up by the cluster admin to ensure that the credentials to access the private registry are available to the cluster users.
 
@@ -69,7 +69,7 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 {: #trusted_images}
 
 You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.
-{:shortdesc}
+{: shortdesc}
 
 1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
 2.  To enforce a policy that only signed images can be used to build containers in your cluster, [add Container Image Security Enforcement](/docs/Registry?topic=Registry-security_enforce#security_enforce).
@@ -230,7 +230,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
 {: #other}
 
 Set up your own image pull secret in your cluster to deploy containers to Kubernetes namespaces other than `default`, use images that are stored in other {{site.data.keyword.cloud_notm}} accounts, or use images that are stored in external private registries. Further, you might create your own image pull secret to apply IAM access policies that restrict permissions to specific registry image namespaces, or actions (such as `push` or `pull`).
-{:shortdesc}
+{: shortdesc}
 
 After you create the image pull secret, your containers must use the secret to be authorized to pull an image from the registry. You can add the image pull secret to the service account for the namespace, or refer to the secret in each deployment. For instructions, see [Using the image pull secret to deploy containers](#use_imagePullSecret).
 
@@ -441,7 +441,7 @@ The following steps create an API key that stores the credentials of an {{site.d
 {: #private_images}
 
 If you already have a private registry, you must store the registry credentials in a Kubernetes image pull secret and reference this secret from your configuration file.
-{:shortdesc}
+{: shortdesc}
 
 Before you begin:
 
@@ -517,7 +517,7 @@ To plan how image pull secrets are used in your cluster, choose between the foll
 {: #store_imagePullSecret}
 
 Every Kubernetes namespace has a Kubernetes service account that is named `default`. Within the namespace, you can add the image pull secret to this service account to grant access for pods to pull images from your registry. Deployments that do not specify a service account automatically use the `default` service account for this Kubernetes namespace.
-{:shortdesc}
+{: shortdesc}
 
 1. Check if an image pull secret already exists for your default service account.
    ```
