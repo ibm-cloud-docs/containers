@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -40,6 +40,12 @@ subcollection: containers
 
 Review information about supported Kubernetes versions for {{site.data.keyword.containerlong}} clusters.
 {: shortdesc}
+
+For more information about the Kubernetes project versions, see the Kubernetes changelog.
+* [Kubernetes 1.18 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.16 release notes](https://v1-16.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
 ## Update types
 {: #update_types}
