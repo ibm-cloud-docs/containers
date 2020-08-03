@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-23"
+lastupdated: "2020-08-03"
 
-keywords: kubernetes, iks, vpn, private cloud, icp
+keywords: kubernetes, iks, vpn, icp
 
 subcollection: containers
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Hybrid cloud

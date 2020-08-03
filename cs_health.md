@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -32,6 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:step: data-tutorial-type='step'}
 
 
 
@@ -76,6 +77,7 @@ You can choose your logging solution based on which cluster components you need 
 
 Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
+
 
 ### Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}
 {: #app_logdna}
@@ -934,7 +936,7 @@ To set up a monitoring configuration for your cluster:
 {: #states}
 
 Review the state of a Kubernetes cluster to get information about the availability and capacity of the cluster, and potential problems that might occur.
-{:shortdesc}
+{: shortdesc}
 
 To view information about a specific cluster, such as its zones, service endpoint URLs, Ingress subdomain, version, and owner, use the `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get). Include the `--show-resources` flag to view more cluster resources such as add-ons for storage pods or subnet VLANs for public and private IPs.
 
@@ -1047,7 +1049,7 @@ The **Master Status** provides details of what operation from the master state i
 ### Worker node states
 {: #states_workers}
 
-You can view the current worker node state by running the `ibmcloud ks worker ls --cluster <cluster_name_or_ID` command and locating the **State** and **Status** fields.
+You can view the current worker node state by running the `ibmcloud ks worker ls --cluster <cluster_name_or_ID>` command and locating the **State** and **Status** fields.
 {: shortdesc}
     <table summary="Every table row should be read left to right, with the cluster state in column one and a description in column two.">
     <caption>Worker node states</caption>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -32,14 +32,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Classic: Restricting network traffic to edge worker nodes
 {: #edge}
 
 Edge worker nodes can improve the security of your {{site.data.keyword.containerlong}} cluster by allowing fewer worker nodes to be accessed externally and by isolating the networking workload.
-{:shortdesc}
+{: shortdesc}
 
 When these worker nodes are marked for networking only, other workloads cannot consume the CPU or memory of the worker node and interfere with networking.
 
@@ -50,7 +50,7 @@ If you want to restrict network traffic to edge worker nodes in a multizone clus
 {: #edge_nodes}
 
 Add the `dedicated=edge` label to worker nodes on each public or private VLAN in your cluster. The labels ensure that network load balancers (NLBs) and Ingress application load balancers (ALBs) are deployed to those worker nodes only. For NLBs, ensure that two or more worker nodes per zone are edge nodes. For ALBs, ensure that three or more worker nodes per zone are edge nodes. Both public and private NLBs and ALBs can deploy to edge worker nodes.
-{:shortdesc}
+{: shortdesc}
 
 Using a gateway-enabled cluster? See [Isolating networking workloads to edge nodes in classic gateway-enabled clusters](#edge_gateway) instead.
 {: tip}
@@ -195,7 +195,7 @@ Before you begin:
 {: #edge_workloads}
 
 A benefit of edge worker nodes is that they can be specified to run networking services only.
-{:shortdesc}
+{: shortdesc}
 
 Using the `dedicated=edge` toleration means that all network load balancer (NLB) and Ingress application load balancer (ALB) services are deployed to the labeled worker nodes only. However, to prevent other workloads from running on edge worker nodes and consuming worker node resources, you must use [Kubernetes taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external}.
 
@@ -260,7 +260,7 @@ Before you begin:
 {: #edge_gateway}
 
 Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
-{:shortdesc}
+{: shortdesc}
 
 When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_clusters#gateway), the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.
 

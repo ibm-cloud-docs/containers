@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -32,20 +32,20 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Setting up the CLI
 {: #cs_cli_install}
 
 You can use the {{site.data.keyword.containerlong}} CLI to create and manage your Kubernetes clusters. To use the API, see [Setting up the API](/docs/containers?topic=containers-cs_api_install).
-{:shortdesc}
+{: shortdesc}
 
 ## Installing the IBM Cloud CLI and plug-ins
 {: #cs_cli_install_steps}
 
 Install the required CLIs to create and manage your Kubernetes clusters in {{site.data.keyword.containerlong_notm}}, and to deploy containerized apps to your cluster.
-{:shortdesc}
+{: shortdesc}
 
 This task includes the information for installing these CLIs and plug-ins:
 
@@ -170,7 +170,7 @@ For more information about the Kubernetes CLI, see the [`kubectl` reference docs
 {: #cs_cli_container}
 
 Instead of installing each of the CLIs individually on your computer, you can install the CLIs into a container that runs on your computer.
-{:shortdesc}
+{: shortdesc}
 
 Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-mac/install/){: external} or [Windows](https://docs.docker.com/docker-for-windows/install/){: external} to build and run images locally. If you are using Windows 8 or earlier, you can install the [Docker Toolbox](https://docs.docker.com/toolbox/toolbox_install_windows/){: external} instead.
 
@@ -197,7 +197,7 @@ Before you begin, [install Docker for Mac](https://docs.docker.com/docker-for-ma
 {: #cs_cli_configure}
 
 You can use the commands that are provided with the Kubernetes CLI to manage clusters in {{site.data.keyword.cloud_notm}}.
-{:shortdesc}
+{: shortdesc}
 
 All `kubectl` commands that are available in Kubernetes 1.17.9 are supported for use with clusters in {{site.data.keyword.cloud_notm}}. After you create a cluster, set the context for your local CLI to that cluster with an environment variable. Then, you can run the Kubernetes `kubectl` commands to work with your cluster in {{site.data.keyword.cloud_notm}}.
 
@@ -384,7 +384,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
 {: #cs_cli_upgrade}
 
 Update the CLIs regularly to use new features.
-{:shortdesc}
+{: shortdesc}
 
 This task includes the information for updating the following CLIs:
 -   {{site.data.keyword.cloud_notm}} CLI version 0.8.0 or later
@@ -462,7 +462,7 @@ To update the CLIs:
 {: #cs_cli_uninstall}
 
 If you no longer need the CLI, you can uninstall it.
-{:shortdesc}
+{: shortdesc}
 
 This task includes the information for removing these CLIs:
 

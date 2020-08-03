@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-21"
+lastupdated: "2020-07-31"
 
 keywords: kubernetes, iks, logging, help, debug
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Logging and monitoring

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-22"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, ingress
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Customizing Ingress routing with annotations
@@ -203,7 +203,7 @@ metadata:
 {: #location-snippets}
 
 Add a custom location block configuration for a service.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -264,7 +264,7 @@ spec:
 {: #alb-id}
 
 Route incoming requests to your apps with a private ALB.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -307,7 +307,7 @@ spec:
 {: #server-snippets}
 
 Add a custom server block configuration.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -375,7 +375,7 @@ With connection annotations, you can change how the ALB connects to the back-end
 {: #proxy-connect-timeout}
 
 Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -512,7 +512,7 @@ spec:
 {: #proxy-next-upstream-config}
 
 Set when the ALB can pass a request to the next upstream server.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -567,7 +567,7 @@ spec:
 {: #sticky-cookie-services}
 
 Use the sticky cookie annotation to add session affinity to your ALB and always route incoming network traffic to the same upstream server.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -628,7 +628,7 @@ spec:
 {: #upstream-fail-timeout}
 
 Set the amount of time during which the ALB can attempt to connect to the server.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -672,7 +672,7 @@ spec:
 {: #upstream-keepalive}
 
 Set the maximum number of idle keepalive connections for an upstream server.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -759,7 +759,7 @@ spec:
 {: #upstream-max-fails}
 
 Set the maximum number of unsuccessful attempts to communicate with the server.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -809,7 +809,7 @@ With HTTPS and TLS/SSL authentication annotations, you can configure your ALB fo
 {: #custom-port}
 
 Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -918,7 +918,7 @@ spec:
 {: #redirect-to-https}
 
 Convert insecure HTTP client requests to HTTPS.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1005,7 +1005,7 @@ spec:
 {: #mutual-auth}
 
 Configure mutual authentication for the ALB.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1083,7 +1083,7 @@ spec:
 {: #ssl-services}
 
 Allow HTTPS requests and encrypt traffic to your upstream apps.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1188,7 +1188,7 @@ spec:
 {: #tcp-ports}
 
 Access an app via a non-standard TCP port.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1303,7 +1303,7 @@ The Ingress ALB routes traffic to the paths that back-end apps listen on. With p
 {: #proxy-external-service}
 
 Add path definitions to external services, such as services hosted in {{site.data.keyword.cloud_notm}}.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1344,7 +1344,7 @@ spec:
 {: #location-modifier}
 
 Modify the way the ALB matches the request URI against the app path.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1401,7 +1401,7 @@ spec:
 {: #rewrite-path}
 
 Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1451,7 +1451,7 @@ The Ingress ALB acts as a proxy between your back-end app and the client web bro
 {: #large-client-header-buffers}
 
 Set the maximum number and size of buffers that read large client request headers.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1495,7 +1495,7 @@ spec:
 {: #proxy-buffering}
 
 Use the buffer annotation to disable the storage of response data on the ALB while the data is sent to the client.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1543,7 +1543,7 @@ spec:
 {: #proxy-buffers}
 
 Configure the number and size of proxy buffers for the ALB.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1589,7 +1589,7 @@ spec:
 {: #proxy-buffer-size}
 
 Configure the size of the proxy buffer that reads the first part of the response.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1636,7 +1636,7 @@ spec:
 {: #proxy-busy-buffers-size}
 
 Configure the size of proxy buffers that can be busy.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1730,7 +1730,7 @@ spec:
 {: #proxy-add-headers}
 
 Add extra header information to a client request before sending the request to the back-end app or to a client response before sending the response to the client.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1808,7 +1808,7 @@ spec:
 {: #response-remove-headers}
 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1864,7 +1864,7 @@ spec:
 {: #client-max-body-size}
 
 Set the maximum size of the body that the client can send as part of a request.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1919,7 +1919,7 @@ With service limit annotations, you can change the default request processing ra
 {: #global-rate-limit}
 
 Limit the request processing rate and number of connections per a defined key for all services.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -1964,7 +1964,7 @@ spec:
 {: #service-rate-limit}
 
 Limit the request processing rate and the number of connections for specific services.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 
@@ -2016,7 +2016,7 @@ Use user authentication annotations if you want to use {{site.data.keyword.appid
 {: #appid-auth}
 
 Use {{site.data.keyword.appid_full_notm}} to authenticate with your app.
-{:shortdesc}
+{: shortdesc}
 
 **Description**
 

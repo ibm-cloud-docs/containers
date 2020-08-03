@@ -2,11 +2,16 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-07-31"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+
+content-type: tutorial
+services: containers, Registry, ContinuousDelivery
+account-plan:
+completion-time: 45m
 
 ---
 
@@ -32,11 +37,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Set up a DevOps delivery pipeline for your app
 {: #tutorial-byoc-kube}
+{: toc-content-type="tutorial"}
+{: toc-services="containers, Registry, ContinuousDelivery"}
+{: toc-completion-time="45m"}
 
 Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerized app that is stored in GitHub. Learn how you create a DevOps toolchain in {{site.data.keyword.cloud_notm}}, integrate it with your GitHub repository and configure delivery pipeline stages that automatically build a container image from your Dockerfile, push it to {{site.data.keyword.registrylong_notm}}, and deploy your app to a cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
@@ -54,11 +62,6 @@ Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerize
   - Expose the app with a Kubernetes NodePort.
 
 <img src="images/byoc.png" width="600" alt="Overview of the continuous delivery pipeline stages that you configure with your DevOps toolchain" style="width:600px; border-style: none"/>
-
-## Time required
-{: #time-byoc-kube}
-
-45 minutes
 
 ## Audience
 {: #audience-byoc-kube}
@@ -80,8 +83,9 @@ This tutorial is intended for experienced software developers and DevOps enginee
    *  **Editor** platform role to the **Continuous Delivery** service.
 * Create or retrieve an [{{site.data.keyword.cloud_notm}} API key](/docs/account?topic=account-userapikey).
 
-## Lesson 1: Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton
+## Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton
 {: #create-devops-toolchain}
+{: step}
 
 To configure your continuous delivery tools, create a {{site.data.keyword.contdelivery_short}} service instance in {{site.data.keyword.cloud_notm}} and set up a DevOps toolchain skeleton.
 {: shortdesc}
@@ -99,8 +103,9 @@ To configure your continuous delivery tools, create a {{site.data.keyword.contde
 
 With your toolchain skeleton set up, you can now start configuring your toolchain.
 
-## Lesson 2: Add a GitHub integration to your toolchain
+## Add a GitHub integration to your toolchain
 {: #add-gh-integration}
+{: step}
 
 Add a GitHub integration to your DevOps toolchain skeleton to point to the GitHub repository where your Dockerfile and app code are stored. When you change the code in your GitHub repository, the changes are automatically made available in {{site.data.keyword.cloud_notm}}.
 {: shortdesc}
@@ -119,8 +124,9 @@ Add a GitHub integration to your DevOps toolchain skeleton to point to the GitHu
 Now that your toolchain is connected to your GitHub repository, create a continuous delivery pipeline that automatically deploys your app to a Kubernetes cluster.
 
 
-## Lesson 3: Configure a continuous delivery pipeline and pipeline stages
+## Configure a continuous delivery pipeline and pipeline stages
 {: #pipeline-byoc-kube}
+{: step}
 
 To automate the deployment of your code into a cluster, you must configure a {{site.data.keyword.contdelivery_short}} pipeline and delivery pipeline stages.
 {: shortdesc}
@@ -180,8 +186,9 @@ To set up your delivery pipeline:
 
 Great job! You successfully automated the deployment of an app from your source code in GitHub to a Kubernetes cluster by using a {{site.data.keyword.contdelivery_short}} pipeline in {{site.data.keyword.cloud_notm}}.
 
-## Lesson 4: Verify the deployment and health of your app in the cluster
+## Verify the deployment and health of your app in the cluster
 {: #verify-byoc-kube}
+{: step}
 
 With your app up and running, review the health of your app in your cluster.
 {: shortdesc}
@@ -220,7 +227,8 @@ With your app up and running, review the health of your app in your cluster.
    {: pre}
 
 
-## What's next
+## What's next?
+{: #byoc_whats_next}
 
 - Explore other [pre-defined toolchains](/docs/ContinuousDelivery?topic=ContinuousDelivery-cd_about#templates) in {{site.data.keyword.cloud_notm}} that you can use to deploy Helm charts to a cluster or accomplish canary testing for your app.
 - Learn about other ways to expose an app to the public, such as [Ingress or LoadBalancer services](/docs/containers?topic=containers-cs_network_planning).

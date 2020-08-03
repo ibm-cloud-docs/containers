@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-28"
+lastupdated: "2020-08-03"
 
-keywords: kubernetes, iks, vpc lbaas,
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # VPC: Exposing apps with VPC load balancers

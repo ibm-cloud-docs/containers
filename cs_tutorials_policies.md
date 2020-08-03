@@ -2,11 +2,15 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-07-31"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+
+content-type: tutorial
+account-plan:
+completion-time: 60m
 
 ---
 
@@ -32,11 +36,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Using Calico network policies to block traffic
 {: #policy_tutorial}
+{: toc-content-type="tutorial"}
+{: toc-services="containers"}
+{: toc-completion-time="60m"}
 
 By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 {: shortdesc}
@@ -51,11 +58,6 @@ In this scenario, you play the role of a networking administrator for a PR firm,
 - Learn to block all incoming traffic to all node ports by creating a high-order Pre-DNAT policy.
 - Learn to allow specific source IP addresses to access the NLB public IP and port by creating a low-order Pre-DNAT policy. Lower-order policies override higher-order policies.
 - Learn to block specific source IP addresses from accessing the NLB public IP and port by creating a low-order Pre-DNAT policy.
-
-## Time required
-{: #policies_time}
-
-1 hour
 
 ## Audience
 {: #policies_audience}
@@ -75,8 +77,9 @@ This tutorial is intended for software developers and network administrators who
 <br />
 
 
-## Lesson 1: Deploy an app and expose it by using an NLB
+## Deploy an app and expose it by using an NLB
 {: #lesson1}
+{: step}
 
 The first lesson shows you how your app is exposed from multiple IP addresses and ports, and where public traffic is coming into your cluster.
 {: shortdesc}
@@ -250,8 +253,9 @@ At this point, your app is exposed from multiple IP addresses and ports. Most of
 
 Next, you can start creating and applying Calico policies to block public traffic.
 
-## Lesson 2: Block all incoming traffic to all node ports
+## Block all incoming traffic to all node ports
 {: #lesson2}
+{: step}
 
 To secure the PR firm's cluster, you must block public access to both the NLB service and node ports that are exposing your app. Start by blocking access to node ports.
 {: shortdesc}
@@ -364,8 +368,9 @@ Great! At this point, your app is exposed to the public internet from the public
 
 Next, you can create and apply Calico policies to allow traffic from only certain source IPs.
 
-## Lesson 3: Allow incoming traffic from a specific IP to the NLB
+## Allow incoming traffic from a specific IP to the NLB
 {: #lesson3}
+{: step}
 
 You now decide to completely lock down traffic to the PR firm's cluster and test access by allowing only your own computer's IP address.
 {: shortdesc}
@@ -487,8 +492,9 @@ First, in addition to the node ports, you must block all incoming traffic to the
 
 At this point, all traffic to the public node ports and NLB is blocked. Only traffic from your allowed system IP is allowed.
 
-## Lesson 4: Deny incoming traffic from specific IPs to the NLB
+## Deny incoming traffic from specific IPs to the NLB
 {: #lesson4}
+{: step}
 
 In the previous lesson, you blocked all traffic and allowed only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blocklisting is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
 {: shortdesc}
@@ -582,8 +588,9 @@ In this lesson, block traffic from your own system's source IP address. At the e
 
 Great work! You successfully controlled traffic into your app by using Calico Pre-DNAT policies to block source IPs.
 
-## Lesson 5: Logging blocked traffic from specific IPs to the NLB
+## Logging blocked traffic from specific IPs to the NLB
 {: #lesson5}
+{: step}
 
 In the previous lesson, you blocked traffic from your system IP to the NLB. In this lesson, you can learn how to log the denied traffic requests.
 {: shortdesc}

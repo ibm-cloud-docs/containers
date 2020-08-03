@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-23"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -32,6 +32,9 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:step: data-tutorial-type='step'}
+
+
 
 
 
@@ -1120,6 +1123,9 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     helm uninstall ibm-ks-cluster-autoscaler -n <namespace>
     ```
     {: pre}
+
+
+
 
 
 

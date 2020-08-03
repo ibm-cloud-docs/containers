@@ -2,11 +2,16 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-20"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+
+content-type: tutorial
+services: containers, tone-analyzer
+account-plan:
+completion-time: 60m
 
 ---
 
@@ -32,30 +37,27 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
+{: toc-content-type="tutorial"}
+{: toc-services="containers, tone-analyzer"}
+{: toc-completion-time="60m"}
 
 With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Follow along with a fictional public relations firm to learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster that integrate with other cloud services such as {{site.data.keyword.ibmwatson}}.
-{:shortdesc}
+{: shortdesc}
 
 ## Objectives
 {: #tutorials_objectives}
 
 In this tutorial, you work for a public relations (PR) firm and complete a series of lessons to set up and configure a custom Kubernetes cluster environment. First, you set up your {{site.data.keyword.cloud_notm}} CLI, create a {{site.data.keyword.containershort_notm}} cluster, and store your PR firm's images in a private {{site.data.keyword.registrylong}}. Then, you provision a {{site.data.keyword.toneanalyzerfull}} service and bind it to your cluster. After you deploy and test a Hello World app in your cluster, you deploy progressively more complex and highly available versions of your {{site.data.keyword.watson}} app so that your PR firm can analyze press releases and receive feedback with the latest AI technology.
-{:shortdesc}
+{: shortdesc}
 
 The following diagram provides an overview of what you set up in this tutorial.
 
 <img src="images/tutorial_ov.png" width="500" alt="Create a cluster and deploy a Watson app overview diagram" style="width:500px; border-style: none"/>
-
-## Time required
-{: #tutorials_time}
-
-60 minutes
-
 
 ## Audience
 {: #tutorials_audience}
@@ -72,8 +74,9 @@ This tutorial is intended for software developers and system administrators who 
     - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
     - The [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
 
-## Lesson 1: Setting up your cluster environment
+## Setting up your cluster environment
 {: #cs_cluster_tutorial_lesson1}
+{: step}
 
 Create your Kubernetes cluster in the {{site.data.keyword.cloud_notm}} console, install the required CLIs, set up your container registry, and set the context for your Kubernetes cluster in the CLI.
 {: shortdesc}
@@ -149,8 +152,9 @@ Good job! You've successfully installed the CLIs and set up your cluster context
 <br />
 
 
-## Lesson 2: Adding an IBM Cloud service to your cluster
+## Adding an IBM Cloud service to your cluster
 {: #cs_cluster_tutorial_lesson2}
+{: step}
 
 With {{site.data.keyword.cloud_notm}} services, you can take advantage of already developed functionality in your apps. Any {{site.data.keyword.cloud_notm}} service that is bound to the Kubernetes cluster can be used by any app that is deployed in that cluster. Repeat the following steps for every {{site.data.keyword.cloud_notm}} service that you want to use with your apps.
 {: shortdesc}
@@ -205,11 +209,12 @@ Before you continue with the next lesson, why not test your knowledge and [take 
 <br />
 
 
-## Lesson 3: Deploying single instance apps to Kubernetes clusters
+## Deploying single instance apps to Kubernetes clusters
 {: #cs_cluster_tutorial_lesson3}
+{: step}
 
 In the previous lesson, you set up a cluster with one worker node. In this lesson, you configure a deployment and deploy a single instance of the app into a Kubernetes pod within the worker node.
-{:shortdesc}
+{: shortdesc}
 
 The components that you deploy by completing this lesson are shown in the following diagram.
 
@@ -398,11 +403,12 @@ Want to delete the resources that you created in this lesson before you move on?
 <br />
 
 
-## Lesson 4: Deploying and updating apps with higher availability
+## Deploying and updating apps with higher availability
 {: #cs_cluster_tutorial_lesson4}
+{: step}
 
 In this lesson, you deploy three instances of the Hello World app into a cluster for higher availability than the first version of the app.
-{:shortdesc}
+{: shortdesc}
 
 Higher availability means that user access is divided across the three instances. When too many users are trying to access the same app instance, they might notice slow response times. Multiple instances can mean faster response times for your users. In this lesson, you also learn how health checks and deployment updates can work with Kubernetes. The following diagram includes the components that you deploy by completing this lesson.
 
@@ -532,11 +538,12 @@ Ready to delete what you created before you continue to the next lesson? This ti
 <br />
 
 
-## Lesson 5: Deploying and updating the Watson Tone Analyzer app
+## Deploying and updating the Watson Tone Analyzer app
 {: #cs_cluster_tutorial_lesson5}
+{: step}
 
 In the previous lessons, the apps were deployed as single components in one worker node. In this lesson, you can deploy two components of an app into a cluster that use the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service.
-{:shortdesc}
+{: shortdesc}
 
 Separating components into different containers ensures that you can update one without affecting the others. Then, you update the app to scale it up with more replicas to make it more highly available. The following diagram includes the components that you deploy by completing this lesson.
 
@@ -545,7 +552,7 @@ Separating components into different containers ensures that you can update one 
 From the previous tutorial, you have your account and a cluster with one worker node. In this lesson, you create an instance of {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service in your {{site.data.keyword.cloud_notm}} account and configure two deployments, one deployment for each component of the app. Each component is deployed in a Kubernetes pod in the worker node. To make both of those components publicly available, you also create a Kubernetes service for each component.
 
 
-### Lesson 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app
+### Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app
 {: #lesson5a}
 
 Deploy the {{site.data.keyword.watson}} apps, access the service publicly, and analyze some text with the app.
@@ -698,7 +705,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
 8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 9. In the **Workloads** tab, you can see the resources that you created.
 
-### Lesson 5b: Updating the running Watson Tone Analyzer deployment
+### Step 5b: Updating the running Watson Tone Analyzer deployment
 {: #lesson5b}
 
 While a deployment is running, you can edit the deployment to change values in the pod template. In this lesson, the PR firm wants to change the app in the deployment by updating the image that is used.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-27"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Kubernetes version information and update actions   
@@ -41,11 +41,17 @@ subcollection: containers
 Review information about supported Kubernetes versions for {{site.data.keyword.containerlong}} clusters.
 {: shortdesc}
 
+For more information about the Kubernetes project versions, see the Kubernetes changelog.
+* [Kubernetes 1.18 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.16 release notes](https://v1-16.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
+
 ## Update types
 {: #update_types}
 
 Your Kubernetes cluster has three types of updates: major, minor, and patch. As updates become available, you are notified when you view information about the cluster master or worker nodes, such as with the `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get` commands.
-{:shortdesc}
+{: shortdesc}
 
 |Update type|Examples of version labels|Updated by|Impact
 |-----|-----|-----|-----|
@@ -70,7 +76,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 {: #version_types}
 
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (`n`) is released, versions up to 2 behind (`n-2`) are supported. Versions more than 2 behind the latest (`n-3`) are first deprecated and then unsupported. For more information, see [Release lifecycle](#release_lifecycle).
-{:shortdesc}
+{: shortdesc}
 
 To continue receiving important security patch updates, make sure that your clusters run a supported Kubernetes version at all times. Deprecated clusters might not receive security updates.
 {: important}

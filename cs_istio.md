@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -32,7 +32,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Setting up Istio
@@ -420,7 +420,7 @@ For example, the patch version of your add-on might be updated automatically by 
 {: #istio_uninstall}
 
 If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling the Istio add-ons.
-{:shortdesc}
+{: shortdesc}
 
 The `istio` add-on is a dependency for the [`knative`](/docs/containers?topic=containers-serverless-apps-knative) add-on.
 {: important}

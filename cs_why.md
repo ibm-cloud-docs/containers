@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-29"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, containers
 
@@ -32,14 +32,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Benefits and service offerings
 {: #cs_ov}
 
 [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/container-service){: external} delivers powerful tools by combining Docker containers, the Kubernetes technology, an intuitive user experience, and built-in security and isolation to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster of compute hosts. For more information about certification, see [Compliance on the {{site.data.keyword.cloud_notm}}](https://www.ibm.com/cloud/compliance){: external}.
-{:shortdesc}
+{: shortdesc}
 
 Check out the following <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a> to learn more about how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps.
 {: tip}
@@ -49,7 +49,7 @@ Check out the following <a href="https://www.ibm.com/demos/collection/Containers
 {: #benefits}
 
 Clusters are deployed on compute hosts that provide native Kubernetes and {{site.data.keyword.IBM_notm}}-specific capabilities.
-{:shortdesc}
+{: shortdesc}
 
 Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
 
@@ -73,7 +73,7 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 {: #differentiation}
 
 You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.cloud_notm}} Public, in {{site.data.keyword.cloud_notm}} Private, or in a hybrid setup.
-{:shortdesc}
+{: shortdesc}
 
 
 <table>
@@ -110,7 +110,7 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 {: #cluster_types}
 
 You can create one free cluster or any number of standard clusters. Try out [free clusters](/docs/containers?topic=containers-getting-started#clusters_gs) to get familiar with a few Kubernetes capabilities, or create standard clusters to use the full capabilities of Kubernetes to deploy apps. Free clusters are automatically deleted after 30 days.
-{:shortdesc}
+{: shortdesc}
 
 If you have a free cluster and want to upgrade to a standard cluster, you can [create a standard cluster](/docs/containers?topic=containers-clusters#clusters_ui). Then, [copy your deployment configuration files](/docs/containers?topic=containers-update_app#copy_apps_cluster) from your free cluster into the standard cluster.
 

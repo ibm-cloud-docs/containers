@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-30"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, containers
 
@@ -32,20 +32,20 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Moving your environment to {{site.data.keyword.containerlong_notm}}
 {: #strategy}
 
 With {{site.data.keyword.containerlong}}, you can quickly and securely deploy container workloads for your apps in production. Learn more so that when you plan your cluster strategy, you optimize your setup to make the most of [Kubernetes](https://kubernetes.io/){: external} automated deploying, scaling, and orchestration management capabilities.
-{:shortdesc}
+{: shortdesc}
 
 ## Moving your workloads to the {{site.data.keyword.cloud_notm}}
 {: #cloud_workloads}
 
 You have lots of reasons to move your workloads to {{site.data.keyword.cloud_notm}}: reducing total cost of ownership, increasing high availability for your apps in a secure and compliant environment, scaling up and down in respond to your user demand, and many more. {{site.data.keyword.containerlong_notm}} combines container technology with open source tools, such as Kubernetes so that you can build a cloud-native app that can migrate across different cloud environments, avoiding vendor lock-in.
-{:shortdesc}
+{: shortdesc}
 
 But how do you get to the cloud? What are your options along the way? And how do you manage your workloads after you get there?
 
@@ -219,7 +219,7 @@ Now that you have a good estimate of your app size and the worker nodes that you
 {: #kube_env}
 
 Your {{site.data.keyword.containerlong_notm}} is linked to one IBM Cloud infrastructure portfolio only. Within your account, you can create clusters that are composed of a master and various worker nodes. IBM manages the master, and you can create a mix of worker pools that pool together individual machines of the same flavor, or memory and CPU specs. Within the cluster, you can further organize resources by using namespaces and labels. Choose the right mix of cluster, flavors, and organization strategies so that you can make sure that your teams and workloads get the resources that they need.
-{:shortdesc}
+{: shortdesc}
 
 ### What type of cluster and flavors should I get?
 {: #env_flavors}
@@ -280,7 +280,7 @@ Make sure that your cluster runs a [supported Kubernetes version](/docs/containe
 {: #kube_ha}
 
 While no system is entirely failsafe, you can take steps to increase the high availability of your apps and services in {{site.data.keyword.containerlong_notm}}.
-{:shortdesc}
+{: shortdesc}
 
 Review more information about making resources highly available.
 * [Reduce potential points of failure](/docs/containers?topic=containers-ha#ha).

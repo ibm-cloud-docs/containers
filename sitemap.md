@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-30"
+lastupdated: "2020-08-03"
 
 keywords: containers
 subcollection: containers
@@ -31,7 +31,7 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Site map
@@ -195,75 +195,70 @@ subcollection: containers
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-* [Time required](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_time)
 * [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
 * [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-* [Lesson 1: Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-* [Lesson 2: Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-* [Lesson 3: Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-* [Lesson 4: Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-* [Lesson 5: Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-  * [Lesson 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-  * [Lesson 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
+* [Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+* [Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+* [Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+* [Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+  * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+  * [Step 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-* [Time required](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_time)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
 * [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-* [Lesson 1: Creating a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-* [Lesson 2: Deploying a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-* [Lesson 3: Setting up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
+* [Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
+* [Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
+* [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 [Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-* [Time required](/docs/containers?topic=containers-tutorial-starterkit-kube#time-starterkit-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
 * [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-* [Lesson 1: Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-* [Lesson 2: Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-* [Lesson 3: Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-* [Lesson 4: Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [Next steps](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
+* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
+* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
+* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
+* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
+* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
 
 [Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-* [Time required](/docs/containers?topic=containers-policy_tutorial#policies_time)
 * [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
 * [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-* [Lesson 1: Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-* [Lesson 2: Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-* [Lesson 3: Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-* [Lesson 4: Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-* [Lesson 5: Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
 * [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
 
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
 * [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-* [Time required](/docs/containers?topic=containers-cf_tutorial#cf_time)
 * [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
 * [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-* [Lesson 1: Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-* [Lesson 2: Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-* [Lesson 3: Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+* [Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+* [Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 [Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
-* [Time required](/docs/containers?topic=containers-tutorial-byoc-kube#time-byoc-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
 * [Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
-* [Lesson 1: Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
-* [Lesson 2: Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
-* [Lesson 3: Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
-* [Lesson 4: Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
+* [Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
+* [Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
+* [Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
+* [Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
+* [What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
 
-[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
-[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
@@ -1368,6 +1363,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020](/docs/containers?topic=containers-changelog#1186_1523)
   * [Changelog for master fix pack 1.18.6_1522, released 24 July 2020](/docs/containers?topic=containers-changelog#1186_1522)
   * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1521)
   * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1520)
@@ -1377,6 +1373,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020](/docs/containers?topic=containers-changelog#1179_1535)
   * [Changelog for master fix pack 1.17.9_1534, released 24 July 2020](/docs/containers?topic=containers-changelog#1179_1534)
   * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1533)
   * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1532)
@@ -1395,6 +1392,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.13_1542, released 3 August 2020](/docs/containers?topic=containers-changelog#11613_1542)
   * [Changelog for master fix pack 1.16.13_1541, released 24 July 2020](/docs/containers?topic=containers-changelog#11613_1541)
   * [Changelog for master fix pack 1.16.13_1540, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1540)
   * [Changelog for worker node fix pack 1.16.13_1539, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1539)
@@ -1420,6 +1418,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.12_1549, released 3 August 2020](/docs/containers?topic=containers-changelog#11512_1549)
   * [Changelog for master fix pack 1.15.12_1548, released 24 July 2020](/docs/containers?topic=containers-changelog#11512_1548)
   * [Changelog for master fix pack 1.15.12_1547, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1547)
   * [Changelog for worker node fix pack 1.15.12_1546, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1546)
@@ -1646,7 +1645,7 @@ subcollection: containers
 
 [What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
 
-[What are the regional uplift charges for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
+[What are the regional uplift charges and sustained usage discounts for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
 
 [Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
 
@@ -1789,6 +1788,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[August 2020](/docs/containers?topic=containers-iks-release#aug20)
 
 [July 2020](/docs/containers?topic=containers-iks-release#july20)
 

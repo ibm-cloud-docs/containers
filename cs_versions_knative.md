@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-16"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, knative, add-on, knative changelog
 
@@ -32,14 +32,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Knative add-on version changelog
 {: #knative-changelog}
 
 View information for patch updates to the [managed Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) in your {{site.data.keyword.containerlong_notm}} clusters.
-{:shortdesc}
+{: shortdesc}
 
 ## Changelog for 0.15.1, released 08 July 2020
 {: #0151}

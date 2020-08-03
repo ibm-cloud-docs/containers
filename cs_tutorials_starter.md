@@ -2,11 +2,16 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-06-09"
+lastupdated: "2020-07-31"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+
+content-type: tutorial
+services: containers, apps, ContinuousDelivery, Cloudant
+account-plan:
+completion-time: 45m
 
 ---
 
@@ -32,11 +37,14 @@ subcollection: containers
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-
+{:step: data-tutorial-type='step'}
 
 
 # Deploy a starter kit app to a Kubernetes cluster
 {: #tutorial-starterkit-kube}
+{: toc-content-type="tutorial"}
+{: toc-services="containers, apps, ContinuousDelivery, Cloudant"}
+{: toc-completion-time="45m"}
 
 Create an app in {{site.data.keyword.cloud}} by using a blank starter kit, and set up a continuous integration/ continuous delivery DevOps pipeline to automate the deployment of the app to your Kubernetes cluster.
 {: shortdesc}
@@ -54,11 +62,6 @@ Create an app in {{site.data.keyword.cloud}} by using a blank starter kit, and s
 
 ![Starter kit flow diagram](images/starterkit-app.png)
 
-## Time required
-{: #time-starterkit-kube}
-
-45 minutes
-
 ## Audience
 {: #audience-starterkit-kube}
 
@@ -71,8 +74,9 @@ This tutorial is intended for software developers who want to learn how to creat
 * Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq).
 * Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster.
 
-## Lesson 1: Add services to your app
+## Add services to your app
 {: #resources-starterkit-kube}
+{: step}
 
 Provision an {{site.data.keyword.cloudant_short_notm}} service instance, create service credentials, and bind the service to your starter kit app.
 {: shortdesc}
@@ -84,8 +88,9 @@ Provision an {{site.data.keyword.cloudant_short_notm}} service instance, create 
 4. On the **Add Cloudant** page, select the {{site.data.keyword.cloud_notm}} region and resource group that your cluster is in. Then, select a pricing plan. For example, use **Lite** to create a free {{site.data.keyword.cloudant_short_notm}} database instance.
 5. Click **Create**. The **App details** page is displayed, and the Cloudant instance is provisioned and bound to your app. After the database is set up, you can see the credentials to access your database in the **Credentials** field on the **App details** page. This field might take a few minutes to display.
 
-## Lesson 2: Deploy your app by using a DevOps toolchain
+## Deploy your app by using a DevOps toolchain
 {: #deploy-starterkit-kube}
+{: step}
 
 Attach a DevOps toolchain to your starter kit app, and configure a delivery pipeline to automatically deploy your app to your cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
@@ -97,8 +102,9 @@ Attach a DevOps toolchain to your starter kit app, and configure a delivery pipe
 5. Select the region to create your toolchain in, and then select the [resource group](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains-iam-security) that provides access to your new toolchain.
 6. Click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.
 
-## Lesson 3: Explore the toolchain tools, logs, and history
+## Explore the toolchain tools, logs, and history
 {: #view-logs-starterkit-kube}
+{: step}
 
 With your toolchain set up, explore how you can use each tool to automate the deployment of your app.
 {: shortdesc}
@@ -123,8 +129,9 @@ With your toolchain set up, explore how you can use each tool to automate the de
       - The **DEPLOY** stage retrieves the container image from {{site.data.keyword.registrylong_notm}} and deploys your app to your Kubernetes cluster.
    2. To find the details of what happened in each deployment stage, click **View logs and history**.
 
-## Lesson 4: Verify the health of your app
+## Verify the health of your app
 {: #verify-starterkit-kube}
+{: step}
 
 Access your app to verify that your app is up and running.
 {: shortdesc}
@@ -142,7 +149,7 @@ Access your app to verify that your app is up and running.
 4. In your preferred web browser, enter the URL. If your app is up and running, you see a `Congratulations` or `{"status":"UP"}` message in your web browser.
 
 
-## Next steps
+## What's next?
 {: #next-steps-startkit-kube notoc}
 
 * **Troubleshoot deployment errors**: If you encounter errors during the app deployment, check the troubleshooting topic for known issues like [exceeding storage quota](/docs/apps?topic=apps-managingapps#exceed_quota), or learn how to [access Kubernetes logs](/docs/apps?topic=apps-managingapps#access_kube_logs) to look for errors.
