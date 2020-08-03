@@ -1363,6 +1363,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020](/docs/containers?topic=containers-changelog#1186_1523)
   * [Changelog for master fix pack 1.18.6_1522, released 24 July 2020](/docs/containers?topic=containers-changelog#1186_1522)
   * [Changelog for master fix pack 1.18.6_1521, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1521)
   * [Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020](/docs/containers?topic=containers-changelog#1186_1520)
@@ -1372,6 +1373,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020](/docs/containers?topic=containers-changelog#1179_1535)
   * [Changelog for master fix pack 1.17.9_1534, released 24 July 2020](/docs/containers?topic=containers-changelog#1179_1534)
   * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1533)
   * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1532)
@@ -1390,6 +1392,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.13_1542, released 3 August 2020](/docs/containers?topic=containers-changelog#11613_1542)
   * [Changelog for master fix pack 1.16.13_1541, released 24 July 2020](/docs/containers?topic=containers-changelog#11613_1541)
   * [Changelog for master fix pack 1.16.13_1540, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1540)
   * [Changelog for worker node fix pack 1.16.13_1539, released 20 July 2020](/docs/containers?topic=containers-changelog#11613_1539)
@@ -1415,6 +1418,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.12_1549, released 3 August 2020](/docs/containers?topic=containers-changelog#11512_1549)
   * [Changelog for master fix pack 1.15.12_1548, released 24 July 2020](/docs/containers?topic=containers-changelog#11512_1548)
   * [Changelog for master fix pack 1.15.12_1547, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1547)
   * [Changelog for worker node fix pack 1.15.12_1546, released 20 July 2020](/docs/containers?topic=containers-changelog#11512_1546)
@@ -1784,6 +1788,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[August 2020](/docs/containers?topic=containers-iks-release#aug20)
 
 [July 2020](/docs/containers?topic=containers-iks-release#july20)
 

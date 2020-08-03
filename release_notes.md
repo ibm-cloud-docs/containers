@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -40,6 +40,15 @@ subcollection: containers
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {:shortdesc}
+
+## August 2020
+{: #aug20}
+
+| Date | Description |
+| ---- | ----------- |
+| 03 August 2020 | **Versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.6_1523](/docs/containers?topic=containers-changelog#1186_1523), [1.17.9_1535](/docs/containers?topic=containers-changelog#1179_1535), [1.16.13_1542](/docs/containers?topic=containers-changelog#11613_1542), and [1.15.12_1549](/docs/containers?topic=containers-changelog#11512_1549). |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in August 2020"}
 
 ## July 2020
 {: #july20}
