@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-03"
 
 keywords: containers
 subcollection: containers
@@ -254,11 +254,11 @@ subcollection: containers
 * [Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
 * [What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
 
-[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
-[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
