@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-07-31"
+lastupdated: "2020-08-04"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -46,6 +46,9 @@ To log, monitor, trace, and visualize your apps that are managed by Istio on {{s
 
 In version 1.5 and later of the Istio add-on, the [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external} monitoring components are included in your Istio installation, but are disabled by default due to current security concerns in the community release of Istio that are not adequately addressed for a production environment. To enable these components, follow these steps.
 {: shortdesc}
+
+All `istio-monitoring` support might be removed in a later version of the managed Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.
+{: note}
 
 1. Edit the `managed-istio-custom` configmap resource.
   ```

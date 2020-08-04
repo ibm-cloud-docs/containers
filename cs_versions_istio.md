@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-03"
+lastupdated: "2020-08-04"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -64,6 +64,18 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+### Changelog for 1.6.7, released 04 August 2020
+{: #167}
+
+The following table shows the changes that are included in version 1.6.7 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.6.5 | 1.6.7 | <ul><li>See the Istio release notes for [Istio 1.6.6](https://istio.io/news/releases/1.6.x/announcing-1.6.6/){:external} and [Istio 1.6.7](https://istio.io/news/releases/1.6.x/announcing-1.6.7/){:external}.</li><li>Resolves [CVE-2019-17514](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17514){: external}, [CVE-2019-20907](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-20907){: external}, [CVE-2019-9674](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9674){: external}, [CVE-2020-14422](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14422){: external}, and [usn-4428-1](https://usn.ubuntu.com/4428-1/){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.6.5" caption-side="top"}
 
 ### Changelog for 1.6.5, released 17 July 2020
 {: #165}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-03"
+lastupdated: "2020-08-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -41,7 +41,7 @@ subcollection: containers
 Istio on {{site.data.keyword.containerlong}} provides a seamless installation of Istio, automatic updates and lifecycle management of Istio control plane components, and integration with platform logging and monitoring tools.
 {: shortdesc}
 
-With one click, you can get all Istio core components and additional tracing, monitoring, and visualization up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on, so {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
+With one click, you can get all Istio core components up and running. Istio on {{site.data.keyword.containerlong_notm}} is offered as a managed add-on so that {{site.data.keyword.cloud_notm}} automatically keeps all your Istio components up-to-date.
 
 ## Installing the Istio add-on
 {: #istio_install}
@@ -71,7 +71,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6.7, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -86,7 +86,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.6       normal         Addon Ready
+  istio           1.6.7       normal         Addon Ready
   ```
   {: screen}
 
@@ -124,7 +124,7 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.6
+  cd istio-1.6.7
   ```
   {: pre}
 4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -164,7 +164,7 @@ In version 1.5 and later of the Istio add-on, you can customize a set of Istio c
     <tr><td>**Beta**: `istio-ingressgateway-zone-1|2|3`</td><td>`"<zone>"`</td><td>The zones where your worker nodes are deployed. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields.<ul><li>If you installed the Istio add-on at version 1.5 or later, your cluster's zones are already listed.</li><li>If you updated your Istio add-on from version 1.4 to 1.5, you must add your cluster's zones.</li></ul></td></tr>
     <tr><td>`istio-kiali-dashboard-viewOnlyMode`</td><td>`"true"`</td><td>No changes can be made to the Kiali dashboard in view-only mode by default. To allow changes in view-only mode, set to `false`.</td></tr>
     <tr><td>1.6 only: `istio-knative-cluster-local-gateway-enabled`</td><td>`"false"`</td><td>Automatically incorporate Knative apps into the Istio service mesh by enabling the Knative cluster local gateway. When version 0.15.1 of the Knative add-on is enabled, the value for this key is set to `"true"` by default. Note that only Knative version 0.15.1 is supported for Istio version 1.6, and that if you installed an older version of Knative, you must manually update your Knative add-on. For more information, see [Deploying serverless apps with Knative (beta)](/docs/containers?topic=containers-serverless-apps-knative).</td></tr>
-    <tr><td>`istio-monitoring`</td><td>`"false"`</td><td>The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that are not adequately addressed for a production environment. To enable these monitoring components, set to `true`.<p class="tip">For further health insights, your Istio installation is preconfigured for you to use [{{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig) to monitor your Istio-managed apps.</p></td></tr>
+    <tr><td>`istio-monitoring`</td><td>`"false"`</td><td>The Prometheus, Grafana, Jaeger, and Kiali monitoring components are disabled by default due to current security concerns in the community release of Istio that are not adequately addressed for a production environment. To enable these monitoring components, set to `true`.<p class="tip">For further health insights, your Istio installation is preconfigured for you to use [{{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig) to monitor your Istio-managed apps.</p><p class="note">All `istio-monitoring` support might be removed in a later version of the managed Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</p></td></tr>
     <tr><td>1.6 only: `istio-monitoring-telemetry`</td><td>`"true"`</td><td>By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.</p></td></tr>
     <tr><td>`istio-pilot-traceSampling`</td><td>`"1.0"`</td><td>By default, Istio [generates trace spans for 1 out of every 100 requests ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/tasks/observability/distributed-tracing/overview/#trace-sampling), which is a sampling rate of 1%. To generate more trace spans, increase the percentage value.</td></tr>
     </tbody>
@@ -371,16 +371,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.5.7
   cluster-local-gateway version:
-  citadel version: 1.6
-  egressgateway version: 1.6
-  egressgateway version: 1.6
-  galley version: 1.6
-  ingressgateway version: 1.6
-  ingressgateway version: 1.6
-  pilot version: 1.6
-  policy version: 1.6
+  citadel version: 1.6.7
+  egressgateway version: 1.6.7
+  egressgateway version: 1.6.7
+  galley version: 1.6.7
+  ingressgateway version: 1.6.7
+  ingressgateway version: 1.6.7
+  pilot version: 1.6.7
+  policy version: 1.6.7
   sidecar-injector version: 1.5.7
-  telemetry version: 1.6
+  telemetry version: 1.6.7
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.5.7"}
@@ -396,7 +396,7 @@ For example, the patch version of your add-on might be updated automatically by 
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.6
+      cd istio-1.6.7
       ```
       {: pre}
     3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -524,7 +524,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.6
+    cd <filepath>/istio-1.6.7
     ```
     {: pre}
 
