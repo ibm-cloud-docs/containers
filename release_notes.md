@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-03"
+lastupdated: "2020-08-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -46,7 +46,8 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
-| 03 August 2020 | **Versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.6_1523](/docs/containers?topic=containers-changelog#1186_1523), [1.17.9_1535](/docs/containers?topic=containers-changelog#1179_1535), [1.16.13_1542](/docs/containers?topic=containers-changelog#11613_1542), and [1.15.12_1549](/docs/containers?topic=containers-changelog#11512_1549). |
+| 04 August 2020 | **Istio add-on**: [Version 1.6.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#167) is released. |
+| 03 August 2020 | <ul><li>**Gateway appliance firewalls**: Updated the [required IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_private) that you must open in a private gateway device firewall.</li><li>**Versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.6_1523](/docs/containers?topic=containers-changelog#1186_1523), [1.17.9_1535](/docs/containers?topic=containers-changelog#1179_1535), [1.16.13_1542](/docs/containers?topic=containers-changelog#11613_1542), and [1.15.12_1549](/docs/containers?topic=containers-changelog#11512_1549).</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in August 2020"}
 
