@@ -114,7 +114,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.cloud_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/eos?origURL=SS2L37_2.1.0.3/cam_deploy_IKS.html){: external}. When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
+    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_deploy_IKS.html){: external}. When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
 
@@ -143,7 +143,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 5.  In your {{site.data.keyword.cloud_notm}} Private cluster, deploy the strongSwan IPSec VPN service.
 
-    1.  [Complete the strongSwan IPSec VPN workarounds](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/eos?origURL=SS2L37_2.1.0.3/cam_strongswan.html){: external}.
+    1.  [Complete the strongSwan IPSec VPN workarounds](https://www.ibm.com/support/knowledgecenter/SS2L37_2.1.0.3/cam_strongswan.html){: external}.
 
     2.  [Set up the strongSwan VPN Helm chart](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html){: external} in your private cluster.
 
