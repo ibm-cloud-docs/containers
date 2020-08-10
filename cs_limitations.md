@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -128,6 +128,7 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 
 
 
+
 ## Classic cluster limitations
 {: #classic_limits}
 
@@ -204,6 +205,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Worker node updates | You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
 {: summary="This table contains information on compute limitations for VPC Gen 2 clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC Gen 2 cluster compute limitations"}
+
 
 ### Networking
 {: #vpc_gen2_networking_limit}
@@ -294,6 +296,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage and Portworx software-defined storage (SDS) are not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
+
 
 
 
