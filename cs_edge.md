@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -265,7 +265,7 @@ Before you begin:
 </br>To prevent other workloads from running on edge worker nodes:
 
 1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
-  
+
   To apply a taint to all existing and future worker nodes in a worker pool:
   ```
   ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoSchedule --taint dedicated=edge:NoExecute
@@ -298,13 +298,13 @@ Before you begin:
 3. If you choose to [enable source IP preservation for an NLB 1.0 service](/docs/containers?topic=containers-loadbalancer#lb_source_ip), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
 4.  Optional: You can remove a taint from the worker nodes.
-    
+
     To remove all taints from all worker nodes in a worker pool:
     ```
     ibmcloud ks worker-pool taint rm -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
-    
+
     To remove individual taints from individual worker nodes:
     ```
     kubectl taint node <node_name> dedicated:NoSchedule- dedicated:NoExecute-
@@ -314,7 +314,7 @@ Before you begin:
 ## Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters
 {: #edge_gateway}
 
-Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a worker pool of edge nodes in your gateway-enabled cluster to ensure that Ingress application load balancers (ALB) pods are deployed to those worker nodes only.
 {: shortdesc}
 
 When you create a [classic cluster with a gateway](/docs/containers?topic=containers-plan_clusters#gateway), the cluster is created with a `compute` worker pool of compute worker nodes that are connected to a private VLAN only, and a `gateway` worker pool of gateway worker nodes that are connected to public and private VLANs. Gateway worker nodes help you achieve network connectivity separation between the internet or an on-premises data center and the compute workload that runs in your cluster. By default, all network load balancer (NLB) and Ingress application load balancer (ALB) pods deploy to the gateway worker nodes, which are also tainted so that no compute workloads can be scheduled onto them.

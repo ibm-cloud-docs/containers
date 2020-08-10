@@ -132,7 +132,7 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 ## Classic cluster limitations
 {: #classic_limits}
 
-Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
 
 ### Compute
@@ -183,7 +183,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC Gen 2 compute cluster limitations
 {: #ks_vpc_gen2_limits}
 
-VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
 {: shortdesc}
 
 ### Compute
@@ -244,7 +244,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC Gen 1 compute cluster limitations
 {: #vpc_ks_limits}
 
-VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
 
 ### Compute

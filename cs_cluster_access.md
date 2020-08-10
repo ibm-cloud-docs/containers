@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, clusters
 
@@ -479,7 +479,6 @@ Many cluster add-ons, plug-ins, and other third-party extensions create custom a
 
 **I need help with a broken webhook. What can I do?**<br>
 See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update).
-
 
 
 

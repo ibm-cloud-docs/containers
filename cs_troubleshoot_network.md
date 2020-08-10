@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -103,6 +103,11 @@ While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}
 ## Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted
 {: #coredns_lameduck}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 {: tsSymptoms}
 Your app sometimes fails to resolve DNS names for cluster services around the same time that one or more CoreDNS pods are restarted, such as during a worker reload or patch update.
 
@@ -124,6 +129,8 @@ health {
 
 ## Cluster service DNS resolution sometimes fails with CoreDNS but not KubeDNS
 {: #coredns_issues}
+
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 {: tsSymptoms}
 In your cluster that runs Kubernetes version 1.15 or earlier, your app sometimes fails to resolve DNS names for cluster services. The failures occur only when CoreDNS, not KubeDNS, is the [configured cluster DNS provider](/docs/containers?topic=containers-cluster_dns). You might see error messages similar to the following.
@@ -152,6 +159,8 @@ You can also remove the cache plug-in configurations from the `coredns` configma
 
 ## Cannot establish VPN connectivity with the strongSwan Helm chart
 {: #cs_vpn_fails}
+
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 {: tsSymptoms}
 When you check VPN connectivity by running `kubectl exec  $STRONGSWAN_POD -- ipsec status`, you do not see a status of `ESTABLISHED`, or the VPN pod is in an `ERROR` state or continues to crash and restart.
@@ -187,6 +196,8 @@ When you try to establish VPN connectivity with the strongSwan Helm chart, it is
 
 ## Cannot install a new strongSwan Helm chart release
 {: #cs_strongswan_release}
+
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 {: tsSymptoms}
 You modify your strongSwan Helm chart and try to install your new release by running `helm install vpn iks-charts/strongswan -f config.yaml`. However, you see the following error:
@@ -229,6 +240,8 @@ This error indicates that the previous release of the strongSwan chart was not c
 
 ## strongSwan VPN connectivity fails after you add or delete worker nodes
 {: #cs_vpn_fails_worker_add}
+
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 {: tsSymptoms}
 You previously established a working VPN connection by using the strongSwan IPSec VPN service. However, after you added or deleted a worker node on your cluster, you experience one or more of the following symptoms:
@@ -363,6 +376,11 @@ Update the Helm chart values to reflect the worker node changes:
 
 ## Cannot retrieve Calico network policies
 {: #cs_calico_fails}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}
 When you try to view Calico network policies in your cluster by running `calicoctl get policy`, you get one of the following unexpected results or error messages:
