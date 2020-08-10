@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, help
 
@@ -90,11 +90,17 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Apps and services
 {: #cs_troubleshoot_app}
 
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting app deployments and integrated services.
 {: shortdesc}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.
 {: tip}
@@ -780,6 +786,4 @@ You might have set up a custom firewall, specified custom Calico policies, or cr
 
 <br />
 
-
-{[get-help.md]}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Service limitations
 {: #limitations}
 
@@ -128,10 +129,11 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 
 
 
+
 ## Classic cluster limitations
 {: #classic_limits}
 
-Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic infrastructure clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
 
 ### Compute
@@ -182,7 +184,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC Gen 2 compute cluster limitations
 {: #ks_vpc_gen2_limits}
 
-VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
 {: shortdesc}
 
 ### Compute
@@ -204,6 +206,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Worker node updates | You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
 {: summary="This table contains information on compute limitations for VPC Gen 2 clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC Gen 2 cluster compute limitations"}
+
 
 ### Networking
 {: #vpc_gen2_networking_limit}
@@ -242,7 +245,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC Gen 1 compute cluster limitations
 {: #vpc_ks_limits}
 
-VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
 {: shortdesc}
 
 ### Compute
@@ -294,6 +297,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage and Portworx software-defined storage (SDS) are not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
+
 
 
 

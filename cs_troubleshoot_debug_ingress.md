@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Ingress
 {: #cs_troubleshoot_debug_ingress}
 
@@ -101,6 +102,11 @@ While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}
 
 ## Checking the status of Ingress components
 {: #ingress-status}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 Check the overall health and status of your cluster's Ingress components by running the `ibmcloud ks ingress status` command.
 {: shortdesc}
@@ -158,13 +164,18 @@ The **Ingress Status** reflects the overall health of the Ingress components. Th
 {: troubleshoot}
 {: support}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 {: tsSymptoms}
 You create a cluster and run `ibmcloud ks cluster get --cluster <cluster>` to check its status. The cluster **State** is `normal`, but the **Ingress Subdomain** and **Ingress Secret** are not available.
 
 {: tsCauses}
 Even if the cluster is in a `normal` state, the Ingress subdomain and secret might still be in progress. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete.
 
-**Classic clusters**:
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**:
 
 1. When worker nodes are fully deployed and ready on the VLANs, a portable public and a portable private subnet for the VLANs are ordered.
 2. After the portable subnet orders are successfully fulfilled, the `ibm-cloud-provider-vlan-ip-config` config map is updated with the portable public and portable private IP addresses.
@@ -175,7 +186,7 @@ Even if the cluster is in a `normal` state, the Ingress subdomain and secret mig
 If you create a classic cluster that is connected to private VLANs only, or if you create a free cluster, no Ingress subdomain or secret are created.
 {: note}
 
-**VPC clusters**:
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**:
 
 1. When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC.
 2. One public ALB per zone is triggered for creation.
@@ -199,7 +210,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
    {: screen}
 
 2. Verify that the prerequisite steps for your ALB creation are completed.
-  * **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: Get the details of the `ibm-cloud-provider-vlan-ip-config` config map.
     ```
     kubectl describe cm ibm-cloud-provider-vlan-ip-config -n kube-system
     ```
@@ -282,7 +293,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     Events:  <none>
     ```
     {: screen}
-  * **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`.
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`.
     ```
     ibmcloud is load-balancers
     ```
@@ -304,7 +315,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
   {: screen}
   * If a public ALB is listed and is assigned an IP address (classic clusters) or hostname (VPC clusters), continue to the next step.
   * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
-    * Classic clusters:
+    * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
       ```
       ibmcloud ks alb configure classic --alb-id <ALB_ID> --disable
       ```
@@ -313,7 +324,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
       ```
       {: pre}
-    * VPC Gen 1 clusters:
+    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
       ```
       ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
       ```
@@ -322,7 +333,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
       ```
       {: pre}
-    * VPC Gen 2 clusters:
+    * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
       ```
       ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
       ```
@@ -360,6 +371,11 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 ## No Ingress subdomain exists after you create clusters of the same or similar name
 {: #cs_rate_limit}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 {: tsSymptoms}
 You create and delete a cluster multiple times, such as for automation purposes, and you either use the same name for the cluster every time that you create it, or a name that is very similar to previous names that you used. When you run `ibmcloud ks cluster get --cluster <cluster>`, your cluster is in a `normal` state but no **Ingress Subdomain** or **Ingress Secret** are available.
 
@@ -375,8 +391,10 @@ If you need to continue testing, you can change the name of the cluster so that 
 ## Classic clusters: Cannot connect to an app via Ingress
 {: #cs_ingress_fails}
 
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+
 {: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or Ingress subdomain, the connection failed or timed out.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You publicly exposed your app by creating an Ingress resource for your app in your classic cluster. When you tried to connect to your app by using the public IP address or Ingress subdomain, the connection failed or timed out.
 
 {: tsResolve}
 First, check that your cluster is fully deployed and has at least 2 worker nodes available per zone to ensure high availability for your ALB.
@@ -399,8 +417,12 @@ If you recently restarted your ALB pods or enabled an ALB, a [readiness check](/
 ## VPC clusters: Cannot connect to an app via Ingress
 {: #vpc_ts_alb}
 
+**Infrastructure provider**:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 {: tsSymptoms}
-You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
 {: tsCauses}
 When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
@@ -411,7 +433,7 @@ When you create a VPC cluster, one public and one private VPC load balancer are 
 
 {: tsResolve}
 Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. VPC Gen 2 clusters: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+1. <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 2. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
   ```
@@ -428,6 +450,8 @@ Verify that no VPC security groups are blocking traffic to your cluster and that
 {: #ingress-debug}
 {: troubleshoot}
 {: support}
+
+**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 
 
@@ -527,7 +551,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 
       When the pod restarts, a [readiness check](/docs/containers?topic=containers-ingress-manage#readiness-check) prevents the ALB pod from attempting to route traffic requests until all of the Ingress resource files are parsed. This readiness check prevents request loss and can take up to 5 minutes by default.
       {: note}
-      * Classic clusters:
+      * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
         ibmcloud ks alb configure classic --alb-id <ALB_ID> --disable
         ```
@@ -537,7 +561,7 @@ Start by checking for error messages in the Ingress resource deployment events a
         ibmcloud ks alb configure classic --alb-id <ALB_ID> --enable
         ```
         {: pre}
-      * VPC Gen 1 clusters:
+      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
         ```
         ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
         ```
@@ -546,7 +570,7 @@ Start by checking for error messages in the Ingress resource deployment events a
         ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
         ```
         {: pre}
-      * VPC Gen 2 clusters:
+      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
         ```
         ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
         ```
@@ -848,6 +872,11 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
 ## Ingress application load balancer (ALB) secret issues
 {: #cs_albsecret_fails}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 
 
 {: tsSymptoms}
@@ -904,6 +933,11 @@ Review the following reasons why the ALB secret might fail and the corresponding
 ## ALB pods do not deploy to worker nodes
 {: #alb-pod-affinity}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 
 
 {: tsSymptoms}
@@ -927,6 +961,11 @@ After the new worker nodes deploy, the ALB pods are automatically scheduled to d
 
 ## Classic clusters: ALB does not deploy in a zone
 {: #cs_subnet_limit}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 
 
@@ -986,6 +1025,11 @@ Option 3: If you are not using all the subnets in the VLAN, you can reuse subnet
 ## Ingress ALB cannot be enabled due to subnet errors
 {: #cs_alb_subnet}
 
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
 
 
 {: tsSymptoms}
@@ -1005,6 +1049,11 @@ Move your ALBs to the same VLANs that your worker nodes exist on by following th
 
 ## Source IP preservation fails when using tainted nodes
 {: #cs_source_ip_fails}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 
 
@@ -1051,6 +1100,11 @@ If you complete one of the above options but the `keepalived` pods are still not
 
 ## Connection via WebSocket closes after 60 seconds
 {: #cs_ingress_websocket}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}
 Your Ingress service exposes an app that uses a WebSocket. However, the connection between a client and your WebSocket app closes when no traffic is sent between them for 60 seconds.

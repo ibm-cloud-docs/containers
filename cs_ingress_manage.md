@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Managing the Ingress ALB lifecycle
 {: #ingress-manage}
 
@@ -120,7 +121,37 @@ You can disable or enable the automatic updates for all Ingress ALBs in your clu
   ```
   {: pre}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods by running `ibmcloud ks alb update -c <cluster_name_or_ID>`. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest image version. You cannot update an individual ALB or choose which image version to update the add-on to. For example, you cannot change your ALB image to another type when you manually update. Automatic updates remain disabled.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest image version. After you force a one-time update, automatic updates remain disabled. 
+* To update all ALB pods in the cluster:
+  ```
+  ibmcloud ks alb update -c <cluster_name_or_ID> --version <image_version>
+  ```
+  {: pre}
+* To update the ALB pods for one or more specific ALBs:
+  ```
+  ibmcloud ks alb update -c <cluster_name_or_ID> --version <image_version> --alb-id <ALB_ID> [--alb-id <ALB_2_ID> ...]
+  ```
+  {: pre}
+
+The latest three versions of the image are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or update an ALB, you can specify an image version for your ALB in the `--version` flag. To list the currently supported versions, run the following command:
+```
+ibmcloud ks alb versions
+```
+{: pre}
+
+Example output:
+```
+IBM Cloud Ingress: 'auth' version
+401
+
+IBM Cloud Ingress versions
+637 (default)
+628
+627
+```
+{: screen}
+
+To see the changes that are included in each version of the {{site.data.keyword.containerlong_notm}} Ingress image, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).
 
 If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest version, you can roll back the update to the version that your ALB pods were previously running. After you roll back an update, automatic updates for ALB pods remain disabled.
 ```
@@ -193,7 +224,7 @@ For example, if you have worker nodes in `dal10`, a default public ALB exists in
 You can also use these steps to create more ALBs across zones in your cluster. When you create a multizone cluster, a default public ALB is created in each zone where you have worker nodes. However, default public ALBs are created in only up to three zones. If, for example, you later remove one of these original three zones and add workers in a different zone, a default public ALB is not created in that new zone. You can manually create an ALB to process connections in that new zone.
 {: tip}
 
-**Classic clusters:**
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters:**
 
 1. In each zone where you have worker nodes, create an ALB.
   ```
@@ -261,15 +292,15 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   {: pre}
   </br>
 
-**VPC clusters:**
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
 
 1. In each zone where you have worker nodes, create an ALB.
-  * VPC Gen 1:
+  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]
     ```
     {: pre}
-  * VPC Gen 2:
+  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
     ```
     ibmcloud ks alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]
     ```
@@ -321,12 +352,12 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   {: screen}
 
 3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster.
-  * VPC Gen 1:
+  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --disable
     ```
     {: pre}
-  * VPC Gen 2:
+  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
     ```
     ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --disable
     ```

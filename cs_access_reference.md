@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -88,6 +88,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+
 
 
 # User access permissions
@@ -282,8 +283,8 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Action | CLI command | API call |
 |----|----|----|
 | Beta: Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to an ALB. | [`ibmcloud ks alb cert deploy`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_deploy) | [`POST /v1/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/CreateALBSecret) or [`PUT /v1/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/UpdateALBSecret) |
-| Beta: View details for an ALB secret in a cluster. | [`ibmcloud ks alb cert get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get) | [`GET /v1/clusters/{idOrName}/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/ViewClusterALBSecrets) |
-| Beta: Remove an ALB secret from a cluster. | [`ibmcloud ks alb cert rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm) | [`DELETE /v1/clusters/{idOrName}/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets) |
+| View details for an ALB secret in a cluster. | [`ibmcloud ks alb cert get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_get) | [`GET /v1/clusters/{idOrName}/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/ViewClusterALBSecrets) |
+| Remove an ALB secret from a cluster. | [`ibmcloud ks alb cert rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_cert_rm) | [`DELETE /v1/clusters/{idOrName}/albsecrets`](https://containers.cloud.ibm.com/global/swagger-global-api/#/alb-beta/DeleteClusterALBSecrets) |
 | List all ALB secrets in a cluster. | [`ibmcloud ks alb cert ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_certs) | - |
 | Set the API key for the {{site.data.keyword.cloud_notm}} account to access the linked IBM Cloud infrastructure portfolio. | [`ibmcloud ks api-key reset`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) | [`POST /v1/keys`](https://containers.cloud.ibm.com/global/swagger-global-api/#/accounts/ResetUserAPIKey) |
 | Disable a managed add-on, such the Kubernetes web terminal, in a cluster. | [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) | [`PATCH /v1/clusters/{idOrName}/addons`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/ManageClusterAddons) |
@@ -717,7 +718,7 @@ A user with the **Super User** infrastructure access role [sets the API key for 
 {: shortdesc}
 
 
-Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Granting user permissions for VPC resources](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic infrastructure permissions apply only to classic clusters. For VPC clusters, see [Granting user permissions for VPC resources](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
 {: note}
 
 

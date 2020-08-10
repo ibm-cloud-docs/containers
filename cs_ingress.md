@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -88,6 +88,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+
 
 
 # Setting up Ingress
@@ -182,7 +183,7 @@ Expose apps that are inside your cluster to the public by using the public Ingre
 
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 ### Step 1: Deploy apps and create app services
 {: #public_inside_1}
@@ -480,8 +481,8 @@ Forward requests directly to the IP address of your external service by setting 
 * Review the Ingress [prerequisites](#config_prereqs).
 * Ensure that the external app that you want to include into the cluster load balancing can be accessed by using a public IP address.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
-* VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 To expose apps that are outside of your cluster to the public:
 1.  Define a Kubernetes service configuration file for the app that the ALB will expose. This service forwards incoming requests to an external endpoint that you create in subsequent steps.
@@ -555,7 +556,7 @@ Route requests through the Ingress ALB to your external service by using the `pr
 
 **Before you begin:**
 * Review the Ingress [prerequisites](#config_prereqs).
-* VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: In order to forward requests to the public external endpoint of your app, your VPC subnets must have a public gateway attached.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To expose apps that are outside of your cluster to the public:
@@ -627,7 +628,7 @@ To expose apps that are outside of your cluster to the public:
 ## Classic clusters: Exposing apps to a private network
 {: #ingress_expose_private}
 
-Expose apps to a private network by using the private Ingress ALBs in a classic cluster.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Expose apps to a private network by using the private Ingress ALBs in a classic cluster.
 {: shortdesc}
 
 To use a private ALB, you must first enable the private ALB. Because private VLAN-only classic clusters are not assigned an IBM-provided Ingress subdomain, no Ingress secret is created during cluster setup. To expose your apps to the private network, you must register your ALB with a custom domain and, optionally, import your own TLS certificate.
@@ -894,7 +895,7 @@ Ingress ALBs make your app available over both the ALB IP address and port, and 
 ## VPC clusters: Exposing apps to a private network
 {: #ingress_expose_vpc_private}
 
-Expose apps to a private network by using the private Ingress ALBs in a VPC cluster.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Expose apps to a private network by using the private Ingress ALBs in a VPC cluster.
 {: shortdesc}
 
 To use a private ALB, you must first enable the private ALB. Then, to expose your apps to the private network, you must create a DNS entry for your private ALB hostname.
@@ -902,7 +903,7 @@ To use a private ALB, you must first enable the private ALB. Then, to expose you
 **Before you begin**:
 * Review the Ingress [prerequisites](#config_prereqs).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by Ingress to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 ### Step 1: Deploy apps and create app services
 {: #vpc_private_1}
@@ -944,12 +945,12 @@ When you create a standard cluster, a private ALB is created in each zone that y
     {: screen}
 
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
-  * VPC Gen 1 clusters:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
     ```
     ibmcloud ks alb configure vpc-classic --alb-id <ALB_ID> --enable
     ```
     {: pre}
-  * VPC Gen 2 clusters:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
     ```
     ibmcloud ks alb configure vpc-gen2 --alb-id <ALB_ID> --enable
     ```
@@ -977,12 +978,12 @@ When you enable the private ALBs, one private VPC load balancer is automatically
   {: screen}
 
 2. Create a DNS subdomain for the private ALB hostname.
-  * VPC Gen 1:
+  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type private
     ```
     {: pre}
-  * VPC Gen 2:
+  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
     ```
     ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type private
     ```

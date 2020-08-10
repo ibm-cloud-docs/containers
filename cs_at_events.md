@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, audit
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # {{site.data.keyword.at_full_notm}} events
 {: #at_events}
 
@@ -109,7 +110,7 @@ The following list of the cluster management events are sent to {{site.data.keyw
 
 |Action|Description|
 |------|-----------|
-| `containers-kubernetes.account.create` | A classic infrastructure account is set for a region and resource group. This event is created when you run the [`ibmcloud ks credential set classic`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create) command. | 
+| `containers-kubernetes.account.create` | A classic infrastructure account is set for a region and resource group. This event is created when you run the [`ibmcloud ks credential set classic`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_logging_create) command. |
 | `containers-kubernetes.account.delete` | A classic infrastructure account is removed for a region and resource group. This event is created when you run the [`ibmcloud ks ks credential unset`](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) command. | 
 | `containers-kubernetes.cluster.config` | A `kubeconfig` file that contains the certificates and secrets to access a cluster is requested. |
 | `containers-kubernetes.cluster.create` | A classic or VPC cluster is created or failed to create. |
@@ -183,7 +184,7 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
 {: class="simple-tab-table"}
 {: #atlocationclassic}
-{: tab-title="Locations for classic clusters"}
+{: tab-title=" Locations for classic clusters"}
 {: tab-group="at-locations"}
 
 | {{site.data.keyword.containerlong_notm}} VPC location | {{site.data.keyword.at_short}} event location |

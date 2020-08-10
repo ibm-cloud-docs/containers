@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # About Ingress
 {: #ingress-about}
 
@@ -137,11 +138,11 @@ The application load balancer (ALB) is an external load balancer that listens fo
 
 When you create a standard cluster, {{site.data.keyword.containerlong_notm}} automatically creates a highly available ALB in each zone where you have worker nodes and assigns a unique public domain which all public ALBs share. You can find the public domain for your cluster by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>` and looking for the **Ingress subdomain** in the format `mycluster-<hash>0001.us-south.containers.appdomain.cloud`. One default private ALB is also automatically created in each zone of your cluster, but the private ALBs are not automatically enabled and do not use the Ingress subdomain. Note that classic clusters with workers that are connected to private VLANs only are not assigned an IBM-provided Ingress subdomain.
 
-**Classic clusters: ALB IP addresses**
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters: ALB IP addresses**
 
 In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, Kubernetes deployment manager reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
-**VPC clusters: ALB hostnames**
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters: ALB hostnames**
 
 When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time. Note that this ALB hostname is different than the Ingress subdomain for your cluster.
 
@@ -156,7 +157,7 @@ Do not delete the services that expose your ALBs on public or private IP address
 Depending on whether you have a classic or VPC cluster, a Cloudflare multizone load balancer (MZLB) or a Load Balancer for VPC health checks your ALBs.
 {: shortdesc}
 
-**Classic clusters: Multizone load balancer (MZLB)**
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters: Multizone load balancer (MZLB)**
 
 Whenever you create a multizone cluster or [add a zone to a single zone cluster](/docs/containers?topic=containers-add_workers#add_zone), a Cloudflare multizone load balancer (MZLB) is automatically created and deployed so that 1 MZLB exists for each region. The MZLB puts the IP addresses of your ALBs behind the same subdomain and enables health checks on these IP addresses to determine whether they are available or not.
 
@@ -169,7 +170,7 @@ Because Cloudflare is a public service, the MZLB load balances for public ALBs t
 If you use Calico pre-DNAT network policies to block all incoming traffic to Ingress services, you must also allow [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} that are used to check the health of your ALBs. For steps on how to create a Calico pre-DNAT policy to allow these IPs, see [Lesson 3 of the Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
 {: note}
 
-**VPC clusters: Load Balancer for VPC**
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters: Load Balancer for VPC**
 
 When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname, and the private VPC load balancer puts the private IP addresses of your private ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time.
 
@@ -188,7 +189,7 @@ Note that the VPC load balancer health checks only public ALBs and updates DNS l
 ### Single-zone cluster
 {: #classic-single}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following diagram shows how Ingress directs communication from the internet to an app in a classic single-zone cluster.
 {: shortdesc}
 
 <img src="images/cs_ingress_singlezone.png" width="600" alt="Expose an app in a single-zone cluster by using Ingress" style="width:600px; border-style: none"/>
@@ -208,7 +209,7 @@ The following diagram shows how Ingress directs communication from the internet 
 ### Multizone cluster
 {: #classic-multi}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following diagram shows how Ingress directs communication from the internet to an app in a classic multizone cluster.
 {: shortdesc}
 
 <img src="images/cs_ingress_multizone.png" width="800" alt="Expose an app in a multizone cluster by using Ingress" style="width:800px; border-style: none"/>
@@ -228,7 +229,7 @@ The following diagram shows how Ingress directs communication from the internet 
 ### Gateway-enabled cluster
 {: #classic-gateway}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following diagram shows how Ingress directs communication from the internet to an app in a [classic gateway-enabled cluster](/docs/containers?topic=containers-plan_clusters#gateway).
 {: shortdesc}
 
 <img src="images/cs_ingress_gateway.png" width="800" alt="Expose an app in a gateway-enabled cluster by using Ingress" style="width:800px; border-style: none"/>
@@ -253,7 +254,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 ## How does a request get to my app with Ingress in a VPC cluster?
 {: #architecture-vpc}
 
-The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
 {: shortdesc}
 
 <img src="images/cs_ingress_vpc.png" width="830" alt="Expose an app in a VPC cluster by using Ingress" style="width:830px; border-style: none"/>

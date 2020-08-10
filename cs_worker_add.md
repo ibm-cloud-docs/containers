@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Adding worker nodes and zones to clusters
 {: #add_workers}
 
@@ -154,13 +155,13 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 ## Adding worker nodes in VPC clusters
 {: #vpc_pools}
 
-Add worker nodes to your VPC cluster.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Add worker nodes to your VPC cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
 {: #vpc_add_pool}
 
-You can add worker nodes to your VPC cluster by creating a new worker pool.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can add worker nodes to your VPC cluster by creating a new worker pool.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
@@ -194,12 +195,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2).
-   * VPC Generation 1 clusters:
+   * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 clusters:
      ```
      ibmcloud ks worker-pool create vpc-classic --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes_min_1> [--label <key>=<value>] [--vpc-id]
      ```
      {: pre}
-   * VPC Generation 2 clusters:
+   * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 clusters:
      ```
      ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes_min_1> [--label <key>=<value>] [--vpc-id]
      ```
@@ -212,12 +213,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
- * VPC Generation 1 clusters:
+ * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 clusters:
    ```
    ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
    ```
    {: pre}
- * VPC Generation 2 clusters:
+ * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 clusters:
    ```
    ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
    ```
@@ -240,7 +241,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Adding a zone to a worker pool
 {: #vpc_add_zone}
 
-You can span your VPC cluster across multiple zones within one region by adding a zone to your existing worker pool.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can span your VPC cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {: shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
@@ -288,12 +289,12 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
    If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
    {: tip}
-   * VPC Generation 1 clusters:
+   * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 clusters:
      ```
      ibmcloud ks zone add vpc-classic --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
      ```
      {: pre}
-   * VPC Generation 2 clusters:
+   * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 clusters:
      ```
      ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
      ```
@@ -318,13 +319,13 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ## Adding worker nodes in classic clusters
 {: #classic_pools}
 
-Add worker nodes to your classic cluster.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Add worker nodes to your classic cluster.
 {: shortdesc}
 
 ### Creating a new worker pool
 {: #add_pool}
 
-You can add worker nodes to your classic cluster by creating a new worker pool.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can add worker nodes to your classic cluster by creating a new worker pool.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
@@ -356,10 +357,10 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
 4. Create a worker pool. For more options, see the [CLI documentation](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create).  
-   * The minimum number of worker nodes per zone is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). 
-   * Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. 
+   * The minimum number of worker nodes per zone is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+   * Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
    * If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
-   
+
    ```
    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
    ```
@@ -397,7 +398,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Adding a zone to a worker pool
 {: #add_zone}
 
-You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You can span your classic cluster across multiple zones within one region by adding a zone to your existing worker pool.
 {: shortdesc}
 
 When you add a zone to a worker pool, the worker nodes that are defined in your worker pool are provisioned in the new zone and considered for future workload scheduling. {{site.data.keyword.containerlong_notm}} automatically adds the `failure-domain.beta.kubernetes.io/region` label for the region and the `failure-domain.beta.kubernetes.io/zone` label for the zone to each worker node. The Kubernetes scheduler uses these labels to spread pods across zones within the same region.
@@ -476,7 +477,7 @@ To add a zone with worker nodes to your worker pool:
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
 
-By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes depending on your use case.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. These pools are created with specific labels for compute or gateway functionality. Add compute or gateway worker nodes depending on your use case.
 {: shortdesc}
 
 * Compute: If you need more compute resources to run your app workloads, [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `compute` worker pool. Only create a new compute worker pool if you need worker nodes of a different flavor than the existing compute worker nodes.
@@ -558,7 +559,7 @@ To add a zone to your worker pool:
 ### Creating a new compute worker pool
 {: #gateway_compute}
 
-By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. After cluster creation, you can add more compute worker nodes by creating a new compute worker pool.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
@@ -623,7 +624,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ### Creating a new gateway worker pool
 {: #gateway_replace}
 
-By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> By default, gateway-enabled classic clusters are created with a `compute` pool of compute worker nodes and a `gateway` pool of gateway worker nodes. If you need more network throughput for your cluster after cluster creation, you can [resize](#resize_pool) or [add zones](#add_gateway_zone) to the `gateway` worker pool. Only create new gateway worker pool if you need worker nodes of a different flavor than the existing gateway worker nodes, which are created on shared virtual machines with the `u3c.2x4` flavor by default.
 {: shortdesc}
 
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
@@ -697,7 +698,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
 
-If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
 
 The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.

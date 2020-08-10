@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Configuring VPC subnets
 {: #vpc-subnets}
 
@@ -133,8 +134,8 @@ The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. For
 If you need to create your cluster by using custom-range subnets, see the guidance for [custom address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes). However, if you use custom-range subnets for your worker nodes, you must ensure that the IP range for the worker node subnets do not overlap with your cluster's pod subnet. The pod subnet varies depending on your subnet choices during cluster creation and your cluster's infrastructure type:
 * If you specified your own pod subnet in the `--pod-subnet` flag during cluster creation, your pods are assigned IP addresses from this range.
 * If you did not specify a custom pod subnet during cluster creation, your cluster uses the default pod subnet. 
-  * For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`.
-  * In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
+  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`.
+  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.
 
 **Can I specify subnets for pods and services in my cluster?**
 

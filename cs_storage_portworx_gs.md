@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -88,6 +88,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+
 
 
 # Getting started with Portworx
@@ -465,3 +466,126 @@ To access the storage from your app, you must mount the PVC to your app.
       cat test.txt
       ```
       {: pre}
+
+
+## Cleaning up your Portworx volumes and cluster
+{: #portworx_cleanup}
+
+Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_cluster), or the [entire Portworx cluster](#remove_storage_node_cluster) if you do not need it anymore.
+{: shortdesc}
+
+### Removing Portworx volumes from apps
+{: #remove_pvc}
+
+When you added storage from your Portworx cluster to your app, you have three main components: the Kubernetes persistent volume claim (PVC) that requested the storage, the Kubernetes persistent volume (PV) that is mounted to your pod and described in the PVC, and the Portworx volume that blocks space on the physical disks of your Portworx cluster. To remove storage from your app, you must remove all components.
+{: shortdesc}
+
+1. List the PVCs in your cluster and note the **NAME** of the PVC, and the name of the PV that is bound to the PVC and shown as **VOLUME**.
+    ```
+    kubectl get pvc
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME                  STATUS    VOLUME                                     CAPACITY   ACCESSMODES   STORAGECLASS            AGE
+    px-pvc		  Bound     pvc-06886b77-102b-11e8-968a-f6612bb731fb   20Gi       RWO           px-high                 78d
+    ```
+    {: screen}
+
+2. Review the **`ReclaimPolicy`** for the storage class.
+   ```
+   kubectl describe storageclass <storageclass_name>
+   ```
+   {: pre}
+
+   If the reclaim policy says `Delete`, your PV and the data on your physical storage in your Portworx cluster are removed when you remove the PVC. If the reclaim policy says `Retain`, or if you provisioned your storage without a storage class, then your PV and your data are not removed when you remove the PVC. You must remove the PVC, PV, and the data separately.
+
+3. Remove any pods that mount the PVC.
+   1. List the pods that mount the PVC.
+      ```
+      kubectl get pods --all-namespaces -o=jsonpath='{range .items[*]}{"\n"}{.metadata.name}{":\t"}{range .spec.volumes[*]}{.persistentVolumeClaim.claimName}{" "}{end}{end}' | grep "<pvc_name>"
+      ```
+      {: pre}
+
+      Example output:
+      ```
+      blockdepl-12345-prz7b:	claim1-block-bronze  
+      ```
+      {: screen}
+
+      If no pod is returned in your CLI output, you do not have a pod that uses the PVC.
+
+   2. Remove the pod that uses the PVC.
+
+      If the pod is part of a deployment, remove the deployment.
+      {: tip}
+
+      ```
+      kubectl delete pod <pod_name>
+      ```
+      {: pre}
+
+   3. Verify that the pod is removed.
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+
+4. Remove the PVC.
+   ```
+   kubectl delete pvc <pvc_name>
+   ```
+   {: pre}
+
+5. Review the status of your PV. Use the name of the PV that you retrieved earlier as **VOLUME**.
+   ```
+   kubectl get pv <pv_name>
+   ```
+   {: pre}
+
+   When you remove the PVC, the PV that is bound to the PVC is released. Depending on how you provisioned your storage, your PV goes into a `Deleting` state if the PV is deleted automatically, or into a `Released` state, if you must manually delete the PV. **Note**: For PVs that are automatically deleted, the status might briefly say `Released` before it is deleted. Rerun the command after a few minutes to see whether the PV is removed.
+
+6. If your PV is not deleted, manually remove the PV.
+   ```
+   kubectl delete pv <pv_name>
+   ```
+   {: pre}
+
+7. Verify that the PV is removed.
+   ```
+   kubectl get pv
+   ```
+   {: pre}
+
+8. Verify that your Portworx volume is removed. Log in to one of your Portworx pods in your cluster to list your volumes. To find available Portworx pods, run `kubectl get pods -n kube-system | grep portworx`.
+   ```
+   kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume list
+   ```
+   {: pre}
+
+9. If your Portworx volume is not removed, manually remove the volume.
+   ```
+   kubectl exec <portworx-pod>  -it -n kube-system -- /opt/pwx/bin/pxctl volume delete <volume_ID>
+   ```
+   {: pre}
+
+### Removing a worker node from your Portworx cluster or the entire Portworx cluster
+{: #remove_storage_node_cluster}
+
+You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you do not want to use Portworx anymore.
+{: shortdesc}
+
+Removing your Portworx cluster removes all the data from your Portworx cluster. Make sure to [create a snapshot for your data and save this snapshot to the cloud](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/create-snapshots/){: external}.
+{: important}
+
+- **Remove a worker node from the Portworx cluster:** If you want to remove a worker node that runs Portworx and stores data in your Portworx cluster,  you must migrate existing pods to remaining worker nodes and then uninstall Portworx from the node. For more information, see [Decommission a Portworx node in Kubernetes](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/decommission-a-node/){: external}.
+- **Remove the entire Portworx cluster:** When you remove a Portworx cluster, you can decide if you want to remove all your data at the same time. For more information, see [Uninstall from Kubernetes cluster](https://docs.portworx.com/portworx-install-with-kubernetes/operate-and-maintain-on-kubernetes/uninstall/uninstall/#delete-wipe-px-cluster-configuration){: external}.
+
+<br />
+
+
+## Getting help and support
+{: #portworx_help}
+
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.

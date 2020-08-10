@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, firewall, acl, acls, access control list, rules, security group
 
@@ -88,6 +88,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+
 
 
 # VPC: Controlling traffic with ACLs, security groups, and network policies
@@ -549,7 +550,7 @@ To create an ACL for each subnet that your cluster is attached to:
 
 8. Optional: If you must allow other traffic to or from your worker nodes on this subnet, add rules for that traffic.
 
-  <p class="note">When you refer to the VPC subnet that your worker nodes are on, you must use `0.0.0.0/0`. For more tips on how to create your rule, see the [VPC CLI reference documentation](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#network-acl-rule-add-nlb).</p>
+  <p class="note">When you refer to the VPC subnet that your worker nodes are on, you must use `0.0.0.0/0`. For more tips on how to create your rule, see the [VPC CLI reference documentation](/docs/vpc?topic=vpc-infrastructure-cli-plugin-vpc-reference#network-acl-rule-add).</p>
 
   ```
   ibmcloud is network-acl-rule-add $acl_id <allow|deny> <inbound|outbound> <protocol> <source_CIDR> <destination_CIDR> --name <new_rule_name>
@@ -611,12 +612,12 @@ After you use ACLs to control traffic for VPC subnets, modify your VPC's default
 **Level of application**: Worker node
 
 **Default behavior**: VPC security groups are applied to the network interface of a single virtual server to filter traffic at the hypervisor level. When you create a VPC cluster, a default security group is automatically created for your VPC and is applied to the worker nodes in your cluster.
-* Gen 2: The default security group denies all incoming traffic requests to your worker nodes.
-* Gen 1: The default security group allows all incoming traffic to your worker nodes by default.
+* <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2: The default security group denies all incoming traffic requests to your worker nodes.
+* <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1: The default security group allows all incoming traffic to your worker nodes by default.
 
 **Use case**:
-* Gen 2: To allow any incoming requests to apps that run on your worker nodes, you must modify the default security group to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes. 
-* Gen 1: The default security group allows all incoming traffic to your worker nodes by default. No action is needed for the default security group.
+* <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2: To allow any incoming requests to apps that run on your worker nodes, you must modify the default security group to allow inbound traffic to the `30000 - 32767` node port range on your worker nodes. 
+* <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1: The default security group allows all incoming traffic to your worker nodes by default. No action is needed for the default security group.
 
 
 
@@ -637,8 +638,8 @@ Use the {{site.data.keyword.cloud_notm}} VPC console to add a rule to your VPC's
 {: shortdesc}
 
 1. Open the security group for your VPC.
-  * VPC Gen 2: From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
-  * VPC Gen 1: No action is required.
+  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2: From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that your cluster is in.
+  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1: No action is required.
 2. In the **Inbound rules** section, click **New rule**.
 3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source enter selected.
 4. Click **Save**.
@@ -671,8 +672,8 @@ Before you begin:
 
 To open required ports in your security group:
 1. List your security groups.
-    * VPC Gen 2: For your **VPC**, note the IDs of the default security group because inbound traffic to the node ports on the worker is denied by default.
-    * VPC Gen 1: No further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
+    * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2: For your **VPC**, note the IDs of the default security group because inbound traffic to the node ports on the worker is denied by default.
+    * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1: No further action is required, because inbound traffic to the node ports on the worker is already allowed by default.
   ```
   ibmcloud is security-groups
   ```
