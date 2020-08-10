@@ -97,6 +97,7 @@ Make your containerized app available to internet access by using the public IP 
 {: shortdesc}
 <br>
 
+
 ## About NodePorts
 {: #nodeport_planning}
 
@@ -251,5 +252,4 @@ If you do not already have an app ready, you can use a Kubernetes example app ca
     3.  Form the URL with one of the worker node IP addresses and the NodePort. Example: `http://192.0.2.23:30872`.
         For VPC clusters, you must be connected to the private network through a VPN connection or by using the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) to access the worker node private IP address and NodePort.
         {: note}
-
 

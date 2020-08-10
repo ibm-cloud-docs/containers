@@ -100,6 +100,7 @@ subcollection: containers
 If you anticipate reaching any of the following {{site.data.keyword.containerlong_notm}} limitations, [contact IBM Support](/docs/get-support?topic=get-support-getting-customer-support) and provide the cluster ID, the new quota limit, the region, and infrastructure provider in your support ticket.
 {: tip}
 
+
 ## Service and quota limitations
 {: #tech_limits}
 
@@ -296,7 +297,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage and Portworx software-defined storage (SDS) are not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
-
 
 
 

@@ -205,6 +205,7 @@ subcollection: containers
 # Learning path for developers
 {: #learning-path-dev}
 
+
 Following a curated learning path to deploy highly available containerized apps in Kubernetes clusters and use the powerful tools of {{site.data.keyword.containerlong_notm}} to automate, isolate, secure, manage, and monitor your app workloads across zones or regions.
 {: shortdesc}
 

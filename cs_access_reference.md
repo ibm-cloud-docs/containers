@@ -93,6 +93,7 @@ subcollection: containers
 # User access permissions
 {: #access_reference}
 
+
 When you [assign cluster permissions](/docs/containers?topic=containers-users), it can be hard to judge which role you need to assign to a user. Use the tables in the following sections to determine the minimum level of permissions that are required to perform common tasks in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 

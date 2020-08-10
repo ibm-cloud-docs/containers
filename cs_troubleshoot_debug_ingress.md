@@ -93,6 +93,7 @@ subcollection: containers
 # Ingress
 {: #cs_troubleshoot_debug_ingress}
 
+
 As you use {{site.data.keyword.containerlong}}, consider these techniques for general Ingress troubleshooting and debugging.
 {: shortdesc}
 

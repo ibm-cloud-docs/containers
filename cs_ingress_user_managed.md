@@ -93,6 +93,7 @@ subcollection: containers
 # Bringing your own Ingress controller
 {: #ingress-user_managed}
 
+
 Bring your own Ingress controller to run on {{site.data.keyword.cloud_notm}} and leverage an IBM-provided hostname and TLS certificate.
 {: shortdesc}
 

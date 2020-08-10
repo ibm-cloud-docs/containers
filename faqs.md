@@ -98,6 +98,7 @@ Review frequently asked questions (FAQs) for using {{site.data.keyword.container
 
 
 
+
 ## What is Kubernetes?
 {: #kubernetes}
 {: faq}

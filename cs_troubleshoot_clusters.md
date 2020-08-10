@@ -93,6 +93,7 @@ subcollection: containers
 # Worker nodes
 {: #cs_troubleshoot_clusters}
 
+
 As you use {{site.data.keyword.containerlong_notm}}, consider these techniques for general troubleshooting and debugging your cluster and cluster master.
 {: shortdesc}
 
@@ -288,6 +289,7 @@ Review common error messages and learn how to resolve them. Messages might begin
 {: #cs_credentials}
 {: troubleshoot}
 {: support}
+
 
 {: tsSymptoms}
 You try to manage worker nodes for a new or an existing cluster by running one of the following commands.

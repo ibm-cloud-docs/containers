@@ -93,6 +93,7 @@ subcollection: containers
 # Clusters and masters
 {: #cs_troubleshoot}
 
+
 As you use {{site.data.keyword.containerlong}}, consider these techniques for general troubleshooting and debugging your cluster and cluster master.
 {: shortdesc}
 
@@ -404,6 +405,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 {: #cs_credentials}
 {: troubleshoot}
 {: support}
+
 
 {: tsSymptoms}
 You try to manage worker nodes for a new or an existing cluster by running one of the following commands.
