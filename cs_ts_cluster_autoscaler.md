@@ -93,7 +93,6 @@ subcollection: containers
 # Cluster autoscaler
 {: #troubleshoot_cluster_autoscaler}
 
-
 As you use the [cluster autoscaler](/docs/containers?topic=containers-ca) for {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting.
 {: shortdesc}
 

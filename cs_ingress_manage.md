@@ -93,7 +93,6 @@ subcollection: containers
 # Managing the Ingress ALB lifecycle
 {: #ingress-manage}
 
-
 Manage the lifecycle of your Ingress application load balancers (ALBs).
 {: shortdesc}
 

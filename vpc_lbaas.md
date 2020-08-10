@@ -95,7 +95,6 @@ subcollection: containers
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC load balancers can be created for VPC clusters only, and cannot be created for classic clusters. To load balance in classic clusters, see [About NLBs](/docs/containers?topic=containers-loadbalancer-about).
 
-
 Set up a Load Balancer for VPC to expose your app on the public or private network.
 {: shortdesc}
 

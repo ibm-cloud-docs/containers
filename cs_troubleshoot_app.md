@@ -93,7 +93,6 @@ subcollection: containers
 # Apps and services
 {: #cs_troubleshoot_app}
 
-
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting app deployments and integrated services.
 {: shortdesc}
 

@@ -99,7 +99,6 @@ subcollection: containers
 Control traffic to and from your cluster and traffic between pods in your cluster by creating network rules and policies.
 {: shortdesc}
 
-
 ## Overview of network security options
 {: #overview}
 

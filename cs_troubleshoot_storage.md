@@ -99,7 +99,6 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
 {: tip}
 
-
 ## Debugging persistent storage failures
 {: #debug_storage}
 {: troubleshoot}

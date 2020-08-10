@@ -93,7 +93,6 @@ subcollection: containers
 # Cluster networking
 {: #cs_troubleshoot_network}
 
-
 As you use {{site.data.keyword.containerlong_notm}}, consider these techniques for troubleshooting the management of your cluster network.
 {: shortdesc}
 

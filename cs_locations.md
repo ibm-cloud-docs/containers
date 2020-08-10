@@ -96,7 +96,6 @@ subcollection: containers
 You can deploy {{site.data.keyword.containerlong}} clusters worldwide. When you create a cluster, its resources remain in the location that you deploy the cluster to. To work with your cluster, you can access the service via a global API endpoint.
 {: shortdesc}
 
-
 ![{{site.data.keyword.containerlong_notm}} locations](images/locations.png)
 
 _{{site.data.keyword.containerlong_notm}} locations_

@@ -93,7 +93,6 @@ subcollection: containers
 # Setting up Ingress
 {: #ingress}
 
-
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 

@@ -99,7 +99,6 @@ Change the pool of available portable public or private IP addresses by adding s
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The content on this page is specific to VPC clusters. For information about classic clusters, see [Configuring subnets and IP addresses for classic clusters](/docs/containers?topic=containers-subnets).
 {: note}
 
-
 ## Overview of VPC networking in {{site.data.keyword.containerlong_notm}}
 {: #vpc_basics}
 
