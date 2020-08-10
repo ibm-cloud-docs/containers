@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-06"
+lastupdated: "2020-08-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -120,7 +120,37 @@ You can disable or enable the automatic updates for all Ingress ALBs in your clu
   ```
   {: pre}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods by running `ibmcloud ks alb update -c <cluster_name_or_ID>`. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest image version. You cannot update an individual ALB or choose which image version to update the add-on to. For example, you cannot change your ALB image to another type when you manually update. Automatic updates remain disabled.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. When you choose to manually update the add-on, all ALB pods in the cluster are updated to the latest image version. After you force a one-time update, automatic updates remain disabled. 
+* To update all ALB pods in the cluster:
+  ```
+  ibmcloud ks alb update -c <cluster_name_or_ID> --version <image_version>
+  ```
+  {: pre}
+* To update the ALB pods for one or more specific ALBs:
+  ```
+  ibmcloud ks alb update -c <cluster_name_or_ID> --version <image_version> --alb-id <ALB_ID> [--alb-id <ALB_2_ID> ...]
+  ```
+  {: pre}
+
+The latest three versions of the image are supported for ALBs. You can specify an image version for your ALB in the `--version` flag. To list the currently supported versions, run the following command:
+```
+ibmcloud ks alb versions
+```
+{: pre}
+
+Example output:
+```
+IBM Cloud Ingress: 'auth' version
+401
+
+IBM Cloud Ingress versions
+637 (default)
+628
+627
+```
+{: screen}
+
+To see the changes that are included in each version of the {{site.data.keyword.containerlong_notm}} Ingress image, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog).
 
 If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest version, you can roll back the update to the version that your ALB pods were previously running. After you roll back an update, automatic updates for ALB pods remain disabled.
 ```
