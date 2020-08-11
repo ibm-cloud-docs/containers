@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks, audit
 
@@ -184,7 +184,7 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
 {: class="simple-tab-table"}
 {: #atlocationclassic}
-{: tab-title=" Locations for classic clusters"}
+{: tab-title="<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Locations for classic clusters"}
 {: tab-group="at-locations"}
 
 | {{site.data.keyword.containerlong_notm}} VPC location | {{site.data.keyword.at_short}} event location |
@@ -198,7 +198,7 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 {: class="simple-tab-table"}
 {: caption="Corresponding {{site.data.keyword.at_short}} instance and {{site.data.keyword.containerlong_notm}} cluster locations." caption-side="top"}
 {: #atlocationvpc}
-{: tab-title="Locations for VPC clusters"}
+{: tab-title="<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Locations for VPC clusters"}
 {: tab-group="at-locations"}
 
 

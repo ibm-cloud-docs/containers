@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -133,7 +133,7 @@ If automatic updates for the Ingress ALB add-on are disabled and you want to upd
   ```
   {: pre}
 
-The latest three versions of the image are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or update an ALB, you can specify an image version for your ALB in the `--version` flag. To list the currently supported versions, run the following command:
+The latest three versions of the image are supported for ALBs. You can specify an image version for your ALB in the `--version` flag. To list the currently supported versions, run the following command:
 ```
 ibmcloud ks alb versions
 ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -190,7 +190,7 @@ To let your workloads pull container images from other namespaces, you can now c
 
 **My cluster image pull secret uses a registry token. Does a token still work?**<br>
 
-The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} via [tokens](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-uaa-tokens){: external} is supported but deprecated.
+The previous method of authorizing cluster access to {{site.data.keyword.registrylong_notm}} via [tokens](https://www.ibm.com/cloud/blog/announcements/announcing-end-of-ibm-cloud-container-registry-support-for-registry-and-uaa-tokens){: external} is supported but deprecated.
 {: deprecated}
 
 Tokens authorize access to the deprecated `registry.bluemix.net` registry domains, whereas API keys authorize access to the `icr.io` registry domains. Existing clusters might have both tokens and API key-based image pull secrets, but new clusters only use API keys. Therefore by default, new clusters can pull images from only `icr.io` domains in the `default` Kubernetes namespace.
