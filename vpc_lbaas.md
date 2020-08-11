@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # VPC: Exposing apps with VPC load balancers
 {: #vpc-lbaas}
 

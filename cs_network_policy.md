@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Classic: Controlling traffic with network policies
 {: #network_policies}
 

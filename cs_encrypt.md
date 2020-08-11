@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Protecting sensitive information in your cluster
 {: #encryption}
 

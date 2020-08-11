@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Planning your cluster for high availability
 {: #ha_clusters}
 

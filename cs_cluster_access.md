@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Accessing Kubernetes clusters
 {: #access_cluster}
 {: help}

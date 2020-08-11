@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Managing the app lifecycle
 {: #update_app}
 

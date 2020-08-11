@@ -93,7 +93,6 @@ subcollection: containers
 
 
 
-
 # Autoscaling clusters
 {: #ca}
 

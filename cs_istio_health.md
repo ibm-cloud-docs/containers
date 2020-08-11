@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Observing Istio traffic
 {: #istio-health}
 

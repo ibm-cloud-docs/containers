@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Quick start for load balancers
 {: #loadbalancer-qs}
 

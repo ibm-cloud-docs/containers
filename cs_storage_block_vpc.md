@@ -92,7 +92,6 @@ subcollection: containers
 
 
 
-
 # Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 and Gen 2 compute)
 {: #vpc-block}
 

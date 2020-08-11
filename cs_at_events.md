@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # {{site.data.keyword.at_full_notm}} events
 {: #at_events}
 

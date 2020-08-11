@@ -95,7 +95,6 @@ completion-time: 45m
 {:video: .video}
 
 
-
 # Deploy a starter kit app to a Kubernetes cluster
 {: #tutorial-starterkit-kube}
 {: toc-content-type="tutorial"}

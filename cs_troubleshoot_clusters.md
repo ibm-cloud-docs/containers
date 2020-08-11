@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Worker nodes
 {: #cs_troubleshoot_clusters}
 

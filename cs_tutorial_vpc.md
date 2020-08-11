@@ -95,7 +95,6 @@ completion-time: 30m
 {:video: .video}
 
 
-
 # Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}

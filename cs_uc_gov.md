@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Government use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_gov}
 

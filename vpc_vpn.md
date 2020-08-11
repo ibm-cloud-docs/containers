@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Setting up VPC VPN connectivity
 {: #vpc-vpnaas}
 

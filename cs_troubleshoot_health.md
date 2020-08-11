@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Logging and monitoring
 {: #cs_troubleshoot_health}
 

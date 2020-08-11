@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Configuring the cluster DNS provider
 {: #cluster_dns}
 

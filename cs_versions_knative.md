@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Knative add-on version changelog
 {: #knative-changelog}
 

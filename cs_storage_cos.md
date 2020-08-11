@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Storing data on IBM Cloud Object Storage
 {: #object_storage}
 

@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}
 {: #file_storage}
 

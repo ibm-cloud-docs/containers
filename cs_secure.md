@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Security for {{site.data.keyword.containerlong_notm}}
 {: #security}
 

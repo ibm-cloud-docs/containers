@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Planning your cluster network setup
 {: #plan_clusters}
 

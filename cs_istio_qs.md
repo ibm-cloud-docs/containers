@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Getting started with Istio
 {: #istio-qs}
 

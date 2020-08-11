@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # IBM Cloud storage utilities
 {: #utilities}
 

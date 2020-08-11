@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # CLI changelog
 {: #cs_cli_changelog}
 

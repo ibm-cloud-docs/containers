@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Classic: Setting up VPN connectivity
 {: #vpn}
 

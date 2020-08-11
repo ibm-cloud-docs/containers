@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # VPC: Opening required ports and IP addresses in other network firewalls
 {: #vpc-firewall}
 

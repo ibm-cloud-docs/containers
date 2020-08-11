@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # {{site.data.keyword.containerlong_notm}} partners
 {: #service-partners}
 

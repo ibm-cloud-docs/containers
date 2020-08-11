@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Classic: Configuring subnets and IP addresses
 {: #subnets}
 

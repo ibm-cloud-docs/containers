@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Classic: About network load balancers (NLBs)
 {: #loadbalancer-about}
 

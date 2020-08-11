@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Default service settings for Kubernetes components
 {: #service-settings}
 

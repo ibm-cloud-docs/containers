@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Logging and monitoring Ingress
 {: #ingress_health}
 

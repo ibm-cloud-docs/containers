@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Cluster networking
 {: #cs_troubleshoot_network}
 

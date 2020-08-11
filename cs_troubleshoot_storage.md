@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Persistent storage
 {: #cs_troubleshoot_storage}
 

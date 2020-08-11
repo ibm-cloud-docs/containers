@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Setting up the API
 {: #cs_api_install}
 

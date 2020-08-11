@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Removing clusters
 {: #remove}
 

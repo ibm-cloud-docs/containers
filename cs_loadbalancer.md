@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Classic: Setting up basic load balancing with an NLB 1.0
 {: #loadbalancer}
 

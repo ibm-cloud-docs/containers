@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Istio add-on version changelog
 {: #istio-changelog}
 

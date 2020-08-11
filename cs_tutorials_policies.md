@@ -94,7 +94,6 @@ completion-time: 60m
 {:video: .video}
 
 
-
 # Using Calico network policies to block traffic
 {: #policy_tutorial}
 {: toc-content-type="tutorial"}

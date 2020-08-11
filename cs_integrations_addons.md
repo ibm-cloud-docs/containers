@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Adding services by using managed add-ons
 {: #managed-addons}
 

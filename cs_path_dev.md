@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 <style>
     <!--
         #tutorials { /* hide the page header */

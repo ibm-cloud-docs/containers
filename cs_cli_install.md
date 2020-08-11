@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Setting up the CLI
 {: #cs_cli_install}
 
