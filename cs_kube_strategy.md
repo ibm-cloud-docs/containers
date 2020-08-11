@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks, containers
 
@@ -134,7 +134,7 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
 **Interested in an on-premises cloud?**</br>
-Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/kc_welcome_containers.htmll){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
+Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.1/kc_welcome_containers.html){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
 
 **Want to run workloads in both on-premises and off-premises clouds?**</br>
 Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
@@ -224,7 +224,7 @@ Now that you have a good idea of what your workload looks like, let's map the es
     *   **Replicas of your app**: To determine the number of worker nodes that you want, you can also consider how many replicas of your app that you want to run. For example, if you know that your workload requires 32 CPU cores, and you plan to run 16 replicas of your app, each replica pod needs 2 CPU cores. If you want to run only one app pod per worker node, you can order an appropriate number of worker nodes for your cluster type to support this configuration.
 
 ### How do I monitor resource usage and capacity in my cluster?
-{: #sizing_manage} 
+{: #sizing_manage}
 
 Now that you have a good estimate of your app size and the worker nodes that you need to run your workload, you can deploy your app and continuously monitor performance to maximize your compute resource usage.
 
@@ -345,5 +345,4 @@ Review more information about making resources highly available.
 * [Run containers that are based on images in a cloud-based public registry](/docs/containers?topic=containers-images).
 * [Plan data storage](/docs/containers?topic=containers-storage_planning#persistent_storage_overview). Especially for multizone clusters, consider using a cloud service such as [{{site.data.keyword.cloudant_short_notm}}](/docs/Cloudant?topic=Cloudant-getting-started-with-cloudant) or [{{site.data.keyword.cos_full_notm}}](/docs/cloud-object-storage?topic=cloud-object-storage-getting-started-cloud-object-storage).
 * For multizone clusters, enable a [load balancer service](/docs/containers?topic=containers-loadbalancer#multi_zone_config) or the Ingress [multizone load balancer](/docs/containers?topic=containers-ingress#ingress) to expose your apps publicly.
-
 

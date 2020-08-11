@@ -166,7 +166,7 @@ Every VM comes with an attached disk for storage of information that the VM need
 
  Additionally, classic and VPC infrastructure differ in the disk setup.
 
-* **Classic VMs**: Classic VMs have two attached disks. The primary storage disk has 25 GB for the OS file system, and the secondary storage disk has 100 GB for data such as the container runtime and the `kubelet`. For reliability, the primary and secondary storage volumes are local disks instead of storage area networking (SAN). Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. The secondary disk is encrypted by default.
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic VMs**: Classic VMs have two attached disks. The primary storage disk has 25 GB for the OS file system, and the secondary storage disk has 100 GB for data such as the container runtime and the `kubelet`. For reliability, the primary and secondary storage volumes are local disks instead of storage area networking (SAN). Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. The secondary disk is encrypted by default.
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC compute VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. To account for network latency, the storage disks have a maximum of up to 3000 IOPS. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption).
 
 **What virtual machine flavors are available?**</br>
@@ -194,7 +194,7 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: class="simple-tab-table"}
 {: caption="Available worker node flavors for classic clusters" caption-side="top"}
 {: #classic-worker-vm-flavors}
-{: tab-title="<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters"}
+{: tab-title="Classic clusters"}
 {: tab-group="vm-worker-flavors"}
 
 
@@ -212,7 +212,7 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: class="simple-tab-table"}
 {: caption="Available worker node flavors for VPC Gen 1 compute clusters" caption-side="top"}
 {: #vpc-classic-worker-vm-flavors}
-{: tab-title="<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 compute"}
+{: tab-title="VPC Gen 1 compute"}
 {: tab-group="vm-worker-flavors"}
 
 
@@ -238,7 +238,7 @@ If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker nod
 {: class="simple-tab-table"}
 {: caption="Available worker node flavors for VPC Gen 2 compute clusters" caption-side="top"}
 {: #vpc-gen2-worker-vm-flavors}
-{: tab-title="<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 compute"}
+{: tab-title="VPC Gen 2 compute"}
 {: tab-group="vm-worker-flavors"}
 
 `*` VPC Gen 1: For more information about network performance caps for virtual machines, see [VPC Gen 1 compute profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
