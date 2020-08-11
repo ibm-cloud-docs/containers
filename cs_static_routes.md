@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Adding static routes to worker nodes
 {: #static-routes}
 

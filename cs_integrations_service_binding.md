@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Adding services by using IBM Cloud service binding
 {: #service-binding}
 

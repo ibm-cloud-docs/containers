@@ -90,6 +90,7 @@ subcollection: containers
 {:video: .video}
 
 
+
 # Retail use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_retail}
 
