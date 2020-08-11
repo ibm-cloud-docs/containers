@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Planning your worker node setup
 {: #planning_worker_nodes}
 

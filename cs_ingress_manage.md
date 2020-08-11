@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Managing the Ingress ALB lifecycle
 {: #ingress-manage}
 

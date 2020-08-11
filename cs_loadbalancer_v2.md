@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks, lb2.0, nlb
 
@@ -88,7 +88,6 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
 
 
 # Classic: Setting up DSR load balancing with an NLB 2.0 (beta)

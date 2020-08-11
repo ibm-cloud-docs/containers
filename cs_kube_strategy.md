@@ -90,7 +90,6 @@ subcollection: containers
 {:video: .video}
 
 
-
 # Moving your environment to {{site.data.keyword.containerlong_notm}}
 {: #strategy}
 

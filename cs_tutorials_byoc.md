@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-11"
 
 keywords: kubernetes, iks
 
@@ -93,7 +93,6 @@ completion-time: 45m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vb.net: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
 
 
 # Set up a DevOps delivery pipeline for your app
