@@ -1722,6 +1722,10 @@ subcollection: containers
 * [Binding a service to a cluster results in service does not support service keys error](/docs/containers?topic=containers-cs_troubleshoot_app#cs_service_keys)
 * [Cannot install a Helm chart with updated configuration values](/docs/containers?topic=containers-cs_troubleshoot_app#cs_helm_install)
 * [Cannot install Tiller for Helm version 2 or deploy containers from public images in a cluster](/docs/containers?topic=containers-cs_troubleshoot_app#cs_tiller_install)
+* [General ways to resolve cluster issues](/docs/containers?topic=containers-cs_troubleshoot_app#help-general)
+* [Reviewing issues and status](/docs/containers?topic=containers-cs_troubleshoot_app#help-cloud-status)
+* [Feedback and questions](/docs/containers?topic=containers-cs_troubleshoot_app#feedback-qs)
+* [Contacting support](/docs/containers?topic=containers-cs_troubleshoot_app#help-support)
 
 [Managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons)
