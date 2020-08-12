@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-10"
+lastupdated: "2020-08-12"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -10,84 +10,30 @@ subcollection: containers
 
 ---
 
-{:DomainName: data-hd-keyref="APPDomain"}
-{:DomainName: data-hd-keyref="DomainName"}
-{:android: data-hd-operatingsystem="android"}
-{:apikey: data-credential-placeholder='apikey'}
-{:app_key: data-hd-keyref="app_key"}
-{:app_name: data-hd-keyref="app_name"}
-{:app_secret: data-hd-keyref="app_secret"}
-{:app_url: data-hd-keyref="app_url"}
-{:authenticated-content: .authenticated-content}
 {:beta: .beta}
-{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
-{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
-{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
-{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
-{:generic: data-hd-operatingsystem="generic"}
-{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
-{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
-{:hide-dashboard: .hide-dashboard}
-{:hide-in-docs: .hide-in-docs}
 {:important: .important}
-{:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
-{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
-{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
-{:objectc data-hd-programlang="objectc"}
-{:org_name: data-hd-keyref="org_name"}
-{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
-{:python: .ph data-hd-programlang='python'}
-{:python: data-hd-programlang="python"}
-{:route: data-hd-keyref="route"}
-{:row-headers: .row-headers}
-{:ruby: .ph data-hd-programlang='ruby'}
-{:ruby: data-hd-programlang="ruby"}
-{:runtime: architecture="runtime"}
-{:runtimeIcon: .runtimeIcon}
-{:runtimeIconList: .runtimeIconList}
-{:runtimeLink: .runtimeLink}
-{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
-{:script: data-hd-video='script'}
-{:service: architecture="service"}
-{:service_instance_name: data-hd-keyref="service_instance_name"}
-{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
-{:space_name: data-hd-keyref="space_name"}
-{:step: data-tutorial-type='step'}
-{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
-{:swift: .ph data-hd-programlang='swift'}
-{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
-{:term: .term}
 {:tip: .tip}
-{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
-{:tutorial: data-hd-content-type='tutorial'}
-{:unity: .ph data-hd-programlang='unity'}
-{:url: data-credential-placeholder='url'}
-{:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
-{:video: .video}
 
 
 
@@ -127,7 +73,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6.7, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6.8, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -142,7 +88,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.6.7       normal         Addon Ready
+  istio           1.6.8       normal         Addon Ready
   ```
   {: screen}
 
@@ -180,7 +126,7 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.6.7
+  cd istio-1.6.8
   ```
   {: pre}
 4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -427,16 +373,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.5.7
   cluster-local-gateway version:
-  citadel version: 1.6.7
-  egressgateway version: 1.6.7
-  egressgateway version: 1.6.7
-  galley version: 1.6.7
-  ingressgateway version: 1.6.7
-  ingressgateway version: 1.6.7
-  pilot version: 1.6.7
-  policy version: 1.6.7
+  citadel version: 1.6.8
+  egressgateway version: 1.6.8
+  egressgateway version: 1.6.8
+  galley version: 1.6.8
+  ingressgateway version: 1.6.8
+  ingressgateway version: 1.6.8
+  pilot version: 1.6.8
+  policy version: 1.6.8
   sidecar-injector version: 1.5.7
-  telemetry version: 1.6.7
+  telemetry version: 1.6.8
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.5.7"}
@@ -452,7 +398,7 @@ For example, the patch version of your add-on might be updated automatically by 
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.6.7
+      cd istio-1.6.8
       ```
       {: pre}
     3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -580,7 +526,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.6.7
+    cd <filepath>/istio-1.6.8
     ```
     {: pre}
 
