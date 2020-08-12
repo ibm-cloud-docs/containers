@@ -66,7 +66,7 @@ Set up the managed Istio add-on in your cluster.
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.6.7       normal         Addon Ready
+  istio           1.6.8       normal         Addon Ready
   ```
   {: screen}
 
@@ -108,7 +108,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.6.7
+    cd istio-1.6.8
     ```
     {: pre}
 

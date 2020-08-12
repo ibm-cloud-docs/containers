@@ -73,7 +73,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6.7, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.6.8, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -88,7 +88,7 @@ In Kubernetes version 1.16 and later clusters, you can install the generally ava
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.6.7       normal         Addon Ready
+  istio           1.6.8       normal         Addon Ready
   ```
   {: screen}
 
@@ -126,7 +126,7 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.6.7
+  cd istio-1.6.8
   ```
   {: pre}
 4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -373,16 +373,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.5.7
   cluster-local-gateway version:
-  citadel version: 1.6.7
-  egressgateway version: 1.6.7
-  egressgateway version: 1.6.7
-  galley version: 1.6.7
-  ingressgateway version: 1.6.7
-  ingressgateway version: 1.6.7
-  pilot version: 1.6.7
-  policy version: 1.6.7
+  citadel version: 1.6.8
+  egressgateway version: 1.6.8
+  egressgateway version: 1.6.8
+  galley version: 1.6.8
+  ingressgateway version: 1.6.8
+  ingressgateway version: 1.6.8
+  pilot version: 1.6.8
+  policy version: 1.6.8
   sidecar-injector version: 1.5.7
-  telemetry version: 1.6.7
+  telemetry version: 1.6.8
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.5.7"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.5.7"}
@@ -398,7 +398,7 @@ For example, the patch version of your add-on might be updated automatically by 
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.6.7
+      cd istio-1.6.8
       ```
       {: pre}
     3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
@@ -526,7 +526,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.6.7
+    cd <filepath>/istio-1.6.8
     ```
     {: pre}
 

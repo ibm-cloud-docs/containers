@@ -48,6 +48,7 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 | Date | Description |
 | ---- | ----------- |
+| 12 August 2020 | **Istio add-on**: [Version 1.6.8](/docs/containers?topic=containers-istio-changelog#168) and [version 1.5.9](/docs/containers?topic=containers-istio-changelog#159) of the Istio managed add-on are released. |
 | 06 August 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.143](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 05 August 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` image build to 647 and the `ingress-auth` image build to 421](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog). |
 | 04 August 2020 | **Istio add-on**: [Version 1.6.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#167) is released. |

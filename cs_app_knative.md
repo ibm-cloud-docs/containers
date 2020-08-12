@@ -270,7 +270,7 @@ Update your Knative add-on to the latest versions.
       {: pre}
     3. Navigate to the Istio package directory.
       ```
-      cd istio-1.6.7
+      cd istio-1.6.8
       ```
       {: pre}
     4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
