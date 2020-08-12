@@ -783,7 +783,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
       {: pre}
 6. Create the cluster in your VPC. You can use the `cluster create vpc-gen2` command to create a single zone cluster in your VPC with worker nodes that are connected to one VPC subnet only. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to your cluster after the cluster is created. The cluster takes a few minutes to provision.
     ```
-    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>] --provider vpc-gen2 [--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint]
+    ibmcloud ks cluster create vpc-gen2 --name <cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>][--workers <number_workers_per_zone>] [--pod-subnet] [--service-subnet] [--disable-public-service-endpoint]
     ```
     {: pre}
 
