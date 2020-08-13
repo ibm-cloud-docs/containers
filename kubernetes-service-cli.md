@@ -106,6 +106,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_no
 {:tip}
 
 
+
 ## Using version 1.0 of the plug-in
 {: #cs_beta}
 
