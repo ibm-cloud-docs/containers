@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-13"
+lastupdated: "2020-08-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -94,7 +94,7 @@ subcollection: containers
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
 
-Refer to these commands to create and manage **both community Kubernetes or OpenShift clusters** in {{site.data.keyword.containerlong}}.
+Refer to these commands to create and manage **both community Kubernetes or {{site.data.keyword.openshiftshort}} clusters** in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
 * **Community Kubernetes**: [Install the CLI plug-in](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps), which uses the `ibmcloud ks` alias.

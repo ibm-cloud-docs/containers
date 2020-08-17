@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -10,30 +10,84 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -63,6 +117,20 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.18 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020
+{: #1188_1525}
+
+The following table shows the changes that are included in the worker node fix pack `1.18.8_1525`. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes | v1.18.6 | v1.18.8 | See the [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.18.md#v1188){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-12400](https://nvd.nist.gov/vuln/detail/CVE-2020-12400){: external}, [CVE-2020-12401](https://nvd.nist.gov/vuln/detail/CVE-2020-12401){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}, and [CVE-2020-6829](https://nvd.nist.gov/vuln/detail/CVE-2020-6829){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, and [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.6_1523" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020
 {: #1186_1523}
@@ -234,6 +302,20 @@ The following table shows the changes that are included in patch update 1.18.2_1
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020
+{: #11711_1537}
+
+The following table shows the changes that are included in the worker node fix pack `1.17.11_1537`. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes | v1.17.9 | v1.17.11 | See the [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.17.md#v11711){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-12400](https://nvd.nist.gov/vuln/detail/CVE-2020-12400){: external}, [CVE-2020-12401](https://nvd.nist.gov/vuln/detail/CVE-2020-12401){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}, and [CVE-2020-6829](https://nvd.nist.gov/vuln/detail/CVE-2020-6829){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, and [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.9_1535" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020
 {: #1179_1535}
@@ -546,6 +628,20 @@ The following table shows the changes that are included in patch update 1.17.2_1
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.16.14_1544, released 17 August 2020
+{: #11614_1544}
+
+The following table shows the changes that are included in the worker node fix pack `1.16.14_1544`. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Kubernetes | v1.16.13 | v1.16.14 | See the [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.16.md#v11614){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-12400](https://nvd.nist.gov/vuln/detail/CVE-2020-12400){: external}, [CVE-2020-12401](https://nvd.nist.gov/vuln/detail/CVE-2020-12401){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}, and [CVE-2020-6829](https://nvd.nist.gov/vuln/detail/CVE-2020-6829){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, and [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.13_1542" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.13_1542, released 3 August 2020
 {: #11613_1542}
@@ -997,6 +1093,19 @@ Review the version 1.15 changelog.
 
 Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.15.12_1550, released 17 August 2020
+{: #11512_1550}
+
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1550`. Worker node patch updates can be applied by updating or reloading the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-12400](https://nvd.nist.gov/vuln/detail/CVE-2020-12400){: external}, [CVE-2020-12401](https://nvd.nist.gov/vuln/detail/CVE-2020-12401){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}, and [CVE-2020-6829](https://nvd.nist.gov/vuln/detail/CVE-2020-6829){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2020-11936](https://nvd.nist.gov/vuln/detail/CVE-2020-11936){: external}, [CVE-2020-15701](https://nvd.nist.gov/vuln/detail/CVE-2020-15701){: external}, [CVE-2020-15702](https://nvd.nist.gov/vuln/detail/CVE-2020-15702){: external}, and [CVE-2020-15709](https://nvd.nist.gov/vuln/detail/CVE-2020-15709){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.12_1549" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.12_1549, released 3 August 2020
 {: #11512_1549}
