@@ -746,6 +746,3 @@ Manually update the reference of the private IP address to point to the correct 
 
 The deleted node is no longer listed in Calico.
 
-<br />
-
-

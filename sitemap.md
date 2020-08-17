@@ -271,6 +271,17 @@ subcollection: containers
 * [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
+[Migrating cluster resources from VPC Gen 1 to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial)
+* [Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
+* [Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
+* [Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
+* [Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
+* [Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
+* [Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
+* [Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
+* [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
+* [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
+
 [Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
 * [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
 * [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
@@ -1780,10 +1791,6 @@ subcollection: containers
 * [Binding a service to a cluster results in service does not support service keys error](/docs/containers?topic=containers-cs_troubleshoot_app#cs_service_keys)
 * [Cannot install a Helm chart with updated configuration values](/docs/containers?topic=containers-cs_troubleshoot_app#cs_helm_install)
 * [Cannot install Tiller for Helm version 2 or deploy containers from public images in a cluster](/docs/containers?topic=containers-cs_troubleshoot_app#cs_tiller_install)
-* [General ways to resolve cluster issues](/docs/containers?topic=containers-cs_troubleshoot_app#help-general)
-* [Reviewing issues and status](/docs/containers?topic=containers-cs_troubleshoot_app#help-cloud-status)
-* [Feedback and questions](/docs/containers?topic=containers-cs_troubleshoot_app#feedback-qs)
-* [Contacting support](/docs/containers?topic=containers-cs_troubleshoot_app#help-support)
 
 [Managed add-ons](/docs/containers?topic=containers-cs_troubleshoot_addons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons)
