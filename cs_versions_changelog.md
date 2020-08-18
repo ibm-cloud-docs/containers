@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-18"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -117,6 +117,28 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.18 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.18.8_1525, released 18 August 2020
+{: #1188_1525_master}
+
+The following table shows the changes that are included in the master fix pack patch update `1.18.8_1525`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Cluster health image | v1.1.8 | v1.1.9 | Updated to use `Go` version 1.13.13. |
+| etcd | v3.4.9 | v3.4.10 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.10){: external}. |
+| GPU device plug-in and installer | 6847df8 | f22c75e | Updated image for [CVE-2020-14039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14039){: external} and [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 376 | 377 | Fixed a bug that prevents persistent volume claim (PVC) creation failures from being retried. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | 8882606 | d80b738 | Updated image for [CVE-2020-12049](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-12049){: external} and to use `Go` version 1.13.14. |
+| Key Management Service provider | v1.0.0 | v2.0.2 | Updated image for [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| Kubernetes | v1.18.6 | v1.18.8 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.8){: external}. |
+| Kubernetes add-on resizer | 1.8.7 | 1.8.11 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.11){: external}. |
+| Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include auditing of all API groups except `apiregistration.k8s.io` and `coordination.k8s.io`. |
+| Kubernetes Metrics Server | v0.3.6 | v0.3.7 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.7){: external}. |
+| Kubernetes `NodeLocal` DNS cache configuration | N/A | N/A | Increased the pod termination grace period. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.6_1523" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020
 {: #1188_1525}
@@ -302,6 +324,27 @@ The following table shows the changes that are included in patch update 1.18.2_1
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.17.11_1537, released 18 August 2020
+{: #11711_1537_master}
+
+The following table shows the changes that are included in the master fix pack patch update `1.17.11_1537`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Cluster health image | v1.1.8 | v1.1.9 | Updated to use `Go` version 1.13.13. |
+| etcd | v3.4.9 | v3.4.10 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.10){: external}. |
+| GPU device plug-in and installer | 8c24345 | bacb9e1 | Updated image for [CVE-2020-14039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14039){: external} and [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 376 | 377 | Fixed a bug that prevents persistent volume claim (PVC) creation failures from being retried. |
+| Key Management Service provider | v1.0.0 | v1.0.1 | Updated image for [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| Kubernetes | v1.17.9 | v1.17.11 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.11){: external}. |
+| Kubernetes add-on resizer | 1.8.5 | 1.8.11 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.11){: external}. |
+| Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include auditing of all API groups except `apiregistration.k8s.io` and `coordination.k8s.io`. |
+| Kubernetes Metrics Server | v0.3.6 | v0.3.7 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.7){: external}. |
+| Kubernetes `NodeLocal` DNS cache configuration | N/A | N/A | Increased the pod termination grace period. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.9_1535" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020
 {: #11711_1537}
@@ -628,6 +671,27 @@ The following table shows the changes that are included in patch update 1.17.2_1
 
 Review the version 1.16 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.16.14_1544, released 18 August 2020
+{: #11614_1544_master}
+
+The following table shows the changes that are included in the master fix pack patch update `1.16.14_1544`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Cluster health image | v1.1.8 | v1.1.9 | Updated to use `Go` version 1.13.13. |
+| GPU device plug-in and installer | 8c24345 | bacb9e1 | Updated image for [CVE-2020-14039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14039){: external} and [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| {{site.data.keyword.cloud_notm}} Provider | v1.16.13-289 | v1.16.14-311 | Updated to support the Kubernetes 1.16.14 release and to use `Go` version 1.13.15. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 376 | 377 | Fixed a bug that prevents persistent volume claim (PVC) creation failures from being retried. |
+| Key Management Service provider | v1.0.0 | v1.0.1 | Updated image for [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| Kubernetes | v1.16.13 | v1.16.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.14){: external}. |
+| Kubernetes add-on resizer | 1.8.5 | 1.8.11 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.11){: external}. |
+| Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include auditing of all API groups except `apiregistration.k8s.io` and `coordination.k8s.io`. |
+| Kubernetes Metrics Server | v0.3.6 | v0.3.7 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.7){: external}. |
+| Kubernetes `NodeLocal` DNS cache configuration | N/A | N/A | Increased the pod termination grace period. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.13_1542" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.16.14_1544, released 17 August 2020
 {: #11614_1544}
@@ -1093,6 +1157,24 @@ Review the version 1.15 changelog.
 
 Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
 {: deprecated}
+
+### Changelog for master fix pack 1.15.12_1550, released 18 August 2020
+{: #11512_1550_master}
+
+The following table shows the changes that are included in the master fix pack patch update `1.15.12_1550`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Cluster health image | v1.1.8 | v1.1.9 | Updated to use `Go` version 1.13.13. |
+| GPU device plug-in and installer | 8c24345 | bacb9e1 | Updated image for [CVE-2020-14039](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-14039){: external} and [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | 376 | 377 | Fixed a bug that prevents persistent volume claim (PVC) creation failures from being retried. |
+| Key Management Service provider | v1.0.0 | v1.0.1 | Updated image for [CVE-2020-15586](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-15586){: external}. |
+| Kubernetes add-on resizer | 1.8.5 | 1.8.11 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.11){: external}. |
+| Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include auditing of all API groups except `apiregistration.k8s.io` and `coordination.k8s.io`. |
+| Kubernetes Metrics Server | v0.3.6 | v0.3.7 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.3.7){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.12_1549" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.15.12_1550, released 17 August 2020
 {: #11512_1550}
