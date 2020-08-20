@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-18"
+lastupdated: "2020-08-20"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -548,7 +548,7 @@ The following table shows the changes that are included in the master fix pack p
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/release-notes/){: external}. Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico | v3.12.0 | v3.12.1 | See the [Calico release notes](https://docs.projectcalico.org/release-notes/){: external}. Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.4-1 | v1.17.4-3 | Updated to use `calicoctl` version 3.12.1. |
@@ -880,7 +880,7 @@ The following table shows the changes that are included in the master fix pack p
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
 | CoreDNS | 1.6.7 | 1.6.9 | See the [CoreDNS release notes](https://coredns.io/2020/03/24/coredns-1.6.9-release/){: external}. Fixed a bug during Corefile migration that might generate invalid data that makes CoreDNS pods fail. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
@@ -1349,7 +1349,7 @@ The following table shows the changes that are included in the master fix pack p
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
@@ -2207,7 +2207,7 @@ The following table shows the changes that are included in the master fix pack p
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the the `allow-vrrp` `GlobalNetworkPolicy`. |
+| Calico configuration | N/A | N/A | Updated to allow egress from the worker nodes via the `allow-vrrp` `GlobalNetworkPolicy`. |
 | Cluster health | N/A | v1.1.1 | Cluster health now includes more add-on status information. |
 | GPU device plug-in and installer | 49979f5 | 8c6538f | Updated the GPU drivers to version [440.33.01](https://www.nvidia.com/download/driverResults.aspx/154570){: external}. |
 | Key Management Service provider | 277 | v1.0.0 | Updated the {{site.data.keyword.keymanagementservicelong_notm}} `Go` client. |
