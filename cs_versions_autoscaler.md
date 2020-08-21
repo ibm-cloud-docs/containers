@@ -2,11 +2,11 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-21"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
-subcollection: openshift
+subcollection: containers
 
 ---
 
