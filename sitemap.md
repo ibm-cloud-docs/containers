@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-21"
+lastupdated: "2020-08-24"
 
 keywords: containers
 subcollection: containers
@@ -512,17 +512,22 @@ subcollection: containers
   * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
   * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
 * [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
-* [Installing the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Installing the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-ca#ca_addon)
+* [Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
-* [Customizing the cluster autoscaler Helm chart configuration values](/docs/containers?topic=containers-ca#ca_chart_values)
+* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-ca#ca_customize)
+  * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-ca#ca_addon_values)
+  * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
 * [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
-* [Upgrading a cluster autoscaler release](/docs/containers?topic=containers-ca#ca_helm_up)
+* [Upgrading the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
   * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
   * [Upgrading a release from Helm v2 to v3](/docs/containers?topic=containers-ca#ca_helm_up_2to3)
-* [Using the cluster autoscaler for a private network-only cluster](/docs/containers?topic=containers-ca#ca_private_cluster)
+* [Using the cluster autoscaler Helm chart for a private network-only cluster](/docs/containers?topic=containers-ca#ca_private_cluster)
 * [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
+* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update)
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
