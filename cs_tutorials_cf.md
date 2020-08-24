@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks
 
@@ -220,7 +220,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
   ```
   {: pre}
 
-  <table>
+  <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
   <caption>Understanding this command's components</caption>
   <col width="15%">
   <thead>
@@ -307,7 +307,7 @@ Deploy your app as a container in a Kubernetes cluster.
   ```
   {: codeblock}
 
-  <table>
+  <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
   <caption>Understanding the YAML file components</caption>
   <col width="15%">
   <thead>

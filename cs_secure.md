@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-14"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, containers
 
@@ -141,7 +141,7 @@ The following image shows the default cluster security settings that address aut
 <img src="images/cs_security_apiserver_access.png" width="600" alt="Security stages when accessing the Kubernetes API server" style="width:600px; border-style: none"/>
 
 
-<table>
+<table summary="The columns are read from left to right. The first column has the security feature for the API server and etcd. The second column describes the feature.">
 <caption>Kubernetes API server and etcd security</caption>
   <thead>
   <th>Security feature</th>
@@ -238,7 +238,7 @@ The image does not include components that ensure secure end-to-end communicatio
 <img src="images/cs_worker_setup.png" width="600" alt="Worker node setup in {{site.data.keyword.containerlong_notm}} (excluding network security)" style="width:600px; border-style: none"/>
 
 
-<table>
+<table summary="The columns are read from left to right. The first column has the parameter of the security feature of the worker node. The second column describes the feature.">
 <caption>Worker node security setup</caption>
   <thead>
   <th>Security feature</th>
@@ -490,7 +490,7 @@ Even if you deployed a container from an image that passes the vulnerability che
 ![Deploying containers with trusted content](images/cs_image_security.png)
 
 
-<table>
+<table summary="The columns are read from left to right. The first column has the security feature of the image and deployment. The second column describes the parameter.">
 <caption>Security for images and deployments</caption>
   <thead>
     <th>Security feature</th>

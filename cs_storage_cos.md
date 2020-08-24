@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks
 
@@ -176,7 +176,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: pre}
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
    <caption>Understanding the command components</caption>
    <thead>
       <th>Component</th>
@@ -728,7 +728,7 @@ To remove the `ibmc` Helm plugin and the `ibm-object-storage-plugin`:
    ```
    {: screen}
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the component of the storage class. The second column describes the component.">
    <caption>Understanding the storage class details</caption>
    <thead>
     <th>Component</th>
@@ -842,7 +842,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
    ```
    {: codeblock}
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
    <caption>Understanding the YAML file components</caption>
    <thead>
     <th>Component</th>
@@ -945,7 +945,7 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
     ```
     {: codeblock}
 
-    <table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
     <caption>Understanding the YAML file components</caption>
     <thead>
       <th>Component</th>
@@ -1179,7 +1179,7 @@ To deploy a stateful set that uses object storage:
    {: codeblock}
 
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
     <caption>Understanding the stateful set YAML file components</caption>
     <thead>
     <th>Component</th>
@@ -1267,7 +1267,7 @@ To deploy a stateful set that uses object storage:
 ### Standard
 {: #standard}
 
-<table>
+<table summary="The columns are read from left to right. The first column has the characteristic of the storage class. The second column has the setting for the characteristic.">
 <caption>Object storage class: standard</caption>
 <thead>
 <th>Characteristics</th>
@@ -1306,7 +1306,7 @@ To deploy a stateful set that uses object storage:
 ### Vault
 {: #Vault}
 
-<table>
+<table summary="The columns are read from left to right. The first column has the characteristic of the storage class. The second column has the setting for the characteristic.">
 <caption>Object storage class: vault</caption>
 <thead>
 <th>Characteristics</th>
@@ -1343,7 +1343,7 @@ To deploy a stateful set that uses object storage:
 ### Cold
 {: #cold}
 
-<table>
+<table summary="The columns are read from left to right. The first column has the characteristic of the storage class. The second column has the setting for the characteristic.">
 <caption>Object storage class: cold</caption>
 <thead>
 <th>Characteristics</th>
@@ -1380,7 +1380,7 @@ To deploy a stateful set that uses object storage:
 ### Flex
 {: #flex}
 
-<table>
+<table summary="The columns are read from left to right. The first column has the characteristic of the storage class. The second column has the setting for the characteristic.">
 <caption>Object storage class: flex</caption>
 <thead>
 <th>Characteristics</th>

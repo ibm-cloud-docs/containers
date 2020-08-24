@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -557,7 +557,7 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
     </table>
 
 7. {: #pvc}To create persistent volume claims in a cluster where worker nodes are connected to private VLANs only, make sure that your cluster is set up with the following Kubernetes version or {{site.data.keyword.cloud_notm}} storage plug-in versions. These versions enable private network communication from your cluster to your persistent storage instances.
-    <table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the type of storage. The second column describes the required version for the type of storage.">
     <caption>Overview of required Kubernetes or {{site.data.keyword.cloud_notm}} storage plug-in versions for private clusters</caption>
     <col width="20%">
     <thead>

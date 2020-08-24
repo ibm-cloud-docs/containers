@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, help, debug
 
@@ -321,7 +321,7 @@ During the PVC creation and binding, many different tasks are executed by the fi
 
 2. Review common error message descriptions and resolutions.
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the error message. The second column describes the error message. The third column provides steps to resolve the error.">
    <thead>
      <th>Error message</th>
      <th>Description</th>
@@ -392,7 +392,7 @@ When you mount a PVC to your pod, you might experience errors when accessing or 
    {: pre}
 
 3. Review common errors that can occur when you mount a PVC to a pod.
-   <table>
+   <table summary="The columns are read from left to right. The first column has the symptom or error message. The second column describes the message. The third column provides steps to resolve the error.">
    <thead>
      <th>Symptom or error message</th>
      <th>Description</th>
@@ -903,7 +903,7 @@ When you mount a PVC to your pod, you might experience errors when accessing or 
    {: pre}
 
 3. Review common errors that can occur when you mount a PVC to a pod.
-   <table>
+   <table summary="The columns are read from left to right. The first column has the symptom or error message. The second column describes the message. The third column provides steps to resolve the error.">
    <thead>
      <th>Symptom or error message</th>
      <th>Description</th>
@@ -1252,7 +1252,7 @@ During the PVC creation and binding, many different tasks are executed by the {{
 
 2. Review common error message descriptions and resolutions.
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the symptom or error message. The second column describes the message. The third column provides steps to resolve the error.">
    <thead>
    <th>Error message</th>
    <th>Description</th>

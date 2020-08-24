@@ -2,37 +2,91 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-21"
+lastupdated: "2020-08-24"
 
 keywords: containers
 subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -76,7 +130,7 @@ subcollection: containers
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
 * [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation)
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
-* [Comparison between OpenShift and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
+* [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
@@ -458,17 +512,22 @@ subcollection: containers
   * [Why are my autoscaled worker pools unbalanced?](/docs/containers?topic=containers-ca#scalable-practices-unbalanced)
   * [Why can't I resize or rebalance my worker pool?](/docs/containers?topic=containers-ca#scalable-practices-resize)
 * [Preparing your cluster for autoscaling](/docs/containers?topic=containers-ca#ca_prepare_cluster)
-* [Installing the cluster autoscaler Helm chart to your cluster](/docs/containers?topic=containers-ca#ca_helm)
+* [Installing the cluster autoscaler add-on in your cluster](/docs/containers?topic=containers-ca#ca_addon)
+* [Installing the cluster autoscaler Helm chart in your cluster](/docs/containers?topic=containers-ca#ca_helm)
 * [Updating the cluster autoscaler configmap to enable scaling](/docs/containers?topic=containers-ca#ca_cm)
-* [Customizing the cluster autoscaler Helm chart configuration values](/docs/containers?topic=containers-ca#ca_chart_values)
+* [Customizing the cluster autoscaler configuration values](/docs/containers?topic=containers-ca#ca_customize)
+  * [Customizing the cluster autoscaler add-on configmap](/docs/containers?topic=containers-ca#ca_addon_values)
+  * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
 * [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
-* [Upgrading a cluster autoscaler release](/docs/containers?topic=containers-ca#ca_helm_up)
+* [Upgrading the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
   * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
   * [Upgrading a release from Helm v2 to v3](/docs/containers?topic=containers-ca#ca_helm_up_2to3)
-* [Using the cluster autoscaler for a private network-only cluster](/docs/containers?topic=containers-ca#ca_private_cluster)
+* [Using the cluster autoscaler Helm chart for a private network-only cluster](/docs/containers?topic=containers-ca#ca_private_cluster)
 * [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
+* [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update)
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)

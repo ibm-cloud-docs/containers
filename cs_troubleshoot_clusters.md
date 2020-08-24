@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -216,12 +216,12 @@ Review common error messages and learn how to resolve them. Messages might begin
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-  <table>
+  <table summary="The columns are read from left to right. The first column has the error message. The second column describes the error and provides resolution steps.">
   <caption>Common error messages</caption>
     <col width="25%">
     <thead>
     <th>Error message</th>
-    <th>Description and resolution
+    <th>Description and resolution</th>
     </thead>
     <tbody>
       <tr>
@@ -460,6 +460,7 @@ Your {{site.data.keyword.cloud_notm}} account uses its own automatically linked 
     ```
     ibmcloud ks credential get --region <region>
     ```
+    {: pre}
     Example output:
     ```
     Infrastructure credentials for user name user@email.com set for resource group default.
