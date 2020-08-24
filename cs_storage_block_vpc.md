@@ -442,7 +442,8 @@ You can attach a volume to one worker node only. Make sure that the volume is in
       ```
       {: pre}
 
-5. Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, and **IOPS** that you retrieved earlier.
+5.  Create a configuration file for your PV. Include the **ID**, **Size**, **Zone**, and **IOPS** that you retrieved earlier.
+    
     ```yaml
     apiVersion: v1
     kind: PersistentVolume
@@ -476,10 +477,10 @@ You can attach a volume to one worker node only. Make sure that the volume is in
       persistentVolumeReclaimPolicy: Retain
       storageClassName: ""
       volumeMode: Filesystem
-      ```
-      {: codeblock}
+    ```
+    {: codeblock}
 
-   <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
+    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
    <caption>Understanding the YAML file components</caption>
    <col width="25%">
    <thead>
