@@ -528,6 +528,7 @@ subcollection: containers
 * [Using the cluster autoscaler Helm chart for a private network-only cluster](/docs/containers?topic=containers-ca#ca_private_cluster)
 * [Removing the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm)
 * [Cluster autoscaler add-on parameter reference](/docs/containers?topic=containers-ca#ca_addon_ref)
+* [Cluster autoscaler Helm chart parameter reference](/docs/containers?topic=containers-ca#ca_helm_ref)
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update)
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
