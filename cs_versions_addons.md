@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -10,30 +10,84 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -47,18 +101,76 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 
 For more information about managing updates for Fluentd and Ingress ALBs, see [Updating cluster components](/docs/containers?topic=containers-update#components).
 
-## Ingress ALBs changelog
-{: #alb_changelog}
+## Beta: Kubernetes Ingress image changelog
+{: #kube_ingress_changelog}
 
-View image version changes for Ingress application load balancers (ALBs) in your {{site.data.keyword.containerlong_notm}} clusters.
+View version changes for Ingress application load balancers (ALBs) that run the community Kubernetes Ingress image.
 {: shortdesc}
 
-When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest image version. By default, automatic updates to the component are enabled, but you can disable automatic updates and manually update the component. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress-manage#alb-update).
+As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports the Kubernetes Ingress image as a beta release. For more information, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+{: beta}
 
-Refer to the following table for a summary of changes for each image version of the Ingress ALB component.
+When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. The latest three versions of the Kubernetes Ingress image are supported for ALBs. To list the currently supported versions, run the following command:
+```
+ibmcloud ks ingress alb versions
+```
+{: pre}
 
-<table summary="Overview of image version changes for the Ingress application load balancer component">
-<caption>Changelog for the Ingress application load balancer component</caption>
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.33.0_390_iks` indicates the most recent build of the `0.33.0` Ingress NGINX version that {{site.data.keyword.containerlong_notm}} released. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+
+When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions. 
+
+### Version 0.34.1 (latest)
+{: #0_34_1}
+
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0341){: external}. Refer to the following table for a summary of changes for each build of version 0.34.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+{: shortdesc}
+
+|Version build|Release date|Changes|
+|-------------|------------|-------|
+|0.34.1_391_iks|24 Aug 2020|Fixes vulnerabilities for [CVE-2019-15847 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15847).|
+{: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
+{: caption="Build changelog for version 0.34.1 of the Kubernetes Ingress image" caption-side="top"}
+
+### Version 0.33.0 (default)
+{: #0_33_0}
+
+For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330){: external}. Refer to the following table for a summary of changes for each build of version 0.33.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+{: shortdesc}
+
+|Version build|Release date|Changes|
+|-------------|------------|-------|
+|0.33.0_390_iks|24 Aug 2020|Fixes vulnerabilities for [CVE-2019-15847 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15847).|
+{: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
+{: caption="Build changelog for version 0.33.0 of the Kubernetes Ingress image" caption-side="top"}
+
+### Version 0.32.0
+{: #0_32_0}
+
+For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0320){: external}. Refer to the following table for a summary of changes for each build of version 0.32.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+{: shortdesc}
+
+|Version build|Release date|Changes|
+|-------------|------------|-------|
+|0.32.0_392_iks|24 Aug 2020|Fixes vulnerabilities for [CVE-2019-15847 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-15847).|
+{: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
+{: caption="Build changelog for version 0.32.0 of the Kubernetes Ingress image" caption-side="top"}
+
+<br />
+
+
+## {{site.data.keyword.containerlong_notm}} Ingress image changelog
+{: #alb_changelog}
+
+View version changes for Ingress application load balancers (ALBs) that run the custom {{site.data.keyword.containerlong_notm}} Ingress image.
+{: shortdesc}
+
+When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest image version. By default, automatic updates to the component are enabled, but you can disable automatic updates and manually update the component. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress#alb-update).
+
+Refer to the following table for a summary of changes for each version of the {{site.data.keyword.containerlong_notm}} Ingress image.
+
+<table summary="Version changes for the {{site.data.keyword.containerlong_notm}} Ingress image">
+<caption>Changelog for the {{site.data.keyword.containerlong_notm}} Ingress image</caption>
 <col width="12%">
 <col width="12%">
 <col width="41%">
@@ -167,7 +279,7 @@ Refer to the following table for a summary of changes for each image version of 
 <td>21 Nov 2019</td>
 <td><ul>
 <li>Supports TLS 1.3 by default.</li>
-<li>Updates the SSL cipher list to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20`. This updated cipher list is applied only to clusters that are created on or after 21 November 2019. Existing clusters continue to use the `HIGH:!aNULL:!MD5;` SSL cipher list. If you have an existing cluster, you can [update its `ssl-ciphers` list](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers) to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20` instead.</li>
+<li>Updates the SSL cipher list to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20`. This updated cipher list is applied only to clusters that are created on or after 21 November 2019. Existing clusters continue to use the `HIGH:!aNULL:!MD5;` SSL cipher list. If you have an existing cluster, you can [update its `ssl-ciphers` list](/docs/containers?topic=containers-ingress_annotation#ssl_protocols_ciphers) to use `HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20` instead.</li>
 <li>Fixes a bug so that the [`client-max-body-size` annotation](/docs/containers?topic=containers-ingress_annotation#client-max-body-size) can now work in conjunction with the [`app-id` annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).</li>
 <li>Fixes `golang` vulnerabilities for [CVE-2019-17596 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-17596).</li></ul></td>
 <td>-</td>
@@ -238,7 +350,7 @@ Refer to the following table for a summary of changes for each image version of 
 <td>515 / 334</td>
 <td>30 Jul 2019</td>
 <td><ul>
-<li>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress-manage#readiness-check).</li>
+<li>Adds a readiness check for ALB pod restarts to prevent request loss. ALB pods are prevented from attempting to route traffic requests until all of the Ingress resource files are parsed, up to a default maximum of 5 minutes. For more information, including steps for changing the default timeout values, see [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress#readiness-check).</li>
 <li>Fixes GNU `patch` vulnerabilities for [CVE-2019-13636 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13636) and [CVE-2019-13638 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-13638).</li>
 </ul></td>
 <td>-</td>
@@ -256,7 +368,7 @@ Refer to the following table for a summary of changes for each image version of 
 <td>14 Jul 2019</td>
 <td><ul>
 <li>Adds the [`upstream-keepalive-timeout`](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout) to set the maximum time that a keepalive connection stays open between the ALB proxy server and the upstream server for your back-end app.</li>
-<li>Adds support for the [`reuse-port`](/docs/containers?topic=containers-ingress-settings#reuse-port) directive to increase the number of ALB socket listeners from one per cluster to one per worker node.</li>
+<li>Adds support for the [`reuse-port`](/docs/containers?topic=containers-ingress_annotation#reuse-port) directive to increase the number of ALB socket listeners from one per cluster to one per worker node.</li>
 <li>Removes the redundant update of the load balancer that exposes an ALB when a port number is changed.</li>
 <li>Fixes `bzip2` vulnerabilities for [CVE-2016-3189 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2016-3189) and [CVE-2019-12900 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-12900).</li>
 <li>Fixes Expat vulnerabilities for [CVE-2018-20843 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20843).</li>
@@ -371,7 +483,7 @@ Refer to the following table for a summary of changes for each image version of 
 <li>Updates the {{site.data.keyword.appid_short_notm}} location directive so that the `app-id` annotation can be used with the `proxy-buffers`, `proxy-buffer-size`, and `proxy-busy-buffer-size` annotations.</li>
 <li>Fixes a bug so that informational logs are not labeled as errors.</li>
 </ul></td>
-<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](/docs/containers?topic=containers-ingress-settings#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.cloud_notm}} Blog post](https://www.ibm.com/cloud/blog/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default).</td>
+<td>Disables TLS 1.0 and 1.1 by default. If the clients that connect to your apps support TLS 1.2, no action is required. If you still have legacy clients that require TLS 1.0 or 1.1 support, manually enable the required TLS versions by following [these steps](/docs/containers?topic=containers-ingress_annotation#ssl_protocols_ciphers). For more information about how to see the TLS versions that your clients use to access your apps, see this [{{site.data.keyword.cloud_notm}} Blog post](https://www.ibm.com/cloud/blog/ibm-cloud-kubernetes-service-alb-update-tls-1-0-and-1-1-disabled-by-default).</td>
 </tr>
 <tr>
 <td>393 / 291</td>
@@ -399,6 +511,9 @@ Refer to the following table for a summary of changes for each image version of 
 </tr>
 </tbody>
 </table>
+
+<br />
+
 
 ## Fluentd for logging changelog
 {: #fluentd_changelog}

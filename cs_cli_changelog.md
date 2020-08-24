@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks
 
@@ -10,30 +10,84 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -58,7 +112,7 @@ Check out the following syntax and behavior changes between each version of the 
 |-------------|-----|-----|-----|-----|
 | Supported? | Deprecated | Deprecated | Deprecated | Default |
 | `ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Latest: Categories of commands</li></ul> | Legacy | Legacy | Latest | Latest |
-| Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Latest: Spaced structure (`ibmcloud ks alb cert get`)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
+| Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks cluster-get`)</li><li>Latest: Spaced structure (`ibmcloud ks cluster get`)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
 | Positional arguments<ul><li>Legacy: Arguments specified by position (`cluster-get mycluster`)</li><li>Latest: Arguments specified by flags (`cluster get --cluster mycluster`)</li></ul> | Legacy and latest | Legacy and latest | Legacy and latest | Latest |
 | Repeated arguments<ul><li>Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)</li><li>Latest: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
 | Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Latest: Dashed (`--show-resources`)</li></ul> | Legacy | Legacy | Legacy and latest | Latest |
@@ -81,6 +135,7 @@ Version 1.0 of the CLI plug-in was released on 16 March 2020. This version conta
 
 |Version|Release date|Changes|
 |-------|------------|-------|
+| 1.0.154 | 24 Aug 2020 | **Added commands**: The following commands are added.<ul><li>Adds the [`ibmcloud ks ingress secret`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ingress-commands) set of beta commands to manage Ingress secrets in your cluster, such as creating secrets for TLS certificates that are stored in {{site.data.keyword.cloudcerts_long_notm}}.</li><li>Adds the [`ibmcloud ks ingress alb migrate`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_migrate_start) set of beta commands to migrate resources that are formatted for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image to resources that are formatted for ALBs that run the Kubernetes Ingress image.</li><li>Adds the [`ibmcloud ks ingress alb enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure) and [`ibmcloud ks ingress alb disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_disable) commands.</li><li>Adds the optional `--version` flag to the `ibmcloud ks ingress alb create` command to specify the {{site.data.keyword.containerlong_notm}} Ingress image version or Kubernetes Ingress image version for the ALB.</li></ul>**Renamed commands**: The following commands are shifted to new naming categories.<ul><li>Shifts all existing `ibmcloud ks alb` commands into the [`ibmcloud ks ingress alb`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#alb-commands) subcategory.</li><li>Changes the names of the following flags in the relevant `ibmcloud ks ingress alb` commands: `--alb-id` to `--alb`, `--secret-name` to `--name`, and `--user-ip` to `--ip`.</li></ul>**Deprecated commands**: The following commands are deprecated in favor of the new commands.<ul><li>Deprecates the `ibmcloud ks alb cert` set of commands.</li><li>Deprecates the `ibmcloud ks alb configure` command.</li><li>Removes the deprecated `ibmcloud ks alb rollback` command.</li></ul> |
 | 1.0.143 | 06 Aug 2020 | <ul><li>Adds the [`ibmcloud ks quota ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_quota_ls) command to list all quota and limits for cluster-related resources in your {{site.data.keyword.cloud_notm}} account.</li><li>Deprecates the `--json` flag. To print a command output in JSON format, use the `--output json` flag instead.</li><li>Deprecates the `-s` flag. To not show the message of the day or update reminders in command output, use the `-q` flag instead.</li><li>Updates `ibmcloud ks cluster ls` command so that if you include the `--ouput json` flag but do not include the `--provider` flag, only classic clusters are returned.</li><li>Corrects the example master update command that is displayed in the output of the `ibmcloud ks cluster get` command when a master update is available.</li><li>Adds information about the effects of worker node replacement in the warning message for the `ibmcloud ks worker replace` command.</li><li>Standardizes the help text for flags that have a list of supported values.</li><li>Updates the help text in various languages.</li></ul> |
 | 1.0.118 | 07 July 2020 | <ul><li>Deprecates the `ibmcloud ks cluster user-subnet add`, `ibmcloud ks cluster user-subnet rm`, and `ibmcloud ks va` commands.</li><li>Updates the Go version to 1.13.12 for [CVE-2020-7919](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-7919){: external}.</li><li>Fixes a bug for downloading the Calico configuration by using the `--network` flag in the `ibmcloud ks cluster config` command.</li><li>Updates the help text for the `--endpoint` flag of the `ibmcloud ks kms enable` command.</li><li>Updates the help text in various languages.</li></ul> |
 | 1.0.99 | 15 June 2020 | Updates the help text in various places.|
@@ -136,11 +191,11 @@ Version 0.3 of the CLI plug-in is deprecated. Ensure that your {{site.data.keywo
 | 0.3.112 | 19 Aug 2019 |<ul><li>With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API](/docs/containers?topic=containers-cs_api_install#api_about), the {{site.data.keyword.cloud_notm}} CLI `kubernetes-service` plug-in supports both classic and VPC infrastructure providers. Some `ibmcloud ks` commands support only one type of infrastructure, whereas other commands include additional names or options. For a list of the CLI changes, see [Comparison of Classic and VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about).</li><li>Adds the `--pod-subnet` and `--service-subnet` flags to the `ibmcloud ks cluster create classic` commands for standard clusters that run Kubernetes 1.15 or later. If you plan to connect your cluster to on-premises networks, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods and subnets.</li><li>Enhances the `ibmcloud ks nlb-dns create` and `ibmcloud ks nlb-dns add` commands so that you can add more than one IP address at a time. For example, to create a DNS entry for multiple network load balancer IP addresses, use multiple flags such as `ibmcloud ks nlb-dns create --cluster mycluster --ip IP1 --ip IP2`.</li></ul> |
 | 0.3.103 | 12 Aug 2019 | General refactoring and improvements. |
 | 0.3.99 | 05 Aug 2019 |<ul><li>Improves error handling for `ibmcloud ks cluster config`.</li><li>Updates the help text in various languages.</li></ul> |
-| 0.3.95 | 30 Jul 2019 |<ul><li>Adds the [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) command to detach a public or private portable subnet in a classic IBM Cloud infrastructure account from a cluster.</li><li>Renames the `ibmcloud ks machine-types` command to `ibmcloud ks flavors`. You can still use the `machine-types` alias.</li><li>In the output of `ibmcloud ks flavors (machine-types)`, indicates flavors that are supported only for {{site.data.keyword.containerlong_notm}} or only for Red Hat OpenShift on IBM Cloud.</li><li>In the output of `ibmcloud ks cluster get`, changes the term `Owner` to `Creator` to reflect that the field returns information about the user that created the cluster.</li><li>Improves error handling for `ibmcloud ks zone add`.</li><li>Updates the help text in various languages.</li></ul> |
+| 0.3.95 | 30 Jul 2019 |<ul><li>Adds the [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) command to detach a public or private portable subnet in a classic IBM Cloud infrastructure account from a cluster.</li><li>Renames the `ibmcloud ks machine-types` command to `ibmcloud ks flavors`. You can still use the `machine-types` alias.</li><li>In the output of `ibmcloud ks flavors (machine-types)`, indicates flavors that are supported only for {{site.data.keyword.containerlong_notm}} or only for {{site.data.keyword.openshiftlong_notm}}.</li><li>In the output of `ibmcloud ks cluster get`, changes the term `Owner` to `Creator` to reflect that the field returns information about the user that created the cluster.</li><li>Improves error handling for `ibmcloud ks zone add`.</li><li>Updates the help text in various languages.</li></ul> |
 | 0.3.58 | 02 Jul 2019 | <ul><li>Fixes a bug so that a worker pool rebalance message is not returned when the cluster autoscaler is enabled.</li><li>Updates help text for the `cluster feature enable private-service-endpoint` and `nlb-dns monitor configure` commands.</li><li>Updates the help text in various languages.</li></ul> |
 | 0.3.49 | 18 Jun 2019 | Updates the Go version to 1.12.6. |
 | 0.3.47 | 15 Jun 2019 | <ul><li>Fixes a bug so that empty tables are not returned in the output of `ibmcloud ks kube-versions`.</li><li>Updates the NLB DNS model so that an array of NLB IP addresses is returned by `ibmcloud ks nlb-dns ls`.</li><li>Changes the description text for the {{site.data.keyword.containerlong_notm}} CLI plug-in.</li></ul> |
-| 0.3.34 | 31 May 2019 | <ul><li>Adds the `versions` command to list all supported Kubernetes and OpenShift versions.</li><li>Deprecates the `kube-versions` command.</li></ul> |
+| 0.3.34 | 31 May 2019 | <ul><li>Adds the `versions` command to list all supported Kubernetes and {{site.data.keyword.openshiftshort}} versions.</li><li>Deprecates the `kube-versions` command.</li></ul> |
 | 0.3.33 | 30 May 2019 | <ul><li>Adds the `--powershell` flag to the `cluster config` command to retrieve Kubernetes environment variables in Windows PowerShell format.</li><li>Deprecates the `region get`, `region set`, and `region ls` commands. For more information, see [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint).</li></ul> |
 | 0.3.28 | 23 May 2019 | <ul><li>Adds the [`ibmcloud ks infra-permissions get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) command to check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.</li><li>Adds the `--private-only` flag to the `zone network-set` command to unset the public VLAN for the worker pool metadata. Subsequent worker nodes in that worker pool zone are connected to a private VLAN only.</li><li>Removes the `--force-update` flag from the `worker update` command.</li><li>Adds the **VLAN ID** column to the output of the `alb ls` and `alb get` commands.</li><li>Adds the **Multizone Metro** column to the output of the `locations` command to designate zones that are multizone-capable.</li><li>Adds the **Master State** and **Master Health** fields to the output of the `cluster get` command. For more information, see [Master states](/docs/containers?topic=containers-health#states_master).</li><li>Updates the help text in various languages.</li></ul> |
 | 0.3.8 | 30 Apr 2019 | Adds support for [global endpoint functionality](/docs/containers?topic=containers-regions-and-zones#endpoint) in version `0.3`. By default, you can now view and manage all of your {{site.data.keyword.containerlong_notm}} resources in all locations. You are not required to target a region to work with resources.<ul><li>Adds the [`ibmcloud ks locations`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations) command to list all locations that {{site.data.keyword.containerlong_notm}} supports.</li><li>Adds the `--location` flag to the `cluster ls` and `zone ls` commands to filter resources by one or more locations.</li><li>Adds the `--region` flag to the `credential set/unset/get`, `api-key reset`, and `vlan spanning get` commands. To run these commands, you must specify a region in the `--region` flag.</li></ul> |
