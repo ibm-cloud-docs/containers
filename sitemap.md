@@ -1645,6 +1645,9 @@ subcollection: containers
 * [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
+[Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
+* [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101)
+
 
 ## Locations
 {: #sitemap_locations}

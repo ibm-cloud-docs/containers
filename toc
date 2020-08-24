@@ -211,6 +211,7 @@ Kubernetes Service
         cs_versions_addons.md
         cs_versions_istio.md
         cs_versions_knative.md
+        cs_versions_autoscaler.md
 
     cs_locations.md
     cs_hybrid.md

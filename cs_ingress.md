@@ -114,7 +114,7 @@ Before you get started with Ingress, review the following prerequisites.
     - **Manager** service role in all namespaces
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. If you have only one worker in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. Because there is only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted. The ALB pod is updated to the latest version only when you delete the old pod manually so that the new, updated pod can be scheduled.
 - If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
-- ALBs that run the [{{site.data.keyword.containerlong_notm}} custom Ingress image](/docs/containers?topic=containers-ingress-types) only: To be included in Ingress load balancing, the names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.
+- To be included in Ingress load balancing, the names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
 <br />
@@ -1478,7 +1478,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
 
-1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create_vpc_gen2).
+1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb-create-vpc-gen2).
   * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]
@@ -1652,8 +1652,6 @@ If you have very large Ingress resource files, it might take longer than 5 minut
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
-
 
 
 

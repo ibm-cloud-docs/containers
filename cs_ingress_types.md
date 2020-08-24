@@ -799,7 +799,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
 
-1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_create_vpc_gen2).
+1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb-create-vpc-gen2).
   * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]
