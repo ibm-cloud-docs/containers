@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -383,7 +383,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
      ```
      {: pre}
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
    <caption>`cluster create classic` command components</caption>
    <col width="25%">
    <thead>
@@ -581,7 +581,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    ```
    {: pre}
 
-   <table>
+   <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
    <caption>cluster create classic components</caption>
    <col width="25%">
    <thead>
@@ -841,7 +841,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     ```
     {: pre}
 
-    <table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
     <caption>Cluster create components</caption>
     <col width="25%">
     <thead>
@@ -1051,7 +1051,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     ```
     {: pre}
 
-    <table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
     <caption>Cluster create components</caption>
     <col width="25%">
     <thead>

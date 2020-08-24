@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-20"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -908,7 +908,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
         ```
         {: codeblock}
 
-        <table>
+        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
         <caption>Understanding the YAML components</caption>
           <col width="25%">
           <thead>
@@ -994,7 +994,7 @@ To prevent breaking changes, do not change the predefined `view`, `edit`, `admin
         ```
         {: codeblock}
 
-        <table>
+        <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
         <caption>Understanding the YAML components</caption>
           <col width="25%">
           <thead>
@@ -1130,7 +1130,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-    <table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
     <caption>Understanding the YAML components</caption>
       <col width="25%">
       <thead>

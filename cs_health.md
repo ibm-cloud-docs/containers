@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -445,7 +445,7 @@ Create a configuration for cluster and app logging. You can differentiate betwee
 
 The following table shows the different options that you have when you configure logging and their descriptions.
 
-<table>
+<table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
 <caption> Understanding logging configuration options</caption>
 <col width="20%">
 <thead>
@@ -585,7 +585,7 @@ To forward Kubernetes API audit logs:
     ```
     {: pre}
 
-  <table>
+  <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
   <caption>Understanding this command's components</caption>
   <col width="20%">
   <thead>
@@ -659,7 +659,7 @@ To forward Kubernetes API audit logs:
 You can choose which logs to forward to your external server by filtering out specific logs for a period of time. You can differentiate between the different filtering options by using flags.
 {: shortdesc}
 
-<table>
+<table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
 <caption>Understanding the options for log filtering</caption>
 <col width="25%">
 <col width="75%">
@@ -809,7 +809,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
   ```
   {: pre}
 
-  <table>
+  <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
   <caption>Understanding this command's components</caption>
   <col width="30%">
   <thead>
@@ -1241,7 +1241,7 @@ To configure Autorecovery:
    ```
    {:codeblock}
 
-   <table summary="Understanding the components of the configmap">
+   <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
    <caption>Understanding the configmap components</caption>
    <thead>
    <col width="25%">
@@ -1276,7 +1276,7 @@ To configure Autorecovery:
    </tbody>
    </table>
 
-   <table summary="Understanding individual components of checks">
+   <table summary="The columns are read from left to right. The first column has the component of the check. The second column describes the component."
    <caption>Understanding the individual components of checks</caption>
    <thead>
    <col width="25%">

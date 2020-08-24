@@ -130,7 +130,7 @@ subcollection: containers
 * [Benefits of using the service](/docs/containers?topic=containers-cs_ov#benefits)
 * [Comparison of offerings and their combinations](/docs/containers?topic=containers-cs_ov#differentiation)
 * [Comparison of free and standard clusters](/docs/containers?topic=containers-cs_ov#cluster_types)
-* [Comparison between OpenShift and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
+* [Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters](/docs/containers?topic=containers-cs_ov#openshift_kubernetes)
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
