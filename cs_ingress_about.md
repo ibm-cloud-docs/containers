@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -10,30 +10,84 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -86,13 +140,13 @@ When you create a standard cluster, {{site.data.keyword.containerlong_notm}} aut
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters: ALB IP addresses**
 
-In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, Kubernetes deployment manager reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
+In classic clusters, the Ingress subdomain for your cluster is linked to the public ALB IP addresses. You can find the IP address of each public ALB by running `ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>` and looking for the **ALB IP** field. The portable public and private ALB IP addresses are provisioned into your IBM Cloud infrastructure account during cluster creation and are static floating IPs that do not change for the life of the cluster. If the worker node is removed, Kubernetes deployment manager reschedules the ALB pods that were on that worker to another worker node in that zone. The rescheduled ALB pods retain the same static IP address. However, if you remove a zone from a cluster, then the ALB IP address for that zone is removed.
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters: ALB hostnames**
 
 When you create a VPC cluster, one public VPC load balancer is automatically created outside of your cluster in your VPC. The public VPC load balancer puts the public IP addresses of your public ALBs behind one hostname. In VPC clusters, a hostname is assigned to the ALBs because the ALB IP addresses are not static and might change over time. Note that this ALB hostname is different than the Ingress subdomain for your cluster.
 
-You can find the hostname that is assigned to your public ALBs and the hostname that is assigned to your private ALBs by running `ibmcloud ks alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts your private ALBs behind one hostname is created only when you enable your private ALBs.
+You can find the hostname that is assigned to your public ALBs and the hostname that is assigned to your private ALBs by running `ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field. Because the private ALBs are disabled by default, a private VPC load balancer that puts your private ALBs behind one hostname is created only when you enable your private ALBs.
 
 Do not delete the services that expose your ALBs on public or private IP addresses. These services are formatted such as `public-crdf253b6025d64944ab99ed63bb4567b6-alb1`.
 {: note}
@@ -129,7 +183,7 @@ Note that the VPC load balancer health checks only public ALBs and updates DNS l
 <br />
 
 
-## How does a request get to my app with Ingress in a classic cluster?
+## How does a request get to my app in a classic cluster?
 {: #architecture-classic}
 
 ### Single-zone cluster
@@ -197,7 +251,7 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 <br />
 
 
-## How does a request get to my app with Ingress in a VPC cluster?
+## How does a request get to my app in a VPC cluster?
 {: #architecture-vpc}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The following diagram shows how Ingress directs communication from the internet to an app in a VPC multizone cluster.
@@ -217,6 +271,94 @@ This diagram shows the traffic flow through a single-zone, gateway-enabled clust
 
 <br />
 
+
+## Do I use the {{site.data.keyword.containerlong_notm}} Ingress image or the Kubernetes Ingress image?
+{: #choose_images}
+
+Using the community Kubernetes Ingress image for your ALBs is a beta feature. Beta features might experience intermittent errors.
+{: beta}
+
+
+
+As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the Ingress application load balancers (ALBs) in your cluster: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image.
+{: shortdesc}
+
+- The **{{site.data.keyword.containerlong_notm}} Ingress image** is built on a custom implementation of the NGINX Ingress controller.
+- The **Kubernetes Ingress image** is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
+
+Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
+
+
+To get started, see [Setting up {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress) or [Beta: Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+
+### Similarities between Ingress images
+{: #alb-image-same}
+
+Review the following similarities between the {{site.data.keyword.containerlong_notm}} Ingress and the Kubernetes Ingress images.
+{: shortdesc}
+
+|Characteristic|Comparison|
+|--------------|----------|
+|Ingress components| Regardless of which image type your ALBs use, [Ingress still consists of the same three components](/docs/containers?topic=containers-ingress-about#ingress_components) in your cluster: Ingress resources, application load balancers (ALBs), and the multizone load balancer (MZLB) for classic clusters or the VPC load balancer for VPC clusters.|
+|Traffic flow| Both ALB images implement the NGINX Ingress controller. In that sense, [the way that ALBs function in your cluster to route traffic to your apps](/docs/containers?topic=containers-ingress-about#architecture-classic) is similar for both image types.|
+|ALB management| The image type does not affect how you manage the lifecycle of ALBs in your cluster. All ALBs can be managed by using `ibmcloud ks ingress alb` CLI commands. Additionally, IBM manages the [automatic updates of ALB versions](/docs/containers?topic=containers-ingress-types#alb-update). |
+{: caption="Similarities between Ingress images"}
+
+### Differences between Ingress images
+{: #alb-image-diff}
+
+Review the following important differences between the {{site.data.keyword.containerlong_notm}} Ingress and the Kubernetes Ingress images.
+{: shortdesc}
+
+|Characteristic|Custom {{site.data.keyword.containerlong_notm}} image|Kubernetes image|
+|--------------|----------------------------|--------------------|
+|Annotation class| Only [custom {{site.data.keyword.containerlong_notm}} annotations](/docs/containers?topic=containers-ingress_annotation) (`ingress.bluemix.net/<annotation>`) are supported. | Only [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations){: external} (`nginx.ingress.kubernetes.io/<annotation>`) are supported.|
+|Annotation application to services| Within the annotation, specify the app service name that you want to apply the annotation to. | Annotations are always applied to all service paths in the resource, and you cannot specify service names within the annotations.|
+|Protocols| HTTP/2 and gRPC protocols are not supported.|HTTP/2 and gRPC protocols are supported.|
+|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and cannot access secrets in any other namespaces.|
+{: caption="Differences between Ingress images"}
+
+
+<br />
+
+
+## How can I enable TLS certificates?
+{: #enable-certs}
+
+To load balance incoming HTTPS connections to your subdomain, you can configure the ALB to decrypt the network traffic and forward the decrypted request to the apps that are exposed in your cluster.
+{: shortdesc}
+
+When you configure the public ALB, you choose the domain that your apps are accessible through. If you use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, you can use the default TLS certificate that is created for the Ingress subdomain. If you set up a CNAME record to map a custom domain to the IBM-provided domain, you can provide your own TLS certificate for your custom domain.
+
+TLS secret configuration depends on the type of Ingress controller image that your ALB runs. For information about how to manage TLS certificates and secrets for Ingress, see the [Kubernetes Ingress image TLS documentation](/docs/containers?topic=containers-ingress-types#manage_certs) or [{{site.data.keyword.containerlong_notm}} Ingress image TLS documentation](/docs/containers?topic=containers-ingress#manage_certs).
+
+<br />
+
+
+## How can I customize routing?
+{: #custom-routing}
+
+You can modify default ALB settings and add annotations to your Ingress resources.
+{: shortdesc}
+
+Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
+
+**ALBs that run the custom {{site.data.keyword.containerlong_notm}} image**:
+* To manage how requests are routed to your app, specify [custom {{site.data.keyword.containerlong_notm}} annotations](/docs/containers?topic=containers-ingress_annotation) (`ingress.bluemix.net/<annotation>`) in your Ingress resources.
+* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm` configmap resource](/docs/containers?topic=containers-ingress_annotation#preserve_source_ip) for your Ingress ALBs.
+
+**ALBs that run the Kubernetes image**:
+* To manage how requests are routed to your app, specify [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
+* To modify default Ingress settings, such as to enable source IP preservation or configure SSL protocols, [change the `ibm-cloud-provider-ingress-cm`, `ibm-k8s-controller-config`, or `ibm-ingress-deploy-config` configmap resources](/docs/containers?topic=containers-ingress_annotation) for your Ingress ALBs.
+
+<br />
+
+
+## How do I manage the lifecycle of my ALBs?
+{: #alb-lifecycle}
+
+Ingress ALBs are managed by {{site.data.keyword.containerlong_notm}}. To further modify and manage your ALBs, such as to manage version updates for your ALBs or to scale up ALB replicas, you can use `ibmcloud ks ingress alb` commands. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress#alb-update).
+{: shortdesc}
 
 
 

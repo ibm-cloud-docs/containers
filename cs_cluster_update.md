@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -644,7 +644,7 @@ You can manage automatic updates of the Fluentd component in the following ways.
 ### Managing automatic updates for Ingress ALBs
 {: #alb}
 
-Control when the Ingress application load balancer (ALB) component is updated. For information about keeping ALBs up-to-date, see [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress-manage).
+Control when the Ingress application load balancer (ALB) component is updated. For information about keeping ALBs up-to-date, see [Managing the Ingress ALB lifecycle](/docs/containers?topic=containers-ingress).
 {: shortdesc}
 
 <br />

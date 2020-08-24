@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-24"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -264,7 +264,7 @@ Before you can run `kubectl` commands:
 
 To run `kubectl` commands to manage your cluster:
 
-1. Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_beta), you must follow different steps to use `kubectl` commands.
+1. Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta), you must follow different steps to use `kubectl` commands.
   * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). Note that any pre-existing `kubeconfig` files are not merged automatically.
   * **Version 0.4 (deprecated) or earlier**: In CLI plug-in version 0.4 or earlier, `cluster config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.
 

@@ -105,32 +105,6 @@ In the terminal, you are notified when updates to the `ibmcloud` CLI and plug-in
 Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_notm}} CLI reference](/docs/Registry?topic=container-registry-cli-plugin-containerregcli). Looking for `kubectl` commands? See the [Kubernetes documentation](https://kubectl.docs.kubernetes.io/){: external}.
 {:tip}
 
-
-
-## Using version 1.0 of the plug-in
-{: #cs_beta}
-
-[Version 1.0 of the CLI plug-in was released on 16 March 2020](/docs/containers?topic=containers-cs_cli_changelog). This version contains permanent syntax and behavior changes that are not backwards compatible.</br></br>To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
-{: important}
-
-Check out the following syntax and behavior changes between each version of the CLI plug-in:
-
-|Functionality|`0.2`|`0.3`|`0.4`|`1.0`|
-|-------------|-----|-----|-----|-----|
-| Supported? | Deprecated | Deprecated | Deprecated | Default |
-| `ibmcloud ks help` output structure<ul><li>Legacy: Alphabetical list of commands</li><li>Beta: Categories of commands</li></ul> | Legacy | Legacy | Beta | Beta |
-| Command structure<ul><li>Legacy: Hyphenated structure (`ibmcloud ks alb-cert-get`)</li><li>Beta: Spaced structure (`ibmcloud ks alb cert get`)</li></ul> | Legacy and beta | Legacy and beta | Legacy and beta | Beta |
-| Positional arguments<ul><li>Legacy: Arguments specified by position (`cluster-get mycluster`)</li><li>Beta: Arguments specified by flags (`cluster get --cluster mycluster`)</li></ul> | Legacy and beta | Legacy and beta | Legacy and beta | Beta |
-| Repeated arguments<ul><li>Legacy: Comma-delineated values (`--worker-pools pool1,pool2,pool3 ...`)</li><li>Beta: Repeated flags for each value with optional shorthand flag aliases (`-p pool1 -p pool2 ...`)</li></ul> | Legacy | Legacy | Legacy and beta | Beta |
-| Flag format<ul><li>Legacy: Camel-case (`--showResources`)</li><li>Beta: Dashed (`--show-resources`)</li></ul> | Legacy | Legacy | Legacy and beta | Beta |
-| Cluster context provided by `ibmcloud ks cluster-config`<ul><li>Legacy: Provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.</li><li>Beta: Appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple).</li></ul> | Legacy | Legacy | Legacy | Beta |
-| API endpoint<ul><li>Legacy: [Target a region and use a regional endpoint to work with resources in that region](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li><li>Beta: [Use the global endpoint to work with resources in any location](/docs/containers?topic=containers-regions-and-zones#bluemix_regions).</li></ul> | Legacy | Beta | Beta | Beta |
-{: caption="Beta versions of the redesigned {{site.data.keyword.containerlong_notm}} plug-in" caption-side="top"}
-{: summary="The rows are read from left to right, with the functionality in column one, version 0.2 of the CLI in column two, version 0.3 in column three, version 0.4 in column four, and version 1.0 in column five."}
-
-<br />
-
-
 ## Comparison of Classic and VPC commands
 {: #cli_classic_vpc_about}
 
@@ -156,20 +130,20 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
  <tr>
    <td>**Provider-specific**: You can perform similar operations in both infrastructure providers, but you must specify the infrastructure provider in the command name.<br><br>If you do not specify the provider, the default is classic. For example, `zone add classic` is an alias for the previous `zone-add` classic command.</td>
    <td>Uses the v1 API.<ul>
-   <li>[`alb configure classic`](#cs_alb_configure)</li>
-   <li>[`alb create classic`](#cs_alb_create)</li>
    <li>[`cluster create classic`](#cs_cluster_create)</li>
+   <li>[`ingress alb create classic`](#cs_alb_create)</li>
+   <li>[`ingress alb enable classic`](#cs_alb_configure)</li>
    <li>[`nlb-dns create classic`](#cs_nlb-dns-create)</li>
    <li>[`nlb-dns rm  classic`](#cs_nlb-dns-rm)</li>
    <li>[`worker-pool create classic`](#cs_worker_pool_create)</li>
    <li>[`zone add classic`](#cs_zone_add)</li></ul>
    </td>
    <td>Uses the v2 API.<ul>
-   <li>[`alb configure vpc-classic`](#cli_alb_configure_vpc_classic)</li>
-   <li>[`alb configure vpc-gen2`](#cli_alb_configure_vpc_gen2)</li>
-   <li>[`alb create vpc-classic`](#cli_alb-create-vpc-classic)</li>
-   <li>[`alb create vpc-gen2`](#cli_alb-create-vpc-gen2)</li>
    <li>[`cluster create vpc-classic`](#cli_cluster-create-vpc-classic)</li>
+   <li>[`ingress alb create vpc-classic`](#cli_alb-create-vpc-classic)</li>
+   <li>[`ingress alb create vpc-gen2`](#cli_alb-create-vpc-gen2)</li>
+   <li>[`ingress alb enable vpc-classic`](#cli_alb_configure_vpc_classic)</li>
+   <li>[`ingress alb enable vpc-gen2`](#cli_alb_configure_vpc_gen2)</li>
    <li>[`cluster create vpc-gen2`](#cli_cluster-create-vpc-gen2)</li>
    <li>[`nlb-dns create vpc-classic`](#cs_nlb-dns-create-vpc)</li>
    <li>[`nlb-dns create vpc-gen2`](#cs_nlb-dns-create-vpc-gen2)</li>
@@ -262,10 +236,10 @@ ibmcloud ks cluster addon disable debug-tool --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable istio`
@@ -288,7 +262,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Optional: This Istio add-on is a dependency for the <code>istio-extras</code>, <code>istio-sample-bookinfo</code>, and <code>knative</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
@@ -314,7 +288,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Optional: This Istio add-on is a dependency for the <code>istio-sample-bookinfo</code> managed add-on. Include this flag to also disable that add-on.</dd>
@@ -340,7 +314,7 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable knative`
@@ -363,10 +337,10 @@ ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable kube-terminal`
@@ -390,10 +364,10 @@ ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable static-route`
@@ -436,10 +410,10 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 **Command options**:
 <dl>
 <dt>`--cluster <em>CLUSTER</em>`</dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 </br>
@@ -471,7 +445,7 @@ ibmcloud ks cluster addon enable debug-tool --cluster CLUSTER [--version VERSION
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -503,7 +477,7 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio versions 1.4 and later are supported only in Kubernetes version 1.16 and later clusters.</dd>
@@ -532,7 +506,7 @@ ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSI
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -564,7 +538,7 @@ ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [--vers
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -593,7 +567,7 @@ ibmcloud ks cluster addon enable knative --cluster CLUSTER [--version VERSION] [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -623,7 +597,7 @@ ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERS
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -650,7 +624,7 @@ ibmcloud ks cluster addon enable static-route --cluster CLUSTER [--version VERSI
 **Command options**:
 <dl>
 <dt>`--cluster <em>CLUSTER</em>`</dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -678,7 +652,7 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 **Command options**:
 <dl>
 <dt>`--cluster <em>CLUSTER</em>`</dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
@@ -706,10 +680,10 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
 </br>
@@ -744,22 +718,22 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--network] [--skip-rbac]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--admin</code></dt>
-<dd>Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`. This value is optional.</dd>
+<dd>Optional: Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`.</dd>
 
 <dt><code>--network</code></dt>
-<dd>Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. This value is optional. **Note**: This option cannot be used in conjunction with the <code>--yaml</code> option.</dd>
+<dd>Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. **Note**: This option cannot be used in conjunction with the <code>--yaml</code> option.</dd>
 
 <dt><code>--skip-rbac</code></dt>
 <dd>Skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>--yaml</code></dt>
-<dd>Prints the command output in YAML format. This value is optional.</dd>
+<dd>Optional: Prints the command output in YAML format.</dd>
 </dl>
 
 **Example**:
@@ -807,11 +781,11 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <dd>Choose a flavor, or machine type, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual flavors vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters. In gateway-enabled classic clusters, you can choose the flavor for compute worker nodes only. Gateway worker nodes are created with the `u3c.2x4` flavor by default.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
+<dd>Optional: The Kubernetes version for the cluster master node. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
 
 <dt><code>--no-subnet</code></dt>
 <dd>By default, a public and a private portable subnet are created on the VLAN associated with the cluster. Include the <code>--no-subnet</code> flag to avoid creating subnets with the cluster. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster later.</dd>
@@ -850,7 +824,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 
 
 <dt><code>--workers WORKER</code></dt>
-<dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
+<dd>Optional: The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
 <p class="important">If you create a cluster with only one worker node per zone, you might experience issues with Ingress. For high availability, create a cluster with at least two workers per zone.</br>
 </br>Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
@@ -875,10 +849,10 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.</p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
-<dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+<dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -944,7 +918,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 <dd>Required. Enter the {{site.data.keyword.openshiftlong_notm}} version that you want to run in your cluster. For a list of supported versions, run <code>ibmcloud ks versions</code>.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -985,20 +959,20 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. This value is required. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`.</p>
+<dd>Required: Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`.</p>
 
 <p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
-<dd>The ID of the VPC in which to create the cluster and worker nodes. This value is required. To list available IDs, run `ibmcloud ks vpcs`.</dd>
+<dd>Required: The ID of the VPC in which to create the cluster and worker nodes. To list available IDs, run `ibmcloud ks vpcs`.</dd>
 
 <dt><code>--subnet-id <em>VPC_SUBNET_ID</em></code></dt>
-<dd>The VPC subnet to assign the cluster. This value is required. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic`.</dd>
+<dd>Required: The VPC subnet to assign the cluster. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic`.</dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
@@ -1008,7 +982,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
 
 <dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
-<dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
+<dd>Optional: The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
 <p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-public-service-endpoint</code></dt>
@@ -1032,10 +1006,10 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.</p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
-<dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+<dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -1073,20 +1047,20 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>The name for the cluster. This value is required. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
 </dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. This value is required. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.</p>
+<dd>Required: Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.</p>
 
 <p class="note">When you select a zone that is located outside your country, keep in mind that you might require legal authorization before data can be physically stored in a foreign country.</p>
 </dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
-<dd>The ID of the VPC in which to create the cluster and worker nodes. This value is required. To list available IDs, run `ibmcloud ks vpcs`.</dd>
+<dd>Required: The ID of the VPC in which to create the cluster and worker nodes. To list available IDs, run `ibmcloud ks vpcs`.</dd>
 
 <dt><code>--subnet-id <em>VPC_SUBNET_ID</em></code></dt>
-<dd>The VPC subnet to assign the cluster. This value is required. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2`.</dd>
+<dd>Required: The VPC subnet to assign the cluster. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2`.</dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>The Kubernetes version for the cluster master node. Note that VPC Gen 2 clusters are supported for Kubernetes versions 1.17 and later only. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
@@ -1095,7 +1069,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.</dd>
 
 <dt><code>--workers <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
-<dd>The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster). This value is optional.
+<dd>Optional: The number of worker nodes that you want to deploy in your cluster. If you do not specify this option, a cluster with the minimum value of 1 is created. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
 <p class="important">Every worker node is assigned a unique worker node ID and domain name that must not be manually changed after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.</p></dd>
 
 <dt><code>--disable-public-service-endpoint</code></dt>
@@ -1119,10 +1093,10 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap.</p></dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
-<dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+<dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before creating the cluster. Note that if you do not have the correct infrastructure permissions, the cluster creation might only partially succeed, such as the master provisioning but the worker nodes unable to provision. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -1160,10 +1134,10 @@ ibmcloud ks cluster feature disable public-service-endpoint --cluster CLUSTER [-
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-y</code></dt>
 <dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
@@ -1208,10 +1182,10 @@ ibmcloud ks cluster feature enable private-service-endpoint --cluster CLUSTER [-
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>-y</code></dt>
 <dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
@@ -1246,10 +1220,10 @@ ibmcloud ks cluster feature enable public-service-endpoint --cluster CLUSTER [-q
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>-y</code></dt>
 <dd>Optional: Refresh the cluster master with no user prompts.</dd>
@@ -1284,16 +1258,16 @@ ibmcloud ks cluster get --cluster CLUSTER [--show-resources] [--output json] [-q
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code><em>--show-resources</em></code></dt>
 <dd>Show more cluster resources such as add-ons, VLANs, subnets, and storage.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1333,10 +1307,10 @@ ibmcloud ks cluster ls [--provider (classic | vpc-classic | vpc-gen2)] [--locati
 <dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional. **Note**: If you do not include the `--provider` flag, only classic clusters are returned.</dd>
+<dd>Optional: Prints the command output in JSON format. **Note**: If you do not include the `--provider` flag, only classic clusters are returned.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1354,7 +1328,7 @@ Modify the webhook back end that forwards API server audit logs to a remote serv
 {: shprtdesc}
 
 The `apiserver-config-get|set|unset audit-webhook` aliases for these commands are deprecated.
-{: deprecated}
+{: note}
 
 #### `ibmcloud ks cluster master audit-webhook get`
 {: #cs_apiserver_config_get}
@@ -1376,13 +1350,13 @@ ibmcloud ks cluster master audit-webhook get --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -1408,22 +1382,22 @@ ibmcloud ks cluster master audit-webhook set --cluster CLUSTER [--remote-server 
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--remote-server <em>SERVER_URL</em></code></dt>
-<dd>The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, add the `http://` prefix to the IP. This value is optional.</dd>
+<dd>Optional: The URL or IP address for the remote logging service you want to send audit logs to. If you provide an insecure server URL, any certificates are ignored. If you provide an IP address, add the `http://` prefix to the IP.</dd>
 
 <dt><code>--ca-cert <em>CA_CERT_PATH</em></code></dt>
-<dd>The file path for the CA certificate that is used to verify the remote logging service. This value is optional.</dd>
+<dd>Optional: The file path for the CA certificate that is used to verify the remote logging service.</dd>
 
 <dt><code>--client-cert <em>CLIENT_CERT_PATH</em></code></dt>
-<dd>The file path for the client certificate that is used to authenticate against the remote logging service. This value is optional.</dd>
+<dd>Optional: The file path for the client certificate that is used to authenticate against the remote logging service.</dd>
 
 <dt><code>--client-key <em> CLIENT_KEY_PATH</em></code></dt>
-<dd>The file path for the corresponding client key that is used to connect to the remote logging service. This value is optional.</dd>
+<dd>Optional: The file path for the corresponding client key that is used to connect to the remote logging service.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1454,10 +1428,10 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
@@ -1469,7 +1443,7 @@ Apply configuration changes for the Kubernetes master that are requested with th
 {: shortdesc}
 
 The `apiserver-refresh` and `cluster-refresh` aliases for this command are deprecated.
-{: deprecated}
+{: note}
 
 ```
 ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
@@ -1486,10 +1460,10 @@ ibmcloud ks cluster master refresh --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
@@ -1503,7 +1477,7 @@ Update the Kubernetes master to the default API version. During the update, you 
 You might need to change your YAML files for future deployments. Review this [release note](/docs/containers?topic=containers-cs_versions) for details.
 
 The `cluster-update` alias for this command is deprecated.
-{: deprecated}
+{: note}
 
 ```
 ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH] [--force-update] [-f] [-q]
@@ -1520,19 +1494,19 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command). This value is optional.</dd>
+<dd>Optional: The Kubernetes version of the cluster. If you do not specify a version, the Kubernetes master is updated to the default API version. To see available versions, run [ibmcloud ks versions](#cs_versions_command).</dd>
 
 <dt><code>--force-update</code></dt>
-<dd>Attempt the update even if the change is greater than two minor versions from the worker node version. This value is optional.</dd>
+<dd>Optional: Attempt the update even if the change is greater than two minor versions from the worker node version.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run without user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1573,7 +1547,7 @@ ibmcloud ks cluster pull-secret apply --cluster CLUSTER
 
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 </dl>
 
 </br>
@@ -1599,19 +1573,19 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--force-delete-storage</code></dt>
-<dd>Deletes the cluster and any persistent storage that the cluster uses. **Attention**: If you include this flag, the data that is stored in the cluster or its associated storage instances cannot be recovered. This value is optional.</dd>
+<dd>Optional: Deletes the cluster and any persistent storage that the cluster uses. **Attention**: If you include this flag, the data that is stored in the cluster or its associated storage instances cannot be recovered.</dd>
 
 <dt><code><strong>--skip-advance-permissions-check</strong></code></dt>
-<dd>Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you do not have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. This value is optional. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
+<dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you do not have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Use this option to force the removal of a cluster without user prompts. This value is optional.</dd>
+<dd>Optional: Use this option to force the removal of a cluster without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1645,23 +1619,23 @@ ibmcloud ks cluster service bind --cluster CLUSTER --namespace KUBERNETES_NAMESP
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-n, --namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>The name of the Kubernetes namespace where you want to create the Kubernetes secret for your service credentials. This value is required.</dd>
+<dd>Required: The name of the Kubernetes namespace where you want to create the Kubernetes secret for your service credentials.</dd>
 
 <dt><code>--key <em>SERVICE_INSTANCE_KEY</em></code></dt>
-<dd>The name or GUID of an existing service key. This value is optional. When you use the `service-binding` command, new service credentials are automatically created for your service instance and assigned the IAM **Writer** service access role for IAM-enabled services. If you want to use an existing service key that you created earlier, use this option. If you define a service key, you cannot set the `--role` option at the same time because your service keys are already created with a specific IAM service access role. </dd>
+<dd>Optional: The name or GUID of an existing service key. When you use the `service-binding` command, new service credentials are automatically created for your service instance and assigned the IAM **Writer** service access role for IAM-enabled services. If you want to use an existing service key that you created earlier, use this option. If you define a service key, you cannot set the `--role` option at the same time because your service keys are already created with a specific IAM service access role.</dd>
 
 <dt><code>--role <em>IAM_SERVICE_ROLE</em></code></dt>
 <dd>The {{site.data.keyword.cloud_notm}} IAM role that you want the service key to have. This value is optional and can be used for IAM-enabled services only. If you do not set this option, your service credentials are automatically created and assigned the IAM **Writer** service access role. If you want to use existing service keys by specifying the `--key` option, do not include this option.<br><br>
 To list available roles for the service, run `ibmcloud iam roles --service <service_name>`. The service name is the name of the service in the catalog, which you can get by running `ibmcloud catalog search`.</dd>
 
 <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
-<dd>The name of the {{site.data.keyword.cloud_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services. This value is required.</dd>
+<dd>Required: The name of the {{site.data.keyword.cloud_notm}} service instance that you want to bind. To find the name, run <code>ibmcloud service list</code> for Cloud Foundry services, and <code>ibmcloud resource service-instances</code> for IAM-enabled services.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1693,19 +1667,19 @@ ibmcloud ks cluster service ls --cluster CLUSTER [--namespace KUBERNETES_NAMESPA
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-n, --namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>Include the services that are bound to a specific namespace in a cluster. This value is optional.</dd>
+<dd>Optional: Include the services that are bound to a specific namespace in a cluster.</dd>
 
 <dt><code>--all-namespaces</code></dt>
-<dd>Include the services that are bound to all of the namespaces in a cluster. This value is optional.</dd>
+<dd>Optional: Include the services that are bound to all of the namespaces in a cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1740,16 +1714,16 @@ ibmcloud ks cluster service unbind --cluster CLUSTER --namespace KUBERNETES_NAME
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-n, --namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>The name of the Kubernetes namespace. This value is required.</dd>
+<dd>Required: The name of the Kubernetes namespace.</dd>
 
 <dt><code>--service <em>SERVICE_INSTANCE</em></code></dt>
-<dd>The name of the {{site.data.keyword.cloud_notm}} service instance that you want to remove. To find the name of the service instance, run `ibmcloud ks cluster service ls --cluster <cluster_name_or_ID>`. This value is required.</dd>
+<dd>Required: The name of the {{site.data.keyword.cloud_notm}} service instance that you want to remove. To find the name of the service instance, run `ibmcloud ks cluster service ls --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1781,13 +1755,13 @@ ibmcloud ks cluster subnet add --cluster CLUSTER --subnet-id SUBNET [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--subnet-id <em>SUBNET</em></code></dt>
-<dd>The ID of the subnet. This value is required.</dd>
+<dd>Required: The ID of the subnet.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1820,7 +1794,7 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).</dd>
+<dd>Required: The name or ID of the cluster. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).</dd>
 
 <dt><code>--size <em>SIZE</em></code></dt>
 <dd>The number of IP addresses that you want to create in the portable subnet. Accepted values are 8, 16, 32, or 64. <p class="note"> When you add portable IP addresses for your subnet, three IP addresses are used to establish cluster-internal networking. You cannot use these three IP addresses for your Ingress application load balancers (ALBs) or to create network load balancer (NLB) services. For example, if you request eight portable public IP addresses, you can use five of them to expose your apps to the public.</p> </dd>
@@ -1829,7 +1803,7 @@ ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [
 <dd>The ID of the public or private VLAN on which you want to create the subnet. You must select a public or private VLAN that an existing worker node is connected to. To review the public or private VLANs that your worker nodes are connected to, run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code> and look for the <strong>Subnet VLANs</strong> section in the output. The subnet is provisioned in the same zone that the VLAN is in.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1858,16 +1832,16 @@ ibmcloud ks cluster subnet detach --cluster CLUSTER --subent-id SUBNET_ID [-f] [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).</dd>
+<dd>Required: The name or ID of the cluster. To list your clusters, use the `ibmcloud ks cluster ls` [command](#cs_clusters).</dd>
 
 <dt><code>--vlan <em>VLAN_ID</em></code></dt>
 <dd>The ID of the public or private subnet that you want to detach. To find the subnet ID, first run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code> and look for the subnet CIDR in the <strong>Subnet VLANs</strong> section of the output. Then, using the subnet CIDR, run <code>ibmcloud ks subnets --provider classic</code> and look for the subnet's <strong>ID</strong>.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -1902,13 +1876,13 @@ ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR 
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--subnet-cidr <em>SUBNET_CIDR</em></code></dt>
 <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must not conflict with any subnet that is used by IBM Cloud infrastructure. Supported prefixes range from `/30` (1 IP address) to `/24` (253 IP addresses). If you set the CIDR at one prefix length and later need to change it, first add the new CIDR, then [remove the old CIDR](#cs_cluster_user_subnet_rm).</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>The ID of the private VLAN. This value is required. The ID must be for a private VLAN in the cluster that one or more of the worker nodes are on. To see private VLANs in your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID> --show-resources`. In the **Subnet VLANs** section of the output, look for VLANs that have a **Public** value of `false`.</dd>
+<dd>Required: The ID of the private VLAN. The ID must be for a private VLAN in the cluster that one or more of the worker nodes are on. To see private VLANs in your cluster, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID> --show-resources`. In the **Subnet VLANs** section of the output, look for VLANs that have a **Public** value of `false`.</dd>
 </dl>
 
 **Example**:
@@ -1940,7 +1914,7 @@ ibmcloud ks cluster user-subnet rm --cluster CLUSTER --subnet-cidr SUBNET_CIDR -
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--subnet-cidr <em>SUBNET_CIDR</em></code></dt>
 <dd>The subnet Classless InterDomain Routing (CIDR). This value is required, and must match the CIDR that was set by the `ibmcloud ks cluster user-subnet add` [command](#cs_cluster_user_subnet_add).</dd>
@@ -1988,10 +1962,10 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--hardware <em>HARDWARE</em></code></dt>
-<dd>The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. This value is optional. For bare metal flavors, specify `dedicated`.</dd>
+<dd>Optional: The level of hardware isolation for your worker node. Use `dedicated` so that available physical resources are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`.</dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
@@ -2000,16 +1974,16 @@ ibmcloud ks worker add --cluster CLUSTER [--hardware HARDWARE] --flavor FLAVOR -
 <dd>An integer that represents the number of worker nodes to create in the cluster.</dd>
 
 <dt><code>--private-vlan <em>PRIVATE_VLAN</em></code></dt>
-<dd>The private VLAN that was specified when the cluster was created. This value is required. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.</dd>
+<dd>Required: The private VLAN that was specified when the cluster was created. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.</dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
-<dd>The public VLAN that was specified when the cluster was created. This value is optional. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></dd>
+<dd>Optional: The public VLAN that was specified when the cluster was created. If you want your worker nodes to exist on a private VLAN only, do not provide a public VLAN ID. Private VLAN routers always begin with <code>bcr</code> (back-end router) and public VLAN routers always begin with <code>fcr</code> (front-end router). When you create a cluster and specify the public and private VLANs, the number and letter combination after those prefixes must match.<p class="note">If worker nodes are set up with a private VLAN only, you must allow worker nodes and the cluster master to communicate by [enabling the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se) or [configuring a gateway appliance](/docs/containers?topic=containers-plan_clusters#workeruser-master).</p></dd>
 
 <dt><code>--disable-disk-encrypt</code></dt>
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -2041,16 +2015,16 @@ ibmcloud ks worker get --cluster CLUSTER_NAME_OR_ID --worker WORKER_NODE_ID [--o
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
-<dd>The name or ID of the worker node's cluster. This value is optional.</dd>
+<dd>Optional: The name or ID of the worker node's cluster.</dd>
 
 <dt><code>--worker <em>WORKER_NODE_ID</em></code></dt>
-<dd>The name of your worker node. Run <code>ibmcloud ks worker ls --cluster <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster. This value is required.</dd>
+<dd>Required: The name of your worker node. Run <code>ibmcloud ks worker ls --cluster <em>CLUSTER</em></code> to view the IDs for the worker nodes in a cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2082,22 +2056,22 @@ ibmcloud ks worker ls --cluster CLUSTER [--worker-pool POOL] [--show-pools] [--s
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster for the available worker nodes. This value is required.</dd>
+<dd>Required: The name or ID of the cluster for the available worker nodes.</dd>
 
 <dt><code>-p, --worker-pool <em>POOL</em></code></dt>
-<dd>View only worker nodes that belong to the worker pool. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is optional.</dd>
+<dd>Optional: View only worker nodes that belong to the worker pool. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>--show-pools</code></dt>
-<dd>List the worker pool that each worker node belongs to. This value is optional.</dd>
+<dd>Optional: List the worker pool that each worker node belongs to.</dd>
 
 <dt><code>--show-deleted</code></dt>
-<dd>View worker nodes that were deleted from the cluster, including the reason for deletion. This value is optional.</dd>
+<dd>Optional: View worker nodes that were deleted from the cluster, including the reason for deletion.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2164,10 +2138,10 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--hard</code></dt>
-<dd>Use this option to force a hard restart of a worker node by cutting off power to the worker node. Use this option if the worker node is unresponsive or the worker node's container runtime is unresponsive. This value is optional.</dd>
+<dd>Optional: Use this option to force a hard restart of a worker node by cutting off power to the worker node. Use this option if the worker node is unresponsive or the worker node's container runtime is unresponsive.</dd>
 
 <dt><code>-w, --worker <em>WORKER</em></code></dt>
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
@@ -2176,10 +2150,10 @@ ibmcloud ks worker reboot [--hard] --cluster CLUSTER --worker WORKER_ID [--skip-
 <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2231,7 +2205,7 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-w, --worker <em>WORKER</em></code></dt>
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
@@ -2240,10 +2214,10 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Use this option to force the reload of a worker node without user prompts. This value is optional.</dd>
+<dd>Optional: Use this option to force the reload of a worker node without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2307,19 +2281,19 @@ ibmcloud ks worker replace --cluster CLUSTER_NAME_OR_ID --worker WORKER_ID [--up
 **Command options**
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--worker <em>WORKER</em></code></dt>
-<dd>The name or ID of a worker node. This value is required.</dd>
+<dd>Required: The name or ID of a worker node.</dd>
 
 <dt><code>--update</code></dt>
 <dd>Include this flag to update the worker node to the same major and minor version of the master and the latest patch.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2351,16 +2325,16 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-w, --worker <em>WORKER</em></code></dt>
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Use this option to force the removal of a worker node without user prompts. This value is optional.</dd>
+<dd>Optional: Use this option to force the removal of a worker node without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2394,16 +2368,16 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you list available worker nodes. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you list available worker nodes.</dd>
 
 <dt><code>-w, --worker <em>WORKER</em></code></dt>
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Use this option to force the update of the worker node without user prompts. This value is optional.</dd>
+<dd>Optional: Use this option to force the update of the worker node without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2442,7 +2416,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 <dd>The name that you want to give your worker pool.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a machine type, or flavor. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual machines types vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (macine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters.</dd>
@@ -2451,19 +2425,19 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 <dd>The number of workers to create in each zone. This value is required, and must be 1 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).</dd>
 
 <dt><code>--hardware <em>ISOLATION</em></code></dt>
-<dd>The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources that are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`. This value is required.</dd>
+<dd>Required: The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources that are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`.</dd>
 
 <dt><code>--disable-disk-encrpyt</code></dt>
 <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
 
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
-<dd>Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`. This value is optional.</ul></dd>
+<dd>Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.</ul></dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
 **Example**:
@@ -2493,10 +2467,10 @@ ibmcloud ks worker-pool create vpc-classic --name <worker_pool_name> --cluster <
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Set the name for the worker pool. This value is required.</dd>
+<dd>Required: Set the name for the worker pool.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-classic`. This value is required.</dd>
+<dd>Required: Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-classic`.</dd>
 
 <dt><code>--size-per-zone <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-classic) to the worker pool. This value is required, and must be 1 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).</dd>
@@ -2505,16 +2479,16 @@ ibmcloud ks worker-pool create vpc-classic --name <worker_pool_name> --cluster <
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
-<dd>Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. This value is optional. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
+<dd>Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
 
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
-<dd>Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`. This value is optional.</ul></dd>
+<dd>Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.</ul></dd>
 
 <dt><code>-q</code>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>--output json</code>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 </dl>
 
@@ -2545,10 +2519,10 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Set the name for the worker pool. This value is required.</dd>
+<dd>Required: Set the name for the worker pool.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`. This value is required.</dd>
+<dd>Required: Specify the name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`.</dd>
 
 <dt><code>--size-per-zone <em>NUMBER_WORKERS_PER_ZONE</em></code></dt>
 <dd>Specify the number of worker nodes to create per zone in this worker pool. No worker nodes are created until you [add zones](#cli_zone-add-vpc-gen2) to the worker pool. This value is required, and must be 1 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).</dd>
@@ -2557,16 +2531,16 @@ ibmcloud ks worker-pool create vpc-gen2 --name <worker_pool_name> --cluster <clu
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a VPC zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-gen2`.</dd>
 
 <dt><code>--vpc-id <em>VPC_ID</em></code></dt>
-<dd>Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. This value is optional. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
+<dd>Optional: Specify the ID of the VPC in which to create the worker pool's worker nodes. The value must match the VPC ID that the cluster is in. To list the cluster's VPC ID, run `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If this flag is not provided, then the worker pool defaults to the VPC ID of existing worker pools in the cluster.</dd>
 
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
-<dd>Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`. This value is optional.</ul></dd>
+<dd>Optional: Apply key-value labels to each worker node in the worker pool. To specify multiple labels, use multiple flags, such as `-l key1=value1 -l key2=value2`.</ul></dd>
 
 <dt><code>-q</code>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>--output json</code>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 </dl>
 
@@ -2599,16 +2573,16 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--outpu
 **Command options**:
 <dl>
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`. This value is required.</dd>
+<dd>Required: The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where the worker pool is located. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where the worker pool is located.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2640,13 +2614,13 @@ ibmcloud ks worker-pool ls --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER_NAME_OR_ID</em></code></dt>
-<dd>The name or ID of the cluster for which you want to list worker pools. This value is required.</dd>
+<dd>Required: The name or ID of the cluster for which you want to list worker pools.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2678,13 +2652,13 @@ ibmcloud ks worker-pool rebalance --cluster CLUSTER --worker-pool WORKER_POOL [-
 **Command options**:
 <dl>
 <dt><code><em>-c, --cluster CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code><em>-p, --worker-pool WORKER_POOL</em></code></dt>
-<dd>The worker pool that you want to rebalance. This value is required.</dd>
+<dd>Required: The worker pool that you want to rebalance.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2716,15 +2690,15 @@ ibmcloud ks worker-pool resize --cluster CLUSTER --worker-pool WORKER_POOL --siz
 <dl>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster for which you want to resize worker pools. This value is required.</dd>
+<dd>Required: The name or ID of the cluster for which you want to resize worker pools.</dd>
 <dt><code>--worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to update. This value is required.</dd>
+<dd>Required: The name of the worker node pool that you want to update.</dd>
 
 <dt><code>--size-per-zone <em>WORKERS_PER_ZONE</em></code></dt>
 <dd>The number of workers that you want to have in each zone. This value is required, and must be 1 or greater. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -2757,16 +2731,16 @@ ibmcloud ks worker-pool rm --worker-pool WORKER_POOL --cluster CLUSTER [-q] [-f]
 **Command options**:
 <dl>
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to remove. This value is required.</dd>
+<dd>Required: The name of the worker node pool that you want to remove.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to remove the worker pool from. This value is required.</dd>
+<dd>Required: The name or ID of the cluster that you want to remove the worker pool from.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 **Example**:
@@ -2807,16 +2781,16 @@ ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --
 **Command options**:
 <dl>
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+<dd>Required: The name of the worker node pool that you want to add the taint to. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+<dd>Required: The name or ID of the cluster with the worker pool that you want to taint.</dd>
 
 <dt><code>--taint <em>KEY=VALUE:EFFECT</em></code></dt>
-<dd>The label and effect for the Kubernetes taint that you want to set for the worker pool. This value is required. Specify the taint in the format <code>key=value:effect</code>. The <code>key=value</code> is a label pair such as <code>env=prod</code> that you use to manage the worker node taint and matching pod tolerations. The <code>effect</code> is a [Kubernetes taint effect](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} such as <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code> that describes how the taint works. Depending on the effect of the taint that you set, pods that are running on your worker nodes might be evicted.</dd>
+<dd>Required: The label and effect for the Kubernetes taint that you want to set for the worker pool. Specify the taint in the format <code>key=value:effect</code>. The <code>key=value</code> is a label pair such as <code>env=prod</code> that you use to manage the worker node taint and matching pod tolerations. The <code>effect</code> is a [Kubernetes taint effect](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} such as <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code> that describes how the taint works. Depending on the effect of the taint that you set, pods that are running on your worker nodes might be evicted.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 **Example**:
@@ -2851,13 +2825,13 @@ ibmcloud ks worker-pool taint rm --worker-pool WORKER_POOL --cluster CLUSTER [-f
 **Command options**:
 <dl>
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to add the taint to. This value is required. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
+<dd>Required: The name of the worker node pool that you want to add the taint to. To list available worker pools, run `ibmcloud ks worker-pool ls -c <cluster_name_or_ID>`.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster with the worker pool that you want to taint. This value is required.</dd>
+<dd>Required: The name or ID of the cluster with the worker pool that you want to taint.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 **Example**:
@@ -2888,16 +2862,16 @@ ibmcloud ks worker-pool zones --worker-pool WORKER_POOL --cluster CLUSTER [-q] [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where the worker pool exists. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where the worker pool exists.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
-<dd>The name of the worker node pool that you want to see zones for. This value is required.</dd>
+<dd>Required: The name of the worker node pool that you want to see zones for.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2930,10 +2904,10 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
+<dd>Required: The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker pool to add the zone to. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.</dd>
@@ -2953,10 +2927,10 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -2985,22 +2959,22 @@ ibmcloud ks zone add vpc-classic --zone ZONE --subnet-id VPC_SUBNET_ID --cluster
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`. This value is required.</dd>
+<dd>Required: The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`.</dd>
 
 <dt><code>--subnet-id <em>SUBNET_ID</em></code></dt>
-<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a [VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. This value is required.</dd>
+<dd>Required: The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a [VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-classic`. This value is required.</dd>
+<dd>Required: The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-classic`.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker pool to add the zone to. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -3031,22 +3005,22 @@ ibmcloud ks zone add vpc-gen2 --zone ZONE --subnet-id VPC_SUBNET_ID --cluster CL
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`. This value is required.</dd>
+<dd>Required: The zone that you want to add. It must be a VPC zone within the cluster's region. To see available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.</dd>
 
 <dt><code>--subnet-id <em>SUBNET_ID</em></code></dt>
-<dd>The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a [VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. This value is required.</dd>
+<dd>Required: The ID of the subnet that you want to add. The VPC subnet must be within the `zone` that you specify. To see available VPC subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <vpc_zone>`. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so use a [VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`. This value is required.</dd>
+<dd>Required: The name or ID of the cluster. To list VPC clusters, run `ibmcloud ks cluster ls --provider vpc-gen2`.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker pool to add the zone to. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -3057,9 +3031,6 @@ ibmcloud ks zone add vpc-gen2 --zone us-south-3 --cluster my_cluster -w pool1 -w
 
 </br>
 
-
-
-
 ### `ibmcloud ks zone ls`
 {: #cs_datacenters}
 
@@ -3069,7 +3040,7 @@ View a list of available zones that you can create a cluster in.
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> This command works for both classic and VPC clusters.
 
 The `locations` alias for this command is deprecated.
-{: deprecated}
+{: note}
 
 ```
 ibmcloud ks zone ls --provider (classic | vpc-classic | vpc-gen2) [--location LOCATION] [--region-only] [--output json] [-q]
@@ -3087,13 +3058,13 @@ ibmcloud ks zone ls --provider (classic | vpc-classic | vpc-gen2) [--location LO
 <dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--region-only</code></dt>
-<dd>List multizones only within the region that you are logged in to. This value is optional.</dd>
+<dd>Optional: List multizones only within the region that you are logged in to.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -3122,10 +3093,10 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region. This value is required.</dd>
+<dd>Required: The zone that you want to add. It must be a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones) within the cluster's region.</dd>
 
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker pool to add the zone to. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`.</dd>
@@ -3140,10 +3111,10 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 <dd>Optional: Unset the public VLAN so that the workers in this zone are connected to a private VLAN only.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run without user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Usage**:
@@ -3211,19 +3182,19 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--pool WORKER_POOL] [-f] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone that you want to remove. This value is required.</dd>
+<dd>Required: The zone that you want to remove.</dd>
 
 <dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
 <dd>The name of the worker pool to remove the zone from. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`. To remove the zone from all worker pools in the cluster, do not include this flag.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the update without user prompts. This value is optional.</dd>
+<dd>Optional: Force the update without user prompts.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -3235,24 +3206,27 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 <br />
 
 
-## `alb` commands
+## `ingress alb` commands
 {: #alb-commands}
 
-View and configure an Ingress application load balancer (ALB).
+View and configure Ingress application load balancers (ALBs).
 {: shortdesc}
 
-### `ibmcloud ks alb autoupdate disable`
+Previously, the following commands were listed in the `ibmcloud ks alb` category. In CLI version 1.0.154 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
+{: important}
+
+### `ibmcloud ks ingress alb autoupdate disable`
 {: #cs_alb_autoupdate_disable}
 
 Disable automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-By default, automatic updates to Ingress application load balancers (ALBs) are enabled. ALB pods are automatically updated when a new image version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks alb update` command](#cs_alb_update).
+By default, automatic updates to Ingress application load balancers (ALBs) are enabled. ALB pods are automatically updated when a new image version is available. To instead update the add-on manually, use this command to disable automatic updates. You can then update ALB pods by running the [`ibmcloud ks ingress alb update` command](#cs_alb_update).
 
 When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the image version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
 
 ```
-ibmcloud ks alb autoupdate disable --cluster CLUSTER [-q]
+ibmcloud ks ingress alb autoupdate disable --cluster CLUSTER [-q]
 ```
 {: pre}
 
@@ -3266,21 +3240,21 @@ ibmcloud ks alb autoupdate disable --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb autoupdate disable --cluster mycluster
+ibmcloud ks ingress alb autoupdate disable --cluster mycluster
 ```
 {: pre}
 
 </br>
 
-### `ibmcloud ks alb autoupdate enable`
+### `ibmcloud ks ingress alb autoupdate enable`
 {: #cs_alb_autoupdate_enable}
 
 Enable automatic updates of all Ingress ALB pods in a cluster.
@@ -3289,7 +3263,7 @@ Enable automatic updates of all Ingress ALB pods in a cluster.
 If automatic updates for the Ingress ALB add-on are disabled, you can re-enable automatic updates. Whenever the next image version becomes available, the ALBs are automatically updated to the latest build.
 
 ```
-ibmcloud ks alb autoupdate enable --cluster CLUSTER [-q]
+ibmcloud ks ingress alb autoupdate enable --cluster CLUSTER [-q]
 ```
 {: pre}
 
@@ -3303,22 +3277,22 @@ ibmcloud ks alb autoupdate enable --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
 
-### `ibmcloud ks alb autoupdate get`
+### `ibmcloud ks ingress alb autoupdate get`
 {: #cs_alb_autoupdate_get}
 
 Check whether automatic updates for the Ingress ALB add-on are enabled and whether your ALBs are updated to the latest image version.
 {: shortdesc}
 
 ```
-ibmcloud ks alb autoupdate get --cluster CLUSTER [--output json] [-q]
+ibmcloud ks ingress alb autoupdate get --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
@@ -3332,402 +3306,25 @@ ibmcloud ks alb autoupdate get --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
 
-### Beta: `ibmcloud ks alb cert deploy`
-{: #cs_alb_cert_deploy}
-
-Deploy or update a certificate from your {{site.data.keyword.cloudcerts_long_notm}} instance to the ALB in a cluster.
-{: shortdesc}
-
-When you import a certificate with this command, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. When the ALB is processing requests, it follows this reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.
-
-You can also use the `--update` parameter to update certificates, such as to update the certificate in your cluster after you renew the certificate in {{site.data.keyword.cloudcerts_short}}. You can update certificates that are imported from the same {{site.data.keyword.cloudcerts_long_notm}} instance only.
-
-To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb cert deploy` and `alb cert deploy --update` commands.
-{: note}
-
-```
-ibmcloud ks alb cert deploy [--update] --cluster CLUSTER --secret-name SECRET_NAME --cert-crn CERTIFICATE_CRN [--update] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**
-
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--update</code></dt>
-<dd>Update the certificate for an ALB secret in a cluster. You can use this parameter to update the certificate after you renew it in {{site.data.keyword.cloudcerts_short}}.</dd>
-
-<dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-<dd>Specify a name for the ALB secret when it is created in the cluster. This value is required. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret. You can get the name of the IBM-provided Ingress secret by running <code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; | grep Ingress</code>.</dd>
-
-<dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-<dd>The certificate CRN. This value is required.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Examples**:
-
-Example for deploying an ALB secret:
-```
-ibmcloud ks alb cert deploy --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
-```
-{: pre}
-
-Example for updating an existing ALB secret:
-```
-ibmcloud ks alb cert deploy --update --secret-name my_alb_secret --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:7e21fde8ee84a96d29240327daee3eb2
-```
-{: pre}
-
-</br>
-
-### Beta: `ibmcloud ks alb cert get`
-{: #cs_alb_cert_get}
-
-If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, view information about the TLS certificate, such as the secrets that are associated with it and its status.
-{: shortdesc}
-
-```
-ibmcloud ks alb cert get --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [--output json] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**
-
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-<dd>The name of the ALB secret. This value is required to get information on a specific ALB secret in the cluster. This flag is mutually exclusive with the `--cert-crn` flag.</dd>
-
-<dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-<dd>The certificate CRN. This value is required to get information on all ALB secrets that match a specific certificate CRN in the cluster. This flag is mutually exclusive with the `--secret-name` flag.</dd>
-
-<dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Examples**:
-
-Example for getting information about an ALB secret:
-```
-ibmcloud ks alb cert get --cluster my_cluster --secret-name my_alb_secret
-```
-{: pre}
-
-Example for getting information about all ALB secrets that match a specified certificate CRN:
-```
-ibmcloud ks alb cert get --cluster my_cluster --cert-crn  crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks alb cert ls`
-{: #cs_alb_certs}
-
-List the certificates that you imported from your {{site.data.keyword.cloudcerts_long_notm}} instance to ALBs in a cluster.
-{: shortdesc}
-
-```
-ibmcloud ks alb cert ls --cluster CLUSTER [--output json] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**
-
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks alb cert ls --cluster my_cluster
-```
-{: pre}
-
-</br>
-
-### Beta: `ibmcloud ks alb cert rm`
-{: #cs_alb_cert_rm}
-
-If you imported a certificate from {{site.data.keyword.cloudcerts_short}} to the ALB in a cluster, remove the secret from the cluster.
-{: shortdesc}
-
-To stay within the [rate limits](https://cloud.ibm.com/apidocs/certificate-manager#rate-limiting) set by {{site.data.keyword.cloudcerts_short}}, wait at least 45 seconds in between successive `alb cert rm` commands.
-{: note}
-
-```
-ibmcloud ks alb cert rm --cluster CLUSTER [--secret-name SECRET_NAME] [--cert-crn CERTIFICATE_CRN] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**
-
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
-
-<dt><code>--secret-name <em>SECRET_NAME</em></code></dt>
-<dd>The name of the ALB secret. This value is required to remove a specific ALB secret in the cluster. This flag is mutually exclusive with the `--cert-crn` flag.</dd>
-
-<dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
-<dd>The certificate CRN. This value is required to remove all ALB secrets that match a specific certificate CRN in the cluster. This flag is mutually exclusive with the `--secret-name` flag.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-
-</dl>
-
-**Examples**:
-
-Example for removing an ALB secret:
-```
-ibmcloud ks alb cert rm --cluster my_cluster --secret-name my_alb_secret
-```
-{: pre}
-
-Example for removing all ALB secrets that match a specified certificate CRN:
-```
-ibmcloud ks alb cert rm --cluster my_cluster --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks alb configure classic`
-{: #cs_alb_configure}
-
-Enable or disable an ALB in your standard cluster.
-{: shortdesc}
-
-You can use this command to:
-* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb create classic` command are enabled by default too.
-* Enable an ALB that you previously disabled.
-* Disable an ALB. For example, disable an ALB on an old VLAN after you create an ALB on a new VLAN. For more information, see [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-manage#migrate-alb-vlan).
-* Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.
-
-```
-ibmcloud ks alb configure classic --alb-id ALB_ID (--disable|--enable [--user-ip USER_IP]|--disable-deployment) [--version IMAGE_VERSION] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic.
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--alb-id <em>ALB_ID</em></code></dt>
-<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks alb ls --cluster <em>CLUSTER</em></code>. This value is required.</dd>
-
-<dt><code>--disable</code></dt>
-<dd>Include this flag to disable an ALB in a cluster. <p class="note">If you disable an ALB, the IP address that the ALB used goes back into the pool of available portable IPs so that another service can use the IP. If you later try to re-enable the ALB, the ALB might report an error if the IP address it previously used is now in use by another service. You can either stop running the other service or specify another IP address to use when you re-enable the ALB.</br></br>Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--enable</code></dt>
-<dd>Include this flag to enable an ALB in a cluster.</dd>
-
-<dt><code>--user-ip <em>USER_IP</em></code></dt>
-<dd>Optional: If you enable the ALB with the <code>--enable</code> flag, you can specify an IP address that is on a VLAN in the zone that the ALB was created in. The ALB is enabled with and uses this public or private IP address. <strong>Note</strong>: This IP address must not be in use by another load balancer or ALB in the cluster. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster, or the public or private IP address that you previously assigned to the ALB.</dd>
-
-<dt><code>--disable-deployment</code></dt>
-<dd>Include this flag to disable the IBM-provided ALB deployment. This flag doesn't remove the DNS registration for the IBM-provided Ingress subdomain or the load balancer service that is used to expose the Ingress controller.</dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Examples**:
-Example for enabling an ALB with a user-provided IP address:
-```
-ibmcloud ks alb configure classic --alb-id private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable --user-ip 169.XX.XXX.XX
-```
-{: pre}
-
-Example for disabling an ALB:
-```
-ibmcloud ks alb configure classic --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks alb configure vpc-classic`
-{: #cli_alb_configure_vpc_classic}
-
-Enable or disable an ALB in a VPC Generation 1 compute cluster.
-{: shortdesc}
-
-You can use this command to:
-* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb create vpc-classic` command are enabled by default too.
-* Enable an ALB that you previously disabled.
-* Disable an ALB.
-* Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
-
-```
-ibmcloud ks alb configure vpc-classic --alb-id ALB_ID --enable|--disable [--version IMAGE_VERSION] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--alb-id <em>ALB_ID</em></code></dt>
-<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks alb ls --cluster <em>CLUSTER</em></code>. This value is required.</dd>
-
-<dt><code>--enable</code></dt>
-<dd>Include this flag to enable an ALB in a cluster.</dd>
-
-<dt><code>--disable</code></dt>
-<dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Examples**:
-
-Example for enabling an ALB:
-```
-ibmcloud ks alb configure vpc-classic --alb-id private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
-```
-{: pre}
-
-Example for disabling an ALB:
-```
-ibmcloud ks alb configure vpc-classic --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks alb configure vpc-gen2`
-{: #cli_alb_configure_vpc_gen2}
-
-Enable or disable an ALB in a VPC Generation 2 compute cluster.
-{: shortdesc}
-
-You can use this command to:
-* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks alb create vpc-gen2` command are enabled by default too.
-* Enable an ALB that you previously disabled.
-* Disable an ALB.
-* Disable the IBM-provided ALB deployment so that you can deploy your own Ingress controller and leverage the IBM-provided Ingress subdomain for your cluster.
-
-```
-ibmcloud ks alb configure vpc-gen2 --alb-id ALB_ID --enable|--disable [--version IMAGE_VERSION] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>--alb-id <em>ALB_ID</em></code></dt>
-<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks alb ls --cluster <em>CLUSTER</em></code>. This value is required.</dd>
-
-<dt><code>--enable</code></dt>
-<dd>Include this flag to enable an ALB in a cluster.</dd>
-
-<dt><code>--disable</code></dt>
-<dd>Include this flag to disable an ALB in a cluster.<p class="note">Before you disable an ALB in a cluster that is connected to a public VLAN, first verify that your Ingress subdomain is fully created by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you disable your ALBs before the Ingress subdomain is created, your cluster's DNS subdomain generation process is interrupted, and you cannot later use `nlb-dns` commands to create subdomains for load balancers.</p></dd>
-
-<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
-</dl>
-
-**Examples**:
-
-Example for enabling an ALB:
-```
-ibmcloud ks alb configure vpc-gen2 --alb-id private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --enable
-```
-{: pre}
-
-Example for disabling an ALB:
-```
-ibmcloud ks alb configure vpc-gen2 --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --disable
-```
-{: pre}
-
-</br>
-
-
-### `ibmcloud ks alb create classic`
+### `ibmcloud ks ingress alb create classic`
 {: #cs_alb_create}
 
 Create a public or private ALB in a classic cluster. The ALB that you create is enabled by default.
 {: shortdesc}
 
 ```
-ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE --vlan VLAN_ID [--version IMAGE_VERSION] [--user-ip IP] [-q]
+ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE) --vlan VLAN_ID --zone ZONE [--ip IP] [--version IMAGE_VERSION] [-q]
 ```
 {: pre}
 
@@ -3740,41 +3337,41 @@ ibmcloud ks alb create classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZO
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>The name or ID of the cluster.</dd>
 
-<dt><code>--type<em> PUBLIC|PRIVATE</em></code></dt>
-<dd>The type of ALB: <code>public</code> or <code>private</code>.</dd>
-
-<dt><code>--zone <em>ZONE</em></code></dt>
-<dd>The zone to create the ALB in.</dd>
+<dt><code>--type <em>(PUBLIC|PRIVATE)</em></code></dt>
+<dd>The type of ALB: <code>public</code> or <code>private</code>. This type must match the <code>vlan</code>.</dd>
 
 <dt><code>--vlan <em>VLAN_ID</em></code></dt>
 <dd>The ID of the VLAN to create the ALB on. This VLAN must match the ALB <code>type</code> and must be in the same <code>zone</code> as the ALB that you want to create.</dd>
 
-<dt><code>--user-ip <em>IP</em></code></dt>
-<dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. This IP address must not be in use by another load balancer or ALB in the cluster.</dd>
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>The zone to create the ALB in.</dd>
+
+<dt><code>--ip <em>IP</em></code></dt>
+<dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. This IP address must not be in use by another load balancer or ALB in the cluster. To see the IP addresses that are currently in use, run <code>kubectl get svcs --all-namespaces</code>.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb create classic --cluster mycluster --type public --zone dal10 --vlan 2234945 --user-ip 1.1.1.1
+ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 647
 ```
 {: pre}
 
 </br>
 
-### `ibmcloud ks alb create vpc-classic`
+### `ibmcloud ks ingress alb create vpc-classic`
 {: #cli_alb-create-vpc-classic}
 
 Create a public or private ALB in a VPC Generation 1 compute cluster. The ALB that you create is enabled by default.
 {: shortdesc}
 
 ```
-ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-q]
+ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-q]
 ```
 {: pre}
 
@@ -3794,28 +3391,28 @@ ibmcloud ks alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVATE --zon
 <dd>The VPC zone to deploy the ALB to.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
+<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb create vpc-classic --cluster mycluster --type public --zone us-south-1
+ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 647
 ```
 {: pre}
 
 </br>
 
-### `ibmcloud ks alb create vpc-gen2`
+### `ibmcloud ks ingress alb create vpc-gen2`
 {: #cli_alb-create-vpc-gen2}
 
 Create a public or private ALB in a VPC Generation 2 compute cluster. The ALB that you create is enabled by default.
 {: shortdesc}
 
 ```
-ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-q]
+ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone ZONE [--version IMAGE_VERSION] [-q]
 ```
 {: pre}
 
@@ -3835,29 +3432,209 @@ ibmcloud ks alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE --zone Z
 <dd>The VPC zone to deploy the ALB to.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks alb versions`.</dd>
+<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1
+ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 647
 ```
 {: pre}
 
 </br>
 
 
-### `ibmcloud ks alb get`
+### `ibmcloud ks ingress alb disable`
+{: #cs_alb_disable}
+
+Disable an ALB in your cluster. The ALB and its pods still exist, but stop routing traffic to your apps.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb configure`, is deprecated.
+{: note}
+
+```
+ibmcloud ks ingress alb disable --alb ALB_ID --cluster CLUSTER [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--alb <em>ALB_ID</em></code></dt>
+<dd>Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks ingress alb ls --cluster <em>CLUSTER</em></code>.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb disable --alb public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress alb enable classic`
+{: #cs_alb_configure}
+
+Enable an ALB in your classic cluster.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb configure classic`, is deprecated.
+{: note}
+
+You can use this command to:
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have workers and an available private subnet, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks ingress alb create classic` command are enabled by default too.
+* Enable an ALB that you previously disabled.
+
+```
+ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_ADDRESS] [--version IMAGE_VERSION] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic.
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--alb <em>ALB_ID</em></code></dt>
+<dd>Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks ingress alb ls --cluster <em>CLUSTER</em></code>.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--ip <em>IP_ADDRESS</em></code></dt>
+<dd>Optional: Specify an IP address that is on a VLAN in the zone that the ALB was created in. The ALB is enabled with and uses this public or private IP address.<p class="note">This IP address must not be in use by another load balancer or ALB in the cluster. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster, or if you re-enable an ALB that was previously enabled, the public or private IP address that was previously assigned to the ALB.</p></dd>
+
+<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 0.34.1_391_iks
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress alb enable vpc-classic`
+{: #cli_alb_configure_vpc_classic}
+
+Enable an ALB in a VPC Generation 1 compute cluster.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb configure vpc-classic`, is deprecated.
+{: note}
+
+You can use this command to:
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks ingress alb create vpc-classic` command are enabled by default too.
+* Enable an ALB that you previously disabled.
+
+```
+ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--version IMAGE_VERSION] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--alb <em>ALB_ID</em></code></dt>
+<dd>Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks ingress alb ls --cluster <em>CLUSTER</em></code>.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
+<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 647
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress alb enable vpc-gen2`
+{: #cli_alb_configure_vpc_gen2}
+
+Enable an ALB in a VPC Generation 2 compute cluster.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb configure vpc-gen2`, is deprecated.
+{: note}
+
+You can use this command to:
+* Enable a default private ALB. When you create a cluster, a default private ALB is created for you in each zone where you have worker nodes, but the default private ALBs are not enabled. However, all default public ALBs are automatically enabled, and any public or private ALBs that you create with the `ibmcloud ks ingress alb create vpc-gen2` command are enabled by default too.
+* Enable an ALB that you previously disabled.
+
+```
+ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--version IMAGE_VERSION] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>--alb <em>ALB_ID</em></code></dt>
+<dd>Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks ingress alb ls --cluster <em>CLUSTER</em></code>.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
+
+<dt><code>--version <em>IMAGE_VERSION</em></code></dt>
+<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 647
+```
+{: pre}
+
+</br>
+
+
+### `ibmcloud ks ingress alb get`
 {: #cs_alb_get}
 
 View the details of an Ingress ALB in a cluster.
 {: shortdesc}
 
 ```
-ibmcloud ks alb get --alb-id ALB_ID [--output json] [-q]
+ibmcloud ks ingress alb get --alb ALB_ID --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
@@ -3870,35 +3647,38 @@ ibmcloud ks alb get --alb-id ALB_ID [--output json] [-q]
 
 **Command options**:
 <dl>
-<dt><code>--alb-id <em>ALB_ID</em></code></dt>
-<dd>The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks alb ls --cluster <em>CLUSTER</em></code>. This value is required.</dd>
+<dt><code>--alb <em>ALB_ID</em></code></dt>
+<dd>Required: The ID for an ALB. To view the IDs for the ALBs in a cluster, run <code>ibmcloud ks ingress alb ls --cluster <em>CLUSTER</em></code>.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb get --alb-id public-cr18a61a63a6a94b658596aa93a087aaa9-alb1
+ibmcloud ks ingress alb get --alb public-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster
 ```
 {: pre}
 
 </br>
 
-### `ibmcloud ks alb ls`
+### `ibmcloud ks ingress alb ls`
 {: #cs_albs}
 
 List all Ingress ALB IDs in a cluster and view whether an update for the ALB pods is available.
 {: shortdesc}
 
-If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster.
+If no ALB IDs are returned, then the cluster does not have a portable subnet. You can [create](#cs_cluster_subnet_create) or [add](#cs_cluster_subnet_add) subnets to a cluster. Afterwards, ALBs are automatically created for you.
 {: tip}
 
 ```
-ibmcloud ks alb ls --cluster CLUSTER [--output json] [-q]
+ibmcloud ks ingress alb ls --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
@@ -3912,36 +3692,31 @@ ibmcloud ks alb ls --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code><em>-c, --cluster </em>CLUSTER</code></dt>
-<dd>The name or ID of the cluster where you list available ALBs. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you list available ALBs.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
 ```
-ibmcloud ks alb ls --cluster my_cluster
+ibmcloud ks ingress alb ls --cluster my_cluster
 ```
 {: pre}
 
 </br>
 
-### `ibmcloud ks alb rollback`
-{: #cs_alb_rollback}
+### `ibmcloud ks ingress alb migrate clean`
+{: #cs_alb_migrate_clean}
 
-This command is deprecated. If you need to roll back an update of your ALB pods, you can specify one of the supported image versions in the [`ibmcloud ks alb update` command](#cs_alb_update).
-{: deprecated}
-
-If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can roll back the update to the build that your ALB pods were previously running. All ALB pods in your cluster revert to their previously running state.
+Clean up any Ingress resources and configmaps that you no longer need, such as after an Ingress migration.
 {: shortdesc}
 
-After you roll back an update, automatic updates for ALB pods are disabled. To re-enable automatic updates, use the [`alb autoupdate enable` command](#cs_alb_autoupdate_enable).
-
 ```
-ibmcloud ks alb rollback --cluster CLUSTER [--output json] [-q]
+ibmcloud ks ingress alb migrate clean --cluster CLUSTER [--generated-resources] [--iks-ingresses] [--kube-ingresses] [--reset-kube-controller-configmap] [--test-ingresses] [-f] [--output json] [-q]
 ```
 {: pre}
 
@@ -3950,30 +3725,95 @@ ibmcloud ks alb rollback --cluster CLUSTER [--output json] [-q]
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: **Editor** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to roll back the ALB builds. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you want to check the migration status.</dd>
+
+<dt><code>--generated-resources</code></dt>
+<dd>Delete all resources that were automatically generated during an Ingress migration, including the Ingress resources and configmaps listed in the **Migrated to** sections in the output of `ibmcloud ks ingress alb migrate status`.</dd>
+
+<dt><code>--iks-ingresses</code></dt>
+<dd>Delete Ingress resources of class `iks-nginx`, class `nginx`, or of no class for public or private ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image.</dd>
+
+<dt><code>--kube-ingresses</code></dt>
+<dd>Delete automatically generated and manually created Ingress resources of class `public-iks-k8s-nginx` or `private-iks-k8s-nginx` for public or private ALBs that run the Kubernetes Ingress image.</dd>
+
+<dt><code>--reset-kube-controller-configmap</code></dt>
+<dd>Reset the `ibm-k8s-controller-config` configmap to the default settings. The configmap is deleted and re-deployed.</dd>
+
+<dt><code>--test-ingresses</code></dt>
+<dd>Delete automatically generated and manually created Ingress resources of class `test` for the test ALB service running the Kubernetes Ingress image.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts. If you do not include this flag, you are prompted for each type of resource to be deleted.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-configmap --test-ingresses -f
+```
+{: pre}
 
 </br>
 
-### `ibmcloud ks alb types`
-{: #cs_alb_types}
+### `ibmcloud ks ingress alb migrate start`
+{: #cs_alb_migrate_start}
 
-List Ingress ALB types that are supported.
+Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterwards you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
 {: shortdesc}
 
 ```
-ibmcloud ks alb types [--output json] [-q]
+ibmcloud ks ingress alb migrate start --cluster CLUSTER --type (test | test-with-private | production) [-f] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster where you want to start a migration of the Ingress configmap and resources.</dd>
+
+<dt><code>--type <em>(test | test-with-private | production)</em></code></dt>
+<dd>The type of migration: a test migration for public Ingress routing, a test migration with private Ingress routing, or a production migration of all Ingress routing. To see the resources that are created by and the processes for each type of migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).</dd>
+
+<dt><code>-f</code></dt>
+<dd>Force the migration to start without confirmation prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress alb migrate status`
+{: #cs_alb_migrate_status}
+
+Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
+{: shortdesc}
+
+```
+ibmcloud ks ingress alb migrate status --cluster CLUSTER [--output json] [-q]
 ```
 {: pre}
 
@@ -3986,28 +3826,36 @@ ibmcloud ks alb types [--output json] [-q]
 
 **Command options**:
 <dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster where you want to check the migration status.</dd>
+
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
+
+**Example**:
+```
+ibmcloud ks ingress alb migrate status --cluster my_cluster --output json
+```
+{: pre}
 
 </br>
 
-### `ibmcloud ks alb update`
+
+
+### `ibmcloud ks ingress alb update`
 {: #cs_alb_update}
 
 Force an update of the pods for individual or all Ingress ALBs in the cluster to the latest or a specific version.
 {: shortdesc}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can also use this command to roll back ALB pods to an earlier, supported version. After you force a one-time update, automatic updates remain disabled.
-
-When you update the major or minor Kubernetes version of your cluster, IBM automatically makes necessary changes to the Ingress deployment, but does not change the image version of your Ingress ALB add-on. You are responsible for checking the compatibility of the latest Kubernetes versions and your Ingress ALB add-on images.
-{: note}
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. If your ALB pods were recently updated, but a custom configuration for your ALBs is affected by the latest build, you can also use this command to roll back ALB pods to an earlier, supported version. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates remain disabled, but can be re-enabled with the `ibmcloud ks ingress alb autoupdate enable` command.
 
 ```
-ibmcloud ks alb update --cluster CLUSTER [--version IMAGE_VERSION] [--alb-id ALB1_ID --alb-id ALB2_ID ...] [--output json] [-q]
+ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ...] [--version IMAGE_VERSION] [--output json] [-q]
 ```
 {: pre}
 
@@ -4021,42 +3869,45 @@ ibmcloud ks alb update --cluster CLUSTER [--version IMAGE_VERSION] [--alb-id ALB
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to update the ALBs. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you want to update the ALBs.</dd>
+
+<dt><code>--alb <em>CLUSTER</em></code></dt>
+<dd>Optional: The ID of the individual ALB to update. To list ALB IDs, run `ibmcloud ks ingress alb ls -c <cluster>`. To update multiple ALBs, use multiple flags, such as `--alb ALB1_ID --alb ALB2_ID`. If you omit this flag, all ALBs in the cluster are updated.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want to update ALBs to. To list available versions, run `ibmcloud ks alb versions`. If you omit this flag, ALBs are updated to the latest version of the image type.</dd>
-
-<dt><code>--alb-id <em>CLUSTER</em></code></dt>
-<dd>Optional: The ID of the individual ALB to update. To list ALB IDs, run `ibmcloud ks alb ls -c <cluster>`. To update multiple ALBs, use multiple flags, such as `--alb-id ALB1_ID --alb-id ALB2_ID`. If you omit this flag, all ALBs in the cluster are updated.</dd>
+<dd>Optional: The version of the image that you want to update ALBs to. Note that you cannot use this flag to [change your ALB from one type of image to another](/docs/containers?topic=containers-ingress-types#alb-type-migration). To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, ALBs are updated to the latest version of the image type.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example commands:**
 * To update all ALB pods in the cluster:
   ```
-  ibmcloud ks alb update -c mycluster --version 626
+  ibmcloud ks ingress alb update -c mycluster --version 647
   ```
   {: pre}
 * To update the ALB pods for one or more specific ALBs:
   ```
-  ibmcloud ks alb update -c mycluster --version 626 --alb-id public-crdf253b6025d64944ab99ed63bb4567b6-alb1
+  ibmcloud ks ingress alb update -c mycluster --version 647 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
   ```
   {: pre}
 
-### `ibmcloud ks alb versions`
+### `ibmcloud ks ingress alb versions`
 {: #cs_alb_versions}
 
-View the available image versions for Ingress ALBs in your cluster.
+View the available images and image versions for Ingress ALBs in your cluster.
 {: shortdesc}
 
+As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the ALB: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image. The latest three version of each image type are supported for ALBs.
+- The {{site.data.keyword.containerlong_notm}} Ingress image is a custom implementation that is built on the NGINX Ingress controller.
+- The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
 ```
-ibmcloud ks alb versions [--output json] [-q]
+ibmcloud ks ingress alb versions [--output json] [-q]
 ```
 {: pre}
 
@@ -4070,23 +3921,263 @@ ibmcloud ks alb versions [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
-
 
 <br />
 
 
-## `ingress` commands
+## `ingress secret` commands
 {: #ingress-commands}
 
-View and modify Ingress services and settings.
+View and modify TLS secrets for Ingress services in your cluster.
 {: shortdesc}
 
-### `ibmcloud ks ingress status`
+Previously, the following commands were listed in the `ibmcloud ks ingress alb cert` subcategory. In CLI version 1.0.154 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
+{: important}
+
+### `ibmcloud ks ingress secret create`
+{: #cs_ingress_secret_create}
+
+Create an Ingress secret in a cluster for a certificate stored in {{site.data.keyword.cloudcerts_long}}.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb cert deploy`, is deprecated.
+{: note}
+
+```
+ibmcloud ks ingress secret create --cert-crn CERTIFICATE_CRN --cluster CLUSTER --name SECRET_NAME [--namespace NAMESPACE] [--persist] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+<dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+<dd>Required: The certificate CRN.</dd>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--name <em>SECRET_NAME</em></code></dt>
+<dd>Required: Specify a name for the secret. Make sure that you do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running <code>ibmcloud ks cluster get --cluster &lt;cluster_name_or_ID&gt; | grep Ingress</code>.</dd>
+
+<dt><code>--namespace <em>NAMESPACE</em></code></dt>
+<dd>Optional: Specify the namespace that your Ingress resource is deployed to. If your ALB runs the Kubernetes Ingress image, this value is required, because the ALB can identify secrets only in the same namespace as your Ingress resource. If your ALB runs the {{site.data.keyword.containerlong_notm}} Ingress image, and you do not specify a namespace, the certificate secret is created in a namespace called `ibm-cert-store`. A reference to this secret is then created in the `default` namespace, which any Ingress resource in any namespace can access. While processing requests, the ALB follows the reference to pick up and use the certificate secret from the `ibm-cert-store` namespace.</dd>
+
+<dt><code>--persist</code></dt>
+<dd>Optional: Persist the secret data in your cluster. If the secret is later deleted from the CLI or {{site.data.keyword.openshiftshort}} web console, the secret is automatically recreated in your cluster. To permanently delete the secret, you must use the [`/ingress/v2/secret/deleteSecret` API](https://containers.cloud.ibm.com/global/swagger-global-api/#/beta/DeleteIngressSecret).</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us-south:a/06580c923e40314421d3b6cb40c01c68:0db4351b-0ee1-479d-af37-56a4da9ef30f:certificate:4bc35b7e0badb304e60aef00947ae7ff --cluster my_cluster --name my_alb_secret --namespace demo_ns
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress secret get`
+{: #cs_ingress_secret_get}
+
+View information about Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb cert get`, is deprecated.
+{: note}
+
+```
+ibmcloud ks ingress secret get --cluster CLUSTER --name SECRET_NAME --namespace NAMESPACE [--output json] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--name <em>SECRET_NAME</em></code></dt>
+<dd>Required: The name of the secret.</dd>
+
+<dt><code>--namespace <em>NAMESPACE</em></code></dt>
+<dd>Required: The namespace that the secret is deployed to.</dd>
+
+<dt><code>--output json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress secret get --cluster my_cluster --name my_alb_secret --namespace demo_ns
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress secret ls`
+{: #cs_ingress_secret_ls}
+
+List Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb cert ls`, is deprecated.
+{: note}
+
+```
+ibmcloud ks ingress secret ls --cluster CLUSTER [--show-deleted] [--output json] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--show-deleted</code></dt>
+<dd>Optional: View secrets that were deleted from the cluster.</dd>
+
+<dt><code>--output json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress secret ls --cluster my_cluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress secret rm`
+{: #cs_ingress_secret_rm}
+
+Delete an Ingress secret from your cluster. If you created a secret for a certificate from {{site.data.keyword.cloudcerts_long_notm}}, only the secret in the cluster is deleted and the certificate remains in your {{site.data.keyword.cloudcerts_long_notm}} instance.
+{: shortdesc}
+
+The previous alias for this command, `ibmcloud ks ingress alb cert rm`, is deprecated.
+{: note}
+
+```
+ibmcloud ks ingress secret rm --cluster CLUSTER --name SECRET_NAME --namespace NAMESPACE [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--name <em>SECRET_NAME</em></code></dt>
+<dd>Required: The name of the secret.</dd>
+
+<dt><code>--namespace <em>NAMESPACE</em></code></dt>
+<dd>Required: The namespace that the secret is deployed to.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress secret rm --cluster my_cluster --name my_alb_secret --namespace demo_ns
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks ingress secret update`
+{: #cs_ingress_secret_update}
+
+Update an Ingress secret for a certificate that is not hosted in the default {{site.data.keyword.cloudcerts_short}} instance that was created for your cluster.
+{: shortdesc}
+
+Any changes that you make to a certificate in the default {{site.data.keyword.cloudcerts_short}} instance that was created for your cluster, which is named in the format `kube-<cluster_ID>`, are automatically reflected in the secret in your cluster. If you make changes to a certificate that is not hosted in your cluster's {{site.data.keyword.cloudcerts_short}} instance, you must use this command to update the secret in your cluster the pick up the certificate changes.
+
+```
+ibmcloud ks ingress secret update --cluster CLUSTER --name SECRET_NAME --namespace NAMESPACE [--cert-crn CRN] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--name <em>SECRET_NAME</em></code></dt>
+<dd>Required: The name of the secret. To see available secrets, run <code>ibmcloud ks ingress secret ls</code>.</dd>
+
+<dt><code>--namespace <em>NAMESPACE</em></code></dt>
+<dd>Required: The namespace that the secret is deployed to. To see the secret namespace, run <code>ibmcloud ks ingress secret get --cluster <cluster_name_or_ID> --name secret_name> --namespace <namespace></code>.</dd>
+
+<dt><code>--cert-crn <em>CERTIFICATE_CRN</em></code></dt>
+<dd>Optional: The certificate CRN. To see the secret CRN, run <code>ibmcloud ks ingress secret get --cluster <cluster_name_or_ID> --name secret_name> --namespace <namespace></code>.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress secret update --cluster my_cluster --name my_alb_secret --namespace demo_ns
+```
+{: pre}
+
+</br>
+
+### `ingress status` command
 {: #cs_ingress_status}
 
 Get the status of the health of Ingress resources for a cluster.
@@ -4107,13 +4198,13 @@ ibmcloud ks ingress status --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4151,10 +4242,10 @@ ibmcloud ks logging autoupdate disable --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you want to disable automatic updates for the Fluentd add-on.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
@@ -4175,10 +4266,10 @@ ibmcloud ks logging autoupdate enable --cluster CLUSTER [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you want to enable automatic updates for the Fluentd add-on.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
@@ -4199,13 +4290,13 @@ ibmcloud ks logging autoupdate get --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster where you want to check whether automatic updates for the Fluentd add-on are enabled. This value is required.</dd>
+<dd>Required: The name or ID of the cluster where you want to check whether automatic updates for the Fluentd add-on are enabled.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 </br>
@@ -4249,7 +4340,7 @@ ibmcloud ks logging collect --cluster CLUSTER --cos-bucket BUCKET_NAME --cos-end
 <dd>Optional: The type of logs that you want to create a snapshot of. Currently, `master` is the only option, as well as the default.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example command**:
@@ -4281,10 +4372,10 @@ ibmcloud ks logging collect-status --cluster CLUSTER [--output json]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to create a snapshot for. This value is required.</dd>
+<dd>Required: The name or ID of the cluster that you want to create a snapshot for.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
 **Example command**:
@@ -4330,7 +4421,7 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 <dd>The hostname or IP address of the log collector server.</dd>
 
 <dt><code>--port <em>LOG_SERVER_PORT</em></code></dt>
-<dd>The port of the log collector server. This value is optional. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
+<dd>Optional: The port of the log collector server. If you do not specify a port, then the standard port <code>514</code> is used for <code>syslog</code> and the standard port <code>9091</code> is used for <code>ibm</code>.</dd>
 
 <dt><code>--space <em>CLUSTER_SPACE</em></code></dt>
 <dd>Optional: The name of the Cloud Foundry space that you want to send logs to. This value is valid only for log type <code>ibm</code> and is optional. If you do not specify a space, logs are sent to the account level. If you do, you must also specify an <code>org</code>.</dd>
@@ -4348,16 +4439,16 @@ ibmcloud ks logging config create --cluster CLUSTER --logsource LOG_SOURCE --typ
 <dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
 
 <dt><code>--skip-validation</code></dt>
-<dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+<dd>Optional: Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs.</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Examples**:
@@ -4397,19 +4488,19 @@ ibmcloud ks logging config get --cluster CLUSTER [--logsource LOG_SOURCE] [--out
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--logsource <em>LOG_SOURCE</em></code></dt>
-<dd>The kind of log source for which you want to filter. Logging configurations of only this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>. This value is optional.</dd>
+<dd>Optional: The kind of log source for which you want to filter. Logging configurations of only this log source in the cluster are returned. Accepted values are <code>container</code>, <code>storage</code>, <code>application</code>, <code>worker</code>, <code>kubernetes</code>, and <code>ingress</code>.</dd>
 
 <dt><code>--show-covering-filters</code></dt>
 <dd>Shows the logging filters that render previous filters obsolete.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4441,7 +4532,7 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-n, --namespace <em>NAMESPACE</em></code></dt>
 <dd>The namespace you want to remove the log forwarding configuration from. If there is more than one config for the same namespace, use the <code>--id &lt;logging_configuration_ID&gt;</code> flag instead.</dd>
@@ -4456,7 +4547,7 @@ ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4488,13 +4579,13 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--id <em>LOG_CONFIG_ID</em></code></dt>
-<dd>The logging configuration ID that you want to update. This value is required.</dd>
+<dd>Required: The logging configuration ID that you want to update.</dd>
 
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
-<dd>The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported. This value is required.</dd>
+<dd>Required: The log forwarding protocol that you want to use. Currently, <code>syslog</code> and <code>ibm</code> are supported.</dd>
 
 <dt><code>-n, --namespace <em>NAMESPACE</em></code>
 <dd>The Kubernetes namespace that you want to forward logs from. Log forwarding is not supported for the <code>ibm-system</code> and <code>kube-system</code> Kubernetes namespaces. This value is valid only for the <code>container</code> log source. If you do not specify a namespace, then all namespaces in the cluster use this configuration.</dd>
@@ -4518,16 +4609,16 @@ ibmcloud ks logging config update --cluster CLUSTER --id LOG_CONFIG_ID --type LO
 <dd>To forward logs from apps, you can specify the name of the container that contains your app. To specify more than one container, use multiple flags, such as `-C /var/log/myApp1/&ast; -C /var/log/myApp2/&ast;`. If no containers are specified, logs are forwarded from all of the containers that contain the paths that you provided. This option is only valid for log source <code>application</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>--skipValidation</code></dt>
-<dd>Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs. This value is optional.</dd>
+<dd>Optional: Skip validation of the org and space names when they are specified. Skipping validation decreases processing time, but an invalid logging configuration does not correctly forward logs.</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example for log type `ibm`**:
@@ -4567,37 +4658,37 @@ ibmcloud ks logging filter create --cluster CLUSTER --type LOG_TYPE [--logging-c
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster to create a logging filter for. This value is required.</dd>
+<dd>Required: The name or ID of the cluster to create a logging filter for.</dd>
 
 <dt><code>--type <em>LOG_TYPE</em></code></dt>
 <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
 
 <dt><code>-lc, --logging-config <em>CONFIG</em></code></dt>
-<dd>The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`. This value is optional.</dd>
+<dd>Optional: The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.</dd>
 
 <dt><code>-n, --namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+<dd>Optional: The Kubernetes namespace from which you want to filter logs.</dd>
 
 <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-<dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+<dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
 
 <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-<dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
 
 <dt><code>--message <em>MESSAGE</em></code></dt>
-<dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+<dd>Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
 
 <dt><code>--regex-message <em>MESSAGE</em></code></dt>
-<dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9".</dd>
+<dd>Optional: Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9".</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Examples**:
@@ -4637,22 +4728,22 @@ ibmcloud ks logging filter get --cluster CLUSTER [--id FILTER_ID] [--show-matchi
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to view filters from. This value is required.</dd>
+<dd>Required: The name or ID of the cluster that you want to view filters from.</dd>
 
 <dt><code>--id <em>FILTER_ID</em></code></dt>
 <dd>The ID of the log filter that you want to view.</dd>
 
 <dt><code>--show-matching-configs</code></dt>
-<dd>Show the logging configurations that match the configuration that you're viewing. This value is optional.</dd>
+<dd>Optional: Show the logging configurations that match the configuration that you're viewing.</dd>
 
 <dt><code>--show-covering-filters</code></dt>
-<dd>Show the logging filters that render previous filters obsolete. This value is optional.</dd>
+<dd>Optional: Show the logging filters that render previous filters obsolete.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4690,13 +4781,13 @@ ibmcloud ks logging filter rm --cluster CLUSTER [--id FILTER_ID] [--all] [--forc
 <dd>The ID of the log filter to delete.</dd>
 
 <dt><code>--all</code></dt>
-<dd>Delete all of your log forwarding filters. This value is optional.</dd>
+<dd>Optional: Delete all of your log forwarding filters.</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4728,7 +4819,7 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster that you want to update a logging filter for. This value is required.</dd>
+<dd>Required: The name or ID of the cluster that you want to update a logging filter for.</dd>
 
 <dt><code>--id <em>FILTER_ID</em></code></dt>
 <dd>The ID of the log filter to update.</dd>
@@ -4737,31 +4828,31 @@ ibmcloud ks logging filter update --cluster CLUSTER --id FILTER_ID --type LOG_TY
 <dd>The type of logs that you want to apply the filter to. Currently <code>all</code>, <code>container</code>, and <code>host</code> are supported.</dd>
 
 <dt><code>-lc, --logging-config <em>CONFIG</em></code></dt>
-<dd>The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`. This value is optional.</dd>
+<dd>Optional: The logging configuration ID. If not provided, the filter is applied to all of the cluster logging configurations that are passed to the filter. You can view log configurations that match the filter by using the <code>--show-matching-configs</code> flag with the command. To specify multiple IDs, use multiple flags, such as `-lc id1 -lc id2`.</dd>
 
 <dt><code>-n, --namespace <em>KUBERNETES_NAMESPACE</em></code></dt>
-<dd>The Kubernetes namespace from which you want to filter logs. This value is optional.</dd>
+<dd>Optional: The Kubernetes namespace from which you want to filter logs.</dd>
 
 <dt><code>--container <em>CONTAINER_NAME</em></code></dt>
-<dd>The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>. This value is optional.</dd>
+<dd>Optional: The name of the container from which you want to filter out logs. This flag applies only when you are using log type <code>container</code>.</dd>
 
 <dt><code>--level <em>LOGGING_LEVEL</em></code></dt>
-<dd>Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. This value is optional. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
+<dd>Optional: Filters out logs that are at the specified level and less. Acceptable values in their canonical order are <code>fatal</code>, <code>error</code>, <code>warn/warning</code>, <code>info</code>, <code>debug</code>, and <code>trace</code>. As an example, if you filtered logs at the <code>info</code> level, <code>debug</code>, and <code>trace</code> are also filtered. **Note**: You can use this flag only when log messages are in JSON format and contain a level field. Example output: <code>{"log": "hello", "level": "info"}</code></dd>
 
 <dt><code>--message <em>MESSAGE</em></code></dt>
-<dd>Filters out any logs that contain a specified message anywhere in the log. This value is optional. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
+<dd>Optional: Filters out any logs that contain a specified message anywhere in the log. Example: The messages "Hello", "!", and "Hello, World!", would apply to the log "Hello, World!".</dd>
 
 <dt><code>--regex-message <em>MESSAGE</em></code></dt>
-<dd>Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. This value is optional. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9"</dd>
+<dd>Optional: Filters out any logs that contain a specified message that is written as a regular expression anywhere in the log. Example: The pattern "hello [0-9]" would apply to "hello 1", "hello 2", and "hello 9"</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Examples**:
@@ -4787,7 +4878,7 @@ Refresh the logging configuration for the cluster. This action refreshes the log
 {: shortdesc}
 
 The `logging config refresh` alias for this command is deprecated.
-{: deprecated}
+{: note}
 
 ```
 ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
@@ -4804,13 +4895,13 @@ ibmcloud ks logging refresh --cluster CLUSTER [--force-update] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--force-update</code></dt>
 <dd>Force your Fluentd pods to update to the latest version. Fluentd must be at the latest version in order to change your logging configurations.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4848,7 +4939,7 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_I
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--ip <em>NLB_IP</em></code></dt>
 <dd>The NLB IP address(es) that you want to add to the subdomain. To see your NLB IPs, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
@@ -4857,10 +4948,10 @@ ibmcloud ks nlb-dns add --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP2 --ip NLB3_I
 <dd>The subdomain that you want to add IPs to. To see existing subdomains, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4889,7 +4980,7 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--ip <em>IP</em></code></dt>
 <dd>The network load balancer IP address that you want to register. To see your NLB IP addresses, run <code>kubectl get svc</code>. To specify multiple IP addresses, use multiple `--ip` flags.</dd>
@@ -4901,10 +4992,10 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 <dd>The subdomain type. Currently only `public` is supported.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4939,7 +5030,7 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNA
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--lb-host <em>VPC_LB_HOSTNAME</em></code></dt>
 <dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
@@ -4948,13 +5039,13 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNA
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
 <dt><code>--type <em>(public|private)</em></code></dt>
-<dd>The subdomain type. </dd>
+<dd>The subdomain type.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -4989,7 +5080,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER --lb-host VPC_LB_HOSTNAME 
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--lb-host <em>VPC_LB_HOSTNAME</em></code></dt>
 <dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
@@ -5001,10 +5092,10 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER --lb-host VPC_LB_HOSTNAME 
 <dd>The subdomain type: public or private.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5037,13 +5128,13 @@ ibmcloud ks nlb-dns ls --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5125,10 +5216,10 @@ ibmcloud ks nlb-dns monitor configure --cluster CLUSTER --nlb-host SUBDOMAIN [--
 <dd>When <code>type</code> is <code>HTTP</code> or <code>HTTPS</code>: Set to <code>true</code> to follow any redirects that are returned by the IP.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5156,16 +5247,16 @@ ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN [--ou
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5195,16 +5286,16 @@ ibmcloud ks nlb-dns monitor enable --cluster CLUSTER --nlb-host SUBDOMAIN [--out
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5233,16 +5324,16 @@ ibmcloud ks nlb-dns monitor get --cluster CLUSTER --nlb-host SUBDOMAIN [--output
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that the monitor health checks. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5270,13 +5361,13 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5305,16 +5396,16 @@ ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host SUBDOMAIN] [--o
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
 <dd>Include this flag to view the status for only one subdomain. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5343,7 +5434,7 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host NEW_LB_HOSTNAME --nlb-su
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--lb-host <em>NEW_LB_HOSTNAME</em></code></dt>
 <dd>The hostname of the new VPC load balancer to update the subdomain with. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
@@ -5352,10 +5443,10 @@ ibmcloud ks nlb-dns replace --cluster CLUSTER --lb-host NEW_LB_HOSTNAME --nlb-su
 <dd>The DNS subdomain that you want to replace the load balancer hostname for. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5384,7 +5475,7 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [-
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--ip <em>IP</em></code></dt>
 <dd>The NLB IP that you want to remove. To see the IPs registered with each subdomain, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
@@ -5393,10 +5484,10 @@ ibmcloud ks nlb-dns rm classic --cluster CLUSTER --ip IP --nlb-host SUBDOMAIN [-
 <dd>The subdomain that you want to remove an IP from. To see existing subdomains, run <code>ibmcloud ks nlb-dns ls</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5425,16 +5516,16 @@ ibmcloud ks nlb-dns rm vpc-classic --cluster CLUSTER --nlb-subdomain SUBDOMAIN [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that you want to remove the VPC load balancer hostname from. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5463,16 +5554,16 @@ ibmcloud ks nlb-dns rm vpc-gen2 --cluster CLUSTER --nlb-subdomain SUBDOMAIN [--o
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain that you want to disassociate from the VPC load balancer hostname. To see existing subdomains, run `ibmcloud ks nlb-dns ls --cluster <cluster>`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5510,16 +5601,16 @@ ibmcloud ks nlb-dns secret regenerate --cluster CLUSTER --nlb-subdomain SUBDOMAI
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain to regenerate the secret for. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5553,19 +5644,19 @@ ibmcloud ks nlb-dns secret rm --cluster CLUSTER --nlb-subdomain SUBDOMAIN [-f] [
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--nlb-subdomain <em>SUBDOMAIN</em></code></dt>
 <dd>The subdomain to delete the secret for. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the command to run with no user prompts. This value is optional.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5600,19 +5691,19 @@ ibmcloud ks webhook-create --cluster CLUSTER --level LEVEL --type slack --url UR
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--level <em>LEVEL</em></code></dt>
-<dd>The notification level, such as <code>Normal</code> or <code>Warning</code>. <code>Warning</code> is the default value. This value is optional.</dd>
+<dd>Optional: The notification level, such as <code>Normal</code> or <code>Warning</code>. <code>Warning</code> is the default value.</dd>
 
 <dt><code>--type <em>slack</em></code></dt>
-<dd>The webhook type. Currently, Slack is supported. This value is required.</dd>
+<dd>Required: The webhook type. Currently, Slack is supported.</dd>
 
 <dt><code>--url <em>URL</em></code></dt>
-<dd>The URL for the webhook. This value is required.</dd>
+<dd>Required: The URL for the webhook.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5659,13 +5750,13 @@ ibmcloud ks api-key info --cluster CLUSTER [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>The name or ID of the cluster. This value is required.</dd>
+<dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -5708,7 +5799,7 @@ ibmcloud ks api-key reset --region REGION [-q]
 <dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5749,10 +5840,10 @@ ibmcloud ks credential get --region REGION [-q] [--output json]
 <dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5790,16 +5881,16 @@ ibmcloud ks credential set classic --infrastructure-api-key API_KEY --infrastruc
 **Command options**:
 <dl>
 <dt><code>--infrastructure-username <em>USERNAME</em></code></dt>
-<dd>IBM Cloud infrastructure account API username. This value is required. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).</dd>
+<dd>Required: IBM Cloud infrastructure account API username. The infrastructure API username is not the same as the IBMid. To view the infrastructure API username, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).</dd>
 
 <dt><code>--infrastructure-api-key <em>API_KEY</em></code></dt>
-<dd>IBM Cloud infrastructure account API key. This value is required. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).</dd>
+<dd>Required: IBM Cloud infrastructure account API key. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).</dd>
 
 <dt><code>--region <em>REGION</em></code></dt>
 <dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5833,7 +5924,7 @@ ibmcloud ks credential unset --region REGION [-q]
 <dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5890,13 +5981,13 @@ ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`. This value is required.</dd>
+<dd>Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`. </dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -5964,10 +6055,10 @@ ibmcloud ks kms crk ls --instance-id KMS_INSTANCE_ID [--output json] [-q]
 <dd>The ID of the key management service instance that you want to list root keys for. To list available KMS instances, run `ibmcloud ks kms instance ls`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6012,7 +6103,7 @@ ibmcloud ks kms enable --cluster CLUSTER_NAME_OR_ID --instance-id KMS_INSTANCE_I
 <dd>Optional: Specify this option to use the KMS public service endpoint. If you do not include this flag, the private service endpoint is used by default.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6043,10 +6134,10 @@ ibmcloud ks kms instance ls [--output json] [-q]
 <dl>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6085,7 +6176,7 @@ ibmcloud ks quota ls [--provider PROVIDER] [--output json]
 <dd>The infrastructure provider type to list quota and limits for.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
 **Example**:
@@ -6132,10 +6223,10 @@ ibmcloud ks subnets [--provider (classic | vpc-classic | vpc-gen2)] [--vpc-id <V
 <dd>Filter output by a specific location. To see supported locations, run <code>ibmcloud ks locations</code>. To specify multiple locations, use one flag for each location, such as `-l dal -l seo`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6174,16 +6265,16 @@ ibmcloud ks vlan ls --zone ZONE [--all] [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Enter the zone where you want to list your private and public VLANs. This value is required. To see available zones, run `ibmcloud ks zone ls`.</dd>
+<dd>Required: Enter the zone where you want to list your private and public VLANs. To see available zones, run `ibmcloud ks zone ls`.</dd>
 
 <dt><code>--all</code></dt>
 <dd>Lists all available VLANs. By default VLANs are filtered to show only those VLANs that are valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6218,10 +6309,10 @@ ibmcloud ks vlan spanning get --region REGION [--output json] [-q]
 <dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6258,10 +6349,10 @@ ibmcloud ks vpcs [--provider (vpc-classic | vpc-gen2)] [--output json] [-q]
 <dd>The infrastructure provider type ID for the VPC worker node machine. Supported values are `vpc-classic` and `vpc-gen2`. If this flag is not specified, VPCs of all providers are returned.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6298,10 +6389,10 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--output json] [-q]
 <dd>Optional: Specify an add-on name, such as <code>istio</code> or <code>knative</code>, to filter versions for.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6321,7 +6412,7 @@ View a list of available worker node flavors. Flavors vary by zone.
 {: shortdesc}
 
 The `machine-types` alias for this command is deprecated.
-{: deprecated}
+{: note}
 
 Each flavor includes the amount of virtual CPU, memory, and disk space for each worker node in the cluster. By default, the secondary storage disk directory where all container data is stored, is encrypted with LUKS encryption. If the `disable-disk-encrypt` option is included during cluster creation, then the host's container runtime data is not encrypted. [Learn more about the encryption](/docs/containers?topic=containers-security#encrypted_disk).
 
@@ -6342,7 +6433,7 @@ ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic | vpc-gen2) [-
 **Command options**:
 <dl>
 <dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Enter the zone where you want to list available flavors. This value is required. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute or `ibmcloud ks zone ls --provider vpc-gen2` for Generation 2 compute.</dd>
+<dd>Required: Enter the zone where you want to list available flavors. To see available zones for classic clusters, run `ibmcloud ks zone ls`. To see available zones for VPC clusters, run `ibmcloud ks zone ls --provider vpc-classic` for Generation 1 compute or `ibmcloud ks zone ls --provider vpc-gen2` for Generation 2 compute.</dd>
 
 <dt><code>--provider <em>(classic | vpc-classic | vpc-gen2)</em></code></dt>
 <dd>The infrastructure provider for which you want to list available flavors.</dd>
@@ -6351,10 +6442,10 @@ ibmcloud ks flavors --zone ZONE --provider (classic | vpc-classic | vpc-gen2) [-
 <dd>Optional: Show additional raw disks that are available for SDS worker node flavors. For more information, see [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds).</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example for classic clusters**:
@@ -6408,7 +6499,7 @@ ibmcloud ks messages
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
 
-In [CLI plug-in version 1.0](#cs_beta), `supported-locations` is replaced by the `locations` command. Version 1.0 of the CLI plug-in was released on 16 March 2020. In version 1.0, the permanent behavior change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
+In [CLI plug-in version 1.0](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta), `supported-locations` is replaced by the `locations` command. Version 1.0 of the CLI plug-in was released on 16 March 2020. In version 1.0, the permanent behavior change to this command is not backwards compatible. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
 {: important}
 
 ```
@@ -6426,7 +6517,7 @@ ibmcloud ks locations [--output json]
 **Command options**:
 <dl>
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
 
 <br />
@@ -6439,7 +6530,7 @@ List all the container platform versions that are available for {{site.data.keyw
 {: shortdesc}
 
 The `kube-versions` alias for this command is deprecated.
-{: deprecated}
+{: note}
 
 ```
 ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--output json] [-q]
@@ -6459,10 +6550,10 @@ ibmcloud ks versions [--show-version (KUBERNETES|OPENSHIFT)] [--output json] [-q
 <dd>Show only the versions for the specified container platform. Supported values are <code>kubernetes</code> or <code>openshift</code>.</dd>
 
 <dt><code>--output json</code></dt>
-<dd>Prints the command output in JSON format. This value is optional.</dd>
+<dd>Optional: Prints the command output in JSON format.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
 **Example**:
@@ -6518,10 +6609,10 @@ ibmcloud ks api --endpoint ENDPOINT [--insecure] [--skip-ssl-validation] [--api-
 <dd>Allow insecure SSL certificates. This flag is optional.</dd>
 
 <dt><code>--api-version VALUE</code></dt>
-<dd>Specify the API version of the service that you want to use. This value is optional.</dd>
+<dd>Optional: Specify the API version of the service that you want to use.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -6577,7 +6668,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 **Command options**:
 <dl>
 <dt><code>--host <em>HOST</em></code></dt>
-<dd>The {{site.data.keyword.containerlong_notm}} API endpoint to use. This value is optional.</dd>
+<dd>Optional: The {{site.data.keyword.containerlong_notm}} API endpoint to use.</dd>
 
 <dt><code>--insecure</code></dt>
 <dd>Allow an insecure HTTP connection.</dd>
@@ -6589,7 +6680,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 <dd>Your IBM Cloud username.</dd>
 
 <dt><code>-q</code></dt>
-<dd>Do not show the message of the day or update reminders. This value is optional.</dd>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
 
 </dl>
 
@@ -6614,7 +6705,7 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
 ### `ibmcloud ks script update`
 {: #script_update}
 
-Rewrite scripts that call kubernetes-service commands. Legacy-structured commands are replaced with beta-structured commands. For a list of all changes between the legacy and beta formats, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](#cs_beta).
+Rewrite scripts that call kubernetes-service commands. Legacy-structured commands are replaced with beta-structured commands. For a list of all changes between the legacy and beta formats, see the comparison table in [Using the beta {{site.data.keyword.containerlong_notm}} plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta).
 {: shortdesc}
 
 <p class="important">Most command behavior and syntax changes in version 1.0. These changes are not backwards compatible. After you update your scripts, you must continue to use version `1.0` of the plug-in within the script or the environment where the script is run. Do not change the `IKS_BETA_VERSION` environment variable to a different version.</p>
