@@ -408,8 +408,14 @@ subcollection: containers
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
 * [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
+  * [Planning considerations for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-planning)
+  * [Available flavors for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-table)
 * [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
+  * [Planning considerations for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-planning)
+  * [Available flavors for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-table)
 * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
+  * [Planning considerations for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-planning)
+  * [Available flavors for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-table)
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
 
