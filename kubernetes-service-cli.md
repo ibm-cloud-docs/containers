@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-25"
+lastupdated: "2020-08-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -3709,7 +3709,7 @@ ibmcloud ks ingress alb ls --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress alb migrate clean`
+### Beta: `ibmcloud ks ingress alb migrate clean`
 {: #cs_alb_migrate_clean}
 
 Clean up any Ingress resources and configmaps that you no longer need, such as after an Ingress migration.
@@ -3765,7 +3765,7 @@ ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-conf
 
 </br>
 
-### `ibmcloud ks ingress alb migrate start`
+### Beta: `ibmcloud ks ingress alb migrate start`
 {: #cs_alb_migrate_start}
 
 Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterwards you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
@@ -3806,7 +3806,7 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress alb migrate status`
+### Beta: `ibmcloud ks ingress alb migrate status`
 {: #cs_alb_migrate_status}
 
 Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
@@ -3930,7 +3930,7 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 <br />
 
 
-## `ingress secret` commands
+## Beta: `ingress secret` commands
 {: #ingress-commands}
 
 View and modify TLS secrets for Ingress services in your cluster.
@@ -3939,7 +3939,7 @@ View and modify TLS secrets for Ingress services in your cluster.
 Previously, the following commands were listed in the `ibmcloud ks ingress alb cert` subcategory. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
-### `ibmcloud ks ingress secret create`
+### Beta: `ibmcloud ks ingress secret create`
 {: #cs_ingress_secret_create}
 
 Create an Ingress secret in a cluster for a certificate stored in {{site.data.keyword.cloudcerts_long}}.
@@ -3990,7 +3990,7 @@ ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us
 
 </br>
 
-### `ibmcloud ks ingress secret get`
+### Beta: `ibmcloud ks ingress secret get`
 {: #cs_ingress_secret_get}
 
 View information about Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4038,7 +4038,7 @@ ibmcloud ks ingress secret get --cluster my_cluster --name my_alb_secret --names
 
 </br>
 
-### `ibmcloud ks ingress secret ls`
+### Beta: `ibmcloud ks ingress secret ls`
 {: #cs_ingress_secret_ls}
 
 List Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4083,7 +4083,7 @@ ibmcloud ks ingress secret ls --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress secret rm`
+### Beta: `ibmcloud ks ingress secret rm`
 {: #cs_ingress_secret_rm}
 
 Delete an Ingress secret from your cluster. If you created a secret for a certificate from {{site.data.keyword.cloudcerts_long_notm}}, only the secret in the cluster is deleted and the certificate remains in your {{site.data.keyword.cloudcerts_long_notm}} instance.
@@ -4129,7 +4129,7 @@ ibmcloud ks ingress secret rm --cluster my_cluster --name my_alb_secret --namesp
 
 </br>
 
-### `ibmcloud ks ingress secret update`
+### Beta: `ibmcloud ks ingress secret update`
 {: #cs_ingress_secret_update}
 
 Update an Ingress secret for a certificate that is not hosted in the default {{site.data.keyword.cloudcerts_short}} instance that was created for your cluster.
