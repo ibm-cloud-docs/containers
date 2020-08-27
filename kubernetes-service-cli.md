@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -909,7 +909,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 <dl>
 
 <dt><code>--location <em>LOCATION</em></code></dt>
-<dd>Required. Enter the ID or name of the location that you want to remove. To retrieve the location ID or name, run <code>ibmcloud sat location ls</code>.</dd>
+<dd>Required. Enter the ID or name of the location where you want to create the cluster. To retrieve the location ID or name, run <code>ibmcloud sat location ls</code>.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
 <dd>Required. Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer.</dd>
@@ -3212,7 +3212,7 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 View and configure Ingress application load balancers (ALBs).
 {: shortdesc}
 
-Previously, the following commands were listed in the `ibmcloud ks alb` category. In CLI version 1.0.154 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
+Previously, the following commands were listed in the `ibmcloud ks alb` category. In CLI version 1.0.157 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
 ### `ibmcloud ks ingress alb autoupdate disable`
@@ -3709,7 +3709,7 @@ ibmcloud ks ingress alb ls --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress alb migrate clean`
+### Beta: `ibmcloud ks ingress alb migrate clean`
 {: #cs_alb_migrate_clean}
 
 Clean up any Ingress resources and configmaps that you no longer need, such as after an Ingress migration.
@@ -3765,7 +3765,7 @@ ibmcloud ks ingress alb migrate clean -c my_cluster --reset-kube-controller-conf
 
 </br>
 
-### `ibmcloud ks ingress alb migrate start`
+### Beta: `ibmcloud ks ingress alb migrate start`
 {: #cs_alb_migrate_start}
 
 Start a migration of your Ingress configmap and resources that are formatted for use with ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress to instead use with ALBs that run the Kubernetes Ingress image. Note that this command helps you create all the resources for ALBs that run Kubernetes Ingress, but afterwards you must still manually change your ALB from one type of image to another. For more information about how to prepare for a migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).
@@ -3806,7 +3806,7 @@ ibmcloud ks ingress alb migrate start --type test --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress alb migrate status`
+### Beta: `ibmcloud ks ingress alb migrate status`
 {: #cs_alb_migrate_status}
 
 Check the status of a [migration of your Ingress configmap and resources](#cs_alb_migrate_start).
@@ -3930,16 +3930,16 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 <br />
 
 
-## `ingress secret` commands
+## Beta: `ingress secret` commands
 {: #ingress-commands}
 
 View and modify TLS secrets for Ingress services in your cluster.
 {: shortdesc}
 
-Previously, the following commands were listed in the `ibmcloud ks ingress alb cert` subcategory. In CLI version 1.0.154 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
+Previously, the following commands were listed in the `ibmcloud ks ingress alb cert` subcategory. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
-### `ibmcloud ks ingress secret create`
+### Beta: `ibmcloud ks ingress secret create`
 {: #cs_ingress_secret_create}
 
 Create an Ingress secret in a cluster for a certificate stored in {{site.data.keyword.cloudcerts_long}}.
@@ -3990,7 +3990,7 @@ ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us
 
 </br>
 
-### `ibmcloud ks ingress secret get`
+### Beta: `ibmcloud ks ingress secret get`
 {: #cs_ingress_secret_get}
 
 View information about Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4038,7 +4038,7 @@ ibmcloud ks ingress secret get --cluster my_cluster --name my_alb_secret --names
 
 </br>
 
-### `ibmcloud ks ingress secret ls`
+### Beta: `ibmcloud ks ingress secret ls`
 {: #cs_ingress_secret_ls}
 
 List Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
@@ -4083,7 +4083,7 @@ ibmcloud ks ingress secret ls --cluster my_cluster
 
 </br>
 
-### `ibmcloud ks ingress secret rm`
+### Beta: `ibmcloud ks ingress secret rm`
 {: #cs_ingress_secret_rm}
 
 Delete an Ingress secret from your cluster. If you created a secret for a certificate from {{site.data.keyword.cloudcerts_long_notm}}, only the secret in the cluster is deleted and the certificate remains in your {{site.data.keyword.cloudcerts_long_notm}} instance.
@@ -4129,7 +4129,7 @@ ibmcloud ks ingress secret rm --cluster my_cluster --name my_alb_secret --namesp
 
 </br>
 
-### `ibmcloud ks ingress secret update`
+### Beta: `ibmcloud ks ingress secret update`
 {: #cs_ingress_secret_update}
 
 Update an Ingress secret for a certificate that is not hosted in the default {{site.data.keyword.cloudcerts_short}} instance that was created for your cluster.
@@ -5724,16 +5724,13 @@ View information about the API key for a cluster or reset it to a new key.
 ### `ibmcloud ks api-key info`
 {: #cs_api_key_info}
 
-View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key in an {{site.data.keyword.containerlong_notm}} resource group.
+View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key that {{site.data.keyword.containerlong_notm}} uses to authenticate certain requests like infrastructure in the region and resource group. For more information, see [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about).
 {: shortdesc}
 
-The {{site.data.keyword.cloud_notm}} API key is automatically set for a resource group and region when the first action that requires the {{site.data.keyword.containerlong_notm}} admin access policy is performed. For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. By doing that, the {{site.data.keyword.cloud_notm}} IAM API key for this user is stored in the account for this resource group and region. The API key is used to order resources in IBM Cloud infrastructure, such as new worker nodes or VLANs. A different API key can be set for each region within a resource group.
+To create a different API key for the resource group and region, use the [`ibmcloud ks api-key reset`](#cs_api_key_reset) command.
 
-When a different user performs an action in this resource group and region that requires interaction with the IBM Cloud infrastructure portfolio, such as creating a new cluster or reloading a worker node, the stored API key is used to determine whether sufficient permissions exist to perform that action. To make sure that infrastructure-related actions in your cluster can be successfully performed, assign your {{site.data.keyword.containerlong_notm}} admin users the **Super user** classic infrastructure access policy  and **Administrator** platform role to VPC infrastructure in {{site.data.keyword.cloud_notm}} IAM. For more information, see [Managing user access](/docs/containers?topic=containers-users#infra_access).
-
-If you find that you need to update the API key that is stored for a resource group and region, you can do so by running the [ibmcloud ks api-key reset](#cs_api_key_reset) command. This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account.
-
-**Tip:** The API key that is returned in this command might not be used if IBM Cloud infrastructure credentials were manually set by using the [ibmcloud ks credential set](#cs_credentials_set) command.
+If you manually set IBM Cloud infrastructure credentials by using the [`ibmcloud ks credential set`](#cs_credentials_set) command, the API key that is returned in this command is not used for infrastructure permissions.
+{: note}
 
 ```
 ibmcloud ks api-key info --cluster CLUSTER [--output json] [-q]
@@ -5771,10 +5768,8 @@ ibmcloud ks api-key info --cluster my_cluster
 ### `ibmcloud ks api-key reset`
 {: #cs_api_key_reset}
 
-Replace the current {{site.data.keyword.cloud_notm}} IAM API key in an {{site.data.keyword.cloud_notm}} resource group and {{site.data.keyword.containershort_notm}} region.
+Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region. The previous API key that was used, if any, is deleted. For more information, see [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about).
 {: shortdesc}
-
-This command requires the {{site.data.keyword.containerlong_notm}} admin access policy and stores the API key of the user that executes this command in the account. The {{site.data.keyword.cloud_notm}} IAM API key is required to order infrastructure from the IBM Cloud infrastructure portfolio. Once stored, the API key is used for every action in a region that requires infrastructure permissions independent of the user that executes this command. For more information about how {{site.data.keyword.cloud_notm}} IAM API keys work, see the [`ibmcloud ks api-key info` command](#cs_api_key_info).
 
 Before you use this command, make sure that the user who executes this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-users#users). Target the resource group and region that you want to set the API key for.
 {: important}

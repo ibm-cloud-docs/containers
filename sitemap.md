@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-27"
 
 keywords: containers
 subcollection: containers
@@ -408,8 +408,14 @@ subcollection: containers
 [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes)
 * [Available hardware for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#shared_dedicated_node)
 * [Virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm)
+  * [Planning considerations for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-planning)
+  * [Available flavors for VMs](/docs/containers?topic=containers-planning_worker_nodes#vm-table)
 * [Physical machines (bare metal)](/docs/containers?topic=containers-planning_worker_nodes#bm)
+  * [Planning considerations for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-planning)
+  * [Available flavors for bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm-table)
 * [Software-defined storage (SDS) machines](/docs/containers?topic=containers-planning_worker_nodes#sds)
+  * [Planning considerations for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-planning)
+  * [Available flavors for SDS](/docs/containers?topic=containers-planning_worker_nodes#sds-table)
 * [Worker node resource reserves](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node)
 
 
@@ -451,6 +457,7 @@ subcollection: containers
   * [Setting up the API key in most cases](/docs/containers?topic=containers-users#api_key_most_cases)
   * [Understanding other options than the API key](/docs/containers?topic=containers-users#api_key_other)
   * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
+  * [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about)
   * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
   * [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-users#default_account)
   * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-users#credentials)
@@ -1454,10 +1461,14 @@ subcollection: containers
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
   * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
   * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
+  * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
+  * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
   * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
   * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
   * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
   * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
+  * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
+  * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
   * [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -101,8 +101,10 @@ completion-time: 60m
 {: toc-services="containers"}
 {: toc-completion-time="60m"}
 
-By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
+Learn how to use Calico policies to allow network traffic from and to certain IP addresses.
 {: shortdesc}
+
+By default, Kubernetes NodePort, LoadBalancer, and Ingress services make your app available on all public and private cluster network interfaces. The `allow-node-port-dnat` default Calico policy permits incoming traffic from NodePort, network load balancer (NLB), and Ingress application load balancer (ALB) services to the app pods that those services expose. Kubernetes uses destination network address translation (DNAT) to forward service requests to the correct pods.
 
 However, for security reasons, you might need to allow traffic to the networking services from certain source IP addresses only. You can use [Calico Pre-DNAT policies](https://docs.projectcalico.org/security/host-forwarded-traffic){: external} to allow or block traffic from or to certain IP addresses. Pre-DNAT policies prevent specified traffic from reaching your apps because they are applied before Kubernetes uses regular DNAT to forward traffic to pods. When you create Calico Pre-DNAT policies, you choose whether to allow or block source IP addresses. For most scenarios, allowing specific traffic provides the most secure configuration because all traffic is blocked except traffic from known, permitted source IP addresses. denying specific traffic is typically useful only in scenarios such as preventing an attack from a small set of IP addresses.
 

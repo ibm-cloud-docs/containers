@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -101,8 +101,10 @@ completion-time: 90m
 {: toc-services="containers, vpc, cloud-object-storage"}
 {: toc-completion-time="90m"}
 
-Move your workloads from {{site.data.keyword.containerlong}} clusters on Virtual Private Cloud (VPC) Generation 1 compute to clusters on VPC Generation 2 compute. With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc).
+Move your workloads from {{site.data.keyword.containerlong}} clusters on VPC Generation 1 compute to clusters on VPC Generation 2 compute.
 {: shortdesc}
+
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc).
 
 
 
