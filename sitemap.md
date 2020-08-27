@@ -1460,10 +1460,14 @@ subcollection: containers
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
   * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
   * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
+  * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
+  * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
   * [`ibmcloud ob logging config show`](/docs/containers?topic=containers-observability_cli#logging_config_show)
   * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
   * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
   * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
+  * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
+  * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
   * [`ibmcloud ob monitoring config show`](/docs/containers?topic=containers-observability_cli#monitoring_config_show)
 
 
