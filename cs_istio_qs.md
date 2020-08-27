@@ -329,7 +329,7 @@ To visualize the BookInfo microservices in the Istio service mesh, launch the Ki
 
 9. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
 
-For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://archive.istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
+For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
 
 ## Step 4: Simulate a phased rollout of BookInfo
 {: #istio-qs-4}
@@ -446,7 +446,7 @@ For more information about referencing metrics and dashboards, monitoring Istio 
 ## Step 6: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}
 
-Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://archive.istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
+Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
 {: shortdesc}
 
 1. Create an authentication policy file that is named `default.yaml`. This policy is namespace-scoped and configures workloads in the service mesh to accept only encrypted requests with TLS. Note that no `targets` specifications are included because the policy applies to all services in the mesh in this namespace.
