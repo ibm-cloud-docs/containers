@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-20"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -102,8 +102,10 @@ completion-time: 45m
 {: toc-services="containers, Registry, ContinuousDelivery"}
 {: toc-completion-time="45m"}
 
-Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerized app that is stored in GitHub. Learn how you create a DevOps toolchain in {{site.data.keyword.cloud_notm}}, integrate it with your GitHub repository and configure delivery pipeline stages that automatically build a container image from your Dockerfile, push it to {{site.data.keyword.registrylong_notm}}, and deploy your app to a cluster in {{site.data.keyword.containerlong_notm}}.
+Set up a {{site.data.keyword.contdelivery_short}} pipeline for your containerized app that is stored in GitHub.
 {: shortdesc}
+
+Learn how you create a DevOps toolchain in {{site.data.keyword.cloud_notm}}, integrate it with your GitHub repository and configure delivery pipeline stages that automatically build a container image from your Dockerfile, push it to {{site.data.keyword.registrylong_notm}}, and deploy your app to a cluster in {{site.data.keyword.containerlong_notm}}.
 
 ## Objectives
 {: #objectives-byoc-kube}

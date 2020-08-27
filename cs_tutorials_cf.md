@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -101,7 +101,7 @@ completion-time: 30m
 {: toc-services="containers"}
 {: toc-completion-time="30m"}
 
-You can take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
+Take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to an {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
 

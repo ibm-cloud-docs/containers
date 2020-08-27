@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -102,8 +102,10 @@ completion-time: 60m
 {: toc-services="containers, tone-analyzer"}
 {: toc-completion-time="60m"}
 
-With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Follow along with a fictional public relations firm to learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster that integrate with other cloud services such as {{site.data.keyword.ibmwatson}}.
+Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system.
 {: shortdesc}
+
+With this tutorial, you can deploy and manage a Kubernetes cluster in {{site.data.keyword.containerlong}}. Follow along with a fictional public relations firm to learn how to automate the deployment, operation, scaling, and monitoring of containerized apps in a cluster that integrate with other cloud services such as {{site.data.keyword.ibmwatson}}.
 
 ## Objectives
 {: #tutorials_objectives}

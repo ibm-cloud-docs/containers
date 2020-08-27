@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -15,30 +15,84 @@ completion-time: 45m
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -48,7 +102,7 @@ completion-time: 45m
 {: toc-services="containers, apps, ContinuousDelivery, Cloudant"}
 {: toc-completion-time="45m"}
 
-Create an app in {{site.data.keyword.cloud}} by using a blank starter kit, and set up a continuous integration/ continuous delivery DevOps pipeline to automate the deployment of the app to your Kubernetes cluster.
+Create a containerized app from an {{site.data.keyword.cloud_notm}} starter kit and deploy your app by using a DevOps toolchain.
 {: shortdesc}
 
 {{site.data.keyword.cloud_notm}} offers starter kits that help you build the foundation of an app that runs on Kubernetes. When you use a starter kit, it's easy to follow a cloud native programming model that uses {{site.data.keyword.cloud_notm}} best practices for app development. Starter kits generate apps that follow the cloud native programming model, and they include test cases and a health check in each programming language. You can also provision {{site.data.keyword.cloud_notm}} services to add extra capabilities to your app.

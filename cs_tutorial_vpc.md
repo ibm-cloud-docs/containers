@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-26"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks
 
@@ -102,8 +102,10 @@ completion-time: 30m
 {: toc-services="containers, vpc"}
 {: toc-completion-time="30m"}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> With **{{site.data.keyword.containerlong}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+Create an {{site.data.keyword.containerlong}} cluster on Virtual Private Cloud (VPC) Generation 2 compute.
 {: shortdesc}
+
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> Want to create a cluster in your Virtual Private Cloud (VPC) on generation 1 compute instead? See [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
 {: tip}
