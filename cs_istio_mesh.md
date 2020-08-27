@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-27"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -122,7 +122,7 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.5 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 sh -
     ```
     {: pre}
 
@@ -710,7 +710,7 @@ To publicly expose apps:
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. If your microservices listen on a different port than `80`, add that port. For more information about virtual service YAML components, see the [Istio reference documentation](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external}.
   ```yaml
-  apiVersion: networking.istio.io/v1alpha3
+  apiVersion: networking.istio.io/v1beta1
   kind: VirtualService
   metadata:
     name: my-virtual-service
@@ -876,7 +876,7 @@ To publicly expose apps:
 
 3. Create a virtual service that uses the `my-gateway` gateway and defines routing rules for your app microservices. For more information about virtual service YAML components, see the [Istio reference documentation](https://istio.io/latest/docs/reference/config/networking/virtual-service/){: external}.
    ```yaml
-   apiVersion: networking.istio.io/v1alpha3
+   apiVersion: networking.istio.io/v1beta1
    kind: VirtualService
    metadata:
      name: my-virtual-service
