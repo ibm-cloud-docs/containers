@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-28"
 
 keywords: kubernetes, iks, vlan
 
@@ -174,7 +174,7 @@ If you previously disabled the public endpoint, you can re-enable it.
    ```
    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
    ```
-  {: pre}
+   {: pre}
    </br>
 
 
@@ -197,7 +197,7 @@ To disable the public service endpoint, you must first enable the private servic
    ```
    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
    ```
-  {: pre}
+   {: pre}
 
 ## Switching from the public service endpoint to the private service endpoint
 {: #migrate-to-private-se}
