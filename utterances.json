@@ -159,7 +159,7 @@
       "Connection fails or times out - Cannot connect to an app via load balancer in kubernetes",
       "Error The VPC load balancer that routes requests to this Kubernetes LoadBalancer service is offline.",
       "Error The VPC load balancer that routes requests to this Kubernetes LoadBalancer service was deleted from your VPC.",
-      "How to remove the load-balancing setup for an app in your VPC cluster",
+      "How to remove the load balancing setup for an app in your VPC cluster",
       "error connecting kubernetes load balancer to VPC"
     ],
     "vpc_no_lb": [
