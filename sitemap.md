@@ -539,6 +539,8 @@ subcollection: containers
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update)
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
+  * [About updating the master](/docs/containers?topic=containers-update#master-about)
+  * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
 * [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
   * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)

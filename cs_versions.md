@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-08-28"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -335,6 +335,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
+| Add-ons and plug-ins | For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation. |
 | **Unsupported:** Select `kubelet` metrics | The following `kubelet` metrics that were available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated kubelet metrics](https://kubernetes.io/docs/setup/release/notes/#client-go){: external}, change to use the available replacement metric: `kubelet_cgroup_manager_latency_microseconds`, `kubelet_cgroup_manager_latency_microseconds_count`, `kubelet_cgroup_manager_latency_microseconds_sum`, `kubelet_pleg_relist_interval_microseconds`, `kubelet_pleg_relist_interval_microseconds_count`, `kubelet_pleg_relist_interval_microseconds_sum`, `kubelet_pleg_relist_latency_microseconds`, `kubelet_pleg_relist_latency_microseconds_count`, `kubelet_pleg_relist_latency_microseconds_sum`, `kubelet_pod_start_latency_microseconds`, `kubelet_pod_start_latency_microseconds_count`, `kubelet_pod_start_latency_microseconds_sum`, `kubelet_pod_worker_latency_microseconds`, `kubelet_pod_worker_latency_microseconds_count`, `kubelet_pod_worker_latency_microseconds_sum`, `kubelet_pod_worker_start_latency_microseconds`, `kubelet_pod_worker_start_latency_microseconds_count`, `kubelet_pod_worker_start_latency_microseconds_sum`, `kubelet_runtime_operations`, `kubelet_runtime_operations_errors`, `kubelet_runtime_operations_latency_microseconds`, `kubelet_runtime_operations_latency_microseconds_count`, `kubelet_runtime_operations_latency_microseconds_sum` |
 | **Unsupported:** Kubernetes API `batch/v2alpha1` | Kubernetes API `batch/v2alpha1` is no longer supported. If your apps rely on this API, update them to use `batch/v1beta1` instead. |
 {: caption="Changes to make before you update the master to Kubernetes 1.18" caption-side="top"}
@@ -388,6 +389,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description |
 | ---- | ----------- |
+| Add-ons and plug-ins | For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation. |
 | **Gateway-enabled clusters only**: Public traffic is blocked on node ports | If you have a gateway-enabled cluster and use a public node port to expose your app, public traffic on the node port is now blocked by default. Instead, use a [load balancer service](/docs/containers?topic=containers-loadbalancer-qs) or [create a preDNAT Calico policy](/docs/containers?topic=containers-policy_tutorial) with an order number that is lower than `1800` and with a selector `ibm.role == 'worker_public'` so that public traffic is explicitly allowed to the node port. |
 | Removed Kubernetes built-in cluster roles | Kubernetes built-in `system:csi-external-provisioner` and `system:csi-external-attacher` cluster roles are removed. Update any role or cluster role bindings that rely on these built-in cluster roles to use different cluster roles. |
 | **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metrics available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated Kubernetes metrics](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.14.md#removed-and-deprecated-metrics){: external}, change to the available replacement metric.<ul><li>`apiserver_request_count`</li><li>`apiserver_request_latencies`</li><li> `apiserver_request_latencies_summary`</li><li>`apiserver_dropped_requests`</li><li>`etcd_request_latencies_summary`</li><li>`apiserver_storage_transformation_latencies_microseconds`</li><li>`apiserver_storage_data_key_generation_latencies_microseconds`</li><li>`apiserver_storage_transformation_failures_total`</li><li>`rest_client_request_latency_seconds`</li></ul> |
@@ -439,6 +441,7 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description |
 | ---- | ----------- |
+| Add-ons and plug-ins | For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation. |
 | **Unsupported**: Deprecated Kubernetes APIs are removed |<p class="important">Kubernetes version 1.16 removes several common, deprecated APIs. Follow the [blog update tips](https://www.ibm.com/cloud/blog/announcements/kubernetes-version-1-16-removes-deprecated-apis){: external}, then take the following steps to mitigate impact to your Kubernetes resources.</p><ol><li>Update the configuration files for any impacted Kubernetes resources, such as daemon sets, deployments, replica sets, stateful sets, pod security policies, and network policies.</li><li>If you [add services to your cluster by using Helm charts](/docs/containers?topic=containers-helm), update to Helm version 2.15.2 or later.</li><li>If you rely on the [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard), prepare for a temporary outage during the master update.</li></ol> |
 | Kubernetes scheduler events | The Kubernetes scheduler now sends events by using the `events.k8s.io/v1beta1` API. If your tooling targets events that are sent by the Kubernetes scheduler, update it to handle scheduling events with either the `core/v1` or `events.k8s.io/v1beta1` APIs. |
 | **Unsupported**: Kubernetes annotation `scheduler.alpha.kubernetes.io/critical-pod` | Support for the `scheduler.alpha.kubernetes.io/critical-pod` annotation is removed. If your pods rely on this annotation, update the pods to use [pod priority](/docs/containers?topic=containers-pod_priority#pod_priority) instead. |
@@ -533,6 +536,10 @@ The following table shows the actions that you must take before you update the K
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>Add-ons and plug-ins</td>
+<td>For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation.</td>
+</tr>
 <tr>
 <td>`kubelet` cgroup metrics collection</td>
 <td>`kubelet` now collects only cgroups metrics for the node, container runtime, kubelet, pods, and containers. If any automation or components rely on additional cgroup metrics, update the components to reflect these changes.</td>
