@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-08-28"
 
 keywords: kubernetes, iks, knative
 
@@ -380,6 +380,7 @@ You can change the configmap of your Istio Ingress gateway and the Ingress routi
 To deploy your serverless app as a Knative service:
 
 1. Create a YAML file for your first serverless [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) app in Go with Knative. When you send a request to your sample app, the app reads the environment variable `TARGET` and prints `"Hello ${TARGET}!"`. If this environment variable is empty, `"Hello World!"` is returned.
+   
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -394,8 +395,8 @@ To deploy your serverless app as a Knative service:
            env:
            - name: TARGET
              value: "Go Sample v1"
-    ```
-    {: codeblock}
+   ```
+   {: codeblock}
 
     <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
     <caption>Understanding the YAML file components</caption>
@@ -539,6 +540,7 @@ To deploy your serverless app as a Knative service:
     ```
     kubectl get pods
     ```
+    {: pre}
 
     Example output:
     ```
@@ -1098,6 +1100,7 @@ spec:
 The current implementation of Knative does not provide a standard way to force your Knative `Serving` component to repull a container image. To repull an image from your registry, choose between the following options:
 
 - **Modify the Knative service `template`**: The `template` of a Knative service is used to create a revision of your Knative service. If you modify this template and for example, add the `repullFlag` annotation, Knative must create a new revision for your app. As part of creating the revision, Knative must check for container image updates. When you set `imagePullPolicy: Always`, Knative cannot use the image cache in the cluster, but instead must pull the image from your container registry.
+   
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -1119,6 +1122,7 @@ The current implementation of Knative does not provide a standard way to force y
     {: note}
 
 - **Use tags to create unique container images**: You can use unique tags for every container image that you create and reference this image in your Knative service `container.image` configuration. In the following example, `v1` is used as the image tag. To force Knative to pull a new image from your container registry, you must change the image tag. For example, use `v2` as your new image tag.
+  
   ```yaml
   apiVersion: serving.knative.dev/v1alpha1
   kind: Service
@@ -1130,8 +1134,8 @@ The current implementation of Knative does not provide a standard way to force y
         containers:
         - image: myapp:v1
           imagePullPolicy: Always
-    ```
-    {: codeblock}
+  ```
+  {: codeblock}
 
 ## Related links  
 {: #knative-related-links}
