@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-08-31"
 
 keywords: containers
 subcollection: containers
@@ -539,6 +539,8 @@ subcollection: containers
 
 [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update)
 * [Updating the Kubernetes master](/docs/containers?topic=containers-update#master)
+  * [About updating the master](/docs/containers?topic=containers-update#master-about)
+  * [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps)
 * [Updating classic worker nodes](/docs/containers?topic=containers-update#worker_node)
   * [Prerequisites](/docs/containers?topic=containers-update#worker-up-prereqs)
   * [Updating classic worker nodes in the CLI with a configmap](/docs/containers?topic=containers-update#worker-up-configmap)
@@ -1216,6 +1218,7 @@ subcollection: containers
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
 * [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
+* [No Ingress secret exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_secret)
 * [VPC clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#vpc_ts_alb)
 * [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-debug)
   * [Step 1: Check your app deployment](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#app-debug-ingress)
@@ -1512,6 +1515,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.8_1526, released 31 August 2020](/docs/containers?topic=containers-changelog#1188_1526)
   * [Changelog for master fix pack 1.18.8_1525, released 18 August 2020](/docs/containers?topic=containers-changelog#1188_1525_master)
   * [Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020](/docs/containers?topic=containers-changelog#1188_1525)
   * [Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020](/docs/containers?topic=containers-changelog#1186_1523)
@@ -1524,6 +1528,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020](/docs/containers?topic=containers-changelog#11711_1538)
   * [Changelog for master fix pack 1.17.11_1537, released 18 August 2020](/docs/containers?topic=containers-changelog#11711_1537_master)
   * [Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020](/docs/containers?topic=containers-changelog#11711_1537)
   * [Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020](/docs/containers?topic=containers-changelog#1179_1535)
@@ -1545,6 +1550,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.14_1545, released 31 August 2020](/docs/containers?topic=containers-changelog#11614_1545)
   * [Changelog for master fix pack 1.16.14_1544, released 18 August 2020](/docs/containers?topic=containers-changelog#11614_1544_master)
   * [Changelog for worker node fix pack 1.16.14_1544, released 17 August 2020](/docs/containers?topic=containers-changelog#11614_1544)
   * [Changelog for worker node fix pack 1.16.13_1542, released 3 August 2020](/docs/containers?topic=containers-changelog#11613_1542)
@@ -1573,6 +1579,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.12_1551, released 31 August 2020](/docs/containers?topic=containers-changelog#11512_1551)
   * [Changelog for master fix pack 1.15.12_1550, released 18 August 2020](/docs/containers?topic=containers-changelog#11512_1550_master)
   * [Changelog for worker node fix pack 1.15.12_1550, released 17 August 2020](/docs/containers?topic=containers-changelog#11512_1550)
   * [Changelog for worker node fix pack 1.15.12_1549, released 3 August 2020](/docs/containers?topic=containers-changelog#11512_1549)
@@ -1902,6 +1909,7 @@ subcollection: containers
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
 * [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
+* [No Ingress secret exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_secret)
 * [VPC clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#vpc_ts_alb)
 * [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-debug)
   * [Step 1: Check your app deployment](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#app-debug-ingress)

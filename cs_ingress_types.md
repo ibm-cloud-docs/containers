@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-27"
+lastupdated: "2020-08-31"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -442,19 +442,13 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
 {: #alb-migrate-3}
 
 1. Change the image type of one ALB to test traffic flow. When you change the ALB's image type, the ALB now only reads the Ingress resources and configmap that are formatted for Kubernetes Ingress, and begins to forward traffic according to those resources.
-    1. Choose the version for the ALB image that you want to use.
-      ```
-      ibmcloud ks ingress alb versions
-      ```
-      {: pre}
-
-    2. List your ALB IDs. In the output, copy the ID and IP address for one ALB.
+    1. List your ALB IDs. In the output, copy the ID and IP address for one ALB.
       ```
       ibmcloud ks ingress alb ls -c <cluster>
       ```
       {: pre}
 
-    3. Disable the ALB.
+    2. Disable the ALB.
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
         ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
@@ -471,7 +465,13 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
         ```
         {: pre}
 
-    4. Re-enable the ALB. Specify the image version that you chose in the `--version` flag.
+    3. Choose the version for Kubernetes Ingress image that you want to use.<p class="note">To choose a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.</p>
+      ```
+      ibmcloud ks ingress alb versions
+      ```
+      {: pre}
+
+    4. Re-enable the ALB. Specify the image version that you chose in the `--version` flag. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image.
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
         ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID> --version <image_version>
@@ -530,13 +530,16 @@ As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certifica
 {: shortdesc}
 
 For an {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions.
-  * If the account owner set the API key, then your cluster is assigned an {{site.data.keyword.cloudcerts_short}} instance.
-  * If another user or a functional user set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform role and the **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned an {{site.data.keyword.cloudcerts_short}} instance.
+* If the account owner set the API key, then your cluster is assigned an {{site.data.keyword.cloudcerts_short}} instance.
+* If another user or a functional ID set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform role _and_ the **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned an {{site.data.keyword.cloudcerts_short}} instance.
+
+When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
+{: note}
 
 The IBM-generated certificate for the default Ingress subdomain that exists in your cluster's {{site.data.keyword.cloudcerts_short}} instance. However, you have full control over your cluster's {{site.data.keyword.cloudcerts_short}} instance and can use {{site.data.keyword.cloudcerts_short}} to upload your own TLS certificates or order TLS certificates for your custom domains.
 
 To view your {{site.data.keyword.cloudcerts_short}} instance:
-1. Go to your [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources){: external}.
+1. In the {{site.data.keyword.cloud_notm}} console, navigate to your [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources){: external}.
 2. Expand the **Services** row.
 3. Look for a {{site.data.keyword.cloudcerts_short}} instance that is named in the format `kube-<cluster_ID>`. To find your cluster's ID, run `ibmcloud ks cluster ls`.
 4. Click the instance's name. The **Your certificates** details page opens.
@@ -633,7 +636,9 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 - The {{site.data.keyword.containerlong_notm}} Ingress image is built on a custom implementation of the NGINX Ingress controller.
 - The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
-The latest three versions of each image type are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. To list the currently supported versions for each type of image, run the following command:
+The latest three versions of each image type are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.
+
+To list the currently supported versions for each type of image, run the following command:
 ```
 ibmcloud ks ingress alb versions
 ```
@@ -799,7 +804,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
 
-1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb-create-vpc-gen2).
+1. In each zone where you have worker nodes, create an ALB. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_alb-create-vpc-gen2).
   * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
     ```
     ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> [--version image_version]
