@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-27"
+lastupdated: "2020-08-31"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -3350,7 +3350,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 <dd>Optional: An IP address to assign to the ALB. This IP must be on the <code>vlan</code> that you specified and must be in the same <code>zone</code> as the ALB that you want to create. This IP address must not be in use by another load balancer or ALB in the cluster. To see the IP addresses that are currently in use, run <code>kubectl get svcs --all-namespaces</code>.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3391,7 +3391,7 @@ ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVA
 <dd>The VPC zone to deploy the ALB to.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3432,7 +3432,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 <dd>The VPC zone to deploy the ALB to.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3522,7 +3522,7 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 <dd>Optional: Specify an IP address that is on a VLAN in the zone that the ALB was created in. The ALB is enabled with and uses this public or private IP address.<p class="note">This IP address must not be in use by another load balancer or ALB in the cluster. If no IP address is provided, the ALB is deployed with a public or private IP address from the portable public or private subnet that was provisioned automatically when you created the cluster, or if you re-enable an ALB that was previously enabled, the public or private IP address that was previously assigned to the ALB.</p></dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3567,7 +3567,7 @@ ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--ver
 <dd>The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3612,7 +3612,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 <dd>The name or ID of the cluster.</dd>
 
 <dt><code>--version <em>IMAGE_VERSION</em></code></dt>
-<dd>Optional for enabling an ALB: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. If you omit this flag, the ALB runs the latest version of the Kubernetes Ingress image type.</dd>
+<dd>Optional: The version of the image that you want the ALB to run. To list available versions, run `ibmcloud ks ingress alb versions`. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
