@@ -1644,7 +1644,8 @@ subcollection: containers
   * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
-* [Changelog for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)
+  * [Changelog for 1.5.10, released 1 September 2020](/docs/containers?topic=containers-istio-changelog#1510)
+  * [Changelog for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)
   * [Changelog for 1.5.8, released 16 July 2020](/docs/containers?topic=containers-istio-changelog#158)
   * [Changelog for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
   * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
@@ -1963,6 +1964,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[September 2020](/docs/containers?topic=containers-iks-release#sep20)
 
 [August 2020](/docs/containers?topic=containers-iks-release#aug20)
 

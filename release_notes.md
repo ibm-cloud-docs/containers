@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-31"
+lastupdated: "2020-09-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -96,6 +96,16 @@ subcollection: containers
 
 Use the release notes to learn about the latest changes to the {{site.data.keyword.containerlong}} documentation that are grouped by month.
 {: shortdesc}
+
+## September 2020
+{: #sep20}
+
+| Date | Description |
+| ---- | ----------- |
+| 01 September 2020 | **Istio add-on**: [Version 1.5.10 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#1510) is released.|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in September 2020"}
+
 
 ## August 2020
 {: #aug20}
