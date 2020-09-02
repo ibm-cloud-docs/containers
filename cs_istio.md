@@ -428,7 +428,7 @@ For example, the patch version of your add-on might be updated automatically by 
   {: pre}
   Example output:
   ```
-  client version: 1.5.7
+  client version: 1.6.8
   cluster-local-gateway version:
   citadel version: 1.7.0
   egressgateway version: 1.7.0
@@ -438,11 +438,11 @@ For example, the patch version of your add-on might be updated automatically by 
   ingressgateway version: 1.7.0
   pilot version: 1.7.0
   policy version: 1.7.0
-  sidecar-injector version: 1.5.7
+  sidecar-injector version: 1.6.8
   telemetry version: 1.7.0
-  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.5.7"}
-  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.5.7"}
-  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.5.7"}
+  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.6.8"}
+  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.6.8"}
+  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.6.8"}
   ...
   ```
   {: screen}
