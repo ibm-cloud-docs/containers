@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-09-02"
 
 keywords: kubernetes, iks, containers
 
@@ -267,9 +267,6 @@ The worker node can take a few minutes to provision, but you can see the progres
 
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
 {: important}
-
-Want to create a cluster in your Virtual Private Cloud (VPC) on generation 1 compute instead? See [Creating a standard VPC Gen 1 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
-{: tip}
 
 1. Create a Virtual Private Cloud (VPC) on generation 2 compute.
   1. Navigate to the [VPC create console](https://cloud.ibm.com/vpc/provision/vpc){: external}.
