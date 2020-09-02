@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-08-31"
+lastupdated: "2020-09-02"
 
 keywords: containers
 subcollection: containers
@@ -1281,7 +1281,7 @@ subcollection: containers
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 * [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}} (experimental)](/docs/containers?topic=containers-block_storage#block_encryption_setup)
+* [Setting up encryption for {{site.data.keyword.blockstorageshort}} (beta)](/docs/containers?topic=containers-block_storage#block_encryption_setup)
   * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
   * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
   * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
@@ -1636,6 +1636,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
   * [Changelog for 1.6.8, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#168)
@@ -1644,12 +1646,13 @@ subcollection: containers
   * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
 * [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
-* [Changelog for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)
+  * [Changelog for 1.5.10, released 1 September 2020](/docs/containers?topic=containers-istio-changelog#1510)
+  * [Changelog for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)
   * [Changelog for 1.5.8, released 16 July 2020](/docs/containers?topic=containers-istio-changelog#158)
   * [Changelog for 1.5.7, released 8 July 2020](/docs/containers?topic=containers-istio-changelog#157)
   * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
-* [Version 1.4](/docs/containers?topic=containers-istio-changelog#v14)
+* [Version 1.4 (unsupported)](/docs/containers?topic=containers-istio-changelog#v14)
   * [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
   * [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
   * [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
@@ -1963,6 +1966,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[September 2020](/docs/containers?topic=containers-iks-release#sep20)
 
 [August 2020](/docs/containers?topic=containers-iks-release#aug20)
 

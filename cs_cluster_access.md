@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-17"
+lastupdated: "2020-09-01"
 
 keywords: kubernetes, iks, clusters
 
@@ -388,7 +388,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
     7.  Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
     8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, the hostname exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
-  * **If you also enabled the public service**, you already have access to the master.
+  * **If you also enabled the public service endpoint**, you already have access to the master.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
