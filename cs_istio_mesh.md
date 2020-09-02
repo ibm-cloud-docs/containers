@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-27"
+lastupdated: "2020-09-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -122,13 +122,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.6.8 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.0 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.6.8
+    cd istio-1.7.0
     ```
     {: pre}
   3. Label the `default` namespace for automatic sidecar injection.
@@ -447,6 +447,9 @@ Each app pod must be running an Envoy proxy sidecar so that the microservices ca
 
 When automatic sidecar injection is enabled, a namespace listens for any new deployments and automatically modifies the pod template specification so that app pods are created with Envoy proxy sidecar containers. Enable automatic sidecar injection for a namespace when you plan to deploy multiple apps that you want to integrate with Istio into that namespace. Automatic sidecar injection is not enabled for any namespaces by default in the Istio managed add-on.
 
+Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
+{: note}
+
 To enable automatic sidecar injection for a namespace:
 
 1. Get the name of the namespace where you want to deploy Istio-managed apps.
@@ -522,6 +525,9 @@ The app pods are now integrated into your Istio service mesh because they have t
 
 If you do not want to enable automatic sidecar injection for a namespace, you can manually inject the sidecar into a deployment YAML. Inject sidecars manually when apps are running in namespaces alongside other deployments that you do not want sidecars automatically injected into.
 
+Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-operators` namespaces.
+{: note}
+
 **Before you begin**:
 1. Download the `istioctl` client.
   ```
@@ -531,7 +537,7 @@ If you do not want to enable automatic sidecar injection for a namespace, you ca
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.6.8
+  cd istio-1.7.0
   ```
   {: pre}
 
@@ -601,9 +607,6 @@ The app pods are now integrated into your Istio service mesh because they have t
 
 By default, one public Istio load balancer, `istio-ingressgateway`, is enabled in your cluster to load balance incoming requests from the internet to your Istio-managed apps. In version 1.5 and later of the Istio add-on, you can achieve higher availability by enabling an Istio load balancer in each zone of your cluster.
 {: shortdesc}
-
-<img src="images/icon-beta-flair.png" alt="Beta icon" width="30" style="width:30px; border-style: none"/> Enabling and disabling public Istio load balancers in multiple zones is a currently beta feature that is subject to change. Do not use it for production workloads.
-{: preview}
 
 1. Edit the `managed-istio-custom` configmap resource.
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-01"
+lastupdated: "2020-09-02"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -98,8 +98,37 @@ View information for patch and minor version updates to the [managed Istio add-o
 {: shortdesc}
 
 * **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}.
-* **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.4 to 1.5, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a latest minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
+* **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.6 to 1.7, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a latest minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
+
+Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
+
+| Istio add-on version | Supported? | Kubernetes version support |
+| -------------------- | -----------|--------------------------- |
+| 1.7 | <img src="images/confirm.png" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
+| 1.6 | <img src="images/confirm.png" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
+| 1.5 | <img src="images/confirm.png" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17 |
+| 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
+{: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
+{: caption="Supported Istio versions" caption-side="top"}
+
+The Istio add-on is not currently supported for Kubernetes version 1.19 clusters.
+{: important}
+
+## Version 1.7
+{: #v17}
+
+### Changelog for 1.7.0, released 02 September 2020
+{: #170}
+
+The following table shows the changes that are included in version 1.7.X of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.0 | 1.6.8 | <ul><li>See the Istio release notes for [Istio 1.7](https://istio.io/news/releases/1.7.x/announcing-1.7/){:external}.</li><li>All `istio-monitoring` support is deprecated in version 1.7 of the Istio add-on and is automatically removed in version 1.8 of the Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-ingressgateway-public-1|2|3-enabled` and `istio-ingressgateway-zone-1|2|3` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.6.8" caption-side="top"}
 
 ## Version 1.6
 {: #v16}
@@ -265,7 +294,7 @@ Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes ve
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.4.9" caption-side="top"}
 
-## Version 1.4
+## Version 1.4 (unsupported)
 {: #v14}
 
 ### Changelog for 1.4.9, released 18 May 2020
