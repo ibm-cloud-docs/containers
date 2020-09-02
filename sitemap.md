@@ -1281,7 +1281,7 @@ subcollection: containers
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 * [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}} (experimental)](/docs/containers?topic=containers-block_storage#block_encryption_setup)
+* [Setting up encryption for {{site.data.keyword.blockstorageshort}} (beta)](/docs/containers?topic=containers-block_storage#block_encryption_setup)
   * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
   * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
   * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
