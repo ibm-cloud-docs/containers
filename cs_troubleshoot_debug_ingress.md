@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-09-02"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -300,7 +300,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
     Events:  <none>
     ```
     {: screen}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`.
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-<cluster_ID>`. If you did not install the `infrastructure-service` plug-in, install it by running `ibmcloud plugin install infrastructure-service`.
     ```
     ibmcloud is load-balancers
     ```
@@ -486,9 +486,15 @@ When you create a VPC cluster, one public and one private VPC load balancer are 
 
 {: tsResolve}
 Verify that no VPC security groups are blocking traffic to your cluster and that the VPC load balancer is available.
-1. <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+1. Install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
+  ```
+  ibmcloud plugin install infrastructure-service
+  ```
+  {: pre}
 
-2. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
+2. <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+
+3. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer that has the same **Host Name** as your public or private ALBs. You can see the hostnames for your public and private ALBs by running `ibmcloud ks ingress alb ls --cluster <cluster_name_or_ID>` and looking for the **Load Balancer Hostname** field.
   ```
   ibmcloud is load-balancers
   ```
