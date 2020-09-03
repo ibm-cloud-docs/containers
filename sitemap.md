@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-03"
 
 keywords: containers
 subcollection: containers
@@ -221,6 +221,7 @@ subcollection: containers
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+  * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
 * [Network](/docs/containers?topic=containers-security#network)
   * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
