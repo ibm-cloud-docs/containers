@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-03"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -126,7 +126,7 @@ The following table shows the changes that are included in version 1.7.X of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.0 | 1.6.8 | <ul><li>See the Istio release notes for [Istio 1.7](https://istio.io/news/releases/1.7.x/announcing-1.7/){:external}.</li><li>All `istio-monitoring` support is deprecated in version 1.7 of the Istio add-on and is automatically removed in version 1.8 of the Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-ingressgateway-public-(n)-enabled` and `istio-ingressgateway-zone-(n)` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use.</li></ul> |
+| 1.7.0 | 1.6.8 | <ul><li>See the Istio release notes for [Istio 1.7](https://istio.io/latest/news/releases/1.7.x/announcing-1.7/){:external}.</li><li>All `istio-monitoring` support is deprecated in version 1.7 of the Istio add-on and is automatically removed in version 1.8 of the Istio add-on. To use monitoring with Istio, you must install the components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-ingressgateway-public-(n)-enabled` and `istio-ingressgateway-zone-(n)` options in the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize) are generally available for production use.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.8" caption-side="top"}
 
@@ -227,7 +227,7 @@ The following table shows the changes that are included in version 1.5.10 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.5.9 | 1.5.10 | See the Istio release notes for [Istio 1.5.10](https://istio.io/news/releases/1.5.x/announcing-1.5.10/){:external}. |
+| 1.5.9 | 1.5.10 | See the Istio release notes for [Istio 1.5.10](https://istio.io/latest/news/releases/1.5.x/announcing-1.5.10/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.5.9" caption-side="top"}
 
