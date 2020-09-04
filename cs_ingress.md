@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-31"
+lastupdated: "2020-09-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -211,7 +211,7 @@ When you configure the public ALB, you choose the domain that your apps will be 
 
 **IBM-provided Ingress domain:** You can use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, to access your app from the internet.
 
-Get the IBM-provided domain. Replace `<cluster_name_or_ID>` with the name of the cluster where the app is deployed.
+Get the IBM-provided domain. To get the cluster name or ID where your app is deployed, run `ibmcloud ks cluster ls`.
 ```
 ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
 ```

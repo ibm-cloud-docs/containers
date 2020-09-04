@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-03"
 
 keywords: kubernetes, iks, knative
 
@@ -98,7 +98,7 @@ Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyw
 {: shortdesc}
 
 The Knative managed add-on is available as a beta feature for Kubernetes version 1.16 and later clusters, and might change without prior notice. Do not use use this feature for production workloads.
-{: preview}
+{: beta}
 
 **What is Knative and why do I want use it?**
 

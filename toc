@@ -208,6 +208,7 @@ Kubernetes Service
     Version history
         cs_versions.md
         cs_versions_changelog.md
+        cs_benchmarks.md
         cs_versions_addons.md
         cs_versions_istio.md
         cs_versions_knative.md

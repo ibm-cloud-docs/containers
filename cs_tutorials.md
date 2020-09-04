@@ -2,14 +2,14 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-27"
+lastupdated: "2020-09-03"
 
 keywords: kubernetes, iks
 
 subcollection: containers
 
 content-type: tutorial
-services: containers, tone-analyzer
+services: containers, tone-analyzer, Registry
 account-plan:
 completion-time: 60m
 
@@ -99,7 +99,7 @@ completion-time: 60m
 # Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
 {: toc-content-type="tutorial"}
-{: toc-services="containers, tone-analyzer"}
+{: toc-services="containers, tone-analyzer, Registry"}
 {: toc-completion-time="60m"}
 
 Create a Kubernetes cluster on managed {{site.data.keyword.containerlong_notm}} with Classic infrastructure worker nodes that run an Ubuntu operating system.
@@ -126,6 +126,7 @@ This tutorial is intended for software developers and system administrators who 
 ## Prerequisites
 {: #tutorials_prereqs}
 
+-  To create a cluster, you must have a paid account. However, you can complete this tutorial without incuring costs by using a free cluster and limiting the amount of registry images and tone analyzer services that you use.
 -  Check out the steps you need to take to [prepare to create a cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Ensure you have the following access policies:
     - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}

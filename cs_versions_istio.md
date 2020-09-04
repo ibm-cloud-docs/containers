@@ -105,9 +105,9 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
-| 1.7 | <img src="images/confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
-| 1.6 | <img src="images/confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
-| 1.5 | <img src="images/confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17 |
+| 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
+| 1.6 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
+| 1.5 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17 |
 | 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-04"
 
 keywords: kubernetes, iks, containers
 
@@ -96,6 +96,9 @@ subcollection: containers
 
 You can use built-in security features in {{site.data.keyword.containerlong}} for risk analysis and security protection. These features help you to protect your cluster infrastructure and network communication, isolate your compute resources, and ensure security compliance across your infrastructure components and container deployments.
 {: shortdesc}
+
+For an analysis of security guidelines by product version, see [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark).
+{: tip}
 
 ## Overview of security threats for your cluster
 {: #threats}
