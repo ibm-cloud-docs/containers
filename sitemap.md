@@ -1628,6 +1628,16 @@ subcollection: containers
   * [Version 1.8 changelog (Unsupported)](/docs/containers?topic=containers-changelog#18_changelog)
   * [Version 1.7 changelog (Unsupported)](/docs/containers?topic=containers-changelog#17_changelog)
 
+[CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
+* [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
+* [Benchmark 1.5 results for version 1.18 clusters](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118)
+  * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-1)
+  * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-2)
+  * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-3)
+  * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-4)
+  * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-5)
+  * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-remediation)
+
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Beta: Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
   * [Version 0.34.1 (latest)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
