@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-03"
+lastupdated: "2020-09-04"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -108,6 +108,7 @@ This task includes the information for installing these CLIs and plug-ins:
 * {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`)
 * {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`)
 * {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
+* {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`)
 
 If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell) or, after your cluster is created, the [Kubernetes Web Terminal](#cli_web).
 {: tip}
@@ -115,13 +116,8 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 <br>
 To install the CLIs:
 
-1.  Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq){: external}. This installation includes:
-    -   The base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`).
-    -   The {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`).
-    -   {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
-    -   The Kubernetes CLI (`kubectl`) that matches the default version: 1.17.11.<p class="note">If you plan to use a cluster that runs a different version, you might need to [install that version of the Kubernetes CLI separately](#kubectl).</p>
-    -   The Helm CLI (`helm`). You might use Helm as a package manager to install {{site.data.keyword.cloud_notm}} services and complex apps to your cluster via Helm charts. You must still [set up Helm](/docs/containers?topic=containers-helm) in each cluster where you want to use Helm.
-
+1.  Install the stand-alone [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-install-ibmcloud-cli) (`ibmcloud`). 
+    
     Plan to use the CLI often? Try [Enabling shell autocompletion for {{site.data.keyword.cloud_notm}} CLI (Linux/MacOS only)](/docs/cli/reference/ibmcloud?topic=cli-shell-autocomplete#shell-autocomplete-linux).
     {: tip}
 
@@ -133,14 +129,23 @@ To install the CLIs:
 
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
-
-3.  To create a logging configuration for {{site.data.keyword.la_full_notm}} or a monitoring configuration for {{site.data.keyword.mon_full_notm}} for your cluster, install the {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`).
+4.  Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.containerlong_notm}} (`ibmcloud ks`). Use this plug-in to create and manage {{site.data.keyword.containerlong_notm}} resources such as clusters, worker nodes, or network load balancers.
+    ```
+    ibmcloud plugin install container-service
+    ```
+    {: pre}
+5.  Install the {{site.data.keyword.cloud_notm}} plug-in for {{site.data.keyword.registrylong_notm}} (`ibmcloud cr`). Use this plug-in to set up your own namespace in a multi-tenant, highly available, and scalable private image registry that is hosted by IBM, and to store and share Docker images with other users. Docker images are required to deploy containers into a cluster.
+    ```
+    ibmcloud plugin install container-registry
+    ```
+    {: pre}
+6.  To create a logging configuration for {{site.data.keyword.la_full_notm}} or a monitoring configuration for {{site.data.keyword.mon_full_notm}} for your cluster, install the {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`).
     ```
     ibmcloud plugin install observe-service
     ```
     {: pre}
 
-4.  Verify that the {{site.data.keyword.containerlong_notm}} plug-in and {{site.data.keyword.registrylong_notm}} plug-in are installed correctly.
+7.  Verify that the plug-ins are installed correctly.
     ```
     ibmcloud plugin list
     ```
