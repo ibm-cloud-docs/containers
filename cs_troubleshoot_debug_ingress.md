@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-08"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -450,7 +450,7 @@ For an {{site.data.keyword.cloudcerts_short}} instance to be created for your ne
 1. For the user or functional user who sets the API key, [assign the user](/docs/containers?topic=containers-users#add_users) the following IAM permissions:
   * The **Administrator** or **Editor** platform role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
   * The **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
-2. The user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases).
+2. The user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases).<p class="warning">When the API key is reset, the previous API key that was used for the region and resource group is deleted. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect).</p>
 3. After the cluster has access to the updated permissions in the API key, the creation of the {{site.data.keyword.cloudcerts_short}} instance is automatically triggered. Note that the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
 4. Verify that your cluster is automatically assigned an {{site.data.keyword.cloudcerts_short}} instance.
   1. In the {{site.data.keyword.cloud_notm}} console, navigate to your [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources){: external}.

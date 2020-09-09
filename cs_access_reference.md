@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-09"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -112,7 +112,7 @@ Review the minimum permissions in {{site.data.keyword.cloud_notm}} IAM that the 
   <li>**Administrator** platform role for **Container Registry** in the console (**container-registry** in the API or CLI) at the **Account** level. Do not limit policies for {{site.data.keyword.registrylong_notm}} to the resource group level.</li>
   <li>If you plan to [expose apps with Ingress](/docs/containers?topic=containers-ingress-about), assign the user **Administrator** or **Editor** platform role and the **Manager** service role for **{{site.data.keyword.cloudcerts_short}}** in **All resource groups**.</li>
   <li>**Viewer** platform role for the resource group access.</li>
-  <li>If you plan to [encrypt your cluster](/docs/containers?topic=containers-encryption#keyprotect), assign the user the appropriate permission to the key management service provider, such as the **Administrator** platform role for {{site.data.keyword.keymanagementserviceshort}}.</li>
+  <li>If you plan to [encrypt your cluster](/docs/containers?topic=containers-encryption#keyprotect), assign the user the appropriate permission to the key management service (KMS) provider, such as the **Administrator** platform role for {{site.data.keyword.keymanagementserviceshort}}.</li>
   <li>**Viewer** platform role for the resource group access.</li></ul>
 <li>**Infrastructure**</li><ul>
   <li>Classic clusters only: **Super User** role or the [minimum required permissions](#infra) for classic infrastructure.</li>
