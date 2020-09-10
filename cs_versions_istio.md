@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-03"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -121,7 +121,7 @@ The Istio add-on is not currently supported for Kubernetes version 1.19 clusters
 ### Changelog for 1.7.0, released 02 September 2020
 {: #170}
 
-The following table shows the changes that are included in version 1.7.X of the managed Istio add-on.
+The following table shows the changes that are included in version 1.7.0 of the managed Istio add-on.
 {: shortdesc}
 
 | Previous | Current | Description |
