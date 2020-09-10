@@ -242,13 +242,7 @@ subcollection: containers
 {: #sitemap_tutorials}
 
 
-[Tutorial overview](/docs/containers?topic=containers-tutorials-ov)
-* [Create a cluster and deploy your first app](/docs/containers?topic=containers-tutorials-ov#tutorials-create-cluster-deploy-app)
-* [Deploy apps to a cluster](/docs/containers?topic=containers-tutorials-ov#tutorials-deploy-app)
-* [Set up high availability and security](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-ha-network-security)
-* [Automate app and cluster deployments](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-app-cluster-deployments)
-* [Monitor and log cluster activity](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-monitor-log)
-* [Migrate apps to the cloud](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-migrate-apps)
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
