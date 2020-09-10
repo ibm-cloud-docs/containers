@@ -636,6 +636,8 @@ subcollection: containers
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
 * [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+  * [Allowing igress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
+  * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
