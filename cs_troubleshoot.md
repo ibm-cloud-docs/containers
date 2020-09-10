@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, help, debug
 
@@ -746,7 +746,7 @@ Identify and restore the resource that causes the broken webhook.
             port: 443
     ```
     {: screen}
-4.  **Optional**: Back up the webhooks, especially if you do not know how to reinstall the webhoook.
+4.  **Optional**: Back up the webhooks, especially if you do not know how to reinstall the webhook.
     ```
     kubectl get mutatingwebhookconfiguration <name> -o yaml > mutatingwebhook-backup.yaml
     ```

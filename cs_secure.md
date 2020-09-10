@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-04"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, containers
 
@@ -246,7 +246,7 @@ To rotate the CA certificates for your cluster:
   ```
   {: screen}
 
-4. Download the updated Kubernetes configuration data and certificates in youe cluster's `kubeconfig` file.
+4. Download the updated Kubernetes configuration data and certificates in your cluster's `kubeconfig` file.
   ```
   ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --network
   ```
