@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-10"
+lastupdated: "2020-09-14"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -118,6 +118,18 @@ The Istio add-on is not currently supported for Kubernetes version 1.19 clusters
 ## Version 1.7
 {: #v17}
 
+### Changelog for 1.7.1, released 14 September 2020
+{: #171}
+
+The following table shows the changes that are included in version 1.7.1 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.0 | 1.7.1 | See the Istio release notes for [Istio 1.7.1](https://istio.io/news/releases/1.7.x/announcing-1.7.1/){:external}. |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.7.1" caption-side="top"}
+
 ### Changelog for 1.7.0, released 02 September 2020
 {: #170}
 
@@ -149,6 +161,18 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+### Changelog for 1.6.9, released 14 September 2020
+{: #169}
+
+The following table shows the changes that are included in version 1.6.9 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.6.8 | 1.6.9 | <ul><li>See the Istio release notes for [Istio 1.6.9](https://istio.io/news/releases/1.6.x/announcing-1.6.9/){:external}.</li><li>Resolves [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external} and [usn-4466-1](https://usn.ubuntu.com/4466-1/){: external}. For more information, see the [Istio security bulletin 2020-009](https://istio.io/news/security/istio-security-2020-009/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.6.9" caption-side="top"}
 
 ### Changelog for 1.6.8, released 12 August 2020
 {: #168}
