@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-09"
+lastupdated: "2020-09-14"
 
 keywords: containers
 subcollection: containers
@@ -242,13 +242,7 @@ subcollection: containers
 {: #sitemap_tutorials}
 
 
-[Tutorial overview](/docs/containers?topic=containers-tutorials-ov)
-* [Create a cluster and deploy your first app](/docs/containers?topic=containers-tutorials-ov#tutorials-create-cluster-deploy-app)
-* [Deploy apps to a cluster](/docs/containers?topic=containers-tutorials-ov#tutorials-deploy-app)
-* [Set up high availability and security](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-ha-network-security)
-* [Automate app and cluster deployments](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-app-cluster-deployments)
-* [Monitor and log cluster activity](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-monitor-log)
-* [Migrate apps to the cloud](/docs/containers?topic=containers-tutorials-ov#tutorials-ov-migrate-apps)
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -642,6 +636,8 @@ subcollection: containers
   * [Running `kubectl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_kubectl)
   * [Running `calicoctl` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_calicoctl)
 * [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers)
+  * [Allowing ingress from a cluster to another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_ingress)
+  * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
 * [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
@@ -1371,7 +1367,7 @@ subcollection: containers
   * [Setting up an {{site.data.keyword.cos_full_notm}} service instance](/docs/containers?topic=containers-utilities#backup_restore_setup_object_storage)
   * [Using {{site.data.keyword.cos_full_notm}} to back up and restore PVC data](/docs/containers?topic=containers-utilities#backup-restore-pvc)
 * [Setting up {{site.data.keyword.mon_full_notm}} for storage volumes](/docs/containers?topic=containers-utilities#monitor_storage)
-  * [Troubleshooting persistant storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
+  * [Troubleshooting persistent storage when a {{site.data.keyword.mon_full_notm}} alert is triggered](/docs/containers?topic=containers-utilities#monitor_storage_ts)
 
 
 ## Enhancing cluster capabilities with integrations
@@ -1516,6 +1512,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.8_1527, released 14 September 2020](/docs/containers?topic=containers-changelog#1188_1527)
   * [Changelog for worker node fix pack 1.18.8_1526, released 31 August 2020](/docs/containers?topic=containers-changelog#1188_1526)
   * [Changelog for master fix pack 1.18.8_1525, released 18 August 2020](/docs/containers?topic=containers-changelog#1188_1525_master)
   * [Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020](/docs/containers?topic=containers-changelog#1188_1525)
@@ -1529,6 +1526,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020](/docs/containers?topic=containers-changelog#11711_1539)
   * [Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020](/docs/containers?topic=containers-changelog#11711_1538)
   * [Changelog for master fix pack 1.17.11_1537, released 18 August 2020](/docs/containers?topic=containers-changelog#11711_1537_master)
   * [Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020](/docs/containers?topic=containers-changelog#11711_1537)
@@ -1551,6 +1549,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.14_1546, released 14 September 2020](/docs/containers?topic=containers-changelog#11614_1546)
   * [Changelog for worker node fix pack 1.16.14_1545, released 31 August 2020](/docs/containers?topic=containers-changelog#11614_1545)
   * [Changelog for master fix pack 1.16.14_1544, released 18 August 2020](/docs/containers?topic=containers-changelog#11614_1544_master)
   * [Changelog for worker node fix pack 1.16.14_1544, released 17 August 2020](/docs/containers?topic=containers-changelog#11614_1544)
@@ -1580,6 +1579,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.16.2_1515, released 11 November 2019](/docs/containers?topic=containers-changelog#1162_1515_worker)
   * [Changelog for 1.16.2_1514, released 4 November 2019](/docs/containers?topic=containers-changelog#1162_1514)
 * [Deprecated: Version 1.15 changelog](/docs/containers?topic=containers-changelog#115_changelog)
+  * [Changelog for worker node fix pack 1.15.12_1552, released 14 September 2020](/docs/containers?topic=containers-changelog#11512_1552)
   * [Changelog for worker node fix pack 1.15.12_1551, released 31 August 2020](/docs/containers?topic=containers-changelog#11512_1551)
   * [Changelog for master fix pack 1.15.12_1550, released 18 August 2020](/docs/containers?topic=containers-changelog#11512_1550_master)
   * [Changelog for worker node fix pack 1.15.12_1550, released 17 August 2020](/docs/containers?topic=containers-changelog#11512_1550)
@@ -1648,9 +1648,11 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
+  * [Changelog for 1.6.9, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#169)
   * [Changelog for 1.6.8, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#168)
   * [Changelog for 1.6.7, released 04 August 2020](/docs/containers?topic=containers-istio-changelog#167)
   * [Changelog for 1.6.5, released 17 July 2020](/docs/containers?topic=containers-istio-changelog#165)

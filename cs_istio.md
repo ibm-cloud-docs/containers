@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -186,7 +186,7 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
   cd istio-1.7.0
   ```
   {: pre}
-4. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
   ```
   export PATH=$PWD/bin:$PATH
   ```
@@ -458,7 +458,7 @@ For example, the patch version of your add-on might be updated automatically by 
       cd istio-1.7.0
       ```
       {: pre}
-    3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+    3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
       ```
       export PATH=$PWD/bin:$PATH
       ```

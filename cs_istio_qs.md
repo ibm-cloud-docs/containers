@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -166,7 +166,7 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
     ```
     {: pre}
 
-  3. MacOS and Linux users: Add the `istioctl` client to your `PATH` system variable.
+  3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
     ```
     export PATH=$PWD/bin:$PATH
     ```

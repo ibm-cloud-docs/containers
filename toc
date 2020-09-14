@@ -36,7 +36,7 @@ Kubernetes Service
 
     {: .topicgroup}
     Tutorials
-        cs_tutorials_ov.md
+        [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
         cs_tutorials.md
         cs_tutorial_vpc.md
         cs_tutorial_migrate_vpc.md

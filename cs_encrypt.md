@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-09"
+lastupdated: "2020-09-10"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -365,7 +365,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Check that your local `etcdctl` version matches the remote `etcd` version. Run the `etcdctl get` commmand with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again.
+    If you see a `context deadline exceeded` error, you might have a temporary connectivity issue. Check that your local `etcdctl` version matches the remote `etcd` version. Run the `etcdctl get` command with the `--debug=true` flag to see any additional information. Then wait a few minutes and try again.
     {: tip}
 
 ## Encrypting data in classic clusters by using IBM Cloud Data Shield 

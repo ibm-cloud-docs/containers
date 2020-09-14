@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-14"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -118,10 +118,24 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.18 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.18.8_1527, released 14 September 2020
+{: #1188_1527}
+
+The following table shows the changes that are included in the worker node fix pack `1.18.8_1527`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| HAProxy | 1.8.25-384f42 | 1.8.26-561f1a | See the [HAProxy changelog](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}.|
+| Ubuntu 18.04 packages | 4.15.0-112-generic | 4.15.0-117-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external}, [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}, and [CVE-2020-14386](https://nvd.nist.gov/vuln/detail/CVE-2020-14386){: external}. |
+| Ubuntu 16.04 packages | 4.4.0-187-generic | 4.4.0-189-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external} and [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.8_1526" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.18.8_1526, released 31 August 2020
 {: #1188_1526}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.8_1526`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.8_1526`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -156,7 +170,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.18.8_1525, released 17 August 2020
 {: #1188_1525}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.8_1525`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.8_1525`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -170,7 +184,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.18.6_1523, released 3 August 2020
 {: #1186_1523}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.6_1523`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.6_1523`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -205,7 +219,7 @@ The following table shows the changes that are included in the master fix pack p
 | IBM Calico extension | 353 | 378 | Updated to handle any `ens` network interface. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | v1.18.4-1 | v1.18.6-1 |Updated to support the Kubernetes 1.18.6 release. |
 | {{site.data.keyword.filestorage_full_notm}} plug-in and monitor configuration | N/A | N/A | Added a pod memory limit. |
-| {{site.data.keyword.cloud_notm}} RBAC operator | 08ce50e | 8882606 | Updated image for [CVE-2020-13777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13777){: external} and to use `Go` verison 1.13.12. |
+| {{site.data.keyword.cloud_notm}} RBAC operator | 08ce50e | 8882606 | Updated image for [CVE-2020-13777](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-13777){: external} and to use `Go` version 1.13.12. |
 | Kubernetes | v1.18.4 | v1.18.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.6){: external}. The update resolves CVE-2020-8559 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6249915){: external}). |
 | Kubernetes configuration | N/A | N/A | The Kubernetes API server audit policy configuration is updated to include auditing the `scheduling.k8s.io` API group and the `tokenreviews` resource. |
 | Kubernetes Dashboard | v2.0.1 | v2.0.3 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.3){: external}. |
@@ -217,7 +231,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.18.6_1520, released 20 July 2020
 {: #1186_1520}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.6_1520`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.6_1520`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -232,7 +246,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.18.4_1518, released 6 July 2020
 {: #1184_1518}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.4_1518`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.4_1518`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -247,7 +261,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.18.4_1517, released 22 June 2020
 {: #1184_1517}
 
-The following table shows the changes that are included in the master and worker node update `1.18.4_1517`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.18.4_1517`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -272,7 +286,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020
 {: #1183_1515}
 
-The following table shows the changes that are included in the worker node fix pack `1.18.3_1515`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.18.3_1515`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -285,7 +299,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.18.3_1514, released 26 May 2020
 {: #1183_1514}
 
-The following table shows the changes that are included in the master and worker node update `1.18.3_1514`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.18.3_1514`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -338,10 +352,24 @@ The following table shows the changes that are included in patch update 1.18.2_1
 Review the version 1.17 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020
+{: #11711_1539}
+
+The following table shows the changes that are included in the worker node fix pack `1.17.11_1539`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| HAProxy | 1.8.25-384f42 | 1.8.26-561f1a | See the [HAProxy changelog](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}.|
+| Ubuntu 18.04 packages | 4.15.0-112-generic | 4.15.0-117-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external}, [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}, and [CVE-2020-14386](https://nvd.nist.gov/vuln/detail/CVE-2020-14386){: external}. |
+| Ubuntu 16.04 packages | 4.4.0-187-generic | 4.4.0-189-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external} and [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.11_1538" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020
 {: #11711_1538}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.11_1538`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.11_1538`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -375,7 +403,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020
 {: #11711_1537}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.11_1537`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.11_1537`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -389,7 +417,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020
 {: #1179_1535}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.9_1535`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.9_1535`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -435,7 +463,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020
 {: #1179_1532}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.9_1532`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.9_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -450,7 +478,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020
 {: #1177_1530}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.7_1530`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.7_1530`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -465,7 +493,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.17.7_1529, released 22 June 2020
 {: #1177_1529}
 
-The following table shows the changes that are included in the master and worker node update `1.17.7_1529`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.17.7_1529`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -488,7 +516,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020
 {: #1176_1527}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.6_1527`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.6_1527`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -501,7 +529,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.17.6_1526, released 26 May 2020
 {: #1176_1526}
 
-The following table shows the changes that are included in the master and worker node update `1.17.6_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.17.6_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -512,7 +540,7 @@ The following table shows the changes that are included in the master and worker
 | GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | IBM Calico extension | Master | 320 | 353 | Skips creating a Calico host endpoint when no endpoint is needed. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | {{site.data.keyword.cloud_notm}} Controller Manager | Master | v1.17.5-1 | v1.17.6-1 | Updated to support the Kubernetes 1.17.6 release. Updated network load balancer (NLB) events to use the latest {{site.data.keyword.cloud_notm}} troubleshooting documentation. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
 | Kubernetes | Both | v1.17.5 | v1.17.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.6){: external}. |
 | Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
 | Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
@@ -526,7 +554,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020
 {: #1175_1524}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.5_1524`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.5_1524`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -539,7 +567,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020
 {: #1175_1523}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.5_1523`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.5_1523`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -589,7 +617,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020
 {: #1174_1521}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.4_1521`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.4_1521`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -603,7 +631,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020
 {: #1174_1520}
 
-The following table shows the changes that are included in the worker node fix pack `1.17.4_1520`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.17.4_1520`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -616,7 +644,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.17.4_1519, released 16 March 2020
 {: #1174_1519}
 
-The following table shows the changes that are included in the master and worker node update `1.17.4_1519`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.17.4_1519`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -634,7 +662,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020
 {: #1173_1518}
 
-The following table shows the changes that are included in the worker node fix pack 1.17.3_1518. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack 1.17.3_1518. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -648,7 +676,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for fix pack 1.17.3_1516, released 17 February 2020
 {: #1173_1516}
 
-The following table shows the changes that are included in the master and worker node fix pack update `1.17.3_1516`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node fix pack update `1.17.3_1516`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -698,10 +726,24 @@ The following table shows the changes that are included in patch update 1.17.2_1
 Review the version 1.16 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.16.14_1546, released 14 September 2020
+{: #11614_1546}
+
+The following table shows the changes that are included in the worker node fix pack `1.16.14_1546`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| HAProxy | 1.8.25-384f42 | 1.8.26-561f1a | See the [HAProxy changelog](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}.|
+| Ubuntu 18.04 packages | 4.15.0-112-generic | 4.15.0-117-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external}, [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}, and [CVE-2020-14386](https://nvd.nist.gov/vuln/detail/CVE-2020-14386){: external}. |
+| Ubuntu 16.04 packages | 4.4.0-187-generic | 4.4.0-189-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external} and [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.14_1545" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.16.14_1545, released 31 August 2020
 {: #11614_1545}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.14_1545`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.14_1545`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -735,7 +777,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.16.14_1544, released 17 August 2020
 {: #11614_1544}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.14_1544`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.14_1544`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -749,7 +791,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.16.13_1542, released 3 August 2020
 {: #11613_1542}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.13_1542`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.13_1542`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -794,7 +836,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.16.13_1539, released 20 July 2020
 {: #11613_1539}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.13_1539`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.13_1539`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -809,7 +851,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.16.11_1537, released 6 July 2020
 {: #11611_1537}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.11_1537`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.11_1537`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -824,7 +866,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.16.11_1536, released 22 June 2020
 {: #11611_1536}
 
-The following table shows the changes that are included in the master and worker node update `1.16.11_1536`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.16.11_1536`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -847,7 +889,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.16.10_1534, released 8 June 2020
 {: #11610_1534}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.10_1534`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.10_1534`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -860,7 +902,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.16.10_1533, released 26 May 2020
 {: #11610_1533}
 
-The following table shows the changes that are included in the master and worker node update `1.16.10_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.16.10_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -870,7 +912,7 @@ The following table shows the changes that are included in the master and worker
 | Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | IBM Calico extension | Master | 320 | 353 | Skips creating a Calico host endpoint when no endpoint is needed. Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | Master | v1.16.9-219 | v1.16.10-243 | Updated to support the Kubernetes 1.16.10 release. Updated network load balancer (NLB) events to use the latest {{site.data.keyword.cloud_notm}} troubleshooting documentation. |
 | Kubernetes | Both | v1.16.9 | v1.16.10 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.16.10){: external}. |
 | Kubernetes Dashboard | Master | v2.0.0-rc7 | v2.0.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.0.0){: external}. |
@@ -885,7 +927,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.16.9_1531, released 11 May 2020
 {: #1169_1531}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.9_1531`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.9_1531`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -898,7 +940,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.16.9_1530, released 27 April 2020
 {: #1169_1530}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.9_1530`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.9_1530`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -936,7 +978,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.16.8_1528, released 13 April 2020
 {: #1168_1528}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.8_1528`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.8_1528`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -950,7 +992,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.16.8_1527, released 30 March 2020
 {: #1168_1527}
 
-The following table shows the changes that are included in the worker node fix pack `1.16.8_1527`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.16.8_1527`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -963,7 +1005,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.16.8_1526, released 16 March 2020
 {: #1168_1526}
 
-The following table shows the changes that are included in the master and worker node update `1.16.8_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.16.8_1526`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -981,7 +1023,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.16.7_1525, released 2 March 2020
 {: #1167_1525}
 
-The following table shows the changes that are included in the worker node fix pack 1.16.7_1525. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack 1.16.7_1525. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -995,7 +1037,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for fix pack 1.16.7_1524, released 17 February 2020
 {: #1167_1524}
 
-The following table shows the changes that are included in the master and worker node fix pack update `1.16.7_1524`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node fix pack update `1.16.7_1524`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -1032,7 +1074,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.16.5_1522, released 20 January 2020
 {: #1165_1522}
 
-The following table shows the changes that are included in the master and worker node patch update 1.16.5_1522. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node patch update 1.16.5_1522. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1197,10 +1239,24 @@ Review the version 1.15 changelog.
 Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
 {: deprecated}
 
+### Changelog for worker node fix pack 1.15.12_1552, released 14 September 2020
+{: #11512_1552}
+
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1552`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| HAProxy | 1.8.25-384f42 | 1.8.26-561f1a | See the [HAProxy changelog](https://www.haproxy.org/download/1.8/src/CHANGELOG){: external}.|
+| Ubuntu 18.04 packages | 4.15.0-112-generic | 4.15.0-117-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external}, [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}, and [CVE-2020-14386](https://nvd.nist.gov/vuln/detail/CVE-2020-14386){: external}. |
+| Ubuntu 16.04 packages | 4.4.0-187-generic | 4.4.0-189-generic | Updated worker node image with kernel and package updates for [CVE-2020-14344](https://nvd.nist.gov/vuln/detail/CVE-2020-14344){: external} and [CVE-2020-14363](https://nvd.nist.gov/vuln/detail/CVE-2020-14363){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.15.12_1551" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.15.12_1551, released 31 August 2020
 {: #11512_1551}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1551`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1551`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1231,7 +1287,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.15.12_1550, released 17 August 2020
 {: #11512_1550}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1550`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1550`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1244,7 +1300,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.15.12_1549, released 3 August 2020
 {: #11512_1549}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1549`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1549`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1284,7 +1340,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.15.12_1546, released 20 July 2020
 {: #11512_1546}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1546`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1546`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1298,7 +1354,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.15.12_1544, released 6 July 2020
 {: #11512_1544}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1544`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1544`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1313,7 +1369,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.15.12_1543, released 22 June 2020
 {: #11512_1543}
 
-The following table shows the changes that are included in the master and worker node update `1.15.12_1543`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.15.12_1543`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -1334,7 +1390,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.15.12_1541, released 8 June 2020
 {: #11512_1541}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.12_1541`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.12_1541`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1347,7 +1403,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.15.12_1540, released 26 May 2020
 {: #11512_1540}
 
-The following table shows the changes that are included in the master and worker node update `1.15.12_1540`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.15.12_1540`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -1356,7 +1412,7 @@ The following table shows the changes that are included in the master and worker
 | etcd | Master | v3.3.18 | v3.3.20 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.20){: external}. |
 | Gateway-enabled cluster controller | Master | 1045 | 1082 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
 | GPU device plug-in and installer | Master | 8c6538f | 8b02302 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external}. |
-| {{site.data.keyword.filestorage_full_notm}} plug-in and montior | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in and monitor | Master | 358 | 373 | Updated image for [CVE-2020-1967](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1967){: external} and [CVE-2020-11655](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-11655){: external}. |
 | {{site.data.keyword.cloud_notm}} Provider | Master | v1.15.11-274 | v1.15.12-316 | Updated to support the Kubernetes 1.15.2 release. |
 | Kubernetes | Both | v1.15.11 | v1.15.12 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.15.12){: external}. The master update resolves CVE-2020-8555 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6220220){: external}). |
 | Kubernetes Metrics Server | Master | N/A | N/A | Increased the CPU per node for the `metrics-server` container to improve availability of the metrics server API service for large clusters. |
@@ -1369,7 +1425,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.15.11_1538, released 11 May 2020
 {: #11511_1538}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.11_1538`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.11_1538`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1382,7 +1438,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.15.11_1537, released 27 April 2020
 {: #11511_1537}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.11_1537`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.11_1537`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1412,7 +1468,7 @@ The following table shows the changes that are included in the master fix pack p
 ### Changelog for worker node fix pack 1.15.11_1535, released 13 April 2020
 {: #11511_1535}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.11_1535`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.11_1535`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1426,7 +1482,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for worker node fix pack 1.15.11_1534, released 30 March 2020
 {: #11511_1534}
 
-The following table shows the changes that are included in the worker node fix pack `1.15.11_1534`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.15.11_1534`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1439,7 +1495,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.15.11_1533, released 16 March 2020
 {: #11511_1533}
 
-The following table shows the changes that are included in the master and worker node update `1.15.11_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node update `1.15.11_1533`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -1455,7 +1511,7 @@ The following table shows the changes that are included in the master and worker
 ### Changelog for worker node fix pack 1.15.10_1532, released 2 March 2020
 {: #11510_1532}
 
-The following table shows the changes that are included in the worker node fix pack 1.15.10_1532. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack 1.15.10_1532. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -1469,7 +1525,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for fix pack 1.15.10_1531, released 17 February 2020
 {: #11510_1531}
 
-The following table shows the changes that are included in the master and worker node fix pack update `1.15.10_1531`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node fix pack update `1.15.10_1531`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -1501,7 +1557,7 @@ The following table shows the changes that are included in the worker node fix p
 ### Changelog for 1.15.8_1529, released 20 January 2020
 {: #1158_1529}
 
-The following table shows the changes that are included in the master and worker node patch update 1.15.8_1529. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node patch update 1.15.8_1529. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2214,7 +2270,7 @@ Version 1.14 is unsupported. You can review the following archive of 1.14 change
 #### Changelog for worker node fix pack 1.14.10_1555, released 26 May 2020
 {: #11410_1555}
 
-The following table shows the changes that are included in the worker node fix pack `1.14.10_1555`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1555`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2227,7 +2283,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for worker node fix pack 1.14.10_1554, released 11 May 2020
 {: #11410_1554}
 
-The following table shows the changes that are included in the worker node fix pack `1.14.10_1554`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1554`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2240,7 +2296,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for worker node fix pack 1.14.10_1553, released 27 April 2020
 {: #11410_1553}
 
-The following table shows the changes that are included in the worker node fix pack `1.14.10_1553`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1553`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2270,7 +2326,7 @@ The following table shows the changes that are included in the master fix pack p
 #### Changelog for worker node fix pack 1.14.10_1551, released 13 April 2020
 {: #11410_1551}
 
-The following table shows the changes that are included in the worker node fix pack `1.14.10_1551`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1551`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2284,7 +2340,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for worker node fix pack 1.14.10_1550, released 30 March 2020
 {: #11410_1550}
 
-The following table shows the changes that are included in the worker node fix pack `1.14.10_1550`. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack `1.14.10_1550`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2297,7 +2353,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for worker node fix pack 1.14.10_1549, released 16 March 2020
 {: #11410_1549}
 
-The following table shows the changes that are included in the worker node fix pack 1.14.10_1549. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack 1.14.10_1549. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2310,7 +2366,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for worker node fix pack 1.14.10_1548, released 2 March 2020
 {: #11410_1548}
 
-The following table shows the changes that are included in the worker node fix pack 1.14.10_1548. Worker node patch updates can be applied by updating or reloading the worker node.
+The following table shows the changes that are included in the worker node fix pack 1.14.10_1548. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -2324,7 +2380,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for fix pack 1.14.10_1547, released 17 February 2020
 {: #11410_1547}
 
-The following table shows the changes that are included in the master and worker node fix pack update `1.14.10_1547`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node fix pack update `1.14.10_1547`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -2354,7 +2410,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for 1.14.10_1545, released 20 January 2020
 {: #11410_1545}
 
-The following table shows the changes that are included in the master and worker node patch update 1.14.10_1545. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node patch update 1.14.10_1545. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
@@ -3441,7 +3497,7 @@ Version 1.13 is unsupported. You can review the following archive of 1.13 change
 #### Changelog for fix pack 1.13.12_1550, released 17 February 2020
 {: #11312_1550}
 
-The following table shows the changes that are included in the master and worker node fix pack update `1.13.12_1550`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node fix pack update `1.13.12_1550`. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Location | Previous | Current | Description |
@@ -3471,7 +3527,7 @@ The following table shows the changes that are included in the worker node fix p
 #### Changelog for 1.13.12_1548, released 20 January 2020
 {: #11312_1548}
 
-The following table shows the changes that are included in the master and worker node patch update 1.13.12_1548. Master patch updates are applied automatically. Worker node patch updates can be applied by updating or reloading the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
+The following table shows the changes that are included in the master and worker node patch update 1.13.12_1548. Master patch updates are applied automatically. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node. For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
 
 | Component | Previous | Current | Description |
