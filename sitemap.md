@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-14"
+lastupdated: "2020-09-15"
 
 keywords: containers
 subcollection: containers
@@ -1353,6 +1353,7 @@ subcollection: containers
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
   * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
 * [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help)
+* [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities)
 * [Classic: Installing the IBM Cloud Block Storage Attacher plug-in (beta)](/docs/containers?topic=containers-utilities#block_storage_attacher)
