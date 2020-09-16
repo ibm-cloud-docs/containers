@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-09-16"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -902,7 +902,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 <br />
 
 
-## Creating a monitoring configuration to forward cluster and app metrics to {{site.data.keyword.mon_full_notm}}
+## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #sysdig}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.

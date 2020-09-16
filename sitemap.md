@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-15"
+lastupdated: "2020-09-16"
 
 keywords: containers
 subcollection: containers
@@ -783,7 +783,7 @@ subcollection: containers
 
 [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
 
-[Creating a monitoring configuration to forward cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
+[Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
 
 [Viewing cluster states](/docs/containers?topic=containers-health#states)
 * [Cluster states](/docs/containers?topic=containers-health#states_cluster)
