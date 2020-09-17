@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -167,7 +167,8 @@ When you set {{site.data.keyword.cloud_notm}} IAM policies, you can assign roles
 <dt>Individual users</dt>
 <dd>You might have a specific user that needs more or less permissions than the rest of your team. You can customize permissions on an individual basis so that each person has the permissions that they need to complete their tasks. You can assign more than one {{site.data.keyword.cloud_notm}} IAM role to each user.</dd>
 <dt>Multiple users in an access group</dt>
-<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one {{site.data.keyword.cloud_notm}} IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.</dd>
+<dd>You can create a group of users and then assign permissions to that group. For example, you can group all team leaders and assign administrator access to the group. Then, you can group all developers and assign only write access to that group. You can assign more than one {{site.data.keyword.cloud_notm}} IAM role to each access group. When you assign permissions to a group, any user that is added or removed from that group is affected. If you add a user to the group, then they also have the additional access. If they are removed, their access is revoked.
+</dd>
 </dl>
 
 {{site.data.keyword.cloud_notm}} IAM roles can't be assigned to a service account. Instead, you can directly [assign RBAC roles to service accounts](#rbac).
@@ -658,6 +659,8 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
 **To assign {{site.data.keyword.cloud_notm}} IAM _service_ roles from the CLI:**
 {: #add_users_cli_service}
 
+
+
 1.  Get the user information for the individual user or access group that you want to assign the service role to.
 
     1.  Get your **Account ID**.
@@ -852,6 +855,8 @@ The `view`, `edit`, `admin`, and `cluster-admin` cluster roles are predefined ro
 
 Making your own custom RBAC policies? Be sure not to edit the existing IBM role bindings that are in the cluster, or name new role bindings with the same name. Any changes to IBM-provided RBAC role bindings are overwritten periodically. Instead, create your own role bindings.
 {: tip}
+
+
 
 **When do I need to use cluster role bindings and role bindings that are not tied to the {{site.data.keyword.cloud_notm}} IAM permissions that I set?**</br>
 You might want to authorize who can create and update pods in your cluster. With [pod security policies (PSPs)](/docs/containers?topic=containers-psp), you can use existing cluster role bindings that come with your cluster, or create your own.
