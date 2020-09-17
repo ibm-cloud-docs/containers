@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-04"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, help, debug
 
@@ -1390,7 +1390,7 @@ This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} I
    ```
    {: pre}
 
-2. If your secret does not show `ibm/ibmc-s3fs` as the **Type**, [recreate your secret](/docs/containers?topic=containers-object_storage#create_cos_secret).
+2. If your secret does not show `ibm/ibmc-s3fs` as the **Type**, [re-create your secret](/docs/containers?topic=containers-object_storage#create_cos_secret).
 
 3. Check your YAML configuration file for your PVC and pod to verify that you used the correct secret.
 

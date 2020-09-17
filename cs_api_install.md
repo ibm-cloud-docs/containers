@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -149,7 +149,7 @@ You can use the version two (`v2`) API to manage both classic and VPC clusters. 
    <td>`vpc` and `classic`<ul>
    <li>The `vpc` provider is designed to support multiple VPC subproviders. The supported VPC subproviders are `vpc-classic`, which corresponds to a VPC cluster for Generation 1 compute resources, and `vpc-gen2`, which corresponds to a VPC cluster for Generation 2 compute resources.</li>
    <li>Provider-specific requests have a path parameter in the URL, such as `v2/vpc/createCluster`. Some APIs are only available to a particular provider, such as `GET vlan` for classic or `GET vpcs` for VPC.</li>
-   <li>Provider-agnostic requests can include a provider-specific body parameter that you specify, usually in JSON, such as `{"provider": "vpc"}`, if you want to return responses for only the specified provider.</li></ul></td>
+   <li>Provider-neutral requests can include a provider-specific body parameter that you specify, usually in JSON, such as `{"provider": "vpc"}`, if you want to return responses for only the specified provider.</li></ul></td>
  </tr>
  <tr>
    <td>`GET` responses</td>

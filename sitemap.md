@@ -769,7 +769,7 @@ subcollection: containers
 [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
-* [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna)
+* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna)
 * [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#webhook_logdna)
 
 [Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
@@ -790,7 +790,7 @@ subcollection: containers
 * [Master states](/docs/containers?topic=containers-health#states_master)
 * [Worker node states](/docs/containers?topic=containers-health#states_workers)
 
-[Configuring health monitoring for worker nodes in classic clusters with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
+[Monitoring worker node health in classic clusters with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
 
 
 ## Setting up an image build pipeline
@@ -1347,6 +1347,7 @@ subcollection: containers
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
+* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
 * [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)

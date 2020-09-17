@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-04"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, containers
 
@@ -124,7 +124,7 @@ The benchmark recommendations have scoring, levels, result status, and responsib
   * Shared: You and IBM share responsibility for configuring the setting that the benchmark recommends.
 
 **What parts of the benchmark am I responsible for?**<br>
-Because {{site.data.keyword.containerlong_notm}} is a managed offering, IBM already configures many security settings for you. For example, IBM manages and automatically applies updates to your cluster master. For your worker nodes, IBM provides security and version updates, but you must apply the updates. You are also responsibile for your workload applications and data. For more information, see [Your responsibilities while using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks).
+Because {{site.data.keyword.containerlong_notm}} is a managed offering, IBM already configures many security settings for you. For example, IBM manages and automatically applies updates to your cluster master. For your worker nodes, IBM provides security and version updates, but you must apply the updates. You are also responsible for your workload applications and data. For more information, see [Your responsibilities while using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks).
 
 **What if some part of the service fails to comply with a recommendation?**<br>
 First, check the explanation of the failure for any remediation steps.
@@ -274,7 +274,7 @@ Review the benchmark results for the etcd node configurations.
 | 2.4 | Ensure that the `--peer-cert-file` and `--peer-key-file` arguments are set as appropriate.| Scored | 1 | Pass | IBM |
 | 2.5 | Ensure that the `--peer-client-cert-auth` argument is set to `true`. | Scored | 1 | Pass | IBM |
 | 2.6 | Ensure that the `--peer-auto-tls` argument is not set to `true`. | Scored | 1 | Pass | IBM |
-| 2.7 | Ensure that a unique Certificate Authority is used for etcd. | Not Scored | 2 | Pass | IBM |
+| 2.7 | Ensure that a unique certificate authority is used for etcd. | Not Scored | 2 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
 {: caption="Section 2 Etcd node configuration benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
 

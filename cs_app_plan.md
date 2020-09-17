@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, deploy
 
@@ -120,7 +120,7 @@ Your containerized app must be able to run on the supported operating system, Ub
 ### What are some guidelines for developing stateless, cloud-native apps?
 {: #12factor}
 
-Check out the [Twelve-Factor App](https://12factor.net/){: external}, a language-agnostic methodology for considering how to develop your app across 12 factors, summarized as follows.
+Check out the [Twelve-Factor App](https://12factor.net/){: external}, a language-neutral methodology for considering how to develop your app across 12 factors, summarized as follows.
 {: shortdesc}
 
 1.  **Codebase**: Use a single codebase in a version control system for your deployments. When you pull an image for your container deployment, specify a tested image tag instead of using `latest`.

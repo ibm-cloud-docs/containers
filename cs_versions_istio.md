@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-14"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -126,7 +126,7 @@ The following table shows the changes that are included in version 1.7.1 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.0 | 1.7.1 | See the Istio release notes for [Istio 1.7.1](https://istio.io/news/releases/1.7.x/announcing-1.7.1/){:external}. |
+| 1.7.0 | 1.7.1 | See the Istio release notes for [Istio 1.7.1](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.1/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.1" caption-side="top"}
 
@@ -170,7 +170,7 @@ The following table shows the changes that are included in version 1.6.9 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.6.8 | 1.6.9 | <ul><li>See the Istio release notes for [Istio 1.6.9](https://istio.io/news/releases/1.6.x/announcing-1.6.9/){:external}.</li><li>Resolves [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external} and [usn-4466-1](https://usn.ubuntu.com/4466-1/){: external}. For more information, see the [Istio security bulletin 2020-009](https://istio.io/news/security/istio-security-2020-009/){:external}.</li></ul> |
+| 1.6.8 | 1.6.9 | <ul><li>See the Istio release notes for [Istio 1.6.9](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.9/){:external}.</li><li>Resolves [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external} and [usn-4466-1](https://usn.ubuntu.com/4466-1/){: external}. For more information, see the [Istio security bulletin 2020-009](https://istio.io/news/security/istio-security-2020-009/){:external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.9" caption-side="top"}
 

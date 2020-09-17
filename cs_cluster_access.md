@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-01"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, clusters
 
@@ -269,7 +269,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
       {: screen}
 
 5. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
-  * For OSX and Linux users:
+  * For macOS and Linux users:
     ```
     sudo nano /etc/hosts
     ```

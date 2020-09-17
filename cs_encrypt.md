@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-10"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -317,7 +317,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ibmcloud ks cluster config -c <cluster_name_or_ID> --admin --output zip > <cluster_name_or_ID>.zip
     ```
     {: pre}
-4. Unzip the compressed folder.
+4. Decompress the folder.
 
 5. Get the `server` field for your cluster. In the output, copy only the master URL, without the `https://` and node port. For example, in the following output, copy the `c2.us-south.containers.cloud.ibm.com` master URL only.
     ```
