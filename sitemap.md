@@ -1067,7 +1067,7 @@ subcollection: containers
   * [Similarities between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-same)
   * [Differences between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-diff)
 * [Creating ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
-* [Changing existing ALBs to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
+* [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
   * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
   * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
