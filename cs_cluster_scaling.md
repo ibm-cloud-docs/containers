@@ -151,7 +151,7 @@ When you enable the cluster autoscaler for a worker pool, worker nodes are scale
 Consider the following image for an example of scaling the cluster up and down.
 
 _Figure: Autoscaling a cluster up and down._
-![Autoscaling a cluster up and down GIF](images/cluster-autoscaler-x3.mp4){: video controls loop width="460"}
+![Autoscaling a cluster up and down GIF](images/cluster-autoscaler-x3.mp4){: video controls loop height="400"}
 
 1.  The cluster has four worker nodes in two worker pools that are spread across two zones. Each pool has one worker node per zone, but **Worker Pool A** has a flavor of `u2c.2x4` and **Worker Pool B** has a flavor of `b2c.4x16`. Your total compute resources are roughly 10 cores (2 cores x 2 worker nodes for **Worker Pool A**, and 4 cores x 2 worker nodes for **Worker Pool B**). Your cluster currently runs a workload that requests 6 of these 10 cores. Additional computing resources are taken up on each worker node by the [reserved resources](/docs/containers?topic=containers-planning_worker_nodes#resource_limit_node) that are required to run the cluster, worker nodes, and any add-ons such as the cluster autoscaler.
 2.  The cluster autoscaler is configured to manage both worker pools with the following minimum and maximum size-per-zone:
