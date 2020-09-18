@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,80 @@ subcollection: containers
 {:video: .video}
 
 
+# Debugging app deployments
+{: #debug_apps}
 
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
+Review the options that you have to debug your app deployments and find the root causes for failures.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
+Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the namespace where your app is deployed.
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
 
-{: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
+1. Look for abnormalities in the service or deployment resources by running the `describe` command.
+    ```
+    kubectl describe service <service_name>
+    ```
+    {: pre}
 
-{: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
+2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
 
-{: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
+3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
 
-  ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-  ```
-  {: pre}
+4. Verify that the service is listening on the correct port.
+   1. Get the name of a pod.
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+   2. Log in to a container.
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
+   3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
+      ```
+      curl localhost: <port>
+      ```
+      {: pre}
 
-<br />
+5. Verify that the service is linked correctly to the pods.
+   1. Get the name of a pod.
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+   2. Log in to a container.
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
+   3. Curl the cluster IP address and port of the service.
+      ```
+      curl <cluster_IP>:<port>
+      ```
+      {: pre}
+   4. If the IP address and port are not accessible, look at the endpoints for the service.
+      * If no endpoints are listed, then the selector for the service does not match the pods. For example, your app deployment might have the label `app=foo`, but the service might have the selector `run=foo`.
+      * If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods. For example, your app might listen on port 9080, but the service might listen on port 80.
 
-
-## Log lines are too long
-{: #long_lines}
-
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
-
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
-
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
+6. For Ingress services, verify that the service is accessible from within the cluster.
+   1. Get the name of a pod.
+      ```
+      kubectl get pods
+      ```
+      {: pre}
+   2. Log in to a container.
+      ```
+      kubectl exec -it <pod_name> -- /bin/bash
+      ```
+      {: pre}
+   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint.
+      ```
+      curl <host_name>.<domain>
+      ```
+      {: pre}

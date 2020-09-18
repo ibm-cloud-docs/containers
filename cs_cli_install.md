@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-10"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -454,7 +454,7 @@ This task includes the information for updating the following CLIs:
 -   {{site.data.keyword.registrylong_notm}} plug-in
 
 
-[Version 1.0 of the CLI plug-in was released on 16 March 2020](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). This version contains permanent syntax and behavior changes that are not backwards compatible.</br></br>To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
+[Version 1.0 of the CLI plug-in was released on 16 March 2020](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). This version contains permanent syntax and behavior changes that are not compatible with earlier versions.</br></br>To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
 {: important}
 
 

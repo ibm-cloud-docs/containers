@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,42 @@ subcollection: containers
 {:video: .video}
 
 
-
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
-{: shortdesc}
-
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
+# Why can't I install a Helm chart with updated configuration values?
+{: #ts-app-helm-install}
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
-
 {: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
+When you try to install an updated Helm chart by running `helm install <release_name> <helm_repo>/<chart_name> -f config.yaml`, you get the `Error: failed to download "<helm_repo>/<chart_name>"` error message.
 
 {: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
+You might need to update your Helm installation because of the following reasons:
+* The URL to the {{site.data.keyword.cloud_notm}} Helm repository that is configured on your local machine might be incorrect.
+* The name of your local Helm repository might not match the Helm repository name or URL of the installation command that you copied from the Helm chart instructions.
+* The Helm chart that you want to install does not support the version of Helm that you installed on your local machine.
+* Your cluster network setup changed from public access to private-only access, but Helm was not updated.
 
 {: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
+To troubleshoot your Helm chart:
 
-  ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-  ```
-  {: pre}
+1.  List the {{site.data.keyword.cloud_notm}} Helm repositories currently available in your Helm instance.
+    ```
+    helm repo list
+    ```
+    {: pre}
+2.  Remove the {{site.data.keyword.cloud_notm}} Helm repositories.
+    ```
+    helm repo remove <helm_repo>
+    ```
+    {: pre}
+3.  Reinstall the Helm version that matches a supported version of the Helm chart that you want to install. As part of the reinstallation, you add and update the {{site.data.keyword.cloud_notm}} Helm repositories.
+    * **Helm v3**: See [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3).
+    * **Helm v2**: See [Installing Helm v2 in your cluster](/docs/containers?topic=containers-helm#install_v2).
+
+Now, you can follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
 
 <br />
 
-
-## Log lines are too long
-{: #long_lines}
-
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
-
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
-
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.

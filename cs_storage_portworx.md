@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks,
 
@@ -125,7 +125,10 @@ The worker node flavor that you need depends on the infrastructure provider that
 In VPC clusters, make sure to select a [virtual server flavor](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles) that meets the [minimum hardware requirements for Portworx](https://docs.portworx.com/start-here-installation/){: external}. The flavor that you choose must have a network speed of 10 Gpbs or more for optimal performance. None of the VPC flavors are set up with raw and unformatted block storage devices. To successfully install and run Portworx, you must [manually attach block storage devices](/docs/containers?topic=containers-utilities#vpc_api_attach) to each of your worker nodes first.
 
 **What if I want to run Portworx in a classic cluster with non-SDS worker nodes?** </br>
-You can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Non-SDS worker nodes can be virtual or bare metal. If you want to use virtual machines, use a worker node flavor of `b3c.16x64` or better. Virtual machines with a flavor of `b3c.4x16` or `u3c.2x4` do not provide the required resources for Portworx to work properly. Keep in mind that virtual machines come with 1000 Mbps that is not sufficient for ideal performance of Portworx. Bare metal machines come with sufficient compute resources and network speed for Portworx, but you must [add raw, unformatted, and unmounted block storage](#create_block_storage) before you can use these machines.
+You can install Portworx on non-SDS worker node flavors, but you might not get the performance benefits that your app requires. Non-SDS worker nodes can be virtual or bare metal. If you want to use virtual machines, use a worker node flavor of `b3c.16x64` or better. Virtual machines with a flavor of `b3c.4x16` or `u3c.2x4` do not provide the required resources for Portworx to work properly. Bare metal machines come with sufficient compute resources and network speed for Portworx, but you must [add raw, unformatted, and unmounted block storage](#create_block_storage) before you can use these machines.
+
+For classic clusters, virtual machines have only 1000 Mbps of networking speed, which is not sufficient to run production workloads with Portworx. Instead, provision Portworx on bare metal machines for the best performance.
+{: important}
 
 If your classic cluster has deprecated x1c or older Ubuntu 16 x2c worker node flavors, update your cluster to have [Ubuntu 18 x3c worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
@@ -137,6 +140,9 @@ You need at least three worker nodes in your Portworx cluster so that Portworx c
 One of the biggest challenges when you run stateful apps in a cluster is to make sure that your container can be rescheduled onto another host if the container or the entire host fails. In Docker, when a container must be rescheduled onto a different host, the volume does not move to the new host. Portworx can be configured to run `hyper-converged` to ensure that your compute resources and the storage are always placed onto the same worker node. When your app must be rescheduled, Portworx moves your app to a worker node where one of your volume replicas resides to ensure local-disk access speed and best performance for your stateful app. Running `hyper-converged` offers the best performance for your pods, but requires storage to be available on all worker nodes in your cluster.
 
 You can also choose to use only a subset of worker nodes for your Portworx storage layer. For example, you might have a worker pool with SDS worker nodes that come with local raw block storage, and another worker pool with virtual worker nodes that do not come with local storage. When you install Portworx, a Portworx pod is scheduled onto every worker node in your cluster as part of a daemon set. Because your SDS worker nodes have local storage, these worker nodes are included into the Portworx storage layer only. Your virtual worker nodes are not included as a storage node because of the missing local storage. However, when you deploy an app pod to your virtual worker node, this pod can still access data that is physically stored on an SDS worker node by using the Portworx daemon set pod. This setup is referred to as `storage-heavy` and offers slightly slower performance than the `hyper-converged` setup because the virtual worker node must talk to the SDS worker node over the private network to access the data.
+
+{{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1).
+{: note}
 
 
 
@@ -655,7 +661,7 @@ To install Portworx:
 
    3. Verify that all worker nodes that you wanted to include in your Portworx storage layer are included by reviewing the **StorageNode** column in the **Cluster Summary** section of your CLI output. Worker nodes that are included in the storage layer are displayed with `Yes` in the **StorageNode** column.
 
-      Because Portworx runs as a daemon set in your cluster, new worker nodes that you add to your cluster are automatically inspected for raw block storage and added to the Portworx data layer.
+      Because Portworx runs as a daemon set in your cluster, existing worker nodes are automatically inspected for raw block storage and added to the Portworx data layer when you deploy Portworx. If you add worker nodes to your cluster and add raw block storage to those workers, restart the Portworx pods on the new worker nodes so that your storage volumes are detected by the daemon set.
       {: note}
 
    4. Verify that each storage node is listed with the correct amount of raw block storage by reviewing the **Capacity** column in the **Cluster Summary** section of your CLI output.
@@ -709,8 +715,11 @@ You can upgrade Portworx to the latest version.
 ### Removing Portworx from your cluster
 {: #remove_portworx}
 
-If you do not want to use Portworx in your cluster, you can uninstall the Helm chart.
+If you do not want to use Portworx in your cluster, you can uninstall the Helm chart and delete your Portworx instance.
 {: shortdesc}
+
+The following steps walk you through deleting the Portworx Helm chart from your cluster and deleting your Portworx instance. If you want to clean up your Portworx installation by removing your volumes from your apps, removing individual worker nodes from Portworx, or if you want to completely remove Portworx and all your volumes and data, see [Cleaning up your Portworx cluster](#portworx_cleanup).
+{: note}
 
 1. Find the installation name of your Portworx Helm chart.
    ```
@@ -728,6 +737,7 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 2. Delete Portworx by removing the Helm chart.
    ```
    helm uninstall <release_name>
+   ```
    {: pre}
 
 3. Verify that the Portworx pods are removed.
@@ -745,6 +755,9 @@ If you do not want to use Portworx in your cluster, you can uninstall the Helm c
 
 To stop billing for Portworx, you must remove the Portworx Helm installation from your cluster and remove the Portworx service instance from your {{site.data.keyword.cloud_notm}} account.
 {: important}
+
+**Next steps**
+[Cleaning up your Portworx volumes and cluster](#portworx_cleanup).
 
 <br />
 
@@ -1031,6 +1044,25 @@ To access the storage from your app, you must mount the PVC to your app.
       <br />
 
 
+## VPC: Updating worker nodes with Portworx volumes
+{: #portworx_vpc_up}
+
+When you update a worker node in a VPC cluster, the worker node is removed from your cluster and replaced with a new worker node. If Portworx volumes are attached to the worker node that is replaced, you must attach the volumes to the new worker node.
+{: shortdesc}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+1. Follow the steps to update your [VPC worker node](/docs/containers?topic=containers-update#vpc_worker_node).
+
+2. [Attach raw {{site.data.keyword.block_storage_is_short}} to your VPC worker node](/docs/containers?topic=containers-utilities#vpc_api_attach).
+
+3. Restart the Portworx pod on the new worker node.
+
+4. [Mount the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc).
+
 ## Setting up disaster recovery with Portworx
 {: #px-dr}
 
@@ -1208,5 +1240,18 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 
 If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
 
+
+## Limitations
+{: #portworx_limitations}
+
+Review the following Portworx limitations.
+
+| Limitation | Description |
+| --- | --- | 
+| **Classic clusters** Pod restart required when adding worker nodes. | Because Portworx runs as a daemon set in your cluster, existing worker nodes are automatically inspected for raw block storage and added to the Portworx data layer when you deploy Portworx. If you add worker nodes to your cluster and add raw block storage to those workers, restart the Portworx pods on the new worker nodes so that your storage volumes are detected by the daemon set. |
+| **VPC clusters** Storage volume reattachment required when updating worker nodes. | When you update a worker node in a VPC cluster, the worker node is removed from your cluster and replaced with a new worker node. If Portworx volumes are attached to the worker node that is replaced, you must attach the volumes to the new worker node. |
+| The Portworx experimental `InitializerConfiguration` feature is not supported. | {{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1). |
+{: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
+{: caption="Portworx limitations"}
 
 

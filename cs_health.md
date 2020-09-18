@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -110,7 +110,7 @@ You can choose your logging solution based on which cluster components you need 
 
 <dl>
 <dt>{{site.data.keyword.la_full}}</dt>
-<dd>Manage pod container logs by deploying an instance of {{site.data.keyword.la_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your {{site.data.keyword.la_full_notm}} service instance. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-getting-started) documentation. To enable {{site.data.keyword.la_full_notm}} in your cluster, see [Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}](#app_logdna).</dd>
+<dd>Manage pod container logs by deploying an instance of {{site.data.keyword.la_full_notm}} and configuring this instance for your cluster in {{site.data.keyword.containershort_notm}}. A logging agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to your {{site.data.keyword.la_full_notm}} service instance. For more information about the service, see the [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-getting-started) documentation. To enable {{site.data.keyword.la_full_notm}} in your cluster, see [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](#app_logdna).</dd>
 
 <dt>{{site.data.keyword.at_full}}</dt>
 <dd>To monitor user-initiated administrative activity made in your cluster, {{site.data.keyword.containershort_notm}} automatically generates cluster management events and forwards these event logs to {{site.data.keyword.at_full_notm}}. To access these logs, [provision an instance of {{site.data.keyword.at_full_notm}}](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started). For more information about the types of {{site.data.keyword.containerlong_notm}} events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).</dd>
@@ -135,7 +135,7 @@ Manage logs by deploying LogDNA as a third-party service to your cluster.
 {: shortdesc}
 
 
-### Creating a logging configuration to forward cluster and app logs to {{site.data.keyword.la_full_notm}}
+### Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}
 {: #app_logdna}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a logging configuration for {{site.data.keyword.la_full_notm}} in your cluster, and use this logging configuration to automatically collect and forward pod logs to {{site.data.keyword.la_full_notm}}.
@@ -158,7 +158,7 @@ Before you begin:
 To set up a logging configuration for your cluster:
 
 1. Create an [{{site.data.keyword.la_full_notm}} service instance](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
-2. Set up a logging configuration for your cluster. When you create the logging configuration, a Kubernetes namespace `ibm-observe` is created and a LogDNA agent is deployed as a daemonset to all worker nodes in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+2. Set up a logging configuration for your cluster. When you create the logging configuration, a Kubernetes namespace `ibm-observe` is created and a LogDNA agent is deployed as a daemon set to all worker nodes in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
    - **From the console:**
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a LogDNA logging configuration.
@@ -202,7 +202,7 @@ To set up a logging configuration for your cluster:
 3. Optional: Verify that the LogDNA agent was set up successfully.
    1. If you used the console to create the LogDNA logging configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-   2. Verify that the daemonset for the LogDNA agent was created and all instances are listed as `AVAILABLE`.
+   2. Verify that the daemon set for the LogDNA agent was created and all instances are listed as `AVAILABLE`.
       ```
       kubectl get daemonsets -n ibm-observe
       ```
@@ -215,7 +215,7 @@ To set up a logging configuration for your cluster:
       ```
       {: screen}
 
-      The number of daemonset instances that are deployed equals the number of worker nodes in your cluster.
+      The number of daemon set instances that are deployed equals the number of worker nodes in your cluster.
 
    3. Review the configmap that was created for your LogDNA agent.
       ```
@@ -498,7 +498,7 @@ The following table shows the different options that you have when you configure
     </tr>
     <tr>
       <td><code><em>--ca-cert</em></code></td>
-      <td>Required: When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the Kubernetes secret name that contains the Certificate Authority certificate.</td>
+      <td>Required: When the logging type is <code>syslog</code> and the protocol is <code>tls</code>, the Kubernetes secret name that contains the certificate authority certificate.</td>
     </tr>
     <tr>
       <td><code><em>--verify-mode</em></code></td>
@@ -547,9 +547,9 @@ The following steps are general instructions. Prior to using the container in a 
 3. Set up a server that accepts a syslog protocol in 1 of 2 ways:
   * Set up and manage your own server or have a provider manage it for you. If a provider manages the server for you, get the logging endpoint from the logging provider.
 
-  * Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant Certificate Authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
+  * Run syslog from a container. For example, you can use this [deployment .yaml file](https://github.com/IBM-Cloud/kube-samples/blob/master/deploy-apps-clusters/deploy-syslog-from-kube.yaml){: external} to fetch a Docker public image that runs a container in your cluster. The image publishes the port `514` on the public cluster IP address, and uses this public cluster IP address to configure the syslog host. You need to inject the relevant certificate authority and server-side certificates and update the `syslog.conf` to enable `tls` on your server.
 
-4. Save your Certificate Authority certificate to a file named `ca-cert`. It must be that exact name.
+4. Save your certificate authority certificate to a file named `ca-cert`. It must be that exact name.
 
 5. Create a secret in the `kube-system` namespace for the `ca-cert` file. When you create your logging configuration, use the secret name for the `--ca-cert` flag.
     ```
@@ -902,7 +902,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 <br />
 
 
-## Creating a monitoring configuration to forward cluster and app metrics to {{site.data.keyword.mon_full_notm}}
+## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #sysdig}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
@@ -926,7 +926,7 @@ Before you begin:
 To set up a monitoring configuration for your cluster:
 
 1. Create an [{{site.data.keyword.mon_full_notm}} service instance](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
-2. Set up a monitoring configuration for your cluster. When you create the monitoring configuration, a Kubernetes namespace `ibm-observe` is created and a Sysdig agent is deployed as a Kubernetes daemonset to all worker nodes in your cluster. This agent collects cluster and pod metrics, such as the worker node CPU and memory usage, or the amount incoming and outgoing network traffic to your pods.
+2. Set up a monitoring configuration for your cluster. When you create the monitoring configuration, a Kubernetes namespace `ibm-observe` is created and a Sysdig agent is deployed as a Kubernetes daemon set to all worker nodes in your cluster. This agent collects cluster and pod metrics, such as the worker node CPU and memory usage, or the amount incoming and outgoing network traffic to your pods.
 
    - **From the console: **
      1. From the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster for which you want to create a Sysdig monitoring configuration.
@@ -969,9 +969,9 @@ To set up a monitoring configuration for your cluster:
 
 3. Optional: Verify that the Sysdig agent was set up successfully.
    1. If you used the console to create the Sysdig monitoring configuration, log in to your cluster. For more information, see [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-   2. Verify that the daemonset for the Sysdig agent was created and all instances are listed as `AVAILABLE`.
+   2. Verify that the daemon set for the Sysdig agent was created and all instances are listed as `AVAILABLE`.
       ```
-      kubectl get daemonsets -n ibm-observe
+      kubectl get daemon sets -n ibm-observe
       ```
       {: pre}
 
@@ -982,7 +982,7 @@ To set up a monitoring configuration for your cluster:
       ```
       {: screen}
 
-      The number of daemonset instances that are deployed equals the number of worker nodes in your cluster.
+      The number of daemon set instances that are deployed equals the number of worker nodes in your cluster.
 
    3. Review the configmap that was created for your Sysdig agent.
       ```
@@ -1185,7 +1185,7 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
 
 
 
-## Configuring health monitoring for worker nodes in classic clusters with Autorecovery
+## Monitoring worker node health in classic clusters with Autorecovery
 {: #autorecovery}
 
 The Autorecovery system uses various checks to query worker node health status. If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. Only one worker node undergoes a corrective action at a time. The worker node must successfully complete the corrective action before any other worker node undergoes a corrective action. For more information, see this [Autorecovery blog post](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.

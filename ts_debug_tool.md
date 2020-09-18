@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,64 @@ subcollection: containers
 {:video: .video}
 
 
+# Running tests with the Diagnostics and Debug Tool
+{: #debug-tool}
+{: troubleshoot}
+{: support}
 
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
+While you troubleshoot, you can use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run tests and gather pertinent information from your cluster.
 {: shortdesc}
-
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
+## Prerequisites
+{: #debug-tool-prereqs}
 
-{: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
-
-{: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
-
-{: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
-
+If you previously installed the debug tool by using Helm, first uninstall the `ibmcloud-iks-debug` Helm chart.
+1. Find the installation name of your Helm chart.
   ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
+  helm list -n <namespace> | grep ibmcloud-iks-debug
   ```
   {: pre}
 
-<br />
+  Example output:
+  ```
+  <helm_chart_name> 1 Thu Sep 13 16:41:44 2019 DEPLOYED ibmcloud-iks-debug-1.0.0 default
+  ```
+  {: screen}
 
+2. Uninstall the debug tool installation by deleting the Helm chart.
+  ```
+  helm uninstall <helm_chart_name> -n <namespace>
+  ```
+  {: pre}
 
-## Log lines are too long
-{: #long_lines}
+3. Verify that the debug tool pods are removed. When the uninstallation is complete, no pods are returned by the following command.
+  ```
+  kubectl get pod --all-namespaces | grep ibmcloud-iks-debug
+  ```
+  {: pre}
 
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+## Enabling the Diagnostics and Debug Tool add-on
+{: #debug-tool-enable}
 
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
+1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
+2. Click the **Add-ons** tab.
+
+3. On the Diagnostics and Debug Tool card, click **Install**.
+
+4. In the dialog box, click **Install**. Note that it can take a few minutes for the add-on to be installed. <p class="tip">To resolve some common issues that you might encounter during the add-on deployment, see [Reviewing add-on state and statuses](/docs/containers?topic=containers-cs_troubleshoot_addons#debug_addons).</p>
+
+5. On the Diagnostics and Debug Tool card, click **Dashboard**.
+
+6. In the debug tool dashboard, select individual tests or a group of tests to run. Some tests check for potential warnings, errors, or issues, and some tests only gather information that you can reference while you troubleshoot. For more information about the function of each test, click the information icon next to the test's name.
+
+7. Click **Run**.
+
+8. Check the results of each test.
+  * If any test fails, click the information icon next to the test's name in the left column for information about how to resolve the issue.
+  * You can also use the results of tests to gather information, such as complete YAMLs, that can help you debug your cluster in the following sections.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-27"
+lastupdated: "2020-09-17"
 
 keywords: kubernetes, iks
 
@@ -554,7 +554,7 @@ At this point, all traffic to the public node ports and NLB is blocked. Only tra
 {: #lesson4}
 {: step}
 
-In the previous lesson, you blocked all traffic and allowed only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. Blocklisting is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
+In the previous lesson, you blocked all traffic and allowed only a few IPs. That scenario works well for testing purposes when you want to limit access to only a few controlled source IP addresses. However, the PR firm has apps that need to be widely available to the public. You need to make sure that all traffic is permitted except for the unusual traffic you are seeing from a few IP addresses. A denylist is useful in a scenario like this one because it can help you prevent an attack from a small set of IP addresses.
 {: shortdesc}
 
 In this lesson, block traffic from your own system's source IP address. At the end of Lesson 4, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked:

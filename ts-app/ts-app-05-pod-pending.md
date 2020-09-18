@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,78 @@ subcollection: containers
 {:video: .video}
 
 
-
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
-{: shortdesc}
-
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
+# Why do pods remain in pending state?
+{: #ts-app-pod-pending}
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
-
 {: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
+When you run `kubectl get pods`, you can see pods that remain in a **Pending** state.
 
 {: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
+If you just created the Kubernetes cluster, the worker nodes might still be configuring.
+
+If this cluster is an existing one:
+*  You might not have enough capacity in your cluster to deploy the pod.
+*  The pod might have exceeded a resource request or limit.
 
 {: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
+This task requires the {{site.data.keyword.cloud_notm}} IAM [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for the cluster and the [**Manager** service role](/docs/containers?topic=containers-users#platform) for all namespaces.
+
+If you just created the Kubernetes cluster, run the following command and wait for the worker nodes to initialize.
+
+```
+kubectl get nodes
+```
+{: pre}
+
+If this cluster is an existing one, check your cluster capacity.
+
+
+1.  Set the proxy with the default port number.
 
   ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
+  kubectl proxy
+  ```
+   {: pre}
+
+2.  Open the Kubernetes dashboard.
+
+  ```
+  http://localhost:8001/ui
   ```
   {: pre}
 
-<br />
+3.  Check if you have enough capacity in your cluster to deploy your pod.
 
+4.  If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
 
-## Log lines are too long
-{: #long_lines}
+    1.  Review the current sizes and flavors of your worker pools to decide which one to resize.
 
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+        ```
+        ibmcloud ks worker-pool ls
+        ```
+        {: pre}
 
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
+    2.  Resize your worker pools to add more nodes to each zone that the pool spans.
 
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
+        ```
+        ibmcloud ks worker-pool resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
+        ```
+        {: pre}
+
+5.  Optional: Check your pod resource requests.
+
+    1.  Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
+
+        ```
+        kubectl get pod <pod_name> -o yaml
+        ```
+        {: pre}
+
+    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
+
+6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.

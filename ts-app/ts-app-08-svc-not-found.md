@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,72 @@ subcollection: containers
 {:video: .video}
 
 
-
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
-{: shortdesc}
-
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
+# Why does binding a service to a cluster results in service not found error?
+{: #ts-app-svc-bind-not-found}
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
-
 {: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
+When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
+
+```
+Binding service to a namespace...
+FAILED
+
+The specified IBM Cloud service could not be found. If you just created the service, wait a little and then try to bind it again. To view available IBM Cloud service instances, run 'ibmcloud service list'. (E0023)
+```
+{: screen}
 
 {: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
+To bind services to a cluster, you must have the Cloud Foundry developer user role for the space where the service instance is provisioned. In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platform access to {{site.data.keyword.containerlong_notm}}. To access the service instance, you must be logged in to the space where the service instance is provisioned.
 
 {: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
 
-  ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-  ```
-  {: pre}
+**As a user in the cluster:**
 
-<br />
+1. Log in to {{site.data.keyword.cloud_notm}}.
+   ```
+   ibmcloud login
+   ```
+   {: pre}
 
+2. Target the org and the space where the service instance is provisioned.
+   ```
+   ibmcloud target -o <org> -s <space>
+   ```
+   {: pre}
 
-## Log lines are too long
-{: #long_lines}
+3. Verify that you are in the right space by listing your service instances.
+   ```
+   ibmcloud service list
+   ```
+   {: pre}
 
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps).
 
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
+**As the account admin:**
 
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
+1. Verify that the user who experiences this problem has [Editor permissions for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#platform).
+
+2. Verify that the user who experiences this problem has the [Cloud Foundry developer role for the space](/docs/account?topic=account-mngcf#update_cf_access) where the service is provisioned.
+
+3. If the correct permissions exists, try assigning a different permission and then re-assigning the required permission.
+
+4. Wait a few minutes, then let the user try to bind the service again.
+
+5. If this does not resolve the problem, then the {{site.data.keyword.cloud_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-using-avatar) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
+   1. Retrieve the cluster ID.
+      ```
+      ibmcloud ks cluster ls
+      ```
+      {: pre}
+
+   2. Retrieve the service instance ID.
+      ```
+      ibmcloud service show <service_name> --guid
+      ```
+      {: pre}
+

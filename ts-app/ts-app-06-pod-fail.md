@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-16"
+lastupdated: "2020-09-17"
 
-keywords: kubernetes, iks, logging, help, debug
+keywords: kubernetes, iks
 
 subcollection: containers
 
@@ -90,49 +90,98 @@ subcollection: containers
 {:video: .video}
 
 
-
-# Logging and monitoring
-{: #cs_troubleshoot_health}
-
-As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting issues with logging and monitoring.
-{: shortdesc}
-
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
-{: tip}
+# Why do pods repeatedly fail to restart or are unexpectedly removed?
+{: #ts-app-pod-fail}
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-## Kubernetes dashboard does not display utilization graphs
-{: #cs_dashboard_graphs}
-
 {: tsSymptoms}
-When you access the Kubernetes dashboard, utilization graphs do not display.
+Your pod was healthy but unexpectedly gets removed or gets stuck in a restart loop.
 
 {: tsCauses}
-Sometimes after a cluster update or worker node reboot, the `kube-dashboard` pod does not update.
+Your containers might exceed their resource limits, or your pods might be replaced by higher priority pods.
 
 {: tsResolve}
-Delete the `kube-dashboard` pod to force a restart. The pod is re-created with RBAC policies to access `heapster` for utilization information.
-
-  ```
-  kubectl delete pod -n kube-system $(kubectl get pod -n kube-system --selector=k8s-app=kubernetes-dashboard -o jsonpath='{.items..metadata.name}')
-  ```
-  {: pre}
+See the following sections:
+* [Fixing container resource limits](#pod-fail-resource-limits)
+* [Fixing pod replacement by higher priority pods](#pod-fail-higher-priority)
 
 <br />
 
 
-## Log lines are too long
-{: #long_lines}
+## Fixing container resource limits
+{: #pod-fail-resource-limits}
 
-{: tsSymptoms}
-You set up a logging configuration in your cluster to forward logs to an external syslog server. When you view logs, you see a long log message. Additionally, in Kibana, you might be able to see only the last 600 - 700 characters of the log message.
+1.  Get the name of your pod. If you used a label, you can include it to filter your results.
+    ```
+    kubectl get pods --selector='app=wasliberty'
+    ```
+    {: pre}
+2.  Describe the pod and look for the **Restart Count**.
+    ```
+    kubectl describe pod
+    ```
+    {: pre}
+3.  If the pod restarted many times in a short period of time, fetch its status.
+    ```
+    kubectl get pod <pod_name> -n <namespace> -o go-template='{{range.status.containerStatuses}}{{"Container Name: "}}{{.name}}{{"\r\nLastState: "}}{{.lastState}}{{end}}'
+    ```
+4.  Review the reason. For example, `OOM Killed` means "out of memory," indicating that the container is crashing because of a resource limit.
+5.  Add capacity to your cluster such as by [resizing worker pools](/docs/containers?topic=containers-add_workers) so that the resources can be fulfilled.
 
-{: tsCauses}
-A long log message might be truncated due to its length before it is collected by Fluentd, so the log might not be parsed correctly by Fluentd before it is forwarded to your syslog server.
+<br />
 
-{: tsResolve}
-To limit line length, you can configure your own logger to have a maximum length for the `stack_trace` in each log. For example, if you are using Log4j for your logger, you can use an [`EnhancedPatternLayout`](http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/EnhancedPatternLayout.html){: external} to limit the `stack_trace` to 15KB.
+
+## Fixing pod replacement by higher priority pods
+{: #pod-fail-higher-priority}
+
+To see if your pod is being replaced by higher priority pods:
+1.  Get the name of your pod.
+
+    ```
+    kubectl get pods
+    ```
+    {: pre}
+
+2.  Describe your pod YAML.
+
+    ```
+    kubectl get pod <pod_name> -o yaml
+    ```
+    {: pre}
+
+3.  Check the `priorityClassName` field.
+
+    1.  If there is no `priorityClassName` field value, then your pod has the `globalDefault` priority class. If your cluster admin did not set a `globalDefault` priority class, then the default is zero (0), or the lowest priority. Any pod with a higher priority class can preempt, or remove, your pod.
+
+    2.  If there is a `priorityClassName` field value, get the priority class.
+
+        ```
+        kubectl get priorityclass <priority_class_name> -o yaml
+        ```
+        {: pre}
+
+    3.  Note the `value` field to check your pod's priority.
+
+4.  List existing priority classes in the cluster.
+
+    ```
+    kubectl get priorityclasses
+    ```
+    {: pre}
+
+5.  For each priority class, get the YAML file and note the `value` field.
+
+    ```
+    kubectl get priorityclass <priority_class_name> -o yaml
+    ```
+    {: pre}
+
+6.  Compare your pod's priority class value with the other priority class values to see if it is higher or lower in priority.
+
+7.  Repeat steps 1 to 3 for other pods in the cluster, to check what priority class they are using. If those other pods' priority class is higher than your pod, your pod is not provisioned unless there is enough resources for your pod and every pod with higher priority.
+
+8.  Contact your cluster admin to add more capacity to your cluster and confirm that the right priority classes are assigned.
