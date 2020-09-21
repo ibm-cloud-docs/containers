@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-31"
+lastupdated: "2020-09-21"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -818,9 +818,6 @@ Kubernetes Ingress field: Currently, no configuration option for the Kubernetes 
 
 Customize the deployment for ALBs that run the Kubernetes Ingress image by creating an `ibm-ingress-deploy-config` configmap.
 {: shortdesc}
-
-The following options are specific to ALBs that run the Kubernetes Ingress image. To modify default Ingress settings that apply to ALBs regardless of image type, such as to enable source IP preservation or configure SSL protocols, see [Modifying default Ingress settings](/docs/containers?topic=containers-ingress_annotation).
-{: tip}
 
 1. Get the names of the services that expose each ALB.
   ```
