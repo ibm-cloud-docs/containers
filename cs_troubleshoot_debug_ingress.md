@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-08"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -212,7 +212,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
    Example output:
    ```
    ID                                                     Public IP         Private IP      Flavor              State     Status   Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.17.11
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-default-000001f7   169.xx.xxx.xxx    10.xxx.xx.xxx   u3c.2x4.encrypted   deployed   Ready    dal10   1.17.12
    ```
    {: screen}
 
@@ -324,7 +324,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
   * If a public ALB is listed and but is not assigned an IP address (classic clusters) or hostname (VPC clusters), try to disable and re-enable the ALBs.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
       ```
-      ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
       ```
       {: pre}
       ```
@@ -333,7 +333,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       {: pre}
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
       ```
-      ibmcloud ks ingress alb disable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID>
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
       ```
       {: pre}
       ```
@@ -342,7 +342,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       {: pre}
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
       ```
-      ibmcloud ks ingress alb disable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
       ```
       {: pre}
       ```
@@ -612,7 +612,7 @@ Start by checking for error messages in the Ingress resource deployment events a
       {: note}
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
-        ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
+        ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
 
@@ -622,7 +622,7 @@ Start by checking for error messages in the Ingress resource deployment events a
         {: pre}
       * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
         ```
-        ibmcloud ks ingress alb disable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID>
+        ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
         ```
@@ -631,7 +631,7 @@ Start by checking for error messages in the Ingress resource deployment events a
         {: pre}
       * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
         ```
-        ibmcloud ks ingress alb disable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
+        ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
         ```
         {: pre}
         ```

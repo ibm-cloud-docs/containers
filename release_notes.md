@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-18"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, release notes
 
@@ -107,6 +107,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 21 September 2020 | **Versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.9_1528](/docs/containers?topic=containers-changelog#1189_1528), [1.17.12_1540](/docs/containers?topic=containers-changelog#11712_1540), and [1.16.15_1547](/docs/containers?topic=containers-changelog#11615_1547). |
 | 14 September 2020 | <ul><li>**Versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-changelog#11614_1546), and [1.15.12_1552](/docs/containers?topic=containers-changelog#11512_1552).</li><li>**Istio add-on**: Versions [1.7.1](/docs/containers?topic=containers-istio-changelog#171) and [1.6.9](/docs/containers?topic=containers-istio-changelog#169) of the Istio managed add-on are released.</li><li>**VPC load balancer**: In version 1.18 and later VPC clusters, added the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotation to preserve the source IP address of requests to apps in your cluster.</li></ul> |
 | 04 September 2020 | **New!: CIS Kubernetes Benchmark**: Added information about {{site.data.keyword.containerlong_notm}} compliance with the [Center for Internet Security (CIS) Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark) 1.5 for clusters that run Kubernetes version 1.18. |
 | 03 September 2020 | **CA certificate rotation**: Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-security#cert-rotate).|

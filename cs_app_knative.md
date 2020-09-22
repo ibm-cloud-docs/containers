@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-10"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, knative
 
@@ -324,7 +324,7 @@ Update your Knative add-on to the latest versions.
       {: pre}
     3. Navigate to the Istio package directory.
       ```
-      cd istio-1.7.0
+      cd istio-1.7.2
       ```
       {: pre}
     4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.

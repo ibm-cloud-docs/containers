@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-18"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -118,6 +118,18 @@ The Istio add-on is not currently supported for Kubernetes version 1.19 clusters
 ## Version 1.7
 {: #v17}
 
+### Changelog for 1.7.2, released 23 September 2020
+{: #172}
+
+The following table shows the changes that are included in version 1.7.2 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.1 | 1.7.2 | See the Istio release notes for [Istio 1.7.2](https://istio.io/news/releases/1.7.x/announcing-1.7.2/){:external}. |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.7.1" caption-side="top"}
+
 ### Changelog for 1.7.1, released 14 September 2020
 {: #171}
 
@@ -128,7 +140,7 @@ The following table shows the changes that are included in version 1.7.1 of the 
 | -------- | ------- | ----------- |
 | 1.7.0 | 1.7.1 | See the Istio release notes for [Istio 1.7.1](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.1/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
-{: caption="Changes since version 1.7.1" caption-side="top"}
+{: caption="Changes since version 1.7.0" caption-side="top"}
 
 ### Changelog for 1.7.0, released 02 September 2020
 {: #170}

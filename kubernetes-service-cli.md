@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-17"
+lastupdated: "2020-09-21"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -3288,7 +3288,7 @@ Before you remove a zone, make sure that you have enough worker nodes in other z
 {: tip}
 
 ```
-ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--pool WORKER_POOL] [-f] [-q]
+ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--worker-pool WORKER_POOL] [-f] [-q]
 ```
 {: pre}
 
