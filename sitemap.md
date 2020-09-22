@@ -1653,6 +1653,7 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
   * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
