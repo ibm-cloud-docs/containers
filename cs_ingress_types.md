@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-17"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -528,21 +528,10 @@ Decide whether to [create new ALBs](#alb-migrate-3-new) that run the Kubernetes 
       {: pre}
 
     2. Disable each of the old ALBs.
-      * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
-        ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-        ```
-        ibmcloud ks ingress alb disable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
-        ```
-        ibmcloud ks ingress alb disable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+      ```
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+      ```
+      {: pre}
 
   * Original {{site.data.keyword.containerlong_notm}} Ingress resources:
     ```
@@ -569,21 +558,10 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
       {: pre}
 
     2. Disable the ALB.
-      * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
-        ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-        ```
-        ibmcloud ks ingress alb disable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
-        ```
-        ibmcloud ks ingress alb disable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
-        ```
-        {: pre}
+      ```
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+      ```
+      {: pre}
 
     3. Before continuing to the next step, verify that the ALB IP address is removed from the DNS registration for the Ingress subdomain.
       ```
@@ -923,7 +901,7 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster. You can re-enable an ALB at any time by running `ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID>`.
   ```
-  ibmcloud ks ingress alb disable classic --alb <ALB_ID> -c <cluster_name_or_ID>
+  ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
   ```
   {: pre}
   </br>
@@ -961,16 +939,10 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   {: screen}
 
 3. If you later decide to scale down your ALBs, you can disable an ALB. For example, you might want to disable an ALB to use less compute resources on your worker nodes. The ALB is disabled and does not route traffic in your cluster.
-  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
-    ```
-    ibmcloud ks ingress alb disable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID>
-    ```
-    {: pre}
-  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
-    ```
-    ibmcloud ks ingress alb disable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID>
-    ```
-    {: pre}
+  ```
+  ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
+  ```
+  {: pre}
 
 
 <br />
