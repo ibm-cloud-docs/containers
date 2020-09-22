@@ -342,7 +342,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
       {: pre}
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
       ```
-      ibmcloud ks ingress alb disable--alb <ALB_ID> -c <cluster_name_or_ID>
+      ibmcloud ks ingress alb disable --alb <ALB_ID> -c <cluster_name_or_ID>
       ```
       {: pre}
       ```
