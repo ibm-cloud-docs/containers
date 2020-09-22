@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-21"
+lastupdated: "2020-09-22"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -912,7 +912,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
 
-1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
+1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.<p class="note">Only one {{site.data.keyword.appid_short_notm}} instance can be used in each namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
   * To use an existing instance, ensure that the service instance name contains only alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
   * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
       1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name must contain only alphanumeric characters or hyphens (`-`), and can't contain spaces.
@@ -1045,9 +1045,6 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       kubectl apply -f oauth2-proxy-app-id.yaml
       ```
       {: pre}
-
-
-
 
 ## Preserving the source IP address
 {: #preserve_source_ip}
