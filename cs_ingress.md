@@ -730,8 +730,8 @@ When you create a standard cluster, a private ALB is created in each zone that y
     The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:645/ingress-auth:421   2234947       -
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:647/ingress-auth:421   2234945       -
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:651/ingress-auth:423   2234947       -
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:651/ingress-auth:423   2234945       -
     ```
     {: screen}
 
@@ -741,15 +741,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `647`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `651`:
   ```
   IBM Cloud Ingress: 'auth' version
-  421
+  423
 
   IBM Cloud Ingress versions
-  647 (default)
+  651 (default)
+  647
   645
-  642
 
   Kubernetes Ingress versions
   0.34.1_391_iks
@@ -760,7 +760,7 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
 3. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--ip` flag.
   ```
-  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version <version>
+  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version 651
   ```
   {: pre}
   </br>
@@ -1035,15 +1035,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `647`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `651`:
   ```
   IBM Cloud Ingress: 'auth' version
-  421
+  423
 
   IBM Cloud Ingress versions
-  647 (default)
+  651 (default)
+  647
   645
-  642
 
   Kubernetes Ingress versions
   0.34.1_391_iks
@@ -1055,12 +1055,12 @@ When you create a standard cluster, a private ALB is created in each zone that y
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version <version>
+    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version 651
     ```
     {: pre}
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version <version>
+    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version 651
     ```
     {: pre}
   </br>
@@ -1424,7 +1424,7 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 - The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
 The latest three versions of each image type are supported for ALBs.
-* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. 
+* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag.
 * To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.
 * If you omit the `--version` flag when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 
@@ -1437,12 +1437,12 @@ ibmcloud ks ingress alb versions
 Example output:
 ```
 IBM Cloud Ingress: 'auth' version
-421
+423
 
 IBM Cloud Ingress versions
-647 (default)
+651 (default)
+647
 645
-642
 
 Kubernetes Ingress versions
 0.34.1_391_iks
@@ -1451,7 +1451,7 @@ Kubernetes Ingress versions
 ```
 {: screen}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.33.0_390_iks` indicates the most recent build of the `0.33.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.34.1_391_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
 For the changes that are included in each version of the Ingress images, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
