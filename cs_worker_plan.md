@@ -517,7 +517,8 @@ To review how much compute resources are currently used on your worker node, run
 {: tab-title="Worker node PID reserves by tier"}
 {: tab-group="Worker Node"}
 
-<p class="note">Sample worker node values are provided for example only. Your actual usage might vary slightly.</p>
+Sample worker node values are provided for example only. Your actual usage might vary slightly.
+{: note}
 
 
 
