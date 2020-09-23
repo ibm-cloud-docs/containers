@@ -798,7 +798,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 <tr>
   <td>13 May 2019</td>
   <td><ul>
-  <li><strong>Version changelogs</strong>: Added that new patch updates are available for [1.14.1_1518](/docs/containers?topic=containers-changelog_archive#1141_1518), [1.13.6_1521](/docs/containers?topic=containers-changelog_archive#1136_1521), [1.12.8_1552](/docs/containers?topic=containers-changelog_archive#1128_1552), [1.11.10_1558](/docs/containers?topic=containers-changelog_archive#11110_1558), and [1.10.13_1558](/docs/containers?topic=containers-changelog#11013_1558).</li>
+  <li><strong>Version changelogs</strong>: Added that new patch updates are available for [1.14.1_1518](/docs/containers?topic=containers-changelog_archive#1141_1518), [1.13.6_1521](/docs/containers?topic=containers-changelog_archive#1136_1521), [1.12.8_1552](/docs/containers?topic=containers-changelog_archive#1128_1552), [1.11.10_1558](/docs/containers?topic=containers-changelog_archive#11110_1558), and [1.10.13_1558](/docs/containers?topic=containers-changelog_archive#11013_1558).</li>
   <li><strong>Worker node flavors</strong>: Removed all [virtual machine worker node flavors](/docs/containers?topic=containers-planning_worker_nodes#vm) that are 48 or more cores per [cloud status ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/status?component=containers-kubernetes&selected=status). You can still provision [bare metal worker nodes](/docs/containers?topic=containers-planning_worker_nodes#bm) with 48 or more cores.</li></ul></td>
 </tr>
 <tr>
