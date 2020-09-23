@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -127,34 +127,6 @@ health {
 
 <br />
 
-
-## Cluster service DNS resolution sometimes fails with CoreDNS but not KubeDNS
-{: #coredns_issues}
-
-**Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-
-{: tsSymptoms}
-In your cluster that runs Kubernetes version 1.15 or earlier, your app sometimes fails to resolve DNS names for cluster services. The failures occur only when CoreDNS, not KubeDNS, is the [configured cluster DNS provider](/docs/containers?topic=containers-cluster_dns). You might see error messages similar to the following.
-
-```
-Name or service not known
-```
-{: screen}
-
-```
-No address associated with hostname or similar
-```
-{: screen}
-
-{: tsCauses}
-CoreDNS caching for cluster services behaves differently than the previous cluster DNS provider, KubeDNS, which can cause issues for apps that use an older DNS client.
-
-{: tsResolve}
-Update your app to use a newer DNS client. For example, if your app image is Ubuntu 14.04, the older DNS client results in periodic failures. When you update the image to Ubuntu 16.04, the DNS client works.
-
-You can also remove the cache plug-in configurations from the `coredns` configmap in the `kube-system` namespace. For more information on customizing CoreDNS, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize).
-
-<br />
 
 
 

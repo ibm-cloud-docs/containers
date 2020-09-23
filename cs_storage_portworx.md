@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-21"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks,
 
@@ -1252,5 +1252,7 @@ Review the following Portworx limitations.
 | The Portworx experimental `InitializerConfiguration` feature is not supported. | {{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1). |
 {: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Portworx limitations"}
+
+
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -116,9 +116,9 @@ ibmcloud ks ingress alb versions
 ```
 {: pre}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.33.0_390_iks` indicates the most recent build of the `0.33.0` Ingress NGINX version that {{site.data.keyword.containerlong_notm}} released. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.34.1_391_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version that {{site.data.keyword.containerlong_notm}} released. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
-When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions. 
+When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
 ### Version 0.34.1 (latest)
 {: #0_34_1}
@@ -184,6 +184,12 @@ Refer to the following table for a summary of changes for each version of the {{
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>651 / 423</td>
+<td>23 Sep 2020</td>
+<td>Updates the `go` version to 1.13.15 for [CVE-2020-16845 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-16845).</td>
+<td>-</td>
+</tr>
 <tr>
 <td>647 / 421</td>
 <td>05 Aug 2020</td>

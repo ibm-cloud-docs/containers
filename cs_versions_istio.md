@@ -126,7 +126,7 @@ The following table shows the changes that are included in version 1.7.2 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.1 | 1.7.2 | See the Istio release notes for [Istio 1.7.2](https://istio.io/news/releases/1.7.x/announcing-1.7.2/){:external}. |
+| 1.7.1 | 1.7.2 | See the Istio release notes for [Istio 1.7.2](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.2/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.1" caption-side="top"}
 

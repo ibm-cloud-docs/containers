@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -234,7 +234,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    ```
    ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
    kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
-   kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.15.1_1511   
+   kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.17.12_1511   
    ```
    {: screen}
 
@@ -1027,7 +1027,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     start_time: "Tue Dec 17 15:19:23 UTC 2019"
     config:
-      kubernetes_version: 1.15
+      kubernetes_version: 1.17.12
       pod_name: ibm-external-compute-job-wk9xc
       image_url: us.icr.io/armada-master/stranger:v1.0.0
       prepare_host: True
@@ -1098,13 +1098,7 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
   ```
   {: pre}
 
-3. Stop the `calico-node`, `calico-node-label`, and `create-workload-endpoint` services on the server instance. If you cluster runs Kubernetes version 1.16 or later, also stop the `create-host-endpoint` service.
-  * Kubernetes 1.15:
-    ```
-    systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service
-    ```
-    {: pre}
-  * Kubernetes 1.16 and later:
+3.  Stop the `calico-node`, `calico-node-label`, `create-host-endpoint`, and `create-workload-endpoint` services on the server instance.
     ```
     systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service create-host-endpoint.service
     ```

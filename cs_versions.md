@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -145,8 +145,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 *   Other: 1.16.15
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.15
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14
+*   Deprecated: 
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15
 
 <br>
 
@@ -209,10 +209,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>Nov 2020 `†`</td>
 </tr>
   <tr>
-  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.15](#cs_v115)</td>
   <td>05 Aug 2019</td>
-  <td>22 Sep 2020 `†`</td>
+  <td>22 Sep 2020</td>
 </tr>
 <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -313,7 +313,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.18 [preparation actions](#cs_v118).
 -  Version 1.17 [preparation actions](#cs_v117).
 -  Version 1.16 [preparation actions](#cs_v116).
--  **Deprecated**: Version 1.15 [preparation actions](#cs_v115).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
@@ -460,7 +459,7 @@ The following table shows the actions that you must take after you update the Ku
 
 | Type | Description |
 | ---- | ----------- |
-| CoreDNS `cache` plug-in | CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS `cache` plug-in due to [the known issue](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_issues), you can now re-enable the plug-in. |
+| CoreDNS `cache` plug-in | CoreDNS caching is updated to better support older DNS clients. If you disabled the CoreDNS `cache` plug-in, you can now re-enable the plug-in. |
 | Kubernetes Dashboard metrics | The latest Kubernetes Dashboard version works with `metrics-server` to display metrics in the Kubernetes Dashboard. If you deployed [Heapster](https://github.com/kubernetes-retired/heapster){: external} to your cluster to enable metrics in the Kubernetes Dashboard, you can now remove `heapster` to conserve cluster resources. |
 | Connection between gateway-enabled clusters and classic virtual or bare metal server instances | [Update your server instance connection](/docs/containers?topic=containers-add_workers#update_connection) to use the latest latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository. |
 | **Unsupported**: `kubectl cp` to copy symbolic links from containers | The `kubectl cp` command no longer supports copying symbolic links from containers. If your scripts rely on this, update them to use `kubectl exec` with `tar` instead. For an example, run `kubectl cp --help` in the `kubectl` 1.16 CLI version. |
@@ -510,100 +509,6 @@ To determine whether you must change your policies:
 <br />
 
 
-## Deprecated: Version 1.15
-{: #cs_v115}
-
-<p><img src="images/certified_kubernetes_1x15.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.15 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.15 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
-
-Review changes that you might need to make when you update from the previous Kubernetes version to 1.15.
-{: shortdesc}
-
-Version 1.15 is deprecated. [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least 1.16.
-{: deprecated}
-
-### Update before master
-{: #115_before}
-
-The following table shows the actions that you must take before you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.15">
-<caption>Changes to make before you update the master to Kubernetes 1.15</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Add-ons and plug-ins</td>
-<td>For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation.</td>
-</tr>
-<tr>
-<td>`kubelet` cgroup metrics collection</td>
-<td>`kubelet` now collects only cgroups metrics for the node, container runtime, kubelet, pods, and containers. If any automation or components rely on additional cgroup metrics, update the components to reflect these changes.</td>
-</tr>
-<tr>
-<td>Default Calico policy change</td>
-<td>If you created custom Calico `HostEndpoints` that refer to an `iks.worker.interface == 'private'` label, a new default Calico policy, `allow-all-private-default`, might disrupt network traffic. You must create a Calico policy with the `iks.worker.interface == 'private'` label to override the default policy. For more information, see [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy).</td>
-</tr>
-<tr>
-<td>Minimum Helm version</td>
-<td>If you [add services to your cluster by using Helm charts](/docs/containers?topic=containers-helm), update to Helm version 2.8 or later.</td>
-</tr>
-</tbody>
-</table>
-
-### Update after master
-{: #115_after}
-
-The following table shows the actions that you must take after you update the Kubernetes master.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.15">
-<caption>Changes to make after you update the master to Kubernetes 1.15</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>Unsupported: `kubectl exec --pod`</td>
-<td>The `kubectl exec` command's `--pod` and shorthand `-p` flags are no longer supported. If your scripts rely on these flags, update them.</td>
-</tr>
-<tr>
-<td>Unsupported: `kubectl scale job`</td>
-<td>The `kubectl scale job` command is removed. If your scripts rely on this command, update them.</td>
-</tr>
-  </tbody>
-</table>
-
-### Update after worker nodes
-{: #115_after_worker}
-
-The following table shows the actions that you must take after you update your worker nodes.
-{: shortdesc}
-
-<table summary="Kubernetes updates for version 1.15">
-<caption>Changes to make after you update the worker nodes to Kubernetes 1.15</caption>
-<thead>
-<tr>
-<th>Type</th>
-<th>Description</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-<td>`kubelet probe metrics` type are now counters rather than gauge</td>
-<td>The previous method of using the gauge type for probe metrics is replaced by the counters type. The gauge type returned `0` for success and `1` for failed operations. Now, the counters type keeps track of the number of times that the metric returns `successful`, `failure`, or `unknown`. If your automation processes rely on a `0` successful or `1` failed gauge response, update the processes to use the counters response statuses. The numerical response value can now indicate the number of times that the counters response statuses are reported.<br><br>Additionally, to reflect this change in functionality, the `prober_probe_result` metric is replaced by the `prober_probe_total` metric.</td>
-</tr>
-</tbody>
-</table>
-
-<br />
 
 
 ## Archive
@@ -612,18 +517,26 @@ The following table shows the actions that you must take after you update your w
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
+### Version 1.15 (Unsupported)
+{: #cs_v115}
+
+As of 22 September 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.15](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.15 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+{: shortdesc}
+
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.16](#cs_v116).
+
 ### Version 1.14 (Unsupported)
 {: #cs_v114}
 
-As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.14](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.14 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 31 May 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.14](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.14 clusters cannot receive security updates or support.
 {: shortdesc}
 
-[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to [Kubernetes 1.15](#cs_v115), and then to a supported version, such as [Kubernetes 1.16](#cs_v116).
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
 
 ### Version 1.13 (Unsupported)
 {: #cs_v113}
 
-As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support.
+As of 22 February 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.13](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.13 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
@@ -631,7 +544,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.12 (Unsupported)
 {: #cs_v112}
 
-As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support.
+As of 3 November 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.12](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.12 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
@@ -639,7 +552,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.11 (Unsupported)
 {: #cs_v111}
 
-As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.11 clusters cannot receive security updates or support.
+As of 20 July 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.11](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.11 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
@@ -647,7 +560,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.10 (Unsupported)
 {: #cs_v110}
 
-As of 16 May 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.10](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.10 clusters cannot receive security updates or support.
+As of 16 May 2019, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.10](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.10 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
@@ -655,7 +568,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.9 (Unsupported)
 {: #cs_v19}
 
-As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support.
+As of 27 December 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.9](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.9 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
@@ -663,7 +576,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.8 (Unsupported)
 {: #cs_v18}
 
-As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support.
+As of 22 September 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.8](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.8 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.
@@ -671,7 +584,7 @@ To continue running your apps in {{site.data.keyword.containerlong_notm}}, [crea
 ### Version 1.7 (Unsupported)
 {: #cs_v17}
 
-As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-changelog#changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support.
+As of 21 June 2018, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.7](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.7 clusters cannot receive security updates or support.
 {: shortdesc}
 
 To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster.

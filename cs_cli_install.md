@@ -567,21 +567,18 @@ To uninstall the CLIs:
 <br />
 
 
-## Using the {{site.data.keyword.cloud-shell_notm}} in your web browser (beta)
+## Using the {{site.data.keyword.cloud-shell_notm}} in your web browser
 {: #cloud-shell}
 
 [{{site.data.keyword.cloud-shell_full}}](https://cloud.ibm.com/shell){: external} allows you to use the {{site.data.keyword.cloud_notm}} CLI and various CLI plug-ins to manage your cluster directly from your web browser.
 {: shortdesc}
-
-The {{site.data.keyword.cloud-shell_notm}} is a beta feature that is subject to change. Do not use it for production workloads.
-{: beta}
 
 The {{site.data.keyword.cloud-shell_notm}} is enabled with several [plug-ins and tools](/docs/cloud-shell?topic=cloud-shell-plugins-tools), including the base {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), the {{site.data.keyword.containerlong_notm}} plug-in (`ibmcloud ks`), the {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`), and the Kubernetes CLI (`kubectl`).
 
 While you use the {{site.data.keyword.cloud-shell_short}}, keep in mind the following limitations:
 * You can open up to five concurrent sessions, which operate independently so you can work with different resources, regions, and accounts at once.
 * Any files that you download and edit locally, such as YAML files, are stored temporarily in the {{site.data.keyword.cloud-shell_short}} and do not persist across sessions.
-* {{site.data.keyword.cloud-shell_short}} has a usage quota that limits you to 4 hours of continuous use or up to 30 hours within a week.
+* {{site.data.keyword.cloud-shell_short}} has a usage quota that limits you to 50 hours within a week.
 
 To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 
