@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-21"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -483,70 +483,6 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio versions 1.4 and later are supported only in Kubernetes version 1.16 and later clusters.</dd>
 </dl>
 
-#### `ibmcloud ks cluster addon enable istio-extras`
-{: #cs_cluster_addon_enable_istio_extras}
-
-Enable the managed Istio extras add-on. Installs Grafana, Jeager, and Kiali to provide extra monitoring, tracing, and visualization for Istio.
-{: shortdesc}
-
-This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, the Istio extras are included in the main `istio` add-on.
-{: note}
-
-```
-ibmcloud ks cluster addon enable istio-extras --cluster CLUSTER [--version VERSION] [-y]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
-</dl>
-
-#### `ibmcloud ks cluster addon enable istio-sample-bookinfo`
-{: #cs_cluster_addon_enable_istio_sample_bookinfo}
-
-Enable the managed Istio BookInfo add-on. Deploys the [BookInfo sample application for Istio](https://istio.io/latest/docs/examples/bookinfo/){: external} into the <code>default</code> namespace.
-{: shortdesc}
-
-This add-on is supported only in Kubernetes version 1.15 and earlier clusters. In Kubernetes version 1.16 and later clusters, you can [manually install BookInfo](/docs/containers?topic=containers-istio-mesh#bookinfo_setup).
-{: note}
-
-```
-ibmcloud ks cluster addon enable istio-sample-bookinfo --cluster CLUSTER [--version VERSION] [-y]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Enable the <code>istio</code> and <code>istio-extras</code> add-on dependencies.</dd>
-</dl>
-
 #### `ibmcloud ks cluster addon enable knative`
 {: #cs_cluster_addon_enable_knative}
 
@@ -949,7 +885,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <dd>Worker nodes feature AES 256-bit disk encryption by default; [learn more](/docs/containers?topic=containers-security#encrypted_disk). To disable encryption, include this option.</dd>
 
 <dt id="pod-subnet"><code><strong>--pod-subnet <em>SUBNET</em></strong></code></br></dt>
-<dd>**Standard clusters that run Kubernetes 1.15 or later**: All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
+<dd>All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.BluDirectLink}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
 <p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pod IP addresses for eight worker nodes, <code>/21</code> to have enough pod IP addresses for 16 worker nodes, and so on.</p>
 <p>The subnet that you choose must be within one of the following ranges:
 <ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
@@ -958,7 +894,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The service subnet is in the 172.21.0.0/16 range by default.</p></dd>
 
 <dt id="service-subnet"><code><strong>--service-subnet <em>SUBNET</em></strong></code></br>
-<dd>**Standard clusters that run Kubernetes 1.15 or later**: All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
+<dd>All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your services.
 <p>The subnet must be specified in CIDR format with a size of at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges:
 <ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
 <li><code>172.21.0.0 - 172.31.255.255</code></li>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -627,7 +627,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    <tr>
    <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
    <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
- Note that gateway-enabled clusters are supported for Kubernetes versions 1.15 and later only.</td>
+</td>
    </tr>
    <tr>
    <td><code>--private-service-endpoint</code></td>
@@ -1083,7 +1083,7 @@ As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not 
     <tr>
     <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
     <td>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
- Note that VPC clusters are supported for Kubernetes versions 1.15 and later only.</td>
+</td>
     </tr>  
     <tr>
     <td><code>--provider <em>&lt;vpc-classic&gt;</em></code></td>

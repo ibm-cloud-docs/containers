@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks
 
@@ -1353,7 +1353,6 @@ By default, your classic {{site.data.keyword.containerlong_notm}} clusters inclu
 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Update your cluster to run Kubernetes version [1.15.5_1520](/docs/containers?topic=containers-changelog#1155_1520), [1.14.8_1536](/docs/containers?topic=containers-changelog#1148_1536), or later.
 * Make sure that you have the **Manager** IAM service role for the cluster, so that you can make changes to deployments in the `kube-system` namespace.
 
 To scale down the {{site.data.keyword.filestorage_short}} plug-in:
