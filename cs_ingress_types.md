@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -107,6 +107,9 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 
 Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
 
+
+Not ready to switch your ALBs to the Kubernetes Ingress image yet? When you enable or update an existing ALB, the ALB continues to run the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image. Your existing ALBs do not begin to run the Kubernetes Ingress image until you specify the Kubernetes Ingress image version in the `--version` flag when you enable them.
+{: tip}
 
 ## Comparison of the ALB image types
 {: #about-alb-images}
@@ -575,7 +578,7 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
       ```
       {: pre}
 
-    5. Re-enable the ALB. Specify the image version that you chose in the `--version` flag. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image.
+    5. Re-enable the ALB. Specify the image version that you chose in the `--version` flag.
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
         ```
         ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID> --version <image_version>
@@ -740,7 +743,10 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 - The {{site.data.keyword.containerlong_notm}} Ingress image is built on a custom implementation of the NGINX Ingress controller.
 - The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
-The latest three versions of each image type are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.
+The latest three versions of each image type are supported for ALBs.
+* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. 
+* To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.
+* If you omit the `--version` flag when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 To list the currently supported versions for each type of image, run the following command:
 ```
@@ -789,7 +795,7 @@ You can disable or enable the automatic updates for all Ingress ALBs in your clu
   ```
   {: pre}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates remain disabled.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. Your ALB continues to run the image that it previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image. After you force a one-time update, automatic updates remain disabled.
 * To update all ALB pods in the cluster:
   ```
   ibmcloud ks ingress alb update -c <cluster_name_or_ID> --version <image_version>

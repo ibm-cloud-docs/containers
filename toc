@@ -157,7 +157,6 @@ Kubernetes Service
 
         {: .topicgroup}
         Exposing apps with Ingress ALBs
-            cs_ingress_qs.md
             cs_ingress_about.md
             cs_ingress_types.md
             cs_ingress_comm_annotations.md

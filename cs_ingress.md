@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -100,6 +100,71 @@ Expose multiple apps in your Kubernetes cluster by creating Ingress resources th
 
 This information is for ALBs that run the custom {{site.data.keyword.containerlong_notm}} Ingress image. To use the community Kubernetes implementation of Ingress, see [Beta: Setting up community Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
 {: note}
+
+## Quick start
+{: #ingress-qs}
+{: help}
+{: support}
+
+Quickly expose your app to the Internet by creating an Ingress resource.
+{: shortdesc}
+
+First time setting up Ingress? Check out the other sections on this page for prerequisite, planning, and detailed setup steps. Come back to these quick start steps for a brief refresher the next time you set up an Ingress resource.
+{: tip}
+
+
+
+1. Create a Kubernetes ClusterIP service for your app so that it can be included in the Ingress application load balancing.
+  ```
+  kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+  ```
+  {: pre}
+
+2. Get the Ingress subdomain and secret for your cluster.
+    ```
+    ibmcloud ks cluster get -c <cluster_name_or_ID> | grep Ingress
+    ```
+    {: pre}
+    Example output:
+    ```
+    Ingress Subdomain:      mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud
+    Ingress Secret:         mycluster-a1b2cdef345678g9hi012j3kl4567890-0000
+    ```
+    {: screen}
+
+3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If your app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
+  ```yaml
+  apiVersion: networking.k8s.io/v1beta1
+  kind: Ingress
+  metadata:
+    name: myingressresource
+  spec:
+    tls:
+    - hosts:
+      - <ingress_subdomain>
+      secretName: <ingress_secret>
+    rules:
+    - host: <ingress_subdomain>
+      http:
+        paths:
+        - path: /<app_path>
+          backend:
+            serviceName: my-app-svc
+            servicePort: 80
+  ```
+  {: codeblock}
+
+4. Create the Ingress resource.
+  ```
+  kubectl apply -f myingressresource.yaml
+  ```
+  {: pre}
+
+5. In a web browser, enter the Ingress subdomain and the path for your app.
+  ```
+  https://<ingress_subdomain>/<app_path>
+  ```
+  {: codeblock}
 
 
 ## Prerequisites
@@ -1358,7 +1423,10 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 - The {{site.data.keyword.containerlong_notm}} Ingress image is built on a custom implementation of the NGINX Ingress controller.
 - The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
-The latest three versions of each image type are supported for ALBs. When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command. If you omit this flag, the ALB runs the default version of the Kubernetes Ingress image type.
+The latest three versions of each image type are supported for ALBs.
+* When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. 
+* To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.
+* If you omit the `--version` flag when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 
 To list the currently supported versions for each type of image, run the following command:
 ```
@@ -1407,7 +1475,7 @@ You can disable or enable the automatic updates for all Ingress ALBs in your clu
   ```
   {: pre}
 
-If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates remain disabled.
+If automatic updates for the Ingress ALB add-on are disabled and you want to update the add-on, you can force a one-time update of your ALB pods. Note that you can use this command to update your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. Your ALB continues to run the image that it previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image. After you force a one-time update, automatic updates remain disabled.
 * To update all ALB pods in the cluster:
   ```
   ibmcloud ks ingress alb update -c <cluster_name_or_ID> --version <image_version>

@@ -1043,8 +1043,6 @@ subcollection: containers
 {: #sitemap_exposing_apps_with_ingress_albs}
 
 
-[Quick start for Ingress](/docs/containers?topic=containers-ingress-qs)
-
 [About Ingress](/docs/containers?topic=containers-ingress-about)
 * [What are the components of Ingress?](/docs/containers?topic=containers-ingress-about#ingress_components)
   * [Ingress resource](/docs/containers?topic=containers-ingress-about#ingress-resource)
@@ -1099,6 +1097,7 @@ subcollection: containers
   * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
 [Setting up {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress)
+* [Quick start](/docs/containers?topic=containers-ingress#ingress-qs)
 * [Prerequisites](/docs/containers?topic=containers-ingress#config_prereqs)
 * [Planning networking for single or multiple namespaces](/docs/containers?topic=containers-ingress#multiple_namespaces)
   * [All apps are in one namespace](/docs/containers?topic=containers-ingress#one-ns)

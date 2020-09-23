@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-09-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -290,6 +290,9 @@ Depending on which image type you choose, the ALB behaves according to that impl
 
 
 To get started, see [Setting up {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress) or [Beta: Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+
+Not ready to switch your ALBs to the Kubernetes Ingress image yet? When you enable or update an existing ALB, the ALB continues to run the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image. Your existing ALBs do not begin to run the Kubernetes Ingress image until you specify the Kubernetes Ingress image version in the `--version` flag when you enable them.
+{: tip}
 
 ### Similarities between Ingress images
 {: #alb-image-same}
