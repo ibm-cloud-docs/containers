@@ -1164,135 +1164,6 @@ ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.17 --zone us-so
 
 </br>
 
-### `ibmcloud ks cluster feature disable public-service-endpoint`
-{: #cs_cluster_feature_disable}
-
-Disable the public service endpoint for a cluster.
-{: shortdesc}
-
-**Important**: Before you disable the public endpoint, you first must complete the following steps to enable the private service endpoint:
-1. Enable the private service endpoint by running `ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name>`.
-2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
-3. [Reload all the worker nodes in your cluster to pick up the private endpoint configuration.](#cs_worker_reload)
-
-```
-ibmcloud ks cluster feature disable public-service-endpoint --cluster CLUSTER [-q] [-f]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>-f</code></dt>
-<dd>Optional: Force the command to run with no user prompts.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks cluster feature disable public-service-endpoint --cluster my_cluster
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks cluster feature enable`
-{: #cs_cluster_feature_enable}
-
-Enable a feature on an existing cluster. This command must be combined with one of the following subcommands for the feature that you want to enable.
-{: shortdesc}
-
-#### `ibmcloud ks cluster feature enable private-service-endpoint`
-{: #cs_cluster_feature_enable_private_service_endpoint}
-
-Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master privately accessible.
-{: shortdesc}
-
-To run this command:
-1. Enable [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
-2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
-3. Run `ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name>`.
-4. Follow the prompt in the CLI to refresh the Kubernetes master API server.
-5. [Reload all the worker nodes](#cs_worker_reload) in your cluster to pick up the private endpoint configuration.
-
-```
-ibmcloud ks cluster feature enable private-service-endpoint --cluster CLUSTER [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. The private service endpoint is permanently enabled by default for VPC clusters.
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks cluster feature enable private-service-endpoint --cluster my_cluster
-```
-{: pre}
-
-#### `ibmcloud ks cluster feature enable public-service-endpoint`
-{: #cs_cluster_feature_enable_public_service_endpoint}
-
-Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master publicly accessible.
-{: shortdesc}
-
-After you run this command, you must refresh the API server to use the service endpoint by following the prompt in the CLI.
-
-```
-ibmcloud ks cluster feature enable public-service-endpoint --cluster CLUSTER [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Refresh the cluster master with no user prompts.</dd>
-</dl>
-
-**Example**:
-```
-ibmcloud ks cluster feature enable public-service-endpoint --cluster my_cluster
-```
-{: pre}
-
-</br>
-
 ### `ibmcloud ks cluster get`
 {: #cs_cluster_get}
 
@@ -1492,10 +1363,135 @@ ibmcloud ks cluster master audit-webhook unset --cluster CLUSTER [-q]
 
 </br>
 
+### `ibmcloud ks cluster master private-service-endpoint enable`
+{: #cs_cluster_master_pse_enable}
+
+Enable the [private service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master privately accessible.
+{: shortdesc}
+
+To run this command:
+1. Enable [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
+3. Run `ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name>`.
+4. Follow the prompt in the CLI to refresh the Kubernetes master API server.
+5. [Reload all the worker nodes](#cs_worker_reload) in your cluster to pick up the private endpoint configuration.
+
+```
+ibmcloud ks cluster master private-service-endpoint enable --cluster CLUSTER [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic. The private service endpoint is permanently enabled by default for VPC clusters.
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+
+<dt><code>-y</code></dt>
+<dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks cluster master private-service-endpoint enable --cluster my_cluster
+```
+{: pre}
+
+
+
+### `ibmcloud ks cluster master public-service-endpoint disable`
+{: #cs_cluster_master_pub_se_disable}
+
+Disable the public service endpoint for a cluster.
+{: shortdesc}
+
+**Important**: Before you disable the public endpoint, you first must complete the following steps to enable the private service endpoint:
+1. Enable the private service endpoint by running `ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name>`.
+2. Follow the prompt in the CLI to refresh the Kubernetes master API server.
+3. [Reload all the worker nodes in your cluster to pick up the private endpoint configuration.](#cs_worker_reload)
+
+```
+ibmcloud ks cluster master public-service-endpoint disable --cluster CLUSTER [-q] [-f]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-y</code></dt>
+<dd>Optional: Refresh the cluster master and reload worker nodes with no user prompts.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks cluster master public-service-endpoint disable --cluster my_cluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks cluster master public-service-endpoint enable`
+{: #cs_cluster_master_pub_se_enable}
+
+Enable the [public service endpoint](/docs/containers?topic=containers-plan_clusters#workeruser-master) to make your cluster master publicly accessible.
+{: shortdesc}
+
+After you run this command, you must refresh the API server to use the service endpoint by following the prompt in the CLI.
+
+```
+ibmcloud ks cluster master public-service-endpoint enable --cluster CLUSTER [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+
+<dt><code>-y</code></dt>
+<dd>Optional: Refresh the cluster master with no user prompts.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks cluster master public-service-endpoint enable --cluster my_cluster
+```
+{: pre}
+
+</br>
+
 ### `ibmcloud ks cluster master refresh`
 {: #cs_apiserver_refresh}
 
-Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks cluster master audit-webhook set`, `cluster master audit-webhook unset`, `cluster feature enable`, or `cluster feature disable` commands. The highly available Kubernetes master components are restarted in a rolling restart. Your worker nodes, apps, and resources are not modified and continue to run.
+Apply configuration changes for the Kubernetes master that are requested with the `ibmcloud ks cluster master` commands. The highly available Kubernetes master components are restarted in a rolling restart. Your worker nodes, apps, and resources are not modified and continue to run.
 {: shortdesc}
 
 The `apiserver-refresh` and `cluster-refresh` aliases for this command are deprecated.

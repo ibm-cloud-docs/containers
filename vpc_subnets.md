@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -142,6 +142,8 @@ If you need to create your cluster by using custom-range subnets, see the guidan
 If you plan to connect your cluster to on-premises networks through {{site.data.keyword.dl_full_notm}} or a VPN service, you can avoid subnet conflicts by specifying a custom subnet CIDR that provides the private IP addresses for your pods, and a custom subnet CIDR to provide the private IP addresses for services.
 
 To specify custom pod and service subnets during cluster creation, use the `--pod-subnet` and `--service-subnet` flags in the `ibmcloud ks cluster create` CLI command.
+
+To see the pod and service subnets that your cluster uses, look for the `Pod Subnet` and `Service Subnet` fields in the output of `ibmcloud ks cluster get`.
 
 **Pods**:
 * Default range: For VPC Gen 1 clusters, the default pod subnet is `172.30.0.0/16`. In the first cluster that you create in a Gen 2 VPC, the default pod subnet is `172.17.0.0/18`. In the second cluster that you create in that VPC, the default pod subnet is `172.17.64.0/18`. In each subsequent cluster, the pod subnet range is the next available, non-overlapping `/18` subnet.

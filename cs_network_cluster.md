@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, vlan
 
@@ -118,7 +118,7 @@ Did you create a cluster with only a private service endpoint before you enabled
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private service endpoint.
    ```
-   ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
 4. Refresh the Kubernetes master API server to use the private service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
@@ -161,7 +161,7 @@ The public service endpoint makes your Kubernetes master publicly accessible. Yo
 If you previously disabled the public endpoint, you can re-enable it.
 1. Enable the public service endpoint.
    ```
-   ibmcloud ks cluster feature enable public-service-endpoint --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
 2. Refresh the Kubernetes master API server to use the public service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
@@ -184,7 +184,7 @@ To disable the public service endpoint, you must first enable the private servic
 1. [Enable the private service endpoint](#set-up-private-se).
 2. Disable the public service endpoint.
    ```
-   ibmcloud ks cluster feature disable public-service-endpoint --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
    ```
    {: pre}
 3. Refresh the Kubernetes master API server to remove the public service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
@@ -215,7 +215,7 @@ Note that you cannot disable the private service endpoint after you enable it.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private service endpoint.
    ```
-   ibmcloud ks cluster feature enable private-service-endpoint --cluster <cluster_name_or_ID>
+   ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
 4. Refresh the Kubernetes master API server to use the private service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
@@ -236,7 +236,7 @@ Note that you cannot disable the private service endpoint after you enable it.
 7.  Optional: To use the private service endpoint only:
     1.  Disable the public service endpoint.
         ```
-        ibmcloud ks cluster feature disable public-service-endpoint --cluster <cluster_name_or_ID>
+        ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
         ```
         {: pre}
     2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).

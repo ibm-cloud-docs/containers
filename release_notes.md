@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -107,11 +107,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 24 September 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.1XX](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 23 September 2020 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 651 and the `ingress-auth` build to 423](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Istio add-on**: Version [1.7.2](/docs/containers?topic=containers-istio-changelog#172) of the Istio managed add-on is released.</li></ul> |
 | 22 September 2020 | **Unsupported: Kubernetes version 1.15**: Clusters that run version 1.15 are unsupported. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.|
 | 21 September 2020 | **Versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.18.9_1528](/docs/containers?topic=containers-changelog#1189_1528), [1.17.12_1540](/docs/containers?topic=containers-changelog#11712_1540), and [1.16.15_1547](/docs/containers?topic=containers-changelog#11615_1547). |
 | 14 September 2020 | <ul><li>**Versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.18.8_1527](/docs/containers?topic=containers-changelog#1188_1527), [1.17.11_1539](/docs/containers?topic=containers-changelog#11711_1539), [1.16.14_1546](/docs/containers?topic=containers-changelog#11614_1546), and [1.15.12_1552](/docs/containers?topic=containers-changelog_archive#11512_1552).</li><li>**Istio add-on**: Versions [1.7.1](/docs/containers?topic=containers-istio-changelog#171) and [1.6.9](/docs/containers?topic=containers-istio-changelog#169) of the Istio managed add-on are released.</li><li>**VPC load balancer**: In version 1.18 and later VPC clusters, added the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotation to preserve the source IP address of requests to apps in your cluster.</li></ul> |
-| 04 September 2020 | **New!: CIS Kubernetes Benchmark**: Added information about {{site.data.keyword.containerlong_notm}} compliance with the [Center for Internet Security (CIS) Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark) 1.5 for clusters that run Kubernetes version 1.18. |
+| 04 September 2020 | **New! CIS Kubernetes Benchmark**: Added information about {{site.data.keyword.containerlong_notm}} compliance with the [Center for Internet Security (CIS) Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark) 1.5 for clusters that run Kubernetes version 1.18. |
 | 03 September 2020 | **CA certificate rotation**: Added steps to [revoke existing certificate authority (CA) certificates in your cluster and issue new CA certificates](/docs/containers?topic=containers-security#cert-rotate).|
 | 02 September 2020 | **Istio add-on**: [Version 1.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v17) is released. |
 | 01 September 2020 | <ul><li>**Deprecation of VPC Gen 1 compute**: VPC Generation 1 is deprecated. If you did not create any VPC Gen 1 resources before 01 September 2020, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before 01 September 2020, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends and all remaining VPC Gen 1 resources are deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only, and [move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial). For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).</li><li>**Istio add-on**: [Version 1.5.10 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#1510) is released.</li></ul>|
