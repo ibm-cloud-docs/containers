@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -110,14 +110,14 @@ Periodically, the Kubernetes project releases [major, minor, or patch updates](/
 You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when updates are available, and can also check the [supported versions](/docs/containers?topic=containers-cs_versions) page.
 
 **How many versions behind the latest can the master be?**</br>
-IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`).
+IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`).
 
 For example, if your current Kubernetes API server version is 1.16 (`n`) and you want to update to 1.18, you must first update to 1.17 (`n+1`) and then to 1.18 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.16 to 1.18 (`n+2`).
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
 **Can my worker nodes run a later version than the master?**</br>
-Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
+Your worker nodes cannot run a later `major.minor` Kubernetes version than the master. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`). First, [update your master](#update_master) to the latest Kubernetes version. Then, [update the worker nodes](#worker_node) in your cluster.
 
 Worker nodes can run later patch versions than the master, such as patch versions that are specific to worker nodes for security updates.
 <br>
@@ -193,7 +193,7 @@ You notice that an update is available for your worker nodes in a [classic infra
 {: note}
 
 * **Patch**: A worker node patch update includes security fixes. You can update the classic worker node to the latest patch by using the `ibmcloud ks worker reload` or `update` commands. Keep in mind that the `update` command also updates the worker node to the same `major.minor` version as the master and latest patch version, if a `major.minor` version update is also available.
-* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. You can update the classic worker node to the same patch by using the `ibmcloud ks worker update` command.
+* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`). You can update the classic worker node to the same patch by using the `ibmcloud ks worker update` command.
 
 For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 {: shortdesc}
@@ -406,7 +406,7 @@ You notice that an update is available for your worker nodes in a [VPC infrastru
 {: note}
 
 * **Patch**: A worker node patch update includes security fixes. You can update the VPC worker node to the latest patch by using the `ibmcloud ks worker replace` command.
-* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. You can update the VPC worker node to the same patch by using the `ibmcloud ks worker replace` command with the `--update` flag.
+* **Major.minor**: A `major.minor` update moves up the Kubernetes version of the worker node to the same version as the master. This type of update often includes changes to the Kubernetes API or other behaviors that you must prepare your cluster for. Remember that your worker nodes can be only up to two versions behind the master version (`n-2`). You can update the VPC worker node to the same patch by using the `ibmcloud ks worker replace` command with the `--update` flag.
 
 For more information, see [Update types](/docs/containers?topic=containers-cs_versions#update_types).
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -453,8 +453,11 @@ To add a zone with worker nodes to your worker pool:
   Name:                           mycluster
   ID:                             df253b6025d64944ab99ed63bb4567b6
   State:                          normal
+  Status:                         healthy cluster
   Created:                        2018-09-28T15:43:15+0000
   Location:                       dal10
+  Pod Subnet:                     172.30.0.0/16
+  Service Subnet:                 172.21.0.0/16
   Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
   Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
   Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140

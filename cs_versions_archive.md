@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -6507,7 +6507,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -7693,7 +7693,7 @@ The following table shows the changes that are included in patch 1.10.8_1530.
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>
@@ -8462,7 +8462,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>TPM-enabled kernel</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_enable) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
+<td>Bare metal worker nodes with TPM chips for Trusted Compute use the default Ubuntu kernel until trust is enabled. If you [enable trust](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) on an existing cluster, you need to [reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) any existing bare metal worker nodes with TPM chips. To check if a bare metal worker node has a TPM chip, review the **Trustable** field after running the `ibmcloud ks flavors --zone` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types).</td>
 </tr>
 </tbody>
 </table>

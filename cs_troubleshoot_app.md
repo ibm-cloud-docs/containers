@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-04"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, help
 
@@ -779,7 +779,7 @@ You might have set up a custom firewall, specified custom Calico policies, or cr
 
 {: tsResolve}
 - If you have a custom firewall or set custom Calico policies, allow outbound and inbound network traffic between your worker nodes and the container registry where the image is stored. If the image is stored in {{site.data.keyword.registrylong_notm}}, review the required ports in [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
-- If you created a private cluster by enabling the private service endpoint only, you can [enable the public service endpoint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_feature_disable) for your cluster. If want to install Helm charts in a private cluster without opening up a public connection, you can install Helm [with Tiller](/docs/containers?topic=containers-helm#private_local_tiller) or [without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
+- If you created a private cluster by enabling the private service endpoint only, you can [enable the public service endpoint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_disable) for your cluster. If want to install Helm charts in a private cluster without opening up a public connection, you can install Helm [with Tiller](/docs/containers?topic=containers-helm#private_local_tiller) or [without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
 
     [Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){: external}. Tiller is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](/docs/containers?topic=containers-helm#install_v3).
     {: note}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-24"
 
 keywords: kubernetes, iks, clusters
 
@@ -194,6 +194,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   Name:                           setest
   ID:                             b8dcc56743394fd19c9f3db7b990e5e3
   State:                          normal
+  Status:                         healthy cluster
   Created:                        2019-04-25T16:03:34+0000
   Location:                       wdc04
   Master URL:                     https://c1.private.us-east.containers.cloud.ibm.com:25073
