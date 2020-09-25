@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-25"
 
 keywords: kubernetes, iks, help, debug
 
@@ -1108,6 +1108,61 @@ If you see a `permission denied` error, you do not have the required `read`, `wr
    {: pre}
 
 3. [Continue installing the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#install_cos).
+
+## Block storage: Installing the Block storage plug-in Helm chart gives CPU throttling warnings
+{: #block_helm_cpu}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+
+{: tsSymptoms}
+When you install the Block storage Helm chart, the installation gives a warning similar to the following:
+
+```
+Message: 50% throttling of CPU in namespace kube-system for container ibmcloud-block-storage-driver-container in pod ibmcloud-block-storage-driver-1abab.
+```
+{: screen}
+
+{: tsCauses}
+The default Block storage plug-in resource requests are not sufficient. The Block storage plug-in and driver are installed with the following default resource request and limit values.
+
+   ```yaml
+   plugin:
+   resources:
+      requests:
+         memory: 100Mi
+         cpu: 50m
+      limits:
+         memory: 300Mi
+         cpu: 300m
+   driver:
+   resources:
+      requests:
+         memory: 50Mi
+         cpu: 25m
+      limits:
+         memory: 200Mi
+         cpu: 100m
+   ```
+   {: codeblock}
+
+{: tsResolve}
+Remove and reinstall the Helm chart with increased resource requests and limits.
+
+1. Remove the Helm chart.
+   ```
+   helm uninstall <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
+   ```
+   {: pre}
+
+2. Reinstall the Helm chart and increase the resource requests and limits by using the `--set` flag when running `helm install`. The following example command sets the `plugin.resources.requests.memory` value to `200Mi` and the `plugin.resources.requests.cpu` value to `100m`. You can pass multiple values by using the `--set` flag for each value that you want to pass.
+
+   ```
+   helm install <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace> --set plugin.resources.requests.memory=200Mi --set plugin.resources.requests.cpu=100m
+   ```
+   {: pre}
+
+
 
 ## Object storage: Installing the Object storage plug-in fails
 {: #cos_plugin_fails}
