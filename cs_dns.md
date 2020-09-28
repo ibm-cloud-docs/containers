@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-09-28"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -261,7 +261,7 @@ Set up the `NodeLocal` DNS caching agent on select worker nodes for improved clu
 
 By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable `NodeLocal` DNS caching on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. Additionally, in clusters that run Kubernetes 1.16 or later, the DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
 
-Do not enable `NodeLocal` DNS cache when you already use [zone-aware DNS](#dns_zone_aware) in your cluster.
+Do not add the DNS cache label when you already use [zone-aware DNS](#dns_zone_aware) in your cluster.
 {: important}
 
 `NodeLocal` DNS cache is generally available in clusters that run Kubernetes 1.18 or later, but still disabled by default. In previous versions, the feature is beta and available only for select Kubernetes versions that depend on your cluster infrastructure provider.
@@ -455,7 +455,7 @@ Set up zone-aware DNS for improved cluster DNS performance and availability in y
 
 By default, your cluster is set up with cluster-wide DNS resources, not zone-aware DNS resources. Even after you set up zone-aware DNS, the cluster-wide DNS resources remain running as a backup DNS. Your zone-aware DNS resources are separate from the cluster-wide DNS, and changing zone-aware DNS does not impact the cluster-wide DNS.
 
-Do not enable [`NodeLocal` DNS cache](#dns_cache) when you use zone-aware DNS in your cluster.
+Do not use the [DNS cache label](#dns_cache) when you use zone-aware DNS in your cluster.
 {: important}
 
 Zone-aware DNS is a beta feature that is subject to change, and available only for clusters that run Kubernetes versions 1.18 and later.
