@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-25"
+lastupdated: "2020-09-28"
 
 keywords: kubernetes, iks, help, debug
 
@@ -1128,21 +1128,21 @@ The default Block storage plug-in resource requests are not sufficient. The Bloc
 
    ```yaml
    plugin:
-   resources:
-      requests:
-         memory: 100Mi
-         cpu: 50m
-      limits:
-         memory: 300Mi
-         cpu: 300m
+      resources:
+         requests:
+            memory: 100Mi
+            cpu: 50m
+         limits:
+            memory: 300Mi
+            cpu: 300m
    driver:
-   resources:
-      requests:
-         memory: 50Mi
-         cpu: 25m
-      limits:
-         memory: 200Mi
-         cpu: 100m
+      resources:
+         requests:
+            memory: 50Mi
+            cpu: 25m
+         limits:
+            memory: 200Mi
+            cpu: 100m
    ```
    {: codeblock}
 
