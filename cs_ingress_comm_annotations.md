@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-24"
+lastupdated: "2020-09-28"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -835,8 +835,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
        name: ibm-ingress-deploy-config
        namespace: kube-system
      data:
-       <alb1-id>: '{"enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>}'
-       <alb2-id>: '{"enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>}'
+       <alb1-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>}'
+       <alb2-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>}'
        ...
      ```
      {: screen}
@@ -849,6 +849,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      <th>Description</th>
      </thead>
      <tbody>
+     <tr><td>`defaultCertificate`</td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [`ibmcloud ks ingress secret create` command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, that secret is applied instead of this default secret.</td></tr>
      <tr><td>`enableSslPassthrough`</td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
      <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
      <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>
