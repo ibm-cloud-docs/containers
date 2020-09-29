@@ -104,10 +104,15 @@ Refer to the following tables for a summary of changes for each version of the [
 The following table shows the changes that are included in version 1.0.1 of the managed cluster autoscaler add-on.
 {: shortdesc}
 
+To view a list of add-ons and the supported {{site.data.keyword.containerlong_notm}} versions, run the following command.
+```
+ibmcloud ks addon-versions
+```
+{: pre}
+
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| N/A | 1.0.1 | <ul><li>The cluster autoscaler is available as a [managed add-on](/docs/containers?topic=containers-ca).</li><li>The add-on can be used with the following {{site.data.keyword.containerlong_notm}} versions: Kubernetes versions 1.15 - 1.18.</li></ul> |
+| N/A | 1.0.1 | <ul><li>The cluster autoscaler is available as a [managed add-on](/docs/containers?topic=containers-ca).</li><li>The add-on can be used with the following versions: Kubernetes versions 1.15 - 1.18. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Cluster autoscaler 1.0.1" caption-side="top"}
-
 
