@@ -347,7 +347,7 @@ Before you install the {{site.data.keyword.cloud_notm}} cluster autoscaler add-o
 
       2. Verify that the add-on is installed and `Ready`.
         ```
-        ibmcloud ks addon ls
+        ibmcloud ks cluster addon ls --cluster <cluster_name>
         ```
         {: pre}
 
@@ -1140,7 +1140,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
   2. Verify the add-on is disabled.
     ```
-    ibmcloud ks cluster addon ls -c <cluster_name>
+    ibmcloud ks cluster addon ls --cluster <cluster_name>
     ```
     {: pre}
 

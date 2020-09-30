@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-28"
+lastupdated: "2020-09-30"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -155,7 +155,7 @@ To update the Kubernetes master _major_ or _minor_ version:
     * **Checking add-ons**
       1.  List the add-ons in the cluster.
           ```
-          ibmcloud ks addon ls -c <cluster_name_or_ID>
+          ibmcloud ks addon ls --cluster <cluster_name_or_ID>
           ```
           {: pre}
       2.  Check the supported Kubernetes version for each add-on that is installed.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-09-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -310,7 +310,7 @@ You cannot revert your managed Istio add-on to a previous version. If you want t
 4. Before you proceed, verify that the update is complete. <p class="note">The update process can take up to 20 minutes to complete.</p>
   1. Ensure that the Istio add-on's **Health State** is `normal` and the **Health Status** is `Addon Ready`. If the state is `updating`, the update is not yet complete.
     ```
-    ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
+    ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
     ```
     {: pre}
   2. Ensure that the control plane component pods in the `istio-system` namespace have a **STATUS** of `Running`.
