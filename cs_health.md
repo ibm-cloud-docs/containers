@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-09-30"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -1030,7 +1030,7 @@ You can view the current cluster state by running the `ibmcloud ks cluster ls` c
         </tr>
        <tr>
          <td>`Delete failed`</td>
-         <td>The Kubernetes master or at least one worker node cannot be deleted.  </td>
+         <td>The Kubernetes master or at least one worker node cannot be deleted. See [Unable to create or delete worker nodes](#infra_errors).</td>
        </tr>
        <tr>
          <td>`Deleted`</td>
