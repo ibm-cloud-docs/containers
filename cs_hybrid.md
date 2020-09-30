@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-17"
+lastupdated: "2020-09-30"
 
 keywords: kubernetes, iks, vpn, icp
 
@@ -216,7 +216,7 @@ Before you begin:
 
 To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{site.data.keyword.cloud_notm}} Public:
 
-1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/Registry?topic=Registry-ts_index#ts_ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
+1.  Follow the steps in the [{{site.data.keyword.registryshort}} documentation](/docs/Registry?topic=Registry-troubleshoot-ppa) to download the licensed software from IBM Passport Advantage, push the image to your namespace, and install the Helm chart in your cluster.
 
     **For IBM WebSphere Application Server Liberty**:
 
