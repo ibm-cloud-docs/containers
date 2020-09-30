@@ -242,7 +242,7 @@ subcollection: containers
 {: #sitemap_tutorials}
 
 
-[Tutorials library for Kubernetes Service](/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -316,11 +316,11 @@ subcollection: containers
 * [Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
 * [What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
 
-[Moving a VM-based application to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
-[Continuous Deployment to Kubernetes](/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
