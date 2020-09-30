@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-29"
+lastupdated: "2020-09-30"
 
 keywords: containers
 subcollection: containers
@@ -1906,6 +1906,41 @@ subcollection: containers
   * [Changelog for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-changelog_archive#1716_1511)
 
 
+## IAM and Activity Tracker events
+{: #sitemap_iam_and_activity_tracker_events}
+
+
+[User access permissions](/docs/containers?topic=containers-access_reference)
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+* [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
+* [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
+* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
+* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
+
+[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
+* [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Tracking private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
+* [Tracking storage resource events](/docs/containers?topic=containers-at_events#storage-events)
+* [Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
+
+[IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam)
+* [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
+* [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
+* [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
+* [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
+* [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
+* [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
+* [Observability: {{site.data.keyword.la_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
+* [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
+* [Private service endpoint allowlist](/docs/containers?topic=containers-api-at-iam#ks-acl)
+* [Satellite](/docs/containers?topic=containers-api-at-iam#sat-api)
+* [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
+* [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
+
+
 ## Locations
 {: #sitemap_locations}
 
@@ -1958,40 +1993,6 @@ subcollection: containers
 [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
 
 [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
-
-
-## User access permissions
-{: #sitemap_user_access_permissions}
-
-
-[User access permissions](/docs/containers?topic=containers-access_reference)
-
-[Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-
-[{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-
-[{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
-
-[Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
-
-[{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
-
-[Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
-
-[Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
-
-
-## {{site.data.keyword.at_full_notm}} events
-{: #sitemap__events}
-
-
-[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
-
-[Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
-
-[Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
-
-[Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 
 ## Default service settings for Kubernetes components
@@ -2080,8 +2081,10 @@ subcollection: containers
   * [Firewall prevents running CLI commands](/docs/containers?topic=containers-cs_troubleshoot#ts_firewall_clis)
   * [`kubectl` commands do not work](/docs/containers?topic=containers-cs_troubleshoot#kubectl_fails)
   * [`kubectl` commands time out](/docs/containers?topic=containers-cs_troubleshoot#exec_logs_fail)
-* [Unable to create a cluster or manage worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot#cs_credentials)
-* [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
+* [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot#infra_errors)
+  * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot#cs_credentials)
+  * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot#orphaned)
+  * [Unable to create or delete worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
 * [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update)
@@ -2092,11 +2095,12 @@ subcollection: containers
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#common_worker_nodes_issues)
-* [Unable to create a cluster or manage worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
-* [Unable to create a cluster or manage worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
+* [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#infra_errors)
+  * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
+  * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
+  * [Unable to create or delete worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
 * [Replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off)
-* [Unable to modify or delete infrastructure in an orphaned cluster](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
