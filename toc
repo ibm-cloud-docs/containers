@@ -214,11 +214,15 @@ Kubernetes Service
         cs_versions_autoscaler.md
         cs_versions_archive.md
 
+    {: .topicgroup}
+    IAM and Activity Tracker events
+        cs_access_reference.md
+        cs_at_events.md
+        cs_api_at_iam.md
+
     cs_locations.md
     cs_hybrid.md
     cs_integrations_overview.md
-    cs_access_reference.md
-    cs_at_events.md
     cs_service_settings.md
     {: .navgroup-end}
 

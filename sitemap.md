@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-29"
+lastupdated: "2020-09-30"
 
 keywords: containers
 subcollection: containers
@@ -1906,6 +1906,41 @@ subcollection: containers
   * [Changelog for 1.7.16_1511, released 19 April 2018](/docs/containers?topic=containers-changelog_archive#1716_1511)
 
 
+## IAM and Activity Tracker events
+{: #sitemap_iam_and_activity_tracker_events}
+
+
+[User access permissions](/docs/containers?topic=containers-access_reference)
+* [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
+* [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
+* [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
+* [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
+* [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
+* [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
+* [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
+
+[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
+* [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Tracking private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
+* [Tracking storage resource events](/docs/containers?topic=containers-at_events#storage-events)
+* [Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
+
+[IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam)
+* [Account](/docs/containers?topic=containers-api-at-iam#ks-account)
+* [Cluster](/docs/containers?topic=containers-api-at-iam#ks-cluster)
+* [Ingress](/docs/containers?topic=containers-api-at-iam#ks-ingress)
+* [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
+* [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
+* [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
+* [Observability: {{site.data.keyword.la_short}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
+* [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
+* [Private service endpoint allowlist](/docs/containers?topic=containers-api-at-iam#ks-acl)
+* [Satellite](/docs/containers?topic=containers-api-at-iam#sat-api)
+* [Storage](/docs/containers?topic=containers-api-at-iam#ks-storage)
+* [Worker nodes and worker pools](/docs/containers?topic=containers-api-at-iam#ks-workers)
+
+
 ## Locations
 {: #sitemap_locations}
 
@@ -1958,40 +1993,6 @@ subcollection: containers
 [Storage services](/docs/containers?topic=containers-supported_integrations#storage_services)
 
 [Database services](/docs/containers?topic=containers-supported_integrations#database_services)
-
-
-## User access permissions
-{: #sitemap_user_access_permissions}
-
-
-[User access permissions](/docs/containers?topic=containers-access_reference)
-
-[Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-
-[{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-
-[{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
-
-[Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
-
-[{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
-
-[Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
-
-[Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
-
-
-## {{site.data.keyword.at_full_notm}} events
-{: #sitemap__events}
-
-
-[{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
-
-[Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
-
-[Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
-
-[Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 
 ## Default service settings for Kubernetes components
