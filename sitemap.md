@@ -1933,7 +1933,7 @@ subcollection: containers
 * [Ingress ALB](/docs/containers?topic=containers-api-at-iam#ks-alb)
 * [Fluentd logging](/docs/containers?topic=containers-api-at-iam#ks-logging)
 * [NLB DNS](/docs/containers?topic=containers-api-at-iam#ks-nlb-dns)
-* [Observability: {{site.data.keyword.la_short}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
+* [Observability: {{site.data.keyword.la_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-logging)
 * [Observability: {{site.data.keyword.mon_short}}](/docs/containers?topic=containers-api-at-iam#ks-observability-monitoring)
 * [Private service endpoint allowlist](/docs/containers?topic=containers-api-at-iam#ks-acl)
 * [Satellite](/docs/containers?topic=containers-api-at-iam#sat-api)
