@@ -2206,6 +2206,8 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release)
 
+[October 2020](/docs/containers?topic=containers-iks-release#oct20)
+
 [September 2020](/docs/containers?topic=containers-iks-release#sep20)
 
 [August 2020](/docs/containers?topic=containers-iks-release#aug20)
