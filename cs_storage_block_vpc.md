@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-10"
+lastupdated: "2020-10-01"
 
 keywords: kubernetes, iks
 
@@ -620,7 +620,7 @@ You can update the {{site.data.keyword.block_storage_is_short}} add-on by disabl
 
 4. Verify that the add-on is in the `Addon Ready` state. The add-on might take a few minutes to become ready.
   ```
-  ibmcloud ks cluster addons --cluster <cluster_name_or_ID>
+  ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
