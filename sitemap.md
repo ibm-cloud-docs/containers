@@ -1333,6 +1333,7 @@ subcollection: containers
 * [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx)
+* [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
   * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
