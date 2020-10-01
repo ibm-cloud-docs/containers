@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-24"
+lastupdated: "2020-10-01"
 
 keywords: kubernetes, iks, clusters
 
@@ -315,8 +315,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.17.12
-  Server Version: v1.17.12
+  Client Version: v1.18.9
+  Server Version: v1.18.9
   ```
   {: screen}
 
@@ -429,8 +429,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.17.12
-  Server Version: v1.17.12
+  Client Version: v1.18.9
+  Server Version: v1.18.9
   ```
   {: screen}
 

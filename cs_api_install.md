@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-10-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -633,8 +633,8 @@ The following instructions require public network access in your cluster to conn
    ```
    {
     "major": "1",
-    "minor": "1.17.12",
-    "gitVersion": "v1.17.12+IKS",
+    "minor": "1.18.9",
+    "gitVersion": "v1.18.9+IKS",
     "gitCommit": "c35166bd86eaa91d17af1c08289ffeab3e71e11e",
     "gitTreeState": "clean",
     "buildDate": "2019-03-21T10:08:03Z",

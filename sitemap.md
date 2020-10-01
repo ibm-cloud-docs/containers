@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-09-30"
+lastupdated: "2020-10-01"
 
 keywords: containers
 subcollection: containers
@@ -1333,6 +1333,7 @@ subcollection: containers
 * [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx)
+* [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
   * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
@@ -2205,6 +2206,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[October 2020](/docs/containers?topic=containers-iks-release#oct20)
 
 [September 2020](/docs/containers?topic=containers-iks-release#sep20)
 
