@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-09"
+lastupdated: "2020-10-01"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -104,7 +104,7 @@ _{{site.data.keyword.containerlong_notm}} locations_
 ## {{site.data.keyword.containerlong_notm}} locations
 {: #locations}
 
-{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including all six worldwide multizone-capable regions and select single zone regions. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
+{{site.data.keyword.cloud_notm}} resources are organized into a hierarchy of geographic locations. {{site.data.keyword.containerlong_notm}} is available in a subset of these locations, including worldwide multizone regions and single zone regions. Other {{site.data.keyword.cloud_notm}} services might be available globally or within a specific location.
 {: shortdesc}
 
 ```
