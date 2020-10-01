@@ -454,12 +454,12 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.17.12 to 1.18.9, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.18.9 to 1.18.9, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```
        {: pre}
-    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.17.8_1530 to 1.17.9_1533, do not include the `--update` flag.
+    *  To update the worker node to the latest patch version at the same `major.minor` version, such as from 1.18.8_1530 to 1.18.9_1533, do not include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID>
        ```
