@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-28"
+lastupdated: "2020-10-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -146,6 +146,8 @@ Kubernetes Ingress resource [annotation](/docs/containers?topic=containers-ingre
 kubernetes.io/ingress.class: "private-iks-k8s-nginx"
 ```
 {: screen}
+
+
 
 ### {{site.data.keyword.appid_short_notm}} authentication
 
