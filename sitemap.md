@@ -1453,12 +1453,13 @@ subcollection: containers
 
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog)
-* [Using version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-* [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
-* [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
-* [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
-* [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
+* [Deprecated versions](/docs/containers?topic=containers-cs_cli_changelog#deprecated)
+  * [Updating to version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
+  * [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
+  * [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
+  * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
+  * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
 [Observability plug-in CLI](/docs/containers?topic=containers-observability_cli)
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
