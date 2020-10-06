@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -107,6 +107,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 06 October 2020 | <ul><li>**Istio add-on**: Versions [1.7.3](/docs/containers?topic=containers-istio-changelog#173) and [1.6.11](/docs/containers?topic=containers-istio-changelog#1611) of the Istio managed add-on are released.</li></ul> |
 | 01 October 2020 | <ul><li>**Default version**: The default version for clusters is now Kubernetes 1.18.</li><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 652 and the `ingress-auth` build to 424](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in October 2020"}
