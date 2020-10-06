@@ -118,7 +118,7 @@ The Istio add-on is not currently supported for Kubernetes version 1.19 clusters
 ## Version 1.7
 {: #v17}
 
-### Changelog for 1.7.3, released 05 October 2020
+### Changelog for 1.7.3, released 06 October 2020
 {: #173}
 
 The following table shows the changes that are included in version 1.7.3 of the managed Istio add-on.
@@ -186,7 +186,7 @@ To see options for changing settings in the managed version of Istio, see [Custo
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
 
-### Changelog for 1.6.11, released 05 October 2020
+### Changelog for 1.6.11, released 06 October 2020
 {: #1611}
 
 The following table shows the changes that are included in version 1.6.11 of the managed Istio add-on.

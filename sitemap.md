@@ -1228,7 +1228,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
-* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates
+* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 
 
@@ -1605,13 +1605,13 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
-  * [Changelog for 1.7.3, released 05 October 2020](/docs/containers?topic=containers-istio-changelog#173)
+  * [Changelog for 1.7.3, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#173)
   * [Changelog for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
   * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
-  * [Changelog for 1.6.11, released 05 October 2020](/docs/containers?topic=containers-istio-changelog#1611)
+  * [Changelog for 1.6.11, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#1611)
   * [Changelog for 1.6.9, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#169)
   * [Changelog for 1.6.8, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#168)
   * [Changelog for 1.6.7, released 04 August 2020](/docs/containers?topic=containers-istio-changelog#167)
@@ -2168,7 +2168,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
-* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates
+* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 
 [Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage)
