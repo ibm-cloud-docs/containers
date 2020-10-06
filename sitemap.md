@@ -1228,6 +1228,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
+* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 
 
@@ -2165,6 +2166,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
+* [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 
 [Persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage)
