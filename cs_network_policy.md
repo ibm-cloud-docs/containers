@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-23"
+lastupdated: "2020-10-06"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -176,7 +176,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 
 3. Install the Calico CLI, `calicoctl`, according to your operating system.
     * **Linux and OS X**:
-      1. [Download the version of the Calico CLI that matches your operating system](https://github.com/projectcalico/calicoctl/releases){: external}.
+      1. [Download the version of the Calico CLI that matches your operating system](https://github.com/projectcalico/calicoctl/releases){: external}.<p class="tip">For OS X, you might need to manually allow the downloaded file to be opened and run by navigating to **System Preferences** > **Security & Privacy** > **General**.</p>
 
       2. Move the file to the `/usr/local/bin` directory.
           ```
@@ -211,8 +211,8 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
           Example output:
           ```
           NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
+          kube-btkc78sw0gqlletjgfp0-eventtest3-default-000001d6
+          ...
           ```
           {: screen}
     * **Windows**:
@@ -227,8 +227,8 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
           Example output:
           ```
           NAME
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w1.cloud.ibm
-          kube-dal10-crc21191ee3997497ca90c8173bbdaf560-w2.cloud.ibm
+          kube-btkc78sw0gqlletjgfp0-eventtest3-default-000001d6
+          ...
           ```
           {: screen}
 

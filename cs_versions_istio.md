@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-22"
+lastupdated: "2020-10-06"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -118,6 +118,18 @@ The Istio add-on is not currently supported for Kubernetes version 1.19 clusters
 ## Version 1.7
 {: #v17}
 
+### Changelog for 1.7.3, released 06 October 2020
+{: #173}
+
+The following table shows the changes that are included in version 1.7.3 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.2 | 1.7.3 | <ul><li>See the Istio release notes for [Istio 1.7.3](https://istio.io/latest/news/releases/1.7.x/announcing-1.7.3/){:external}.</li><li>Updates Prometheus to version 2.21.0 and Jaeger to version 1.20.0. Note that these components are deprecated in version 1.7 of the Istio add-on and are automatically removed in [version 1.8 of the Istio add-on](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>Resolves [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}, [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}, and [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}. For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.7.2" caption-side="top"}
+
 ### Changelog for 1.7.2, released 23 September 2020
 {: #172}
 
@@ -173,6 +185,18 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+### Changelog for 1.6.11, released 06 October 2020
+{: #1611}
+
+The following table shows the changes that are included in version 1.6.11 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.6.9 | 1.6.11 | <ul><li>See the Istio release notes for [Istio 1.6.10](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.10/){:external} and [Istio 1.6.11](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.11/){:external}.</li><li>Updates Prometheus to version 2.21.0 and Jaeger to version 1.20.0. Note that these components are deprecated in version 1.7 of the Istio add-on and are automatically removed in [version 1.8 of the Istio add-on](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>Resolves [CVE-2020-25017](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25017){: external}, [CVE-2018-7738](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738){: external}, and [usn-4512-1](https://ubuntu.com/security/notices/USN-4512-1){: external}. For more information, see the [Istio security bulletin 2020-010](https://istio.io/latest/news/security/istio-security-2020-010/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.6.9" caption-side="top"}
 
 ### Changelog for 1.6.9, released 14 September 2020
 {: #169}
