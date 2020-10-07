@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-29"
+lastupdated: "2020-10-07"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -112,7 +112,7 @@ ibmcloud ks addon-versions
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| N/A | 1.0.1 | <ul><li>The cluster autoscaler is available as a [managed add-on](/docs/containers?topic=containers-ca).</li><li>The add-on can be used with the following versions: Kubernetes versions 1.15 - 1.18. |
+| N/A | 1.0.1 | <ul><li>The cluster autoscaler is available as a [managed add-on](/docs/containers?topic=containers-ca).</li><li>The add-on can be used with the following versions: Kubernetes versions 1.15 - 1.18.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Cluster autoscaler 1.0.1" caption-side="top"}
 
