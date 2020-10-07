@@ -680,7 +680,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
 
     * If a public ALB has no IP address(classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit).
 
-2. If you use Calico pre-DNAT network policies, VPC access control lists (ACLs), or another custom firewall to block incoming traffic to Ingress ALBs, you must allow inbound access from Cloudflare's IPv4 IPs to the IP addresses of your ALBs so that your ALBs can be health checked. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALBs from  [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} that are used to check the health of your ALBs on port 80.
+2. If you use Calico pre-DNAT network policies, VPC access control lists (ACLs), or another custom firewall to block incoming traffic to Ingress ALBs, you must allow inbound access from the {{site.data.keyword.openshiftshort}} control plane and Cloudflare's IPv4 IPs to the IP addresses of your ALBs so that your ALBs can be health checked. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALBs from [the ports and IP addresses in step 2 of this section](/docs/containers?topic=containers-firewall#firewall_outbound) and [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} that are used to check the health of your ALBs on port 80.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
 
