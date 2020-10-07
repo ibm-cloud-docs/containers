@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-04"
+lastupdated: "2020-10-07"
 
 keywords: kubernetes, iks, helm
 
@@ -124,6 +124,7 @@ For more information about the prerequisites for each add-on, see:
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
 - [Static routes](/docs/containers?topic=containers-static-routes)
+- [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 
 ## Updating managed add-ons
 {: #updating-managed-add-ons}
