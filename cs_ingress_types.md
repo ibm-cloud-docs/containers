@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-08"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -165,11 +166,6 @@ Create ALBs that run the community Kubernetes Ingress image in your cluster.
       ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
       ```
       {: pre}
-  6. Using the CRN, create a secret for the certificate in the namespace where your Ingress resources are deployed. If you have Ingress resources in multiple namespaces, repeat this command for each namespace.
-    ```
-    ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
-    ```
-    {: pre}
 
 2. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
   1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
@@ -247,21 +243,21 @@ Create ALBs that run the community Kubernetes Ingress image in your cluster.
 3. Create at least one ALB in each zone that runs the Kubernetes Ingress image.
     * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
       ```
-      ibmcloud ks ingress alb create classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version 0.34.1_391_iks
+      ibmcloud ks ingress alb create classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version 0.35.0_474_iks
       ```
       {: pre}
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
       ```
-      ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.34.1_391_iks
+      ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.35.0_474_iks
       ```
       {: pre}
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
       ```
-      ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.34.1_391_iks
+      ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.35.0_474_iks
       ```
       {: pre}
 
-4. Verify that the new ALBs are created. In the output, copy the IP address for one ALB that has a **Build** of `0.34.1_391_iks`.
+4. Verify that the new ALBs are created. In the output, copy the IP address for one ALB that has a **Build** of `0.35.0_474_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
@@ -475,7 +471,7 @@ Decide whether to [create new ALBs](#alb-migrate-3-new) that run the Kubernetes 
   ```
   {: pre}
 
-6. Copy the IP address for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.34.1_391_iks`.
+6. Copy the IP address for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.35.0_474_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
@@ -755,13 +751,13 @@ IBM Cloud Ingress versions
 647
 
 Kubernetes Ingress versions
-0.34.1_391_iks
-0.33.0_390_iks (default)
-0.32.0_392_iks
+0.35.0_474_iks
+0.34.1_391_iks (default)
+0.33.0_390_iks
 ```
 {: screen}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.34.1_391_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.35.0_474_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
 For the changes that are included in each version of the Ingress images, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog).
 

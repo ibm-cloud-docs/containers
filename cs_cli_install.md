@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -116,8 +116,8 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 <br>
 To install the CLIs:
 
-1.  Install the stand-alone [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-install-ibmcloud-cli) (`ibmcloud`). 
-    
+1.  Install the stand-alone [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-install-ibmcloud-cli) (`ibmcloud`).
+
     Plan to use the CLI often? Try [Enabling shell autocompletion for {{site.data.keyword.cloud_notm}} CLI (Linux/macOS only)](/docs/cli/reference/ibmcloud?topic=cli-shell-autocomplete#shell-autocomplete-linux).
     {: tip}
 
@@ -269,11 +269,7 @@ Before you can run `kubectl` commands:
 
 To run `kubectl` commands to manage your cluster:
 
-1. Depending on which [version of the {{site.data.keyword.containerlong_notm}} plug-in you use](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta), you must follow different steps to use `kubectl` commands.
-  * **Version 1.0 (default)**: Ensure that your {{site.data.keyword.containerlong_notm}} plug-in uses the latest `0.4` version by running `ibmcloud plugin update kubernetes-service`. In CLI plug-in version 1.0, `cluster config` appends the new `kubeconfig` file to your existing `kubeconfig` file in `~/.kube/config` or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple). Note that any pre-existing `kubeconfig` files are not merged automatically.
-  * **Version 0.4 (deprecated) or earlier**: In CLI plug-in version 0.4 or earlier, `cluster config` provides a command that you must copy and paste to set the new `kubeconfig` file as your current `KUBECONFIG` environment variable. You must set your environment variable before you can interact with your cluster.
-
-2.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
+1.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
     ```
     ibmcloud login
     ```
@@ -282,27 +278,28 @@ To run `kubectl` commands to manage your cluster:
     If you have a federated ID, use `ibmcloud login --sso` to log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your username and use the provided URL in your CLI output to retrieve your one-time passcode. You know you have a federated ID when the login fails without the `--sso` and succeeds with the `--sso` option.
     {: tip}
 
-3.  Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
+2.  Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
 
-4.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
+3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
     ```
     ibmcloud target -g <resource_group_name>
     ```
     {: pre}
 
-5.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
+4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
     ```
     ibmcloud ks cluster ls
     ```
     {: pre}
 
-6.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the last file in the `KUBECONFIG` environment variable.
+5.  Set the cluster as the context for this session. Complete these configuration steps every time that you work with your cluster. The following command sets the context by downloading and adding the `kubeconfig` file for your cluster to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows) or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig). Note that any pre-existing `kubeconfig` files are not merged automatically.
+
     ```
     ibmcloud ks cluster config --cluster <cluster_name_or_ID>
     ```
     {: pre}
 
-7.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
+6.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
     ```
     kubectl config current-context
     ```
@@ -452,10 +449,6 @@ This task includes the information for updating the following CLIs:
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI version 1.18.9 or later
 -   {{site.data.keyword.registrylong_notm}} plug-in
-
-
-[Version 1.0 of the CLI plug-in was released on 16 March 2020](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta). This version contains permanent syntax and behavior changes that are not compatible with earlier versions.</br></br>To maintain all CLI functionality, update and test any automation before you update to 1.0 by checking out the [`ibmcloud ks script update` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
-{: important}
 
 
 <br>

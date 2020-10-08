@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -215,6 +215,37 @@ Create, view, and modify clusters and cluster settings, such as add-on, subnet, 
 Disable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to disable.
 {: shortdesc}
 
+#### `ibmcloud ks cluster addon disable alb-oauth-proxy`
+{: #cs_cluster_addon_disable_alb-oauth-proxy}
+
+
+Disable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon disable alb-oauth-proxy --cluster CLUSTER
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+</dl>
+
+**Example**:
+  ```
+  ibmcloud ks cluster addon disable alb-oauth-proxy --cluster my_cluster
+  ```
+  {: pre}
+
 #### `ibmcloud ks cluster addon disable debug-tool`
 {: #cs_cluster_addon_disable_debug}
 
@@ -423,6 +454,39 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 
 Enable a managed add-on in an existing cluster. This command must be combined with one of the following subcommands for the managed add-on that you want to enable.
 {: shortdesc}
+
+#### `ibmcloud ks cluster addon enable alb-oauth-proxy`
+{: #cs_cluster_addon_enable_alb-oauth-proxy}
+
+Enable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
+{: shortdesc}
+
+```
+ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [--version VERSION]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--version <em>VERSION</em></code></dt>
+<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
+</dl>
+
+**Example**:
+  ```
+  ibmcloud ks cluster addon enable alb-oauth-proxy --cluster my_cluster
+  ```
+  {: pre}
 
 #### `ibmcloud ks cluster addon enable debug-tool`
 {: #cs_cluster_addon_enable_debug}
@@ -750,9 +814,6 @@ After logging in to {{site.data.keyword.cloud_notm}}, download the Kubernetes co
 {: shortdesc}
 
 The `kubeconfig` file is merged to your existing `kubeconfig` file in `~/.kube/config` (`<user_profile>/.kube/config` in Windows), or to the last file that is set by the `KUBECONFIG` environment variable in your terminal session. After you run `ibmcloud ks cluster config`, you can interact with your cluster immediately, and quickly [change the context to other clusters in the Kubernetes context](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple).
-
-{{site.data.keyword.containerlong_notm}} plug-in CLI versions 0.4 and earlier are deprecated or unsupported. In these earlier versions, the `cluster config` command downloaded the `kubeconfig` file to `user_home_directory/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>`. With the release of version 1.0 on 16 March 2020, the `cluster config` behavior changes permanently and is not compatible with earlier versions. To maintain CLI functionality, update and test any automation that you built with earlier CLI versions now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in. If you still need a separate `kubeconfig` file per cluster instead of the new merged `kubeconfig` file behavior, see [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig).
-{: deprecated}
 
 ```
 ibmcloud ks cluster config --cluster CLUSTER [--admin] [--network] [--skip-rbac] [-q] [--yaml]
@@ -3582,7 +3643,7 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 0.34.1_391_iks
+ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 0.35.0_474_iks
 ```
 {: pre}
 
@@ -6544,9 +6605,6 @@ ibmcloud ks messages
 
 List the locations that are supported by {{site.data.keyword.containerlong_notm}}. For more information about the locations that are returned, see [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations).
 {: shortdesc}
-
-In [CLI plug-in version 1.0](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta), `supported-locations` is replaced by the `locations` command. Version 1.0 of the CLI plug-in was released on 16 March 2020. In version 1.0, the permanent behavior change to this command is not compatible with earlier versions. To maintain all CLI functionality, update and test any automation now by checking out the [`ibmcloud ks script update` command](#script_update) and setting your `IKS_BETA_VERSION` environment variable to `1.0`. After you update your scripts, update your CLI to version `1.0` of the plug-in.
-{: important}
 
 ```
 ibmcloud ks locations [--output json]

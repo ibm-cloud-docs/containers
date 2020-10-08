@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-07"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -1286,7 +1286,7 @@ To configure Autorecovery:
    </tbody>
    </table>
 
-   <table summary="The columns are read from left to right. The first column has the component of the check. The second column describes the component."
+   <table summary="The columns are read from left to right. The first column has the component of the check. The second column describes the component.">
    <caption>Understanding the individual components of checks</caption>
    <thead>
    <col width="25%">

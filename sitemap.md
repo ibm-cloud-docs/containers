@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-06"
+lastupdated: "2020-10-08"
 
 keywords: containers
 subcollection: containers
@@ -43,6 +43,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -1453,12 +1454,13 @@ subcollection: containers
 
 
 [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog)
-* [Using version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
 * [Version 1.0](/docs/containers?topic=containers-cs_cli_changelog#10)
-* [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
-* [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
-* [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
-* [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
+* [Deprecated versions](/docs/containers?topic=containers-cs_cli_changelog#deprecated)
+  * [Updating to version 1.0 of the plug-in](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta)
+  * [Version 0.4](/docs/containers?topic=containers-cs_cli_changelog#04)
+  * [Version 0.3](/docs/containers?topic=containers-cs_cli_changelog#03)
+  * [Version 0.2](/docs/containers?topic=containers-cs_cli_changelog#02)
+  * [Version 0.1](/docs/containers?topic=containers-cs_cli_changelog#01)
 
 [Observability plug-in CLI](/docs/containers?topic=containers-observability_cli)
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
@@ -1597,8 +1599,9 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Beta: Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.34.1 (latest)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
-  * [Version 0.33.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
+  * [Version 0.35.0 (latest)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
+  * [Version 0.34.1 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
+  * [Version 0.33.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 * [{{site.data.keyword.containerlong_notm}} Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
