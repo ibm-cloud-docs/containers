@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-07"
+lastupdated: "2020-10-08"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -165,11 +166,6 @@ Create ALBs that run the community Kubernetes Ingress image in your cluster.
       ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
       ```
       {: pre}
-  6. Using the CRN, create a secret for the certificate in the namespace where your Ingress resources are deployed. If you have Ingress resources in multiple namespaces, repeat this command for each namespace.
-    ```
-    ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
-    ```
-    {: pre}
 
 2. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
   1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
