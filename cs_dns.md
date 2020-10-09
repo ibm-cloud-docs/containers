@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-28"
+lastupdated: "2020-10-09"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -215,7 +216,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
     **Custom Corefile example output**:
-    ```
+    ```yaml
     apiVersion: v1
     kind: ConfigMap
     metadata:
@@ -286,7 +287,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
 **To enable NodeLocal DNS cache**:
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers. 
+2. If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.
 3. List the nodes in your cluster. The `NodeLocal` DNS caching agent pods are part of a daemon set that run on each node.
    ```
    kubectl get nodes
@@ -401,7 +402,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 
 2.  Confirm that the `NodeLocal` DNS cache has a configmap.
-    1.  Determine if the `NodeLocal` DNS cache configmap exists. 
+    1.  Determine if the `NodeLocal` DNS cache configmap exists.
         ```
         kubectl get cm -n kube-system node-local-dns-config
         ```
@@ -494,7 +495,7 @@ kubectl get networkpolicy --all-namespaces -o yaml
 
 **Step 2: Enable zone-aware DNS:**
 
-1.  If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers. 
+1.  If you [customized stub domains and upstream DNS servers for CoreDNS](#dns_customize), you must also [customize the `NodeLocal` DNS cache](#dns_nodelocal_customize) with these stub domains and upstream DNS servers.
 2.  Set an environment variable for the zones of the cluster.
     ```
     ZONES=$(kubectl get nodes --no-headers --ignore-not-found=true -o jsonpath='{range .items[*]}{.metadata.labels.failure-domain\.beta\.kubernetes\.io/zone}{"\n"}{end}' | uniq)
