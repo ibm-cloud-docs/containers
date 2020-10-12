@@ -182,7 +182,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
 
-3. VPC Gen 2 clusters that run Kubernetes version 1.18 and earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
+3. VPC Gen 2 clusters that run Kubernetes version 1.18 or earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
     1. List your security groups. For the **VPC** that you created, note the ID of the default security group.
       ```
       ibmcloud is security-groups
