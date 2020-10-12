@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-10-12"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,7 @@ completion-time: 90m
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -206,7 +207,7 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
     ibmcloud is subnets
     ```
     {: pre}
-  2. For each subnet that your cluster is attached to, note information that you also want to use to create your Gen 2 subnets, such as the CIDR if you used custom prefixes, the total IP address count, the ACL ID, whether a public gateway is attached, and the zone. For more information about how VPC subnets are used in {{site.data.keyword.containerlong_notm}}, see [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets).
+  2. For each subnet that your cluster is attached to, note information that you also want to use to create your Gen 2 subnets, such as the CIDR if you used custom prefixes, the total IP address count, the ACL ID, security group ID, whether a public gateway is attached, and the zone. For more information about how VPC subnets are used in {{site.data.keyword.containerlong_notm}}, see [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets).
     ```
     ibmcloud is subnet <subnet_ID>
     ```
@@ -215,6 +216,12 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
 4. Optional: If you modified the default access control list (ACL) for your Gen 1 VPC that is applied to all subnets in the VPC, or if you manually created an ACL for each subnet that your cluster is attached to, use the ACL IDs from the output of the previous step to list the rules for ACLs. In the output, copy the list of inbound and outbound rules for each ACL. For more information about how VPC ACLs are used in {{site.data.keyword.containerlong_notm}}, see [Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy#acls).
   ```
   ibmcloud is nwacl <ACL_ID>
+  ```
+  {: pre}
+
+4. Optional: If you modified the default security group for your Gen 1 VPC that is applied to all worker nodes in the VPC, use the security group ID from the output of step 3 to list the rules for the security group. In the output, copy the list of inbound and outbound rules. For more information about how VPC security groups are used in {{site.data.keyword.containerlong_notm}}, see [Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+  ```
+  ibmcloud is sg <security_group_ID>
   ```
   {: pre}
 
@@ -283,7 +290,7 @@ Using the details that you gathered, create your Gen 2 VPC, resources, and clust
     ```
     {: pre}
 
-3. To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
+3. VPC Gen 2 clusters that run Kubernetes version 1.18 and earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
     1. List your security groups. For the **VPC** that you created, note the ID of the default security group.
       ```
       ibmcloud is security-groups

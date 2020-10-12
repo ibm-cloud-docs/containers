@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-12"
 
 keywords: kubernetes, iks, containers
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -275,13 +276,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
   4. Give the VPC subnet a name and select the location where you want to create the cluster.
   5. Attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
   6. Click **Create virtual private cloud**.
-2. Allow traffic requests to apps that you deploy by modifying the VPC's default security group.
-    1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
-    2. In the **Inbound rules** section, click **New rule**.
-    3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
-    4. Click **Save**.
-    5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
-3. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
+2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
    1. Select the **Standard** plan.
    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.18.9 or later**.
@@ -295,6 +290,12 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
     2.  Set how many worker nodes to create per zone, such as **1**.
 6.  Review the rest of the cluster details, such as the service endpoint, cluster name, and tags.
 7.  In the **Summary** pane, review your order summary and then click **Create**.
+8.  VPC Gen 2 clusters that run Kubernetes version 1.18 and earlier only: Allow traffic requests to apps that you deploy by modifying the VPC's default security group.
+    1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
+    2. In the **Inbound rules** section, click **New rule**.
+    3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
+    4. Click **Save**.
+    5. If you require VPC VPN access or classic infrastructure access into this cluster, repeat these steps to add a rule that uses the **UDP** protocol, `30000` for the **Port min**, `32767` for the **Port max**, and the **Any** source type.
 
 <br>
 
