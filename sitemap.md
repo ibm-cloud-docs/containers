@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-08"
+lastupdated: "2020-10-13"
 
 keywords: containers
 subcollection: containers
@@ -641,13 +641,15 @@ subcollection: containers
   * [Allowing egress to a cluster from another service](/docs/containers?topic=containers-vpc-firewall#vpc-allowlist_workers_egress)
 
 [VPC: Controlling traffic with ACLs, security groups, and network policies](/docs/containers?topic=containers-vpc-network-policy)
-* [Overview of network security options](/docs/containers?topic=containers-vpc-network-policy#overview)
+* [Overview](/docs/containers?topic=containers-vpc-network-policy#overview)
+  * [Comparison of network security options](/docs/containers?topic=containers-vpc-network-policy#comparison)
+  * [Do I use ACLs or security groups?](/docs/containers?topic=containers-vpc-network-policy#acl-sg-compare)
+* [Controlling traffic with the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
+  * [Creating security group rules in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
+  * [Creating security group rules from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
 * [Controlling traffic with ACLs](/docs/containers?topic=containers-vpc-network-policy#acls)
   * [Creating ACLs in the console](/docs/containers?topic=containers-vpc-network-policy#acls_ui)
   * [Creating ACLs from the CLI](/docs/containers?topic=containers-vpc-network-policy#acls_cli)
-* [Opening required ports in the default security group](/docs/containers?topic=containers-vpc-network-policy#security_groups)
-  * [Opening required ports in the console](/docs/containers?topic=containers-vpc-network-policy#security_groups_ui)
-  * [Opening required ports from the CLI](/docs/containers?topic=containers-vpc-network-policy#security_groups_cli)
 * [Controlling traffic between pods with Kubernetes policies](/docs/containers?topic=containers-vpc-network-policy#kubernetes_policies)
   * [Isolate app services within a namespace](/docs/containers?topic=containers-vpc-network-policy#services_one_ns)
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
@@ -1001,9 +1003,12 @@ subcollection: containers
 * [Exposing an app by using an NLB in a classic cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_classic)
 * [Exposing an app by using a VPC load balancer in a VPC cluster](/docs/containers?topic=containers-loadbalancer-qs#lb_qs_vpc)
 
-[VPC: Exposing apps with VPC load balancers](/docs/containers?topic=containers-vpc-lbaas)
+[VPC: Exposing apps with load balancers for VPC](/docs/containers?topic=containers-vpc-lbaas)
 * [About VPC load balancing in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-lbaas#lbaas_about)
-* [Setting up a Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
+  * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
+  * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
+* [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
+* [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
 * [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
@@ -1213,9 +1218,8 @@ subcollection: containers
 [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
 * [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
-* [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
-* [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
 * [No Ingress secret exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_secret)
+* [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
 * [VPC clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#vpc_ts_alb)
 * [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-debug)
   * [Step 1: Check your app deployment](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#app-debug-ingress)
@@ -1229,6 +1233,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
+* [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 
@@ -1487,6 +1492,10 @@ subcollection: containers
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
+* [Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#119_after)
+  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#119_after_worker)
 * [Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
   * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
@@ -1495,7 +1504,7 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#117_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#117_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#117_after_worker)
-* [Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116)
+* [Deprecated: Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116)
   * [Update before master](/docs/containers?topic=containers-cs_versions#116_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#116_after)
   * [Preparing private network policies](/docs/containers?topic=containers-cs_versions#116_networkpolicies)
@@ -1513,7 +1522,10 @@ subcollection: containers
 
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.9_1530, released 12 October 2020](/docs/containers?topic=containers-changelog#1189_1530)
   * [Changelog for worker node fix pack 1.18.9_1529, released 28 September 2020](/docs/containers?topic=containers-changelog#1189_1529)
   * [Changelog for master fix pack 1.18.9_1528, released 21 September 2020](/docs/containers?topic=containers-changelog#1189_1528)
   * [Changelog for worker node fix pack 1.18.8_1527, released 14 September 2020](/docs/containers?topic=containers-changelog#1188_1527)
@@ -1530,6 +1542,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.12_1542, released 12 October 2020](/docs/containers?topic=containers-changelog#11712_1542)
   * [Changelog for worker node fix pack 1.17.12_1541, released 28 September 2020](/docs/containers?topic=containers-changelog#11712_1541)
   * [Changelog for master fix pack 1.17.12_1540, released 21 September 2020](/docs/containers?topic=containers-changelog#11712_1540)
   * [Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020](/docs/containers?topic=containers-changelog#11711_1539)
@@ -1554,7 +1567,8 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020](/docs/containers?topic=containers-changelog#1173_1518)
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
-* [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+* [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.15_1549, released 12 October 2020](/docs/containers?topic=containers-changelog#11615_1549)
   * [Changelog for worker node fix pack 1.16.15_1548, released 28 September 2020](/docs/containers?topic=containers-changelog#11615_1548)
   * [Changelog for master fix pack 1.16.15_1547, released 21 September 2020](/docs/containers?topic=containers-changelog#11615_1547)
   * [Changelog for worker node fix pack 1.16.14_1546, released 14 September 2020](/docs/containers?topic=containers-changelog#11614_1546)
@@ -2014,6 +2028,8 @@ subcollection: containers
 
 [`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
 
+[`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
+
 [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
 [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
@@ -2155,9 +2171,8 @@ subcollection: containers
 [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress)
 * [Checking the status of Ingress components](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-status)
 * [No Ingress subdomain exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_subdomain)
-* [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
-* [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
 * [No Ingress secret exists after cluster creation](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress_secret)
+* [Classic clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_fails)
 * [VPC clusters: Cannot connect to an app via Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#vpc_ts_alb)
 * [Debugging Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#ingress-debug)
   * [Step 1: Check your app deployment](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#app-debug-ingress)
@@ -2171,6 +2186,7 @@ subcollection: containers
 * [Classic clusters: ALB does not deploy in a zone](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_subnet_limit)
 * [Ingress ALB cannot be enabled due to subnet errors](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_alb_subnet)
 * [Source IP preservation fails when using tainted nodes](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_source_ip_fails)
+* [No Ingress subdomain exists after you create clusters of the same or similar name](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_rate_limit)
 * [Ingress secret expiration date is not updated](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#sync_cert_dates)
 * [Connection via WebSocket closes after 60 seconds](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress#cs_ingress_websocket)
 

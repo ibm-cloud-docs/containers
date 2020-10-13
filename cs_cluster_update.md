@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-13"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -112,7 +113,7 @@ You are notified in the {{site.data.keyword.cloud_notm}} console and CLI when up
 **How many versions behind the latest can the master be?**</br>
 IBM generally supports three versions of Kubernetes at a time. You can update the Kubernetes API server only to the next version ahead of its current version (`n+1`). Additionally, your worker nodes can be up to two versions behind the master version (`n-2`).
 
-For example, if your current Kubernetes API server version is 1.16 (`n`) and you want to update to 1.18, you must first update to 1.17 (`n+1`) and then to 1.18 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.16 to 1.18 (`n+2`).
+For example, if your current Kubernetes API server version is 1.17 (`n`) and you want to update to 1.19, you must first update to 1.18 (`n+1`) and then to 1.19 (`n+2`). Next, you can update the worker nodes up to two version ahead, such as 1.17 to 1.19 (`n+2`).
 
 If your cluster runs an unsupported Kubernetes version, follow the [version archive instructions](/docs/containers?topic=containers-cs_versions#k8s_version_archive). To avoid getting in an unsupported state and operational impact, keep your cluster up-to-date.
 
@@ -150,7 +151,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 To update the Kubernetes master _major_ or _minor_ version:
 
 1.  Review the [Kubernetes changes](/docs/containers?topic=containers-cs_versions) and make any updates marked _Update before master_.
-2.  Check the add-ons and plug-ins that are installed in your cluster for any impact that might be caused by updating the cluster version.
+2.  Review any [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}, such as deprecation notices.
+3.  Check the add-ons and plug-ins that are installed in your cluster for any impact that might be caused by updating the cluster version.
     
     * **Checking add-ons**
       1.  List the add-ons in the cluster.
@@ -172,9 +174,9 @@ To update the Kubernetes master _major_ or _minor_ version:
       4.  Check the `README.md` or `RELEASENOTES.md` files for supported versions.
       5.  If the plug-in must be updated to run in the Kubernetes version that you want to update your cluster to, update the plug-in by following the plug-in instructions.
 
-3.  Update your API server and associated master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
-4.  Wait a few minutes, then confirm that the update is complete. Review the API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks cluster ls`.
-5.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
+4.  Update your API server and associated master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
+5.  Wait a few minutes, then confirm that the update is complete. Review the API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks cluster ls`.
+6.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
 *  [Updating classic worker nodes](#worker_node).
@@ -454,7 +456,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.18.9 to 1.18.9, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.18.9 to 1.19.2, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```

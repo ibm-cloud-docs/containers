@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-07"
+lastupdated: "2020-10-08"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -1038,7 +1039,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 
 **Example:**
 ```
-ibmcloud sat cluster create satellite --name mysatcluster --location mylocation --version 4.3_openshift
+ibmcloud sat cluster create satellite --name mysatcluster --location mylocation --version 4.4_openshift
 ```
 {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-13"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -98,9 +99,9 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
-* [Kubernetes 1.18 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.19 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
-* [Kubernetes 1.16 release notes](https://v1-16.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
 ## Update types
@@ -141,12 +142,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.18.9
+*   Latest: 1.19.2
 *   Default: 1.18.9
-*   Other: 1.16.15, 1.17.12
+*   Other: 1.17.12
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 
+*   Deprecated: 1.16.15
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15
 
 <br>
@@ -193,21 +194,27 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <tbody>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.19](#cs_v119)</td>
+  <td>13 Oct 2020</td>
+  <td>Oct 2021 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.18](#cs_v118)</td>
   <td>11 May 2020</td>
-  <td>May 2021 `†`</td>
+  <td>Jun 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.17](#cs_v117)</td>
   <td>10 Feb 2020</td>
-  <td>Feb 2021 `†`</td>
+  <td>Mar 2021 `†`</td>
 </tr>
   <tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.16](#cs_v116)</td>
   <td>04 Nov 2019</td>
-  <td>Nov 2020 `†`</td>
+  <td>29 Jan 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -308,13 +315,70 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 
 ## Preparing to update
 {: #prep-up}
-This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG) and [IBM version](/docs/containers?topic=containers-changelog){: external} changelogs.
+This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG), [IBM version changelogs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
+-  Version 1.19 [preparation actions](#cs_v119).
 -  Version 1.18 [preparation actions](#cs_v118).
 -  Version 1.17 [preparation actions](#cs_v117).
--  Version 1.16 [preparation actions](#cs_v116).
 -  [Archive](#k8s_version_archive) of unsupported versions.
+
+<br />
+
+
+## Version 1.19
+{: #cs_v119}
+
+<p><img src="images/certified_kubernetes_1x19.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.19 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.19 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.19.
+{: shortdesc}
+
+### Update before master
+{: #119_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| ---- | ---------- |
+| Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use Kubernetes data store driver (KDD). During the update, you can request resources that require Calico, such as pods that are subject to Calico policies, but the resources remain pending until the update is complete. As part of the update and going forward, access to the `etcd` port in the cluster master is blocked. If you use the `etcd` port, such as in firewall rules or Calico policies that allow worker nodes to access `etcd`, update these resources to use the `apiserver` port instead. To get the `apiserver` port, run `ibmcloud ks cluster get -c <cluster_name_or_ID>` and look for the node port that is listed for the **Master URL**. |
+| **Unsupported:** CoreDNS `federations` plug-in | CoreDNS version 1.7 no longer supports the `federations` plug-in. If you customized your CoreDNS configuration to use this plug-in, you must remove the plug-in and any related configurations before updating. For more information about updating your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
+| **Unsupported:** Select CoreDNS metrics | CoreDNS version 1.7 [metrics changed](https://coredns.io/2020/06/15/coredns-1.7.0-release/#metric-changes){: external}. If you rely on these changed metrics, update accordingly. | 
+| **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metric label names for `kubernetes_build_info` changed. These metrics, available via the `/metrics` endpoint, changed as follows. If you rely on these changed metrics, update accordingly.<ul><li>From `gitVersion` to `git_version`</li><li>From `gitCommit` to `git_commit`</li><li>From `gitTreeState` to `git_tree_state`</li><li>From `buildDate` to `build_date`</li><li>From `goVersion` to `go_version`</li></ul>. |
+{: caption="Changes to make before you update the master to Kubernetes 1.19" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after master
+{: #119_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| ---- | ---------- |
+| Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use Kubernetes data store driver (KDD). If you have any automation that depends on the Calico configuration file for your cluster, first download the new KDD-based Calico configuration file by running `ibmcloud ks cluster config -c <cluster_name_or_ID> --network`. Then, update your automation to use the new Calico configuration file. Additionally, because worker nodes can no longer access etcd with admin keys, ensure that you update your worker nodes so that the previous etcd secrets are removed. |
+| CoreDNS pod autoscaling configuration | Kubernetes DNS autoscaler configuration is updated to include unscheduable worker nodes in scaling calculations. To improve cluster DNS availability, you can set the `"includeUnschedulableNodes":true` parameter when [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale). |
+| Kubernetes `seccomp` support graduates to general availability (GA) | The support for `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io/...` annotations are now deprecated, and are planned for removal in Kubernetes version 1.22. A `seccompProfile` field is now added to the pod and container `securityContext` objects. The Kubernetes version skew handling automatically converts the new field into the annotations and vice versa. You do not have to change your existing workloads, but you can begin the conversion in preparation for the removal of the annotations before version 1.22. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
+| **Unsupported:** `kubectl apply --server-dry-run` removed | The deprecated `--server-dry-run` flag is removed from the `kubectl apply` command. If your scripts rely on this flag, update them to use the `--dry-run=server` flag instead. |
+| **Unsupported:** `kubectl get --export` removed | The deprecated `--export` flag is removed from the `kubectl get` command. If your scripts rely on this flag, refer to the [Deprecate --export flag from get command pull request](https://github.com/kubernetes/kubernetes/pull/73787){: external} issue for discussion and references to scripts that handle various use cases. |
+| `kubectl --output jsonpath` format changes  | The `kubectl get` `--o jsonpath` (or `-o jsonpath`) option now returns a JSON object for complex types such as structs, arrays, and slices. Previously, the option returned output in `go` format. If you use `kubectl get` to retrieve such fields using `--output jsonpath`, update your scripts to handle JSON objects. You might try using the `-o go-template` option to maintain compatibility with the previous behavior. |
+| **Unsupported:** Select `kubelet` metrics | The following `kubelet` metrics that were available via the `/metrics` and `/metrics/resource` endpoints are unsupported and removed. If you use any of these removed and deprecated `kubelet` metrics, change to use the available replacement metric.<ul><li>From `kubelet_running_container_count` to `kubelet_running_containers`</li><li>From `kubelet_running_pod_count` to `kubelet_running_pods`</li><li>From `node_cpu_usage_seconds` to `node_cpu_usage_seconds_total`</li><li>From `container_cpu_usage_seconds` to `container_cpu_usage_seconds_total`</li></ul>. |
+| **Unsupported:** Select `kube-proxy` metrics | The following `kube-proxy` metric label names for `kubernetes_build_info`, available via the `/metrics` endpoint, are changed. If you rely on these changed metrics, update accordingly.<ul><li>From `gitVersion` to `git_version`</li><li>From `gitCommit` to `git_commit`</li><li>From `gitTreeState` to `git_tree_state`</li><li>From `buildDate` to `build_date`</li><li>From `goVersion` to `go_version`</li></ul> |
+{: caption="Changes to make after you update the master to Kubernetes 1.19" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after worker nodes
+{: #119_after_worker}
+
+The following table shows the actions that you must take after you update your worker nodes.
+{: shortdesc}
+
+| Type | Description|
+| ---- | ---------- |
+| **Deprecated:** Beta worker node labels | The following beta worker node labels are deprecated and replaced. For now, both sets of labels are supported, but update your workloads to use the new labels, such as in affinity rules for deployments.<ul><li>From `beta.kubernetes.io/os` to `kubernetes.io/os`</li><li>From `beta.kubernetes.io/arch` to `kubernetes.io/arch`</li><li>From `failure-domain.beta.kubernetes.io/zone` to `topology.kubernetes.io/zone`</li><li>From `failure-domain.beta.kubernetes.io/region` to `topology.kubernetes.io/region`</li><li>From `beta.kubernetes.io/instance-type` to `node.kubernetes.io/instance-type`</li></ul> |
+{: caption="Changes to make after you update the worker nodes to Kubernetes 1.19" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 <br />
 
@@ -425,13 +489,16 @@ The following table shows the actions that you must take after you update your w
 <br />
 
 
-## Version 1.16
+## Deprecated: Version 1.16
 {: #cs_v116}
 
 <p><img src="images/certified_kubernetes_1x16.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.16 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.16 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.16.
 {: shortdesc}
+
+Kubernetes version 1.16 is deprecated, and becomes unsupported on 29 January 2021 (date subject to change). [Update your clusters](/docs/containers?topic=containers-update) to at least Kubernetes version 1.17 as soon as possible.
+{: deprecated}
 
 ### Update before master
 {: #116_before}
