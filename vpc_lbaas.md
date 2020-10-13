@@ -350,8 +350,6 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
 
 7. Repeat steps 2 - 6 to deploy a VPC network load balancer in each zone where you want to expose your app.
 
-8. Optional: Register the external IP addresses of the VPC network load balancer in each zone with a [DNS subdomain](#vpc_nlb_dns).
-
 Do not delete the subnets that you attached to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any network load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.
 {: important}
 
