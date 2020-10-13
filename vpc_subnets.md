@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-08"
+lastupdated: "2020-10-13"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -385,8 +385,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
   Example output:
   ```
   ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.9
-  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.9
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.19.2
+  kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.19.2
   ```
   {: screen}
 
@@ -504,8 +504,8 @@ In VPC clusters, a subnet is limited to one zone. When you attach a public gatew
         Example output:
         ```
         ID                                                   Primary IP     Flavor   State    Status   Zone         Version
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.18.9
-        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.18.9
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-000005ac   10.240.02.00   c2.2x4   normal   Ready    us-south-2   1.19.2
+        kube-bl25g33d0if1cmfn0p8g-vpctest-default-00000623   10.240.01.00   c2.2x4   normal   Ready    us-south-1   1.19.2
         ```
         {: screen}
 

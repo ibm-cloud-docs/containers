@@ -1492,6 +1492,10 @@ subcollection: containers
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
+* [Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#119_after)
+  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#119_after_worker)
 * [Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
   * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
@@ -1500,7 +1504,7 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#117_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#117_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#117_after_worker)
-* [Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116)
+* [Deprecated: Version 1.16](/docs/containers?topic=containers-cs_versions#cs_v116)
   * [Update before master](/docs/containers?topic=containers-cs_versions#116_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#116_after)
   * [Preparing private network policies](/docs/containers?topic=containers-cs_versions#116_networkpolicies)
@@ -1518,6 +1522,8 @@ subcollection: containers
 
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
   * [Changelog for worker node fix pack 1.18.9_1530, released 12 October 2020](/docs/containers?topic=containers-changelog#1189_1530)
   * [Changelog for worker node fix pack 1.18.9_1529, released 28 September 2020](/docs/containers?topic=containers-changelog#1189_1529)
@@ -1561,7 +1567,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020](/docs/containers?topic=containers-changelog#1173_1518)
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
-* [Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+* [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
   * [Changelog for worker node fix pack 1.16.15_1549, released 12 October 2020](/docs/containers?topic=containers-changelog#11615_1549)
   * [Changelog for worker node fix pack 1.16.15_1548, released 28 September 2020](/docs/containers?topic=containers-changelog#11615_1548)
   * [Changelog for master fix pack 1.16.15_1547, released 21 September 2020](/docs/containers?topic=containers-changelog#11615_1547)
@@ -2021,6 +2027,8 @@ subcollection: containers
 [`kube-controller-manager`](/docs/containers?topic=containers-service-settings#kube-controller-manager)
 
 [`kubelet`](/docs/containers?topic=containers-service-settings#kubelet)
+
+[`kube-scheduler`](/docs/containers?topic=containers-service-settings#kube-scheduler)
 
 [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
