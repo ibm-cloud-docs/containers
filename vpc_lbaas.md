@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-10-13"
 
 keywords: kubernetes, iks
 
@@ -120,7 +120,7 @@ The following table describes the basic characteristics of each load balancing o
 |Types of load balancers|Public and private|Public|
 {: caption="Load balancing options for VPC clusters"}
 
-`*` To preserve the source IP address for an Application Load Balancer for VPC, the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotation must be specified when the VPC application load balancer is initially created in VPC Gen 2 clusters that run Kubernetes version 1.18 and later only.
+`*` To preserve the source IP address for an Application Load Balancer for VPC, the `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"` annotation must be specified when the VPC application load balancer is initially created. This annotation is supported for VPC Gen 2 clusters that run Kubernetes version 1.18 and later only.
 
 ### Network Load Balancer for VPC
 {: #nlb_vpc}
@@ -136,7 +136,7 @@ When you create a Kubernetes `LoadBalancer` service for an app in your cluster a
 
 The following diagram illustrates how a user accesses an app from the internet through the VPC network load balancer.
 
-<img src="images/vpc_tutorial_lesson4_lb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
+<img src="images/vpc_tutorial_lesson4_lb.png" alt="VPC load balancing for a cluster"/>
 
 1. A request to your app uses the hostname that is assigned to the Kubernetes `LoadBalancer` service by the VPC network load balancer, such as `1234abcd-<region>.lb.appdomain.cloud`.
 2. The request is automatically forwarded by the VPC network load balancer to one of the node ports on the worker node, and then to the private IP address of the app pod.
@@ -157,7 +157,7 @@ By default, when you create a Kubernetes `LoadBalancer` service for an app in yo
 
 The following diagram illustrates how a user accesses an app from the internet through the VPC application load balancer.
 
-<img src="images/vpc_alb.png" width="800" alt="VPC load balancing for a cluster" style="width:600px; border-style: none"/>
+<img src="images/vpc_alb.png" alt="VPC load balancing for a cluster"/>
 
 1. A request to your app uses the hostname that is assigned to the Kubernetes `LoadBalancer` service by the VPC application load balancer, such as `1234abcd-<region>.lb.appdomain.cloud`.
 2. The request is automatically forwarded by the VPC application load balancer to one of the node ports on the worker node, and then to the private IP address of the app pod.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-10-13"
 
 keywords: kubernetes, iks, containers
 
@@ -287,10 +287,10 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
     2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
 5.  Configure your **Worker pool** setup.
     1.  If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.
-    2.  Set how many worker nodes to create per zone, such as **1**.
+    2.  Set how many worker nodes to create per zone, such as **2**.
 6.  Review the rest of the cluster details, such as the service endpoint, cluster name, and tags.
 7.  In the **Summary** pane, review your order summary and then click **Create**.
-8.  VPC Gen 2 clusters that run Kubernetes version 1.18 or earlier only: Allow traffic requests to apps that you deploy by modifying the VPC's default security group.
+8.  Kubernetes version 1.18 or earlier only: Allow traffic requests to apps that you deploy by modifying the VPC's default security group.
     1. From the [Virtual private cloud dashboard](https://cloud.ibm.com/vpc-ext/network/vpcs){: external}, click the name of the **Default Security Group** for the VPC that you created.
     2. In the **Inbound rules** section, click **New rule**.
     3. Choose the **TCP** protocol, enter `30000` for the **Port min** and `32767` for the **Port max**, and leave the **Any** source type selected.
