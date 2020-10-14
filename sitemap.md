@@ -1328,6 +1328,7 @@ subcollection: containers
 * [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
   * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
   * [Removing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
+* [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#cos_auth_ip)
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
 * [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
 * [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
