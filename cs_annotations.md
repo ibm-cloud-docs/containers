@@ -2170,7 +2170,6 @@ spec:
 
 
 ## Preserving the source IP address
-
 {: #preserve_source_ip}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC clusters.
