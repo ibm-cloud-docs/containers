@@ -1465,7 +1465,7 @@ ibmcloud ks cluster master private-service-endpoint enable --cluster my_cluster
 ```
 {: pre}
 
-
+</br>
 
 ### `ibmcloud ks cluster master public-service-endpoint disable`
 {: #cs_cluster_master_pub_se_disable}
