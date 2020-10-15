@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-14"
+lastupdated: "2020-10-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1098,14 +1098,17 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       ```
       {: pre}
 
+<br />
+
+
 ## Preserving the source IP address
+
 {: #preserve_source_ip}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC clusters.
 {: note}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs.
-{: shortdesc}
 
 To preserve the original source IP address of the client request, you can enable [source IP preservation](https://kubernetes.io/docs/tutorials/services/source-ip/#source-ip-for-services-with-typeloadbalancer){: external}. Preserving the client’s IP is useful, for example, when app servers have to apply security and access-control policies.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-08"
+lastupdated: "2020-10-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1617,7 +1617,7 @@ ibmcloud ks cluster master update --cluster CLUSTER [--version MAJOR.MINOR.PATCH
 <dd>Optional: Attempt the update even if the change is greater than two minor versions from the worker node version.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Force the command to run without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -1696,7 +1696,7 @@ ibmcloud ks cluster rm --cluster CLUSTER [--force-delete-storage] [--skip-advanc
 <dd>Optional: Skip [the check for infrastructure permissions](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#infra_permissions_get) before deleting the cluster. Note that if you do not have the correct infrastructure permissions, the cluster deletion might only partially succeed, such as the IBM-managed master being removed but the worker nodes unable to be removed from your infrastructure account. You might skip the permissions check if you want to continue an otherwise blocked operation, such as when you use multiple infrastructure accounts and can handle the infrastructure resources separately from the master, if needed later.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Use this option to force the removal of a cluster without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -2328,7 +2328,7 @@ ibmcloud ks worker reload --cluster CLUSTER --worker WORKER_ID [--skip-master-he
 <dd>Skip a health check of your master before reloading or rebooting your worker nodes.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Use this option to force the reload of a worker node without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -2445,7 +2445,7 @@ ibmcloud ks worker rm --cluster CLUSTER --worker WORKER [-f] [-q]
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Use this option to force the removal of a worker node without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -2488,7 +2488,7 @@ ibmcloud ks worker update --cluster CLUSTER --worker WORKER_ID [-f] [-q]
 <dd>Specify a worker node ID. To reload multiple worker nodes, use multiple flags, such as `-w worker1_id -w worker2_id`.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Use this option to force the update of the worker node without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3225,7 +3225,7 @@ ibmcloud ks zone network-set --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 <dd>Optional: Unset the public VLAN so that the workers in this zone are connected to a private VLAN only.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Force the command to run without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3305,7 +3305,7 @@ ibmcloud ks zone rm --cluster CLUSTER --zone ZONE [--worker-pool WORKER_POOL] [-
 <dd>The name of the worker pool to remove the zone from. To specify multiple worker pools, use multiple flags, such as `-p pool1 -p pool2`. To remove the zone from all worker pools in the cluster, do not include this flag.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: Force the update without user prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3320,13 +3320,13 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 <br />
 
 
-## `ingress alb` commands
+## `ingress` commands
 {: #alb-commands}
 
 View and configure Ingress application load balancers (ALBs).
 {: shortdesc}
 
-Previously, the following commands were listed in the `ibmcloud ks alb` category. In CLI version 1.0.157 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
+In CLI version 1.0.157 and later, the `ibmcloud ks alb` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress alb` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: important}
 
 ### `ibmcloud ks ingress alb autoupdate disable`
@@ -3906,7 +3906,7 @@ ibmcloud ks ingress alb migrate start --cluster CLUSTER --type (test | test-with
 <dd>The type of migration: a test migration for public Ingress routing, a test migration with private Ingress routing, or a production migration of all Ingress routing. To see the resources that are created by and the processes for each type of migration, see [Changing the image of existing ALBs](/docs/containers?topic=containers-ingress-types#alb-type-migration).</dd>
 
 <dt><code>-f</code></dt>
-<dd>Force the migration to start without confirmation prompts.</dd>
+<dd>Optional: Force the command to run with no user prompts./dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -3957,8 +3957,6 @@ ibmcloud ks ingress alb migrate status --cluster my_cluster --output json
 {: pre}
 
 </br>
-
-
 
 ### `ibmcloud ks ingress alb update`
 {: #cs_alb_update}
@@ -4041,25 +4039,15 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
-<br />
-
-
-## Beta: `ingress secret` commands
-{: #ingress-commands}
-
-View and modify TLS secrets for Ingress services in your cluster.
-{: shortdesc}
-
-Previously, the following commands were listed in the `ibmcloud ks ingress alb cert` subcategory. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
-{: important}
+</br>
 
 ### Beta: `ibmcloud ks ingress secret create`
 {: #cs_ingress_secret_create}
 
-Create an Ingress secret in a cluster for a certificate stored in {{site.data.keyword.cloudcerts_long}}.
+Create an Ingress secret in a cluster for a certificate that is stored in {{site.data.keyword.cloudcerts_long}}.
 {: shortdesc}
 
-The previous alias for this command, `ibmcloud ks ingress alb cert deploy`, is deprecated.
+The previous alias for this command, `ibmcloud ks ingress alb cert deploy`, is deprecated. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: note}
 
 ```
@@ -4110,7 +4098,7 @@ ibmcloud ks ingress secret create --cert-crn crn:v1:staging:public:cloudcerts:us
 View information about Ingress secrets in your cluster, including secrets that you imported for a certificate from {{site.data.keyword.cloudcerts_long_notm}}.
 {: shortdesc}
 
-The previous alias for this command, `ibmcloud ks ingress alb cert get`, is deprecated.
+The previous alias for this command, `ibmcloud ks ingress alb cert get`, is deprecated. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: note}
 
 ```
@@ -4203,7 +4191,7 @@ ibmcloud ks ingress secret ls --cluster my_cluster
 Delete an Ingress secret from your cluster. If you created a secret for a certificate from {{site.data.keyword.cloudcerts_long_notm}}, only the secret in the cluster is deleted and the certificate remains in your {{site.data.keyword.cloudcerts_long_notm}} instance.
 {: shortdesc}
 
-The previous alias for this command, `ibmcloud ks ingress alb cert rm`, is deprecated.
+The previous alias for this command, `ibmcloud ks ingress alb cert rm`, is deprecated. In CLI version 1.0.157 and later, the `ibmcloud ks ingress alb cert` category is deprecated, and these commands are now listed in the `ibmcloud ks ingress secret` subcategory. For more information, see the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog#10).
 {: note}
 
 ```
@@ -4291,7 +4279,7 @@ ibmcloud ks ingress secret update --cluster my_cluster --name my_alb_secret --na
 
 </br>
 
-### `ingress status` command
+### `ibmcloud ks ingress status`
 {: #cs_ingress_status}
 
 Get the status of the health of Ingress resources for a cluster.
