@@ -1078,6 +1078,7 @@ subcollection: containers
 * [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
   * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
   * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+* [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 * [Customizing routing and settings by using annotations and configmaps](/docs/containers?topic=containers-ingress-types#cm-annotations)
 * [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update)
   * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
