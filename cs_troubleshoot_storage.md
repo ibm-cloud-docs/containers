@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-14"
 
 keywords: kubernetes, iks, help, debug
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -549,7 +550,7 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
     apiVersion: apps/v1
     kind: Deployment
     metadata:
-      name: my_pod
+      name: my-pod
     spec:
       replicas: 1
       selector:
@@ -585,13 +586,13 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
 5.  Create the pod and mount the PVC to your pod.
 
     ```
-    kubectl apply -f my_pod.yaml
+    kubectl apply -f my-pod.yaml
     ```
     {: pre}
 
 6. Verify that the volume is successfully mounted to your pod. Note the pod name and **Containers/Mounts** path.
    ```
-   kubectl describe pod <my_pod>
+   kubectl describe pod <my-pod>
    ```
    {: pre}
 
@@ -632,7 +633,7 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
 
 7.  Log in to the pod by using the pod name that you previously noted.
     ```
-    kubectl exec -it <my_pod-123456789> /bin/bash
+    kubectl exec -it <my-pod-123456789> /bin/bash
     ```
     {: pre}
 
@@ -1763,6 +1764,29 @@ After you set the correct file permissions in your {{site.data.keyword.cos_full_
 
 <br />
 
+
+## Object Storage: App pod fails because of an `Operation not permitted` error
+{: #cos_operation_not_permitted}
+
+**Infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+{: tsSymptoms}
+When you create a PVC, you see an error message similar to the following:
+
+```
+EPERM: operation not permitted
+```
+{: screen}
+
+{: tsCauses}
+IAM has introduced a `refresh_token_expiration` key which causes an issue with the IAM credential response parser, where the parser was not able to differentiate between `expiration` and `refresh_token_expiration`. This issue is resolved in the [community repo](https://github.com/s3fs-fuse/s3fs-fuse/pull/1421) and in the {{site.data.keyword.cos_full_notm}} plug-in. 
+
+{: tsResolve}
+1. If you are using Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3) before installing the {{site.data.keyword.cos_full_notm}} plug-in.
+2. Follow the steps to [update your {{site.data.keyword.cos_full_notm}} plug-in to the latest version](/docs/containers?topic=containers-object_storage#update_cos_plugin).
 
 
 ## PVC creation fails because of missing permissions

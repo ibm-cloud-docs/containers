@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-13"
+lastupdated: "2020-10-16"
 
 keywords: containers
 subcollection: containers
@@ -606,7 +606,7 @@ subcollection: containers
   * [Opening ports in a public or private firewall for inbound traffic to NodePort, load balancer, and Ingress services](/docs/containers?topic=containers-firewall#firewall_inbound)
 * [Allowing the cluster to access resources through Calico network policies](/docs/containers?topic=containers-firewall#firewall_calico_egress)
 * [Allowing traffic to your cluster in other services' firewalls or in on-premises firewalls](/docs/containers?topic=containers-firewall#allowlist_workers)
-* [Updating IAM allowlists for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
+* [Updating IAM firewalls for {{site.data.keyword.containershort}} IP addresses](/docs/containers?topic=containers-firewall#iam_allowlist)
 
 [Classic: Restricting network traffic to edge worker nodes](/docs/containers?topic=containers-edge)
 * [Isolating networking workloads to edge nodes](/docs/containers?topic=containers-edge#edge_nodes)
@@ -1078,6 +1078,7 @@ subcollection: containers
 * [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
   * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
   * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
+* [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
 * [Customizing routing and settings by using annotations and configmaps](/docs/containers?topic=containers-ingress-types#cm-annotations)
 * [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update)
   * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
@@ -1329,6 +1330,7 @@ subcollection: containers
   * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
   * [Removing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#remove_cos_plugin)
 * [Deciding on the object storage configuration](/docs/containers?topic=containers-object_storage#configure_cos)
+* [VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}](/docs/containers?topic=containers-object_storage#cos_auth_ip)
 * [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
 * [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
 * [Backing up and restoring data](/docs/containers?topic=containers-object_storage#cos_backup_restore)
@@ -2210,6 +2212,7 @@ subcollection: containers
   * [Object storage: Cannot access an existing bucket](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_access_bucket_fails)
 * [Object storage: Changing the ownership of the mount path fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_mountpath_error)
 * [Object storage: Accessing files with a non-root user fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_nonroot_access)
+* [Object Storage: App pod fails because of an `Operation not permitted` error](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_operation_not_permitted)
 * [PVC creation fails because of missing permissions](/docs/containers?topic=containers-cs_troubleshoot_storage#missing_permissions)
 * [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx)
   * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-catalog)

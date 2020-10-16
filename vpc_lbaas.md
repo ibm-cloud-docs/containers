@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-13"
+lastupdated: "2020-10-16"
 
 keywords: kubernetes, iks
 
@@ -271,7 +271,7 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
   </tr>
   <tr>
     <td>`externalTrafficPolicy: Local`</td>
-    <td>Set to `Local` to preserve the source IP address of client requests to your apps.</td>
+    <td>Set to `Local` to preserve the source IP address of client requests to your apps. If `Cluster` is set, DSR is implemented only if the request is processed by an app pod that is deployed to the same worker node where the Kubernetes `LoadBalancer` service pod that receives the request exists. If the request must be forwarded to an app pod on another worker nodes, DSR is not implemented.</td>
   </tr>
   </tbody></table>
 
@@ -292,28 +292,28 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
 
   Example CLI output for a public `LoadBalancer` service:
   ```
-  Name:                     myloadbalancer
+  Name:                     myvpcnlb
   Namespace:                default
   Labels:                   <none>
-  Annotations:              kubectl.kubernetes.io/last-applied-configuration:
-                              {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type":"public"},...
-                            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: public
-                            service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "nlb"
-  Selector:                 run=webserver
+  Annotations:              service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: nlb
+  Selector:                 app=echo-server
   Type:                     LoadBalancer
-  IP:                       169.XX.XXX.XX
-  LoadBalancer Ingress:     1234abcd-us-south.lb.appdomain.cloud
-  Port:                     <unset>  8080/TCP
+  IP:                       172.21.204.12
+  LoadBalancer Ingress:     52.XXX.XXX.XXX
+  Port:                     tcp-80  80/TCP
   TargetPort:               8080/TCP
-  NodePort:                 <unset>  30532/TCP
-  Endpoints:
+  NodePort:                 tcp-80  32022/TCP
+  Endpoints:                172.17.17.133:8080,172.17.22.68:8080,172.17.34.18:8080 + 3 more...
   Session Affinity:         None
   External Traffic Policy:  Local
+  HealthCheck NodePort:     30882
   Events:
-    Type    Reason                Age   From                Message
-    ----    ------                ----  ----                -------
-    Normal  EnsuringLoadBalancer  52s   service-controller  Ensuring load balancer
-    Normal  EnsuredLoadBalancer   35s   service-controller  Ensured load balancer
+    Type     Reason                           Age                  From                Message
+    ----     ------                           ----                 ----                -------
+    Warning  SyncLoadBalancerFailed           13m (x5 over 15m)    service-controller  Error syncing load balancer: failed to ensure load balancer: kube-bqcssbbd0bsui62odcdg-2d93b07decf641d2ad3f9c2985122ec1 for service default/myvpcnlb is busy: offline/create_pending
+    Normal   EnsuringLoadBalancer             9m27s (x7 over 15m)  service-controller  Ensuring load balancer
+    Normal   EnsuredLoadBalancer              9m20s                service-controller  Ensured load balancer
+    Normal   CloudVPCLoadBalancerNormalEvent  8m17s                ibm-cloud-provider  Event on cloud load balancer myvpcnlb for service default/myvpcnlb with UID 2d93b07d-ecf6-41d2-ad3f-9c2985122ec1: The VPC load balancer that routes requests to this Kubernetes LoadBalancer service is currently online/active.
   ```
   {: screen}
 
@@ -423,7 +423,7 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector`</td>
-    <td>Kubernetes version 1.19 only: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in your cluster are configured to receive traffic from the VPC application load balancer. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<br><br>The following keys are permitted:
+    <td>Kubernetes version 1.18 only: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in your cluster are configured to receive traffic from the VPC application load balancer. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<br><br>The following keys are permitted:
       <ul><li>`ibm-cloud.kubernetes.io/internal-ip`</li>
       <li>`ibm-cloud.kubernetes.io/machine-type`</li>
       <li>`ibm-cloud.kubernetes.io/os`</li>
@@ -432,6 +432,9 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
       <li>`ibm-cloud.kubernetes.io/worker-pool-id`</li>
       <li>`ibm-cloud.kubernetes.io/worker-pool-name`</li>
       <li>`ibm-cloud.kubernetes.io/zone`</li>
+      <li>1.19 and later only: `kubernetes.io/arch`</li>
+      <li>1.19 and later only: `kubernetes.io/hostname`</li>
+      <li>1.19 and later only: `kubernetes.io/os`</li>
       <li>`node.kubernetes.io/instance-type`</li>
       <li>`topology.kubernetes.io/region`</li>
       <li>`topology.kubernetes.io/zone`</li></ul>
@@ -439,14 +442,14 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet`</td>
-    <td>Kubernetes version 1.19 only: Annotation to specify one or more subnets that the VPC application load balancer service deploys to. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the VPC application load balancer deploys to a different subnet in the same VPC, the VPC application load balancer can still route traffic to your worker nodes on the cluster subnets. To see subnets, run `ibmcloud ks subnets --provider (vpc-classic|vpc-gen2) --vpc-id <vpc> --zone <zone>`.</td>
+    <td>Kubernetes version 1.18 only: Annotation to specify one or more subnets that the VPC application load balancer service deploys to. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the VPC application load balancer deploys to a different subnet in the same VPC, the VPC application load balancer can still route traffic to your worker nodes on the cluster subnets. To see subnets, run `ibmcloud ks subnets --provider (vpc-classic|vpc-gen2) --vpc-id <vpc> --zone <zone>`.</td>
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>
     <td>Annotation to specify a VPC zone that your cluster is attached to. When you specify a zone in this annotation, two processes occur:<ul>
     <li>The VPC application load balancer is deployed to the same subnet in that zone that your worker nodes are connected to.</li>
     <li>Only worker nodes in your cluster in this zone are configured to receive traffic from the VPC application load balancer.</li></ul>
-    To see zones, run `ibmcloud ks zone ls --provider (vpc-classic|vpc-gen2)`.<p class="note">To place the load balancer in a specific zone, you must specify this annotation when you create the load balancer. If you later change this annotation to a different zone, the load balancer itself is not moved to the new zone. However, the load balancer is reconfigured to send traffic to only worker nodes in the new zone.</br></br>If you set the `dedicated: edge` label on worker nodes, then only edge nodes in the specified zone are configured to receive traffic. Edge nodes in other zones and non-edge nodes in the specified zone do not receive traffic from the load balancer.</p></td>
+    To see zones, run `ibmcloud ks zone ls --provider (vpc-classic|vpc-gen2)`.<p class="note">To place the load balancer in a specific zone, you must specify this annotation when you create the load balancer. If you later change this annotation to a different zone, the load balancer itself is not moved to the new zone. However, the load balancer is reconfigured to send traffic to only worker nodes in the new zone.</br></br>If the `dedicated: edge` label is set on worker nodes and you specify this annotation, then only edge nodes in the specified zone are configured to receive traffic. Edge nodes in other zones and non-edge nodes in the specified zone do not receive traffic from the load balancer.</p></td>
   </tr>
   <tr>
     <td>`selector`</td>
@@ -479,27 +482,27 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
 
   Example CLI output for a public `LoadBalancer` service:
   ```
-  Name:                     myloadbalancer
+  Name:                     myvpcalb
   Namespace:                default
   Labels:                   <none>
-  Annotations:              kubectl.kubernetes.io/last-applied-configuration:
-                              {"apiVersion":"v1","kind":"Service","metadata":{"annotations":{"service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type":"public"},...
-                            service.kubernetes.io/ibm-load-balancer-cloud-provider-ip-type: public
-  Selector:                 run=webserver
+  Annotations:              
+  Selector:                 app=echo-server
   Type:                     LoadBalancer
-  IP:                       172.21.106.166
+  IP:                       172.21.XX.XX
   LoadBalancer Ingress:     1234abcd-us-south.lb.appdomain.cloud
-  Port:                     <unset>  8080/TCP
+  Port:                     tcp-80  80/TCP
   TargetPort:               8080/TCP
-  NodePort:                 <unset>  30532/TCP
-  Endpoints:
+  NodePort:                 tcp-80  30610/TCP
+  Endpoints:                172.17.17.133:8080,172.17.22.68:8080,172.17.34.18:8080 + 3 more...
   Session Affinity:         None
-  External Traffic Policy:  Cluster
+  External Traffic Policy:  Local
+  HealthCheck NodePort:     31438
   Events:
-    Type    Reason                Age   From                Message
-    ----    ------                ----  ----                -------
-    Normal  EnsuringLoadBalancer  52s   service-controller  Ensuring load balancer
-    Normal  EnsuredLoadBalancer   35s   service-controller  Ensured load balancer
+    Type    Reason                           Age   From                Message
+    ----    ------                           ----  ----                -------
+    Normal  EnsuringLoadBalancer             16m   service-controller  Ensuring load balancer
+    Normal  EnsuredLoadBalancer              15m   service-controller  Ensured load balancer
+    Normal  CloudVPCLoadBalancerNormalEvent  13m   ibm-cloud-provider  Event on cloud load balancer myvpcalb for service default/myvpcalb with UID 08cbacf0-2c93-4186-84b6-c4ab88a2faf9: The VPC load balancer that routes requests to this Kubernetes LoadBalancer service is currently online/active.
   ```
   {: screen}
 
@@ -621,7 +624,9 @@ Review the following default settings and limitations.
 * Private VPC application load balancers do not accept all traffic, only RFC 1918 traffic.
 * Private VPC network load balancers are currently not supported.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.
-* The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster. If your cluster has more than 50 worker nodes, create one load balancer per zone. In the YAML file for each load balancer, add the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"` annotation. Each load balancer can forward requests to apps on the worker nodes in that zone only.
+* The VPC load balancer can route requests to pods that are deployed on a maximum of 50 worker nodes in a cluster.
+  * If your cluster has more than 50 worker nodes and you set `externalTrafficPolicy: Cluster` when you configured the Kubernetes `LoadBalancer` service, the VPC load balancer can only route to the first 50 worker nodes that are returned in the cluster's API call to the VPC load balancer.
+  * If your cluster has more than 50 worker nodes and you set `externalTrafficPolicy: Local` when you configured the Kubernetes `LoadBalancer` service, the VPC load balancer fails and cannot forward traffic to any worker nodes. Instead, create one load balancer per zone. In each Kubernetes `LoadBalancer` service that you create, include the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone: "<zone>"` annotation. Each load balancer can forward requests to apps on the worker nodes in that zone only, and can forwards requests to a maximum of 50 worker nodes in that zone.
 * When you define the configuration YAML file for a Kubernetes `LoadBalancer` service, the following annotations and settings are not supported:
     * `service.kubernetes.io/ibm-load-balancer-cloud-provider-vlan: "<vlan_id>"`
     * `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "ipvs"`

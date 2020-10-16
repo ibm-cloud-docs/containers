@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-15"
 
 keywords: kubernetes, iks, clusters
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -406,13 +407,15 @@ The Kubernetes master is accessible through the private service endpoint if auth
       ```
       {: pre}
 
-6. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+6. Verify that you are connected to the private network through your {{site.data.keyword.vpc_short}} VPN connection.
+
+7. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
     {: pre}
 
-7. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
+8. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
   1. Navigate to the `kubeconfig` directory and open the file.
     ```
     cd /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name> && nano touch kube-config-prod-dal10-mycluster.yml
@@ -421,7 +424,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   2. Edit your Kubernetes configuration file to add the word `private` to the service endpoint URL. For example, in the Kubernetes configuration file `kube-config-prod-dal10-mycluster.yml`, the server field might look like `server: https://c1.us-east.containers.cloud.ibm.com:30426`. You can change this URL to the private service endpoint URL by changing the server field to `server: https://c1.private.us-east.containers.cloud.ibm.com:30426`.
   3. Repeat these steps each time that you run `ibmcloud ks cluster config`.
 
-8. Verify that the `kubectl` commands run properly with your cluster through the private service endpoint by checking the Kubernetes CLI server version.
+9. Verify that the `kubectl` commands run properly with your cluster through the private service endpoint by checking the Kubernetes CLI server version.
   ```
   kubectl version --short
   ```
@@ -433,7 +436,6 @@ The Kubernetes master is accessible through the private service endpoint if auth
   Server Version: v1.18.9
   ```
   {: screen}
-
 
 
 <br />
