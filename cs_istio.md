@@ -294,6 +294,12 @@ If your Istio add-on runs version 1.3 or earlier, you must update your add-on by
 You cannot revert your managed Istio add-on to a previous version. If you want to revert to an earlier minor version, such as from version 1.5 to 1.4, you must uninstall your add-on and then reinstall the add-on by specifying the earlier version.
 {: important}
 
+1. Review the current version of your Istio add-on.
+  ```
+  kubectl get iop managed-istio -n ibm-operators -o jsonpath='{.metadata.annotations.version}'
+  ```
+  {: pre}
+
 1. Review the available Istio add-on versions.
   ```
   ibmcloud ks addon-versions
