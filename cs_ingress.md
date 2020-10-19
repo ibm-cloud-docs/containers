@@ -731,8 +731,8 @@ When you create a standard cluster, a private ALB is created in each zone that y
     The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947       -
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:652/ingress-auth:424   2234945       -
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947       -
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:653/ingress-auth:425   2234945       -
     ```
     {: screen}
 
@@ -742,15 +742,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `652`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `653`:
   ```
   IBM Cloud Ingress: 'auth' version
-  424
+  425
 
   IBM Cloud Ingress versions
-  652 (default)
+  653 (default)
+  652
   651
-  647
 
   Kubernetes Ingress versions
   0.35.0_474_iks
@@ -761,7 +761,7 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
 3. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--ip` flag.
   ```
-  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version 652
+  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version 653
   ```
   {: pre}
   </br>
@@ -1023,10 +1023,10 @@ When you create a standard cluster, a private ALB is created in each zone that y
     The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                Enabled    Status     Type      Load Balancer Hostname                 Zone         Build
-    private-crbl25g33d0if1cmfn0p8g-alb1   false      disabled   private   -                                      us-south-1   ingress:652/ingress-auth:424
-    private-crbl25g33d0if1cmfn0p8g-alb2   false      disabled   private   -                                      us-south-2   ingress:652/ingress-auth:424
-    public-crbl25g33d0if1cmfn0p8g-alb1    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-    public-crbl25g33d0if1cmfn0p8g-alb2    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
+    private-crbl25g33d0if1cmfn0p8g-alb1   false      disabled   private   -                                      us-south-1   ingress:653/ingress-auth:425
+    private-crbl25g33d0if1cmfn0p8g-alb2   false      disabled   private   -                                      us-south-2   ingress:653/ingress-auth:425
+    public-crbl25g33d0if1cmfn0p8g-alb1    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+    public-crbl25g33d0if1cmfn0p8g-alb2    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
     ```
     {: screen}
 
@@ -1036,15 +1036,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `652`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `653`:
   ```
   IBM Cloud Ingress: 'auth' version
-  424
+  425
 
   IBM Cloud Ingress versions
-  652 (default)
+  653 (default)
+  652
   651
-  647
 
   Kubernetes Ingress versions
   0.35.0_474_iks
@@ -1056,12 +1056,12 @@ When you create a standard cluster, a private ALB is created in each zone that y
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version 652
+    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version 653
     ```
     {: pre}
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version 652
+    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version 653
     ```
     {: pre}
   </br>
@@ -1081,8 +1081,8 @@ When you enable the private ALBs, one private VPC load balancer is automatically
   Example output:
   ```
   ALB ID                                Enabled   Status    Type      Load Balancer Hostname                 Zone         Build
-  private-crbl25g33d0if1cmfn0p8g-alb1   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-  private-crbl25g33d0if1cmfn0p8g-alb2   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
+  private-crbl25g33d0if1cmfn0p8g-alb1   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+  private-crbl25g33d0if1cmfn0p8g-alb2   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
   ```
   {: screen}
 
@@ -1448,12 +1448,12 @@ ibmcloud ks ingress alb versions
 Example output:
 ```
 IBM Cloud Ingress: 'auth' version
-424
+425
 
 IBM Cloud Ingress versions
-652 (default)
+653 (default)
+652
 651
-647
 
 Kubernetes Ingress versions
 0.35.0_474_iks
@@ -1587,12 +1587,12 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   Example output for a cluster in which new public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb3` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb4` are created in `dal10` and `dal12`:
   ```
   ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021       -
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294019       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234945       -
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021       -
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294019       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234945       -
   ```
   {: screen}
 
@@ -1626,12 +1626,12 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   Example output for a cluster in which new public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb3` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb4` are created in `us-south-1` and `us-south-2`:
   ```
   ALB ID                                            Enabled   Status     Type      Load Balancer Hostname                 Zone         Build
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -                                      us-south-2   ingress:652/ingress-auth:424
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -                                      us-south-1   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -                                      us-south-2   ingress:653/ingress-auth:425
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -                                      us-south-1   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
   ```
   {: screen}
 
@@ -1684,12 +1684,12 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     Example output for a cluster in which new public ALBs are created on VLAN `2294030` in `dal12` and `2234940` in `dal10`:
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294030
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234940
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294030
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234940
     ```
     {: screen}
 
@@ -1708,12 +1708,12 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     Example output for a cluster in which the default public ALBs on VLAN `2294019` in `dal12` and `2234945` in `dal10`: are disabled:
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    false     disabled   public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    false     disabled   public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294030
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234940
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    false     disabled   public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    false     disabled   public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294030
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234940
     ```
     {: screen}
 
