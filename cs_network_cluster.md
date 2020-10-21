@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-21"
 
 keywords: kubernetes, iks, vlan
 
@@ -107,8 +107,6 @@ After you initially set up your network when you [create a cluster](/docs/contai
 
 Enable the private service endpoint for your cluster.
 {: shortdesc}
-
-
 
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
 
