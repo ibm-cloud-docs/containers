@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-20"
+lastupdated: "2020-10-21"
 
 keywords: containers
 subcollection: containers
@@ -1605,13 +1605,13 @@ subcollection: containers
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
-* [Benchmark 1.5 results for version 1.18 clusters](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118)
-  * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-1)
-  * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-2)
-  * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-3)
-  * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-4)
-  * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-5)
-  * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-remediation)
+* [Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+  * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
+  * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
+  * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
+  * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4)
+  * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5)
+  * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Beta: Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
