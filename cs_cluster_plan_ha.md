@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-22"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -157,8 +157,8 @@ To convert a single zone cluster to a multizone cluster, your cluster must be se
 
 
 
-
-
+**Do my apps automatically spread across zones?**<br>
+It depends on how you set up the app. See [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps) and [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning).
 
 ## Multiple public clusters connected with a global load balancer
 {: #multiple_clusters}

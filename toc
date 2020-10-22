@@ -32,7 +32,6 @@ Kubernetes Service
     Cluster strategy
         cs_responsibilities.md
         cs_secure.md
-        cs_ha.md
 
     {: .topicgroup}
     Tutorials
@@ -184,6 +183,8 @@ Kubernetes Service
         cs_integrations_addons.md
         cs_integrations_helm.md
         cs_integrations_service_binding.md
+
+    cs_ha.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}

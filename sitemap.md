@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-21"
+lastupdated: "2020-10-22"
 
 keywords: containers
 subcollection: containers
@@ -234,9 +234,6 @@ subcollection: containers
 * [Container isolation and security](/docs/containers?topic=containers-security#container)
 * [Storing personal information](/docs/containers?topic=containers-security#pi)
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
-
-[High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha)
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
 
 
 ## Tutorials
@@ -1434,6 +1431,23 @@ subcollection: containers
   * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
   * [Referencing the secret in environment variables](/docs/containers?topic=containers-service-binding#reference_secret)
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
+
+
+## Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_understanding_high_availability_and_disaster_recovery_for_}
+
+
+[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha)
+
+[About high availability](/docs/containers?topic=containers-ha#ha-about)
+
+[Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
+* [1. Container or pod availability](/docs/containers?topic=containers-ha#ha-container)
+* [2. Worker node availability](/docs/containers?topic=containers-ha#ha-worker)
+* [3. Cluster availability](/docs/containers?topic=containers-ha#ha-cluster)
+* [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
+* [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
+* [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
 ## Community Kubernetes documentation
