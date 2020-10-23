@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -131,7 +131,6 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 
 
 
-
 ## Classic cluster limitations
 {: #classic_limits}
 
@@ -181,7 +180,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 {: caption="Classic cluster storage limitations"}
 
 <br />
-
 
 ## VPC Gen 2 compute cluster limitations
 {: #ks_vpc_gen2_limits}
@@ -297,7 +295,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Unsupported types | File storage is not available. |
 {: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC cluster storage limitations"}
-
 
 
 
