@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-17"
+lastupdated: "2020-10-19"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -209,12 +210,12 @@ When you create your {{site.data.keyword.cloud_notm}} account, the default resou
 <br />
 
 
-## Setting up the API key to enable access to the infrastructure portfolio
+## Setting up the API key to enable access to the infrastructure portfolio and other services
 {: #api_key}
 {: help}
 {: support}
 
-To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.cloud_notm}} account is correctly set up to access {{site.data.keyword.cloud_notm}} infrastructure in each resource group and region that your clusters are in. In most cases, you can set up infrastructure access by [using the API key](#api_key_most_cases). For other options, see [Understanding other options than the API key](#api_key_other)
+To successfully provision and work with clusters, you must ensure that your {{site.data.keyword.cloud_notm}} account is correctly set up to access {{site.data.keyword.cloud_notm}} infrastructure and other {{site.data.keyword.cloud_notm}} services that you use in each resource group and region that your clusters are in.
 {: shortdesc}
 
 ### Setting up the API key in most cases
@@ -263,6 +264,81 @@ For different ways to access the IBM Cloud infrastructure portfolio, check out t
 * For more information about using your Pay-As-You-Go or Subscription account to set the API key, see [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](#default_account).
 * If you don't have a Pay-As-You-Go or Subscription account or need to use a different IBM Cloud infrastructure account, see [Accessing a different IBM Cloud infrastructure account](#credentials).
 
+### Understanding how the API key works
+{: #api_key_about}
+
+{{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure portfolio and other {{site.data.keyword.cloud_notm}} services that you use for your cluster by using an [API key](/docs/account?topic=account-manapikey). The API key impersonates, or stores the credentials of, a user with access to the infrastructure and other services. {{site.data.keyword.containerlong_notm}} uses the API key to order resources in the service, such as new worker nodes or VLANs in IBM Cloud infrastructure. 
+{: shortdesc}
+
+**What is the API key used for?**<br>
+The API key is used to authorize underlying actions in the following {{site.data.keyword.cloud_notm}} services:
+*   **Infrastructure**, such as classic or VPC compute, networking, and storage resources for your cluster.
+*   **{{site.data.keyword.keymanagementserviceshort}}**, if you [enable a key management service provider](/docs/containers?topic=containers-encryption#kms) in your cluster.
+*   **{{site.data.keyword.cloudcerts_short}}**, for managing the Ingress certificates for your cluster.
+*   **{{site.data.keyword.registryshort}}**, for setting up default access to pull images from the registry to your cluster.
+*   **{{site.data.keyword.la_short}}**, if you [enable the logging service](/docs/containers?topic=containers-health).
+*   **{{site.data.keyword.mon_short}}**, if you [enable the monitoring service](/docs/containers?topic=containers-health).
+*   **{{site.data.keyword.at_short}}**, for sending audit events from your cluster.
+
+**How many API keys do I need?**<br>
+You have a different API key for each region and resource group where you use {{site.data.keyword.containerlong_notm}}. To check if an API key is already set up for the region and resource group, run the following command.
+
+```
+ibmcloud ks api-key info --cluster <cluster_name_or_ID>
+```
+{: pre}
+
+**How do I set up the API key?**<br>
+To enable all users to access the infrastructure portfolio or other services, the user whose credentials are stored in the [API key must have the correct permissions](#owner_permissions). Then, log in as the user or functional ID and perform the first admin action in a region and resource group or [reset the API key](#api_key_most_cases). For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. As a result, the {{site.data.keyword.cloud_notm}} IAM API key for this admin user is created in the account for this resource group and region.
+
+**What permissions does the user who sets the API key need? How do I give the user these permissions?**<br>
+See [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions) and [Ensuring that the API key or infrastructure credentials owner has the correct permissions](#owner_permissions).
+
+**If the API key is based on one user, how are other cluster users in the region and resource group affected?**<br>
+Other users within the region and resource group of the account share the API key for accessing the infrastructure and other services with {{site.data.keyword.containerlong_notm}} clusters. When users log in to the {{site.data.keyword.cloud_notm}} account, an {{site.data.keyword.cloud_notm}} IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
+
+To see the {{site.data.keyword.cloud_notm}} IAM token for a CLI session, you can run `ibmcloud iam oauth-tokens`. {{site.data.keyword.cloud_notm}} IAM tokens can also be used to [make calls directly to the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install#cs_api).
+{: tip}
+
+**If users have access to the portfolio through an {{site.data.keyword.cloud_notm}} IAM token, how do I limit which commands a user can run?**<br>
+After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [platform role](#platform). By assigning {{site.data.keyword.cloud_notm}} IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has all the required infrastructure roles, all infrastructure-related commands can be run in a cluster. But, depending on the {{site.data.keyword.cloud_notm}} IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
+
+For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After verification, you can invite individual users or users in {{site.data.keyword.cloud_notm}} IAM access groups to that region by setting platform management policies for them in that region. A user with a **Viewer** platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure permissions.
+
+To audit the actions that users in your account run, you can use [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events) to view all cluster-related events.
+{: tip}
+
+**What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
+For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure permissions](#infra_access) for users.
+
+**What happens if the user who set up the API key for a region and resource group leaves the company?**<br>
+If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} account owner can remove that user's permissions. However, before you remove a user's specific access permissions or remove a user from your account completely, you must reset the API key with another user's infrastructure credentials. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure portal and infrastructure-related commands might fail. For more information, see [Removing user permissions](#removing).
+
+**How can I lock down my cluster if my API key becomes compromised?**<br>
+If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/account?topic=account-userapikey#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
+
+### Ensuring that the API key or infrastructure credentials owner has the correct permissions
+{: #owner_permissions}
+
+To ensure that all infrastructure-related actions can be successfully completed in the cluster, the user whose credentials you want to set for the API key must have the proper permissions. Consider using a functional ID user for the API key owner instead of a personal user. In case the person leaves the team, the functional ID user remains the API key owner.
+{: shortdesc}
+
+1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external}.
+
+2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct {{site.data.keyword.cloud_notm}} IAM platform roles.
+    1. From the menu bar, select **Manage > Access (IAM)**, and then click the **Users** page.
+    2. Click the name of the user who you want to set the API key for or whose credentials you want to set for the API key, and then click the **Access policies** tab.
+    3.  [Assign the user](#platform) the [minimum permissions that are needed to create and manage clusters](/docs/containers?topic=containers-access_reference#cluster_create_permissions).
+
+3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
+  1. From the menu bar, select **Manage > Access (IAM)**.
+  2. Select the **Users** tab, click on the user. The required infrastructure permissions vary depending on what type of [cluster infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) you use, classic or VPC.
+    * **For classic clusters**:
+      1. In the **API keys** pane, verify that the user has a **Classic infrastructure API key**, or click **Create an IBM Cloud API key**. For more information, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys#classic_keys).
+      2. Click the **Classic infrastructure** tab and then click the **Permissions** tab.
+      3. If the user doesn't have each category checked, you can use the **Permission sets** drop-down list to assign the **Super User** role. Or you can expand each category and give the user the required [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
+    * **For VPC clusters**: Assign the user the [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
+
 ### Understanding access to the infrastructure portfolio
 {: #understand_infra}
 
@@ -308,75 +384,6 @@ To access the IBM Cloud infrastructure portfolio, you use an {{site.data.keyword
     </tr>
   </tbody>
   </table>
-
-### Accessing the portfolio with the API key
-{: #api_key_about}
-
-{{site.data.keyword.containerlong_notm}} accesses the IBM Cloud infrastructure portfolio by using an [API key](/docs/account?topic=account-manapikey). The API key impersonates, or stores the credentials of, a user with access to an IBM Cloud infrastructure account. {{site.data.keyword.containerlong_notm}} uses the API key to order resources in IBM Cloud infrastructure, such as new worker nodes or VLANs. You have a different API key for each region within a resource group.
-{: shortdesc}
-
-To check if an API key is already set up for the region and resource group, you can use the following command.
-
-```
-ibmcloud ks api-key info --cluster <cluster_name_or_ID>
-```
-{: pre}
-
-To enable all users to access the infrastructure portfolio, the user whose credentials are stored in the [API key must have the correct permissions](#owner_permissions). Then, log in as the user or functional ID and perform the first admin action in a region and resource group or [reset the API key](#api_key_most_cases). For example, one of your admin users creates the first cluster in the `default` resource group in the `us-south` region. As a result, the {{site.data.keyword.cloud_notm}} IAM API key for this admin user is created in the account for this resource group and region.
-
-Other users within the account share the API key for accessing the infrastructure. When users log in to the {{site.data.keyword.cloud_notm}} account, an {{site.data.keyword.cloud_notm}} IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
-
-To see the {{site.data.keyword.cloud_notm}} IAM token for a CLI session, you can run `ibmcloud iam oauth-tokens`. {{site.data.keyword.cloud_notm}} IAM tokens can also be used to [make calls directly to the {{site.data.keyword.containerlong_notm}} API](/docs/containers?topic=containers-cs_api_install#cs_api).
-{: tip}
-
-**If users have access to the portfolio through an {{site.data.keyword.cloud_notm}} IAM token, how do I limit which commands a user can run?**
-
-After you set up access to the portfolio for users in your account, you can then control which infrastructure actions the users can perform by assigning the appropriate [platform role](#platform). By assigning {{site.data.keyword.cloud_notm}} IAM roles to users, they are limited in which commands they can run against a cluster. For example, because the API key owner has all the required infrastructure roles, all infrastructure-related commands can be run in a cluster. But, depending on the {{site.data.keyword.cloud_notm}} IAM role that is assigned to a user, the user can run only some of those infrastructure-related commands.
-
-For example, if you want to create a cluster in a new region, make sure that the first cluster is created by a user with the **Super User** infrastructure role, such as the account owner. After verification, you can invite individual users or users in {{site.data.keyword.cloud_notm}} IAM access groups to that region by setting platform management policies for them in that region. A user with a **Viewer** platform role isn't authorized to add a worker node. Therefore, the `worker-add` action fails, even though the API key has the correct infrastructure permissions. If you change the user's platform role to **Operator**, the user is authorized to add a worker node. The `worker-add` action succeeds because the user is authorized and the API key is set correctly. You don't need to edit the user's IBM Cloud infrastructure permissions.
-
-To audit the actions that users in your account run, you can use [{{site.data.keyword.cloudaccesstrailshort}}](/docs/containers?topic=containers-at_events) to view all cluster-related events.
-{: tip}
-
-**What if I don't want to assign the API key owner or credentials owner the Super User infrastructure role?**</br>
-
-For compliance, security, or billing reasons, you might not want to give the **Super User** infrastructure role to the user who sets the API key or whose credentials are set with the `ibmcloud ks credential set` command. However, if this user doesn't have the **Super User** role, then infrastructure-related actions, such as creating a cluster or reloading a worker node, can fail. Instead of using {{site.data.keyword.cloud_notm}} IAM platform roles to control users' infrastructure access, you must [set specific IBM Cloud infrastructure permissions](#infra_access) for users.
-
-**What happens if the user who set up the API key for a region and resource group leaves the company?**
-
-If the user is leaving your organization, the {{site.data.keyword.cloud_notm}} account owner can remove that user's permissions. However, before you remove a user's specific access permissions or remove a user from your account completely, you must reset the API key with another user's infrastructure credentials. Otherwise, the other users in the account might lose access to the IBM Cloud infrastructure portal and infrastructure-related commands might fail. For more information, see [Removing user permissions](#removing).
-
-**How can I lock down my cluster if my API key becomes compromised?**
-
-If an API key that is set for a region and resource group in your cluster is compromised, [delete it](/docs/account?topic=account-userapikey#delete_user_key) so that no further calls can be made by using the API key as authentication. For more information about securing access to the Kubernetes API server, see the [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver) security topic.
-
-**How do I set up the API key for my cluster?**</br>
-
-It depends on what type of account that you're using to access the IBM Cloud infrastructure portfolio:
-* [An {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](#default_account) that comes with automatic access to the {{site.data.keyword.cloud_notm}} portfolio.
-* [A different IBM Cloud infrastructure account that is not linked to your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](#credentials)
-
-### Ensuring that the API key or infrastructure credentials owner has the correct permissions
-{: #owner_permissions}
-
-To ensure that all infrastructure-related actions can be successfully completed in the cluster, the user whose credentials you want to set for the API key must have the proper permissions. Consider using a functional ID user for the API key owner instead of a personal user. In case the person leaves the team, the functional ID user remains the API key owner.
-{: shortdesc}
-
-1. Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external}.
-
-2. To make sure that all account-related actions can be successfully performed, verify that the user has the correct {{site.data.keyword.cloud_notm}} IAM platform roles.
-    1. From the menu bar, select **Manage > Access (IAM)**, and then click the **Users** page.
-    2. Click the name of the user who you want to set the API key for or whose credentials you want to set for the API key, and then click the **Access policies** tab.
-    3.  [Assign the user](#platform) the [minimum permissions that are needed to create and manage clusters](/docs/containers?topic=containers-access_reference#cluster_create_permissions).
-
-3. To make sure that all infrastructure-related actions in your cluster can be successfully performed, verify that the user has the correct infrastructure access policies.
-  1. From the menu bar, select **Manage > Access (IAM)**.
-  2. Select the **Users** tab, click on the user. The required infrastructure permissions vary depending on what type of [cluster infrastructure provider](/docs/containers?topic=containers-infrastructure_providers) you use, classic or VPC.
-    * **For classic clusters**:
-      1. In the **API keys** pane, verify that the user has a **Classic infrastructure API key**, or click **Create an IBM Cloud API key**. For more information, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys#classic_keys).
-      2. Click the **Classic infrastructure** tab and then click the **Permissions** tab.
-      3. If the user doesn't have each category checked, you can use the **Permission sets** drop-down list to assign the **Super User** role. Or you can expand each category and give the user the required [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra).
-    * **For VPC clusters**: Assign the user the [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-iam-getting-started).
 
 ### Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account
 {: #default_account}

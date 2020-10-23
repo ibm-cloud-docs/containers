@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-24"
+lastupdated: "2020-10-21"
 
 keywords: kubernetes, iks, vlan
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -107,14 +108,12 @@ After you initially set up your network when you [create a cluster](/docs/contai
 Enable the private service endpoint for your cluster.
 {: shortdesc}
 
-
-
 The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
 
-Did you create a cluster with only a private service endpoint before you enabled your account for [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
+Did you create a cluster with only a private service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
 {: tip}
 
-1. Enable [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private service endpoint.
    ```
@@ -211,7 +210,7 @@ All clusters that are connected to a public and a private VLAN use the public se
 
 Note that you cannot disable the private service endpoint after you enable it.
 
-1. Enable [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Enable the private service endpoint.
    ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-09"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -150,7 +150,6 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     {: screen}
 
 <br />
-
 
 
 ## Adding worker nodes in VPC clusters
@@ -316,7 +315,6 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 <br />
 
-
 ## Adding worker nodes in classic clusters
 {: #classic_pools}
 
@@ -395,7 +393,6 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 <br />
 
-
 ### Adding a zone to a worker pool
 {: #add_zone}
 
@@ -409,7 +406,7 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 Before you begin:
 *  To add a zone to your worker pool, your worker pool must be in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). If your worker pool is not in a multizone-capable zone, consider [creating a new worker pool](#add_pool).
 *  Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/openshift?topic=openshift-users#platform).
-*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+*  In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 
 To add a zone with worker nodes to your worker pool:
 
@@ -476,7 +473,6 @@ To add a zone with worker nodes to your worker pool:
   {: screen}
 
 <br />
-
 
 ## Adding worker nodes in gateway-enabled classic clusters
 {: #gateway_pools}
@@ -697,7 +693,6 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
   {: pre}
 
 <br />
-
 
 ## Adding classic infrastructure servers to gateway-enabled classic clusters
 {: #gateway_vsi}
@@ -1132,7 +1127,6 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
 
 
 
-
 ## Deprecated: Adding stand-alone worker nodes
 {: #standalone}
 
@@ -1173,7 +1167,6 @@ If you have a cluster that was created after worker pools were introduced, you c
    {: pre}
 
 <br />
-
 
 
 ## Installing SGX drivers and platform software on SGX-capable worker nodes
@@ -1233,7 +1226,6 @@ To uninstall the drivers and platform software, you can follow the same steps, b
 
 
 
-
 ## Adding tags to existing clusters
 {: #cluster_tags}
 
@@ -1271,7 +1263,6 @@ Choose among the following options:
 {: class="simple-tab-table"}
 
 <br />
-
 
 ## Adding labels to existing worker pools
 {: #worker_pool_labels}
@@ -1366,7 +1357,6 @@ After you label your worker pool, you can use the [label in your app deployments
 
 <br />
 
-
 ## Autorecovery for your worker nodes in classic clusters
 {: #planning_autorecovery}
 
@@ -1374,7 +1364,6 @@ Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`
 {: shortdesc}
 
 In classic clusters, you can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
-
 
 
 

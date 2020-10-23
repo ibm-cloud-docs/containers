@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, helm
 
@@ -10,30 +10,85 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -72,7 +127,6 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 <br />
 
-
 ## DevOps services
 {: #devops_services}
 
@@ -94,7 +148,6 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 <br />
 
-
 ## Hybrid cloud services
 {: #hybrid_cloud_services}
 
@@ -108,7 +161,6 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: summary="The table shows available services that you can use to connect your cluster to on-premises data centers. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
-
 
 ## Logging and monitoring services
 {: #health_services}
@@ -129,7 +181,6 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 {: summary="The table shows available services that you can add to your cluster to add extra logging and monitoring capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
 
 <br />
-
 
 
 ## Security services
@@ -154,7 +205,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 <br />
 
 
-
 ## Storage services
 {: #storage_services}
 
@@ -171,7 +221,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 
 <br />
 
-
 ## Database services
 {: #database_services}
 
@@ -181,7 +230,6 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 |Cloud databases|You can choose between various {{site.data.keyword.cloud_notm}} database services, such as {{site.data.keyword.composeForMongoDB_full}} or {{site.data.keyword.cloudantfull}} to deploy highly available and scalable database solutions in your cluster. For a list of available cloud databases, see the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog?category=databases){: external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 {: caption="Database services"}
 {: summary="The table shows available services that you can add to your cluster to add database capabilities. Rows are to be read from the left to right, with the name of the service in column one, and a description of the service in column two."}
-
 
 
 

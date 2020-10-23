@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-28"
+lastupdated: "2020-10-20"
 
 keywords: kubernetes, iks, kernel
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -319,6 +320,8 @@ Want to tune more settings? Check out the [Kubernetes Add-on resizer configurati
 {: tip}
 
 <br />
+
+
 
 
 ## Changing the Calico maximum transmission unit (MTU)

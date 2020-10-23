@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-07"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -173,7 +174,7 @@ First time setting up Ingress? Check out the other sections on this page for pre
 Before you get started with Ingress, review the following prerequisites.
 {: shortdesc}
 
-- Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
+- Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
 - Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
     - **Administrator** platform role for the cluster
     - **Manager** service role in all namespaces
@@ -183,7 +184,6 @@ Before you get started with Ingress, review the following prerequisites.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
 
 <br />
-
 
 ## Planning networking for single or multiple namespaces
 {: #multiple_namespaces}
@@ -240,7 +240,6 @@ The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<globally_unique_
 
 <br />
 
-
 ## Exposing apps that are inside your cluster to the public
 {: #ingress_expose_public}
 
@@ -260,13 +259,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 {: shortdesc}
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-deploy_app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
-
 2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
       ```
       kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
       ```
       {: pre}
-
 
 ### Step 2: Select an app domain
 {: #public_inside_2}
@@ -291,7 +288,6 @@ Ingress Secret:         mycluster-<hash>-0000
 
 **Custom domain:** To use a custom domain instead, you can set up a CNAME record to map your custom domain to the IBM-provided domain.
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 255 characters or fewer.
-
 2.  Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
 
 ### Step 3: Select TLS termination
@@ -483,7 +479,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     ```
     {: pre}
 
-
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
 
 ### Step 5: Access your app from the internet
@@ -516,11 +511,9 @@ http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
 
-
 <p class="tip">Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.</p>
 
 <br />
-
 
 ## Exposing apps that are outside your cluster to the public
 {: #external_endpoint}
@@ -674,7 +667,6 @@ To expose apps that are outside of your cluster to the public:
     kubectl describe ingress myingressresource
     ```
     {: pre}
-
 5. In a web browser, enter the URL of the app service to access.
   ```
   https://<domain>/<app_path>
@@ -684,7 +676,6 @@ To expose apps that are outside of your cluster to the public:
 <p class="tip">Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.</p>
 
 <br />
-
 
 ## Classic clusters: Exposing apps to a private network
 {: #ingress_expose_private}
@@ -705,13 +696,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 {: shortdesc}
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-deploy_app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
-
 2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
       ```
       kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
       ```
       {: pre}
-
 
 </br>
 
@@ -730,8 +719,8 @@ When you create a standard cluster, a private ALB is created in each zone that y
     The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947       -
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:652/ingress-auth:424   2234945       -
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947       -
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.xx.xxx.xxx  dal10   ingress:653/ingress-auth:425   2234945       -
     ```
     {: screen}
 
@@ -741,15 +730,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `652`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `653`:
   ```
   IBM Cloud Ingress: 'auth' version
-  424
+  425
 
   IBM Cloud Ingress versions
-  652 (default)
+  653 (default)
+  652
   651
-  647
 
   Kubernetes Ingress versions
   0.35.0_474_iks
@@ -760,7 +749,7 @@ When you create a standard cluster, a private ALB is created in each zone that y
 
 3. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable. If you want to specify an IP address for the ALB, include the IP address in the `--ip` flag.
   ```
-  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version 652
+  ibmcloud ks ingress alb enable classic --alb <private_ALB_ID> -c <cluster_name_or_ID> --version 653
   ```
   {: pre}
   </br>
@@ -780,7 +769,6 @@ When you configure the private ALBs, you must expose your apps by using a custom
 **Private and public VLAN classic clusters:**
 
 1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 255 characters or fewer.
-
 2.  Map your custom domain to the portable private IP addresses of the ALBs by adding the IP addresses as A records. To find the portable private IP addresses of the ALBs, run `ibmcloud ks ingress alb get --alb  <private_alb_ID>` for each ALB.
 </br>
 
@@ -926,7 +914,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     ```
     {: pre}
 
-
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
 </br>
 
@@ -963,7 +950,6 @@ http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
 
-
 <p class="tip">Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.</p>
 
 ### Optional: Block traffic to public NodePorts
@@ -975,7 +961,6 @@ In clusters that are connected to public and private VLANs, block traffic to pub
 Ingress ALBs make your app available over both the ALB IP address and port, and the service's NodePorts. NodePorts are accessible on every IP address (public and private) for every node within the cluster. If your cluster is attached to both public and private VLANs, an ALB with a portable private IP address still has a public NodePort open on every worker node. Create a [Calico preDNAT network policy](/docs/containers?topic=containers-network_policies#block_ingress) to block traffic to the public NodePorts.
 
 <br />
-
 
 ## VPC clusters: Exposing apps to a private network
 {: #ingress_expose_vpc_private}
@@ -997,13 +982,11 @@ Start by deploying your apps and creating Kubernetes services to expose them.
 {: shortdesc}
 
 1.  [Deploy your app to the cluster](/docs/containers?topic=containers-deploy_app#app_cli). Ensure that you add a label to your deployment in the metadata section of your configuration file, such as `app: code`. This label is needed to identify all pods where your app runs so that the pods can be included in the Ingress load balancing.
-
 2.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
       ```
       kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
       ```
       {: pre}
-
 
 </br>
 
@@ -1022,10 +1005,10 @@ When you create a standard cluster, a private ALB is created in each zone that y
     The field **Status** for private ALBs is _disabled_.
     ```
     ALB ID                                Enabled    Status     Type      Load Balancer Hostname                 Zone         Build
-    private-crbl25g33d0if1cmfn0p8g-alb1   false      disabled   private   -                                      us-south-1   ingress:652/ingress-auth:424
-    private-crbl25g33d0if1cmfn0p8g-alb2   false      disabled   private   -                                      us-south-2   ingress:652/ingress-auth:424
-    public-crbl25g33d0if1cmfn0p8g-alb1    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-    public-crbl25g33d0if1cmfn0p8g-alb2    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
+    private-crbl25g33d0if1cmfn0p8g-alb1   false      disabled   private   -                                      us-south-1   ingress:653/ingress-auth:425
+    private-crbl25g33d0if1cmfn0p8g-alb2   false      disabled   private   -                                      us-south-2   ingress:653/ingress-auth:425
+    public-crbl25g33d0if1cmfn0p8g-alb1    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+    public-crbl25g33d0if1cmfn0p8g-alb2    true       enabled    public    0bcc2ab2-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
     ```
     {: screen}
 
@@ -1035,15 +1018,15 @@ When you create a standard cluster, a private ALB is created in each zone that y
   ```
   {: pre}
 
-  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `652`:
+  In the following example output, the default {{site.data.keyword.containerlong_notm}} Ingress version is `653`:
   ```
   IBM Cloud Ingress: 'auth' version
-  424
+  425
 
   IBM Cloud Ingress versions
-  652 (default)
+  653 (default)
+  652
   651
-  647
 
   Kubernetes Ingress versions
   0.35.0_474_iks
@@ -1055,12 +1038,12 @@ When you create a standard cluster, a private ALB is created in each zone that y
 2. Enable the private ALBs. Run this command for the ID of each private ALB that you want to enable.
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version 652
+    ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version 653
     ```
     {: pre}
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
     ```
-    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version 652
+    ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version 653
     ```
     {: pre}
   </br>
@@ -1080,8 +1063,8 @@ When you enable the private ALBs, one private VPC load balancer is automatically
   Example output:
   ```
   ALB ID                                Enabled   Status    Type      Load Balancer Hostname                 Zone         Build
-  private-crbl25g33d0if1cmfn0p8g-alb1   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-  private-crbl25g33d0if1cmfn0p8g-alb2   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
+  private-crbl25g33d0if1cmfn0p8g-alb1   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+  private-crbl25g33d0if1cmfn0p8g-alb2   true      enabled   private   1234abcd-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
   ```
   {: screen}
 
@@ -1234,7 +1217,6 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     ```
     {: pre}
 
-
 Your Ingress resource is created in the same namespace as your app services. Your apps in this namespace are registered with the cluster's Ingress ALB.
 </br>
 
@@ -1266,7 +1248,6 @@ http://<subdomain1>.<domain>/<app1_path>
 http://<subdomain2>.<domain>/<app1_path>
 ```
 {: codeblock}
-
 
 <p class="tip">Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.</p>
 
@@ -1373,7 +1354,6 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 
 
 
-
 ## Opening non-default ports in the Ingress ALB
 {: #opening_ingress_ports}
 
@@ -1417,7 +1397,6 @@ Expose non-default ports for the Ingress ALB.
 
 <br />
 
-
 ## Updating ALBs
 {: #alb-update}
 
@@ -1447,12 +1426,12 @@ ibmcloud ks ingress alb versions
 Example output:
 ```
 IBM Cloud Ingress: 'auth' version
-424
+425
 
 IBM Cloud Ingress versions
-652 (default)
+653 (default)
+652
 651
-647
 
 Kubernetes Ingress versions
 0.35.0_474_iks
@@ -1506,7 +1485,6 @@ If your ALB pods were recently updated, but a custom configuration for your ALBs
 The image version that you change your ALB to must be a supported image version that is listed in the output of `ibmcloud ks ingress alb versions`. Note that you can use this command to change your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates to your ALBs are disabled.
 
 <br />
-
 
 ## Scaling ALBs
 {: #scale_albs}
@@ -1586,12 +1564,12 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   Example output for a cluster in which new public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb3` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb4` are created in `dal10` and `dal12`:
   ```
   ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021       -
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294019       -
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234945       -
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021       -
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294019       -
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234945       -
   ```
   {: screen}
 
@@ -1625,12 +1603,12 @@ You can also use these steps to create more ALBs across zones in your cluster. W
   Example output for a cluster in which new public ALBs with IDs of `public-crdf253b6025d64944ab99ed63bb4567b6-alb3` and `public-crdf253b6025d64944ab99ed63bb4567b6-alb4` are created in `us-south-1` and `us-south-2`:
   ```
   ALB ID                                            Enabled   Status     Type      Load Balancer Hostname                 Zone         Build
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -                                      us-south-2   ingress:652/ingress-auth:424
-  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -                                      us-south-1   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:652/ingress-auth:424
-  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:652/ingress-auth:424
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -                                      us-south-2   ingress:653/ingress-auth:425
+  private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -                                      us-south-1   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-2   ingress:653/ingress-auth:425
+  public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    23f2dfb1-us-south.lb.appdomain.cloud   us-south-1   ingress:653/ingress-auth:425
   ```
   {: screen}
 
@@ -1642,7 +1620,6 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 
 <br />
-
 
 ## Moving ALBs across VLANs
 {: #migrate-alb-vlan}
@@ -1683,12 +1660,12 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     Example output for a cluster in which new public ALBs are created on VLAN `2294030` in `dal12` and `2234940` in `dal10`:
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build                          ALB VLAN ID   NLB Version
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294030
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234940
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    true      enabled    public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    true      enabled    public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294030
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234940
     ```
     {: screen}
 
@@ -1707,12 +1684,12 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
     Example output for a cluster in which the default public ALBs on VLAN `2294019` in `dal12` and `2234945` in `dal10`: are disabled:
     ```
     ALB ID                                            Enabled   Status     Type      ALB IP          Zone    Build
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:652/ingress-auth:424   2294021
-    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:652/ingress-auth:424   2234947
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    false     disabled   public    169.48.228.78   dal12   ingress:652/ingress-auth:424   2294019
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    false     disabled   public    169.46.17.6     dal10   ingress:652/ingress-auth:424   2234945
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:652/ingress-auth:424   2294030
-    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:652/ingress-auth:424   2234940
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb1   false     disabled   private   -               dal12   ingress:653/ingress-auth:425   2294021
+    private-crdf253b6025d64944ab99ed63bb4567b6-alb2   false     disabled   private   -               dal10   ingress:653/ingress-auth:425   2234947
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb1    false     disabled   public    169.48.228.78   dal12   ingress:653/ingress-auth:425   2294019
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb2    false     disabled   public    169.46.17.6     dal10   ingress:653/ingress-auth:425   2234945
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb3    true      enabled    public    169.49.28.09    dal12   ingress:653/ingress-auth:425   2294030
+    public-crdf253b6025d64944ab99ed63bb4567b6-alb4    true      enabled    public    169.50.35.62    dal10   ingress:653/ingress-auth:425   2234940
     ```
     {: screen}
 
@@ -1733,9 +1710,7 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
 
-
 <br />
-
 
 ## Increasing the restart readiness check time for ALB pods
 {: #readiness-check}
@@ -1772,6 +1747,5 @@ If you have very large Ingress resource files, it might take longer than 5 minut
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-06"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -97,7 +98,7 @@ subcollection: containers
 View information for patch and minor version updates to the [managed Istio add-on](/docs/containers?topic=containers-istio-about#istio_ov_addon) in your {{site.data.keyword.containerlong}} Kubernetes clusters.
 {: shortdesc}
 
-* **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}.
+* **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. You can check the patch version of your add-on by running `kubectl get iop managed-istio -n ibm-operators -o jsonpath='{.metadata.annotations.version}'`.
 * **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.6 to 1.7, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a latest minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
@@ -185,6 +186,18 @@ To see options for changing settings in the managed version of Istio, see [Custo
 | Envoy sidecar proxy lifecycle pre-stop | In the managed Istio add-on, a sleep time of 25 seconds is added to allow traffic connections to close before an Envoy sidecar is removed from an app pod. |
 {: summary="The rows are read from left to right. The first column is the installation profile setting. The second column is the difference between the managed and community implementation of the profile setting."}
 {: caption="Differences between the installation profiles of managed and community Istio" caption-side="top"}
+
+## Changelog for 1.6.12, released 22 October 2020
+{: #1612}
+
+The following table shows the changes that are included in version 1.6.12 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.6.11 | 1.6.12 | <ul><li>See the Istio release notes for [Istio 1.6.12](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.12/){:external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.6.11" caption-side="top"}
 
 ### Changelog for 1.6.11, released 06 October 2020
 {: #1611}

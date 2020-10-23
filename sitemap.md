@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-16"
+lastupdated: "2020-10-23"
 
 keywords: containers
 subcollection: containers
@@ -235,9 +235,6 @@ subcollection: containers
 * [Storing personal information](/docs/containers?topic=containers-security#pi)
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
-[High availability for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha)
-* [Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
-
 
 ## Tutorials
 {: #sitemap_tutorials}
@@ -449,12 +446,12 @@ subcollection: containers
   * [Pick the right access policy and role for your users](/docs/containers?topic=containers-users#access_roles)
   * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#iam_individuals_groups)
   * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
-* [Setting up the API key to enable access to the infrastructure portfolio](/docs/containers?topic=containers-users#api_key)
+* [Setting up the API key to enable access to the infrastructure portfolio and other services](/docs/containers?topic=containers-users#api_key)
   * [Setting up the API key in most cases](/docs/containers?topic=containers-users#api_key_most_cases)
   * [Understanding other options than the API key](/docs/containers?topic=containers-users#api_key_other)
-  * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
-  * [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about)
+  * [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about)
   * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
+  * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
   * [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-users#default_account)
   * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-users#credentials)
 * [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform)
@@ -1436,6 +1433,23 @@ subcollection: containers
 * [Removing a service from a cluster](/docs/containers?topic=containers-service-binding#unbind-service)
 
 
+## Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_understanding_high_availability_and_disaster_recovery_for_}
+
+
+[Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha)
+
+[About high availability](/docs/containers?topic=containers-ha#ha-about)
+
+[Overview of potential points of failure in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-ha#fault_domains)
+* [1. Container or pod availability](/docs/containers?topic=containers-ha#ha-container)
+* [2. Worker node availability](/docs/containers?topic=containers-ha#ha-worker)
+* [3. Cluster availability](/docs/containers?topic=containers-ha#ha-cluster)
+* [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
+* [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
+* [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
+
+
 ## Community Kubernetes documentation
 
 [Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
@@ -1605,13 +1619,13 @@ subcollection: containers
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
-* [Benchmark 1.5 results for version 1.18 clusters](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118)
-  * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-1)
-  * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-2)
-  * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-3)
-  * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-4)
-  * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-5)
-  * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-118-remediation)
+* [Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+  * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
+  * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
+  * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
+  * [Section 4: Worker node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-4)
+  * [Section 5: Kubernetes policies](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-5)
+  * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Beta: Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
@@ -1630,6 +1644,7 @@ subcollection: containers
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
+* [Changelog for 1.6.12, released 22 October 2020](/docs/containers?topic=containers-istio-changelog#1612)
   * [Changelog for 1.6.11, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#1611)
   * [Changelog for 1.6.9, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#169)
   * [Changelog for 1.6.8, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#168)

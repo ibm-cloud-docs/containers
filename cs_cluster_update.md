@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-13"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -183,7 +183,6 @@ When the master update is complete, you can update your worker nodes, depending 
 *  [Updating VPC worker nodes](#vpc_worker_node).
 
 <br />
-
 
 ## Updating classic worker nodes
 {: #worker_node}
@@ -399,7 +398,6 @@ If you have Portworx installed in your cluster, you must restart the Portworx po
 
 <br />
 
-
 ## Updating VPC worker nodes
 {: #vpc_worker_node}
 
@@ -485,7 +483,6 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 5.  From the action bar, click **Update**.
 
 <br />
-
 
 ## Updating flavors (machine types)
 {: #machine_type}
@@ -687,12 +684,10 @@ Control when the Ingress application load balancer (ALB) component is updated. F
 
 <br />
 
-
 ## Updating managed add-ons
 {: #addons}
 
 Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with open-source capabilities, such as Istio or Knative. The version of the open-source tool that you add to your cluster is tested by IBM and approved for use in {{site.data.keyword.containerlong_notm}}. To update managed add-ons that you enabled in your cluster to the latest versions, see [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons).
-
 
 
 
@@ -753,7 +748,7 @@ To update stand-alone worker nodes to worker pools:
       ```
       {: pre}
 
-   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+   2. **To add the zone to multiple worker pools**: Add multiple worker pools to the `ibmcloud ks zone add classic` command. To add multiple worker pools to a zone, you must have an existing private and public VLAN in that zone. If you do not have a public and private VLAN in that zone, consider adding the zone to one worker pool first so that a public and a private VLAN are created for you. Then, you can add the zone to other worker pools. </br></br>It is important that the worker nodes in all your worker pools are provisioned into all the zones to ensure that your cluster is balanced across zones. If you want to use different VLANs for different worker pools, repeat this command with the VLAN that you want to use for your worker pool. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
       ```
       ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name1> -w <pool_name2> -w <pool_name3> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
       ```

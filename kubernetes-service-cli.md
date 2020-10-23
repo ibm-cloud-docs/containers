@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-15"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -194,7 +194,6 @@ With the release of the [{{site.data.keyword.containerlong_notm}} version 2 API]
 </table>
 
 <br />
-
 
 ## `ibmcloud ks` commands
 {: #map}
@@ -896,8 +895,7 @@ ibmcloud ks cluster create classic [--hardware HARDWARE] --zone ZONE --flavor FL
 <dd>Choose a flavor, or machine type, for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware, or as physical machines on bare metal. Available physical and virtual flavors vary by the zone in which you deploy the cluster. For more information, see the documentation for the `ibmcloud ks flavors (machine-types)` [command](#cs_machine_types). This value is required for standard clusters and is not available for free clusters. In gateway-enabled classic clusters, you can choose the flavor for compute worker nodes only. Gateway worker nodes are created with the `u3c.2x4` flavor by default.</dd>
 
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
-</dd>
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.</dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
 <dd>Optional: The Kubernetes version for the cluster master node. When the version is not specified, the cluster is created with the default of supported Kubernetes versions. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
@@ -1047,7 +1045,6 @@ ibmcloud sat cluster create satellite --name mysatcluster --location mylocation 
 
 
 
-
 ### `ibmcloud ks cluster create vpc-classic`
 {: #cli_cluster-create-vpc-classic}
 
@@ -1077,8 +1074,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
-</dd>
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>Required: Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-classic`.</p>
@@ -1093,8 +1089,7 @@ ibmcloud ks cluster create vpc-classic --name NAME --zone ZONE --vpc-id VPC_ID -
 <dd>Required: The VPC subnet to assign the cluster. To list available VPC subnets, run `ibmcloud ks subnets --provider vpc-classic`.</dd>
 
 <dt><code>--version <em>MAJOR.MINOR.PATCH</em></code></dt>
-<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.
-</dd>
+<dd>The Kubernetes version for the cluster master node. This value is optional. When the version is not specified, the cluster is created with the default supported Kubernetes version. To see available versions, run <code>ibmcloud ks versions</code>.</dd>
 
 <dt><code>--flavor <em>FLAVOR</em></code></dt>
 <dd>Choose a flavor for your worker nodes. You can deploy your worker nodes as virtual machines on shared or dedicated hardware. To see flavors that are available in a zone, run `ibmcloud ks flavors --zone <vpc_zone> --provider vpc-classic`.</dd>
@@ -1165,8 +1160,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 <dl>
 <dt><code>--name <em>NAME</em></code></dt>
-<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.
-</dd>
+<dd>Required: The name for the cluster. The name must start with a letter, can contain letters, numbers, periods (.), and hyphen (-), and must be 35 characters or fewer. Use a name that is unique across regions. The cluster name and the region in which the cluster is deployed form the fully qualified domain name for the Ingress subdomain. To ensure that the Ingress subdomain is unique within a region, the cluster name might be truncated and appended with a random value within the Ingress domain name.</dd>
 
 <dt><code>--zone <em>ZONE</em></code></dt>
 <dd>Required: Select a zone to deploy the initial cluster worker pool in. If you create the cluster in a multizone metro, you can add a zone to the worker pool later. To list available VPC zones, run `ibmcloud ks zone ls --provider vpc-gen2`.</p>
@@ -1432,7 +1426,7 @@ Enable the [private service endpoint](/docs/containers?topic=containers-plan_clu
 {: shortdesc}
 
 To run this command:
-1. Enable [VRF](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 3. Run `ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name>`.
 4. Follow the prompt in the CLI to refresh the Kubernetes master API server.
@@ -1894,7 +1888,7 @@ Create a portable classic subnet in an IBM Cloud infrastructure account on your 
 
 <p class="important">Portable public IP addresses are charged monthly. If you remove portable public IP addresses after your cluster is provisioned, you still must pay the monthly charge, even if you used them only for a short amount of time.</br>
 </br>When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
-</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
+</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
 
 ```
 ibmcloud ks cluster subnet create --cluster CLUSTER --size SIZE --vlan VLAN_ID [-q]
@@ -1976,7 +1970,7 @@ This command is deprecated. Add an existing IBM Cloud infrastructure subnet to y
 {: deprecated}
 
 <p class="important">When you make a subnet available to a cluster, IP addresses of this subnet are used for cluster networking purposes. To avoid IP address conflicts, make sure that you use a subnet with one cluster only. Do not use a subnet for multiple clusters or for other purposes outside of {{site.data.keyword.containerlong_notm}} at the same time.</br>
-</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
+</br>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p>
 
 ```
 ibmcloud ks cluster user-subnet add --cluster CLUSTER --subnet-cidr SUBNET_CIDR --private-vlan PRIVATE_VLAN
@@ -2044,7 +2038,6 @@ ibmcloud ks cluster user-subnet rm --cluster my_cluster --subnet-cidr 169.xx.xxx
 {: pre}
 
 <br />
-
 
 ## `worker` commands
 {: worker_node_commands}
@@ -2501,7 +2494,6 @@ ibmcloud ks worker update --cluster my_cluster -w kube-dal10-cr18a61a63a6a94b658
 {: pre}
 
 <br />
-
 
 ## `worker-pool` commands
 {: #worker-pool}
@@ -2996,7 +2988,6 @@ ibmcloud ks worker-pool zones --cluster my_cluster --worker-pool pool1
 
 <br />
 
-
 ## `zone` commands
 {: #zone}
 
@@ -3030,12 +3021,12 @@ ibmcloud ks zone add classic --zone ZONE --cluster CLUSTER --worker-pool WORKER_
 <dd><p>The ID of the private VLAN. This value is conditional.</p>
     <p>If you have a private VLAN in the zone, this value must match the private VLAN ID of one or more of the worker nodes in the cluster. To see the VLANs that you have available, run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code>. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.</p>
     <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.</p>
-    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
+    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
 
 <dt><code>--public-vlan <em>PUBLIC_VLAN</em></code></dt>
 <dd><p>The ID of the public VLAN. This value is required if you want to expose workloads on the nodes to the public after you create the cluster. It must match the public VLAN ID of one or more of the worker nodes in the cluster for the zone. To see the VLANs that you have available, run <code>ibmcloud ks cluster get --cluster &lt;cluster&gt; --show-resources</code>. New worker nodes are added to the VLAN that you specify, but the VLANs for any existing worker nodes are not changed.</p>
     <p>If you do not have a private or public VLAN in that zone, do not specify this option. A private and a public VLAN are automatically created for you when you initially add a zone to your worker pool.</p>
-    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/dl?topic=dl-overview-of-virtual-routing-and-forwarding-vrf-on-ibm-cloud#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
+    <p>In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).</p></dd>
 
 <dt><code>--private-only</code></dt>
 <dd>Use this option to prevent a public VLAN from being created. Required only when you specify the `--private-vlan` flag and do not include the `--public-vlan` flag.<p class="note">If worker nodes are set up with a private VLAN only, you must enable the private service endpoint or configure a gateway appliance. For more information, see [Planning your private cluster and worker node setup](/docs/containers?topic=containers-plan_clusters#private_clusters).</p></dd>
@@ -3319,7 +3310,6 @@ ibmcloud ks zone rm --zone dal10 --cluster my_cluster
 
 <br />
 
-
 ## `ingress` commands
 {: #alb-commands}
 
@@ -3472,7 +3462,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 
 **Example**:
 ```
-ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 652
+ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 653
 ```
 {: pre}
 
@@ -3513,7 +3503,7 @@ ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVA
 
 **Example**:
 ```
-ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 652
+ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 653
 ```
 {: pre}
 
@@ -3554,7 +3544,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 
 **Example**:
 ```
-ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 652
+ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 653
 ```
 {: pre}
 
@@ -3689,7 +3679,7 @@ ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--ver
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 652
+ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 653
 ```
 {: pre}
 
@@ -3734,7 +3724,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 652
+ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 653
 ```
 {: pre}
 
@@ -3999,12 +3989,12 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 **Example commands:**
 * To update all ALB pods in the cluster:
   ```
-  ibmcloud ks ingress alb update -c mycluster --version 652
+  ibmcloud ks ingress alb update -c mycluster --version 653
   ```
   {: pre}
 * To update the ALB pods for one or more specific ALBs:
   ```
-  ibmcloud ks ingress alb update -c mycluster --version 652 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
+  ibmcloud ks ingress alb update -c mycluster --version 653 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
   ```
   {: pre}
 
@@ -4318,7 +4308,6 @@ ibmcloud ks ingress status --cluster mycluster
 </br>
 
 <br />
-
 
 ## `logging` commands
 {: #logging_commands}
@@ -5013,7 +5002,6 @@ ibmcloud ks logging refresh --cluster my_cluster
 {: pre}
 
 <br />
-
 
 ## `nlb-dns` commands
 {: #nlb-dns}
@@ -5771,7 +5759,6 @@ ibmcloud ks nlb-dns secret rm --cluster mycluster --nlb-subdomain mycluster-a1b2
 
 <br />
 
-
 ## `webhook-create` command
 {: #cs_webhook_create}
 
@@ -5816,7 +5803,6 @@ ibmcloud ks webhook-create --cluster my_cluster --level Normal --type slack --ur
 
 <br />
 
-
 ## `api-key` commands
 {: #api_key-commands}
 
@@ -5826,7 +5812,7 @@ View information about the API key for a cluster or reset it to a new key.
 ### `ibmcloud ks api-key info`
 {: #cs_api_key_info}
 
-View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key that {{site.data.keyword.containerlong_notm}} uses to authenticate certain requests like infrastructure in the region and resource group. For more information, see [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about).
+View the name and email address for the owner of the {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM) API key that {{site.data.keyword.containerlong_notm}} uses to authenticate certain requests like infrastructure in the region and resource group. For more information, see [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about).
 {: shortdesc}
 
 To create a different API key for the resource group and region, use the [`ibmcloud ks api-key reset`](#cs_api_key_reset) command.
@@ -5870,7 +5856,7 @@ ibmcloud ks api-key info --cluster my_cluster
 ### `ibmcloud ks api-key reset`
 {: #cs_api_key_reset}
 
-Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region. For more information, see [Accessing the portfolio with the API key](/docs/containers?topic=containers-users#api_key_about).
+Create an {{site.data.keyword.cloud_notm}} IAM API key that impersonates the user's permissions to authenticate requests for all clusters in the current resource group and region. For more information, see [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about).
 {: shortdesc}
 
 <p class="important">Before you use this command, make sure that the user who runs this command has the required [{{site.data.keyword.containerlong_notm}} and IBM Cloud infrastructure permissions](/docs/containers?topic=containers-access_reference#cluster_create_permissions). Target the resource group and region that you want to set the API key for.</br></br>When the API key is reset, the previous API key that was used, if any, for the region and resource group is deleted. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect) or the [default {{site.data.keyword.cloudcerts_long}} service instance for your cluster](/docs/containers?topic=containers-ingress#manage_certs_about).</p>
@@ -5905,7 +5891,6 @@ ibmcloud ks api-key reset --region us-south
 {: pre}
 
 <br />
-
 
 ## `credential` commands
 {: #credential}
@@ -6031,7 +6016,6 @@ ibmcloud ks credential unset --region us-south
 
 <br />
 
-
 ## `infra-permissions` commands
 {: #infra-commands}
 
@@ -6116,7 +6100,6 @@ Manage Storage    required
 {: screen}
 
 <br />
-
 
 ## `kms` commands
 {: #ks_kms}
@@ -6244,7 +6227,6 @@ ibmcloud ks kms instance ls
 
 <br />
 
-
 ## `quota` commands
 {: #cs_quota}
 
@@ -6284,7 +6266,6 @@ ibmcloud ks quota ls
 </br>
 
 <br />
-
 
 ## `subnets` command
 {: #cs_subnets}
@@ -6420,7 +6401,6 @@ ibmcloud ks vlan spanning get --region us-south
 <br />
 
 
-
 ## `vpcs` command
 {: #cs_vpcs}
 
@@ -6458,7 +6438,6 @@ ibmcloud ks vpcs
 {: pre}
 
 <br />
-
 
 
 ## `addon-versions` command
@@ -6499,7 +6478,6 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--output json] [-q]
   {: pre}
 
 <br />
-
 
 ## `flavors` command
 {: #cs_machine_types}
@@ -6565,7 +6543,6 @@ ibmcloud ks flavors --zone us-south-1 --provider vpc-gen2
 
 <br />
 
-
 ## `messages` command
 {: #cs_messages}
 
@@ -6587,7 +6564,6 @@ ibmcloud ks messages
 **Command options**: None
 
 <br />
-
 
 ## locations command
 {: #cs_supported-locations}
@@ -6614,7 +6590,6 @@ ibmcloud ks locations [--output json]
 </dl>
 
 <br />
-
 
 ## `versions` command
 {: #cs_versions_command}
@@ -6656,7 +6631,6 @@ ibmcloud ks versions
 {: pre}
 
 <br />
-
 
 ## `api` command
 {: #cs_cli_api}
@@ -6727,7 +6701,6 @@ Region:                us-south
 
 <br />
 
-
 ## `init` command
 {: #cs_init}
 
@@ -6794,7 +6767,6 @@ ibmcloud ks init [--host HOST] [--insecure] [-p] [-u] [-q]
   {: pre}
 
 <br />
-
 
 ## `script` commands
 {: #script}
@@ -6874,7 +6846,6 @@ To use this command to prepare your automation scripts for the release of versio
     {: pre}
 
 <br />
-
 
 ## Beta: `storage` commands
 {: #cs_storage}
@@ -7120,7 +7091,6 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
-
 
 
 

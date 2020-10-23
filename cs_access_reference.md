@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-15"
+lastupdated: "2020-10-19"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -253,12 +253,11 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Action | CLI command | API call |
 |----|----|----|
 | Refresh the Kubernetes master. | [`ibmcloud ks cluster master refresh`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_apiserver_refresh) | [`PUT /v1/clusters/{idOrName}/masters`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/HandleMasterAPIServer) |
+| Update a cluster. | [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) | [`PUT /v1/clusters/{idOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateCluster) |
 | Make an {{site.data.keyword.cloud_notm}} IAM service ID for the cluster, create a policy for the service ID that assigns the **Reader** service access role in {{site.data.keyword.registrylong_notm}}, and then create an API key for the service ID. | [`ibmcloud ks cluster pull-secret apply`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) | - |
 | Add a subnet to a cluster. | [`ibmcloud ks cluster subnet add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_add) | [`PUT /v1/clusters/{idOrName}/subnets/{subnetId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterSubnet) |
 | Create a subnet and add it to a cluster. | [`ibmcloud ks cluster subnet create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_create) | [`POST /v1/clusters/{idOrName}/vlans/{vlanId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateClusterSubnet) |
 | Detach a subnet from a cluster. | [`ibmcloud ks cluster subnet detach`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_subnet_detach) | [`DELETE /v1/clusters/{idOrName}/subnets/{subnetId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/DetachClusterSubnet) |
-| Update a cluster. | [`ibmcloud ks cluster master update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) | [`PUT /v1/clusters/{idOrName}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/UpdateCluster) |
-| Remove a user-managed subnet from a cluster. | [`ibmcloud ks cluster user-subnet rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_user_subnet_rm) | [`DELETE /v1/clusters/{idOrName}/usersubnets/{subnetId}/vlans/{vlanId}`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/RemoveClusterUserSubnet) |
 | Add worker nodes. | [`ibmcloud ks worker add (deprecated)`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) | [`POST /v1/clusters/{idOrName}/workers`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/AddClusterWorkers) |
 | Create a worker pool in a classic cluster. | [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_create) | [`POST /v1/clusters/{idOrName}/workerpools`](https://containers.cloud.ibm.com/global/swagger-global-api/#/clusters/CreateWorkerPool) |
 | Create a worker pool in a VPC cluster. | [`ibmcloud ks worker-pool create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_classic) | [`POST ​/v2​/vpc​/createWorkerPool`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/vpcCreateWorkerPool) |
@@ -390,7 +389,7 @@ Wondering if you have the correct permissions to run a certain `kubectl` command
 
 The following table shows the permissions that are granted by each RBAC role to individual Kubernetes resources. Permissions are shown as which verbs a user with that role can complete against the resource, such as "get", "list", "describe", "create", or "delete".
 
-<table summary="The columns are read from left to right. The first column has the Kubernetes resource that an RBAC role authorizes actions to. The second column describes the actions that the view role authorizes actions to for the resource. The third column describes the actions that the edit role authorizes actions to for the resource. The second column describes the actions that the admin and cluster admin roles authorize actions to for the resource.">
+<table summary="The columns are read from left to right. The first column has the Kubernetes resource that an RBAC role authorizes actions to. The second column describes the actions that the view role authorizes actions to for the resource. The third column describes the actions that the edit role authorizes actions to for the resource. The fourth column describes the actions that the admin and cluster admin roles authorize actions to for the resource.">
  <caption>Kubernetes resource permissions granted by each predefined RBAC role</caption>
  <col width="25%">
  <thead>

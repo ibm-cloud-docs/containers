@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-08"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, containers
 
@@ -125,7 +125,6 @@ Ready to get started? Try out the [creating a Kubernetes cluster tutorial](/docs
 <br />
 
 
-
 ## Comparison of offerings and their combinations
 {: #differentiation}
 
@@ -162,7 +161,6 @@ You can run {{site.data.keyword.containerlong_notm}} in {{site.data.keyword.clou
 
 <br />
 
-
 ## Comparison of free and standard clusters
 {: #cluster_types}
 
@@ -195,7 +193,6 @@ If you have a free cluster and want to upgrade to a standard cluster, you can [c
 <br />
 
 
-
 ## Comparison between {{site.data.keyword.openshiftshort}} and community Kubernetes clusters
 {: #openshift_kubernetes}
 
@@ -223,7 +220,6 @@ Both {{site.data.keyword.openshiftlong_notm}} and {{site.data.keyword.containerl
 |Supported operating system| Ubuntu 16.64, 18.64 |Red Hat Enterprise Linux 7|
 |Preferred external traffic networking| Ingress | Router |
 {: caption="Characteristics of community Kubernetes and {{site.data.keyword.openshiftshort}} clusters" caption-side="top"}
-
 
 
 
