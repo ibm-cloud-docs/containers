@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, help, debug
 
@@ -258,13 +258,10 @@ Review the options to debug your clusters and find the root causes for failures.
        </tbody>
      </table>
 
-
 <p>The [Kubernetes master](/docs/containers?topic=containers-service-arch) is the main component that keeps your cluster up and running. The master stores cluster resources and their configurations in the etcd database that serves as the single point of truth for your cluster. The Kubernetes API server is the main entry point for all cluster management requests from the worker nodes to the master, or when you want to interact with your cluster resources.<br><br>If a master failure occurs, your workloads continue to run on the worker nodes, but you cannot use `kubectl` commands to work with your cluster resources or view the cluster health until the Kubernetes API server in the master is back up. If a pod goes down during the master outage, the pod cannot be rescheduled until the worker node can reach the Kubernetes API server again.<br><br>During a master outage, you can still run `ibmcloud ks` commands against the {{site.data.keyword.containerlong_notm}} API to work with your infrastructure resources, such as worker nodes or VLANs. If you change the current cluster configuration by adding or removing worker nodes to the cluster, your changes do not happen until the master is back up.</p>
 <p class="important">Do not restart or reboot a worker node during a master outage. This action removes the pods from your worker node. Because the Kubernetes API server is unavailable, the pods cannot be rescheduled onto other worker nodes in the cluster.</p>
 
-
 <br />
-
 
 ## Reviewing master health
 {: #debug_master}
@@ -302,9 +299,7 @@ The **Master Status** provides details of what operation from the master state i
 {: caption="Master states"}
 {: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
 
-
 <br />
-
 
 
 
@@ -334,7 +329,6 @@ You might have corporate network policies that prevent access from your local sy
 [Allow TCP access for the CLI commands to work](/docs/containers?topic=containers-firewall#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 <br />
-
 
 ### `kubectl` commands do not work
 {: #kubectl_fails}
@@ -371,7 +365,6 @@ If you have multiple clusters at different Kubernetes versions or different cont
 <br />
 
 
-
 ### `kubectl` commands time out
 {: #exec_logs_fail}
 
@@ -387,7 +380,7 @@ If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `
 The OpenVPN connection between the master node and worker nodes is not functioning properly.
 
 {: tsResolve}
-1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
 2. Restart the OpenVPN client pod.
   ```
   kubectl delete pod -n kube-system -l app=vpn
@@ -398,9 +391,7 @@ The OpenVPN connection between the master node and worker nodes is not functioni
 <br />
 
 
-
 <br />
-
 
 ## Unable to create or delete worker nodes or clusters
 {: #infra_errors}
@@ -639,8 +630,6 @@ The {{site.data.keyword.cloud_notm}} account owner or an account administrator m
 
 
 
-
-
 ## Unable to create a cluster in the console due to `No VPC is available` error
 {: #ts_no_vpc}
 
@@ -684,7 +673,6 @@ To set an API key for the `default` resource group, use the {{site.data.keyword.
 
 
 
-
 ## Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}
 {: #ts_image_pull_create}
 
@@ -718,7 +706,6 @@ Steps:
 2.  [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.
 
 <br />
-
 
 ## Cluster cannot update because of broken webhook
 {: #webhooks_update}
@@ -840,7 +827,6 @@ Identify and restore the resource that causes the broken webhook.
 
 <br />
 
-
 ## Cluster remains in a pending State
 {: #cs_cluster_pending}
 
@@ -862,7 +848,6 @@ You can try one of the following solutions:
   - Check to see whether your VLAN is valid. To be valid, a VLAN must be associated with infrastructure that can host a worker with local disk storage. You can [list your VLANs](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans) by running `ibmcloud ks vlan ls --zone <zone>` if the VLAN does not show in the list, then it is not valid. Choose a different VLAN.
 
 <br />
-
 
 
 ## Unable to view or work with a cluster
@@ -993,7 +978,6 @@ To check your user access permissions:
 <br />
 
 
-
 ## Cannot access resources in a cluster
 {: #cs_firewall}
 
@@ -1045,7 +1029,5 @@ To access resources in the cluster, your worker nodes must be able to communicat
 3. If you have a Vyatta or custom firewall settings, make sure that you [opened up the required ports](/docs/containers?topic=containers-firewall#firewall_outbound) to allow the cluster to access infrastructure resources and services.
 
 <br />
-
-
 
 

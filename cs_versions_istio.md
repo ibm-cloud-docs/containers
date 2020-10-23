@@ -195,7 +195,7 @@ The following table shows the changes that are included in version 1.6.12 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.6.11 | 1.6.12 | <ul><li>See the Istio release notes for [Istio 1.6.12](https://istio.io/news/releases/1.6.x/announcing-1.6.12/){:external}.</li></ul> |
+| 1.6.11 | 1.6.12 | <ul><li>See the Istio release notes for [Istio 1.6.12](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.12/){:external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.11" caption-side="top"}
 

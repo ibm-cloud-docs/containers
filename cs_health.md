@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, logmet, logs, metrics
 
@@ -128,7 +128,6 @@ You can choose your logging solution based on which cluster components you need 
 <br />
 
 
-
 ## Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}
 {: #logdna}
 
@@ -230,7 +229,6 @@ To set up a logging configuration for your cluster:
    3. Review the pod logs that the LogDNA agent collected from your cluster. It might take a few minutes for your first logs to show.
 
 5. Review how you can [search and filter logs in the LogDNA dashboard](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-view_logs).
-
 
 ### Forwarding Kubernetes API audit logs
 {: #webhook_logdna}
@@ -377,7 +375,6 @@ For more information about Kubernetes audit logs, see the <a href="https://kuber
 
 <br />
 
-
 ## Forwarding cluster, app, and Kubernetes API audit logs to an external server
 {: #configuring}
 
@@ -441,7 +438,6 @@ In order to change your logging or filter configurations, the Fluentd logging co
 Yes. For example, if you have a particularly chatty pod, you might want to prevent logs from that pod from taking up log storage space, while still allowing other pods' logs to be forwarded. To prevent logs from a specific pod from being forwarded, see [Filtering logs](#filter-logs).
 
 <br />
-
 
 ### Forwarding cluster and app logs
 {: #enable-forwarding}
@@ -785,7 +781,6 @@ You can stop forwarding logs by deleting one or all of the logging configuration
 
 <br />
 
-
 ## Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket
 {: #collect_master}
 
@@ -879,7 +874,6 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 <br />
 
-
 ## Choosing a monitoring solution
 {: #view_metrics}
 
@@ -901,7 +895,6 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 </dl>
 
 <br />
-
 
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
 {: #sysdig}
@@ -996,8 +989,7 @@ To set up a monitoring configuration for your cluster:
    2. On the cluster **Overview** page, click **Launch**. The Sysdig dashboard opens.
    3. Review the pod and cluster metrics that the Sysdig agent collected from your cluster. It might take a few minutes for your first metrics to show.
 
-5. Review how you can work with the [Sysdig dashboard](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-dashboards#dashboards) to further analyze your metrics.
-
+5. Review how you can work with the [Sysdig dashboard](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-panels) to further analyze your metrics.
 
 ## Viewing cluster states
 {: #states}
@@ -1080,7 +1072,6 @@ You can view the current cluster state by running the `ibmcloud ks cluster ls` c
 
 
 
-
 ### Master states
 {: #states_master}
 
@@ -1109,7 +1100,6 @@ The **Master Status** provides details of what operation from the master state i
 |`update_failed`|The master update failed. IBM Support is notified and works to resolve the issue. You can continue to monitor the health of the master until the master reaches a normal state. If the master remains in this state for more than 1 day, [open an {{site.data.keyword.cloud_notm}} support case](/docs/containers?topic=containers-get-help). IBM Support might identify other issues in your cluster that you must fix before the master can be updated.|
 {: caption="Master states"}
 {: summary="Table rows read from left to right, with the master state in column one and a description in column two."}
-
 
 
 
@@ -1186,7 +1176,6 @@ You can view the current worker node state by running the `ibmcloud ks worker ls
     </tr>
       </tbody>
     </table>
-
 
 
 

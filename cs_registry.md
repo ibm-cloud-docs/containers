@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-23"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -121,7 +121,6 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 
 <br />
 
-
 ## Setting up trusted content for container images
 {: #trusted_images}
 
@@ -135,7 +134,6 @@ You can build containers from trusted images that are signed and stored in {{sit
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
-
 
 ## Understanding how to authorize your cluster to pull images from a private registry
 {: #cluster_registry_auth}
@@ -208,7 +206,7 @@ When you set up your {{site.data.keyword.cloud_notm}} account to use service end
 {: shortdesc}
 
 **What do I need to do to set up my cluster to use the private connection to `icr.io` registries?**<br>
-1.  Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so that you can use the {{site.data.keyword.registrylong_notm}} private service endpoint. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf#benefits-of-moving-to-vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. 
+1.  Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so that you can use the {{site.data.keyword.registrylong_notm}} private service endpoint. To enable VRF, [contact your IBM Cloud infrastructure account representative](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. 
 2.  [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 
 Now, {{site.data.keyword.registrylong_notm}} automatically uses the private service endpoint. You do not need to enable the private service endpoint for your {{site.data.keyword.containerlong_notm}} clusters.
@@ -220,7 +218,6 @@ The image push and pull traffic is automatically on the private network. {{site.
 Yes, if you [sign your images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent), the signatures contain the registry domain name. If you want to use the private `icr.io` domain for your signed images, resign your images with the private `icr.io` domains.
 
 <br />
-
 
 ## Updating existing clusters to use the API key image pull secret
 {: #imagePullSecret_migrate_api_key}
@@ -281,7 +278,6 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     2.  [Edit the {{site.data.keyword.cloud_notm}} IAM policies](/docs/account?topic=account-serviceids#update_serviceid) for the service ID, or [create another image pull secret](#other_registry_accounts).
 
 <br />
-
 
 ## Using an image pull secret to access images in other {{site.data.keyword.cloud_notm}} accounts or external private registries from non-default Kubernetes namespaces
 {: #other}
@@ -559,7 +555,6 @@ To create an image pull secret:
 
 <br />
 
-
 ## Using the image pull secret to deploy containers
 {: #use_imagePullSecret}
 
@@ -635,7 +630,6 @@ Every Kubernetes namespace has a Kubernetes service account that is named `defau
 
 <br />
 
-
 ## Setting up a cluster to pull entitled software
 {: #secret_entitled_software}
 
@@ -673,6 +667,5 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 Wondering what to do next? You can [set up the **entitled** Helm chart repository](/docs/containers?topic=containers-helm), where Helm charts that incorporate entitled software are stored. If you already have Helm installed in your cluster, run `helm repo add entitled https://raw.githubusercontent.com/IBM/charts/master/repo/entitled`.
 {: tip}
-
 
 
