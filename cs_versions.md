@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-13"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -142,9 +142,9 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.19.2
-*   Default: 1.18.9
-*   Other: 1.17.12
+*   Latest: 1.19.3
+*   Default: 1.18.10
+*   Other: 1.17.13
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.16.15
@@ -160,7 +160,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.18.9+IKS
+Server Version: v1.18.10+IKS
 ```
 {: screen}
 
@@ -312,7 +312,6 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 
 <br />
 
-
 ## Preparing to update
 {: #prep-up}
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG), [IBM version changelogs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
@@ -324,7 +323,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
-
 
 ## Version 1.19
 {: #cs_v119}
@@ -382,7 +380,6 @@ The following table shows the actions that you must take after you update your w
 
 <br />
 
-
 ## Version 1.18
 {: #cs_v118}
 
@@ -436,7 +433,6 @@ The following table shows the actions that you must take after you update your w
 
 <br />
 
-
 ## Version 1.17
 {: #cs_v117}
 
@@ -487,7 +483,6 @@ The following table shows the actions that you must take after you update your w
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 <br />
-
 
 ## Deprecated: Version 1.16
 {: #cs_v116}
@@ -575,7 +570,6 @@ To determine whether you must change your policies:
     * Ensure you have a private host endpoint for each worker node in your cluster. If private host endpoints exist for all worker nodes in your cluster, no action is required. Continue to update your Kubernetes master to 1.16. If private host endpoints exist for only some worker nodes in your cluster, [create a private host endpoint with the `ibm.role == 'worker_private'` label for each worker node in your cluster](/docs/containers?topic=containers-network_policies#isolate_workers). The Calico policies in these steps are designed to apply to all worker nodes in the cluster. Applying the policies to only some worker nodes is not supported, because communication between worker nodes can be blocked.
 
 <br />
-
 
 
 

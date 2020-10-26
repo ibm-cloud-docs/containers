@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,6 @@ With version 2.0.0, the {{site.data.keyword.cos_full_notm}} Helm chart is now av
 
 <br />
 
-
 ## Creating your object storage service instance
 {: #create_cos_service}
 
@@ -134,7 +133,6 @@ Follow these steps to create an {{site.data.keyword.cos_full_notm}} service inst
 3. [Store your service credentials in a Kubernetes secret inside the cluster](#create_cos_secret) to enable access to your {{site.data.keyword.cos_full_notm}} service instance.
 
 <br />
-
 
 ## Creating a secret for the object storage service credentials
 {: #create_cos_secret}
@@ -215,7 +213,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 <br />
 
 
-
 ## Installing the IBM Cloud Object Storage plug-in
 {: #install_cos}
 
@@ -246,7 +243,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.18.9_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.18.10_1523*
       ```
       {: screen}
 
@@ -255,7 +252,6 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
    2. Review the [version changelog](/docs/containers?topic=containers-changelog) to find the changes that are included in the latest patch version.
 
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
 2. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the version 3 Helm client on your local machine.
 
   If you enabled [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public Helm repository.
@@ -615,7 +611,6 @@ To remove the `ibmc` Helm plugin and the `ibm-object-storage-plugin`:
 
     <br />
 
-
 ## Deciding on the object storage configuration
 {: #configure_cos}
 
@@ -747,7 +742,6 @@ To remove the `ibmc` Helm plugin and the `ibm-object-storage-plugin`:
 Now that you decided on the configuration that you want, you are ready to [create a PVC](#add_cos) to provision {{site.data.keyword.cos_full_notm}}.
 
 <br />
-
 
 ## VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}
 {: #cos_auth_ip}
@@ -1156,7 +1150,6 @@ To add {{site.data.keyword.cos_full_notm}} to your cluster:
 
    <br />
 
-
 ## Using object storage in a stateful set
 {: #cos_statefulset}
 
@@ -1365,7 +1358,6 @@ To deploy a stateful set that uses object storage:
     <br />
 
 
-
 ## Backing up and restoring data
 {: #cos_backup_restore}
 
@@ -1376,7 +1368,6 @@ To deploy a stateful set that uses object storage:
 {: note}
 
 <br />
-
 
 
 ## Storage class reference
@@ -1537,6 +1528,5 @@ To deploy a stateful set that uses object storage:
 
 * {{site.data.keyword.cos_full_notm}} is based on the `s3fs-fuse` file system. You can review a list of limitations in the [`s3fs-fuse` repository](https://github.com/s3fs-fuse/s3fs-fuse#limitations).
 * To access a file in {{site.data.keyword.cos_full_notm}} with a non-root user, you must set the `runAsUser` and `fsGroup` values in your deployment to the same value.
-
 
 

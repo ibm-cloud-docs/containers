@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks
 
@@ -49,6 +49,7 @@ completion-time: 60m
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -185,7 +186,7 @@ Because it can take a few minutes to provision, create your cluster before you s
 
     ```
     ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.18.9
+    kube-mil01-pafe24f557f070463caf9e31ecf2d96625-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   free           normal   Ready    mil01      1.18.10
     ```
     {: screen}
 8.  Set the context for your Kubernetes cluster in your CLI.
@@ -209,7 +210,6 @@ Because it can take a few minutes to provision, create your cluster before you s
 Good job! You've successfully installed the CLIs and set up your cluster context for the following lessons. Next, set up your cluster environment and add the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} service.
 
 <br />
-
 
 ## Adding an IBM Cloud service to your cluster
 {: #cs_cluster_tutorial_lesson2}
@@ -266,7 +266,6 @@ Before you continue with the next lesson, why not test your knowledge and [take 
 {: note}
 
 <br />
-
 
 ## Deploying single instance apps to Kubernetes clusters
 {: #cs_cluster_tutorial_lesson3}
@@ -415,7 +414,7 @@ To deploy the app:
         Listing cluster workers...
         OK
         ID                                                 Public IP       Private IP       Machine Type   State    Status   Zone   Version
-        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.18.9
+        kube-mil01-pa10c8f571c84d4ac3b52acbf50fd11788-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    free           normal   Ready    mil01      1.18.10
         ```
         {: screen}
 7. Open a browser and check out the app with the following URL: `http://<IP_address>:<NodePort>`. With the example values, the URL is `http://169.xx.xxx.xxx:30872`. When you enter that URL in a browser, you can see the following text.
@@ -460,7 +459,6 @@ Want to delete the resources that you created in this lesson before you move on?
   {: screen}
 
 <br />
-
 
 ## Deploying and updating apps with higher availability
 {: #cs_cluster_tutorial_lesson4}
@@ -595,7 +593,6 @@ Ready to delete what you created before you continue to the next lesson? This ti
   {: screen}
 
 <br />
-
 
 ## Deploying and updating the Watson Tone Analyzer app
 {: #cs_cluster_tutorial_lesson5}
@@ -831,7 +828,6 @@ Quiz time! You covered a lot of material, so [make sure that you understand it a
 {: note}
 
 <br />
-
 
 ## What's next?
 {: #tutorials_next}

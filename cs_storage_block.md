@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks
 
@@ -210,7 +210,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
       ```
       OK
       ID                                                  Public IP        Private IP     Machine Type           State    Status   Zone    Version
-      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.18.9_1523*
+      kube-dal10-crb1a23b456789ac1b20b2nc1e12b345ab-w26   169.xx.xxx.xxx    10.xxx.xx.xxx   b3c.4x16.encrypted     normal   Ready    dal10   1.18.10_1523*
       ```
       {: screen}
 
@@ -219,7 +219,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    2. Review the [version changelog](/docs/containers?topic=containers-changelog) to find the changes that are included in the latest patch version.
 
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-
 
 1.  [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
@@ -423,7 +422,6 @@ To remove the plug-in:
 
 
 
-
 ## Deciding on the block storage configuration
 {: #block_predefined_storageclass}
 
@@ -556,7 +554,6 @@ Make sure to choose your storage configuration carefully to have enough capacity
 6. Choose if you want to be billed hourly or monthly. Check the [pricing](https://www.ibm.com/cloud/block-storage/pricing){: external} for more information. By default, all block storage devices are provisioned with an hourly billing type.
 
 <br />
-
 
 ## Setting up encryption for {{site.data.keyword.blockstorageshort}} (beta)
 {: #block_encryption_setup}
@@ -1195,7 +1192,6 @@ To add block storage:
 
 
 
-
 ## Using existing block storage in your cluster
 {: #existing_block}
 
@@ -1392,7 +1388,6 @@ Before you can start to mount your existing storage to an app, you must retrieve
 You successfully created a PV and bound it to a PVC. Cluster users can now [mount the PVC](#block_app_volume_mount) to their deployments and start reading from and writing to the PV.
 
 <br />
-
 
 
 ## Using block storage in a stateful set
@@ -1754,7 +1749,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-
 ## Changing the size and IOPS of your existing storage device
 {: #block_change_storage_configuration}
 
@@ -1866,13 +1860,11 @@ To make your data even more highly available and protect your app from a zone fa
 
 <br />
 
-
 ## Storage class reference
 {: #block_storageclass_reference}
 
 Storage classes that have `retain` in the title have a reclaim policy of **Retain**. Example: `ibmc-file-retain-bronze`. Storage classes that do not have `retain` in the title have a reclaim policy of **Delete**. Example: `ibmc-file-bronze`.
 {: tip}
-
 
 | Characteristics | Setting|
 |:-----------------|:-----------------|
@@ -1942,7 +1934,6 @@ Storage classes that have `retain` in the title have a reclaim policy of **Retai
 {: tab-group="Block storage class"}
 
 <br />
-
 
 ## Sample customized storage classes
 {: #block_custom_storageclass}
@@ -2133,7 +2124,6 @@ The following examples create a storage class that provisions block storage with
 <br />
 
 
-
 ## Removing persistent storage from a cluster
 {: #cleanup}
 
@@ -2305,7 +2295,6 @@ To clean up persistent data:
     ibmcloud sl block volume-list
     ```
     {: pre}
-
 
 
 

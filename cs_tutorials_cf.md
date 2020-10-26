@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks
 
@@ -48,6 +48,7 @@ completion-time: 30m
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -132,7 +133,6 @@ This tutorial is intended for Cloud Foundry app developers.
 <br />
 
 
-
 ## Download app code
 {: #cf_1}
 {: step}
@@ -167,7 +167,6 @@ Your app code is ready to be containerized!
 
 
 <br />
-
 
 
 ## Creating a Docker image with your app code
@@ -257,7 +256,6 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 
 <br />
-
 
 
 ## Deploying a container from your image
@@ -353,7 +351,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     ```
     ID                                                 Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.18.9
+    kube-dal10-cr18e61e63c6e94b658596ca93d087eed9-w1   169.xx.xxx.xxx   10.xxx.xx.xxx   u3c.2x4.encrypted   normal   Ready    dal10   1.18.10
     ```
     {: screen}
 

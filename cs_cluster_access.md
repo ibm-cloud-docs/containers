@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-15"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks, clusters
 
@@ -113,7 +113,6 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 
 <br />
 
-
 ## Accessing Kubernetes clusters through the public service endpoint
 {: #access_public_se}
 
@@ -165,7 +164,6 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
       {: codeblock}
 
 <br />
-
 
 ## Accessing clusters through the private service endpoint
 {: #access_private_se}
@@ -316,8 +314,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.18.9
-  Server Version: v1.18.9
+  Client Version: v1.18.10
+  Server Version: v1.18.10
   ```
   {: screen}
 
@@ -432,8 +430,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
   Example output:
   ```
-  Client Version: v1.18.9
-  Server Version: v1.18.9
+  Client Version: v1.18.10
+  Server Version: v1.18.10
   ```
   {: screen}
 
@@ -441,9 +439,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
 <br />
 
 
-
 <br />
-
 
 ## Accessing the cluster master via admission controllers and webhooks
 {: #access_webhooks}
@@ -483,6 +479,5 @@ Many cluster add-ons, plug-ins, and other third-party extensions create custom a
 
 **I need help with a broken webhook. What can I do?**<br>
 See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update).
-
 
 

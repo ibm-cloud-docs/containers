@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-01"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -108,7 +109,6 @@ Learn the general steps for deploying apps by clicking an area of the following 
 </map>
 
 <br />
-
 
 ## Launching the Kubernetes dashboard
 {: #cli_dashboard}
@@ -185,7 +185,6 @@ When you are done with the Kubernetes dashboard, use `CTRL+C` to exit the `proxy
 
 <br />
 
-
 ## Deploying apps with the Kubernetes dashboard
 {: #app_ui}
 
@@ -217,7 +216,6 @@ To deploy your app:
   * If your app is [publicly available](/docs/containers?topic=containers-cs_network_planning#public_access), navigate to the cluster overview page in your {{site.data.keyword.containerlong}} dashboard. Copy the subdomain, which is located in the cluster summary section and paste it into a browser to view your app.
 
 <br />
-
 
 ## Deploying apps with the CLI
 {: #app_cli}
@@ -253,7 +251,6 @@ To deploy your app:
 3.  If you made your app publicly available by using a nodeport service, a load balancer service, or Ingress, verify that you can access the app.
 
 <br />
-
 
 ## Deploying apps to specific worker nodes by using labels
 {: #node_affinity}
@@ -305,7 +302,7 @@ To deploy apps to specific worker nodes:
                         ibm-cloud.kubernetes.io/machine-type=b3c.4x16.encrypted
                         ibm-cloud.kubernetes.io/sgx-enabled=false
                         ibm-cloud.kubernetes.io/worker-pool-id=00a11aa1a11aa11a1111a1111aaa11aa-11a11a
-                        ibm-cloud.kubernetes.io/worker-version=1.18.9_1534
+                        ibm-cloud.kubernetes.io/worker-version=1.18.10_1534
                         kubernetes.io/hostname=10.xxx.xx.xxx
                         privateVLAN=1234567
                         publicVLAN=7654321
@@ -389,7 +386,6 @@ To deploy apps to specific worker nodes:
     4. In the output, verify that the worker node with the private IP address that you identified in the previous step is deployed in this worker pool.
 
 <br />
-
 
 
 
@@ -563,7 +559,6 @@ To execute a workload on a GPU machine:
     {: screen}
 
     In this example, you see that both GPUs were used to execute the job because both the GPUs were scheduled in the worker node. If the limit is set to 1, only 1 GPU is shown.
-
 
 
 
