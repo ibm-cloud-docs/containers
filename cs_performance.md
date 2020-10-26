@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-20"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks, kernel
 
@@ -177,7 +177,6 @@ You must have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role
     {: pre}
 
 <br />
-
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
 1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
@@ -189,7 +188,6 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
 <br />
-
 
 ## Optimizing pod performance
 {: #pod}
@@ -229,7 +227,6 @@ Before you begin, ensure you have the [**Manager** {{site.data.keyword.cloud_not
 3. If you changed the `net.core.somaxconn` value in the kernel settings, most apps can automatically use the updated value. However, some apps might require you to manually change the corresponding value in your app code to match the kernel value. For example, if you're tuning the performance of a pod where an NGINX app runs, you must change the value of the `backlog` field in the NGINX app code to match. For more information, see this [NGINX blog post](https://www.nginx.com/blog/tuning-nginx/){: external}.
 
 <br />
-
 
 ## Adjusting cluster metrics provider resources
 {: #metrics}
@@ -321,7 +318,172 @@ Want to tune more settings? Check out the [Kubernetes Add-on resizer configurati
 
 <br />
 
+## Enabling huge pages
+{: #huge-pages}
 
+You can enable the [Kubernetes `HugePages` scheduling](https://kubernetes.io/docs/tasks/manage-hugepages/scheduling-hugepages/){: external} in clusters that run Kubernetes version 1.19 or later. The only supported page size is 2 MB per page, which is the default size of the Kubernetes feature gate.
+{: shortdesc}
+
+Huge pages scheduling is a beta feature in {{site.data.keyword.containerlong_notm}} and is subject to change.
+{: beta}
+
+By default, the CPU of your worker nodes allocates RAM in chunks, or pages, of 4 KB. When your app requires more RAM, the system must continue to look up more pages, which can slow down processing. With huge pages, you can increase the page size to 2 MB to increase performance for your RAM-intensive apps like databases for artificial intelligence (AI), internet of things (IoT), or machine learning workloads. For more information about huge pages, see [the Linux kernel documentation](https://www.kernel.org/doc/Documentation/vm/hugetlbpage.txt){: external}.
+
+You can reboot the worker node and the huge pages configuration persists. However, the huge pages configuration does **not** persist across any other worker node life cycle operations. You must repeat the enablement steps each time that you update, reload, replace, or add worker nodes.
+{: important}
+
+**Supported infrastructure providers and required permissions**:
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 or 2 compute
+* **Operator** platform role and **Manager** service role for the cluster in {{site.data.keyword.cloud_notm}} IAM
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Create a `hugepages-ds.yaml` configuration file to enable huge pages. The following sample YAML uses a daemon set to run the pod on every worker node in your cluster. The sample YAML that you use depends on whether you run a VPC or classic cluster. You can set the allocation of huge pages that are available on the worker node by using the `vm.nr_hugepages` parameter. This example allocates 512 pages at 2 MB per page, for 1 GB of total RAM allocated exclusively for huge pages.
+
+    Want to enable huge pages only for certain worker nodes, such as a worker pool that you use for RAM-intensive apps? [Label](/docs/containers?topic=containers-add_workers#worker_pool_labels) and [taint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker_pool_taint) your worker pool, and then add [affinity rules](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} to the daemon set so that the pods are deployed only to the worker nodes in the worker pool that you specify.
+    {: tip}
+
+    ```yaml
+    apiVersion: apps/v1
+    kind: DaemonSet
+    metadata:
+      name: hugepages-enablement
+      namespace: kube-system
+      labels:
+        tier: management
+        app: hugepages-enablement
+    spec:
+      selector:
+        matchLabels:
+          name: hugepages-enablement
+      template:
+        metadata:
+          labels:
+            name: hugepages-enablement
+        spec:
+          hostPID: true
+          initContainers:
+            - command:
+                - sh
+                - -c
+                # Customize allocated Hugepages by providing the value
+                - "echo vm.nr_hugepages=512 > /etc/sysctl.d/90-hugepages.conf"
+              image: alpine:3.6
+              imagePullPolicy: IfNotPresent
+              name: sysctl
+              resources: {}
+              securityContext:
+                privileged: true
+              volumeMounts:
+                - name: modify-sysctld
+                  mountPath: /etc/sysctl.d
+          containers:
+            - resources:
+                requests:
+                  cpu: 0.01
+              image: alpine:3.6
+              # once the init container completes, keep the pod running for worker node changes
+              name: sleepforever
+              command: ["/bin/sh", "-c"]
+              args:
+                - >
+                  while true; do
+                      sleep 100000;
+                  done
+          volumes:
+            - name: modify-sysctld
+              hostPath:
+                path: /etc/sysctl.d
+    ```
+    {: codeblock}
+
+2.  Apply the file that you previously created.
+    ```
+    kubectl apply -f hugepages-ds.yaml
+    ```
+    {: pre}
+3.  Verify that the pods are **Running**.
+    ```
+    kubectl get pods
+    ```
+    {: pre}
+4.  Restart the kubelet that runs on each worker node by rebooting the worker nodes. Do **not** reload the worker node to restart the kubelet. Reloading the worker node before the kubelet picks up on the huge pages enablement causes the enablement to fail.
+    1.  List the worker nodes in your cluster.
+        ```
+        ibmcloud ks worker ls -c <cluster_name_or_ID>
+        ```
+        {: pre}
+    2.  Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` flags, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
+        ```
+        ibmcloud ks worker reboot -c <cluster_name_or_ID> -w <worker1_ID> -w <worker2_ID>
+        ```
+        {: pre}
+5.  Create a `hugepages-test.yaml` test pod that mounts huge pages as a volume and uses resource limits and requests to set how much of the huge pages resources that the pod uses. **Note**: If you used labels, taints, and affinity rules to enable huge pages on select worker nodes only, include these same rules in your test pod.
+    ```yaml
+    apiVersion: v1
+    kind: Pod
+    metadata:
+      name: hugepages-example
+    spec:
+      containers:
+      - name: hugepages-example
+        image: fedora:34
+        command:
+        - sleep
+        - inf
+        volumeMounts:
+        - mountPath: /hugepages-2Mi
+          name: hugepage-2mi
+        resources:
+          limits:
+            hugepages-2Mi: 100Mi
+            memory: 100Mi
+          requests:
+            memory: 100Mi
+      volumes:
+      - name: hugepage-2mi
+        emptyDir:
+          medium: HugePages-2Mi
+    ```
+    {: codeblock}
+6.  Apply the pod file that you previously created.
+    ```
+    kubectl apply -f hugepages-pod.yaml
+    ```
+    {: pre}
+7.  Verify that your pod uses the huge pages resources.
+    1.  Check that your pod is **Running**. The pod does not run if no worker nodes with huge pages are available.
+        ```
+        kubectl get pods
+        ```
+        {: pre}
+    2.  Log in to the pod.
+        ```
+        kubectl exec -it <pod> /bin/sh
+        ```
+        {: pre}
+    3.  Verify that your pod can view the sizes of the huge pages.
+        ```
+        ls /sys/kernel/mm/hugepages
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        hugepages-1048576kB  hugepages-2048kB
+        ```
+        {: screen}
+8.  Optional: Remove the enablement daemon set. Keep in mind that you must re-create the daemon set if you need to update, reload, replace, or add worker nodes with huge pages later.
+    ```
+    kubectl -n kube-system delete daemonset hugepages-enablement
+    ```
+    {: pre}
+9.  Repeat these steps whenever you update, reload, replace, or add worker nodes. 
+
+To troubleshoot worker nodes with huge pages, you can only reboot the worker node. The huge pages configuration does not persist across any other worker node life cycle operation, such as updating, reloading, replacing, or adding worker nodes. To remove the huge pages configuration from your cluster, you can update, reload, or replace all the worker nodes.
+
+<br />
 
 
 ## Changing the Calico maximum transmission unit (MTU)
@@ -436,7 +598,6 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
 
 <br />
 
-
 ## Disabling the port map plug-in
 {: #calico-portmap}
 
@@ -499,4 +660,3 @@ To disable the port map plug-in:
     kubectl rollout restart daemonset -n kube-system calico-node
     ```
     {: pre}
-

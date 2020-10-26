@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-23"
+lastupdated: "2020-10-26"
 
 keywords: containers
 subcollection: containers
@@ -553,6 +553,7 @@ subcollection: containers
 * [Optimizing worker node performance](/docs/containers?topic=containers-kernel#worker)
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
+* [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
 * [Changing the Calico maximum transmission unit (MTU)](/docs/containers?topic=containers-kernel#calico-mtu)
 * [Disabling the port map plug-in](/docs/containers?topic=containers-kernel#calico-portmap)
 
