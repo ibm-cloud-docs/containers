@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -200,7 +200,6 @@ Review the options to debug your worker nodes and find the root causes for failu
     </tr>
       </tbody>
     </table>
-
 3. List the details for the worker node. If the details include an error message, review the list of [common error messages for worker nodes](#common_worker_nodes_issues) to learn how to resolve the problem.
     ```
     ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>
@@ -208,7 +207,6 @@ Review the options to debug your worker nodes and find the root causes for failu
     {: pre}
 
 <br />
-
 
 ## Common issues with worker nodes
 {: #common_worker_nodes_issues}
@@ -288,7 +286,6 @@ Review common error messages and learn how to resolve them. Messages might begin
   </table>
 
 <br />
-
 
 ## Unable to create or delete worker nodes or clusters
 {: #infra_errors}
@@ -525,8 +522,6 @@ The {{site.data.keyword.cloud_notm}} account owner or an account administrator m
 
 <br />
 
-
-
 ## Cannot add worker nodes due to an invalid VLAN ID
 {: #suspended}
 
@@ -594,7 +589,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-
 ## Replacing a worker node does not create a worker node
 {: #auto-rebalance-off}
 
@@ -621,7 +615,6 @@ To enable automatical rebalancing, [rebalance](/docs/containers?topic=containers
 
 <br />
 
-
 ## Accessing your worker node with SSH fails
 {: #cs_ssh_worker}
 
@@ -640,7 +633,6 @@ SSH by password is unavailable on the worker nodes.
 Use a Kubernetes [`DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} for actions that you must run on every node, or use jobs for one-time actions that you must run.
 
 <br />
-
 
 ## Bare metal instance ID is inconsistent with worker records
 {: #bm_machine_id}
@@ -664,7 +656,6 @@ For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload
 You can also [delete the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
 
 <br />
-
 
 ## After a worker node updates or reloads, duplicate nodes and pods appear
 {: #cs_duplicate_nodes}
@@ -690,7 +681,6 @@ Service is not disrupted due to these duplicates, but you can remove the old wor
 
 <br />
 
-
 ## Accessing a pod on a new worker node fails with a timeout
 {: #cs_nodes_duplicate_ip}
 
@@ -714,8 +704,8 @@ Manually update the reference of the private IP address to point to the correct 
 
   ```
   ID                                                 Public IP       Private IP       Machine Type   State     Status   Zone   Version
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.18.9
-  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.18.9
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w1   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       normal    Ready    dal10      1.18.10
+  kube-dal10-cr9b7371a7fcbe46d08e04f046d5e6d8b4-w2   169.xx.xxx.xxx  10.xxx.xx.xxx    b3c.4x16       deleted    -       dal10      1.18.10
   ```
   {: screen}
 
@@ -750,4 +740,3 @@ Manually update the reference of the private IP address to point to the correct 
 
 
 The deleted node is no longer listed in Calico.
-

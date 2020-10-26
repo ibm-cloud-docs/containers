@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-13"
+lastupdated: "2020-10-26"
 
 keywords: kubernetes, iks, containers
 
@@ -259,7 +259,6 @@ The worker node can take a few minutes to provision, but you can see the progres
 
 <br />
 
-
 ## Creating a VPC Gen 2 compute cluster
 {: #vpc-gen2-gs}
 
@@ -279,7 +278,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
    1. Select the **Standard** plan.
-   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.18.9 or later**.
+   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.18.10 or later**.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the **Gen 2** VPC that you created earlier.
 4.  Configure the **Location** details for your cluster.
@@ -302,7 +301,6 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 The worker node can take a few minutes to provision, but you can see the progress in the **Worker nodes** tab. When the status reaches `Ready`, you can start working with your cluster by [deploying your first app](#deploy-app)!
 
 <br />
-
 
 ## Deploying an app to your cluster
 {: #deploy-app}
@@ -338,7 +336,6 @@ The steps to deploy an app vary if you have a free or standard cluster, because 
 Great job! You just deployed your first app in your Kubernetes cluster.
 
 <br />
-
 
 
 ## What's next?
