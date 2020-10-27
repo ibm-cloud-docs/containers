@@ -1323,6 +1323,7 @@ subcollection: containers
 
 [Storing data on IBM Cloud Object Storage](/docs/containers?topic=containers-object_storage)
 * [Creating your object storage service instance](/docs/containers?topic=containers-object_storage#create_cos_service)
+* [Creating {{site.data.keyword.cos_full_notm}} service credentials](/docs/containers?topic=containers-object_storage#service_credentials)
 * [Creating a secret for the object storage service credentials](/docs/containers?topic=containers-object_storage#create_cos_secret)
 * [Installing the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#install_cos)
   * [Updating the IBM Cloud Object Storage plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin)
@@ -1332,6 +1333,7 @@ subcollection: containers
 * [Adding object storage to apps](/docs/containers?topic=containers-object_storage#add_cos)
 * [Using object storage in a stateful set](/docs/containers?topic=containers-object_storage#cos_statefulset)
 * [Backing up and restoring data](/docs/containers?topic=containers-object_storage#cos_backup_restore)
+* [Adding your {{site.data.keyword.cos_full_notm}} credentials to the default storage classes](/docs/containers?topic=containers-object_storage#storage_class_custom)
 * [Storage class reference](/docs/containers?topic=containers-object_storage#cos_storageclass_reference)
   * [Standard](/docs/containers?topic=containers-object_storage#standard)
   * [Vault](/docs/containers?topic=containers-object_storage#Vault)
