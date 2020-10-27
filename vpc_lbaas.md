@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-16"
+lastupdated: "2020-10-27"
 
 keywords: kubernetes, iks
 
@@ -165,7 +165,6 @@ The following diagram illustrates how a user accesses an app from the internet t
 
 <br />
 
-
 ## Setting up a Network Load Balancer for VPC
 {: #setup_vpc_nlb}
 
@@ -231,7 +230,7 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector`</td>
-    <td>Optional: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in the same zone as the VPC network load balancer are configured to receive traffic from the VPC network load balancer. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<br><br>The following keys are permitted:
+    <td>Optional: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in the same zone as the VPC network load balancer are configured to receive traffic from the VPC network load balancer. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<p class="note">In VPC clusters that run Kubernetes version 1.18, you cannot use the `vpc-node-selector` annotation if you enable the PROXY protocol.</p><br><br>The following keys are permitted:
       <ul><li>`ibm-cloud.kubernetes.io/internal-ip`</li>
       <li>`ibm-cloud.kubernetes.io/machine-type`</li>
       <li>`ibm-cloud.kubernetes.io/os`</li>
@@ -250,7 +249,7 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet`</td>
-    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.</td>
+    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.<p class="note">In VPC clusters that run Kubernetes version 1.18, you cannot use the `vpc-subnet` annotation if you enable the PROXY protocol.</p></td>
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>
@@ -354,7 +353,6 @@ Do not delete the subnets that you attached to your cluster during cluster creat
 {: important}
 
 <br />
-
 
 ## Setting up an Application Load Balancer for VPC
 {: #setup_vpc_ks_vpc_lb}
@@ -545,7 +543,6 @@ Do not delete the subnets that you attached to your cluster during cluster creat
 
 <br />
 
-
 ## Registering a VPC load balancer hostname with a DNS subdomain
 {: #vpc_lb_dns}
 
@@ -613,7 +610,6 @@ To use the SSL certificate to access your app via HTTPS, ensure that you defined
 
 <br />
 
-
 ## Limitations
 {: #lbaas_limitations}
 
@@ -637,6 +633,5 @@ Review the following default settings and limitations.
     * VPC network load balancers only: `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"`
 * When you delete a VPC cluster, any VPC load balancers that were automatically created by {{site.data.keyword.containerlong_notm}} for the Kubernetes `LoadBalancer` services in that cluster are also automatically deleted. However, any VPC load balancers that you manually created in your VPC are not deleted.
 * You can register up to 128 subdomains for VPC load balancer hostnames. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-using-avatar).
-
 
 
