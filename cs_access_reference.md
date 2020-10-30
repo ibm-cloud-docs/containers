@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-10-30"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -316,7 +316,6 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 
 <br />
 
-
 ## {{site.data.keyword.cloud_notm}} IAM service roles
 {: #service}
 
@@ -376,7 +375,6 @@ The following table shows the Kubernetes resource permissions that are granted b
 
 <br />
 
-
 ## Kubernetes resource permissions per RBAC role
 {: #rbac_ref}
 
@@ -389,7 +387,7 @@ Wondering if you have the correct permissions to run a certain `kubectl` command
 
 The following table shows the permissions that are granted by each RBAC role to individual Kubernetes resources. Permissions are shown as which verbs a user with that role can complete against the resource, such as "get", "list", "describe", "create", or "delete".
 
-<table summary="The columns are read from left to right. The first column has the Kubernetes resource that an RBAC role authorizes actions to. The second column describes the actions that the view role authorizes actions to for the resource. The third column describes the actions that the edit role authorizes actions to for the resource. The fourth column describes the actions that the admin and cluster admin roles authorize actions to for the resource.">
+<table summary="The columns are read from left to right. The first column has the Kubernetes resource that an RBAC role authorizes actions to. The second column describes the actions that the view role authorizes for the resource. The third column describes the actions that the edit role authorizes for the resource. The fourth column describes the actions that the admin and cluster admin roles authorize for the resource.">
  <caption>Kubernetes resource permissions granted by each predefined RBAC role</caption>
  <col width="25%">
  <thead>
@@ -661,7 +659,6 @@ The following table shows the permissions that are granted by each RBAC role to 
 
 <br />
 
-
 ## {{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users
 {: #iam_issuer_users}
 
@@ -683,7 +680,6 @@ You might use this information if you build automation tooling within the cluste
 {: note}
 
 <br />
-
 
 ## Cloud Foundry roles
 {: #cloud-foundry}
@@ -770,6 +766,5 @@ The following table shows the classic infrastructure permissions that the creden
 {: #classic-permissions-suggested}
 {: tab-title="Other common use cases"}
 {: tab-group="Classic infrastructure permissions"}
-
 
 
