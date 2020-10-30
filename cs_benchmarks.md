@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-21"
+lastupdated: "2020-10-30"
 
 keywords: kubernetes, iks, containers
 
@@ -94,7 +94,7 @@ subcollection: containers
 # CIS Kubernetes Benchmark
 {: #cis-benchmark}
 
-The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with controls that are commensurate to various industry regulations.
+The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external} as a framework of specific steps to configure Kubernetes more securely and with standards that are commensurate to various industry regulations.
 {: shortdesc}
 
 When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your {{site.data.keyword.containerlong}} clusters meet the CIS Kubernetes Benchmark.
@@ -138,7 +138,6 @@ Next, decide whether the component falls within your responsibility. If so, you 
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
 
 <br />
-
 
 ## Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19
 {: #cis-benchmark-15}
