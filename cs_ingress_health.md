@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, ingress, alb, health, prometheus
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -91,7 +92,7 @@ subcollection: containers
 
 
 
-# Logging and monitoring Ingress
+# Logging and monitoring {{site.data.keyword.containerlong_notm}} Ingress
 {: #ingress_health}
 
 Customize logging and set up monitoring to help you troubleshoot issues and improve the performance of your Ingress configuration.
@@ -261,7 +262,6 @@ Before you begin, ensure that you have the [**Writer** or **Manager** {{site.dat
             {: pre}
 
 <br />
-
 
 ## Monitoring the Ingress ALB
 {: #ingress_monitoring}
@@ -514,7 +514,6 @@ The following table lists the supported upstream type 2 metric names.
 
 <br />
 
-
 ## Increasing the shared memory zone size for Ingress metrics collection
 {: #vts_zone_size}
 
@@ -553,6 +552,5 @@ Before you begin, ensure that you have the [**Writer** or **Manager** {{site.dat
    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
    ```
    {: pre}
-
 
 

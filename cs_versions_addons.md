@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -102,14 +102,11 @@ Check the [Security Bulletins on {{site.data.keyword.cloud_notm}} Status](https:
 
 For more information about managing updates for Fluentd and Ingress ALBs, see [Updating cluster components](/docs/containers?topic=containers-update#components).
 
-## Beta: Kubernetes Ingress image changelog
+## Kubernetes Ingress image changelog
 {: #kube_ingress_changelog}
 
-View version changes for Ingress application load balancers (ALBs) that run the community Kubernetes Ingress image.
+View version changes for Ingress application load balancers (ALBs) that run the [community Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types).
 {: shortdesc}
-
-As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports the Kubernetes Ingress image as a beta release. For more information, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
-{: beta}
 
 When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag. The latest three versions of the Kubernetes Ingress image are supported for ALBs. To list the currently supported versions, run the following command:
 ```
@@ -117,7 +114,7 @@ ibmcloud ks ingress alb versions
 ```
 {: pre}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.35.0_474_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version that {{site.data.keyword.containerlong_notm}} released. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.35.0_474_iks` indicates the most recent build of the `0.35.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
@@ -170,7 +167,6 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 {: caption="Build changelog for version 0.32.0 of the Kubernetes Ingress image" caption-side="top"}
 
 <br />
-
 
 ## {{site.data.keyword.containerlong_notm}} Ingress image changelog
 {: #alb_changelog}
@@ -538,7 +534,6 @@ Refer to the following table for a summary of changes for each version of the {{
 </table>
 
 <br />
-
 
 ## Fluentd for logging changelog
 {: #fluentd_changelog}

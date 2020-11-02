@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-15"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, ingress
 
@@ -103,7 +103,6 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 
 These custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are applicable for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image only. If your ALBs run the [Kubernetes Ingress image instead](/docs/containers?topic=containers-ingress-types), {{site.data.keyword.containerlong_notm}} annotations are not supported. You must instead use [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
 {: important}
-
 
 
 |General annotations|Name|Description|
@@ -257,7 +256,6 @@ metadata:
 
 <br />
 
-
 ### Location snippets (`location-snippets`)
 {: #location-snippets}
 
@@ -318,7 +316,6 @@ spec:
 
 <br />
 
-
 ### Private ALB routing (`ALB-ID`)
 {: #alb-id}
 
@@ -360,7 +357,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Server snippets (`server-snippets`)
 {: #server-snippets}
@@ -423,7 +419,6 @@ annotations:
 
 <br />
 
-
 ## Connection annotations
 {: #connection}
 
@@ -482,7 +477,6 @@ spec:
 
 <br />
 
-
 ### Keepalive requests (`keepalive-requests`)
 {: #keepalive-requests}
 
@@ -524,7 +518,6 @@ spec:
 
 <br />
 
-
 ### Keepalive timeout (`keepalive-timeout`)
 {: #keepalive-timeout}
 
@@ -565,7 +558,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Proxy next upstream (`proxy-next-upstream-config`)
 {: #proxy-next-upstream-config}
@@ -620,7 +612,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Session-affinity with cookies (`sticky-cookie-services`)
 {: #sticky-cookie-services}
@@ -682,7 +673,6 @@ spec:
 
 <br />
 
-
 ### Upstream fail timeout (`upstream-fail-timeout`)
 {: #upstream-fail-timeout}
 
@@ -725,7 +715,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Upstream keepalive (`upstream-keepalive`)
 {: #upstream-keepalive}
@@ -771,7 +760,6 @@ spec:
 
 <br />
 
-
 ### Upstream keepalive timeout (`upstream-keepalive-timeout`)
 {: #upstream-keepalive-timeout}
 
@@ -812,7 +800,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Upstream max fails (`upstream-max-fails`)
 {: #upstream-max-fails}
@@ -856,7 +843,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ## HTTPS and TLS/SSL authentication annotations
 {: #https-auth}
@@ -972,7 +958,6 @@ spec:
 
 <br />
 
-
 ### HTTP redirects to HTTPS (`redirect-to-https`)
 {: #redirect-to-https}
 
@@ -1012,7 +997,6 @@ spec:
 {: codeblock}
 
 <br />
-
 
 ### HTTP Strict Transport Security (`hsts`)
 {: #hsts}
@@ -1058,7 +1042,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Mutual authentication (`mutual-auth`)
 {: #mutual-auth}
@@ -1136,7 +1119,6 @@ spec:
    {: pre}
 
 <br />
-
 
 ### SSL services support (`ssl-services`)
 {: #ssl-services}
@@ -1241,7 +1223,6 @@ spec:
    {: pre}
 
 <br />
-
 
 ### TCP ports (`tcp-ports`)
 {: #tcp-ports}
@@ -1351,7 +1332,6 @@ spec:
 
 <br />
 
-
 ## Path routing annotations
 {: #path-routing}
 
@@ -1397,7 +1377,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Location modifier (`location-modifier`)
 {: #location-modifier}
@@ -1455,7 +1434,6 @@ spec:
 
 <br />
 
-
 ### Rewrite paths (`rewrite-path`)
 {: #rewrite-path}
 
@@ -1498,7 +1476,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ## Proxy buffer annotations
 {: #proxy-buffer}
@@ -1549,7 +1526,6 @@ spec:
 
 <br />
 
-
 ### Client response data buffering (`proxy-buffering`)
 {: #proxy-buffering}
 
@@ -1597,7 +1573,6 @@ spec:
 
 <br />
 
-
 ### Proxy buffers (`proxy-buffers`)
 {: #proxy-buffers}
 
@@ -1642,7 +1617,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Proxy buffer size (`proxy-buffer-size`)
 {: #proxy-buffer-size}
@@ -1690,7 +1664,6 @@ spec:
 
 <br />
 
-
 ### Proxy busy buffers size (`proxy-busy-buffers-size`)
 {: #proxy-busy-buffers-size}
 
@@ -1733,7 +1706,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ## Request and response annotations
 {: #request-response}
@@ -1783,7 +1755,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ### Additional client request or response header (`proxy-add-headers`, `response-add-headers`)
 {: #proxy-add-headers}
@@ -1862,7 +1833,6 @@ spec:
 
 <br />
 
-
 ### Client response header removal (`response-remove-headers`)
 {: #response-remove-headers}
 
@@ -1918,7 +1888,6 @@ spec:
 
 <br />
 
-
 ### Client request body size (`client-max-body-size`)
 {: #client-max-body-size}
 
@@ -1966,7 +1935,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ## Service limit annotations
 {: #service-limit}
@@ -2018,7 +1986,6 @@ spec:
 
 <br />
 
-
 ### Service rate limits (`service-rate-limit`)
 {: #service-rate-limit}
 
@@ -2063,7 +2030,6 @@ spec:
 {: caption="Understanding the annotation components" caption-side="top"}
 
 <br />
-
 
 ## User authentication annotations
 {: #user-authentication}
@@ -2260,7 +2226,6 @@ To enable source IP preservation, edit the load balancer service that exposes an
 
 <br />
 
-
 ## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
@@ -2306,7 +2271,6 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 <br />
 
-
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
 
@@ -2344,13 +2308,11 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
 
 <br />
 
-
 ## Tuning ALB performance
 {: #perf_tuning}
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
-
 
 ### Adding ALB socket listeners for each NGINX worker process
 {: #reuse-port}
@@ -2509,6 +2471,5 @@ In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `backlog` field se
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
 
 
