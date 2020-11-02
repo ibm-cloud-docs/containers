@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-15"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -92,14 +92,11 @@ subcollection: containers
 
 
 
-# Beta: Kubernetes Ingress annotations
+# Kubernetes Ingress annotations
 {: #comm-ingress-annotations}
 
 Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
-
-Using the Kubernetes Ingress image for your ALBs is a beta feature. Beta features might experience intermittent errors.
-{: beta}
 
 
 
@@ -854,7 +851,6 @@ Kubernetes Ingress field: Currently, no configuration option for the Kubernetes 
 
 <br />
 
-
 ## Customizing the ALB deployment
 {: #comm-customize-deploy}
 
@@ -948,7 +944,6 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
   3. Save and close the file. Your changes are applied automatically.
 
 <br />
-
 
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
 {: #app-id}
@@ -1100,7 +1095,6 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
 <br />
 
-
 ## Preserving the source IP address
 {: #preserve_source_ip}
 
@@ -1192,7 +1186,6 @@ To enable source IP preservation, edit the load balancer service that exposes an
 
 <br />
 
-
 ## Configuring SSL protocols and SSL ciphers at the HTTP level
 {: #ssl_protocols_ciphers}
 
@@ -1238,7 +1231,6 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 <br />
 
-
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
 
@@ -1276,13 +1268,11 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
 
 <br />
 
-
 ## Tuning ALB performance
 {: #perf_tuning}
 
 To optimize performance of your Ingress ALBs, you can change the default settings according to your needs.
 {: shortdesc}
-
 
 ### Enabling log buffering and flush timeout
 {: #access-log}
@@ -1435,5 +1425,4 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-
 

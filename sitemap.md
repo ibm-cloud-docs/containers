@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-10-30"
+lastupdated: "2020-11-02"
 
 keywords: containers
 subcollection: containers
@@ -1064,7 +1064,7 @@ subcollection: containers
 * [How can I customize routing?](/docs/containers?topic=containers-ingress-about#custom-routing)
 * [How do I manage the lifecycle of my ALBs?](/docs/containers?topic=containers-ingress-about#alb-lifecycle)
 
-[Beta: Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types)
+[Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types)
 * [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images)
   * [Similarities between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-same)
   * [Differences between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-diff)
@@ -1087,7 +1087,7 @@ subcollection: containers
   * [Creating more ALBs](/docs/containers?topic=containers-ingress-types#create_alb)
 * [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan)
 
-[Beta: Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations)
+[Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations)
 * [Customizing routing with annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations)
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
@@ -1199,7 +1199,7 @@ subcollection: containers
   * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress_annotation#backlog)
   * [Tuning kernel performance](/docs/containers?topic=containers-ingress_annotation#ingress_kernel)
 
-[Logging and monitoring Ingress](/docs/containers?topic=containers-ingress_health)
+[Logging and monitoring {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)
 * [Customizing Ingress log content and format](/docs/containers?topic=containers-ingress_health#ingress_log_format)
 * [Monitoring the Ingress ALB](/docs/containers?topic=containers-ingress_health#ingress_monitoring)
@@ -1641,7 +1641,7 @@ subcollection: containers
   * [Explanation and remediation](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-remediation)
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
-* [Beta: Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
+* [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
   * [Version 0.35.0 (latest)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
   * [Version 0.34.1 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
@@ -2260,6 +2260,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[November 2020](/docs/containers?topic=containers-iks-release#nov20)
 
 [October 2020](/docs/containers?topic=containers-iks-release#oct20)
 

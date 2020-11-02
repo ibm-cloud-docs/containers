@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -92,11 +92,8 @@ subcollection: containers
 
 
 
-# Beta: Setting up Kubernetes Ingress
+# Setting up Kubernetes Ingress
 {: #ingress-types}
-
-Using the community Kubernetes Ingress image for your ALBs is a beta feature. Beta features might experience intermittent errors.
-{: beta}
 
 
 
@@ -108,9 +105,10 @@ As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two type
 
 Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
 
-
 Not ready to switch your ALBs to the Kubernetes Ingress image yet? When you enable or update an existing ALB, the ALB continues to run the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image. Your existing ALBs do not begin to run the Kubernetes Ingress image until you specify the Kubernetes Ingress image version in the `--version` flag when you enable them.
 {: tip}
+
+For a comparison of the Kubernetes Ingress image and the deprecated IBM Ingress image, review the following tables.
 
 ## Comparison of the ALB image types
 {: #about-alb-images}
@@ -145,9 +143,7 @@ Review the following important differences between the {{site.data.keyword.conta
 |TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and cannot access secrets in any other namespaces.|
 {: caption="Differences between Ingress images"}
 
-
 <br />
-
 
 ## Creating ALBs that run the Kubernetes Ingress image
 {: #alb-comm-create}
@@ -276,7 +272,6 @@ Create ALBs that run the community Kubernetes Ingress image in your cluster.
   {: pre}
 
 <br />
-
 
 ## Migrating your existing Ingress ALB setup to run Kubernetes Ingress
 {: #alb-type-migration}
@@ -614,7 +609,6 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 
 <br />
 
-
 ## Managing TLS certificates and secrets
 {: #manage_certs}
 
@@ -713,7 +707,6 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 
 <br />
 
-
 ## Customizing the Ingress class
 {: #ingress-class}
 
@@ -767,18 +760,22 @@ Choose the image type and image version for your ALBs, and keep the image versio
 ### Choosing a supported image version
 {: #alb-version-choose}
 
-As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the ALB: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image.
+
+
+As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the Ingress application load balancers (ALBs) in your cluster: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image.
 {: shortdesc}
 
-- The {{site.data.keyword.containerlong_notm}} Ingress image is built on a custom implementation of the NGINX Ingress controller.
-- The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
+- The **{{site.data.keyword.containerlong_notm}} Ingress image** is built on a custom implementation of the NGINX Ingress controller.
+- The **Kubernetes Ingress image** is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
 
-The latest three versions of each image type are supported for ALBs.
+Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
+
+You can manage the versions of your ALBs in the following ways:
 * When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag.
 * To specify a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.
 * If you omit the `--version` flag when you enable or update an existing ALB, the ALB runs the default version of the same image that the ALB previously ran: either the Kubernetes Ingress image or the {{site.data.keyword.containerlong_notm}} Ingress image.
 
-To list the currently supported versions for each type of image, run the following command:
+To list the latest three versions that are supported for each type of image, run the following command:
 ```
 ibmcloud ks ingress alb versions
 ```
@@ -801,7 +798,7 @@ Kubernetes Ingress versions
 ```
 {: screen}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.35.0_474_iks` indicates the most recent build of the `0.34.1` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.35.0_474_iks` indicates the most recent build of the `0.35.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
 For the changes that are included in each version of the Ingress images, see the [Ingress version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog).
 
@@ -811,7 +808,7 @@ For the changes that are included in each version of the Ingress images, see the
 Manage automatic updates of all Ingress ALB pods in a cluster.
 {: shortdesc}
 
-By default, automatic updates to Ingress ALBs are enabled. ALB pods are automatically updated by IBM when a new image version is available. If your ALBs run the Kubernetes Ingress image, your ALBs are automatically updated to the latest version of the Kubernetes Ingress NGINX image. For example, if your ALBs run version `0.33.0_217_iks`, and the Kubernetes Ingress NGINX image `0.33.1` is released, your ALBs are automatically updated to the latest build of the latest community version, such as `0.33.1_1_iks`.
+By default, automatic updates to Ingress ALBs are enabled. ALB pods are automatically updated by IBM when a new image version is available. If your ALBs run the Kubernetes Ingress image, your ALBs are automatically updated to the latest version of the Kubernetes Ingress NGINX image. For example, if your ALBs run version `0.34.1_391_iks`, and the Kubernetes Ingress NGINX image `0.35.0` is released, your ALBs are automatically updated to the latest build of the latest community version, such as `0.35.0_474_iks`.
 
 You can disable or enable the automatic updates for all Ingress ALBs in your cluster.
 * To disable automatic updates:
@@ -846,7 +843,6 @@ If your ALB pods were recently updated, but a custom configuration for your ALBs
 The image version that you change your ALB to must be a supported image version that is listed in the output of `ibmcloud ks ingress alb versions`. Note that you can use this command to change your ALB image to a different version, but you cannot use this command to change your ALB from one type of image to another. After you force a one-time update, automatic updates to your ALBs are disabled.
 
 <br />
-
 
 ## Scaling ALBs
 {: #scale_albs}
@@ -983,7 +979,6 @@ You can also use these steps to create more ALBs across zones in your cluster. W
 
 <br />
 
-
 ## Moving ALBs across VLANs
 {: #migrate-alb-vlan}
 
@@ -1072,6 +1067,4 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
   {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
-
 

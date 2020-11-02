@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-27"
+lastupdated: "2020-11-02"
 
 keywords: kubernetes, iks, ingress
 
@@ -103,7 +103,6 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 
 These custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are applicable for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image only. If your ALBs run the [Kubernetes Ingress image instead](/docs/containers?topic=containers-ingress-types), {{site.data.keyword.containerlong_notm}} annotations are not supported. You must instead use [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
 {: important}
-
 
 
 |General annotations|Name|Description|
