@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-04"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -1182,7 +1182,7 @@ To resynchronize the expiration dates, you can regenerate the secrets for your I
   ```
   {: pre}
 
-2. Regenerate the Ingress subdomain secret. The certificate is renewed, a new expiration date is generated, and the updates are synchronizeed across the secret in different namespaces.<p class="note">It might take up to 30 minutes for the secret regeneration to complete.</p>
+2. Regenerate the Ingress subdomain secret. The certificate is renewed, a new expiration date is generated, and the updates are synchronized across the secret in different namespaces. Secret regeneration is not disruptive, and traffic continues to flow while the secret regenerates. Note that it might take up to 30 minutes for the secret regeneration to complete.
   ```
   ibmcloud ks nlb-dns secret regenerate -c <cluster_name_or_ID> --nlb-subdomain <ingress_subdomain>
   ```
@@ -1209,7 +1209,7 @@ To resynchronize the expiration dates, you can regenerate the secrets for your I
     ibmcloud ks nlb-dns ls -c <cluster_name_or_ID>
     ```
     {: pre}
-  2. For each subdomain besides the Ingress subdomain, regenerate its secret. The certificate is renewed, a new expiration date is generated, and the updates are synchronized across the secret in different namespaces.<p class="note">It might take up to 30 minutes for the secret regeneration to complete.</p>
+  2. For each subdomain besides the Ingress subdomain, regenerate its secret. The certificate is renewed, a new expiration date is generated, and the updates are synchronized across the secret in different namespaces. Secret regeneration is not disruptive, and traffic continues to flow while the secret regenerates.<p class="note">It might take up to 30 minutes for the secret regeneration to complete.</p>
     ```
     ibmcloud ks nlb-dns secret regenerate -c <cluster_name_or_ID> --nlb-subdomain <NLB_DNS_subdomain>
     ```
