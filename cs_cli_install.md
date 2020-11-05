@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-04"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -395,9 +395,9 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     ibmcloud ks clusters
     ```
     {: pre}
-2.  Set your `KUBECONFIG` environment variable in your terminal to a temporary directory.
+2.  Set your `KUBECONFIG` environment variable in your terminal to a temporary file path.
     ```
-    export KUBECONFIG=$(mktemp).yaml
+    export KUBECONFIG=$(mktemp)
     ```
     {: pre}
 3.  Download the `kubeconfig` file to the temporary directory that you just created.

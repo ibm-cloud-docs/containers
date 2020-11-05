@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-04"
 
 keywords: kubernetes, iks, help, debug
 
@@ -580,7 +580,7 @@ Consider the following example scenario to understand how clusters might become 
     * If you did not see the **Infrastructure User** field in step 1, you can use the `ibmcloud ks credential unset --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) to resume using the default credentials that come with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go account.
     * If you did see the **Infrastructure User** field in step 1, you can use the `ibmcloud ks credential set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) to set credentials to that infrastructure account.
 
-### Unable to create or delete worker nodes due to paid account error
+### Unable to create or delete worker nodes due to paid account or one time password error
 {: #cs_totp}
 
 **Infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
@@ -589,6 +589,10 @@ Consider the following example scenario to understand how clusters might become 
 You cannot manage worker nodes for your cluster, and you receive an error message similar to one of the following.
 ```
 Unable to connect to the IBM Cloud account. Ensure that you have a paid account.
+```
+{: screen}
+```
+Cannot authenticate the infrastructure user: Time-based One Time Password authentication is required to log in with this user.
 ```
 {: screen}
 

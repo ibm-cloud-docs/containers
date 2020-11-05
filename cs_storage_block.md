@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-04"
 
 keywords: kubernetes, iks
 
@@ -239,15 +239,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ```
    {: pre}
 
-4. Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in. When you install the plug-in, pre-defined block storage classes are added to your cluster.
+4. Install the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in and give your installation a name, for example: `block-storage-plugin`. When you install the plug-in, pre-defined block storage classes are added to your cluster.
    ```
-   helm install <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
+   helm install <name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
    ```
    {: pre}
 
    Example output:
    ```
-   NAME:   <release_name>
+   NAME:   <name>
    LAST DEPLOYED: Wed Apr 18 10:02:55 2018
    NAMESPACE: default
    STATUS: DEPLOYED
@@ -285,7 +285,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
    ibmcloud-block-storage-plugin  0s
 
    NOTES:
-   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: <release_name>
+   Thank you for installing: ibmcloud-block-storage-plugin.   Your release is named: <name>
    ```
    {: screen}
 
@@ -355,13 +355,13 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
   Example output:
   ```
   NAME        	NAMESPACE  	REVISION	    UPDATED                             	STATUS  	CHART                              	APP VERSION
-  <release_name>	  <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
+  <name>	  <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
   ```
   {: screen}
 
 4. Upgrade the {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
   ```
-  helm upgrade <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
+  helm upgrade <name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
   ```
   {: pre}
 
@@ -393,13 +393,13 @@ To remove the plug-in:
   Example output:
   ```
   NAME        	 NAMESPACE  	REVISION	    UPDATED                             	STATUS  	CHART                              	APP VERSION
-  <release_name> <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
+  <name> <namespace>    	1       	2020-01-27 09:18:33.046018 -0500 EST	deployed	ibmcloud-block-storage-plugin-1.6.0
   ```
   {: screen}
 
 2. Delete the {{site.data.keyword.cloud_notm}} Block Storage plug-in.
   ```
-  helm uninstall <release_name> -n <namespace>
+  helm uninstall <name> -n <namespace>
   ```
   {: pre}
 
@@ -555,14 +555,11 @@ Make sure to choose your storage configuration carefully to have enough capacity
 
 <br />
 
-## Setting up encryption for {{site.data.keyword.blockstorageshort}} (beta)
+## Setting up encryption for {{site.data.keyword.blockstorageshort}}
 {: #block_encryption_setup}
 
 You can set up encryption for {{site.data.keyword.blockstorageshort}} by using {{site.data.keyword.keymanagementservicelong_notm}}.
 {: shortdesc}
-
-Encryption for {{site.data.keyword.blockstorageshort}} is a beta feature. This feature might be unavailable or change without prior notification. Do not use this feature for production workloads.
-{: beta}
 
 The following example explains how to create a service ID with the required access roles for {{site.data.keyword.keymanagementserviceshort}} and your cluster. The credentials of this service ID are used to enable encryption for your {{site.data.keyword.blockstorageshort}} volumes.
 
@@ -668,13 +665,13 @@ You can enable encryption by creating a Kubernetes secret that uses your persona
     If you installed the plug-in without using Helm, you must manually remove the block storage plug-in deployment and all associated resources before installing a new version.
     {: note}
     ```
-    helm uninstall <release_name> <namespace>
+    helm uninstall <name> <namespace>
     ```
     {: pre}
   
   12. Install the `ibmcloud-block-storage-plugin` Helm chart.
     ```
-    helm install <release_name> iks-charts/ibmcloud-block-storage-plugin
+    helm install <name> iks-charts/ibmcloud-block-storage-plugin
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-02"
+lastupdated: "2020-11-05"
 
 keywords: containers
 subcollection: containers
@@ -234,91 +234,6 @@ subcollection: containers
 * [Container isolation and security](/docs/containers?topic=containers-security#container)
 * [Storing personal information](/docs/containers?topic=containers-security#pi)
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
-
-
-## Tutorials
-{: #sitemap_tutorials}
-
-
-[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
-
-[Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
-* [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-* [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
-* [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-* [Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-* [Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-* [Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-* [Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-* [Deploying and updating the Watson Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-  * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-  * [Step 5b: Updating the running Watson Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
-* [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
-
-[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
-* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
-* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-* [Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-* [Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-* [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
-* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
-
-[Migrating cluster resources from VPC Gen 1 to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial)
-* [Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
-* [Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
-* [Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
-* [Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
-* [Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
-* [Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
-* [Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
-* [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
-* [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
-
-[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
-* [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-* [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
-* [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
-
-[Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
-* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
-* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
-* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
-* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-* [Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-* [Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-[Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
-* [Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
-* [Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
-* [Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
-* [Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
-* [Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
-* [Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
-* [Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
-* [What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
-
-[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
-
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
-
-[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
@@ -737,6 +652,9 @@ subcollection: containers
 * [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
   * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
   * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
+* [Creating VPC subnets for classic access](/docs/containers?topic=containers-vpc-subnets#classic_access_subnets)
+  * [Creating VPC subnets for classic access in the console](/docs/containers?topic=containers-vpc-subnets#ca_subnet_ui)
+  * [Creating VPC subnets for classic access from the CLI](/docs/containers?topic=containers-vpc-subnets#ca_subnet_cli)
 * [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
@@ -1283,7 +1201,7 @@ subcollection: containers
 * [Quickstart for {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_qs)
 * [Installing the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block)
 * [Deciding on the block storage configuration](/docs/containers?topic=containers-block_storage#block_predefined_storageclass)
-* [Setting up encryption for {{site.data.keyword.blockstorageshort}} (beta)](/docs/containers?topic=containers-block_storage#block_encryption_setup)
+* [Setting up encryption for {{site.data.keyword.blockstorageshort}}](/docs/containers?topic=containers-block_storage#block_encryption_setup)
   * [Encrypting volume data by using a custom storage class](/docs/containers?topic=containers-block_storage#encrypt_custom_sc)
   * [Create a PVC that references your {{site.data.keyword.blockstorageshort}} secret](/docs/containers?topic=containers-block_storage#pvc_encrypt_label)
   * [Verifying the encryption of your {{site.data.keyword.blockstorageshort}} volumes](/docs/containers?topic=containers-block_storage#block_encrypt)
@@ -1310,11 +1228,13 @@ subcollection: containers
 * [Adding {{site.data.keyword.block_storage_is_short}} to your apps](/docs/containers?topic=containers-vpc-block#vpc-block-add)
 * [Using an existing {{site.data.keyword.block_storage_is_short}} instance](/docs/containers?topic=containers-vpc-block#vpc-block-static)
 * [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/containers?topic=containers-vpc-block#vpc-addon-update)
-* [Creating {{site.data.keyword.block_storage_is_short}} with a different file system](/docs/containers?topic=containers-vpc-block#vpc-block-xfs)
 * [Setting up encryption for {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 * [Customizing the default storage settings](/docs/containers?topic=containers-vpc-block#vpc-customize-default)
-  * [Customizing a storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
+  * [Creating a custom storage class](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
+  * [Verifying your {{site.data.keyword.block_storage_is_short}} file system](/docs/containers?topic=containers-vpc-block#vpc-block-fs-verify)
   * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
+  * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
+  * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
@@ -1651,12 +1571,14 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)
   * [Changelog for 1.7.3, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#173)
   * [Changelog for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
   * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
 * [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
+  * [Changelog for 1.6.13, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#1613)
   * [Changelog for 1.6.12, released 22 October 2020](/docs/containers?topic=containers-istio-changelog#1612)
   * [Changelog for 1.6.11, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#1611)
   * [Changelog for 1.6.9, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#169)
@@ -2137,7 +2059,7 @@ subcollection: containers
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot#orphaned)
-  * [Unable to create or delete worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
+  * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
 * [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update)
@@ -2151,7 +2073,7 @@ subcollection: containers
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
-  * [Unable to create or delete worker nodes due to paid account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
+  * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
 * [Replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off)
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)

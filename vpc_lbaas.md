@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-28"
+lastupdated: "2020-11-04"
 
 keywords: kubernetes, iks
 
@@ -270,7 +270,7 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
   </tr>
   <tr>
     <td>`externalTrafficPolicy: Local`</td>
-    <td><ul><li>Set to `Local` to preserve the source IP address of client requests to your apps. You must ensure that an app pod exists on each worker node in the zone that the network load balancer deploys to, such as by using a daemonset.</li><li>If `Cluster` is set, DSR is implemented only if the request is processed by an app pod that is deployed to the same worker node where the Kubernetes `LoadBalancer` service pod that receives the request exists. If the request must be forwarded to an app pod on another worker nodes, DSR is not implemented.</li></ul></td>
+    <td><ul><li>Set to `Local` to preserve the source IP address of client requests to your apps. You must ensure that an app pod exists on each worker node in the zone that the network load balancer deploys to, such as by using a daemonset.</li><li>If `Cluster` is set, DSR is implemented only from the worker node that the incoming request is first forwarded to from the VPC load balancer. Once the incoming request arrives, the request is forwarded to a worker node that contains the app pod. The response from the app pod is sent to the original worker node, and that worker node uses DSR to send the response directly back to the client, bypassing the VPC load balancer.</li></ul></td>
   </tr>
   </tbody></table>
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-02"
+lastupdated: "2020-11-05"
 
 keywords: kubernetes, iks, multi az, multi-az, szr, mzr
 
@@ -188,7 +188,7 @@ To load balance workloads across your apps, add the public IP addresses of your 
 2.  Set up the CIS global load balancer by following steps 1 - 5 in [Getting Started with {{site.data.keyword.cloud_notm}} Internet Services (CIS)](/docs/cis?topic=cis-getting-started#getting-started). These steps walk you through provisioning the service instance, adding your app domain, and configuring your name servers, and creating DNS records. Create a DNS record for each ALB or NLB IP address that you collected. These DNS records map your app domain to all of your cluster ALBs or NLBs, and ensure that requests to your app domain are forwarded to your clusters in a round-robin cycle.
 3. [Add health checks](/docs/cis?topic=cis-configure-glb#add-a-health-check) for the ALBs or NLBs. You can use the same health check for the ALBs or NLBs in all of your clusters, or create specific health checks to use for specific clusters.
 4. [Add an origin pool](/docs/cis?topic=cis-configure-glb#add-a-pool) for each cluster by adding the cluster's ALB or NLB IPs. For example, if you have 3 clusters that each have two ALBs, create three origin pools that each have two ALB IP addresses. You can find the NLB or ALB IP addresses by running `kubectl get svc -n <namespace>`. Add a health check to each origin pool that you create.
-4. [Add a global load balancer](/docs/cis?topic=cis-configure-glb#set-up-and-configure-your-load-balancers).
+4. [Add a global load balancer](/docs/cis?topic=cis-configure-glb).
 
 **To use your own global load balancer**:
 1. Set up [Kubernetes load balancer services](/docs/containers?topic=containers-loadbalancer-qs) or set up the [Ingress service](/docs/containers?topic=containers-ingress) to expose the apps in your cluster.
