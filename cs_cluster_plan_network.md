@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-11-05"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -130,7 +130,9 @@ Subnets provide a channel for connectivity among the worker nodes within the clu
 
 If your worker nodes must access a public endpoint outside of the cluster, you can enable a public gateway on the VPC subnet that the worker nodes are deployed to. A public gateway can be attached to or detached from a subnet at any time.
 
-The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. For a list of IP address ranges per VPC zone, see the [VPC default address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes). If you enable your VPC with classic access, or access to classic infrastructure resources, the default IP ranges per VPC zone are different. For more information, see [Classic access VPC default address prefixes](/docs/vpc?topic=vpc-setting-up-access-to-classic-infrastructure#classic-access-default-address-prefixes).
+The default IP address range for VPC subnets is 10.0.0.0 – 10.255.255.255. For a list of IP address ranges per VPC zone, see the [VPC default address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes).
+
+If you enable classic access when you create your VPC, [classic access default address prefixes](/docs/vpc?topic=vpc-setting-up-access-to-classic-infrastructure#classic-access-default-address-prefixes) automatically determine the IP ranges of any subnets that you create. However, the default IP ranges for classic access VPC subnets conflict with the subnets for the {{site.data.keyword.containerlong_notm}} control plane. Instead, you must [create the VPC without the automatic default address prefixes, and then create your own address prefixes and subnets within those ranges for you cluster](/docs/containers?topic=containers-vpc-subnets#classic_access_subnets).
 
 Need to create your cluster by using custom-range subnets? Check out this guidance on [custom address prefixes](/docs/vpc?topic=vpc-configuring-address-prefixes). If you use custom-range subnets for your worker nodes, you must [ensure that your worker node subnets do not overlap with your cluster's pod subnet](/docs/containers?topic=containers-vpc-subnets#vpc-ip-range).
 {: tip}
@@ -226,7 +228,6 @@ Note that a public gateway is not required on your subnets to allow inbound netw
 
 <br />
 
-
 ## Example scenarios for VPC cluster network setups
 {: #vpc-scenarios}
 
@@ -268,7 +269,6 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <br />
 
-
 ### Scenario: Run internet-facing app workloads in a VPC cluster with limited public egress
 {: #vpc-pgw}
 
@@ -307,7 +307,6 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-
 ### Scenario: Extend your on-premises data center to a VPC cluster
 {: #vpc-vpn}
 
@@ -342,7 +341,6 @@ After you test your app, you can expose it to the private network by creating a 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating VPC Gen 2 compute clusters](/docs/containers?topic=containers-clusters).
 
 <br />
-
 
 ## Understanding network basics of classic clusters
 {: #plan_basics}
@@ -456,7 +454,6 @@ For example, if your worker nodes are connected to a private VLAN only, but you 
 
 <br />
 
-
 ## Example scenarios for classic cluster network setups
 {: #classic-scenarios}
 
@@ -502,7 +499,6 @@ To expose an app in your cluster to the internet, you can create a public networ
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
 
 <br />
-
 
 ### Scenario: Extend your on-premises data center to a classic cluster and add limited public access
 {: #limited-public}
@@ -583,7 +579,6 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
-
 ### Scenario: Extend your on-premises data center to a classic cluster
 {: #private_clusters}
 
@@ -616,7 +611,6 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
-
 
 
 

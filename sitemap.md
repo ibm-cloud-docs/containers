@@ -737,6 +737,9 @@ subcollection: containers
 * [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
   * [Creating a VPC subnet in the console](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_ui)
   * [Creating a VPC subnet in the CLI](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet_cli)
+* [Creating VPC subnets for classic access](/docs/containers?topic=containers-vpc-subnets#classic_access_subnets)
+  * [Creating VPC subnets for classic access in the console](/docs/containers?topic=containers-vpc-subnets#ca_subnet_ui)
+  * [Creating VPC subnets for classic access from the CLI](/docs/containers?topic=containers-vpc-subnets#ca_subnet_cli)
 * [Restricting public network traffic to a subnet with a public gateway](/docs/containers?topic=containers-vpc-subnets#vpc-restrict-gateway)
 
 [Setting up VPC VPN connectivity](/docs/containers?topic=containers-vpc-vpnaas)
