@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-05"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -1128,7 +1128,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
   **Add-on**
   1. Disable the add-on.
     ```
-    ibmcloud ks addon disable cluster-autoscaler --cluster <cluster_name>
+    ibmcloud ks cluster addon disable cluster-autoscaler --cluster <cluster_name>
     ```
     {: pre}
 
