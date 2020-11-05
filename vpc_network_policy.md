@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-28"
+lastupdated: "2020-11-05"
 
 keywords: kubernetes, iks, firewall
 
@@ -245,8 +245,8 @@ Use the {{site.data.keyword.cloud_notm}} console to add inbound and outbound rul
     </tbody>
     </table>
 
-If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
-{: note}
+If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
+{: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
 {: tip}
@@ -429,8 +429,8 @@ To create rules in your default security group:
   ```
   {: pre}
 
-If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
-{: note}
+If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
+{: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
 {: tip}
