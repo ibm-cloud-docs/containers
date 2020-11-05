@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -222,6 +222,8 @@ After you set up your account to create clusters, decide on the setup for your c
 {: shortdesc}
 
 
+
+The following image walks you through choosing the setup that you want for your cluster.
 
 
 <img usemap="#cluster-plan-map" border="0" class="image" src="images/cluster-plan-dt-vpc.png" alt="This image walks you through choosing the setup that you want for your cluster."/>
