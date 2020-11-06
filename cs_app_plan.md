@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-17"
+lastupdated: "2020-11-06"
 
 keywords: kubernetes, iks, deploy
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -160,7 +161,6 @@ For more, see the following tutorials:
 
 
 <br />
-
 
 ## Understanding Kubernetes objects for apps
 {: #kube-objects}
@@ -299,13 +299,12 @@ See [Specifying your app requirements in your YAML file](/docs/containers?topic=
 * [Secrets](/docs/containers?topic=containers-app#secret) to set container environment variables
 * [Persistent volumes](/docs/containers?topic=containers-app#pv) that are mounted to the container for storage
 
-### How can I add IBM services to my app, such as Watson?
+### How can I add IBM services to my app, such as {{site.data.keyword.watson}}?
 {: #services_ibm}
 
 See [Adding services to apps](/docs/containers?topic=containers-service-binding#adding_app).
 
 <br />
-
 
 ## Planning highly available deployments
 {: #highly_available_apps}
@@ -363,7 +362,6 @@ If you want to dynamically add and remove apps in response to workload usage, se
 {: shortdesc}
 
 <br />
-
 
 ## Versioning and updating apps
 {: #updating}
@@ -431,7 +429,6 @@ If you want to run your app in multiple clusters, public and private environment
 </dl>
 
 <br />
-
 
 ## Setting up service discovery
 {: #service_discovery}
@@ -507,5 +504,4 @@ Want to control access at the application level? To create a sign-on flow that y
 
 You can set up {{site.data.keyword.cloud_notm}} [logging and monitoring](/docs/containers?topic=containers-health) for your cluster. You might also choose to integrate with a third-party [logging or monitoring service](/docs/containers?topic=containers-supported_integrations#health_services).
 {: shortdesc}
-
 

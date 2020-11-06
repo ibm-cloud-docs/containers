@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-05"
+lastupdated: "2020-11-06"
 
 keywords: containers
 subcollection: containers
@@ -752,7 +752,7 @@ subcollection: containers
   * [What if I want my app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
   * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-plan_deploy#resources)
   * [How can I add capabilities to my app configuration?](/docs/containers?topic=containers-plan_deploy#capabilities)
-  * [How can I add IBM services to my app, such as Watson?](/docs/containers?topic=containers-plan_deploy#services_ibm)
+  * [How can I add IBM services to my app, such as {{site.data.keyword.watson}}?](/docs/containers?topic=containers-plan_deploy#services_ibm)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
   * [How can I increase the availability of my app?](/docs/containers?topic=containers-plan_deploy#increase_availability)
 * [Versioning and updating apps](/docs/containers?topic=containers-plan_deploy#updating)

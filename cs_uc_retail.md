@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-11-06"
 
 keywords: kubernetes, iks
 
@@ -10,30 +10,85 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -141,7 +196,7 @@ Why {{site.data.keyword.cloud_notm}}: {{site.data.keyword.containerlong_notm}} p
 Key technologies:    
 * [Horizontal scaling to accelerate development](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
 * [Clusters that fit varied CPU, RAM, storage needs](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes)
-* [Insights to market trends with Watson Discovery](https://www.ibm.com/cloud/watson-discovery)
+* [Insights to market trends with {{site.data.keyword.watson}} Discovery](https://www.ibm.com/cloud/watson-discovery)
 * [DevOps native tools, including open toolchains in {{site.data.keyword.contdelivery_full}}](https://www.ibm.com/cloud/architecture/toolchains/)
 * [Inventory management with {{site.data.keyword.messagehub_full}}](/docs/EventStreams?topic=EventStreams-about#about)
 
@@ -169,7 +224,7 @@ Back-end inventory systems for product inventory, store replenishment, and produ
 
 {{site.data.keyword.messagehub_full}} acts as the just-in-time events platform to bring in the rapidly changing information from the inventory systems to IBM Streaming Analytics.
 
-Social media analytics with Watson Discovery (personality and tone insights) also feed in trends to the inventory analysis to improve product forecasting.
+Social media analytics with {{site.data.keyword.watson}} Discovery (personality and tone insights) also feed in trends to the inventory analysis to improve product forecasting.
 
 The loyalty mobile app provides detailed personalization information, especially when customers use its social sharing features, such as posting recipes.
 
@@ -187,7 +242,7 @@ Technical solution:
 * {{site.data.keyword.messagehub_full}}
 * {{site.data.keyword.cloudant}}
 * IBM Streaming Analytics
-* IBM Watson Discovery
+* IBM {{site.data.keyword.watson}} Discovery
 
 **Step 1: Containerize apps, by using microservices**
 
@@ -197,7 +252,7 @@ Technical solution:
 
 **Step 2: Analyze inventory and trends**
 * {{site.data.keyword.messagehub_full}} acts as the just-in-time events platform to bring in the rapidly changing information from inventory systems to IBM Streaming Analytics.
-* Social media analysis with Watson Discovery and inventory systems data is integrated with IBM Streaming Analytics to deliver merchandising and marketing advice.
+* Social media analysis with {{site.data.keyword.watson}} Discovery and inventory systems data is integrated with IBM Streaming Analytics to deliver merchandising and marketing advice.
 
 **Step 3: Deliver promotions with mobile loyalty app**
 * Jump-start development of mobile app with the IBM Mobile Starter Kit and other IBM Mobile services, such as {{site.data.keyword.appid_full_notm}}.
@@ -209,6 +264,5 @@ Technical solution:
 * Customer traffic and sales increased in stores by making the stores themselves a differentiating asset.
 * At the same time, new insights from social and cognitive analysis improved reduced inventory OpEx (operating expenses).
 * Social sharing in the mobile app also helps to identify and market to new customers.
-
 
 

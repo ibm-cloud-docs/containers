@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-06"
 
 keywords: kubernetes, iks
 
@@ -116,7 +116,7 @@ In this tutorial, you work for a public relations (PR) firm and complete a serie
 
 The following diagram provides an overview of what you set up in this tutorial.
 
-<img src="images/tutorial_ov.png" width="500" alt="Create a cluster and deploy a Watson app overview diagram" style="width:500px; border-style: none"/>
+<img src="images/tutorial_ov.png" width="500" alt="Create a cluster and deploy a {{site.data.keyword.watson}} app overview diagram" style="width:500px; border-style: none"/>
 
 ## Audience
 {: #tutorials_audience}
@@ -594,7 +594,7 @@ Ready to delete what you created before you continue to the next lesson? This ti
 
 <br />
 
-## Deploying and updating the Watson Tone Analyzer app
+## Deploying and updating the {{site.data.keyword.watson}} Tone Analyzer app
 {: #cs_cluster_tutorial_lesson5}
 {: step}
 
@@ -761,7 +761,7 @@ If you took a break from the last lesson and started a new terminal, make sure t
 8. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 9. In the **Workloads** tab, you can see the resources that you created.
 
-### Step 5b: Updating the running Watson Tone Analyzer deployment
+### Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment
 {: #lesson5b}
 
 While a deployment is running, you can edit the deployment to change values in the pod template. In this lesson, the PR firm wants to change the app in the deployment by updating the image that is used.
