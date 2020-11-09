@@ -1375,6 +1375,27 @@ subcollection: containers
 * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
+## Managing costs for your clusters
+{: #sitemap_managing_costs_for_your_clusters}
+
+
+[Managing costs for your clusters](/docs/containers?topic=containers-costs)
+
+[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs-for-clusters)
+* [Worker nodes](/docs/containers?topic=containers-costs#nodes)
+* [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
+* [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
+* [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
+* [Storage](/docs/containers?topic=containers-costs#persistent_storage)
+* [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
+* [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
+* [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+
+[Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
+
+[Managing costs](/docs/containers?topic=containers-costs#costs-manage)
+
+
 ## Community Kubernetes documentation
 
 [Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
@@ -2033,19 +2054,7 @@ subcollection: containers
 
 [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
-[Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
-
-[What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
-
-[What are the regional uplift charges and sustained usage discounts for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
-
-[Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
-
-[Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
-
-[Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
-
-[Can I add tags to my cluster?](/docs/containers?topic=containers-faqs#faq_tags)
+[What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
 
 ## Troubleshooting cluster components

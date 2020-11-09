@@ -186,6 +186,7 @@ Kubernetes Service
         cs_integrations_service_binding.md
 
     cs_ha.md
+    cs_costs.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
