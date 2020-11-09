@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-11-09"
 
 keywords: kubernetes, iks, access, permissions, api key
 
@@ -119,7 +119,6 @@ For more information about setting up your account and resources, try out this t
 
 <br />
 
-
 ## Understanding access policies and roles
 {: #access_policies}
 {: help}
@@ -209,7 +208,6 @@ When you create your {{site.data.keyword.cloud_notm}} account, the default resou
 
 <br />
 
-
 ## Setting up the API key to enable access to the infrastructure portfolio and other services
 {: #api_key}
 {: help}
@@ -293,6 +291,8 @@ To enable all users to access the infrastructure portfolio or other services, th
 
 **What permissions does the user who sets the API key need? How do I give the user these permissions?**<br>
 See [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions) and [Ensuring that the API key or infrastructure credentials owner has the correct permissions](#owner_permissions).
+
+To check a user's permissions, review the access policies and access groups of the user in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/iam/users){: external}, or use the `ibmcloud iam user-policies <user>` command.
 
 **If the API key is based on one user, how are other cluster users in the region and resource group affected?**<br>
 Other users within the region and resource group of the account share the API key for accessing the infrastructure and other services with {{site.data.keyword.containerlong_notm}} clusters. When users log in to the {{site.data.keyword.cloud_notm}} account, an {{site.data.keyword.cloud_notm}} IAM token that is based on the API key is generated for the CLI session and enables infrastructure-related commands to be run in a cluster.
@@ -476,7 +476,6 @@ To set infrastructure account credentials to access the IBM Cloud infrastructure
   3. If you see that field, you do not use the default infrastructure credentials that come with your Pay-As-You-Go or Subscription account in this region. Instead, the region is set to use the different infrastructure account credentials that you set.
 
 <br />
-
 <br>
 
 ## Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM
@@ -834,7 +833,6 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
 
 <br />
 
-
 ## Assigning RBAC permissions
 {: #role-binding}
 
@@ -1183,7 +1181,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-
 ## Customizing classic infrastructure permissions
 {: #infra_access}
 
@@ -1304,7 +1301,6 @@ To customize classic infrastructure permissions through the CLI:
 6.  For individual required or suggested permissions, see the [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table.
 
 <br />
-
 
 ## Removing user permissions
 {: #removing}
@@ -1452,6 +1448,5 @@ Classic infrastructure permissions apply only to classic clusters. For VPC clust
 3. Click the **Classic infrastructure** tab, then click the **Permissions, Devices, or VPN subnets** tabs.
 4. In each tab, deselect specific permissions.
 5. To save your changes, click **Set** and **Save**. Permissions are downgraded after a few minutes.
-
 
 
