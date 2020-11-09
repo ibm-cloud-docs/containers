@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-05"
+lastupdated: "2020-11-09"
 
 keywords: containers
 subcollection: containers
@@ -752,7 +752,7 @@ subcollection: containers
   * [What if I want my app configuration to use variables? How do I add these to the YAML?](/docs/containers?topic=containers-plan_deploy#variables)
   * [How can I make sure that my app has the right resources?](/docs/containers?topic=containers-plan_deploy#resources)
   * [How can I add capabilities to my app configuration?](/docs/containers?topic=containers-plan_deploy#capabilities)
-  * [How can I add IBM services to my app, such as Watson?](/docs/containers?topic=containers-plan_deploy#services_ibm)
+  * [How can I add IBM services to my app, such as {{site.data.keyword.watson}}?](/docs/containers?topic=containers-plan_deploy#services_ibm)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
   * [How can I increase the availability of my app?](/docs/containers?topic=containers-plan_deploy#increase_availability)
 * [Versioning and updating apps](/docs/containers?topic=containers-plan_deploy#updating)
@@ -1375,6 +1375,27 @@ subcollection: containers
 * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
+## Managing costs for your clusters
+{: #sitemap_managing_costs_for_your_clusters}
+
+
+[Managing costs for your clusters](/docs/containers?topic=containers-costs)
+
+[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs-for-clusters)
+* [Worker nodes](/docs/containers?topic=containers-costs#nodes)
+* [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
+* [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
+* [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
+* [Storage](/docs/containers?topic=containers-costs#persistent_storage)
+* [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
+* [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
+* [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+
+[Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
+
+[Managing costs](/docs/containers?topic=containers-costs#costs-manage)
+
+
 ## Community Kubernetes documentation
 
 [Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
@@ -1464,10 +1485,12 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.3_1526, released 9 November 2020](/docs/containers?topic=containers-changelog#1193_1526)
   * [Changelog for worker node fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525_worker)
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.10_1532, released 9 November 2020](/docs/containers?topic=containers-changelog#11810_1532)
   * [Changelog for worker node fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog#11810_1531_worker)
   * [Changelog for master fix pack 1.18.10_1531, released 26 October 2020](/docs/containers?topic=containers-changelog#11810_1531)
   * [Changelog for worker node fix pack 1.18.9_1530, released 12 October 2020](/docs/containers?topic=containers-changelog#1189_1530)
@@ -1487,6 +1510,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.13_1544, released 9 November 2020](/docs/containers?topic=containers-changelog#11713_1544)
   * [Changelog for worker node fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog#11713_1543_worker)
   * [Changelog for master fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog#11713_1543)
   * [Changelog for worker node fix pack 1.17.12_1542, released 12 October 2020](/docs/containers?topic=containers-changelog#11712_1542)
@@ -1515,6 +1539,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.15_1551, released 9 November 2020](/docs/containers?topic=containers-changelog#11615_1551)
   * [Changelog for worker node fix pack 1.16.15_1550, released 26 October 2020](/docs/containers?topic=containers-changelog#11615_1550_worker)
   * [Changelog for master fix pack 1.16.15_1550, released 26 October 2020](/docs/containers?topic=containers-changelog#11615_1550)
   * [Changelog for worker node fix pack 1.16.15_1549, released 12 October 2020](/docs/containers?topic=containers-changelog#11615_1549)
@@ -2029,19 +2054,7 @@ subcollection: containers
 
 [Does IBM support third-party and open source tools that I use with my cluster?](/docs/containers?topic=containers-faqs#faq_thirdparty_oss)
 
-[Where can I find more information about {{site.data.keyword.containerlong_notm}} pricing models?](/docs/containers?topic=containers-faqs#pricing)
-
-[What am I charged for when I use {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-faqs#charges)
-
-[What are the regional uplift charges and sustained usage discounts for VPC Generation 2 compute worker nodes?](/docs/containers?topic=containers-faqs#charges_vpc_gen2)
-
-[Are my platform and infrastructure resources consolidated in one bill?](/docs/containers?topic=containers-faqs#bill)
-
-[Can I estimate my costs?](/docs/containers?topic=containers-faqs#cost_estimate)
-
-[Can I view my current usage?](/docs/containers?topic=containers-faqs#usage)
-
-[Can I add tags to my cluster?](/docs/containers?topic=containers-faqs#faq_tags)
+[What am I charged for? Can I estimate and control costs in my cluster?](/docs/containers?topic=containers-faqs#charges)
 
 
 ## Troubleshooting cluster components
