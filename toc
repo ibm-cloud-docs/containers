@@ -35,17 +35,18 @@ Kubernetes Service
     {: .navgroup-end}
 
     {: .topicgroup id="tutorial"}
-    [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
-    cs_tutorials.md
-    cs_tutorial_vpc.md
-    cs_tutorial_migrate_vpc.md
-    cs_tutorials_starter.md
-    cs_tutorials_policies.md
-    cs_tutorials_cf.md
-    cs_tutorials_byoc.md
-    [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
-    [Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
-    [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
+    Tutorials
+        [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
+        cs_tutorials.md
+        cs_tutorial_vpc.md
+        cs_tutorial_migrate_vpc.md
+        cs_tutorials_starter.md
+        cs_tutorials_policies.md
+        cs_tutorials_cf.md
+        cs_tutorials_byoc.md
+        [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+        [Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
+        [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
