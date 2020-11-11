@@ -1450,7 +1450,7 @@ subcollection: containers
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
   * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
   * [Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
-* [Setting up volume encryption with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
+* [Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
   * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
   * [Enabling per-volume encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
