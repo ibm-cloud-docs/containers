@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-12"
+lastupdated: "2020-11-13"
 
 keywords: kubernetes, iks
 
@@ -802,7 +802,6 @@ When you want to set up encryption for your {{site.data.keyword.blockstorageshor
 
 ### Creating a custom storage class
 {: #vpc-customize-storage-class}
-{: #vpc-block-xfs}
 
 Create your own customized storage class with the preferred settings for your {{site.data.keyword.blockstorageshort}} instance.
 {: shortdesc}
