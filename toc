@@ -34,7 +34,7 @@ Kubernetes Service
         cs_secure.md
     {: .navgroup-end}
 
-    {: .topicgroup id="tutorial"}
+    {: .navgroup id="tutorial"}
     [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
     cs_tutorials.md
     cs_tutorial_vpc.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-07"
+lastupdated: "2020-11-13"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -116,7 +117,6 @@ Calico enforces these policies, including any Kubernetes network policies that a
 
 <br />
 
-
 ## Default Calico and Kubernetes network policies
 {: #default_policy}
 {: help}
@@ -158,7 +158,6 @@ A default Kubernetes policy that limits access to the Kubernetes Dashboard is al
 {: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Kubernetes policy in column one and the description in column two."}
 
 <br />
-
 
 ## Installing and configuring the Calico CLI
 {: #cli_install}
@@ -234,7 +233,6 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
 
 <br />
 
-
 ## Viewing network policies
 {: #view_policies}
 
@@ -289,7 +287,6 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
 
 <br />
 
-
 ## Adding network policies
 {: #adding_network_policies}
 
@@ -317,7 +314,6 @@ To create Calico policies, use the following steps.
     {: pre}
 
 <br />
-
 
 ## Controlling inbound traffic to NLB or NodePort services
 {: #block_ingress}
@@ -444,7 +440,7 @@ To see how to allow or block source IP addresses, try the [Using Calico network 
   ```
   {: pre}
 
-3. Optional: In multizone clusters, a multizone load balancer (MZLB) health checks the Ingress application load balancers (ALBs) in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must allow inbound access to your ALBs from [the ports and IP addresses in step 2 of this section](/docs/containers?topic=containers-firewall#firewall_outbound) and [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} that are used to check the health of your ALBs on port 80. For steps on how to create a Calico pre-DNAT policy to allow these IPs, see Lesson 3 of the [Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
+3. Optional: In multizone clusters, a multizone load balancer (MZLB) health checks the Ingress application load balancers (ALBs) in each zone of your cluster and keeps the DNS lookup results updated based on these health checks. If you use pre-DNAT policies to block all incoming traffic to Ingress services, you must allow inbound access on port 80 to your ALBs from [the ports and IP addresses in step 2 of this section](/docs/containers?topic=containers-firewall#firewall_outbound) and [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} so that the Kubernetes control plane can check the health of your routers. For steps on how to create a Calico pre-DNAT policy to allow these IP addresses, see Lesson 3 of the [Calico network policy tutorial](/docs/containers?topic=containers-policy_tutorial#lesson3).
 
 ## Isolating clusters on the public network
 {: #isolate_workers_public}
@@ -512,7 +508,6 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
   {: pre}
 
 <br />
-
 
 ## Isolating clusters on the private network
 {: #isolate_workers}
@@ -592,7 +587,6 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
   {: pre}
 
 <br />
-
 
 ## Controlling traffic between pods
 {: #isolate_services}
@@ -700,9 +694,7 @@ Traffic can now flow from finance microservices to the accounts Srv1 back end. T
 
 In this example, all traffic from all microservices in the finance namespace is permitted. You can't allow traffic from specific app pods in another namespace because `podSelector` and `namespaceSelector` can't be combined.
 
-
 <br />
-
 
 ## Logging denied traffic
 {: #log_denied}
@@ -836,6 +828,5 @@ This section shows you how to log traffic that is denied by a Kubernetes network
   {: screen}
 
 6. Optional: Forward the logs from `/var/log/syslog` to [{{site.data.keyword.la_full}}](/docs/containers?topic=containers-health#app_logdna) or to [an external syslog server](/docs/containers?topic=containers-health#configuring).
-
 
 

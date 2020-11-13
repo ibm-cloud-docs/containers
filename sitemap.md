@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-09"
+lastupdated: "2020-11-13"
 
 keywords: containers
 subcollection: containers
@@ -234,6 +234,189 @@ subcollection: containers
 * [Container isolation and security](/docs/containers?topic=containers-security#container)
 * [Storing personal information](/docs/containers?topic=containers-security#pi)
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
+
+
+## Tutorials library for Kubernetes Service
+
+[Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
+
+
+## Creating Kubernetes clusters
+{: #sitemap_creating_kubernetes_clusters}
+
+
+[Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
+
+[Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
+
+[Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
+
+[Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
+
+[Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+
+[Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+
+[Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+
+[Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+
+[Deploying and updating the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+* [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+* [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
+
+[What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
+
+
+## Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
+{: #sitemap_creating_a_cluster_in_your_virtual_private_cloud_(vpc)_on_generation_2_compute}
+
+
+[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
+
+[Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
+
+[Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+
+[Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
+
+[Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
+
+[Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
+
+[Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
+
+[What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
+
+
+## Migrating cluster resources from VPC Gen 1 to VPC Gen 2
+{: #sitemap_migrating_cluster_resources_from_vpc_gen_1_to_vpc_gen_2}
+
+
+[Migrating cluster resources from VPC Gen 1 to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial)
+
+[Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
+
+[Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
+
+[Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
+
+[Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
+
+[Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
+
+[Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
+
+[Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
+
+[Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
+
+[What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
+
+
+## Deploy a starter kit app to a Kubernetes cluster
+{: #sitemap_deploy_a_starter_kit_app_to_a_kubernetes_cluster}
+
+
+[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
+
+[Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
+
+[Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
+
+[Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
+
+[Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
+
+[Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
+
+[Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
+
+[Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
+
+[What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
+
+
+## Using Calico network policies to block traffic
+{: #sitemap_using_calico_network_policies_to_block_traffic}
+
+
+[Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
+
+[Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
+
+[Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
+
+[Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
+
+[Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+
+[Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+
+[Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+
+[Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+
+[Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+
+[What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
+
+
+## Migrating an app from Cloud Foundry to a cluster
+{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
+
+
+[Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
+
+[Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
+
+[Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
+
+[Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
+
+[Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+
+[Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+
+[Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+
+
+## Set up a DevOps delivery pipeline for your app
+{: #sitemap_set_up_a_devops_delivery_pipeline_for_your_app}
+
+
+[Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
+
+[Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
+
+[Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
+
+[Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
+
+[Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
+
+[Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
+
+[Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
+
+[Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
+
+[What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
+
+
+## Moving a VM-based application to Kubernetes
+
+[Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+
+
+## Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
+
+
+## Continuous Deployment to Kubernetes
+
+[Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
 
 
 ## Installing the CLI and API
@@ -1267,7 +1450,7 @@ subcollection: containers
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
   * [Using the Portworx KVDB](/docs/containers?topic=containers-portworx#portworx-kvdb)
   * [Setting up a Databases for etcd service instance](/docs/containers?topic=containers-portworx#databases-for-etcd)
-* [Setting up volume encryption with {{site.data.keyword.keymanagementservicelong_notm}}](/docs/containers?topic=containers-portworx#encrypt_volumes)
+* [Setting up volume encryption](/docs/containers?topic=containers-portworx#encrypt_volumes)
   * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
   * [Enabling per-volume encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
@@ -1919,6 +2102,9 @@ subcollection: containers
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
 * [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Tracking Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
+* [Tracking Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
+* [Tracking NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
 * [Tracking private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
 * [Tracking storage resource events](/docs/containers?topic=containers-at_events#storage-events)
 * [Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)

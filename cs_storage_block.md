@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-04"
+lastupdated: "2020-11-10"
 
 keywords: kubernetes, iks
 
@@ -103,7 +103,7 @@ Keep in mind the following requirements when you use the {{site.data.keyword.clo
 - {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in is available only for standard {{site.data.keyword.containerlong_notm}} clusters that are provisioned on classic infrastructure.  If you have a VPC cluster, see [Storing data on {{site.data.keyword.blockstorageshort}} for VPC (Gen 1 and Gen 2 compute)](/docs/containers?topic=containers-vpc-block#vpc-block-reference).
 - If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, make sure that you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in version 1.3.0 or later to connect to your {{site.data.keyword.blockstorageshort}} instance over the private network.
 - {{site.data.keyword.blockstorageshort}} instances are specific to a single zone. If you have a multizone cluster, consider [multizone persistent storage options](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- If you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}}  with Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3).
+- If you installed the {{site.data.keyword.cloud_notm}} {{site.data.keyword.blockstorageshort}} plug-in with Helm version 2, [migrate to Helm version 3](/docs/containers?topic=containers-helm#migrate_v3).
 
 <br>
 

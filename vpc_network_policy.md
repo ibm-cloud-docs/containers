@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-05"
+lastupdated: "2020-11-13"
 
 keywords: kubernetes, iks, firewall
 
@@ -245,7 +245,7 @@ Use the {{site.data.keyword.cloud_notm}} console to add inbound and outbound rul
     </tbody>
     </table>
 
-If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
+If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
 {: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
@@ -429,7 +429,7 @@ To create rules in your default security group:
   ```
   {: pre}
 
-If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
+If you use Ingress to expose apps in your cluster, you must allow inbound access from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so that they can be health checked. If you do not allow inbound access from these IP addresses, the ALBs continue to operate, but your Ingress status might show a warning message that the ALBs are unreachable by the health check.
 {: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
@@ -678,7 +678,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
 
 9. Multizone clusters: Repeat steps 2 - 8 to create an ACL for each subnet that your cluster is attached to.
 
-If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
+If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
 {: note}
 
 ### Creating ACLs from the CLI
@@ -857,7 +857,7 @@ To create an ACL for each subnet that your cluster is attached to:
 ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by including the `--before-rule-name deny-all-(inbound|outbound)` flag.
 {: note}
 
-If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IPs](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
+If you create specific rules to block incoming traffic to the IP addresses of Ingress ALBs, you must allow inbound access from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and the `166.8.0.0/14` Kubernetes control plane to the IP addresses of your ALBs so they can be health checked.
 {: note}
 
 <br />
