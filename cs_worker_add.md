@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-26"
+lastupdated: "2020-11-16"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -142,10 +142,10 @@ To resize the worker pool, change the number of worker nodes that the worker poo
     Example output for a worker pool that is in two zones, `dal10` and `dal12`, and is resized to two worker nodes per zone:
     ```
     ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.18.10
-    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.18.10
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.18.10
-    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.18.10
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.18.12
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal10   1.18.12
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w9   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.18.12
+    kube-dal12-crb20b637238ea471f8d4a8b881aae4962-w10  169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          normal   Ready   dal12   1.18.12
     ```
     {: screen}
 
@@ -234,7 +234,7 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    ```
    ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
    kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
-   kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.18.10_1511   
+   kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.18.12_1511   
    ```
    {: screen}
 
@@ -386,8 +386,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.10
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.10
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.12
+   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.12
    ```
    {: screen}
 
@@ -465,7 +465,7 @@ To add a zone with worker nodes to your worker pool:
   Ingress Secret:                 mycluster-<hash>-0000
   Workers:                        6
   Worker Zones:                   dal10, dal12
-  Version:                        1.18.10_1524
+  Version:                        1.18.12_1524
   Owner:                          owner@email.com
   Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
   Resource Group Name:            Default
@@ -616,8 +616,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.10
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.18.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.12
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.18.12
    ```
    {: screen}
 
@@ -681,8 +681,8 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
    Example output:
    ```
    ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.10
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.18.10
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.18.12
+   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.18.12
    ```
    {: screen}
 
@@ -699,6 +699,9 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> If you have non-containerized workloads on a classic IBM Cloud infrastructure [virtual server](https://cloud.ibm.com/catalog/infrastructure/virtual-server-group) or [bare metal server](https://cloud.ibm.com/catalog/infrastructure/bare-metal), you can connect those workloads to the workloads in your gateway-enabled classic cluster by adding the server instance to your cluster network.
 {: shortdesc}
+
+You can add classic infrastructure servers to gateway-enabled classic clusters that run Kubernetes version 1.18 and earlier only. This feature is not supported for clusters that run Kubernetes version 1.19.
+{: important}
 
 The server instance is added to your cluster's private 172.30.X.X pod network so that your cluster workloads can communicate with the server. For example, you might have a database with specific configurations already running in an {{site.data.keyword.cloud_notm}} bare metal server. You can directly attach the database to the network of your gateway-enabled cluster without migrating the database to a container. The apps that run on your compute worker nodes can then send data to and receive data from the database in the bare metal server.
 
@@ -1026,7 +1029,7 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     start_time: "Tue Dec 17 15:19:23 UTC 2019"
     config:
-      kubernetes_version: 1.18.10
+      kubernetes_version: 1.18.12
       pod_name: ibm-external-compute-job-wk9xc
       image_url: us.icr.io/armada-master/stranger:v1.0.0
       prepare_host: True

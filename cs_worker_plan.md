@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-10"
+lastupdated: "2020-11-16"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -328,6 +328,8 @@ Worker node flavors vary by cluster type, the zone where you want to create the 
 
 Bare metal machines are optimized for different use cases such as data-, GPU-, or RAM-intensive workloads.
 
+
+
 Choose a flavor, or machine type, with the right storage configuration to support your workload. Some flavors have a mix of the following disks and storage configurations. For example, some flavors might have a SATA primary disk with a raw SSD secondary disk.
 
 * **SATA**: A magnetic spinning disk storage device that is often used for the primary disk of the worker node that stores the OS file system.
@@ -370,15 +372,21 @@ Choose a flavor, or machine type, with the right storage configuration to suppor
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg3c.16x128</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has one Tesla K80 physical card that has two graphics processing units (GPUs) per card for a total of two GPUs.</td>
+<td><strong>GPU bare metal, mg3c.16x128</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has one Tesla K80 physical card that has two graphics processing units (GPUs) per card for a total of two GPUs. For deep learning applications, use the `mg4c.32x384.2xp100` with the larger Tesla P100 physical cards.</td>
 <td>16 / 128 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
+<td>2 TB HDD / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
-<td><strong>GPU bare metal, mg3c.28x256</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has two Tesla K80 physical cards that have two GPUs per card for a total of four GPUs.</td>
+<td><strong>GPU bare metal, mg3c.28x256</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, or 3D applications. This flavor has two Tesla K80 physical cards that have two GPUs per card for a total of four GPUs. For deep learning applications, use the `mg4c.32x384.2xp100` with the larger Tesla P100 physical cards.</td>
 <td>28 / 256 GB</td>
-<td>2 TB SATA / 960 GB SSD</td>
+<td>2 TB HDD / 960 GB SSD</td>
+<td>10000 Mbps</td>
+</tr>
+<tr>
+<td><strong>GPU bare metal, mg4c.32x384.2xp100</strong>: Choose this type for mathematically intensive workloads such as high-performance computing, machine learning, deep learning, or 3D applications. This flavor has two Tesla P100 physical cards that have two GPUs per card for a total of four GPUs. Note that this Pascal GPU flavor does not support the Data Center GPU Manager because of a known issue from NVIDIA.</td>
+<td>32 / 384 GB</td>
+<td>2 TB HDD / 960 GB SSD</td>
 <td>10000 Mbps</td>
 </tr>
 <tr>
