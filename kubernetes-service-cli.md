@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-05"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -354,6 +354,9 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
 {: shortdesc}
 
+As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
+{: deprecated}
+
 ```
 ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f]
 ```
@@ -552,6 +555,9 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 Enable the managed [Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) to install the Knative serverless framework.
 {: shortdesc}
+
+As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
+{: deprecated}
 
 ```
 ibmcloud ks cluster addon enable knative --cluster CLUSTER [--version VERSION] [-y]

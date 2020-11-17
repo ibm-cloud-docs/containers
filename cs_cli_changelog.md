@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-19"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks
 
@@ -153,7 +153,6 @@ Check out the following syntax and behavior changes between each version of the 
 
 <br />
 
-
 ### Version 0.4
 {: #04}
 
@@ -182,7 +181,6 @@ Version 0.4 of the CLI plug-in is deprecated. To update to the latest version, s
 
 <br />
 
-
 ### Version 0.3
 {: #03}
 
@@ -210,7 +208,6 @@ Version 0.3 of the CLI plug-in is deprecated. To update to the latest version, s
 
 <br />
 
-
 ### Version 0.2
 {: #02}
 
@@ -230,14 +227,13 @@ Version 0.2 of the CLI plug-in is deprecated. To update to the latest version, s
 | 0.2.61 | 26 Feb 2019 | <ul><li>Adds the `cluster pull-secret apply` command, which creates an IAM service ID for the cluster, policies, API key, and image pull secrets so that containers that run in the `default` Kubernetes namespace can pull images from IBM Cloud Container Registry. For new clusters, image pull secrets that use IAM credentials are created by default. Use this command to update existing clusters or if your cluster has an image pull secret error during creation. For more information, see [the doc](/docs/containers?topic=containers-registry#cluster_registry_auth).</li><li>Fixes a bug where `ibmcloud ks init` failures caused help output to be printed.</li></ul> |
 | 0.2.53 | 19 Feb 2019 | <ul><li>Fixes a bug where the region was ignored for `ibmcloud ks api-key reset`, `ibmcloud ks credential get/set`, and `ibmcloud ks vlan spanning get`.</li><li>Improves performance for `ibmcloud ks worker update`.</li><li>Adds the version of the add-on in `ibmcloud ks cluster addon enable` prompts.</li></ul> |
 | 0.2.44 | 08 Feb 2019 | <ul><li>Adds `--skip-rbac` option to the `ibmcloud ks cluster config` command to skip adding user Kubernetes RBAC roles based on the {{site.data.keyword.cloud_notm}} IAM service access roles to the cluster configuration. Include this option only if you [manage your own Kubernetes RBAC roles](/docs/containers?topic=containers-users#rbac). If you use [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service) to manage all your RBAC users, do not include this option.</li><li>Updates the Go version to 1.11.5.</li></ul> |
-| 0.2.40 | 06 Feb 2019 | <ul><li>Adds the [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) and [Knative](/docs/containers?topic=containers-serverless-apps-knative) managed add-ons for {{site.data.keyword.containerlong_notm}}.</li><li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the `ibmcloud ks vlan ls` command.</li></ul> |
+| 0.2.40 | 06 Feb 2019 | <ul><li>Adds the [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons), [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable), and [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable) commands for working with managed cluster add-ons such as the [Istio](/docs/containers?topic=containers-istio) managed add-on for {{site.data.keyword.containerlong_notm}}.</li><li>Improves help text for {{site.data.keyword.Bluemix_dedicated_notm}} users of the `ibmcloud ks vlan ls` command.</li></ul> |
 | 0.2.30 | 31 Jan 2019 | Increases the default timeout value for `ibmcloud ks cluster config` to `500s`. |
 | 0.2.19 | 16 Jan 2019 | <ul><li>Adds the `IKS_BETA_VERSION` environment variable to enable the redesigned beta version of the {{site.data.keyword.containerlong_notm}} plug-in CLI. To try out the redesigned version, see [Using the beta command structure](/docs/containers?topic=containers-cs_cli_changelog#changelog_beta).</li><li>Increases the default timeout value for `ibmcloud ks subnets` to `60s`.</li><li>Fixes a minor bug and updates the help text in various languages.</li></ul> |
 {: caption="Overview of version changes for version 0.2 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
 
 <br />
-
 
 ### Version 0.1
 {: #01}
@@ -260,4 +256,3 @@ Version 0.1 of the CLI plug-in is deprecated. To update to the latest version, s
 | 0.1.590 | 01 Oct 2018 | <ul><li>Adds the [`ibmcloud ks logging collect`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect) and [`ibmcloud ks logging collect-status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_collect_status) commands for collecting API server logs in your cluster.</li><li>Adds the [`ibmcloud ks key-protect-enable` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#ks_kms) to enable {{site.data.keyword.keymanagementserviceshort}} as a key management service (KMS) provider in your cluster.</li><li>Adds the `--skip-master-health` flag to the [ibmcloud ks worker reboot](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) and [ibmcloud ks worker reload](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) commands to skip the master health check before initiating the reboot or reload.</li><li>Renames `Owner Email` to `Owner` in the output of `ibmcloud ks cluster get`.</li></ul> |
 {: caption="Overview of version changes for version 0.1 of the {{site.data.keyword.containerlong_notm}} CLI plug-in" caption-side="top"}
 {: summary="The rows are read from left to right, with the CLI plug-in version in column one, the release date of the version in column two, and a brief description of the changes for the version in column three."}
-

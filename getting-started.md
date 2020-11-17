@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-16"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, containers
 
@@ -353,7 +353,7 @@ Set up the right environment for your workloads.
 
 Explore other capabilities for your cluster.
 * Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as LogDNA and Sysdig to monitor your cluster's health.
-* Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio and Knative.
+* Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio.
 
 Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
 {: tip}

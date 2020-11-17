@@ -985,7 +985,7 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
-[Deploying serverless apps with Knative (beta)](/docs/containers?topic=containers-serverless-apps-knative)
+[Deploying serverless apps with Knative (deprecated)](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
   * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
 * [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)

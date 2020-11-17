@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-16"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, clusters
 
@@ -473,7 +473,6 @@ Keep in mind the following considerations when you configure a webhook.
 Many cluster add-ons, plug-ins, and other third-party extensions create custom admission controllers. Some common ones include:
 *   [Container image security enforcement](/docs/Registry?topic=Registry-security_enforce).
 *   [Istio](/docs/containers?topic=containers-istio-about).
-*   [Knative](/docs/containers?topic=containers-serverless-apps-knative).
 
 <br>
 
