@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-24"
+lastupdated: "2020-11-16"
 
 keywords: kubernetes, iks
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -117,7 +118,6 @@ For more information about how to create and use PVCs, PVs, and the physical sto
 
 <br />
 
-
 ## Dynamic provisioning
 {: #dynamic_provisioning}
 
@@ -156,7 +156,6 @@ For more information about how to dynamically provision persistent storage, see:
 - [Portworx](/docs/containers?topic=containers-portworx#add_portworx_storage)
 
 <br />
-
 
 ## Static provisioning
 {: #static_provisioning}
@@ -198,7 +197,6 @@ For more information about how to statically provision storage, see:
 
 <br />
 
-
 ## Storage classes
 {: #storageclasses}
 
@@ -231,7 +229,7 @@ If you cannot use one of the provided storage classes, you can create your own c
    - Sample customized storage classes:
      - [Classic File Storage](/docs/containers?topic=containers-file_storage#file_custom_storageclass)
      - [Classic Block Storage](/docs/containers?topic=containers-block_storage#block_custom_storageclass)
-     - [VPC Block Storage with an `xfs` file system](/docs/containers?topic=containers-vpc-block#vpc-block-xfs)
+     - [VPC Block Storage with an `xfs` file system](/docs/containers?topic=containers-vpc-block#vpc-customize-storage-class)
      - [VPC Block Storage with encryption](/docs/containers?topic=containers-vpc-block#vpc-block-encryption)
 
 2. Create the customized storage class.
@@ -327,7 +325,6 @@ To change the default storage class for a cluster:
     kubectl get storageclasses | grep "(default)"
     ```
     {: pre}
-
 
 
 
