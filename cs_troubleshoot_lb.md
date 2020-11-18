@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-11-18"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -204,7 +204,6 @@ To troubleshoot your NLB service:
 
 <br />
 
-
 ## Classic clusters: Cannot deploy a load balancer
 {: #cs_subnet_limit_lb}
 
@@ -263,7 +262,6 @@ If you are not using all the subnets in the VLAN, you can reuse subnets on the V
 
 <br />
 
-
 ## Classic clusters: Source IP preservation fails when using tainted nodes
 {: #cs_source_ip_fails_lb}
 
@@ -308,7 +306,6 @@ If you complete one of the above options but the `keepalived` pods are still not
     {: pre}
 
 <br />
-
 
 ## VPC clusters: Cannot connect to an app via load balancer
 {: #vpc_ts_lb}
@@ -357,7 +354,6 @@ Verify that no VPC security groups are blocking traffic to your cluster and that
       * If after several minutes you cannot reach the load balancer, it might be offline due to provisioning or connection issues. [Open an {{site.data.keyword.cloud_notm}} support case](https://cloud.ibm.com/unifiedsupport/cases/add). For the type, select **Technical**. For the category, select **Network** in the VPC section. In the description, include your cluster ID and the VPC load balancer ID.
 
 <br />
-
 
 ## VPC clusters: Kubernetes `LoadBalancer` service fails because no IPs are available
 {: #vpc_no_lb}
@@ -414,5 +410,3 @@ After you create a VPC subnet, you cannot resize it or change its IP range. Inst
   {: pre}
 
 <br />
-
-
