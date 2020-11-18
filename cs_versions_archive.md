@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-10-20"
+lastupdated: "2020-11-18"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1078,7 +1078,6 @@ The following table shows the changes that are included in the patch 1.15.1_1511
 
 <br />
 
-
 ## Version 1.14 changelog (unsupported 31 May 2020)
 {: #114_changelog}
 
@@ -1870,7 +1869,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
 </tr>
 </tbody>
 </table>
@@ -1947,13 +1946,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -1980,13 +1979,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -2060,13 +2059,13 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 </tbody>
 </table>
@@ -2160,13 +2159,13 @@ The following table shows the changes that are included in the patch 1.14.1_1519
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 </tbody>
 </table>
@@ -2306,7 +2305,6 @@ The following table shows the changes that are included in the patch 1.14.1_1516
 </table>
 
 <br />
-
 
 ## Version 1.13 changelog (unsupported 22 February 2020)
 {: #113_changelog}
@@ -2984,7 +2982,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
 </tr>
  </tbody>
 </table>
@@ -3061,13 +3059,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -3094,13 +3092,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -3167,13 +3165,13 @@ The following table shows the changes that are included in the patch 1.13.7_1526
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 </tbody>
 </table>
@@ -3255,13 +3253,13 @@ The following table shows the changes that are included in the patch 1.13.6_1522
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 </tbody>
 </table>
@@ -3381,7 +3379,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
 </tr>
 </tbody>
 </table>
@@ -3437,13 +3435,13 @@ The following table shows the changes that are included in the patch 1.13.5_1517
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 </tbody>
 </table>
@@ -3563,7 +3561,7 @@ The following table shows the changes that are included in the patch 1.13.4_1513
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -3575,7 +3573,7 @@ The following table shows the changes that are included in the patch 1.13.4_1513
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
@@ -3853,7 +3851,6 @@ The following table shows the changes that are included in the patch 1.13.2_1507
 </table>
 
 <br />
-
 
 ## Version 1.12 changelog (unsupported 3 November 2019)
 {: #112_changelog}
@@ -4280,7 +4277,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-7307.html).</td>
+<td>Updated worker node images with package updates for [CVE-2019-13012 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-13012) and [CVE-2019-7307 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-7307.html).</td>
 </tr>
  </tbody>
 </table>
@@ -4358,13 +4355,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 </tbody>
 </table>
@@ -4390,13 +4387,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html). For more information, see the [IBM security bulletin ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/support/pages/node/958863).</td>
 </tr>
 <tr>
 <td>containerd</td>
@@ -4445,13 +4442,13 @@ The following table shows the changes that are included in the patch 1.12.9_1557
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 </tbody>
 </table>
@@ -4545,13 +4542,13 @@ The following table shows the changes that are included in the patch 1.12.8_1553
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 </tbody>
 </table>
@@ -4672,7 +4669,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
 </tr>
 </tbody>
 </table>
@@ -4728,13 +4725,13 @@ The following table shows the changes that are included in the patch 1.12.7_1548
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 </tbody>
 </table>
@@ -4843,7 +4840,7 @@ The following table shows the changes that are included in the patch 1.12.6_1544
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -4855,7 +4852,7 @@ The following table shows the changes that are included in the patch 1.12.6_1544
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
@@ -5460,7 +5457,6 @@ If you access the dashboard via `kubectl proxy`, the **SKIP** button on the logi
 
 <br />
 
-
 ## Version 1.11 changelog (unsupported as of 20 July 2019)
 {: #111_changelog}
 
@@ -5523,13 +5519,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-151-generic</td>
 <td>4.4.0-154-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-52-generic</td>
 <td>4.15.0-54-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11479.html).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html) and [CVE-2019-11479 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11479.html).</td>
 </tr>
 </tbody>
 </table>
@@ -5555,13 +5551,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-150-generic</td>
 <td>4.4.0-151-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-51-generic</td>
 <td>4.15.0-52-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-11478.html).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-11477 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11477.html) and [CVE-2019-11478 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-11478.html).</td>
 </tr>
 </tbody>
 </table>
@@ -5587,13 +5583,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
 </tr>
 </tbody>
 </table>
@@ -5663,13 +5659,13 @@ The following table shows the changes that are included in the patch pack 1.11.1
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-145-generic</td>
 <td>4.4.0-148-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-47-generic</td>
 <td>4.15.0-50-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2018/CVE-2018-12130.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2018-12126 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12126.html), [CVE-2018-12127 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12127.html), and [CVE-2018-12130 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2018-12130.html).</td>
 </tr>
 </tbody>
 </table>
@@ -5790,7 +5786,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
 </tr>
 </tbody>
 </table>
@@ -5852,13 +5848,13 @@ The following table shows the changes that are included in the patch 1.11.9_1554
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 </tbody>
 </table>
@@ -5954,7 +5950,7 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -5966,7 +5962,7 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
@@ -6916,7 +6912,6 @@ The following table shows the changes that are included in patch 1.11.2_1513.
 
 <br />
 
-
 ## Version 1.10 changelog (unsupported as of 16 May 2019)
 {: #110_changelog}
 
@@ -7031,7 +7026,7 @@ The following table shows the changes that are included in the worker node fix p
 <td>Ubuntu packages</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-3842.html).</td>
+<td>Updates to installed Ubuntu packages including `systemd` for [CVE-2019-3842 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-3842.html).</td>
 </tr>
 </tbody>
 </table>
@@ -7075,13 +7070,13 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-143-generic</td>
 <td>4.4.0-145-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-46-generic</td>
 <td>4.15.0-47-generic</td>
-<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9213.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-9213 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9213.html).</td>
 </tr>
 </tbody>
 </table>
@@ -7178,7 +7173,7 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>GPU device plug-in and installer</td>
 <td>e32d51c</td>
 <td>9ff3fda</td>
-<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-9741.html).</td>
+<td>Updated the GPU drivers to [418.43 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.nvidia.com/object/unix.html). Update includes fix for [CVE-2019-9741 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-9741.html).</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
@@ -7190,7 +7185,7 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>Kernel</td>
 <td>4.4.0-141</td>
 <td>4.4.0-143</td>
-<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://people.canonical.com/~ubuntu-security/cve/2019/CVE-2019-6133.html).</td>
+<td>Updated worker node images with kernel update for [CVE-2019-6133 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-6133.html).</td>
 </tr>
 <tr>
 <td>Key Management Service provider</td>
@@ -8285,7 +8280,6 @@ The following table shows the changes that are included in patch 1.10.1_1508.
 
 <br />
 
-
 ## Version 1.9 changelog (unsupported as of 27 December 2018)
 {: #19_changelog}
 
@@ -9013,7 +9007,6 @@ The following table shows the changes that are included in patch 1.9.7_1510.
 
 <br />
 
-
 ## Version 1.8 changelog (Unsupported)
 {: #18_changelog}
 
@@ -9374,7 +9367,6 @@ Review the version 1.8 changelogs.
 </table>
 
 <br />
-
 
 ## Version 1.7 changelog (Unsupported)
 {: #17_changelog}
