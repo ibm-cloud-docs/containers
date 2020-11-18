@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-02"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -384,7 +384,7 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
     {: pre}
   * Test ALB service:
     ```
-    service public-ingress-migrator -n kube-system
+    kubectl delete service public-ingress-migrator -n kube-system
     ```
     {: pre}
 

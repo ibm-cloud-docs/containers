@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, helm
 
@@ -155,7 +155,7 @@ To connect to a different VPC or to an on-prem data center, use the [VPN for VPC
 Because you own the standard clusters that you create in {{site.data.keyword.containerlong_notm}}, you can choose to install third-party solutions to add extra capabilities to your cluster.
 {: shortdesc}
 
-Some open source technologies, such as Knative, Istio, LogDNA, Sysdig, or Portworx are tested by IBM and provided as managed add-ons, Helm charts, or {{site.data.keyword.cloud_notm}} services that are operated by the service provider in partnership with IBM. These open source tools are fully integrated into the {{site.data.keyword.cloud_notm}} billing and support system.
+Some open source technologies, such as Istio, LogDNA, Sysdig, or Portworx are tested by IBM and provided as managed add-ons, Helm charts, or {{site.data.keyword.cloud_notm}} services that are operated by the service provider in partnership with IBM. These open source tools are fully integrated into the {{site.data.keyword.cloud_notm}} billing and support system.
 
 You can install other open source tools in your cluster, but these tools might not be managed, supported, or verified to work in {{site.data.keyword.containerlong_notm}}.
 
@@ -169,7 +169,7 @@ For more information about {{site.data.keyword.containerlong_notm}} partners and
 
 ### Managed add-ons
 {: #cluster-add-ons}
-{{site.data.keyword.containerlong_notm}} integrates popular open source integrations, such as [Knative](/docs/containers?topic=containers-serverless-apps-knative) or [Istio](/docs/containers?topic=containers-istio) by using [managed add-ons](/docs/containers?topic=containers-managed-addons). Managed add-ons are an easy way to install an open source tool in your cluster that is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
+{{site.data.keyword.containerlong_notm}} integrates popular open source integrations, such as [Istio](/docs/containers?topic=containers-istio) by using [managed add-ons](/docs/containers?topic=containers-managed-addons). Managed add-ons are an easy way to install an open source tool in your cluster that is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
 
 Managed add-ons are fully integrated into the {{site.data.keyword.cloud_notm}} support organization. If you have a question or an issue with using the managed add-ons, you can use one of the {{site.data.keyword.containerlong_notm}} support channels. For more information, see [Getting help and support](/docs/containers?topic=containers-get-help).
 
@@ -193,6 +193,5 @@ You might use custom resource definitions (CRDs) to extend the Kubernetes API to
 {: shortdesc}
 
 To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.
-
 
 

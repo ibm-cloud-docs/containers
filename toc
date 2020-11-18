@@ -215,6 +215,7 @@ Kubernetes Service
         cs_versions_istio.md
         cs_versions_knative.md
         cs_versions_autoscaler.md
+        cs_versions_vpc_block_addon.md
         cs_versions_archive.md
 
     {: .topicgroup}

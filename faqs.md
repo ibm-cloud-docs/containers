@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-11"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -240,7 +240,7 @@ Your cluster must have at least 1 worker node to run default Kubernetes componen
 * **Free clusters**: Free clusters have only 1 worker node.
 * **Worker pools**: For any type of cluster, each worker pool must have at least 1 worker node at all times. For the smallest size cluster possible, you can have only 1 worker pool.
 
-Keep in mind that some services such as Ingress or Knative might require multiple worker nodes for high availability, and you might not be able to run these services or your apps in the smallest size cluster possible.
+Keep in mind that some services such as Ingress might require multiple worker nodes for high availability, and you might not be able to run these services or your apps in the smallest size cluster possible.
 {: important}
 
 ## Which Kubernetes versions does the service support?
@@ -251,9 +251,9 @@ Keep in mind that some services such as Ingress or Knative might require multipl
 {{site.data.keyword.containerlong_notm}} concurrently supports multiple versions of Kubernetes. When a latest version (n) is released, versions up to 2 behind (n-2) are supported. Versions more than 2 behind the latest (n-3) are first deprecated and then unsupported. The following versions are currently supported:
 
 **Supported Kubernetes versions**:
-*   Latest: 1.19.3
-*   Default: 1.18.10
-*   Other: 1.17.13
+*   Latest: 1.19.4
+*   Default: 1.18.12
+*   Other: 1.17.14
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 

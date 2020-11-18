@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-06"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, knative
 
@@ -44,6 +44,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -91,14 +92,14 @@ subcollection: containers
 
 
 
-# Deploying serverless apps with Knative (beta)
+# Deploying serverless apps with Knative (deprecated)
 {: #serverless-apps-knative}
 
 Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-The Knative managed add-on is available as a beta feature for Kubernetes version 1.16 and later clusters, and might change without prior notice. Do not use use this feature for production workloads.
-{: beta}
+As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
+{: deprecated}
 
 **What is Knative and why do I want use it?**
 
@@ -380,7 +381,7 @@ You can change the configmap of your Istio Ingress gateway and the Ingress routi
 To deploy your serverless app as a Knative service:
 
 1. Create a YAML file for your first serverless [`Hello World`](https://hub.docker.com/r/ibmcom/kn-helloworld) app in Go with Knative. When you send a request to your sample app, the app reads the environment variable `TARGET` and prints `"Hello ${TARGET}!"`. If this environment variable is empty, `"Hello World!"` is returned.
-   
+
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -1100,7 +1101,7 @@ spec:
 The current implementation of Knative does not provide a standard way to force your Knative `Serving` component to repull a container image. To repull an image from your registry, choose between the following options:
 
 - **Modify the Knative service `template`**: The `template` of a Knative service is used to create a revision of your Knative service. If you modify this template and for example, add the `repullFlag` annotation, Knative must create a new revision for your app. As part of creating the revision, Knative must check for container image updates. When you set `imagePullPolicy: Always`, Knative cannot use the image cache in the cluster, but instead must pull the image from your container registry.
-   
+
    ```yaml
    apiVersion: serving.knative.dev/v1alpha1
    kind: Service
@@ -1122,7 +1123,7 @@ The current implementation of Knative does not provide a standard way to force y
     {: note}
 
 - **Use tags to create unique container images**: You can use unique tags for every container image that you create and reference this image in your Knative service `container.image` configuration. In the following example, `v1` is used as the image tag. To force Knative to pull a new image from your container registry, you must change the image tag. For example, use `v2` as your new image tag.
-  
+
   ```yaml
   apiVersion: serving.knative.dev/v1alpha1
   kind: Service

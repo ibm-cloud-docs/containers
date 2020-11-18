@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-16"
+lastupdated: "2020-11-18"
 
 keywords: containers
 subcollection: containers
@@ -618,7 +618,7 @@ subcollection: containers
   * [Customizing the cluster autoscaler Helm chart values](/docs/containers?topic=containers-ca#ca_chart_values)
 * [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
-* [Upgrading the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
 * [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
   * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
@@ -985,7 +985,7 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
-[Deploying serverless apps with Knative (beta)](/docs/containers?topic=containers-serverless-apps-knative)
+[Deploying serverless apps with Knative (deprecated)](/docs/containers?topic=containers-serverless-apps-knative)
 * [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
   * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
 * [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
@@ -1822,7 +1822,10 @@ subcollection: containers
 * [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
-* [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101)
+* [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)
+
+[{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
+* [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.15 changelog (unsupported 22 September 2020)](/docs/containers?topic=containers-changelog_archive#115_changelog)

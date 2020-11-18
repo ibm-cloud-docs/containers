@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-08-12"
+lastupdated: "2020-11-17"
 
 keywords: kubernetes, iks, responsibilities, incident, operations, change, security, regulation, disaster recovery, management
 
@@ -10,30 +10,85 @@ subcollection: containers
 
 ---
 
+{:DomainName: data-hd-keyref="APPDomain"}
+{:DomainName: data-hd-keyref="DomainName"}
+{:android: data-hd-operatingsystem="android"}
+{:apikey: data-credential-placeholder='apikey'}
+{:app_key: data-hd-keyref="app_key"}
+{:app_name: data-hd-keyref="app_name"}
+{:app_secret: data-hd-keyref="app_secret"}
+{:app_url: data-hd-keyref="app_url"}
+{:authenticated-content: .authenticated-content}
 {:beta: .beta}
+{:c#: data-hd-programlang="c#"}
 {:codeblock: .codeblock}
+{:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
+{:dotnet-standard: .ph data-hd-programlang='dotnet-standard'}
 {:download: .download}
 {:external: target="_blank" .external}
 {:faq: data-hd-content-type='faq'}
+{:fuzzybunny: .ph data-hd-programlang='fuzzybunny'}
+{:generic: data-hd-operatingsystem="generic"}
+{:generic: data-hd-programlang="generic"}
 {:gif: data-image-type='gif'}
+{:go: .ph data-hd-programlang='go'}
 {:help: data-hd-content-type='help'}
+{:hide-dashboard: .hide-dashboard}
+{:hide-in-docs: .hide-in-docs}
 {:important: .important}
+{:ios: data-hd-operatingsystem="ios"}
+{:java: #java .ph data-hd-programlang='java'}
+{:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
+{:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
+{:objectc data-hd-programlang="objectc"}
+{:org_name: data-hd-keyref="org_name"}
+{:php: data-hd-programlang="php"}
 {:pre: .pre}
 {:preview: .preview}
+{:python: .ph data-hd-programlang='python'}
+{:python: data-hd-programlang="python"}
+{:route: data-hd-keyref="route"}
+{:row-headers: .row-headers}
+{:ruby: .ph data-hd-programlang='ruby'}
+{:ruby: data-hd-programlang="ruby"}
+{:runtime: architecture="runtime"}
+{:runtimeIcon: .runtimeIcon}
+{:runtimeIconList: .runtimeIconList}
+{:runtimeLink: .runtimeLink}
+{:runtimeTitle: .runtimeTitle}
 {:screen: .screen}
+{:script: data-hd-video='script'}
+{:service: architecture="service"}
+{:service_instance_name: data-hd-keyref="service_instance_name"}
+{:service_name: data-hd-keyref="service_name"}
 {:shortdesc: .shortdesc}
+{:space_name: data-hd-keyref="space_name"}
+{:step: data-tutorial-type='step'}
+{:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift: #swift .ph data-hd-programlang='swift'}
+{:swift: .ph data-hd-programlang='swift'}
+{:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
+{:term: .term}
 {:tip: .tip}
+{:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
 {:tsCauses: .tsCauses}
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
+{:tutorial: data-hd-content-type='tutorial'}
+{:unity: .ph data-hd-programlang='unity'}
+{:url: data-credential-placeholder='url'}
+{:user_ID: data-hd-keyref="user_ID"}
+{:vb.net: .ph data-hd-programlang='vb.net'}
+{:video: .video}
 
 
 
@@ -98,7 +153,6 @@ You and IBM share responsibilities for the set up and maintenance of your {{site
 
 <br />
 
-
 ### Change management
 {: #change-management}
 
@@ -114,7 +168,6 @@ You and IBM share responsibilities for keeping your clusters at the latest conta
 
 <br />
 
-
 ### Identity and access management
 {: #iam-responsibilities}
 
@@ -129,7 +182,6 @@ You and IBM share responsibilities for controlling access to your {{site.data.ke
 
 <br />
 
-
 ### Security and regulation compliance
 {: #security-compliance}
 
@@ -143,7 +195,6 @@ IBM is responsible for the security and compliance of {{site.data.keyword.contai
 {: caption="Table 5. Responsibilities for security and regulation compliance" caption-side="top"}
 
 <br />
-
 
 ### Disaster recovery
 {: #disaster-recovery}
@@ -165,10 +216,9 @@ You are completely responsible for the applications, workloads, and data that yo
 
 | Resource | How IBM helps | What you can do |
 | -------- | -------------------- | --------------------- |
-| Applications  |<ul><li>Provision clusters with Kubernetes components installed so that you can access the Kubernetes API to deploy and manage your containerized apps.</li><li>Provide a number of managed add-ons to extend your app's capabilities, such as [Istio](/docs/containers?topic=containers-istio) or [Knative](/docs/containers?topic=containers-serverless-apps-knative). Maintenance is simplified for you because IBM provides the installation and updates for the managed add-ons.</li><li>Provide cluster integration with select third-party partnership technologies, such as {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}}, and Portworx.</li><li>Provide automation to enable service binding to other {{site.data.keyword.cloud_notm}} services.</li><li>Create clusters with image pull secrets so that your deployments in the `default` Kubernetes namespace can pull images from {{site.data.keyword.registrylong_notm}}.</li><li>Provide access to Kubernetes APIs that you can use to set up Operators to add community, third-party, and your own services to your cluster. Note that Operators might not work without manual adjustments such as changes in cluster security policies.</li><li>Provide storage classes and plug-ins to support persistent volumes for use with your apps.</li><li>Automatically configure security settings to prevent insecure access, such as disabling SSH into the worker node compute hosts.</li><li>Automatically integrate {{site.data.keyword.cloud_notm}} IAM service roles with Kubernetes RBAC roles in the cluster.</li><li>Generate an API key that is used to access infrastructure permissions for each resource group and region.</li></ul> | <ul><li>Maintain responsibility for your apps, data, and their complete lifecycle.</li><li>If you add community, third-party, your own, or other services to your cluster such as by using Operators, you are responsible for these services and for working with the appropriate provider to troubleshoot any issues.</li><li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app); [keep up-to-date](/docs/containers?topic=containers-update_app#app_rolling); [set up resource requests and limits](/docs/containers?topic=containers-app#resourcereq); [size your worker pool](/docs/containers?topic=containers-strategy#sizing) to have enough resources to run your apps; [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations#supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li></ul> |
+| Applications  |<ul><li>Provision clusters with Kubernetes components installed so that you can access the Kubernetes API to deploy and manage your containerized apps.</li><li>Provide a number of managed add-ons to extend your app's capabilities, such as [Istio](/docs/containers?topic=containers-istio) or the Diagnostics and Debug Tool. Maintenance is simplified for you because IBM provides the installation and updates for the managed add-ons.</li><li>Provide cluster integration with select third-party partnership technologies, such as {{site.data.keyword.la_short}}, {{site.data.keyword.mon_short}}, and Portworx.</li><li>Provide automation to enable service binding to other {{site.data.keyword.cloud_notm}} services.</li><li>Create clusters with image pull secrets so that your deployments in the `default` Kubernetes namespace can pull images from {{site.data.keyword.registrylong_notm}}.</li><li>Provide access to Kubernetes APIs that you can use to set up Operators to add community, third-party, and your own services to your cluster. Note that Operators might not work without manual adjustments such as changes in cluster security policies.</li><li>Provide storage classes and plug-ins to support persistent volumes for use with your apps.</li><li>Automatically configure security settings to prevent insecure access, such as disabling SSH into the worker node compute hosts.</li><li>Automatically integrate {{site.data.keyword.cloud_notm}} IAM service roles with Kubernetes RBAC roles in the cluster.</li><li>Generate an API key that is used to access infrastructure permissions for each resource group and region.</li></ul> | <ul><li>Maintain responsibility for your apps, data, and their complete lifecycle.</li><li>If you add community, third-party, your own, or other services to your cluster such as by using Operators, you are responsible for these services and for working with the appropriate provider to troubleshoot any issues.</li><li>Use the provided tools and features to [configure and deploy](/docs/containers?topic=containers-app); [keep up-to-date](/docs/containers?topic=containers-update_app#app_rolling); [set up resource requests and limits](/docs/containers?topic=containers-app#resourcereq); [size your worker pool](/docs/containers?topic=containers-strategy#sizing) to have enough resources to run your apps; [set up permissions](/docs/containers?topic=containers-users#users); [integrate with other services](/docs/containers?topic=containers-supported_integrations#supported_integrations); [externally serve](/docs/containers?topic=containers-cs_network_planning#cs_network_planning); [save, back up, and restore data](/docs/containers?topic=containers-storage_planning#storage_planning); and otherwise manage your [highly available](/docs/containers?topic=containers-ha#ha) and resilient workloads.</li></ul> |
 | Data | <ul><li>Maintain [platform-level standards](/docs/overview?topic=overview-security) so that your data can be stored with controls commensurate to leading international security compliance standards.</li><li>Provision clusters with Kubernetes components installed so that you can access the Kubernetes API to help manage your app data, such as with secrets and configmaps.</li><li>Integrate with {{site.data.keyword.cloud_notm}} services that you can use to store and manage your data, such as {{site.data.keyword.cloud_notm}} Databases or {{site.data.keyword.cos_short}}.</li><li>Integrate with {{site.data.keyword.ibmwatson_notm}} services that you can use to maximize the insights and use of your data with the latest artificial intelligence technology.</li></ul>| <ul><li>Maintain responsibility for your data and how your apps consume the data.</li></ul>
 {: summary="The rows are read from left to right. The resource area of comparing responsibilities is in the first column, with the responsibilities of IBM in the second column and your responsibilities in the third column."}
 {: caption="Table 7. Applications and data" caption-side="top"}
-
 
 
