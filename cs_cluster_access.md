@@ -435,6 +435,7 @@ As noted in the Kubernetes documentation, you can use admission controllers for 
 {: important}
 
 Keep in mind the following considerations when you configure a webhook.
+
 * Create [replica pods](/docs/containers?topic=containers-app#replicaset) for the webhook so that if one pod goes down, the webhook can still process requests from your resources. Spread the replica pods across zones, if possible.
 * Set appropriate CPU and memory [resource requests and limits](/docs/containers?topic=containers-app#resourcereq) for your webhook.
 * Add [liveness and readiness probes](/docs/containers?topic=containers-app#probe) to help make sure your webhook container is running and ready to serve requests.
