@@ -166,4 +166,4 @@ Review the following limitations for the managed Istio add-on.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
 * You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
 * The following features are not supported in the managed Istio add-on:
-  * [Any features by the community that are in alpha or beta release stages](https://istio.io/latest/about/feature-stages/){: external}
+  * [Any features by the community that are in alpha release stages](https://istio.io/latest/about/feature-stages/){: external}
