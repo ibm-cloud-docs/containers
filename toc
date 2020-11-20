@@ -77,6 +77,7 @@ Kubernetes Service
             cs_cluster_update.md
             cs_performance.md
             cs_remove.md
+            cs_costs.md
 
     {: .topicgroup}
     Securing cluster workloads
@@ -186,7 +187,6 @@ Kubernetes Service
         cs_integrations_service_binding.md
 
     cs_ha.md
-    cs_costs.md
     {: .navgroup-end}
 
     {: .navgroup id="reference"}

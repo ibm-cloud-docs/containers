@@ -658,6 +658,19 @@ subcollection: containers
 
 [Removing clusters](/docs/containers?topic=containers-remove)
 
+[Understanding costs for your clusters](/docs/containers?topic=containers-costs)
+* [Understanding costs by component](/docs/containers?topic=containers-costs#costs-for-clusters)
+  * [Worker nodes](/docs/containers?topic=containers-costs#nodes)
+  * [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
+  * [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
+  * [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
+  * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
+  * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
+  * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
+  * [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+* [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
+* [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
+
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
@@ -1557,27 +1570,6 @@ subcollection: containers
 * [4. Zone availability](/docs/containers?topic=containers-ha#ha-zone)
 * [5. Region availability](/docs/containers?topic=containers-ha#ha-region)
 * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
-
-
-## Managing costs for your clusters
-{: #sitemap_managing_costs_for_your_clusters}
-
-
-[Managing costs for your clusters](/docs/containers?topic=containers-costs)
-
-[Understanding costs for your clusters](/docs/containers?topic=containers-costs#costs-for-clusters)
-* [Worker nodes](/docs/containers?topic=containers-costs#nodes)
-* [Public bandwidth](/docs/containers?topic=containers-costs#bandwidth)
-* [Subnet IP addresses](/docs/containers?topic=containers-costs#subnet_ips)
-* [Multizone load balancer](/docs/containers?topic=containers-costs#mzlb_pricing)
-* [Storage](/docs/containers?topic=containers-costs#persistent_storage)
-* [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
-* [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
-* [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
-
-[Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
-
-[Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
 
 ## Community Kubernetes documentation
