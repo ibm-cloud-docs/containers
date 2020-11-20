@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-19"
+lastupdated: "2020-11-20"
 
 keywords: kubernetes, iks, clusters
 
@@ -448,7 +448,7 @@ Keep in mind the following considerations when you configure a webhook.
 
 **What other types of apps use admission controllers?**<br>
 Many cluster add-ons, plug-ins, and other third-party extensions create custom admission controllers. Some common ones include:
-*   [Container image security enforcement](/docs/Registry?topic=Registry-security_enforce)
+*   [Portieris](https://github.com/IBM/portieris){: external}
 *   [Istio](/docs/containers?topic=containers-istio-about)
 
 <br>

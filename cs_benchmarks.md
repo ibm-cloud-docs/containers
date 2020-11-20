@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-30"
+lastupdated: "2020-11-20"
 
 keywords: kubernetes, iks, containers
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -479,7 +480,7 @@ Review the following explanations and possible remediation actions that you can 
 | 5.2.9 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.3.2 | {{site.data.keyword.containershort}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy), and you can optionally [add your own network policies](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
 | 5.4.2 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | You can optionally [enable enforcing image security](/docs/Registry?topic=Registry-security_enforce#security_enforce). |
+| 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](https://github.com/IBM/portieris){: external}. |
 | 5.6.2 | {{site.data.keyword.containershort}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
 | 5.6.3 | {{site.data.keyword.containershort}} deploys some system components that do not set a pod or container `securityContext`. |
 | 5.6.4 | {{site.data.keyword.containershort}} deploys some Kubernetes resources to the default namespace. |
