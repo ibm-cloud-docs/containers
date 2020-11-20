@@ -1109,7 +1109,7 @@ subcollection: containers
   * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
 * [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-* [Registering a VPC load balancer hostname with a DNS subdomain](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
+* [Registering a VPC load balancer with a DNS subdomain and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
