@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-17"
+lastupdated: "2020-11-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -841,7 +842,7 @@ ibmcloud ks cluster config --cluster CLUSTER [--admin] [--network] [--skip-rbac]
 <dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--admin</code></dt>
-<dd>Optional: Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`.</dd>
+<dd>Optional: Download the TLS certificates and permission files for the Super User role. You can use the certs to automate tasks in a cluster without having to reauthenticate. The files are downloaded to `<user_home_directory>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name>-admin`.<br><br>**Note**: This flag is required when the `--endpoint link` flag is specified.</dd>
 
 <dt><code>--network</code></dt>
 <dd>Optional: Download the Calico configuration file, TLS certificates, and permission files that are required to run <code>calicoctl</code> commands in your cluster. **Note**: This option cannot be used with the <code>--yaml</code> option.</dd>
@@ -5129,13 +5130,13 @@ ibmcloud ks nlb-dns create vpc-classic --cluster CLUSTER --lb-host VPC_LB_HOSTNA
 <dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>--lb-host <em>VPC_LB_HOSTNAME</em></code></dt>
-<dd>The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
+<dd>Required: The VPC load balancer hostname. To see VPC load balancer hostnames, run `kubectl get svc -o wide`.</dd>
 
 <dt><code>--secret-namespace <em>NAMESPACE</em></code></dt>
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
 <dt><code>--type <em>(public|private)</em></code></dt>
-<dd>The subdomain type.</dd>
+<dd>The VPC load balancer type.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -5185,7 +5186,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER --lb-host VPC_LB_HOSTNAME 
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
 <dt><code>--type <em>(public|private)</em></code></dt>
-<dd>The subdomain type: public or private.</dd>
+<dd>The VPC load balancer type.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>

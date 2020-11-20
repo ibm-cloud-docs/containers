@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-11-18"
+lastupdated: "2020-11-20"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -6492,7 +6493,7 @@ The following table shows the changes that are included in patch 1.11.3_1533.
 <td>Cluster master HA update</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed the update to highly available (HA) masters for clusters that use admission webhooks such as `initializerconfigurations`, `mutatingwebhookconfigurations`, or `validatingwebhookconfigurations`. You might use these webhooks with Helm charts such as for [Container Image Security Enforcement](/docs/Registry?topic=Registry-security_enforce#security_enforce).</td>
+<td>Fixed the update to highly available (HA) masters for clusters that use admission webhooks such as `initializerconfigurations`, `mutatingwebhookconfigurations`, or `validatingwebhookconfigurations`. You might use these webhooks with Helm charts or admission controller projects such as [Portieris](https://github.com/IBM/portieris){: external}.</td>
 </tr>
 <tr>
 <td>{{site.data.keyword.cloud_notm}} Provider</td>

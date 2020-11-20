@@ -3,7 +3,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-02"
+lastupdated: "2020-11-18"
 
 keywords: kubernetes, iks, classic
 
@@ -45,6 +45,7 @@ subcollection: containers
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -124,6 +125,5 @@ As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not 
 |Troubleshooting and support|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [Debugging your clusters](/docs/containers?topic=containers-cs_troubleshoot) guide. For questions, try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.|Both classic and VPC clusters are supported through the same {{site.data.keyword.cloud_notm}} Support processes. For cluster issues, check out the [troubleshooting documentation](/docs/containers?topic=containers-cs_troubleshoot) for VPC-specific topics. For questions, try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.|
 {: caption="Infrastructure providers for {{site.data.keyword.containerlong_notm}} clusters"}
 {: summary="The rows are read from left to right, with the area of comparison in column one, classic infrastructure provider in column two, and VPC infrastructure provider in column three."}
-
 
 
