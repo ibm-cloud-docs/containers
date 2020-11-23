@@ -786,7 +786,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 1. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). VPC clusters that run Kubernetes version 1.19 or later must be created in the same resource group as the VPC. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
-   ibmcloud login -r <region> [--sso]
+   ibmcloud login -r <region> [-g <resource_group>] [--sso]
    ```
    {: pre}
 
@@ -1020,7 +1020,7 @@ As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not 
 
 1. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
-   ibmcloud login -r <region> [--sso]
+   ibmcloud login -r <region> [-g <resource_group>] [--sso]
    ```
    {: pre}
 
