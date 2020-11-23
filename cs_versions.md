@@ -353,7 +353,9 @@ The following table shows the actions that you must take before you update the K
   ```
   {: pre}
 
-3. If the resource groups match, continue with updating your cluster.<p class="important">If the cluster and VPC exist in different resource groups, you currently cannot update your cluster to version 1.19.
+3. If the resource groups match, continue with updating your cluster.
+
+<p class="important">If the cluster and VPC exist in different resource groups, you currently cannot update your cluster to version 1.19.
 
 | Type | Description|
 | ---- | ---------- |
