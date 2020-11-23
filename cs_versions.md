@@ -342,10 +342,10 @@ The following table shows the actions that you must take before you update the K
 **Before you begin**: In Kubernetes version 1.19, all load balancing functions require that the VPC and cluster exist in the same resource group. Before you begin the update process, check the resource group of your cluster and VPC.
 
 1. For your cluster, check the **Resource Group Name** and copy the ID of the VPC in the **VPCs** field.
-```
-ibmcloud ks cluster get -c <cluster_name_or_ID>
-```
-{: pre}
+  ```
+  ibmcloud ks cluster get -c <cluster_name_or_ID>
+  ```
+  {: pre}
 
 2. For the VPC, check the **Resource group** name.
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-19"
+lastupdated: "2020-11-23"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -4025,7 +4025,7 @@ ibmcloud ks ingress alb versions [--output json] [-q]
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+**Minimum required permissions**: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
@@ -6253,7 +6253,7 @@ ibmcloud ks quota ls [--provider PROVIDER] [--output json]
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+**Minimum required permissions**: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
@@ -6290,7 +6290,7 @@ ibmcloud ks subnets [--provider (classic | vpc-classic | vpc-gen2)] [--vpc-id <V
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+**Minimum required permissions**: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
@@ -6385,7 +6385,7 @@ ibmcloud ks vlan spanning get --region REGION [--output json] [-q]
 
 **Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
-**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+**Minimum required permissions**: **Viewer** platform role for {{site.data.keyword.containerlong_notm}}
 
 **Command options**:
 <dl>
