@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-18"
+lastupdated: "2020-11-23"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -337,6 +338,22 @@ Review changes that you might need to make when you update from the previous Kub
 
 The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
+
+**Before you begin**: In Kubernetes version 1.19, all load balancing functions require that the VPC and cluster exist in the same resource group. Before you begin the update process, check the resource group of your cluster and VPC.
+
+1. For your cluster, check the **Resource Group Name** and copy the ID of the VPC in the **VPCs** field.
+```
+ibmcloud ks cluster get -c <cluster_name_or_ID>
+```
+{: pre}
+
+2. For the VPC, check the **Resource group** name.
+  ```
+  ibmcloud is vpc <VPC_ID>
+  ```
+  {: pre}
+
+3. If the resource groups match, continue with updating your cluster.<p class="important">If the cluster and VPC exist in different resource groups, you currently cannot update your cluster to version 1.19.
 
 | Type | Description|
 | ---- | ---------- |
