@@ -671,6 +671,14 @@ subcollection: containers
 * [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
+[Using reservations to reduce classic worker node costs](/docs/containers?topic=containers-reservations)
+* [Understanding reservations](/docs/containers?topic=containers-reservations#ri-about)
+  * [Reservation usage and lifecycle](/docs/containers?topic=containers-reservations#ri-usage-lifecycle)
+  * [Billing and discounts](/docs/containers?topic=containers-reservations#ri-about-billing)
+* [Creating a reservation](/docs/containers?topic=containers-reservations#ri-create)
+* [Using a reservation in a cluster](/docs/containers?topic=containers-reservations#ri-use)
+* [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
+
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
