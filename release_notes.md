@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-20"
+lastupdated: "2020-11-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 23 November 2020 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1527](/docs/containers?topic=containers-changelog#1194_1527_worker), [1.18.12_1533](/docs/containers?topic=containers-changelog#11812_1533_worker), [1.17.14_1545](/docs/containers?topic=containers-changelog#11714_1545_worker), and [1.16.15_1552](/docs/containers?topic=containers-changelog#11615_1552_worker). |
 | 20 November 2020 | **New! Portieris for image security enforcement**: With the [open source Portieris project](https://github.com/IBM/portieris){: external}, you can set up a Kubernetes admission controller to enforce image security policies by namespace or cluster. Use Portieris instead of the [deprecated Container Image Security Enforcement Helm chart](/docs/Registry?topic=Registry-security_enforce). |
 | 19 November 2020 | **Ingress ALB changelog**: Updated the [`nginx-ingress` build to 653 and the `ingress-auth` build to 425](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image. |
 | 18 November 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.197](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Knative add-on deprecation**: As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes the open source capabilities of Knative.</li><li>**New! {{site.data.keyword.block_storage_is_short}} changelog**: Added a [changelog](/docs/containers?topic=containers-vpc_bs_changelog) for the {{site.data.keyword.block_storage_is_short}} add-on.</li></ul>|
