@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-16"
+lastupdated: "2020-11-24"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -151,7 +152,7 @@ The **Ingress Status** reflects the overall health of the Ingress components. Th
 |`ALBs cannot be created because no portable subnet is available`|Each ALB is created with a portable public or private IP address from the public or private subnet on the VLANs that your cluster is connected to. If no portable IP address is available, the ALB is not created. You might need to add a new subnet to your cluster or order a new VLAN. For troubleshooting information, see [Classic clusters: ALB does not deploy in a zone](#cs_subnet_limit).|
 |`All Ingress components are healthy`|The Ingress components are successfully deployed and are healthy.|
 |`Creating Ingress ALBs`|Your ALBs are currently deploying. Wait until your ALBs are fully deployed to review the health of your Ingress components. Note that ALB creation can take up to 15 minutes to complete. |
-|`Creating TLS certificate for Ingress subdomain. Ensure you have the correct IAM permissions.` |The default Ingress subdomain for your cluster is created with a default TLS certificate, which is stored in the **Ingress Secret**. The certificate is currently being created and stored in the default {{site.data.keyword.cloudcerts_long_notm}} instance for your cluster.<p class="note">When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console. If this message continues to be displayed, see [No Ingress secret exists after cluster creation](#ingress_secret).</p>|
+|`Creating TLS certificate for Ingress subdomain, which might take several minutes. Ensure you have the correct IAM permissions.` |The default Ingress subdomain for your cluster is created with a default TLS certificate, which is stored in the **Ingress Secret**. The certificate is currently being created and stored in the default {{site.data.keyword.cloudcerts_long_notm}} instance for your cluster.<p class="note">When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console. If this message continues to be displayed, see [No Ingress secret exists after cluster creation](#ingress_secret).</p>|
 |`Could not create a Certificate Manager instance. Ensure you have the correct IAM platform permissions.` | A default {{site.data.keyword.cloudcerts_long_notm}} instance for your cluster was not created to store the TLS certificate for the Ingress subdomain. The API key for the resource group and region that your cluster is in does not have the correct IAM permissions for {{site.data.keyword.cloudcerts_short}}. For troubleshooting steps, see [No Ingress secret exists after cluster creation](#ingress_secret).|
 |`Could not upload certificates to Certificate Manager instance. Ensure you have the correct IAM service permissions.`|The TLS certificate for your cluster's default Ingress subdomain is created, but cannot be stored in the default {{site.data.keyword.cloudcerts_long_notm}} instance for your cluster. The API key for the resource group and region that your cluster is in does not have the correct IAM permissions for {{site.data.keyword.cloudcerts_short}}. For troubleshooting steps, see [No Ingress secret exists after cluster creation](#ingress_secret).|
 |`Ingress is not supported for free clusters`|In a free cluster, you can expose your app only by using a [NodePort service](/docs/containers?topic=containers-nodeport).|
@@ -384,7 +385,7 @@ Typically, after the cluster is ready, the Ingress subdomain and secret are crea
 {: tsSymptoms}
 When you run `ibmcloud ks ingress status -c <cluster_name_or_ID>`, one of the following messages continues to be displayed:
 ```
-Creating TLS certificate for Ingress subdomain. Ensure you have the correct IAM permissions.
+Creating TLS certificate for Ingress subdomain, which might take several minutes. Ensure you have the correct IAM permissions.
 ```
 {: screen}
 ```
@@ -1040,7 +1041,7 @@ Option 3: If you are not using all the subnets in the VLAN, you can reuse subnet
 
 3. Verify that the subnet was successfully created and added to your cluster. The subnet CIDR is listed in the **Subnet VLANs** section.
     ```
-    ibmcloud ks cluster get --show-resources <cluster_name_or_ID>
+    ibmcloud ks cluster get --cluster <cluster_name> --show-resources
     ```
     {: pre}
 

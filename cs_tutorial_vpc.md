@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-11-24"
 
 keywords: kubernetes, iks
 
@@ -18,6 +18,7 @@ completion-time: 30m
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -26,6 +27,7 @@ completion-time: 30m
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -43,7 +45,6 @@ completion-time: 30m
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -77,7 +78,6 @@ completion-time: 30m
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -89,6 +89,7 @@ completion-time: 30m
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -147,7 +148,6 @@ Install the command-line tools.
 
 <br />
 
-
 ## Create a cluster in VPC
 {: #vpc_ks_create_vpc_cluster}
 {: step}
@@ -155,9 +155,9 @@ Install the command-line tools.
 Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
 {: shortdesc}
 
-1.  Log in to the {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). The VPC can be in a separate resource group than the resource group of your cluster. If you have a federated ID, include the `--sso` flag.
+1.  Log in to the account, resource group, and {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). VPC clusters that run Kubernetes version 1.19 or later must be created in the same resource group as the VPC. If you have a federated ID, include the `--sso` flag.
     ```
-    ibmcloud login -r us-south [--sso]
+    ibmcloud login -r us-south [-g <resource_group>] [--sso]
     ```
     {: pre}
 
@@ -209,7 +209,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 4.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
     ```
-    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.17 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
+    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.18.12 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
 
@@ -240,7 +240,6 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         {: screen}
 
 <br />
-
 
 ## Deploy a privately available app
 {: #vpc_ks_app}
@@ -455,7 +454,6 @@ To deploy the app:
 
 <br />
 
-
 ## Set up a Load Balancer for VPC to expose your app publicly
 {: #vpc_ks_vpc_lb}
 {: step}
@@ -574,7 +572,6 @@ When you create a Kubernetes `LoadBalancer` service in your cluster, a load bala
     {: screen}
 
 <br />
-
 
 ## What's next?
 {: #vpc_ks_next}

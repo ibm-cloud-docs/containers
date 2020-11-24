@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-04"
+lastupdated: "2020-11-24"
 
 keywords: kubernetes, iks
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -248,8 +249,8 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
     </td>
   </tr>
   <tr>
-    <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet`</td>
-    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.<p class="note">In VPC clusters that run Kubernetes version 1.18, you cannot use the `vpc-subnet` annotation if you enable the PROXY protocol.</p></td>
+    <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets`</td>
+    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.<p class="note">In clusters that run Kubernetes version 1.18, you cannot use the `vpc-subnet` annotation if you enable the PROXY protocol, or if your VPC and cluster are not in the same resource group.</p></td>
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>
@@ -543,18 +544,18 @@ Do not delete the subnets that you attached to your cluster during cluster creat
 
 <br />
 
-## Registering a VPC load balancer hostname with a DNS subdomain
+## Registering a VPC load balancer with a DNS subdomain and TLS certificate
 {: #vpc_lb_dns}
 
-The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want an SSL certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain.
+The VPC load balancer provides a default HTTP hostname in the format `1234abcd-<region>.lb.appdomain.cloud` through which you can access your app. However, if you want a TLS certificate for your app domain to support HTTPS, you can create an IBM-provided subdomain or bring your own custom domain for both public and private VPC load balancers.
 {: shortdesc}
 
-After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default health check that is provided for the default load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc?topic=vpc-alb-health-checks).
+After you create a DNS subdomain for a VPC load balancer hostname, you cannot use `nlb-dns health-monitor` commands to create a custom health check. Instead, the default VPC load balancer health check that is provided for the default VPC load balancer hostname is used. For more information, see the [VPC documentation](/docs/vpc?topic=vpc-alb-health-checks).
 {: note}
 
 Before you begin:
-* [Set up a VPC application load balancer](#setup_vpc_ks_vpc_lb) or [VPC network load balancer](#setup_vpc_nlb). Ensure that you define an HTTPS port in your Kubernetes `LoadBalancer` service that configures the load balancer.
-* To use the SSL certificate to access your app via HTTPS, your app must be able to terminate TLS connections.
+* [Set up a VPC application load balancer](#setup_vpc_ks_vpc_lb) or [VPC network load balancer](#setup_vpc_nlb). Ensure that you define an HTTPS port in your Kubernetes `LoadBalancer` service that configures the VPC load balancer.
+* To use the TLS certificate to access your app via HTTPS, your app must be able to terminate TLS connections.
 
 To register a VPC load balancer hostname with a DNS subdomain:
 
@@ -572,9 +573,9 @@ To register a VPC load balancer hostname with a DNS subdomain:
   ```
   {: screen}
 
-2. Create a DNS subdomain for the hostname.
-  * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with an SSL certificate for the load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard SSL certificate for the subdomain for you.
-    1. Create a DNS subdomain and SSL certificate.
+2. Create a DNS subdomain for the load balancer hostname.
+  * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with a TLS certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard TLS certificate for the subdomain for you.
+    1. Create a DNS subdomain and TLS certificate.
       * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
         ```
         ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
@@ -605,7 +606,7 @@ To register a VPC load balancer hostname with a DNS subdomain:
 
 3. If you created a subdomain for a public VPC load balancer, open a web browser and enter the URL to access your app through the subdomain. If you created a subdomain for a private VPC application load balancer, you must be [connected to your private VPC network](/docs/vpc?topic=vpc-vpn-onprem-example) to test access to your subdomain.
 
-To use the SSL certificate to access your app via HTTPS, ensure that you defined an HTTPS port in your [Kubernetes `LoadBalancer` service](#setup_vpc_ks_vpc_lb). You can verify that requests are correctly routing through the HTTPS port by running `curl -v --insecure https://<domain>`. A connection error indicates that no HTTPS port is open on the service. Also, ensure that TLS connections can be terminated by your app. You can verify that your app terminates TLS properly by running `curl -v https://<domain>`. A certificate error indicates that your app is not properly terminating TLS connections.
+To use the TLS certificate to access your app via HTTPS, ensure that you defined an HTTPS port in your [Kubernetes `LoadBalancer` service](#setup_vpc_ks_vpc_lb). You can verify that requests are correctly routing through the HTTPS port by running `curl -v --insecure https://<domain>`. A connection error indicates that no HTTPS port is open on the service. Also, ensure that TLS connections can be terminated by your app. You can verify that your app terminates TLS properly by running `curl -v https://<domain>`. A certificate error indicates that your app is not properly terminating TLS connections.
 {: tip}
 
 <br />
