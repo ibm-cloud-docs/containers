@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-17"
+lastupdated: "2020-11-25"
 
 keywords: kubernetes, iks, helm
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -109,6 +110,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |{{site.data.keyword.cloud_notm}} Classic Block Storage|Block storage|[{{site.data.keyword.cloud_notm}} Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |{{site.data.keyword.block_storage_is_short}}|Block storage|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc?topic=vpc-creating-block-storage) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on {{site.data.keyword.block_storage_is_short}} (Gen 1 compute)](/docs/containers?topic=containers-vpc-block)||<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloudcerts_full_notm}}|TLS certificates|You can use [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-getting-started#getting-started){:external} to store and manage SSL certificates for your apps. For more information, see [Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates](https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+| {{site.data.keyword.codeenginefull_notm}} (beta) | {{site.data.keyword.codeengineshort}} is a fully managed, serverless platform that runs your containerized workloads, including web apps, micro-services, event-driven functions, or batch jobs. {{site.data.keyword.codeengineshort}} even builds container images for you from your source code. Because these workloads are all hosted within the same Kubernetes infrastructure, all of them can seamlessly work together. For more information, see [Getting started with {{site.data.keyword.codeenginefull_notm}} (Beta)](/docs/codeengine). |
 |{{site.data.keyword.registrylong_notm}}|Container images|Set up your own secured Docker image repository where you can safely store and share images between cluster users. For more information, see the [{{site.data.keyword.registrylong}} documentation](/docs/Registry?topic=Registry-getting-started){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloud_notm}} {{site.data.keyword.contdelivery_short}}|Build automation|Automate your app builds and container deployments to Kubernetes clusters by using a toolchain. For more information about the setup, see the blog [Deploy Kubernetes pods to the {{site.data.keyword.containerlong_notm}} using DevOps Pipelines](https://developer.ibm.com/recipes/tutorials/deploy-kubernetes-pods-to-the-bluemix-container-service-using-devops-pipelines/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.datashield_full_notm}}|Memory encryption|You can use [{{site.data.keyword.datashield_short}}](/docs/data-shield?topic=data-shield-getting-started#getting-started){:external} to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
