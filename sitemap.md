@@ -1834,6 +1834,9 @@ subcollection: containers
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
+[Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
+* [Changelog for 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
+
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.15 changelog (unsupported 22 September 2020)](/docs/containers?topic=containers-changelog_archive#115_changelog)
   * [Changelog for worker node fix pack 1.15.12_1552, released 14 September 2020](/docs/containers?topic=containers-changelog_archive#11512_1552)
