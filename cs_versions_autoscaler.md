@@ -105,7 +105,7 @@ Refer to the following tables for a summary of changes for each version of the [
 
 | Cluster autoscaler add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
-| 1.0.1 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15 - 1.20.</li></ul> |
+| 1.0.1 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15 - 1.20</li></ul> |
 {: summary="The rows are read from left to right. The first column is the cluster autoscaler add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the cluster autoscaler version is supported for."}
 
 ## Changelog for 1.0.1, released 15 August 2020
