@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-19"
+lastupdated: "2020-12-01"
 
 keywords: kubernetes, iks, ingress
 
@@ -93,7 +93,7 @@ subcollection: containers
 
 
 
-# {{site.data.keyword.containerlong_notm}} Ingress annotations
+# Deprecated: {{site.data.keyword.containerlong_notm}} Ingress annotations
 {: #ingress_annotation}
 
 To add capabilities to your Ingress application load balancer (ALB), you can specify annotations as metadata in an Ingress resource.
@@ -102,8 +102,9 @@ To add capabilities to your Ingress application load balancer (ALB), you can spe
 
 
 
-These custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are applicable for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image only. If your ALBs run the [Kubernetes Ingress image instead](/docs/containers?topic=containers-ingress-types), {{site.data.keyword.containerlong_notm}} annotations are not supported. You must instead use [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
-{: important}
+These custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are applicable for ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image only. As of 01 December 2020, the custom {{site.data.keyword.containerlong_notm}} Ingress image is deprecated. For ALBs that run the [Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types), {{site.data.keyword.containerlong_notm}} annotations are not supported. You must instead use [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations) (`nginx.ingress.kubernetes.io/<annotation>`) in your Ingress resources.
+{: deprecated}
+
 
 
 |General annotations|Name|Description|
