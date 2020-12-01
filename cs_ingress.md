@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-19"
+lastupdated: "2020-12-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -93,14 +93,14 @@ subcollection: containers
 
 
 
-# Setting up {{site.data.keyword.containerlong_notm}} Ingress
+# Deprecated: Setting up {{site.data.keyword.containerlong_notm}} Ingress
 {: #ingress}
 
 Expose multiple apps in your Kubernetes cluster by creating Ingress resources that are managed by the IBM-provided application load balancer in {{site.data.keyword.containerlong}}.
 {: shortdesc}
 
-This information is for ALBs that run the custom {{site.data.keyword.containerlong_notm}} Ingress image. To use the community Kubernetes implementation of Ingress, see [Setting up community Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
-{: note}
+This information is for ALBs that run the custom {{site.data.keyword.containerlong_notm}} Ingress image. As of 01 December 2020, the custom {{site.data.keyword.containerlong_notm}} Ingress image is deprecated. To use the community Kubernetes implementation of Ingress, see [Setting up community Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+{: deprecated}
 
 ## Quick start
 {: #ingress-qs}
@@ -1408,13 +1408,17 @@ Choose the image type and image version for your ALBs, and keep the image versio
 
 
 
-As of 24 August 2020, {{site.data.keyword.containerlong_notm}} supports two types of NGINX Ingress controller images for the Ingress application load balancers (ALBs) in your cluster: the {{site.data.keyword.containerlong_notm}} Ingress image, and the Kubernetes Ingress image.
+As of 01 December 2020, {{site.data.keyword.containerlong_notm}} primarily supports the Kubernetes Ingress image for the Ingress application load balancers (ALBs) in your cluster. The Kubernetes Ingress image is built on the community Kubernetes project's implementation of the NGINX Ingress controller. The previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which was built on a custom implementation of the NGINX Ingress controller, is deprecated.
 {: shortdesc}
 
-- The **{{site.data.keyword.containerlong_notm}} Ingress image** is built on a custom implementation of the NGINX Ingress controller.
-- The **Kubernetes Ingress image** is built on the community Kubernetes project's implementation of the NGINX Ingress controller.
+**Clusters created on or after 01 December 2020**: Default application load balancers (ALBs) run the Kubernetes Ingress image in all new {{site.data.keyword.containerlong_notm}} clusters.
 
-Depending on which image type you choose, the ALB behaves according to that implementation of the NGINX Ingress controller.
+**Clusters created before 01 December 2020**:
+* Existing clusters with ALBs that run the custom IBM Ingress image continue to operate as-is.
+* Support for the custom IBM Ingress image ends in 6 months on 30 April 2021.
+* You must move to the new Kubernetes Ingress by migrating any existing Ingress setups. Your existing ALBs and other Ingress resources are not automatically migrated to the new Kubernetes Ingress image.
+* You can easily migrate to Kubernetes Ingress by using the [migration tool](#alb-type-migration) that is developed and supported by IBM Cloud Kubernetes Service.
+* If you do not move to Kubernetes Ingress before 30 April 2020, ALBs that run the custom IBM Ingress image continue to run, but all support from IBM Cloud for those ALBs is discontinued.
 
 You can manage the versions of your ALBs in the following ways:
 * When you create a new ALB, enable an ALB that was previously disabled, or manually update an ALB, you can specify an image version for your ALB in the `--version` flag.

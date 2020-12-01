@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-11-30"
+lastupdated: "2020-12-01"
 
 keywords: containers
 subcollection: containers
@@ -1191,7 +1191,7 @@ subcollection: containers
 * [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images)
   * [Similarities between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-same)
   * [Differences between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-diff)
-* [Creating ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
+* [Exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
 * [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
   * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
@@ -1200,6 +1200,8 @@ subcollection: containers
   * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
   * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
+  * [Default Ingress classes for public and private ALBs](/docs/containers?topic=containers-ingress-types#ingress-class-default)
+  * [Custom Ingress classes](/docs/containers?topic=containers-ingress-types#ingress-class-custom)
 * [Customizing routing and settings by using annotations and configmaps](/docs/containers?topic=containers-ingress-types#cm-annotations)
 * [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update)
   * [Choosing a supported image version](/docs/containers?topic=containers-ingress-types#alb-version-choose)
@@ -1224,7 +1226,7 @@ subcollection: containers
   * [Changing the number of open files for worker processes](/docs/containers?topic=containers-comm-ingress-annotations#max-worker-files)
   * [Tuning kernel performance](/docs/containers?topic=containers-comm-ingress-annotations#ingress_kernel)
 
-[Setting up {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress)
+[Deprecated: Setting up {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress)
 * [Quick start](/docs/containers?topic=containers-ingress#ingress-qs)
 * [Prerequisites](/docs/containers?topic=containers-ingress#config_prereqs)
 * [Planning networking for single or multiple namespaces](/docs/containers?topic=containers-ingress#multiple_namespaces)
@@ -1269,7 +1271,7 @@ subcollection: containers
 * [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress#migrate-alb-vlan)
 * [Increasing the restart readiness check time for ALB pods](/docs/containers?topic=containers-ingress#readiness-check)
 
-[{{site.data.keyword.containerlong_notm}} Ingress annotations](/docs/containers?topic=containers-ingress_annotation)
+[Deprecated: {{site.data.keyword.containerlong_notm}} Ingress annotations](/docs/containers?topic=containers-ingress_annotation)
 * [General annotations](/docs/containers?topic=containers-ingress_annotation#general)
   * [Custom error actions (`custom-errors`, `custom-error-actions`)](/docs/containers?topic=containers-ingress_annotation#custom-errors)
   * [Location snippets (`location-snippets`)](/docs/containers?topic=containers-ingress_annotation#location-snippets)
@@ -1322,7 +1324,7 @@ subcollection: containers
   * [Changing the pending connections backlog](/docs/containers?topic=containers-ingress_annotation#backlog)
   * [Tuning kernel performance](/docs/containers?topic=containers-ingress_annotation#ingress_kernel)
 
-[Logging and monitoring {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress_health)
+[Deprecated: Logging and monitoring {{site.data.keyword.containerlong_notm}} Ingress](/docs/containers?topic=containers-ingress_health)
 * [Viewing Ingress logs](/docs/containers?topic=containers-ingress_health#ingress_logs)
 * [Customizing Ingress log content and format](/docs/containers?topic=containers-ingress_health#ingress_log_format)
 * [Monitoring the Ingress ALB](/docs/containers?topic=containers-ingress_health#ingress_monitoring)
@@ -1783,7 +1785,7 @@ subcollection: containers
   * [Version 0.34.1 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
-* [{{site.data.keyword.containerlong_notm}} Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
+* [Deprecated: {{site.data.keyword.containerlong_notm}} Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
@@ -2393,6 +2395,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[December 2020](/docs/containers?topic=containers-iks-release#dec20)
 
 [November 2020](/docs/containers?topic=containers-iks-release#nov20)
 
