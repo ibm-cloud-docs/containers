@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-23"
+lastupdated: "2020-12-03"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -1044,7 +1044,7 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 
 **Example:**
 ```
-ibmcloud sat cluster create satellite --name mysatcluster --location mylocation --version 4.4_openshift
+ibmcloud sat cluster create satellite --name mysatcluster --location mylocation --version 4.5_openshift
 ```
 {: pre}
 
@@ -5066,7 +5066,7 @@ Publicly expose your app by creating a DNS subdomain to register a network load 
 {: shortdesc}
 
 ```
-ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--secret-namespace NAMESPACE] [--type public] [--output json] [-q]
+ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP --ip NLB3_IP ...] [--secret-namespace NAMESPACE] --type public [--output json] [-q]
 ```
 {: pre}
 
