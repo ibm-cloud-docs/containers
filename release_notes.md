@@ -109,7 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 03 December 2020 | <ul><li>**Istio add-on**: Versions [1.6.14](/docs/containers?topic=containers-istio-changelog#1614) and [1.7.5](/docs/containers?topic=containers-istio-changelog#175) of the Istio managed add-on are released.</li><li>**Cluster autoscaler**: Patch update `1.0.1_146` is available. For more information, see the [Cluster autoscaler add-on changelog](/docs/openshift?topic=openshift-ca_changelog).</li></ul> |
+| 03 December 2020 | <ul><li>**Istio add-on**: Versions [1.6.14](/docs/containers?topic=containers-istio-changelog#1614) and [1.7.5](/docs/containers?topic=containers-istio-changelog#175) of the Istio managed add-on are released.</li><li>**Cluster autoscaler add-on**: Patch update `1.0.1_146` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/openshift?topic=openshift-ca_changelog).</li></ul> |
 | 01 December 2020 | **Default Kubernetes Ingress image**: In all new {{site.data.keyword.containerlong_notm}} clusters, default application load balancers (ALBs) now run the Kubernetes Ingress image. In existing clusters, ALBs continue to run the previously supported {{site.data.keyword.containerlong_notm}} Ingress image, which is now deprecated. For more information and migration actions, see [Setting up Kubernetes Ingress](/docs/containers?topic=containers-ingress-types). |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in December 2020"}
