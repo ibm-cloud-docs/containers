@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-24"
+lastupdated: "2020-12-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -98,8 +98,6 @@ subcollection: containers
 
 Modify default ALB settings and add annotations to your Ingress resources for ALBs that run the Kubernetes Ingress image.
 {: shortdesc}
-
-
 
 ## Customizing routing with annotations
 {: #annotations}
@@ -1428,4 +1426,3 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
-

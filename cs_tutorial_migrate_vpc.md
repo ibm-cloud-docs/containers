@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-12-03"
 
 keywords: kubernetes, iks
 
@@ -18,6 +18,7 @@ completion-time: 90m
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -26,6 +27,7 @@ completion-time: 90m
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -43,7 +45,6 @@ completion-time: 90m
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -77,7 +78,6 @@ completion-time: 90m
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -89,6 +89,7 @@ completion-time: 90m
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -165,7 +166,6 @@ This tutorial is for administrators who want to migrate cluster workloads off of
   {: pre}
 
 <br />
-
 
 ## Plan your migration to VPC Gen 2
 {: #vpc_migrate_plan}
@@ -252,7 +252,6 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
 
 <br />
 
-
 ## Create your Gen 2 VPC, resources, and cluster
 {: #vpc_migrate_create_gen2}
 {: step}
@@ -324,7 +323,6 @@ While the cluster is creating, continue to the next step.
 
 <br />
 
-
 ## Set up an {{site.data.keyword.cos_short}} bucket
 {: #vpc_migrate_cos}
 {: step}
@@ -384,7 +382,6 @@ Create an {{site.data.keyword.cos_full_notm}} service instance and bucket to sto
   {: pre}
 
 <br />
-
 
 ## Create a Velero backup of your Gen 1 cluster
 {: #vpc_migrate_velero_gen1}
@@ -482,7 +479,6 @@ Set up Velero on your VPC Gen 1 cluster and create backups to {{site.data.keywor
 
 <br />
 
-
 ## Restore a Velero backup to your Gen 2 cluster
 {: #vpc_migrate_velero_gen2}
 {: step}
@@ -567,12 +563,11 @@ Set up Velero on your VPC Gen 2 cluster and restore the backups of your resource
       {: pre}
     * Resources in each namespace:
       ```
-      kubectl get all -n namespace
+      kubectl get all -n <namespace>
       ```
       {: pre}
 
 <br />
-
 
 ## What's next?
 {: #vpc_migrate_whats-next}
@@ -591,4 +586,3 @@ Set up Velero on your VPC Gen 2 cluster and restore the backups of your resource
     {: pre}
 * If you created VPC subnets in multiple zones for your VPC Gen 2 cluster, [spread your worker nodes by adding a zone to your cluster](/docs/containers?topic=containers-add_workers#vpc_pools).
 * For other common tasks to finish setting up your VPC Gen 2 cluster, check out the learning paths for [administrators](/docs/containers?topic=containers-learning-path-admin) and [developers](/docs/containers?topic=containers-learning-path-dev).
-
