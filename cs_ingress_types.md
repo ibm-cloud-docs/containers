@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-02"
+lastupdated: "2020-12-03"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1140,4 +1140,3 @@ Note that all public ALBs in your cluster share the same IBM-assigned Ingress su
   {: screen}
 
 7. Optional: If you no longer need the subnets on the old VLANs, you can [remove them](/docs/containers?topic=containers-subnets#remove-subnets).
-
