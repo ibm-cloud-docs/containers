@@ -689,8 +689,9 @@ subcollection: containers
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
 * [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
   * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
-  * [Enabling or rotating KMS encryption through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-  * [Enabling or rotating KMS encryption through the console](/docs/containers?topic=containers-encryption#kms_ui)
+  * [Enabling KMS encryption through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
+  * [Enabling KMS encryption through the console](/docs/containers?topic=containers-encryption#kms_ui)
+  * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
 * [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
 
