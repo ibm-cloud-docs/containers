@@ -2386,6 +2386,7 @@ subcollection: containers
   * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-catalog)
   * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-cluster)
   * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-cs_troubleshoot_storage#px-support)
+* [Portworx: Encryption set up fails due to invalid KMS endpoint](/docs/containers?topic=containers-cs_troubleshoot_storage#px-kms-endpoint)
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help_storage)
 
 [Getting help](/docs/containers?topic=containers-get-help)
