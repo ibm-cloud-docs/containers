@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -262,7 +262,7 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress fields:
     ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
     ```
     {: screen}
-* `ibm-k8s-controller-config` configmap [field](/docs/containers?topic=containers-ingress_annotation#custom-port):
+* `ibm-cloud-provider-ingress-cm` configmap [field](/docs/containers?topic=containers-ingress_annotation#custom-port):
     ```
     public-ports: "80;443;9443"
     ```
