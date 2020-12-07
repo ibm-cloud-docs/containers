@@ -864,7 +864,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 2. Create a configmap to customize the Ingress deployment.
 
-  1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify the following options.
+  1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and do not need to specify all of the settings.
      ```yaml
      apiVersion: v1
      kind: ConfigMap
