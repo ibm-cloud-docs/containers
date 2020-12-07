@@ -2306,6 +2306,7 @@ subcollection: containers
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
 * [Debugging the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#debug_cluster_autoscaler)
+* [Cluster autoscaler add-on deployment fails and the `ibm-iks-cluster-autoscaler` pod is stuck in the `Init` state](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#ca_ts_secret)
 
 [Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network)
 * [Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck)
