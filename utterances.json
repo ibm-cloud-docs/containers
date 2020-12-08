@@ -109,16 +109,6 @@
     "How to list the IBM Cloud Helm repositories currently available ",
     "Cannot install a Helm chart"
   ],
-  "cs_tiller_install": [
-    "Issues with installing Tiller for Helm v2",
-    "can't install Tiller for Helm version 2",
-    "Installation fails when deploying containers from public images in a cluster",
-    "can't deploy images from public registries for kubernetes",
-    "Error Failed to pull image gcr.io/kubernetes-helm/tiller:v2.12.0: rpc error",
-    "How to fix installation issue with Tiller for Helm version 2",
-    "Kubernetes error: failed to resolve image gcr.io/kubernetes-helm/tiller:v2.12.0: no available",
-    "Failed to pull image error when installing helm"
-  ],
   "debug_addons": [
     "check the health state and status of a kubernetes cluster add-on",
     "Add-on health state and its descriptions in kubernetes",

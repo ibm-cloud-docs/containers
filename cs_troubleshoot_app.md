@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-24"
+lastupdated: "2020-12-08"
 
 keywords: kubernetes, iks, help
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,12 +40,12 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -71,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -83,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -177,7 +179,6 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
       {: pre}
 
 <br />
-
 
 
 
@@ -400,7 +401,6 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
 
 <br />
 
-
 ## Containers do not start
 {: #containers_do_not_start}
 
@@ -416,7 +416,6 @@ Containers might not start when the registry quota is reached.
 <br />
 
 
-
 ## Pods fail to deploy because of a pod security policy
 {: #cs_psp}
 
@@ -429,7 +428,7 @@ unable to validate against any pod security policy
 {: screen}
 
 {: tsCauses}
-[The `PodSecurityPolicy` admission controller](/docs/containers?topic=containers-psp) checks the authorization of the user or service account, such as a deployment or Helm tiller, that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
+[The `PodSecurityPolicy` admission controller](/docs/containers?topic=containers-psp) checks the authorization of the user or service account that tried to create the pod. If no pod security policy supports the user or service account, then the `PodSecurityPolicy` admission controller prevents the pods from being created.
 
 If you deleted one of the pod security policy resources for [{{site.data.keyword.IBM_notm}} cluster management](/docs/containers?topic=containers-psp#ibm_psp), you might experience similar issues.
 
@@ -447,7 +446,6 @@ If you deleted an {{site.data.keyword.IBM_notm}} cluster management resource, re
     {: pre}
 
 <br />
-
 
 
 ## Pods remain in pending state
@@ -525,7 +523,6 @@ If this cluster is an existing one, check your cluster capacity.
 
 
 
-
 ## Pods repeatedly fail to restart or are unexpectedly removed
 {: #pods_fail}
 
@@ -595,7 +592,6 @@ To see if your pod is being replaced by higher priority pods:
 
 <br />
 
-
 ## Binding a service to a cluster results in same name error
 {: #cs_duplicate_services}
 
@@ -635,7 +631,6 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
   {: pre}
 
 <br />
-
 
 ## Binding a service to a cluster results in service not found error
 {: #cs_not_found_services}
@@ -704,7 +699,6 @@ To bind services to a cluster, you must have the Cloud Foundry developer user ro
 
 <br />
 
-
 ## Binding a service to a cluster results in service does not support service keys error
 {: #cs_service_keys}
 
@@ -725,7 +719,6 @@ Some services in {{site.data.keyword.cloud_notm}}, such as {{site.data.keyword.k
 To integrate services that do not support service keys, check if the service provides an API that you can use to access the service directly from your app. For example, if you want to use {{site.data.keyword.keymanagementservicelong}}, see the [API reference](https://cloud.ibm.com/apidocs/key-protect){: external}.
 
 <br />
-
 
 ## Cannot install a Helm chart with updated configuration values
 {: #cs_helm_install}
@@ -753,36 +746,10 @@ To troubleshoot your Helm chart:
     helm repo remove <helm_repo>
     ```
     {: pre}
-3.  Reinstall the Helm version that matches a supported version of the Helm chart that you want to install. As part of the reinstallation, you add and update the {{site.data.keyword.cloud_notm}} Helm repositories.
-    * **Helm v3**: See [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3).
-    * **Helm v2**: See [Installing Helm v2 in your cluster](/docs/containers?topic=containers-helm#install_v2).
+3.  Reinstall the Helm version that matches a supported version of the Helm chart that you want to install. As part of the reinstallation, you add and update the {{site.data.keyword.cloud_notm}} Helm repositories. For more information, see [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3).
+
 
 Now, you can follow the instructions in the Helm chart `README` to install the Helm chart in your cluster.
-
-<br />
-
-
-## Cannot install Tiller for Helm version 2 or deploy containers from public images in a cluster
-{: #cs_tiller_install}
-
-{: tsSymptoms}
-
-When you try to install Tiller for Helm version 2 or want to deploy images from public registries, such as DockerHub, the installation fails with an error similar to the following:
-
-```
-Failed to pull image "gcr.io/kubernetes-helm/tiller:v2.12.0": rpc error: code = Unknown desc = failed to resolve image "gcr.io/kubernetes-helm/tiller:v2.12.0": no available registry endpoint:
-```
-{: screen}
-
-{: tsCauses}
-You might have set up a custom firewall, specified custom Calico policies, or created a private-only cluster by using the private service endpoint that block public network connectivity to the container registry where the image is stored.
-
-{: tsResolve}
-- If you have a custom firewall or set custom Calico policies, allow outbound and inbound network traffic between your worker nodes and the container registry where the image is stored. If the image is stored in {{site.data.keyword.registrylong_notm}}, review the required ports in [Allowing the cluster to access infrastructure resources and other services](/docs/containers?topic=containers-firewall#firewall_outbound).
-- If you created a private cluster by enabling the private service endpoint only, you can [enable the public service endpoint](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_disable) for your cluster. If want to install Helm charts in a private cluster without opening up a public connection, you can install Helm [with Tiller](/docs/containers?topic=containers-helm#private_local_tiller) or [without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
-
-    [Helm v3 was released on 13 November 2019](https://helm.sh/blog/helm-3-released/){: external}. Tiller is removed in Helm v3. Install Helm v2 only if you have specific requirements to use Helm v2 in your cluster. Otherwise, [install the latest release of Helm v3](/docs/containers?topic=containers-helm#install_v3).
-    {: note}
 
 <br />
 

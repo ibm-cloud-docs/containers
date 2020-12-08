@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-30"
+lastupdated: "2020-12-08"
 
 keywords: kubernetes, iks, vpn, icp
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,12 +40,12 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -71,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -83,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -115,7 +117,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.cloud_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_3.2.0.0/cam_integrate_IKS.html){: external}. When you deploy a cluster with CAM, the Helm tiller is automatically installed for you.
+    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_3.2.0.0/cam_integrate_IKS.html){: external}. When you deploy a cluster with CAM, Helm is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
 
@@ -186,7 +188,6 @@ To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.da
 
 <br />
 
-
 ## Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers
 {: #hybrid_ppa_importer}
 
@@ -212,7 +213,7 @@ Before you begin:
 - [Install the {{site.data.keyword.registryshort}} CLI plug-in (`ibmcloud cr`)](/docs/Registry?topic=Registry-registry_setup_cli_namespace#cli_namespace_registry_cli_install).
 - [Set up a namespace in {{site.data.keyword.registryshort}}](/docs/Registry?topic=Registry-registry_setup_cli_namespace#registry_namespace_setup) or retrieve your existing namespace by running `ibmcloud cr namespaces`.
 - [Target your `kubectl` CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
-- [Install the Helm CLI and set up tiller in your cluster](/docs/containers?topic=containers-helm#public_helm_install).
+- [Install the Helm CLI](/docs/containers?topic=containers-helm#public_helm_install).
 
 To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{site.data.keyword.cloud_notm}} Public:
 
