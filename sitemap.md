@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-08"
 
 keywords: containers
 subcollection: containers
@@ -689,8 +689,9 @@ subcollection: containers
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
 * [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
   * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
-  * [Enabling or rotating KMS encryption through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-  * [Enabling or rotating KMS encryption through the console](/docs/containers?topic=containers-encryption#kms_ui)
+  * [Enabling KMS encryption through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
+  * [Enabling KMS encryption through the console](/docs/containers?topic=containers-encryption#kms_ui)
+  * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
 * [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
 
@@ -1671,6 +1672,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.4_1528, released 7 December 2020](/docs/containers?topic=containers-changelog#1194_1528)
   * [Changelog for worker node fix pack 1.19.4_1527, released 23 November 2020](/docs/containers?topic=containers-changelog#1194_1527_worker)
   * [Changelog for master fix pack 1.19.4_1527, released 16 November 2020](/docs/containers?topic=containers-changelog#1194_1527)
   * [Changelog for worker node fix pack 1.19.3_1526, released 9 November 2020](/docs/containers?topic=containers-changelog#1193_1526)
@@ -1678,6 +1680,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.12_1534, released 7 December 2020](/docs/containers?topic=containers-changelog#11812_1534)
   * [Changelog for worker node fix pack 1.18.12_1533, released 23 November 2020](/docs/containers?topic=containers-changelog#11812_1533_worker)
   * [Changelog for master fix pack 1.18.12_1533, released 16 November 2020](/docs/containers?topic=containers-changelog#11812_1533)
   * [Changelog for worker node fix pack 1.18.10_1532, released 9 November 2020](/docs/containers?topic=containers-changelog#11810_1532)
@@ -1700,6 +1703,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.14_1546, released 7 December 2020](/docs/containers?topic=containers-changelog#11714_1546)
   * [Changelog for worker node fix pack 1.17.14_1545, released 23 November 2020](/docs/containers?topic=containers-changelog#11714_1545_worker)
   * [Changelog for master fix pack 1.17.14_1545, released 16 November 2020](/docs/containers?topic=containers-changelog#11714_1545)
   * [Changelog for worker node fix pack 1.17.13_1544, released 9 November 2020](/docs/containers?topic=containers-changelog#11713_1544)
@@ -1731,6 +1735,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for worker node fix pack 1.16.15_1553, released 7 December 2020](/docs/containers?topic=containers-changelog#11615_1553)
   * [Changelog for worker node fix pack 1.16.15_1552, released 23 November 2020](/docs/containers?topic=containers-changelog#11615_1552_worker)
   * [Changelog for master fix pack 1.16.15_1552, released 16 November 2020](/docs/containers?topic=containers-changelog#11615_1552)
   * [Changelog for worker node fix pack 1.16.15_1551, released 9 November 2020](/docs/containers?topic=containers-changelog#11615_1551)
@@ -2120,13 +2125,13 @@ subcollection: containers
 * [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
-* [Tracking cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
-* [Tracking Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
-* [Tracking Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
-* [Tracking NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
-* [Tracking private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
-* [Tracking storage resource events](/docs/containers?topic=containers-at_events#storage-events)
-* [Tracking logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [Cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
+* [Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
+* [Logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
+* [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
+* [Storage events](/docs/containers?topic=containers-at_events#storage-events)
 * [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 [IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam)
@@ -2301,6 +2306,7 @@ subcollection: containers
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
 * [Debugging the cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#debug_cluster_autoscaler)
+* [Cluster autoscaler add-on deployment fails and the `ibm-iks-cluster-autoscaler` pod is stuck in the `Init` state](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler#ca_ts_secret)
 
 [Cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network)
 * [Cluster service DNS resolution sometimes fails when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck)
@@ -2386,6 +2392,7 @@ subcollection: containers
   * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-catalog)
   * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-cs_troubleshoot_storage#px-verify-cluster)
   * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-cs_troubleshoot_storage#px-support)
+* [Portworx: Encryption set up fails due to invalid KMS endpoint](/docs/containers?topic=containers-cs_troubleshoot_storage#px-kms-endpoint)
 * [Feedback, questions, and support](/docs/containers?topic=containers-cs_troubleshoot_storage#getting_help_storage)
 
 [Getting help](/docs/containers?topic=containers-get-help)

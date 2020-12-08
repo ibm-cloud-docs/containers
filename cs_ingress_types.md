@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -329,7 +329,7 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
     * Copies of your Ingress resources:
       * Use the `test` Ingress class
       * Contain annotations that are transformed into the Kubernetes NGINX format
-      * For each subdomain in your Ingress resource file, a subdomain based on the test Ingress subdomain is created. For example, if you list `example.com` in your Ingress resource, the subdomain `example-com-123456.mycluster-a1b2cdef345678g9hi012j3kl4567890-m000.us-south.containers.appdomain.cloud` is created in the test copy.
+      * For each subdomain in your Ingress resource file, a subdomain based on the test Ingress subdomain is created. For example, if you list `example.com` in your Ingress resource, the subdomain `8e7n6j5k.mycluster-a1b2cdef345678g9hi012j3kl4567890-m000.containers.appdomain.cloud` is created in the test copy. Or, if you list `*.example.com`, the subdomain `*.wc-8e7n6j5k.myCluster-a1b2cdef345678g9hi012j3kl4567890-m000.containers.appdomain.cloud` is created, for example.
       * If your Ingress resource files included TLS sections, a secret for the test subdomain is also created and is listed in the test copies.
       * If your Ingress resource files defined more than one service per file, multiple test copies are created so that only one service is defined per file.
     * A test configmap:

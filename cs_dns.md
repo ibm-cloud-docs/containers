@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-09"
+lastupdated: "2020-12-04"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,6 +84,7 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
@@ -253,7 +254,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-
 ## Setting up NodeLocal DNS cache
 {: #dns_cache}
 
@@ -294,18 +294,13 @@ The following steps update DNS pods that run on particular worker nodes. You can
    ```
    {: pre}
 4. Add the `ibm-cloud.kubernetes.io/node-local-dns-enabled=true` label to the worker node. The label starts the DNS caching agent pod on the worker node.
-
-   **To label all worker nodes in the cluster**:
-   ```
-   kubectl label node --all --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
-   ```
-   {: pre}
-
-   **To label an individual worker node**:
-   ```
-   kubectl label node <node_name> --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
-   ```
-   {: pre}
+   1. Add the label to one or more worker nodes.
+      * **To label all worker nodes in the cluster**: [Add the label to all existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels).
+      * **To label an individual worker node**:
+         ```
+         kubectl label node <node_name> --overwrite "ibm-cloud.kubernetes.io/node-local-dns-enabled=true"
+         ```
+         {: pre}
    1. Verify that the node has the label by checking that the `NODE-LOCAL-DNS-ENABLED` field is set to `true`.
       ```
       kubectl get nodes -L "ibm-cloud.kubernetes.io/node-local-dns-enabled"
@@ -379,7 +374,6 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 
 <br />
 
-
 ## Customizing NodeLocal DNS cache
 {: #dns_nodelocal_customize}
 
@@ -446,7 +440,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 4.  After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
 
 <br />
-
 
 ## Setting up zone-aware DNS (beta)
 {: #dns_zone_aware}

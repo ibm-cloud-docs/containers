@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -262,7 +262,7 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress fields:
     ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
     ```
     {: screen}
-* `ibm-k8s-controller-config` configmap [field](/docs/containers?topic=containers-ingress_annotation#custom-port):
+* `ibm-cloud-provider-ingress-cm` configmap [field](/docs/containers?topic=containers-ingress_annotation#custom-port):
     ```
     public-ports: "80;443;9443"
     ```
@@ -864,7 +864,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 2. Create a configmap to customize the Ingress deployment.
 
-  1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify the following options.
+  1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and do not need to specify all of the settings.
      ```yaml
      apiVersion: v1
      kind: ConfigMap
