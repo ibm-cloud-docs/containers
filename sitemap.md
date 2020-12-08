@@ -136,20 +136,15 @@ subcollection: containers
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
-[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
-* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
-  * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
-  * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
-  * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
-  * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
-* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
-* [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
-  * [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-service-arch#pi-info)
-  * [How is my information stored and encrypted?](/docs/containers?topic=containers-service-arch#pi-storage)
-  * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
-  * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
-* [Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
-* [Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
+* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
+* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
+  * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
+  * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
+  * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
+  * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
+  * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
+  * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
 ## Use cases
@@ -205,36 +200,6 @@ subcollection: containers
 * [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-
-## Cluster strategy
-{: #sitemap_cluster_strategy}
-
-
-[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
-* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
-* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
-  * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
-  * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
-  * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
-  * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
-  * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
-  * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
-
-[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
-* [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
-  * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
-* [Worker node](/docs/containers?topic=containers-security#workernodes)
-* [Network](/docs/containers?topic=containers-security#network)
-  * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
-  * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-  * [Expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
-* [Persistent storage](/docs/containers?topic=containers-security#storage)
-* [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
-* [Image and registry](/docs/containers?topic=containers-security#images_registry)
-* [Container isolation and security](/docs/containers?topic=containers-security#container)
-* [Storing personal information](/docs/containers?topic=containers-security#pi)
-* [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
 ## Tutorials library for Kubernetes Service
@@ -680,6 +645,60 @@ subcollection: containers
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
 
 
+## Security for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_security_for_}
+
+
+[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
+
+[Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+* [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
+
+[Worker node](/docs/containers?topic=containers-security#workernodes)
+
+[Network](/docs/containers?topic=containers-security#network)
+* [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
+* [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
+* [Expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+
+[Persistent storage](/docs/containers?topic=containers-security#storage)
+
+[Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
+
+[Image and registry](/docs/containers?topic=containers-security#images_registry)
+
+[Container isolation and security](/docs/containers?topic=containers-security#container)
+
+[Storing personal information](/docs/containers?topic=containers-security#pi)
+
+[Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
+
+
+## Service architecture and dependencies
+{: #sitemap_service_architecture_and_dependencies}
+
+
+[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
+
+[Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
+* [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
+* [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
+* [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
+* [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
+
+[VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
+
+[Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
+* [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-service-arch#pi-info)
+* [How is my information stored and encrypted?](/docs/containers?topic=containers-service-arch#pi-storage)
+* [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
+* [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
+
+[Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
+
+[Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+
+
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
 
@@ -707,11 +726,6 @@ subcollection: containers
 
 ## Securing the cluster network
 {: #sitemap_securing_the_cluster_network}
-
-
-
-## Classic clusters
-{: #sitemap_classic_clusters}
 
 
 [Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall)
@@ -745,11 +759,6 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-
-## VPC clusters
-{: #sitemap_vpc_clusters}
-
-
 [VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
@@ -774,13 +783,23 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
 
 
+## Managing security and compliance with Kubernetes
+{: #sitemap_managing_security_and_compliance_with_kubernetes}
+
+
+[Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance)
+
+[Monitoring security and compliance posture with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#monitor-clusters)
+* [Available goals for Kubernetes](/docs/containers?topic=containers-manage-security-compliance#clusters-available-goals)
+
+
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
 
 
 
 ## Classic clusters
-{: #sitemap_classic_clusters_}
+{: #sitemap_classic_clusters}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -846,7 +865,7 @@ subcollection: containers
 
 
 ## VPC clusters
-{: #sitemap_vpc_clusters_}
+{: #sitemap_vpc_clusters}
 
 
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
