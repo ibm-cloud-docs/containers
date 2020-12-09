@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-08"
+lastupdated: "2020-12-09"
 
 keywords: containers
 subcollection: containers
@@ -1062,10 +1062,9 @@ subcollection: containers
 [Getting started with Istio](/docs/containers?topic=containers-istio-qs)
 * [Step 1: Enable the Istio add-on](/docs/containers?topic=containers-istio-qs#istio-qs-1)
 * [Step 2: Set up the BookInfo sample app](/docs/containers?topic=containers-istio-qs#istio-qs-2)
-* [Step 3: Visualize the service mesh with Kiali](/docs/containers?topic=containers-istio-qs#istio-qs-3)
-* [Step 4: Simulate a phased rollout of BookInfo](/docs/containers?topic=containers-istio-qs#istio-qs-4)
-* [Step 5: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-qs#istio-qs-5)
-* [Step 6: Secure in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-qs#mtls-qs)
+* [Step 3: Simulate a phased rollout of BookInfo](/docs/containers?topic=containers-istio-qs#istio-qs-3)
+* [Step 4: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-qs#istio-qs-4)
+* [Step 5: Secure in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-qs#mtls-qs)
 
 [About the managed Istio add-on](/docs/containers?topic=containers-istio-about)
 * [What is Istio?](/docs/containers?topic=containers-istio-about#istio_ov_what_is)
@@ -1079,8 +1078,8 @@ subcollection: containers
 * [Customizing the Istio installation](/docs/containers?topic=containers-istio#customize)
 * [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)
   * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor)
-  * [Updating your add-on from beta versions to the generally available version](/docs/containers?topic=containers-istio#istio-ga)
   * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio#update_client_sidecar)
+  * [Updating your add-on from version 1.3](/docs/containers?topic=containers-istio#istio-ga)
 * [Uninstalling Istio](/docs/containers?topic=containers-istio#istio_uninstall)
   * [Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
   * [Uninstalling the Istio add-on from the console](/docs/containers?topic=containers-istio#istio_uninstall_ui)
@@ -1105,18 +1104,11 @@ subcollection: containers
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
-* [Enabling Prometheus, Grafana, Jaeger, and Kiali](/docs/containers?topic=containers-istio-health#enable_optional_monitor)
-* [Launching the Prometheus, Grafana, Jaeger, and Kiali dashboards](/docs/containers?topic=containers-istio-health#istio_health_extras)
-  * [Prometheus](/docs/containers?topic=containers-istio-health#prometheus)
-  * [Grafana](/docs/containers?topic=containers-istio-health#grafana)
-  * [Jaeger](/docs/containers?topic=containers-istio-health#jaeger)
-  * [Kiali](/docs/containers?topic=containers-istio-health#kiali)
+* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
 * [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
   * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
   * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
-* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
-  * [Updating Sysdig for Istio add-on version 1.5](/docs/containers?topic=containers-istio-health#sysdig-15)
 
 
 ## Exposing apps
@@ -1805,6 +1797,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)
+  * [Changelog for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
   * [Changelog for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
   * [Changelog for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)
@@ -1812,7 +1806,7 @@ subcollection: containers
   * [Changelog for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
   * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
-* [Version 1.6](/docs/containers?topic=containers-istio-changelog#v16)
+* [Version 1.6 (deprecated)](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
   * [Changelog for 1.6.14, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#1614)
   * [Changelog for 1.6.13, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#1613)
@@ -1823,7 +1817,7 @@ subcollection: containers
   * [Changelog for 1.6.7, released 04 August 2020](/docs/containers?topic=containers-istio-changelog#167)
   * [Changelog for 1.6.5, released 17 July 2020](/docs/containers?topic=containers-istio-changelog#165)
   * [Changelog for 1.6, released 08 July 2020](/docs/containers?topic=containers-istio-changelog#16)
-* [Version 1.5](/docs/containers?topic=containers-istio-changelog#v15)
+* [Version 1.5 (unsupported)](/docs/containers?topic=containers-istio-changelog#v15)
   * [Differences between version 1.5 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm)
   * [Changelog for 1.5.10, released 1 September 2020](/docs/containers?topic=containers-istio-changelog#1510)
   * [Changelog for 1.5.9, released 12 August 2020](/docs/containers?topic=containers-istio-changelog#159)

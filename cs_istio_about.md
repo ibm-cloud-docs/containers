@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-09"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -113,7 +113,6 @@ For example, using Istio in your microservice mesh can help you:
 - Achieve better visibility into the apps that run in your cluster.
 - Deploy canary versions of apps and control the traffic that is sent to them.
 - Enable automatic encryption of data that is transferred between microservices.
-- Enforce rate limiting and attribute-based allowlist and blocklist policies.
 
 An Istio service mesh is composed of a data plane and a control plane. The data plane consists of Envoy proxy sidecars in each app pod, which mediate communication between microservices. The control plane consists of Pilot, Mixer telemetry and policy, and Citadel, which apply Istio configurations in your cluster. For more information about each of these components, see the [`istio` add-on description](#istio_ov_components).
 
@@ -141,17 +140,13 @@ If you need to use the latest version of Istio or customize your Istio installat
 ## What comes with the Istio add-on?
 {: #istio_ov_components}
 
-In Kubernetes version 1.16, 1.17, and 1.18 clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.7.5.
+In Kubernetes clusters, you can install the generally available managed Istio add-on, which runs Istio version 1.8.0.
 {: shortdesc}
-
-The Istio add-on is not currently supported for Kubernetes version 1.19 clusters.
-{: important}
 
 The Istio add-on installs the core components of Istio. For more information about any of the following control plane components, see the [Istio documentation](https://istio.io/latest/docs/concepts/what-is-istio/){: external}.
 * `Envoy` proxies inbound and outbound traffic for all services in the mesh. Envoy is deployed as a sidecar container in the same pod as your app container.
 * `istiod` unifies functionality that Pilot, Galley, Citadel, and the sidecar injector previously performed into a single control plane package.
 * `istio-ingressgateway` and `istio-egressgateway` control incoming traffic to and outgoing traffic from your Istio-managed apps.
-* To provide extra monitoring, tracing, and visualization for Istio, you can optionally install [Prometheus](https://prometheus.io/){: external}, [Grafana](https://grafana.com/){: external}, [Jaeger](https://www.jaegertracing.io/){: external}, and [Kiali](https://kiali.io/){: external}.
 
 <br />
 
@@ -161,9 +156,7 @@ The Istio add-on installs the core components of Istio. For more information abo
 Review the following limitations for the managed Istio add-on.
 {: shortdesc}
 
-* The Istio add-on is not currently supported for Kubernetes version 1.19 clusters.
-* In Istio versions 1.5 and later, the `IstioControlPlane` is deprecated and replaced with the `IstioOperator` resource.
 * When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane installation. Only the `IstioControlPlane` resources that are managed by IBM are supported.
-* You cannot modify the `istio` configuration map in the `istio-system` namespace. This configuration map determines the Istio control plane settings after the managed add-on is installed.
+* You cannot modify any Istio resources that are created for you in the `istio-system` namespace. If you need to customize the Istio installation, you can [edit the `managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).
 * The following features are not supported in the managed Istio add-on:
   * [Any features by the community that are in alpha release stages](https://istio.io/latest/about/feature-stages/){: external}

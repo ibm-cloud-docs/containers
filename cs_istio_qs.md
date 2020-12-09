@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-09"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -122,7 +122,7 @@ Set up the managed Istio add-on in your cluster.
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.7.5       normal         Addon Ready
+  istio           1.8.0       normal         Addon Ready
   ```
   {: screen}
 
@@ -158,13 +158,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.7.5 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.0 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.7.5
+    cd istio-1.8.0
     ```
     {: pre}
 
@@ -255,85 +255,8 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 
 For more information about how routing works in Istio, see [Understanding what happened](/docs/containers?topic=containers-istio-mesh#istio_bookinfo_understanding).
 
-## Step 3: Visualize the service mesh with Kiali
+## Step 3: Simulate a phased rollout of BookInfo
 {: #istio-qs-3}
-
-To visualize the BookInfo microservices in the Istio service mesh, launch the Kiali dashboard.
-{: shortdesc}
-
-1. Enable Kiali for your Istio installation.
-  1. Edit the `managed-istio-custom` configmap resource.
-    ```
-    kubectl edit cm managed-istio-custom -n ibm-operators
-    ```
-    {: pre}
-
-  2. In the `data` section, set the `istio-monitoring` setting to `"true"`. If the setting is not listed, add a `data` section and add the setting as `istio-monitoring: "true"`. This setting enables Prometheus, Grafana, Jaeger, and Kiali.
-
-  3. Save the configuration file.
-
-  4. Apply the changes to your Istio installation. Changes might take up to 10 minutes to take effect.
-    ```
-    kubectl annotate iop -n ibm-operators managed-istio --overwrite version="custom-applied-at: $(date)"
-    ```
-    {: pre}
-
-2. Generate 100 requests to the `productpage` service of BookInfo.
-  ```
-  for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
-  ```
-  {: pre}
-1. Define the credentials that you want to use to access Kiali.
-  1. Copy and paste the following command. This command starts a text entry for you to enter a username, which is then encoded in base64 and stored in the `KIALI_USERNAME` environment variable.
-    ```
-    KIALI_USERNAME=$(read -p 'Kiali Username: ' uval && echo -n $uval | base64)
-    ```
-    {: pre}
-  2. Copy and paste the following command. This command starts a text entry for you to enter a passphrase, which is then encoded in base64 and stored in the `KIALI_PASSPHRASE` environment variable.
-    ```
-    KIALI_PASSPHRASE=$(read -p 'Kiali Passphrase: ' pval && echo -n $pval | base64)
-    ```
-    {: pre}
-  3. Apply the following configuration to store the credentials in a Kubernetes secret.
-      ```
-      cat <<EOF | kubectl apply -f -
-      apiVersion: v1
-      kind: Secret
-      metadata:
-        name: kiali
-        namespace: istio-system
-        labels:
-          app: kiali
-      type: Opaque
-      data:
-        username: $KIALI_USERNAME
-        passphrase: $KIALI_PASSPHRASE
-      EOF
-      ```
-      {: pre}
-
-2. Access the Kiali dashboard.
-  ```
-  istioctl dashboard kiali
-  ```
-  {: pre}
-
-3. Enter the username and passphrase that you previously defined.
-
-4. In the menu, click **Graph**.
-
-5. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
-8. In the **No edge labels** drop-down list, select **Requests percentage**.
-
-    If you do not see any percentages in the graph, in the upper-right corner of the dashboard, change the timeframe to **Last 5m** or **Last 10m**.
-    {: tip}
-
-9. Notice that the **reviews** section of the graph shows approximately equal percentages of traffic between `v1`, `v2`, and `v3` of the `reviews` microservice.
-
-For more information about using Kiali to visualize your Istio-managed microservices, see [Generating a service graph](https://istio.io/v1.0/docs/tasks/telemetry/kiali/#generating-a-service-graph){: external} in the Istio open source documentation.
-
-## Step 4: Simulate a phased rollout of BookInfo
-{: #istio-qs-4}
 
 To simulate a release of an app, you can perform a phased rollout `v3` of the `reviews` microservice of BookInfo.
 {: shortdesc}
@@ -384,45 +307,25 @@ After you finish testing your app and are ready to start directing live traffic 
 
 5. Try refreshing the page several times. Notice that the page with no stars (`v1`) is no longer shown, and that a majority of page refreshes show the black stars (`v2`). Only rarely is the page with red stars (`v3`) shown.
 
-6. Generate 100 requests to the `productpage` service of BookInfo.
-  ```
-  for i in `seq 1 100`; do curl -s -o /dev/null http://$GATEWAY_URL/productpage; done
-  ```
-  {: pre}
-
-7. Review the traffic distribution in Kiali.
-    1. Access the Kiali dashboard
+6. Change the traffic distribution so that all traffic is sent only to `v3`. Note that in a real scenario, you might slowly roll out your version changes by changing the traffic distribution first to 80:20, then 70:30, and so on, until all traffic is routed to only the latest version.
+    1. Edit the configuration file for the `reviews` virtual service.
       ```
-      istioctl dashboard kiali
+      kubectl edit VirtualService reviews
       ```
       {: pre}
-    2. In the menu, click **Graph**.
-    3. In the **Select a namespace** drop-down list, select the namespace where your apps are deployed.
-    4. In the **No edge labels** drop-down list, select **Requests percentage**.
+    2. Change the `weight` of `v2` to `0` and the `weight` of `v3` to `100`.
+    3. Save and close the file.
 
-        If you do not see any percentages in the graph, in the upper-right corner of the dashboard, change the timeframe to **Last 5m** or **Last 10m**.
-        {: tip}
-    5. Notice that the **reviews** section of the graph shows approximately 90% of traffic is sent to `v2` and 10% of traffic is sent to `v3` of the `reviews` microservice.
+7. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
 
-8. Change the traffic distribution so that all traffic is sent only to `v3`. Note that in a real scenario, you might slowly roll out your version changes by changing the traffic distribution first to 80:20, then 70:30, and so on, until all traffic is routed to only the latest version.
-    1. In the menu of the Kiali dashboard, click **Istio Config**.
-    2. Click the **reviews** `VirtualService`.
-    3. Click the **YAML** tab.
-    4. Change the `weight` of `v2` to `0` and the `weight` of `v3` to `100`.
-    5. Click **Save**.
-
-9. Try refreshing the BookInfo page several times. Notice that the page with black stars (`v2`) is no longer shown, and only the page with red stars (`v3`) shown.
-
-10. In the **Graph** page of the Kiali dashboard, verify that 100% of traffic is now sent to `v3` of `reviews`.
-
-11. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
+8. Verify that in the time since you changed the YAML file for the reviews `VirtualService`, no logs exist for requests to `v2`.
   ```
   kubectl logs -l app=reviews,version=v2 -c istio-proxy
   ```
   {: pre}
 
-## Step 5: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}
-{: #istio-qs-5}
+## Step 4: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}
+{: #istio-qs-4}
 
 Use one of Sysdig's predefined Istio dashboards to monitor your BookInfo microservices.
 {: shortdesc}
@@ -443,7 +346,7 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} on the Sysdig blog.
 
-## Step 6: Secure in-cluster traffic by enabling mTLS
+## Step 5: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}
 
 Enable encryption for workloads in a namespace to achieve mutual TLS (mTLS) inside the cluster. Traffic that is routed by Envoy among pods in the cluster is encrypted with TLS. The certificate management for mTLS is handled by Istio. For more information, see the [Istio mTLS documentation](https://istio.io/v1.4/docs/tasks/security/authentication/authn-policy/){: external}.
