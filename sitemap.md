@@ -1211,6 +1211,7 @@ subcollection: containers
 [Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations)
 * [Customizing routing with annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations)
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
+* [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 * [Preserving the source IP address](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-comm-ingress-annotations#ssl_protocols_ciphers)

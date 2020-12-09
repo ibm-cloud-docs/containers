@@ -729,18 +729,15 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 ## Customizing the Ingress class
 {: #ingress-class}
 
-
-
-As of Kubernetes version 1.18, the new [`IngressClass` resource](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class){: external} replaces the deprecated `kubernetes.io/ingress.class` annotation.
+An Ingress class associates a class name with an Ingress controller type.
 {: shortdesc}
 
-An `IngressClass` resource associates a class name with an Ingress controller type. Within the `IngressClass`, you can optionally set the class as the default Ingress class by including the `ingressclass.kubernetes.io/is-default-class: "true"` annotation. Then, in the Ingress resources that you create to define routing for your app service paths, you specify the class name in the `spec.ingressClassName` field to apply the Ingress resource to the Ingress controllers that are associated with that class.
-
-Note that because the deprecated `kubernetes.io/ingress.class` annotation is still usable, classes that are specified in Ingress resources are applied in the following ways:
-* If a class is specified either in the `spec.ingressClassName` field or in the deprecated `kubernetes.io/ingress.class` annotation, the class is applied.
-* If both the `spec.ingressClassName` field and the `kubernetes.io/ingress.class` annotation and specified, the class in the annotation is used.
-* If neither the `spec.ingressClassName` field nor the `kubernetes.io/ingress.class` annotation are specified, the default class is applied.
-
+Depending on your cluster version, an Ingress class can be specified in one of the following ways:
+* **Kubernetes 1.18 or later**: An [`IngressClass` resource](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class){: external} associates a class name with an Ingress controller type. When you create Ingress resources to define routing for your apps, you specify the class name in the `spec.ingressClassName` field to apply the Ingress resource to the Ingress controllers that are associated with that class. Note that because the deprecated `kubernetes.io/ingress.class` annotation is still usable in Kubernetes 1.18 and later, classes that are specified in Ingress resources are applied in the following ways:
+  * If a class is specified either in the `spec.ingressClassName` field or in the deprecated `kubernetes.io/ingress.class` annotation, the class is applied.
+  * If both the `spec.ingressClassName` field and the `kubernetes.io/ingress.class` annotation and specified, the class in the annotation is used.
+  * If neither the `spec.ingressClassName` field nor the `kubernetes.io/ingress.class` annotation are specified, the default class is applied.
+* **Kubernetes 1.17 or earlier**: When you create Ingress resources to define routing for your apps, you specify the class name in the `kubernetes.io/ingress.class` annotation to apply the Ingress resource to the Ingress controllers that are associated with that class.
 
 ### Default Ingress classes for public and private ALBs
 {: #ingress-class-default}
@@ -748,7 +745,14 @@ Note that because the deprecated `kubernetes.io/ingress.class` annotation is sti
 In {{site.data.keyword.containerlong_notm}} clusters that run Kubernetes version 1.18 or later and that are created on or after 01 December 2020, `IngressClass` resources are created by default for public and private ALBs.
 {: shortdesc}
 
-**Public ALBs**: The following `IngressClass` is automatically created in the `kube-system` namespace to configure all public ALBs in your cluster with the `public-iks-k8s-nginx` class. To apply an Ingress resource that you create to the public ALBs in your cluster, specify `ingressClassName: "public-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
+The default `IngressClass` resources for public ALBs `public-iks-k8s-nginx` and private ALBs `private-iks-k8s-nginx` are not automatically created for existing 1.18 clusters that were created before 01 December 2020. Instead, choose among the following options.
+* **Manually create the resources**: To use the new Ingress class functionality instead, you can manually create these `IngressClass` resources in your cluster and specify the `ingressClassName` field in your Ingress resources.
+* **Deprecated: Use the annotation**: Until the annotation becomes unsupported, you can continue to use the `kubernetes.io/ingress.class` annotation in your Ingress resources to specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` classes.
+
+#### Public ALBs
+{: #ingress-class-default-public}
+
+The following `IngressClass` is automatically created in the `kube-system` namespace to configure all public ALBs in your cluster with the `public-iks-k8s-nginx` class. To apply an Ingress resource that you create to the public ALBs in your cluster, specify `ingressClassName: "public-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
 
 The `IngressClass` for public ALBs, `public-iks-k8s-nginx`, is set as the default class in your cluster. If you do not specify an `ingressClassName` field (or the deprecated `kubernetes.io/ingress.class` annotation) in your Ingress resource, the resource it applied to the public ALBs in your cluster.
 {: note}
@@ -765,7 +769,10 @@ spec:
 ```
 {: screen}
 
-**Private ALBs**: The following `IngressClass` is automatically created in the `kube-system` namespace to configure all public ALBs in your cluster with the `private-iks-k8s-nginx` class. To apply an Ingress resource that you create to the public ALBs in your cluster, specify `ingressClassName: "private-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
+#### Private ALBs
+{: #ingress-class-default-private}
+
+The following `IngressClass` is automatically created in the `kube-system` namespace to configure all public ALBs in your cluster with the `private-iks-k8s-nginx` class. To apply an Ingress resource that you create to the public ALBs in your cluster, specify `ingressClassName: "private-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -777,16 +784,11 @@ spec:
 ```
 {: screen}
 
-The `public-iks-k8s-nginx` and `private-iks-k8s-nginx` `IngressClass` resources are not automatically created for existing 1.18 clusters that were created before 01 December 2020. In these clusters, you can still use the `kubernetes.io/ingress.class` annotation in your Ingress resources to specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` classes. However, to use the new Ingress class functionality, you can manually create these `IngressClass` resources in your cluster and specify the `ingressClassName` field in your Ingress resources.
-{: important}
-
 ### Custom Ingress classes
 {: #ingress-class-custom}
 
 You can configure your own classes by creating custom `IngressClass` resources and changing the ALB deployment.
 {: shortdesc}
-
-
 
 1. Create an `IngressClass` resource. If you want this class to be the default class for your cluster, include the `ingressclass.kubernetes.io/is-default-class: "true"` annotation so that any Ingress resources that do not specify an Ingress class use this class by default.<p class="tip">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, a class might already be created. In this case, you can continue to step 3.</p>
   ```yaml
@@ -810,6 +812,8 @@ You can configure your own classes by creating custom `IngressClass` resources a
 3. If you want the Kubernetes Ingress ALBs in your cluster to process Ingress resources of this class, [specify the custom class in an `ibm-ingress-deploy-config` configmap and update your ALBs to pick up the changes](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
 
 4. In your Ingress resources, specify the `ingressClassName: "<class_name>"` field in the `spec` section of your Ingress resource. Do not include the deprecated `kubernetes.io/ingress.class` annotation. Note that if you do not specify an Ingress class in an Ingress resource, then the default class is applied.
+
+<br />
 
 ## Customizing routing and settings by using annotations and configmaps
 {: #cm-annotations}
