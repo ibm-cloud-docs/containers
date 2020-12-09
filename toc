@@ -12,7 +12,7 @@ Kubernetes Service
         cs_overview.md
         cs_why.md
         cs_providers.md
-        cs_responsibilities.md
+        cs_tech.md
 
     {: .topicgroup}
     Use cases
@@ -27,6 +27,11 @@ Kubernetes Service
     Learning paths
         cs_path_admin.md
         cs_path_dev.md
+
+    {: .topicgroup}
+    Cluster strategy
+        cs_responsibilities.md
+        cs_secure.md
     {: .navgroup-end}
 
     {: .navgroup id="tutorial"}
@@ -72,32 +77,31 @@ Kubernetes Service
             cs_cluster_update.md
             cs_performance.md
             cs_remove.md
-        
+
         {: .topicgroup}
         Managing cluster costs
             cs_costs.md
             cs_costs_reserved.md
 
-    {:. topicgroup}
-    Enhancing security
-        cs_secure.md
-        cs_tech.md
+    {: .topicgroup}
+    Securing cluster workloads
+        cs_encrypt.md
+        cs_psp.md
+        cs_pod_priority.md
+
+    {: .topicgroup}
+    Securing the cluster network
 
         {: .topicgroup}
-        Securing cluster workloads
-            cs_encrypt.md
-            cs_psp.md
-            cs_pod_priority.md
-
-        {: .topicgroup}
-        Securing the cluster network
+        Classic clusters
             cs_firewall.md
             cs_edge.md
             cs_network_policy.md
+
+        {: .topicgroup}
+        VPC clusters
             vpc_firewall.md
             vpc_network_policy.md
-
-        cs_manage_scc.md
 
     {: .topicgroup}
     Managing the cluster network
