@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-09"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -107,15 +107,28 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
+| 1.8 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18, 1.19 |
 | 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
-| 1.6 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
-| 1.5 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17 |
+| 1.6 | <img src="images/warning-filled.png" width="32" style="width:32px;" alt="Deprecated"/> | 1.16, 1.17, 1.18 |
+| 1.5 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | 1.16, 1.17 |
 | 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
 
-The Istio add-on is not currently supported for Kubernetes version 1.19 clusters.
-{: important}
+## Version 1.8
+{: #v18}
+
+### Changelog for 1.8.0, released 9 December 2020
+{: #180}
+
+The following table shows the changes that are included in version 1.8.0 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.5 | 1.8.0 | <ul><li>See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){:external}.</li><li>If you created a custom `IstioOperator` resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8.</li><li>All `istio-monitoring` support is removed, and in the `managed-istio-custom` configmap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.7.5" caption-side="top"}
 
 ## Version 1.7
 {: #v17}
@@ -128,7 +141,7 @@ The following table shows the changes that are included in version 1.7.5 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.4 | 1.7.5 | <ul><li>See the Istio release notes for [Istio 1.7.5](https://istio.io/news/releases/1.7.x/announcing-1.7.5/){:external}.</li></ul> |
+| 1.7.4 | 1.7.5 | See the Istio release notes for [Istio 1.7.5](https://istio.io/news/releases/1.7.x/announcing-1.7.5/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.4" caption-side="top"}
 
@@ -192,7 +205,7 @@ The following table shows the changes that are included in version 1.7.0 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.8" caption-side="top"}
 
-## Version 1.6
+## Version 1.6 (deprecated)
 {: #v16}
 
 ### Differences between version 1.6 of managed and community Istio
@@ -320,7 +333,7 @@ The following table shows the changes that are included in version 1.6 of the ma
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.5.7" caption-side="top"}
 
-## Version 1.5
+## Version 1.5 (unsupported)
 {: #v15}
 
 ### Differences between version 1.5 of managed and community Istio
@@ -407,7 +420,7 @@ The following table shows the changes that are included in version 1.5.6 of the 
 The following table shows the changes that are included in version 1.5 of the managed Istio add-on.
 {: shortdesc}
 
-Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only. Currently, the Istio add-on is not supported for version 1.18 clusters.
+Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only.
 {: note}
 
 | Previous | Current | Description |

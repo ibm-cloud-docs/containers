@@ -77,7 +77,7 @@ Kubernetes Service
             cs_cluster_update.md
             cs_performance.md
             cs_remove.md
-        
+
         {: .topicgroup}
         Managing cluster costs
             cs_costs.md

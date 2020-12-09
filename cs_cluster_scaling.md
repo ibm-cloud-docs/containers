@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-02"
+lastupdated: "2020-12-08"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -247,7 +247,7 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
   ```
   {: screen}
 
-7. [Taint the worker pools](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker_pool_taint) that you want to autoscale so that the worker pool does not accept workloads except the ones that you want to run on the autoscaled worker pool. You can learn more about taints and tolerations in the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). As an example, you might set a taint of `use=autoscale:NoExecute`. In this example, the `NoExecute` toleration evicts pods that do not have the matching the toleration.
+7. [Taint the worker pools](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#worker_pool_taint) that you want to autoscale so that the worker pool does not accept workloads except the ones that you want to run on the autoscaled worker pool. You can learn more about taints and tolerations in the [community Kubernetes documentation](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/). As an example, you might set a taint of `use=autoscale:NoExecute`. In this example, the `NoExecute` taint evicts pods that do not have the toleration corresponding to this taint.
 
 8. [Install the cluster autoscaler add-on](#ca_addon).
 
@@ -345,39 +345,12 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
     * **`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.
 
 5.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the `autoscale` worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
+   ``` 
+   helm install ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --set workerpools[0].default.max=5,workerpools[0].autoscale.min=2,workerpools[0].default.enabled=true
+   ```
+   {: pre}
 
-    <table class="simple-tab-table" id="helm3" tab-title="Helm 3 install command" tab-group="helm-install" aria-describedby="tableSummary-19ecbef4c01853826b42de82471b9035">
-    <caption caption-side="top">
-      Install the cluster autoscaler chart in Helm version 3<br>
-      <span class="table-summary" id="tableSummary-19ecbef4c01853826b42de82471b9035">The row contains the installation command.</span>
-    </caption>
-    <thead>
-    <tr>
-    <th>Command</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><p><pre class="pre"><code>helm install ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --set workerpools[0].default.max=5,workerpools[0].autoscale.min=2,workerpools[0].default.enabled=true</code></pre></p></td>
-    </tr>
-    </tbody>
-    </table>
-    <table class="simple-tab-table" id="helm2" tab-title="Helm 2 install command" tab-group="helm-install" aria-describedby="tableSummary-19ecbef4c01853826b42de82471b9034">
-    <caption caption-side="top">
-      Install the cluster autoscaler chart in Helm version 2<br>
-      <span class="table-summary" id="tableSummary-19ecbef4c01853826b42de82471b9034">The row contains the installation command.</span>
-    </caption>
-    <thead>
-    <tr>
-    <th>Command</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr>
-    <td><p><pre class="pre"><code>helm install iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --name ibm-iks-cluster-autoscaler --set workerpools[0].autoscale.max=5,workerpools[0].default.min=2,workerpools[0].default.enabled=true</code></pre></p></td>
-    </tr>
-    </tbody>
-    </table><p>Example output:</p>
+
     ```
     NAME: ibm-iks-cluster-autoscaler
     LAST DEPLOYED: Fri Jan 17 12:20:30 2020
@@ -811,7 +784,7 @@ This topic applies only to the cluster autoscaler Helm chart.
 This topic applies only to the cluster autoscaler Helm chart.
 {: important}
 
-To upgrade your cluster autoscaler release, you can update the Helm chart repo and re-create the cluster autoscaler pods. Use the same version of Helm that you used to install the initial Helm chart and release. For example, if you installed the release with Helm version 2, these upgrade steps might not work if you now have Helm version 3. Instead, see [Upgrading a release from Helm version 2 to version 3](#ca_helm_up_2to3).
+To upgrade your cluster autoscaler release, you can update the Helm chart repo and re-create the cluster autoscaler pods. Use the same version of Helm that you used to install the initial Helm chart and release.
 
 Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
 
@@ -869,161 +842,6 @@ Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
     Events:  <none>
     ```
     {: screen}
-
-### Upgrading a release from Helm v2 to v3
-{: #ca_helm_up_2to3}
-
-This topic applies only to the cluster autoscaler Helm chart.
-{: important}
-
-When you upgrade a release of the cluster autoscaler, you must use the same version of Helm that you used to install the initial Helm chart and release. The cluster autoscaler Helm chart supports both Helm version 2.15 and 3.0. If you installed the Helm chart and release with Helm v2 and then try to upgrade from a Helm v3 client, you might experience errors. Instead, uninstall the release and reinstall the latest release with Helm v3. For more information, see [Migrating from Helm v2 to v3](/docs/containers?topic=containers-helm#migrate_v3).
-{: shortdesc}
-
-Additionally, if you have release version 1.0.2 or earlier, you must uninstall that release before you install the latest release.
-
-Before you begin, see the [Prerequisites](#ca_helm_up_prereqs).
-
-1.  [Migrate to](/docs/containers?topic=containers-helm#migrate_v3) or [install](/docs/containers?topic=containers-helm#install_v3) Helm version 3.
-2.  Get your cluster autoscaler configmap.
-    ```
-    kubectl get cm iks-ca-configmap -n kube-system -o yaml > iks-ca-configmap.yaml
-    ```
-    {: pre}
-3.  Remove all worker pools from the configmap by setting the `"enabled"` value to `false`.
-    ```
-    kubectl edit cm iks-ca-configmap -n kube-system
-    ```
-    {: pre}
-4.  If you applied custom settings to the Helm chart, note your custom settings.
-    ```
-    helm get values ibm-iks-cluster-autoscaler -a
-    ```
-    {: pre}
-5.  Uninstall your current Helm chart.
-    ```
-    helm uninstall ibm-iks-cluster-autoscaler -n <namespace>
-    ```
-    {: pre}
-6.  Update the Helm chart repo to get the latest cluster autoscaler Helm chart version.
-    ```
-    helm repo update
-    ```
-    {: pre}
-7.  Install the latest cluster autoscaler Helm chart. Apply any custom settings that you previously used with the `--set` flag, such as `scanInterval=2m`.
-    ```
-    helm install ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system [--set <custom_settings>]
-    ```
-    {: pre}
-8.  Apply the cluster autoscaler configmap that you previously retrieved to enable autoscaling for your worker pools.
-    ```
-    kubectl apply -f iks-ca-configmap.yaml
-    ```
-    {: pre}
-9.  Get your cluster autoscaler pod.
-    ```
-    kubectl get pods -n kube-system
-    ```
-    {: pre}
-10.  Review the **`Events`** section of the cluster autoscaler pod and look for a **`ConfigUpdated`** event to verify that the configmap is successfully updated. The event message for your configmap is in the following format: `minSize:maxSize:PoolName:<SUCCESS|FAILED>:error message`.
-    ```
-    kubectl describe pod -n kube-system <cluster_autoscaler_pod>
-    ```
-    {: pre}
-
-    Example output:
-    ```
-		Name:               ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6
-		Namespace:          kube-system
-		...
-		Events:
-		Type     Reason         Age   From                                        Message
-		----     ------         ----  ----                                        -------
-
-		Normal  ConfigUpdated  3m    ibm-iks-cluster-autoscaler-857c4d9d54-gwvc6  {"1:3:default":"SUCCESS:"}
-    ```
-    {: screen}
-
-<br />
-
-## Using the cluster autoscaler Helm chart for a private network-only cluster
-{: #ca_private_cluster}
-
-This topic applies only to the cluster autoscaler Helm chart.
-{: important}
-
-The cluster autoscaler Helm chart is deprecated. For the latest version of the cluster autoscaler, [install the add-on](#ca_addon). You can not have both the cluster autoscaler Helm chart and the cluster autoscaler add-on installed at the same time.
-{: deprecated}
-
-The cluster autoscaler is available for standard classic and VPC clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, you must either connect to your cluster from a VPN or temporarily open the required ports or temporarily enable the public service endpoint to install, update, or customize the cluster autoscaler. After the cluster autoscaler is installed, you can close the ports or disable the public service endpoint.
-{: shortdesc}
-
-If your account is not enabled for VRF and service endpoints, you can [open the required ports](/docs/containers?topic=containers-firewall#vyatta_firewall) to allow public network connectivity in your cluster.
-{: tip}
-
-Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-
-1.  Set up Helm for your private network-only cluster. You can choose between the following options.
-    * [Pushing the Helm Tiller image to your namespace in {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-helm#private_local_tiller).
-    * [Installing a Helm chart without Tiller](/docs/containers?topic=containers-helm#private_install_without_tiller).
-2.  Temporarily enable public connectivity to your cluster to install, update, or customize the cluster autoscaler.
-    * If your cluster is protected from the public network by a firewall, [open the required ports in your firewall](/docs/containers?topic=containers-firewall).
-    * If your cluster has only the private service endpoint enabled, [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).
-3.  [Install](#ca_helm), [update](#ca_helm_up), or [configure](#ca_chart_values) the cluster autoscaler Helm chart.
-4.  After you configure the cluster autoscaler, you can close the ports or [disable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).
-5.  Make sure that the `storage-secret-store` secret in the `kube-system` namespace uses the private service endpoint. If you initially created the cluster with a private service endpoint, the endpoint is already added to the secret.
-    1.  Download the secret to get the encoded secret information from the `data` field of the secret file.
-        ```
-        kubectl get secret storage-secret-store -n kube-system -o yaml > storage-secret-store.yaml
-        ```
-        {: pre}
-        Example output:
-        ```
-        apiVersion: v1
-        data:
-          slclient.toml: W0J...
-        ```
-        {: screen}
-    2.  Decode the value of the `data` field.
-        ```
-        echo "<W0J...>" | base64 -D
-        ```
-        {: pre}
-        Example output:
-        ```
-        [Bluemix]
-          iam_url = "https://iam.bluemix.net"
-          iam_client_id = "bx"
-          iam_client_secret = "bx"
-          iam_api_key = "<key>"
-          refresh_token = ""
-          pay_tier = "paid"
-          containers_api_route = "https://us-south.containers.cloud.ibm.com"
-          encryption = true
-          containers_api_route_private = "https://private.us-south.containers.cloud.ibm.com"
-
-        [Softlayer]
-          encryption = true
-          softlayer_username = ""
-          softlayer_api_key = ""
-          softlayer_endpoint_url = "https://api.service.softlayer.com/rest/v3"
-          softlayer_iam_endpoint_url = "https://api.service.softlayer.com/mobile/v3"
-          softlayer_datacenter = "dal10"
-          softlayer_token_exchange_endpoint_url = "https://iam.bluemix.net"
-
-        [VPC]
-          gc_token_exchange_endpoint_url = "https://iam.bluemix.net"
-          gc_riaas_endpoint_url = "https://us-south.iaas.cloud.ibm.com:443"
-          gc_api_key = "<key>"
-        ```
-        {: screen}
-    3.  Verify that the `containers_api_route_private` field includes the `private` service endpoint address.
-    4.  If the `containers_api_route_private` field is not in the secret, reload the cluster autoscaler pod.  
-      ```
-      kubectl delete pod -n kube-system <autoscaler_pod>
-      ```
-      {: pre}
-
-<br />
 
 ## Removing the cluster autoscaler
 {: #ca_rm}
