@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-09"
+lastupdated: "2020-12-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -171,10 +171,10 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       ```
       {: pre}
 
-2. Create an Ingress resource for use with ALBs that run the Kubernetes Ingress image.
+2. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
   1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
      ```yaml
-     apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+     apiVersion: networking.k8s.io/v1beta1
      kind: Ingress
      metadata:
        name: community-ingress-resource
@@ -268,13 +268,13 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
           ```
           {: pre}
 
-4. Copy the IP address for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
+4. Copy the IP address (classic) or hostname (VPC) for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
   {: pre}
 
-5. Using the ALB's IP address, the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+5. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
   ```
   curl http://<ALB_IP>/<app_path> -H "Host: <ingress_subdomain>"
   ```
@@ -490,13 +490,13 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
   ```
   {: pre}
 
-7. Copy the IP address for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.35.0_474_iks`.
+7. Copy the IP address (classic) or hostname (VPC) for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.35.0_474_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
   {: pre}
 
-8. Using the ALB's IP address, the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+8. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
   ```
   curl http://<ALB_IP>/<app_path> -H "Host: ingress.subdomain.containers.appdomain.cloud"
   ```
@@ -517,7 +517,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
   2. In the `spec.rules` section, change the `host` by removing the extra character from the health subdomain. The Cloudflare health check for this subdomain can now resume, and the IP addresses for the new ALBs are added back to the DNS registration.
   3. Save and close the file. Your changes are applied automatically.
 
-10. Optional: If you do not want to run the new Kubernetes Ingress ALBs alongside the old {{site.data.keyword.containerlong_notm}} Ingress ALBs, remove the old {{site.data.keyword.containerlong_notm}} Ingress ALBs and clean up your original Ingress resource files that were for the {{site.data.keyword.containerlong_notm}} Ingress image.
+10. Optional: If you do not want to run the new Kubernetes Ingress ALBs alongside the old {{site.data.keyword.containerlong_notm}} Ingress ALBs, remove the old {{site.data.keyword.containerlong_notm}} Ingress ALBs and clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
   * Original ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image:
     1. List your ALB IDs. In the output, copy the IDs for ALBs that have the {{site.data.keyword.containerlong_notm}} Ingress version in the **Build** column, such as `653`.
       ```
@@ -612,7 +612,7 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 
     8. After you verify that traffic is flowing correctly through one ALB, repeat these steps for each ALB in your cluster. <p class="note">To ensure that the implementation of Ingress is consistent across your apps, make sure that you change the image for all of your ALBs in the cluster.</p>
 
-2. Optional: Clean up your original Ingress resource files that were for the {{site.data.keyword.containerlong_notm}} Ingress image.
+2. Optional: Clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
   * Original {{site.data.keyword.containerlong_notm}} Ingress resources:
     ```
     ibmcloud ks ingress alb migrate clean -c <cluster_name_or_ID> --iks-ingresses -f

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-09"
+lastupdated: "2020-12-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -1052,7 +1052,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication.
   ```
-  kubectl create -f <app_ingress_resource>.yaml -n namespace
+  kubectl apply -f <app_ingress_resource>.yaml -n namespace
   ```
   {: pre}
 
