@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-20"
+lastupdated: "2020-12-10"
 
 keywords: kubernetes, iks, clusters
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -248,20 +248,11 @@ The Kubernetes master is accessible through the private service endpoint if auth
       ```
       {: pre}
 
-5. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+5.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
-    ibmcloud ks cluster config -c <cluster_name_or_ID>
-    ```
-    {: pre}
-
-6. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
-  1. Navigate to the `kubeconfig` directory and open the file.
-    ```
-    cd /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name> && nano touch kube-config-prod-dal10-mycluster.yml
+    ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
     ```
     {: pre}
-  2. Edit your Kubernetes configuration file to add the word `private` to the service endpoint URL. For example, in the Kubernetes configuration file `kube-config-prod-dal10-mycluster.yml`, the server field might look like `server: https://c1.us-east.containers.cloud.ibm.com:30426`. You can change this URL to the private service endpoint URL by changing the server field to `server: https://c1.private.us-east.containers.cloud.ibm.com:30426`.
-  3. Repeat these steps each time that you run `ibmcloud ks cluster config`.
 
 6.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
     ```
@@ -387,20 +378,11 @@ The Kubernetes master is accessible through the private service endpoint if auth
 
 5. Verify that you are connected to the private network through a [VPN](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) connection.
 
-6. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
+6.  Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
     ```
-    ibmcloud ks cluster config -c <cluster_name_or_ID>
-    ```
-    {: pre}
-
-7. Optional: If you have both the public and private service endpoints enabled, update your local Kubernetes configuration file to use the private service endpoint. By default, the public service endpoint is downloaded to the configuration file.
-  1. Navigate to the `kubeconfig` directory and open the file.
-    ```
-    cd /Users/<user_name>/.bluemix/plugins/kubernetes-service/clusters/<cluster_name> && nano touch kube-config-prod-dal10-mycluster.yml
+    ibmcloud ks cluster config -c <cluster_name_or_ID> --endpoint private
     ```
     {: pre}
-  2. Edit your Kubernetes configuration file to add the word `private` to the service endpoint URL. For example, in the Kubernetes configuration file `kube-config-prod-dal10-mycluster.yml`, the server field might look like `server: https://c1.us-east.containers.cloud.ibm.com:30426`. You can change this URL to the private service endpoint URL by changing the server field to `server: https://c1.private.us-east.containers.cloud.ibm.com:30426`.
-  3. Repeat these steps each time that you run `ibmcloud ks cluster config`.
 
 7.  Verify that `kubectl` commands run properly and that the Kubernetes context is set to your cluster.
     ```

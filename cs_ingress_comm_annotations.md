@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-07"
+lastupdated: "2020-12-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -946,11 +946,42 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 <br />
 
+## Customizing the Ingress class
+{: #-custom-ingress-class}
+
+An Ingress class associates a class name with an Ingress controller type.
+{: shortdesc}
+
+* **Kubernetes 1.18 or later**: Use the `IngressClass` resource to customize Ingress classes.
+* **Kubernetes 1.17 or earlier**: Use the `kubernetes.io/ingress.class` annotation to customize Ingress classes.
+
+For more information, see [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class).
+
+<br />
+
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
 {: #app-id}
 
+We should add as a pre-requisite, that the Secret that contains the certificate+private key for the host which is being protected by App ID should be copied to the target namespace.
+
+
+
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
+
+**Before you begin**: Ensure that the secret that contains your TLS certificate and key is copied to the namespace where your app is deployed.
+1. Get the CRN of the Ingress secret for your custom domain or default Ingress subdomain.
+  ```
+  ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
+  ```
+  {: pre}
+2. Using the CRN, create a secret for the certificate in the namespace where your app is deployed.
+  ```
+  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
+  ```
+  {: pre}
+
+To use {{site.data.keyword.appid_full_notm}} to secure your apps:
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance. <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
   * To use an existing instance, ensure that the service instance name contains only alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
@@ -995,7 +1026,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       {: pre}
 
 5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
-  1. Using your {{site.data.keyword.appid_short_notm}} service instance name, add the following `auth-url` annotation.
+  1. Add the following `auth-url` annotation. Change only the placeholder for your {{site.data.keyword.appid_short_notm}} service instance name.
      ```yaml
      ...
      annotations:
@@ -1039,7 +1070,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication.
   ```
-  kubectl create -f <app_ingress_resource>.yaml -n namespace
+  kubectl apply -f <app_ingress_resource>.yaml -n namespace
   ```
   {: pre}
 
@@ -1099,8 +1130,40 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 ## Preserving the source IP address
 {: #preserve_source_ip}
 
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC clusters.
-{: note}
+By default, the source IP addresses of client requests are not preserved by the Ingress ALB. To preserve source IP addresses, you can enable the [PROXY protocol in VPC clusters](#preserve_source_ip_vpc) or [change the `externalTrafficPolicy` in classic clusters](#preserve_source_ip_classic).
+{: shortdesc}
+
+### Enabling the PROXY protocol in VPC clusters
+{: #preserve_source_ip_vpc}
+
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> To preserve the source IP address of the client request in a VPC cluster, you can enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster.
+{: shortdesc}
+
+The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
+
+1. Enable the PROXY protocol. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable).<p class="important">After you run this command, new load balancers are created with the updated PROXY protocol configuration. Two unused IP addresses for each load balancer must be available in each subnet during the load balancer recreation. After these load balancers are created, the existing ALB load balancers are deleted. This load balancer recreation process might cause service disruptions.</p>
+  ```
+  ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR> --header-timeout <timeout>
+  ```
+  {: pre}
+
+2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster.
+  ```
+  ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. To later disable the PROXY protocol, you can run the following command:
+  ```
+  ibmcloud ks ingress lb proxy-protocol disable --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+### Changing the `externalTrafficPolicy` in classic clusters
+{: #preserve_source_ip_classic}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Preserve the source IP address for client requests in a classic cluster.
+{: shortdesc}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-02"
+lastupdated: "2020-12-09"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -135,7 +135,7 @@ First time setting up Ingress? Check out the other sections on this page for pre
 
 3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If your app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
   ```yaml
-  apiVersion: networking.k8s.io/v1beta1
+  apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
   kind: Ingress
   metadata:
     name: myingressresource
@@ -382,7 +382,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource
@@ -404,7 +404,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource
@@ -619,7 +619,7 @@ To expose apps that are outside of your cluster to the public:
 
 2. Create an Ingress resource file that is named, for example, `myingressresource.yaml`.
   ```yaml
-  apiVersion: networking.k8s.io/v1beta1
+  apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
   kind: Ingress
   metadata:
     name: myingress
@@ -808,7 +808,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource
@@ -832,7 +832,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource
@@ -1111,7 +1111,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that does not use TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource
@@ -1135,7 +1135,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
     Example YAML that uses TLS:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1
+    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
     kind: Ingress
     metadata:
       name: myingressresource

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-09"
+lastupdated: "2020-12-10"
 
 keywords: containers
 subcollection: containers
@@ -87,7 +87,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -1211,8 +1211,11 @@ subcollection: containers
 [Kubernetes Ingress annotations](/docs/containers?topic=containers-comm-ingress-annotations)
 * [Customizing routing with annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations)
 * [Customizing the ALB deployment](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy)
+* [Customizing the Ingress class](/docs/containers?topic=containers-comm-ingress-annotations#-custom-ingress-class)
 * [Adding {{site.data.keyword.appid_short_notm}} authentication to apps](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 * [Preserving the source IP address](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip)
+  * [Enabling the PROXY protocol in VPC clusters](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_vpc)
+  * [Changing the `externalTrafficPolicy` in classic clusters](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_classic)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-comm-ingress-annotations#ssl_protocols_ciphers)
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-comm-ingress-annotations#default_server_cert)
 * [Tuning ALB performance](/docs/containers?topic=containers-comm-ingress-annotations#perf_tuning)
@@ -1311,6 +1314,8 @@ subcollection: containers
 * [User authentication annotations](/docs/containers?topic=containers-ingress_annotation#user-authentication)
   * [{{site.data.keyword.appid_short_notm}} Authentication (`appid-auth`)](/docs/containers?topic=containers-ingress_annotation#appid-auth)
 * [Preserving the source IP address](/docs/containers?topic=containers-ingress_annotation#preserve_source_ip)
+  * [Enabling the PROXY protocol in VPC clusters](/docs/containers?topic=containers-ingress_annotation#preserve_source_ip_vpc)
+  * [Changing the `externalTrafficPolicy` in classic clusters](/docs/containers?topic=containers-ingress_annotation#preserve_source_ip_classic)
 * [Configuring SSL protocols and SSL ciphers at the HTTP level](/docs/containers?topic=containers-ingress_annotation#ssl_protocols_ciphers)
 * [Sending your custom certificate to legacy clients](/docs/containers?topic=containers-ingress_annotation#default_server_cert)
 * [Tuning ALB performance](/docs/containers?topic=containers-ingress_annotation#perf_tuning)
