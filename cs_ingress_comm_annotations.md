@@ -962,8 +962,26 @@ For more information, see [Customizing the Ingress class](/docs/containers?topic
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
 {: #app-id}
 
+We should add as a pre-requisite, that the Secret that contains the certificate+private key for the host which is being protected by App ID should be copied to the target namespace.
+
+
+
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
+
+**Before you begin**: Ensure that the secret that contains your TLS certificate and key is copied to the namespace where your app is deployed.
+1. Get the CRN of the Ingress secret for your custom domain or default Ingress subdomain.
+  ```
+  ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
+  ```
+  {: pre}
+2. Using the CRN, create a secret for the certificate in the namespace where your app is deployed.
+  ```
+  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
+  ```
+  {: pre}
+
+To use {{site.data.keyword.appid_full_notm}} to secure your apps:
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance. <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
   * To use an existing instance, ensure that the service instance name contains only alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
@@ -1008,7 +1026,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       {: pre}
 
 5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
-  1. Using your {{site.data.keyword.appid_short_notm}} service instance name, add the following `auth-url` annotation.
+  1. Add the following `auth-url` annotation. Change only the placeholder for your {{site.data.keyword.appid_short_notm}} service instance name.
      ```yaml
      ...
      annotations:
