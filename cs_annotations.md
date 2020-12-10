@@ -2149,21 +2149,13 @@ By default, the source IP addresses of client requests are not preserved by the 
 
 The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
 
-
-In VPC clusters that run Kubernetes version 1.18, the PROXY protocol cannot be used when you configure your VPC load balancer with the `vpc-node-selector` or `vpc-subnets` annotations.
-{: note}
-
 1. Enable the PROXY protocol.<p class="important">After you run this command, new load balancers are created with the updated PROXY protocol configuration. Two unused IP addresses for each load balancer must be available in each subnet during the load balancer recreation. After these load balancers are created, the existing ALB load balancers are deleted. This load balancer recreation process might cause service disruptions.</p>
   ```
   ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-## Preserving the source IP address
-{: #preserve_source_ip}
-
-<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC clusters.
-{: note}2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster.
+2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster.
   ```
   ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
   ```
