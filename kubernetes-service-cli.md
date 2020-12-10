@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-10"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -4035,6 +4035,136 @@ ibmcloud ks ingress alb versions [--output json] [-q]
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
+
+</br>
+
+### Beta: `ibmcloud ks ingress lb get`
+{: #cs_ingress_lb_proxy-protocol_get}
+
+Get the configuration of load balancers that expose Ingress ALBs in your cluster.
+{: shortdesc}
+
+For example, if you previously ran commands such as [`ibmcloud ks ingress lb proxy-protocol enable`](#cs_ingress_lb_proxy-protocol_enable), you can use this command to view your configuration changes.
+
+```
+ibmcloud ks ingress lb get --cluster CLUSTER [--output OUTPUT] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Viewer** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress lb get --cluster mycluster
+```
+{: pre}
+
+</br>
+
+### Beta: `ibmcloud ks ingress lb proxy-protocol disable`
+{: #cs_ingress_lb_proxy-protocol_disable}
+
+Disable the NGINX PROXY protocol for the load balancers in front of all Ingress ALBs in your cluster so that client connection information is no longer passed in request headers to ALBs.
+{: shortdesc}
+
+After you run this command, the existing load balancers are deleted and recreated, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
+{: important}
+
+```
+ibmcloud ks ingress lb proxy-protocol disable --cluster CLUSTER [-f] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress lb proxy-protocol disable --cluster mycluster
+```
+{: pre}
+
+</br>
+
+### Beta: `ibmcloud ks ingress lb proxy-protocol enable`
+{: #cs_ingress_lb_proxy-protocol_enable}
+
+Enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster so that client connection information is passed in request headers to ALBs.
+{: shortdesc}
+
+The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request to the ALBs. This client information can include the client IP address, the proxy server IP address, and both port numbers.
+
+After you run this command, the existing load balancers are deleted and recreated, which can cause service disruptions. Two unused IP addresses must be available in each subnet during the load balancer recreation.
+{: important}
+
+```
+ibmcloud ks ingress lb proxy-protocol enable --cluster CLUSTER [--cidr CIDR ...] [--header-timeout TIMEOUT] [-f] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**
+
+<dl>
+
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster.</dd>
+
+<dt><code>--cidr <em>CIDR</em></code></dt>
+<dd>Optional: Load balancer CIDRs from which ALBs process information in PROXY protocol headers. If requests that contain PROXY headers originate from load balancers in other IP ranges, the information in the headers is not process by the ALB. This option is supported only for ALBs that run the community Kubernetes Ingress image. Default: `0.0.0.0/0`</dd>
+
+<dt><code>--header-timeout <em>TIMEOUT</em></code></dt>
+<dd>Optional: The timeout value, in seconds, for the load balancer to receive the PROXY protocol headers that contain the client connection information. This option is supported only for ALBs that run the community Kubernetes Ingress image. Default: `5`</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```
+ibmcloud ks ingress lb proxy-protocol enable --cluster mycluster --cidr 1.1.1.1/16
+```
+{: pre}
 
 </br>
 

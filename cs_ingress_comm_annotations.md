@@ -1112,8 +1112,44 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 ## Preserving the source IP address
 {: #preserve_source_ip}
 
+By default, the source IP addresses of client requests are not preserved by the Ingress ALB. To preserve source IP addresses, you can enable the [PROXY protocol in VPC clusters](#preserve_source_ip_vpc) or [change the `externalTrafficPolicy` in classic clusters](#preserve_source_ip_classic).
+{: shortdesc}
+
+### Enabling the PROXY protocol in VPC clusters
+{: #preserve_source_ip_vpc}
+
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> To preserve the source IP address of the client request in a VPC cluster, you can enable the [NGINX PROXY protocol](https://docs.nginx.com/nginx/admin-guide/load-balancer/using-proxy-protocol/){: external} for all load balancers that expose Ingress ALBs in your cluster.
+{: shortdesc}
+
+The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
+
+1. Enable the PROXY protocol. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable).<p class="important">After you run this command, new load balancers are created with the updated PROXY protocol configuration. Two unused IP addresses for each load balancer must be available in each subnet during the load balancer recreation. After these load balancers are created, the existing ALB load balancers are deleted. This load balancer recreation process might cause service disruptions.</p>
+  ```
+  ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR> --header-timeout <timeout>
+  ```
+  {: pre}
+
+## Preserving the source IP address
+{: #preserve_source_ip}
+
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> The source IP address for client requests can be preserved in classic clusters only, and cannot be preserved in VPC clusters.
-{: note}
+{: note}2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster.
+  ```
+  ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. To later disable the PROXY protocol, you can run the following command:
+  ```
+  ibmcloud ks ingress lb proxy-protocol disable --cluster <cluster_name_or_ID>
+  ```
+  {: pre}
+
+### Changing the `externalTrafficPolicy` in classic clusters
+{: #preserve_source_ip_classic}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Preserve the source IP address for client requests in a classic cluster.
+{: shortdesc}
 
 By default, the source IP address of the client request is not preserved. When a client request to your app is sent to your cluster, the request is routed to a pod for the load balancer service that exposes the ALB. If no app pod exists on the same worker node as the load balancer service pod, the load balancer forwards the request to an app pod on a different worker node. The source IP address of the package is changed to the public IP address of the worker node where the app pod runs.
 
