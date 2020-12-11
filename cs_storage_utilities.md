@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-24"
+lastupdated: "2020-12-11"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -549,7 +549,7 @@ Before you begin:
 
 1. Check which region and zone your VPC worker node is in.
   ```
-  ibmcloud ks worker ls &lt;cluster_name&gt;
+  ibmcloud ks worker ls <cluster_name>
   ```
   {: pre}
 
