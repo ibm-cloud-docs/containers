@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-10"
+lastupdated: "2020-12-11"
 
 keywords: kubernetes, iks, release notes
 
@@ -434,7 +434,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 </tr>
 <tr>
   <td>17 October 2019</td>
-  <td><ul><li><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for [private network-only clusters](/docs/containers?topic=containers-ca#ca_private_cluster). To get started, [update to the latest Helm chart version](/docs/containers?topic=containers-ca#ca_helm_up).</li>
+  <td><ul><li><strong>New! Cluster autoscaler</strong>: The cluster autoscaler is available for private network-only clusters. To get started, update to the latest Helm chart version.</li>
   <li><strong>New DevOps tutorial</strong>: Learn how to [set up your own DevOps toolchain](/docs/containers?topic=containers-tutorial-byoc-kube) and configure continuous delivery pipeline stages to deploy your containerized app that is stored in GitHub to a cluster in {{site.data.keyword.containerlong_notm}}.</li></ul></td>
 </tr>
 <tr>
