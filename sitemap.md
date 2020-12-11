@@ -223,6 +223,7 @@ subcollection: containers
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
   * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
 * [Network](/docs/containers?topic=containers-security#network)
