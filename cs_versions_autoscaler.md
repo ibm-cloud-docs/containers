@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-03"
+lastupdated: "2020-12-11"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -105,7 +105,7 @@ Refer to the following tables for a summary of changes for each version of the [
 
 | Cluster autoscaler add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
-| 1.0.1 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15 - 1.20</li></ul> |
+| 1.0.1 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15 - 1.19</li></ul> |
 {: summary="The rows are read from left to right. The first column is the cluster autoscaler add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the cluster autoscaler version is supported for."}
 
 ## Changelog for 1.0.1, released 15 August 2020
@@ -122,6 +122,7 @@ ibmcloud ks addon-versions
 
 | Patch version | Image tags | Release date | Supported Kubernetes versions | Description |
 | --- | --- | --- | --- | --- |
+| `1.0.1_195` | <ul><li>1.11.0-7</li><li>1.16.2-8</li><li>1.17.0-9</li><li>1.18.1-8</li><li>1.19.0 3</li></ul>  | 10 December 2020 | 1.15 - 1.19 | <ul><li>The cluster autoscaler images are now signed.</li><li>Resources that are deployed by the cluster autoscaler add-on are now linked with the corresponding source code and build urls.</li><li>Updates the Go version to 1.15.5</li></ul> |
 | `1.0.1_146` | <ul><li>`1.15.4-4`</li><li>`1.16.2-7`</li><li>`1.17.0-8`</li><li>`1.18.1-7`</li><li>`1.19.0-2`</li></ul>  | 03 December 2020 | 1.15 - 1.19 | <ul><li>The cluster autoscaler now runs as non-root.</li><li>Adds a feature to validate secrets before the autoscaler pods are initialized.</li></ul> |
 | `1.0.1_128` | <ul><li>`1.15.4-4`</li><li>`1.16.2-6`</li><li>`1.17.0-7`</li><li>`1.18.1-6`</li><li>`1.19.0-1`</li></ul> | 27 October 2020 | 1.15 - 1.19</li></ul> | Updates the Go version to `1.15.2` |
 | `1.0.1_124` | <ul><li>`1.15.4-4`</li><li>`1.16.2-6`</li><li>`1.17.0-7`</li><li>`1.18.1-6`</li><li>`1.19.0-1`</li></ul> | 16 October 2020 | 1.15 - 1.19</li></ul> | <ul><li>Exposes the `--new-pod-scale-up-delay` flag in the configmap.</li><li>Adds support for Kubernetes 1.19.</li></ul> |

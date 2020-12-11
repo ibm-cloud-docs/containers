@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-08"
+lastupdated: "2020-12-11"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -253,8 +253,6 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
 
     You might also install the cluster autoscaler Helm chart, but the Helm chart is deprecated and becomes unsupported tentatively 15 September 2020. You cannot install the add-on and the Helm chart in the same cluster at the same time.
     {: deprecated}
-
-9. **Private clusters only**: See [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster).
 
 <br />
 
@@ -521,7 +519,7 @@ Customize the cluster autoscaler settings such as the amount of time it waits be
 
 **Before you begin**:
 *  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-*  [Install the `ibm-iks-cluster-autoscaler` add-on](#ca_addon). You can also install the autoscaler via Helm chart for [public](#ca_helm) or [private](#ca_private_cluster) clusters, but the Helm chart is deprecated.
+*  [Install the `ibm-iks-cluster-autoscaler` add-on](#ca_addon). You can also install the autoscaler via a [Helm chart](#ca_helm), but the Helm chart is deprecated.
 
 ### Customizing the cluster autoscaler add-on configmap
 {: #ca_addon_values}
@@ -775,8 +773,7 @@ This topic applies only to the cluster autoscaler Helm chart.
 {: important}
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2. **Private clusters only**: See [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster).
-3. To review the changelog of chart versions, [download the source code `tar` file](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibm-iks-cluster-autoscaler) and open the `RELEASENOTES.MD` file.
+2. To review the changelog of chart versions, [download the source code `tar` file](https://cloud.ibm.com/kubernetes/helm/iks-charts/ibm-iks-cluster-autoscaler) and open the `RELEASENOTES.MD` file.
 
 ### Upgrading the cluster autoscaler release version
 {: #ca_helm_up_general}
