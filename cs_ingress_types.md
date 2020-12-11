@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-10"
+lastupdated: "2020-12-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -210,7 +210,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       <tbody>
       <tr>
       <td><code>annotations</code></td>
-      <td><ul><li>`kubernetes.io/ingress.class`: Specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` to apply this Ingress resource to the public ALBs or private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, you can specify your own class in a `spec.spec.ingressClassName: :<class_name>` field. You must also specify this custom class in an [`IngressClass` resource and a `ibm-ingress-deploy-config` configmap](#ingress-class).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.</li></ul></td>
+      <td><ul><li>`kubernetes.io/ingress.class`: Specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` to apply this Ingress resource to the public ALBs or private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class that your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass` resource and a `ibm-ingress-deploy-config` configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.</li></ul></td>
       </tr>
       <tr>
       <td><code>tls.hosts</code></td>
@@ -245,10 +245,10 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       {: pre}
 
 3. Clusters created before 01 December 2020: Verify that you have at least one ALB in each zone that runs the Kubernetes Ingress image. In the **Build** column of the output, look for versions in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
-      ```
-      ibmcloud ks alb ls -c <cluster_name_or_ID>
-      ```
-      {: pre}
+    ```
+    ibmcloud ks alb ls -c <cluster_name_or_ID>
+    ```
+    {: pre}
 
       * If one ALB per zone runs the Kubernetes Ingress image, continue to step 4.
       * If you do not have one ALB per zone that runs the Kubernetes Ingress image, create at least one in each zone.
@@ -634,9 +634,12 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance is automatically created for each cluster that you can use to manage the cluster's Ingress TLS certificates.
 {: shortdesc}
 
-For an {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions.
-* If the account owner set the API key, then your cluster is assigned an {{site.data.keyword.cloudcerts_short}} instance.
-* If another user or a functional ID set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform role _and_ the **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned an {{site.data.keyword.cloudcerts_short}} instance.
+### About your default {{site.data.keyword.cloudcerts_short}} instance
+{: #manager_certs_about}
+
+For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions.
+* If the account owner set the API key, then your cluster is assigned a {{site.data.keyword.cloudcerts_short}} instance.
+* If another user or a functional ID set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform role _and_ the **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned a {{site.data.keyword.cloudcerts_short}} instance.
 
 When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
 {: note}
@@ -674,20 +677,25 @@ IBM-provided TLS certificates are signed by LetsEncrypt and are fully managed by
 
 The TLS certificate is stored as a Kubernetes secret in the `default` namespace.
 
-To get the secret name:
-```
-ibmcloud ks cluster get -c <cluster> | grep Ingress
-```
-{: pre}
+1. Get the secret name.
+  ```
+  ibmcloud ks cluster get -c <cluster> | grep Ingress
+  ```
+  {: pre}
 
-To see the secret details:
-```
-ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
-```
-{: pre}
+2. View the secret details.
+  ```
+  ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
+  ```
+  {: pre}
 
-In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces by running `ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace` in each namespace.
-{: note}
+3. Copy the secret to other namespaces. In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces.
+  ```
+  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
+  ```
+  {: pre}
+
+4. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
 
 The IBM-provided Ingress subdomain wildcard, `*.<cluster_name>.<globally_unique_account_HASH>-0000.<region>.containers.appdomain.cloud`, is registered by default for your cluster. The IBM-provided TLS certificate is a wildcard certificate and can be used for the wildcard subdomain.
 {: tip}
@@ -724,6 +732,8 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
   ```
   {: pre}
 
+6. Specify the secret name in the `spec.tls` section of your [Ingress resource](/docs/containers?topic=containers-ingress-types#alb-comm-create).
+
 <br />
 
 ## Customizing the Ingress class
@@ -746,8 +756,8 @@ In {{site.data.keyword.containerlong_notm}} clusters that run Kubernetes version
 {: shortdesc}
 
 The default `IngressClass` resources for public ALBs `public-iks-k8s-nginx` and private ALBs `private-iks-k8s-nginx` are not automatically created for existing 1.18 clusters that were created before 01 December 2020. Instead, choose among the following options.
-* **Manually create the resources**: To use the new Ingress class functionality instead, you can manually create these `IngressClass` resources in your cluster and specify the `ingressClassName` field in your Ingress resources.
-* **Deprecated: Use the annotation**: Until the annotation becomes unsupported, you can continue to use the `kubernetes.io/ingress.class` annotation in your Ingress resources to specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` classes.
+* **Manually create the resources**: To use the new Ingress class functionality instead, you can manually create the following `IngressClass` resources in your cluster and specify the `ingressClassName` field in your Ingress resources.
+* **Use the annotation (deprecated)**: Until the annotation becomes unsupported, you can continue to use the `kubernetes.io/ingress.class` annotation in your Ingress resources to specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` classes.
 
 #### Public ALBs
 {: #ingress-class-default-public}
@@ -772,7 +782,7 @@ spec:
 #### Private ALBs
 {: #ingress-class-default-private}
 
-The following `IngressClass` is automatically created in the `kube-system` namespace to configure all public ALBs in your cluster with the `private-iks-k8s-nginx` class. To apply an Ingress resource that you create to the public ALBs in your cluster, specify `ingressClassName: "private-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
+The following `IngressClass` is automatically created in the `kube-system` namespace to configure all private ALBs in your cluster with the `private-iks-k8s-nginx` class. To apply an Ingress resource that you create to the private ALBs in your cluster, specify `ingressClassName: "private-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
 
 ```yaml
 apiVersion: networking.k8s.io/v1
@@ -790,7 +800,10 @@ spec:
 You can configure your own classes by creating custom `IngressClass` resources and changing the ALB deployment.
 {: shortdesc}
 
-1. Create an `IngressClass` resource. If you want this class to be the default class for your cluster, include the `ingressclass.kubernetes.io/is-default-class: "true"` annotation so that any Ingress resources that do not specify an Ingress class use this class by default.<p class="tip">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, a class might already be created. In this case, you can continue to step 3.</p>
+1. Create an `IngressClass` resource. If you want this class to be the default class for your cluster, include the `ingressclass.kubernetes.io/is-default-class: "true"` annotation so that any Ingress resources that do not specify an Ingress class use this class by default.
+  For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, a class might already be created. In this case, you can continue to step 3.
+  {: tip}
+
   ```yaml
   apiVersion: networking.k8s.io/v1
   kind: IngressClass
@@ -805,7 +818,7 @@ You can configure your own classes by creating custom `IngressClass` resources a
 
 2. Deploy the `IngressClass` to your cluster.
   ```
-  kubectl apply -f <class_name>.yaml -n <namespace>
+  kubectl apply -n kube-system -f <class_name>.yaml
   ```
   {: pre}
 

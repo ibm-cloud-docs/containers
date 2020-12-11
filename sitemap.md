@@ -1194,6 +1194,7 @@ subcollection: containers
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
   * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
 * [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
+  * [About your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
   * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
   * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
