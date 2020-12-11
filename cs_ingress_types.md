@@ -634,8 +634,10 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-about-certificate-manager) instance is automatically created for each cluster that you can use to manage the cluster's Ingress TLS certificates.
 {: shortdesc}
 
-### About your default {{site.data.keyword.cloudcerts_short}} instance
+### Using your default {{site.data.keyword.cloudcerts_short}} instance
 {: #manager_certs_about}
+
+#### Verifying permissions for {{site.data.keyword.cloudcerts_short}}
 
 For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions.
 * If the account owner set the API key, then your cluster is assigned a {{site.data.keyword.cloudcerts_short}} instance.
@@ -644,6 +646,8 @@ For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new
 When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
 {: note}
 
+#### Viewing your {{site.data.keyword.cloudcerts_short}} instance and certificates
+
 To view your {{site.data.keyword.cloudcerts_short}} instance:
 1. In the {{site.data.keyword.cloud_notm}} console, navigate to your [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources){: external}.
 2. Expand the **Services** row.
@@ -651,6 +655,11 @@ To view your {{site.data.keyword.cloudcerts_short}} instance:
 4. Click the instance's name. The **Your certificates** details page opens.
 
 The IBM-generated certificate for the default Ingress subdomain exists in your cluster's {{site.data.keyword.cloudcerts_short}} instance. However, you have full control over your cluster's {{site.data.keyword.cloudcerts_short}} instance and can use {{site.data.keyword.cloudcerts_short}} to upload your own TLS certificates or order TLS certificates for your custom domains.
+
+Do not delete your cluster's {{site.data.keyword.cloudcerts_short}} instance. When you delete your cluster, the {{site.data.keyword.cloudcerts_short}} instance for your cluster is also automatically deleted. Any certificates that are stored in the {{site.data.keyword.cloudcerts_short}} instance for your cluster are deleted when the {{site.data.keyword.cloudcerts_short}} instance is deleted.
+{: important}
+
+#### Managing secrets for certificates
 
 To manage the secrets for TLS certificates in your cluster, you can use the `ibmcloud ks ingress secret` set of commands.
 * For example, you can import a certificate from {{site.data.keyword.cloudcerts_short}} to a Kubernetes secret in your cluster:
@@ -663,9 +672,6 @@ To manage the secrets for TLS certificates in your cluster, you can use the `ibm
   ibmcloud ks ingress secret ls -c <cluster>
   ```
   {: pre}
-
-Do not delete your cluster's {{site.data.keyword.cloudcerts_short}} instance. When you delete your cluster, the {{site.data.keyword.cloudcerts_short}} instance for your cluster is also automatically deleted. Any certificates that are stored in the {{site.data.keyword.cloudcerts_short}} instance for your cluster are deleted when the {{site.data.keyword.cloudcerts_short}} instance is deleted.
-{: important}
 
 ### Using the default TLS certificate for the IBM-provided Ingress subdomain
 {: #manage_certs_ibm}
