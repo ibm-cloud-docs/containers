@@ -1118,7 +1118,7 @@ subcollection: containers
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
   * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v1_gateway)
-* [Components and architecture of an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
   * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v2_gateway)
@@ -1130,7 +1130,7 @@ subcollection: containers
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
-[Classic: Setting up DSR load balancing with an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-v2)
+[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2)
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
