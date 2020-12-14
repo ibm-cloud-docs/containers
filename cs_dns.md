@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-04"
+lastupdated: "2020-12-14"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -377,7 +377,113 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 ## Customizing NodeLocal DNS cache
 {: #dns_nodelocal_customize}
 
-In clusters that run Kubernetes version 1.16 and later, you can customize the `NodeLocal` DNS caching agent by editing its configmap. For example, you might want to customize stub domains or upstream DNS servers to resolve services that point to external hosts. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
+You can customize the `NodeLocal` DNS cache by editing either of the two configmaps. 
+{: shortdesc}
+
+* [**`node-local-dns` configmap**](#dns_nodelocal_customize_configmap): In Kubernetes 1.17 or later, customize the `NodeLocal` DNS cache configuration.
+* [**`node-local-dns-config` configmap**](#dns_nodelocal_customize_stub_upstream): Extend the `NodeLocal` DNS cache configuration by customizing stub domains or upstream DNS servers to resolve services that point to external hosts. 
+
+### Editing the `node-local-dns` configmap for general configuration updates
+{: #dns_nodelocal_customize_configmap}
+
+Edit the `node-local-dns` configmap to customize the `NodeLocal` DNS cache configuration.
+{: shortdesc}
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Verify that the `NodeLocal` DNS cache daemon set is available.
+    ```
+    kubectl get ds -n kube-system node-local-dns
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME             DESIRED   CURRENT   READY   UP-TO-DATE   AVAILABLE   NODE SELECTOR                                         AGE
+    node-local-dns   4         4         4       4            4           ibm-cloud.kubernetes.io/node-local-dns-enabled=true   82d
+    ```
+    {: screen}
+
+2.  Edit the default settings or add custom Corefiles to the `NodeLocal` DNS cache configmap. Each Corefile that you import must use the `coredns` path. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
+
+    Only a limited set of [plug-ins](https://coredns.io/plugins/){: external} is supported for the `NodeLocal` DNS cache.
+    {: important}
+
+    ```
+    kubectl edit configmap -n kube-system node-local-dns
+    ```
+    {: pre}
+
+    **Example output**:
+    ```
+    apiVersion: v1
+    kind: ConfigMap
+    metadata:
+      name: node-local-dns
+      namespace: kube-system
+    data:
+      Corefile: |
+        # Add your NodeLocal DNS customizations as import files under ./coredns directory.
+        # Refer to https://cloud.ibm.com/docs/containers?topic=containers-cluster_dns for details.
+        import ./coredns/<MyCorefile>
+        cluster.local:53 abc.com:53 {
+            errors
+            cache {
+                    success 9984 30
+                    denial 9984 5
+            }
+            reload
+            loop
+            bind 169.254.20.10 172.21.0.10
+            forward . __PILLAR__CLUSTER__DNS__ {
+                    force_tcp
+            }
+            prometheus :9253
+            health 169.254.20.10:8080
+            }
+        in-addr.arpa:53 {
+            errors
+            cache 30
+            reload
+            loop
+            bind 169.254.20.10 172.21.0.10
+            forward . __PILLAR__CLUSTER__DNS__ {
+                    force_tcp
+            }
+            prometheus :9253
+            }
+        ip6.arpa:53 {
+            errors
+            cache 30
+            reload
+            loop
+            bind 169.254.20.10 172.21.0.10
+            forward . __PILLAR__CLUSTER__DNS__ {
+                    force_tcp
+            }
+            prometheus :9253
+            }
+        .:53 {
+            errors
+            cache 30
+            reload
+            loop
+            bind 169.254.20.10 172.21.0.10
+            forward . __PILLAR__UPSTREAM__SERVERS__ {
+                    force_tcp
+            }
+            prometheus :9253
+            }
+      <MyCorefile>: |
+        # Add custom corefile content ...
+      ```
+      {: screen}
+3.  After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
+
+### Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers
+{: #dns_nodelocal_customize_stub_upstream}
+
+Edit the `node-local-dns-config` configmap to extend the `NodeLocal` DNS cache configuration such as by customizing stub domains or upstream DNS servers. For more information, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#kube-dns){: external}.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -438,6 +544,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 4.  After a few minutes, the `NodeLocal` DNS cache pods pick up the configmap changes.
+
 
 <br />
 

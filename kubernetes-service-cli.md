@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-10"
+lastupdated: "2020-12-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -303,7 +303,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 #### `ibmcloud ks cluster addon disable istio-extras`
 {: #cs_cluster_addon_disable_istio_extras}
 
-Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from the cluster.
+Disable the managed Istio extras add-on, which is unsupported. Removes Grafana, Jeager, and Kiali from the cluster.
 {: shortdesc}
 
 ```
@@ -329,7 +329,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 #### `ibmcloud ks cluster addon disable istio-sample-bookinfo`
 {: #cs_cluster_addon_disable_istio_sample_bookinfo}
 
-Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and other BookInfo app resources from the cluster.
+Disable the managed Istio BookInfo add-on, which is unsupported. Removes all deployments, pods, and other BookInfo app resources from the cluster.
 {: shortdesc}
 
 ```
@@ -3469,7 +3469,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 
 **Example**:
 ```
-ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 653
+ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 2410
 ```
 {: pre}
 
@@ -3510,7 +3510,7 @@ ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVA
 
 **Example**:
 ```
-ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 653
+ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 2410
 ```
 {: pre}
 
@@ -3551,7 +3551,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 
 **Example**:
 ```
-ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 653
+ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 2410
 ```
 {: pre}
 
@@ -3641,7 +3641,7 @@ ibmcloud ks ingress alb enable classic --alb ALB_ID --cluster CLUSTER [--ip IP_A
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 0.35.0_474_iks
+ibmcloud ks ingress alb enable classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --ip 169.XX.XXX.XX --version 0.35.0_767_iks
 ```
 {: pre}
 
@@ -3686,7 +3686,7 @@ ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--ver
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 653
+ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2410
 ```
 {: pre}
 
@@ -3731,7 +3731,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 
 **Example**:
 ```
-ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 653
+ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2410
 ```
 {: pre}
 
@@ -3996,12 +3996,12 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 **Example commands:**
 * To update all ALB pods in the cluster:
   ```
-  ibmcloud ks ingress alb update -c mycluster --version 653
+  ibmcloud ks ingress alb update -c mycluster --version 2410
   ```
   {: pre}
 * To update the ALB pods for one or more specific ALBs:
   ```
-  ibmcloud ks ingress alb update -c mycluster --version 653 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
+  ibmcloud ks ingress alb update -c mycluster --version 2410 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
   ```
   {: pre}
 

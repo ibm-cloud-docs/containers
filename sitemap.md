@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-11"
+lastupdated: "2020-12-14"
 
 keywords: containers
 subcollection: containers
@@ -223,6 +223,7 @@ subcollection: containers
 
 [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
 * [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
   * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
 * [Worker node](/docs/containers?topic=containers-security#workernodes)
 * [Network](/docs/containers?topic=containers-security#network)
@@ -382,27 +383,9 @@ subcollection: containers
 [Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 
-## Set up a DevOps delivery pipeline for your app
-{: #sitemap_set_up_a_devops_delivery_pipeline_for_your_app}
+## Developing a Kubernetes app toolchain with Code Risk Analyzer
 
-
-[Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
-
-[Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
-
-[Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
-
-[Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
-
-[Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
-
-[Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
-
-[Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
-
-[Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
-
-[What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
+[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
 
 ## Moving a VM-based application to Kubernetes
@@ -838,6 +821,8 @@ subcollection: containers
   * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
   * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
+  * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
+  * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
 * [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
@@ -878,6 +863,8 @@ subcollection: containers
   * [Enable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_enablecache)
   * [Disable NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_disablecache)
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
+  * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
+  * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
 * [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
@@ -1135,7 +1122,7 @@ subcollection: containers
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#v1_multi)
   * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v1_gateway)
-* [Components and architecture of an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
+* [Components and architecture of an NLB 2.0](/docs/containers?topic=containers-loadbalancer-about#planning_ipvs)
   * [Traffic flow in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_single)
   * [Traffic flow in a multizone cluster](/docs/containers?topic=containers-loadbalancer-about#ipvs_multi)
   * [Traffic flow in a gateway-enabled cluster](/docs/containers?topic=containers-loadbalancer-about#v2_gateway)
@@ -1147,7 +1134,7 @@ subcollection: containers
   * [Adding edge node affinity rules and tolerations](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes)
   * [Adding affinity rules for multiple public or private VLANs](/docs/containers?topic=containers-loadbalancer#edge_nodes_multiple_vlans)
 
-[Classic: Setting up DSR load balancing with an NLB 2.0 (beta)](/docs/containers?topic=containers-loadbalancer-v2)
+[Classic: Setting up DSR load balancing with an NLB 2.0](/docs/containers?topic=containers-loadbalancer-v2)
 * [Prerequisites](/docs/containers?topic=containers-loadbalancer-v2#ipvs_provision)
 * [Setting up an NLB 2.0 in a multizone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_multi_zone_config)
 * [Setting up an NLB 2.0 in a single-zone cluster](/docs/containers?topic=containers-loadbalancer-v2#ipvs_single_zone_config)
@@ -1193,6 +1180,7 @@ subcollection: containers
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
   * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
 * [Managing TLS certificates and secrets](/docs/containers?topic=containers-ingress-types#manage_certs)
+  * [Using your default {{site.data.keyword.cloudcerts_short}} instance](/docs/containers?topic=containers-ingress-types#manager_certs_about)
   * [Using the default TLS certificate for the IBM-provided Ingress subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_ibm)
   * [Using a TLS certificate for a custom subdomain](/docs/containers?topic=containers-ingress-types#manage_certs_custom)
 * [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class)
@@ -1666,6 +1654,8 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for master fix pack 1.19.5_1529, released 14 December 2020](/docs/containers?topic=containers-changelog#1195_1529)
+  * [Changelog for worker node fix pack 1.19.4_1529, released 11 December 2020](/docs/containers?topic=containers-changelog#1194_1529)
   * [Changelog for worker node fix pack 1.19.4_1528, released 7 December 2020](/docs/containers?topic=containers-changelog#1194_1528)
   * [Changelog for worker node fix pack 1.19.4_1527, released 23 November 2020](/docs/containers?topic=containers-changelog#1194_1527_worker)
   * [Changelog for master fix pack 1.19.4_1527, released 16 November 2020](/docs/containers?topic=containers-changelog#1194_1527)
@@ -1674,6 +1664,8 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog#11715_1548)
+  * [Changelog for worker node fix pack 1.18.12_1535, released 11 December 2020](/docs/containers?topic=containers-changelog#11812_1535)
   * [Changelog for worker node fix pack 1.18.12_1534, released 7 December 2020](/docs/containers?topic=containers-changelog#11812_1534)
   * [Changelog for worker node fix pack 1.18.12_1533, released 23 November 2020](/docs/containers?topic=containers-changelog#11812_1533_worker)
   * [Changelog for master fix pack 1.18.12_1533, released 16 November 2020](/docs/containers?topic=containers-changelog#11812_1533)
@@ -1697,6 +1689,8 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.15_1548, released 14 December 2020](/docs/containers?topic=containers-changelog#11715_1548)
+  * [Changelog for worker node fix pack 1.17.14_1548, released 11 December 2020](/docs/containers?topic=containers-changelog#11714_1548)
   * [Changelog for worker node fix pack 1.17.14_1546, released 7 December 2020](/docs/containers?topic=containers-changelog#11714_1546)
   * [Changelog for worker node fix pack 1.17.14_1545, released 23 November 2020](/docs/containers?topic=containers-changelog#11714_1545_worker)
   * [Changelog for master fix pack 1.17.14_1545, released 16 November 2020](/docs/containers?topic=containers-changelog#11714_1545)
@@ -1729,6 +1723,8 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for master fix pack 1.16.15_1554, released 14 December 2020](/docs/containers?topic=containers-changelog#11615_1554_master)
+  * [Changelog for worker node fix pack 1.16.15_1554, released 11 December 2020](/docs/containers?topic=containers-changelog#11615_1554)
   * [Changelog for worker node fix pack 1.16.15_1553, released 7 December 2020](/docs/containers?topic=containers-changelog#11615_1553)
   * [Changelog for worker node fix pack 1.16.15_1552, released 23 November 2020](/docs/containers?topic=containers-changelog#11615_1552_worker)
   * [Changelog for master fix pack 1.16.15_1552, released 16 November 2020](/docs/containers?topic=containers-changelog#11615_1552)
@@ -1780,8 +1776,8 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.35.0 (latest)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
-  * [Version 0.34.1 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
+  * [Version 0.35.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
+  * [Version 0.34.1](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 * [Deprecated: {{site.data.keyword.containerlong_notm}} Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
