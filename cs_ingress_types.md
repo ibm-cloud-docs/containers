@@ -888,8 +888,8 @@ IBM Cloud Ingress versions
 658
 
 Kubernetes Ingress versions
-0.35.0_767_iks
-0.34.1_764_iks (default)
+0.35.0_767_iks (default)
+0.34.1_764_iks
 0.33.0_768_iks
 ```
 {: screen}
