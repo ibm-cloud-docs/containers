@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-11"
+lastupdated: "2020-12-14"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -312,7 +312,7 @@ The cluster autoscaler Helm chart is deprecated. For the latest version of the c
 
 
 
-The cluster autoscaler Helm chart is available for standard classic and VPC clusters that are set up with public network connectivity. If your cluster cannot access the public network, such as a private cluster behind a firewall or a cluster with only the private service endpoint enabled, see [Using the cluster autoscaler for a private network-only cluster](#ca_private_cluster). If you connect to your private cluster from a VPN, verify your connection to your cluster by running `kubectl get pods`.
+The cluster autoscaler Helm chart is available for standard classic and VPC clusters that are set up with public network connectivity.
 {: important}
 
 Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a Helm chart to autoscale worker pools in your cluster.
@@ -343,7 +343,7 @@ Install the {{site.data.keyword.cloud_notm}} cluster autoscaler plug-in with a H
     * **`enabled=(true|false)`**: Set the value to `true` to enable the cluster autoscaler to scale your worker pool. Set the value to `false` to stop the cluster autoscaler from scaling the worker pool. Later, if you want to [remove the cluster autoscaler](/docs/containers?topic=containers-ca#ca_rm), you must first disable each worker pool in the configmap.
 
 5.  Install the cluster autoscaler Helm chart in the `kube-system` namespace of your cluster. In the example command, the `autoscale` worker pool is enabled for autoscaling with the Helm chart installation. The worker pool details are added to the cluster autoscaler config map.
-   ``` 
+   ```
    helm install ibm-iks-cluster-autoscaler iks-charts/ibm-iks-cluster-autoscaler --namespace kube-system --set workerpools[0].default.max=5,workerpools[0].autoscale.min=2,workerpools[0].default.enabled=true
    ```
    {: pre}
