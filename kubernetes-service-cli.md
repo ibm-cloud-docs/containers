@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-10"
+lastupdated: "2020-12-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -303,7 +303,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 #### `ibmcloud ks cluster addon disable istio-extras`
 {: #cs_cluster_addon_disable_istio_extras}
 
-Disable the managed Istio extras add-on. Removes Grafana, Jeager, and Kiali from the cluster.
+Disable the managed Istio extras add-on, which is unsupported. Removes Grafana, Jeager, and Kiali from the cluster.
 {: shortdesc}
 
 ```
@@ -329,7 +329,7 @@ ibmcloud ks cluster addon disable istio-extras --cluster CLUSTER [-f]
 #### `ibmcloud ks cluster addon disable istio-sample-bookinfo`
 {: #cs_cluster_addon_disable_istio_sample_bookinfo}
 
-Disable the managed Istio BookInfo add-on. Removes all deployments, pods, and other BookInfo app resources from the cluster.
+Disable the managed Istio BookInfo add-on, which is unsupported. Removes all deployments, pods, and other BookInfo app resources from the cluster.
 {: shortdesc}
 
 ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-07"
+lastupdated: "2020-12-14"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -160,7 +160,7 @@ Review the following known limitations:
 **Do the features change depending on my cluster version?**<br>
 {: #kms-keyprotect-features}
 
-Yes. Your cluster version impacts the functionality of the KMS provider. To see what {{site.data.keyword.keymanagementserviceshort}} features are available for different cluster versions of {{site.data.keyword.containerlong_notm}}, review the following table. 
+Yes. Your cluster version impacts the functionality of the KMS provider. To see what {{site.data.keyword.keymanagementserviceshort}} features are available for different cluster versions of {{site.data.keyword.containerlong_notm}}, review the following table.
 
 To check your cluster version, run the following command.
 ```
@@ -324,7 +324,7 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 ### Rotating the root key for your cluster
 {: #kms_rotate}
 
-To rotate the root key that is used to encrypt your cluster, you can repeat the steps to enable KMS encryption from the [CLI](#kms_cli) or [console](#kms_ui). 
+To rotate the root key that is used to encrypt your cluster, you can repeat the steps to enable KMS encryption from the [CLI](#kms_cli) or [console](#kms_ui).
 {: shortdesc}
 
 Additionally, if your cluster runs version `1.18.8_1525` or later, you can also [rotate the root key](/docs/key-protect?topic=key-protect-rotate-keys) from your {{site.data.keyword.keymanagementserviceshort}} instance.
