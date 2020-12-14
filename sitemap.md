@@ -383,27 +383,9 @@ subcollection: containers
 [Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 
-## Set up a DevOps delivery pipeline for your app
-{: #sitemap_set_up_a_devops_delivery_pipeline_for_your_app}
+## Developing a Kubernetes app toolchain with Code Risk Analyzer
 
-
-[Set up a DevOps delivery pipeline for your app](/docs/containers?topic=containers-tutorial-byoc-kube)
-
-[Objectives](/docs/containers?topic=containers-tutorial-byoc-kube#objectives-byoc-kube)
-
-[Audience](/docs/containers?topic=containers-tutorial-byoc-kube#audience-byoc-kube)
-
-[Prerequisites](/docs/containers?topic=containers-tutorial-byoc-kube#prereqs-byoc-kube)
-
-[Create a {{site.data.keyword.contdelivery_short}} service and a DevOps toolchain skeleton](/docs/containers?topic=containers-tutorial-byoc-kube#create-devops-toolchain)
-
-[Add a GitHub integration to your toolchain](/docs/containers?topic=containers-tutorial-byoc-kube#add-gh-integration)
-
-[Configure a continuous delivery pipeline and pipeline stages](/docs/containers?topic=containers-tutorial-byoc-kube#pipeline-byoc-kube)
-
-[Verify the deployment and health of your app in the cluster](/docs/containers?topic=containers-tutorial-byoc-kube#verify-byoc-kube)
-
-[What's next?](/docs/containers?topic=containers-tutorial-byoc-kube#byoc_whats_next)
+[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
 
 ## Moving a VM-based application to Kubernetes
