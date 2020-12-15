@@ -547,6 +547,7 @@ Before you begin:
 
 [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
+
 1. Check which region and zone your VPC worker node is in.
   ```
   ibmcloud ks worker ls -c <cluster_name>
