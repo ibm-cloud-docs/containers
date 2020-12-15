@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-14"
+lastupdated: "2020-12-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -824,7 +824,7 @@ You can configure your own classes by creating custom `IngressClass` resources a
 
 2. Deploy the `IngressClass` to your cluster.
   ```
-  kubectl apply -n kube-system -f <class_name>.yaml
+  kubectl apply -f <class_name>.yaml
   ```
   {: pre}
 
