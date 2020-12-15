@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-11"
+lastupdated: "2020-12-15"
 
 keywords: kubernetes, iks
 
@@ -549,7 +549,7 @@ Before you begin:
 
 1. Check which region and zone your VPC worker node is in.
   ```
-  ibmcloud ks worker ls <cluster_name>
+  ibmcloud ks worker ls -c <cluster_name>
   ```
   {: pre}
 
