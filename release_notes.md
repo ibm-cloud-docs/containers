@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-14"
+lastupdated: "2020-12-15"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 15 December 2020 | Cluster autoscaler add-on patch update `1.0.1_205` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). |
 | 14 December 2020 | <ul><li>**Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0). Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.5_1529](/docs/containers?topic=containers-changelog#1195_1529), [1.18.13_1535](/docs/containers?topic=containers-changelog#11813_1535), [1.17.15_1548](/docs/containers?topic=containers-changelog#11715_1548), and [1.16.15_1554](/docs/containers?topic=containers-changelog#11615_1554_master).</li></ul> |
 | 11 December 2020 | <ul><li>**Storage add-ons**: Cluster autoscaler add-on patch update `1.0.1_195` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). {{site.data.keyword.block_storage_is_short}} add-on patch update `2.0.3_464` is released. For more information, see the [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog).</li><li>**strongSwan versions** Added information about which [strongSwan Helm chart versions](/docs/containers?topic=containers-vpn#vpn_upgrade) are supported.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1529](/docs/containers?topic=containers-changelog#1194_1529), [1.18.12_1535](/docs/containers?topic=containers-changelog#11812_1535), [1.17.14_1547](/docs/containers?topic=containers-changelog#11714_1547), and [1.16.15_1554](/docs/containers?topic=containers-changelog#11615_1554).</li></ul> |
 | 09 December 2020 | <ul><li>**Accessing clusters**: Updated the steps for [accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se) to use the `--endpoint private` flag in the `ibmcloud ks cluster config` command.</li><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.206](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Proxy protocol for Ingress:** In VPC clusters, you can now [enable the PROXY protocol](/docs/containers?topic=containers-comm-ingress-annotations#preserve_source_ip_vpc) for all load balancers that expose Ingress ALBs in your cluster. The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.</li></ul> |
