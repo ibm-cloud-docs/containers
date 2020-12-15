@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-14"
+lastupdated: "2020-12-15"
 
 keywords: containers
 subcollection: containers
@@ -1489,7 +1489,7 @@ subcollection: containers
   * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
-* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach)
+* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
   * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster](/docs/containers?topic=containers-utilities#vpc_api_detach)
   * [Reviewing volume attachment details for a VPC worker node](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
 * [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)
@@ -1664,7 +1664,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
-  * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog#11715_1548)
+  * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog#11813_1535)
   * [Changelog for worker node fix pack 1.18.12_1535, released 11 December 2020](/docs/containers?topic=containers-changelog#11812_1535)
   * [Changelog for worker node fix pack 1.18.12_1534, released 7 December 2020](/docs/containers?topic=containers-changelog#11812_1534)
   * [Changelog for worker node fix pack 1.18.12_1533, released 23 November 2020](/docs/containers?topic=containers-changelog#11812_1533_worker)
@@ -2120,7 +2120,7 @@ subcollection: containers
 * [Cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
 * [Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
 * [Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
-* [Logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events#at-lm)
 * [NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
 * [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
 * [Storage events](/docs/containers?topic=containers-at_events#storage-events)

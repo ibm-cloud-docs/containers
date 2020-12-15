@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-11"
+lastupdated: "2020-12-15"
 
 keywords: kubernetes, iks
 
@@ -423,7 +423,7 @@ You can attach a volume to one worker node only. Make sure that the volume is in
 
 3. Retrieve a list of worker nodes in your VPC cluster. Note the **Zone** of the worker node that is in the same zone as your storage volume.
   ```
-  ibmcloud ks worker ls <cluster_name>
+  ibmcloud ks worker ls -c <cluster_name>
   ```
   {: pre}
 
