@@ -2120,7 +2120,7 @@ subcollection: containers
 * [Cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
 * [Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
 * [Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
-* [Logging and monitoring configuration events](/docs/containers?topic=containers-at_events#at-lm)
+* [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events#at-lm)
 * [NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
 * [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
 * [Storage events](/docs/containers?topic=containers-at_events#storage-events)
