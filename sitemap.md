@@ -1489,7 +1489,7 @@ subcollection: containers
   * [Removing the IBM Cloud Block Volume Attacher plug-in](/docs/containers?topic=containers-utilities#remove_block_attacher)
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
-* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes](/docs/containers?topic=containers-utilities#vpc_api_attach)
+* [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
   * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster](/docs/containers?topic=containers-utilities#vpc_api_detach)
   * [Reviewing volume attachment details for a VPC worker node](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
 * [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)
