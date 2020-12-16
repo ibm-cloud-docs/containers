@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-15"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 16 December 2020 | **Istio add-on**: Versions [1.8.1](/docs/containers?topic=containers-istio-changelog#181) and [1.7.6](/docs/containers?topic=containers-istio-changelog#176) of the Istio managed add-on are released. Version 1.6 is unsupported. |
 | 15 December 2020 | **Cluster autoscaler**: Cluster autoscaler add-on patch update `1.0.1_205` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). |
 | 14 December 2020 | <ul><li>**Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_767_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0). Updated the [`nginx-ingress` build to 2410 and the `ingress-auth` build to 947](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.5_1529](/docs/containers?topic=containers-changelog#1195_1529), [1.18.13_1535](/docs/containers?topic=containers-changelog#11813_1535), [1.17.15_1548](/docs/containers?topic=containers-changelog#11715_1548), and [1.16.15_1554](/docs/containers?topic=containers-changelog#11615_1554_master).</li></ul> |
 | 11 December 2020 | <ul><li>**Storage add-ons**: Cluster autoscaler add-on patch update `1.0.1_195` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). {{site.data.keyword.block_storage_is_short}} add-on patch update `2.0.3_464` is released. For more information, see the [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog).</li><li>**strongSwan versions** Added information about which [strongSwan Helm chart versions](/docs/containers?topic=containers-vpn#vpn_upgrade) are supported.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.4_1529](/docs/containers?topic=containers-changelog#1194_1529), [1.18.12_1535](/docs/containers?topic=containers-changelog#11812_1535), [1.17.14_1548](/docs/containers?topic=containers-changelog#11714_1548), and [1.16.15_1554](/docs/containers?topic=containers-changelog#11615_1554).</li></ul> |
