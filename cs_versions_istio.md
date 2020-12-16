@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-11"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -109,7 +109,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 | -------------------- | -----------|--------------------------- |
 | 1.8 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18, 1.19 |
 | 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
-| 1.6 | <img src="images/warning-filled.png" width="32" style="width:32px;" alt="Deprecated"/> | 1.16, 1.17, 1.18 |
+| 1.6 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.5 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
@@ -117,6 +117,18 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.8
 {: #v18}
+
+### Changelog for 1.8.1, released 16 December 2020
+{: #181}
+
+The following table shows the changes that are included in version 1.8.1 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.8.0 | 1.8.1 | See the Istio release notes for [Istio 1.8.1](https://istio.io/news/releases/1.8.x/announcing-1.8.1/){:external}. |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.8.0" caption-side="top"}
 
 ### Changelog for 1.8.0, released 9 December 2020
 {: #180}
@@ -132,6 +144,18 @@ The following table shows the changes that are included in version 1.8.0 of the 
 
 ## Version 1.7
 {: #v17}
+
+## Changelog for 1.7.6, released 16 December 2020
+{: #176}
+
+The following table shows the changes that are included in version 1.7.6 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.7.5 | 1.7.6 | <ul><li>See the Istio release notes for [Istio 1.7.6](https://istio.io/news/releases/1.7.x/announcing-1.7.6/){:external}.</li><li>Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.7.5" caption-side="top"}
 
 ### Changelog for 1.7.5, released 3 December 2020
 {: #175}
@@ -205,7 +229,7 @@ The following table shows the changes that are included in version 1.7.0 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.8" caption-side="top"}
 
-## Version 1.6 (deprecated)
+## Version 1.6 (unsupported)
 {: #v16}
 
 ### Differences between version 1.6 of managed and community Istio

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-15"
+lastupdated: "2020-12-16"
 
 keywords: containers
 subcollection: containers
@@ -1538,7 +1538,6 @@ subcollection: containers
   * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
   * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
 * [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
-* [Related Helm links](/docs/containers?topic=containers-helm#helm_links)
 
 [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding)
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
@@ -1785,15 +1784,17 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)
+  * [Changelog for 1.8.1, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#181)
   * [Changelog for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+* [Changelog for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
   * [Changelog for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
   * [Changelog for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)
   * [Changelog for 1.7.3, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#173)
   * [Changelog for 1.7.2, released 23 September 2020](/docs/containers?topic=containers-istio-changelog#172)
   * [Changelog for 1.7.1, released 14 September 2020](/docs/containers?topic=containers-istio-changelog#171)
   * [Changelog for 1.7.0, released 02 September 2020](/docs/containers?topic=containers-istio-changelog#170)
-* [Version 1.6 (deprecated)](/docs/containers?topic=containers-istio-changelog#v16)
+* [Version 1.6 (unsupported)](/docs/containers?topic=containers-istio-changelog#v16)
   * [Differences between version 1.6 of managed and community Istio](/docs/containers?topic=containers-istio-changelog#diff-managed-comm-16)
   * [Changelog for 1.6.14, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#1614)
   * [Changelog for 1.6.13, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#1613)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-09"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks, knative
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -101,6 +101,9 @@ Learn how to install and use Knative in a Kubernetes cluster in {{site.data.keyw
 
 As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
 {: deprecated}
+
+If you want to create a continuous delivery pipeline, see [working with Tekton pipelines](/docs/ContinuousDelivery?topic=ContinuousDelivery-tekton-pipelines)
+{: tip}
 
 **What is Knative and why do I want use it?**
 
@@ -326,7 +329,7 @@ Update your Knative add-on to the latest versions.
       {: pre}
     3. Navigate to the Istio package directory.
       ```
-      cd istio-1.8.0
+      cd istio-1.8.1
       ```
       {: pre}
     4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.

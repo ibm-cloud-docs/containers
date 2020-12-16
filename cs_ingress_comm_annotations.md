@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-10"
+lastupdated: "2020-12-15"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -962,14 +962,11 @@ For more information, see [Customizing the Ingress class](/docs/containers?topic
 ## Adding {{site.data.keyword.appid_short_notm}} authentication to apps
 {: #app-id}
 
-We should add as a pre-requisite, that the Secret that contains the certificate+private key for the host which is being protected by App ID should be copied to the target namespace.
-
-
-
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
 
 **Before you begin**: Ensure that the secret that contains your TLS certificate and key is copied to the namespace where your app is deployed.
+
 1. Get the CRN of the Ingress secret for your custom domain or default Ingress subdomain.
   ```
   ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
@@ -993,12 +990,12 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, {{site.data.keyword.appid_full_notm}} validates the request URL against the allowlist of redirect URLs.
   1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Manage Authentication**.
   2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `http://<hostname>/oauth2-<App_ID_service_instance_name>/callback` or `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`.
+  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `http://<hostname>/oauth2-<App_ID_service_instance_name>/callback` or `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
 
     {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/sign_out` to your domain in the format `http://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` or `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list.
     {: note}
 
-3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in.
+3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
   ```
   ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <App_ID_service_instance_name> [--key <service_instance_key>]
   ```
@@ -1026,7 +1023,7 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
       {: pre}
 
 5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
-  1. Add the following `auth-url` annotation. Change only the placeholder for your {{site.data.keyword.appid_short_notm}} service instance name.
+  1. Add the following `auth-url` annotation. Change only the placeholder for your {{site.data.keyword.appid_short_notm}} service instance name. Note that all letters in the service instance name must specified as lowercase.
      ```yaml
      ...
      annotations:
@@ -1066,7 +1063,7 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
        ...
        ```
        {: codeblock}
-  3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation.
+  3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication.
   ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-16"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks
 
@@ -18,6 +18,7 @@ completion-time: 60m
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -26,6 +27,7 @@ completion-time: 60m
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -43,7 +45,6 @@ completion-time: 60m
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -77,7 +78,6 @@ completion-time: 60m
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -89,10 +89,11 @@ completion-time: 60m
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -262,8 +263,7 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
 </br>
 Great work! Your cluster is configured and your local environment is ready for you to start deploying apps into the cluster.
 
-Before you continue with the next lesson, why not test your knowledge and [take a short quiz](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php){: external}?
-{: note}
+
 
 <br />
 
@@ -824,8 +824,7 @@ Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyze
   ```
   {: pre}
 
-Quiz time! You covered a lot of material, so [make sure that you understand it all](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php){: external}. Don't worry, the quiz is not cumulative!
-{: note}
+
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-09"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -129,7 +129,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.8.0, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.8.1, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -144,7 +144,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.8.0       normal         Addon Ready
+  istio           1.8.1       normal         Addon Ready
   ```
   {: screen}
 
@@ -176,12 +176,12 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 
 2. Download the version of `istioctl` that matches your cluster's Istio version.
   ```
-  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.0 sh -
+  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.1 sh -
   ```
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.8.0
+  cd istio-1.8.1
   ```
   {: pre}
 4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -349,16 +349,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.7.4
   cluster-local-gateway version:
-  citadel version: 1.8.0
-  egressgateway version: 1.8.0
-  egressgateway version: 1.8.0
-  galley version: 1.8.0
-  ingressgateway version: 1.8.0
-  ingressgateway version: 1.8.0
-  pilot version: 1.8.0
-  policy version: 1.8.0
+  citadel version: 1.8.1
+  egressgateway version: 1.8.1
+  egressgateway version: 1.8.1
+  galley version: 1.8.1
+  ingressgateway version: 1.8.1
+  ingressgateway version: 1.8.1
+  pilot version: 1.8.1
+  policy version: 1.8.1
   sidecar-injector version: 1.7.4
-  telemetry version: 1.8.0
+  telemetry version: 1.8.1
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.7.4"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.7.4"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.7.4"}
@@ -369,12 +369,12 @@ For example, the patch version of your add-on might be updated automatically by 
 2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.0 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.1 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.8.0
+      cd istio-1.8.1
       ```
       {: pre}
     3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -578,7 +578,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.8.0
+    cd <filepath>/istio-1.8.1
     ```
     {: pre}
 
