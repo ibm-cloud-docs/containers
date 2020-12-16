@@ -1538,7 +1538,6 @@ subcollection: containers
   * [What is Helm and how do I use it?](/docs/containers?topic=containers-helm#what-is-helm)
   * [What Helm charts are supported in {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-helm#supported-charts)
 * [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
-* [Related Helm links](/docs/containers?topic=containers-helm#helm_links)
 
 [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding)
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)

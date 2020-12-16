@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-11-20"
+lastupdated: "2020-12-16"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -162,7 +162,7 @@ Subnets for {{site.data.keyword.containerlong_notm}} clusters vary by infrastruc
 ### Multizone load balancer
 {: #mzlb_pricing}
 
-When you create a multizone cluster or add zones to a single zone cluster, you must have a load balancer to health check Ingress and load balancer IP addresses in each zone, and forward requests to your apps across zones in the region. 
+When you create a multizone cluster or add zones to a single zone cluster, you must have a load balancer to health check Ingress and load balancer IP addresses in each zone, and forward requests to your apps across zones in the region.
 {: shortdesc}
 
 The type of load balancer that is automatically created varies depending on the type of cluster. For more information, see [Multizone load balancer (MZLB) or Load Balancer for VPC](/docs/containers?topic=containers-ingress-about#mzlb).
@@ -174,7 +174,7 @@ The type of load balancer that is automatically created varies depending on the 
 ### Storage
 {: #persistent_storage}
 
-When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from. 
+When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from.
 {: shortdesc}
 
 To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
@@ -215,7 +215,7 @@ For virtual server instances that are billed hourly, discounted prices depend on
 ## Estimating costs
 {: #costs-estimate}
 
-See [Estimating your costs](/docs/billing-usage?topic=billing-usage-cost#cost). 
+See [Estimating your costs](/docs/billing-usage?topic=billing-usage-cost#cost).
 
 Keep in mind that some charges are not reflected in the estimate, such as tiered pricing for increased hourly usage. For more information, see [Understanding costs for your clusters](#costs-for-clusters).
 
@@ -234,7 +234,7 @@ The following steps present a general process to manage costs for your {{site.da
     * [Decide the cluster environment that you want](/docs/containers?topic=containers-strategy#kube_env).
     * [Consider the availability that you want for your cluster](/docs/containers?topic=containers-ha_clusters). For example, a basic high availability setup is one multizone cluster with three worker nodes in each of three zones, for a minimum total of nine worker nodes.
 3.  Check out other {{site.data.keyword.cloud_notm}} services, add-ons, operators, and other third-party software that you might use that can increase your cost. To get an idea of what other costs clusters typically incur, review [Understanding costs for your clusters](#costs-for-clusters).
-4.  [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/container-service/pricing){: external}. 
+4.  [Estimate your costs](/docs/billing-usage?topic=billing-usage-cost#cost) and review detailed pricing information for the service, see [{{site.data.keyword.containerlong_notm}}: Pricing](https://www.ibm.com/cloud/container-service/pricing){: external}.
 5.  Manage the lifecycle of your cluster to control costs.
     * Consider [enabling the cluster autoscaler](/docs/containers?topic=containers-ca) to automatically add or remove worker nodes in response to your cluster workload resource requets.
     * Manually [resize your worker pool](/docs/containers?topic=containers-add_workers) to remove worker nodes that you do not need. Keep in mind that you cannot scale a worker pool down to zero worker nodes.
