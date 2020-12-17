@@ -1837,9 +1837,6 @@ subcollection: containers
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
 * [Changelog for 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
-[Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
-* [Changelog for 1.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_br_chart)
-
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.15 changelog (unsupported 22 September 2020)](/docs/containers?topic=containers-changelog_archive#115_changelog)
   * [Changelog for worker node fix pack 1.15.12_1552, released 14 September 2020](/docs/containers?topic=containers-changelog_archive#11512_1552)
