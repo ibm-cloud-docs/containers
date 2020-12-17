@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-16"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -126,7 +126,7 @@ The following table shows the changes that are included in version 1.8.1 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.8.0 | 1.8.1 | See the Istio release notes for [Istio 1.8.1](https://istio.io/news/releases/1.8.x/announcing-1.8.1/){:external}. |
+| 1.8.0 | 1.8.1 | See the Istio release notes for [Istio 1.8.1](The page was redirected to https://istio.io/latest/news/releases/1.8.x/announcing-1.8.1/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.8.0" caption-side="top"}
 
@@ -153,7 +153,7 @@ The following table shows the changes that are included in version 1.7.6 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.5 | 1.7.6 | <ul><li>See the Istio release notes for [Istio 1.7.6](https://istio.io/news/releases/1.7.x/announcing-1.7.6/){:external}.</li><li>Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}.</li></ul> |
+| 1.7.5 | 1.7.6 | <ul><li>See the Istio release notes for [Istio 1.7.6](The page was redirected to https://istio.io/latest/news/releases/1.7.x/announcing-1.7.6/){:external}.</li><li>Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.5" caption-side="top"}
 
@@ -165,7 +165,7 @@ The following table shows the changes that are included in version 1.7.5 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.4 | 1.7.5 | See the Istio release notes for [Istio 1.7.5](https://istio.io/news/releases/1.7.x/announcing-1.7.5/){:external}. |
+| 1.7.4 | 1.7.5 | See the Istio release notes for [Istio 1.7.5](The page was redirected to https://istio.io/latest/news/releases/1.7.x/announcing-1.7.5/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.4" caption-side="top"}
 
@@ -177,7 +177,7 @@ The following table shows the changes that are included in version 1.7.4 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.3 | 1.7.4 | <ul><li>See the Istio release notes for [Istio 1.7.4](https://istio.io/news/releases/1.7.x/announcing-1.7.4/){:external}.</li><li>Resolves [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external} and [usn-4581-1](https://usn.ubuntu.com/4581-1/){: external}.</li></ul> |
+| 1.7.3 | 1.7.4 | <ul><li>See the Istio release notes for [Istio 1.7.4](The page was redirected to https://istio.io/latest/news/releases/1.7.x/announcing-1.7.4/){:external}.</li><li>Resolves [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external} and [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.3" caption-side="top"}
 
@@ -257,7 +257,7 @@ The following table shows the changes that are included in version 1.6.14 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.6.13 | 1.6.14 | <ul><li>See the Istio release notes for [Istio 1.6.14](https://istio.io/news/releases/1.6.x/announcing-1.6.14/){:external}.</li><li>Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}.</li></ul> |
+| 1.6.13 | 1.6.14 | <ul><li>See the Istio release notes for [Istio 1.6.14](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.14/){:external}.</li><li>Resolves [CVE-2020-28196](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28196){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.13" caption-side="top"}
 
@@ -269,7 +269,7 @@ The following table shows the changes that are included in version 1.6.13 of the
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.6.12 | 1.6.13 | <ul><li>See the Istio release notes for [Istio 1.6.13](https://istio.io/news/releases/1.6.x/announcing-1.6.13/){:external}.</li><li>Resolves [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external} and [usn-4581-1](https://usn.ubuntu.com/4581-1/){: external}.</li></ul> |
+| 1.6.12 | 1.6.13 | <ul><li>See the Istio release notes for [Istio 1.6.13](https://istio.io/latest/news/releases/1.6.x/announcing-1.6.13/){:external}.</li><li>Resolves [CVE-2020-26116](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-26116){: external} and [usn-4581-1](https://ubuntu.com/security/notices/USN-4581-1){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.6.12" caption-side="top"}
 

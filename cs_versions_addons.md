@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-14"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -206,7 +206,7 @@ Refer to the following table for a summary of changes for each version of the {{
 <tr>
 <td>652 / 424</td>
 <td>01 Oct 2020</td>
-<td>Fixes vulnerabilities for [CVE-2018-7738 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738), [CVE-2020-8169 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/docs/CVE-2020-8169.html), and [CVE-2020-8177 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/docs/CVE-2020-8177.html).</td>
+<td>Fixes vulnerabilities for [CVE-2018-7738 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-7738), [CVE-2020-8169 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://curl.haxx.se/docs/CVE-2020-8169.html), and [CVE-2020-8177 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://curl.se/docs/CVE-2020-8177.html).</td>
 <td>-</td>
 </tr>
 <tr>
