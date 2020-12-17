@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-12-15"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -129,7 +129,7 @@ The following table shows the changes that are included in the master fix pack p
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | Cluster health image | v1.2.3 | v1.2.4 | Updated image to implement additional IBM security controls. |
-| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.14){: external}. |
+| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.14){: external}. |
 | Gateway-enabled cluster controller | 1105 | 1184 | Updated to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |
 | GPU device plug-in and installer | c7a8cf7 | adcae42 | Updated the GPU drivers to version [450.80.02](https://www.nvidia.com/download/driverResults.aspx/165294){: external}. Updated image for [CVE-2020-28367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28367){: external}, [CVE-2020-28366](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28366){: external}, and [CVE-2020-28362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28362){: external}. Updated image to implement additional IBM security controls. |
 | IBM Calico extension | 378 | 538 | Updated to use the universal base image (UBI) and to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |
@@ -269,7 +269,7 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 | Key Management Service provider | v2.0.4 | v2.1.0 | Updated to use the key management service (KMS) provider secret to identify when a [{{site.data.keyword.keymanagementserviceshort}}](/docs/containers?topic=containers-encryption#keyprotect) key is enabled and disabled so that encryption and decryption requests are updated accordingly. |
 | Kubernetes | v1.18.9 | v1.19.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.2){: external}. |
 | Kubernetes configuration | N/A | N/A | Disabled the Kubernetes `SCTPSupport` and `ServiceAppProtocol` feature gates. |
-| Kubernetes DNS autoscaler | 1.7.1 | 1.8.3 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-incubator/cluster-proportional-autoscaler/releases/tag/1.8.3){: external}. In addition, the Kubernetes DNS autoscaler configuration was updated to include unscheduable worker nodes in scaling calculations. |
+| Kubernetes DNS autoscaler | 1.7.1 | 1.8.3 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.8.3){: external}. In addition, the Kubernetes DNS autoscaler configuration was updated to include unscheduable worker nodes in scaling calculations. |
 | Kubernetes NodeLocal DNS cache | 1.15.13 | 1.15.14 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.14){: external}. |
 | Load balancer and load balancer monitor for IBM Cloud Provider | 223 | 234 | Updated to use `Go` version 1.15.2. |
 | Operator Lifecycle Manager Catalog | v1.6.1 | v1.14.0 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.14.0){: external}. |
@@ -293,7 +293,7 @@ The following table shows the changes that are included in the master fix pack p
 | --- | --- | --- | --- |
 | Cluster health image | v1.1.13 | v1.1.14 | Updated image to implement additional IBM security controls. |
 | CoreDNS | 1.6.9 | 1.8.0 | See the [CoreDNS release notes](https://coredns.io/2020/10/22/coredns-1.8.0-release/){: external}. Additionally, updated the CoreDNS configuration to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
-| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.14){: external}. |
+| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.14){: external}. |
 | Gateway-enabled cluster controller | 1105 | 1184 | Updated to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |
 | GPU device plug-in and installer | c7a8cf7 | adcae42 | Updated the GPU drivers to version [450.80.02](https://www.nvidia.com/download/driverResults.aspx/165294){: external}. Updated image for [CVE-2020-28367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28367){: external}, [CVE-2020-28366](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28366){: external}, and [CVE-2020-28362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28362){: external}. Updated image to implement additional IBM security controls. |
 | IBM Calico extension | 378 | 544 | Updated to use the universal base image (UBI) and to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |
@@ -704,7 +704,7 @@ The following table shows the changes that are included in the master fix pack p
 | Component | Previous | Current | Description |
 | --- | --- | --- | --- |
 | CoreDNS | 1.6.9 | 1.8.0 | See the [CoreDNS release notes](https://coredns.io/2020/10/22/coredns-1.8.0-release/){: external}. Additionally, updated the CoreDNS configuration to increase the weight of scheduling CoreDNS pods to different worker nodes and zones. |
-| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/coreos/etcd/releases/v3.4.14){: external}. |
+| etcd | v3.4.13 | v3.4.14 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.4.14){: external}. |
 | Gateway-enabled cluster controller | 1105 | 1184 | Updated to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |
 | GPU device plug-in and installer | c7a8cf7 | adcae42 | Updated the GPU drivers to version [450.80.02](https://www.nvidia.com/download/driverResults.aspx/165294){: external}. Updated image for [CVE-2020-28367](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28367){: external}, [CVE-2020-28366](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28366){: external}, and [CVE-2020-28362](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28362){: external}. Updated image to implement additional IBM security controls. |
 | IBM Calico extension | 378 | 544 | Updated to use the universal base image (UBI) and to use `Go` version 1.15.5. Updated image to implement additional IBM security controls. |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-09-08"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,12 +40,12 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -71,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -83,10 +84,11 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -94,7 +96,7 @@ subcollection: containers
 # Overview
 {: #iks-overview}
 
-Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/container-service/){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
+Learn more about [{{site.data.keyword.containerlong}}](https://www.ibm.com/cloud/kubernetes-service){: external}, its capabilities, and the options that are available to you to customize the cluster to your needs.
 {: shortdesc}
 
 ## Understanding {{site.data.keyword.containerlong_notm}}
@@ -135,7 +137,6 @@ Review the following links to find out more about the benefits and responsibilit
 - Learn how you can use {{site.data.keyword.containerlong_notm}} to modernize and run containerized apps in these <a href="https://www.ibm.com/demos/collection/Containers-(Kubernetes)-on-IBM-Cloud/?lc=null">videos</a>.
 
 <br />
-
 
 
 ## Docker containers
@@ -183,7 +184,6 @@ Ready to gain deeper knowledge of Docker? [Learn how Docker and {{site.data.keyw
 
 <br />
 
-
 ## Kubernetes clusters
 {: #kubernetes_basics}
 
@@ -224,6 +224,5 @@ Review how you can learn about Kubernetes concepts and the terminology.
 
 * Familiarize yourself with the product by completing the [Creating clusters tutorial](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial).
 * Learn how Kubernetes and {{site.data.keyword.containerlong_notm}} work together by completing this [course](https://cognitiveclass.ai/courses/kubernetes-course).
-
 
 

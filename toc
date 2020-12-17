@@ -1,7 +1,7 @@
 {:navgroup: .navgroup}
 {:topicgroup: .topicgroup}
 
-{: .toc subcollection="containers" category="containers" audience="compute" href="/docs/containers?topic=containers-getting-started" console-page="/kubernetes/overview" product-page="https://www.ibm.com/cloud/container-service/" path="containers"}
+{: .toc subcollection="containers" category="containers" audience="compute" href="/docs/containers?topic=containers-getting-started" console-page="/kubernetes/overview" product-page="https://www.ibm.com/cloud/kubernetes-service" path="containers"}
 Kubernetes Service
 
     {: .navgroup id="learn"}
@@ -121,7 +121,11 @@ Kubernetes Service
             cs_dns.md
             cs_static_routes.md
 
-    cs_health.md
+    {: .topicgroup}
+    Logging and monitoring
+        cs_health_log.md
+        cs_health_monitor.md
+        cs_health_audit.md
 
     {: .topicgroup}
     Setting up an image build pipeline
@@ -221,6 +225,7 @@ Kubernetes Service
         cs_versions_autoscaler.md
         cs_versions_vpc_block_addon.md
         cs_versions_object.md
+        cs_versions_backup_restore.md
         cs_versions_archive.md
 
     {: .topicgroup}

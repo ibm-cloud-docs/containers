@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-11-20"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -2060,13 +2060,13 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 </tbody>
 </table>
@@ -3166,13 +3166,13 @@ The following table shows the changes that are included in the patch 1.13.7_1526
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 </tbody>
 </table>
@@ -4443,13 +4443,13 @@ The following table shows the changes that are included in the patch 1.12.9_1557
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 </tbody>
 </table>
@@ -5584,13 +5584,13 @@ The following table shows the changes that are included in the worker node patch
 <td>Ubuntu 16.04 kernel</td>
 <td>4.4.0-148-generic</td>
 <td>4.4.0-150-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 <tr>
 <td>Ubuntu 18.04 kernel</td>
 <td>4.15.0-50-generic</td>
 <td>4.15.0-51-generic</td>
-<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906.html?_ga=2.184456110.929090212.1560547312-1880639276.1557078470).</td>
+<td>Updated worker node images with kernel and package updates for [CVE-2019-10906 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/CVE-2019-10906).</td>
 </tr>
 </tbody>
 </table>

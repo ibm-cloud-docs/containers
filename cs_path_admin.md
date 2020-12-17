@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-10-12"
+lastupdated: "2020-12-17"
 
 keywords: kubernetes, iks, containers
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,10 +84,11 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -312,7 +313,6 @@ Start by designing a cluster for maximum availability and capacity for your work
 
 <br />
 
-
 ## Create a cluster
 {: #admin_cluster}
 
@@ -338,7 +338,6 @@ Create a cluster with infrastructure, network, and availability setups that are 
 
 <br />
 
-
 ## Manage the network
 {: #admin_network}
 
@@ -356,7 +355,6 @@ Review the following optional topics to manage the network connectivity of your 
 </br>Need help? Check out [Troubleshooting cluster networking](/docs/containers?topic=containers-cs_troubleshoot_network#cs_troubleshoot_network).
 
 <br />
-
 
 ## Secure your cluster
 {: #admin_secure}
@@ -378,7 +376,6 @@ Use built-in security features to protect your cluster infrastructure and networ
 
 <br />
 
-
 ## Logging and monitoring
 {: #admin_health}
 
@@ -394,7 +391,6 @@ Set up logging and monitoring to help you troubleshoot issues and improve the he
 
 
 <br />
-
 
 ## Add a registry and CI/CD
 {: #admin_registry}
@@ -421,7 +417,6 @@ Plan and add highly available persistent storage based on your app requirements,
 
 <br />
 
-
 ## Add integrations
 {: #admin_integrate}
 
@@ -441,7 +436,6 @@ Enhance cluster capabilities by integrating various external services and catalo
 
 <br />
 
-
 ## Manage the lifecycle
 {: #admin_lifecycle}
 
@@ -456,6 +450,5 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
 * **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
 
 </br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-cs_troubleshoot), [worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters), or the [cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler).
-
 
 
