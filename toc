@@ -121,7 +121,11 @@ Kubernetes Service
             cs_dns.md
             cs_static_routes.md
 
-    cs_health.md
+    {: .topicgroup}
+    Logging and monitoring
+        cs_health_log.md
+        cs_health_monitor.md
+        cs_health_audit.md
 
     {: .topicgroup}
     Setting up an image build pipeline

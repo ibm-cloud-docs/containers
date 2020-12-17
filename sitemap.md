@@ -875,37 +875,39 @@ subcollection: containers
 * [Creating static routes](/docs/containers?topic=containers-static-routes#create-route-resources)
 
 
-## Logging and monitoring cluster health
-{: #sitemap_logging_and_monitoring_cluster_health}
+## Logging and monitoring
+{: #sitemap_logging_and_monitoring}
 
 
-[Logging and monitoring cluster health](/docs/containers?topic=containers-health)
+[Logging for clusters](/docs/containers?topic=containers-health)
+* [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
+* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
+  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
+  * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
+  * [Forwarding logs to your own server over the `udp` or `tcp` protocols](/docs/containers?topic=containers-health#enable-forwarding-udp-tcp)
+  * [Forwarding logs to your own server over the `tls` protocol](/docs/containers?topic=containers-health#enable-forwarding-tls)
+  * [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
+  * [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
+* [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
 
-[Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
+[Monitoring cluster health](/docs/containers?topic=containers-health-monitor)
+* [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
+* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#sysdig)
+* [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
+  * [Cluster states](/docs/containers?topic=containers-health-monitor#states_cluster)
+  * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
+  * [Worker node states](/docs/containers?topic=containers-health-monitor#states_workers)
+* [Monitoring worker node health in classic clusters with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
-[Forwarding cluster, app, and Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
-* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#app_logdna)
-* [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#webhook_logdna)
-
-[Forwarding cluster, app, and Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health#configuring)
-* [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
-* [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
-* [Forwarding Kubernetes API audit logs](/docs/containers?topic=containers-health#audit_enable)
-* [Filtering logs that are forwarded](/docs/containers?topic=containers-health#filter-logs)
-* [Verifying, updating, and deleting log forwarding](/docs/containers?topic=containers-health#verifying-log-forwarding)
-
-[Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master)
-
-[Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics)
-
-[Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health#sysdig)
-
-[Viewing cluster states](/docs/containers?topic=containers-health#states)
-* [Cluster states](/docs/containers?topic=containers-health#states_cluster)
-* [Master states](/docs/containers?topic=containers-health#states_master)
-* [Worker node states](/docs/containers?topic=containers-health#states_workers)
-
-[Monitoring worker node health in classic clusters with Autorecovery](/docs/containers?topic=containers-health#autorecovery)
+[Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
+* [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
+  * [Understanding the Kubernetes API audit configuration](/docs/containers?topic=containers-health-audit#api-server-config)
+  * [Forwarding Kubernetes API audit logs to LogDNA](/docs/containers?topic=containers-health-audit#audit-api-server-logdna)
+  * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
+  * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
+  * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
+* [Service audit logs](/docs/containers?topic=containers-health-audit#audit-service)
 
 
 ## Setting up an image build pipeline
