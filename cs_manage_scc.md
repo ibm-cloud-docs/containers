@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-08"
+lastupdated: "2020-12-18"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -125,6 +125,6 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 *   **Ensure that data in cluster secrets are encrypted with keys that the customer manages.** You can enable a key management service (KMS) provider in your cluster. For more information, see [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption).
 *   **Ensure that data in cluster secrets are encrypted with keys that the customer manages that are controlled by a hardware security module that the customer manages.** You can enable {{site.data.keyword.hscrypto}} as the key management service (KMS) provider in your cluster. For more information, see [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption).
 *   **Ensure that the cluster has a logging service enabled.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)..
-*   **Ensure that the cluster has a monitoring service enabled.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health#view_metrics).
+*   **Ensure that the cluster has a monitoring service enabled.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
 *   **Ensure that the cluster and worker node versions are up to date.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
 *   **Ensure that the cluster can pull images from the private image repository that is provided by {{site.data.keyword.registrylong_notm}}.** For more information, see [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth).

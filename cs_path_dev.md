@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-17"
+lastupdated: "2020-12-18"
 
 keywords: kubernetes, iks, containers
 
@@ -375,7 +375,7 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 1. **Test access**: Test access to your app by creating a public or private [NodePort](/docs/containers?topic=containers-nodeport) on your worker nodes.
 2. **Monitoring**:
   1. Open a [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard) on your local system to view information about your app resources.
-  2. [Choose a monitoring solution](/docs/containers?topic=containers-health#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
+  2. [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
 3. **Logging**:
   1. [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
   2. If you expose your app by using [Ingress](#dev_expose), you can set up [logging for requests that are proxied by your ALBs](/docs/containers?topic=containers-ingress_health).
