@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-17"
+lastupdated: "2020-12-18"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 18 December 2020 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.197](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 17 December 2020 | <ul><li>**Audit documentation**: Reorganized information about the configuration and forwarding of Kubernetes API server [audit logs](/docs/containers?topic=containers-health-audit).</li><li>**Back up and restore**: Version `1.0.5` of the `ibmcloud-backup-restore` Helm chart is released. For more information, see the [Back up and restore Helm chart changelog](/docs/containers?topic=containers-backup_restore_changelog).</li><li>**Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0). Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li></ul> |
 | 16 December 2020 | **Istio add-on**: Versions [1.8.1](/docs/containers?topic=containers-istio-changelog#181) and [1.7.6](/docs/containers?topic=containers-istio-changelog#176) of the Istio managed add-on are released. Version 1.6 is unsupported. |
 | 15 December 2020 | **Cluster autoscaler**: Cluster autoscaler add-on patch update `1.0.1_205` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). |
