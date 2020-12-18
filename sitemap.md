@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2020
-lastupdated: "2020-12-17"
+lastupdated: "2020-12-18"
 
 keywords: containers
 subcollection: containers
@@ -1837,7 +1837,8 @@ subcollection: containers
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
-* [Changelog for 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
+* [Changelog for version 2.0.6](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
+* [Changelog for version 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog)
 * [Changelog for 1.0.5](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
