@@ -1293,7 +1293,7 @@ Kubernetes version 1.16 is deprecated, and becomes unsupported on 29 January 202
 {: deprecated}
 
 ### Changelog for worker node fix pack 1.16.15_1555, released 21 December 2020
-{: #11715_1549}
+{: #11615_1555}
 
 The following table shows the changes that are included in the worker node fix pack `1.16.15_1555`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}
