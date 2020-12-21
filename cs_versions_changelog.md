@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2020
-lastupdated: "2020-12-17"
+lastupdated: "2020-12-21"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -119,6 +119,22 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.19 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.19.5_1530, released 21 December 2020
+{: #1195_1530}
+
+The following table shows the changes that are included in the worker node fix pack `1.19.5_1530`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-126-generic | 4.15.0-128-generic | Updated worker node image with kernel and package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Kubernetes | v1.19.4 | v1.19.5 | See the [Kubernetes changelogs.](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.5){: external} |
+| Ephemeral storage reservations | N/A | N/A | Reserve local ephermal storage to prevent workload evictions. |
+| HAProxy | db4e6d | 9b2dca | Image update for [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external} and [CVE-2020-24659](https://nvd.nist.gov/vuln/detail/CVE-2020-24659){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.5_1529" caption-side="top"}
 
 ### Changelog for master fix pack 1.19.5_1529, released 14 December 2020
 {: #1195_1529}
@@ -282,6 +298,22 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 
 Review the version 1.18 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.18.13_1536, released 21 December 2020
+{: #11813_1536}
+
+The following table shows the changes that are included in the worker node fix pack `1.18.13_1536`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-126-generic | 4.15.0-128-generic | Updated worker node image with kernel and package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Kubernetes | v1.18.12 | v1.18.13 | See the [Kubernetes changelogs.](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.13){: external} |
+| Ephemeral storage reservations | N/A | N/A | Reserve local ephermal storage to prevent workload evictions. |
+| HAProxy | db4e6d | 9b2dca | Image update for [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external} and [CVE-2020-24659](https://nvd.nist.gov/vuln/detail/CVE-2020-24659){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.13_1535" caption-side="top"}
 
 ### Changelog for master fix pack 1.18.13_1535, released 14 December 2020
 {: #11813_1535}
@@ -694,6 +726,22 @@ The following table shows the changes that are included in patch update 1.18.2_1
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020
+{: #11715_1549}
+
+The following table shows the changes that are included in the worker node fix pack `1.17.15_1549`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-126-generic | 4.15.0-128-generic | Updated worker node image with kernel and package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Kubernetes | v1.17.14 | v1.17.15 | See the [Kubernetes changelogs.](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.15){: external} |
+| Ephemeral storage reservations | N/A | N/A | Reserve local ephermal storage to prevent workload evictions. |
+| HAProxy | db4e6d | 9b2dca | Image update for [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external} and [CVE-2020-24659](https://nvd.nist.gov/vuln/detail/CVE-2020-24659){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.15_1548" caption-side="top"}
 
 ### Changelog for master fix pack 1.17.15_1548, released 14 December 2020
 {: #11715_1548}
@@ -1243,6 +1291,21 @@ Review the version 1.16 changelog.
 
 Kubernetes version 1.16 is deprecated, and becomes unsupported on 29 January 2021 (date subject to change). [Update your clusters](/docs/containers?topic=containers-update) to at least Kubernetes version 1.17 as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.16.15_1555, released 21 December 2020
+{: #11715_1549}
+
+The following table shows the changes that are included in the worker node fix pack `1.16.15_1555`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Ubuntu 18.04 packages | 4.15.0-126-generic | 4.15.0-128-generic | Updated worker node image with kernel and package updates for: [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external}, [CVE-2020-27350](https://nvd.nist.gov/vuln/detail/CVE-2020-27350){: external}, [CVE-2020-27351](https://nvd.nist.gov/vuln/detail/CVE-2020-27351){: external}, [CVE-2020-8284](https://nvd.nist.gov/vuln/detail/CVE-2020-8284){: external}, [CVE-2020-8285](https://nvd.nist.gov/vuln/detail/CVE-2020-8285){: external}, and [CVE-2020-8286](https://nvd.nist.gov/vuln/detail/CVE-2020-8286){: external}. |
+| Ephemeral storage reservations | N/A | N/A | Reserve local ephermal storage to prevent workload evictions. |
+| HAProxy | db4e6d | 9b2dca | Image update for [CVE-2020-1971](https://nvd.nist.gov/vuln/detail/CVE-2020-1971){: external} and [CVE-2020-24659](https://nvd.nist.gov/vuln/detail/CVE-2020-24659){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.15_1554" caption-side="top"}
 
 ### Changelog for master fix pack 1.16.15_1554, released 14 December 2020
 {: #11615_1554_master}
