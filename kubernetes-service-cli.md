@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-17"
+lastupdated: "2020-12-22"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -6407,7 +6407,7 @@ ibmcloud ks quota ls
 ## `subnets` command
 {: #cs_subnets}
 
-List available subnets in your IBM Cloud infrastructure account.
+List available subnets in all resource groups in your IBM Cloud infrastructure account.
 {: shortdesc}
 
 ```
