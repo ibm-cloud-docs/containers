@@ -2305,6 +2305,7 @@ subcollection: containers
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
+* [After deleting all worker nodes and adding ones, several pods do not start](/docs/containers?topic=containers-cs_troubleshoot_clusters#zero_nodes_calico_failure)
 * [Accessing a pod on a new worker node fails with a timeout](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
