@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2020
-lastupdated: "2020-12-18"
+lastupdated: "2020-12-29"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -304,7 +304,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 3.  Version `n` becomes the default supported {{site.data.keyword.containerlong_notm}} version.
 4.  Version `n` becomes the oldest supported {{site.data.keyword.containerlong_notm}} version.
 5.  Version `n` is deprecated, and security patch updates might not be provided. Depending on the community release cycle and version testing, you have 45 days or less until the next phase of deprecation starts in step 6. During the deprecation period, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities. For example, you can add and reload worker nodes.
-6.  You have 45 days to update your cluster to a supported version before version `n` becomes unsupported. Similar to step 5, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities.
+6.  You receive a notification in the console and CLI that you have 45 days to update your cluster to a supported version before version `n` becomes unsupported. Similar to step 5, your cluster is still functional, but might require updating to a supported release to fix security vulnerabilities.
 7.  Version `n` is unsupported. Review the following potential impacts and then immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support. Unsupported clusters cannot add or reload existing worker nodes, and you cannot create clusters at an unsupported version.
 8. The cluster master runs two or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.
 
