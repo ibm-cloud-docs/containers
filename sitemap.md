@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2017, 2020
-lastupdated: "2020-12-29"
+  years: 2017, 2021
+lastupdated: "2021-01-04"
 
 keywords: containers
 subcollection: containers
@@ -1460,6 +1460,13 @@ subcollection: containers
 * [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx)
+  * [What is software-defined storage (SDS)?](/docs/containers?topic=containers-portworx#about-px-sds)
+  * [How does Portworx work?](/docs/containers?topic=containers-portworx#about-px-work)
+  * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the right one for Portworx?](/docs/containers?topic=containers-portworx#about-px-flavors)
+  * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-portworx#about-px-non-sds)
+  * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-portworx#about-px-ha)
+  * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-portworx#about-px-topology)
+  * [What's next?](/docs/containers?topic=containers-portworx#about-px-next)
 * [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
