@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-17"
+  years: 2014, 2021
+lastupdated: "2021-01-04"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -720,8 +720,9 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
   * TLS certificates that contain pre-shared keys (TLS-PSK) are not supported.
   * If your custom domain is registered as a wildcard domain such as `*.custom_domain.net`, you must get a wildcard TLS certificate.
 
-3. Import the certificate's associated secret into the same namespace where your Ingress resource for an app exists. If you want to use this certificate for apps in multiple namespaces, repeat this command for each namespace.<p class="note">Do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.</p>
-  ```
+3. Import the certificate's associated secret into the same namespace where your Ingress resource for an app exists. If you want to use this certificate for apps in multiple namespaces, repeat this command for each namespace. You can find the certificate CRN by running `ibmcloud ks ingress secret ls -c <cluster_name_or_ID>`.
+  <p class="note">Do not create the secret with the same name as the IBM-provided Ingress secret, which you can find by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress`.</p>
+  ```S
   ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace <namespace>
   ```
   {: pre}
