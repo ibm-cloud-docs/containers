@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-22"
+  years: 2014, 2021
+lastupdated: "2021-01-05"
 
 keywords: kubernetes, iks
 
@@ -250,7 +250,7 @@ Expose your app to the public network by setting up a Kubernetes `LoadBalancer` 
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets`</td>
-    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets in all resource groups, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.<p class="note">In clusters that run Kubernetes version 1.18, you cannot use the `vpc-subnet` annotation if you enable the PROXY protocol, or if your VPC and cluster are not in the same resource group.</p></td>
+    <td>Optional: Annotation to specify one or more subnets in one zone that the VPC network load balancer deploys to. Values can be specified as VPC subnet IDs, VPC subnet names, or VPC subnet CIDRs. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the network load balancer deploys to a different subnet in the same VPC, the VPC network load balancer can still route traffic to your worker nodes on the cluster subnets in the same zone. To see subnets in all resource groups, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.</td>
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>

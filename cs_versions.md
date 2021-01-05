@@ -339,25 +339,6 @@ Review changes that you might need to make when you update from the previous Kub
 The following table shows the actions that you must take before you update the Kubernetes master.
 {: shortdesc}
 
-**Before you begin**: In Kubernetes version 1.19, all load balancing functions require that the VPC and cluster exist in the same resource group. Before you begin the update process, check the resource group of your cluster and VPC.
-
-1. For your cluster, check the **Resource Group Name** and copy the ID of the VPC in the **VPCs** field.
-  ```
-  ibmcloud ks cluster get -c <cluster_name_or_ID>
-  ```
-  {: pre}
-
-2. For the VPC, check the **Resource group** name.
-  ```
-  ibmcloud is vpc <VPC_ID>
-  ```
-  {: pre}
-
-3. If the resource groups match, continue with updating your cluster.
-
-If the cluster and VPC exist in different resource groups, you currently cannot update your cluster to version 1.19.
-{: important}
-
 | Type | Description|
 | ---- | ---------- |
 | Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use Kubernetes data store driver (KDD). During the update, you can request resources that require Calico, such as pods that are subject to Calico policies, but the resources remain pending until the update is complete. As part of the update and going forward, access to the `etcd` port in the cluster master is blocked. If you use the `etcd` port, such as in firewall rules or Calico policies that allow worker nodes to access `etcd`, update these resources to use the `apiserver` port instead. To get the `apiserver` port, run `ibmcloud ks cluster get -c <cluster_name_or_ID>` and look for the node port that is listed for the **Master URL**. |
