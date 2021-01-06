@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-11-23"
+  years: 2014, 2021
+lastupdated: "2021-01-06"
 
 keywords: kubernetes, iks, containers
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -279,11 +279,11 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
    1. Select the **Standard** plan.
-   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.18.12 or later**.
+   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.18.14 or later**.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the **Gen 2** VPC that you created earlier.
 4.  Configure the **Location** details for your cluster.
-    1. Select the **Resource group** that you want to create your cluster in. VPC clusters that run Kubernetes version 1.19 or later must be created in the same resource group as the VPC. You cannot change the resource group later.
+    1. Select the **Resource group** that you want to create your cluster in. You cannot change the resource group later.
     2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.
 5.  Configure your **Worker pool** setup.
     1.  If you want a larger size for your worker nodes, click **Change flavor**. Otherwise, leave the default **4 vCPUs / 16 GB** flavor selected.

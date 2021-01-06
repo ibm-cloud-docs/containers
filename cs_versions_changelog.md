@@ -1,8 +1,8 @@
 ---
 
 copyright:
- years: 2014, 2020
-lastupdated: "2020-12-21"
+ years: 2014, 2021
+lastupdated: "2021-01-06"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -119,6 +119,23 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.19 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.19.6_1531, released 6 January 2021
+{: #1196_1531}
+
+The following table shows the changes that are included in the master fix pack patch update `1.19.6_1531`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 538 | 556 | Updated image to include the `ip` command. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.5-1 | v1.19.6-1 | Updated to support the Kubernetes 1.19.6 release and to use `Go` version 1.15.5. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | N/A | N/A | Updated to run with a privileged security context. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | c148a8a | f859228 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-24659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-24659){: external}. |
+| Kubernetes | v1.19.5 | v1.19.6 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.19.6){: external}. |
+| Kubernetes `NodeLocal` DNS cache | N/A | N/A | Updated to run with a least privileged security context. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.5_1529" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.5_1530, released 21 December 2020
 {: #1195_1530}
@@ -298,6 +315,25 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 
 Review the version 1.18 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.18.14_1537, released 6 January 2021
+{: #11814_1537}
+
+The following table shows the changes that are included in the master fix pack patch update `1.18.14_1537`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 544 | 556 | Updated image to include the `ip` command. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.18.13-1 | v1.18.14-1 | Updated to support the Kubernetes 1.18.14 release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | N/A | N/A | Updated to run with a privileged security context. |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | c148a8a | f859228 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-24659](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-24659){: external}. |
+| Key Management Service provider | v2.0.7 | v2.2.2 | Updated the key management service (KMS) provider support as follows.<ul><li>Updated to use `Go` version 1.15.2.</li><li>Added support for [service-to-service authentication](/docs/account?topic=account-serviceauth).</li><li>Updated to use the KMS provider secret to identify when a [Key Protect](/docs/containers?topic=containers-encryption#keyprotect) key is enabled and disabled so that encryption and decryption requests are updated accordingly.</li></ul> |
+| Kubernetes | v1.18.13 | v1.18.14 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.18.14){: external}. |
+| Kubernetes `NodeLocal` DNS cache | N/A | N/A | Updated to run with a least privileged security context. |
+| Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.14.1-IKS-2 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-28928](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28928){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.13_1535" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.18.13_1536, released 21 December 2020
 {: #11813_1536}
@@ -727,6 +763,21 @@ The following table shows the changes that are included in patch update 1.18.2_1
 Review the version 1.17 changelog.
 {: shortdesc}
 
+### Changelog for master fix pack 1.17.16_1550, released 6 January 2021
+{: #11716_1550}
+
+The following table shows the changes that are included in the master fix pack patch update `1.17.16_1550`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 544 | 556 | Updated image to include the `ip` command. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.17.15-1 | v1.17.16-1 | Updated to support the Kubernetes 1.17.16 release. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | N/A | N/A | Updated to run with a privileged security context. |
+| Kubernetes | v1.17.15 | v1.17.16 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.17.16){: external}. |
+| Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.14.1-IKS-2 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-28928](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28928){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.15_1548" caption-side="top"}
 ### Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020
 {: #11715_1549}
 
@@ -1292,6 +1343,19 @@ Review the version 1.16 changelog.
 Kubernetes version 1.16 is deprecated, and becomes unsupported on 29 January 2021 (date subject to change). [Update your clusters](/docs/containers?topic=containers-update) to at least Kubernetes version 1.17 as soon as possible.
 {: deprecated}
 
+### Changelog for master fix pack 1.16.15_1556, released 6 January 2021
+{: #11615_1556}
+
+The following table shows the changes that are included in the master fix pack patch update `1.16.15_1556`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 544 | 556 | Updated image to include the `ip` command. |
+| {{site.data.keyword.filestorage_full_notm}} plug-in | N/A | N/A | Updated to run with a privileged security context. |
+| Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.14.1-IKS-2 | Updated image for [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external} and [CVE-2020-28928](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28928){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.16.15_1554" caption-side="top"}
 ### Changelog for worker node fix pack 1.16.15_1555, released 21 December 2020
 {: #11615_1555}
 

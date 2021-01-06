@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-21"
+  years: 2014, 2021
+lastupdated: "2021-01-06"
 
 keywords: kubernetes, iks, release notes
 
@@ -104,12 +104,21 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
 
+## January 2021
+{: #jan21}
+
+| Date | Description |
+| ---- | ----------- |
+| 06 January 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.6_1531](/docs/containers?topic=containers-changelog#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-changelog#11615_1556).|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in January 2021"}
+
 ## December 2020
 {: #dec20}
 
 | Date | Description |
 | ---- | ----------- |
-| 21 December 2020 | <ul><li>**Gateway firewalls and Calico policies**: For classic clusters in Tokyo, updated the {{site.data.keyword.containerlong_notm}} IP addresses that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound) or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation){: external}.</li><li>Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.5_1530](/docs/containers?topic=containers-changelog#1195_1530), [1.18.13_1536](/docs/containers?topic=containers-changelog#11813_1536), [1.17.15_1549](/docs/containers?topic=containers-changelog#11715_1549), and [1.16.15_1555](/docs/containers?topic=containers-changelog#11615_1555).</li></ul> |
+| 21 December 2020 | <ul><li>**Gateway firewalls and Calico policies**: For classic clusters in Tokyo, updated the {{site.data.keyword.containerlong_notm}} IP addresses that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound) or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/public-network-isolation){: external}.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.5_1530](/docs/containers?topic=containers-changelog#1195_1530), [1.18.13_1536](/docs/containers?topic=containers-changelog#11813_1536), [1.17.15_1549](/docs/containers?topic=containers-changelog#11715_1549), and [1.16.15_1555](/docs/containers?topic=containers-changelog#11615_1555).</li></ul> |
 | 18 December 2020 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.208](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Object Storage plug-in**: Version `2.0.6` of the Object Storage plug-in is released. For more information, see the [Object Storage plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).</li></ul> |
 | 17 December 2020 | <ul><li>**Audit documentation**: Reorganized information about the configuration and forwarding of Kubernetes API server [audit logs](/docs/containers?topic=containers-health-audit).</li><li>**Back up and restore**: Version `1.0.5` of the `ibmcloud-backup-restore` Helm chart is released. For more information, see the [Back up and restore Helm chart changelog](/docs/containers?topic=containers-backup_restore_changelog).</li><li>**Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_826_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0). Updated the [`ingress-auth` build to 954](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li></ul> |
 | 16 December 2020 | **Istio add-on**: Versions [1.8.1](/docs/containers?topic=containers-istio-changelog#181) and [1.7.6](/docs/containers?topic=containers-istio-changelog#176) of the Istio managed add-on are released. Version 1.6 is unsupported. |

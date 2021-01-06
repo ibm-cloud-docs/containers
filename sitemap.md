@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2017, 2020
-lastupdated: "2020-12-21"
+  years: 2017, 2021
+lastupdated: "2021-01-06"
 
 keywords: containers
 subcollection: containers
@@ -1460,6 +1460,13 @@ subcollection: containers
 * [Limitations](/docs/containers?topic=containers-object_storage#cos_limitations)
 
 [Storing data on software-defined storage (SDS) with Portworx](/docs/containers?topic=containers-portworx)
+  * [What is software-defined storage (SDS)?](/docs/containers?topic=containers-portworx#about-px-sds)
+  * [How does Portworx work?](/docs/containers?topic=containers-portworx#about-px-work)
+  * [What worker node flavor in {{site.data.keyword.containerlong_notm}} is the right one for Portworx?](/docs/containers?topic=containers-portworx#about-px-flavors)
+  * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-portworx#about-px-non-sds)
+  * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-portworx#about-px-ha)
+  * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-portworx#about-px-topology)
+  * [What's next?](/docs/containers?topic=containers-portworx#about-px-next)
 * [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
 * [Setting up a key-value store for Portworx metadata](/docs/containers?topic=containers-portworx#portworx_database)
@@ -1655,6 +1662,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for master fix pack 1.19.6_1531, released 6 January 2021](/docs/containers?topic=containers-changelog#1196_1531)
   * [Changelog for worker node fix pack 1.19.5_1530, released 21 December 2020](/docs/containers?topic=containers-changelog#1195_1530)
   * [Changelog for master fix pack 1.19.5_1529, released 14 December 2020](/docs/containers?topic=containers-changelog#1195_1529)
   * [Changelog for worker node fix pack 1.19.4_1529, released 11 December 2020](/docs/containers?topic=containers-changelog#1194_1529)
@@ -1666,6 +1674,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.14_1537, released 6 January 2021](/docs/containers?topic=containers-changelog#11814_1537)
   * [Changelog for worker node fix pack 1.18.13_1536, released 21 December 2020](/docs/containers?topic=containers-changelog#11813_1536)
   * [Changelog for master fix pack 1.18.13_1535, released 14 December 2020](/docs/containers?topic=containers-changelog#11813_1535)
   * [Changelog for worker node fix pack 1.18.12_1535, released 11 December 2020](/docs/containers?topic=containers-changelog#11812_1535)
@@ -1692,6 +1701,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.16_1550, released 6 January 2021](/docs/containers?topic=containers-changelog#11716_1550)
   * [Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020](/docs/containers?topic=containers-changelog#11715_1549)
   * [Changelog for master fix pack 1.17.15_1548, released 14 December 2020](/docs/containers?topic=containers-changelog#11715_1548)
   * [Changelog for worker node fix pack 1.17.14_1548, released 11 December 2020](/docs/containers?topic=containers-changelog#11714_1548)
@@ -1727,6 +1737,7 @@ subcollection: containers
   * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
   * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 * [Deprecated: Version 1.16 changelog](/docs/containers?topic=containers-changelog#116_changelog)
+  * [Changelog for master fix pack 1.16.15_1556, released 6 January 2021](/docs/containers?topic=containers-changelog#11615_1556)
   * [Changelog for worker node fix pack 1.16.15_1555, released 21 December 2020](/docs/containers?topic=containers-changelog#11615_1555)
   * [Changelog for master fix pack 1.16.15_1554, released 14 December 2020](/docs/containers?topic=containers-changelog#11615_1554_master)
   * [Changelog for worker node fix pack 1.16.15_1554, released 11 December 2020](/docs/containers?topic=containers-changelog#11615_1554)
@@ -2305,6 +2316,7 @@ subcollection: containers
 * [Accessing your worker node with SSH fails](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_ssh_worker)
 * [Bare metal instance ID is inconsistent with worker records](/docs/containers?topic=containers-cs_troubleshoot_clusters#bm_machine_id)
 * [After a worker node updates or reloads, duplicate nodes and pods appear](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes)
+* [After deleting all worker nodes, several pods do not start on new worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#zero_nodes_calico_failure)
 * [Accessing a pod on a new worker node fails with a timeout](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_nodes_duplicate_ip)
 
 [Cluster autoscaler](/docs/containers?topic=containers-troubleshoot_cluster_autoscaler)
@@ -2409,6 +2421,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[January 2021](/docs/containers?topic=containers-iks-release#jan21)
 
 [December 2020](/docs/containers?topic=containers-iks-release#dec20)
 
