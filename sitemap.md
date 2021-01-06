@@ -2418,6 +2418,8 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release)
 
+[January 2021](/docs/containers?topic=containers-iks-release#jan21)
+
 [December 2020](/docs/containers?topic=containers-iks-release#dec20)
 
 [November 2020](/docs/containers?topic=containers-iks-release#nov20)
