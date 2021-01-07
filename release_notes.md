@@ -109,7 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 07 January 2021 | <ul><li>**Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).</li></ul>|
+| 07 January 2021 | **Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).|
 | 06 January 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.6_1531](/docs/containers?topic=containers-changelog#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-changelog#11615_1556).|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in January 2021"}
