@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-11-20"
+  years: 2014, 2021
+lastupdated: "2021-01-07"
 
 keywords: kubernetes, iks, containers
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -137,6 +137,64 @@ Next, decide whether the component falls within your responsibility. If so, you 
 
 **What else can I do to increase the security and compliance of my cluster?**<br>
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
+
+<br />
+
+## Running the worker node CIS Kubernetes benchmark
+{: #cis-worker-test}
+
+To review the results of the CIS Kubernetes benchmark for [Section 4: Worker node security configuration](#cis-benchmark-15-4), you can run the test yourself. Because you own the worker nodes and are partially [responsible](/docs/containers?topic=containers-responsibilities_iks) for their compliance, you might make configuration changes that you want to validate on your own.
+{: shortdesc}
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+
+1.  Create a namespace for the resources to run the benchmark.
+    ```
+    kubectl create ns ibm-kube-bench-test
+    ```
+    {: pre}
+2.  Create a configmap for the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/cis-kube-benchmark/cis-1.5/ibm/){: external} GitHub repository.
+    ```
+    kubectl create cm -n ibm-kube-bench-test --from-file https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/
+    ```
+    {: pre}
+3.  Create a job to run the benchmark test based on the configurations that you previously created.
+    ```
+    kubectl apply -n ibm-kube-bench-test -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/job-node.yaml
+    ```
+    {: pre}
+4.  Check that the job successfully completed.
+    ```
+    kubectl get pods -n ibm-kube-bench-test -l job-name=kube-bench-node
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    NAME                    READY   STATUS      RESTARTS   AGE
+    kube-bench-node-hlvhc   0/1     Completed   0          23s
+    ```
+    {: screen}
+5.  Review the CIS Kubernetes benchmark results for your worker nodes by checking the pod logs.
+    ```
+    kubectl logs -n ibm-kube-bench-test -l job-name=kube-bench-node --tail=-1
+    ```
+    {: pre}
+
+    Example output:
+    ```
+    == Summary ==
+    20 checks PASS
+    2 checks FAIL
+    1 checks WARN
+    0 checks INFO
+    ```
+    {: screen}
+6.  Optional: When you are done reviewing results, delete the resources that you created.
+    ```
+    kubectl delete ns ibm-kube-bench-test
+    ```
+    {: pre}
 
 <br />
 
@@ -310,7 +368,7 @@ Review the benchmark results for the control plane configuration subsections.
 ### Section 4: Worker node security configuration
 {: #cis-benchmark-15-4}
 
-Review the benchmark results for the worker node security configuration subsections.
+Review the benchmark results for the worker node security configuration subsections. If you want to generate results for your own worker nodes, see [Running the worker node CIS Kubernetes benchmark](#cis-worker-test).
 {: shortdesc}
 
 * [Section 4.1 Worker node configuration files](#cis-benchmark-15-4-1)

@@ -1782,6 +1782,7 @@ subcollection: containers
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
+* [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
 * [Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
   * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
   * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
