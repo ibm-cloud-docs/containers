@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-07"
+lastupdated: "2021-01-08"
 
 keywords: kubernetes, iks, containers
 
@@ -153,11 +153,15 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kubectl create ns ibm-kube-bench-test
     ```
     {: pre}
-2.  Create a configmap for the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/cis-kube-benchmark/cis-1.5/ibm/){: external} GitHub repository.
-    ```
-    kubectl create cm -n ibm-kube-bench-test --from-file https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/
-    ```
-    {: pre}
+2.  Create a configmap with the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/cis-kube-benchmark/cis-1.5/ibm/){: external} GitHub repository.
+    1.  Download the the `config` and `node` configuration files. You can also clone the repository.
+        * [`config` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/config.yaml){: external}
+        * [`node` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/node.yaml){: external}
+    2.  Create the configmap by using the `--from-file` flag to specify the directory where your downloaded configuration files are located.
+        ```
+        kubectl create cm kube-bench-node -n ibm-kube-bench-test --from-file <./filepath/to/repo>
+        ```
+        {: pre}
 3.  Create a job to run the benchmark test based on the configurations that you previously created.
     ```
     kubectl apply -n ibm-kube-bench-test -f https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/job-node.yaml
