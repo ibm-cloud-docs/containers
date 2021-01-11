@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -117,7 +117,7 @@ First time setting up Ingress? Check out the other sections on this page for pre
 
 1. Create a Kubernetes ClusterIP service for your app so that it can be included in the Ingress application load balancing.
   ```
-  kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+  kubectl expose deploy <app_deployment_name> --name my-app-svc --port 80 -n <namespace>
   ```
   {: pre}
 
@@ -134,26 +134,51 @@ First time setting up Ingress? Check out the other sections on this page for pre
     {: screen}
 
 3. Using the Ingress subdomain and secret, create an Ingress resource file. Replace `<app_path>` with the path that your app listens on. If your app does not listen on a specific path, define the root path as a slash (<code>/</code>) only.
-  ```yaml
-  apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
-  kind: Ingress
-  metadata:
-    name: myingressresource
-  spec:
-    tls:
-    - hosts:
-      - <ingress_subdomain>
-      secretName: <ingress_secret>
-    rules:
-    - host: <ingress_subdomain>
-      http:
-        paths:
-        - path: /<app_path>
-          backend:
-            serviceName: my-app-svc
-            servicePort: 80
-  ```
-  {: codeblock}
+  * **Kubernetes version 1.19 and later**:
+    ```yaml
+    apiVersion: networking.k8s.io/v1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+    spec:
+      tls:
+      - hosts:
+        - <ingress_subdomain>
+        secretName: <ingress_secret>
+      rules:
+      - host: <ingress_subdomain>
+        http:
+          paths:
+          - path: /<app_path>
+            pathType: Prefix
+            backend:
+              service:
+                name: my-app-svc
+                port:
+                  number: 80
+    ```
+    {: codeblock}
+  * **Kubernetes version 1.18 and earlier**:
+    ```yaml
+    apiVersion: networking.k8s.io/v1beta1
+    kind: Ingress
+    metadata:
+      name: myingressresource
+    spec:
+      tls:
+      - hosts:
+        - <ingress_subdomain>
+        secretName: <ingress_secret>
+      rules:
+      - host: <ingress_subdomain>
+        http:
+          paths:
+          - path: /<app_path>
+            backend:
+              serviceName: my-app-svc
+              servicePort: 80
+    ```
+    {: codeblock}
 
 4. Create the Ingress resource.
   ```
@@ -378,33 +403,41 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 
-2. Define an Ingress resource in your configuration file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
-
-    Example YAML that does not use TLS:
+2. Define an Ingress resource in your configuration file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
+  * **Kubernetes version 1.19 and later**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
-      name: myingressresource
+      name: community-ingress-resource
     spec:
+      tls:
+      - hosts:
+        - <domain>
+        secretName: <tls_secret_name>
       rules:
       - host: <domain>
         http:
           paths:
           - path: /<app1_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app1_service>
-              servicePort: 80
+              service:
+                name: <app1_service>
+                port:
+                  number: 80
           - path: /<app2_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app2_service>
-              servicePort: 80
+              service:
+                name: <app2_service>
+                port:
+                  number: 80
     ```
     {: codeblock}
-
-    Example YAML that uses TLS:
+  * **Kubernetes version 1.18 and earlier**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -458,11 +491,11 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <p class="tip">To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</p></td>
     </tr>
     <tr>
-    <td><code>serviceName</code></td>
+    <td><code>service.name</code> (1.19 or later)</br><code>serviceName</code> (1.18 or earlier)</td>
     <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps. If your apps are exposed by services in different namespaces in the cluster, include only app services that are in the same namespace. You must create one Ingress resource for each namespace where you have apps that you want to expose.</td>
     </tr>
     <tr>
-    <td><code>servicePort</code></td>
+    <td><code>service.port.number</code> (1.19 or later)</br><code>servicePort</code> (1.18 or earlier)</td>
     <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
     </tr>
     </tbody></table>
@@ -804,35 +837,43 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 
-2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier.
-
-    Example YAML that does not use TLS:
+2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
+  * **Kubernetes version 1.19 and later**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
       name: myingressresource
       annotations:
         ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
     spec:
+      tls:
+      - hosts:
+        - <domain>
+        secretName: <tls_secret_name>
       rules:
       - host: <domain>
         http:
           paths:
           - path: /<app1_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app1_service>
-              servicePort: 80
+              service:
+                name: <app1_service>
+                port:
+                  number: 80
           - path: /<app2_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app2_service>
-              servicePort: 80
+              service:
+                name: <app2_service>
+                port:
+                  number: 80
     ```
     {: codeblock}
-
-    Example YAML that uses TLS:
+  * **Kubernetes version 1.18 and earlier**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -893,11 +934,11 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <p class="tip">To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</p>
     </tr>
     <tr>
-    <td><code>serviceName</code></td>
+    <td><code>service.name</code> (1.19 or later)</br><code>serviceName</code> (1.18 or earlier)</td>
     <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps. If your apps are exposed by services in different namespaces in the cluster, include only app services that are in the same namespace. You must create one Ingress resource for each namespace where you have apps that you want to expose.</td>
     </tr>
     <tr>
-    <td><code>servicePort</code></td>
+    <td><code>service.port.number</code> (1.19 or later)</br><code>servicePort</code> (1.18 or earlier)</td>
     <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
     </tr>
     </tbody></table>
@@ -1107,35 +1148,43 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
 
 1. Open your preferred editor and create an Ingress configuration file that is named, for example, `myingressresource.yaml`.
 
-2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier.
-
-    Example YAML that does not use TLS:
+2.  Define an Ingress resource in your configuration file that uses your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
+  * **Kubernetes version 1.19 and later**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
       name: myingressresource
       annotations:
         ingress.bluemix.net/ALB-ID: "<private_ALB_ID_1>;<private_ALB_ID_2>"
     spec:
+      tls:
+      - hosts:
+        - <domain>
+        secretName: <tls_secret_name>
       rules:
       - host: <domain>
         http:
           paths:
           - path: /<app1_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app1_service>
-              servicePort: 80
+              service:
+                name: <app1_service>
+                port:
+                  number: 80
           - path: /<app2_path>
+            pathType: ImplementationSpecific
             backend:
-              serviceName: <app2_service>
-              servicePort: 80
+              service:
+                name: <app2_service>
+                port:
+                  number: 80
     ```
     {: codeblock}
-
-    Example YAML that uses TLS:
+  * **Kubernetes version 1.18 and earlier**:
     ```yaml
-    apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+    apiVersion: networking.k8s.io/v1beta1
     kind: Ingress
     metadata:
       name: myingressresource
@@ -1196,11 +1245,11 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     <p class="tip">To configure Ingress to listen on a path that is different than the path that your app listens on, you can use the [rewrite annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path).</p></td>
     </tr>
     <tr>
-    <td><code>serviceName</code></td>
+    <td><code>service.name</code> (1.19 or later)</br><code>serviceName</code> (1.18 or earlier)</td>
     <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps. If your apps are exposed by services in different namespaces in the cluster, include only app services that are in the same namespace. You must create one Ingress resource for each namespace where you have apps that you want to expose.</td>
     </tr>
     <tr>
-    <td><code>servicePort</code></td>
+    <td><code>service.port.number</code> (1.19 or later)</br><code>servicePort</code> (1.18 or earlier)</td>
     <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
     </tr>
     </tbody></table>
