@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-11"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools, delete
 
@@ -860,7 +860,7 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
   </thead>
   <tbody>
   <tr>
-  <td>mel01, syd01, syd04, syd05</td>
+  <td>syd01, syd04, syd05</td>
   <td>`au.icr.io`</td>
   </tr>
   <tr>
