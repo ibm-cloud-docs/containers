@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-08"
+lastupdated: "2021-01-12"
 
 keywords: kubernetes, iks, containers
 
@@ -153,7 +153,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kubectl create ns ibm-kube-bench-test
     ```
     {: pre}
-2.  Create a configmap with the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/cis-kube-benchmark/cis-1.5/ibm/){: external} GitHub repository.
+2.  Create a configmap with the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/tree/master/cis-kube-benchmark/cis-1.5/ibm){: external} GitHub repository.
     1.  Download the the `config` and `node` configuration files. You can also clone the repository.
         * [`config` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/config.yaml){: external}
         * [`node` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/node.yaml){: external}

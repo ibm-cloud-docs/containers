@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-04"
+lastupdated: "2021-01-12"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -253,7 +253,7 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Expose your custom Ingress controller deployment to the public or to the private network by setting up a Kubernetes `LoadBalancer` service in your cluster. A VPC load balancer which routes requests to your app is automatically created for you in your VPC outside of your cluster.
 {: shortdesc}
 
-1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller](https://raw.githubusercontent.com/kubernetes/ingress-nginx/nginx-0.30.0/deploy/static/deploy.yaml){: external}. If you use the community controller, edit the `deploy.yaml` file by following these steps.
+1. Get the configuration file for your Ingress controller ready. For example, you can use the [cloud-generic NGINX community Ingress controller]( https://github.com/kubernetes/ingress-nginx/blob/master/deploy/static/provider/cloud/deploy.yaml){: external}. If you use the community controller, edit the `deploy.yaml` file by following these steps.
   1. Replace all instances of `namespace: ingress-nginx` with `namespace: kube-system`.
   2. Replace all instances of the `app.kubernetes.io/name: ingress-nginx` and `app.kubernetes.io/instance: ingress-nginx` labels with one `app: ingress-nginx` label.
   3. Remove the `LimitRange` object.
