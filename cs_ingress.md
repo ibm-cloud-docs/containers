@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-11"
+lastupdated: "2021-01-12"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -150,7 +150,7 @@ First time setting up Ingress? Check out the other sections on this page for pre
         http:
           paths:
           - path: /<app_path>
-            pathType: Prefix
+            pathType: ImplementationSpecific
             backend:
               service:
                 name: my-app-svc
@@ -409,7 +409,7 @@ If your cluster has multiple namespaces where apps are exposed, one Ingress reso
     apiVersion: networking.k8s.io/v1
     kind: Ingress
     metadata:
-      name: community-ingress-resource
+      name: myingressresource
     spec:
       tls:
       - hosts:
