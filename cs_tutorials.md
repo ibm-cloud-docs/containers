@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-08"
 
 keywords: kubernetes, iks
 
@@ -263,6 +263,9 @@ With {{site.data.keyword.cloud_notm}} services, you can take advantage of alread
 </br>
 Great work! Your cluster is configured and your local environment is ready for you to start deploying apps into the cluster.
 
+
+Before you continue with the next lesson, why not test your knowledge and [take a short quiz](https://ibmcloud-quizzes.mybluemix.net/containers/cluster_tutorial/quiz.php){: external}?
+{: note}
 
 
 <br />
@@ -824,6 +827,9 @@ Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyze
   ```
   {: pre}
 
+
+Quiz time! You covered a lot of material, so [make sure that you understand it all](https://ibmcloud-quizzes.mybluemix.net/containers/apps_tutorial/quiz.php){: external}. Don't worry, the quiz is not cumulative!
+{: note}
 
 
 <br />

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-11"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -358,6 +358,7 @@ The following table shows the actions that you must take after you update the Ku
 | ---- | ---------- |
 | Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use Kubernetes data store driver (KDD). If you have any automation that depends on the Calico configuration file for your cluster, first download the new KDD-based Calico configuration file by running `ibmcloud ks cluster config -c <cluster_name_or_ID> --network`. Then, update your automation to use the new Calico configuration file. Additionally, because worker nodes can no longer access etcd with admin keys, ensure that you update your worker nodes so that the previous etcd secrets are removed. |
 | CoreDNS pod autoscaling configuration | Kubernetes DNS autoscaler configuration is updated to include unscheduable worker nodes in scaling calculations. To improve cluster DNS availability, you can set the `"includeUnschedulableNodes":true` parameter when [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale). |
+| Ingress resource fields | In the Ingress resource definition, several fields are changed, including the API version, service name, and service port, and added the `pathType` field. To update your Ingress resources to the new format, see the example YAML file in the documentation for the [community Kubernetes Ingress setup](/docs/containers?topic=containers-ingress-types#alb-comm-create) or for the [deprecated custom {{site.data.keyword.containerlong_notm}} Ingress setup](/docs/containers?topic=containers-ingress#public_inside_4). |
 | Kubernetes `seccomp` support graduates to general availability (GA) | The support for `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io/...` annotations are now deprecated, and are planned for removal in Kubernetes version 1.22. A `seccompProfile` field is now added to the pod and container `securityContext` objects. The Kubernetes version skew handling automatically converts the new field into the annotations and vice versa. You do not have to change your existing workloads, but you can begin the conversion in preparation for the removal of the annotations before version 1.22. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | **Unsupported:** `kubectl apply --server-dry-run` removed | The deprecated `--server-dry-run` flag is removed from the `kubectl apply` command. If your scripts rely on this flag, update them to use the `--dry-run=server` flag instead. |
 | **Unsupported:** `kubectl get --export` removed | The deprecated `--export` flag is removed from the `kubectl get` command. If your scripts rely on this flag, refer to the [Deprecate --export flag from get command pull request](https://github.com/kubernetes/kubernetes/pull/73787){: external} issue for discussion and references to scripts that handle various use cases. |

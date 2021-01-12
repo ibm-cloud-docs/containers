@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-05"
+lastupdated: "2021-01-08"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -278,7 +278,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
 | Security groups | The default [VPC security group](/docs/vpc?topic=vpc-using-security-groups) that is created for you is automatically applied to your worker nodes. You can make changes to the default security group, such as to [allow traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups). However, you cannot create other security groups to apply to your worker nodes. |
-| strongSwan VPN service | <ul><li>Only [outbound VPN connections from the cluster](/docs/containers?topic=containers-vpn#strongswan_3) can be established.</li><li>Because VPC clusters do not support UDP load balancers, the following `config.yaml` options are not supported for use in strongSwan Helm charts in VPC clusters: <ul><li>`enableServiceSourceIP`</li><li>`loadBalancerIP`</li><li>`zoneLoadBalancer`</li><li>`connectUsingLoadBalancerIP`</li></ul></li></ul> |
+| strongSwan VPN service | The strongSwan service is not supported. To connect your cluster to resources in an on-premises network or another VPC, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). |
 | Subnets | <ul><li>See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations).</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
 | VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations). |
 {: summary="This table contains information on networking limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}

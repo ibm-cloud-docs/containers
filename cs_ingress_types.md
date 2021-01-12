@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-11"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -172,33 +172,67 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       {: pre}
 
 2. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
-  1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier.
-     ```yaml
-     apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
-     kind: Ingress
-     metadata:
-       name: community-ingress-resource
-       annotations:
-         kubernetes.io/ingress.class: "<public|private>-iks-k8s-nginx"
-     spec:
-       tls:
-       - hosts:
-         - <domain>
-         secretName: <tls_secret_name>
-       rules:
-       - host: <domain>
-         http:
-           paths:
-           - path: /<app1_path>
-             backend:
-               serviceName: <app1_service>
-               servicePort: 80
-           - path: /<app2_path>
-             backend:
-               serviceName: <app2_service>
-               servicePort: 80
-     ```
-     {: codeblock}
+  1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
+     * **Kubernetes version 1.19 and later**:
+       ```yaml
+       apiVersion: networking.k8s.io/v1
+       kind: Ingress
+       metadata:
+         name: community-ingress-resource
+         annotations:
+           kubernetes.io/ingress.class: "<public|private>-iks-k8s-nginx"
+       spec:
+         tls:
+         - hosts:
+           - <domain>
+           secretName: <tls_secret_name>
+         rules:
+         - host: <domain>
+           http:
+             paths:
+             - path: /<app1_path>
+               pathType: Prefix
+               backend:
+                 service:
+                   name: <app1_service>
+                   port:
+                     number: 80
+             - path: /<app2_path>
+               pathType: Prefix
+               backend:
+                 service:
+                   name: <app2_service>
+                   port:
+                     number: 80
+       ```
+       {: codeblock}
+     * **Kubernetes version 1.18 and earlier**:
+       ```yaml
+       apiVersion: networking.k8s.io/v1beta1
+       kind: Ingress
+       metadata:
+         name: community-ingress-resource
+         annotations:
+           kubernetes.io/ingress.class: "<public|private>-iks-k8s-nginx"
+       spec:
+         tls:
+         - hosts:
+           - <domain>
+           secretName: <tls_secret_name>
+         rules:
+         - host: <domain>
+           http:
+             paths:
+             - path: /<app1_path>
+               backend:
+                 serviceName: <app1_service>
+                 servicePort: 80
+             - path: /<app2_path>
+               backend:
+                 serviceName: <app2_service>
+                 servicePort: 80
+       ```
+       {: codeblock}
 
       <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
       <caption>Ingress resource YAML file components</caption>
@@ -229,11 +263,15 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       <td>Replace <em>&lt;app_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to the IBM-provided or your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app runs.</td>
       </tr>
       <tr>
-      <td><code>serviceName</code></td>
+      <td>1.19 and later only: <code>pathType</code></td>
+      <td>The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).</td>
+      </tr>
+      <tr>
+      <td><code>service.name</code> (1.19 or later) or <code>serviceName</code> (1.18 or earlier)</td>
       <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps.</td>
       </tr>
       <tr>
-      <td><code>servicePort</code></td>
+      <td><code>service.port.number</code> (1.19 or later)</br><code>servicePort</code> (1.18 or earlier)</td>
       <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
       </tr>
       </tbody></table>

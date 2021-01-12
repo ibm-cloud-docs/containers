@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-10-06"
+  years: 2014, 2021
+lastupdated: "2021-01-11"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,12 +40,12 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -71,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -83,10 +84,11 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -164,7 +166,6 @@ The following tables list the available single and multizone locations in {{site
 
 | Geography |  Country  | Metro | Data center |  Previous region  |
 |-----|-----|-----|-----|-----|
-| Asia Pacific | Australia | Melbourne | mel01 | AP South (`ap-south`, `au-syd`) |
 | Asia Pacific | Australia | Sydney | syd01, syd04, syd05 | AP South (`ap-south`, `au-syd`) |
 | Asia Pacific | China | Hong Kong<br>SAR of the PRC | hkg02 | AP North (`ap-north`, `jp-tok`) |
 | Asia Pacific | India | Chennai | che01 | AP North (`ap-north`, `jp-tok`) |
@@ -259,7 +260,6 @@ Free clusters are limited to specific locations and are available for only class
 
 <br />
 
-
 ## Accessing the global endpoint
 {: #endpoint}
 
@@ -339,7 +339,6 @@ If you need to specify a region in an API call, remove the `/global` parameter f
 <br />
 
 
-
 ## Previous {{site.data.keyword.cloud_notm}} region and zone structure
 {: #bluemix_regions}
 
@@ -360,13 +359,12 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | {{site.data.keyword.containerlong_notm}} region | Corresponding {{site.data.keyword.cloud_notm}} regions | Available zones in the region |
 | --- | --- | --- |
 | AP North (standard clusters only) | Tokyo | che01, hkg02, seo01, sng01, **tok02, tok04, tok05** |
-| AP South | Sydney | mel01, **syd01, syd04, syd05** |
+| AP South | Sydney | **syd01, syd04, syd05** |
 | EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, osl01, par01 |
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
 {: caption="Corresponding {{site.data.keyword.containershort}} and {{site.data.keyword.cloud_notm}} regions, with zones. Multizone-capable zones are in bold." caption-side="top"}
-
 
 
 
