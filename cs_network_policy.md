@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-18"
+  years: 2014, 2021
+lastupdated: "2021-01-12"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -166,7 +166,7 @@ A default Kubernetes policy that limits access to the Kubernetes Dashboard is al
 To view, manage, and add Calico policies, install and configure the Calico CLI.
 {: shortdesc}
 
-1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. The `--admin` option downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. The `--network` option downloads the Calico configuration file to run all Calico commands.
+1. Run the `ibmcloud ks cluster config` command and copy and paste the output to set the `KUBECONFIG` environment variable. Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. The `--admin` option downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. The `--network` option downloads the Calico configuration file to run all Calico commands.
   ```
   ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
   ```
