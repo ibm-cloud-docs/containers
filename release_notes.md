@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-12"
+lastupdated: "2021-01-13"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 13 January 2021 | **Cluster autoscaler**: Cluster autoscaler add-on patch update `1.0.1_210` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog) |
 | 12 January 2021 | <ul><li>**Ingress resources**: Added example Ingress resource definitions that are compatible with Kubernetes version 1.19. See the example YAML file in the documentation for the [community Kubernetes Ingress setup](/docs/containers?topic=containers-ingress-types#alb-comm-create) or for the [deprecated custom {{site.data.keyword.containerlong_notm}} Ingress setup](/docs/containers?topic=containers-ingress#public_inside_4).</li><li>**Kubernetes benchmarks**: Added how to [run the CIS Kubernetes benchmark tests on your own worker nodes](/docs/containers?topic=containers-cis-benchmark#cis-worker-test).</li><li>**Removal of data center support**: Update the documentation to reflect that Melbourne (`mel01`) is no longer available as an option to create {{site.data.keyword.cloud_notm}} resources in. For more information, see [Withdrawal of support for some data centers](/docs/get-support?topic=get-support-dc-migrate).</li></ul>|
 | 07 January 2021 | **Ingress ALB changelog**: Updated the latest [Kubernetes Ingress image build to `0.35.0_869_iks`](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0).|
 | 06 January 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.6_1531](/docs/containers?topic=containers-changelog#1196_1531), [1.18.14_1537](/docs/containers?topic=containers-changelog#11814_1537), [1.17.16_1550](/docs/containers?topic=containers-changelog#11716_1550), and [1.16.15_1556](/docs/containers?topic=containers-changelog#11615_1556).|
