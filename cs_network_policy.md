@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-12"
+lastupdated: "2021-01-13"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -595,6 +595,37 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
 Kubernetes policies protect pods from internal network traffic. You can create simple Kubernetes network policies to isolate app microservices from each other within a namespace or across namespaces.
 {: shortdesc}
 
+By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster.
+
+If a pod does not require access to a specific service and you want to ensure that the pod cannot access that service, you can create a Kubernetes network policy to block egress from the pod to the specified service. For example, any pod can access the metrics endpoints on the CoreDNS pods. To block unnecessary access, you can apply a policy such as the following, which allows ingress to the CoreDNS pods only from pods in namespaces that have the `coredns-metrics-policy: allow` label, or from pods in the `kube-system` namespace that have the `coredns-metrics-policy: allow` label.
+```yaml
+apiVersion: networking.k8s.io/v1
+kind: NetworkPolicy
+metadata:
+  name: coredns-metrics
+  namespace: kube-system
+spec:
+  ingress:
+  - from:
+    - namespaceSelector:
+        matchLabels:
+          coredns-metrics-policy: allow
+    - podSelector:
+        matchLabels:
+          coredns-metrics-policy: allow
+  - ports:
+    - port: 53
+      protocol: TCP
+    - port: 53
+      protocol: UDP
+  podSelector:
+    matchLabels:
+      k8s-app: kube-dns
+  policyTypes:
+  - Ingress
+```
+{: codeblock}
+
 For more information about how Kubernetes network policies control pod-to-pod traffic and for more example policies, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/services-networking/network-policies/){: external}.
 {: tip}
 
@@ -602,6 +633,7 @@ For more information about how Kubernetes network policies control pod-to-pod tr
 {: #services_one_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices within one namespace.
+{: shortdesc}
 
 An Accounts team deploys multiple app services in one namespace, but they need isolation to permit only necessary communication between the microservices over the public network. For the app `Srv1`, the team has front end, back end, and database services. They label each service with the `app: Srv1` label and the `tier: frontend`, `tier: backend`, or `tier: db` label.
 
@@ -661,6 +693,7 @@ Traffic can now flow from the front end to the back end, and from the back end t
 {: #services_across_ns}
 
 The following scenario demonstrates how to manage traffic between app microservices across multiple namespaces.
+{: shortdesc}
 
 Services that are owned by different subteams need to communicate, but the services are deployed in different namespaces within the same cluster. The Accounts team deploys front end, back end, and database services for the app Srv1 in the accounts namespace. The Finance team deploys front end, back end, and database services for the app Srv2 in the finance namespace. Both teams label each service with the `app: Srv1` or `app: Srv2` label and the `tier: frontend`, `tier: backend`, or `tier: db` label. They also label the namespaces with the `usage: accounts` or `usage: finance` label.
 

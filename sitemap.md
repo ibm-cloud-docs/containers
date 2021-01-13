@@ -229,7 +229,7 @@ subcollection: containers
 * [Network](/docs/containers?topic=containers-security#network)
   * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
   * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-  * [Expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+  * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 * [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
 * [Image and registry](/docs/containers?topic=containers-security#images_registry)
