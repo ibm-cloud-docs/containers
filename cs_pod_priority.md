@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-11"
+  years: 2014, 2021
+lastupdated: "2021-01-14"
 
 keywords: kubernetes, iks
 
@@ -129,7 +129,7 @@ _Figure: Pod priority scenarios_
 No. If you don't want to use pod priority, don't set a `globalDefault` or include a priority class in your pod deployments. Every pod defaults to zero, except the cluster-critical pods that IBM deploys with the [default priority classes](#default_priority_class). Because pod priority is relative, this basic setup ensures that the cluster-critical pods are prioritized for resources, and schedules any other pods by following the existing scheduling policies that you have in place.
 
 **How do resource quotas affect pod priority?**</br>
-You can use pod priority in combination with resource quotas, including [quota scopes](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes){: external} for clusters that run Kubernetes 1.12 or later. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
+You can use pod priority in combination with resource quotas, including [quota scopes](https://kubernetes.io/docs/concepts/policy/resource-quotas/#quota-scopes){: external}. With quota scopes, you can set up your resource quotas to account for pod priority. Higher priority pods get to consume system resources that are limited by the resource quota before lower priority pods.
 
 <br />
 
