@@ -878,7 +878,6 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      ```
      {: screen}
 
-
      <table summary="The columns are read from left to right. The first column has the parameter of the configmap. The second column describes the parameter.">
      <caption>Understanding this configmap's components</caption>
      <col width="25%">
