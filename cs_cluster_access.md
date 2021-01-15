@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-10"
+  years: 2014, 2021
+lastupdated: "2021-01-15"
 
 keywords: kubernetes, iks, clusters
 
@@ -120,7 +120,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 To work with your cluster, set the cluster that you created as the context for a CLI session to run `kubectl` commands.
 {: shortdesc}
 
-If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
 {: tip}
 
 1. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.

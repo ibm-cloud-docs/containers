@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-15"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -433,7 +433,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
    </tr>
    <tr>
    <td><code>--public-service-endpoint</code></td>
-   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
+   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your CLI, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
    </tr>
    <tr>
    <td><code>--private-service-endpoint</code></td>
@@ -632,7 +632,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    </tr>
    <tr>
    <td><code>--public-service-endpoint</code></td>
-   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your terminal, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
+   <td>Enable the public service endpoint so that your Kubernetes master can be accessed over the public network, for example to run `kubectl` commands from your command line, and so that your Kubernetes master and the worker nodes can communicate over the public VLAN. You can later disable the public service endpoint if you want a private-only cluster.<br><br>After you create the cluster, you can get the endpoint by running `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`.</td>
    </tr>
    <tr>
    <td><code>--pod-subnet</code></td>
@@ -785,7 +785,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 
 **To create a VPC cluster from the CLI**:
 
-1. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
+1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc?topic=vpc-creating-a-vpc-in-a-different-region). Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
    ibmcloud login -r <region> [-g <resource_group>] [--sso]
    ```
@@ -1015,7 +1015,7 @@ As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not 
 
 **To create a VPC cluster from the CLI**:
 
-1. In your terminal, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
+1. In your command line, log in to your {{site.data.keyword.cloud_notm}} account and target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the --sso flag to log in.
    ```
    ibmcloud login -r <region> [-g <resource_group>] [--sso]
    ```
