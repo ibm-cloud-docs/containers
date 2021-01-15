@@ -1013,7 +1013,7 @@ Create an {{site.data.keyword.satellitelong_notm}} cluster on your own infrastru
 {{site.data.keyword.satellitelong_notm}} is available as a closed beta and is subject to change. To register for the beta, see the [product details page](https://cloud.ibm.com/satellite/beta){: external}.
 {: beta}
 
-Before you begin, create a {{site.data.keyword.satelliteshort}} and assign at least three hosts to the location for control plane operations. After you create a {{site.data.keyword.satelliteshort}} cluster, assign hosts for the worker nodes. For more information, see [Creating {{site.data.keyword.openshiftshort}} clusters in {{site.data.keyword.satelliteshort}}](/docs/openshift?topic=openshift-satellite-clusters#satcluster-create-cli).
+Before you begin, create a {{site.data.keyword.satelliteshort}} and assign at least 3 hosts to the location for control plane operations. After you create a {{site.data.keyword.satelliteshort}} cluster, assign hosts for the worker nodes. For more information, see [Creating {{site.data.keyword.openshiftshort}} clusters in {{site.data.keyword.satelliteshort}}](/docs/openshift?topic=openshift-satellite-clusters#satcluster-create-cli).
 
 ```sh
 ibmcloud ks cluster create satellite --location LOCATION --name NAME --version VERSION [-q]
@@ -2540,7 +2540,7 @@ ibmcloud ks worker-pool create classic --name POOL_NAME --cluster CLUSTER --flav
 <dt><code>--hardware <em>ISOLATION</em></code></dt>
 <dd>Required: The level of hardware isolation for your worker node. Use `dedicated` if you want to have available physical resources that are dedicated to you only, or `shared` to allow physical resources to be shared with other IBM customers. The default is `shared`. For bare metal flavors, specify `dedicated`.</dd>
 
-<dt><code>--disable-disk-encrpyt</code></dt>
+<dt><code>--disable-disk-encrypt</code></dt>
 <dd>Specifies that the disk is not encrypted. The default value is <code>false</code>.</dd>
 
 <dt><code>-l, --label <em>KEY1=VALUE1</em></code></dt>
@@ -2900,7 +2900,7 @@ ibmcloud ks worker-pool taint set --worker-pool WORKER_POOL --cluster CLUSTER --
 <dd>Required: The name or ID of the cluster with the worker pool that you want to taint.</dd>
 
 <dt><code>--taint <em>KEY=VALUE:EFFECT</em></code></dt>
-<dd>Required: The label and effect for the Kubernetes taint that you want to set for the worker pool. Specify the taint in the format <code>key=value:effect</code>. The <code>key=value</code> is a label pair such as <code>env=prod</code> that you use to manage the worker node taint and matching pod tolerations. The <code>effect</code> is a [Kubernetes taint effect](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} such as <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code> that describes how the taint works. Depending on the effect of the taint that you set, pods that are running on your worker nodes might be evicted.</dd>
+<dd>Required: The label and effect for the Kubernetes taint that you want to set for the worker pool. Specify the taint in the format <code>key=value:effect</code>. The <code>key=value</code> is a label pair such as <code>env=prod</code> that you use to manage the worker node taint and matching pod tolerations. The <code>effect</code> is a [Kubernetes taint effect ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/) such as <code>NoSchedule</code>, <code>PreferNoSchedule</code>, or <code>NoExecute</code> that describes how the taint works. Depending on the effect of the taint that you set, pods that are running on your worker nodes might be evicted.</dd>
 
 <dt><code>-f</code></dt>
 <dd>Optional: Force the command to run with no user prompts.</dd>
