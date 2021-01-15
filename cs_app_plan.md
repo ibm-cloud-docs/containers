@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-04"
+lastupdated: "2021-01-14"
 
 keywords: kubernetes, iks, deploy
 
@@ -465,7 +465,7 @@ As you plan how many `Service` objects you need in your cluster, keep in mind th
 ## Securing apps
 {: #secure_apps}
 
-As you plan and develop your app, consider the following options to maintain a secure image, ensure that sensitive information is encrypted, and encrypt traffic between app microservices.
+As you plan and develop your app, consider the following options to maintain a secure image, ensure that sensitive information is encrypted, encrypt traffic between app microservices, and control traffic between your app pods and other pods and services in the cluster.
 {: shortdesc}
 
 <dl>
@@ -477,6 +477,8 @@ As you plan and develop your app, consider the following options to maintain a s
 <dd>You can encrypt the Kubernetes secrets that you create in your cluster by using a key management service (KMS) provider, such as {{site.data.keyword.keymanagementserviceshort}}. To get started, see [Encrypt secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect) and [Verify that secrets are encrypted](/docs/containers?topic=containers-encryption#verify_kms).</dd>
 <dt>Microservice traffic encryption</dt>
 <dd>After you deploy your app, you can set up a service mesh and enable mTLS encryption for traffic between services in the mesh. To get started, [set up the managed Istio add-on](/docs/containers?topic=containers-istio). Then, follow the steps in [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls).</dd>
+<dt>Pod traffic management</dt>
+<dd>By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster. [Kubernetes network policies](/docs/containers?topic=containers-network_policies#isolate_services) protect pods from internal network traffic. For example, if most or all pods do not require access to specific pods or services, and you want to ensure that pods by default cannot access those pods or services, you can create a Kubernetes network policy to block ingress those pods or services. Kubernetes network policies can also help you enforce workload isolation between namespaces by controlling how pods and services in different namespaces can communicate.</dd>
 </dl>
 
 ## Managing access and monitoring app health

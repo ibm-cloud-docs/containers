@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-04"
+lastupdated: "2021-01-14"
 
 keywords: kubernetes, iks, containers
 
@@ -434,7 +434,7 @@ The more apps or worker nodes that you expose publicly, the more steps you must 
 **What if I want to connect my cluster to other networks, like other VPCs, an on-prem data center, or IBM Cloud classic resources?**</br>
 Depending on the network that you want to connect your worker nodes to, you can [choose a VPN solution](/docs/containers?topic=containers-vpc-vpnaas).
 
-### Expose apps with LoadBalancer and Ingress services
+### Securely expose apps with LoadBalancer and Ingress services
 {: #network_lb_ingress}
 
 You can use network load balancer (NLB) and Ingress application load balancer (ALB) networking services to connect your apps to the public internet or to external private networks. Review the following optional settings for NLBs and ALBs that you can use to meet back-end app security requirements or encrypt traffic as it moves through your cluster.
@@ -625,7 +625,7 @@ Multi-tenant clusters use Kubernetes namespaces to isolate tenants and are usual
 
 - **Access:** When you set up multiple namespaces, you must configure proper RBAC policies for each namespace to ensure resource isolation. RBAC policies are complex and require in-depth Kubernetes knowledge.
 - **Privileged pods:** If one tenant in a multi-tenant cluster requires to run privileged pods, this pod can access other namespaces in the cluster or damage the shared compute host. Controlling privileged pods is a complex task that requires effort and deep technical expertise. Use [pod security policies (PSPs)](/docs/containers?topic=containers-psp) to control what resources your tenants can deploy in the cluster.
-- **Network policies:** Because your worker nodes are connected to the same private network, you must make sure that you have strict firewall policies in place to prevent pods from accessing pods in other namespaces.
+- **Network policies:** Because your worker nodes are connected to the same private network, you must make sure that you have strict network policies in place to prevent pods from accessing pods in other namespaces.
 - **Compute resource limitation:** To ensure that every team has the necessary resources to deploy services and run apps in the cluster, you must set up [resource quotas](https://kubernetes.io/docs/concepts/policy/resource-quotas/) for every namespace. Resource quotas determine the deployment constraints for a namespace, such as the number of Kubernetes resources that you can deploy, and the amount of CPU and memory that can be consumed by those resources. After you set a quota, users must include resource requests and limits in their deployments.
 - **Shared cluster resources:** If you run multiple tenants in one cluster, some cluster resources, such as the Ingress application load balancer (ALB) or available portable IP addresses are shared across tenants. Smaller services might have a hard time using shared resources if they must compete against large services in the cluster.
 - **Updates:** You can run one Kubernetes API version at a time only. All apps that run in a cluster must comply with the current Kubernetes API version independent of the team that owns the app. When you want to update a cluster, you must ensure that all teams are ready to switch to a new Kubernetes API version and that apps are updated accordingly. This also means that individual teams have less control over the Kubernetes API version they want to run.
@@ -634,6 +634,9 @@ Multi-tenant clusters use Kubernetes namespaces to isolate tenants and are usual
 
 Although single-tenant and multi-tenant clusters come with roughly the same costs, single-tenant clusters provide a higher level of isolation than the namespaces in a multi-tenant cluster. For better workload isolation, use single-tenant clusters.
 {: important}
+
+**How can I control pod access to other resources in the cluster?** </br>
+By default, any pod has access to any other pod in the cluster. Additionally, any pod has access to any services that are exposed by the pod network, such as a metrics service, the cluster DNS, the API server, or any services that you manually create in your cluster. [Kubernetes network policies](/docs/containers?topic=containers-network_policies#isolate_services) protect pods from internal network traffic. For example, if most or all pods do not require access to specific pods or services, and you want to ensure that pods by default cannot access those pods or services, you can create a Kubernetes network policy to block ingress those pods or services. Kubernetes network policies can also help you enforce workload isolation between namespaces by controlling how pods and services in different namespaces can communicate.
 
 **How can I control pod permissions?** </br>
 By default, every cluster enables the [Kubernetes pod security policy admission controller](https://kubernetes.io/docs/concepts/policy/pod-security-policy/) that you can use to define what requirements a pod must meet to get deployed in a namespace. With pod security policies, you can control the usage of privileged containers, root namespaces, host networking and ports, volume types, host file systems, and Linux permissions such as read-only or group IDs. For more information, see [Configuring pod security policies](/docs/containers?topic=containers-psp).

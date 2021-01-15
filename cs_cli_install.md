@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-06"
+lastupdated: "2021-01-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -112,7 +112,7 @@ This task includes the information for installing these CLIs and plug-ins:
 * {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
 * {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`)
 
-If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell) or, after your cluster is created, the [Kubernetes Web Terminal](#cli_web).
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell) or, after your cluster is created, the [Kubernetes web terminal](#cli_web).
 {: tip}
 
 <br>
@@ -120,7 +120,7 @@ To install the CLIs:
 
 1.  Install the stand-alone [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-install-ibmcloud-cli) (`ibmcloud`).
 
-    Plan to use the CLI often? Try [Enabling shell autocompletion for {{site.data.keyword.cloud_notm}} CLI (Linux/macOS only)](/docs/cli/reference/ibmcloud?topic=cli-shell-autocomplete#shell-autocomplete-linux).
+    Plan to use the CLI often? Try [Enabling autocompletion for the {{site.data.keyword.cloud_notm}} CLI (Linux/macOS only)](/docs/cli/reference/ibmcloud?topic=cli-shell-autocomplete#shell-autocomplete-linux).
     {: tip}
 
 2.  Log in to the {{site.data.keyword.cloud_notm}} CLI. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted.
@@ -179,7 +179,7 @@ For reference information about these CLIs, see the documentation for those tool
 To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.cloud_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 {: shortdesc}
 
-Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keyword.containershort_notm}} clusters? Make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version. You might want to set up multiple directories on your local machine to organize different `kubectl` versions and then create aliases in your terminal for these directories.
+Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keyword.containershort_notm}} clusters? Make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version. You might want to set up multiple directories on your local machine to organize different `kubectl` versions and then create aliases in your command-line interface (CLI) for these directories.
 {: tip}
 
 1.  If you already have a cluster, check that the version of your client `kubectl` CLI matches the version of the cluster API server.
@@ -217,7 +217,7 @@ Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keywo
         chmod +x /usr/local/bin/kubectl
         ```
         {: pre}
-4.  If you have clusters that run different versions of Kubernetes, such as 1.19.6 and 1.17.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local terminal profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
+4.  If you have clusters that run different versions of Kubernetes, such as 1.19.6 and 1.17.16, download each `kubectl` version binary file to a separate directory. Then, you can set up an alias in your local command-line interface profile to point to the `kubectl` binary file directory that matches the `kubectl` version of the cluster that you want to work with, or [run the CLI from a container](#cs_cli_container).
 5.  **Optional**: [Enable autocompletion for `kubectl` commands](https://kubernetes.io/docs/tasks/tools/install-kubectl/#enabling-shell-autocompletion){: external}. The steps vary depending on the shell that you use.
 
 Next, start [Creating Kubernetes clusters from the CLI with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-clusters#clusters_cli_steps).
@@ -320,7 +320,7 @@ If you are using Windows and the Kubernetes CLI is not installed in the same dir
 ## Setting the Kubernetes context for multiple clusters
 {: #cli_config_multiple}
 
-You can use the {{site.data.keyword.containerlong_notm}} plug-in CLI to add the `kubeconfig` file for multiple clusters to the Kubernetes context of your terminal. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/){: external}.
+You can use the {{site.data.keyword.containerlong_notm}} plug-in CLI to add the `kubeconfig` file for multiple clusters to the Kubernetes context of your command-line interface (CLI). For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/access-application-cluster/configure-access-multiple-clusters/){: external}.
 {: shortdesc}
 
 Before you begin:
@@ -337,13 +337,13 @@ To set the Kubernetes context for multiple clusters:
     ibmcloud ks cluster ls
     ```
     {: pre}
-2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your terminal. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
+2.  Add the `kubeconfig` file for the cluster to the Kubernetes context for your command line. The Kubernetes context is set by the `~/.kube/config` file (`<user_profile>/.kube/config` in Windows), or the [last file that is set by the `KUBECONFIG` environment variable](#cli_temp_kubeconfig), on your local machine.
     ```
     ibmcloud ks cluster config -c <cluster_name_or_ID>
     ```
     {: pre}
 3.  Repeat step 2 for each cluster that you want to set the Kubernetes context for.
-4.  Check which cluster your terminal is currently set to use.
+4.  Check which cluster your command line is currently set to use.
     ```
     kubectl config current-context
     ```
@@ -359,7 +359,7 @@ To set the Kubernetes context for multiple clusters:
     kubectl config get-contexts
     ```
     {: pre}
-6.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for each terminal that uses the `kubeconfig` file, or specify the context on each `kubectl` command.
+6.  Set the Kubernetes context to another cluster. You can switch the Kubernetes configuration context for each command-line interface (CLI) that uses the `kubeconfig` file, or specify the context on each `kubectl` command.
 
     *   **Switch the Kubernetes context**: Use the context of a different cluster. Replace `<context>` with the context that you previously retrieved.
 
@@ -380,7 +380,7 @@ To set the Kubernetes context for multiple clusters:
         ```
         {: pre}
 
-        Plan to switch contexts by command often? Create an alias for each cluster in your terminal for the context. For example: `alias kprod='kubectl --context=mycluster/abc123'`. Then you can use the alias to switch clusters.
+        Plan to switch contexts by command often? Create an alias for each cluster in your command line for the context. For example: `alias kprod='kubectl --context=mycluster/abc123'`. Then you can use the alias to switch clusters.
         {: tip}
 
 <br />
@@ -396,7 +396,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     ibmcloud ks clusters
     ```
     {: pre}
-2.  Set your `KUBECONFIG` environment variable in your terminal to a temporary file path.
+2.  Set your `KUBECONFIG` environment variable in your command line to a temporary file path.
     ```
     export KUBECONFIG=$(mktemp)
     ```
@@ -418,7 +418,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
         /tmp/tmp.zhK6bD5Lpw
         ```
         {: screen}
-    *   To print the `kubeconfig` file in your terminal:
+    *   To print the `kubeconfig` file in your command line:
         ```
         cat $KUBECONFIG
         ```
@@ -428,7 +428,7 @@ Instead of merging the `kubeconfig` file of [multiple clusters](#cli_config_mult
     kubectl get pods
     ```
     {: pre}
-6.  Repeat these steps when you want to use a different cluster or open a new terminal session.
+6.  Repeat these steps when you want to use a different cluster or open a new command line session.
 
 <br />
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-01-12"
+lastupdated: "2021-01-15"
 
 keywords: containers
 subcollection: containers
@@ -229,7 +229,7 @@ subcollection: containers
 * [Network](/docs/containers?topic=containers-security#network)
   * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
   * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-  * [Expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+  * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
 * [Persistent storage](/docs/containers?topic=containers-security#storage)
 * [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
 * [Image and registry](/docs/containers?topic=containers-security#images_registry)
@@ -2391,8 +2391,8 @@ subcollection: containers
 * [Block Storage: App cannot access or write to PVC](/docs/containers?topic=containers-cs_troubleshoot_storage#block_app_failures)
   * [Block storage: Block storage changes to read-only](/docs/containers?topic=containers-cs_troubleshoot_storage#readonly_block)
   * [Block storage: Mounting existing block storage to a pod fails due to the wrong file system](/docs/containers?topic=containers-cs_troubleshoot_storage#block_filesystem)
-* [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
 * [Block storage: Installing the Block storage plug-in Helm chart gives CPU throttling warnings](/docs/containers?topic=containers-cs_troubleshoot_storage#block_helm_cpu)
+* [Object storage: Installing the Object storage `ibmc` Helm plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_helm_fails)
 * [Object storage: Installing the Object storage plug-in fails](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_plugin_fails)
 * [Object storage: PVC remains in a pending state](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_pvc_pending)
   * [Object storage: PVC or pod creation fails due to not finding the Kubernetes secret](/docs/containers?topic=containers-cs_troubleshoot_storage#cos_secret_access_fails)

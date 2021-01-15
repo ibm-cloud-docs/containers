@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-08"
+lastupdated: "2021-01-15"
 
 keywords: kubernetes, iks
 
@@ -154,9 +154,9 @@ Because it can take a few minutes to provision, create your cluster before you s
     -   {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registrylong_notm}}.
     -   The Kubernetes CLI (`kubectl`). Use this CLI to deploy and manage Kubernetes resources such as your app's pods and services.
 
-    If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+    If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
     {: tip}
-3.  In your terminal, log in to your {{site.data.keyword.cloud_notm}} account. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
+3.  In your command line, log in to your {{site.data.keyword.cloud_notm}} account. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
     ```
     ibmcloud login [-g <resource_group>] [--sso]
     ```
@@ -478,9 +478,9 @@ In the previous lessons, you created your cluster with one worker node and deplo
 
 As defined in the configuration script, Kubernetes can use an availability check to see whether a container in a pod is running or not. For example, these checks might catch deadlocks, where an app runs, but it is unable to progress. Restarting a container that is in this condition can help to make the app more available despite bugs. Then, Kubernetes uses a readiness check to know when a container is ready to start accepting traffic again. A pod is considered ready when its container is ready. When the pod is ready, it is started again. In this version of the app, every 15 seconds it times out. With a health check configured in the configuration script, containers are re-created if the health check finds an issue with an app.
 
-If you took a break from the last lesson and started a new terminal, make sure that you log back in to your cluster.
+If you took a break from the last lesson, make sure that you log back in to your cluster.
 
-1.  In your terminal, navigate to the `Lab 2` directory.
+1.  In your command line, navigate to the `Lab 2` directory.
     ```
     cd 'container-service-getting-started-wt/Lab 2'
     ```
@@ -617,7 +617,7 @@ From the previous tutorial, you have your account and a cluster with one worker 
 Deploy the {{site.data.keyword.watson}} apps, access the service publicly, and analyze some text with the app.
 {: shortdesc}
 
-If you took a break from the last lesson and started a new terminal, make sure that you log back in to your cluster.
+If you took a break from the last lesson, make sure that you log back in to your cluster.
 
 1.  In a CLI, navigate to the `Lab 3` directory.
     ```

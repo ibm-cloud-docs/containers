@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-11"
+  years: 2014, 2021
+lastupdated: "2021-01-15"
 
 keywords: kubernetes, iks, helm
 
@@ -99,7 +99,7 @@ Quickly add extra capabilities and open-source technologies to your cluster with
 {: shortdesc}
 
 **What are managed add-ons?** </br>
-Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with extra capabilities and open-source capabilities, such as Istio, Kubernetes Terminal, {{site.data.keyword.block_storage_is_short}}, or the Cluster Autoscaler. The version of the driver, plug-in, or open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
+Managed {{site.data.keyword.containerlong_notm}} add-ons are an easy way to enhance your cluster with extra capabilities and open-source capabilities, such as Istio, Kubernetes web terminal, {{site.data.keyword.block_storage_is_short}}, or the Cluster Autoscaler. The version of the driver, plug-in, or open-source tool that you add to your cluster is tested by IBM and approved to be used in {{site.data.keyword.containerlong_notm}}.
 
 The managed add-ons that you can install in your cluster depend on the type of cluster, the container platform, and the infrastructure provider that you choose.
 {: note}
@@ -120,7 +120,7 @@ To enable a managed add-on in your cluster from the CLI, use the [`ibmcloud ks c
 For more information about the prerequisites for each add-on, see:
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 - [Istio](/docs/containers?topic=containers-istio)
-- [Kubernetes Terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
+- [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
 - [Static routes](/docs/containers?topic=containers-static-routes)

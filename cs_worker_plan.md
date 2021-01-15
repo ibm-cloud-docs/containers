@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-18"
+  years: 2014, 2021
+lastupdated: "2021-01-13"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
