@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-01-16"
+lastupdated: "2021-01-19"
 
 keywords: containers
 subcollection: containers
@@ -1000,24 +1000,6 @@ subcollection: containers
 * [Deploying apps to specific worker nodes by using labels](/docs/containers?topic=containers-deploy_app#node_affinity)
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
-[Deploying serverless apps with Knative (deprecated)](/docs/containers?topic=containers-serverless-apps-knative)
-* [Setting up Knative in your cluster](/docs/containers?topic=containers-serverless-apps-knative#knative-setup)
-  * [Updating the Knative managed add-on](/docs/containers?topic=containers-serverless-apps-knative#update-knative-addon)
-* [Using Knative services to deploy a serverless app](/docs/containers?topic=containers-serverless-apps-knative#knative-deploy-app)
-* [Setting up custom domain names and certificates](/docs/containers?topic=containers-serverless-apps-knative#knative-custom-domain-tls)
-* [Using volumes to access Kubernetes secrets and config maps](/docs/containers?topic=containers-serverless-apps-knative#knative-access-volume)
-* [Pulling images from a private container registry](/docs/containers?topic=containers-serverless-apps-knative#knative-private-registry)
-* [Accessing a Knative service from another Knative service](/docs/containers?topic=containers-serverless-apps-knative#knative-access-service)
-* [Common Knative service settings](/docs/containers?topic=containers-serverless-apps-knative#knative-service-settings)
-  * [Setting the minimum and maximum number of pods](/docs/containers?topic=containers-serverless-apps-knative#knative-min-max-pods)
-  * [Scaling your app based on CPU usage or number of requests](/docs/containers?topic=containers-serverless-apps-knative#scale-cpu-vs-number-requests)
-  * [Specifying the maximum number of requests per pod](/docs/containers?topic=containers-serverless-apps-knative#max-request-per-pod)
-  * [Changing the default container port](/docs/containers?topic=containers-serverless-apps-knative#knative-container-port)
-  * [Changing the `scale-to-zero-grace-period`](/docs/containers?topic=containers-serverless-apps-knative#knative-idle-time)
-  * [Creating private-only serverless apps](/docs/containers?topic=containers-serverless-apps-knative#knative-private-only)
-  * [Forcing the Knative service to repull a container image](/docs/containers?topic=containers-serverless-apps-knative#knative-repull-image)
-* [Related links](/docs/containers?topic=containers-serverless-apps-knative#knative-related-links)
-
 [Testing access to apps with NodePorts](/docs/containers?topic=containers-nodeport)
 * [About NodePorts](/docs/containers?topic=containers-nodeport#nodeport_planning)
 * [Enabling access to an app by using a NodePort service](/docs/containers?topic=containers-nodeport#nodeport_config)
@@ -1997,11 +1979,6 @@ subcollection: containers
   * [Changelog for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
   * [Changelog for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
   * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
-
-[Knative add-on version changelog](/docs/containers?topic=containers-knative-changelog)
-* [Changelog for 0.15.1, released 08 July 2020](/docs/containers?topic=containers-knative-changelog#0151)
-* [Changelog for 0.14.0, released 20 May 2020](/docs/containers?topic=containers-knative-changelog#0140)
-* [Changelog for 0.12.1, released 10 February 2020](/docs/containers?topic=containers-knative-changelog#0121)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
 * [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)

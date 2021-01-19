@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-15"
+lastupdated: "2021-01-19"
 
 keywords: kubernetes, iks, help, debug
 
@@ -837,7 +837,6 @@ Identify and restore the resource that causes the broken webhook.
     *   If the webhook is managed by an add-on that you installed, uninstall the add-on. Common add-ons that cause webhook issues include the following:
         * [Portieris](https://github.com/IBM/portieris){: external}.
         * [Istio](/docs/containers?topic=containers-istio#istio_uninstall).
-        * [Knative](/docs/containers?topic=containers-serverless-apps-knative).
 8.  Re-create the webhook or reinstall the add-on.
 
 <br />

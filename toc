@@ -138,7 +138,6 @@ Kubernetes Service
         cs_images.md
         cs_app.md
         cs_app_deploy.md
-        cs_app_knative.md
         cs_nodeport.md
         cs_app_update.md
 
@@ -221,7 +220,6 @@ Kubernetes Service
         cs_benchmarks.md
         cs_versions_addons.md
         cs_versions_istio.md
-        cs_versions_knative.md
         cs_versions_autoscaler.md
         cs_versions_vpc_block_addon.md
         cs_versions_object.md
