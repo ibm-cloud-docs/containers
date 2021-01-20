@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-15"
+lastupdated: "2021-01-20"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -1027,7 +1027,7 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
      ```yaml
      ...
      annotations:
-       nginx.ingress.kubernetes.io/auth-url: https://$host/oauth2-<App_ID_service_instance_name>/auth
+       nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace of the Ingress resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
      ...
      ```
      {: codeblock}
