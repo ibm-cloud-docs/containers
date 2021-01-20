@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-12"
+lastupdated: "2021-01-19"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -206,6 +206,12 @@ Refer to the following table for a summary of changes for each version of the {{
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>2424 / 954</td>
+<td>19 Jan 2021</td>
+<td>Fixes `p11-kit` vulnerabilities for [CVE-2020-29361 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29361), [CVE-2020-29362 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29362), and [CVE-2020-29363 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29363).|</td>
+<td>-</td>
+</tr>
 <tr>
 <td>2410 / 954</td>
 <td>17 Dec 2020</td>

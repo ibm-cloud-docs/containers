@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-15"
+lastupdated: "2021-01-19"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -297,7 +297,7 @@ ibmcloud ks cluster addon disable istio --cluster CLUSTER [-f]
 <dd>Required: The name or ID of the cluster.</dd>
 
 <dt><code>-f</code></dt>
-<dd>Optional: This Istio add-on is a dependency for the <code>istio-extras</code>, <code>istio-sample-bookinfo</code>, and <code>knative</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
+<dd>Optional: This Istio add-on is a dependency for the <code>istio-extras</code> and <code>istio-sample-bookinfo</code> managed add-ons. Include this flag to also disable those add-ons.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable istio-extras`
@@ -347,35 +347,6 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 <dl>
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>Required: The name or ID of the cluster.</dd>
-</dl>
-
-#### `ibmcloud ks cluster addon disable knative`
-{: #cs_cluster_addon_disable_knative}
-
-Disable the managed Knative add-on to remove the Knative serverless framework from the cluster.
-{: shortdesc}
-
-As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
-{: deprecated}
-
-```sh
-ibmcloud ks cluster addon disable knative --cluster CLUSTER [-f]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>-f</code>
-<dd>Optional: Force the command to run with no user prompts.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon disable kube-terminal`
@@ -549,38 +520,6 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio versions 1.4 and later are supported only in Kubernetes version 1.16 and later clusters.</dd>
-</dl>
-
-#### `ibmcloud ks cluster addon enable knative`
-{: #cs_cluster_addon_enable_knative}
-
-Enable the managed [Knative add-on](/docs/containers?topic=containers-serverless-apps-knative) to install the Knative serverless framework.
-{: shortdesc}
-
-As of 18 November 2020 the Knative managed add-on is deprecated. On 18 December 2020 the add-on becomes unsupported and can no longer be installed, and on 18 January 2021 the add-on is automatically uninstalled from all clusters. If you use the Knative add-on, consider migrating to the [Knative open source project](https://knative.dev/docs/install/){: external} or to [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.
-{: deprecated}
-
-```sh
-ibmcloud ks cluster addon enable knative --cluster CLUSTER [--version VERSION] [-y]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-
-**Minimum required permissions**: **Administrator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
-
-<dt><code>-y</code></dt>
-<dd>Optional: Enable the <code>istio</code> add-on dependency.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon enable kube-terminal`
@@ -1058,7 +997,7 @@ ibmcloud sat cluster create satellite --name mysatcluster --location mylocation 
 Create a Virtual Private Cloud (VPC) cluster with worker nodes on Generation 1 infrastructure. When you log in to your {{site.data.keyword.cloud_notm}} account, target the {{site.data.keyword.cloud_notm}} region and resource group where you want to create your VPC cluster. For supported regions, see [Creating a VPC in a different region](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-in-a-different-region). The cluster's resource group can differ from the VPC resource group.
 {: shortdesc}
 
-As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not create any VPC Gen 1 resources before this date, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before this date, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends and all remaining VPC Gen 1 resources are deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only, and [move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial). For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).
+As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not create any VPC Gen 1 resources before this date, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before this date, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends. On 31 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only, and [move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial). For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).
 {: deprecated}
 
 Free clusters are not available in VPC.
@@ -3469,7 +3408,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 2410
+ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 2424
 ```
 {: pre}
 
@@ -3510,7 +3449,7 @@ ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVA
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 2410
+ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 2424
 ```
 {: pre}
 
@@ -3551,7 +3490,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 2410
+ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 2424
 ```
 {: pre}
 
@@ -3686,7 +3625,7 @@ ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--ver
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2410
+ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2424
 ```
 {: pre}
 
@@ -3731,7 +3670,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2410
+ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2424
 ```
 {: pre}
 
@@ -3996,12 +3935,12 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 **Example commands:**
 * To update all ALB pods in the cluster:
   ```sh
-  ibmcloud ks ingress alb update -c mycluster --version 2410
+  ibmcloud ks ingress alb update -c mycluster --version 2424
   ```
   {: pre}
 * To update the ALB pods for one or more specific ALBs:
   ```sh
-  ibmcloud ks ingress alb update -c mycluster --version 2410 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
+  ibmcloud ks ingress alb update -c mycluster --version 2424 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
   ```
   {: pre}
 
@@ -6598,7 +6537,7 @@ ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
-<dd>Optional: Specify an add-on name, such as <code>istio</code> or <code>knative</code>, to filter versions for.</dd>
+<dd>Optional: Specify an add-on name such as <code>istio</code> to filter versions for.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>

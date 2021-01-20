@@ -901,7 +901,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
     ```
     {: pre}
 
-  3. To pick up the changes, update your ALBs.
+  3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
     ```
     ibmcloud ks ingress alb update -c <cluster_name_or_ID>
     ```
