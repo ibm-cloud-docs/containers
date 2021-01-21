@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-19"
+lastupdated: "2021-01-21"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -150,28 +150,65 @@ Review the following important differences between the {{site.data.keyword.conta
 
 <br />
 
-## Exposing apps with ALBs that run the Kubernetes Ingress image
+## Prerequisites
+{: #config_prereqs}
+
+Before you get started with Ingress, review the following prerequisites.
+{: shortdesc}
+
+- Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
+- Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
+    - **Administrator** platform role for the cluster
+    - **Manager** service role in all namespaces
+- Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and to apply periodic updates. If you have only one worker node in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. If you have only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted, and the ALB pod is updated to the latest version only when you delete the old pod manually so that an updated pod can be scheduled.
+- If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
+- To be included in Ingress load balancing, the names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.
+- If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
+- <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+
+## Publicly exposing apps with ALBs that run the Kubernetes Ingress image
 {: #alb-comm-create}
 
-Create Ingress resources so that ALBs that run the community Kubernetes Ingress image can route traffic to your apps.
+Create Ingress resources so that public ALBs that run the community Kubernetes Ingress image can route traffic to your apps.
 {: shortdesc}
 
 The following steps show you how to expose your apps with the Kubernetes Ingress setup. If you created your cluster on or after 01 December 2020, your ALBs run the Kubernetes Ingress image by default. However, if you created your cluster before 01 December 2020, your ALBs run the deprecated custom IBM Ingress image. In this case, you can use the following steps to create new ALBs that run the Kubernetes Ingress image, and run this new Kubernetes Ingress setup alongside your existing IBM Ingress setup. If you prefer to migrate your existing IBM Ingress setup to the Kubernetes Ingress setup instead, check out [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](#alb-type-migration).
 {: tip}
 
-1. To use TLS termination, re-create your TLS secrets. In the Kubernetes Ingress implementation, the ALB cannot access secrets that are in a different namespace than the Ingress resource. If you use the default Ingress secret and your Ingress resources are deployed in namespaces other than `default`, or if you import a secret from {{site.data.keyword.cloudcerts_long_notm}} and your Ingress resources are deployed in namespaces other than `ibm-cert-store`, you must re-create the secret in those namespaces. For more information, see [Managing TLS certificates and secrets](#manage_certs).
-    1. Get the CRN of the secret for your subdomain.
+1.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
       ```
-      ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
-      ```
-      {: pre}
-    2. Using the CRN, create a secret for the certificate in the namespace where your Ingress resources are deployed. If you have Ingress resources in multiple namespaces, repeat this command for each namespace.
-      ```
-      ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
+      kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
       ```
       {: pre}
+2. Choose a domain and set up TLS for your apps. You can use the IBM-provided domain, such as `mycluster-<hash>-0000.us-south.containers.appdomain.cloud/myapp`, or define a custom domain.
+    * **To use the IBM-provided domain**:
+      1. Get your cluster's Ingress subdomain and secret.
+          ```
+          ibmcloud ks cluster get --cluster <cluster_name_or_ID> | grep Ingress
+          ```
+          {: pre}
 
-2. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
+          Example output:
+          ```
+          Ingress Subdomain:      mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+          Ingress Secret:         mycluster-<hash>-0000
+          ```
+          {: screen}
+      2. If you want to use TLS and your apps are deployed in a namespace other than `default`, you must re-create the secret in the namespace where your apps exist. To find the CRN for the default Ingress secret, run `ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default`. For more information, see [Managing TLS certificates and secrets](#manage_certs).
+          ```
+          ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
+          ```
+          {: pre}
+    * **To use a custom domain**:
+      1.    Create a custom domain. To register your custom domain, work with your Domain Name Service (DNS) provider or [{{site.data.keyword.cloud_notm}} DNS](/docs/dns?topic=dns-getting-started). If the apps that you want Ingress to expose are in different namespaces in one cluster, register the custom domain as a wildcard domain, such as `*.custom_domain.net`. Note that domains are limited to 255 characters or fewer.
+      2.  Define an alias for your custom domain by specifying the IBM-provided domain as a Canonical Name record (CNAME). To find the IBM-provided Ingress domain, run `ibmcloud ks cluster get --cluster <cluster_name>` and look for the **Ingress subdomain** field.
+      3. To use TLS termination, create a secret in the namespace where your apps exist that contains your own TLS certificate. For example, if a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
+        ```
+        ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> [--namespace <namespace>]
+        ```
+        {: pre}
+
+3. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
   1. Define an Ingress resource file that uses the IBM-provided domain or your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
      * **Kubernetes version 1.19 and later**:
        ```yaml
@@ -180,7 +217,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
        metadata:
          name: community-ingress-resource
          annotations:
-           kubernetes.io/ingress.class: "<public|private>-iks-k8s-nginx"
+           kubernetes.io/ingress.class: "public-iks-k8s-nginx"
        spec:
          tls:
          - hosts:
@@ -213,7 +250,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
        metadata:
          name: community-ingress-resource
          annotations:
-           kubernetes.io/ingress.class: "<public|private>-iks-k8s-nginx"
+           kubernetes.io/ingress.class: "public-iks-k8s-nginx"
        spec:
          tls:
          - hosts:
@@ -244,7 +281,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       <tbody>
       <tr>
       <td><code>annotations</code></td>
-      <td><ul><li>`kubernetes.io/ingress.class`: Specify `public-iks-k8s-nginx` or `private-iks-k8s-nginx` to apply this Ingress resource to the public ALBs or private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class that your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass` resource and a `ibm-ingress-deploy-config` configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.</li></ul></td>
+      <td><ul><li>`kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the public ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for yourr configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass` resource and a `ibm-ingress-deploy-config` configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.</li></ul></td>
       </tr>
       <tr>
       <td><code>tls.hosts</code></td>
@@ -263,15 +300,15 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       <td>Replace <em>&lt;app_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to the IBM-provided or your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app runs.</td>
       </tr>
       <tr>
-      <td>1.19 and later only: <code>pathType</code></td>
+      <td>Kubernetes 1.19 and later only: <code>pathType</code></td>
       <td>The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).</td>
       </tr>
       <tr>
-      <td><code>service.name</code> (1.19 or later) or <code>serviceName</code> (1.18 or earlier)</td>
+      <td><code>service.name</code> (Kubernetes 1.19 or later) or <code>serviceName</code> (Kubernetes 1.18 or earlier)</td>
       <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps.</td>
       </tr>
       <tr>
-      <td><code>service.port.number</code> (1.19 or later)</br><code>servicePort</code> (1.18 or earlier)</td>
+      <td><code>service.port.number</code> (Kubernetes 1.19 or later)</br><code>servicePort</code> (Kubernetes 1.18 or earlier)</td>
       <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
       </tr>
       </tbody></table>
@@ -282,7 +319,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
       ```
       {: pre}
 
-3. Clusters created before 01 December 2020: Verify that you have at least one ALB in each zone that runs the Kubernetes Ingress image. In the **Build** column of the output, look for versions in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
+4. Clusters created before 01 December 2020 only: Verify that you have at least one ALB in each zone that runs the Kubernetes Ingress image. In the **Build** column of the output, look for versions in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
     ```
     ibmcloud ks alb ls -c <cluster_name_or_ID>
     ```
@@ -290,29 +327,18 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 
       * If one ALB per zone runs the Kubernetes Ingress image, continue to step 4.
       * If you do not have one ALB per zone that runs the Kubernetes Ingress image, create at least one in each zone.
-        * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-          ```
-          ibmcloud ks ingress alb create classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version 0.35.0_869_iks
-          ```
-          {: pre}
-        * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-          ```
-          ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.35.0_869_iks
-          ```
-          {: pre}
-        * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
-          ```
-          ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version 0.35.0_869_iks
-          ```
-          {: pre}
+        ```
+        ibmcloud ks ingress alb create <classic|vpc-gen2> --cluster <cluster_name_or_ID> --type public --zone <zone> --vlan <VLAN_ID> --version 0.35.0_869_iks
+        ```
+        {: pre}
 
-4. Copy the IP address (classic) or hostname (VPC) for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
+5. Copy the IP address (classic) or hostname (VPC) for one ALB that runs the Kubernetes Ingress image. In the output, choose an ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
   {: pre}
 
-5. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+6. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
   ```
   curl http://<ALB_IP>/<app_path> -H "Host: <ingress_subdomain>"
   ```
@@ -320,7 +346,184 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
 
   For example, to send a request to "myapp" by using a default Ingress subdomain:
   ```
-  curl http://8.8.8.8/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
+  curl http://169.X.X.X/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
+  ```
+  {: pre}
+
+Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.
+{: tip}
+
+<br />
+
+## Privately exposing apps with ALBs that run the Kubernetes Ingress image
+{: #alb-comm-create-private}
+
+Create Ingress resources so that private ALBs that run the community Kubernetes Ingress image can route traffic to your apps.
+{: shortdesc}
+
+The following steps show you how to expose your apps with the Kubernetes Ingress setup. If you created your cluster on or after 01 December 2020, your ALBs run the Kubernetes Ingress image by default. However, if you created your cluster before 01 December 2020, your ALBs run the deprecated custom IBM Ingress image. In this case, you can use the following steps to create new ALBs that run the Kubernetes Ingress image, and run this new Kubernetes Ingress setup alongside your existing IBM Ingress setup. If you prefer to migrate your existing IBM Ingress setup to the Kubernetes Ingress setup instead, check out [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](#alb-type-migration).
+{: tip}
+
+1.   For each app deployment that you want to expose, create a Kubernetes `ClusterIP` service. Your app must be exposed by a Kubernetes service to be included in the Ingress load balancing.
+      ```
+      kubectl expose deploy <app_deployment_name> --name my-app-svc --port <app_port> -n <namespace>
+      ```
+      {: pre}
+2. Verify that you have at least one private ALB in each zone that runs the Kubernetes Ingress image. Look for ALBs with a **Type** of `private` and a **Build** version in the `<community_version>_<ibm_build>_iks` Kubernetes Ingress format.
+    ```
+    ibmcloud ks alb ls -c <cluster_name_or_ID>
+    ```
+    {: pre}
+
+      * If at least one private ALB per zone runs the Kubernetes Ingress image, ensure that the ALBs have a **Status** of `enabled`. If they are disabled, run the following command to enable each ALB.
+        ```
+        ibmcloud ks ingress alb enable <classic|vpc-gen2> --alb <ALB_ID> -c <cluster_name_or_ID> --version 0.35.0_869_iks
+        ```
+        {: pre}
+      * If you do not have one private ALB per zone that runs the Kubernetes Ingress image, create at least one in each zone.
+        ```
+        ibmcloud ks ingress alb create <classic|vpc-gen2> --cluster <cluster_name_or_ID> --type private --zone <vpc_zone> --version 0.35.0_869_iks
+        ```
+        {: pre}
+
+2. Choose a domain and optionally set up TLS for your apps. When you configure the private ALBs, you must expose your apps by using a custom domain.
+  1. Classic clusters with only a private VLAN: Configure your own [DNS service that is available on your private network](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/){: external}.
+  2. Create a custom domain through your DNS service provider.
+  3. Map your custom domain to the private ALBs by adding their IP addresses as A records (classic clusters) or their VPC hostname as a CNAME (VPC clusters). To find the ALB IP addresses (classic) or hostname (VPC), run `ibmcloud ks ingress alb ls -c <cluster_name_or_ID>`.
+  4. To use TLS termination, create a secret in the namespace where your apps exist that contains a TLS certificate for your custom domain. For example, if a TLS certificate is stored in {{site.data.keyword.cloudcerts_long_notm}} that you want to use, you can import its associated secret into your cluster by running the following command:
+    ```
+    ibmcloud ks ingress secret create --name <secret_name> --cluster <cluster_name_or_ID> --cert-crn <certificate_crn> --namespace <namespace>
+    ```
+    {: pre}
+
+3. Create an Ingress resource that is formatted for use with ALBs that run the Kubernetes Ingress image.
+  1. Define an Ingress resource file that uses your custom domain to route incoming network traffic to the services that you created earlier. Note that the format of the Ingress resource definition varies based on your cluster's Kubernetes version.
+     * **Kubernetes version 1.19 and later**:
+       ```yaml
+       apiVersion: networking.k8s.io/v1
+       kind: Ingress
+       metadata:
+         name: community-ingress-resource
+         annotations:
+           kubernetes.io/ingress.class: "private-iks-k8s-nginx"
+       spec:
+         tls:
+         - hosts:
+           - <domain>
+           secretName: <tls_secret_name>
+         rules:
+         - host: <domain>
+           http:
+             paths:
+             - path: /<app1_path>
+               pathType: Prefix
+               backend:
+                 service:
+                   name: <app1_service>
+                   port:
+                     number: 80
+             - path: /<app2_path>
+               pathType: Prefix
+               backend:
+                 service:
+                   name: <app2_service>
+                   port:
+                     number: 80
+       ```
+       {: codeblock}
+     * **Kubernetes version 1.18 and earlier**:
+       ```yaml
+       apiVersion: networking.k8s.io/v1beta1
+       kind: Ingress
+       metadata:
+         name: community-ingress-resource
+         annotations:
+           kubernetes.io/ingress.class: "private-iks-k8s-nginx"
+       spec:
+         tls:
+         - hosts:
+           - <domain>
+           secretName: <tls_secret_name>
+         rules:
+         - host: <domain>
+           http:
+             paths:
+             - path: /<app1_path>
+               backend:
+                 serviceName: <app1_service>
+                 servicePort: 80
+             - path: /<app2_path>
+               backend:
+                 serviceName: <app2_service>
+                 servicePort: 80
+       ```
+       {: codeblock}
+
+      <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
+      <caption>Ingress resource YAML file components</caption>
+      <col width="20%">
+      <thead>
+      <th>Parameter</th>
+      <th>Description</th>
+      </thead>
+      <tbody>
+      <tr>
+      <td><code>annotations</code></td>
+      <td><ul><li>`kubernetes.io/ingress.class: "public-iks-k8s-nginx"`: Apply this Ingress resource to the private ALBs that run the Kubernetes Ingress image in your cluster.<p class="note">For configurations in which another component manages your Ingress ALBs, such as if Ingress is deployed as part of a Helm chart, do not specify this annotation. Instead, find the Ingress class for your configuration, and specify that class in a `spec.ingressClassName: <class_name>` field. You must also specify this custom class in an [`IngressClass` resource and a `ibm-ingress-deploy-config` configmap](#ingress-class-custom).</p></li><li>To customize routing for Ingress, you can add [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations) (`nginx.ingress.kubernetes.io/<annotation>`). Custom {{site.data.keyword.containerlong_notm}} annotations (`ingress.bluemix.net/<annotation>`) are **not** supported.</li></ul></td>
+      </tr>
+      <tr>
+      <td><code>tls.hosts</code></td>
+      <td>To use TLS, replace <em>&lt;domain&gt;</em> with your custom domain.</td>
+      </tr>
+      <tr>
+      <td><code>tls.secretName</code></td>
+      <td>Replace <em>&lt;tls_secret_name&gt;</em> with the name of the TLS secret for your domain.<td>
+      </tr>
+      <tr>
+      <td><code>host</code></td>
+      <td>Replace <em>&lt;domain&gt;</em> with your custom domain.</td>
+      </tr>
+      <tr>
+      <td><code>path</code></td>
+      <td>Replace <em>&lt;app_path&gt;</em> with a slash or the path that your app is listening on. The path is appended to your custom domain to create a unique route to your app. When you enter this route into a web browser, network traffic is routed to the ALB. The ALB looks up the associated service and sends network traffic to the service. The service then forwards the traffic to the pods where the app runs.</td>
+      </tr>
+      <tr>
+      <td>Kubernetes 1.19 and later only: <code>pathType</code></td>
+      <td>The URL path matching method. Supported values are `ImplementationSpecific`, `Exact`, or `Prefix`. For more information about and examples of each path type, see the [community Kubernetes documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/concepts/services-networking/ingress/#path-types).</td>
+      </tr>
+      <tr>
+      <td><code>service.name</code> (Kubernetes 1.19 or later) or <code>serviceName</code> (Kubernetes 1.18 or earlier)</td>
+      <td>Replace <em>&lt;app1_service&gt;</em> and <em>&lt;app2_service&gt;</em>, and so on, with the name of the services you created to expose your apps.</td>
+      </tr>
+      <tr>
+      <td><code>service.port.number</code> (Kubernetes 1.19 or later)</br><code>servicePort</code> (Kubernetes 1.18 or earlier)</td>
+      <td>The port that your service listens to. Use the same port that you defined when you created the Kubernetes service for your app.</td>
+      </tr>
+      </tbody></table>
+
+  2.  Create the Ingress resource for your cluster. Ensure that the resource deploys into the same namespace as the app services that you specified in the resource.
+      ```
+      kubectl apply -f community-ingress-resource.yaml -n <namespace>
+      ```
+      {: pre}
+
+4. Copy the IP address (classic) or hostname (VPC) for one private ALB that runs the Kubernetes Ingress image. In the output, choose a private ALB that has a **Build** in the format `<community_version>_<ibm_build>_iks`.
+  ```
+  ibmcloud ks ingress alb ls -c <cluster>
+  ```
+  {: pre}
+
+5. Ensure that you are connected to your private network, such as through a VPN.
+
+6. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+  ```
+  curl http://<ALB_IP>/<app_path> -H "Host: <ingress_subdomain>"
+  ```
+  {: pre}
+
+  For example, to send a request to "myapp" in a classic cluster:
+  ```
+  curl http://10.X.X.X/myapp -H "Host: mycustomdomain.com"
   ```
   {: pre}
 
@@ -493,48 +696,31 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
   2. In the `spec.rules` section, change the `host` by adding any character to the health subdomain. For example, if the health subdomain is listed as `albhealth.mycluster.us-south.containers.appdomain.cloud`, you could add a `x` to the subdomain such as `xalbhealth.mycluster.us-south.containers.appdomain.cloud`. The added character ensures that the Cloudflare health check that uses this subdomain fails, and that any IP addresses for ALBs that run the Kubernetes Ingress image are consequently removed from the DNS registration for your Ingress subdomain. Because your ALBs that run the {{site.data.keyword.containerlong_notm}} use a different health check resource than this resource, they continue to receive traffic. After you test your new ALBs in subsequent steps, you can remove the added character to ensure that the new ALBs are included in the DNS registration again.
   3. Save and close the file. Your changes are applied automatically.
 
-3. Choose the version for Kubernetes Ingress image that you want to use.<p class="note">To choose a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.</p>
+3. Create at least one ALB in each zone that runs the Kubernetes Ingress image. These ALBs read only the Ingress resources and configmap that are formatted for Kubernetes Ingress, and begin to forward traffic according to those resources.<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> In VPC clusters, one VPC load balancer exposes all ALBs in your cluster. When you run one of the following commands to create an ALB, the new ALB immediately begins to receive traffic that is routed by the VPC load balancer. Consider creating only one ALB that runs the Kubernetes Ingres image and testing that ALB in the following steps before you create more ALBs.</p>
   ```
-  ibmcloud ks ingress alb versions
+  ibmcloud ks ingress alb create <classic|vpc-gen2> --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version 0.35.0_869_iks
   ```
   {: pre}
 
-4. Create at least one ALB in each zone that runs the Kubernetes Ingress image. These ALBs read only the Ingress resources and configmap that are formatted for Kubernetes Ingress, and begin to forward traffic according to those resources.<p class="note"><img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> In VPC clusters, one VPC load balancer exposes all ALBs in your cluster. When you run one of the following commands to create an ALB, the new ALB immediately begins to receive traffic that is routed by the VPC load balancer. Consider creating only one ALB that runs the Kubernetes Ingres image and testing that ALB in the following steps before you create more ALBs.</p>
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-    ```
-    ibmcloud ks ingress alb create classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <zone> --vlan <VLAN_ID> --version <version>
-    ```
-    {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-    ```
-    ibmcloud ks ingress alb create vpc-classic --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version <version>
-    ```
-    {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
-    ```
-    ibmcloud ks ingress alb create vpc-gen2 --cluster <cluster_name_or_ID> --type <public_or_private> --zone <vpc_zone> --version <version>
-    ```
-    {: pre}
-
-5. Verify that the new ALBs are created.
+4. Verify that the new ALBs are created.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
   {: pre}
 
-6. If you made any changes to the test ALB service during your test migration, such as opening non-standard ports, make those changes to these ALB services.
+5. If you made any changes to the test ALB service during your test migration, such as opening non-standard ports, make those changes to these ALB services.
   ```
   kubectl edit -n kube-system svc <ALB_ID>
   ```
   {: pre}
 
-7. Copy the IP address (classic) or hostname (VPC) for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.35.0_869_iks`.
+6. Copy the IP address (classic) or hostname (VPC) for one ALB that has the Kubernetes Ingress version that you specified in the **Build** column, such as `0.35.0_869_iks`.
   ```
   ibmcloud ks ingress alb ls -c <cluster>
   ```
   {: pre}
 
-8. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+7. Using the ALB's IP address (classic) or hostname (VPC), the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
   ```
   curl http://<ALB_IP>/<app_path> -H "Host: ingress.subdomain.containers.appdomain.cloud"
   ```
@@ -542,11 +728,11 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
 
   For example, to send a request to "myapp" by using a default Ingress subdomain:
   ```
-  curl http://8.8.8.8/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
+  curl http://169.X.X.X/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
   ```
   {: pre}
 
-9. <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are included in the DNS registration again.
+8. <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Optional for classic clusters: If you changed the ALB health check subdomain in step 2, remove the added character to ensure that the new ALBs are included in the DNS registration again.
   1. Open the health check resource for ALBs that run the Kubernetes Ingress image.
     ```
     kubectl edit ing k8s-alb-health -n kube-system
@@ -555,7 +741,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
   2. In the `spec.rules` section, change the `host` by removing the extra character from the health subdomain. The Cloudflare health check for this subdomain can now resume, and the IP addresses for the new ALBs are added back to the DNS registration.
   3. Save and close the file. Your changes are applied automatically.
 
-10. Optional: If you do not want to run the new Kubernetes Ingress ALBs alongside the old {{site.data.keyword.containerlong_notm}} Ingress ALBs, remove the old {{site.data.keyword.containerlong_notm}} Ingress ALBs and clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
+9. Optional: If you do not want to run the new Kubernetes Ingress ALBs alongside the old {{site.data.keyword.containerlong_notm}} Ingress ALBs, remove the old {{site.data.keyword.containerlong_notm}} Ingress ALBs and clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
   * Original ALBs that run the {{site.data.keyword.containerlong_notm}} Ingress image:
     1. List your ALB IDs. In the output, copy the IDs for ALBs that have the {{site.data.keyword.containerlong_notm}} Ingress version in the **Build** column, such as `2424`.
       ```
@@ -580,7 +766,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
     ```
     {: pre}
 
-11. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
+10. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
 
 #### Migrate existing ALBs
 {: #alb-migrate-3-existing}
@@ -607,36 +793,19 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
       ```
       {: pre}
 
-    4. Choose the version for Kubernetes Ingress image that you want to use.<p class="note">To choose a version other than the default, you must first disable automatic updates by running the `ibmcloud ks ingress alb autoupdate disable` command.</p>
+    4. Re-enable the ALB with the default Kubernetes Ingress image version.
       ```
-      ibmcloud ks ingress alb versions
+      ibmcloud ks ingress alb enable <classic|vpc-gen2> --alb <ALB_ID> -c <cluster_name_or_ID> --version 0.35.0_869_iks
       ```
       {: pre}
 
-    5. Re-enable the ALB. Specify the image version that you chose in the `--version` flag.
-      * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
-        ```
-        ibmcloud ks ingress alb enable classic --alb <ALB_ID> -c <cluster_name_or_ID> --version <image_version>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-        ```
-        ibmcloud ks ingress alb enable vpc-classic --alb <ALB_ID> -c <cluster_name_or_ID> --version <image_version>
-        ```
-        {: pre}
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
-        ```
-        ibmcloud ks ingress alb enable vpc-gen2 --alb <ALB_ID> -c <cluster_name_or_ID> --version <image_version>
-        ```
-        {: pre}
-
-    6. If you made any changes to the test ALB service during your test migration, such as opening non-standard ports, make those changes to this ALB service.
+    5. If you made any changes to the test ALB service during your test migration, such as opening non-standard ports, make those changes to this ALB service.
       ```
       kubectl edit -n kube-system svc <ALB_ID>
       ```
       {: pre}
 
-    7. Using the ALB's IP address, the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
+    6. Using the ALB's IP address, the app path, and your domain, verify that you can successfully send traffic to your app through this ALB.
       ```
       curl http://<ALB_IP>/<app_path> -H "Host: ingress.subdomain.containers.appdomain.cloud"
       ```
@@ -644,11 +813,11 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 
       For example, to send a request to "myapp" by using a default Ingress subdomain:
       ```
-      curl http://8.8.8.8/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
+      curl http://169.X.X.X/myapp -H "Host: mycluster-a1b2cdef345678g9hi012j3kl4567890-0000.us-south.containers.appdomain.cloud"
       ```
       {: pre}
 
-    8. After you verify that traffic is flowing correctly through one ALB, repeat these steps for each ALB in your cluster. <p class="note">To ensure that the implementation of Ingress is consistent across your apps, make sure that you change the image for all of your ALBs in the cluster.</p>
+    7. After you verify that traffic is flowing correctly through one ALB, repeat these steps for each ALB in your cluster. <p class="note">To ensure that the implementation of Ingress is consistent across your apps, make sure that you change the image for all of your ALBs in the cluster.</p>
 
 2. Optional: Clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
   * Original {{site.data.keyword.containerlong_notm}} Ingress resources:
@@ -923,8 +1092,8 @@ IBM Cloud Ingress: 'auth' version
 
 IBM Cloud Ingress versions
 2424 (default)
+2410
 662
-658
 
 Kubernetes Ingress versions
 0.35.0_869_iks (default)
