@@ -520,6 +520,7 @@ subcollection: containers
 * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
   * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
   * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
+  * [Creating an allowlist for the private service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
@@ -1599,6 +1600,7 @@ subcollection: containers
   * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)
   * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)
   * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_master_audit_webhook)
+  * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_master_pse_allowlist)
   * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pse_enable)
   * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
   * [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_enable)
