@@ -255,15 +255,15 @@ subcollection: containers
 
 [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
 
-[Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+[Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
 
-[Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+[Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
 
-[Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+[Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
 
-[Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+[Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
 
-[Deploying and updating the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+[Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
 * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
 * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 
@@ -314,6 +314,25 @@ subcollection: containers
 [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
 
 [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
+
+
+## Developing in clusters with the OpenShift Do CLI
+{: #sitemap_developing_in_clusters_with_the_openshift_do_cli}
+
+
+[Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial)
+
+[Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
+
+[Audience](/docs/containers?topic=containers-odo-tutorial#odo-audience)
+
+[Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
+
+[Create a microservice with `odo`](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
+
+[Push a microservice to the cluster with `odo`](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
+
+[What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
 
 
 ## Deploy a starter kit app to a Kubernetes cluster
@@ -378,9 +397,9 @@ subcollection: containers
 
 [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
 
-[Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+[Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
 
-[Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+[Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 
 ## Developing a Kubernetes app toolchain with Code Risk Analyzer
@@ -415,6 +434,7 @@ subcollection: containers
 * [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple)
 * [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
+* [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
 * [Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)

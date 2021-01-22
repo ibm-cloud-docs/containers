@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-19"
+lastupdated: "2021-01-22"
 
 keywords: kubernetes, iks
 
@@ -172,7 +172,7 @@ Your app code is ready to be containerized!
 <br />
 
 
-## Creating a Docker image with your app code
+## Create a Docker image with your app code
 {: #cf_2}
 {: step}
 
@@ -261,7 +261,7 @@ Create a Dockerfile that includes your app code and the necessary configurations
 <br />
 
 
-## Deploying a container from your image
+## Deploy a container from your image
 {: #cf_3}
 {: step}
 
