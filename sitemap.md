@@ -328,9 +328,9 @@ subcollection: containers
 
 [Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
 
-[Create a microservice with `odo`](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
+[Create a microservice](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
 
-[Push a microservice to the cluster with `odo`](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
+[Push a microservice to the cluster](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
 
 [What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
 
