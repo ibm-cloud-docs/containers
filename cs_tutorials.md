@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-19"
+lastupdated: "2021-01-22"
 
 keywords: kubernetes, iks
 
@@ -135,7 +135,7 @@ This tutorial is intended for software developers and system administrators who 
     - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
     - The [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
 
-## Setting up your cluster environment
+## Set up your cluster environment
 {: #cs_cluster_tutorial_lesson1}
 {: step}
 
@@ -212,7 +212,7 @@ Good job! You've successfully installed the CLIs and set up your cluster context
 
 <br />
 
-## Adding an IBM Cloud service to your cluster
+## Add an {{site.data.keyword.cloud_notm}} service to your cluster
 {: #cs_cluster_tutorial_lesson2}
 {: step}
 
@@ -270,7 +270,7 @@ Before you continue with the next lesson, why not test your knowledge and [take 
 
 <br />
 
-## Deploying single instance apps to Kubernetes clusters
+## Deploy single instance apps to Kubernetes clusters
 {: #cs_cluster_tutorial_lesson3}
 {: step}
 
@@ -463,7 +463,7 @@ Want to delete the resources that you created in this lesson before you move on?
 
 <br />
 
-## Deploying and updating apps with higher availability
+## Deploy and update apps with higher availability
 {: #cs_cluster_tutorial_lesson4}
 {: step}
 
@@ -597,7 +597,7 @@ Ready to delete what you created before you continue to the next lesson? This ti
 
 <br />
 
-## Deploying and updating the {{site.data.keyword.watson}} Tone Analyzer app
+## Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app
 {: #cs_cluster_tutorial_lesson5}
 {: step}
 

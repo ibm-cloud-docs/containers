@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-01-20"
+lastupdated: "2021-01-25"
 
 keywords: containers
 subcollection: containers
@@ -255,15 +255,15 @@ subcollection: containers
 
 [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
 
-[Setting up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+[Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
 
-[Adding an IBM Cloud service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+[Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
 
-[Deploying single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+[Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
 
-[Deploying and updating apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+[Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
 
-[Deploying and updating the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+[Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
 * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
 * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 
@@ -314,6 +314,25 @@ subcollection: containers
 [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
 
 [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
+
+
+## Developing in clusters with the OpenShift Do CLI
+{: #sitemap_developing_in_clusters_with_the_openshift_do_cli}
+
+
+[Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial)
+
+[Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
+
+[Audience](/docs/containers?topic=containers-odo-tutorial#odo-audience)
+
+[Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
+
+[Create a microservice](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
+
+[Push a microservice to the cluster](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
+
+[What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
 
 
 ## Deploy a starter kit app to a Kubernetes cluster
@@ -378,9 +397,9 @@ subcollection: containers
 
 [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
 
-[Creating a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+[Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
 
-[Deploying a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
+[Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 
 ## Developing a Kubernetes app toolchain with Code Risk Analyzer
@@ -415,6 +434,7 @@ subcollection: containers
 * [Setting the Kubernetes context for multiple clusters](/docs/containers?topic=containers-cs_cli_install#cli_config_multiple)
 * [Creating a temporary `kubeconfig` file](/docs/containers?topic=containers-cs_cli_install#cli_temp_kubeconfig)
 * [Updating the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_upgrade)
+* [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
 * [Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
@@ -520,6 +540,7 @@ subcollection: containers
 * [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
   * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
   * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
+  * [Creating an allowlist for the private service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
@@ -1158,7 +1179,9 @@ subcollection: containers
 * [Comparison of the ALB image types](/docs/containers?topic=containers-ingress-types#about-alb-images)
   * [Similarities between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-same)
   * [Differences between Ingress images](/docs/containers?topic=containers-ingress-types#alb-image-diff)
-* [Exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
+* [Prerequisites](/docs/containers?topic=containers-ingress-types#config_prereqs)
+* [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
+* [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 * [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
   * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
@@ -1597,6 +1620,7 @@ subcollection: containers
   * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)
   * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)
   * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_master_audit_webhook)
+  * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_master_pse_allowlist)
   * [`ibmcloud ks cluster master private-service-endpoint enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pse_enable)
   * [`ibmcloud ks cluster master public-service-endpoint disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_disable)
   * [`ibmcloud ks cluster master public-service-endpoint enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_master_pub_se_enable)

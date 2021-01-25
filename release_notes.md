@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-19"
+lastupdated: "2021-01-22"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 25 January 2021 | <ul><li>**Istio add-on**: [Version 1.8 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v18) is released.</li><li>**New! {{site.data.keyword.openshiftshort}} Do (`odo`) CLI tutorial**: Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.openshiftshort}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need an {{site.data.keyword.openshiftshort}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.</li><li>**New! Private service endpoint allowlists**: You can now control access to your private service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private service endpoint.</li><li>**Private Kubernetes Ingress**: Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).</li></ul> |
 | 19 January 2021 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-changelog#11615_1557_master).</li></ul> |
 | 18 January 2021 | <ul><li>**Knative add-on is unsupported**: The Knative add-on is automatically removed from your cluster. Instead, use the [Knative open source project](https://knative.dev/docs/install/){: external} or [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532), [1.18.15_1538](/docs/containers?topic=containers-changelog#11815_1538), [1.17.17_1551](/docs/containers?topic=containers-changelog#11717_1551), and [1.16.15_1557](/docs/containers?topic=containers-changelog#11615_1557).</li></ul> |
 | 14 January 2021 | **Cluster autoscaler**: Cluster autoscaler add-on patch update `1.0.1_210` is released. For more information, see the [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog) |

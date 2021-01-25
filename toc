@@ -39,6 +39,7 @@ Kubernetes Service
     cs_tutorials.md
     cs_tutorial_vpc.md
     cs_tutorial_migrate_vpc.md
+    cs_tutorial_odo.md
     cs_tutorials_starter.md
     cs_tutorials_policies.md
     cs_tutorials_cf.md
