@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-14"
+lastupdated: "2021-01-25"
 
 keywords: kubernetes, iks, firewall
 
@@ -534,7 +534,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 2</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -544,7 +544,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 3</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -554,7 +554,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 4</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -564,7 +564,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 5</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -574,6 +574,16 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 6</td>
    </tr>
    <tr>
+   <td>Allow incoming traffic requests to apps that run on your worker nodes.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>30000 - 32767</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>After 7</td>
+   </tr>
+   <tr>
    <td>**Optional**: To allow Ingress ALBs to be healthchecked, allow traffic on port 80. For more information, see the **Important** note at the end of these steps.</td>
    <td>Allow</td>
    <td>TCP</td>
@@ -581,7 +591,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>80</td>
    <td>Any</td>
    <td>-</td>
-   <td>After 7</td>
+   <td>After 9</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>
@@ -644,7 +654,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 2</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 56501.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -654,7 +664,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 3</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 443.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -664,7 +674,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 4</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 8834.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -674,7 +684,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 5</td>
    </tr>
    <tr>
-   <td>To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
+   <td>Gen 1 only: To expose apps by using load balancers or Ingress, allow traffic through VPC load balancers on port 10514.</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
@@ -682,6 +692,26 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>Any</td>
    <td>10514</td>
    <td>After 6</td>
+   </tr>
+   <tr>
+   <td>Allow incoming traffic requests to apps that run on your worker nodes.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>30000 - 32767</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>After 7</td>
+   </tr>
+   <tr>
+   <td>**Optional**: To allow Ingress ALBs to be healthchecked, allow traffic on port 80. For more information, see the **Important** note at the end of these steps.</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>80</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>After 9</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>
@@ -814,7 +844,7 @@ To create an ACL for each subnet that your cluster is attached to:
   ```
   {: pre}
 
-7. Optional: If you plan to expose apps by using load balancers or Ingress, create rules to allow inbound and outbound traffic through TCP ports `56501`, `443`, `8834`, and `10514`.
+7. <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> Gen 1 only: If you plan to expose apps by using load balancers or Ingress, create rules to allow inbound and outbound traffic through TCP ports `56501`, `443`, `8834`, and `10514`.
 
   ```
   ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-lb-outbound1 --source-port-min 56501 --source-port-max 56501
