@@ -1973,10 +1973,11 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)
+  * [Changelog for 1.8.2, released 25 January 2021](/docs/containers?topic=containers-istio-changelog#182)
   * [Changelog for 1.8.1, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#181)
   * [Changelog for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
-* [Changelog for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
+  * [Changelog for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
   * [Changelog for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
   * [Changelog for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)
   * [Changelog for 1.7.3, released 06 October 2020](/docs/containers?topic=containers-istio-changelog#173)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-21"
+lastupdated: "2021-01-25"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -118,6 +118,18 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.8
 {: #v18}
 
+### Changelog for 1.8.2, released 25 January 2021
+{: #182}
+
+The following table shows the changes that are included in version 1.8.2 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.8.1 | 1.8.2 | <ul><li>See the Istio release notes for [Istio 1.8.2](https://istio.io/news/releases/1.8.x/announcing-1.8.2/){:external}.</li><li>Resolves [CVE-2020-27350](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27350){: external}, [CVE-2020-8231](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8231){: external}, [CVE-2020-8284](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8284){: external}, [CVE-2020-8285](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8285){: external}, [CVE-2020-8286](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-8286){: external}, [CVE-2020-1971](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971){: external}, [usn-4662-1](https://usn.ubuntu.com/4662-1/){: external}, [usn-4665-1](https://usn.ubuntu.com/4665-1/){: external}, [usn-4667-1](https://usn.ubuntu.com/4667-1/){: external}, and [usn-4677-1](https://usn.ubuntu.com/4677-1/){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.8.1" caption-side="top"}
+
 ### Changelog for 1.8.1, released 16 December 2020
 {: #181}
 
@@ -145,7 +157,7 @@ The following table shows the changes that are included in version 1.8.0 of the 
 ## Version 1.7
 {: #v17}
 
-## Changelog for 1.7.6, released 16 December 2020
+### Changelog for 1.7.6, released 16 December 2020
 {: #176}
 
 The following table shows the changes that are included in version 1.7.6 of the managed Istio add-on.
