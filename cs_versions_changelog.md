@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-01-19"
+lastupdated: "2021-01-26"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1451,7 +1451,7 @@ The following table shows the changes that are included in patch update 1.17.2_1
 Review the version 1.16 changelog.
 {: shortdesc}
 
-Kubernetes version 1.16 is deprecated, and becomes unsupported on 29 January 2021 (date subject to change). [Update your clusters](/docs/containers?topic=containers-update) to at least Kubernetes version 1.17 as soon as possible.
+Kubernetes version 1.16 is deprecated, and becomes unsupported on 31 January 2021. [Update your clusters](/docs/containers?topic=containers-update) to at least Kubernetes version 1.17 as soon as possible.
 {: deprecated}
 
 ### Changelog for master fix pack 1.16.15_1557, released 19 January 2021
