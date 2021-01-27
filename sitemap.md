@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-01-25"
+lastupdated: "2021-01-27"
 
 keywords: containers
 subcollection: containers
@@ -243,183 +243,102 @@ subcollection: containers
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
 
 
-## Creating Kubernetes clusters
-{: #sitemap_creating_kubernetes_clusters}
+## Creating clusters
+{: #sitemap_creating_clusters}
 
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
-
-[Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
-
-[Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
-
-[Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
-
-[Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
-
-[Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
-
-[Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
-
-[Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
-
-[Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
-* [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
-* [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
-
-[What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
-
-
-## Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
-{: #sitemap_creating_a_cluster_in_your_virtual_private_cloud_(vpc)_on_generation_2_compute}
-
+* [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
+* [Audience](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_audience)
+* [Prerequisites](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_prereqs)
+* [Set up your cluster environment](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson1)
+* [Add an {{site.data.keyword.cloud_notm}} service to your cluster](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson2)
+* [Deploy single instance apps to Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson3)
+* [Deploy and update apps with higher availability](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson4)
+* [Deploy and update the {{site.data.keyword.watson}} Tone Analyzer app](/docs/containers?topic=containers-cs_cluster_tutorial#cs_cluster_tutorial_lesson5)
+  * [Step 5a: Deploying the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5a)
+  * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
+* [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
 [Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
-
-[Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
-
-[Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
-
-[Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
-
-[Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
-
-[Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
-
-[Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
-
-[What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
-
-
-## Migrating cluster resources from VPC Gen 1 to VPC Gen 2
-{: #sitemap_migrating_cluster_resources_from_vpc_gen_1_to_vpc_gen_2}
-
+* [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
+* [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
+* [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
+* [Create a cluster in VPC](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_create_vpc_cluster)
+* [Deploy a privately available app](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_app)
+* [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
+* [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
 [Migrating cluster resources from VPC Gen 1 to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial)
-
-[Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
-
-[Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
-
-[Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
-
-[Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
-
-[Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
-
-[Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
-
-[Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
-
-[Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
-
-[What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
+* [Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
+* [Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
+* [Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
+* [Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
+* [Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
+* [Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
+* [Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
+* [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
+* [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
 
 
-## Developing in clusters with the OpenShift Do CLI
-{: #sitemap_developing_in_clusters_with_the_openshift_do_cli}
-
-
-[Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial)
-
-[Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
-
-[Audience](/docs/containers?topic=containers-odo-tutorial#odo-audience)
-
-[Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
-
-[Create a microservice](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
-
-[Push a microservice to the cluster](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
-
-[What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
-
-
-## Deploy a starter kit app to a Kubernetes cluster
-{: #sitemap_deploy_a_starter_kit_app_to_a_kubernetes_cluster}
-
-
-[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
-
-[Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
-
-[Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
-
-[Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
-
-[Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
-
-[Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
-
-[Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
-
-[Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-
-[What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
-
-
-## Using Calico network policies to block traffic
-{: #sitemap_using_calico_network_policies_to_block_traffic}
-
-
-[Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
-
-[Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
-
-[Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
-
-[Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
-
-[Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
-
-[Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
-
-[Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
-
-[Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
-
-[Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
-
-[What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
-
-
-## Migrating an app from Cloud Foundry to a cluster
-{: #sitemap_migrating_an_app_from_cloud_foundry_to_a_cluster}
+## Migrating environments to clusters
+{: #sitemap_migrating_environments_to_clusters}
 
 
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
-
-[Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
-
-[Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
-
-[Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
-
-[Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
-
-[Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
-
-[Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
-
-
-## Developing a Kubernetes app toolchain with Code Risk Analyzer
-
-[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
-
-
-## Moving a VM-based application to Kubernetes
+* [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
+* [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
+* [Prerequisites](/docs/containers?topic=containers-cf_tutorial#cf_prereqs)
+* [Download app code](/docs/containers?topic=containers-cf_tutorial#cf_1)
+* [Create a Docker image with your app code](/docs/containers?topic=containers-cf_tutorial#cf_2)
+* [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
 
 
-## Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services
+## Developing apps in clusters
+{: #sitemap_developing_apps_in_clusters}
 
-[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
+[Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial)
+* [Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
+* [Audience](/docs/containers?topic=containers-odo-tutorial#odo-audience)
+* [Prerequisites](/docs/containers?topic=containers-odo-tutorial#odo-prereqs)
+* [Create a microservice](/docs/containers?topic=containers-odo-tutorial#odo-new-microservice)
+* [Push a microservice to the cluster](/docs/containers?topic=containers-odo-tutorial#odo-push-microservice)
+* [What's next?](/docs/containers?topic=containers-odo-tutorial#odo-next-steps)
 
-## Continuous Deployment to Kubernetes
+[Deploy a starter kit app to a Kubernetes cluster](/docs/containers?topic=containers-tutorial-starterkit-kube)
+* [Objectives](/docs/containers?topic=containers-tutorial-starterkit-kube#objectives-starterkit-kube)
+* [Audience](/docs/containers?topic=containers-tutorial-starterkit-kube#audience-starterkit-kube)
+* [Prerequisites](/docs/containers?topic=containers-tutorial-starterkit-kube#prereqs-starterkit-kube)
+* [Add services to your app](/docs/containers?topic=containers-tutorial-starterkit-kube#resources-starterkit-kube)
+* [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
+* [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
+* [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
+* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube)
+
+[Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
 [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+
+
+## Controlling traffic to apps in clusters
+{: #sitemap_controlling_traffic_to_apps_in_clusters}
+
+
+[Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
+* [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
+* [Audience](/docs/containers?topic=containers-policy_tutorial#policies_audience)
+* [Prerequisites](/docs/containers?topic=containers-policy_tutorial#policies_prereqs)
+* [Deploy an app and expose it by using an NLB](/docs/containers?topic=containers-policy_tutorial#lesson1)
+* [Block all incoming traffic to all node ports](/docs/containers?topic=containers-policy_tutorial#lesson2)
+* [Allow incoming traffic from a specific IP to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson3)
+* [Deny incoming traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson4)
+* [Logging blocked traffic from specific IPs to the NLB](/docs/containers?topic=containers-policy_tutorial#lesson5)
+* [What's next?](/docs/containers?topic=containers-policy_tutorial#whats_next)
+
+[Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis){: external}
 
 
 ## Installing the CLI and API
@@ -1578,11 +1497,6 @@ subcollection: containers
 * [6. Storage availability](/docs/containers?topic=containers-ha#ha-storage)
 
 
-## Community Kubernetes documentation
-
-[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
-
-
 ## API reference
 {: #sitemap_api_reference}
 
@@ -2402,6 +2316,17 @@ subcollection: containers
 [`kube-proxy`](/docs/containers?topic=containers-service-settings#kube-proxy)
 
 [Feature gates](/docs/containers?topic=containers-service-settings#feature-gates)
+
+
+## Related links
+{: #sitemap_related_links}
+
+
+[Community Kubernetes documentation](https://kubernetes.io/docs/home/){: external}
+
+[IBM Developer: Containers](https://developer.ibm.com/technologies/containers/){: external}
+
+[IBM Developer: Kubernetes](https://developer.ibm.com/components/kubernetes/){: external}
 
 
 ## FAQs

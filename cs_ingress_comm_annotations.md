@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-20"
+lastupdated: "2021-01-27"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -773,7 +773,7 @@ Kubernetes Ingress fields:
 
 3. Specify the `tcp-services` configmap as a field in the [`ibm-ingress-deploy-config` configmap](#comm-customize-deploy).
   ```
-  tcpServicesConfig=tcp-services
+  tcpServicesConfig=kube-system/tcp-services
   ```
   {: screen}
 
@@ -872,8 +872,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
        name: ibm-ingress-deploy-config
        namespace: kube-system
      data:
-       <alb1-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<tcp-services>"}'
-       <alb2-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<tcp-services>"}'
+       <alb1-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+       <alb2-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
        ...
      ```
      {: screen}
@@ -891,7 +891,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
      <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>
      <tr><td>`replicas`</td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods.</td></tr>
-     <tr><td>`tcpServicesConfig`</td><td>Specify a [configmap, such as `tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
+     <tr><td>`tcpServicesConfig`</td><td>Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
      </tbody>
      </table>
 
@@ -965,21 +965,6 @@ For more information, see [Customizing the Ingress class](/docs/containers?topic
 Enforce authentication for your apps by configuring Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external}.
 {: shortdesc}
 
-**Before you begin**: Ensure that the secret that contains your TLS certificate and key is copied to the namespace where your app is deployed.
-
-1. Get the CRN of the Ingress secret for your custom domain or default Ingress subdomain.
-  ```
-  ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
-  ```
-  {: pre}
-2. Using the CRN, create a secret for the certificate in the namespace where your app is deployed.
-  ```
-  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
-  ```
-  {: pre}
-
-To use {{site.data.keyword.appid_full_notm}} to secure your apps:
-
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance. <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
   * To use an existing instance, ensure that the service instance name contains only alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
   * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
@@ -990,9 +975,9 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, {{site.data.keyword.appid_full_notm}} validates the request URL against the allowlist of redirect URLs.
   1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Manage Authentication**.
   2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `http://<hostname>/oauth2-<App_ID_service_instance_name>/callback` or `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
+  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
 
-    {{site.data.keyword.appid_full_notm}} offers a logout function: If `/logout` exists in your {{site.data.keyword.appid_full_notm}} path, cookies are removed and the user is sent back to the login page. To use this function, you must append `/sign_out` to your domain in the format `http://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` or `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list.
+    If you use the [{{site.data.keyword.appid_full_notm}} logout function](/docs/appid?topic=appid-cd-sso#cd-sso-log-out), you must append `/sign_out` to your domain in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list.
     {: note}
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
@@ -1065,7 +1050,7 @@ To use {{site.data.keyword.appid_full_notm}} to secure your apps:
        {: codeblock}
   3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
 
-6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication.
+6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
   ```
   kubectl apply -f <app_ingress_resource>.yaml -n namespace
   ```
