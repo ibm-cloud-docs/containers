@@ -238,10 +238,14 @@ subcollection: containers
 * [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
-## [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
-{: #sitemap_[tutorials_library_for_kubernetes_service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pagesize=20)}
+## Tutorials library for Kubernetes Service
 
 [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20){: external}
+
+
+## Creating clusters
+{: #sitemap_creating_clusters}
+
 
 [Creating Kubernetes clusters](/docs/containers?topic=containers-cs_cluster_tutorial)
 * [Objectives](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_objectives)
@@ -276,6 +280,11 @@ subcollection: containers
 * [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
 * [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
 
+
+## Migrating environments to clusters
+{: #sitemap_migrating_environments_to_clusters}
+
+
 [Migrating an app from Cloud Foundry to a cluster](/docs/containers?topic=containers-cf_tutorial)
 * [Objectives](/docs/containers?topic=containers-cf_tutorial#cf_objectives)
 * [Audience](/docs/containers?topic=containers-cf_tutorial#cf_audience)
@@ -285,6 +294,11 @@ subcollection: containers
 * [Deploy a container from your image](/docs/containers?topic=containers-cf_tutorial#cf_3)
 
 [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes){: external}
+
+
+## Developing apps in clusters
+{: #sitemap_developing_apps_in_clusters}
+
 
 [Developing in clusters with the OpenShift Do CLI](/docs/containers?topic=containers-odo-tutorial)
 * [Objectives](/docs/containers?topic=containers-odo-tutorial#odo-objectives)
@@ -307,6 +321,11 @@ subcollection: containers
 [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
 [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes){: external}
+
+
+## Controlling traffic to apps in clusters
+{: #sitemap_controlling_traffic_to_apps_in_clusters}
+
 
 [Using Calico network policies to block traffic](/docs/containers?topic=containers-policy_tutorial)
 * [Objectives](/docs/containers?topic=containers-policy_tutorial#policies_objectives)
