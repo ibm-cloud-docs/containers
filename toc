@@ -36,17 +36,22 @@ Kubernetes Service
 
     {: .navgroup id="tutorial"}
     [Tutorials library for Kubernetes Service](https://cloud.ibm.com/docs?tab=tutorials&tags=containers&page=1&pageSize=20)
-    cs_tutorials.md
-    cs_tutorial_vpc.md
-    cs_tutorial_migrate_vpc.md
-    cs_tutorial_odo.md
-    cs_tutorials_starter.md
-    cs_tutorials_policies.md
-    cs_tutorials_cf.md
-    [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)
-    [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
-    [Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
-    [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
+    {: .topicgroup}
+    Creating clusters
+        cs_tutorials.md
+        cs_tutorial_vpc.md
+        cs_tutorial_migrate_vpc.md
+    Migrating environments to clusters
+        cs_tutorials_cf.md
+        [Moving a VM-based application to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-vm-to-containers-and-kubernetes)
+    Developing apps in clusters
+        cs_tutorial_odo.md
+        cs_tutorials_starter.md
+        [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer)
+        [Continuous Deployment to Kubernetes](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-continuous-deployment-to-kubernetes)
+    Controlling traffic to apps in clusters
+        cs_tutorials_policies.md
+        [Resilient and secure multi-region Kubernetes clusters with IBM Cloud Internet Services](https://cloud.ibm.com/docs/solution-tutorials?topic=solution-tutorials-multi-region-k8s-cis)
     {: .navgroup-end}
 
     {: .navgroup id="howto"}
@@ -198,8 +203,6 @@ Kubernetes Service
     {: .navgroup-end}
 
     {: .navgroup id="reference"}
-    [Community Kubernetes documentation](https://kubernetes.io/docs/home/)
-
     {: .topicgroup}
     API reference
         [IBM Cloud Kubernetes Service API](https://containers.cloud.ibm.com/global/swagger-global-api/#/)
@@ -237,6 +240,12 @@ Kubernetes Service
     cs_hybrid.md
     cs_integrations_overview.md
     cs_service_settings.md
+
+    {: .topicgroup}
+    Related links
+        [Community Kubernetes documentation](https://kubernetes.io/docs/home/)
+        [IBM Developer: Containers](https://developer.ibm.com/technologies/containers/)
+        [IBM Developer: Kubernetes](https://developer.ibm.com/components/kubernetes/)
     {: .navgroup-end}
 
     {: .navgroup id="help"}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-26"
+lastupdated: "2021-01-27"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -773,7 +773,7 @@ Kubernetes Ingress fields:
 
 3. Specify the `tcp-services` configmap as a field in the [`ibm-ingress-deploy-config` configmap](#comm-customize-deploy).
   ```
-  tcpServicesConfig=tcp-services
+  tcpServicesConfig=kube-system/tcp-services
   ```
   {: screen}
 
@@ -872,8 +872,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
        name: ibm-ingress-deploy-config
        namespace: kube-system
      data:
-       <alb1-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<tcp-services>"}'
-       <alb2-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<tcp-services>"}'
+       <alb1-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+       <alb2-id>: '{"defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
        ...
      ```
      {: screen}
@@ -891,7 +891,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
      <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>
      <tr><td>`replicas`</td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods.</td></tr>
-     <tr><td>`tcpServicesConfig`</td><td>Specify a [configmap, such as `tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
+     <tr><td>`tcpServicesConfig`</td><td>Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
      </tbody>
      </table>
 
