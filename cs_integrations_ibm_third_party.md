@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-01"
+  years: 2014, 2021
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, helm
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -88,7 +90,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -190,7 +192,7 @@ Installing third-party open source integrations or Helm charts from the Kubernet
 ### Extending Kubernetes API and software with CRDs and Operators
 {: #kube-crd-operators}
 
-You might use custom resource definitions (CRDs) to extend the Kubernetes API to create and orchestrate custom objects in your cluster. Operators combine custom resources and controllers to automate the lifecycle of app, such as installing and rolling out updates to a customized app from a catalog in your cluster. Custom resources are generally available in [Kubernetes 1.16](/docs/containers?topic=containers-cs_versions#cs_v116) and later.
+You might use custom resource definitions (CRDs) to extend the Kubernetes API to create and orchestrate custom objects in your cluster. Operators combine custom resources and controllers to automate the lifecycle of app, such as installing and rolling out updates to a customized app from a catalog in your cluster. Custom resources are generally available in [Kubernetes 1.17](/docs/containers?topic=containers-cs_versions#cs_v117) and later.
 {: shortdesc}
 
 To get started, see the Kubernetes documentation for [Custom resources](https://kubernetes.io/docs/concepts/extend-kubernetes/api-extension/custom-resources/){: external} and [Operators](https://kubernetes.io/docs/concepts/extend-kubernetes/operator/){: external}.

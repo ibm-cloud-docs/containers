@@ -111,7 +111,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 01 February 2021 | <ul><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-changelog#11717_1552).</li></ul> |
+| 01 February 2021 | <ul><li>**Unsupported: Kubernetes version 1.16**: Clusters that run Kubernetes version 1.16 are unsupported as of 31 January 2021. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-changelog#11717_1552).</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in February 2021"}
 

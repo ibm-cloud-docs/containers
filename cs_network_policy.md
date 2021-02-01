@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-14"
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -126,7 +128,7 @@ Calico enforces these policies, including any Kubernetes network policies that a
 When a cluster with a public VLAN is created, a `HostEndpoint` resource with the `ibm.role: worker_public` label is created automatically for each worker node and its public network interface. To protect the public network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_public` label.
 {: shortdesc}
 
-In clusters that run Kubernetes version 1.16 or later, a `HostEndpoint` resource with the `ibm.role: worker_private` label is also created automatically for each worker node and its private network interface. To protect the private network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_private` label.
+In clusters that run Kubernetes version 1.17 or later, a `HostEndpoint` resource with the `ibm.role: worker_private` label is also created automatically for each worker node and its private network interface. To protect the private network interface of a worker node, default Calico policies are applied to any host endpoint with the `ibm.role: worker_private` label.
 
 These default Calico host policies allow all outbound network traffic and allow inbound traffic to specific cluster components, such as Kubernetes NodePort, LoadBalancer, and Ingress services. Any other inbound network traffic from the internet to your worker nodes that isn't specified in the default policies is blocked. The default policies don't affect pod to pod traffic.
 
@@ -141,7 +143,7 @@ Review the following default Calico host policies that are automatically applied
 |Calico policy|Description|
 |--- |--- |
 |`allow-all-outbound`|Allows all outbound traffic on the public network.|
-|`allow-all-private-default`|In Kubernetes version 1.16 or later: Allows all inbound and outbound traffic on the private network. **Note**: Before you update your cluster to Kubernetes version 1.16, see [this topic](/docs/containers?topic=containers-cs_versions#116_networkpolicies) for information about updating Calico private host endpoints and network policies.|
+|`allow-all-private-default`|In Kubernetes version 1.17 or later: Allows all inbound and outbound traffic on the private network.|
 |`allow-bigfix-port`|Allows incoming traffic on port 52311 to the BigFix app to allow necessary worker node updates.|
 |`allow-icmp`|Allows incoming ICMP packets (pings).|
 |`allow-node-port-dnat`|Allows incoming network load balancer (NLB), Ingress application load balancer (ALB), and NodePort service traffic to the pods that those services are exposing. Note: You don't need to specify the exposed ports because Kubernetes uses destination network address translation (DNAT) to forward the service requests to the correct pods. That forwarding takes place before the host endpoint policies are applied in Iptables.|
@@ -527,11 +529,9 @@ Whenever new locations for {{site.data.keyword.containerlong_notm}} and other {{
 {: note}
 
 **Before you begin:**
-1. If your cluster runs Kubernetes version 1.16, see [this topic](/docs/containers?topic=containers-cs_versions#116_networkpolicies) for information about updating Calico private host endpoints and network policies in version 1.16.
+1. [Install and configure the Calico CLI.](#cli_install)
 
-2. [Install and configure the Calico CLI.](#cli_install)
-
-3. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. The `--admin` option downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. The `--network` option downloads the Calico configuration file to run all Calico commands.
+2. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. The `--admin` option downloads the keys to access your infrastructure portfolio and run Calico commands on your worker nodes. The `--network` option downloads the Calico configuration file to run all Calico commands.
   ```
   ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
   ```

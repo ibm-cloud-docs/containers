@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-14"
+  years: 2014, 2021
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -160,7 +162,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: screen}
 2.  Edit the default settings for the CoreDNS configmap. Use a Corefile in the `data` section of the configmap to customize stub domains and upstream DNS servers. For more information, see [the Kubernetes documentation](https://kubernetes.io/docs/tasks/administer-cluster/dns-custom-nameservers/#coredns){: external}.
 
-    In Kubernetes version 1.16 and later, the CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
+    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
     {: note}
 
     ```
@@ -208,7 +210,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 3.  Optional: Add custom Corefiles to the CoreDNS configmap. In the following example, include the `import <MyCoreFile>` in the `data.Corefile` section, and fill out the `data.<MyCorefile>` section with your custom Corefile information. For more information, see [the Corefile import documentation](https://coredns.io/plugins/import/){: external}.
 
-    In Kubernetes version 1.16 and later, the CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
+    The CoreDNS `proxy` plug-in is deprecated and replaced with the `forward` plug-in. If you update the CoreDNS configmap, make sure to replace all `proxy` instances with `forward`.
     {: note}
 
     ```
@@ -260,7 +262,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 Set up the `NodeLocal` DNS caching agent on select worker nodes for improved cluster DNS performance and availability in your {{site.data.keyword.containerlong_notm}} cluster. For more information, see the [Kubernetes docs](https://kubernetes.io/docs/tasks/administer-cluster/nodelocaldns/){: external}.
 {: shortdesc}
 
-By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable `NodeLocal` DNS caching on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. Additionally, in clusters that run Kubernetes 1.16 or later, the DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
+By default, cluster DNS requests for pods that use a `ClusterFirst` [DNS policy](https://kubernetes.io/docs/concepts/services-networking/dns-pod-service/#pod-s-dns-policy){: external} are sent to the cluster DNS service. If you enable `NodeLocal` DNS caching on a worker node, the cluster DNS requests for these pods that are on the worker node are sent instead to the local DNS cache, which listens on link-local IP address 169.254.20.10. The DNS cache also listens on the cluster IP of the `kube-dns` service in the `kube-system` namespace.
 
 Do not add the DNS cache label when you already use [zone-aware DNS](#dns_zone_aware) in your cluster.
 {: important}
@@ -310,7 +312,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.16.1+IKS   true
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.17.1+IKS   true
       ```
       {: screen}
    2. Verify that the DNS caching agent pod is running on the worker node.
@@ -356,7 +358,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.16.1+IKS   
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.17.1+IKS   
       ```
       {: screen}
    2. Verify that the pod is no longer running on the node where DNS cache is disabled. The output shows no pods.
