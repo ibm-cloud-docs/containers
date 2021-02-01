@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-27"
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -103,6 +105,15 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
+
+## February 2021
+{: #feb21}
+
+| Date | Description |
+| ---- | ----------- |
+| 01 February 2021 | <ul><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-changelog#11717_1552).</li></ul> |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in February 2021"}
 
 ## January 2021
 {: #jan21}
