@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-27"
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, release notes
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -104,12 +106,21 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
 
+## February 2021
+{: #feb21}
+
+| Date | Description |
+| ---- | ----------- |
+| 01 February 2021 | <ul><li>**Unsupported: Kubernetes version 1.16**: Clusters that run Kubernetes version 1.16 are unsupported as of 31 January 2021. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-changelog#11717_1552).</li></ul> |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in February 2021"}
+
 ## January 2021
 {: #jan21}
 
 | Date | Description |
 | ---- | ----------- |
-| 27 January 2021 | <ul><li>**Reminder: VPC Gen 1 deprecation**: You can continue to use VPC Gen 1 resources only until 26 February 2021, when all service for VPC Gen 1 ends. On 31 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, [create new VPC clusters on Generation 2 compute only](#clusters_vpcg2), and [move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial).</li><li>**Block Storage for VPC add-on**: Block Storage for VPC add-on patch update `2.0.3_471` is released. For more information, see the [Block Storage for VPC add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog).</li></ul> |
+| 27 January 2021 | <ul><li>**Reminder: VPC Gen 1 deprecation**: You can continue to use VPC Gen 1 resources only until 26 February 2021, when all service for VPC Gen 1 ends. On 31 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2#clusters_vpcg2), and [move your workloads from existing VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial).</li><li>**Block Storage for VPC add-on**: Block Storage for VPC add-on patch update `2.0.3_471` is released. For more information, see the [Block Storage for VPC add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog).</li></ul> |
 | 25 January 2021 | <ul><li>**Istio add-on**: [Version 1.8 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v18) is released.</li><li>**New! {{site.data.keyword.openshiftshort}} Do (`odo`) CLI tutorial**: Looking to develop apps without using `kubectl` system admin commands or YAML configuration files? Check out the [Developing on clusters with the {{site.data.keyword.openshiftshort}} Do CLI](/docs/containers?topic=containers-odo-tutorial) tutorial for a quick guide on using `odo` to package and push your apps to your cluster. You no longer need an {{site.data.keyword.openshiftshort}} cluster to use `odo`, but can use `odo` with any Kubernetes cluster.</li><li>**New! Private service endpoint allowlists**: You can now control access to your private service endpoint by [creating a subnet allowlist](/docs/containers?topic=containers-access_cluster#private-se-allowlist). Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private service endpoint.</li><li>**Private Kubernetes Ingress**: Added steps for [privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).</li></ul> |
 | 19 January 2021 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2424](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532_master), [1.18.15_1538](/docs/containers?topic=containers-changelog#11815_1538_master), [1.17.17_1551](/docs/containers?topic=containers-changelog#11717_1551_master), and [1.16.15_1557](/docs/containers?topic=containers-changelog#11615_1557_master).</li></ul> |
 | 18 January 2021 | <ul><li>**Knative add-on is unsupported**: The Knative add-on is automatically removed from your cluster. Instead, use the [Knative open source project](https://knative.dev/docs/install/){: external} or [{{site.data.keyword.codeenginefull}}](/docs/codeengine?topic=codeengine-getting-started), which includes Knative's open-source capabilities.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1532](/docs/containers?topic=containers-changelog#1197_1532), [1.18.15_1538](/docs/containers?topic=containers-changelog#11815_1538), [1.17.17_1551](/docs/containers?topic=containers-changelog#11717_1551), and [1.16.15_1557](/docs/containers?topic=containers-changelog#11615_1557).</li></ul> |

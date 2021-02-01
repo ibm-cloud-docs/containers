@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-25"
+lastupdated: "2021-02-01"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -107,8 +109,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
-| 1.8 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18, 1.19 |
-| 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.16, 1.17, 1.18 |
+| 1.8 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.17, 1.18, 1.19 |
+| 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.17, 1.18 |
 | 1.6 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.5 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
@@ -456,7 +458,7 @@ The following table shows the changes that are included in version 1.5.6 of the 
 The following table shows the changes that are included in version 1.5 of the managed Istio add-on.
 {: shortdesc}
 
-Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.16 and 1.17 only.
+Version 1.5 of the Istio add-on is supported for clusters that run Kubernetes versions 1.17 only.
 {: note}
 
 | Previous | Current | Description |
