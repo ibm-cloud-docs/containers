@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-02"
 
 keywords: kubernetes, iks, clusters
 
@@ -451,12 +451,14 @@ Your authorized users can now continue with [Accessing clusters through the priv
 
 Admission controllers intercept authorized API requests from various Kubernetes resources before the requests reach the API server that runs in your {{site.data.keyword.containerlong_notm}} cluster master. Mutating admission webhooks might modify the request, and validating admission webhooks check the request. If either webhook rejects a request, the entire request fails. Advanced features, whether built-in or added on, often require admission controllers as a security precaution and to control what requests are sent to the API server. For more information, see [Using Admission Controllers](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/){: external} and [Dynamic Admission Control](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} in the Kubernetes documentation.
 
-**What are the default admission controllers in my cluster?**<br>
+**What are the default admission controllers in my cluster?**
+
 Review the order of default admission controllers by cluster version in the [`kube-apiserver` component reference information](/docs/containers?topic=containers-service-settings#kube-apiserver).
 
 <br>
 
-**Can I create my own admission controllers?**<br>
+**Can I create my own admission controllers?**
+
 Yes, see the [Kubernetes](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/){: external} documentation for more information.
 
 As noted in the Kubernetes documentation, you can use admission controllers for operations that are otherwise handled by the control plane. As such, take great caution when you configure a custom admission controller. You are responsible for any changes that happen in your cluster because of a custom admission controller.
@@ -474,12 +476,14 @@ Keep in mind the following considerations when you configure a webhook.
 
 <br>
 
-**What other types of apps use admission controllers?**<br>
+**What other types of apps use admission controllers?**
+
 Many cluster add-ons, plug-ins, and other third-party extensions create custom admission controllers. Some common ones include:
 *   [Portieris](https://github.com/IBM/portieris){: external}
 *   [Istio](/docs/containers?topic=containers-istio-about)
 
 <br>
 
-**I need help with a broken webhook. What can I do?**<br>
+**I need help with a broken webhook. What can I do?**
+
 See [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update).

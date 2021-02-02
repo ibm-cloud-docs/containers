@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-14"
+lastupdated: "2021-02-02"
 
 keywords: kubernetes, iks, vlan
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -156,7 +158,8 @@ Enable or disable the public service endpoint for your cluster.
 
 The public service endpoint makes your Kubernetes master publicly accessible. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#internet-facing).
 
-**Steps to enable**</br>
+**Steps to enable**
+
 If you previously disabled the public endpoint, you can re-enable it.
 1. Enable the public service endpoint.
    ```
@@ -178,7 +181,8 @@ If you previously disabled the public endpoint, you can re-enable it.
 
 
 {: #disable-public-se}
-**Steps to disable**</br>
+**Steps to disable**
+
 To disable the public service endpoint, you must first enable the private service endpoint so that your worker nodes can communicate with the Kubernetes master.
 1. [Enable the private service endpoint](#set-up-private-se).
 2. Disable the public service endpoint.

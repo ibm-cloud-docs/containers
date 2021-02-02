@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-18"
+  years: 2014, 2021
+lastupdated: "2021-02-02"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -73,6 +73,8 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
+{:swift-ios: .ph data-hd-programlang='iOS Swift'}
+{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -501,7 +503,8 @@ You can choose which logs to forward to your external server by filtering out sp
 ### Verifying, updating, and deleting log forwarding
 {: #verifying-log-forwarding}
 
-**Verifying**</br>
+**Verifying**
+
 You can verify that your configuration is set up correctly in 1 of 2 ways:
 
 * To list all of the logging configurations in a cluster:
@@ -516,14 +519,16 @@ You can verify that your configuration is set up correctly in 1 of 2 ways:
   ```
   {: pre}
 
-**Updating**</br>
+**Updating**
+
 You can update a logging configuration that you already created:
 ```
 ibmcloud ks logging config update --cluster <cluster_name_or_ID> --id <log_config_id> --namespace <namespace> --type <server_type> --syslog-protocol <protocol> --logsource <source> --hostname <hostname_or_ingestion_URL> --port <port> --space <cluster_space> --org <cluster_org> --app-containers <container1,2> --app-paths <paths_to_logs>
 ```
 {: pre}
 
-**Deleting**</br>
+**Deleting**
+
 You can stop forwarding logs by deleting one or all of the logging configurations for a cluster:
 
 * To delete one logging configuration:

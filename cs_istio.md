@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -109,7 +109,8 @@ With one click, you can get all Istio core components up and running. Istio on {
 In Kubernetes clusters, you can install the generally available managed Istio add-on.
 {: shortdesc}
 
-**Before you begin**</br>
+**Before you begin**
+
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create a standard Kubernetes cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui).
 * You cannot run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
