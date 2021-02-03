@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-02"
+lastupdated: "2021-02-03"
 
 keywords: containers
 subcollection: containers
@@ -1565,6 +1565,8 @@ subcollection: containers
   * [`ibmcloud ks worker-pool create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_classic)
   * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
   * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_get)
+  * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_rm)
+  * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_set)
   * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pools)
   * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)
   * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)
