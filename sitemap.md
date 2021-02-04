@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-03"
+lastupdated: "2021-02-04"
 
 keywords: containers
 subcollection: containers
@@ -72,8 +72,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift-ios: .ph data-hd-programlang='iOS Swift'}
-{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -572,7 +570,10 @@ subcollection: containers
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Tuning performance](/docs/containers?topic=containers-kernel)
-* [Optimizing worker node performance](/docs/containers?topic=containers-kernel#worker)
+* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
+  * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
+  * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
+* [Modifying default worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
