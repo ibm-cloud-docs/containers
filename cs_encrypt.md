@@ -162,7 +162,6 @@ Review the following known limitations:
 * Customizing the IP addresses that are allowed to connect to your {{site.data.keyword.keymanagementserviceshort}} instance is not supported.
 
 **Do the features change depending on my cluster version?**
-
 {: #kms-keyprotect-features}
 
 Yes. Your cluster version impacts the functionality of the KMS provider. To see what {{site.data.keyword.keymanagementserviceshort}} features are available for different cluster versions of {{site.data.keyword.containerlong_notm}}, review the following table.
