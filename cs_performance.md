@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-14"
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks, kernel
 
@@ -102,16 +102,45 @@ If you have specific performance optimization requirements, you can change the d
 If you choose to change the default settings, you are doing so at your own risk. You are responsible for running tests against any changed settings and for any potential disruptions caused by the changed settings in your environment.
 {: important}
 
-## Optimizing worker node performance
+## Default worker node settings
+{: #worker-default}
+
+By default, your worker nodes have the operating system and compute hardware of the [worker node flavor](/docs/containers?topic=containers-planning_worker_nodes) that you choose when you create the worker pool.
+{: shortdesc}
+
+### Customizing the operating system
+{: #worker-default-os}
+
+The following operating systems are available for worker nodes: **Ubuntu 16.04 x86_64, 18.04 x86_64**. Your cluster cannot mix operating systems or use different operating systems. 
+{: shortdesc}
+
+To optimize your worker nodes, consider the following information.
+* **Image and version updates**: Worker node updates, such as security patches to the image or Kubernetes versions, are provided by IBM for you. However, you choose when to apply the updates to the worker nodes. For more information, see [Updating clusters, worker nodes, and cluster components](/docs/containers?topic=containers-update).
+* **Temporary modifications**: If you log in to a pod or use some other process to modify a worker node setting, the modifications are temporary. Worker node lifecycle operations, such as autorecovery, reloading, updating, or replacing a worker node, change any modifications back to the default settings.
+* **Persistent modifications**: For modifications to persist across worker node lifecycle operations, use a daemon set with an init container. For more information, see [Modifying default worker node settings to optimize performance](#worker).
+
+   Modifications to the operating system are not supported. If you modify the default settings, you are responsible for debugging and resolving the issues that might occur.
+   {: important}
+
+### Hardware changes
+{: #worker-default-hw}
+
+To change the compute hardware, such as the CPU and memory per worker node, choose among the following options.
+* [Create a worker pool](/docs/containers?topic=containers-add_workers). The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters.
+* [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool. 
+
+## Modifying default worker node settings to optimize performance
 {: #worker}
 
 If you have specific performance optimization requirements, you can change the default settings for the Linux kernel `sysctl` parameters on worker nodes.
 {: shortdesc}
 
-Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} object to your cluster. The daemon set alters the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. No pods are affected.
+Worker nodes are automatically provisioned with optimized kernel performance, but you can change the default settings by applying a custom [Kubernetes `DaemonSet`](https://kubernetes.io/docs/concepts/workloads/controllers/daemonset/){: external} with an [`initContainer`](https://kubernetes.io/docs/concepts/workloads/pods/init-containers/){: external} to your cluster. The daemon set modifies the settings for all existing worker nodes and applies the settings to any new worker nodes that are provisioned in the cluster. The init container makes sure that these modifications occur before other pods are scheduled on the worker node. No pods are affected.
 
 You must have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for all namespaces to run the sample privileged `initContainer`. After the containers for the deployments are initialized, the privileges are dropped.
 {: note}
+
+Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 1. Save the following daemon set in a file named `worker-node-kernel-settings.yaml`. In the `spec.template.spec.initContainers` section, add the fields and values for the `sysctl` parameters that you want to tune. This example daemon set changes the default maximum number of connections that are allowed in the environment via the `net.core.somaxconn` setting and the ephemeral port range via the `net.ipv4.ip_local_port_range` setting.
     ```yaml
@@ -189,6 +218,8 @@ To revert your worker nodes' `sysctl` parameters to the default values set by {{
 2. [Reboot all worker nodes in the cluster](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot). The worker nodes come back online with the default values applied.
 
 <br />
+
+
 
 ## Optimizing pod performance
 {: #pod}

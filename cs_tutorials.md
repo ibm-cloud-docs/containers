@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks
 
@@ -78,8 +78,6 @@ completion-time: 60m
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift-ios: .ph data-hd-programlang='iOS Swift'}
-{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -440,7 +438,8 @@ Good job! You deployed your first version of the app.
 
 Too many commands in this lesson? Agreed. How about using a configuration script to do some of the work for you? To use a configuration script for the second version of the app, and to create higher availability by deploying multiple instances of that app, continue to the next lesson.
 
-**Clean up**<br>
+**Clean up**
+
 Want to delete the resources that you created in this lesson before you move on? When you created the deployment, Kubernetes assigned the deployment a label, `app=hello-world-deployment` (or whatever you named the deployment). Then, when you exposed the deployment, Kubernetes applied the same label to the service that was created. Labels are useful tools for you to organize your Kubernetes resources so that you can apply bulk actions such as `get` or `delete` to them.
 
   You can check all your resources that have the `app=hello-world-deployment` label.
@@ -581,7 +580,8 @@ If you took a break from the last lesson, make sure that you log back in to your
 
 Nice, you deployed the second version of the app. You had to use fewer commands, learned how health checks work, and edited a deployment, which is great! The Hello world app passed the test for the PR firm. Now, you can deploy a more useful app for the PR firm to start analyzing press releases.
 
-**Clean up**<br>
+**Clean up**
+
 Ready to delete what you created before you continue to the next lesson? This time, you can use the same configuration script to delete both of the resources that you created.
 
   ```
@@ -804,7 +804,8 @@ Change the name of the image:
 
 Good job! You deployed the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app and learned how to perform a simple app update. The PR firm can use this deployment to start analyzing their press releases with the latest AI technology.
 
-**Clean up**<br>
+**Clean up**
+
 Ready to delete the {{site.data.keyword.watson}} {{site.data.keyword.toneanalyzershort}} app that you created in your {{site.data.keyword.containerlong_notm}} cluster? You can use the configuration script to delete the resources that you created.
 
   ```

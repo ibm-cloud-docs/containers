@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -73,8 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift-ios: .ph data-hd-programlang='iOS Swift'}
-{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -109,7 +107,8 @@ With one click, you can get all Istio core components up and running. Istio on {
 In Kubernetes clusters, you can install the generally available managed Istio add-on.
 {: shortdesc}
 
-**Before you begin**</br>
+**Before you begin**
+
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
 * [Create a standard Kubernetes cluster with at least 3 worker nodes that each have 4 cores and 16 GB memory (`b3c.4x16`) or more](/docs/containers?topic=containers-clusters#clusters_ui).
 * You cannot run community Istio concurrently with the managed Istio add-on in your cluster. If you use an existing cluster and you previously installed Istio in the cluster by using the IBM Helm chart or through another method, [clean up that Istio installation](#istio_uninstall_other).
@@ -200,13 +199,19 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 You can customize a set of Istio configuration options by editing the `managed-istio-custom` configmap resource. These settings include extra control over monitoring, logging, and networking in your control plane and service mesh.
 {: shortdesc}
 
-1. Edit the `managed-istio-custom` configmap resource.
+1. Describe the `managed-istio-custom` configmap resource to review its contents and the in-line documentation.
+  ```
+  kubectl describe cm managed-istio-custom -n ibm-operators
+  ```
+  {: pre}
+
+2. Edit the `managed-istio-custom` configmap resource.
   ```
   kubectl edit cm managed-istio-custom -n ibm-operators
   ```
   {: pre}
 
-2. Add a `data` section, and add the `<key>: "<value>"` pair of one or more of the following configuration options.
+3. In the `data` section, add the `<key>: "<value>"` pair of one or more of the following configuration options.
     <table summary="The rows are read from left to right. The first column is the configuration option name. The second column is the default value of the option. The third column contains a brief description of the option.">
     <caption>Istio add-on configuration options</caption>
     <thead>
@@ -218,7 +223,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     <tr><td>`istio-global-logging-level`</td><td>`"default:info"`</td><td>Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.</br></br>To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/).<p class="tip">To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.</p></td></tr>
     <tr><td>`istio-global-outboundTrafficPolicy-mode`</td><td>`"ALLOW_ANY"`</td><td>By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.</td></tr>
     <tr><td>`istio-egressgateway-public-1-enabled`</td><td>`"true"`</td><td>To disable the default Istio egress gateway, set to `"false"`.</td></tr>    
-    <tr><td>`istio-global-proxy-accessLogFile`</td><td>""</td><td>Envoy proxies print access information to their standard output. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.</td></tr>
+    <tr><td>`istio-global-proxy-accessLogFile`</td><td>`""`</td><td>Envoy proxies print access information to their standard output. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.</td></tr>
     <tr><td>`istio-ingressgateway-public-1|2|3-enabled`</td><td>`"true"` in zone 1 only</td><td>To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created.</td></tr>
     <tr><td>`istio-ingressgateway-zone-1|2|3`</td><td>`"<zone>"`</td><td>The zones where your worker nodes are deployed. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields.<ul><li>If you installed the Istio add-on at version 1.5 or later, your cluster's zones are already listed.</li><li>If you updated your Istio add-on from version 1.4 to a later version, you must add your cluster's zones.</li></ul></td></tr>
     <tr><td>`istio-monitoring-telemetry`</td><td>`"true"`</td><td>By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.</td></tr>
@@ -227,9 +232,22 @@ You can customize a set of Istio configuration options by editing the `managed-i
     </tbody>
     </table>
 
-3. Save and close the configuration file.
+    For example, your configmap might look like the following:
+    ```
+    apiVersion: v1
+    data:
+      istio-ingressgateway-zone-1: dal10
+      <key: value> # such as istio-egressgateway-public-1-enabled: "false"
+    kind: ConfigMap
+    metadata:
+      name: managed-istio-custom
+      namespace: ibm-operators
+    ```
+    {: screen}
 
-4. If you changed the `istio-global-logging-level` or `istio-global-proxy-accessLogFile` settings, you must restart your data plane pods to apply the changes to them.
+4. Save and close the configuration file.
+
+5. If you changed the `istio-global-logging-level` or `istio-global-proxy-accessLogFile` settings, you must restart your data plane pods to apply the changes to them.
   1. Get the list of all data plane pods that are not in the `istio-system` namespace.
     ```
     istioctl version --short=false | grep "data plane version" | grep -v istio-system

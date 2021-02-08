@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-11"
+  years: 2014, 2021
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks, vpn, icp
 
@@ -182,7 +182,8 @@ With [{{site.data.keyword.BluDirectLink}}](/docs/dl?topic=dl-dl-about), you can 
 
 To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.data.keyword.dl_full_notm}} connection, see [Get Started with {{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl) in the {{site.data.keyword.dl_full_notm}} documentation.
 
-**What's next?**</br>
+**What's next?**
+
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
 * To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-08"
 
 keywords: containers
 subcollection: containers
@@ -72,8 +72,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift-ios: .ph data-hd-programlang='iOS Swift'}
-{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -572,7 +570,10 @@ subcollection: containers
 * [Updating from stand-alone worker nodes to worker pools](/docs/containers?topic=containers-update#standalone_to_workerpool)
 
 [Tuning performance](/docs/containers?topic=containers-kernel)
-* [Optimizing worker node performance](/docs/containers?topic=containers-kernel#worker)
+* [Default worker node settings](/docs/containers?topic=containers-kernel#worker-default)
+  * [Customizing the operating system](/docs/containers?topic=containers-kernel#worker-default-os)
+  * [Hardware changes](/docs/containers?topic=containers-kernel#worker-default-hw)
+* [Modifying default worker node settings to optimize performance](/docs/containers?topic=containers-kernel#worker)
 * [Optimizing pod performance](/docs/containers?topic=containers-kernel#pod)
 * [Adjusting cluster metrics provider resources](/docs/containers?topic=containers-kernel#metrics)
 * [Enabling huge pages](/docs/containers?topic=containers-kernel#huge-pages)
@@ -1565,6 +1566,8 @@ subcollection: containers
   * [`ibmcloud ks worker-pool create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_classic)
   * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
   * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_get)
+  * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_rm)
+  * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_set)
   * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pools)
   * [`ibmcloud ks worker-pool rebalance`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance)
   * [`ibmcloud ks worker-pool resize`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize)
@@ -1738,6 +1741,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.7_1534, released 3 February 2021](/docs/containers?topic=containers-changelog#1197_1534)
   * [Changelog for worker node fix pack 1.19.7_1533, released 1 February 2021](/docs/containers?topic=containers-changelog#1197_1533)
   * [Changelog for master fix pack 1.19.7_1532, released 19 January 2021](/docs/containers?topic=containers-changelog#1197_1532_master)
   * [Changelog for worker node fix pack 1.19.7_1532, released 18 January 2021](/docs/containers?topic=containers-changelog#1197_1532)
@@ -1753,6 +1757,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.15_1540, released 3 February 2021](/docs/containers?topic=containers-changelog#11815_1540)
   * [Changelog for worker node fix pack 1.18.15_1539, released 1 February 2021](/docs/containers?topic=containers-changelog#11815_1539)
   * [Changelog for master fix pack 1.18.15_1538, released 19 January 2021](/docs/containers?topic=containers-changelog#11815_1538_master)
   * [Changelog for worker node fix pack 1.18.15_1538, released 18 January 2021](/docs/containers?topic=containers-changelog#11815_1538)
@@ -1848,6 +1853,7 @@ subcollection: containers
   * [Changelog for 1.8.1, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#181)
   * [Changelog for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.7, released 8 February 2021](/docs/containers?topic=containers-istio-changelog#177)
   * [Changelog for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
   * [Changelog for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
   * [Changelog for 1.7.4, released 5 November 2020](/docs/containers?topic=containers-istio-changelog#174)

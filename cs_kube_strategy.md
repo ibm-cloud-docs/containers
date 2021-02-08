@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-18"
+  years: 2014, 2021
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks, containers
 
@@ -132,13 +132,16 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 | Proprietary apps with strict designs, licensing, or heavy regulations | | <img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" /> |
 {: caption="{{site.data.keyword.cloud_notm}} implementations support your workloads" caption-side="top"}
 
-**Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**</br>
+**Ready to run workloads off-premises in {{site.data.keyword.containerlong_notm}}?**
+
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
-**Interested in an on-premises cloud?**</br>
+**Interested in an on-premises cloud?**
+
 Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/support/knowledgecenter/SSBS6K_3.2.x/kc_welcome_containers.html){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
 
-**Want to run workloads in both on-premises and off-premises clouds?**</br>
+**Want to run workloads in both on-premises and off-premises clouds?**
+
 Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
 
 ### Can I automate my infrastructure deployments?
@@ -161,7 +164,8 @@ If you already have an app, you can [migrate it to {{site.data.keyword.container
 Kubernetes is designed to provide capabilities to two main personas, the cluster admin and the app developer. Each persona uses different technical skills to successfully run and deploy apps to a cluster.
 {: shortdesc}
 
-**What are a cluster admin's main tasks and technical knowledge?** </br>
+**What are a cluster admin's main tasks and technical knowledge?**
+
 As a cluster admin, you are responsible to set up, operate, secure, and manage the {{site.data.keyword.cloud_notm}} infrastructure of your cluster. Typical tasks include:
 - Size the cluster to provide enough capacity for your workloads.
 - Design a cluster to meet the high availability, disaster recovery, and compliance standards of your company.
@@ -171,12 +175,14 @@ As a cluster admin, you are responsible to set up, operate, secure, and manage t
 
 The cluster admin persona must have a broad knowledge that includes compute, network, storage, security, and compliance. In a typical company, this knowledge is spread across multiple specialists, such as System Engineers, System Administrators, Network Engineers, Network Architects, IT Managers, or Security and Compliance Specialists. Consider assigning the cluster admin role to multiple people in your company so that you have the required knowledge to successfully operate your cluster.
 
-**What are an app developer's main tasks and technical skills?** </br>
+**What are an app developer's main tasks and technical skills?**
+
 As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/), and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
 
 Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported Ubuntu 16.04 x86_64, 18.04 x86_64 operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 
-**Do cluster administrators and developers interact with each other?** </br>
+**Do cluster administrators and developers interact with each other?**
+
 Yes. Cluster administrators and developers must interact frequently so that cluster administrators understand workload requirements to provide this capability in the cluster, and so that developers know about available limitations, integrations, and security principles that they must consider in their app development process.
 
 ## Sizing your Kubernetes cluster to support your workload

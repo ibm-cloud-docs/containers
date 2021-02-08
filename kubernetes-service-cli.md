@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-01"
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -73,8 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift-ios: .ph data-hd-programlang='iOS Swift'}
-{:swift-server: .ph data-hd-programlang='server-side Swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -957,7 +955,7 @@ Create an {{site.data.keyword.satellitelong_notm}} cluster on your own infrastru
 Before you begin, create a {{site.data.keyword.satelliteshort}} and assign at least 3 hosts to the location for control plane operations. After you create a {{site.data.keyword.satelliteshort}} cluster, assign hosts for the worker nodes. For more information, see [Creating {{site.data.keyword.openshiftshort}} clusters in {{site.data.keyword.satelliteshort}}](/docs/openshift?topic=openshift-satellite-clusters#satcluster-create-cli).
 
 ```sh
-ibmcloud ks cluster create satellite --location LOCATION --name NAME --version VERSION [-q]
+ibmcloud ks cluster create satellite --location LOCATION --name NAME --version VERSION [--enable-admin-agent] [--host-label LABEL ...] [--pod-subnet SUBNET] [--pull-secret SECRET] [-q] [--service-subnet SUBNET] [--workers COUNT] [--zone ZONE]
 ```
 {: pre}
 
@@ -978,8 +976,40 @@ ibmcloud ks cluster create satellite --location LOCATION --name NAME --version V
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Required. Enter the {{site.data.keyword.openshiftlong_notm}} version that you want to run in your cluster. For a list of supported versions, run <code>ibmcloud ks versions</code>.</dd>
 
+<dt><code>--enable-admin-agent</code></dt>
+<dd>Optional. Grant the {{site.data.keyword.satelliteshort}} Config service accounts access to the cluster admin role to manage Kubernetes resources.</dd>
+
+<dt><code>--host-label, -hl <em>LABEL</em></code></dt>
+<dd>Optional. Enter existing labels that describe {{site.data.keyword.satelliteshort}} hosts, formatted as `-hl key=value` pairs, so hosts with matching labels can be automatically assigned as worker nodes for the cluster. To find available host labels, run <code>ibmcloud sat host get --host &lt;host_name_or_ID&gt; --location &lt;location_name_or_ID&gt;</code>.</dd>
+
+<dt><code>--pod-subnet <em>SUBNET</em></code></dt>
+<dd>Optional. All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. You can avoid subnet conflicts with the network that you use to connect to your location by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
+<p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pod IP addresses for eight worker nodes, <code>/21</code> to have enough pod IP addresses for 16 worker nodes, and so on.</p>
+<p>The subnet that you choose must be within one of the following ranges:
+<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
+<li><code>172.21.0.0 - 172.31.255.255</code></li>
+<li><code>192.168.0.0 - 192.168.254.255</code></li>
+<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The service subnet is in the 172.21.0.0/16 range by default.</p></dd>
+
+<dt><code>--pull-secret <em>SECRET</em></code></dt>
+<dd>Optional. Provide your [{{site.data.keyword.redhat_full}} account pull secret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.redhat.com/openshift/install/pull-secret) so that the cluster can download {{site.data.keyword.openshiftshort}} images from your own {{site.data.keyword.redhat_notm}} account.</dd>
+
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
+
+<dt><code>--service-subnet <em>SUBNET</em></code></dt>
+<dd>Optional. All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. You can avoid subnet conflicts with the network that you use to connect to your location by specifying a custom subnet CIDR that provides the private IP addresses for your services.
+<p>The subnet must be specified in CIDR format with a size of at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges:
+<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
+<li><code>172.21.0.0 - 172.31.255.255</code></li>
+<li><code>192.168.0.0 - 192.168.254.255</code></li>
+<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.</p></dd>
+
+<dt><code>--workers <em>COUNT</em></code></dt>
+<dd>Required when `--host-label` is specified. The number of worker nodes per zone in the default worker pool.</dd>
+
+<dt><code>--zone <em>ZONE</em></code></dt>
+<dd>Optional. The name of the zone to create the {{site.data.keyword.satelliteshort}} location control plane in. For high availability, you might want to use one of the 3 zones from the location control plane, and then add the two other zones to your cluster later. To see the zone names for your location, run `ibmcloud sat location get --location <location_name_or_ID>` and look for the `Host Zones` field.</dd>
 
 </dl>
 
@@ -2842,6 +2872,94 @@ ibmcloud ks worker-pool get --worker-pool WORKER_POOL --cluster CLUSTER [--outpu
 **Example**:
 ```sh
 ibmcloud ks worker-pool get --worker-pool pool1 --cluster my_cluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks worker-pool label rm`
+{: #cs_worker_pool_label_rm}
+
+Remove all custom Kubernetes labels from all worker nodes in a worker pool.
+{: shortdesc}
+
+To remove an individual label from a worker pool, you can run the `ibmcloud ks worker-pool label set` command with only the custom labels that you want to keep.
+{: tip}
+
+```sh
+ibmcloud ks worker-pool label rm --cluster CLUSTER --worker-pool POOL [-f] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster where the worker pool is located.</dd>
+
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>Required: The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```sh
+ibmcloud ks worker-pool label rm --worker-pool pool1 --cluster my_cluster
+```
+{: pre}
+
+</br>
+
+### `ibmcloud ks worker-pool label set`
+{: #cs_worker_pool_label_set}
+
+Set custom Kubernetes labels in the format `key=value` for all the worker nodes in the worker pool. To keep any existing custom labels on the worker pool, you must include those labels in this command.
+{: shortdesc}
+
+```sh
+ibmcloud ks worker-pool label set --cluster CLUSTER --label LABEL [--label LABEL ...] --worker-pool POOL [-f] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+
+**Minimum required permissions**: **Operator** platform role for the cluster in {{site.data.keyword.containerlong_notm}}
+
+**Command options**:
+<dl>
+<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
+<dd>Required: The name or ID of the cluster where the worker pool is located.</dd>
+
+<dt><code>--label <em>LABEL</em></code></dt>
+<dd>Required: A custom label in the format `key=value` to set for all the worker nodes in the worker pool. For multiple labels, repeat this flag. To keep any existing custom labels on the worker pool, include those labels with this flag. You can list the existing custom labels on worker nodes in the worker pool by running `ibmcloud ks worker-pool get -c <cluster_name_or_ID> --worker-pool <pool>`.</dd>
+
+<dt><code>-p, --worker-pool <em>WORKER_POOL</em></code></dt>
+<dd>Required: The name of the worker node pool that you want to view the details of. To list available worker pools, run `ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>`.</dd>
+
+<dt><code>-f</code></dt>
+<dd>Optional: Force the command to run with no user prompts.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+```sh
+ibmcloud ks worker-pool label set --worker-pool pool1 --cluster my_cluster --label app=dev
 ```
 {: pre}
 
@@ -6309,22 +6427,26 @@ The `ibmcloud ks infra-permissions` commands check only classic IBM Cloud infras
 Check whether the credentials that allow [access to the IBM Cloud infrastructure portfolio](/docs/containers?topic=containers-users#api_key) for the targeted resource group and region are missing suggested or required infrastructure permissions.
 {: shortdesc}
 
-**What do `required` and `suggested` infrastructure permissions mean?**<br>
+**What do `required` and `suggested` infrastructure permissions mean?**
+
 If the infrastructure credentials for the region and resource group are missing any permissions, the output of this command returns a list of `required` and `suggested` permissions.
 *   **Required**: These permissions are needed to successfully order and manage infrastructure resources such as worker nodes. If the infrastructure credentials are missing one of these permissions, common actions such as `worker reload` can fail for all clusters in the region and resource group.
 *   **Suggested**: These permissions are helpful to include in your infrastructure permissions, and might be necessary in certain use cases. For example, the `Add Compute with Public Network Port` infrastructure permission is suggested because if you want public networking, you need this permission. However, if your use case is a cluster on the private VLAN only, the permission is not needed so it is not considered `required`.
 
 For a list of common use cases by permission, see [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
 
-**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table?**<br>
+**What if I see an infrastructure permission that I can't find in the console or [Infrastructure roles](/docs/containers?topic=containers-access_reference#infra) table?**
+
 `Support Case` permissions are managed in a different part of the console than infrastructure permissions. See step 8 of [Customizing infrastructure permissions](/docs/containers?topic=containers-users#infra_access).
 
-**Which infrastructure permissions do I assign?**<br>
+**Which infrastructure permissions do I assign?**
+
 If your company's policies for permissions are strict, you might need to limit the `suggested` permissions for your cluster's use case. Otherwise, make sure that your infrastructure credentials for the region and resource group include all the `required` and `suggested` permissions.
 
 For most use cases, [set up the API key](/docs/containers?topic=containers-users#api_key) for the region and resource group with the appropriate infrastructure permissions. If you need to use another infrastructure account that differs from your current account, [set up manual credentials](/docs/containers?topic=containers-users#credentials).
 
-**How do I control what actions the users can perform?**<br>
+**How do I control what actions the users can perform?**
+
 After infrastructure credentials are set up, you can control what actions your users can perform by assigning them [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform).
 
 ```sh

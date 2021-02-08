@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-08"
+  years: 2014, 2021
+lastupdated: "2021-02-04"
 
 keywords: kubernetes, iks
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -99,7 +99,8 @@ subcollection: containers
 With [pod security policies (PSPs)](https://kubernetes.io/docs/concepts/policy/pod-security-policy/){: external}, you can
 configure policies to authorize who can create and update pods in {{site.data.keyword.containerlong}}.
 
-**Why do I set pod security policies?**</br>
+**Why do I set pod security policies?**
+
 As a cluster admin, you want to control what happens in your cluster, especially actions that affect the cluster's security or readiness. Pod security policies can help you control usage of privileged containers, root privileges, host networking and ports, volume types, host file systems, Linux capabilities, and more.
 
 With the `PodSecurityPolicy` admission controller, pod creation is controlled by pod security policies and related role-based access control (RBAC). By default, {{site.data.keyword.containerlong_notm}} clusters do not restrict pod creation for any authenticated users or service accounts. To secure your cluster, customize the pod security policies. This customization can have unintended side-effects, so make sure to thoroughly test your customizations. To deploy apps, the user and service accounts must all be authorized by the pod security policies that are required to deploy pods.
@@ -107,21 +108,24 @@ With the `PodSecurityPolicy` admission controller, pod creation is controlled by
 Trying to control which users have access to the {{site.data.keyword.containerlong_notm}}? See [Assigning cluster access](/docs/containers?topic=containers-users#users) to set {{site.data.keyword.cloud_notm}} IAM and infrastructure permissions.
 {: tip}
 
-**Are any policies set by default? What can I add?**</br>
+**Are any policies set by default? What can I add?**
+
 By default, {{site.data.keyword.containerlong_notm}} configures the `PodSecurityPolicy` admission controller with [resources for {{site.data.keyword.IBM_notm}} cluster management](#ibm_psp) that you cannot delete or modify. You also cannot disable the admission controller.
 
 Pod actions are not locked down by default. Instead, two role-based access control (RBAC) resources in the cluster authorize all administrators, users, services, and nodes to create privileged and unprivileged pods. Additional RBAC resources are included for portability with {{site.data.keyword.cloud_notm}} Private packages that are used for [hybrid deployments](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_iks_icp).
 
 If you want to prevent certain users from creating or updating pods, you can [modify these RBAC resources or create your own](#customize_psp).
 
-**How does policy authorization work?**</br>
+**How does policy authorization work?**
+
 When you as a user create a pod directly and not by using a controller such as a deployment, your credentials are validated against the pod security policies that you are authorized to use. If no policy supports the pod security requirements, the pod is not created.
 
 When you create a pod by using a resource controller such as a deployment, Kubernetes validates the pod's service account credentials against the pod security policies that the service account is authorized to use. If no policy supports the pod security requirements, the controller succeeds, but the pod is not created.
 
 For common error messages, see [Pods fail to deploy because of a pod security policy](/docs/containers?topic=containers-cs_troubleshoot_app#cs_psp).
 
-**Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?**<br>
+**Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?**
+
 Other cluster role bindings or namespace-scoped role bindings might give you other pod security policies that authorize you to create privileged pods. Additionally by default, cluster administrators have access to all resources, including pod security policies, and so can add themselves to PSPs or create privileged resources.
 
 ## Customizing pod security policies
@@ -130,7 +134,8 @@ Other cluster role bindings or namespace-scoped role bindings might give you oth
 To prevent unauthorized pod actions, you can modify existing pod security policy resources or create your own. You must be a cluster admin to customize policies.
 {: shortdesc}
 
-**What existing policies can I modify?**</br>
+**What existing policies can I modify?**
+
 By default, your cluster contains the following RBAC resources that enable cluster administrators, authenticated users, service accounts, and nodes to use the `ibm-privileged-psp` and `ibm-restricted-psp` pod security policies. These policies allow the users to create and update privileged and unprivileged (restricted) pods.
 
 | Name | Namespace | Type | Purpose |
