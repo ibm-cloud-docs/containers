@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-08"
 
 keywords: kubernetes, iks
 
@@ -110,7 +110,7 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 |Version|Release date|Changes|
 |-------|------------|-------|
-| 1.0.223 | 04 Feb 2021 | <ul><li>Adds the [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_set) and [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_rm) commands to set and remove custom Kubernetes labels for all worker nodes in a worker pool.</li></ul> |
+| 1.0.223 | 08 Feb 2021 | <ul><li>Adds the [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_set) and [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_rm) commands to set and remove custom Kubernetes labels for all worker nodes in a worker pool.</li></ul> |
 | 1.0.208 | 18 Dec 2020 | Updates the help text in various languages. |
 | 1.0.206 | 10 Dec 2020 | <ul><li>Adds the `ibmcloud ks ingress lb get`, `ibmcloud ks ingress lb proxy-protocol disable`, and `ibmcloud ks ingress lb proxy-protocol disable` [beta commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable) to manage the configuration of load balancers that expose Ingress ALBs in your cluster. For example, you can enable the NGINX PROXY protocol so that client connection information is passed in request headers to ALBs.</li><li>Adds the optional `--endpoint` flag to the `ibmcloud ks cluster config` command to specify a type of endpoint for the cluster context, such as the cluster's private service endpoint.</li><li>Updates the help text in various languages.</li><li>Updates the Go version to 1.15.6.</li></ul> |
 | 1.0.197 | 18 Nov 2020 | <ul><li>Adds a warning message to the `ibmcloud ks cluster config` command about temporary `kubectl` command failures due to RBAC synchronization.</li><li>Ensures that incident IDs are returned with 500-level messages.</li><li>In `ibmcloud ks cluster storage` commands, the cluster name is now accepted in the `--cluster` flag in addition to the cluster ID.</li><li>Updates the output of the `ibmcloud ks ingress alb migrate` command to be more readable.</li><li>Updates the help text in various languages.</li></ul> |
