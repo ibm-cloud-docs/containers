@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-08"
+lastupdated: "2021-02-09"
 
 keywords: containers
 subcollection: containers
@@ -1531,7 +1531,6 @@ subcollection: containers
   * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_status)
   * [`ibmcloud ks cluster config`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config)
   * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)
-  * [Beta: `ibmcloud ks cluster create satellite`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-satellite)
   * [`ibmcloud ks cluster create vpc-classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-classic)
   * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
   * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)
