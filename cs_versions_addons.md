@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-10"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -206,6 +206,12 @@ Refer to the following table for a summary of changes for each version of the {{
 </tr>
 </thead>
 <tbody>
+<tr>
+<td>2452 / 954</td>
+<td>09 Feb 2021</td>
+<td>Updates `ca-certificates` for [USN-4719-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4719-1/).|</td>
+<td>-</td>
+</tr>
 <tr>
 <td>2424 / 954</td>
 <td>19 Jan 2021</td>

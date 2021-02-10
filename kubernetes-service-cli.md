@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-10"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -941,85 +941,6 @@ ibmcloud ks cluster create classic --zone dal10 --public-vlan my_public_VLAN_ID 
 {: pre}
 
 </br>
-
-
-### Beta: `ibmcloud ks cluster create satellite`
-{: #cli_cluster-create-satellite}
-
-Create an {{site.data.keyword.satellitelong_notm}} cluster on your own infrastructure that you add to a {{site.data.keyword.satelliteshort}} location as hosts. The hosts are used as worker nodes in your {{site.data.keyword.satelliteshort}} cluster.
-{: shortdesc}
-
-{{site.data.keyword.satellitelong_notm}} is available as a closed beta and is subject to change. To register for the beta, see the [product details page](https://cloud.ibm.com/satellite/beta){: external}.
-{: beta}
-
-Before you begin, create a {{site.data.keyword.satelliteshort}} and assign at least 3 hosts to the location for control plane operations. After you create a {{site.data.keyword.satelliteshort}} cluster, assign hosts for the worker nodes. For more information, see [Creating {{site.data.keyword.openshiftshort}} clusters in {{site.data.keyword.satelliteshort}}](/docs/openshift?topic=openshift-satellite-clusters#satcluster-create-cli).
-
-```sh
-ibmcloud ks cluster create satellite --location LOCATION --name NAME --version VERSION [--enable-admin-agent] [--host-label LABEL ...] [--pod-subnet SUBNET] [--pull-secret SECRET] [-q] [--service-subnet SUBNET] [--workers COUNT] [--zone ZONE]
-```
-{: pre}
-
-</br>
-
-**Minimum required permissions**: {{site.data.keyword.cloud_notm}} IAM **Administrator** platform role for {{site.data.keyword.satelliteshort}}.
-
-**Command options:**
-
-<dl>
-
-<dt><code>--location <em>LOCATION</em></code></dt>
-<dd>Required. Enter the ID or name of the location where you want to create the cluster. To retrieve the location ID or name, run <code>ibmcloud sat location ls</code>.</dd>
-
-<dt><code>--name <em>NAME</em></code></dt>
-<dd>Required. Enter a name for your cluster. The name must start with a letter, can contain letters, numbers, and hyphen (-), and must be 35 characters or fewer.</dd>
-
-<dt><code>--version <em>VERSION</em></code></dt>
-<dd>Required. Enter the {{site.data.keyword.openshiftlong_notm}} version that you want to run in your cluster. For a list of supported versions, run <code>ibmcloud ks versions</code>.</dd>
-
-<dt><code>--enable-admin-agent</code></dt>
-<dd>Optional. Grant the {{site.data.keyword.satelliteshort}} Config service accounts access to the cluster admin role to manage Kubernetes resources.</dd>
-
-<dt><code>--host-label, -hl <em>LABEL</em></code></dt>
-<dd>Optional. Enter existing labels that describe {{site.data.keyword.satelliteshort}} hosts, formatted as `-hl key=value` pairs, so hosts with matching labels can be automatically assigned as worker nodes for the cluster. To find available host labels, run <code>ibmcloud sat host get --host &lt;host_name_or_ID&gt; --location &lt;location_name_or_ID&gt;</code>.</dd>
-
-<dt><code>--pod-subnet <em>SUBNET</em></code></dt>
-<dd>Optional. All pods that are deployed to a worker node are assigned a private IP address in the 172.30.0.0/16 range by default. You can avoid subnet conflicts with the network that you use to connect to your location by specifying a custom subnet CIDR that provides the private IP addresses for your pods.
-<p>When you choose a subnet size, consider the size of the cluster that you plan to create and the number of worker nodes that you might add in the future. The subnet must have a CIDR of at least <code>/23</code>, which provides enough pod IPs for a maximum of four worker nodes in a cluster. For larger clusters, use <code>/22</code> to have enough pod IP addresses for eight worker nodes, <code>/21</code> to have enough pod IP addresses for 16 worker nodes, and so on.</p>
-<p>The subnet that you choose must be within one of the following ranges:
-<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
-<li><code>172.21.0.0 - 172.31.255.255</code></li>
-<li><code>192.168.0.0 - 192.168.254.255</code></li>
-<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The service subnet is in the 172.21.0.0/16 range by default.</p></dd>
-
-<dt><code>--pull-secret <em>SECRET</em></code></dt>
-<dd>Optional. Provide your [{{site.data.keyword.redhat_full}} account pull secret ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.redhat.com/openshift/install/pull-secret) so that the cluster can download {{site.data.keyword.openshiftshort}} images from your own {{site.data.keyword.redhat_notm}} account.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-
-<dt><code>--service-subnet <em>SUBNET</em></code></dt>
-<dd>Optional. All services that are deployed to the cluster are assigned a private IP address in the 172.21.0.0/16 range by default. You can avoid subnet conflicts with the network that you use to connect to your location by specifying a custom subnet CIDR that provides the private IP addresses for your services.
-<p>The subnet must be specified in CIDR format with a size of at least <code>/24</code>, which allows a maximum of 255 services in the cluster, or larger. The subnet that you choose must be within one of the following ranges:
-<ul><li><code>172.17.0.0 - 172.17.255.255</code></li>
-<li><code>172.21.0.0 - 172.31.255.255</code></li>
-<li><code>192.168.0.0 - 192.168.254.255</code></li>
-<li><code>198.18.0.0 - 198.19.255.255</code></li></ul>Note that the pod and service subnets cannot overlap. The pod subnet is in the 172.30.0.0/16 range by default.</p></dd>
-
-<dt><code>--workers <em>COUNT</em></code></dt>
-<dd>Required when `--host-label` is specified. The number of worker nodes per zone in the default worker pool.</dd>
-
-<dt><code>--zone <em>ZONE</em></code></dt>
-<dd>Optional. The name of the zone to create the {{site.data.keyword.satelliteshort}} location control plane in. For high availability, you might want to use one of the 3 zones from the location control plane, and then add the two other zones to your cluster later. To see the zone names for your location, run `ibmcloud sat location get --location <location_name_or_ID>` and look for the `Host Zones` field.</dd>
-
-</dl>
-
-**Example:**
-```sh
-ibmcloud sat cluster create satellite --name mysatcluster --location mylocation --version 4.5_openshift
-```
-{: pre}
-
-<br />
 
 
 
@@ -2107,7 +2028,7 @@ Detach a public or private portable classic subnet in an IBM Cloud infrastructur
 {: shortdesc}
 
 ```sh
-ibmcloud ks cluster subnet detach --cluster CLUSTER --subent-id SUBNET_ID [-f] [-q]
+ibmcloud ks cluster subnet detach --cluster CLUSTER --subnet-id SUBNET_ID [-f] [-q]
 ```
 {: pre}
 
@@ -3728,7 +3649,7 @@ ibmcloud ks ingress alb create classic --cluster CLUSTER --type (PUBLIC|PRIVATE)
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 2424
+ibmcloud ks ingress alb create classic --cluster mycluster --type public --vlan 2234945 --zone dal10 --ip 1.1.1.1 --version 2452
 ```
 {: pre}
 
@@ -3769,7 +3690,7 @@ ibmcloud ks ingress alb create vpc-classic --cluster CLUSTER --type PUBLIC|PRIVA
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 2424
+ibmcloud ks ingress alb create vpc-classic --cluster mycluster --type public --zone us-south-1 --version 2452
 ```
 {: pre}
 
@@ -3810,7 +3731,7 @@ ibmcloud ks ingress alb create vpc-gen2 --cluster CLUSTER --type PUBLIC|PRIVATE 
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 2424
+ibmcloud ks ingress alb create vpc-gen2 --cluster mycluster --type public --zone us-south-1 --version 2452
 ```
 {: pre}
 
@@ -3945,7 +3866,7 @@ ibmcloud ks ingress alb enable vpc-classic --alb ALB_ID --cluster CLUSTER [--ver
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2424
+ibmcloud ks ingress alb enable vpc-classic --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2452
 ```
 {: pre}
 
@@ -3990,7 +3911,7 @@ ibmcloud ks ingress alb enable vpc-gen2 --alb ALB_ID --cluster CLUSTER [--versio
 
 **Example**:
 ```sh
-ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2424
+ibmcloud ks ingress alb enable vpc-gen2 --alb private-cr18a61a63a6a94b658596aa93a087aaa9-alb1 --cluster mycluster --version 2452
 ```
 {: pre}
 
@@ -4255,12 +4176,12 @@ ibmcloud ks ingress alb update --cluster CLUSTER [--alb ALB1_ID --alb ALB2_ID ..
 **Example commands:**
 * To update all ALB pods in the cluster:
   ```sh
-  ibmcloud ks ingress alb update -c mycluster --version 2424
+  ibmcloud ks ingress alb update -c mycluster --version 2452
   ```
   {: pre}
 * To update the ALB pods for one or more specific ALBs:
   ```sh
-  ibmcloud ks ingress alb update -c mycluster --version 2424 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
+  ibmcloud ks ingress alb update -c mycluster --version 2452 --alb public-crdf253b6025d64944ab99ed63bb4567b6-alb1
   ```
   {: pre}
 
@@ -5004,7 +4925,7 @@ ibmcloud ks logging config get --cluster my_cluster --logsource worker
 Delete one log forwarding configuration or all logging configurations for a cluster. Deleting the log configuration stops log forwarding to a remote syslog server.
 {: shortdesc}
 
-```sh
+```
 ibmcloud ks logging config rm --cluster CLUSTER (--namespace NAMESPACE --id LOG_CONFIG_ID] [--all] [--force-update] [-q]
 ```
 {: pre}
