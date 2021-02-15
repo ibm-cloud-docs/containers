@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-12"
+lastupdated: "2021-02-15"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 15 February 2021 | <ul><li>**New! Osaka multizone region**: You can now create classic or VPC clusters in the Osaka, Japan (`jp-osa`) [location](/docs/containers?topic=containers-regions-and-zones).</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1535](/docs/containers?topic=containers-changelog#1197_1535), [1.18.15_1541](/docs/containers?topic=containers-changelog#11815_1541), and [1.17.17_1553](/docs/containers?topic=containers-changelog#11717_1553).</li></ul> |
 | 12 February 2021 | **Gateway firewalls and Calico policies**: For classic clusters in Frankfurt, updated the required IP addresses and ports that you must open in a [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private) or [Calico private network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3/eu-de){: external}.
 | 10 February 2021 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Gateway firewalls and Calico policies**: For classic clusters in Dallas, Washington D.C., and Frankfurt, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.</li></ul> |
 | 08 February 2021 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.223](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Istio add-on**: [Version 1.7.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#177) is released.</li></ul> |

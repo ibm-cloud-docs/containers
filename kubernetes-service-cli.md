@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-11"
+lastupdated: "2021-02-15"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -6198,7 +6198,7 @@ ibmcloud ks api-key reset --region REGION [-q]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
+<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -6238,7 +6238,7 @@ ibmcloud ks credential get --region REGION [-q] [--output json]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
+<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -6288,7 +6288,7 @@ ibmcloud ks credential set classic --infrastructure-api-key API_KEY --infrastruc
 <dd>Required: IBM Cloud infrastructure account API key. To view or generate an infrastructure API key, see [Managing classic infrastructure API keys](/docs/account?topic=account-classic_keys).</dd>
 
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
+<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -6322,7 +6322,7 @@ ibmcloud ks credential unset --region REGION [-q]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
+<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>-q</code></dt>
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
@@ -6385,7 +6385,7 @@ ibmcloud ks infra-permissions get --region REGION [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`. </dd>
+<dd>Required: Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`. </dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -6707,7 +6707,7 @@ ibmcloud ks vlan spanning get --region REGION [--output json] [-q]
 **Command options**:
 <dl>
 <dt><code>--region <em>REGION</em></code></dt>
-<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
+<dd>Specify a region in {{site.data.keyword.containerlong_notm}}: `jp-osa`, `jp-tok`, `au-syd`, `eu-de`, `eu-gb`, `us-east`, or `us-south`.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -6969,11 +6969,10 @@ If you need to list and work with resources from one region only, you can use th
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+* Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
-
-
 
 To use the global functionality, you can use the `ibmcloud ks api` command again to target the global endpoint: `https://containers.cloud.ibm.com`
 
@@ -7039,11 +7038,10 @@ If you need to list and work with resources from one region only, you can use th
 * Dallas (US South, us-south): `https://us-south.containers.cloud.ibm.com`
 * Frankfurt (EU Central, eu-de): `https://eu-de.containers.cloud.ibm.com`
 * London (UK South, eu-gb): `https://eu-gb.containers.cloud.ibm.com`
+* Osaka (jp-osa): `https://jp-osa.containers.cloud.ibm.com`
 * Sydney (AP South, au-syd): `https://au-syd.containers.cloud.ibm.com`
 * Tokyo (AP North, jp-tok): `https://jp-tok.containers.cloud.ibm.com`
 * Washington, D.C. (US East, us-east): `https://us-east.containers.cloud.ibm.com`
-
-
 
 To use the global functionality, you can use the `ibmcloud ks init` command again to target the global endpoint: `https://containers.cloud.ibm.com`
 
