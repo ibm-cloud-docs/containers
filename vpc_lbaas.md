@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-11"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks
 
@@ -618,6 +618,7 @@ Review the following default settings and limitations.
 {: shortdesc}
 
 * All VPC load balancers do not currently support UDP.
+* **Kubernetes 1.20 and later**: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters.
 * Private VPC application load balancers do not accept all traffic, only RFC 1918 traffic.
 * Private VPC network load balancers are currently not supported.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.

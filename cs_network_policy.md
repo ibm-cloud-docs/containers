@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -150,10 +150,11 @@ Review the following default Calico host policies that are automatically applied
 {: caption="Default Calico host policies for each cluster"}
 {: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Calico policy in column one and the description in column two."}
 
-A default Kubernetes policy that limits access to the Kubernetes Dashboard is also created. Kubernetes policies don't apply to the host endpoint, but to the `kube-dashboard` pod instead. This policy applies to all classic clusters.
+Default Kubernetes policies that limits access to the Kubernetes Dashboard are also created. Kubernetes policies don't apply to the host endpoint, but at the pod-level instead, and to all classic and VPC clusters.
 
 |Kubernetes policy|Description|
 |--- |--- |
+| `dashboard-metrics-scraper` | **Kubernetes 1.20 or later**: Provided in the `kube-system` namespace: Blocks all pods from accessing the Kubernetes Dashboard metrics scraper. This policy does not prevent the Kubernetes Dashboard from accessing the dashboard metrics. Further, this policy does not impact accessing the dashboard metrics from the {{site.data.keyword.cloud_notm}} console or from using `kubectl proxy`. If a pod requires access to the dashboard metrics scraper, deploy the pod in a namespace that has the `dashboard-metrics-scraper-policy: allow` label. |
 |`kubernetes-dashboard`|Provided in the `kube-system` namespace: Blocks all pods from accessing the Kubernetes Dashboard. This policy does not impact accessing the dashboard from the {{site.data.keyword.cloud_notm}} console or by using `kubectl proxy`. If a pod requires access to the dashboard, deploy the pod in a namespace that has the `kubernetes-dashboard-policy: allow` label.|
 {: caption="Default Kubernetes policies for each cluster"}
 {: summary="The first row in the table spans both columns. Read the rest of the rows from left to right, with the Kubernetes policy in column one and the description in column two."}
@@ -508,7 +509,7 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
   ```
   {: pre}
 
-4. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` and `allow-public-services-pods.yaml` policies. The policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other IBM Cloud services, you must manually add the subnets for those services to this policy.
+4. Optional: To allow your worker nodes to access other {{site.data.keyword.cloud_notm}} services over the public network, apply the `allow-public-services.yaml` and `allow-public-services-pods.yaml` policies. The policy allows access to the IP addresses for {{site.data.keyword.registrylong_notm}}, and if the services are available in the region, {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}}. To access other {{site.data.keyword.cloud_notm}} services, you must manually add the subnets for those services to this policy.
   ```
   calicoctl apply -f allow-public-services.yaml
   calicoctl apply -f allow-public-services-pods.yaml
@@ -577,7 +578,7 @@ If you use a Windows machine, you must include the `--config=<filepath>/calicoct
   ```
   {: pre}
 
-5. Optional: To allow your workers and pods to access {{site.data.keyword.registrylong_notm}} over the private network, apply the `allow-private-services.yaml` and `allow-private-services-pods.yaml` policies. To access other IBM Cloud services that support private service endpoints, you must manually add the subnets for those services to this policy.
+5. Optional: To allow your workers and pods to access {{site.data.keyword.registrylong_notm}} over the private network, apply the `allow-private-services.yaml` and `allow-private-services-pods.yaml` policies. To access other {{site.data.keyword.cloud_notm}} services that support private service endpoints, you must manually add the subnets for those services to this policy.
   ```
   calicoctl apply -f allow-private-services.yaml
   calicoctl apply -f allow-private-services-pods.yaml

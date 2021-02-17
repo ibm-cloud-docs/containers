@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-16"
+lastupdated: "2021-02-17"
 
 keywords: containers
 subcollection: containers
@@ -1712,6 +1712,9 @@ subcollection: containers
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
+* [Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#120_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#120_after)
 * [Version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119)
   * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#119_after)
@@ -1720,7 +1723,7 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#118_after_worker)
-* [Version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117)
+* [Deprecated: Version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117)
   * [Update before master](/docs/containers?topic=containers-cs_versions#117_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#117_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#117_after_worker)
@@ -1739,6 +1742,9 @@ subcollection: containers
 
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
+  * [Changelog for worker node fix pack 1.20.2_1523, released 3 February 2021](/docs/containers?topic=containers-changelog#1202_1523)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
   * [Changelog for worker node fix pack 1.19.7_1535, released 15 February 2021](/docs/containers?topic=containers-changelog#1197_1535)
   * [Changelog for worker node fix pack 1.19.7_1534, released 3 February 2021](/docs/containers?topic=containers-changelog#1197_1534)
@@ -1788,7 +1794,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
-* [Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+* [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
   * [Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021](/docs/containers?topic=containers-changelog#11717_1553)
   * [Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021](/docs/containers?topic=containers-changelog#11717_1552)
   * [Changelog for master fix pack 1.17.17_1551, released 19 January 2021](/docs/containers?topic=containers-changelog#11717_1551_master)

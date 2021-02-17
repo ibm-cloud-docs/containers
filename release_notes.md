@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-15"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 17 February 2021 | <ul><li>**New! Kubernetes 1.20**: You can create or [update](/docs/containers?topic=containers-cs_versions#cs_v120) your cluster to Kubernetes version 1.20. With Kubernetes 1.20, you get the latest stable enhancements from the community, as well as beta access to features such as [API server priority](/docs/containers?topic=containers-kubeapi-priority). For more information, see the [Kubernetes blog](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/){: external}.</li><li>**Deprecated Kubernetes 1.17**: With the release of Kubernetes 1.20, clusters that run version 1.17 are deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.</li></ul> |
 | 15 February 2021 | <ul><li>**New! Osaka multizone region**: You can now create classic or VPC clusters in the Osaka, Japan (`jp-osa`) [location](/docs/containers?topic=containers-regions-and-zones).</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1535](/docs/containers?topic=containers-changelog#1197_1535), [1.18.15_1541](/docs/containers?topic=containers-changelog#11815_1541), and [1.17.17_1553](/docs/containers?topic=containers-changelog#11717_1553).</li></ul> |
 | 12 February 2021 | **Gateway firewalls and Calico policies**: For classic clusters in Frankfurt, updated the required IP addresses and ports that you must open in a [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private) or [Calico private network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies/private-network-isolation/calico-v3/eu-de){: external}.
 | 10 February 2021 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Gateway firewalls and Calico policies**: For classic clusters in Dallas, Washington D.C., and Frankfurt, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.</li></ul> |

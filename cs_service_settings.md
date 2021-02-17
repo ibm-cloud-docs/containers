@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-10-13"
+  years: 2014, 2021
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,7 +40,6 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
@@ -72,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -84,10 +84,11 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -112,7 +113,7 @@ Review the default settings for the `kube-apiserver` master component in {{site.
 | Privileged pods | `allow-privileged=true` | 
 | Request headers | <ul><li><code>requestheader-client-ca-file=/mnt/etc/kubernetes-cert/ca.pem</code></li><li><code>requestheader-username-headers=X-Remote-User</code></li><li><code>requestheader-group-headers=X-Remote-Group</code></li><li><code>requestheader-extra-headers-prefix=X-Remote-Extra-</code></li></ul> | 
 | Number of client requests | <ul><li><code>k8s_max_requests_inflight: 1600</code></li><li><code>k8s_max_mutating_requests_inflight: 800</code></li></ul>|
-| Admission controllers | <ul><li><code>NamespaceLifecycle</code></li><li><code>LimitRanger</code></li><li><code>ServiceAccount</code></li><li><code>DefaultStorageClass</code></li><li><code>Initializers</code> (Kubernetes 1.13 or earlier)</li><li><code>MutatingAdmissionWebhook</code></li><li><code>ValidatingAdmissionWebhook</code></li><li><code>ResourceQuota</code></li><li><code>PodSecurityPolicy</code></li><li><code>DefaultTolerationSeconds</code></li><li><code>StorageObjectInUseProtection</code></li><li><code>PersistentVolumeClaimResize</code></li><li><code>Priority</code> (Kubernetes 1.11 or later)</li><li><code>NodeRestriction</code> (Kubernetes 1.14 or later)</li><li><code>TaintNodesByCondition</code> (Kubernetes 1.14 or later)</li><li><code>CertificateApproval</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSigning</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSubjectRestriction</code> (Kubernetes 1.18 or later)</li><li><code>DefaultIngressClass</code> (Kubernetes 1.18 or later)</li></ul> |
+| Admission controllers | <ul><li><code>NamespaceLifecycle</code></li><li><code>LimitRanger</code></li><li><code>ServiceAccount</code></li><li><code>DefaultStorageClass</code></li><li><code>Initializers</code> (Kubernetes 1.13 or earlier)</li><li><code>MutatingAdmissionWebhook</code></li><li><code>ValidatingAdmissionWebhook</code></li><li><code>ResourceQuota</code></li><li><code>PodSecurityPolicy</code></li><li><code>DefaultTolerationSeconds</code></li><li><code>StorageObjectInUseProtection</code></li><li><code>PersistentVolumeClaimResize</code></li><li><code>Priority</code> (Kubernetes 1.11 or later)</li><li><code>NodeRestriction</code> (Kubernetes 1.14 or later)</li><li><code>TaintNodesByCondition</code> (Kubernetes 1.14 or later)</li><li><code>CertificateApproval</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSigning</code> (Kubernetes 1.18 or later)</li><li><code>CertificateSubjectRestriction</code> (Kubernetes 1.18 or later)</li><li><code>DefaultIngressClass</code> (Kubernetes 1.18 or later)</li><li><code>RuntimeClass</code> (Kubernetes 1.20 or later)</li></ul> |
 | Kube audit log config | <ul><li><code>audit-log-maxsize=128</code></li><li><code>audit-log-maxage=2</code></li><li><code>audit-log-maxbackup=2</code></li></ul> | 
 | Feature gates | See [Feature gates](#feature-gates) | 
 | TLS cipher support | <p><strong>TLS version =< 1.2 (Kubernetes version 1.19 and earlier)</strong>:</p><ul><li><code>TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384</code></li><li><code>TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256</code></li><li><code>TLS_ECDHE_ECDSA_WITH_CHACHA20_POLY1305_SHA256</code></li><li><code>TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384</code></li><li><code>TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256</code></li><li><code>TLS_ECDHE_RSA_WITH_CHACHA20_POLY1305_SHA256</code></li></ul><p><strong>TLS version 1.3 (Kubernetes version 1.19 and later)</strong>:</p><ul><li><code>TLS_AES_128_GCM_SHA256</code></li><li><code>TLS_CHACHA20_POLY1305_SHA256</code></li><li><code>TLS_AES_256_GCM_SHA384</code></li></ul>|
@@ -194,6 +195,7 @@ Review the feature gates that are applied to all master and worker node componen
 
 | Kubernetes version | Default feature gates |
 |---|---|
+| 1.20 | <ul><li><code>AllowInsecureBackendProxy=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 | 1.19 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li><li><code>SCTPSupport=false</code></li><li><code>ServiceAppProtocol=false</code></li></ul>|
 | 1.18 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul>|
 | 1.17 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul> | 
@@ -202,4 +204,3 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
 {: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
-
