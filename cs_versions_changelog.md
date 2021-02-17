@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-02-15"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -114,7 +114,50 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 </br>
 
+## Version 1.20 changelog
+{: #120_changelog}
 
+Review the version 1.20 changelog.
+{: shortdesc}
+
+### Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021
+{: #1202_1528}
+
+The following table shows the changes that are included in the version updates for `1.20.2_1528` master fix pack and `1.20.2_1527` worker node fix pack.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| Calico | v3.16.5 | v3.17.2 | See the [Calico release notes](https://docs.projectcalico.org/releases){: external}. |
+| Cluster health image | v1.2.6 | v1.2.8 | Updated to use `Go` version 1.15.7. Updated image to implement additional IBM security controls. |
+| Gateway-enabled cluster controller | 1195 | 1232 | Updated to use `Go` version 1.15.7. |
+| GPU device plug-in and installer | af5a6cb | 1c41e4b | Updated to support the Kubernetes 1.20 release. |
+| IBM Calico extension | 567 | 618 | Updated to use `Go` version 1.15.7. |
+| {{site.data.keyword.cloud_notm}} Controller Manager | v1.19.7-4 | v1.20.2-15 | Updated to support the Kubernetes 1.20.2 release and to use `calicoctl` version 3.17.2. Updated to implement additional IBM security controls.<p class="note">Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters.</p> |
+| {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor | 385 | 388 | Improved the retry logic for provisioning persistent volume claims (PVCs). |
+| {{site.data.keyword.cloud_notm}} RBAC Operator | f859228 | 86de2b7 | Updated to use `Go` version 1.15.7. |
+| Key Management Service provider | v2.2.3 | v2.2.4 | Updated image to implement additional IBM security controls. |
+| Kubernetes | v1.19.7 | v1.20.2 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.20.2){: external}. |
+| Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](/docs/containers?topic=containers-service-settings#feature-gates). |
+| Kubernetes Dashboard | v2.0.5 | v2.1.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.1.0){: external}. |
+| Kubernetes Dashboard metrics scraper configuration | N/A | N/A | [Default Kubernetes network policy added](/docs/containers?topic=containers-network_policies#default_policy) to block most pods from accessing the Kubernetes Dashboard metrics. |
+| Kubernetes Metrics Server | v0.3.7 | v0.4.2 | See the [Kubernetes Metrics Server release notes](https://github.com/kubernetes-incubator/metrics-server/releases/tag/v0.4.2){: external}. |
+| Kubernetes NodeLocal DNS cache | 1.15.14 | 1.16.0 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.16.0){: external}. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 1078 | 1165 | Updated to run as a non-root user by default, with privileged escalation as needed. Updated to use `Go` version 1.15.7. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.7_1532 (master) and 1.19.7_1535 (worker node)." caption-side="top"}
+
+### Changelog for worker node fix pack 1.20.2_1523, released 3 February 2021
+{: #1202_1523}
+
+The following table shows the changes that are included in the worker node fix pack `1.20.2_1523`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Metadata updates | N/A | N/A | Updated the worker node version fix pack metadata for internal documentation purposes. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.7_1534" caption-side="top"}
 
 ## Version 1.19 changelog
 {: #119_changelog}
@@ -382,7 +425,7 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 | Kubernetes configuration | N/A | N/A | Disabled the Kubernetes `SCTPSupport` and `ServiceAppProtocol` feature gates. |
 | Kubernetes DNS autoscaler | 1.7.1 | 1.8.3 | See the [Kubernetes DNS autoscaler release notes](https://github.com/kubernetes-sigs/cluster-proportional-autoscaler/releases/tag/1.8.3){: external}. In addition, the Kubernetes DNS autoscaler configuration was updated to include unscheduable worker nodes in scaling calculations. |
 | Kubernetes NodeLocal DNS cache | 1.15.13 | 1.15.14 | See the [Kubernetes NodeLocal DNS cache release notes](https://github.com/kubernetes/dns/releases/tag/1.15.14){: external}. |
-| Load balancer and load balancer monitor for IBM Cloud Provider | 223 | 234 | Updated to use `Go` version 1.15.2. |
+| Load balancer and load balancer monitor for {{site.data.keyword.cloud_notm}} Provider | 223 | 234 | Updated to use `Go` version 1.15.2. |
 | Operator Lifecycle Manager Catalog | v1.6.1 | v1.14.0 | See the [Operator Lifecycle Manager Catalog release notes](https://github.com/operator-framework/operator-registry/releases/tag/v1.14.0){: external}. |
 | Operator Lifecycle Manager | 0.14.1-IKS-1 | 0.16.1 | See the [Operator Lifecycle Manager release notes](https://github.com/operator-framework/operator-lifecycle-manager/releases/tag/0.16.1){: external}. |
 {: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
@@ -910,11 +953,14 @@ The following table shows the changes that are included in patch update 1.18.2_1
 
 <br />
 
-## Version 1.17 changelog
+## Deprecated: Version 1.17 changelog
 {: #117_changelog}
 
 Review the version 1.17 changelog.
 {: shortdesc}
+
+Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
+{: deprecated}
 
 ### Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021
 {: #11717_1553}

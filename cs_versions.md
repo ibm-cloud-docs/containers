@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -100,9 +100,10 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
-* [Kubernetes 1.19 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.20 release notes](https://kubernetes.io/docs/setup/release/notes/){: external}
+* [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
-* [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* **Deprecated**: [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 
 ## Update types
@@ -143,12 +144,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.19.7
+*   Latest: 1.20.2
 *   Default: 1.18.15
-*   Other: 1.17.17
+*   Other: 1.19.7
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 
+*   Deprecated: 1.17.17
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16
 
 <br>
@@ -195,6 +196,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <tbody>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.20](#cs_v120)</td>
+  <td>16 Feb 2021</td>
+  <td>Feb 2022 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.19](#cs_v119)</td>
   <td>13 Oct 2020</td>
   <td>Oct 2021 `†`</td>
@@ -203,13 +210,13 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.18](#cs_v118)</td>
   <td>11 May 2020</td>
-  <td>Jun 2021 `†`</td>
+  <td>Aug 2021 `†`</td>
 </tr>
   <tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.17](#cs_v117)</td>
   <td>10 Feb 2020</td>
-  <td>Mar 2021 `†`</td>
+  <td>30 Jun 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -318,10 +325,49 @@ If you wait until your cluster is two or more minor versions behind the oldest s
 This information summarizes updates that are likely to have impact on deployed apps when you update a cluster to a new version from the previous version. For a complete list of changes, review the [community Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG), [IBM version changelogs](/docs/containers?topic=containers-changelog){: external}, and [Kubernetes helpful warnings](https://kubernetes.io/blog/2020/09/03/warnings/){: external}.
 {: shortdesc}
 
+-  Version 1.20 [preparation actions](#cs_v120).
 -  Version 1.19 [preparation actions](#cs_v119).
 -  Version 1.18 [preparation actions](#cs_v118).
--  Version 1.17 [preparation actions](#cs_v117).
+-  **Deprecated**: Version 1.17 [preparation actions](#cs_v117).
 -  [Archive](#k8s_version_archive) of unsupported versions.
+
+<br />
+
+
+## Version 1.20
+{: #cs_v120}
+
+
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.20.
+{: shortdesc}
+
+### Update before master
+{: #120_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unavailable**: Select cluster add-ons | Before you update your cluster, check that you do not need the following cluster add-ons, which are not supported in Kubernetes 1.20.<ul><li>[Cluster autoscaler](/docs/containers?topic=containers-ca_changelog)</li><li>[Managed Istio](/docs/containers?topic=containers-istio-changelog)</li></ul>|
+| **Unsupported:** Open access to the Kubernetes Dashboard metrics scraper | A Kubernetes network policy is added to protect access to the Kubernetes Dashboard metrics scraper. If a pod requires access to the dashboard metrics scraper, deploy the pod in a namespace that has the `dashboard-metrics-scraper-policy: allow` label. For more information, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies). |
+| Pod exec probe timeout handling | [Pod exec probes now honor the `timeoutSeconds` field](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#exec-probe-timeout-handling){: external}. If an exec probe does not set the `timeoutSeconds` field, the default of `1` second is used. If the default value is not sufficient for your app, update the pod exec probe.| 
+| Resolve non-deterministic behavior of owner references | Kubernetes garbage collector is updated to resolve non-deterministic behavior of owner references. Before you update your cluster, review the [Kubernetes community recommendation](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.20.md#urgent-upgrade-notes){: external} that you run the [kubectl-check-ownerreferences](https://github.com/kubernetes-sigs/kubectl-check-ownerreferences){: external} tool to locate existing objects with invalid owner references. |
+{: caption="Changes to make before you update the master to Kubernetes 1.20" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after master
+{: #120_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported:** `kubectl autoscale --generator` removed | The deprecated `--generator` flag is removed from the `kubectl autoscale` command. If your scripts rely on this flag, update them. |
+{: caption="Changes to make after you update the master to Kubernetes 1.20" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
 <br />
 
@@ -357,6 +403,7 @@ The following table shows the actions that you must take after you update the Ku
 | Type | Description|
 | ---- | ---------- |
 | Calico data store driver change | When you update your cluster to version 1.19, Calico is updated to use Kubernetes data store driver (KDD). If you have any automation that depends on the Calico configuration file for your cluster, first download the new KDD-based Calico configuration file by running `ibmcloud ks cluster config -c <cluster_name_or_ID> --network`. Then, update your automation to use the new Calico configuration file. Additionally, because worker nodes can no longer access etcd with admin keys, ensure that you update your worker nodes so that the previous etcd secrets are removed. |
+| Certificate signing request (CSR) | The `CertificateSigningRequest` API is promoted to `certificates.k8s.io/v1`. You can use the `CertificateSigningRequest` API to generate server certificates that are signed by the cluster certificate authority (CA) for TLS communication within the cluster. For more details, see the [Kubernetes version 1.19 changelog](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.19.md#api-change-1){: external} and [Kubernetes CSR documentation](https://kubernetes.io/docs/reference/access-authn-authz/certificate-signing-requests/){: external}.<br><br>If you are currently using the `v1beta CertificateSigningRequest` API, make the following changes before you update to `v1`. For an example, see [Manage TLS Certificates in a Cluster](https://kubernetes.io/docs/tasks/tls/managing-tls-in-a-cluster/){: external}.<ul><li>The Kubernetes `CertificateSigningRequest` API includes a mandatory `signerName` field. Use `kubernetes.io/kubelet-serving` when you create server certificates.</li><li>The CSR subjects must include `organizations` that are exactly `["system:nodes"]`.</li><li>The CSR common name must start with `system:node:`.</li><li>The CSR subject alternative names must include the service or pod DNS hosts names and IP addresses that are used to connect to the server.</li></ul>|
 | CoreDNS pod autoscaling configuration | Kubernetes DNS autoscaler configuration is updated to include unscheduable worker nodes in scaling calculations. To improve cluster DNS availability, you can set the `"includeUnschedulableNodes":true` parameter when [Autoscaling the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_autoscale). |
 | Ingress resource fields | In the Ingress resource definition, several fields are changed, including the API version, service name, and service port, and added the `pathType` field. To update your Ingress resources to the new format, see the example YAML file in the documentation for the [community Kubernetes Ingress setup](/docs/containers?topic=containers-ingress-types#alb-comm-create) or for the [deprecated custom {{site.data.keyword.containerlong_notm}} Ingress setup](/docs/containers?topic=containers-ingress#public_inside_4). |
 | Kubernetes `seccomp` support graduates to general availability (GA) | The support for `seccomp.security.alpha.kubernetes.io/pod` and `container.seccomp.security.alpha.kubernetes.io/...` annotations are now deprecated, and are planned for removal in Kubernetes version 1.22. A `seccompProfile` field is now added to the pod and container `securityContext` objects. The Kubernetes version skew handling automatically converts the new field into the annotations and vice versa. You do not have to change your existing workloads, but you can begin the conversion in preparation for the removal of the annotations before version 1.22. For more information, see [Configure a Security Context for a Pod or Container](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
@@ -440,13 +487,16 @@ The following table shows the actions that you must take after you update your w
 
 <br />
 
-## Version 1.17
+## Deprecated: Version 1.17
 {: #cs_v117}
 
 <p><img src="images/certified_kubernetes_1x17.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.17 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.17 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.17.
 {: shortdesc}
+
+Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](#cs_v118) as soon as possible.
+{: deprecated}
 
 ### Update before master
 {: #117_before}
