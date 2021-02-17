@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-17"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -265,13 +265,13 @@ Before you begin:
 
   To apply a taint to all existing and future worker nodes in a worker pool:
   ```
-  ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoSchedule --taint dedicated=edge:NoExecute
+  ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoExecute
   ```
   {: pre}
 
   To apply a taint to individual worker nodes:
   ```
-  kubectl taint node -l dedicated=edge dedicated=edge:NoSchedule dedicated=edge:NoExecute
+  kubectl taint node -l dedicated=edge dedicated=edge:NoExecute
   ```
   {: pre}
 
