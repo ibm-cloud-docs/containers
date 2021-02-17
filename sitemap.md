@@ -2409,6 +2409,7 @@ subcollection: containers
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
 * [Cluster cannot update because of broken webhook](/docs/containers?topic=containers-cs_troubleshoot#webhooks_update)
+* [Cluster image security enforcement (Portieris) install cancelled](/docs/containers?topic=containers-cs_troubleshoot#portieris_enable)
 * [Cluster remains in a pending State](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_pending)
 * [Unable to view or work with a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_cluster_access)
 * [Cannot access resources in a cluster](/docs/containers?topic=containers-cs_troubleshoot#cs_firewall)
