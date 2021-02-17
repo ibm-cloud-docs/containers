@@ -633,6 +633,9 @@ subcollection: containers
 * [Creating a priority class](/docs/containers?topic=containers-pod_priority#create_priority_class)
 * [Assigning priority to your pods](/docs/containers?topic=containers-pod_priority#prioritize)
 
+[Setting Kubernetes API priority and fairness](/docs/containers?topic=containers-kubeapi-priority)
+* [Reviewing default flow schema and priority levels](/docs/containers?topic=containers-kubeapi-priority#kubeapi-default-priority)
+
 
 ## Securing the cluster network
 {: #sitemap_securing_the_cluster_network}

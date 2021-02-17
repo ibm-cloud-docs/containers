@@ -101,6 +101,7 @@ Kubernetes Service
         cs_encrypt.md
         cs_psp.md
         cs_pod_priority.md
+        cs_kubeapi_priority.md
 
     {: .topicgroup}
     Securing the cluster network
