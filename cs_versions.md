@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-02-23"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -144,9 +144,9 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.20.2
-*   Default: 1.18.15
-*   Other: 1.19.7
+*   Latest: 1.20.4
+*   Default: 1.18.16
+*   Other: 1.19.8
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.17.17
@@ -162,7 +162,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.18.15+IKS
+Server Version: v1.18.16+IKS
 ```
 {: screen}
 
@@ -337,7 +337,7 @@ This information summarizes updates that are likely to have impact on deployed a
 ## Version 1.20
 {: #cs_v120}
 
-
+<p> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.20 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.20.
 {: shortdesc}

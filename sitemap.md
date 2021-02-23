@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-02-23"
 
 keywords: containers
 subcollection: containers
@@ -397,7 +397,7 @@ subcollection: containers
 [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters)
 * [Understanding network basics of VPC clusters](/docs/containers?topic=containers-plan_clusters#plan_vpc_basics)
   * [Worker-to-worker communication: VPC subnets](/docs/containers?topic=containers-plan_clusters#vpc-worker-worker)
-  * [Worker-to-master and user-to-master communication: Service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
+  * [Worker-to-master and user-to-master communication: Virtual private endpoints or cloud service endpoints](/docs/containers?topic=containers-plan_clusters#vpc-workeruser-master)
   * [Worker communication to other services or networks](/docs/containers?topic=containers-plan_clusters#vpc-worker-services-onprem)
   * [External communication to apps that run on worker nodes](/docs/containers?topic=containers-plan_clusters#vpc-external-workers)
 * [Example scenarios for VPC cluster network setups](/docs/containers?topic=containers-plan_clusters#vpc-scenarios)
@@ -787,6 +787,7 @@ subcollection: containers
 * [Overview of VPC networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-vpc-subnets#vpc_basics)
   * [Subnets](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets)
   * [Public gateways](/docs/containers?topic=containers-vpc-subnets#vpc_basics_pgw)
+  * [Virtual private endpoints (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe)
   * [Network segmentation](/docs/containers?topic=containers-vpc-subnets#vpc_basics_segmentation)
   * [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations)
 * [Creating a VPC subnet and attaching a public gateway](/docs/containers?topic=containers-vpc-subnets#create_vpc_subnet)
@@ -1746,9 +1747,10 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
-  * [Changelog for worker node fix pack 1.20.2_1523, released 3 February 2021](/docs/containers?topic=containers-changelog#1202_1523)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for master fix pack 1.19.8_1537, released 22 February 2021](/docs/containers?topic=containers-changelog#1198_1537)
   * [Changelog for worker node fix pack 1.19.7_1535, released 15 February 2021](/docs/containers?topic=containers-changelog#1197_1535)
   * [Changelog for worker node fix pack 1.19.7_1534, released 3 February 2021](/docs/containers?topic=containers-changelog#1197_1534)
   * [Changelog for worker node fix pack 1.19.7_1533, released 1 February 2021](/docs/containers?topic=containers-changelog#1197_1533)
@@ -1766,6 +1768,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.16_1543, released 22 February 2021](/docs/containers?topic=containers-changelog#11816_1543)
   * [Changelog for worker node fix pack 1.18.15_1541, released 15 February 2021](/docs/containers?topic=containers-changelog#11815_1541)
   * [Changelog for worker node fix pack 1.18.15_1540, released 3 February 2021](/docs/containers?topic=containers-changelog#11815_1540)
   * [Changelog for worker node fix pack 1.18.15_1539, released 1 February 2021](/docs/containers?topic=containers-changelog#11815_1539)
@@ -1798,6 +1801,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.17_1555, released 22 February 2021](/docs/containers?topic=containers-changelog#11717_1555)
   * [Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021](/docs/containers?topic=containers-changelog#11717_1553)
   * [Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021](/docs/containers?topic=containers-changelog#11717_1552)
   * [Changelog for master fix pack 1.17.17_1551, released 19 January 2021](/docs/containers?topic=containers-changelog#11717_1551_master)
@@ -2408,6 +2412,7 @@ subcollection: containers
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot#orphaned)
+  * [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-cs_troubleshoot#vpe-ts)
   * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cs_troubleshoot#cs_totp)
 * [Unable to create a cluster in the console due to `No VPC is available` error](/docs/containers?topic=containers-cs_troubleshoot#ts_no_vpc)
 * [Cluster create error cannot pull images from {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-cs_troubleshoot#ts_image_pull_create)
@@ -2423,6 +2428,7 @@ subcollection: containers
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
+  * [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-cs_troubleshoot_clusters#vpe-ts)
   * [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_totp)
 * [Cannot add worker nodes due to an invalid VLAN ID](/docs/containers?topic=containers-cs_troubleshoot_clusters#suspended)
 * [Replacing a worker node does not create a worker node](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off)
