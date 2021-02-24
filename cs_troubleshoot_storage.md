@@ -7,6 +7,7 @@ lastupdated: "2021-02-24"
 keywords: kubernetes, iks, help, debug
 
 subcollection: containers
+content-type: troubleshoot
 
 ---
 

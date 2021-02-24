@@ -7,6 +7,7 @@ lastupdated: "2021-02-24"
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
 subcollection: containers
+content-type: troubleshoot
 
 ---
 
