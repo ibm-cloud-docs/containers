@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-23"
+lastupdated: "2021-02-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 24 February 2021 | **Default version**: Kubernetes 1.19 is now the default cluster version.<br><br> |
 | 23 February 2021 | **VPE**: In VPC clusters that run Kubernetes version 1.20 or later, worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe). |
 | 22 February 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.4_1530](/docs/containers?topic=containers-changelog#1204_1530), [1.19.8_1537](/docs/containers?topic=containers-changelog#1198_1537), [1.18.16_1543](/docs/containers?topic=containers-changelog#11816_1543), and [1.17.17_1555](/docs/containers?topic=containers-changelog#11717_1555). |
 | 20 February 2021 | **Certified Kubernetes**: The Kubernetes version [1.20](/docs/containers?topic=containers-cs_versions#cs_v120) release is now certified. |

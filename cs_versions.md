@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-23"
+lastupdated: "2021-02-24"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -122,7 +122,7 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
 <dl>
   <dt>Major and minor updates (1.x)</dt>
     <dd>First, [update your master node](/docs/containers?topic=containers-update#master) and then [update the worker nodes](/docs/containers?topic=containers-update#worker_node).
-    <ul><li>You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.17 and you want to update to 1.19, you must update to 1.18 first.</li>
+    <ul><li>You cannot update a Kubernetes master two or more minor versions ahead (n+2). For example, if your current master is version 1.18 and you want to update to 1.20, you must update to 1.19 first.</li>
     <li>Worker nodes cannot run a Kubernetes major or minor version that is greater than the masters. Additionally, your worker nodes can be only up to two versions behind the master version (`n-2`).</li>
     <li>If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. Make sure to keep your Kubernetes cluster and [CLI versions](/docs/containers?topic=containers-cs_cli_install#kubectl) up-to-date.</li></ul></dd>
   <dt>Patch updates (x.x.4_1510)</dt>
@@ -145,8 +145,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 **Supported Kubernetes versions**:
 *   Latest: 1.20.4
-*   Default: 1.18.16
-*   Other: 1.19.8
+*   Default: 1.19.8
+*   Other: 1.18.16
 
 **Deprecated and unsupported Kubernetes versions**:
 *   Deprecated: 1.17.17
@@ -162,7 +162,7 @@ kubectl version  --short | grep -i server
 
 Example output:
 ```
-Server Version: v1.18.16+IKS
+Server Version: v1.19.8+IKS
 ```
 {: screen}
 
