@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-23"
+lastupdated: "2021-02-24"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 24 February 2021 | **Default version**: Kubernetes 1.19 is now the default cluster version.<br><br>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 23 February 2021 | **VPE**: In VPC clusters that run Kubernetes version 1.20 or later, worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe). |
 | 22 February 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.4_1530](/docs/containers?topic=containers-changelog#1204_1530), [1.19.8_1537](/docs/containers?topic=containers-changelog#1198_1537), [1.18.16_1543](/docs/containers?topic=containers-changelog#11816_1543), and [1.17.17_1555](/docs/containers?topic=containers-changelog#11717_1555). |
 | 20 February 2021 | **Certified Kubernetes**: The Kubernetes version [1.20](/docs/containers?topic=containers-cs_versions#cs_v120) release is now certified. |
@@ -118,7 +119,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 | 10 February 2021 | <ul><li>**Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2452](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image.</li><li>**Gateway firewalls and Calico policies**: For classic clusters in Dallas, Washington D.C., and Frankfurt, updated the required IP addresses and ports that you must open in a [public gateway firewall device](/docs/containers?topic=containers-firewall#firewall_outbound), [private gateway device firewall](/docs/containers?topic=containers-firewall#firewall_private), or [Calico network isolation policies](https://github.com/IBM-Cloud/kube-samples/tree/master/calico-policies){: external}.</li></ul> |
 | 08 February 2021 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.223](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Istio add-on**: [Version 1.7.7 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#177) is released.</li></ul> |
 | 04 February 2021 | **Worker node modifications**: Summarized the modifications that you can make to the [default worker node settings](/docs/containers?topic=containers-kernel#worker-default).|
-| 03 February 2021 | **Worker node versions**: A worker node fix pack for internal documentation updates is available for Kubernetes version [1.20.2_1523](/docs/containers?topic=containers-changelog#1202_1523), [1.19.7_1534](/docs/containers?topic=containers-changelog#1197_1534), and [1.18.15_1540](/docs/containers?topic=containers-changelog#11815_1540).|
+| 03 February 2021 | **Worker node versions**: A worker node fix pack for internal documentation updates is available for Kubernetes version [1.19.7_1534](/docs/containers?topic=containers-changelog#1197_1534), and [1.18.15_1540](/docs/containers?topic=containers-changelog#11815_1540).|
 | 01 February 2021 | <ul><li>**Unsupported: Kubernetes version 1.16**: Clusters that run Kubernetes version 1.16 are unsupported as of 31 January 2021. To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.19.7_1533](/docs/containers?topic=containers-changelog#1197_1533), [1.18.15_1539](/docs/containers?topic=containers-changelog#11815_1539), and [1.17.17_1552](/docs/containers?topic=containers-changelog#11717_1552).</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in February 2021"}
