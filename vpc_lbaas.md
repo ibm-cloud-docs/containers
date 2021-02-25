@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks
 
@@ -111,7 +111,7 @@ The following table describes the basic characteristics of each load balancing o
 
 |Characteristic|Application Load Balancer for VPC|Network Load Balancer for VPC|
 |--------------|---------------------|-----------------------------|
-|Supported VPC Gen and Kubernetes version|Gen 1 and 2, all versions|Gen 2 and 1.19 only|
+|Supported Kubernetes version|All versions|1.19 and later only|
 |Transport layer|Layer 7|Layer 4|
 |Supported protocols|TCP|TCP|
 |Application access|Hostname|Hostname and static IP address|
@@ -367,7 +367,7 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
 **Before you begin**:
 * Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC application load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2 clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC application load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 * To view VPC application load balancers, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
   ```
   ibmcloud plugin install infrastructure-service
@@ -441,14 +441,14 @@ Do not confuse the Application Load Balancer for VPC with Ingress applications l
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet`</td>
-    <td>Kubernetes version 1.18 only: Annotation to specify one or more subnets that the VPC application load balancer service deploys to. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the VPC application load balancer deploys to a different subnet in the same VPC, the VPC application load balancer can still route traffic to your worker nodes on the cluster subnets. To see subnets in all resource groups, run `ibmcloud ks subnets --provider (vpc-classic|vpc-gen2) --vpc-id <vpc> --zone <zone>`.</td>
+    <td>Kubernetes version 1.18 only: Annotation to specify one or more subnets that the VPC application load balancer service deploys to. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the VPC application load balancer deploys to a different subnet in the same VPC, the VPC application load balancer can still route traffic to your worker nodes on the cluster subnets. To see subnets in all resource groups, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.</td>
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>
     <td>Annotation to specify a VPC zone that your cluster is attached to. When you specify a zone in this annotation, two processes occur:<ul>
     <li>The VPC application load balancer is deployed to the same subnet in that zone that your worker nodes are connected to.</li>
     <li>Only worker nodes in your cluster in this zone are configured to receive traffic from the VPC application load balancer.</li></ul>
-    To see zones, run `ibmcloud ks zone ls --provider (vpc-classic|vpc-gen2)`.<p class="note">To place the load balancer in a specific zone, you must specify this annotation when you create the load balancer. If you later change this annotation to a different zone, the load balancer itself is not moved to the new zone. However, the load balancer is reconfigured to send traffic to only worker nodes in the new zone.</br></br>If the `dedicated: edge` label is set on worker nodes and you specify this annotation, then only edge nodes in the specified zone are configured to receive traffic. Edge nodes in other zones and non-edge nodes in the specified zone do not receive traffic from the load balancer.</p></td>
+    To see zones, run `ibmcloud ks zone ls --provider vpc-gen2`.<p class="note">To place the load balancer in a specific zone, you must specify this annotation when you create the load balancer. If you later change this annotation to a different zone, the load balancer itself is not moved to the new zone. However, the load balancer is reconfigured to send traffic to only worker nodes in the new zone.</br></br>If the `dedicated: edge` label is set on worker nodes and you specify this annotation, then only edge nodes in the specified zone are configured to receive traffic. Edge nodes in other zones and non-edge nodes in the specified zone do not receive traffic from the load balancer.</p></td>
   </tr>
   <tr>
     <td>`selector`</td>
@@ -576,16 +576,10 @@ To register a VPC load balancer hostname with a DNS subdomain:
 2. Create a DNS subdomain for the load balancer hostname.
   * **IBM-provided subdomain**: Use `nlb-dns` commands to generate a subdomain with a TLS certificate for the VPC load balancer hostname. {{site.data.keyword.cloud_notm}} takes care of generating and maintaining the wildcard TLS certificate for the subdomain for you.
     1. Create a DNS subdomain and TLS certificate.
-      * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
-        ```
-        ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-        ```
-        {: pre}
-      * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
-        ```
-        ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-        ```
-        {: pre}
+      ```
+      ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
+      ```
+      {: pre}
 
     2. Verify that the subdomain is created. For more information, see [Understanding the subdomain format](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname_format).
       ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -241,12 +241,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --cluster <cluster_name_or_id>
     ```
     {: pre}
-  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
-    ```
-    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
-    ```
-    {: pre}
-  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2:
     ```
     ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --cluster <cluster_name_or_id>
     ```
@@ -291,12 +286,7 @@ When you enable the BookInfo add-on in your cluster, the Istio gateway `bookinfo
     ibmcloud ks nlb-dns create classic --ip $INGRESS_IP --secret-namespace istio-system --cluster <cluster_name_or_id>
     ```
     {: pre}
-  * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
-    ```
-    ibmcloud ks nlb-dns create vpc-classic --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
-    ```
-    {: pre}
-  * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2:
     ```
     ibmcloud ks nlb-dns create vpc-gen2 --lb-host $GATEWAY_URL --secret-namespace istio-system --cluster <cluster_name_or_id>
     ```
@@ -747,12 +737,7 @@ To publicly expose apps:
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```
     {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-    ```
-    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
-    ```
-    {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2 clusters:
     ```
     ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```
@@ -913,12 +898,7 @@ To publicly expose apps:
     ibmcloud ks nlb-dns create classic --cluster <cluster_name_or_id> --ip <LB_IP> [--ip <LB_zone2_IP> ...]
     ```
     {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1 clusters:
-    ```
-    ibmcloud ks nlb-dns create vpc-classic -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
-    ```
-    {: pre}
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2 clusters:
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2 clusters:
     ```
     ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
     ```

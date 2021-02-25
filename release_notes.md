@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 26 February 2021 | **End of service of VPC Gen 1**: Removed steps for using VPC Gen 1 compute. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2). [Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial) before 31 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted. |
 | 25 February 2021 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 24 February 2021 | **Default version**: Kubernetes 1.19 is now the default cluster version. |
 | 23 February 2021 | **VPE**: In VPC clusters that run Kubernetes version 1.20 or later, worker node communication to the Kubernetes master is now established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe). |

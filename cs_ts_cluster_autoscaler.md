@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks, help, debug
 
@@ -102,7 +102,6 @@ As you use the [cluster autoscaler](/docs/containers?topic=containers-ca) for {{
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 ## Debugging the cluster autoscaler
@@ -332,7 +331,5 @@ To verify that the issue is a secret validation issue, get the logs from the `se
     {: pre}
 
 4. Update your `storage-secret-store` secret with the requried IAM permissions by [resetting your credentials](/docs/openshift?topic=openshift-cs_troubleshoot_storage#missing_permissions).
-
-
 
 

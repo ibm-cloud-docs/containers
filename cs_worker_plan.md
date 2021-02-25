@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-15"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -232,9 +232,6 @@ The following table shows available worker node flavors for classic and VPC clus
 If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
 
-VPC Generation 1 compute is deprecated. For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).
-{: deprecated}
-
 | Name and use case | Cores/ Memory | Primary/ Secondary disk | Network speed |
 |:-----------------|:-----------------|:------------------|:-------------|
 | **Virtual, u3c.2x4**: Use this smallest size VM for quick testing, proofs of concept, and other light workloads. | 2 / 4 GB | 25 GB / 100 GB | 1000 Mbps |
@@ -255,25 +252,6 @@ VPC Generation 1 compute is deprecated. For more information, see [About Migrati
 {: #classic-worker-vm-flavors}
 {: tab-title="Classic clusters"}
 {: tab-group="vm-worker-flavors"}
-
-
-| Name and use case | Cores/ Memory | Primary disk | Network speed `*` |
-|:-----------------|:-----------------|:------------------|:-------------|
-| **Virtual, b2.4x16**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for testing, development, and other light workloads. | 4 / 16 GB | 100 GB | 1000 Mbps |
-| **Virtual, b2.8x32**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for light to mid-sized workloads. | 8 / 32 GB | 100 GB | 1000 Mbps
-| **Virtual, b2.16x64**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for mid-sized workloads.  | 16 / 64 GB | 100 GB | 1000 Mbps |
-| **Virtual, b2.32x128**: Select this balanced VM if you want a 1:4 ratio of CPU and memory resources from the worker node for large-sized workloads.| 32 / 128 GB | 100 GB | 1000 Mbps |
-| **Virtual, c2.2x4**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for light-sized workloads. | 2 / 4 GB | 100 GB | 1000 Mbps |
-| **Virtual, c2.16x32**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid-sized workloads. | 16 / 32 GB | 100 GB | 1000 Mbps |
-| **Virtual, c2.32x64**: Use this flavor when you want a 1:2 ratio of CPU and memory resources from the worker node for mid to large-sized workloads. | 32 / 64 GB | 100 GB | 1000 Mbps |
-| **Virtual, m2.8x64**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for light to mid-sized workloads that require more memory. | 8 / 64 GB | 100 GB | 1000 Mbps |
-| **Virtual, m2.16x128**: Use this flavor when you want a 1:8 ratio of CPU and memory resources from the worker node for mid to large-sized workloads that require more memory. | 16 / 128 GB | 100 GB | 1000 Mbps |
-{: class="simple-tab-table"}
-{: caption="Available worker node flavors for VPC Gen 1 compute clusters" caption-side="top"}
-{: #vpc-classic-worker-vm-flavors}
-{: tab-title="VPC Gen 1 compute"}
-{: tab-group="vm-worker-flavors"}
-
 
 | Name and use case | Cores / Memory | Primary disk | Network speed `*` |
 |:-----------------|:-----------------|:------------------|:-------------|
@@ -299,8 +277,6 @@ VPC Generation 1 compute is deprecated. For more information, see [About Migrati
 {: #vpc-gen2-worker-vm-flavors}
 {: tab-title="VPC Gen 2 compute"}
 {: tab-group="vm-worker-flavors"}
-
-`*` VPC Gen 1: For more information about network performance caps for virtual machines, see [VPC Gen 1 compute profiles](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles).
 
 `*` VPC Gen 2: For more information about network performance caps for virtual machines, see [VPC Gen 2 compute profiles](/docs/vpc?topic=vpc-profiles). The network speeds refer to the speeds of the worker node interfaces. The maximum speed available to your worker nodes is `16Gbps`. Because IP in IP encapsulation is required for traffic between pods that are on different VPC Gen 2 worker nodes, data transfer speeds between pods on different worker nodes might be slower, about half the compute profile network speed. Overall network speeds for apps that you deploy to your cluster depend on the worker node size and application's architecture.
 
