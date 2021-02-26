@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-02-26"
 
 keywords: kubernetes, iks
 
@@ -107,7 +107,7 @@ completion-time: 30m
 Create an {{site.data.keyword.containerlong}} cluster on Virtual Private Cloud (VPC) Generation 2 compute.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 ## Objectives
 {: #vpc_ks_objectives}
@@ -581,9 +581,8 @@ Now that you have a VPC cluster, learn more about what you can do.
 
 * [Setting up block storage for your apps](/docs/containers?topic=containers-vpc-block)
 * [Overview of the differences between classic and VPC clusters](/docs/containers?topic=containers-infrastructure_providers)
-* [VPC cluster limitations](/docs/containers?topic=containers-limitations#vpc_ks_limits)
+* [VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 * [About the v2 API](/docs/containers?topic=containers-cs_api_install#api_about)
-* [Comparison of Classic and VPC commands for the CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about)
 
 Need help, have questions, or want to give feedback on VPC clusters? Try posting in the [Slack channel](https://cloud.ibm.com/kubernetes/slack){: external}.
 {: tip}

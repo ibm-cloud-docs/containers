@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-26"
 
 keywords: kubernetes, iks
 
@@ -106,9 +106,9 @@ completion-time: 90m
 Move your workloads from {{site.data.keyword.containerlong}} clusters on VPC Generation 1 compute to clusters on VPC Generation 2 compute.
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc).
+With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc).
 
-As of 01 September 2020, VPC Generation 1 compute is deprecated. If you did not create any VPC Gen 1 resources before this date, you can no longer provision any VPC Gen 1 resources. If you created any VPC Gen 1 resources before this date, you can continue to provision and use VPC Gen 1 resources until 26 February 2021, when all service for VPC Gen 1 ends. On 31 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only. For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).
+As of 26 February 2021, all service for VPC Gen 1 is ended. On 01 March 2021, any remaining VPC Gen 1 worker nodes are automatically deleted. To ensure continued support, create new VPC clusters on Generation 2 compute only. For more information, see [About Migrating from VPC (Gen 1) to VPC (Gen 2)](/docs/vpc-on-classic?topic=vpc-on-classic-migrating-faqs).
 {: deprecated}
 
 ## Objectives

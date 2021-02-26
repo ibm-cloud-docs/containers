@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-12"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -330,16 +330,10 @@ In classic clusters, bringing your own Ingress controller is supported only for 
 6. To register the VPC load balancer hostname, create a new DNS subdomain or use the existing Ingress subdomain for your cluster. If you plan to continue to use IBM-provided ALBs concurrently with your custom Ingress controller in one cluster, you must create a new DNS subdomain.
   * Create a new DNS subdomain:
       1. Create a DNS entry for the VPC load balancer hostname by creating a subdomain with an SSL certificate.
-        * <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 1:
-          ```
-          ibmcloud ks nlb-dns create vpc-classic --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-          ```
-          {: pre}
-        * <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Gen 2:
-          ```
-          ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
-          ```
-          {: pre}
+        ```
+        ibmcloud ks nlb-dns create vpc-gen2 --cluster <cluster_name_or_id> --lb-host <vpc_lb_hostname> --type (public|private)
+        ```
+        {: pre}
 
       2. Verify that the subdomain is created.
         ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -125,7 +125,6 @@ Review the options to debug your worker nodes and find the root causes for failu
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 1. If your cluster is in a **Critical**, **Delete failed**, or **Warning** state, or is stuck in the **Pending** state for a long time, review the state of your worker nodes.
@@ -233,7 +232,6 @@ Review common error messages and learn how to resolve them. Messages might begin
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
   <table summary="The columns are read from left to right. The first column has the error message. The second column describes the error and provides resolution steps.">
@@ -671,9 +669,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Replacing a worker node does not create a worker node
 {: #auto-rebalance-off}
 
-**Infrastructure provider**:
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+**Infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}
 When you [replace a worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) or [update a VPC worker node](/docs/containers?topic=containers-update#vpc_worker_node), a worker node is not automatically added back to your cluster.
@@ -699,7 +695,6 @@ To enable automatical rebalancing, [rebalance](/docs/containers?topic=containers
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}
@@ -741,7 +736,6 @@ You can also [delete the bare metal worker node](/docs/containers?topic=containe
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}
@@ -765,7 +759,6 @@ Service is not disrupted due to these duplicates, but you can remove the old wor
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 {: tsSymptoms}

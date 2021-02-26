@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-01-04"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks,
 
@@ -104,7 +104,6 @@ Portworx is available for standard clusters that are set up with public network 
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 
@@ -175,10 +174,10 @@ Before you create your cluster and install Portworx, review the following planni
 {: shortdesc}
 
 1. Review the [Portworx limitations](#portworx_limitations).
-2. Create a [multizone cluster](/docs/containers?topic=containers-clusters). 
+2. Create a [multizone cluster](/docs/containers?topic=containers-clusters).
    1. Infrastructure provider: If you use classic infrastructure, you must choose a bare metal flavor for the worker nodes. For classic clusters, virtual machines have only 1000 Mbps of networking speed, which is not sufficient to run production workloads with Portworx. Instead, provision Portworx on bare metal machines for the best performance.
    2. Worker node flavor: Choose an SDS or bare metal flavor. If you want to use virtual machines, use a worker node with 16 vCPU and 64 GB memory or more, such as `b3c.16x64`. Virtual machines with a flavor of `b3c.4x16` or `u3c.2x4` do not provide the required resources for Portworx to work properly.
-   3. Minimum number of workers: Two worker nodes per zone across three zones, for a minimum total of six worker nodes. 
+   3. Minimum number of workers: Two worker nodes per zone across three zones, for a minimum total of six worker nodes.
 3. **VPC and non-SDS classic worker nodes only**: [Create raw, unformatted, and unmounted block storage](#create_block_storage).
 4. For production workloads, create an [external Databases for etcd](#portworx_database) instance for your Portworx metadata key-value store.
 5. [Set up encryption](#setup_encryption).
@@ -412,7 +411,7 @@ Follow these steps to set up encryption for your Portworx volumes.
 
    Name:                  <name>   
    ID:                    crn:v1:bluemix:public:kms:us-south:a/1ab123ab3c456789cde1f1234ab1cd123:a1a2b345-1d12-12ab-a12a-1abc2d3e1234::   
-   GUID:                  a1a2b345-1d12-12ab-a12a-1abc2d3e1234 
+   GUID:                  a1a2b345-1d12-12ab-a12a-1abc2d3e1234
    ...
    ```
    {: screen}
@@ -1087,9 +1086,7 @@ When you update a worker node in a VPC cluster, the worker node is removed from 
 Update only one worker node at a time. When the worker node update is complete, attach your {{site.data.keyword.block_storage_is_short}} and restart the Portworx pod.
 {: important}
 
-**Supported infrastructure provider**:
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+**Supported infrastructure provider**: <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
 1. Follow the steps to update your [VPC worker node](/docs/containers?topic=containers-update#vpc_worker_node).
 
@@ -1281,14 +1278,12 @@ If you run into an issue with using Portworx, you can open an issue in the [Port
 Review the following Portworx limitations.
 
 | Limitation | Description |
-| --- | --- | 
+| --- | --- |
 | **Classic clusters** Pod restart required when adding worker nodes. | Because Portworx runs as a daemon set in your cluster, existing worker nodes are automatically inspected for raw block storage and added to the Portworx data layer when you deploy Portworx. If you add or update worker nodes to your cluster and add raw block storage to those workers, restart the Portworx pods on the new or updated worker nodes so that your storage volumes are detected by the daemon set. |
 | **VPC clusters** Storage volume reattachment required when updating worker nodes. | When you update a worker node in a VPC cluster, the worker node is removed from your cluster and replaced with a new worker node. If Portworx volumes are attached to the worker node that is replaced, you must attach the volumes to the new worker node. You can attach storage volumes with the [API](/docs/containers?topic=containers-utilities#vpc_api_attach) or the [CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_storage_att_cr). |
 | The Portworx experimental `InitializerConfiguration` feature is not supported. | {{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1). |
 | **Public network connectivity** | Portworx is available for standard clusters that are set up with public network connectivity and a public service endpoint. If your cluster cannot access the public network, you cannot use Portworx unless you open up all egress network traffic on TCP port 443 or enable the public service endpoint. |
 {: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Portworx limitations"}
-
-
 
 

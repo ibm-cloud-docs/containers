@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-02-25"
 
 keywords: kubernetes, iks, kernel
 
@@ -111,7 +111,7 @@ By default, your worker nodes have the operating system and compute hardware of 
 ### Customizing the operating system
 {: #worker-default-os}
 
-The following operating systems are available for worker nodes: **Ubuntu 16.04 x86_64, 18.04 x86_64**. Your cluster cannot mix operating systems or use different operating systems. 
+The following operating systems are available for worker nodes: **Ubuntu 16.04 x86_64, 18.04 x86_64**. Your cluster cannot mix operating systems or use different operating systems.
 {: shortdesc}
 
 To optimize your worker nodes, consider the following information.
@@ -127,7 +127,7 @@ To optimize your worker nodes, consider the following information.
 
 To change the compute hardware, such as the CPU and memory per worker node, choose among the following options.
 * [Create a worker pool](/docs/containers?topic=containers-add_workers). The instructions vary depending on the type of infrastructure for the cluster, such as classic, VPC, or gateway clusters.
-* [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool. 
+* [Update the flavor](/docs/containers?topic=containers-update#machine_type) in your cluster by creating a worker pool and removing the previous worker pool.
 
 ## Modifying default worker node settings to optimize performance
 {: #worker}
@@ -366,7 +366,7 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 
 **Supported infrastructure providers and required permissions**:
 * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 or 2 compute
+* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 * **Operator** platform role and **Manager** service role for the cluster in {{site.data.keyword.cloud_notm}} IAM
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -511,7 +511,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     kubectl -n kube-system delete daemonset hugepages-enablement
     ```
     {: pre}
-9.  Repeat these steps whenever you update, reload, replace, or add worker nodes. 
+9.  Repeat these steps whenever you update, reload, replace, or add worker nodes.
 
 To troubleshoot worker nodes with huge pages, you can only reboot the worker node. The huge pages configuration does not persist across any other worker node life cycle operation, such as updating, reloading, replacing, or adding worker nodes. To remove the huge pages configuration from your cluster, you can update, reload, or replace all the worker nodes.
 
@@ -591,7 +591,7 @@ You can change the MTU on the tunnel interface `tunl0`, which is used for pod to
     ...
     ```
     {: codeblock}
-    
+
 3. Apply the MTU changes to your cluster master by refreshing the master API server. It might take several minutes for the master to refresh.
   ```
   ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>

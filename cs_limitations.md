@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-02-26"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -185,7 +185,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 ## VPC Gen 2 compute cluster limitations
 {: #ks_vpc_gen2_limits}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen2.png" alt="VPC Generation 2 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations. Additionally, all the underlying [VPC quotas, VPC limits](/docs/vpc?topic=vpc-quotas), [VPC service limitations](/docs/vpc?topic=vpc-limitations), and [regular service limitations](#tech_limits) apply.
 {: shortdesc}
 
 ### Compute
@@ -200,7 +200,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Operating system | You cannot create a cluster with worker nodes that run multiple operating systems, such as {{site.data.keyword.openshiftshort}} on Red Hat Enterprise Linux and community Kubernetes on Ubuntu. |
 | Versions | VPC Gen 2 clusters must run Kubernetes version 1.17 or later. |
 | Virtual Private Cloud | See [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations) and [Quotas](/docs/vpc-on-classic?topic=vpc-on-classic-quotas). |
-| v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about). |
+| v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). |
 | Worker node flavors | Only certain flavors are available for worker node [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). Bare metal machines are not supported.|
 | Worker node host access | For security, you cannot SSH into the worker node compute host. |
 | Worker node updates | You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
@@ -240,63 +240,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | Portworx | Review the [Portworx limitations](/docs/containers?topic=containers-portworx#portworx_limitations). |
 {: summary="This table contains information on storage limitations for VPC Gen 2 clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="VPC Gen 2 cluster storage limitations"}
-
-
-
-## VPC Gen 1 compute cluster limitations
-{: #vpc_ks_limits}
-
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> <img src="images/icon-vpc-gen1.png" alt="VPC Generation 1 compute icon" width="30" style="width:30px; border-style: none"/> VPC Generation 1 compute clusters in {{site.data.keyword.containerlong_notm}} are released with the following limitations.
-{: shortdesc}
-
-### Compute
-{: #vpc_compute_limit}
-
-Keep in mind that the [service](#tech_limits) limitations also apply.
-
-| Category | Description |
-| -------- | ----------- |
-| Container platforms | VPC Gen 1 clusters are available for only community Kubernetes clusters, not {{site.data.keyword.openshiftshort}} clusters. |
-| Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc-on-classic-block-storage?topic=vpc-on-classic-block-storage-block-storage-about#about-provider-managed-encryption-gen1). However, you cannot [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-creating-instances-byok).|
-| Location | VPC clusters are available only in [multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones). |
-| v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_classic_vpc_about). |
-| Virtual Private Cloud | See [Known limitations](/docs/vpc-on-classic?topic=vpc-on-classic-known-limitations) and [Quotas](/docs/vpc-on-classic?topic=vpc-on-classic-quotas). |
-| Operating system | You cannot create a cluster with worker nodes that run multiple operating systems, such as {{site.data.keyword.openshiftshort}} on Red Hat Enterprise Linux and community Kubernetes on Ubuntu. |
-| Worker node flavors | Only certain flavors are available for worker node [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). Bare metal machines are not supported. |
-| Worker node host access | For security, you cannot SSH into the worker node compute host. |
-| Worker node updates | You cannot update or reload worker nodes. Instead, you can delete the worker node and rebalance the worker pool with the `ibmcloud ks worker replace` command. If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes. |
-{: summary="This table contains information on compute limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
-{: caption="VPC cluster compute limitations"}
-
-### Networking
-{: #vpc_networking_limit}
-
-Keep in mind that the [service](#tech_limits) limitations also apply.
-
-| Category | Description |
-| -------- | ----------- |
-| Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
-| NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |
-| Security groups | The default [VPC security group](/docs/vpc?topic=vpc-using-security-groups) that is created for you is automatically applied to your worker nodes. You can make changes to the default security group, such as to [allow traffic requests to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups). However, you cannot create other security groups to apply to your worker nodes. |
-| strongSwan VPN service | The strongSwan service is not supported. To connect your cluster to resources in an on-premises network or another VPC, see [Using VPN with your VPC](/docs/vpc?topic=vpc-vpn-onprem-example). |
-| Subnets | <ul><li>See [VPC networking limitations](/docs/containers?topic=containers-vpc-subnets#vpc_basics_limitations).</li><li>Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</li></ul> |
-| VPC load balancer | See [VPC load balancer limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations). |
-{: summary="This table contains information on networking limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
-{: caption="VPC cluster networking limitations"}
-
-### Storage
-{: #vpc_storage_limit}
-
-Keep in mind that the [service](#tech_limits) limitations also apply.
-
-| Category | Description |
-| -------- | ----------- |
-| Storage class for profile sizes | The [available volume profiles](/docs/vpc?topic=vpc-block-storage-profiles) are limited to 2TB in size and 20,000 IOPS in capacity. |
-| Supported types | You can set up VPC Block Storage and {{site.data.keyword.cos_full_notm}} only.<ul><li>[VPC Block Storage](/docs/containers?topic=containers-vpc-block) is available as a cluster add-on. Make sure to [attach a public gateway to all the VPC subnets](/docs/vpc-on-classic?topic=vpc-on-classic-creating-a-vpc-using-the-ibm-cloud-cli#step-5-attach-a-public-gateway) that the cluster uses so that you can provision VPC Block Storage.</li><li>[{{site.data.keyword.cos_full_notm}}](/docs/openshift?topic=openshift-object_storage) is available as a Helm chart.</li></ul> |
-| Unsupported types | File storage is not available. |
-{: summary="This table contains information on storage limitations for VPC clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
-{: caption="VPC cluster storage limitations"}
-
 
 
 
