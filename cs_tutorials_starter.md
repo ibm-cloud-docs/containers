@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-08-27"
+  years: 2014, 2021
+lastupdated: "2021-02-26"
 
 keywords: kubernetes, iks
 
@@ -18,6 +18,7 @@ completion-time: 45m
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -26,6 +27,7 @@ completion-time: 45m
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -43,12 +45,12 @@ completion-time: 45m
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -76,7 +78,6 @@ completion-time: 45m
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -88,10 +89,11 @@ completion-time: 45m
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -128,7 +130,7 @@ This tutorial is intended for software developers who want to learn how to creat
 
 * Create a **Java + Spring** app by using a [starter kit](/docs/apps/tutorials?topic=apps-tutorial-starterkit).
 * Install the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started#idt-prereq).
-* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpc_standard) cluster.
+* Create a [classic](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC](/docs/containers?topic=containers-clusters#clusters_vpcg2) cluster.
 
 ## Add services to your app
 {: #resources-starterkit-kube}
@@ -153,7 +155,7 @@ Attach a DevOps toolchain to your starter kit app, and configure a delivery pipe
 
 1. On the **App details** page, click **Deploy your app**.
 2. On the **Deploy your app** page, select **IBM Cloud Kubernetes Service**.
-3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpc_standard).
+3. Select the region and the name of the cluster, for which you want to set up a continuous delivery pipeline. If you don't have a cluster, click **Create cluster**. For more information about creating a cluster, see the instructions for creating a [classic cluster](/docs/containers?topic=containers-clusters#clusters_standard) or [VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
 4. Provide a name for your toolchain.
 5. Select the region to create your toolchain in, and then select the [resource group](/docs/ContinuousDelivery?topic=ContinuousDelivery-toolchains-iam-security) that provides access to your new toolchain.
 6. Click **Create**. The **App details** page is displayed, along with deployment information about your toolchain.
