@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-02-26"
 
 keywords: kubernetes, iks, classic
 
@@ -100,7 +100,7 @@ With {{site.data.keyword.containerlong}}, you can create a cluster from the foll
 * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: Create your cluster on a classic compute, networking, and storage environment in IBM Cloud infrastructure.
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Generation 2 compute**: Create your cluster on the next generation of IBM Cloud infrastructure virtual servers, available as of 20 May 2020.
 
-As of 26 February 2021, all service for VPC Gen 1 is ended. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2). [Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial) before 31 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted.
+As of 26 February 2021, all service for VPC Gen 1 is ended. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2). [Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial) before 01 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted.
 {: deprecated}
 
 |Area|Classic|VPC|
