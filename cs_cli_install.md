@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -158,8 +158,9 @@ To install the CLIs:
     Listing installed plug-ins...
 
     Plugin Name                            Version   Status
-    container-registry                     0.1.404
-    container-service/kubernetes-service   0.4.66
+    container-registry                     0.1.514
+    container-service/kubernetes-service   1.0.231
+    observe-service/ob                     1.0.61
     ```
     {: screen}
 
@@ -168,6 +169,7 @@ For reference information about these CLIs, see the documentation for those tool
 -   [`ibmcloud` commands](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_cli)
 -   [`ibmcloud ks` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli)
 -   [`ibmcloud cr` commands](/docs/Registry?topic=container-registry-cli-plugin-containerregcli)
+-   [`ibmcloud ob` commands](/docs/containers?topic=containers-observability_cli)
 
 <br />
 
@@ -445,6 +447,7 @@ This task includes the information for updating the following CLIs:
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   Kubernetes CLI version 1.19.8 or later
 -   {{site.data.keyword.registrylong_notm}} plug-in
+-   {{site.data.keyword.containerlong_notm}} observability plug-in
 
 
 <br>
@@ -505,6 +508,23 @@ To update the CLIs:
 
         The registry plug-in is displayed in the results as `container-registry`.
 
+6.  Update the {{site.data.keyword.containerlong_notm}} observability plug-in.
+    1. Install the update from the {{site.data.keyword.cloud_notm}} plug-in repository.
+
+        ```
+        ibmcloud plugin update ob 
+        ```
+        {: pre}
+
+    2.  Verify that the plug-in is listed with the latest version.
+
+        ```
+        ibmcloud plugin list
+        ```
+        {: pre}
+
+        The observability plug-in is displayed in the results as `observe-service/ob`.
+
 <br />
 
 ## Installing the `odo` CLI for developers
@@ -526,6 +546,7 @@ This task includes the information for removing these CLIs:
 
 -   {{site.data.keyword.containerlong_notm}} plug-in
 -   {{site.data.keyword.registrylong_notm}} plug-in
+-   {{site.data.keyword.containerlong_notm}} observability plug-in
 
 To uninstall the CLIs:
 
@@ -540,6 +561,13 @@ To uninstall the CLIs:
 
     ```
     ibmcloud plugin uninstall container-registry
+    ```
+    {: pre}
+
+3.  Uninstall the {{site.data.keyword.containerlong_notm}} observability plug-in.
+
+    ```
+    ibmcloud plugin uninstall ob
     ```
     {: pre}
 

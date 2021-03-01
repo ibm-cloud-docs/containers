@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-26"
+lastupdated: "2021-03-01"
 
 keywords: kubernetes, iks
 
@@ -110,6 +110,7 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 |Version|Release date|Changes|
 |-------|------------|-------|
+| 1.0.23X | 01 Mar 2021 | <ul><li></li></ul> |
 | 1.0.231 | 25 Feb 2021 | <ul><li>Updates the Go version to 1.15.8.</li><li>Updates the help text in various languages.</li></ul> |
 | 1.0.223 | 08 Feb 2021 | <ul><li>Adds the [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_set) and [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_label_rm) commands to set and remove custom Kubernetes labels for all worker nodes in a worker pool.</li></ul> |
 | 1.0.208 | 18 Dec 2020 | Updates the help text in various languages. |
