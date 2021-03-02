@@ -2271,9 +2271,11 @@ subcollection: containers
 
 [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-* [Single and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
-* [Single zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-* [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Classic multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+* [Classic single zone data center locations](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+* [VPC multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+* [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+* [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
 [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)
