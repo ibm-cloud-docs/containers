@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-02"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -122,19 +122,23 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 
 <br />
 
-## Setting up trusted content for container images
-{: #trusted_images}
 
-You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.
-{: shortdesc}
 
-1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
-2.  To enforce a policy that only signed images can be used to build containers in your cluster, [install the open source Portieris project](https://github.com/IBM/portieris){: external}.
-3.  Cluster users can deploy apps that are built from trusted images.
-    1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).
+## Setting up trusted content for container images	
+{: #trusted_images}	
+
+You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.	
+{: shortdesc}	
+
+1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.	
+2.  To enforce a policy that only signed images can be used to build containers in your cluster, [install the open source Portieris project](https://github.com/IBM/portieris){: external}.	
+3.  Cluster users can deploy apps that are built from trusted images.	
+    1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).	
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
+
+
 
 ## Understanding how to authorize your cluster to pull images from a private registry
 {: #cluster_registry_auth}

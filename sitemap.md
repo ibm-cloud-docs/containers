@@ -914,6 +914,7 @@ subcollection: containers
 * [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
 * [Pushing images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#push-images)
 * [Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor](/docs/containers?topic=containers-images#va-images)
+* [Setting up trusted content for container images](/docs/containers?topic=containers-images#trusted_images)
 * [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
