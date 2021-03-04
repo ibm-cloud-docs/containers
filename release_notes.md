@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-02"
+lastupdated: "2021-03-04"
 
 keywords: kubernetes, iks, release notes
 
@@ -118,6 +118,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 27 February 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.4_1531](/docs/containers?topic=containers-changelog#1204_1531_master), [1.19.8_1538](/docs/containers?topic=containers-changelog#1198_1538_master), and [1.18.16_1544](/docs/containers?topic=containers-changelog#11816_1544_master). |
 | 26 February 2021 | <ul><li>**End of service of VPC Gen 1**: Removed steps for using VPC Gen 1 compute. You can now [create new VPC clusters on Generation 2 compute only](/docs/containers?topic=containers-clusters#clusters_vpcg2). [Move any remaining workloads from VPC Gen 1 clusters to VPC Gen 2 clusters](/docs/containers?topic=containers-vpc_migrate_tutorial) before 01 March 2021, when any remaining VPC Gen 1 worker nodes are automatically deleted.</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: Version `3.0.0` of the {{site.data.keyword.block_storage_is_short}} add-on is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog).</li></ul> |
 | 25 February 2021 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.231](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 24 February 2021 | **Default version**: Kubernetes 1.19 is now the default cluster version. |

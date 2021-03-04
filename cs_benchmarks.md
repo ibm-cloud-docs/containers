@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-04"
 
 keywords: kubernetes, iks, containers
 
@@ -159,12 +159,12 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 2.  Create a configmap with the `config` and `node` configuration files from the [kube-samples](https://github.com/IBM-Cloud/kube-samples/tree/master/cis-kube-benchmark/cis-1.5/ibm){: external} GitHub repository.
-    1.  Download the the `config` and `node` configuration files. You can also clone the repository.
+    1.  Download the the `config` and `node` configuration files into a local directory that is called `ibm`. You can also clone the repository and navigate into the `ibm` directory.
         * [`config` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/config.yaml){: external}
         * [`node` file](https://raw.githubusercontent.com/IBM-Cloud/kube-samples/master/cis-kube-benchmark/cis-1.5/ibm/node.yaml){: external}
-    2.  Create the configmap by using the `--from-file` flag to specify the directory where your downloaded configuration files are located.
+    2.  Create the configmap by using the `--from-file` flag to specify the `ibm` directory where your downloaded the configuration files.
         ```
-        kubectl create cm kube-bench-node -n ibm-kube-bench-test --from-file <./filepath/to/repo>
+        kubectl create cm kube-bench-node -n ibm-kube-bench-test --from-file ibm
         ```
         {: pre}
 3.  Create a job to run the benchmark test based on the configurations that you previously created.
@@ -207,10 +207,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-## Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19
+## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20
 {: #cis-benchmark-15}
 
-Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 and 1.19. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
+Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.20. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
 {: shortdesc}
 
 * [Section 1: Master node security configuration](#cis-benchmark-15-1)
@@ -526,8 +526,8 @@ Review the following explanations and possible remediation actions that you can 
 | 1.2.33 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 1.2.34 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 1.3.6 | {{site.data.keyword.containershort}} rotates certificates on every worker node reload or update that you choose to perform. |
-| 3.2.1 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
-| 3.2.2 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
+| 3.2.1 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
+| 3.2.2 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 4.2.6 | {{site.data.keyword.containershort}} does not protect kernel defaults so that you can optionally [tune kernel parameters](/docs/containers?topic=containers-kernel). |
 | 4.2.8 | {{site.data.keyword.containershort}} ensures that the hostname matches the name that is issued by the infrastructure provider. |
 | 4.2.11 | {{site.data.keyword.containershort}} rotates certificates on every worker node reload or update that you choose to perform. |
