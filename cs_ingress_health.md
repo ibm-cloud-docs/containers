@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-08"
+  years: 2014, 2021
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, ingress, alb, health, prometheus
 
@@ -88,7 +88,7 @@ subcollection: containers
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -110,7 +110,7 @@ If you want to troubleshoot your Ingress or monitor Ingress activity, you can re
 
 Logs are automatically collected for your Ingress ALBs. To view the ALB logs, choose between two options.
 * [Create a logging configuration for the Ingress service](/docs/containers?topic=containers-health#logging) in your cluster.
-* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+* Check the logs from the CLI. **Note**: You must have at least the [**Reader** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
     1. Get the ID of a pod for an ALB.
         ```
         kubectl get pods -n kube-system | grep alb
@@ -157,7 +157,7 @@ You can customize the content and format of logs that are collected for the Ingr
 
 By default, Ingress logs are formatted in JSON and display common log fields. However, you can also create a custom log format by choosing which log components are forwarded and how the components are arranged in the log output
 
-Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 
@@ -526,7 +526,7 @@ Shared memory zones are defined so that worker processes can share information s
 
 In the `ibm-cloud-provider-ingress-cm` Ingress configmap, the `vts-status-zone-size` field sets the size of the shared memory zone for metrics data collection. By default, `vts-status-zone-size` is set to `10m`. If you have a large environment that requires more memory for metrics collection, you can override the default to instead use a larger value by following these steps.
 
-Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
+Before you begin, ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the `kube-system` namespace.
 
 1. Edit the configuration file for the `ibm-cloud-provider-ingress-cm` configmap resource.
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -128,8 +128,8 @@ This tutorial is intended for Cloud Foundry app developers.
 - [Create a cluster](/docs/containers?topic=containers-clusters#clusters_ui).
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - Ensure you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
-    - [Any platform role](/docs/containers?topic=containers-users#platform)
-    - The [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform)
+    - [Any platform access role](/docs/containers?topic=containers-users#platform)
+    - The [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform)
 - [Learn about Docker and Kubernetes terminology](/docs/containers?topic=containers-service-arch).
 
 

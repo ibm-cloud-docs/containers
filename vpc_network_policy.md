@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, firewall
 
@@ -549,7 +549,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>80</td>
    <td>Any</td>
    <td>-</td>
-   <td>After 5</td>
+   <td>After 4</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>
@@ -629,7 +629,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>80</td>
    <td>Any</td>
    <td>-</td>
-   <td>After 5</td>
+   <td>After 4</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>

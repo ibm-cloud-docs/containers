@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-01"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -266,7 +266,7 @@ All `kubectl` commands that are available in Kubernetes 1.19.8 are supported for
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
 * [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
-* Make sure that you have a [service role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service role but no platform role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform role to list clusters.
+* Make sure that you have a [service access role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service access role but no platform access role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform access role to list clusters.
 
 To run `kubectl` commands to manage your cluster:
 
@@ -287,7 +287,7 @@ To run `kubectl` commands to manage your cluster:
     ```
     {: pre}
 
-4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
+4.  List all of the clusters in the account to get the name of the cluster. If you have only an {{site.data.keyword.cloud_notm}} IAM service access role and cannot view clusters, ask your cluster admin for the IAM platform **Viewer** role, or the cluster name and ID.
     ```
     ibmcloud ks cluster ls
     ```

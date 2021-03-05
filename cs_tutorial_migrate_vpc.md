@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-26"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -133,11 +133,11 @@ This tutorial is for administrators who want to migrate cluster workloads off of
 
 **Permissions**
 * Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
-  * [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
-  * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-  * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-  * [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry.
-  * [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.cos_full_notm}}.
+  * [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
+  * [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+  * [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+  * [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for Container Registry.
+  * [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.cos_full_notm}}.
 * Make sure that the API key for the region and resource group that you plan to create the VPC Gen 2 cluster in is set up with the correct [infrastructure permissions](/docs/containers?topic=containers-users#api_key).
 
 <br>

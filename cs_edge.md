@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-17"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -116,8 +116,8 @@ Using a gateway-enabled cluster? See [Isolating networking workloads to edge nod
 Before you begin:
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-  * Any platform role for the cluster
-  * **Writer** or **Manager** service role for all namespaces
+  * Any platform access role for the cluster
+  * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To create an edge node worker pool:
@@ -256,7 +256,7 @@ Using a gateway-enabled cluster? See [Isolating networking workloads to edge nod
 {: tip}
 
 Before you begin:
-- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service role for all namespaces](/docs/containers?topic=containers-users#platform).
+- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role for all namespaces](/docs/containers?topic=containers-users#platform).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To prevent other workloads from running on edge worker nodes:
@@ -323,8 +323,8 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 **Before you begin**:
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}:
-  * Any platform role for the cluster
-  * **Writer** or **Manager** service role for all namespaces
+  * Any platform access role for the cluster
+  * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To create an edge node worker pool in a gateway-enabled classic cluster:

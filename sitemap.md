@@ -2254,8 +2254,8 @@ subcollection: containers
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
 * [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-* [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-* [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
+* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
+* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)

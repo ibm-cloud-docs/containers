@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -398,8 +398,8 @@ Also, if you used the same cluster name repeatedly, you might have a rate limiti
 
 {: tsResolve}
 1. For the user or functional user who sets the API key, [assign the user](/docs/containers?topic=containers-users#add_users) the following IAM permissions:
-  * The **Administrator** or **Editor** platform role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
-  * The **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
+  * The **Administrator** or **Editor** platform access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
+  * The **Manager** service access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
 2. The user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases).<p class="warning">When the API key is reset, the previous API key that was used for the region and resource group is deleted. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect).</p>
 3. After the cluster has access to the updated permissions in the API key, the creation of the {{site.data.keyword.cloudcerts_short}} instance is automatically triggered. Note that the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
 4. Verify that your cluster is automatically assigned a {{site.data.keyword.cloudcerts_short}} instance.
@@ -494,8 +494,8 @@ You publicly exposed your app by creating an Ingress resource for your app in yo
 The steps in the following sections can help you debug your Ingress setup.
 
 Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}:
-  - **Editor** or **Administrator** platform role for the cluster
-  - **Writer** or **Manager** service role
+  - **Editor** or **Administrator** platform access role for the cluster
+  - **Writer** or **Manager** service access role
 
 ### Step 1: Check your app deployment
 {: #app-debug-ingress}
@@ -922,7 +922,7 @@ Review the following reasons why the ALB secret might fail and the corresponding
  <tbody>
  <tr>
  <td>The owner of the cluster's API Key does not have the required access roles to download and update certificate data.</td>
- <td>Check with your account Administrator to assign the owner of the cluster's API Key, the following {{site.data.keyword.cloud_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</li><li>The <a href="/docs/containers?topic=containers-users#platform">**Administrator** platform role</a> for the cluster.</li></ul></td>
+ <td>Check with your account Administrator to assign the owner of the cluster's API Key, the following {{site.data.keyword.cloud_notm}} IAM roles:<ul><li>The **Manager** and **Writer** service access roles for your {{site.data.keyword.cloudcerts_full_notm}} instance. For more information, see <a href="/docs/certificate-manager?topic=certificate-manager-managing-service-access-roles#managing-service-access-roles">Managing service access</a> for {{site.data.keyword.cloudcerts_short}}.</li><li>The <a href="/docs/containers?topic=containers-users#platform">**Administrator** platform access role</a> for the cluster.</li></ul></td>
  </tr>
  <tr>
  <td>The certificate CRN provided at time of create, update, or remove does not belong to the same account as the cluster.</td>
