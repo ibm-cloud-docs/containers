@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-10"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -122,8 +122,6 @@ Review the following goals for {{site.data.keyword.containerlong_notm}}.
 
 *   **Ensure that clusters are accessible by using the private service endpoint only.** You can [disable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
 *   **Ensure that inbound traffic to the cluster through Ingress uses allowed TLS versions only.** The default TLS versions are 1.2 or 1.3. For more information, see [About Ingress](/docs/containers?topic=containers-ingress-about).
-*   **Ensure that data in cluster secrets are encrypted with keys that the customer manages.** You can enable a key management service (KMS) provider in your cluster. For more information, see [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption).
-*   **Ensure that data in cluster secrets are encrypted with keys that the customer manages that are controlled by a hardware security module that the customer manages.** You can enable {{site.data.keyword.hscrypto}} as the key management service (KMS) provider in your cluster. For more information, see [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption).
 *   **Ensure that the cluster has a logging service enabled.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)..
 *   **Ensure that the cluster has a monitoring service enabled.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
 *   **Ensure that the cluster and worker node versions are up to date.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
