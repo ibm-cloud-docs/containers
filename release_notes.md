@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-04"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 05 March 2021 | **Trusted images**: You can now [set up trusted content for container images](/docs/containers?topic=containers-images#trusted_images) that are signed and stored in {{site.data.keyword.registrylong_notm}}. |
 | 01 March 2021 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.233](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**Istio add-on**: [Version 1.8.3 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#183) is released.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.4_1531](/docs/containers?topic=containers-changelog#1204_1531), [1.19.8_1538](/docs/containers?topic=containers-changelog#1198_1538), [1.18.16_1544](/docs/containers?topic=containers-changelog#11816_1544), and [1.17.17_1555](/docs/containers?topic=containers-changelog#11717_1555_worker).</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in March 2021"}

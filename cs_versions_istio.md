@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-01"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -126,7 +126,7 @@ The following table shows the changes that are included in version 1.8.3 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.8.2 | 1.8.3 | <ul><li>See the Istio release notes for [Istio 1.8.3](https://istio.io/news/releases/1.8.x/announcing-1.8.3/){:external}.</li><li>Resolves [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}, [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}, [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}, and [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}.</li></ul> |
+| 1.8.2 | 1.8.3 | <ul><li>See the Istio release notes for [Istio 1.8.3](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.3/){:external}.</li><li>Resolves [CVE-2018-20482](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-20482){: external}, [CVE-2019-9923](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-9923){: external}, [CVE-2021-23239](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23239){: external}, and [CVE-2021-3156](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3156){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.8.2" caption-side="top"}
 
