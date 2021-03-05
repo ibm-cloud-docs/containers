@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -144,8 +144,8 @@ If you created a LogDNA logging configuration in your cluster without using the 
 {: tip}
 
 Before you begin:
-- Verify that you are assigned the **Editor** platform role and **Manager** server access role for {{site.data.keyword.la_full_notm}}.
-- Verify that you are assigned the **Administrator** platform role and the **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}} to create the logging configuration. To view a logging configuration or launch the LogDNA dashboard after the logging configuration is created, users must be assigned the **Viewer** platform role and **Reader** service access role for the `ibm-observe` Kubernetes namespace in {{site.data.keyword.containerlong_notm}}.
+- Verify that you are assigned the **Editor** platform access role and **Manager** server access role for {{site.data.keyword.la_full_notm}}.
+- Verify that you are assigned the **Administrator** platform access role and the **Manager** service access role for all Kubernetes namespaces in {{site.data.keyword.containerlong_notm}} to create the logging configuration. To view a logging configuration or launch the LogDNA dashboard after the logging configuration is created, users must be assigned the **Viewer** platform access role and **Reader** service access role for the `ibm-observe` Kubernetes namespace in {{site.data.keyword.containerlong_notm}}.
 - If you want to use the CLI to set up the logging configuration:
   - [Install the {{site.data.keyword.containerlong_notm}} observability CLI plug-in (`ibmcloud ob`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
   - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -363,7 +363,7 @@ The following table shows the different options that you have when you configure
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
 {: #enable-forwarding-udp-tcp}
 
-1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform).
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -390,8 +390,8 @@ The following steps are general instructions. Prior to using the container in a 
 {: tip}
 
 1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-    * **Editor** or **Administrator** platform role for the cluster
-    * **Writer** or **Manager** service role for the `kube-system` namespace
+    * **Editor** or **Administrator** platform access role for the cluster
+    * **Writer** or **Manager** service access role for the `kube-system` namespace
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -554,7 +554,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
-* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 **Creating a snapshot**
 
@@ -562,7 +562,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 
 2. Generate [HMAC service credentials](/docs/cloud-object-storage/iam?topic=cloud-object-storage-service-credentials) in the bucket that you created.
   1. In the **Service Credentials** tab of the {{site.data.keyword.cos_short}} dashboard, click **New Credential**.
-  2. Give the HMAC credentials the `Writer` service role.
+  2. Give the HMAC credentials the `Writer` service access role.
   3. In the **Add Inline Configuration Parameters** field, specify `{"HMAC":true}`.
 
 3. Through the CLI, make a request for a snapshot of your master logs.

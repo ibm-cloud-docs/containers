@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-08-24"
+  years: 2014, 2021
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-premises, vpn, gateway, static route, routing table
 
@@ -13,6 +13,7 @@ subcollection: containers
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
+{:api: .ph data-hd-interface='api'}
 {:apikey: data-credential-placeholder='apikey'}
 {:app_key: data-hd-keyref="app_key"}
 {:app_name: data-hd-keyref="app_name"}
@@ -21,6 +22,7 @@ subcollection: containers
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: data-hd-programlang="c#"}
+{:cli: .ph data-hd-interface='cli'}
 {:codeblock: .codeblock}
 {:curl: .ph data-hd-programlang='curl'}
 {:deprecated: .deprecated}
@@ -38,12 +40,12 @@ subcollection: containers
 {:hide-in-docs: .hide-in-docs}
 {:important: .important}
 {:ios: data-hd-operatingsystem="ios"}
-{:java: #java .ph data-hd-programlang='java'}
 {:java: .ph data-hd-programlang='java'}
 {:java: data-hd-programlang="java"}
 {:javascript: .ph data-hd-programlang='javascript'}
 {:javascript: data-hd-programlang="javascript"}
 {:new_window: target="_blank"}
+{:note .note}
 {:note: .note}
 {:objectc data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -71,7 +73,6 @@ subcollection: containers
 {:step: data-tutorial-type='step'}
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
-{:swift: #swift .ph data-hd-programlang='swift'}
 {:swift: .ph data-hd-programlang='swift'}
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
@@ -83,10 +84,11 @@ subcollection: containers
 {:tsResolve: .tsResolve}
 {:tsSymptoms: .tsSymptoms}
 {:tutorial: data-hd-content-type='tutorial'}
+{:ui: .ph data-hd-interface='ui'}
 {:unity: .ph data-hd-programlang='unity'}
 {:url: data-credential-placeholder='url'}
 {:user_ID: data-hd-keyref="user_ID"}
-{:vb.net: .ph data-hd-programlang='vb.net'}
+{:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
 
 
@@ -116,7 +118,6 @@ The static route cluster add-on can be used to apply and manage static routes on
 
 <br />
 
-
 ## Enabling the static route add-on
 {: #enable-add-on}
 
@@ -124,7 +125,7 @@ To get started with static routes in {{site.data.keyword.containerlong_notm}}, e
 {: shortdesc}
 
 **Before you begin**:
-* Ensure that you have the [**Administrator** IAM platform role for the cluster in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#platform).
+* Ensure that you have the [**Administrator** IAM platform access role for the cluster in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#platform).
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>
@@ -165,7 +166,6 @@ To get started with static routes in {{site.data.keyword.containerlong_notm}}, e
   {: screen}
 
 <br />
-
 
 ## Creating static routes
 {: #create-route-resources}
@@ -295,6 +295,5 @@ After you [enable the static route add-on](#enable-add-on), you can create and a
         subnet: 10.94.227.46/24
   ```
   {: screen}
-
 
 

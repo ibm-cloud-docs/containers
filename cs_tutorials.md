@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -131,9 +131,9 @@ This tutorial is intended for software developers and system administrators who 
 -  To create a cluster, you must have a paid account. However, you can complete this tutorial without incurring costs by using a free cluster and limiting the amount of registry images and tone analyzer services that you use.
 -  Check out the steps you need to take to [prepare to create a cluster](/docs/containers?topic=containers-clusters#cluster_prepare).
 -  Ensure you have the following access policies:
-    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
-    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
-    - The [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
+    - The [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.registrylong_notm}}
+    - The [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}
 
 ## Set up your cluster environment
 {: #cs_cluster_tutorial_lesson1}

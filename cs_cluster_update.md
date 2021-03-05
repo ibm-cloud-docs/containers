@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -152,7 +152,7 @@ The following diagram shows the process that you can take to update your master.
 ### Steps to update the cluster master
 {: #master-steps}
 
-Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform).
 
 To update the Kubernetes master _major_ or _minor_ version:
 
@@ -233,7 +233,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog).
 - Consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) so that your cluster has enough capacity to rescheduling your workloads during the update.
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform).
 
 ### Updating classic worker nodes in the CLI with a configmap
 {: #worker-up-configmap}
@@ -453,7 +453,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog) version changelog.
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform).
 
 ### Updating VPC worker nodes in the CLI
 {: #vpc_worker_cli}
@@ -509,7 +509,7 @@ You can update the flavors, or machine types, of your worker nodes by adding new
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform).
 
 To update flavors:
 
@@ -572,7 +572,7 @@ To update flavors:
         ```
         {: pre}
 
-     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
+     3. Add the zone to your worker pool that you retrieved earlier. When you add a zone, the worker nodes that are defined in your worker pool are provisioned in the zone and considered for future workload scheduling. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone location.
        * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters:
          ```
          ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
@@ -666,7 +666,7 @@ When you create a logging configuration for a source in your cluster to forward 
 As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, automatic updates to Fluentd must be enabled.
 {: important}
 
-You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster.
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging autoupdate get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging autoupdate disable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable).
@@ -718,7 +718,7 @@ Review the following image to see how your cluster setup changes when you move f
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
 Before you begin:
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform role](/docs/containers?topic=containers-users#platform) for the cluster.
+- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To update stand-alone worker nodes to worker pools:
@@ -735,7 +735,7 @@ To update stand-alone worker nodes to worker pools:
    ```
    {: pre}
 
-3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones).
+3. List available zones and decide where you want to provision the worker nodes in your worker pool. To view the zone where your stand-alone worker nodes are provisioned, run `ibmcloud ks cluster get --cluster <cluster_name_or_ID>`. If you want to spread your worker nodes across multiple zones, choose a [classic](/docs/containers?topic=containers-regions-and-zones#zones-mz) or [VPC](/docs/containers?topic=containers-regions-and-zones#zones-vpc) multizone.
    ```
    ibmcloud ks zone ls
    ```

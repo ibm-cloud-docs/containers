@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-26"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -124,10 +124,10 @@ This tutorial is for administrators who are creating a cluster in {{site.data.ke
 {: #vpc_ks_prereqs}
 
 Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
-* [**Administrator** platform role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
-* [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [**Writer** or **Manager** service role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [**Administrator** platform role](/docs/containers?topic=containers-users#platform) for Container Registry.
+* [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
+* [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
+* [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for Container Registry.
 
 If this cluster is not the first cluster in the region and resource group, make sure that the API key for the region and resource group that you plan to create the cluster in is set up with the correct [infrastructure permissions](/docs/containers?topic=containers-users#api_key).
 
@@ -155,7 +155,7 @@ Install the command-line tools.
 Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.keyword.cloud_notm}} Virtual Private Cloud (VPC) environment. For more information about VPC, see [Getting Started with Virtual Private Cloud](/docs/vpc?topic=vpc-getting-started).
 {: shortdesc}
 
-1.  Log in to the account, resource group, and {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones). If you have a federated ID, include the `--sso` flag.
+1.  Log in to the account, resource group, and {{site.data.keyword.cloud_notm}} region where you want to create your VPC environment. The VPC must be set up in the same multizone metro location where you want to create your cluster. In this tutorial you create a VPC in `us-south`. For other supported regions, see [Multizone metros for VPC clusters](/docs/containers?topic=containers-regions-and-zones#zones-vpc). If you have a federated ID, include the `--sso` flag.
     ```
     ibmcloud login -r us-south [-g <resource_group>] [--sso]
     ```

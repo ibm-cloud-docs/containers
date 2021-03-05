@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-01"
+lastupdated: "2021-03-05"
 
 keywords: containers
 subcollection: containers
@@ -136,20 +136,15 @@ subcollection: containers
 
 [Supported infrastructure providers](/docs/containers?topic=containers-infrastructure_providers)
 
-[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
-* [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
-  * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
-  * [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
-  * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
-  * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
-* [VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
-* [Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
-  * [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-service-arch#pi-info)
-  * [How is my information stored and encrypted?](/docs/containers?topic=containers-service-arch#pi-storage)
-  * [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
-  * [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
-* [Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
-* [Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
+* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
+* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
+  * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
+  * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
+  * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
+  * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
+  * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
+  * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
 
 
 ## Use cases
@@ -205,37 +200,6 @@ subcollection: containers
 * [Expose your app](/docs/containers?topic=containers-learning-path-dev#dev_expose)
 * [Add app storage](/docs/containers?topic=containers-learning-path-dev#dev_storage)
 * [Add integrations](/docs/containers?topic=containers-learning-path-dev#dev_integrate)
-
-
-## Cluster strategy
-{: #sitemap_cluster_strategy}
-
-
-[Your responsibilities with using {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-responsibilities_iks)
-* [Overview of shared responsibilities](/docs/containers?topic=containers-responsibilities_iks#overview-by-resource)
-* [Tasks for shared responsibilities by area](/docs/containers?topic=containers-responsibilities_iks#task-responsibilities)
-  * [Incident and operations management](/docs/containers?topic=containers-responsibilities_iks#incident-and-ops)
-  * [Change management](/docs/containers?topic=containers-responsibilities_iks#change-management)
-  * [Identity and access management](/docs/containers?topic=containers-responsibilities_iks#iam-responsibilities)
-  * [Security and regulation compliance](/docs/containers?topic=containers-responsibilities_iks#security-compliance)
-  * [Disaster recovery](/docs/containers?topic=containers-responsibilities_iks#disaster-recovery)
-  * [Applications and data](/docs/containers?topic=containers-responsibilities_iks#applications-and-data)
-
-[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
-* [Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
-* [Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
-  * [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
-* [Worker node](/docs/containers?topic=containers-security#workernodes)
-* [Network](/docs/containers?topic=containers-security#network)
-  * [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
-  * [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
-  * [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
-* [Persistent storage](/docs/containers?topic=containers-security#storage)
-* [Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
-* [Image and registry](/docs/containers?topic=containers-security#images_registry)
-* [Container isolation and security](/docs/containers?topic=containers-security#container)
-* [Storing personal information](/docs/containers?topic=containers-security#pi)
-* [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
 ## Tutorials library for Kubernetes Service
@@ -606,6 +570,62 @@ subcollection: containers
 * [Reviewing reservation usage](/docs/containers?topic=containers-reservations#ri-review)
 
 
+## Security for {{site.data.keyword.containerlong_notm}}
+{: #sitemap_security_for_}
+
+
+[Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security)
+
+[Overview of security threats for your cluster](/docs/containers?topic=containers-security#threats)
+
+[Kubernetes API server and etcd](/docs/containers?topic=containers-security#apiserver)
+* [Rotating CA certificates in your cluster](/docs/containers?topic=containers-security#cert-rotate)
+
+[Worker node](/docs/containers?topic=containers-security#workernodes)
+
+[Network](/docs/containers?topic=containers-security#network)
+* [Network segmentation and privacy for classic clusters](/docs/containers?topic=containers-security#network_segmentation)
+* [Network segmentation and privacy for VPC clusters](/docs/containers?topic=containers-security#network_segmentation_vpc)
+* [Securely expose apps with LoadBalancer and Ingress services](/docs/containers?topic=containers-security#network_lb_ingress)
+
+[Persistent storage](/docs/containers?topic=containers-security#storage)
+
+[Monitoring and logging](/docs/containers?topic=containers-security#monitoring_logging)
+
+[Image and registry](/docs/containers?topic=containers-security#images_registry)
+
+[Container isolation and security](/docs/containers?topic=containers-security#container)
+
+[Storing personal information](/docs/containers?topic=containers-security#pi)
+
+[Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
+
+
+## Service architecture and dependencies
+{: #sitemap_service_architecture_and_dependencies}
+
+
+[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
+
+[Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
+* [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
+* [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
+* [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
+* [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
+
+[VPC cluster](/docs/containers?topic=containers-service-arch#architecture_vpc)
+
+[Overview of personal and sensitive data storage and removal options](/docs/containers?topic=containers-service-arch#ibm-data)
+* [What information is stored with IBM when using {{site.data.keyword.containerlong_notm}}?](/docs/containers?topic=containers-service-arch#pi-info)
+* [How is my information stored and encrypted?](/docs/containers?topic=containers-service-arch#pi-storage)
+* [Where is my information stored?](/docs/containers?topic=containers-service-arch#pi-location)
+* [How can I remove my information?](/docs/containers?topic=containers-service-arch#pi-removal)
+
+[Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
+
+[Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+
+
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
 
@@ -636,11 +656,6 @@ subcollection: containers
 
 ## Securing the cluster network
 {: #sitemap_securing_the_cluster_network}
-
-
-
-## Classic clusters
-{: #sitemap_classic_clusters}
 
 
 [Classic: Opening required ports and IP addresses in your firewall](/docs/containers?topic=containers-firewall)
@@ -674,11 +689,6 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-network_policies#services_across_ns)
 * [Logging denied traffic](/docs/containers?topic=containers-network_policies#log_denied)
 
-
-## VPC clusters
-{: #sitemap_vpc_clusters}
-
-
 [VPC: Opening required ports and IP addresses in other network firewalls](/docs/containers?topic=containers-vpc-firewall)
 * [Opening ports in a corporate firewall](/docs/containers?topic=containers-vpc-firewall#vpc-corporate)
   * [Running `ibmcloud`, `ibmcloud ks`, and `ibmcloud cr` commands from behind a firewall](/docs/containers?topic=containers-vpc-firewall#vpc-firewall_bx)
@@ -703,13 +713,23 @@ subcollection: containers
   * [Isolate app services between namespaces](/docs/containers?topic=containers-vpc-network-policy#services_across_ns)
 
 
+## Managing security and compliance with Kubernetes
+{: #sitemap_managing_security_and_compliance_with_kubernetes}
+
+
+[Managing security and compliance with Kubernetes](/docs/containers?topic=containers-manage-security-compliance)
+
+[Monitoring security and compliance posture with Kubernetes](/docs/containers?topic=containers-manage-security-compliance#monitor-clusters)
+* [Available goals for Kubernetes](/docs/containers?topic=containers-manage-security-compliance#clusters-available-goals)
+
+
 ## Managing the cluster network
 {: #sitemap_managing_the_cluster_network}
 
 
 
 ## Classic clusters
-{: #sitemap_classic_clusters_}
+{: #sitemap_classic_clusters}
 
 
 [Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
@@ -777,7 +797,7 @@ subcollection: containers
 
 
 ## VPC clusters
-{: #sitemap_vpc_clusters_}
+{: #sitemap_vpc_clusters}
 
 
 [Configuring VPC subnets](/docs/containers?topic=containers-vpc-subnets)
@@ -914,6 +934,7 @@ subcollection: containers
 * [Referring to the image pull secret in your pod deployment](/docs/containers?topic=containers-images#pod_imagePullSecret)
 * [Pushing images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#push-images)
 * [Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor](/docs/containers?topic=containers-images#va-images)
+* [Setting up trusted content for container images](/docs/containers?topic=containers-images#trusted_images)
 * [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
@@ -1735,9 +1756,13 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.4_1531, released 1 March 2021](/docs/containers?topic=containers-changelog#1204_1531)
+  * [Changelog for master fix pack 1.20.4_1531, released 27 February 2021](/docs/containers?topic=containers-changelog#1204_1531_master)
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.8_1538, released 1 March 2021](/docs/containers?topic=containers-changelog#1198_1538)
+  * [Changelog for master fix pack 1.19.8_1538, released 27 February 2021](/docs/containers?topic=containers-changelog#1198_1538_master)
   * [Changelog for master fix pack 1.19.8_1537, released 22 February 2021](/docs/containers?topic=containers-changelog#1198_1537)
   * [Changelog for worker node fix pack 1.19.7_1535, released 15 February 2021](/docs/containers?topic=containers-changelog#1197_1535)
   * [Changelog for worker node fix pack 1.19.7_1534, released 3 February 2021](/docs/containers?topic=containers-changelog#1197_1534)
@@ -1756,6 +1781,8 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.16_1544, released 1 March 2021](/docs/containers?topic=containers-changelog#11816_1544)
+  * [Changelog for master fix pack 1.18.16_1544, released 27 February 2021](/docs/containers?topic=containers-changelog#11816_1544_master)
   * [Changelog for master fix pack 1.18.16_1543, released 22 February 2021](/docs/containers?topic=containers-changelog#11816_1543)
   * [Changelog for worker node fix pack 1.18.15_1541, released 15 February 2021](/docs/containers?topic=containers-changelog#11815_1541)
   * [Changelog for worker node fix pack 1.18.15_1540, released 3 February 2021](/docs/containers?topic=containers-changelog#11815_1540)
@@ -1789,6 +1816,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.17_1555, released 1 March 2021](/docs/containers?topic=containers-changelog#11717_1555_worker)
   * [Changelog for master fix pack 1.17.17_1555, released 22 February 2021](/docs/containers?topic=containers-changelog#11717_1555)
   * [Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021](/docs/containers?topic=containers-changelog#11717_1553)
   * [Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021](/docs/containers?topic=containers-changelog#11717_1552)
@@ -1833,7 +1861,7 @@ subcollection: containers
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
-* [Benchmark 1.5 results for Kubernetes versions 1.18 and 1.19](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
   * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
   * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
   * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
@@ -1898,7 +1926,7 @@ subcollection: containers
 * [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
-* [Changelog for version 3.0.0](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
+* [Changelog for version 3.0.0](/docs/containers?topic=containers-vpc_bs_changelog#0300_is_block)
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
@@ -2226,8 +2254,8 @@ subcollection: containers
 
 [User access permissions](/docs/containers?topic=containers-access_reference)
 * [Permissions to create a cluster](/docs/containers?topic=containers-access_reference#cluster_create_permissions)
-* [{{site.data.keyword.cloud_notm}} IAM platform roles](/docs/containers?topic=containers-access_reference#iam_platform)
-* [{{site.data.keyword.cloud_notm}} IAM service roles](/docs/containers?topic=containers-access_reference#service)
+* [{{site.data.keyword.cloud_notm}} IAM platform access roles](/docs/containers?topic=containers-access_reference#iam_platform)
+* [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service)
 * [Kubernetes resource permissions per RBAC role](/docs/containers?topic=containers-access_reference#rbac_ref)
 * [{{site.data.keyword.cloud_notm}} IAM issuer details for RBAC users](/docs/containers?topic=containers-access_reference#iam_issuer_users)
 * [Cloud Foundry roles](/docs/containers?topic=containers-access_reference#cloud-foundry)
@@ -2266,9 +2294,11 @@ subcollection: containers
 
 [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-* [Single and multizone locations in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-regions-and-zones#zones)
-* [Single zone clusters](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
-* [Multizone clusters](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
+* [Classic multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+* [Classic single zone data center locations](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+* [VPC multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+* [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
+* [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
 
 [Accessing the global endpoint](/docs/containers?topic=containers-regions-and-zones#endpoint)

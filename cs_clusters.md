@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -142,7 +142,7 @@ ibmcloud ks cluster create classic --name my_cluster
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --private-vlan <private_VLAN_ID> --private-only --private-service-endpoint
    ```
    {: pre}
-*  For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
+*  For a classic multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-mz), [add zones](/docs/containers?topic=containers-add_workers#add_zone):
    ```
    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
    ```
@@ -156,7 +156,7 @@ ibmcloud ks cluster create classic --name my_cluster
     ibmcloud ks cluster create vpc-gen2 --name my_cluster --zone us-east-1 --vpc-id <VPC_ID> --subnet-id <VPC_SUBNET_ID> --flavor b2.4x16 --workers 3
     ```
     {: pre}
-*  For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones), [add zones](/docs/containers?topic=containers-add_workers#vpc_add_zone):
+*  For a VPC multizone cluster, after you created the cluster in a [multizone metro](/docs/containers?topic=containers-regions-and-zones#zones-vpc), [add zones](/docs/containers?topic=containers-add_workers#vpc_add_zone):
    ```
    ibmcloud ks zone add vpc-gen2 --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --subnet-id <VPC_SUBNET_ID>
    ```
@@ -179,7 +179,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
   1. From the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/){: external} menu bar, click **Manage > Access (IAM)**.
   2. Click the **Users** page, and then from the table, select yourself.
   3. From the **Access policies** tab, confirm that you [have the required permissions to create clusters](/docs/containers?topic=containers-access_reference#cluster_create_permissions).
-  <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform role at the same time as scoping the access policy to a namespace.</p>
+  <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform access role at the same time as scoping the access policy to a namespace.</p>
 
 4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups).
   * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.cloud_notm}}. If you do not target a resource group, the default resource group is automatically targeted. Free clusters are created in the `default` resource group.
@@ -228,7 +228,7 @@ The following image walks you through choosing the setup that you want for your 
     <area target="" alt="Free and standard cluster comparison" title="Free and standard cluster comparison" href="/docs/containers?topic=containers-cs_ov#cluster_types" coords="43,9,361,106" shape="rect">
     <area target="" alt="OpenShift and Kubernetes comparison" title="OpenShift and Kubernetes comparison" href="/docs/openshift?topic=openshift-cs_ov#openshift_kubernetes" coords="110,128,467,224" shape="rect">
     <area target="" alt="VPC and classic infrastructure comparison" title="VPC and classic infrastructure comparison" href="/docs/containers?topic=containers-infrastructure_providers" coords="60,252,398,352" shape="rect">
-    <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones" coords="101,377,564,456" shape="rect">
+    <area target="" alt="Locations" title="Locations" href="/docs/containers?topic=containers-regions-and-zones#zones-mz" coords="101,377,564,456" shape="rect">
     <area target="" alt="Virtual Machines" title="Virtual Machines" href="/docs/containers?topic=containers-planning_worker_nodes#vm" coords="105,488,564,538" shape="rect">
     <area target="" alt="Bare metal machines" title="Bare metal machines" href="/docs/containers?topic=containers-planning_worker_nodes#bm" coords="566,569,372,546" shape="rect">
     <area target="" alt="VPC scenarios" title="VPC scenarios" href="/docs/containers?topic=containers-plan_clusters#vpc-scenarios" coords="104,597,298,675" shape="rect">
@@ -331,7 +331,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
       ```
       {: pre} 
 
-3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
+3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
     ```
     ibmcloud ks locations
     ```
@@ -489,7 +489,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-9. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#add_zone) to increase the cluster's availability.
+9. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones-mz), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#add_zone) to increase the cluster's availability.
 
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
 
@@ -536,7 +536,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
       ```
       {: pre} 
 
-3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
+3. Review the zones where you can create your cluster. In the output of the following command, zones have a **Location Type** of `dc`. To span your cluster across zones, you must create the cluster in a [multizone-capable zone](/docs/containers?topic=containers-regions-and-zones#zones-mz). Multizone-capable zones have a metro value in the **Multizone Metro** column. If you want to create a multizone cluster, you can use the {{site.data.keyword.cloud_notm}} console, or [add more zones](/docs/containers?topic=containers-add_workers#add_zone) to your cluster after the cluster is created.
     ```
     ibmcloud ks locations
     ```
@@ -688,7 +688,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-9. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#add_gateway_zone) to increase the cluster's availability.
+9. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones-mz), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#add_gateway_zone) to increase the cluster's availability.
 
 10. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
 
@@ -895,7 +895,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
    Every worker node is assigned a unique worker node ID and domain name that must not be changed manually after the cluster is created. Changing the ID or domain name prevents the Kubernetes master from managing your cluster.
    {: important}
 
-8. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to increase the cluster's availability.
+8. **Optional**: If you created your cluster in a [multizone metro location](/docs/containers?topic=containers-regions-and-zones#zones-vpc), you can [spread the default worker pool across zones](/docs/containers?topic=containers-add_workers#vpc_add_zone) to increase the cluster's availability.
 
 9. After your cluster is created, you can [begin working with your cluster by configuring your CLI session](/docs/containers?topic=containers-access_cluster).
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-25"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -105,7 +105,7 @@ As of 01 December 2020, {{site.data.keyword.containerlong_notm}} primarily suppo
 
 **Clusters created before 01 December 2020**:
 * Existing clusters with ALBs that run the custom IBM Ingress image continue to operate as-is.
-* Support for the custom IBM Ingress image ends in 6 months on 30 April 2021.
+* Support for the custom IBM Ingress image ends on 30 April 2021.
 * You must move to the new Kubernetes Ingress by migrating any existing Ingress setups. Your existing ALBs and other Ingress resources are not automatically migrated to the new Kubernetes Ingress image.
 * You can easily migrate to Kubernetes Ingress by using the [migration tool](/docs/containers?topic=containers-ingress-types#alb-type-migration) that is developed and supported by IBM Cloud Kubernetes Service.
 * If you do not move to Kubernetes Ingress before 30 April 2020, ALBs that run the custom IBM Ingress image continue to run, but all support from IBM Cloud for those ALBs is discontinued.
@@ -158,8 +158,8 @@ Before you get started with Ingress, review the following prerequisites.
 
 - Classic clusters: Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). When a VRF or VLAN spanning is enabled, the ALB can route packets to various subnets in the account.
 - Setting up Ingress requires the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#platform):
-    - **Administrator** platform role for the cluster
-    - **Manager** service role in all namespaces
+    - **Administrator** platform access role for the cluster
+    - **Manager** service access role in all namespaces
 - Ingress is available for standard clusters only and requires at least two worker nodes per zone to ensure high availability and to apply periodic updates. If you have only one worker node in a zone, the ALB cannot receive automatic updates. When automatic updates are rolled out to ALB pods, the pod is reloaded. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. If you have only one ALB pod on one worker, the pod is not restarted so that traffic is not interrupted, and the ALB pod is updated to the latest version only when you delete the old pod manually so that an updated pod can be scheduled.
 - If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
 - To be included in Ingress load balancing, the names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.
@@ -846,9 +846,9 @@ As of 24 August 2020, an [{{site.data.keyword.cloudcerts_long}}](/docs/certifica
 
 #### Verifying permissions for {{site.data.keyword.cloudcerts_short}}
 
-For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions.
+For a {{site.data.keyword.cloudcerts_short}} instance to be created for your new or existing cluster, ensure that the API key for the region and resource group that the cluster is created in has the correct permissions. You can check who set the API key for the cluster by running `ibmcloud ks api-key info -c <cluster_name_or_ID>`.
 * If the account owner set the API key, then your cluster is assigned a {{site.data.keyword.cloudcerts_short}} instance.
-* If another user or a functional ID set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform role _and_ the **Manager** service role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned a {{site.data.keyword.cloudcerts_short}} instance.
+* If another user or a functional ID set the API key, first [assign the user](/docs/containers?topic=containers-users#add_users) the **Administrator** or **Editor** platform access role _and_ the **Manager** service access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**. Then, the user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases). After the cluster has access to the updated permissions in the API key, your cluster is automatically assigned a {{site.data.keyword.cloudcerts_short}} instance.
 
 When the creation of the {{site.data.keyword.cloudcerts_short}} instance is triggered, the {{site.data.keyword.cloudcerts_short}} instance might take up to an hour to become visible in the {{site.data.keyword.cloud_notm}} console.
 {: note}
@@ -982,7 +982,7 @@ The `IngressClass` for public ALBs, `public-iks-k8s-nginx`, is set as the defaul
 {: note}
 
 ```yaml
-apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+apiVersion: networking.k8s.io/v1
 kind: IngressClass
 metadata:
   name: public-iks-k8s-nginx
@@ -999,7 +999,7 @@ spec:
 The following `IngressClass` is automatically created in the `kube-system` namespace to configure all private ALBs in your cluster with the `private-iks-k8s-nginx` class. To apply an Ingress resource that you create to the private ALBs in your cluster, specify `ingressClassName: "private-iks-k8s-nginx"` in the `spec` section of your Ingress resource.
 
 ```yaml
-apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+apiVersion: networking.k8s.io/v1
 kind: IngressClass
 metadata:
   name: private-iks-k8s-nginx
@@ -1019,7 +1019,7 @@ You can configure your own classes by creating custom `IngressClass` resources a
   {: tip}
 
   ```yaml
-  apiVersion: networking.k8s.io/v1beta1 # For Kubernetes version 1.19, use networking.k8s.io/v1 instead
+  apiVersion: networking.k8s.io/v1
   kind: IngressClass
   metadata:
     name: <class_name>
@@ -1069,7 +1069,7 @@ As of 01 December 2020, {{site.data.keyword.containerlong_notm}} primarily suppo
 
 **Clusters created before 01 December 2020**:
 * Existing clusters with ALBs that run the custom IBM Ingress image continue to operate as-is.
-* Support for the custom IBM Ingress image ends in 6 months on 30 April 2021.
+* Support for the custom IBM Ingress image ends on 30 April 2021.
 * You must move to the new Kubernetes Ingress by migrating any existing Ingress setups. Your existing ALBs and other Ingress resources are not automatically migrated to the new Kubernetes Ingress image.
 * You can easily migrate to Kubernetes Ingress by using the [migration tool](/docs/containers?topic=containers-ingress-types#alb-type-migration) that is developed and supported by IBM Cloud Kubernetes Service.
 * If you do not move to Kubernetes Ingress before 30 April 2020, ALBs that run the custom IBM Ingress image continue to run, but all support from IBM Cloud for those ALBs is discontinued.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks
 
@@ -1356,7 +1356,7 @@ By default, your classic {{site.data.keyword.containerlong_notm}} clusters inclu
 
 Before you begin:
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-* Make sure that you have the **Manager** IAM service role for the cluster, so that you can make changes to deployments in the `kube-system` namespace.
+* Make sure that you have the **Manager** IAM service access role for the cluster, so that you can make changes to deployments in the `kube-system` namespace.
 
 To scale down the {{site.data.keyword.filestorage_short}} plug-in:
 1.  Scale down the {{site.data.keyword.filestorage_short}} plug-in and watcher deployments to `0` replicas.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-05"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -122,19 +122,23 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 
 <br />
 
-## Setting up trusted content for container images
-{: #trusted_images}
 
-You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.
-{: shortdesc}
 
-1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
-2.  To enforce a policy that only signed images can be used to build containers in your cluster, [install the open source Portieris project](https://github.com/IBM/portieris){: external}.
-3.  Cluster users can deploy apps that are built from trusted images.
-    1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).
+## Setting up trusted content for container images	
+{: #trusted_images}	
+
+You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.	
+{: shortdesc}	
+
+1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.	
+2.  To enforce a policy that only signed images can be used to build containers in your cluster, [install the open source Portieris project](https://github.com/IBM/portieris){: external}.	
+3.  Cluster users can deploy apps that are built from trusted images.	
+    1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).	
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](#other).
 
 <br />
+
+
 
 ## Understanding how to authorize your cluster to pull images from a private registry
 {: #cluster_registry_auth}
@@ -241,12 +245,12 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
 **Before you begin**:
 *   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Make sure that you have the following permissions:
-    *   {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
+    *   {{site.data.keyword.cloud_notm}} IAM **Operator or Administrator** platform access role for {{site.data.keyword.containerlong_notm}}. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name containers-kubernetes --roles <(Administrator|Operator)>
         ```
         {: pre}
-    *   {{site.data.keyword.cloud_notm}} IAM **Administrator** platform role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy cannot be scoped to a particular region or resource group. The account owner can give you the role by running:
+    *   {{site.data.keyword.cloud_notm}} IAM **Administrator** platform access role for {{site.data.keyword.registrylong_notm}}, across all regions and resource groups. The policy cannot be scoped to a particular region or resource group. The account owner can give you the role by running:
         ```
         ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
         ```
@@ -260,7 +264,7 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     ibmcloud ks cluster ls
     ```
     {: pre}
-2.  Run the following command to create a service ID for the cluster and assign the service ID an IAM **Reader** service role for {{site.data.keyword.registrylong_notm}}. The command also creates an API key to impersonate the service ID credentials and stores the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
+2.  Run the following command to create a service ID for the cluster and assign the service ID an IAM **Reader** service access role for {{site.data.keyword.registrylong_notm}}. The command also creates an API key to impersonate the service ID credentials and stores the API key in a Kubernetes image pull secret in the cluster. The image pull secret is in the `default` Kubernetes namespace.
     ```
     ibmcloud ks cluster pull-secret apply --cluster <cluster_name_or_ID>
     ```
