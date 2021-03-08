@@ -553,7 +553,7 @@ Find an overview of Kubernetes versions that are unsupported in {{site.data.keyw
 ### Version 1.16 (Unsupported)
 {: #cs_v116}
 
-As of 31 January 2020, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.16](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.16 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 31 January 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.16](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.16 clusters cannot receive security updates or support unless they are updated to the next most recent version.
 {: shortdesc}
 
 [Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.17](#cs_v117).
