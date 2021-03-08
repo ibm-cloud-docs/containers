@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-08"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -352,8 +352,9 @@ The following table shows the actions that you must take before you update the K
 | --- | --- |
 | **Unavailable**: Select cluster add-ons | Before you update your cluster, check that you do not need the following cluster add-ons, which are not supported in Kubernetes 1.20.<ul><li>[Cluster autoscaler](/docs/containers?topic=containers-ca_changelog)</li><li>[Managed Istio](/docs/containers?topic=containers-istio-changelog)</li></ul>|
 | **Unsupported:** Open access to the Kubernetes Dashboard metrics scraper | A Kubernetes network policy is added to protect access to the Kubernetes Dashboard metrics scraper. If a pod requires access to the dashboard metrics scraper, deploy the pod in a namespace that has the `dashboard-metrics-scraper-policy: allow` label. For more information, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies). |
-| Pod exec probe timeout handling | [Pod exec probes now honor the `timeoutSeconds` field](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#exec-probe-timeout-handling){: external}. If an exec probe does not set the `timeoutSeconds` field, the default of `1` second is used. If the default value is not sufficient for your app, update the pod exec probe.| 
+| Pod exec probe timeout handling | [Pod exec probes now honor the `timeoutSeconds` field](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#exec-probe-timeout-handling){: external}. If an exec probe does not set the `timeoutSeconds` field, the default of `1` second is used. If the default value is not sufficient for your app, update the pod exec probe.|
 | Resolve non-deterministic behavior of owner references | Kubernetes garbage collector is updated to resolve non-deterministic behavior of owner references. Before you update your cluster, review the [Kubernetes community recommendation](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.20.md#urgent-upgrade-notes){: external} that you run the [kubectl-check-ownerreferences](https://github.com/kubernetes-sigs/kubectl-check-ownerreferences){: external} tool to locate existing objects with invalid owner references. |
+| VPC clusters: App URL character length | DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
 {: caption="Changes to make before you update the master to Kubernetes 1.20" caption-side="top"}
 {: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
 
