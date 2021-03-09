@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-08"
+lastupdated: "2021-03-09"
 
 keywords: containers
 subcollection: containers
@@ -1923,6 +1923,7 @@ subcollection: containers
   * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
+* [Changelog for 1.0.2, released 08 March 2021](/docs/containers?topic=containers-ca_changelog#0102_ca_addon)
 * [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
