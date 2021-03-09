@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-08"
 
 keywords: kubernetes, iks
 
@@ -612,7 +612,7 @@ Review the following default settings and limitations.
 {: shortdesc}
 
 * All VPC load balancers do not currently support UDP.
-* **Kubernetes 1.20 and later**: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters.
+* Kubernetes 1.20 or later: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters.
 * Private VPC application load balancers do not accept all traffic, only RFC 1918 traffic.
 * Private VPC network load balancers are currently not supported.
 * One VPC load balancer is created for each Kubernetes `LoadBalancer` service that you create, and it routes requests to that Kubernetes `LoadBalancer` service only. Across all of your VPC clusters in your VPC, a maximum of 20 VPC load balancers can be created.
@@ -629,5 +629,6 @@ Review the following default settings and limitations.
     * VPC network load balancers only: `service.kubernetes.io/ibm-load-balancer-cloud-provider-enable-features: "proxy-protocol"`
 * When you delete a VPC cluster, any VPC load balancers that were automatically created by {{site.data.keyword.containerlong_notm}} for the Kubernetes `LoadBalancer` services in that cluster are also automatically deleted. However, any VPC load balancers that you manually created in your VPC are not deleted.
 * You can register up to 128 subdomains for VPC load balancer hostnames. This limit can be lifted on request by opening a [support case](/docs/get-support?topic=get-support-using-avatar).
+* Kubernetes 1.20 or later: Subdomains that you register for VPC load balancer hostnames are limited to 130 characters or fewer.
 
 

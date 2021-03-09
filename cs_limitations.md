@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-02"
+lastupdated: "2021-03-09"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -116,9 +116,10 @@ To view quota limits on cluster-related resources in your {{site.data.keyword.cl
 | -------- | ----------- |
 | API rate limits | 200 requests per 10 seconds to the {{site.data.keyword.containerlong_notm}} API from each unique source IP address. |
 | App deployment | The apps that you deploy to and services that you integrate with your cluster must be able to run on the operating system of the worker nodes. |
+| Calico network plug-in | Changing the Calico plug-in, components, or default Calico settings is not supported. For example, do not deploy a new Calico plug-in version, or modify the daemon sets or deployments for the Calico components, default `IPPool` resources, or Calico nodes. Instead, you can follow the documentation to [create a Calico `NetworkPolicy` or `GlobalNetworkPolicy`](/docs/containers?topic=containers-network_policies), to [change the Calico MTU](/docs/containers?topic=containers-kernel#calico-mtu), or to [disable the port map plug-in for the Calico CNI](/docs/containers?topic=containers-kernel#calico-portmap). |
 | Cluster quota | You cannot exceed 100 clusters per region and per [infrastructure provider](/docs/containers?topic=containers-infrastructure_providers). If you need more of the resource, [contact IBM Support](/docs/get-support?topic=get-support-using-avatar). In the support case, include the new quota limit for the region and infrastructure provider that you want.|
 | Kubernetes | Make sure to review the [Kubernetes project limitations](https://kubernetes.io/docs/setup/best-practices/cluster-large/){: external}. |
-| KMS provider | Customizing the IP addresses that are allowed to connect to your {{site.data.keyword.keymanagementservicefull}} instance is not supported. |
+| KMS provider | Customizing the IP addresses that are allowed to connect to your {{site.data.keyword.keymanagementservicefull}} instance is not supported.|
 | Kubernetes pod logs | To check the logs for individual app pods, you can use the command line to run `kubectl logs <pod name>`. Do not use the Kubernetes dashboard to stream logs for your pods, which might cause a disruption in your access to the Kubernetes dashboard. |
 | Load balancers | **Kubernetes 1.20 or later**: Although the Kubernetes [SCTP protocol](https://kubernetes.io/docs/concepts/services-networking/service/#sctp){: external} and [application protocol](https://kubernetes.io/docs/concepts/services-networking/service/#application-protocol){: external} features are generally available in the community release, creating load balancers that use these protocols is not supported in {{site.data.keyword.containerlong_notm}} clusters.|
 | Pod instances | You can run 110 pods per worker node. If you have worker nodes with 11 CPU cores or more, you can support 10 pods per core, up to a limit of 250 pods per worker node. The number of pods includes `kube-system` and `ibm-system` pods that run on the worker node. For improved performance, consider limiting the number of pods that you run per compute core so that you do not overuse the worker node. For example, on a worker node with a `b3c.4x16` flavor, you might run 10 pods per core that use no more than 75% of the worker node total capacity. |
@@ -215,6 +216,7 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 
 | Category | Description |
 | -------- | ----------- |
+| App URL length | Kubernetes version 1.20 or later only: DNS resolution is managed by the cluster's [virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe), which can resolve URLs up to 130 characters. If you expose apps in your cluster with URLs, such as the Ingress subdomain, ensure that the URLs are 130 characters or fewer. |
 | Istio managed add-on | See [Istio add-on limitations](/docs/containers?topic=containers-istio-about#istio_limitations). |
 | Network speeds | [VPC Gen 2 compute profile network speeds](/docs/vpc?topic=vpc-profiles) refer to the speeds of the worker node interfaces. The maximum speed available to your worker nodes is `16Gbps`. Because IP in IP encapsulation is required for traffic between pods that are on different VPC Gen 2 worker nodes, data transfer speeds between pods on different worker nodes might be slower, about half the compute profile network speed. Overall network speeds for apps that you deploy to your cluster depend on the worker node size and application's architecture. |
 | NodePort | You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a VPC load balancer or Ingress service instead. |

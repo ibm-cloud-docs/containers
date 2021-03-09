@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-08"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -126,8 +126,6 @@ _Figure: Overview of data encryption in a cluster_
 7.  **Data-in-use encryption**: For select, SGX-enabled classic worker node flavors, you can use [{{site.data.keyword.datashield_short}}](#datashield) to encrypt data-in-use within the worker node.
 
 
-
-
 <br />
 
 ## Understanding Key Management Service (KMS) providers
@@ -135,8 +133,6 @@ _Figure: Overview of data encryption in a cluster_
 
 You can protect the etcd component in your Kubernetes master and Kubernetes secrets by using a Kubernetes [key management service (KMS) provider](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/){: external} that encrypts secrets with encryption keys that you control.
 {: shortdesc}
-
-
 
 **What KMS providers are available by default? Can I add other providers?**
 
@@ -198,8 +194,6 @@ To use the additional {{site.data.keyword.keymanagementserviceshort}} features:
 
 Enable a Kubernetes [key management service (KMS) provider](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/){: external} such as [{{site.data.keyword.keymanagementserviceshort}}](/docs/key-protect?topic=key-protect-getting-started-tutorial){: external} to encrypt the Kubernetes secrets and etcd component of your Kubernetes master.
 {: shortdesc}
-
-
 
 **Clusters that run version 1.17**: To rotate your encryption key, repeat the [CLI](#kms_cli) or [console](#kms_ui) steps to enable KMS provider encryption with a new root key ID. The new root key is added to the cluster configuration along with the previous root key so that existing encrypted data is still protected. To encrypt your existing secrets with the new root key, you must rewrite the secrets.
 {: note}
