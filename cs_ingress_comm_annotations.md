@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -173,7 +173,14 @@ ingress.bluemix.net/client-max-body-size: "serviceName=app1 size=200m"
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-body-size){: external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){:external}:
+
+```
+nginx.ingress.kubernetes.io/proxy-body-size: 8m
+```
+{: screen}
+
+Or, Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-body-size){: external}:
 
 ```
 proxy-body-size: 200m
@@ -729,9 +736,10 @@ ingress.bluemix.net/ssl-services: ssl-service=app1 ssl-secret=app1-ssl-secret pr
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){:external}:
+Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){:external}:
 
 ```
+nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 nginx.ingress.kubernetes.io/proxy-ssl-secret: app1-ssl-secret
 nginx.ingress.kubernetes.io/proxy-ssl-verify-depth: 5
 nginx.ingress.kubernetes.io/proxy-ssl-name: proxy-ssl-name=mydomain.com
@@ -996,7 +1004,7 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
   ```
   {: screen}
 
-4. Enable the ALB OAuth Proxy add-on in your cluster.
+4. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
     1. Enable the `alb-oauth-proxy` add-on.
       ```
       ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
@@ -1009,11 +1017,11 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       {: pre}
 
 5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
-  1. Add the following `auth-url` annotation. Change only the placeholder for your {{site.data.keyword.appid_short_notm}} service instance name. Note that all letters in the service instance name must specified as lowercase.
+  1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
      ```yaml
      ...
      annotations:
-       nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace of the Ingress resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
+       nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace_of_Ingress_resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
      ...
      ```
      {: codeblock}
@@ -1050,6 +1058,8 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
        ```
        {: codeblock}
   3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
+    * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
+    * If you do not specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
   ```

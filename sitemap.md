@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-09"
+lastupdated: "2021-03-10"
 
 keywords: containers
 subcollection: containers
@@ -601,11 +601,11 @@ subcollection: containers
 [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
-## Service architecture and dependencies
-{: #sitemap_service_architecture_and_dependencies}
+## Architecture and dependencies of the service
+{: #sitemap_architecture_and_dependencies_of_the_service}
 
 
-[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
+[Architecture and dependencies of the service](/docs/containers?topic=containers-service-arch)
 
 [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
 * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
@@ -862,7 +862,7 @@ subcollection: containers
   * [Cluster states](/docs/containers?topic=containers-health-monitor#states_cluster)
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
   * [Worker node states](/docs/containers?topic=containers-health-monitor#states_workers)
-* [Monitoring worker node health in classic clusters with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
+* [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
@@ -1885,6 +1885,7 @@ subcollection: containers
   * [Changelog for 1.8.1, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#181)
   * [Changelog for 1.8.0, released 9 December 2020](/docs/containers?topic=containers-istio-changelog#180)
 * [Version 1.7](/docs/containers?topic=containers-istio-changelog#v17)
+  * [Changelog for 1.7.8, released 10 March 2021](/docs/containers?topic=containers-istio-changelog#178)
   * [Changelog for 1.7.7, released 8 February 2021](/docs/containers?topic=containers-istio-changelog#177)
   * [Changelog for 1.7.6, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#176)
   * [Changelog for 1.7.5, released 3 December 2020](/docs/containers?topic=containers-istio-changelog#175)
@@ -2446,6 +2447,7 @@ subcollection: containers
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#common_worker_nodes_issues)
+* [Using the Kubernetes API to debug worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug-kube-nodes)
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)
