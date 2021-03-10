@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-24"
+lastupdated: "2021-03-10"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -173,7 +173,14 @@ ingress.bluemix.net/client-max-body-size: "serviceName=app1 size=200m"
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-body-size){: external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){:external}:
+
+```
+nginx.ingress.kubernetes.io/proxy-body-size: 8m
+```
+{: screen}
+
+Or, Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-body-size){: external}:
 
 ```
 proxy-body-size: 200m
@@ -729,9 +736,10 @@ ingress.bluemix.net/ssl-services: ssl-service=app1 ssl-secret=app1-ssl-secret pr
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){:external}:
+Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){:external}:
 
 ```
+nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
 nginx.ingress.kubernetes.io/proxy-ssl-secret: app1-ssl-secret
 nginx.ingress.kubernetes.io/proxy-ssl-verify-depth: 5
 nginx.ingress.kubernetes.io/proxy-ssl-name: proxy-ssl-name=mydomain.com
