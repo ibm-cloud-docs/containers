@@ -601,11 +601,11 @@ subcollection: containers
 [Kubernetes security bulletins](/docs/containers?topic=containers-security#security_bulletins)
 
 
-## Service architecture and dependencies
-{: #sitemap_service_architecture_and_dependencies}
+## Architecture and dependencies of the service
+{: #sitemap_architecture_and_dependencies_of_the_service}
 
 
-[Service architecture and dependencies](/docs/containers?topic=containers-service-arch)
+[Architecture and dependencies of the service](/docs/containers?topic=containers-service-arch)
 
 [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
 * [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
@@ -862,7 +862,7 @@ subcollection: containers
   * [Cluster states](/docs/containers?topic=containers-health-monitor#states_cluster)
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)
   * [Worker node states](/docs/containers?topic=containers-health-monitor#states_workers)
-* [Monitoring worker node health in classic clusters with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
+* [Monitoring worker node health in with Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery)
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
@@ -2447,6 +2447,7 @@ subcollection: containers
 [Worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters)
 * [Debugging worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug_worker_nodes)
 * [Common issues with worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#common_worker_nodes_issues)
+* [Using the Kubernetes API to debug worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters#debug-kube-nodes)
 * [Unable to create or delete worker nodes or clusters](/docs/containers?topic=containers-cs_troubleshoot_clusters#infra_errors)
   * [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_credentials)
   * [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cs_troubleshoot_clusters#orphaned)

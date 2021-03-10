@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-10"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -93,7 +93,7 @@ subcollection: containers
 
 
 
-# Service architecture and dependencies
+# Architecture and dependencies of the service
 {: #service-arch}
 
 Review sample cluster architectures and the components that are created in your [classic](#architecture_classic) or [VPC](#architecture_vpc) cluster.

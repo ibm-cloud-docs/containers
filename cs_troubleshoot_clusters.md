@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-10"
 
 keywords: kubernetes, iks, ImagePullBackOff, registry, image, failed to pull image, debug
 
@@ -108,6 +108,7 @@ As you use {{site.data.keyword.containerlong_notm}}, consider these techniques f
 2. Make sure that your command line tools are up to date.
    * In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
    * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+3. [Enable autorecovery for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery).
 <br>
 
 **Reviewing issues and status**
@@ -150,7 +151,7 @@ Review the options to debug your worker nodes and find the root causes for failu
         <li>You set up a Virtual Router Appliance for your worker node that went down and cut off the communication between your worker node and the Kubernetes master. </li><li> Current networking issues in {{site.data.keyword.containerlong_notm}} or IBM Cloud infrastructure that causes the communication between your worker node and the Kubernetes master to fail.</li>
         <li>Your worker node ran out of capacity. Check the <strong>Status</strong> of the worker node to see whether it shows <strong>Out of disk</strong> or <strong>Out of memory</strong>. If your worker node is out of capacity, consider to either reduce the workload on your worker node or add a worker node to your cluster to help load balance the workload.</li>
         <li>The device was powered off from the [{{site.data.keyword.cloud_notm}} console resource list ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cloud.ibm.com/resources). Open the resource list and find your worker node ID in the **Devices** list. In the action menu, click **Power On**.</li></ul>
-        In many cases, [reloading](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node.<p class="tip">In classic clusters, you can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability).</p>
+        In many cases, [reloading](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) your worker node can solve the problem. When you reload your worker node, the latest [patch version](/docs/containers?topic=containers-cs_versions#version_types) is applied to your worker node. The major and minor version is not changed. Before you reload your worker node, make sure to cordon and drain your worker node to ensure that the existing pods are terminated gracefully and rescheduled onto remaining worker nodes. </br></br> If reloading the worker node does not resolve the issue, go to the next step to continue troubleshooting your worker node.<p class="tip">You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like rebooting a VPC worker node or reloading the operating system on a classic worker node. For more information about how Autorecovery works, see the [Autorecovery blog ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability).</p>
         </td>
        </tr>
        <tr>
@@ -221,6 +222,10 @@ Review the options to debug your worker nodes and find the root causes for failu
     ibmcloud ks worker get --cluster <cluster_name_or_id> --worker <worker_node_id>
     ```
     {: pre}
+4.  Review the infrastructure environment to check for other reasons that might cause the worker node issues.
+    1.  Check with your networking team to make sure that no recent maintenance, such as firewall or subnet updates, might impact the worker node connections.
+    2.  Review [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/status/){: external} for **{{site.data.keyword.containerlong_notm}}** and the underlying infrastructure provider, such as **Virtual Servers** for classic, **VPC** related components, or **{{site.data.keyword.satelliteshort}}**.
+    3.  If you have access to the underlying infrastructure, such as classic **Virtual Servers**, review the details of the corresponding machines for the worker nodes.
 
 <br />
 
@@ -299,6 +304,80 @@ Review common error messages and learn how to resolve them. Messages might begin
   </tr>
     </tbody>
   </table>
+
+<br />
+
+## Using the Kubernetes API to debug worker nodes
+{: #debug-kube-nodes}
+
+If you have access to the cluster, you can debug the worker nodes by using the Kubernetes API on the `Node` resource.
+{: shortdesc}
+
+Before you begin, make sure that you have the **Manager** service access role in all namespaces for the cluster, which corresponds to the `cluster-admin` RBAC role.
+
+1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2.  List the worker nodes in your cluster and note the **NAME** of the worker nodes that are not in a `Ready` **STATUS**. Note that the **NAME** is the private IP address of the worker node.
+    ```
+    kubectl get nodes
+    ```
+    {: pre}
+3.  Describe the each worker node, and review the `Conditions` section in the output.
+    * `Type`: The type of condition that might affect the worker node, such as memory or disk pressure.
+    * `LastTransitionTime`: The most recent time that the status was updated. Use this time to identify when the issue with your worker node began, which can help you further troubleshoot the issue.
+    
+    ```
+    kubectl describe node <name>
+    ```
+    {: pre}
+4.  Check the usage of the worker nodes.
+    1.  In the `Allocated resources` output of the previous command, review the workloads that use the worker node's CPU and memory resources. You might notice that some pods do not set resource limits, and are consuming more resources than you expected. If so, adjust the resource usage of the pods.
+    2.  Review the percentage of usage of CPU and memory across the worker nodes in your cluster. If the usage is consistently over 80%, [add more worker nodes](/docs/containers?topic=containers-add_workers) to the cluster to support the workloads.
+5.  Check for custom admission controllers that are installed in your cluster. Admission controllers often block required pods from running, which might make your worker nodes enter a critical state. If you have custom admission controllers, try removing them with `kubectl delete`. Then, check if the worker node issue resolves.
+    ```
+    kubectl get mutatingwebhookconfigurations --all-namespaces
+    ```
+    {: pre}
+
+    ```
+    kubectl get validatingwebhookconfigurations --all-namespaces
+    ```
+    {: pre}
+6.  If you configured [log forwarding](/docs/containers?topic=containers-health), review the node-related logs from the following paths.
+    ```
+    /var/log/containerd.log
+    /var/log/kubelet.log
+    /var/log/kube-proxy.log
+    /var/log/syslog
+    ```
+    {: screen}
+7.  Check that a workload deployment does not cause the worker node issue.
+    1.  Taint the worker node with the issue.
+        ```
+        kubectl taint node NODEIP ibm-cloud-debug-isolate-customer-workload=true:NoExecute
+        ```
+        {: pre}
+    2.  Make sure that you deleted any custom admission controllers as described in step 5.
+    3.  Restart the worker node.
+        * **Classic**: Reload the worker node.
+          ```
+          ibmcloud ks worker reload -c <cluster_name_or_ID> --worker <worker_ID>
+          ```
+          {: pre}
+        * **VPC**: Replace the worker node.
+          ```
+          ibmcloud ks worker replace -c <cluster_name_or_ID> --worker <worker_ID> --update
+          ```
+          {: pre}
+    4.  Wait for the worker node to finish restarting. If the worker node enters a healthy state, the issue is likely caused by a workload.
+    5.  Schedule one workload at a time onto the worker node to see which workload causes the issue. To schedule the workloads, add the following toleration.
+        ```
+        tolerations:
+        - effect: NoExecute
+          key: ibm-cloud-debug-isolate-customer-workload
+          operator: Exists
+        ```
+        {: copyblock}
+    6.  After you identify the workload that causes the issue, continue with [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps).
 
 <br />
 
