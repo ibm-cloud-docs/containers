@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-11"
 
 keywords: kubernetes, iks
 
@@ -144,7 +144,7 @@ Install the command-line tools.
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
-*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.17.3**.
+*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.19.8**.
 
 <br />
 
@@ -162,17 +162,12 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
     {: pre}
 
 2.  Create a VPC for your cluster. For more information, see the docs for creating a VPC in the [console](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console) or [CLI](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-vpc-cli).
-    1.  Target the VPC infrastructure generation 2.
-        ```
-        ibmcloud is target --gen 2
-        ```
-        {: pre}
-    2.  Create a VPC that is called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
+    1.  Create a VPC that is called `myvpc` and note the **ID** in the output. VPCs provide an isolated environment for your workloads to run within the public cloud. You can use the same VPC for multiple clusters, such as if you plan to have different clusters host separate microservices that need to communicate with each other. If you want to separate your clusters, such as for different departments, you can create a VPC for each cluster.
         ```
         ibmcloud is vpc-create myvpc
         ```
         {: pre}
-    3.  Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
+    2.  Create a subnet for your VPC, and note its **ID**. Consider the following information when you create the VPC subnet:
         *  **Zones**: You must have one VPC subnet for each zone in your cluster. The available zones depend on the metro location that you created the VPC in. To list available zones in the region, run `ibmcloud is zones`.
         *  **IP addresses**: VPC subnets provide private IP addresses for your worker nodes and load balancer services in your cluster, so make sure to [create a subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
         *  **Public gateways**: You do not need to attach a public gateway to complete this tutorial. Instead, you can keep your worker nodes isolated from public access by using VPC load balancers to expose workloads securely. You might attach a public gateway if your worker nodes need to access a public URL. For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
@@ -182,38 +177,13 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
         ```
         {: pre}
 
-3. VPC Gen 2 clusters that run Kubernetes version 1.18 or earlier only: To allow any traffic requests to apps that you deploy on your worker nodes, modify the VPC's default security group.
-    1. List your security groups. For the **VPC** that you created, note the ID of the default security group.
-      ```
-      ibmcloud is security-groups
-      ```
-      {: pre}
-      Example output with only the default security group of a randomly generated name, `preppy-swimmer-island-green-refreshment`:
-      ```
-      ID                                     Name                                       Rules   Network interfaces         Created                     VPC                      Resource group
-      1a111a1a-a111-11a1-a111-111111111111   preppy-swimmer-island-green-refreshment    4       -                          2019-08-12T13:24:45-04:00   <vpc_name>(bbbb222b-.)   c3c33cccc33c333ccc3c33cc3c333cc3
-      ```
-      {: screen}
-
-    2. Add a security group rule to allow inbound TCP traffic on ports 30000-32767.
-      ```
-      ibmcloud is security-group-rule-add <security_group_ID> inbound tcp --port-min 30000 --port-max 32767
-      ```
-      {: pre}
-
-    3. If you require VPC VPN access or classic infrastructure access into this cluster, add a security group rule to allow inbound UDP traffic on ports 30000-32767.
-      ```
-      ibmcloud is security-group-rule-add <security_group_ID> inbound udp --port-min 30000 --port-max 32767
-      ```
-      {: pre}
-
-4.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
+3.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private service endpoint. You can use the public service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
     ```
     ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.19.8 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
 
-5.  Check the state of your cluster. The cluster might take a few minutes to provision.
+4.  Check the state of your cluster. The cluster might take a few minutes to provision.
     1.  Verify that the cluster **State** is **normal**.
         ```
         ibmcloud ks cluster ls --provider vpc-gen2
@@ -234,8 +204,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
         Example output:
         ```
-        Client Version: v1.17.3
-        Server Version: v1.17.3+IKS
+        Client Version: 1.19.8
+        Server Version: 1.19.8+IKS
         ```
         {: screen}
 
