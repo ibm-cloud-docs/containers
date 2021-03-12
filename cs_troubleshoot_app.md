@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-12"
 
 keywords: kubernetes, iks, help
 
@@ -484,7 +484,7 @@ If this cluster is an existing one, check your cluster capacity.
 2.  Open the Kubernetes dashboard.
 
   ```
-  http://localhost:8001/ui
+  http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
   ```
   {: pre}
 
