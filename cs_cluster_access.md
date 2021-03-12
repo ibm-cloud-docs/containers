@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-02"
+lastupdated: "2021-03-12"
 
 keywords: kubernetes, iks, clusters
 
@@ -155,7 +155,7 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 
    2. Open the following URL in a web browser to see the Kubernetes dashboard.
       ```
-      http://localhost:8001/ui
+      http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
       ```
       {: codeblock}
 
@@ -266,7 +266,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
     ```
     {: screen}
 
-    
+
 ### Accessing classic clusters through the private service endpoint
 {: #classic_private_se}
 

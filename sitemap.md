@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-10"
+lastupdated: "2021-03-12"
 
 keywords: containers
 subcollection: containers
@@ -2264,13 +2264,26 @@ subcollection: containers
 * [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
 
 [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events)
-* [Cluster management events](/docs/containers?topic=containers-at_events#cluster-events)
+* [Cluster events](/docs/containers?topic=containers-at_events#clusters-events)
+* [Cluster account events](/docs/containers?topic=containers-at_events#cluster-account-events)
+* [Cluster add-on events](/docs/containers?topic=containers-at_events#cluster-addons)
+* [Deprecated: Previous cluster management events](/docs/containers?topic=containers-at_events#cluster-events-old)
+* [Fluentd logging events](/docs/containers?topic=containers-at_events#at-fluentd)
 * [Ingress ALB events](/docs/containers?topic=containers-at_events#ingress-alb-events)
 * [Ingress secret events](/docs/containers?topic=containers-at_events#ingress-secret-events)
 * [Observability events for logging and monitoring](/docs/containers?topic=containers-at_events#at-lm)
 * [NLB DNS events](/docs/containers?topic=containers-at_events#ingress-nlb-dns-events)
 * [Private service endpoint allowlist events](/docs/containers?topic=containers-at_events#acl-events)
+* [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events#satellite-events)
 * [Storage events](/docs/containers?topic=containers-at_events#storage-events)
+* [Worker node and worker pool events](/docs/containers?topic=containers-at_events#worker-events)
+* [Preview: Events with updated names (tentative)](/docs/containers?topic=containers-at_events#events-new)
+  * [Updated cluster events](/docs/containers?topic=containers-at_events#events-new-cluster)
+  * [Updated cluster account events](/docs/containers?topic=containers-at_events#events-new-account)
+  * [Updated cluster add-on events](/docs/containers?topic=containers-at_events#events-new-addons)
+  * [Updated Fluentd logging events](/docs/containers?topic=containers-at_events#events-new-fluentd)
+  * [Updated worker pool and worker node events](/docs/containers?topic=containers-at_events#events-new-worker)
+  * [Updated field names across events](/docs/containers?topic=containers-at_events#events-updated-fields)
 * [Viewing your cluster events](/docs/containers?topic=containers-at_events#at-ui)
 
 [IAM and {{site.data.keyword.cloudaccesstrailshort}} action by API method](/docs/containers?topic=containers-api-at-iam)
