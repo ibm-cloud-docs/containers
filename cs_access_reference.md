@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-15"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -126,6 +126,7 @@ Review the minimum permissions in {{site.data.keyword.cloud_notm}} IAM that the 
 <dd>In addition to the API key, each individual user must have the following permissions to create a cluster.<ul>
 <li>**Administrator** platform access role for **Kubernetes Service** in the console (**containers-kubernetes** in the API or CLI). If your access is scoped to a resource group or region, you must also have the **Viewer** platform access role at the **Account** level to view the account's VLANs.</li>
 <li>**Administrator** platform access role for **Container Registry** in the console (**container-registry** in the API or CLI) at the **Account** level.</li>
+<li>**Viewer** platform access role to **IAM Identity Service** for account management access.</li>
 <li>**Viewer** platform access role for the resource group access.</li></ul></dd>
 </dl>
 

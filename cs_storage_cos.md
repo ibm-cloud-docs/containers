@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-15"
 
 keywords: kubernetes, iks
 
@@ -261,7 +261,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
    2. Review the [version changelog](/docs/containers?topic=containers-changelog) to find the changes that are included in the latest patch version.
 
    3. Apply the latest patch version by reloading your worker node. Follow the instructions in the [ibmcloud ks worker reload command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to gracefully reschedule any running pods on your worker node before you reload your worker node. Note that during the reload, your worker node machine is updated with the latest image and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-2. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the version 3 Helm client on your local machine.
+2. [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the version 3 Helm client on your local machine..
 
   If you enabled [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint) in your {{site.data.keyword.cloud_notm}} account, you can use the private {{site.data.keyword.cloud_notm}} Helm repository to keep your image pull traffic on the private network. If you cannot enable VRF or service endpoints in your account, use the public Helm repository.
   {: note}
