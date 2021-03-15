@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-15"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -120,6 +120,20 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.20 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.20.4_1532, released 12 March 2021
+{: #1204_1532}
+
+The following table shows the changes that are included in the worker node fix pack `1.20.4_1532`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Containerd | v1.4.3 | v1.4.4 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.4){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-24031](https://nvd.nist.gov/vuln/detail/CVE-2021-24031){: external}, [CVE-2021-24032](https://nvd.nist.gov/vuln/detail/CVE-2021-24032){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, and [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for{: external}, [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.4_1531" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.20.4_1531, released 1 March 2021
 {: #1204_1531}
 
@@ -195,6 +209,20 @@ The following table shows the changes that are included in the version updates f
 
 Review the version 1.19 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.19.8_1539, released 12 March 2021
+{: #1198_1539}
+
+The following table shows the changes that are included in the worker node fix pack `1.19.8_1539`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Containerd | v1.4.3 | v1.4.4 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.4.4){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-24031](https://nvd.nist.gov/vuln/detail/CVE-2021-24031){: external}, [CVE-2021-24032](https://nvd.nist.gov/vuln/detail/CVE-2021-24032){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, and [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for{: external}, [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.8_1538" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.8_1538, released 1 March 2021
 {: #1198_1538}
@@ -517,6 +545,20 @@ The following table shows the changes that are included in the `1.19.2_1524` ver
 
 Review the version 1.18 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.18.16_1545, released 12 March 2021
+{: #11816_1545}
+
+The following table shows the changes that are included in the worker node fix pack `1.18.16_1545`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Containerd | v1.3.9 | 1.3.10 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.3.10){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-24031](https://nvd.nist.gov/vuln/detail/CVE-2021-24031){: external}, [CVE-2021-24032](https://nvd.nist.gov/vuln/detail/CVE-2021-24032){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, and [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for{: external}, [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.16_1544" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.18.16_1544, released 1 March 2021
 {: #11816_1544}
@@ -1090,6 +1132,20 @@ Review the version 1.17 changelog.
 
 Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.17.17_1556, released 12 March 2021
+{: #11717_1556}
+
+The following table shows the changes that are included in the worker node fix pack `1.17.17_1556`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Containerd | v1.3.9 | 1.3.10 | See the [containerd release notes](https://github.com/containerd/containerd/releases/tag/v1.3.10){: external}. |
+| Ubuntu 18.04 packages | N/A | N/A | Updated worker node image with package updates for [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-24031](https://nvd.nist.gov/vuln/detail/CVE-2021-24031){: external}, [CVE-2021-24032](https://nvd.nist.gov/vuln/detail/CVE-2021-24032){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, and [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}. |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node image with package updates for{: external}, [CVE-2021-21300](https://nvd.nist.gov/vuln/detail/CVE-2021-21300){: external}, [CVE-2021-27218](https://nvd.nist.gov/vuln/detail/CVE-2021-27218){: external}, [CVE-2021-27219](https://nvd.nist.gov/vuln/detail/CVE-2021-27219){: external}, and [CVE-2021-3177](https://nvd.nist.gov/vuln/detail/CVE-2021-3177){: external}. |
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.17_1555" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.17_1555, released 1 March 2021
 {: #11717_1555_worker}
