@@ -416,11 +416,11 @@ subcollection: containers
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster)
 * [Prerequisites](/docs/containers?topic=containers-access_cluster#prereqs)
-* [Accessing clusters through the public service endpoint](/docs/containers?topic=containers-access_cluster#access_public_se)
-* [Accessing clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
-  * [Accessing VPC clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
-  * [Accessing classic clusters through the private service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
-  * [Creating an allowlist for the private service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
+* [Accessing clusters through the public cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_public_se)
+* [Accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se)
+  * [Accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se)
+  * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
+  * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
 [Assigning cluster access](/docs/containers?topic=containers-users)
@@ -608,8 +608,8 @@ subcollection: containers
 [Architecture and dependencies of the service](/docs/containers?topic=containers-service-arch)
 
 [Classic cluster](/docs/containers?topic=containers-service-arch#architecture_classic)
-* [Non-VRF or VRF-enabled account with public service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
-* [VRF-enabled account with private and public service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
+* [Non-VRF or VRF-enabled account with public cloud service endpoint only](/docs/containers?topic=containers-service-arch#no-vrf-public-endpoint)
+* [VRF-enabled account with private and public cloud service endpoints](/docs/containers?topic=containers-service-arch#vrf-both-endpoints)
 * [Kubernetes master components](/docs/containers?topic=containers-service-arch#master-components)
 * [Worker node components](/docs/containers?topic=containers-service-arch#worker-components)
 
@@ -750,9 +750,9 @@ subcollection: containers
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
 
 [Classic: Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
-* [Setting up the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
-* [Setting up the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
-* [Switching from the public service endpoint to the private service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
+* [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
+* [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
+* [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
 * [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 
 [Classic: Setting up VPN connectivity](/docs/containers?topic=containers-vpn)

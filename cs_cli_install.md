@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -647,7 +647,7 @@ To install and launch the Kubernetes web terminal:
 4. In the **Actions...** drop-down list, select **Web terminal** again. The terminal opens in your browser.
 5. VPC clusters: Configure access to external endpoints, such as the {{site.data.keyword.containerlong_notm}} API, from the web terminal. Choose between the following options:
     * Enable a [public gateway](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity) on each VPC subnet that your worker nodes are attached to. This ensures that the `kube-terminal` pod in your cluster is always deployed to a worker node on a subnet that has external access.
-    * Edit the `KUBECONFIG` file to use the private service endpoint for your cluster.
+    * Edit the `KUBECONFIG` file to use the private cloud service endpoint for your cluster.
       1. In the web terminal, edit the `KUBECONFIG` file.
         ```
         vim $KUBECONFIG

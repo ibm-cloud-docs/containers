@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks
 
@@ -238,7 +238,7 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
     {: pre}
 
 6. Get information about your VPC Gen 1 cluster and plan your VPC Gen 2 cluster.
-  1. List your cluster details and note information that you also want to use to create your VPC Gen 2 cluster, such as the resource group, the number of worker nodes, the worker zones, and whether the public service endpoint is enabled.
+  1. List your cluster details and note information that you also want to use to create your VPC Gen 2 cluster, such as the resource group, the number of worker nodes, the worker zones, and whether the public cloud service endpoint is enabled.
     ```
     ibmcloud ks cluster get -c <gen1_cluster_name_or_ID>
     ```

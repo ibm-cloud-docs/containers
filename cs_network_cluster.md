@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-04"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, vlan
 
@@ -103,32 +103,32 @@ After you initially set up your network when you [create a cluster](/docs/contai
 {: note}
 
 
-## Setting up the private service endpoint
+## Setting up the private cloud service endpoint
 {: #set-up-private-se}
 
-Enable the private service endpoint for your cluster.
+Enable the private cloud service endpoint for your cluster.
 {: shortdesc}
 
-The private service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private service endpoint after you enable it.
+The private cloud service endpoint makes your Kubernetes master privately accessible. Your worker nodes and your authorized cluster users can communicate with the Kubernetes master over the private network. To determine whether you can enable the private cloud service endpoint, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#workeruser-master). Note that you cannot disable the private cloud service endpoint after you enable it.
 
-Did you create a cluster with only a private service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
+Did you create a cluster with only a private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint)? Try [setting up the public cloud service endpoint](#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account.
 {: tip}
 
 1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
-3. Enable the private service endpoint.
+3. Enable the private cloud service endpoint.
    ```
    ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
-4. Refresh the Kubernetes master API server to use the private service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
+4. Refresh the Kubernetes master API server to use the private cloud service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
 
 5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
-6. Update all the worker nodes in your cluster to pick up the private service endpoint configuration.
+6. Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
    <p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
    ```
@@ -137,40 +137,40 @@ Did you create a cluster with only a private service endpoint before you enabled
    {: pre}
 
 7. If the cluster is in an environment behind a firewall:
-  * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
+  * [Allow your authorized cluster users to run `kubectl` commands to access the master through the private cloud service endpoint.](/docs/containers?topic=containers-firewall#firewall_kubectl)
   * [Allow outbound network traffic to the private IPs](/docs/containers?topic=containers-firewall#firewall_outbound) for infrastructure resources and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
-9.  Optional: To use the private service endpoint only:
-    1.  [Disable the public service endpoint](#disable-public-se).
-    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
+9.  Optional: To use the private cloud service endpoint only:
+    1.  [Disable the public cloud service endpoint](#disable-public-se).
+    2.  [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
 <br />
 
-## Setting up the public service endpoint
+## Setting up the public cloud service endpoint
 {: #set-up-public-se}
 
-Enable or disable the public service endpoint for your cluster.
+Enable or disable the public cloud service endpoint for your cluster.
 {: shortdesc}
 
 
 
-The public service endpoint makes your Kubernetes master publicly accessible. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#internet-facing).
+The public cloud service endpoint makes your Kubernetes master publicly accessible. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. For more information, see [Worker-to-master and user-to-master communication](/docs/containers?topic=containers-plan_clusters#internet-facing).
 
 **Steps to enable**
 
 If you previously disabled the public endpoint, you can re-enable it.
-1. Enable the public service endpoint.
+1. Enable the public cloud service endpoint.
    ```
    ibmcloud ks cluster master public-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
-2. Refresh the Kubernetes master API server to use the public service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
+2. Refresh the Kubernetes master API server to use the public cloud service endpoint. You can follow the prompt in the CLI, or manually run the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
 3. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
-4. Update all the worker nodes in your cluster to remove the public service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+4. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
    ```
    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
    ```
@@ -181,52 +181,52 @@ If you previously disabled the public endpoint, you can re-enable it.
 {: #disable-public-se}
 **Steps to disable**
 
-To disable the public service endpoint, you must first enable the private service endpoint so that your worker nodes can communicate with the Kubernetes master.
-1. [Enable the private service endpoint](#set-up-private-se).
-2. Disable the public service endpoint.
+To disable the public cloud service endpoint, you must first enable the private cloud service endpoint so that your worker nodes can communicate with the Kubernetes master.
+1. [Enable the private cloud service endpoint](#set-up-private-se).
+2. Disable the public cloud service endpoint.
    ```
    ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
    ```
    {: pre}
-3. Refresh the Kubernetes master API server to remove the public service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
+3. Refresh the Kubernetes master API server to remove the public cloud service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
 4. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
-5. Update all the worker nodes in your cluster to remove the public service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
+5. Update all the worker nodes in your cluster to remove the public cloud service endpoint configuration.<p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must reload the worker nodes manually with the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
    ```
    ibmcloud ks worker update --cluster <cluster_name_or_ID> --worker <worker1,worker2>
    ```
    {: pre}
 
-## Switching from the public service endpoint to the private service endpoint
+## Switching from the public cloud service endpoint to the private cloud service endpoint
 {: #migrate-to-private-se}
 
-Enable worker nodes to communicate with the master over the private network instead of the public network by enabling the private service endpoint.
+Enable worker nodes to communicate with the master over the private network instead of the public network by enabling the private cloud service endpoint.
 {: shortdesc}
 
-All clusters that are connected to a public and a private VLAN use the public service endpoint by default. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. To enable worker nodes to communicate with the Kubernetes master over the private network instead of the public network, you can enable the private service endpoint. Then, you can optionally disable the public service endpoint.
-* If you enable the private service endpoint and keep the public service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
-* If you enable the private service endpoint but disable the public service endpoint, workers and users must communicate with the master over the private network.
+All clusters that are connected to a public and a private VLAN use the public cloud service endpoint by default. Your worker nodes and your authorized cluster users can securely communicate with the Kubernetes master over the public network. To enable worker nodes to communicate with the Kubernetes master over the private network instead of the public network, you can enable the private cloud service endpoint. Then, you can optionally disable the public cloud service endpoint.
+* If you enable the private cloud service endpoint and keep the public cloud service endpoint enabled too, workers always communicate with the master over the private network, but your users can communicate with the master over either the public or private network.
+* If you enable the private cloud service endpoint but disable the public cloud service endpoint, workers and users must communicate with the master over the private network.
 
-Note that you cannot disable the private service endpoint after you enable it.
+Note that you cannot disable the private cloud service endpoint after you enable it.
 
 1. Enable [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) in your IBM Cloud infrastructure account. To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2. [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
-3. Enable the private service endpoint.
+3. Enable the private cloud service endpoint.
    ```
    ibmcloud ks cluster master private-service-endpoint enable --cluster <cluster_name_or_ID>
    ```
    {: pre}
-4. Refresh the Kubernetes master API server to use the private service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
+4. Refresh the Kubernetes master API server to use the private cloud service endpoint by following the CLI prompt or by manually running the following command. It might take several minutes for the master to refresh.
    ```
    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
    ```
    {: pre}
 5. [Create a configmap](/docs/containers?topic=containers-update#worker-up-configmap) to control the maximum number of worker nodes that can be unavailable at a time in your cluster. When you update your worker nodes, the configmap helps prevent downtime for your apps as the apps are rescheduled orderly onto available worker nodes.
 
-6.  Update all the worker nodes in your cluster to pick up the private service endpoint configuration.
+6.  Update all the worker nodes in your cluster to pick up the private cloud service endpoint configuration.
 
     <p class="important">By issuing the update command, the worker nodes are reloaded to pick up the service endpoint configuration. If no worker update is available, you must [reload the worker nodes manually](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). If you reload, be sure to cordon, drain, and manage the order to control the maximum number of worker nodes that are unavailable at a time.</p>
     ```
@@ -234,13 +234,13 @@ Note that you cannot disable the private service endpoint after you enable it.
     ```
     {: pre}
 
-7.  Optional: To use the private service endpoint only:
-    1.  Disable the public service endpoint.
+7.  Optional: To use the private cloud service endpoint only:
+    1.  Disable the public cloud service endpoint.
         ```
         ibmcloud ks cluster master public-service-endpoint disable --cluster <cluster_name_or_ID>
         ```
         {: pre}
-    2.  [Set up access to the master on the private service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
+    2.  [Set up access to the master on the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
 
 <br />
 
