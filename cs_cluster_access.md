@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-12"
+lastupdated: "2021-03-17"
 
 keywords: kubernetes, iks, clusters
 
@@ -105,16 +105,16 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 
 1. [Install the required CLI tools](/docs/containers?topic=containers-cs_cli_install), including the {{site.data.keyword.cloud_notm}} CLI, {{site.data.keyword.containershort_notm}} plug-in(`ibmcloud ks`), and Kubernetes CLI (`kubectl`).
 2. [Create your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-clusters).
-3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall#corporate) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private service endpoint-only clusters, you cannot test the connection to your cluster until you expose the private service endpoint of the master to the cluster by using a [private NLB](#access_private_se).
+3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall#corporate) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private cloud service endpoint-only clusters, you cannot test the connection to your cluster until you expose the private cloud service endpoint of the master to the cluster by using a [private NLB](#access_private_se).
 4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
 5.  In the output of the cluster details from the previous step, check the **Public** or **Private Service Endpoint** URL of the cluster.
-    *  **Public Service Endpoint URL only**: Continue with [Accessing clusters through the public service endpoint](#access_public_se).
-    *  **Private Service Endpoint URL only**: If your cluster has only a private service endpoint enabled, continue with [Accessing clusters through the private service endpoint](#access_private_se).
+    *  **Public Service Endpoint URL only**: Continue with [Accessing clusters through the public cloud service endpoint](#access_public_se).
+    *  **Private Service Endpoint URL only**: If your cluster has only a private cloud service endpoint enabled, continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
     *  **Both service endpoint URLs**: You can access your cluster either through the [public](#access_public_se) or the [private](#access_private_se) service endpoint.
 
 <br />
 
-## Accessing clusters through the public service endpoint
+## Accessing clusters through the public cloud service endpoint
 {: #access_public_se}
 
 To work with your cluster, set the cluster that you created as the context for a CLI session to run `kubectl` commands.
@@ -161,13 +161,13 @@ If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can
 
 <br />
 
-## Accessing clusters through the private service endpoint
+## Accessing clusters through the private cloud service endpoint
 {: #access_private_se}
 
-The Kubernetes master is accessible through the private service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example) for VPC infrastructure, or for classic infrastructure, a [VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl). However, communication with the Kubernetes master over the private service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.dl_full_notm}}. You can expose the private service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.dl_full_notm}} connection. If you enable only the private service endpoint, you can use the Kubernetes dashboard or temporarily enable the public service endpoint to create the private NLB.
+The Kubernetes master is accessible through the private cloud service endpoint if authorized cluster users are in your {{site.data.keyword.cloud_notm}} private network or are connected to the private network through a [VPC VPN connection](/docs/vpc?topic=vpc-vpn-onprem-example) for VPC infrastructure, or for classic infrastructure, a [VPN connection](/docs/iaas-vpn?topic=iaas-vpn-getting-started) or [{{site.data.keyword.dl_full_notm}}](/docs/dl?topic=dl-get-started-with-ibm-cloud-dl). However, communication with the Kubernetes master over the private cloud service endpoint must go through the <code>166.X.X.X</code> IP address range, which is not routable from a VPN connection or through {{site.data.keyword.dl_full_notm}}. You can expose the private cloud service endpoint of the master for your cluster users by using a private network load balancer (NLB). The private NLB exposes the private cloud service endpoint of the master as an internal <code>10.X.X.X</code> IP address range that users can access with the VPN or {{site.data.keyword.dl_full_notm}} connection. If you enable only the private cloud service endpoint, you can use the Kubernetes dashboard or temporarily enable the public cloud service endpoint to create the private NLB.
 {: shortdesc}
 
-### Accessing VPC clusters through the private service endpoint
+### Accessing VPC clusters through the private cloud service endpoint
 {: #vpc_private_se}
 
 1. Set up your {{site.data.keyword.vpc_short}} VPN and connect to your private network through the VPN.
@@ -175,7 +175,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   2. [Create a VPN gateway in your VPC, and create the connection between the VPC VPN gateway and your local VPN gateway](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console#vpn-ui). If you have a multizone cluster, you must create a VPC gateway on a subnet in each zone where you have worker nodes.
   3. Verify that you are connected to the private network through your {{site.data.keyword.vpc_short}} VPN connection.
 
-2. Get the private service endpoint URL and port for your cluster.
+2. Get the private cloud service endpoint URL and port for your cluster.
   ```
   ibmcloud ks cluster get -c <cluster_name_or_ID>
   ```
@@ -192,7 +192,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: screen}
 
-3. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
+3. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private cloud service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
    ```yaml
    apiVersion: v1
    kind: Service
@@ -220,8 +220,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
    ```
    {: codeblock}
 
-4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
-  * **If you enabled the private service endpoint only**, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
+4. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
+  * **If you enabled the private cloud service endpoint only**, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
     1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2.  From the menu bar, select the account that you want to use.
     3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
@@ -229,9 +229,9 @@ The Kubernetes master is accessible through the private service endpoint if auth
     5.  From the cluster detail page, click the **Kubernetes Dashboard**.
     6.  Click **+ Create**.
     7.  Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
-    8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, the hostname exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+    8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, the hostname exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
-  * **If you also enabled the public service endpoint**, you already have access to the master.
+  * **If you also enabled the public cloud service endpoint**, you already have access to the master.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
@@ -242,7 +242,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
       kubectl apply -f kube-api-via-nlb.yaml
       ```
       {: pre}
-    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, the hostname in the **EXTERNAL-IP** address field exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, the hostname in the **EXTERNAL-IP** address field exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
       ```
       kubectl get svc -o wide
       ```
@@ -267,10 +267,10 @@ The Kubernetes master is accessible through the private service endpoint if auth
     {: screen}
 
 
-### Accessing classic clusters through the private service endpoint
+### Accessing classic clusters through the private cloud service endpoint
 {: #classic_private_se}
 
-1. Get the private service endpoint URL and port for your cluster.
+1. Get the private cloud service endpoint URL and port for your cluster.
   ```
   ibmcloud ks cluster get -c <cluster_name_or_ID>
   ```
@@ -292,7 +292,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
   ```
   {: screen}
 
-2. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
+2. Create a YAML file that is named `kube-api-via-nlb.yaml`. This YAML creates a private `LoadBalancer` service and exposes the private cloud service endpoint through that NLB. Replace `<private_service_endpoint_port>` with the port you found in the previous step.
    ```yaml
    apiVersion: v1
    kind: Service
@@ -320,8 +320,8 @@ The Kubernetes master is accessible through the private service endpoint if auth
    ```
    {: codeblock}
 
-3. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public service endpoint or Kubernetes dashboard.
-  * If you enabled the private service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private service endpoint of the master.
+3. To create the private NLB, you must be connected to the cluster master. Because you cannot yet connect through the private cloud service endpoint from a VPN or {{site.data.keyword.dl_full_notm}}, you must connect to the cluster master and create the NLB by using the public cloud service endpoint or Kubernetes dashboard.
+  * If you enabled the private cloud service endpoint only, you can use the Kubernetes dashboard to create the NLB. The dashboard automatically routes all requests to the private cloud service endpoint of the master.
     1.  Log in to the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/).
     2.  From the menu bar, select the account that you want to use.
     3.  From the menu ![Menu icon](../icons/icon_hamburger.svg "Menu icon"), click **Kubernetes**.
@@ -329,9 +329,9 @@ The Kubernetes master is accessible through the private service endpoint if auth
     5.  From the cluster detail page, click the **Kubernetes Dashboard**.
     6.  Click **+ Create**.
     7.  Select **Create from file**, upload the `kube-api-via-nlb.yaml` file, and click **Upload**.
-    8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+    8.  In the **Overview** page, verify that the `kube-api-via-nlb` service is created. In the **External endpoints** column, note the `10.x.x.x` address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
 
-  * If you also enabled the public service endpoint, you already have access to the master.
+  * If you also enabled the public cloud service endpoint, you already have access to the master.
     1. Download and add the `kubeconfig` configuration file for your cluster to your existing `kubeconfig` in `~/.kube/config` or the last file in the `KUBECONFIG` environment variable.
         ```
         ibmcloud ks cluster config -c <cluster_name_or_ID>
@@ -342,13 +342,13 @@ The Kubernetes master is accessible through the private service endpoint if auth
       kubectl apply -f kube-api-via-nlb.yaml
       ```
       {: pre}
-    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private service endpoint for the Kubernetes master on the port that you specified in your YAML file.
+    3. Verify that the `kube-api-via-nlb` NLB is created. In the output, note the `10.x.x.x` **EXTERNAL-IP** address. This IP address exposes the private cloud service endpoint for the Kubernetes master on the port that you specified in your YAML file.
       ```
       kubectl get svc -o wide
       ```
       {: pre}
 
-      In this example output, the IP address for the private service endpoint of the Kubernetes master is `10.186.92.42`.
+      In this example output, the IP address for the private cloud service endpoint of the Kubernetes master is `10.186.92.42`.
       ```
       NAME                     TYPE           CLUSTER-IP       EXTERNAL-IP      PORT(S)          AGE   SELECTOR
       kube-api-via-nlb         LoadBalancer   172.21.150.118   10.186.92.42     443:32235/TCP    10m   <none>
@@ -356,7 +356,7 @@ The Kubernetes master is accessible through the private service endpoint if auth
       ```
       {: screen}
 
-4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
+4. On the client machines where you or your users run `kubectl` commands, add the NLB IP address and the private cloud service endpoint URL to the `/etc/hosts` file. Do not include any ports in the IP address and URL and do not include `https://` in the URL.
   * For macOS and Linux users:
     ```
     sudo nano /etc/hosts
@@ -397,38 +397,38 @@ The Kubernetes master is accessible through the private service endpoint if auth
     ```
     {: screen}
 
-### Creating an allowlist for the private service endpoint
+### Creating an allowlist for the private cloud service endpoint
 {: #private-se-allowlist}
 
-Control access to your private service endpoint by creating a subnet allowlist.
+Control access to your private cloud service endpoint by creating a subnet allowlist.
 {: shortdesc}
 
-After you [grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform), you can add a secondary layer of security by creating an allowlist for the private service endpoint. Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private service endpoint.
+After you [grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform), you can add a secondary layer of security by creating an allowlist for the private cloud service endpoint. Only authorized requests to your cluster master that originate from subnets in the allowlist are permitted through the cluster's private cloud service endpoint.
 
-For example, to access your cluster's private service endpoint, you must connect to your {{site.data.keyword.cloud_notm}} classic network or your VPC network through a VPN or {{site.data.keyword.dl_full_notm}}. You can add the subnet for the VPN or {{site.data.keyword.dl_short}} tunnel so that authorized users in your organization can only access the private service endpoint from that subnet.
+For example, to access your cluster's private cloud service endpoint, you must connect to your {{site.data.keyword.cloud_notm}} classic network or your VPC network through a VPN or {{site.data.keyword.dl_full_notm}}. You can add the subnet for the VPN or {{site.data.keyword.dl_short}} tunnel so that authorized users in your organization can only access the private cloud service endpoint from that subnet.
 
-A private service endpoint allowlist can also help prevent users from accessing your cluster after their authorization is revoked. When a user leaves your organization, you remove their {{site.data.keyword.cloud_notm}} IAM permissions that grant them access to the cluster. However, the user might have copied the API key that contains a functional ID's credentials, which contain the necessary IAM permissions for you cluster. That user can still use those credentials and the private service endpoint address to access your cluster from a different subnet, such as from a different {{site.data.keyword.cloud_notm}} account. If you create an allowlist that includes only the subnets for your VPN tunnel in your organization's {{site.data.keyword.cloud_notm}} account, the user's attempted access from another {{site.data.keyword.cloud_notm}} account is denied.
+A private cloud service endpoint allowlist can also help prevent users from accessing your cluster after their authorization is revoked. When a user leaves your organization, you remove their {{site.data.keyword.cloud_notm}} IAM permissions that grant them access to the cluster. However, the user might have copied the API key that contains a functional ID's credentials, which contain the necessary IAM permissions for you cluster. That user can still use those credentials and the private cloud service endpoint address to access your cluster from a different subnet, such as from a different {{site.data.keyword.cloud_notm}} account. If you create an allowlist that includes only the subnets for your VPN tunnel in your organization's {{site.data.keyword.cloud_notm}} account, the user's attempted access from another {{site.data.keyword.cloud_notm}} account is denied.
 
-Worker node subnets are automatically added to and removed from your allowlist so that worker nodes can always access the master through the private service endpoint.
+Worker node subnets are automatically added to and removed from your allowlist so that worker nodes can always access the master through the private cloud service endpoint.
 
-If the public service endpoint is enabled for your cluster, authorized requests are still permitted through the public service endpoint. Therefore, the private service endpoint allowlist is most effective for controlling access to clusters that have only the private service endpoint enabled.
+If the public cloud service endpoint is enabled for your cluster, authorized requests are still permitted through the public cloud service endpoint. Therefore, the private cloud service endpoint allowlist is most effective for controlling access to clusters that have only the private cloud service endpoint enabled.
 {: note}
 
 Before you begin:
-* [Access your cluster through the private service endpoint](#access_private_se).
+* [Access your cluster through the private cloud service endpoint](#access_private_se).
 * [Grant users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform).
 
-To create a private service endpoint allowlist:
+To create a private cloud service endpoint allowlist:
 
 1. Get the subnets that you want to add to the allowlist. For example, you might get the subnet for the connection through your VPN or {{site.data.keyword.dl_short}} tunnel to your {{site.data.keyword.cloud_notm}} private network.
 
-2. Enable the subnet allowlist feature for a cluster's private service endpoint. Now, access to the cluster via the private service endpoint is blocked for any requests that originate from a subnet that is not in the allowlist. Your worker nodes continue to run and have access to the master.
+2. Enable the subnet allowlist feature for a cluster's private cloud service endpoint. Now, access to the cluster via the private cloud service endpoint is blocked for any requests that originate from a subnet that is not in the allowlist. Your worker nodes continue to run and have access to the master.
   ```
   ibmcloud ks cluster master private-service-endpoint allowlist enable --cluster <cluster_name_or_ID>
   ```
   {: pre}
 
-3. Add subnets from which authorized users can access your private service endpoint to the allowlist.
+3. Add subnets from which authorized users can access your private cloud service endpoint to the allowlist.
   ```
   ibmcloud ks cluster master private-service-endpoint allowlist add --cluster <cluster_name_or_ID> --subnet <subnet_CIDR> [--subnet <subnet_CIDR> ...]
   ```
@@ -440,7 +440,7 @@ To create a private service endpoint allowlist:
   ```
   {: pre}
 
-Your authorized users can now continue with [Accessing clusters through the private service endpoint](#access_private_se).
+Your authorized users can now continue with [Accessing clusters through the private cloud service endpoint](#access_private_se).
 
 <br />
 

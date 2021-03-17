@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-10"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, ips, vlans, networking, public gateway
 
@@ -176,7 +176,7 @@ To see the pod and service subnets that your cluster uses, look for the `Pod Sub
 A public gateway enables a subnet and all worker nodes that are attached to the subnet to establish outbound connections to the internet. If your worker nodes must access a public endpoint outside of the cluster, you can enable a [public gateway](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity) on the VPC subnets that worker nodes are deployed to.
 {: shortdesc}
 
-If an {{site.data.keyword.cloud_notm}} service does not support private service endpoints, your worker nodes must be connected to a subnet that has a public gateway attached to it. The pods on those worker nodes can securely communicate with the services over the public network through the subnet's public gateway. Note that a public gateway is not required on your subnets to allow inbound network traffic from the internet to `LoadBalancer` services or ALBs.
+If an {{site.data.keyword.cloud_notm}} service does not support private cloud service endpoints, your worker nodes must be connected to a subnet that has a public gateway attached to it. The pods on those worker nodes can securely communicate with the services over the public network through the subnet's public gateway. Note that a public gateway is not required on your subnets to allow inbound network traffic from the internet to `LoadBalancer` services or ALBs.
 
 Within one VPC, you can create only one public gateway per zone, but that public gateway can be attached to multiple subnets within the zone. For more information about public gateways, see the [Networking for VPC documentation](/docs/vpc?topic=vpc-about-networking-for-vpc#public-gateway-for-external-connectivity).
 
@@ -239,7 +239,7 @@ Use the {{site.data.keyword.cloud_notm}} console to create a VPC subnet for your
 4. Specify the number of IP addresses to create.
   * VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
   * If you enter a specific IP range, do not use the following reserved ranges: `172.16.0.0/16`, `172.18.0.0/16`, `172.19.0.0/16`, and `172.20.0.0/16`.
-5. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only.
+5. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only.
 6. Click **Create subnet**.
 7. Use the subnet to [create a cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui), [create a new worker pool](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [add the subnet to an existing worker pool](/docs/containers?topic=containers-add_workers#vpc_add_zone).<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
 
@@ -359,7 +359,7 @@ If you enable classic access when you create your VPC, [classic access default a
   3. Select the location and zone where you want to create the subnet.
   4. Select the address prefix that you created for this zone.
   5. Specify the number of IP addresses to create. VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IPs that a VPC subnet has later.
-  6. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only.
+  6. Choose if you want to attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only.
   7. Click **Create subnet**.
 4. Use the subnets to [create a cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui).<p class="important">Do not delete the subnets that you attach to your cluster during cluster creation or when you add worker nodes in a zone. If you delete a VPC subnet that your cluster used, any load balancers that use IP addresses from the subnet might experience issues, and you might be unable to create new load balancers.</p>
 
@@ -390,7 +390,7 @@ If you enable classic access when you create your VPC, [classic access default a
   ```
   {: pre}
 
-5. Optional: Attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public service endpoints only.
+5. Optional: Attach a public network gateway to your subnet. A public network gateway is required when you want your cluster to access public endpoints, such as a public URL of another app, or an {{site.data.keyword.cloud_notm}} service that supports public cloud service endpoints only.
     1. Create a public gateway in each zone. Consider naming the public gateway in the format `<cluster>-<zone>-gateway`. In the output, note the public gateway's **ID**.
         ```
         ibmcloud is public-gateway-create <gateway_name> <VPC_ID> <zone>
@@ -442,7 +442,7 @@ Improve the security of your {{site.data.keyword.containerlong}} cluster by allo
 {: shortdesc}
 
 
-If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
+If pods on your worker nodes need to connect to a public external endpoint, you can attach a public gateway to the subnet that those worker nodes are on. For example, your VPC cluster can automatically connect to other [{{site.data.keyword.cloud_notm}} services that support private cloud service endpoints](/docs/account?topic=account-vrf-service-endpoint), such as {{site.data.keyword.registrylong_notm}}. However, if you need to access {{site.data.keyword.cloud_notm}} services that support only public cloud service endpoints, you can attach a public gateway to the subnet so that your pods can send requests over the public network.
 
 
 You can isolate this network traffic in your cluster by attaching a public gateway to only one subnet in your cluster. Then, you can use app affinity to deploy app pods that require access to external endpoints to only the subnet with an attached public gateway.

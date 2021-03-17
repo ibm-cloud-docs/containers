@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-02-10"
+lastupdated: "2021-03-17"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -207,21 +207,27 @@ Refer to the following table for a summary of changes for each version of the {{
 </thead>
 <tbody>
 <tr>
+<td>2458 / 954</td>
+<td>09 Feb 2021</td>
+<td>Fixes `GNOME GLib` vulnerabilities for [CVE-2021-24031 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24031) and [CVE-CVE-2021-24032 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24032), and fixes `Zstandard` vulnerabilities for [CVE-2021-27218 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27218) and [CVE-2021-27219 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-27219).</td>
+<td>-</td>
+</tr>
+<tr>
 <td>2452 / 954</td>
 <td>09 Feb 2021</td>
-<td>Updates `ca-certificates` for [USN-4719-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4719-1/).|</td>
+<td>Updates `ca-certificates` for [USN-4719-1 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://ubuntu.com/security/notices/USN-4719-1/).</td>
 <td>-</td>
 </tr>
 <tr>
 <td>2424 / 954</td>
 <td>19 Jan 2021</td>
-<td>Fixes `p11-kit` vulnerabilities for [CVE-2020-29361 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29361), [CVE-2020-29362 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29362), and [CVE-2020-29363 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29363).|</td>
+<td>Fixes `p11-kit` vulnerabilities for [CVE-2020-29361 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29361), [CVE-2020-29362 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29362), and [CVE-2020-29363 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-29363).</td>
 <td>-</td>
 </tr>
 <tr>
 <td>2410 / 954</td>
 <td>17 Dec 2020</td>
-<td>Fixes an Alpine vulnerability for [CVE-2020-1971 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971).|</td>
+<td>Fixes an Alpine vulnerability for [CVE-2020-1971 ![External link icon](../icons/launch-glyph.svg "External link icon")](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-1971).</td>
 <td>-</td>
 </tr>
 <tr>

@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-03-02"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -2788,7 +2788,7 @@ The following table shows the changes that are included in the patch 1.14.3_1523
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
@@ -3894,7 +3894,7 @@ The following table shows the changes that are included in the patch 1.13.7_1526
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
@@ -4302,7 +4302,7 @@ The following table shows the changes that are included in the patch 1.13.4_1513
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -5171,7 +5171,7 @@ The following table shows the changes that are included in the patch 1.12.9_1557
 <td>Public service endpoint for Kubernetes master</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Fixed an issue to [enable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
+<td>Fixed an issue to [enable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se).</td>
 </tr>
 <tr>
 <td>Ubuntu 16.04 kernel</td>
@@ -5581,7 +5581,7 @@ The following table shows the changes that are included in the patch 1.12.6_1544
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -6691,7 +6691,7 @@ The following table shows the changes that are included in the patch 1.11.8_1550
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
 </tr>
 <tr>
 <td>Kernel</td>
@@ -7914,7 +7914,7 @@ The following table shows the changes that are included in the patch 1.10.13_155
 <td>{{site.data.keyword.cloud_notm}} File Storage plug-in</td>
 <td>344</td>
 <td>345</td>
-<td>Added support for [private service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
+<td>Added support for [private cloud service endpoints](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se).</td>
 </tr>
 <tr>
 <td>Kernel</td>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-08"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks
 
@@ -120,7 +120,7 @@ To start monitoring your resources, check out [Getting started with {{site.data.
 Review the following goals for {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-*   **Ensure that clusters are accessible by using the private service endpoint only.** You can [disable the public service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
+*   **Ensure that clusters are accessible by using the private cloud service endpoint only.** You can [disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
 *   **Ensure that inbound traffic to the cluster through Ingress uses allowed TLS versions only.** The default TLS versions are 1.2 or 1.3. For more information, see [About Ingress](/docs/containers?topic=containers-ingress-about).
 *   **Ensure that the cluster has a logging service enabled.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
 *   **Ensure that the cluster has a monitoring service enabled.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).

@@ -1,8 +1,8 @@
 ---
 
 copyright:
-  years: 2014, 2020
-lastupdated: "2020-12-18"
+  years: 2014, 2021
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, containers
 
@@ -312,7 +312,7 @@ Begin working with your cluster by setting up the CLI and accessing the cluster.
 
 1. **CLI setup**: [Set up the CLIs](/docs/containers?topic=containers-cs_cli_install) that are necessary to create and work with clusters. As you work with your cluster, refer to the [command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli) and keep track of CLI version updates with the [CLI changelog](/docs/containers?topic=containers-cs_cli_changelog).
 2. **User permissions**: Ensure that your cluster administrator gives you the proper [{{site.data.keyword.cloud_notm}} IAM role](/docs/containers?topic=containers-learning-path-admin#admin_secure) to access the cluster.
-3. **Cluster access**: [Access your cluster through the public or private service endpoint](/docs/containers?topic=containers-access_cluster).
+3. **Cluster access**: [Access your cluster through the public or private cloud service endpoint](/docs/containers?topic=containers-access_cluster).
 
 </br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-cs_troubleshoot) and [Troubleshooting worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters).
 

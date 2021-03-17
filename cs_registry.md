@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-05"
+lastupdated: "2021-03-16"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -221,10 +221,10 @@ When you set up your {{site.data.keyword.cloud_notm}} account to use service end
 
 **What do I need to do to set up my cluster to use the private connection to `icr.io` registries?**
 
-1.  Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so that you can use the {{site.data.keyword.registrylong_notm}} private service endpoint. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command.
+1.  Enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so that you can use the {{site.data.keyword.registrylong_notm}} private cloud service endpoint. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command.
 2.  [Enable your {{site.data.keyword.cloud_notm}} account to use service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint).
 
-Now, {{site.data.keyword.registrylong_notm}} automatically uses the private service endpoint. You do not need to enable the private service endpoint for your {{site.data.keyword.containerlong_notm}} clusters.
+Now, {{site.data.keyword.registrylong_notm}} automatically uses the private cloud service endpoint. You do not need to enable the private cloud service endpoint for your {{site.data.keyword.containerlong_notm}} clusters.
 
 **I have a private-only cluster. How do I enforce that my image traffic remains on the private network?**
 
