@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-16"
+lastupdated: "2021-03-17"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,7 +109,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 12 March 2021 | **New and deprecated events for {{site.data.keyword.at_short}}**: To align with event auditing standards across cloud, {{site.data.keyword.containerlong_notm}} introduces new and deprecates some existing event names or fields. Deprecated event names and fields become unsupported on 12 April 2021.<ul><li>**New events available now**: API actions that require Viewer permissions, such as `list` and `get`, now send events. For more information, see the [documentation](/docs/containers?topic=containers-at_events).</li><li>**Deprecated events**: Some events are [deprecated](/docs/containers?topic=containers-at_events#cluster-events-old) and are no longer sent on 12 April 2021. Instead, [new events](/docs/containers?topic=containers-at_events#events-new) that might include updated names and updated fields are sent.</li><li>**Deprecated fields across events**: [Some fields](/docs/containers?topic=containers-at_events#events-updated-fields) are deprecated and replaced by or updated with new values across events.</li></ul><br><br>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.4_1532](/docs/containers?topic=containers-changelog#1204_1532), [1.19.8_1539](/docs/containers?topic=containers-changelog#1198_1539), [1.18.16_1545](/docs/containers?topic=containers-changelog#11816_1545), and [1.17.17_1556](/docs/containers?topic=containers-changelog#11717_1556).|
+| 16 March 2021 | **Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image. |
+| 12 March 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.4_1532](/docs/containers?topic=containers-changelog#1204_1532), [1.19.8_1539](/docs/containers?topic=containers-changelog#1198_1539), [1.18.16_1545](/docs/containers?topic=containers-changelog#11816_1545), and [1.17.17_1556](/docs/containers?topic=containers-changelog#11717_1556).|
 | 10 March 2021 | **Istio add-on**: [Version 1.7.8 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#178) is released. |
 | 09 March 2021 | **Cluster autoscaler add-on**: Version 1.0.2 of the cluster autoscaler add-on is released. For more information, see the [cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog). |
 | 05 March 2021 | **Trusted images**: You can now [set up trusted content for container images](/docs/containers?topic=containers-images#trusted_images) that are signed and stored in {{site.data.keyword.registrylong_notm}}. |
