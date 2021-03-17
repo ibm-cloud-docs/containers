@@ -2281,7 +2281,7 @@ subcollection: containers
 * [{{site.data.keyword.satelliteshort}} events](/docs/containers?topic=containers-at_events#satellite-events)
 * [Storage events](/docs/containers?topic=containers-at_events#storage-events)
 * [Worker node and worker pool events](/docs/containers?topic=containers-at_events#worker-events)
-* [Preview: Events with updated names (tentative)](/docs/containers?topic=containers-at_events#events-new)
+* [Preview: Events with updated names](/docs/containers?topic=containers-at_events#events-new)
   * [Updated cluster events](/docs/containers?topic=containers-at_events#events-new-cluster)
   * [Updated cluster account events](/docs/containers?topic=containers-at_events#events-new-account)
   * [Updated cluster add-on events](/docs/containers?topic=containers-at_events#events-new-addons)
