@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-17"
+lastupdated: "2021-03-22"
 
 keywords: kubernetes, iks, help, debug
 
@@ -91,7 +91,7 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
+ 
 
 
 # Clusters and masters
@@ -690,7 +690,9 @@ The {{site.data.keyword.cloud_notm}} account owner or an account administrator m
     {: screen}
 5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key reset --region <region>` in each region where you have clusters.
 
+
 <br />
+
 
 
 

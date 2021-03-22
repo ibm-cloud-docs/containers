@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-17"
+lastupdated: "2021-03-22"
 
 keywords: kubernetes, iks, release notes
 
@@ -90,7 +90,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
+ 
 
 
 # Release notes
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 22 March 2021 | **Ingress ALB changelog**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images. |
 | 17 March 2021 | **Deprecated events to be replaced for {{site.data.keyword.at_short}}**: To align with event auditing standards across cloud, several cluster events and fields are deprecated and are replaced in 30 days on 16 April 2021 by new events and fields.<ul><li>**Deprecated events**: Some events are [deprecated](/docs/containers?topic=containers-at_events#cluster-events-old) and are no longer sent after the deprecation. Instead, [new events](/docs/containers?topic=containers-at_events#events-new) are sent.</li><li>**Deprecated fields across events**: [Some fields](/docs/containers?topic=containers-at_events#events-updated-fields) are deprecated and replaced by or updated with new values across events.</li></ul>
 | 16 March 2021 | **Ingress ALB changelog**: Updated the [`nginx-ingress` build to 2458](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog) for the {{site.data.keyword.containerlong_notm}} Ingress image. |
 | 12 March 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.4_1532](/docs/containers?topic=containers-changelog#1204_1532), [1.19.8_1539](/docs/containers?topic=containers-changelog#1198_1539), [1.18.16_1545](/docs/containers?topic=containers-changelog#11816_1545), and [1.17.17_1556](/docs/containers?topic=containers-changelog#11717_1556).|
