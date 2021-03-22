@@ -676,7 +676,9 @@ The {{site.data.keyword.cloud_notm}} account owner or an account administrator m
     {: screen}
 5. To ensure that existing clusters use the updated infrastructure API credentials, run `ibmcloud ks api-key reset --region <region>` in each region where you have clusters.
 
+
 <br />
+
 
 ## Cannot add worker nodes due to an invalid VLAN ID
 {: #suspended}
