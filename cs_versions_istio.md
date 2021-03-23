@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-23"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -117,6 +117,19 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Version 1.8
 {: #v18}
+
+### Changelog for 1.8.4, released 23 March 2021
+{: #184}
+
+The following table shows the changes that are included in version 1.8.4 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.8.3 | 1.8.4 | <ul><li>See the Istio release notes for [Istio 1.8.4](https://istio.io/news/releases/1.7.x/announcing-1.8.4/){:external}.</li><li>Resolves
+[CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}, [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}, [CVE-2020-27619](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27619){: external}, and [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.8.3" caption-side="top"}
 
 ### Changelog for 1.8.3, released 1 March 2021
 {: #183}
