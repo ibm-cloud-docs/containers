@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-24"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -899,7 +899,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      <tr><td>`enableSslPassthrough`</td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
      <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
      <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>
-     <tr><td>`replicas`</td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods.</td></tr>
+     <tr><td>`replicas`</td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](#scale_albs).</td></tr>
      <tr><td>`tcpServicesConfig`</td><td>Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
      </tbody>
      </table>
