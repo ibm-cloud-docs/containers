@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-24"
 
 keywords: kubernetes, iks, containers
 
@@ -92,6 +92,7 @@ subcollection: containers
 {:video: .video}
  
 
+
 # CIS Kubernetes Benchmark
 {: #cis-benchmark}
 
@@ -99,6 +100,8 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 {: shortdesc}
 
 When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your {{site.data.keyword.containerlong}} clusters meet the CIS Kubernetes Benchmark.
+
+
 
 ## Using the benchmark
 {: #cis-benchmark-use}
@@ -145,11 +148,15 @@ See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?top
 
 <br />
 
+
+
 ## Running the worker node CIS Kubernetes benchmark
 {: #cis-worker-test}
 
 To review the results of the CIS Kubernetes benchmark for [Section 4: Worker node security configuration](#cis-benchmark-15-4), you can run the test yourself. Because you own the worker nodes and are partially [responsible](/docs/containers?topic=containers-responsibilities_iks) for their compliance, you might make configuration changes that you want to validate on your own.
 {: shortdesc}
+
+
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -206,6 +213,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
 <br />
+
+
 
 ## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20
 {: #cis-benchmark-15}
@@ -553,3 +562,4 @@ Review the following explanations and possible remediation actions that you can 
 | 5.6.4 | {{site.data.keyword.containershort}} deploys some Kubernetes resources to the default namespace. |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column contains the description of why the benchmark recommendation is not met and possible remediation actions."}
 {: caption="Explanation and remediation for benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+

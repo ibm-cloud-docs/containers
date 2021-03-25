@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-23"
+lastupdated: "2021-03-25"
 
 keywords: containers
 subcollection: containers
@@ -2314,9 +2314,9 @@ subcollection: containers
 
 [{{site.data.keyword.containerlong_notm}} locations](/docs/containers?topic=containers-regions-and-zones#locations)
 * [How locations are organized](/docs/containers?topic=containers-regions-and-zones#example_locations_org)
-* [Classic multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-mz)
-* [Classic single zone data center locations](/docs/containers?topic=containers-regions-and-zones#zones-sz)
-* [VPC multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
+* [Classic multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-mz)
+* [Classic single zone regions](/docs/containers?topic=containers-regions-and-zones#zones-sz)
+* [VPC multizone regions](/docs/containers?topic=containers-regions-and-zones#zones-vpc)
 * [Resources in a single zone cluster](/docs/containers?topic=containers-regions-and-zones#regions_single_zone)
 * [Resources in a multizone cluster](/docs/containers?topic=containers-regions-and-zones#regions_multizone)
 * [Free clusters](/docs/containers?topic=containers-regions-and-zones#regions_free)
