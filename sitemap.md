@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-25"
+lastupdated: "2021-03-26"
 
 keywords: containers
 subcollection: containers
@@ -1430,13 +1430,14 @@ subcollection: containers
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
-* [VPC: Updating worker nodes with Portworx volumes](/docs/containers?topic=containers-portworx#portworx_vpc_up)
 * [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
   * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
+  * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
 * [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help)
+  * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br)
@@ -1448,8 +1449,10 @@ subcollection: containers
 * [Classic: Manually adding block storage to specific worker nodes](/docs/containers?topic=containers-utilities#manual_block)
 * [Classic: Attaching raw block storage to non-SDS worker nodes](/docs/containers?topic=containers-utilities#attach_block)
 * [VPC: Adding raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the API](/docs/containers?topic=containers-utilities#vpc_api_attach)
-  * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster](/docs/containers?topic=containers-utilities#vpc_api_detach)
-  * [Reviewing volume attachment details for a VPC worker node](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
+  * [Detaching raw and unformatted {{site.data.keyword.blockstorageshort}} from a worker node in a VPC cluster by using the API](/docs/containers?topic=containers-utilities#vpc_api_detach)
+  * [Reviewing volume attachment details for a VPC worker node by using the API](/docs/containers?topic=containers-utilities#vpc_api_get_worker)
+* [VPC: Attaching raw {{site.data.keyword.blockstorageshort}} to VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#vpc_cli_attach)
+  * [Removing raw {{site.data.keyword.blockstorageshort}} from VPC worker nodes by using the CLI](/docs/containers?topic=containers-utilities#storage-util-rm-vpc-cli)
 * [Backing up and restoring PVC data for file and block storage](/docs/containers?topic=containers-utilities#ibmcloud-backup-restore)
   * [Setting up an {{site.data.keyword.cos_full_notm}} service instance](/docs/containers?topic=containers-utilities#backup_restore_setup_object_storage)
   * [Using {{site.data.keyword.cos_full_notm}} to back up and restore PVC data](/docs/containers?topic=containers-utilities#backup-restore-pvc)
