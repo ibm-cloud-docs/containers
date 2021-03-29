@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-29"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -102,7 +102,7 @@ Forward audit logs for {{site.data.keyword.containerlong_notm}}, the Kubernetes 
 {: #audit-api-server}
 
 To monitor user-initiated, Kubernetes administrative activity made within your cluster, you can collect and forward audit events that are passed through your Kubernetes API server to {{site.data.keyword.la_full_notm}} or an external server. Although the Kubernetes API server for your cluster is enabled for auditing by default, no auditing data is available until you set up log forwarding.
-{: shortdesc} 
+{: shortdesc}
 
 ### Understanding the Kubernetes API audit configuration
 {: #api-server-config}
@@ -113,7 +113,7 @@ To review the Kubernetes API audit configuration, review the following informati
   {: note}
 * For Kubernetes audit logs and verbosity, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}.
 
-### Forwarding Kubernetes API audit logs to LogDNA
+### Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}
 {: #audit-api-server-logdna}
 
 To set up your cluster to forward audit logs to {{site.data.keyword.la_full_notm}}, you can create a Kubernetes audit system by using the provided image and deployment.
@@ -379,4 +379,4 @@ See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/d
 ## Service audit logs
 {: #audit-service}
 
-By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events). 
+By default, {{site.data.keyword.containerlong_notm}} generates and sends events to {{site.data.keyword.at_full_notm}}. To see these events, you must create an {{site.data.keyword.at_full_notm}} instance. For more information, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).
