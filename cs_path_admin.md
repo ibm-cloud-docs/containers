@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-29"
 
 keywords: kubernetes, iks, containers
 
@@ -384,7 +384,7 @@ Set up logging and monitoring to help you troubleshoot issues and improve the he
 
 
 1. **Cluster and app logging**: [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs as well as user-initiated administrative activities.
-2. **Audit logging**: [Forwarding Kubernetes API audit logs to IBM Log Analysis with LogDNA](/docs/containers?topic=containers-health-audit)
+2. **Audit logging**: [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health-audit)
 3. **Monitoring**: [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
 
 </br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health).
