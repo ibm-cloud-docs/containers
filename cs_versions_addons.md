@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-25"
+lastupdated: "2021-03-29"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -191,7 +191,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 View version changes for Ingress application load balancers (ALBs) that run the custom {{site.data.keyword.containerlong_notm}} Ingress image.
 {: shortdesc}
 
-As of 01 December 2020, the custom {{site.data.keyword.containerlong_notm}} Ingress image is deprecated. To use the community Kubernetes implementation of Ingress, see [Setting up community Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
+As of 01 December 2020, the custom {{site.data.keyword.containerlong_notm}} Ingress image is deprecated and becomes unsupported 01 June 2021. To use the community Kubernetes implementation of Ingress, see [Setting up community Kubernetes Ingress](/docs/containers?topic=containers-ingress-types).
 {: deprecated}
 
 When the Ingress ALB component is updated, the `nginx-ingress` and `ingress-auth` containers in all ALB pods are updated to the latest image version. By default, automatic updates to the component are enabled, but you can disable automatic updates and manually update the component. For more information, see [Updating ALBs](/docs/containers?topic=containers-ingress#alb-update).
