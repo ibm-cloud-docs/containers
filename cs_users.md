@@ -891,7 +891,7 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
 <br />
 
 ## Assigning RBAC permissions
-{: #role-binding}
+{: #role-binding-assign}
 
 Use RBAC roles to define the actions that a user can take to work with the Kubernetes resources in your cluster.
 {: shortdesc}

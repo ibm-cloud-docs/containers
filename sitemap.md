@@ -441,7 +441,7 @@ subcollection: containers
   * [Example use cases and roles](/docs/containers?topic=containers-users#example-iam)
   * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
   * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
-* [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding)
+* [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding-assign)
   * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
   * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
   * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
