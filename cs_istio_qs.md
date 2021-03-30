@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-29"
+lastupdated: "2021-03-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -90,7 +90,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 
 # Getting started with Istio
@@ -327,10 +327,10 @@ After you finish testing your app and are ready to start directing live traffic 
 ## Step 4: Monitor BookInfo with {{site.data.keyword.mon_full_notm}}
 {: #istio-qs-4}
 
-Use one of Sysdig's predefined Istio dashboards to monitor your BookInfo microservices.
+Use one of {{site.data.keyword.mon_short}}'s predefined Istio dashboards to monitor your BookInfo microservices.
 {: shortdesc}
 
-The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, Sysdig is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
+The managed `istio` add-on installs Prometheus into your cluster. The `istio-mixer-telemetry` pods in your cluster are annotated with a Prometheus endpoint so that Prometheus can aggregate all telemetry data for your pods. When you deploy a monitoring agent to the worker nodes in your cluster, {{site.data.keyword.mon_short}} is already automatically enabled to detect and scrape the data from these Prometheus endpoints to display them in your {{site.data.keyword.cloud_notm}} monitoring dashboard.
 
 Since all of the Prometheus work is done, all that is left for you is to deploy monitoring agents in your cluster.
 
@@ -340,11 +340,11 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
 
-4. In the Sysdig UI, click **Add new dashboard**.
+4. In the {{site.data.keyword.mon_short}} UI, click **Add new dashboard**.
 
-5. Search for `Istio` and select one of Sysdig's predefined Istio dashboards.
+5. Search for `Istio` and select one of {{site.data.keyword.mon_short}}'s predefined Istio dashboards.
 
-For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} on the Sysdig blog.
+For more information about referencing metrics and dashboards, monitoring Istio internal components, and monitoring Istio A/B deployments and canary deployments, check out the [How to monitor Istio, the Kubernetes service mesh](https://sysdig.com/blog/monitor-istio/){: external} blog post.
 
 ## Step 5: Secure in-cluster traffic by enabling mTLS
 {: #mtls-qs}

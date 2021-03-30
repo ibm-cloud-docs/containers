@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-30"
 
 keywords: kubernetes, iks, containers
 
@@ -90,7 +90,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 
 <style>
@@ -279,7 +279,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 2. From the [{{site.data.keyword.containerlong_notm}} dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 3. Configure your VPC environment.
    1. Select the **Standard** plan.
-   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.19.8 or later**.
+   2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.19.9 or later**.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the **Gen 2** VPC that you created earlier.
 4.  Configure the **Location** details for your cluster.
@@ -353,7 +353,7 @@ Set up the right environment for your workloads.
 * Control network traffic to your apps for [classic](/docs/containers?topic=containers-network_policies) and [VPC](/docs/containers?topic=containers-vpc-network-policy) clusters.
 
 Explore other capabilities for your cluster.
-* Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as LogDNA and Sysdig to monitor your cluster's health.
+* Check out [{{site.data.keyword.cloud_notm}} and 3rd-party services](/docs/containers?topic=containers-supported_integrations), such as Portworx.
 * Enhance your app lifecycle with [managed add-ons](/docs/containers?topic=containers-managed-addons) like Istio.
 
 Looking for an overview of all your options in {{site.data.keyword.containerlong_notm}}? Check out the curated [learning path for administrators](/docs/containers?topic=containers-learning-path-admin) or [learning path for developers](/docs/containers?topic=containers-learning-path-dev).
