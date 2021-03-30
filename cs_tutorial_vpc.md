@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-30"
 
 keywords: kubernetes, iks
 
@@ -144,7 +144,7 @@ Install the command-line tools.
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
-*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.19.8**.
+*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.19.9**.
 
 <br />
 
@@ -179,7 +179,7 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
 3.  Create a cluster in your VPC in the same zone as the subnet. By default, your cluster is created with a public and a private cloud service endpoint. You can use the public cloud service endpoint to access the Kubernetes master, such as to run `kubectl` commands, from your local machine. Your worker nodes can communicate with the master on the private cloud service endpoint. For more information about the command options, see the [`cluster create vpc-gen2` CLI reference docs](/docs/containers-cli-plugin?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
     ```
-    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.19.8 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
+    ibmcloud ks cluster create vpc-gen2 --name myvpc-cluster --zone us-south-1 --version 1.19.9 --flavor bx2.2x8 --workers 1 --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID>
     ```
     {: pre}
 
@@ -204,8 +204,8 @@ Create an {{site.data.keyword.containerlong_notm}} cluster in your {{site.data.k
 
         Example output:
         ```
-        Client Version: 1.19.8
-        Server Version: 1.19.8+IKS
+        Client Version: 1.19.9
+        Server Version: 1.19.9+IKS
         ```
         {: screen}
 
