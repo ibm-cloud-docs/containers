@@ -1465,14 +1465,6 @@ subcollection: containers
 
 
 [{{site.data.keyword.containerlong_notm}} partners](/docs/containers?topic=containers-service-partners)
-* [LogDNA](/docs/containers?topic=containers-service-partners#logdna-partner)
-  * [Benefits](/docs/containers?topic=containers-service-partners#logdna-benefits)
-  * [Integration with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners#logdna-integration)
-  * [Billing and support](/docs/containers?topic=containers-service-partners#logdna-billing-support)
-* [Sysdig](/docs/containers?topic=containers-service-partners#sydig-partner)
-  * [Benefits](/docs/containers?topic=containers-service-partners#sydig-benefits)
-  * [Integration with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners#sysdig-integration)
-  * [Billing and support](/docs/containers?topic=containers-service-partners#sysdig-billing-support)
 * [Portworx](/docs/containers?topic=containers-service-partners#portworx-parter)
   * [Benefits](/docs/containers?topic=containers-service-partners#portworx-benefits)
   * [Integration with {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-service-partners#portworx-integration)
