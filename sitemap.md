@@ -429,7 +429,7 @@ subcollection: containers
   * [Pick the right access policy and role for your users](/docs/containers?topic=containers-users#access_roles)
   * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#iam_individuals_groups)
   * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
-* [Setting up the API key to enable access to the infrastructure portfolio and other services](/docs/containers?topic=containers-users#api_key)
+* [Setting up the API key to enable access to the infrastructure portfolio and other services](/docs/containers?topic=containers-users#api_key_setup)
   * [Setting up the API key in most cases](/docs/containers?topic=containers-users#api_key_most_cases)
   * [Understanding other options than the API key](/docs/containers?topic=containers-users#api_key_other)
   * [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about)
