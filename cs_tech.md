@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-03-31"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -356,7 +356,7 @@ Review the {{site.data.keyword.cloud_notm}} services that {{site.data.keyword.co
 |{{site.data.keyword.cloud_notm}} Command Line (CLI)|When {{site.data.keyword.containerlong_notm}} runs CLI commands, the service connects to the service API endpoint over the public cloud service endpoint.|
 |{{site.data.keyword.registrylong_notm}}|This service is used to store the container images that {{site.data.keyword.containerlong_notm}} uses to run the service.|
 | {{site.data.keyword.la_full_notm}} | {{site.data.keyword.containerlong_notm}} sends service logs to {{site.data.keyword.la_full_notm}}. These logs are monitored and analyzed by the service team to detect service issues and malicious activities. You can also use {{site.data.keyword.la_full_notm}} to manage your own pod container logs. To use {{site.data.keyword.la_full_notm}}, you must deploy a logging agent to every worker node in your cluster. This agent collects pod logs from all namespaces, including `kube-system`, and forwards the logs to {{site.data.keyword.la_full_notm}}. To get started, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna).  |
-| {{site.data.keyword.mon_full_notm}} | {{site.data.keyword.containerlong_notm}} sends service metrics to {{site.data.keyword.mon_full_notm}}. These metrics are monitored by the service team to identify capacity and performance issues of the service. You can also use {{site.data.keyword.mon_full_notm}} to gain operational visibility into the performance and health of your apps. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-kubernetes_cluster#kubernetes_cluster).|
+| {{site.data.keyword.mon_full_notm}} | {{site.data.keyword.containerlong_notm}} sends service metrics to {{site.data.keyword.mon_full_notm}}. These metrics are monitored by the service team to identify capacity and performance issues of the service. You can also use {{site.data.keyword.mon_full_notm}} to gain operational visibility into the performance and health of your apps. For more information, see [Analyzing metrics for an app that is deployed in a Kubernetes cluster](/docs/monitoring?topic=monitoring-kubernetes_cluster#kubernetes_cluster).|
 | {{site.data.keyword.cloudaccesstraillong_notm}} | {{site.data.keyword.containerlong_notm}} integrates with {{site.data.keyword.at_full_notm}} to forward cluster audit events to the {{site.data.keyword.at_full_notm}} service instance that is set up and owned by the {{site.data.keyword.containerlong_notm}} user. For more information, see [{{site.data.keyword.cloudaccesstraillong_notm}} events](/docs/containers?topic=containers-at_events).|
 | IBMid profile service | The IBMid component is used to look up the IBMid from an email address. The IBMid is used to authenticate with {{site.data.keyword.cloud_notm}} via Identity and Access Management (IAM). |
 | Identity and Access Management (IAM) | To authenticate requests to the service and authorize user actions, {{site.data.keyword.containerlong_notm}} implements platform and service access roles in Identity and Access Management (IAM). For more information about required IAM permissions to work with the service, see [Assigning cluster access](/docs/containers?topic=containers-users). |
