@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-03-31"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -130,7 +130,7 @@ You can choose your logging solution based on which cluster components you need 
 ## Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}
 {: #logdna}
 
-Forward logs to an {site.data.keyword.la_full_notm}} instance.
+Forward logs to an {{site.data.keyword.la_full_notm}} instance.
 {: shortdesc}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a logging configuration for {{site.data.keyword.la_full_notm}} in your cluster, and use this logging configuration to automatically collect and forward pod logs to {{site.data.keyword.la_full_notm}}.
