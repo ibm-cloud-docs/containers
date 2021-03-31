@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-03-31"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,7 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 30 March 2021 | <ul><li>**Cluster autoscaler add-on**: [Patch update `1.0.2_232`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1533](/docs/containers?topic=containers-changelog#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-changelog#11717_1557).</li></ul>|
+| 30 March 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1533](/docs/containers?topic=containers-changelog#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-changelog#11717_1557).|
 | 29 March 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.5_1534](/docs/containers?topic=containers-changelog#1205_1534), [1.19.9_1541](/docs/containers?topic=containers-changelog#1199_1541), [1.18.17_1547](/docs/containers?topic=containers-changelog#11817_1547), and [1.17.17_1558](/docs/containers?topic=containers-changelog#11717_1558). |
 | 25 March 2021 | <ul><li>**{{site.data.keyword.cloudcerts_short}} instances**: The default {{site.data.keyword.cloudcerts_short}} instance for your cluster is now named in the format `kube-crtmgr-<cluster_ID>`.</li></ul> |
 | 23 March 2021 | **Istio add-on**: [Version 1.8.4 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#184) is released. |
