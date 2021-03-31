@@ -845,7 +845,7 @@ subcollection: containers
 
 [Logging for clusters](/docs/containers?topic=containers-health)
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
-* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logdna)
+* [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logging)
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
   * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
   * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
@@ -857,7 +857,7 @@ subcollection: containers
 
 [Monitoring cluster health](/docs/containers?topic=containers-health-monitor)
 * [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics)
-* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#sysdig)
+* [Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-health-monitor#monitoring)
 * [Viewing cluster states](/docs/containers?topic=containers-health-monitor#states)
   * [Cluster states](/docs/containers?topic=containers-health-monitor#states_cluster)
   * [Master states](/docs/containers?topic=containers-health-monitor#states_master)

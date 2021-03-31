@@ -113,7 +113,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
 <dl>
   <dt>{{site.data.keyword.mon_full}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
+  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#monitoring).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
@@ -123,7 +123,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 <br />
 
 ## Forwarding cluster and app metrics to {{site.data.keyword.mon_full_notm}}
-{: #sysdig}
+{: #monitoring}
 
 Use the {{site.data.keyword.containerlong_notm}} observability plug-in to create a monitoring configuration for {{site.data.keyword.mon_full_notm}} in your cluster, and use this monitoring configuration to automatically collect and forward metrics to {{site.data.keyword.mon_full_notm}}.
 {: shortdesc}
