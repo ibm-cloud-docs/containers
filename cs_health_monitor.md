@@ -113,7 +113,7 @@ To avoid conflicts when using metrics services, be sure that clusters across res
 
 <dl>
   <dt>{{site.data.keyword.mon_full}}</dt>
-  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/monitoring?topic=monitoring-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
+  <dd>Gain operational visibility into the performance and health of your apps and your cluster by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes. The agent collects pod and cluster metrics, and sends these metrics to {{site.data.keyword.mon_full_notm}}. For more information about {{site.data.keyword.mon_full_notm}}, see the [service documentation](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-getting-started). To set up the {{site.data.keyword.mon_short}} agent in your cluster, see [Viewing cluster and app metrics with {{site.data.keyword.mon_full_notm}}](#sysdig).</dd>
 
   <dt>Kubernetes dashboard</dt>
   <dd>The Kubernetes dashboard is an administrative web interface where you can review the health of your worker nodes, find Kubernetes resources, deploy containerized apps, and troubleshoot apps with logging and monitoring information. For more information about how to access your Kubernetes dashboard, see [Launching the Kubernetes dashboard for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-deploy_app#cli_dashboard).</dd>
@@ -144,7 +144,7 @@ Before you begin:
 
 To set up a monitoring configuration for your cluster:
 
-1. Create an [{{site.data.keyword.mon_full_notm}} service instance](/docs/monitoring?topic=monitoring-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
+1. Create an [{{site.data.keyword.mon_full_notm}} service instance](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-provision) and note the name of the instance. The service instance must belong to the same {{site.data.keyword.cloud_notm}} account where you created your cluster, but can be in a different resource group and {{site.data.keyword.cloud_notm}} region than your cluster.
 2. Set up a monitoring configuration for your cluster. When you create the monitoring configuration, a Kubernetes namespace `ibm-observe` is created and a {{site.data.keyword.mon_short}} agent is deployed as a Kubernetes daemon set to all worker nodes in your cluster. This agent collects cluster and pod metrics, such as the worker node CPU and memory usage, or the amount incoming and outgoing network traffic to your pods.
 
    - **From the console: **
@@ -214,7 +214,7 @@ To set up a monitoring configuration for your cluster:
    2. On the cluster **Overview** page, click **Launch**. The {{site.data.keyword.mon_short}} dashboard opens.
    3. Review the pod and cluster metrics that the {{site.data.keyword.mon_short}} agent collected from your cluster. It might take a few minutes for your first metrics to show.
 
-5. Review how you can work with the [{{site.data.keyword.mon_short}} dashboard](/docs/monitoring?topic=monitoring-panels) to further analyze your metrics.
+5. Review how you can work with the [{{site.data.keyword.mon_short}} dashboard](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-panels) to further analyze your metrics.
 
 ## Viewing cluster states
 {: #states}
