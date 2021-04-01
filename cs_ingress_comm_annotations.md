@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-01"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -435,7 +435,7 @@ ingress.bluemix.net/keepalive-timeout: "serviceName=app1 timeout=60s"
 Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive){:external}:
 
 ```
-keep-alive: 60s
+keep-alive: 60
 ```
 {: screen}
 
