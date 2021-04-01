@@ -847,7 +847,7 @@ subcollection: containers
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 * [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logging)
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
-  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
+  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
   * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
   * [Forwarding logs to your own server over the `udp` or `tcp` protocols](/docs/containers?topic=containers-health#enable-forwarding-udp-tcp)
   * [Forwarding logs to your own server over the `tls` protocol](/docs/containers?topic=containers-health#enable-forwarding-tls)

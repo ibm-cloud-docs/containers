@@ -232,7 +232,7 @@ Configure log forwarding for {{site.data.keyword.containerlong_notm}} standard c
 {: shortdesc}
 
 ### Understanding log forwarding to an external server
-{: #logging}
+{: #logging-external}
 
 When you create a logging configuration for a source in your cluster to forward to an external server, a [Fluentd](https://www.fluentd.org/){: external} component is created in your cluster. Fluentd collects the logs from that source's paths and forwards the logs to an external server. The traffic from the source to the logging service on the ingestion port is encrypted.
 {: shortdesc}
