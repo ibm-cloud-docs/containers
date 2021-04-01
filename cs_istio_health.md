@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-31"
+lastupdated: "2021-04-01"
 
 keywords: kubernetes, iks, mesh, Prometheus, Grafana, Jaeger, Kiali, controlz, envoy
 
@@ -100,19 +100,19 @@ Log and monitor your apps that are managed by Istio on {{site.data.keyword.conta
 {: shortdesc}
 
 ## Setting up logging with {{site.data.keyword.la_full_notm}}
-{: #istio_health_logdna}
+{: #istio_health_la}
 
 Seamlessly manage logs for your app container and the Envoy proxy sidecar container in each pod by deploying {{site.data.keyword.la_short}} agents to your worker nodes to forward logs to {{site.data.keyword.la_full}}.
 {: shortdesc}
 
-To use [{{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
+To use [{{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-getting-started), you deploy a logging agent to every worker node in your cluster. This agent collects logs with the extension `*.log` and extensionless files that are stored in the `/var/log` directory of your pod from all namespaces, including `kube-system`. These logs include logs from your app container and the Envoy proxy sidecar container in each pod. The agent then forwards the logs to the {{site.data.keyword.la_full_notm}} service.
 
-To get started, set up logging for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/Log-Analysis-with-LogDNA?topic=Log-Analysis-with-LogDNA-kube#kube).
+To get started, set up logging for your cluster by following the steps in [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-kube#kube).
 
 <br />
 
 ## Setting up monitoring with {{site.data.keyword.mon_full_notm}}
-{: #istio_health_sysdig}
+{: #istio_health_mon}
 
 Gain operational visibility into the performance and health of your Istio-managed apps by deploying a {{site.data.keyword.mon_short}} agent to your worker nodes to forward metrics to {{site.data.keyword.mon_full}}.
 {: shortdesc}
@@ -123,9 +123,9 @@ Since all of the Prometheus work is done, all that is left for you is to deploy 
 
 1. [Provision an instance of {{site.data.keyword.mon_full_notm}}](https://cloud.ibm.com/observe/monitoring/create){: external}.
 
-2. [Configure a monitoring agent in your cluster.](/docs/Monitoring-with-Sysdig?topic=Monitoring-with-Sysdig-config_agent#config_agent_kube_script)
+2. [Configure a monitoring agent in your cluster.](/docs/monitoring?topic=monitoring-config_agent#config_agent_kube_script)
 
-3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **View Sysdig** for the instance that you provisioned.
+3. In the [Monitoring console](https://cloud.ibm.com/observe/monitoring){: external}, click **Open Dashboard** for the instance that you provisioned.
 
 4. In the {{site.data.keyword.mon_short}} UI, click **Add new dashboard**.
 

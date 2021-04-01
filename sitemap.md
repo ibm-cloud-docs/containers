@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-31"
+lastupdated: "2021-04-01"
 
 keywords: containers
 subcollection: containers
@@ -867,7 +867,7 @@ subcollection: containers
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
   * [Understanding the Kubernetes API audit configuration](/docs/containers?topic=containers-health-audit#api-server-config)
-  * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-logdna)
+  * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
   * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
   * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
   * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
@@ -1026,8 +1026,8 @@ subcollection: containers
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
-* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
+* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
 * [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
   * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
   * [Envoy](/docs/containers?topic=containers-istio-health#envoy)

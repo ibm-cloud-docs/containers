@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-31"
+lastupdated: "2021-04-01"
 
 keywords: kubernetes, iks, containers
 
@@ -521,7 +521,7 @@ By default, {{site.data.keyword.containerlong_notm}} automatically collects logs
 - **Containers**: Logs that are written to `STDOUT` or `STDERR`.
 - **Apps**: Logs that are written to a specific path inside your app.
 - **Workers**: Logs from the Ubuntu operating system that are sent to `/var/log/syslog` and `/var/log/auth.log`.
-- **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}. You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started). 
+- **Kubernetes API server**: Every cluster-related action that is sent to the Kubernetes API server is logged for auditing reasons, including the time, the user, and the affected resource. For more information, see [Kubernetes audit logs](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}. You can access these logs by using {{site.data.keyword.at_full_notm}}. For more information, see the [getting started tutorial](/docs/activity-tracker?topic=activity-tracker-getting-started). 
 - **Ingress**: Logs for an Ingress application load balancer (ALB) that manages inbound network traffic.
 - **Kubernetes system components**: Logs from the `kubelet`, the `kube-proxy`, and other components that run in the `kube-system` namespace.
 
@@ -535,7 +535,7 @@ To set up a host-based intrusion detection system (HIDS) and security event log 
 
 **How can I audit events that happen in my cluster?**
 
-You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-at_events#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/Activity-Tracker-with-LogDNA?topic=Activity-Tracker-with-LogDNA-getting-started).
+You can [set up {{site.data.keyword.cloudaccesstraillong}} in your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-at_events#at_events). For more information, view the [{{site.data.keyword.cloudaccesstrailshort}} documentation](/docs/activity-tracker?topic=activity-tracker-getting-started).
 
 **What are my options to enable trust in my cluster?**
 
