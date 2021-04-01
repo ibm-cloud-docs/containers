@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-01"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -650,7 +650,7 @@ To install and launch the Kubernetes web terminal:
     * Edit the `KUBECONFIG` file to use the private cloud service endpoint for your cluster.
       1. In the web terminal, edit the `KUBECONFIG` file.
         ```
-        vim $KUBECONFIG
+        vim .kube/config
         ```
         {: pre}
       2. Type `i` to switch to insert mode so that you can edit the file.

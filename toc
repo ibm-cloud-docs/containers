@@ -192,6 +192,7 @@ Kubernetes Service
         cs_storage_block_vpc.md
         cs_storage_cos.md
         cs_storage_portworx.md
+        cs_storage_vpc_block_driver.md
         cs_storage_br.md
         cs_storage_utilities.md
 
@@ -275,3 +276,4 @@ Kubernetes Service
     {: .navgroup-end}
 
     cs_storage_portworx_gs.md
+

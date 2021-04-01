@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-01"
 
 keywords: kubernetes, iks, containers
 
@@ -556,7 +556,7 @@ Review the following explanations and possible remediation actions that you can 
 | 5.2.9 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
 | 5.3.2 | {{site.data.keyword.containershort}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy), and you can optionally [add your own network policies](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
 | 5.4.2 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](https://github.com/IBM/portieris){: external}. |
+| 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec). |
 | 5.6.2 | {{site.data.keyword.containershort}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
 | 5.6.3 | {{site.data.keyword.containershort}} deploys some system components that do not set a pod or container `securityContext`. |
 | 5.6.4 | {{site.data.keyword.containershort}} deploys some Kubernetes resources to the default namespace. |

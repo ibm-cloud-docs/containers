@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-03-31"
+lastupdated: "2021-04-01"
 
 keywords: containers
 subcollection: containers
@@ -847,7 +847,7 @@ subcollection: containers
 * [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview)
 * [Forwarding cluster and app logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health#logging)
 * [Forwarding cluster and app logs to an external server](/docs/containers?topic=containers-health#configuring)
-  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging)
+  * [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging-external)
   * [Forwarding cluster and app logs](/docs/containers?topic=containers-health#enable-forwarding)
   * [Forwarding logs to your own server over the `udp` or `tcp` protocols](/docs/containers?topic=containers-health#enable-forwarding-udp-tcp)
   * [Forwarding logs to your own server over the `tls` protocol](/docs/containers?topic=containers-health#enable-forwarding-tls)
@@ -867,7 +867,7 @@ subcollection: containers
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
   * [Understanding the Kubernetes API audit configuration](/docs/containers?topic=containers-health-audit#api-server-config)
-  * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-logdna)
+  * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
   * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
   * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
   * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
@@ -880,7 +880,6 @@ subcollection: containers
 
 [Setting up an image registry](/docs/containers?topic=containers-registry)
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
-* [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
   * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
   * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
@@ -935,6 +934,9 @@ subcollection: containers
 * [Pushing images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#push-images)
 * [Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor](/docs/containers?topic=containers-images#va-images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-images#trusted_images)
+* [Enabling image security enforcement in your cluster](/docs/containers?topic=containers-images#portieris-image-sec)
+  * [Enabling or disabling image security enforcement](/docs/containers?topic=containers-images#portieris-enable)
+  * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
 * [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
@@ -1026,8 +1028,8 @@ subcollection: containers
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
-* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_logdna)
-* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_sysdig)
+* [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
+* [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
 * [Launching the ControlZ component inspection and Envoy sidecar dashboards](/docs/containers?topic=containers-istio-health#istio_inspect)
   * [ControlZ](/docs/containers?topic=containers-istio-health#controlz)
   * [Envoy](/docs/containers?topic=containers-istio-health#envoy)
@@ -1440,6 +1442,17 @@ subcollection: containers
   * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
+[Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged)
+* [Prerequisites](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-prereq)
+  * [Labelling your worker nodes](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-label-um)
+  * [Retrieving IAM and VPC details](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-driver-get-details)
+* [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
+* [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
+* [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
+* [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
+  * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
+  * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
+
 [Backing up and restoring storage data](/docs/containers?topic=containers-storage_br)
 
 [IBM Cloud storage utilities](/docs/containers?topic=containers-utilities)
@@ -1548,6 +1561,8 @@ subcollection: containers
   * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)
   * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
   * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)
+  * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-enable)
+  * [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-enable)
   * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)
   * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_master_audit_webhook)
   * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_master_pse_allowlist)
@@ -2583,6 +2598,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[April 2021](/docs/containers?topic=containers-iks-release#apr21)
 
 [March 2021](/docs/containers?topic=containers-iks-release#mar21)
 
