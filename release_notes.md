@@ -104,6 +104,15 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
 
+## April 2021
+{: #apr21}
+
+| Date | Description |
+| ---- | ----------- |
+| 01 April 2021 | **New! image security add-on**: In clusters that run Kubernetes version 1.18 or later, you can [install the container image security enforcement add-on](/docs/containers?topic=containers-images#portieris-image-sec) to set up the [Portieris](https://github.com/IBM/portieris){: external} project in your cluster.|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in April 2021"}
+
 ## March 2021
 {: #mar21}
 

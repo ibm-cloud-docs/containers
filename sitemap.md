@@ -880,7 +880,6 @@ subcollection: containers
 
 [Setting up an image registry](/docs/containers?topic=containers-registry)
 * [Planning image registries](/docs/containers?topic=containers-registry#planning_images)
-* [Setting up trusted content for container images](/docs/containers?topic=containers-registry#trusted_images)
 * [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth)
   * [Default image pull secret setup](/docs/containers?topic=containers-registry#cluster_registry_auth_default)
   * [Private network connection to `icr.io` registries](/docs/containers?topic=containers-registry#cluster_registry_auth_private)
@@ -935,6 +934,9 @@ subcollection: containers
 * [Pushing images to {{site.data.keyword.registrylong_notm}}](/docs/containers?topic=containers-images#push-images)
 * [Managing security of images in {{site.data.keyword.registrylong_notm}} with Vulnerability Advisor](/docs/containers?topic=containers-images#va-images)
 * [Setting up trusted content for container images](/docs/containers?topic=containers-images#trusted_images)
+* [Enabling image security enforcement in your cluster](/docs/containers?topic=containers-images#portieris-image-sec)
+  * [Enabling or disabling image security enforcement](/docs/containers?topic=containers-images#portieris-enable)
+  * [Default image policies](/docs/containers?topic=containers-images#portieris-default-policies)
 * [Deprecated: Using a registry token to deploy containers from an {{site.data.keyword.registrylong_notm}} image](/docs/containers?topic=containers-images#namespace_token)
   * [Deprecated: Deploying images to the `default` Kubernetes namespace with a registry token](/docs/containers?topic=containers-images#token_default_namespace)
   * [Deprecated: Copying the token-based image pull secret from the default namespace to other namespaces in your cluster](/docs/containers?topic=containers-images#token_copy_imagePullSecret)
@@ -1559,6 +1561,8 @@ subcollection: containers
   * [`ibmcloud ks cluster create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_create)
   * [`ibmcloud ks cluster create vpc-gen2`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2)
   * [`ibmcloud ks cluster get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_get)
+  * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-enable)
+  * [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-enable)
   * [`ibmcloud ks cluster ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_clusters)
   * [`ibmcloud ks cluster master audit-webhook`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster_master_audit_webhook)
   * [`ibmcloud ks cluster master private-service-endpoint allowlist`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_master_pse_allowlist)
@@ -2594,6 +2598,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+[April 2021](/docs/containers?topic=containers-iks-release#apr21)
 
 [March 2021](/docs/containers?topic=containers-iks-release#mar21)
 
