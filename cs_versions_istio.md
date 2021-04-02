@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-02"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -107,13 +107,29 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
+| 1.9 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.17, 1.18, 1.19, 1.20 |
 | 1.8 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.17, 1.18, 1.19 |
-| 1.7 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | 1.17, 1.18 |
+| 1.7 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.6 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.5 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 | 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
+
+## Version 1.9
+{: #v19}
+
+## Changelog for 1.9.2, released 1 April 2021
+{: #192}
+
+The following table shows the changes that are included in version 1.9.2 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.8.4 | 1.9.2 | <ul><li>See the Istio release notes for [Istio 1.9.0](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.0/){:external}, [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){:external}, and [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){:external}.</li><li>The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.8.4" caption-side="top"}
 
 ## Version 1.8
 {: #v18}

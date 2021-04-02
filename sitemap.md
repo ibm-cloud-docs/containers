@@ -1943,6 +1943,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+* [Changelog for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
 * [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)
   * [Changelog for 1.8.4, released 23 March 2021](/docs/containers?topic=containers-istio-changelog#184)
   * [Changelog for 1.8.3, released 1 March 2021](/docs/containers?topic=containers-istio-changelog#183)
