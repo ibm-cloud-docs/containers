@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-02"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -90,7 +90,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 
 # Setting up Istio
@@ -130,7 +130,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.8.4, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.9.2, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -145,7 +145,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.8.4       normal         Addon Ready
+  istio           1.9.2       normal         Addon Ready
   ```
   {: screen}
 
@@ -177,12 +177,12 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 
 2. Download the version of `istioctl` that matches your cluster's Istio version.
   ```
-  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.4 sh -
+  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.2 sh -
   ```
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.8.4
+  cd istio-1.9.2
   ```
   {: pre}
 4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -220,6 +220,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     <th>Description</th>
     </thead>
     <tbody>
+    <tr><td>`istio-components-pilot-requests-cpu`</td><td>`"500m"`</td><td>Configure the CPU request in millicpu for the `istiod` component pod.<p class="important">Use caution when changing this value. Setting this value too low might prevent the control plane from workering properly, and setting this value too high might prevent the `istiod` pod from being scheduled.</p></td></tr>
     <tr><td>`istio-global-logging-level`</td><td>`"default:info"`</td><td>Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.</br></br>To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/).<p class="tip">To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.</p></td></tr>
     <tr><td>`istio-global-outboundTrafficPolicy-mode`</td><td>`"ALLOW_ANY"`</td><td>By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.</td></tr>
     <tr><td>`istio-egressgateway-public-1-enabled`</td><td>`"true"`</td><td>To disable the default Istio egress gateway, set to `"false"`.</td></tr>    
@@ -245,6 +246,9 @@ You can customize a set of Istio configuration options by editing the `managed-i
     ```
     {: screen}
 
+    Don't see an option from this table in your configmap? Because your configmap contains user-defined values, the configmap is not reconciled with any options that are released over time. Instead, you can back up a copy of your configmap and delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default configmap, configure any new settings, and apply the changes.
+    {: tip}
+
 4. Save and close the configuration file.
 
 5. If you changed the `istio-global-logging-level` or `istio-global-proxy-accessLogFile` settings, you must restart your data plane pods to apply the changes to them.
@@ -256,15 +260,15 @@ You can customize a set of Istio configuration options by editing the `managed-i
 
     Example output:
     ```
-    data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.7.4"}
-    data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.7.4"}
-    data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.7.4"}
-    data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.7.4"}
-    data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.7.4"}
-    data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.7.4"}
+    data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.9.2"}
     ```
     {: screen}
-  2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.7.4"}`.
+  2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.9.2"}`.
     ```
     kubectl delete pod <pod_name> -n <namespace>
     ```
@@ -296,9 +300,6 @@ When you update the Istio control components in the `istio-system` namespace to 
 * The Istio data plane continues to function during the update. However, some traffic to apps in the service mesh might be interrupted for a short period of time.
 * The external IP address for the `istio-ingressgateway` load balancer does not change during or after the update.
 
-If your Istio add-on runs version 1.3 or earlier, you must update your add-on by following the steps in [Updating your add-on from beta versions to the generally available version](#istio-ga).
-{: note}
-
 You cannot revert your managed Istio add-on to a previous version. If you want to revert to an earlier minor version, you must uninstall your add-on and then reinstall the add-on by specifying the earlier version.
 {: important}
 
@@ -324,7 +325,10 @@ You cannot revert your managed Istio add-on to a previous version. If you want t
   ```
   {: pre}
 
-6. Before you proceed, verify that the update is complete. <p class="note">The update process can take up to 20 minutes to complete.</p>
+6. Before you proceed, verify that the update is complete.
+
+  <p class="note">The update process can take up to 20 minutes to complete.</p>
+
   1. Ensure that the Istio add-on's **Health State** is `normal` and the **Health Status** is `Addon Ready`. If the state is `updating`, the update is not yet complete.
     ```
     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
@@ -366,21 +370,21 @@ For example, the patch version of your add-on might be updated automatically by 
   {: pre}
   Example output:
   ```
-  client version: 1.7.4
+  client version: 1.8.4
   cluster-local-gateway version:
-  citadel version: 1.8.4
-  egressgateway version: 1.8.4
-  egressgateway version: 1.8.4
-  galley version: 1.8.4
-  ingressgateway version: 1.8.4
-  ingressgateway version: 1.8.4
-  pilot version: 1.8.4
-  policy version: 1.8.4
-  sidecar-injector version: 1.7.4
-  telemetry version: 1.8.4
-  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.7.4"}
-  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.7.4"}
-  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.7.4"}
+  citadel version: 1.9.2
+  egressgateway version: 1.9.2
+  egressgateway version: 1.9.2
+  galley version: 1.9.2
+  ingressgateway version: 1.9.2
+  ingressgateway version: 1.9.2
+  pilot version: 1.9.2
+  policy version: 1.9.2
+  sidecar-injector version: 1.8.4
+  telemetry version: 1.9.2
+  data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.8.4"}
+  data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.8.4"}
+  data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.8.4"}
   ...
   ```
   {: screen}
@@ -388,12 +392,12 @@ For example, the patch version of your add-on might be updated automatically by 
 2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.8.4 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.2 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.8.4
+      cd istio-1.9.2
       ```
       {: pre}
     3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -404,88 +408,11 @@ For example, the patch version of your add-on might be updated automatically by 
 
 3. In the output of step 1, compare the `pilot version` to the `data plane version` for each data plane pod.
   * If the `pilot version` and the `data plane version` match, no further updates are required.
-  * If the `pilot version` and the `data plane version` do not match, restart your deployments for the data plane pods that run the old version. The pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.7.4"}`.
+  * If the `pilot version` and the `data plane version` do not match, restart your deployments for the data plane pods that run the old version. The pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.8.4"}`.
     ```
     kubectl rollout restart deployment <deployment> -n <namespace>
     ```
     {: pre}
-
-### Updating your add-on from version 1.3
-{: #istio-ga}
-
-As of 19 November 2019, the Istio managed add-on is generally available for Kubernetes clusters. The beta version of the managed add-on, which runs Istio version 1.3 or earlier, can no longer be installed on 12 February 2020. You can [update your add-on](#istio_update) by uninstalling the Istio version 1.3 or earlier add-on and installing the latest version of the Istio add-on.
-{: shortdesc}
-
-After you install the Istio version 1.4 or later add-on, {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates. To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.7 to 1.8, you can follow the steps in [Updating the minor version of the Istio add-on](#istio_minor). You can see the changes that are applied in each update in the [Istio add-on changelog](/docs/containers?topic=containers-istio-changelog).
-
-1. Save any resources, such as configuration files for any services or apps, that you created or modified in the `istio-system` namespace. Example command:
-   ```
-   kubectl get pod <pod_name> -o yaml -n istio-system
-   ```
-   {: pre}
-
-2. Save the Kubernetes resources that were automatically generated in the namespace of the managed add-on to a YAML file on your local machine. These resources are generated by using custom resource definitions (CRDs).
-   1. Get the CRDs for your add-on.
-      ```
-      kubectl get crd
-      ```
-      {: pre}
-
-   2. Save any resources created from these CRDs.
-
-3. If you enabled the `istio-sample-bookinfo` and `istio-extras` add-ons, disable them.
-   1. Disable the `istio-sample-bookinfo` add-on.
-      ```
-      ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-
-   2. Disable the `istio-extras` add-on.
-      ```
-      ibmcloud ks cluster addon disable istio-extras --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
-
-4. Disable the Istio add-on.
-   ```
-   ibmcloud ks cluster addon disable istio --cluster <cluster_name_or_ID> -f
-   ```
-   {: pre}
-
-5. Before you continue to the next step, verify that all add-on resources are removed.
-  1. Verify that the beta Istio add-ons are removed.
-     ```
-     ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-     ```
-     {: pre}
-  2. Verify that the `istio-system` namespace is removed.
-    ```
-    kubectl get namespaces
-    ```
-    {: pre}
-
-6. Re-enable Istio. The default version of the generally available Istio managed add-on, 1.4, is installed.
-   ```
-   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
-
-7. Apply the CRD resources that you saved in step 2.
-    ```
-    kubectl apply -f <file_name> -n <namespace>
-    ```
-    {: pre}
-
-8. Optional: [Install the BookInfo sample app.](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
-
-9. Optional: If you use TLS sections in your gateway configuration files, you must delete and re-create the gateways so that Envoy can access the secrets.
-  ```
-  kubectl delete gateway mygateway
-  kubectl apply -f mygateway.yaml
-  ```
-  {: pre}
-
-10. Next, [update your `istioctl` client and sidecars](#update_client_sidecar).
 
 <br />
 
@@ -594,7 +521,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.8.4
+    cd <filepath>/istio-1.9.2
     ```
     {: pre}
 

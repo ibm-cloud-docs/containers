@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-02"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,7 +109,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 01 April 2021 | **New! image security add-on**: In clusters that run Kubernetes version 1.18 or later, you can [install the container image security enforcement add-on](/docs/containers?topic=containers-images#portieris-image-sec) to set up the [Portieris](https://github.com/IBM/portieris){: external} project in your cluster.|
+| 02 April 2021 | **Istio add-on**: [Version 1.9.2 of the Istio managed add-on](/docs/containers?topic=containers-istio-changelog#v19) is released. |
+| 01 April 2021 | <ul><li>**Cluster autoscaler add-on**: [Patch update `1.0.2_249`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: [Patch update `3.0.0_521`](/docs/containers?topic=containers-vpc_bs_changelog) of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li><li>**{{site.data.keyword.block_storage_is_short}} driver**: Added steps to install the `vpc-block-csi-driver` on unmanaged clusters. For more information, see [Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged).</li><li>**New! image security add-on**: In clusters that run Kubernetes version 1.18 or later, you can [install the container image security enforcement add-on](/docs/containers?topic=containers-images#portieris-image-sec) to set up the [Portieris](https://github.com/IBM/portieris){: external} project in your cluster.</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in April 2021"}
 
@@ -118,7 +119,6 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 01 April 2021 | <ul><li>**Cluster autoscaler add-on**: [Patch update `1.0.2_249`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: [Patch update `3.0.0_521`](/docs/containers?topic=containers-vpc_bs_changelog) of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li><li>**{{site.data.keyword.block_storage_is_short}} driver**: Added steps to install the `vpc-block-csi-driver` on unmanaged clusters. For more information, see [Storing data on {{site.data.keyword.block_storage_is_short}} for unmanaged clusters](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged).</li></ul> |
 | 30 March 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1533](/docs/containers?topic=containers-changelog#1205_1533), [1.19.9_1540](/docs/containers?topic=containers-changelog#1199_1540), [1.18.17_1546](/docs/containers?topic=containers-changelog#11817_1546), and [1.17.17_1557](/docs/containers?topic=containers-changelog#11717_1557).|
 | 29 March 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.5_1534](/docs/containers?topic=containers-changelog#1205_1534), [1.19.9_1541](/docs/containers?topic=containers-changelog#1199_1541), [1.18.17_1547](/docs/containers?topic=containers-changelog#11817_1547), and [1.17.17_1558](/docs/containers?topic=containers-changelog#11717_1558). |
 | 25 March 2021 | <ul><li>**{{site.data.keyword.cloudcerts_short}} instances**: The default {{site.data.keyword.cloudcerts_short}} instance for your cluster is now named in the format `kube-crtmgr-<cluster_ID>`.</li></ul> |
