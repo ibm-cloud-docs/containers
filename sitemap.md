@@ -280,7 +280,7 @@ subcollection: containers
 * [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
 * [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube notoc)
+* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#what's-next?)
 
 [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
