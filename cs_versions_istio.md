@@ -100,7 +100,7 @@ View information for patch and minor version updates to the [managed Istio add-o
 {: shortdesc}
 
 * **Patch updates**: {{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. You can check the patch version of your add-on by running `kubectl get iop managed-istio -n ibm-operators -o jsonpath='{.metadata.annotations.version}'`.
-* **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.6 to 1.7, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a latest minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
+* **Minor version updates**: To update your Istio components to the most recent minor version of Istio that is supported by {{site.data.keyword.containerlong_notm}}, such as from version 1.8. to 1.9, follow the steps in [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor). When a latest minor version (`n`) of the Istio add-on is released, 1 minor version behind (`n-1`) is supported for typically 6 weeks after the latest version release date.
 * **`istioctl` and sidecar updates**: Whenever the managed Istio add-on is updated, make sure that you [update your `istioctl` client and the Istio sidecars for your app](/docs/containers?topic=containers-istio#update_client_sidecar) to match the Istio version of the add-on. You can check whether the versions of your `istioctl` client and the Istio add-on control plane match by running `istioctl version`.
 
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
@@ -142,8 +142,7 @@ The following table shows the changes that are included in version 1.8.4 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.8.3 | 1.8.4 | <ul><li>See the Istio release notes for [Istio 1.8.4](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.4/){:external}.</li><li>Resolves
-[CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}, [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}, [CVE-2020-27619](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27619){: external}, and [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}.</li></ul> |
+| 1.8.3 | 1.8.4 | <ul><li>See the Istio release notes for [Istio 1.8.4](https://istio.io/latest/news/releases/1.8.x/announcing-1.8.4/){:external}.</li><li>Resolves[CVE-2021-23840](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23840){: external}, [CVE-2021-23841](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-23841){: external}, [CVE-2020-27619](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-27619){: external}, and [CVE-2021-3177](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3177){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.8.3" caption-side="top"}
 
@@ -195,7 +194,7 @@ The following table shows the changes that are included in version 1.8.0 of the 
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.5" caption-side="top"}
 
-## Version 1.7
+## Version 1.7 (unsupported)
 {: #v17}
 
 ### Changelog for 1.7.8, released 10 March 2021
