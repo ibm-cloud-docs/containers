@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks, vyatta, strongswan, ipsec, on-prem
 
@@ -452,7 +452,7 @@ After you deploy your Helm chart, test the VPN connectivity.
 3. Check the status of the VPN. A status of `ESTABLISHED` means that the VPN connection was successful.
 
     ```
-    kubectl exec $STRONGSWAN_POD -- ipsec status
+    kubectl exec $STRONGSWAN_POD -- sudo ipsec status
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-02"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -127,7 +127,7 @@ The following table shows the changes that are included in version 1.9.2 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.8.4 | 1.9.2 | <ul><li>See the Istio release notes for [Istio 1.9.0](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.0/){:external}, [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){:external}, and [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){:external}.</li><li>The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.</li></ul> |
+| 1.8.4 | 1.9.2 | <ul><li>See the Istio release notes for [Istio 1.9.0](https://istio.io/latest/news/releases/1.9.x/announcing-1.9/){:external}, [Istio 1.9.1](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.1/){:external}, and [Istio 1.9.2](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.2/){:external}.</li><li>The `istio-components-pilot-requests-cpu` setting is added to the `managed-istio-custom` configmap resource to change the default CPU request of `500` for `istiod`.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.8.4" caption-side="top"}
 

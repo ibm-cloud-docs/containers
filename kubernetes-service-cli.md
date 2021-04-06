@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -960,7 +960,7 @@ ibmcloud ks cluster get --cluster my_cluster --show-resources
 </br>
 
 ### `ibmcloud ks cluster image-security disable`
-{: #cs-image-security-enable}
+{: #cs-image-security-disable}
 
 Disable [image security enforcement](/docs/containers?topic=containers-images#portieris-image-sec). When you disable the feature, the underlying `ClusterImagePolicy` CRD is removed, which removes all of the default image policies and any custom images policies that you created.
 {: shortdesc}
@@ -1989,7 +1989,7 @@ ibmcloud ks cluster user-subnet rm --cluster my_cluster --subnet-cidr 169.xx.xxx
 <br />
 
 ## `worker` commands
-{: worker_node_commands}
+{: #worker_node_commands}
 
 View and modify worker nodes for a cluster.
 {: shortdesc}

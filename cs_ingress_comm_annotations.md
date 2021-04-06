@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -147,6 +147,7 @@ kubernetes.io/ingress.class: "private-iks-k8s-nginx"
 
 
 ### {{site.data.keyword.appid_short_notm}} authentication
+{: #app-id-authentication}
 
 Configure Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external} to enforce authentication for your apps.
 {: shortdesc}

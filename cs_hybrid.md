@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks, vpn, icp
 
@@ -117,7 +117,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 
 1.  Create a standard cluster with {{site.data.keyword.containerlong}} in {{site.data.keyword.cloud_notm}} Public or use an existing one. To create a cluster, choose between the following options:
     - [Create a standard cluster from the console or CLI](/docs/containers?topic=containers-clusters#clusters_ui).
-    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/support/knowledgecenter/SS2L37_3.2.0.0/cam_integrate_IKS.html){: external}. When you deploy a cluster with CAM, Helm is automatically installed for you.
+    - [Use the Cloud Automation Manager (CAM) to create a cluster by using a pre-defined template](https://www.ibm.com/docs/en/cam/3.2.0.0?topic=deploying-cloud-kubernetes-service){: external}. When you deploy a cluster with CAM, Helm is automatically installed for you.
 
 2.  In your {{site.data.keyword.containerlong_notm}} cluster, [follow the instructions to set up the strongSwan IPSec VPN service](/docs/containers?topic=containers-vpn#vpn_configure).
 
@@ -142,13 +142,13 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
     ```
     {: pre}
 
-4.  [Create a cluster in {{site.data.keyword.cloud_notm}} Private](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/installing/installing.html){: external}.
+4.  [Create a cluster in {{site.data.keyword.cloud_notm}} Private](https://www.ibm.com/docs/en/cloud-private/2.1.0.3?topic=installing){: external}.
 
 5.  In your {{site.data.keyword.cloud_notm}} Private cluster, deploy the strongSwan IPSec VPN service.
 
-    1.  [Complete the strongSwan IPSec VPN workarounds](https://www.ibm.com/support/knowledgecenter/SS2L37_3.2.0.0/cam_strongswan.html){: external}.
+    1.  [Complete the strongSwan IPSec VPN workarounds](https://www.ibm.com/docs/en/cam/3.2.0.0?topic=service-strongswan-helm-chart-cloud-private){: external}.
 
-    2.  [Set up the strongSwan VPN Helm chart](https://www.ibm.com/support/knowledgecenter/SSBS6K_2.1.0.3/app_center/create_release.html){: external} in your private cluster.
+    2.  [Set up the strongSwan VPN Helm chart](https://www.ibm.com/docs/en/cloud-private/2.1.0.3?topic=apps-deploying-helm-charts-in-catalog){: external} in your private cluster.
 
         *  In the configuration parameters, set the **Remote gateway** field to the value of the portable public IP address that you set as the `loadbalancerIP` of your {{site.data.keyword.containerlong_notm}} cluster.
 
@@ -171,7 +171,7 @@ Establish VPN connectivity between your public Kubernetes cluster and your {{sit
 **What's next?**
 
 *   [Run your licensed software images in public clusters](#hybrid_ppa_importer).
-*   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
+*   To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/docs/en/cloud-private/3.1.0?topic=multicloud-manager){: external}.
 
 
 ## Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}
@@ -185,7 +185,7 @@ To choose an {{site.data.keyword.dl_full_notm}} offering and set up an {{site.da
 **What's next?**
 
 * [Run your licensed software images in public clusters](#hybrid_ppa_importer).
-* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/support/knowledgecenter/en/SSBS6K_3.1.0/mcm/getting_started/introduction.html){: external}.
+* To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/docs/en/cloud-private/3.1.0?topic=multicloud-manager){: external}.
 
 <br />
 
@@ -224,7 +224,7 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
 
     1.  Instead of obtaining the image from IBM Passport Advantage, use the [Docker Hub image](https://hub.docker.com/_/websphere-liberty/){: external}. For instructions on getting a production license, see [Upgrading the image from Docker Hub to a production image](https://github.com/WASdev/ci.docker/tree/master/ga/production-upgrade){: external}.
 
-    2.  Follow the [Liberty Helm chart instructions](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/com.ibm.websphere.wlp.doc/ae/rwlp_icp_helm.html){: external}.
+    2.  Follow the [Liberty Helm chart instructions](https://www.ibm.com/docs/en/was-liberty/base){: external}.
 
 2.  Verify that the **STATUS** of the Helm chart shows `DEPLOYED`. If not, wait a few minutes, and then try again.
     ```
@@ -234,6 +234,6 @@ To deploy an {{site.data.keyword.cloud_notm}} Private image in a cluster in {{si
 
 3.  For more information about how to configure and use the product with your cluster, refer to the product-specific documentation.
 
-    - [IBM Db2 Direct Advanced Edition Server](https://www.ibm.com/support/knowledgecenter/en/SSEPGG_11.1.0/com.ibm.db2.luw.licensing.doc/doc/c0070181.html){: external}
-    - [IBM MQ Advanced](https://www.ibm.com/support/knowledgecenter/en/SSFKSJ_9.0.0/com.ibm.mq.helphome.v90.doc/WelcomePagev9r0.html){: external}
-    - [IBM WebSphere Application Server Liberty](https://www.ibm.com/support/knowledgecenter/en/SSEQTP_liberty/as_ditamaps/welcome_liberty.html){: external}
+    - [IBM Db2 Direct Advanced Edition Server](https://www.ibm.com/docs/en/db2/11.1?topic=direct-db2-advanced-edition){: external}
+    - [IBM MQ Advanced](https://www.ibm.com/docs/en/ibm-mq/9.0){: external}
+    - [IBM WebSphere Application Server Liberty](https://www.ibm.com/docs/en/was-liberty/base){: external}
