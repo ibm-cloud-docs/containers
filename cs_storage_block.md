@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-02"
+lastupdated: "2021-04-06"
 
 keywords: kubernetes, iks
 
@@ -329,6 +329,8 @@ You can now continue to [create a PVC](#add_block) to provision block storage fo
 
 
 ### Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in
+{: #update_block}
+
 You can upgrade the existing {{site.data.keyword.cloud_notm}} Block Storage plug-in to the latest version.
 {: shortdesc}
 
@@ -372,6 +374,8 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
   {: pre}
 
 ### Removing the {{site.data.keyword.cloud_notm}} Block Storage plug-in
+{: #rm_block}
+
 If you do not want to provision and use {{site.data.keyword.cloud_notm}} Block Storage in your cluster, you can uninstall the Helm chart.
 {: shortdesc}
 
