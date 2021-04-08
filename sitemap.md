@@ -2005,6 +2005,9 @@ subcollection: containers
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog)
 * [Changelog for 1.0.5](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
 
+[ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog)
+* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
+
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.16 changelog (unsupported as of 31 January 2021)](/docs/containers?topic=containers-changelog_archive#116_changelog)
   * [Changelog for master fix pack 1.16.15_1557, released 19 January 2021](/docs/containers?topic=containers-changelog_archive#11615_1557_master)

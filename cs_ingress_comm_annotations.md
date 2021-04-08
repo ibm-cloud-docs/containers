@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-06"
+lastupdated: "2021-04-08"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -143,8 +143,6 @@ Kubernetes Ingress resource [annotation](/docs/containers?topic=containers-ingre
 kubernetes.io/ingress.class: "private-iks-k8s-nginx"
 ```
 {: screen}
-
-
 
 ### {{site.data.keyword.appid_short_notm}} authentication
 {: #app-id-authentication}
@@ -1121,6 +1119,9 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
       ```
       {: pre}
 
+For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
+{: tip}
+
 <br />
 
 ## Preserving the source IP address
@@ -1478,7 +1479,6 @@ Each ALB has NGINX worker processes that process the client connections and comm
    kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
    ```
    {: pre}
-
 
 ### Tuning kernel performance
 {: #ingress_kernel}

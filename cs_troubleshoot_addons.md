@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-08"
 
 keywords: kubernetes, iks, help
 
@@ -109,7 +109,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 You can check the health state and status of a cluster add-on by running the following command:
 ```
-ibmcloud ks cluster addons -c <cluster_name_or_ID>
+ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 ```
 {: pre}
 

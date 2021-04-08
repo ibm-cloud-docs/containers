@@ -233,6 +233,7 @@ Kubernetes Service
         cs_versions_vpc_block_addon.md
         cs_versions_object.md
         cs_versions_backup_restore.md
+        cs_versions_alb_oauth_proxy.md
         cs_versions_archive.md
 
     {: .topicgroup}
@@ -276,4 +277,3 @@ Kubernetes Service
     {: .navgroup-end}
 
     cs_storage_portworx_gs.md
-
