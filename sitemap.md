@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-07"
+lastupdated: "2021-04-08"
 
 keywords: containers
 subcollection: containers
@@ -916,7 +916,7 @@ subcollection: containers
   * [How can I add IBM services to my app, such as {{site.data.keyword.watson}}?](/docs/containers?topic=containers-plan_deploy#services_ibm)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
   * [How can I increase the availability of my app?](/docs/containers?topic=containers-plan_deploy#increase_availability)
-  * [How can I scale my app?](/docs/containers?topic=containers-plan_deploy#how-can-i-scale-my-app?)
+  * [How can I scale my app?](/docs/containers?topic=containers-plan_deploy#scale)
 * [Versioning and updating apps](/docs/containers?topic=containers-plan_deploy#updating)
   * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-plan_deploy#deploy_organize)
   * [What app update strategies can I use?](/docs/containers?topic=containers-plan_deploy#updating_apps_strategy)
@@ -1487,7 +1487,7 @@ subcollection: containers
 * [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
 * [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
 * [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
-* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-{{site.data.keyword.block_storage_is_short}}-driver)
+* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
 * [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
   * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
   * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
