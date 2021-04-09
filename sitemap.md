@@ -732,7 +732,7 @@ subcollection: containers
 {: #sitemap_classic_clusters}
 
 
-[Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
+[Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets)
 * [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
   * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
   * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
@@ -749,13 +749,13 @@ subcollection: containers
   * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
 
-[Classic: Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
+[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
 * [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
 * [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
 * [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 
-[Classic: Setting up VPN connectivity](/docs/containers?topic=containers-vpn)
+[Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn)
 * [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
 * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
 * [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpn#vpn_multizone)
