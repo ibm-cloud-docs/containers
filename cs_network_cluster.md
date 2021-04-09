@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-09"
 
 keywords: kubernetes, iks, vlan
 
@@ -93,7 +93,7 @@ subcollection: containers
  
 
 
-# Classic: Changing service endpoints or VLAN connections
+# Changing service endpoints or VLAN connections
 {: #cs_network_cluster}
 
 After you initially set up your network when you [create a cluster](/docs/containers?topic=containers-clusters), you can change the service endpoints that your cluster master is accessible through or change the VLAN connections for your worker nodes.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-09"
 
 keywords: kubernetes, iks, help
 
@@ -91,7 +91,7 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 
 # Managed add-ons
@@ -109,7 +109,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 You can check the health state and status of a cluster add-on by running the following command:
 ```
-ibmcloud ks cluster addons -c <cluster_name_or_ID>
+ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 ```
 {: pre}
 
@@ -179,15 +179,35 @@ While you troubleshoot the [managed Istio add-on](/docs/containers?topic=contain
 {: #control_plane}
 
 {: tsSymptoms}
-One or more of the Istio control plane components, such as `istio-telemetry`, does not exist in your cluster.
+One or more of the Istio control plane components, such as `istiod`, does not exist in your cluster.
 
 {: tsCauses}
 * You deleted one of the Istio deployments that is installed in your cluster Istio managed add-on.
-* You changed the default `IstioControlPlane` resource. When you enable the managed Istio add-on, you cannot use `IstioControlPlane` resources to customize the Istio control plane. Only the `IstioControlPlane` resources that are managed by IBM are supported. Changing the control plane settings might result in an unsupported control plane state.
+* You changed the default `IstioOperator` resource. When you enable the managed Istio add-on, you cannot use `IstioOperator` (`iop`) resources to customize the Istio control plane installation. Only the `IstioOperator` resources that are managed by IBM for the Istio control plane are supported. Changing the control plane settings might result in an unsupported control plane state. If you create an `IstioOperator` resource for custom gateways in your Istio data plane, you are responsible for managing those resources.
 
 {: tsResolve}
-Refresh your `IstioControlPlane` resource. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
-```
-kubectl annotate icp -n ibm-operators managed-istiocontrolplane --overwrite restartedAt=$(date +%H-%M-%S)
-```
-{: pre}
+To verify the control plane components installation:
+
+1. Check the values of any customizations that you specified in the customization configmap. For example, if the value of the `istio-components-pilot-requests-cpu` setting is too high, control plane components might not be scheduled.
+  ```
+  kubectl describe cm managed-istio-custom -n ibm-operators
+  ```sh
+  {: pre}
+
+2. Check the logs of the Istio operator. If any logs indicate that the operator is failing to reconcile your customization settings, verify your settings for the [customized Istio installation](/docs/containers?topic=containers-istio#customize) again.
+  ```
+  kubectl logs -n ibm-operators -l name=managed-istio-operator
+  ```
+  {: pre}
+
+3. Optional: To refresh your `managed-istio-custom` configmap resource, delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the original installation settings is created in your cluster. The Istio operator reconciles the installation of Istio to the original add-on settings, including the core components of the Istio control plane.
+  ```sh
+  kubectl delete cm managed-istio-custom -n ibm-operators
+  ```
+  {: pre}
+
+4. If Istio control plane components or other Istio resources are still unavailable, refresh the cluster master.
+  ```sh
+  ibmcloud ks cluster master refresh -c <cluster_name_or_ID>
+  ```
+  {: pre}

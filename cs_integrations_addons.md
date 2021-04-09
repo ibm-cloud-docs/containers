@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-08"
 
 keywords: kubernetes, iks, helm
 
@@ -122,12 +122,12 @@ To enable a managed add-on in your cluster from the CLI, use the [`ibmcloud ks c
 
 For more information about the prerequisites for each add-on, see:
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
+- [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
+- [Cluster Autoscaler](/docs/openshift?topic=openshift-ca)
+- [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
 - [Istio](/docs/containers?topic=containers-istio)
 - [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
-- [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
-- [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
 - [Static routes](/docs/containers?topic=containers-static-routes)
-- [Cluster Autoscaler](/docs/openshift?topic=openshift-ca)
 
 ## Updating managed add-ons
 {: #updating-managed-add-ons}
@@ -147,7 +147,7 @@ The versions of each managed add-on are tested by {{site.data.keyword.cloud_notm
 
 You can check the health state and status of a cluster add-on by running the following command:
 ```
-ibmcloud ks cluster addons -c <cluster_name_or_ID>
+ibmcloud ks cluster addon ls -c <cluster_name_or_ID>
 ```
 {: pre}
 

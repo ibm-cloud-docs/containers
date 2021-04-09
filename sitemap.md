@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-06"
+lastupdated: "2021-04-09"
 
 keywords: containers
 subcollection: containers
@@ -732,7 +732,7 @@ subcollection: containers
 {: #sitemap_classic_clusters}
 
 
-[Classic: Configuring subnets and IP addresses](/docs/containers?topic=containers-subnets)
+[Configuring classic subnets and IP addresses](/docs/containers?topic=containers-subnets)
 * [Overview of classic networking in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-subnets#basics)
   * [VLANs](/docs/containers?topic=containers-subnets#basics_vlans)
   * [Subnets and IP addresses](/docs/containers?topic=containers-subnets#basics_subnets)
@@ -749,13 +749,13 @@ subcollection: containers
   * [Managing subnet routing for gateway appliances](/docs/containers?topic=containers-subnets#vra-routing)
 * [Removing subnets from a cluster](/docs/containers?topic=containers-subnets#remove-subnets)
 
-[Classic: Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
+[Changing service endpoints or VLAN connections](/docs/containers?topic=containers-cs_network_cluster)
 * [Setting up the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-private-se)
 * [Setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se)
 * [Switching from the public cloud service endpoint to the private cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#migrate-to-private-se)
 * [Changing your worker node VLAN connections](/docs/containers?topic=containers-cs_network_cluster#change-vlans)
 
-[Classic: Setting up VPN connectivity](/docs/containers?topic=containers-vpn)
+[Setting up classic VPN connectivity](/docs/containers?topic=containers-vpn)
 * [Using the strongSwan IPSec VPN service Helm chart](/docs/containers?topic=containers-vpn#vpn-setup)
 * [strongSwan VPN service considerations](/docs/containers?topic=containers-vpn#strongswan_limitations)
 * [Configuring the strongSwan VPN in a multizone cluster](/docs/containers?topic=containers-vpn#vpn_multizone)
@@ -916,7 +916,7 @@ subcollection: containers
   * [How can I add IBM services to my app, such as {{site.data.keyword.watson}}?](/docs/containers?topic=containers-plan_deploy#services_ibm)
 * [Planning highly available deployments](/docs/containers?topic=containers-plan_deploy#highly_available_apps)
   * [How can I increase the availability of my app?](/docs/containers?topic=containers-plan_deploy#increase_availability)
-  * [How can I scale my app?](/docs/containers?topic=containers-plan_deploy#how-can-i-scale-my-app?)
+  * [How can I scale my app?](/docs/containers?topic=containers-plan_deploy#scale)
 * [Versioning and updating apps](/docs/containers?topic=containers-plan_deploy#updating)
   * [How can I organize my deployments to make them easier to update and manage?](/docs/containers?topic=containers-plan_deploy#deploy_organize)
   * [What app update strategies can I use?](/docs/containers?topic=containers-plan_deploy#updating_apps_strategy)
@@ -1487,7 +1487,7 @@ subcollection: containers
 * [Creating the image pull secret in your cluster](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-create-storage-secret)
 * [Creating the {{site.data.keyword.block_storage_is_short}} driver deployment](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-deploy-cm)
 * [Deploying a stateful set that uses {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-stateful-set-deploy)
-* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-{{site.data.keyword.block_storage_is_short}}-driver)
+* [Removing the {{site.data.keyword.block_storage_is_short}} driver](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#removing-the-block-storage-for-vpc-driver)
 * [Config map reference](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-um-cm-ref)
   * [RHEL or CentOS configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-rhel-cm)
   * [Ubuntu configmap](/docs/containers?topic=containers-vpc-block-storage-driver-unmanaged#vpc-block-ubuntu-cm)
@@ -1998,11 +1998,15 @@ subcollection: containers
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
+* [Changelog for version 2.0.7](/docs/containers?topic=containers-cos_plugin_changelog#0207_object_plugin)
 * [Changelog for version 2.0.6](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
 * [Changelog for version 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
 
 [Back up and restore Helm chart](/docs/containers?topic=containers-backup_restore_changelog)
 * [Changelog for 1.0.5](/docs/containers?topic=containers-backup_restore_changelog#0105_br_chart)
+
+[ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog)
+* [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.16 changelog (unsupported as of 31 January 2021)](/docs/containers?topic=containers-changelog_archive#116_changelog)
