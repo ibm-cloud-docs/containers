@@ -280,7 +280,7 @@ subcollection: containers
 * [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
 * [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#what's-next?)
+* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#next-steps-startkit-kube notoc)
 
 [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
@@ -1534,6 +1534,7 @@ subcollection: containers
 * [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
 * [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
+* [Supported add-ons for clusters in {{site.data.keyword.satelliteshort}} locations](/docs/containers?topic=containers-managed-addons#addons-satellite)
 
 [Adding services by using Helm charts](/docs/containers?topic=containers-helm)
 * [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
