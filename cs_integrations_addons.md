@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-14"
+lastupdated: "2021-04-15"
 
 keywords: kubernetes, iks, helm
 
@@ -190,25 +190,6 @@ The **Health State** reflects the lifecycle of the add-on components. The **Heal
 Still having trouble with the Istio add-on? Check out these [troubleshooting topics](/docs/containers?topic=containers-istio#istio-ts) to debug your Istio deployment.
 {: tip}
 
-<ff-satellite>
 
-## Supported add-ons for clusters in {{site.data.keyword.satelliteshort}} locations
-{: #addons-satellite}
 
-Review which managed add-ons are available for {{site.data.keyword.openshiftshort}} clusters that are created in an {{site.data.keyword.satellitelong_notm}} location.
-{: shortdesc}
 
-Supported add-ons for clusters in {{site.data.keyword.satelliteshort}} locations:
-- [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
-- [HPCS Router](/docs/openshift?topic=openshift-hpcs-router)
-- [Image Key Synchronizer](/docs/openshift?topic=openshift-images#encrypted-images)
-- [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
-- [Static routes](/docs/containers?topic=containers-static-routes)
-
-Unsupported add-ons for clusters in {{site.data.keyword.satelliteshort}} locations:
-- [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
-- [Cluster Autoscaler](/docs/openshift?topic=openshift-ca)
-- [Istio](/docs/containers?topic=containers-istio)
-- [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
-
-</ff-satellite>

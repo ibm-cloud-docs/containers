@@ -1534,7 +1534,6 @@ subcollection: containers
 * [Adding managed add-ons](/docs/containers?topic=containers-managed-addons#adding-managed-add-ons)
 * [Updating managed add-ons](/docs/containers?topic=containers-managed-addons#updating-managed-add-ons)
 * [Reviewing add-on states and statuses](/docs/containers?topic=containers-managed-addons#debug_addons_review)
-* [Supported add-ons for clusters in {{site.data.keyword.satelliteshort}} locations](/docs/containers?topic=containers-managed-addons#addons-satellite)
 
 [Adding services by using Helm charts](/docs/containers?topic=containers-helm)
 * [About Helm in {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-helm#about-helm)
