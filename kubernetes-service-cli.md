@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-12"
+lastupdated: "2021-04-16"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -6261,7 +6261,7 @@ ibmcloud ks vpcs [--provider vpc-gen2] [--output json] [-q]
 
 **Command options**:
 <dl>
-<dt><code>--provider vpc-gen2</em></code></dt>
+<dt><code>--provider vpc-gen2</code></dt>
 <dd>The infrastructure provider type ID for the VPC worker node machine. `vpc-gen2` for VPC Generation 2 compute is supported.</dd>
 
 <dt><code>--output json</code></dt>
