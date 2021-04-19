@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-16"
+lastupdated: "2021-04-19"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 19 April 2021 | <ul><li>**Cluster autoscaler add-on**: [Patch update `1.0.2_256`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.</li><li>**{{site.data.keyword.cos_full_notm}} plug-in**: Version `2.0.8` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog).</li></ul> |
 | 16 April 2021 | **New fields and events for {{site.data.keyword.at_short}}**: To align with event auditing standards across {{site.data.keyword.cloud_notm}}, the [previously deprecated cluster fields and events](#deprecated-at-events) are now replaced by new fields and events. For an updated list of events, see [{{site.data.keyword.at_full_notm}} events](/docs/containers?topic=containers-at_events).|
 | 15 April 2021 | **Accessing VPC clusters**: Updated the steps for [accessing VPC clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#vpc_private_se) by configuring the VPC VPN gateway to access the `166.8.0.0/14` subnet. |
 | 12 April 2021 | <ul><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.5_1535](/docs/containers?topic=containers-changelog#1205_1535), [1.19.9_1542](/docs/containers?topic=containers-changelog#1199_1542), [1.18.17_1548](/docs/containers?topic=containers-changelog#11817_1548), and [1.17.17_1559](/docs/containers?topic=containers-changelog#11717_1559).</li><li>**Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for updates to the Kubernetes Ingress and {{site.data.keyword.containerlong_notm}} Ingress images.</li></ul>|
