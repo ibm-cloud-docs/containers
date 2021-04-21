@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-20"
+lastupdated: "2021-04-21"
 
 keywords: containers
 subcollection: containers
@@ -108,7 +108,7 @@ subcollection: containers
 
 [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-[Creating a VPC Gen 2 compute cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+[Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
@@ -224,7 +224,7 @@ subcollection: containers
   * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
+[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
 * [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
@@ -409,9 +409,9 @@ subcollection: containers
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
   * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
-* [Creating a standard VPC Gen 2 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
-  * [Creating a standard VPC Gen 2 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
-  * [Creating standard VPC Gen 2 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
+* [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
+  * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
+  * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster)
@@ -557,7 +557,7 @@ subcollection: containers
   * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
   * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
   * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
-  * [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+  * [VPC worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
 * [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
@@ -2705,7 +2705,7 @@ subcollection: containers
 * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
-[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+[VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
 * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-21"
 
 keywords: kubernetes, iks
 
@@ -98,53 +98,50 @@ completion-time: 30m
  
 
 
-# Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute
+# Creating a cluster in your Virtual Private Cloud (VPC)
 {: #vpc_ks_tutorial}
 {: toc-content-type="tutorial"}
 {: toc-services="containers, vpc"}
 {: toc-completion-time="30m"}
 
-Create an {{site.data.keyword.containerlong}} cluster on Virtual Private Cloud (VPC) Generation 2 compute.
+Create an {{site.data.keyword.containerlong}} cluster in your Virtual Private Cloud (VPC).
 {: shortdesc}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC Generation 2 compute**, you can create your cluster on VPC infrastructure in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> With **{{site.data.keyword.containerlong_notm}} clusters on VPC**, you can create your cluster in the next generation of the {{site.data.keyword.cloud_notm}} platform, in your [Virtual Private Cloud](/docs/vpc?topic=vpc-about-vpc). VPC gives you the security of a private cloud environment with the dynamic scalability of a public cloud. VPC uses the next version of {{site.data.keyword.containerlong_notm}} [infrastructure providers](/docs/containers?topic=containers-infrastructure_providers#infrastructure_providers), with a select group of v2 API, CLI, and console functionality. You can create only standard clusters for VPC.
 
 ## Objectives
 {: #vpc_ks_objectives}
 
-In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Gen 2 Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
+In the tutorial lessons, you create an {{site.data.keyword.containerlong_notm}} cluster in a Virtual Private Cloud (VPC). Then, you deploy an app and expose the app publicly by using a load balancer.
 
 ## Audience
 {: #vpc_ks_audience}
 
-This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC Generation 2 compute for the first time.
+This tutorial is for administrators who are creating a cluster in {{site.data.keyword.containerlong_notm}} in VPC for the first time.
 {: shortdesc}
 
 ## Prerequisites
 {: #vpc_ks_prereqs}
 
-Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies.
-* [**Administrator** platform access role for VPC Infrastructure](/docs/vpc?topic=vpc-managing-user-permissions-for-vpc-resources).
-* [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [**Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}.
-* [**Administrator** platform access role](/docs/containers?topic=containers-users#platform) for Container Registry.
+Complete the following prerequisite steps to set up permissions and the command-line environment.
+{: shortdesc}
 
-If this cluster is not the first cluster in the region and resource group, make sure that the API key for the region and resource group that you plan to create the cluster in is set up with the correct [infrastructure permissions](/docs/containers?topic=containers-users#api_key).
+**Permissions**: If you are the account owner, you already have the required permissions to create a cluster and can continue to the next step. Otherwise, ask the account owner to [set up the API key and assign you the minimum user permissions in {{site.data.keyword.cloud_notm}} IAM](/docs/openshift?topic=openshift-access_reference#cluster_create_permissions).
 
-<br>
-Install the command-line tools.
-*   [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}}plug-in (`ibmcloud ks`), and {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
-*   Update your {{site.data.keyword.containerlong_notm}} plug-in to the latest version.
-    ```
-    ibmcloud plugin update kubernetes-service
-    ```
-    {: pre}
-*   To work with VPC, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
+**Command-line tools**: For quick access to your resources from the command line, try the [{{site.data.keyword.cloud_notm}} Shell](https://cloud.ibm.com/shell). Otherwise, set up your local command-line environment by completing the following steps.
+1.  [Install the {{site.data.keyword.cloud_notm}} CLI (`ibmcloud`), {{site.data.keyword.containershort_notm}} plug-in (`ibmcloud ks`), and {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)](/docs/containers?topic=containers-cs_cli_install#cs_cli_install_steps).
+2.  [Install the {{site.data.keyword.openshiftshort}} (`oc`) and Kubernetes (`kubectl`) CLIs](/docs/openshift?topic=openshift-openshift-cli#cli_oc).
+3.  To work with VPC, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
     ```
     ibmcloud plugin install infrastructure-service
     ```
     {: pre}
-*   Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.19.9**.
+4.  Update your {{site.data.keyword.containershort_notm}} plug-in to the latest version.
+    ```
+    ibmcloud plugin update kubernetes-service
+    ```
+    {: pre}
+5.  Make sure that the [`kubectl` version](/docs/containers?topic=containers-cs_cli_install#kubectl) matches the Kubernetes version of your VPC cluster. This tutorial creates a cluster that runs version **1.19.9**.
 
 <br />
 

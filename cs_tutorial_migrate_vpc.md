@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-21"
 
 keywords: kubernetes, iks
 
@@ -95,7 +95,7 @@ completion-time: 90m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 # Migrating cluster resources from VPC Gen 1 to VPC Gen 2
 {: #vpc_migrate_tutorial}
@@ -177,7 +177,7 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
 1. Review the differences between VPC Gen 1 and Gen 2, such as changes in VPC architecture, VPC quotas and limitations, and limitations for {{site.data.keyword.containerlong_notm}} clusters on VPC infrastructure.
   * [VPC Gen 2 overview and architecture](/docs/vpc?topic=vpc-about-vpc)
   * [VPC Gen 2 quotas and limitations](/docs/vpc?topic=vpc-quotas)
-  * [Limitations for {{site.data.keyword.containerlong_notm}} clusters on VPC Gen 2 compute](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+  * [Limitations for VPC Gen 2 clusters](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 
 2. Get information about your Gen 1 VPC and plan your Gen 2 VPC.
   1. Target the region for your Gen 1 VPC.
@@ -248,7 +248,7 @@ Start by gathering information about your existing Gen 1 VPC, resources, and clu
     ibmcloud ks worker ls -c <gen1_cluster_name_or_ID>
     ```
     {: pre}
-  3. Verify that the same [worker node flavors are supported for {{site.data.keyword.containerlong_notm}} clusters on VPC Gen 2 compute](/docs/containers?topic=containers-planning_worker_nodes#vpc-gen2-worker-vm-flavors). If the worker node flavor is not supported, you must choose a supported flavor for your VPC Gen 2 worker nodes.
+  3. Verify that the same [worker node flavors are supported for VPC Gen 2 clusters](/docs/containers?topic=containers-planning_worker_nodes#vpc-gen2-worker-vm-flavors). If the worker node flavor is not supported, you must choose a supported flavor for your VPC Gen 2 worker nodes.
 
 <br />
 
@@ -312,7 +312,7 @@ Using the details that you gathered, create your Gen 2 VPC, resources, and clust
 
 5. Optional: To access your Gen 2 VPC by using the VPC VPN, follow the steps in [Setting up VPC VPN connectivity](/docs/vpc?topic=vpc-creating-a-vpc-using-the-ibm-cloud-console#vpn-ui) to create a VPN gateway for each subnet that you created for this cluster in this VPC.
 
-6. Create your cluster on VPC Gen 2 compute. For more information about the options for this command, see the [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
+6. Create a VPC Gen 2 cluster. For more information about the options for this command, see the [{{site.data.keyword.containerlong_notm}} CLI reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_cluster-create-vpc-gen2).
   ```
   ibmcloud ks cluster create vpc-gen2 --name <gen2_cluster_name> --zone <vpc_zone> --vpc-id <vpc_ID> --subnet-id <vpc_subnet_ID> --flavor <worker_flavor> [--version <major.minor.patch>] --workers <number_workers_per_zone> [--disable-public-service-endpoint]
   ```

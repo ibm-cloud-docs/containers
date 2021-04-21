@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-09"
+lastupdated: "2021-04-21"
 
 keywords: kubernetes, iks, help
 
@@ -102,7 +102,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for tr
 
 **Infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 ## Reviewing add-on states and statuses
 {: #debug_addons}
