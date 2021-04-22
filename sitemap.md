@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-04-22"
 
 keywords: containers
 subcollection: containers
@@ -1129,6 +1129,7 @@ subcollection: containers
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 * [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
+  * [Migration FAQs](/docs/containers?topic=containers-ingress-types#alb-migrate-faqs)
   * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
   * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)

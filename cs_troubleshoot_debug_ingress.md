@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-04-22"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -974,12 +974,29 @@ When you run `kubectl get pods -n kube-system | grep alb`, either no ALB pods or
 {: screen}
 
 {: tsCauses}
-Ingress requires at least two worker nodes per zone to ensure high availability and that periodic updates are applied. By default, ALB pods have two replicas. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. When only one worker node exists per zone in your cluster, ALB pods cannot deploy correctly.
+Ingress requires at least two worker nodes per zone to ensure high availability and apply periodic updates. By default, ALB pods have two replicas. However, ALB pods have anti-affinity rules to ensure that only one pod is scheduled to each worker node for high availability. When only one worker node exists per zone in a classic or VPC cluster, or if only one worker node exists on a VLAN that your classic cluster is attached to, ALB pods cannot deploy correctly.
 
 {: tsResolve}
-The method to increase the number of worker nodes per zone depends on whether you restrict network traffic to edge worker nodes.
-* **If you do not use edge nodes**: Ensure that at least two worker nodes exist in each zone by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool), [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_pool).
-* **If you use edge nodes**: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
+
+1. Check the number of worker nodes per zone in your cluster.
+  ```
+  ibmcloud ks worker ls -c <cluster_name_or_ID>
+  ```
+  {: pre}
+  * Classic and VPC clusters: If only one worker node exists in a zone, increase the number of worker nodes in that zone.
+    * **If you do not use edge nodes**: Ensure that at least two worker nodes exist in each zone by [resizing an existing worker pool](/docs/containers?topic=containers-add_workers#resize_pool), [creating a new worker pool in a VPC cluster](/docs/containers?topic=containers-add_workers#vpc_add_pool), or [creating a new worker pool in a classic cluster](/docs/containers?topic=containers-add_workers#add_pool).
+    * **If you use edge nodes**: Ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone.
+  * Classic clusters only: If more than one worker node exists in each zone of your classic cluster, your worker nodes might be connected to different VLANs within one zone so that only one worker node exists on a private VLAN. Continue to the next step.
+
+2. For each worker node in one zone, get the private VLAN that the worker node is attached to.
+  ```
+  ibmcloud ks worker get -w <worker_ID> -c <cluster_name_or_ID>
+  ```
+  {: pre}
+
+3. If only one worker node exists on a private VLAN, and the other worker nodes in the zone are attached to a different private VLAN, [create a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with a size of at least one worker node. When you add a zone to the worker pool in step 6, specify the same zone and private VLAN as the worker node that you previously identified.
+
+4. Repeat these steps for each zone in your cluster to ensure that more than one worker node exists on a private VLAN.
 
 After the new worker nodes deploy, the ALB pods are automatically scheduled to deploy to those worker nodes.
 <br />
