@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-06"
+lastupdated: "2021-04-26"
 
 keywords: kubernetes, iks, upgrade, version
 

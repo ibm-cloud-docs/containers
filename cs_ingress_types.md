@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-19"
+lastupdated: "2021-04-22"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -164,7 +164,7 @@ Before you get started with Ingress, review the following prerequisites.
 - If you restrict network traffic to edge worker nodes, ensure that at least two [edge worker nodes](/docs/containers?topic=containers-edge) are enabled in each zone so that ALBs deploy uniformly.
 - To be included in Ingress load balancing, the names of the `ClusterIP` services that expose your apps must be unique across all namespaces in your cluster.
 - If a zone fails, you might see intermittent failures in requests to the Ingress ALB in that zone.
-- <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Gen 2 clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+- <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Ensure that traffic requests that are routed by Ingress to node ports on your worker nodes are permitted in [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 ## Publicly exposing apps with ALBs that run the Kubernetes Ingress image
 {: #alb-comm-create}
@@ -539,6 +539,22 @@ The following steps use the Ingress resource migration tool to help you create I
 
 The migration tool is intended to help you prepare your Ingress resources and configmap. However, you must verify, test, and modify your Ingress resources and configmap to ensure that they work correctly with the Kubernetes Ingress image.
 {: important}
+
+### Migration FAQs
+{: #alb-migrate-faqs}
+
+Review the following frequently asked questions about the Ingress ALB migration process.
+{: shortdesc}
+
+**Why do I have more resources after the migration than I had before?**
+
+With the {{site.data.keyword.containerlong_notm}} Ingress image, you can apply an Ingress annotation to specific services. For example, the following annotation configures the timeout only for the `myservice` service, but has no effect on other services that are defined in the Ingress resource: `ingress.bluemix.net/keepalive-timeout: "serviceName=myservice timeout=60s"`. However, with the Kubernetes Ingress image, every annotation in an Ingress resource is applied to all service paths in that resource.
+
+The migration tool creates one new Ingress resource for each service path that was specified in the original resource, so that you can modify the annotations for each service path. Also, an Ingress resource with the `-server` suffix is generated that contains annotations that affect the NGINX configuration on the server level.
+
+**How do I proceed with migration warnings?**
+
+The migration tool attempts to convert the {{site.data.keyword.containerlong_notm}} Ingress annotations and configmap parameters into Kubernetes Ingress annotations and parameters that result in the same behavior. When the migration tool cannot convert an annotation or parameter automatically, or when the resulting behavior is slightly different, the tool generates a warning for the corresponding resource. The warning message contains the description of the problem and links to the appropriate {{site.data.keyword.containerlong_notm}} or NGINX documentation for remediation steps.
 
 ### Step 1: Copy TLS secrets
 {: #alb-migrate-1}

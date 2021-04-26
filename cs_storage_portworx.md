@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-06"
+lastupdated: "2021-04-23"
 
 keywords: kubernetes, iks,
 
@@ -99,12 +99,9 @@ subcollection: containers
 [Portworx](https://portworx.com/products/portworx-enterprise//){: external} is a highly available software-defined storage solution that you can use to manage local persistent storage for your containerized databases and other stateful apps, or to share data between pods across multiple zones.
 {: shortdesc}
 
-Portworx is available for standard clusters that are set up with public network connectivity and a public cloud service endpoint. If your cluster cannot access the public network, you cannot use Portworx unless you open up all egress network traffic on TCP port 443 or enable the public cloud service endpoint.
-{: important}
-
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 
 ## About Portworx
@@ -130,7 +127,7 @@ Portworx also comes with additional features that you can use for your stateful 
 
 The worker node flavor that you need depends on the infrastructure provider that you use. If you have a classic cluster, {{site.data.keyword.containerlong_notm}} provides bare metal worker node flavors that are optimized for [software-defined storage (SDS) usage](/docs/containers?topic=containers-planning_worker_nodes#sds). These flavors also come with one or more raw, unformatted, and unmounted local disks that you can use for your Portworx storage layer. In classic clusters, Portworx offers the best performance when you use SDS worker node machines that come with 10 Gbps network speed.
 
-In VPC clusters, make sure to select a [virtual server flavor](/docs/vpc-on-classic-vsi?topic=vpc-on-classic-vsi-profiles) that meets the [minimum hardware requirements for Portworx](https://docs.portworx.com/start-here-installation/){: external}. The flavor that you choose must have a network speed of 10 Gpbs or more for optimal performance. None of the VPC flavors are set up with raw and unformatted block storage devices. To successfully install and run Portworx, you must [manually attach block storage devices](/docs/containers?topic=containers-utilities#vpc_api_attach) to each of your worker nodes first.
+In VPC clusters, make sure to select a [virtual server flavor](/docs/vpc?topic=vpc-profiles) that meets the [minimum hardware requirements for Portworx](https://docs.portworx.com/start-here-installation/){: external}. The flavor that you choose must have a network speed of 10 Gpbs or more for optimal performance. None of the VPC flavors are set up with raw and unformatted block storage devices. To successfully install and run Portworx, you must [manually attach block storage devices](/docs/containers?topic=containers-utilities#vpc_api_attach) to each of your worker nodes first.
 
 ### What if I want to run Portworx in a classic cluster with non-SDS worker nodes?
 {: #about-px-non-sds}
@@ -1245,7 +1242,7 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 ### Removing the Portworx daemon set
 {: #remove_px_daemonset}
 
-When you remove the Portworx daemon set, the Portworx containers are removed from your worker nodes. However, the Portworx configuration files remain on the worker nodes and the storage devices, and the data volumes are still intact. You can use the data volumes again if you restart the Portworx daemon set and containers by using the same configuration files. 
+When you remove the Portworx daemon set, the Portworx containers are removed from your worker nodes. However, the Portworx configuration files remain on the worker nodes and the storage devices, and the data volumes are still intact. You can use the data volumes again if you restart the Portworx daemon set and containers by using the same configuration files.
 {: shortdesc}
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -1325,7 +1322,6 @@ Review the following Portworx limitations.
 | **Classic clusters** Pod restart required when adding worker nodes. | Because Portworx runs as a daemon set in your cluster, existing worker nodes are automatically inspected for raw block storage and added to the Portworx data layer when you deploy Portworx. If you add or update worker nodes to your cluster and add raw block storage to those workers, restart the Portworx pods on the new or updated worker nodes so that your storage volumes are detected by the daemon set. |
 | **VPC clusters** Storage volume reattachment required when updating worker nodes. | When you update a worker node in a VPC cluster, the worker node is removed from your cluster and replaced with a new worker node. If Portworx volumes are attached to the worker node that is replaced, you must attach the volumes to the new worker node. You can attach storage volumes with the [API](/docs/containers?topic=containers-utilities#vpc_api_attach) or the [CLI](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_storage_att_cr). |
 | The Portworx experimental `InitializerConfiguration` feature is not supported. | {{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1). |
-| **Public network connectivity** | Portworx is available for standard clusters that are set up with public network connectivity and a public cloud service endpoint. If your cluster cannot access the public network, you cannot use Portworx unless you open up all egress network traffic on TCP port 443 or enable the public cloud service endpoint. |
 {: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Portworx limitations"}
 

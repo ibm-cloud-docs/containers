@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-26"
 
 keywords: kubernetes, iks
 
@@ -381,7 +381,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
 
   - **For OS X and Linux:**
 
-      **VPC Gen 2 clusters** To enable authorized IPs on VPC Gen 2, set the `--set bucketAccessPolicy=true` flag.
+      **VPC clusters** To enable authorized IPs on VPC, set the `--set bucketAccessPolicy=true` flag.
       {: note}
         ```
         helm ibmc install ibm-object-storage-plugin ibm-helm/ibm-object-storage-plugin --set license=true [--set bucketAccessPolicy=false]
@@ -390,7 +390,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
 
   - **For Windows:**
 
-      **VPC Gen 2 clusters** To enable authorized IPs on VPC Gen 2, set the `--set bucketAccessPolicy=true` flag.
+      **VPC clusters** To enable authorized IPs on VPC, set the `--set bucketAccessPolicy=true` flag.
       {: note}
         ```
         helm install ibm-object-storage-plugin ./ibm-object-storage-plugin --set dcname="${DC_NAME}" --set provider="${CLUSTER_PROVIDER}" --set workerOS="${WORKER_OS}" --set platform="${PLATFORM}" --set license=true [--set bucketAccessPolicy=false]
@@ -411,7 +411,7 @@ To install the `ibmc` Helm plug-in and the `ibm-object-storage-plugin`:
     </tr>
     <tr>
       <td><code>CLUSTER_PROVIDER</code></td>
-      <td>The infrastructure provider. To retrieve this value, run <code>kubectl get nodes -o jsonpath="{.items[*].metadata.labels.ibm-cloud\.kubernetes\.io\/iaas-provider}{'\n'}"</code>. If the output from the previous step contains <code>softlayer</code>, then set the <code>CLUSTER_PROVIDER</code> to <code>"IBMC"</code>. If the output contains <code>gc</code>, <code>ng</code>, or <code>g2</code>, then set the <code>CLUSTER_PROVIDER</code> to <code>"IBM-VPC"</code>. Store the infrastructure provider in an environment variable. For example: <code>SET CLUSTER_PROVIDER="IBM-VPC"</code>.</td>
+      <td>The infrastructure provider. To retrieve this value, run <code>kubectl get nodes -o jsonpath="{.items[*].metadata.labels.ibm-cloud\.kubernetes\.io\/iaas-provider}{'\n'}"</code>. If the output from the previous step contains <code>softlayer</code>, then set the <code>CLUSTER_PROVIDER</code> to <code>"IBMC"</code>. If the output contains <code>gc</code>, <code>ng</code>, or <code>g2</code>, then set the <code>CLUSTER_PROVIDER</code> to <code>"IBMC-VPC"</code>. Store the infrastructure provider in an environment variable. For example: <code>SET CLUSTER_PROVIDER="IBMC-VPC"</code>.</td>
     </tr>
     <tr>
       <td><code>WORKER_OS</code> and <code>PLATFORM</code></td>
@@ -755,7 +755,7 @@ Now that you decided on the configuration that you want, you are ready to [creat
 ## VPC: Setting up authorized IP addresses for {{site.data.keyword.cos_full_notm}}
 {: #cos_auth_ip}
 
-You can authorize your VPC Gen 2 Cloud Service Endpoint source IP addresses to access your {{site.data.keyword.cos_full_notm}} bucket. When you set up authorized IP addresses, you can only access your bucket data from those IP addresses; for example, in an app pod.
+You can authorize your VPC Cloud Service Endpoint source IP addresses to access your {{site.data.keyword.cos_full_notm}} bucket. When you set up authorized IP addresses, you can only access your bucket data from those IP addresses; for example, in an app pod.
 {: shortdesc}
 
 **Minimum required permissions**:
@@ -763,7 +763,7 @@ You can authorize your VPC Gen 2 Cloud Service Endpoint source IP addresses to a
  * **Writer** service access role for the {{site.data.keyword.cos_full_notm}} service.
 
 **Supported infrastructure provider**:
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 1. [Follow the instructions to install the `ibmc` Helm plugin](#install_cos). Make sure to install the `ibm-object-storage-plugin` and set the `bucketAccessPolicy` flag to `true`.
 

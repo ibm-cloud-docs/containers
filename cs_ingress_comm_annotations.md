@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-08"
+lastupdated: "2021-04-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -226,11 +226,11 @@ ingress.bluemix.net/proxy-read-timeout: "serviceName=app1 timeout=62s"
 Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){:external}:
 
 ```
-nginx.ingress.kubernetes.io/proxy-connect-timeout: 62s
+nginx.ingress.kubernetes.io/proxy-connect-timeout: 62
 ```
 {: screen}
 ```
-nginx.ingress.kubernetes.io/proxy-read-timeout: 62s
+nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 ```
 {: screen}
 

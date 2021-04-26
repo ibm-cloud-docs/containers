@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-30"
+lastupdated: "2021-04-26"
 
 keywords: kubernetes, iks, containers
 
@@ -260,10 +260,10 @@ The worker node can take a few minutes to provision, but you can see the progres
 
 <br />
 
-## Creating a VPC Gen 2 compute cluster
+## Creating a VPC cluster
 {: #vpc-gen2-gs}
 
-<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a standard VPC Generation 2 compute cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC Gen 2 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Create a standard VPC cluster by using the {{site.data.keyword.cloud_notm}} console. For more detailed information about your cluster customization options, see [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2).
 {: shortdesc}
 
 VPC clusters can be created as standard clusters only, and as such incur costs. Be sure to review the order summary at the end of this tutorial to review the costs for your cluster. To keep your costs to a minimum, set up your cluster as a single zone cluster with one worker node only.
@@ -271,7 +271,6 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
 
 1. Create a Virtual Private Cloud (VPC) on generation 2 compute.
   1. Navigate to the [VPC create console](https://cloud.ibm.com/vpc/provision/vpc){: external}.
-  2. Make sure that the banner at the beginning of the page is set to **Gen 2 compute**. If **Gen 1 compute** is set, click **Switch to Gen 2 compute**.
   3. Give the VPC a name and select a resource group to deploy the VPC into.
   4. Give the VPC subnet a name and select the location where you want to create the cluster.
   5. Attach a public gateway to your subnet so that you can access public endpoints from your cluster. This public gateway is used later on to access container images from Docker Hub.
@@ -281,7 +280,7 @@ VPC clusters can be created as standard clusters only, and as such incur costs. 
    1. Select the **Standard** plan.
    2. Select **Kubernetes** as your container platform and select the Kubernetes **version 1.19.9 or later**.
    3. Select **VPC** infrastructure.
-   4. From the **Virtual private cloud** drop-down menu, select the **Gen 2** VPC that you created earlier.
+   4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 4.  Configure the **Location** details for your cluster.
     1. Select the **Resource group** that you want to create your cluster in. You cannot change the resource group later.
     2. Select the zones to create your cluster in. The zones are filtered based on the VPC that you selected, and include the subnets that you previously created.

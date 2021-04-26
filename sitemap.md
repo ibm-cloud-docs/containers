@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-20"
+lastupdated: "2021-04-26"
 
 keywords: containers
 subcollection: containers
@@ -108,7 +108,7 @@ subcollection: containers
 
 [Creating a free classic cluster](/docs/containers?topic=containers-getting-started#clusters_gs)
 
-[Creating a VPC Gen 2 compute cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
+[Creating a VPC cluster](/docs/containers?topic=containers-getting-started#vpc-gen2-gs)
 
 [Deploying an app to your cluster](/docs/containers?topic=containers-getting-started#deploy-app)
 
@@ -224,7 +224,7 @@ subcollection: containers
   * [Step 5b: Updating the running {{site.data.keyword.watson}} Tone Analyzer deployment](/docs/containers?topic=containers-cs_cluster_tutorial#lesson5b)
 * [What's next?](/docs/containers?topic=containers-cs_cluster_tutorial#tutorials_next)
 
-[Creating a cluster in your Virtual Private Cloud (VPC) on generation 2 compute](/docs/containers?topic=containers-vpc_ks_tutorial)
+[Creating a cluster in your Virtual Private Cloud (VPC)](/docs/containers?topic=containers-vpc_ks_tutorial)
 * [Objectives](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_objectives)
 * [Audience](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_audience)
 * [Prerequisites](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_prereqs)
@@ -280,7 +280,6 @@ subcollection: containers
 * [Deploy your app by using a DevOps toolchain](/docs/containers?topic=containers-tutorial-starterkit-kube#deploy-starterkit-kube)
 * [Explore the toolchain tools, logs, and history](/docs/containers?topic=containers-tutorial-starterkit-kube#view-logs-starterkit-kube)
 * [Verify the health of your app](/docs/containers?topic=containers-tutorial-starterkit-kube#verify-starterkit-kube)
-* [What's next?](/docs/containers?topic=containers-tutorial-starterkit-kube#what's-next?)
 
 [Developing a Kubernetes app toolchain with Code Risk Analyzer](https://www.ibm.com/cloud/architecture/tutorials/develop-kubernetes-app-with-code-risk-analyzer){: external}
 
@@ -409,9 +408,9 @@ subcollection: containers
   * [Creating a standard classic cluster in the console](/docs/containers?topic=containers-clusters#clusters_ui)
   * [Creating a standard classic cluster in the CLI](/docs/containers?topic=containers-clusters#clusters_cli_steps)
   * [Creating a standard classic cluster with a gateway in the CLI](/docs/containers?topic=containers-clusters#gateway_cluster_cli)
-* [Creating a standard VPC Gen 2 compute cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
-  * [Creating a standard VPC Gen 2 compute cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
-  * [Creating standard VPC Gen 2 compute clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
+* [Creating a standard VPC cluster](/docs/containers?topic=containers-clusters#clusters_vpcg2)
+  * [Creating a standard VPC cluster in the console](/docs/containers?topic=containers-clusters#clusters_vpcg2_ui)
+  * [Creating standard VPC clusters from the CLI](/docs/containers?topic=containers-clusters#cluster_vpcg2_cli)
 * [Next steps](/docs/containers?topic=containers-clusters#next_steps)
 
 [Accessing clusters](/docs/containers?topic=containers-access_cluster)
@@ -557,7 +556,7 @@ subcollection: containers
   * [Storage](/docs/containers?topic=containers-costs#persistent_storage)
   * [{{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-costs#services)
   * [Operators and other third-party integrations](/docs/containers?topic=containers-costs#operators_pricing)
-  * [VPC Generation 2 compute worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
+  * [VPC worker nodes](/docs/containers?topic=containers-costs#charges_vpc_gen2)
 * [Estimating costs](/docs/containers?topic=containers-costs#costs-estimate)
 * [Managing costs](/docs/containers?topic=containers-costs#costs-manage)
 
@@ -1063,8 +1062,9 @@ subcollection: containers
   * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
   * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
+* [Registering a network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
 * [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-* [Registering a VPC load balancer with a DNS subdomain and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
+* [Registering an application load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
@@ -1129,6 +1129,7 @@ subcollection: containers
 * [Publicly exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create)
 * [Privately exposing apps with ALBs that run the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types#alb-comm-create-private)
 * [Migrating your existing Ingress ALB setup to run Kubernetes Ingress](/docs/containers?topic=containers-ingress-types#alb-type-migration)
+  * [Migration FAQs](/docs/containers?topic=containers-ingress-types#alb-migrate-faqs)
   * [Step 1: Copy TLS secrets](/docs/containers?topic=containers-ingress-types#alb-migrate-1)
   * [Step 2: Update Ingress resources](/docs/containers?topic=containers-ingress-types#alb-migrate-2)
   * [Step 3: Change ALB images](/docs/containers?topic=containers-ingress-types#alb-migrate-3)
@@ -1807,6 +1808,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.6_1537, released 26 April 2021](/docs/containers?topic=containers-changelog#1206_1537)
   * [Changelog for worker node fix pack 1.20.5_1535, released 12 April 2021](/docs/containers?topic=containers-changelog#1205_1535)
   * [Changelog for master fix pack 1.20.5_1533, released 30 March 2021](/docs/containers?topic=containers-changelog#1205_1533)
   * [Changelog for worker node fix pack 1.20.5_1534, released 29 March 2021](/docs/containers?topic=containers-changelog#1205_1534)
@@ -1816,6 +1818,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.10_1544, released 26 April 2021](/docs/containers?topic=containers-changelog#11910_1544)
   * [Changelog for worker node fix pack 1.19.9_1542, released 12 April 2021](/docs/containers?topic=containers-changelog#1199_1542)
   * [Changelog for master fix pack 1.19.9_1540, released 30 March 2021](/docs/containers?topic=containers-changelog#1199_1540)
   * [Changelog for worker node fix pack 1.19.9_1541, released 29 March 2021](/docs/containers?topic=containers-changelog#1199_1541)
@@ -1840,6 +1843,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.18_1550, released 26 April 2021](/docs/containers?topic=containers-changelog#11818_1550)
   * [Changelog for worker node fix pack 1.18.17_1548, released 12 April 2021](/docs/containers?topic=containers-changelog#11817_1548)
   * [Changelog for master fix pack 1.18.17_1546, released 30 March 2021](/docs/containers?topic=containers-changelog#11817_1546)
   * [Changelog for worker node fix pack 1.18.17_1547, released 29 March 2021](/docs/containers?topic=containers-changelog#11817_1547)
@@ -1879,6 +1883,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.17_1561, released 26 April 2021](/docs/containers?topic=containers-changelog#11717_1561)
   * [Changelog for worker node fix pack 1.17.17_1559, released 12 April 2021](/docs/containers?topic=containers-changelog#11717_1559)
   * [Changelog for master fix pack 1.17.17_1557, released 30 March 2021](/docs/containers?topic=containers-changelog#11717_1557)
   * [Changelog for worker node fix pack 1.17.17_1558, released 29 March 2021](/docs/containers?topic=containers-changelog#11717_1558)
@@ -2705,7 +2710,7 @@ subcollection: containers
 * [Networking](/docs/containers?topic=containers-limitations#classic_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#classic_storage_limit)
 
-[VPC Gen 2 compute cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
+[VPC cluster limitations](/docs/containers?topic=containers-limitations#ks_vpc_gen2_limits)
 * [Compute](/docs/containers?topic=containers-limitations#vpc_gen2_compute_limit)
 * [Networking](/docs/containers?topic=containers-limitations#vpc_gen2_networking_limit)
 * [Storage](/docs/containers?topic=containers-limitations#vpc_gen2_storage_limit)
