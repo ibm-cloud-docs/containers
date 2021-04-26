@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-04-26"
 
 keywords: kubernetes, iks
 
@@ -208,7 +208,8 @@ Access your app to verify that your app is up and running.
 
 
 ## What's next?
-{: #next-steps-startkit-kube notoc}
+{: #next-steps-startkit-kube}
+{: notoc}
 
 * **Troubleshoot deployment errors**: If you encounter errors during the app deployment, check the troubleshooting topic for known issues like [exceeding storage quota](/docs/apps?topic=apps-managingapps#exceed_quota), or learn how to [access Kubernetes logs](/docs/apps?topic=apps-managingapps#access_kube_logs) to look for errors.
 
