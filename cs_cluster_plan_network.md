@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-04-27"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -158,8 +158,7 @@ When you create VPC subnets for your clusters, keep in mind the following featur
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> {{site.data.keyword.containerlong_notm}} uses different types of service endpoints to establish a connection from authorized cluster users and worker nodes to the Kubernetes master.  Authorized cluster users communicate with the Kubernetes master through cloud service endpoints. Depending on your cluster version, worker nodes communicate with the Kubernetes master through cloud service endpoints or VPC virtual private endpoints.
 {: shortdesc}
 
-You must enable your account to use service endpoints. To enable service endpoints, run `ibmcloud account update --service-endpoint-enable true`.
-{: note}
+Before you create a cluster, you must enable your account to use service endpoints. To enable service endpoints, run `ibmcloud account update --service-endpoint-enable true`.
 
 In VPC clusters in {{site.data.keyword.containerlong_notm}}, you cannot disable the private cloud service endpoint or set up a cluster with the public cloud service endpoint only.
 {: note}
