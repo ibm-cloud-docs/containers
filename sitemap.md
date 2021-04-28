@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-27"
+lastupdated: "2021-04-28"
 
 keywords: containers
 subcollection: containers
@@ -1062,9 +1062,10 @@ subcollection: containers
   * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
   * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
-* [Registering a network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
+  * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
 * [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
-* [Registering an application load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
+  * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
+  * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_lb_dns)
 * [Limitations](/docs/containers?topic=containers-vpc-lbaas#lbaas_limitations)
 
 [Classic: About network load balancers (NLBs)](/docs/containers?topic=containers-loadbalancer-about)
