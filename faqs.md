@@ -261,7 +261,7 @@ Keep in mind that some services such as Ingress might require multiple worker no
 
 For more information about supported versions and update actions that you must take to move from one version to another, see [Version information and update actions](/docs/containers?topic=containers-cs_versions#cs_versions).
 
-Have an [{{site.data.keyword.openshiftshort}} cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported {{site.data.keyword.openshiftshort}} version is 4.5, which includes Kubernetes 1.18.
+Have an [{{site.data.keyword.openshiftshort}} cluster](/docs/openshift?topic=openshift-openshift_tutorial)? The supported {{site.data.keyword.openshiftshort}} version is 4.6, which includes Kubernetes 1.19.
 {: note}
 
 
