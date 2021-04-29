@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-02"
+lastupdated: "2021-04-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -130,7 +130,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
 
 1. [Target the CLI to your cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 
-2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.9.2, is installed.
+2. Enable the `istio` add-on. The default version of the generally available Istio managed add-on, 1.9.3, is installed.
   ```
   ibmcloud ks cluster addon enable istio --cluster <cluster_name_or_ID>
   ```
@@ -145,7 +145,7 @@ In Kubernetes clusters, you can install the generally available managed Istio ad
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.9.2       normal         Addon Ready
+  istio           1.9.3       normal         Addon Ready
   ```
   {: screen}
 
@@ -177,12 +177,12 @@ Install the `istioctl` CLI client. For more information, see the [`istioctl` com
 
 2. Download the version of `istioctl` that matches your cluster's Istio version.
   ```
-  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.2 sh -
+  curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.3 sh -
   ```
   {: pre}
 3. Navigate to the Istio package directory.
   ```
-  cd istio-1.9.2
+  cd istio-1.9.3
   ```
   {: pre}
 4. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -223,9 +223,9 @@ You can customize a set of Istio configuration options by editing the `managed-i
     <tr><td>`istio-components-pilot-requests-cpu`</td><td>`"500m"`</td><td>Configure the CPU request in millicpu for the `istiod` component pod.<p class="important">Use caution when changing this value. Setting this value too low might prevent the control plane from workering properly, and setting this value too high might prevent the `istiod` pod from being scheduled.</p></td></tr>
     <tr><td>`istio-global-logging-level`</td><td>`"default:info"`</td><td>Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.</br></br>To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/).<p class="tip">To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.</p></td></tr>
     <tr><td>`istio-global-outboundTrafficPolicy-mode`</td><td>`"ALLOW_ANY"`</td><td>By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.</td></tr>
-    <tr><td>`istio-egressgateway-public-1-enabled`</td><td>`"true"`</td><td>To disable the default Istio egress gateway, set to `"false"`.</td></tr>    
+    <tr><td>`istio-egressgateway-public-1-enabled`</td><td>`"true"`</td><td>To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.</td></tr>    
     <tr><td>`istio-global-proxy-accessLogFile`</td><td>`""`</td><td>Envoy proxies print access information to their standard output. To view this access information when running `kubectl logs` commands for the Envoy containers, set to `"/dev/stdout"`.</td></tr>
-    <tr><td>`istio-ingressgateway-public-1|2|3-enabled`</td><td>`"true"` in zone 1 only</td><td>To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created.</td></tr>
+    <tr><td>`istio-ingressgateway-public-1|2|3-enabled`</td><td>`"true"` in zone 1 only</td><td>To make your apps more highly available, set to `"true"` for each zone where you want a public `istio-ingressgateway` load balancer to be created. To use [custom ingress gateways](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead of the default ingress gateway, you can set to `"false"`.</td></tr>
     <tr><td>`istio-ingressgateway-zone-1|2|3`</td><td>`"<zone>"`</td><td>The zones where your worker nodes are deployed. These fields apply your cluster's zones to the `istio-ingressgateway-public-1|2|3-enabled` fields.<ul><li>If you installed the Istio add-on at version 1.5 or later, your cluster's zones are already listed.</li><li>If you updated your Istio add-on from version 1.4 to a later version, you must add your cluster's zones.</li></ul></td></tr>
     <tr><td>`istio-monitoring-telemetry`</td><td>`"true"`</td><td>By default, telemetry metrics and Prometheus support is enabled. To remove any performance issues associated with telemetry metrics and disable all monitoring, set to `"false"`.</td></tr>
     <tr><td>`istio-meshConfig-enableTracing`</td><td>`"true"`</td><td>By default, Istio generates trace spans for 1 out of every 100 requests. To disable trace spans, set to `"false"`.</td></tr>
@@ -260,15 +260,15 @@ You can customize a set of Istio configuration options by editing the `managed-i
 
     Example output:
     ```
-    data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.9.2"}
-    data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.9.2"}
-    data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.9.2"}
-    data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.9.2"}
-    data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.9.2"}
-    data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.9.2"}
+    data plane version: version.ProxyInfo{ID:"test-6f86fc4677-vsbsf.default", IstioVersion:"1.9.3"}
+    data plane version: version.ProxyInfo{ID:"rerun-xfs-f8958bb94-j6n89.default", IstioVersion:"1.9.3"}
+    data plane version: version.ProxyInfo{ID:"test2-5cbc75859c-jh6bx.default", IstioVersion:"1.9.3"}
+    data plane version: version.ProxyInfo{ID:"minio-test-78b5d4597d-hkpvt.default", IstioVersion:"1.9.3"}
+    data plane version: version.ProxyInfo{ID:"sb-887f89d7d-7s8ts.default", IstioVersion:"1.9.3"}
+    data plane version: version.ProxyInfo{ID:"gid-deployment-5dc86db4c4-kdshs.default", IstioVersion:"1.9.3"}
     ```
     {: screen}
-  2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.9.2"}`.
+  2. Restart each pod by deleting it. In the output of the previous step, the pod name and namespace are listed in each entry as `data plane version: version.ProxyInfo{ID:"<pod_name>.<namespace>", IstioVersion:"1.9.3"}`.
     ```
     kubectl delete pod <pod_name> -n <namespace>
     ```
@@ -372,16 +372,16 @@ For example, the patch version of your add-on might be updated automatically by 
   ```
   client version: 1.8.4
   cluster-local-gateway version:
-  citadel version: 1.9.2
-  egressgateway version: 1.9.2
-  egressgateway version: 1.9.2
-  galley version: 1.9.2
-  ingressgateway version: 1.9.2
-  ingressgateway version: 1.9.2
-  pilot version: 1.9.2
-  policy version: 1.9.2
+  citadel version: 1.9.3
+  egressgateway version: 1.9.3
+  egressgateway version: 1.9.3
+  galley version: 1.9.3
+  ingressgateway version: 1.9.3
+  ingressgateway version: 1.9.3
+  pilot version: 1.9.3
+  policy version: 1.9.3
   sidecar-injector version: 1.8.4
-  telemetry version: 1.9.2
+  telemetry version: 1.9.3
   data plane version: version.ProxyInfo{ID:"cluster-local-gateway-859958cb-fjv2d.istio-system", IstioVersion:"1.8.4"}
   data plane version: version.ProxyInfo{ID:"istio-egressgateway-7966998fd7-vxhm6.istio-system", IstioVersion:"1.8.4"}
   data plane version: version.ProxyInfo{ID:"webserver-6c6db9ffbc-xzjzl.default", IstioVersion:"1.8.4"}
@@ -392,12 +392,12 @@ For example, the patch version of your add-on might be updated automatically by 
 2. In the output, compare the `client version` (`istioctl`) to the version of the Istio control plane components, such as the `pilot version`. If the `client version` and control plane component versions do not match:
     1. Download the `istioctl` client of the same version as the control plane components.
       ```
-      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.2 sh -
+      curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.3 sh -
       ```
       {: pre}
     2. Navigate to the Istio package directory.
       ```
-      cd istio-1.9.2
+      cd istio-1.9.3
       ```
       {: pre}
     3. Linux and macOS users: Add the `istioctl` client to your `PATH` system variable.
@@ -521,7 +521,7 @@ If you previously installed Istio in the cluster by using the IBM Helm chart or 
 * If you previously installed BookInfo in the cluster, clean up those resources.
   1. Change the directory to the Istio file location.
     ```
-    cd <filepath>/istio-1.9.2
+    cd <filepath>/istio-1.9.3
     ```
     {: pre}
 

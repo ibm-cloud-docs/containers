@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-04-29"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -124,13 +124,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.2 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.3 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.9.2
+    cd istio-1.9.3
     ```
     {: pre}
   3. Label the `default` namespace for automatic sidecar injection.
@@ -483,7 +483,7 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.9.2
+  cd istio-1.9.3
   ```
   {: pre}
 
@@ -577,15 +577,15 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
    ```
    {: screen}
 
-3. Enable or disable an Istio load balancer in each zone by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"true"` or `"false"`.<p class="note">If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled. If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.</p>
-   Example to enable a public gateway in each zone:
+3. Enable or disable an Istio load balancer in each zone by setting the `istio-ingressgateway-public-1|2|3-enabled` fields to `"true"` or `"false"`.
+
+  <p class="note">If you want you apps to be accessible to clients, ensure that at least one load balancer is enabled, or [create custom gateway load balancers](/docs/containers?topic=containers-istio-custom-gateway). If you disable all load balancers in all zones, your app is no longer exposed and cannot be accessed externally.</p>
+
+  Example to enable a public gateway in each zone:
    ```yaml
    istio-ingressgateway-public-1-enabled: "true"
    istio-ingressgateway-public-2-enabled: "true"
    istio-ingressgateway-public-3-enabled: "true"
-   istio-ingressgateway-private-1-enabled: "false"
-   istio-ingressgateway-private-2-enabled: "false"
-   istio-ingressgateway-private-3-enabled: "false"
    ```
    {: codeblock}
 
@@ -739,7 +739,7 @@ To publicly expose apps:
     {: pre}
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
     ```
-    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
+    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
     {: pre}
 
@@ -900,7 +900,7 @@ To publicly expose apps:
     {: pre}
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters:
     ```
-    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname> [--ip <LB_zone2_hostname> ...]
+    ibmcloud ks nlb-dns create vpc-gen2 -c <cluster_name_or_ID> --lb-host <LB_hostname>
     ```
     {: pre}
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-04-29"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 29 April 2021 | <ul><li>**Custom IOPs for Istio**: Added a page for [using an `IstioOperator` to create custom Istio ingress and egress gateways](/docs/containers?topic=containers-istio-custom-gateway) for the managed Istio add-on.</li><li>**Istio add-on changelog**: [Version 1.9.3](/docs/containers?topic=containers-istio-changelog#v19) and version [1.8.5](/docs/containers?topic=containers-istio-changelog#v18) of the Istio managed add-on are released.</li></ul>|
 | 28 April 2021 | **Default version**: The default version for new clusters is now Kubernetes 1.20.|
 | 27 April 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.6_1536](/docs/containers?topic=containers-changelog#1206_1536), [1.19.10_1543](/docs/containers?topic=containers-changelog#11910_1543), [1.18.18_1549](/docs/containers?topic=containers-changelog#11818_1549), and [1.17.17_1560](/docs/containers?topic=containers-changelog#11717_1560)|
 | 26 April 2021 | <ul><li>**CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.258](/docs/containers?topic=containers-cs_cli_changelog#10).</li><li>**VPC NLB**: Adds steps for [registering a VPC network load balancer with a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns).</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.6_1537](/docs/containers?topic=containers-changelog#1206_1537), [1.19.10_1544](/docs/containers?topic=containers-changelog#11910_1544), [1.18.18_1550](/docs/containers?topic=containers-changelog#11818_1550), and [1.17.17_1561](/docs/containers?topic=containers-changelog#11717_1561).</li></ul> |
