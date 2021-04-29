@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-08"
+lastupdated: "2021-04-29"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -119,6 +119,17 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.9
 {: #v19}
 
+### Changelog for 1.9.3, released 29 April 2021
+{: #193}
+
+The following table shows the changes that are included in version 1.9.3 of the managed Istio add-on.
+{: shortdesc}
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.9.2 | 1.9.3 | <ul><li>See the Istio release notes for [Istio 1.9.3](https://istio.io/news/releases/1.9.x/announcing-1.9.3/){:external}.</li><li>Resolves [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}, [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}, [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}, [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}, [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}, [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}, and [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.9.2" caption-side="top"}
+
 ### Changelog for 1.9.2, released 1 April 2021
 {: #192}
 
@@ -133,6 +144,18 @@ The following table shows the changes that are included in version 1.9.2 of the 
 
 ## Version 1.8
 {: #v18}
+
+### Changelog for 1.8.5, released 29 April 2021
+{: #185}
+
+The following table shows the changes that are included in version 1.8.5 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.8.4 | 1.8.5 | <ul><li>See the Istio release notes for [Istio 1.8.5](https://istio.io/news/releases/1.8.x/announcing-1.8.5/){:external}.</li><li>Resolves [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}, [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}, [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}, [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}, [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}, [CVE-2021-24031](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24031){: external}, [CVE-2021-24032](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-24032){: external}, [usn-4760-1](https://ubuntu.com/security/notices/USN-4760-1/){: external}, [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}, and [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.8.4" caption-side="top"}
 
 ### Changelog for 1.8.4, released 23 March 2021
 {: #184}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-04-29"
 
 keywords: containers
 subcollection: containers
@@ -1026,6 +1026,17 @@ subcollection: containers
   * [Exposing the Istio ingress gateway with DNS with TLS termination](/docs/containers?topic=containers-istio-mesh#tls)
 * [Securing in-cluster traffic by enabling mTLS](/docs/containers?topic=containers-istio-mesh#mtls)
 
+[Deploying custom Istio gateways](/docs/containers?topic=containers-istio-custom-gateway)
+* [Considerations](/docs/containers?topic=containers-istio-custom-gateway#considerations)
+* [Creating a custom ingress gateway for public traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-public)
+  * [Set up the BookInfo sample](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo)
+  * [Exposing BookInfo by using an IBM-provided subdomain with TLS](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-bookinfo-dns)
+* [Creating a custom ingress gateway for private network traffic](/docs/containers?topic=containers-istio-custom-gateway#custom-ingress-gateway-private)
+* [Controlling custom gateway updates and versions](/docs/containers?topic=containers-istio-custom-gateway#custom-gateway-version)
+* [Additional gateway customizations](/docs/containers?topic=containers-istio-custom-gateway#additional-gateway-customizations)
+* [Creating a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway)
+* [Disabling the default gateways](/docs/containers?topic=containers-istio-custom-gateway#disable-default-gateways)
+
 [Observing Istio traffic](/docs/containers?topic=containers-istio-health)
 * [Setting up logging with {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_la)
 * [Setting up monitoring with {{site.data.keyword.mon_full_notm}}](/docs/containers?topic=containers-istio-health#istio_health_mon)
@@ -1958,8 +1969,10 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+  * [Changelog for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
   * [Changelog for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
 * [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)
+  * [Changelog for 1.8.5, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#185)
   * [Changelog for 1.8.4, released 23 March 2021](/docs/containers?topic=containers-istio-changelog#184)
   * [Changelog for 1.8.3, released 1 March 2021](/docs/containers?topic=containers-istio-changelog#183)
   * [Changelog for 1.8.2, released 25 January 2021](/docs/containers?topic=containers-istio-changelog#182)
