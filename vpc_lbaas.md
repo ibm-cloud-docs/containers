@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-04-29"
 
 keywords: kubernetes, iks
 
@@ -174,7 +174,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
 
 **Before you begin**:
 * VPC NLBs can be created only in VPC clusters that run Kubernetes version 1.19 or later.
-* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * To view VPC NLBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.
   ```
@@ -231,7 +231,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
   </tr>
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-node-selector`</td>
-    <td>Optional: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in the same zone as the VPC NLB are configured to receive traffic from the VPC NLB. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<p class="note">In VPC clusters that run Kubernetes version 1.18 or later, you cannot use the `vpc-node-selector` annotation if you enable the PROXY protocol.</p><br><br>The following keys are permitted:
+    <td>Optional: Annotation to specify a worker node label selector. To identify the worker nodes that receive traffic, you can select one of the supported label selector keys. Note that you can include only one label selector in the annotation, and that the selector must be specified in the `"key=value"` format. If this annotation is not specified, all worker nodes in the same zone as the VPC NLB are configured to receive traffic from the VPC NLB. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation, and any `dedicated: edge` labels on worker nodes are ignored.<br><br>The following keys are permitted:
       <ul><li>`ibm-cloud.kubernetes.io/internal-ip`</li>
       <li>`ibm-cloud.kubernetes.io/machine-type`</li>
       <li>`ibm-cloud.kubernetes.io/os`</li>
@@ -419,7 +419,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
 {: #setup_vpc_alb_pub_priv}
 
 **Before you begin**:
-* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the `default` namespace.
+* Ensure that you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the namespace in which you deploy the Kubernetes `LoadBalancer` service for the VPC NLB.
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters that run Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC ALB to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 * To view VPC ALBs, install the `infrastructure-service` plug-in. The prefix for running commands is `ibmcloud is`.

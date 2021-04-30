@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-04-30"
 
 keywords: kubernetes, iks, containers
 
@@ -101,8 +101,6 @@ The Center for Internet Security (CIS) publishes the [CIS Kubernetes Benchmark](
 
 When a new [Kubernetes version](/docs/containers?topic=containers-cs_versions) is released, IBM engineers compare the default configuration of a cluster that runs that Kubernetes version against the benchmark and publishes the results in this documentation. You can review how specific versions of your {{site.data.keyword.containerlong}} clusters meet the CIS Kubernetes Benchmark.
 
-
-
 ## Using the benchmark
 {: #cis-benchmark-use}
 
@@ -147,8 +145,6 @@ Next, decide whether the component falls within your responsibility. If so, you 
 See [Security for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-security).
 
 <br />
-
-
 
 ## Running the worker node CIS Kubernetes benchmark
 {: #cis-worker-test}
@@ -214,8 +210,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-
-
 ## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20
 {: #cis-benchmark-15}
 
@@ -267,7 +261,7 @@ Review the benchmark results for the master node security configuration subsecti
 | 1.1.20 | Ensure that the Kubernetes PKI certificate file permissions are set to `644` or more restrictive. | Scored | 1 | Pass | IBM |
 | 1.1.21 | Ensure that the Kubernetes PKI key file permissions are set to `600`. | Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 1.1 Master node configuration files benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 1.1 Master node configuration files benchmark results" caption-side="top"}
 
 #### Section 1.2: API server
 {: #cis-benchmark-15-1-2}
@@ -310,7 +304,7 @@ Review the benchmark results for the master node security configuration subsecti
 | 1.2.34 | Ensure that encryption providers are appropriately configured. | Scored | 1 | [Fail](#cis-benchmark-15-remediation) | Shared |
 | 1.2.35 | Ensure that the API Server only makes use of Strong Cryptographic Ciphers. | Not Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 1.2 API server benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 1.2 API server benchmark results" caption-side="top"}
 
 #### Section 1.3: Controller manager
 {: #cis-benchmark-15-1-3}
@@ -325,7 +319,7 @@ Review the benchmark results for the master node security configuration subsecti
 | 1.3.6 | Ensure that the `RotateKubeletServerCertificate` argument is set to `true`. | Scored | 2 | [Fail](#cis-benchmark-15-remediation) | IBM |
 | 1.3.7 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 1.3 Controller manager benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 1.3 Controller manager benchmark results" caption-side="top"}
 
 #### Section 1.4: Scheduler
 {: #cis-benchmark-15-1-4}
@@ -335,7 +329,7 @@ Review the benchmark results for the master node security configuration subsecti
 | 1.4.1 | Ensure that the `--profiling` argument is set to `false`. | Scored | 1 | Pass | IBM |
 | 1.4.2 | Ensure that the `--bind-address` argument is set to `127.0.0.1`. | Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 1.4 Scheduler benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 1.4 Scheduler benchmark results" caption-side="top"}
 
 ### Section 2: Etcd node configuration
 {: #cis-benchmark-15-2}
@@ -353,7 +347,7 @@ Review the benchmark results for the etcd node configurations.
 | 2.6 | Ensure that the `--peer-auto-tls` argument is not set to `true`. | Scored | 1 | Pass | IBM |
 | 2.7 | Ensure that a unique certificate authority is used for etcd. | Not Scored | 2 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 2 Etcd node configuration benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 2 Etcd node configuration benchmark results" caption-side="top"}
 
 ### Section 3: Control plane configuration
 {: #cis-benchmark-15-3}
@@ -371,7 +365,7 @@ Review the benchmark results for the control plane configuration subsections.
 | --- | --- | --- | --- | --- | --- |
 | 3.1.1 | Client certificate authentication should not be used for users. | Not Scored | 2 | Pass | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 3.1 Authentication and authorization benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 3.1 Authentication and authorization benchmark results" caption-side="top"}
 
 #### Section 3.2: Logging
 {: #cis-benchmark-15-3-2}
@@ -381,7 +375,7 @@ Review the benchmark results for the control plane configuration subsections.
 | 3.2.1 | Ensure that a minimal audit policy is created. | Scored | 1 | [Fail](#cis-benchmark-15-remediation) | Shared |
 | 3.2.2 | Ensure that the audit policy covers key security concerns. | Not Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 3.2 Logging benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 3.2 Logging benchmark results" caption-side="top"}
 
 ### Section 4: Worker node security configuration
 {: #cis-benchmark-15-4}
@@ -408,7 +402,7 @@ Review the benchmark results for the worker node security configuration subsecti
 | 4.1.9 | Ensure that the kubelet configuration file has permissions set to `644` or more restrictive. | Scored | 1 | Pass | IBM |
 | 4.1.10 | Ensure that the kubelet configuration file ownership is set to `root:root`. | Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 4.1 Worker node configuration files benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 4.1 Worker node configuration files benchmark results" caption-side="top"}
 
 #### Section 4.2: Kubelet
 {: #cis-benchmark-15-4-2}
@@ -425,11 +419,11 @@ Review the benchmark results for the worker node security configuration subsecti
 | 4.2.8 | Ensure that the `--hostname-override` argument is not set. | Not Scored | 1 | [Fail](#cis-benchmark-15-remediation) | IBM |
 | 4.2.9 | Ensure that the `--event-qps argument` is set to `0` or a level which ensures appropriate event capture. | Not Scored | 2 | Pass | IBM |
 | 4.2.10 | Ensure that the `--tls-cert-file` and `--tls-private-key-file` arguments are set as appropriate. | Scored | 1 | Pass | IBM |
-| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to false. | Scored | 1 | [Pass](#cis-benchmark-15-remediation) | IBM |
+| 4.2.11 | Ensure that the `--rotate-certificates` argument is not set to false. | Scored | 1 | [Pass](#cis-benchmark-15-remediation)| IBM |
 | 4.2.12 | Ensure that the `RotateKubeletServerCertificate` argument is set to true. | Scored | 1 | [Fail](#cis-benchmark-15-remediation) | IBM |
 | 4.2.13 | Ensure that the Kubelet only makes use of Strong Cryptographic Ciphers. | Not Scored | 1 | Pass | IBM |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 4.2 Kubelet benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 4.2 Kubelet benchmark results" caption-side="top"}
 
 ### Section 5: Kubernetes policies
 {: #cis-benchmark-15-5}
@@ -456,7 +450,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | 5.1.5 | Ensure that default service accounts are not actively used. | Scored | 1 | [Fail](#cis-benchmark-15-remediation) | Shared |
 | 5.1.6 | Ensure that Service Account Tokens are only mounted where necessary.| Not Scored | 1 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.1 RBAC and service accounts benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.1 RBAC and service accounts benchmark results" caption-side="top"}
 
 #### Section 5.2: Pod security policies
 {: #cis-benchmark-15-5-2}
@@ -473,7 +467,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | 5.2.8 | Minimize the admission of containers with added capabilities. | Not Scored | 1 | [Pass](#cis-benchmark-15-remediation) | Shared |
 | 5.2.9 | Minimize the admission of containers with capabilities assigned. | Not Scored | 2 | [Pass](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.2 Pod security policies benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.2 Pod security policies benchmark results" caption-side="top"}
 
 #### Section 5.3: Network policies and CNI
 {: #cis-benchmark-15-5-3}
@@ -483,7 +477,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | 5.3.1 | Ensure that the CNI in use supports Network Policies. | Not Scored | 1 | Pass | IBM |
 | 5.3.2 | Ensure that all Namespaces have Network Policies defined. | Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.3 Network policies and CNI benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.3 Network policies and CNI benchmark results" caption-side="top"}
 
 #### Section 5.4: Secrets management
 {: #cis-benchmark-15-5-4}
@@ -493,7 +487,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | 5.4.1 | Prefer using secrets as files over secrets as environment variables. | Not Scored | 1 | Pass | Shared |
 | 5.4.2 | Consider external secret storage. | Not Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.4 Secrets management benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.4 Secrets management benchmark results" caption-side="top"}
 
 #### Section 5.5: Extensible admission control
 {: #cis-benchmark-15-5-5}
@@ -502,7 +496,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | --- | --- | --- | --- | --- | --- |
 | 5.5.1 | Configure Image Provenance using `ImagePolicyWebhook` admission controller. | Not Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.5 Extensible admission control benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.5 Extensible admission control benchmark results" caption-side="top"}
 
 #### Section 5.6: General policies
 {: #cis-benchmark-15-5-6}
@@ -514,7 +508,7 @@ Review the benchmark results for the Kubernetes policies subsections.
 | 5.6.3 | Apply Security Context to Your Pods and Containers. | Not Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 | 5.6.4 | The default namespace should not be used. | Scored | 2 | [Fail](#cis-benchmark-15-remediation) | Shared |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column is the benchmark recommendation. The third column is the scoring of the recommendation, either scored or not scored. The fourth column is the level of the recommendation, either 1 for basic or 2 for more advanced and performance-impacting. The fifth column contains the result of whether the service passes or fails the recommendation. The sixth column designates the responsibility of passing the recommendation, either IBM or shared between IBM and you."}
-{: caption="Section 5.6 General policies benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
+{: caption="Section 5.6 General policies benchmark results" caption-side="top"}
 
 ### Explanation and remediation
 {: #cis-benchmark-15-remediation}
@@ -525,41 +519,40 @@ Review the following explanations and possible remediation actions that you can 
 | Section # | Description|
 | --- | --- |
 | 1.2.1 | Your cluster uses RBAC to control access to the cluster, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
-| 1.2.10 | {{site.data.keyword.containershort}} does not enable the [`EventRateLimit`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller because the admission controller is a Kubernetes alpha feature. |
-| 1.2.12 | {{site.data.keyword.containershort}} does not enable the [`AlwaysPullImages`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller because this setting overrides the `imagePullPolicy` of a container and might impact performance. |
-| 1.2.21 | {{site.data.keyword.containershort}} enables profiling for cluster administrator troubleshooting purposes. |
-| 1.2.22 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
-| 1.2.23 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
-| 1.2.24 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
-| 1.2.25 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health). |
+| 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [`EventRateLimit`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller because the admission controller is a Kubernetes alpha feature. |
+| 1.2.12 | {{site.data.keyword.containerlong_notm}} does not enable the [`AlwaysPullImages`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller because this setting overrides the `imagePullPolicy` of a container and might impact performance. |
+| 1.2.21 | {{site.data.keyword.containerlong_notm}} enables profiling for cluster administrator troubleshooting purposes. |
+| 1.2.22 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
+| 1.2.23 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
+| 1.2.24 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
+| 1.2.25 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
 | 1.2.33 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 1.2.34 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 1.3.6 | {{site.data.keyword.containershort}} rotates certificates on every worker node reload or update that you choose to perform. |
+| 1.3.6 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update that you choose to perform. |
 | 3.2.1 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
 | 3.2.2 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit#audit-api-server). |
-| 4.2.6 | {{site.data.keyword.containershort}} does not protect kernel defaults so that you can optionally [tune kernel parameters](/docs/containers?topic=containers-kernel). |
-| 4.2.8 | {{site.data.keyword.containershort}} ensures that the hostname matches the name that is issued by the infrastructure provider. |
-| 4.2.11 | {{site.data.keyword.containershort}} rotates certificates on every worker node reload or update that you choose to perform. |
-| 4.2.12 | {{site.data.keyword.containershort}} rotates certificates on every worker node reload or update that you choose to perform. |
-| 5.1.2 | {{site.data.keyword.containershort}} deploys some system components that might have their Kubernetes secret access further restricted. |
-| 5.1.3 | {{site.data.keyword.containershort}} deploys some system components that might have their Kubernetes resource access further restricted. |
-| 5.1.5 | {{site.data.keyword.containershort}} does not set `automountServiceAccountToken: false` for each default service account. |
-| 5.1.6 | {{site.data.keyword.containershort}} deploys some system components that could set `automountServiceAccountToken: false`.  |
-| 5.2.1 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.2 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.3 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.4 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.5 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.6 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.7 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.8 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.2.9 | You can optionally [configure pod security policies](/docs/containers?topic=containers-psp). |
-| 5.3.2 | {{site.data.keyword.containershort}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy), and you can optionally [add your own network policies](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
+| 4.2.6 | {{site.data.keyword.containerlong_notm}} does not protect kernel defaults so that you can optionally [tune kernel parameters](/docs/containers?topic=containers-kernel). |
+| 4.2.8 | {{site.data.keyword.containerlong_notm}} ensures that the hostname matches the name that is issued by the infrastructure provider. |
+| 4.2.11 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update that you choose to perform. |
+| 4.2.12 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update that you choose to perform. |
+| 5.1.2 | {{site.data.keyword.containerlong_notm}} deploys some system components that might have their Kubernetes secret access further restricted. |
+| 5.1.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that might have their Kubernetes resource access further restricted. |
+| 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set `automountServiceAccountToken: false` for each default service account. |
+| 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set `automountServiceAccountToken: false`.  |
+| 5.2.1 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.2 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.3 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.4 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.5 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.6 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.7 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.8 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.2.9 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
+| 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy), and you can optionally [add your own network policies](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
 | 5.4.2 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
 | 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec). |
-| 5.6.2 | {{site.data.keyword.containershort}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
-| 5.6.3 | {{site.data.keyword.containershort}} deploys some system components that do not set a pod or container `securityContext`. |
-| 5.6.4 | {{site.data.keyword.containershort}} deploys some Kubernetes resources to the default namespace. |
+| 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
+| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a pod or container `securityContext`. |
+| 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default namespace. |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column contains the description of why the benchmark recommendation is not met and possible remediation actions."}
-{: caption="Explanation and remediation for benchmark results for clusters that run Kubernetes 1.18" caption-side="top"}
-
+{: caption="Explanation and remediation for benchmark results" caption-side="top"}

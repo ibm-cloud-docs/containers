@@ -92,84 +92,33 @@ subcollection: containers
 {:video: .video}
  
 
-# Debugging app deployments
-{: #debug_apps}
-
-Review the options that you have to debug your app deployments and find the root causes for failures.
-{: shortdesc}
+# Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?
+{: #ts_image_pull_create}
 
 **Infrastructure provider**:
   * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the namespace where your app is deployed.
+{: tsSymptoms}
+When you created a cluster, you received an error message similar to the following.
 
 
+```
+Your cluster cannot pull images from the {{site.data.keyword.registrylong_notm}} 'icr.io' domains because an IAM access policy could not be created. Make sure that you have the IAM Administrator platform access role to {{site.data.keyword.registrylong_notm}}. Then, create an image pull secret with IAM credentials to the registry by running 'ibmcloud ks cluster pull-secret apply'.
+```
+{: screen}
 
-1. Look for abnormalities in the service or deployment resources by running the `describe` command.
+{: tsCauses}
+During cluster creation, a service ID is created for your cluster and assigned the **Reader** service access policy to {{site.data.keyword.registrylong_notm}}. Then, an API key for this service ID is generated and stored in [an image pull secret](/docs/containers?topic=containers-registry#cluster_registry_auth) to authorize the cluster to pull images from {{site.data.keyword.registrylong_notm}}.
+
+To successfully assign the **Reader** service access policy to the service ID during cluster creation, you must have the **Administrator** platform access policy to {{site.data.keyword.registrylong_notm}}.
+
+{: tsResolve}
+
+Steps:
+1.  Make sure that the account owner gives you the **Administrator** role to {{site.data.keyword.registrylong_notm}}.
     ```
-    kubectl describe service <service_name>
+    ibmcloud iam user-policy-create <your_user_email> --service-name container-registry --roles Administrator
     ```
     {: pre}
-
-2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
-
-3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
-
-4. Verify that the service is listening on the correct port.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
-      ```
-      curl localhost: <port>
-      ```
-      {: pre}
-
-5. Verify that the service is linked correctly to the pods.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   3. Curl the cluster IP address and port of the service.
-      ```
-      curl <cluster_IP>:<port>
-      ```
-      {: pre}
-   4. If the IP address and port are not accessible, look at the endpoints for the service.
-      * If no endpoints are listed, then the selector for the service does not match the pods. For example, your app deployment might have the label `app=foo`, but the service might have the selector `run=foo`.
-      * If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods. For example, your app might listen on port 9080, but the service might listen on port 80.
-
-6. For Ingress services, verify that the service is accessible from within the cluster.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint.
-      ```
-      curl <host_name>.<domain>
-      ```
-      {: pre}
-
-
-
-
+2.  [Use the `ibmcloud ks cluster pull-secret apply` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_pull_secret_apply) to re-create an image pull secret with the appropriate registry credentials.

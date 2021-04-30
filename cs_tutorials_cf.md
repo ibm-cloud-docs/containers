@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-04-30"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ completion-time: 30m
 Take an app that you deployed previously by using Cloud Foundry and deploy the same code in a container to an {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-Want to automatically generate a Dockerfile and Kubernetes configuration files for your application? Try using a migration tool like [Konveyor Move2Kube](https://www.konveyor.io/move2kube){: external} along with the steps in this tutorial.
+Want to automatically generate a Dockerfile and Kubernetes configuration files for your application? Try using a migration tool like [Konveyor Move2Kube](https://move2kube.konveyor.io/){: external} along with the steps in this tutorial.
 {: tip}
 
 ## Objectives
