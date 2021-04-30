@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-23"
+lastupdated: "2021-04-30"
 
 keywords: kubernetes, iks,
 
@@ -177,8 +177,7 @@ Before you create your cluster and install Portworx, review the following planni
    3. Minimum number of workers: Two worker nodes per zone across three zones, for a minimum total of six worker nodes.
 3. **VPC and non-SDS classic worker nodes only**: [Create raw, unformatted, and unmounted block storage](#create_block_storage).
 4. For production workloads, create an [external Databases for etcd](#portworx_database) instance for your Portworx metadata key-value store.
-5. [Set up encryption](#setup_encryption).
-6. Install or migrate to [Helm version 3](/docs/containers?topic=containers-helm).
+5. **Optional** [Set up encryption](#setup_encryption).
 7. [Install Portworx](#install_portworx).
 
 ## Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes
@@ -203,10 +202,50 @@ Keep in mind that the networking of non-SDS worker nodes in classic clusters is 
 4. Continue with your Portworx setup by [Setting up a key-value store for Portworx metadata](#portworx_database).</br>
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters:**
-1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_api_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.  
+1. Follow the [steps](/docs/containers?topic=containers-utilities#vpc_cli_attach) to create the {{site.data.keyword.block_storage_is_short}} instances and attach these to each worker node that you want to add to the Portworx storage layer. For highly available data storage, Portworx requires at least 3 worker nodes with raw and unformatted block storage.  
 2. Continue with your Portworx setup by [Setting up a key-value store for Portworx metadata](#portworx_database).
 
 <br />
+
+
+
+## Private only clusters: Copying the `ImagePullSecret` to the `kube-system` namespace from the Kubernetes dashboard
+{: #vpc-image-pull-px}
+
+To enable Portworx to pull container images from {{site.data.keyword.registryshort}} to the `kube-system` namespace in your cluster, you must copy the `all-icr-io` secret from the `default` namespace to the `kube-system` namespace. You must also add the `all-icr-io` secret to the default service account in the `kube-system` namespace.
+{: shortdesc}
+
+
+1. From the [**Cluster Overview** page](chttps://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster where you want to install Portworx and open the **Kubernetes dashboard**.
+2. In the Kubernetes dashboard, make sure the `default` namespace is selected.
+3. In the **Config and Storage** section of the navigation, click **Secrets**. Then click the `all-icr-io` secret.
+3. On the **Secret** page, click the **Edit resource** button.
+4. In the **Edit a resource** window, copy the YAML configuration and then, click **Cancel**
+5. In the namespace menu, select the `kube-system` namespace.
+6. Click the **Create new resource** button and paste the YAML configuration that you copied earlier.
+7. Edit the YAML to specify the `kube-system` namespace and remove the `resourceVersion` value. Review the following YAML configuration.
+   ```yaml
+   metadata:
+      name: all-icr-io
+      namespace: kube-system
+      uid: aa111111-11a1-1a1a-11a1-a111a1111a11
+      resourceVersion: ''
+   ```
+   {: screen}
+8. Click **Upload**.
+9. In the **Cluster** section of the navigation, click **Service Accounts**.
+10. Click the `default` service account. Note that you might need to navigate to the next page. 
+11. Click the **Edit resource** button and add the `all-icr-io` secret as follows.
+   ```yaml
+   secrets:
+      - name: default-token-l5hcm
+      - name: all-icr-io
+   ```
+   {: screen}
+12. Click **Update**
+13. [Install Portworx in your cluster](#install_portworx)
+
+
 
 ## Setting up a key-value store for Portworx metadata
 {: #portworx_database}
@@ -236,7 +275,7 @@ To set up the internal Portworx KDVB, follow the steps in [Installing Portworx i
 If you plan to use the internal KVDB, make sure that your cluster has a minimum of 3 worker nodes with additional local block storage so that the KVDB can be set up for high availability. Your data is automatically replicated across these 3 worker nodes and you can choose to scale this deployment to replicate data across up to 25 worker nodes.
 {: note}
 
-### Setting up a Databases for etcd service instance
+### Optional: Setting up a Databases for etcd service instance
 {: #databases-for-etcd}
 
 If you want to use an external database service for your Portworx cluster metadata and keep the metadata separate from the operational data that you plan to store with Portworx, set up a [Databases for etcd](/docs/databases-for-etcd?topic=databases-for-etcd-getting-started) service instance in your cluster.
@@ -328,7 +367,7 @@ Databases for etcd is a managed etcd service that securely stores and replicates
 
 <br />
 
-## Setting up volume encryption
+## Optional: Setting up volume encryption
 {: #encrypt_volumes}
 
 To protect your data in a Portworx volume, you can encrypt your cluster's volumes with {{site.data.keyword.keymanagementservicelong_notm}} or {{site.data.keyword.hscrypto}}.
@@ -423,7 +462,7 @@ Follow these steps to set up encryption for your Portworx volumes.
    {: note}
 
 
-### Creating a secret to store the KMS credentials
+### Creating a secret to store the KMS encryption credentials
 {: px_create_km_secret}
 
 **Before you begin:** [Set up encryption](#setup_encryption)
@@ -588,7 +627,6 @@ Check out how to [encrypt the secrets in your cluster](/docs/containers?topic=co
 
 <br />
 
-
 ## Installing Portworx in your cluster
 {: #install_portworx}
 
@@ -609,9 +647,7 @@ Before you begin:
 
 To install Portworx:
 
-1.  [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
-
-3. Open the Portworx service from the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog/services/portworx-enterprise){: external} and complete the fields as follows:
+1. Open the Portworx service from the [{{site.data.keyword.cloud_notm}} catalog](https://cloud.ibm.com/catalog/services/portworx-enterprise){: external} and complete the fields as follows:
    1. Select the region where your {{site.data.keyword.containerlong_notm}} cluster is located.
    2.  Review the Portworx pricing information.
    3. Enter a name for your Portworx service instance.
@@ -620,7 +656,7 @@ To install Portworx:
    6. Enter an {{site.data.keyword.cloud_notm}} API key to retrieve the list of clusters that you have access to. If you don't have an API key, see [Managing user API keys](/docs/account?topic=account-userapikey). After you enter the API key, the **Kubernetes or OpenShift cluster name** field appears at the bottom of the page.
    7. Enter a unique name for the Portworx cluster that is created within your {{site.data.keyword.containerlong_notm}} cluster.
    8. From the **Portworx metadata key-value store** drop down, choose the type of key-value store that you want to use to store Portworx metadata. Select **Portworx KVDB** to automatically create a key-value store during the Portworx installation, or select **Databases for etcd** if you want to use an existing Databases for etcd instance. If you choose **Databases for etcd**, the **Etcd API endpoints** and **Etcd secret name** fields appear.
-   9. Required for Databases for etcd only: Enter the information of your Databases for etcd service instance.
+   9. **Required for Databases for etcd only**: Enter the information of your Databases for etcd service instance.
       1. [Retrieve the etcd endpoint, and the name of the Kubernetes secret](#databases_credentials) that you created for your Databases for etcd service instance.
       2. In the **Etcd API endpoints** field, enter the API endpoint of your Databases for etcd service instance that you retrieved earlier. Make sure to enter the endpoint in the format `etcd:<etcd_endpoint1>;etcd:<etcd_endpoint2>`. If you have more than one endpoint, include all endpoints and separate them with a semicolon (`;`).
       3. In the **Etcd secret name** field, enter the name of the Kubernetes secret that you created in your cluster to store the Databases for etcd service credentials.
@@ -628,11 +664,11 @@ To install Portworx:
    11. Optional: From the **Portworx secret store type** drop down list, choose the secret store type that you want to use to store the volume encryption key.
        - **Kubernetes Secret**: Choose this option if you want to store your own custom key to encrypt your volumes in a Kubernetes Secret in your cluster. The secret must not be present before you install Portworx. You can create the secret after you install Portworx. For more information, see the [Portworx documentation](https://docs.portworx.com/key-management/kubernetes-secrets/#configuring-kubernetes-secrets-with-portworx){: external}.
        - **{{site.data.keyword.keymanagementservicelong_notm}}**: Choose this option if you want to use root keys in {{site.data.keyword.keymanagementservicelong_notm}} to encrypt your volumes. Make sure that you follow the [instructions](#setup_encryption) to create your {{site.data.keyword.keymanagementservicelong_notm}} service instance, and to store the credentials for how to access your service instance in a Kubernetes secret in the `portworx` namespace before you install Portworx.        
-5. Click **Create** to start the Portworx installation in your cluster. This process might take a few minutes to complete. The service details page opens with instructions for how to verify your Portworx installation, create a persistent volume claim (PVC), and mount the PVC to an app.
-6. From the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources), find the Portworx service that you created.
-7. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
-8. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx) to start troubleshooting why your installation failed.
-9. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
+1. Click **Create** to start the Portworx installation in your cluster. This process might take a few minutes to complete. The service details page opens with instructions for how to verify your Portworx installation, create a persistent volume claim (PVC), and mount the PVC to an app.
+1. From the [{{site.data.keyword.cloud_notm}} resource list](https://cloud.ibm.com/resources), find the Portworx service that you created.
+1. Review the **Status** column to see if the installation succeeded or failed. The status might take a few minutes to update.
+1. If the **Status** changes to `Provision failure`, follow the [instructions](/docs/containers?topic=containers-cs_troubleshoot_storage#debug-portworx) to start troubleshooting why your installation failed.
+1. If the **Status** changes to `Provisioned`, verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
    1. List the Portworx pods in the `kube-system` namespace. The installation is successful when you see one or more `portworx`, `stork`, and `stork-scheduler` pods. The number of pods equals the number of worker nodes that are included in your Portworx cluster. All pods must be in a `Running` state.
       ```
       kubectl get pods -n kube-system | grep 'portworx\|stork'
@@ -714,6 +750,8 @@ To install Portworx:
 
 You can upgrade Portworx to the latest version.
 {: shortdesc}
+
+1.  [Follow the instructions](/docs/containers?topic=containers-helm#install_v3) to install the Helm version 3 client on your local machine.
 
 1. Update your Helm repos.
    ```

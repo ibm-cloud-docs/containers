@@ -92,84 +92,68 @@ subcollection: containers
 {:video: .video}
  
 
-# Debugging app deployments
-{: #debug_apps}
-
-Review the options that you have to debug your app deployments and find the root causes for failures.
-{: shortdesc}
+# Why is my Portieris cluster image security enforcement installation canceled?
+{: #portieris_enable}
 
 **Infrastructure provider**:
   * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 2 compute
 
-Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for the namespace where your app is deployed.
+{: tsSymptoms}
+Portieris image security enforcement add-on does not install.  You see a master status similar to the following:
+```
+Image security enforcement update cancelled. CAE008: Cannot enable Portieris image security enforcement because the cluster already has a conflicting image admission controller installed. For more information, see the troubleshooting docs: 'https://ibm.biz/portieris_enable'
+```
+{: screen}
 
+{: tsCauses}
+Your cluster has a conflicting image admission controller already installed, which prevents the image security enforcement cluster add-on from installing. When you have more than one image admission controller in your cluster, pods might not run.
 
+Potential conflicting image admission controller sources include:
+*   The deprecated [container image security enforcement Helm chart](/docs/Registry?topic=Registry-security_enforce).
+*   A previous manual installation of the open source [Portieris](https://github.com/IBM/portieris){: external} project.
 
-1. Look for abnormalities in the service or deployment resources by running the `describe` command.
+{: tsResolve}
+Identify and remove the conflicting image admission controller.
+
+1.  Check for existing image admission controllers.
+    *   Check if you have an existing container image security enforcement deployment in your cluster. If no output is returned, you do not have the deployment.
+        ```
+        kubectl get deploy cise-ibmcloud-image-enforcement -n ibm-system
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        NAME                              READY   UP-TO-DATE   AVAILABLE   AGE
+        cise-ibmcloud-image-enforcement   3/3     3            3           129m
+        ```
+        {: pre}
+
+    *   Check if you have an existing Portieris deployment in your cluster. If no output is returned, you do not have the deployment.
+        ```
+        kubectl get deployment --all-namespaces -l app=portieries
+        ```
+        {: pre}
+
+        Example output:
+        ```
+        NAMESPACE     NAME        READY   UP-TO-DATE   AVAILABLE   AGE
+        portieris     portieris   3/3     3            3           8m8s
+        ```
+        {: pre}
+2.  Uninstall the conflicting deployment.
+    *   For container image security enforcement, see the [{{site.data.keyword.registrylong_notm}} documentation](/docs/Registry?topic=Registry-security_enforce#remove).
+    *   For Portieris, see the [open source documentation](https://github.com/IBM/portieris#uninstalling-portieris){: external}.
+3.  Confirm that conflicting admission controllers are removed by checking that the cluster no longer has a mutating webhook configuration for an image admission controller.
     ```
-    kubectl describe service <service_name>
+    kubectl get MutatingWebhookConfiguration image-admission-config
     ```
     {: pre}
 
-2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
-
-3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
-
-4. Verify that the service is listening on the correct port.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   3. Curl the app from within the container. If the port is not accessible, the service might not be listening on the correct port or the app might have issues. Update the configuration file for the service with the correct port and redeploy or investigate potential issues with the app.
-      ```
-      curl localhost: <port>
-      ```
-      {: pre}
-
-5. Verify that the service is linked correctly to the pods.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   3. Curl the cluster IP address and port of the service.
-      ```
-      curl <cluster_IP>:<port>
-      ```
-      {: pre}
-   4. If the IP address and port are not accessible, look at the endpoints for the service.
-      * If no endpoints are listed, then the selector for the service does not match the pods. For example, your app deployment might have the label `app=foo`, but the service might have the selector `run=foo`.
-      * If endpoints are listed, then look at the target port field on the service and make sure that the target port is the same as what is being used for the pods. For example, your app might listen on port 9080, but the service might listen on port 80.
-
-6. For Ingress services, verify that the service is accessible from within the cluster.
-   1. Get the name of a pod.
-      ```
-      kubectl get pods
-      ```
-      {: pre}
-   2. Log in to a container.
-      ```
-      kubectl exec -it <pod_name> -- /bin/bash
-      ```
-      {: pre}
-   2. Curl the URL specified for the Ingress service. If the URL is not accessible, check for a firewall issue between the cluster and the external endpoint.
-      ```
-      curl <host_name>.<domain>
-      ```
-      {: pre}
-
-
-
-
+    Example output:
+    ```
+    Error from server (NotFound): mutatingwebhookconfigurations.admissionregistration.k8s.io "image-admission-config" not found
+    ```
+    {: pre}
+4.  Retry the installing the add-on by running the `ibmcloud ks cluster image-security enable` command.
