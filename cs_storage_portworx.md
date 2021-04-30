@@ -216,7 +216,7 @@ To enable Portworx to pull container images from {{site.data.keyword.registrysho
 {: shortdesc}
 
 
-1. From the [**Cluster Overview** page](chttps://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster where you want to install Portworx and open the **Kubernetes dashboard**.
+1. From the [**Cluster Overview** page](https://cloud.ibm.com/kubernetes/clusters){: external}, select the cluster where you want to install Portworx and open the **Kubernetes dashboard**.
 2. In the Kubernetes dashboard, make sure the `default` namespace is selected.
 3. In the **Config and Storage** section of the navigation, click **Secrets**. Then click the `all-icr-io` secret.
 3. On the **Secret** page, click the **Edit resource** button.
