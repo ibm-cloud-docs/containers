@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-04-30"
 
 keywords: kubernetes, iks, help, debug
 
@@ -2080,7 +2080,7 @@ The endpoint that you entered in your Kubernetes secret is incorrect. If the KMS
    ```
    {: pre}
 
-3. [Edit the Kubernetes secret that you created to include the correct endpoint for your KMS provider](/docs/openshift?topic=openshift-portworx#creating-a-secret-to-store-the-kms-credentials).
+3. [Edit the Kubernetes secret that you created to include the correct endpoint for your KMS provider](/docs/openshift?topic=openshift-portworx#px_create_km_secret).
    ```sh
    kubectl edit <secret-name> -n portworx
    ```

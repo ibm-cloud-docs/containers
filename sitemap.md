@@ -1478,7 +1478,7 @@ subcollection: containers
   * [Portworx per-volume encryption workflow](/docs/containers?topic=containers-portworx#px_encryption)
   * [Portworx per-volume decryption workflow](/docs/containers?topic=containers-portworx#decryption)
   * [Enabling per-volume encryption for your Portworx volumes](/docs/containers?topic=containers-portworx#setup_encryption)
-  * [Creating a secret to store the KMS encryption credentials](/docs/containers?topic=containers-portworx#creating-a-secret-to-store-the-kms-encryption-credentials)
+  * [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-portworx#px_create_km_secret)
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)

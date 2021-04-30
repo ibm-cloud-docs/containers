@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-29"
+lastupdated: "2021-04-30"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -479,7 +479,7 @@ spec:
                           weight: 100
 
 ```
-{: screen}
+{: codeblock}
 
 <br />
 
