@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-26"
+lastupdated: "2021-05-04"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -755,7 +755,7 @@ Access an app via a non-standard TCP port.
 Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#tcp-ports):
 
 ```
-ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=8080 servicePort=9000"
+ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=8080"
 ```
 {: screen}
 
@@ -780,7 +780,7 @@ Kubernetes Ingress fields:
 
 3. Specify the `tcp-services` configmap as a field in the [`ibm-ingress-deploy-config` configmap](#comm-customize-deploy).
   ```
-  tcpServicesConfig=kube-system/tcp-services
+  "tcpServicesConfig":"kube-system/tcp-services"
   ```
   {: screen}
 
@@ -864,10 +864,16 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 {: shortdesc}
 
 1. Get the names of the services that expose each ALB.
-  ```
-  kubectl get svc -n kube-system | grep alb
-  ```
-  {: pre}
+  * Classic clusters:
+    ```
+    kubectl get svc -n kube-system | grep alb
+    ```
+    {: pre}
+  * VPC clusters: In the output, look for a service name that is formatted such as `public-crc204dl7w0qf6n6sp7tug`.
+    ```
+    kubectl get svc -n kube-system | grep LoadBalancer
+    ```
+    {: pre}
 
 2. Create a configmap to customize the Ingress deployment.
 
