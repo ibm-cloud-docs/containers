@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-29"
+lastupdated: "2021-05-05"
 
 keywords: kubernetes, iks, release notes
 
@@ -103,6 +103,12 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
+
+## May 2021
+{: #may21}
+| Date | Description |
+| ---- | ----------- |
+| 4 May 2021 |  **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1538](/docs/containers?topic=containers-changelog#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog#11910_1545).|
 
 ## April 2021
 {: #apr21}

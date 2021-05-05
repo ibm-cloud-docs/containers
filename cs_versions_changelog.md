@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-04-27"
+lastupdated: "2021-05-05"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -119,6 +119,20 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 
 Review the version 1.20 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.20.6_1538, released 4 May 2021
+{: #1206_1538}
+
+The following table shows the changes that are included in the master fix pack patch update `1.20.6_1538`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 618 | 661 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2020-14391](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CCVE-2020-14391){: external}, [CVE-2020-25661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25661){: external} and [CVE-2020-25662](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25662){: external}. |
+| Gateway-enabled cluster controller | 1322 | 1352 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2021-28831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28831){: external}, [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}. |
+| IBM Cloud Controller Manager | v1.20.6-1 | v1.20.6-2 | Updated to support VPC private network load balancers. |
+| Load balancer and load balancer monitor for IBM Cloud Provider | 1274 | 1328 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2021-28831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28831){: external}, [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}. |
+{: caption="Changes since version 1.20.6_1536" caption-side="top"}
 
 ### Changelog for master fix pack 1.20.6_1536, released 27 April 2021
 {: #1206_1536}
@@ -293,6 +307,20 @@ The following table shows the changes that are included in the version updates f
 
 Review the version 1.19 changelog.
 {: shortdesc}
+
+### Changelog for master fix pack 1.19.10_1545, released 4 May 2021
+{: #11910_1545}
+
+The following table shows the changes that are included in the master fix pack patch update `1.19.10_1545`. Master patch updates are applied automatically.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --- | --- | --- | --- |
+| IBM Calico extension | 618 | 661 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2020-14391](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CCVE-2020-14391){: external}, [CVE-2020-25661](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25661){: external} and [CVE-2020-25662](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-25662){: external}. |
+| Gateway-enabled cluster controller | 1322 | 1352 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2021-28831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28831){: external}, [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}. |
+| IBM Cloud Controller Manager | v1.19.10-1 | v1.19.10-2 | Updated to support VPC private network load balancers. |
+| Load balancer and load balancer monitor for IBM Cloud Provider | 1274 | 1328 | Updated to use `Go` version 1.15.11. Updated image to implement additional IBM security controls and for [CVE-2021-28831](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28831){: external}, [CVE-2021-30139](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-30139){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}. |
+{: caption="Changes since version 1.19.10_1543" caption-side="top"}
 
 ### Changelog for master fix pack 1.19.10_1543, released 27 April 2021
 {: #11910_1543}
