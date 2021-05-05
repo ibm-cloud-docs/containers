@@ -106,9 +106,12 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 ## May 2021
 {: #may21}
+
 | Date | Description |
 | ---- | ----------- |
 | 4 May 2021 |  **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1538](/docs/containers?topic=containers-changelog#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog#11910_1545).|
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in May 2021"}
 
 ## April 2021
 {: #apr21}
