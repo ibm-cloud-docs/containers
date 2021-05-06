@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-29"
+lastupdated: "2021-05-06"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -246,7 +246,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     ```
     {: screen}
 
-    Don't see an option from this table in your configmap? Because your configmap contains user-defined values, the configmap is not reconciled with any options that are released over time. Instead, you can back up a copy of your configmap and delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default configmap, configure any new settings, and apply the changes.
+    Don't see an option from this table in your configmap? Because your configmap contains user-defined values, the configmap is not updated with any options that are released over time. Instead, you can back up a copy of your configmap and delete the configmap from your cluster. After about 5 minutes, a default configmap that contains the new options is created in your cluster. Then, you can copy your previously configured settings from your backup to this default configmap, configure any new settings, and apply the changes.
     {: tip}
 
 4. Save and close the configuration file.
