@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-19"
+lastupdated: "2021-05-07"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -119,7 +119,7 @@ The following table shows the changes that are included in version 1.0.2 of the 
 {: shortdesc}
 
 To view a list of add-ons and the supported Kubernetes versions, run the following command.
-```
+```sh
 ibmcloud ks addon-versions
 ```
 {: pre}
