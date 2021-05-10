@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-05-10"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -127,6 +127,8 @@ Learn more about [securing your personal information](/docs/containers?topic=con
 
 To pull images from a registry, your {{site.data.keyword.containerlong_notm}} cluster uses a special type of Kubernetes secret, an `imagePullSecret`. This image pull secret stores the credentials to access a container registry.
 {: shortdesc}
+
+
 
 The container registry can be:
 * A private namespace in your own {{site.data.keyword.registrylong_notm}}.
