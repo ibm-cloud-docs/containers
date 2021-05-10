@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-05"
+lastupdated: "2021-05-10"
 
 keywords: kubernetes, iks, release notes
 
@@ -109,6 +109,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 10 May 2021 | <ul><li>**Cluster autoscaler add-on**: [Patch update `1.0.2_267`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available.</li><li>**{{site.data.keyword.cos_full_notm}} plug-in**: [Version `2.0.9`](/docs/containers?topic=containers-cos_plugin_changelog) of the {{site.data.keyword.cos_full_notm}} plug-in is available.</li></ul> |
 | 4 May 2021 |  **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.20.5_1538](/docs/containers?topic=containers-changelog#1206_1538) and [1.19.10_1545](/docs/containers?topic=containers-changelog#11910_1545).|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in May 2021"}
