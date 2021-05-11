@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-05-11"
 
 keywords: kubernetes, iks, firewall
 
@@ -215,8 +215,21 @@ Use the {{site.data.keyword.cloud_notm}} console to add inbound and outbound rul
     <td>`30000` - `32767`</td>
     <td>Any</td>
     </tr>
+    <tr>
+    <td>`*` Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each control plane IP address [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).</td>
+    <td>TCP</td>
+    <td>`80`</td>
+    <td>Each control plane IP address for your region [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist)</td>
+    </tr>
+    <tr>
+    <td>`*` Allow access from the Cloudflare IP addresses that are used to health check the IP addresses of your ALBs. Create one rule for each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/).</td>
+    <td>TCP</td>
+    <td>`80`</td>
+    <td>Each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/)</td>
+    </tr>
     </tbody>
     </table>
+    <p>`*` Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.</p>
 5. To create new rules to control outbound traffic to your worker nodes, in the **Outbound rules** section, delete the default rule that allows all outbound traffic.
 6. In the **Outbound rules** section, click **Create**. Keep in mind that in addition to any rules that you create, the rules in the following table are required to allow necessary outbound traffic from your cluster.
     <table summary="The columns are read from left to right. The first column describes the purpose of the outbound rule. The second column states is the protocol type. The third column is the range of ports to allow traffic through. The fourth column is the type of source.">
@@ -249,9 +262,6 @@ Use the {{site.data.keyword.cloud_notm}} console to add inbound and outbound rul
     </tr>
     </tbody>
     </table>
-
-The default ALBs in your cluster are automatically health checked by the Kubernetes control plane. When you apply the rules in this security group, the necessary inbound access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components and from the Cloudflare IPv4 IP addresses that are used to health check the IP addresses of your ALBs is blocked. Because each security group has a quota of only 25 rules, you currently cannot add enough inbound and outbound rules for each {{site.data.keyword.openshiftshort}} control plane and Cloudflare IP address. Due to this known limitation your Ingress status shows that your ALBs are unreachable; however, this status does not reflect your ALBs' actual health. If you notice that traffic is not flowing correctly to your apps, you can [manually check your router services' health](/docs/openshift?topic=openshift-cs_troubleshoot_debug_ingress#ping-43). Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.
-{: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
 {: tip}
@@ -361,8 +371,21 @@ To create rules in your default security group:
     <td>`30000` - `32767`</td>
     <td>Any</td>
     </tr>
+    <tr>
+    <td>`*` **Optional**: Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each control plane IP address [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).</td>
+    <td>TCP</td>
+    <td>`80`</td>
+    <td>Each control plane IP address for your region [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist)</td>
+    </tr>
+    <tr>
+    <td>`*` **Optional**: Allow access from the Cloudflare IP addresses that are used to health check the IP addresses of your ALBs. Create one rule for each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/).</td>
+    <td>TCP</td>
+    <td>`80`</td>
+    <td>Each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/)</td>
+    </tr>
     </tbody>
     </table>
+    <p>`*` Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.</p>
 
 6. To create new rules to control outbound traffic to your worker nodes, get the ID of the default rule that allows all outbound traffic.
     ```
@@ -433,9 +456,6 @@ To create rules in your default security group:
   ibmcloud is sg $sg
   ```
   {: pre}
-
-The default ALBs in your cluster are automatically health checked by the Kubernetes control plane. When you apply the rules in this security group, the necessary inbound access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components and from the Cloudflare IPv4 IP addresses that are used to health check the IP addresses of your ALBs is blocked. Because each security group has a quota of only 25 rules, you currently cannot add enough inbound and outbound rules for each {{site.data.keyword.openshiftshort}} control plane and Cloudflare IP address. Due to this known limitation your Ingress status shows that your ALBs are unreachable; however, this status does not reflect your ALBs' actual health. If you notice that traffic is not flowing correctly to your apps, you can [manually check your router services' health](/docs/openshift?topic=openshift-cs_troubleshoot_debug_ingress#ping-43). Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.
-{: important}
 
 To simplify your VPC security setup, leave your default ACL for the VPC as-is. If you configure rules in both ACLs for your subnets and in the default security group for your worker nodes, you might inadvertently block the subnets and ports that are required for necessary traffic to reach your cluster.
 {: tip}
@@ -546,14 +566,24 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 4</td>
    </tr>
    <tr>
-   <td>**Optional**: To allow Ingress ALBs to be healthchecked, allow traffic on port 80. For more information, see the **Important** note at the end of these steps.</td>
+   <td>`*` **Optional**: Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each control plane IP address [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).</td>
    <td>Allow</td>
    <td>TCP</td>
-   <td>Any</td>
+   <td>Each control plane IP address for your region [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist)</td>
    <td>80</td>
    <td>Any</td>
    <td>-</td>
    <td>After 5</td>
+   </tr>
+   <tr>
+   <td>`*` **Optional**: Allow access from the Cloudflare IP addresses that are used to health check the IP addresses of your ALBs. Create one rule for each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/).</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/)</td>
+   <td>80</td>
+   <td>Any</td>
+   <td>-</td>
+   <td>After previous rule order</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>
@@ -567,6 +597,7 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    </tr>
    </tbody>
    </table>
+   <p>`*` Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single inbound rule and outbound rule to allow all incoming and outgoing traffic on port 80.</p>
 6. In the **Outbound rules** section, create the following rules by clicking **Create**.
 
    <p class="note">ACL rules are applied to traffic in a specific order. If you must create custom rules to allow other traffic to or from your worker nodes on this subnet, be sure to set the custom rules' **Priority** before final the rule that denies all traffic. If you add a rule after the deny rule, your rule is ignored, because the packet matches the deny rule and is blocked and removed before it can reach your rule.</p>
@@ -636,14 +667,24 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    <td>After 4</td>
    </tr>
    <tr>
-   <td>**Optional**: To allow Ingress ALBs to be healthchecked, allow traffic on port 80. For more information, see the **Important** note at the end of these steps.</td>
+   <td>`*` **Optional**: Allow access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one rule for each control plane IP address [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).</td>
    <td>Allow</td>
    <td>TCP</td>
    <td>Any</td>
    <td>80</td>
-   <td>Any</td>
+   <td>Each control plane IP address for your region [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist)</td>
    <td>-</td>
    <td>After 5</td>
+   </tr>
+   <tr>
+   <td>`*` **Optional**: Allow access from the Cloudflare IP addresses that are used to health check the IP addresses of your ALBs. Create one rule for each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/).</td>
+   <td>Allow</td>
+   <td>TCP</td>
+   <td>Any</td>
+   <td>80</td>
+   <td>Each [Cloudflare IPv4 IP address ![External link icon](../icons/launch-glyph.svg "External link icon")](https://www.cloudflare.com/ips/)</td>
+   <td>-</td>
+   <td>After previous rule order</td>
    </tr>
    <tr>
    <td>Deny all other traffic that does not match the previous rules.</td>
@@ -657,14 +698,12 @@ Looking for a simpler security setup? Leave the default ACL for your VPC as-is, 
    </tr>
    </tbody>
    </table>
+   <p>`*` Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single inbound rule and outbound rule to allow all incoming and outgoing traffic on port 80.</p>
 7. In the **Attach subnets** section, choose the name of the subnet for which you created this ACL.
 
 8. Click **Create access control list**.
 
 9. Multizone clusters: Repeat steps 2 - 8 to create an ACL for each subnet that your cluster is attached to.
-
-The default ALBs in your cluster are automatically health checked by the Kubernetes control plane. When you apply the rules in this security group, the necessary inbound access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components and from the Cloudflare IPv4 IP addresses that are used to health check the IP addresses of your ALBs is blocked. Because each ACL has a quota of only 50 rules, you currently cannot add enough inbound and outbound rules for each {{site.data.keyword.openshiftshort}} control plane and Cloudflare IP address. Due to this known limitation your Ingress status shows that your ALBs are unreachable; however, this status does not reflect your ALBs' actual health. If you notice that traffic is not flowing correctly to your apps, you can [manually check your router services' health](/docs/openshift?topic=openshift-cs_troubleshoot_debug_ingress#ping-43). Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.
-{: important}
 
 ### Creating ACLs from the CLI
 {: #acls_cli}
@@ -779,12 +818,19 @@ To create an ACL for each subnet that your cluster is attached to:
   ```
   {: pre}
 
-8. Optional: To allow Ingress ALBs to be health checked, allow traffic on port 80. For more information, see the **Important** note at the end of these steps.
+8. Optional: Allow access to and from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components. Create one inbound and one outbound rule for each control plane IP address [in step 6 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist). Alternatively, you can create a single inbound rule and outbound rule to allow all incoming and outgoing traffic on port 80.
   ```
-  ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-hc-outbound --destination-port-min 80 --destination-port-max 80
-  ibmcloud is network-acl-rule-add $acl_id allow inbound tcp 0.0.0.0/0 0.0.0.0/0 --name allow-hc-inbound --destination-port-min 80 --destination-port-max 80
+  ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 <IP_address> --name allow-hc-outbound --destination-port-min 80 --destination-port-max 80
+  ibmcloud is network-acl-rule-add $acl_id allow inbound tcp <IP_address> 0.0.0.0/0 --name allow-hc-inbound --destination-port-min 80 --destination-port-max 80
   ```
   {: pre}
+
+8. Optional: Allow access to and from the Cloudflare IP addresses that are used to health check the IP addresses of your ALBs. Create one rule for each [Cloudflare IPv4 IP address](https://www.cloudflare.com/ips/){: external}. Alternatively, you can create a single inbound rule and outbound rule to allow all incoming and outgoing traffic on port 80.
+    ```
+    ibmcloud is network-acl-rule-add $acl_id allow outbound tcp 0.0.0.0/0 <IP_address> --name allow-hc-outbound --destination-port-min 80 --destination-port-max 80
+    ibmcloud is network-acl-rule-add $acl_id allow inbound tcp <IP_address> 0.0.0.0/0 --name allow-hc-inbound --destination-port-min 80 --destination-port-max 80
+    ```
+    {: pre}
 
 9. Optional: If you must allow other traffic to or from your worker nodes on this subnet, add rules for that traffic.
 
@@ -837,9 +883,6 @@ To create an ACL for each subnet that your cluster is attached to:
 
 ACL rules are applied to traffic in a specific order. If you want to add a rule after you complete these steps, ensure that you add the rule before the `deny-all-inbound` or `deny-all-outbound` rule. If you add a rule after these rules, your rule is ignored, because the packet matches the `deny-all-inbound` and `deny-all-outbound` rules and is blocked and removed before it can reach your rule. Create your rule in the proper order by including the `--before-rule-name deny-all-(inbound|outbound)` flag.
 {: note}
-
-The default ALBs in your cluster are automatically health checked by the Kubernetes control plane. When you apply the rules in this security group, the necessary inbound access from the Kubernetes control plane IP addresses that are used to health check and report the overall status of your Ingress components and from the Cloudflare IPv4 IP addresses that are used to health check the IP addresses of your ALBs is blocked. Because each ACL has a quota of only 50 rules, you currently cannot add enough inbound and outbound rules for each {{site.data.keyword.openshiftshort}} control plane and Cloudflare IP address. Due to this known limitation your Ingress status shows that your ALBs are unreachable; however, this status does not reflect your ALBs' actual health. If you notice that traffic is not flowing correctly to your apps, you can [manually check your router services' health](/docs/openshift?topic=openshift-cs_troubleshoot_debug_ingress#ping-43). Alternatively, to allow the inbound traffic for ALB healthchecks, you can create a single rule to allow all incoming traffic on port 80.
-{: important}
 
 <br />
 

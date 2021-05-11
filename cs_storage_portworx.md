@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-10"
+lastupdated: "2021-05-11"
 
 keywords: kubernetes, iks,
 
@@ -1124,8 +1124,9 @@ Install PX-Backup on an {{site.data.keyword.containerlong_notm}} cluster in your
 
 Before you begin:
 - Make sure that your cluster meets the [minimum Portworx requirements](https://docs.portworx.com/start-here-installation/){: external}.  
-- [Install or update the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block). 
+- [Install or update the {{site.data.keyword.cloud_notm}} Block Storage plug-in in your cluster](/docs/containers?topic=containers-block_storage#install_block).
 - Provision and attach 320Gi of block storage to your cluster. See [Storing data on classic {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage) or [Storing data on Block Storage for VPC](/docs/containers?topic=containers-vpc-block).
+
 
 
 
@@ -1285,7 +1286,7 @@ If a cluster that you want to back up with PX-Backup does not have Portworx Ente
 2. Open a text editor and paste the command.
 3. Copy the URL in the command and enter it in to your web browser to open the YAML file for the Stork installation.
 4. Copy and paste the entire YAML file into a new file in your text editor.
-5. If the cluster you want to add is a private cluster, find the **image** field and replace `openstorage/stork:<version_number>` with `icr.io/ext/portworx/stork:<version_numer>`. To find the latest availale version of Stork, see the [Stork releases](https://github.com/libopenstorage/stork/releases){: external}.
+5. If the cluster you want to add is a private cluster, find the **image** field and replace `openstorage/stork:<version_number>` with `icr.io/ext/portworx/stork:<version_numer>`. To find the latest available version of Stork, see the [Stork releases](https://github.com/libopenstorage/stork/releases){: external}.
    ```
     - --health-monitor-interval=120
     - --webhook-controller=false
