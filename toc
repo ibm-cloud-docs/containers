@@ -244,7 +244,6 @@ Kubernetes Service
         cs_api_at_iam.md
 
     cs_locations.md
-    cs_hybrid.md
     cs_integrations_overview.md
     cs_service_settings.md
 

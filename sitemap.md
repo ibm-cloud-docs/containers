@@ -2429,19 +2429,6 @@ subcollection: containers
 * [Previous {{site.data.keyword.cloud_notm}} region and zone structure](/docs/containers?topic=containers-regions-and-zones#bluemix_regions)
 
 
-## Hybrid cloud
-{: #sitemap_hybrid_cloud}
-
-
-[Hybrid cloud](/docs/containers?topic=containers-hybrid_iks_icp)
-
-* [Connecting your public and private cloud with the strongSwan VPN](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_vpn)
-
-* [Connecting your public and private cloud with {{site.data.keyword.dl_full_notm}}](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_dl)
-
-* [Running {{site.data.keyword.cloud_notm}} Private images in public Kubernetes containers](/docs/containers?topic=containers-hybrid_iks_icp#hybrid_ppa_importer)
-
-
 ## Supported IBM Cloud and third-party integrations
 {: #sitemap_supported_ibm_cloud_and_third-party_integrations}
 
