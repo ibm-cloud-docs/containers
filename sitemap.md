@@ -2040,6 +2040,8 @@ subcollection: containers
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
 [Object storage plug-in](/docs/containers?topic=containers-cos_plugin_changelog)
+* [Changelog for version 2.0.9](/docs/containers?topic=containers-cos_plugin_changelog#0209_object_plugin)
+* [Changelog for version 2.0.8](/docs/containers?topic=containers-cos_plugin_changelog#0208_object_plugin)
 * [Changelog for version 2.0.7](/docs/containers?topic=containers-cos_plugin_changelog#0207_object_plugin)
 * [Changelog for version 2.0.6](/docs/containers?topic=containers-cos_plugin_changelog#0206_object_plugin)
 * [Changelog for version 2.0.5](/docs/containers?topic=containers-cos_plugin_changelog#0205_object_plugin)
