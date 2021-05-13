@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-05-13"
 
 keywords: kubernetes, iks, help, debug
 
@@ -107,7 +107,7 @@ As you use {{site.data.keyword.containerlong}}, consider these techniques for ge
    * [Update your cluster](/docs/containers?topic=containers-update#master) to the latest default version for [{{site.data.keyword.containershort}}](/docs/containers?topic=containers-cs_versions).
 2. Make sure that your command line tools are up to date.
    * In the command line, you are notified when updates to the `ibmcloud` CLI and plug-ins are available. Be sure to keep your CLI up-to-date so that you can use all available commands and flags.
-   * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+   * Make sure that [your `kubectl` CLI](/docs/containers?topic=containers-cs_cli_install#kubectl) client matches the same Kubernetes version as your cluster server. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
 <br>
 
 **Reviewing issues and status**
@@ -355,7 +355,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). If you use a community Kubernetes cluster, you might also have the {{site.data.keyword.openshiftshort}} version of `kubectl`, which does not work with community Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). If you use a community Kubernetes cluster, you might also have the {{site.data.keyword.openshiftshort}} version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
