@@ -2,11 +2,12 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-13"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+content-type: troubleshoot
 
 ---
 

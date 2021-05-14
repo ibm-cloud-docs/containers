@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-01"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -360,8 +360,6 @@ You cannot modify the default `kube-audit` policy or apply your own custom polic
         ```
         {: pre}
 
-
-
 ### Managing API server log forwarding
 {: #audit-api-server-manage}
 
@@ -371,6 +369,8 @@ See [Verifying, updating, and deleting log forwarding](/docs/containers?topic=co
 {: #audit-api-server-snapshot}
 
 See [Collecting master logs in an {{site.data.keyword.cos_full_notm}} bucket](/docs/containers?topic=containers-health#collect_master).
+
+
 
 <br />
 

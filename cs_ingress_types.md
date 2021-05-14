@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-22"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -571,7 +571,7 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
   {: pre}
 2. Using the CRN, create a secret for the certificate in the namespace where your Ingress resources are deployed. If you have Ingress resources in multiple namespaces, repeat this command for each namespace.
   ```
-  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace namespace
+  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
   ```
   {: pre}
 
@@ -605,12 +605,14 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
   {: pre}
 
   * If the **Status** is `failed`:
-    1. Check the logs for the migration.
+    1. Wait several minutes, then check the status again. The migration status might take a few minutes to become available.
+
+    2. If retrieving the status continues to fail after several minutes, check the logs for the migration.
         ```
         kubectl logs -n kube-system job/ingress-migration
         ```
         {: pre}
-    2. [Open a support case](/docs/containers?topic=containers-get-help#help-support) and include the migration job logs in your case.
+    3. [Open a support case](/docs/containers?topic=containers-get-help#help-support) and include the migration job logs in your case.
 
 3. In the output of the previous step, review the **Resource migrations warnings** for each Ingress resource or configmap. These messages indicate fields or configurations, such as annotations, that were not migrated, and the steps to manually change the field for compatibility with the Kubernetes Ingress implementation. To resolve warnings, edit the manifest for each resource or configmap.<p class="important">Some differences between the images cannot be migrated by this tool and must be migrated manually. To see a comparison between annotations for each image type, see [Customizing Kubernetes Ingress routing with annotations and configmaps](/docs/containers?topic=containers-comm-ingress-annotations#annotations).</p>
   * Ingress resources:
@@ -629,15 +631,15 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
     ```
     {: pre}
 
-4. Try to send a traffic request to your apps by accessing the test subdomain and each of your app paths.
+4. Try to send a traffic request to your apps by accessing the test subdomain and each of your app paths. You can find the Ingress subdomain for your cluster by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`.
     * If your Ingress resources include TLS:
       ```
-      https://test-<ingress_subdomain>/<app1_path>
+      https://test-<ingress_subdomain>/<app_path>
       ```
       {: codeblock}
     * If your Ingress resources do not include TLS:
       ```
-      http://test-<ingress_subdomain>/<app1_path>
+      http://test-<ingress_subdomain>/<app_path>
       ```
       {: codeblock}
 
@@ -887,7 +889,7 @@ Do not delete your cluster's {{site.data.keyword.cloudcerts_short}} instance. Wh
 To manage the secrets for TLS certificates in your cluster, you can use the `ibmcloud ks ingress secret` set of commands.
 * For example, you can import a certificate from {{site.data.keyword.cloudcerts_short}} to a Kubernetes secret in your cluster:
   ```
-  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <crn> --name <secret_name> --namespace namespace
+  ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <crn> --name <secret_name> --namespace <namespace>
   ```
   {: pre}
 * To view all Ingress secrets for TLS certificates in your cluster:
