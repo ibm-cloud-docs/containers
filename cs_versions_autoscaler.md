@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-07"
+lastupdated: "2021-05-14"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 # Cluster autoscaler add-on changelog
 {: #ca_changelog}
 

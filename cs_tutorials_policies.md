@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks
 
@@ -94,8 +94,8 @@ completion-time: 60m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Using Calico network policies to block traffic
 {: #policy_tutorial}

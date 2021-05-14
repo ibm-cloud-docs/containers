@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-26"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks
 
@@ -95,8 +95,8 @@ completion-time: 45m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Deploy a starter kit app to a Kubernetes cluster
 {: #tutorial-starterkit-kube}
