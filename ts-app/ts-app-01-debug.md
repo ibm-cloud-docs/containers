@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks
 
@@ -91,8 +91,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 # Debugging app deployments
 {: #debug_apps}
 
@@ -113,7 +113,7 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
     ```
     {: pre}
 
-2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-cs_troubleshoot_storage#stuck_creating_state).
+2. [Check whether the containers are stuck in the `ContainerCreating` state](/docs/containers?topic=containers-block_app_failures).
 
 3. Check whether the cluster is in the `Critical` state. If the cluster is in a `Critical` state, check the firewall rules and verify that the master can communicate with the worker nodes.
 
