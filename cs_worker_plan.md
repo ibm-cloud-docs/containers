@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -155,7 +155,7 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 
 **How can I check the operating system that my worker nodes run?**
 
-When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. Supported operating systems are Ubuntu 16.04 x86_64, 18.04 x86_64. To update the version of the operating system that a worker node uses, such as from Ubuntu 16 to 18, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
+When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. Supported operating systems are Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). To update the version of the operating system that a worker node uses, such as from Ubuntu 16 to 18, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
 
 You can also log in to your cluster to check the operating system of the worker nodes.
 1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -229,7 +229,7 @@ Every VM comes with an attached disk for storage of information that the VM need
 
 The following table shows available worker node flavors for classic and VPC clusters. Worker node flavors vary by cluster type, the zone where you want to create the cluster, the container platform, and the infrastructure provider that you want to use. To see the flavors available in your zone, run `ibmcloud ks flavors --zone <zone>`.
 
-If your classic cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
+If your classic cluster has deprecated Ubuntu 16 `x1c` or `x2c` worker node flavors, you can [update your cluster to have Ubuntu 18 `x3c` worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
 
 | Name and use case | Cores/ Memory | Primary/ Secondary disk | Network speed |

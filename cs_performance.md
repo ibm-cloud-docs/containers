@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, kernel
 
@@ -111,7 +111,7 @@ By default, your worker nodes have the operating system and compute hardware of 
 ### Customizing the operating system
 {: #worker-default-os}
 
-The following operating systems are available for worker nodes: **Ubuntu 16.04 x86_64, 18.04 x86_64**. Your cluster cannot mix operating systems or use different operating systems.
+The following operating systems are available for worker nodes: **Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated)**. Your cluster cannot mix operating systems or use different operating systems.
 {: shortdesc}
 
 To optimize your worker nodes, consider the following information.
