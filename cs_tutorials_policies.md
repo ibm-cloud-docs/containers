@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks
 
@@ -278,7 +278,7 @@ The following image shows how the web server app is exposed to the internet by t
 
     3. Copy the public IP of the worker node and the node port into your text cheat sheet to use in later lessons.
 
-    4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection or by using the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web). Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
+    4. Verify that you can access the public IP address the worker node through the node port. **Note**: Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. Then, you can use the worker node's private IP address and NodePort: `<worker_private_IP>:<NodePort>`.
         ```
         curl  --connect-timeout 10 <worker_IP>:<NodePort>
         ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, networking
 
@@ -327,7 +327,7 @@ Check out the following load balancing deployment patterns for private app netwo
 
 |Name|Load-balancing method|Use case|Implementation|
 |----|---------------------|--------|--------------|
-|NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time. **Note**: You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection or by using the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).|[Create a private NodePort service](/docs/containers?topic=containers-nodeport).|
+|NodePort|Port on a worker node that exposes the app on the worker's private IP address|Test private access to one app or provide access for only a short amount of time. **Note**: You can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection.|[Create a private NodePort service](/docs/containers?topic=containers-nodeport).|
 |VPC application load balancer|Basic load balancing that exposes the app with a private hostname|Quickly expose one app to a private network with a VPC application load balancer-assigned private hostname.|[Create a private `LoadBalancer` service](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb) in your cluster. A multizonal VPC application load balancer is automatically created in your VPC that assigns a hostname to your `LoadBalancer` service for your app.|
 |Ingress ALB|HTTPS load balancing that exposes the app with a hostname and uses custom routing rules|Implement custom routing rules and SSL termination for multiple apps.|<ol><li>[Enable the private ALB, create a subdomain to register the ALB with a DNS entry, and create an Ingress resource](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).</li><li>Customize ALB routing rules with [annotations](/docs/containers?topic=containers-ingress_annotation).</li></ol>|
 {: caption="Characteristics of private network deployment patterns for a VPC cluster" caption-side="top"}

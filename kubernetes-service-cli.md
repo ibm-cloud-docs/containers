@@ -258,6 +258,9 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 Disable the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on. To use the Kubernetes web terminal in the {{site.data.keyword.containerlong_notm}} cluster console, you must re-enable the add-on first.
 {: shortdesc}
 
+The Kubernetes web terminal add-on is deprecated. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+{: deprecated}
+
 ```sh
 ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
 ```
@@ -424,6 +427,9 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 Enable the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on to use the Kubernetes web terminal in the {{site.data.keyword.containerlong_notm}} cluster console.
 {: shortdesc}
+
+The Kubernetes web terminal add-on is deprecated. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+{: deprecated}
 
 ```sh
 ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERSION]

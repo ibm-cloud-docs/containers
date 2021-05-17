@@ -308,7 +308,7 @@ subcollection: containers
 * [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
-* [Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
+* [Deprecated: Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install)
 * [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
