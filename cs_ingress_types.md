@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -632,15 +632,14 @@ In the Kubernetes Ingress implementation, the ALB cannot access secrets that are
     ```
     {: pre}
 
-4. Try to send a traffic request to your apps by accessing the test subdomain and each of your app paths. You can find the Ingress subdomain for your cluster by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`.
-    * If your Ingress resources include TLS:
+4. Try to send a traffic request to your apps by accessing each app's path on the test subdomain. For each subdomain in your original Ingress resource file, a test subdomain is created in the test copies of the Ingress resource file. For example, if you list `example.com` in your original Ingress resource, a test subdomain such as `8e7n6j5k.mycluster-a1b2cdef345678g9hi012j3kl4567890-m000.containers.appdomain.cloud` is created in the test copy of the Ingress resource. To list the test subdomains, run `kubectl get ingress <migrated_resource_name> -n <namespace>` for each test copy.
       ```
-      https://test-<ingress_subdomain>/<app_path>
+      https://<test_ingress_subdomain>/<app_path>
       ```
       {: codeblock}
     * If your Ingress resources do not include TLS:
       ```
-      http://test-<ingress_subdomain>/<app_path>
+      http://<test_ingress_subdomain>/<app_path>
       ```
       {: codeblock}
 
