@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-11"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks,
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Storing data on software-defined storage (SDS) with Portworx
 {: #portworx}
@@ -137,7 +137,7 @@ You can install Portworx on non-SDS worker node flavors, but you might not get t
 For classic clusters, virtual machines have only 1000 Mbps of networking speed, which is not sufficient to run production workloads with Portworx. Instead, provision Portworx on bare metal machines for the best performance.
 {: important}
 
-If your classic cluster has deprecated x1c or older Ubuntu 16 x2c worker node flavors, update your cluster to have [Ubuntu 18 x3c worker nodes](/docs/containers?topic=containers-update#machine_type).
+If your classic cluster has deprecated Ubuntu 16 x1c or x2c worker node flavors, update your cluster to have [Ubuntu 18 x3c worker nodes](/docs/containers?topic=containers-update#machine_type).
 {: tip}
 
 ### How can I make sure that my data is stored highly available?
@@ -714,9 +714,9 @@ To install Portworx:
 	   Scheduler: kubernetes
 	   Nodes: 2 node(s) with storage (2 online), 1 node(s) without storage (1 online)
 	      IP		ID		StorageNode	Used	Capacity	Status	StorageStatus	Version		Kernel			OS
-	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
+	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
+	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
+	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
        Global Storage Pool
 	      Total Used    	:  6.0 GiB
 	      Total Capacity	:  40 GiB
@@ -1277,7 +1277,7 @@ Adding a cluster:
 10. Repeat these steps to add more clusters to your PX-Backup service.
 
 #### Installing Stork on a non-Portworx cluster
-{: px-backup-stork}
+{: #px-backup-stork}
 
 If a cluster that you want to back up with PX-Backup does not have Portworx Enterprise installed on it, you must install Stork on to the cluster before adding it to your PX-Backup service.
 {: shortdesc}
@@ -1530,7 +1530,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 ## Getting help and support
 {: #portworx_help}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`. You can also [gather logging information](#portworx_logs) before opening a support ticket.
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`. You can also [gather logging information](#portworx_logs) before opening a support ticket.
 
 ### Gathering logs
 {: #portworx_logs}

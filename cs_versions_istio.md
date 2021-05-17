@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-30"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -90,7 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
+  
+ 
 
 
 # Istio add-on version changelog
@@ -119,11 +120,24 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 ## Version 1.9
 {: #v19}
 
+### Changelog for 1.9.4, released 17 May 2021
+{: #194}
+
+The following table shows the changes that are included in version 1.9.4 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.9.3 | 1.9.4 | See the Istio release notes for [Istio 1.9.4](https://istio.io/news/releases/1.9.x/announcing-1.9.4/){:external}. |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.9.3" caption-side="top"}
+
 ### Changelog for 1.9.3, released 29 April 2021
 {: #193}
 
 The following table shows the changes that are included in version 1.9.3 of the managed Istio add-on.
 {: shortdesc}
+
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
 | 1.9.2 | 1.9.3 | <ul><li>See the Istio release notes for [Istio 1.9.3](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.3/){:external}.</li><li>Resolves [CVE-2021-28683](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28683){: external}, [CVE-2021-28682](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-28682){: external}, [CVE-2021-29258](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-29258){: external}, [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external}, [CVE-2021-22876](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22876){: external}, [CVE-2021-22890](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22890){: external}, [usn-4891-1](https://ubuntu.com/security/notices/USN-4891-1/){: external}, and [usn-4898-1](https://ubuntu.com/security/notices/USN-4898-1/){: external}. For more information, see the [Istio security bulletin 2021-003](https://istio.io/latest/news/security/istio-security-2021-003/).</li></ul> |

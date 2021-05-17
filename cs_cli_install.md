@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Setting up the CLI
 {: #cs_cli_install}
@@ -112,7 +112,7 @@ This task includes the information for installing these CLIs and plug-ins:
 * {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`)
 * {{site.data.keyword.containerlong_notm}} observability plug-in (`ibmcloud ob`)
 
-If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell) or, after your cluster is created, the [Kubernetes web terminal](#cli_web).
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell).
 {: tip}
 
 <br>
@@ -178,7 +178,7 @@ For reference information about these CLIs, see the documentation for those tool
 ## Installing the Kubernetes CLI (`kubectl`)
 {: #kubectl}
 
-To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.cloud_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
+To view a local version of the Kubernetes dashboard and to deploy apps into your clusters, install the Kubernetes CLI (`kubectl`). The latest stable version of `kubectl` is installed with the base {{site.data.keyword.cloud_notm}} CLI. However, to work with your cluster, you must instead install the Kubernetes CLI `major.minor` version that matches the Kubernetes cluster `major.minor` version that you plan to use. If you use a `kubectl` CLI version that does not match at least the `major.minor` version of your clusters, you might experience unexpected results. For example, [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). Make sure to keep your Kubernetes cluster and CLI versions up-to-date.
 {: shortdesc}
 
 Using both {{site.data.keyword.openshiftlong_notm}} and Ubuntu {{site.data.keyword.containershort_notm}} clusters? Make sure to use the `kubectl` binary file that matches your cluster `major.minor` Kubernetes version. You might want to set up multiple directories on your local machine to organize different `kubectl` versions and then create aliases in your command-line interface (CLI) for these directories.
@@ -625,14 +625,14 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
         ```
         {: screen}
 
-## Using the Kubernetes web terminal in your web browser
+## Deprecated: Using the Kubernetes web terminal in your web browser
 {: #cli_web}
 
 After you create your cluster, the Kubernetes web terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-You can use the Kubernetes web terminal for quick access and testing of your cluster. Do not use it for production workloads.
-{: important}
+The Kubernetes web terminal is deprecated. This add-on provides quick access for testing your cluster. Do not use it for production workloads. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell). Keep in mind that to use the {{site.data.keyword.cloud-shell_notm}}, you must set the Kubernetes context for your {{site.data.keyword.cloud-shell_notm}} session by running `ibmcloud ks cluster config`.
+{: deprecated}
 
 If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started){: external}, the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registrylong_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
 

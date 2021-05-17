@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-21"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, clusters
 
@@ -90,7 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
+  
+ 
 
 # Accessing clusters
 {: #access_cluster}
@@ -103,7 +104,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 ## Prerequisites
 {: #prereqs}
 
-1. [Install the required CLI tools](/docs/containers?topic=containers-cs_cli_install), including the {{site.data.keyword.cloud_notm}} CLI, {{site.data.keyword.containershort_notm}} plug-in(`ibmcloud ks`), and Kubernetes CLI (`kubectl`). For quick access to test features in your cluster, you can also use the [{{site.data.keyword.cloud_notm}} Shell](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+1. [Install the required CLI tools](/docs/containers?topic=containers-cs_cli_install), including the {{site.data.keyword.cloud_notm}} CLI, {{site.data.keyword.containershort_notm}} plug-in(`ibmcloud ks`), and Kubernetes CLI (`kubectl`). For quick access to test features in your cluster, you can also use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
 2. [Create your {{site.data.keyword.containerlong_notm}} cluster](/docs/containers?topic=containers-clusters).
 3. If your network is protected by a company firewall, [allow access](/docs/containers?topic=containers-firewall#corporate) to the {{site.data.keyword.cloud_notm}} and {{site.data.keyword.containerlong_notm}} API endpoints and ports. For private cloud service endpoint-only clusters, you cannot test the connection to your cluster until you [configure access to the cloud service endpoint subnet](#access_private_se).
 4. Check that your cluster is in a healthy state by running `ibmcloud ks cluster get -c <cluster_name_or_ID>`. If your cluster is not in a healthy state, review the [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot) guide for help. For example, if your cluster is provisioned in an account that is protected by a firewall gateway appliance, you must [configure your firewall settings to allow outgoing traffic to the appropriate ports and IP addresses](/docs/containers?topic=containers-firewall).
@@ -120,7 +121,7 @@ After your {{site.data.keyword.containerlong}} cluster is created, you can begin
 To work with your cluster, set the cluster that you created as the context for a CLI session to run `kubectl` commands.
 {: shortdesc}
 
-If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+If you want to use the {{site.data.keyword.cloud_notm}} console instead, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
 {: tip}
 
 1. Set the cluster that you created as the context for this session. Complete these configuration steps every time that you work with your cluster.

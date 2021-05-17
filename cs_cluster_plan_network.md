@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-27"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Planning your cluster network setup
 {: #plan_clusters}

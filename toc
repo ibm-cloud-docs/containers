@@ -36,7 +36,6 @@ Kubernetes Service
     Creating clusters
         cs_tutorials.md
         cs_tutorial_vpc.md
-        cs_tutorial_migrate_vpc.md
 
     {: .topicgroup}
     Migrating environments to clusters

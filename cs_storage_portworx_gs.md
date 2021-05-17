@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-03-22"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Getting started with Portworx
 {: #getting-started-with-portworx}
@@ -164,9 +164,9 @@ To verify your installation:
 	   Scheduler: kubernetes
 	   Nodes: 2 node(s) with storage (2 online), 1 node(s) without storage (1 online)
 	      IP		ID		StorageNode	Used	Capacity	Status	StorageStatus	Version		Kernel			OS
-	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
-	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 16.04.5 LTS
+	      10.184.58.11	10.184.58.11	Yes		3.0 GiB	20 GiB		Online	Up		1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
+	      10.176.48.67	10.176.48.67	Yes		3.0 GiB	20 GiB		Online	Up (This node)	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
+	      10.176.48.83	10.176.48.83	No		0 B	0 B		Online	No Storage	1.5.0.0-bc1c580	4.4.0-133-generic	Ubuntu 18.04.5 LTS
        Global Storage Pool
 	      Total Used    	:  6.0 GiB
 	      Total Capacity	:  40 GiB
@@ -589,4 +589,4 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 ## Getting help and support
 {: #portworx_help}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-06"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Updating clusters, worker nodes, and cluster components
 {: #update}
@@ -182,7 +182,7 @@ To update the Kubernetes master _major_ or _minor_ version:
 
 4.  Update your API server and associated master components by using the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/login) or running the CLI `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update).
 5.  Wait a few minutes, then confirm that the update is complete. Review the API server version on the {{site.data.keyword.cloud_notm}} clusters dashboard or run `ibmcloud ks cluster ls`.
-6.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
+6.  Install the version of the [`kubectl cli`](/docs/containers?topic=containers-cs_cli_install#kubectl) that matches the API server version that runs in the master. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are two or more versions apart from the server version (n +/- 2).
 
 When the master update is complete, you can update your worker nodes, depending on the type of cluster infrastructure provider that you have.
 *  [Updating classic worker nodes](#worker_node).
@@ -498,7 +498,7 @@ You can update your VPC worker nodes in the console. Before you begin, consider 
 ## Updating flavors (machine types)
 {: #machine_type}
 
-You can update the flavors, or machine types, of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated `x1c` or older Ubuntu 16 `x2c` worker node flavors, create Ubuntu 18 worker nodes that use flavors with `x3c` in the names.
+You can update the flavors, or machine types, of your worker nodes by adding new worker nodes and removing the old ones. For example, if your cluster has deprecated Ubuntu 16 `x1c` or `x2c` worker node flavors, create Ubuntu 18 worker nodes that use flavors with `x3c` in the names.
 {: shortdesc}
 
 Before you begin:

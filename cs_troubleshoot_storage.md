@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-30"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, help, debug
 
@@ -91,8 +91,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Persistent storage
 {: #cs_troubleshoot_storage}
@@ -221,7 +221,7 @@ Review the options to debug persistent storage and find the root causes for fail
       - [Object storage: Accessing files with a non-root user fails](#cos_nonroot_access)
 
 
-7. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. If you use a `kubectl` CLI version that does not match at least the major.minor version of your cluster, you might experience unexpected results. For example, [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg “External link icon”)](https://kubernetes.io/docs/setup/release/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
+7. Verify that the `kubectl` CLI version that you run on your local machine matches the Kubernetes version that is installed in your cluster. If you use a `kubectl` CLI version that does not match at least the major.minor version of your cluster, you might experience unexpected results. For example, [Kubernetes does not support ![External link icon](../icons/launch-glyph.svg “External link icon”)](https://kubernetes.io/releases/version-skew-policy/) `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2).
    1. Show the `kubectl` CLI version that is installed in your cluster and your local machine.
       ```
       kubectl version
@@ -2049,7 +2049,7 @@ If you entered the correct information on the {{site.data.keyword.cloud_notm}} c
 ### Step 3: Reach out to Portworx and IBM
 {: #px-support}
 
-If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
+If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
 
 ## Portworx: Encryption set up fails due to invalid KMS endpoint
 {: #px-kms-endpoint}
@@ -2099,6 +2099,6 @@ If you find information that you entered incorrectly or you must change the setu
 If you still experience issues with persistent storage in your cluster, review the following options to receive further support or ask questions.
 
 - For issues with {{site.data.keyword.cloud_notm}} File, Block, or Object Storage, see [Getting help](/docs/containers?topic=containers-get-help) to find information about how to contact the IBM team on Slack or open an {{site.data.keyword.cloud_notm}} support case.
-- For issues with Portworx, open an issue in the [Portworx Service Portal](https://portworx.atlassian.net/servicedesk/customer/portal/2){: external}. You can also submit a request by sending an e-mail to `support@portworx.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@portworx.com`.
+- For issues with Portworx, open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
 
 

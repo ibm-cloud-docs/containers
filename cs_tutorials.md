@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks
 
@@ -95,8 +95,8 @@ completion-time: 60m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Creating Kubernetes clusters
 {: #cs_cluster_tutorial}
@@ -154,7 +154,7 @@ Because it can take a few minutes to provision, create your cluster before you s
     -   {{site.data.keyword.registrylong_notm}} plug-in (`ibmcloud cr`). Use this plug-in to set up and manage a private image repository in {{site.data.keyword.registrylong_notm}}.
     -   The Kubernetes CLI (`kubectl`). Use this CLI to deploy and manage Kubernetes resources such as your app's pods and services.
 
-    If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web).
+    If you want to use the {{site.data.keyword.cloud_notm}} console instead, after your cluster is created, you can run CLI commands directly from your web browser in the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
     {: tip}
 3.  In your command line, log in to your {{site.data.keyword.cloud_notm}} account. Enter your {{site.data.keyword.cloud_notm}} credentials when prompted. If you have a federated ID, use the `--sso` flag to log in. Select the region and, if applicable, target the resource group (`-g`) that you created your cluster in.
     ```

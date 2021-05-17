@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-28"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -90,8 +90,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # {{site.data.keyword.containerlong_notm}} CLI
 {: #kubernetes-service-cli}
@@ -257,6 +257,9 @@ ibmcloud ks cluster addon disable istio-sample-bookinfo --cluster CLUSTER
 
 Disable the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on. To use the Kubernetes web terminal in the {{site.data.keyword.containerlong_notm}} cluster console, you must re-enable the add-on first.
 {: shortdesc}
+
+The Kubernetes web terminal add-on is deprecated. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+{: deprecated}
 
 ```sh
 ibmcloud ks cluster addon disable kube-terminal --cluster CLUSTER [-f]
@@ -424,6 +427,9 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 Enable the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on to use the Kubernetes web terminal in the {{site.data.keyword.containerlong_notm}} cluster console.
 {: shortdesc}
+
+The Kubernetes web terminal add-on is deprecated. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
+{: deprecated}
 
 ```sh
 ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERSION]
@@ -970,7 +976,6 @@ ibmcloud ks cluster image-security disable --cluster CLUSTER [-q]
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -1003,7 +1008,6 @@ ibmcloud ks cluster image-security enable --cluster CLUSTER [-f] [-q]
 
 **Supported infrastructure provider**:
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC Generation 1 compute
   * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 **Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
@@ -6913,6 +6917,8 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
+
+
 
 
 

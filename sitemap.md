@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-05-11"
+lastupdated: "2021-05-17"
 
 keywords: containers
 subcollection: containers
@@ -89,8 +89,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Site map
 {: #cs_sitemap}
@@ -233,17 +233,6 @@ subcollection: containers
 * [Set up a Load Balancer for VPC to expose your app publicly](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_vpc_lb)
 * [What's next?](/docs/containers?topic=containers-vpc_ks_tutorial#vpc_ks_next)
 
-[Migrating cluster resources from VPC Gen 1 to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial)
-* [Objectives](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_objectives)
-* [Audience](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_audience)
-* [Prerequisites](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_ks_prereqs)
-* [Plan your migration to VPC Gen 2](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_plan)
-* [Create your Gen 2 VPC, resources, and cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_create_gen2)
-* [Set up an {{site.data.keyword.cos_short}} bucket](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_cos)
-* [Create a Velero backup of your Gen 1 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen1)
-* [Restore a Velero backup to your Gen 2 cluster](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_velero_gen2)
-* [What's next?](/docs/containers?topic=containers-vpc_migrate_tutorial#vpc_migrate_whats-next)
-
 
 ## Migrating environments to clusters
 {: #sitemap_migrating_environments_to_clusters}
@@ -319,7 +308,7 @@ subcollection: containers
 * [Installing the `odo` CLI for developers](/docs/containers?topic=containers-cs_cli_install#cli-odo-install)
 * [Uninstalling the CLI](/docs/containers?topic=containers-cs_cli_install#cs_cli_uninstall)
 * [Using the {{site.data.keyword.cloud-shell_notm}} in your web browser](/docs/containers?topic=containers-cs_cli_install#cloud-shell)
-* [Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
+* [Deprecated: Using the Kubernetes web terminal in your web browser](/docs/containers?topic=containers-cs_cli_install#cli_web)
 
 [Setting up the API](/docs/containers?topic=containers-cs_api_install)
 * [About the API](/docs/containers?topic=containers-cs_api_install#api_about)
@@ -1983,6 +1972,7 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+  * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
   * [Changelog for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
   * [Changelog for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
 * [Version 1.8](/docs/containers?topic=containers-istio-changelog#v18)

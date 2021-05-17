@@ -2,11 +2,12 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-04-30"
+lastupdated: "2021-05-14"
 
 keywords: kubernetes, iks
 
 subcollection: containers
+content-type: troubleshoot
 
 ---
 
@@ -141,7 +142,7 @@ error: No Auth Provider found for name "oidc"
 {: screen}
 
 {: tsCauses}
-You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/docs/setup/release/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). If you use a community Kubernetes cluster, you might also have the {{site.data.keyword.openshiftshort}} version of `kubectl`, which does not work with community Kubernetes clusters.
+You have a different version of `kubectl` than your cluster version. [Kubernetes does not support](https://kubernetes.io/releases/version-skew-policy/){: external} `kubectl` client versions that are 2 or more versions apart from the server version (n +/- 2). If you use a community Kubernetes cluster, you might also have the {{site.data.keyword.openshiftshort}} version of `kubectl`, which does not work with community Kubernetes clusters.
 
 To check your client `kubectl` version against the cluster server version, run `kubectl version --short`.
 
