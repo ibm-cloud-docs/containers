@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-18"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -1447,7 +1447,7 @@ The following table shows the changes that are included in patch update 1.18.2_1
 Review the version 1.17 changelog.
 {: shortdesc}
 
-Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
+Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118) as soon as possible.
 {: deprecated}
 
 ### Changelog for worker node fix pack 1.17.17_1562, released 10 May 2021
