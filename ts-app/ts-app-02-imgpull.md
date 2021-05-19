@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks
 
@@ -91,8 +91,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 # Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?
 {: #ts-app-image-pull}
 
@@ -309,4 +309,7 @@ This method of using a token to authorize cluster access to {{site.data.keyword.
     ```
     docker pull registry.<region>.bluemix.net/<namespace>/<image>:<tag>
     ```
-    {: pre}
+    {: pre} 
+    
+    
+    

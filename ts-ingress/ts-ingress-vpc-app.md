@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-19"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -91,15 +91,16 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+
 
 # VPC clusters: Why can't my app connect via Ingress?
 {: #vpc_ts_alb}
 
-**Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+**Infrastructure provider**:
+* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 {: tsSymptoms}
-<img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> You publicly exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
+You exposed your app by creating an Ingress resource for your app in your VPC cluster. When you tried to connect to your app by using the subdomain of the Ingress application load balancer (ALB), the connection failed or timed out.
 
 {: tsCauses}
 When you create a VPC cluster, one public and one private VPC load balancer are automatically created outside of your cluster in your VPC. The VPC load balancer routes requests to the apps that the ALBs expose. Requests cannot be routed to your app in the following situations:
@@ -116,7 +117,7 @@ Verify that no VPC security groups are blocking traffic to your cluster and that
   ```
   {: pre}
 
-2. <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters that run Kubernetes version 1.18 or earlier: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
+2. Kubernetes version 1.18 or earlier only: [Allow traffic requests that are routed by the VPC load balancer to node ports on your worker nodes](/docs/containers?topic=containers-vpc-network-policy#security_groups).
 
 3. Verify that the VPC load balancer for your ALBs exists. In the output, look for the VPC load balancer **Name** that starts with `kube-crtmgr-<cluster_ID>`. If you did not install the `infrastructure-service` plug-in, install it by running `ibmcloud plugin install infrastructure-service`.
   ```

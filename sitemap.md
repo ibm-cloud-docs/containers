@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-19"
 
 keywords: containers
 subcollection: containers
@@ -1470,7 +1470,6 @@ subcollection: containers
   * [Creating a secret to store the KMS credentials](/docs/containers?topic=containers-portworx#px_create_km_secret)
 * [Installing Portworx in your cluster](/docs/containers?topic=containers-portworx#install_portworx)
   * [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx)
-  * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Creating a Portworx volume](/docs/containers?topic=containers-portworx#add_portworx_storage)
 * [Mounting the volume to your app](/docs/containers?topic=containers-portworx#mount_pvc)
 * [Backing up and restoring apps and data with PX-Backup](/docs/containers?topic=containers-portworx#px-backup)
@@ -1486,6 +1485,7 @@ subcollection: containers
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
   * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
   * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
+  * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help)
   * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)

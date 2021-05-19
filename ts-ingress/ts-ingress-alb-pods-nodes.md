@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -91,17 +91,15 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Why do ALB pods not deploy to worker nodes?
 {: #alb-pod-affinity}
 
 **Infrastructure provider**:
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-
+* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 {: tsSymptoms}
 When you run `kubectl get pods -n kube-system | grep alb`, either no ALB pods or only some ALB pods successfully deployed to your worker nodes. When you describe an ALB pod by running `kubectl describe pod -n kube-system <pod_name>`, you see a message similar to the following in the **Events** section of the output.
@@ -136,4 +134,3 @@ Ingress requires at least two worker nodes per zone to ensure high availability 
 4. Repeat these steps for each zone in your cluster to ensure that more than one worker node exists on a private VLAN.
 
 After the new worker nodes deploy, the ALB pods are automatically scheduled to deploy to those worker nodes.
-

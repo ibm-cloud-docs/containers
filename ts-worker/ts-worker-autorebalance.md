@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-18"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -91,10 +91,10 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+  
+  
 
-
-# Why doesn't replacing a worker node create a worker node?
+# VPC: Why doesn't replacing a worker node create a worker node?
 {: #auto-rebalance-off}
 
 **Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-17"
 
 keywords: kubernetes, iks
 
@@ -91,10 +91,14 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 # Why does binding a service to a cluster result in a same name error?
 {: #ts-app-svc-bind-name}
+
+**Infrastructure provider**:
+  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 {: tsSymptoms}
 When you run `ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_name>`, you see the following message.
@@ -119,7 +123,7 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
   ```
   {: pre}
 
-  Output:
+  Example output:
   ```
   Invoking 'cf service <service_instance_name> --guid'...
   <service_instance_GUID>
@@ -130,3 +134,6 @@ Use the service GUID instead of the service instance name in the `ibmcloud ks cl
   ibmcloud ks cluster service bind --cluster <cluster_name> --namespace <namespace> --service <service_instance_GUID>
   ```
   {: pre}
+  
+  
+  

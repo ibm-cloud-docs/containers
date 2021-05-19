@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-18"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -91,10 +91,10 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+  
+  
 
-
-# Why is the bare metal instance ID inconsistent with worker records?
+# Classic: Why is the bare metal instance ID inconsistent with worker records?
 {: #bm_machine_id}
 
 **Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
@@ -111,8 +111,8 @@ The worker node instance ID changed. Reload the worker node if bare metal hardwa
 The machine ID can become inconsistent with the {{site.data.keyword.containerlong_notm}} worker record when the machine experiences hardware issues. When IBM Cloud infrastructure resolves this issue, a component can change within the system that the service does not identify.
 
 {: tsResolve}
-For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). **Note**: Reloading also updates the machine's [patch version](/docs/containers?topic=containers-changelog).
+For {{site.data.keyword.containerlong_notm}} to re-identify the machine, [reload the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload). Note that reloading also updates the machine's [patch version](/docs/containers?topic=containers-changelog).
 
-You can also [delete the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm). **Note**: Bare metal instances are billed monthly.
+You can also [delete the bare metal worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_rm). Keep in mind that bare metal instances are billed monthly.
 
 

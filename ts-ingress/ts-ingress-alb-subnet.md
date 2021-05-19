@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-19"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -91,17 +91,14 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
+  
+  
 
-
-# Why can't the Ingress ALB be enabled with subnet errors?
+# Classic clusters: Why does enabling Ingress ALBs result in subnet errors?
 {: #cs_alb_subnet}
 
 **Infrastructure provider**:
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-
+* <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
 {: tsSymptoms}
 When you try to enable an Ingress ALB by running the `ibmcloud ks ingress alb enable` command, you see the following error:
@@ -116,4 +113,4 @@ However, you ran `ibmcloud ks ks subnets` and verified that one or more subnets 
 Your ALBs and your worker nodes might not exist on the same VLANs. This can occur when you delete worker nodes on the VLANs that the ALBs were also originally created on, and then create new worker nodes on new VLANs.
 
 {: tsResolve}
-Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress#migrate-alb-vlan).
+Move your ALBs to the same VLANs that your worker nodes exist on by following the steps in [Moving ALBs across VLANs](/docs/containers?topic=containers-ingress-types#migrate-alb-vlan).

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-18"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -217,7 +217,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.17](#cs_v117)</td>
   <td>10 Feb 2020</td>
-  <td>30 Jun 2021 `†`</td>
+  <td>02 Jul 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -497,7 +497,7 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.17.
 {: shortdesc}
 
-Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 30 June 2021. Update your cluster to at least [version 1.18](#cs_v118) as soon as possible.
+Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](#cs_v118) as soon as possible.
 {: deprecated}
 
 ### Update before master
