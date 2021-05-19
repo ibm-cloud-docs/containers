@@ -91,7 +91,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
- 
+
 
 
 # Setting up Kubernetes Ingress
@@ -775,7 +775,7 @@ Create new ALBs that run the Kubernetes Ingress image. After you create the new 
 
   * Original {{site.data.keyword.containerlong_notm}} Ingress resources:
     ```
-    ibmcloud ks ingress alb migrate clean -c <cluster_name_or_ID> --iks-ingresses -f
+    ibmcloud ks ingress alb migrate clean -c <cluster_name_or_ID> --iks-ingresses
     ```
     {: pre}
   * Original {{site.data.keyword.containerlong_notm}} Ingress configmap:
@@ -840,7 +840,7 @@ If you choose to change your existing ALBs to the Kubernetes Ingress image, an A
 2. Optional: Clean up your original Ingress resource files that were formatted for the {{site.data.keyword.containerlong_notm}} Ingress image.
   * Original {{site.data.keyword.containerlong_notm}} Ingress resources:
     ```
-    ibmcloud ks ingress alb migrate clean -c <cluster_name_or_ID> --iks-ingresses -f
+    ibmcloud ks ingress alb migrate clean -c <cluster_name_or_ID> --iks-ingresses
     ```
     {: pre}
   * Original {{site.data.keyword.containerlong_notm}} Ingress configmap:
