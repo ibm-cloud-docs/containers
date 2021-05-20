@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-20"
 
 keywords: kubernetes, iks, helm
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -135,7 +136,7 @@ For more information about the prerequisites for each add-on, see:
 The versions of each managed add-on are tested by {{site.data.keyword.cloud_notm}} and approved for use in {{site.data.keyword.containerlong_notm}}. To update the components of an add-on to the most recent version supported by {{site.data.keyword.containerlong_notm}}, use the following steps.
 {: shortdesc}
 
-1. Check for update instructions that are specific to your managed add-on. If you do not find update instructions, continue with the next step.<p class="important">The Istio add-on requires specific update steps, and some Istio add-on versions include breaking changes. Ensure that you follow the steps in [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update)) to update your Istio add-on.</p>
+1. Check for update instructions that are specific to your managed add-on. If you do not find update instructions, continue with the next step.<p class="important">The Istio add-on requires specific update steps, and some Istio add-on versions include breaking changes. Ensure that you follow the steps in [Updating the Istio add-on](/docs/containers?topic=containers-istio#istio_update) to update your Istio add-on.</p>
 2. If your add-on does not have specific update instructions, select the cluster where you installed managed add-ons from your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters).
 3. Select the **Add-ons** tab.
 4. From the actions menu, select **Update** to start updating the managed add-on. When the update is installed, the latest version of the managed add-on is listed on the cluster add-on page.

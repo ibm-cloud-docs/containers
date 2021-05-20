@@ -443,8 +443,8 @@ subcollection: containers
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
 
 
-## Managing the cluster lifecycle
-{: #sitemap_managing_the_cluster_lifecycle}
+## Managing the cluster and worker node lifecycle
+{: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
 
 
 [Adding worker nodes and zones to clusters](/docs/containers?topic=containers-add_workers)
@@ -471,7 +471,7 @@ subcollection: containers
   * [Installing with a script](/docs/containers?topic=containers-add_workers#intel-sgx-script)
 * [Adding tags to existing clusters](/docs/containers?topic=containers-add_workers#cluster_tags)
 * [Adding labels to existing worker pools](/docs/containers?topic=containers-add_workers#worker_pool_labels)
-* [Autorecovery for your worker nodes in classic clusters](/docs/containers?topic=containers-add_workers#planning_autorecovery)
+* [Automatically resolving issues for your worker nodes](/docs/containers?topic=containers-add_workers#planning_autorecovery)
 
 [Autoscaling clusters](/docs/containers?topic=containers-ca)
 * [Understanding scale-up and scale-down](/docs/containers?topic=containers-ca#ca_about)
