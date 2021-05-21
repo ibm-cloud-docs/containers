@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Object storage: Why does installing the Object storage plug-in fail?
 {: #cos_plugin_fails}
@@ -127,79 +128,77 @@ During the installation, many different tasks are executed by the {{site.data.ke
 
 2. [Retry the installation](/docs/containers?topic=containers-object_storage#install_cos).
 
-3. If you continue to see the same error, get a list of the resources that are installed when the plug-in is installed.
-
-   1. Get a list of storage classes that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get StorageClass --all-namespaces \
-          -l app=ibmcloud-object-storage-plugin \
-          -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
-
-   2. Get a list of cluster role bindings that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get ClusterRoleBinding --all-namespaces \
-          -l app=ibmcloud-object-storage-plugin \
-          -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
-
-   3. Get a list of role bindings that are created by the `ibmcloud-object-storage-driver`.
-      ```
-      kubectl get RoleBinding --all-namespaces \
-         -l app=ibmcloud-object-storage-driver \
-         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
-
-   4. Get a list of role bindings that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get RoleBinding --all-namespaces \
-          -l app=ibmcloud-object-storage-plugin \
-          -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
-
-   5. Get a list of cluster roles that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get ClusterRole --all-namespaces \
+3. If you continue to see the same error, get a list of the resources that are installed when the plug-in is installed. Get a list of storage classes that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get StorageClass --all-namespaces \
          -l app=ibmcloud-object-storage-plugin \
          -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
+   ```
+   {: pre}
 
-   6. Get a list of deployments that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get Deployments --all-namespaces \
+2. Get a list of cluster role bindings that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get ClusterRoleBinding --all-namespaces \
+         -l app=ibmcloud-object-storage-plugin \
+         -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
+
+3. Get a list of role bindings that are created by the `ibmcloud-object-storage-driver`.
+   ```sh
+   kubectl get RoleBinding --all-namespaces \
+      -l app=ibmcloud-object-storage-driver \
+      -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
+
+4. Get a list of role bindings that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get RoleBinding --all-namespaces \
          -l app=ibmcloud-object-storage-plugin \
          -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
+   ```
+   {: pre}
 
-   7. Get a list of the daemon sets that are created by the `ibmcloud-object-storage-driver`.
-      ```
-      kubectl get DaemonSets --all-namespaces \
-         -l app=ibmcloud-object-storage-driver \
-         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
+5. Get a list of cluster roles that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get ClusterRole --all-namespaces \
+      -l app=ibmcloud-object-storage-plugin \
+      -o jsonpath='{range .items[*]}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
 
-   8. Get a list of the service accounts that are created by the `ibmcloud-object-storage-driver`.
-      ```
-      kubectl get ServiceAccount --all-namespaces \
-         -l app=ibmcloud-object-storage-driver \
-         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre }
+6. Get a list of deployments that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get Deployments --all-namespaces \
+      -l app=ibmcloud-object-storage-plugin \
+      -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
 
-   9. Get a list of the service accounts that are created by the `ibmcloud-object-storage-plugin`.
-      ```
-      kubectl get ServiceAccount --all-namespaces \
-         -l app=ibmcloud-object-storage-plugin \
-         -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
-      ```
-      {: pre}
+7. Get a list of the daemon sets that are created by the `ibmcloud-object-storage-driver`.
+   ```sh
+   kubectl get DaemonSets --all-namespaces \
+      -l app=ibmcloud-object-storage-driver \
+      -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
+
+8. Get a list of the service accounts that are created by the `ibmcloud-object-storage-driver`.
+   ```sh
+   kubectl get ServiceAccount --all-namespaces \
+      -l app=ibmcloud-object-storage-driver \
+      -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre }
+
+9. Get a list of the service accounts that are created by the `ibmcloud-object-storage-plugin`.
+   ```sh
+   kubectl get ServiceAccount --all-namespaces \
+      -l app=ibmcloud-object-storage-plugin \
+      -o jsonpath='{range .items[*]}{.metadata.namespace}{"\t"}{.metadata.name}{"\n"}{end}'
+   ```
+   {: pre}
 
 4. Delete the conflicting resources.
 

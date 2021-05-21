@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?
 {: #cos_secret_access_fails}
@@ -106,14 +107,14 @@ content-type: troubleshoot
 {: tsSymptoms}
 When you create your PVC or deploy a pod that mounts the PVC, the creation or deployment fails.
 
-- Example error message for a PVC creation failure:
-  ```
+Example error message for a PVC creation failure:
+  ```sh
   cannot get credentials: cannot get secret tsecret-key: secrets "secret-key" not found
   ```
   {: screen}
 
-- Example error message for a pod creation failure:
-  ```
+Example error message for a pod creation failure:
+  ```sh
   persistentvolumeclaim "pvc-3" not found (repeated 3 times)
   ```
   {: screen}
@@ -125,7 +126,7 @@ The Kubernetes secret that you created is not referenced correctly in your deplo
 This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#platform) for all namespaces.
 
 1. List the secrets in your cluster and review the secret type. The secret must show `ibm/ibmc-s3fs` as the **Type**.
-   ```
+   ```sh
    kubectl get secrets --all-namespaces
    ```
    {: pre}

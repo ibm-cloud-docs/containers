@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, deploy
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -108,7 +109,7 @@ Learn what kinds of workloads can be run on {{site.data.keyword.containerlong_no
 ### What kind of apps can I run in {{site.data.keyword.containerlong_notm}}?
 {: #app_types}
 
-Your containerized app must be able to run on the supported operating system, Ubuntu 16.04 x86_64, 18.04 x86_64. You also want to consider the statefulness of your app.
+Your containerized app must be able to run on the supported operating system, Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). You also want to consider the statefulness of your app.
 {: shortdesc}
 
 <dl>

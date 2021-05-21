@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Object Storage: Why is the transport endpoint not connected?
 {: cos_transport_ts_connect}
@@ -140,7 +141,7 @@ Follow the steps to gather logging information.
    {: codeblock}
 
 2. Create the `debug-pvc` PVC in your cluster.
-   ```
+   ```sh
    kubectl create -f debug-pvc.yaml>
    ```
    {: pre}
@@ -230,3 +231,6 @@ Follow the steps to gather logging information.
    kubectl delete daemonset ibm-inspectnode
    ```
    {: pre}
+
+
+
