@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, debug
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -100,7 +101,7 @@ content-type: troubleshoot
 As you use {{site.data.keyword.containerlong}}, consider these techniques for troubleshooting persistent storage.
 {: shortdesc}
 
-If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-cs_troubleshoot).
+If you have a more general issue, try out [cluster debugging](/docs/containers?topic=containers-debug_clusters).
 {: tip}
 
 ## Debugging persistent storage failures

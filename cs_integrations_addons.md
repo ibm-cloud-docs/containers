@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-20"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, helm
 
@@ -125,7 +125,7 @@ For more information about the prerequisites for each add-on, see:
 - [ALB OAuth Proxy](/docs/containers?topic=containers-comm-ingress-annotations#app-id)
 - [{{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)
 - [Cluster Autoscaler](/docs/openshift?topic=openshift-ca)
-- [Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility)
+- [Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
 - [Istio](/docs/containers?topic=containers-istio)
 - **Deprecated**: [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web)
 - [Static routes](/docs/containers?topic=containers-static-routes)

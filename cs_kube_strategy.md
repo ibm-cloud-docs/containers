@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, containers
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -136,13 +137,10 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
-**Interested in an on-premises cloud?**
-
-Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
-
 **Want to run workloads in both on-premises and off-premises clouds?**
 
-Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/docs/en/cloud-private/3.1.0?topic=multicloud-manager){: external}.
+Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-about) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
+
 
 ### Can I automate my infrastructure deployments?
 {: #infra_packaging}
@@ -154,7 +152,7 @@ You can use the open source [Terraform](/docs/ibm-cloud-provider-for-terraform?t
 ### What kind of apps can I run? Can I move existing apps, or do I need to develop new apps?
 {: #app_kinds}
 
-Your containerized app must be able to run on the supported operating system, Ubuntu 16.04 x86_64, 18.04 x86_64. You also want to consider the statefulness of your app. For more information about the kinds of apps that can run in {{site.data.keyword.containerlong_notm}}, see [Planning app deployments](/docs/containers?topic=containers-plan_deploy#app_types).
+Your containerized app must be able to run on the supported operating system, Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). You also want to consider the statefulness of your app. For more information about the kinds of apps that can run in {{site.data.keyword.containerlong_notm}}, see [Planning app deployments](/docs/containers?topic=containers-plan_deploy#app_types).
 
 If you already have an app, you can [migrate it to {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-plan_deploy#migrate_containerize). If you want to develop a new app, check out the [guidelines for developing stateless, cloud-native apps](/docs/containers?topic=containers-plan_deploy#12factor)
 
@@ -179,7 +177,7 @@ The cluster admin persona must have a broad knowledge that includes compute, net
 
 As a developer, you design, create, secure, deploy, test, run, and monitor cloud-native, containerized apps in an Kubernetes cluster. To create and run these apps, you must be familiar with the concept of microservices, the [12-factor app](/docs/containers?topic=containers-plan_deploy#12factor) guidelines, [Docker and containerization principles](https://www.docker.com/), and available [Kubernetes deployment options](/docs/containers?topic=containers-plan_deploy).
 
-Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported Ubuntu 16.04 x86_64, 18.04 x86_64 operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
+Kubernetes and {{site.data.keyword.containerlong_notm}} provide multiple options for how to [expose an app and keep an app private](/docs/containers?topic=containers-cs_network_planning), [add persistent storage](/docs/containers?topic=containers-storage_planning), [integrate other services](/docs/containers?topic=containers-ibm-3rd-party-integrations), and how you can [secure your workloads and protect sensitive data](/docs/containers?topic=containers-security#container). Before you move your app to a cluster in {{site.data.keyword.containerlong_notm}}, verify that you can run your app as a containerized app on the supported Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated) operating system and that Kubernetes and {{site.data.keyword.containerlong_notm}} provide the capabilities that your workload needs.
 
 **Do cluster administrators and developers interact with each other?**
 

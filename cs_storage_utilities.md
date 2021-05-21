@@ -1320,8 +1320,8 @@ When an alert is triggered, review the alert details in {{site.data.keyword.mon_
 
 * [Troubleshooting persistent storage volumes](/docs/containers?topic=containers-cs_troubleshoot_storage).
 * [Troubleshooting worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).
-* [Troubleshooting apps](/docs/containers?topic=containers-cs_troubleshoot_app).
-* [Troubleshooting clusters](/docs/containers?topic=containers-cs_troubleshoot).
+* [Troubleshooting apps](/docs/containers?topic=containers-debug_apps).
+* [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).
 * [Open a support case](/docs/get-support?topic=get-support-using-avatar).
 
 
