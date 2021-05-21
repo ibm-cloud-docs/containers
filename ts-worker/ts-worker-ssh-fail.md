@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-20"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -205,7 +205,7 @@ If the `kubectl exec` command fails, continue to option 3.
 ## Option 3: Create a pod with root SSH access
 {: #pod-ssh}
 
-If you are unable to use the `kubectl debug node` or `kubectl exec` commands, such as if the VPN connection between the cluster master and worker nodes is down, you can create a pod that enables root SSH access and copies a public SSH key to the worker node to allow SSH access.
+If you are unable to use the `kubectl debug node` or `kubectl exec` commands, such as if the VPN connection between the cluster master and worker nodes is down, you can create a pod that enables root SSH access and copies a public SSH key to the worker node for SSH access.
 {: shortdesc}
 
 Allowing root SSH access is a security risk. Only allow SSH access when it is required and no other option is available to troubleshoot worker node issues. When you finish troubleshooting, be sure to follow step 7 in this section to disable SSH access.
@@ -219,7 +219,7 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
   ```
   {: pre}
 
-3. Create the following YAML file for a debug pod, and save the file as `enable-ssh.yaml`. Replace `<NODE_NAME>` with the worker node name and example `value` for `SSH_PUBLIC_KEY` with your public SSH key.
+3. Create the following YAML file for a debug pod, and save the file as `enable-ssh.yaml`. Replace `<NODE_NAME>` with the worker node name and replace the example `value` for `SSH_PUBLIC_KEY` with your public SSH key.
    ```yaml
    apiVersion: v1
    kind: Pod
@@ -260,7 +260,7 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
    ```
    {: codeblock}
 
-4. Create the pod in your cluster. When this pod is created, your public SSH key is added to the worker node and SSH is configured to allow root SSH login.
+4. Create the pod in your cluster. When this pod is created, your public key is added to the worker node and SSH is configured to allow root SSH login.
   ```sh
   kubectl apply -f enable-ssh.yaml
   ```
@@ -325,7 +325,7 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
 6. Run debug commands to help you gather information and troubleshoot issues, such as `ip`, `ifconfig`, `nc`, `tcpdump`, `ping`, `ps`, and `curl`.
 
 7. After you finish debugging, clean up resources to disable SSH access.
-  1. Delete the SSH pod.
+  1. Delete the SSH enablement pod.
     ```sh
     kubectl delete pod enable-ssh-<NODE_NAME>
     ```
