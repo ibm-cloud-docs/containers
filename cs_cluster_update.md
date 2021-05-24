@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -384,12 +384,12 @@ Set up a configmap to perform a rolling update of your classic worker nodes.
    ```
    {: pre}
 
-10. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers?topic=containers-cs_duplicate_nodes).
+10. Verify that you do not have duplicate worker nodes. In some cases, older clusters might list duplicate worker nodes with a **`NotReady`** status after an update. To remove duplicates, see [troubleshooting](/docs/containers?topic=containers-cs_troubleshoot_clusters#cs_duplicate_nodes).
 
 Next steps:
 -   Repeat the update process with other worker pools.
 -   Inform developers who work in the cluster to update their `kubectl` CLI to the version of the Kubernetes master.
--   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_dashboard_graphs).
+-   If the Kubernetes dashboard does not display utilization graphs, [delete the `kube-dashboard` pod](/docs/containers?topic=containers-cs_troubleshoot_health#cs_dashboard_graphs).
 
 ### Updating classic worker nodes in the console
 {: #worker_up_console}
@@ -437,7 +437,7 @@ If you replace multiple worker nodes at the same time, they are deleted and repl
 
 **What if a replacement worker node is not created?**
 
-A replacement worker node is not created if the worker pool does not have [automatic rebalancing enabled](/docs/containers?topic=containers-auto-rebalance-off).
+A replacement worker node is not created if the worker pool does not have [automatic rebalancing enabled](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off).
 
 ### Prerequisites
 {: #vpc_worker_prereqs}
@@ -469,7 +469,7 @@ Before you update your VPC worker nodes, review the prerequisite steps.
     {: pre}
 
 4.  Replace the worker node to update either the patch version or the `major.minor` version that matches the master version.
-    *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.20.6, include the `--update` flag.
+    *  To update the worker node to the same `major.minor` version as the master, such as from 1.20 to 1.20.7, include the `--update` flag.
        ```
        ibmcloud ks worker replace --cluster <cluster_name_or_ID> --worker <worker_node_ID> --update
        ```

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, containers
 
@@ -137,10 +137,13 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
+**Interested in an on-premises cloud?**
+
+Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
+
 **Want to run workloads in both on-premises and off-premises clouds?**
 
-Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-about) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
-
+Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/docs/en/cloud-private/3.1.0?topic=multicloud-manager){: external}.
 
 ### Can I automate my infrastructure deployments?
 {: #infra_packaging}

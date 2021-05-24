@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, containers
 
@@ -315,7 +315,7 @@ Begin working with your cluster by setting up the CLI and accessing the cluster.
 2. **User permissions**: Ensure that your cluster administrator gives you the proper [{{site.data.keyword.cloud_notm}} IAM role](/docs/containers?topic=containers-learning-path-admin#admin_secure) to access the cluster.
 3. **Cluster access**: [Access your cluster through the public or private cloud service endpoint](/docs/containers?topic=containers-access_cluster).
 
-</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-debug_clusters) and [Troubleshooting worker nodes](/docs/containers?topic=containers-debug_worker_nodes.
+</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-cs_troubleshoot) and [Troubleshooting worker nodes](/docs/containers?topic=containers-cs_troubleshoot_clusters).
 
 <br />
 
@@ -344,7 +344,7 @@ Configure your app in a YAML file that declares the configuration of the Kuberne
   1. To plan customized configurations for more than one environment, such as development, testing, and production environments, [use the Kustomize tool](/docs/containers?topic=containers-app#kustomize) to manage your configuration YAML file.
   2. If you want to run your app in multiple clusters, public and private environments, or even multiple cloud providers, [package your application to help automate deployments](/docs/containers?topic=containers-plan_deploy#packaging).
 
-</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app).
 
 <br />
 
@@ -361,7 +361,7 @@ Deploy your app to the cluster by running your app configuration file.
 * [Deploying an app on a GPU machine](/docs/containers?topic=containers-deploy_app#gpu_app)
 
 
-</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_apps).
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_app).
 
 <br />
 
@@ -435,7 +435,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_private).
       * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).
 
-</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
+</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_troubleshoot_lb).
 
 <br />
 
@@ -463,6 +463,6 @@ Enhance app capabilities by integrating various external services and catalog se
 2. **Add services to your cluster**: Ask your cluster administrator to [add the integration to your cluster](/docs/containers?topic=containers-learning-path-admin#admin_integrate).
 3. **Access services from your app**: Ensure that your app can access the service. For example, to access an IBM Cloud service instance from your app, you must [make the service credentials that are stored in the Kubernetes secret available to your app](/docs/containers?topic=containers-service-binding#adding_app).
 
-</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_worker_nodes.
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-cs_troubleshoot_clusters).
 
 
