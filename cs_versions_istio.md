@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -128,7 +129,7 @@ The following table shows the changes that are included in version 1.9.4 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.9.3 | 1.9.4 | See the Istio release notes for [Istio 1.9.4](https://istio.io/news/releases/1.9.x/announcing-1.9.4/){:external}. |
+| 1.9.3 | 1.9.4 | See the Istio release notes for [Istio 1.9.4](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.4/){:external}. |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.9.3" caption-side="top"}
 

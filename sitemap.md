@@ -1864,7 +1864,7 @@ subcollection: containers
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
   * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1553)
-  * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog# 11819_1552)
+  * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1552)
   * [Changelog for worker node fix pack 1.18.18_1551, released 10 May 2021](/docs/containers?topic=containers-changelog#11818_1551)
   * [Changelog for master fix pack 1.18.18_1549, released 27 April 2021](/docs/containers?topic=containers-changelog#11818_1549)
   * [Changelog for worker node fix pack 1.18.18_1550, released 26 April 2021](/docs/containers?topic=containers-changelog#11818_1550)

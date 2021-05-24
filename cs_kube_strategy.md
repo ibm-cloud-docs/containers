@@ -141,10 +141,6 @@ Great! You're already in our public cloud documentation. Keep reading for more s
 
 Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
 
-**Want to run workloads in both on-premises and off-premises clouds?**
-
-Start with setting up an {{site.data.keyword.cloud_notm}} Private account. Then, see [Using {{site.data.keyword.containerlong_notm}} with {{site.data.keyword.cloud_notm}} Private](/docs/containers?topic=containers-hybrid_iks_icp) to connect your {{site.data.keyword.cloud_notm}} Private environment with a cluster in {{site.data.keyword.cloud_notm}} Public. To manage multiple cloud Kubernetes clusters such as across {{site.data.keyword.cloud_notm}} Public and {{site.data.keyword.cloud_notm}} Private, check out the [IBM Multicloud Manager](https://www.ibm.com/docs/en/cloud-private/3.1.0?topic=multicloud-manager){: external}.
-
 ### Can I automate my infrastructure deployments?
 {: #infra_packaging}
 
