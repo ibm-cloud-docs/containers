@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, firewall, vyatta, ips
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -438,7 +439,7 @@ If you have a firewall on the public network in your IBM Cloud infrastructure ac
         Replace <em>&lt;monitoring_public_IP&gt;</em> with the [{{site.data.keyword.mon_short}} IP addresses](/docs/monitoring?topic=monitoring-endpoints).
     *   **{{site.data.keyword.la_full_notm}}**:
         <pre class="screen">TCP port 443, port 80 FROM &lt;each_worker_node_public_IP&gt; TO &lt;logging_public_IP&gt;</pre>
-        Replace &lt;<em>logging_public_IP&gt;</em> with the [{{site.data.keyword.la_short}} IP addresses](/docs/log-analysis?topic=log-analysis-service-connection#network_outgoing_traffic).
+        Replace &lt;<em>logging_public_IP&gt;</em> with the [{{site.data.keyword.la_short}} IP addresses](/docs/log-analysis?topic=log-analysis-endpoints#endpoints_api_public).
 
 6. Optional: Allow incoming and outgoing network traffic for the managed Istio add-on.
   * Allow outgoing network traffic from the `istio-egressgateway` load balancer through the following ports: `TCP port 80, port 15443 FROM <each_worker_node_publicIP>`
@@ -503,7 +504,7 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
           <tr>
             <td>US East</td>
              <td>mon01<br>tor01<br><br>wdc04, wdc06, wdc07</td>
-             <td><code>166.9.20.11, 166.9.24.22</code><br><code>166.9.20.42, 166.9.22.8</code><br><br><code>166.9.20.116, 166.9.20.117, 166.9.20.12, 166.9.20.13, 166.9.20.38, 166.9.20.80, 166.9.20.187, 166.9.22.9, 166.9.22.10, 166.9.22.26, 166.9.22.43, 166.9.22.52, 166.9.22.54, 166.9.22.109, 166.9.24.19, 166.9.24.35, 166.9.24.4, 166.9.24.46, 166.9.24.47, 166.9.24.5, 166.9.24.90</code></td>
+             <td><code>166.9.20.11, 166.9.24.22</code><br><code>166.9.20.42, 166.9.22.8</code><br><br><code>166.9.20.117, 166.9.20.12, 166.9.20.13, 166.9.20.38, 166.9.20.63, 166.9.20.80, 166.9.20.187, 166.9.22.9, 166.9.22.10, 166.9.22.26, 166.9.22.43, 166.9.22.51, 166.9.22.52, 166.9.22.109, 166.9.24.19, 166.9.24.35, 166.9.24.4, 166.9.24.45, 166.9.24.47, 166.9.24.5, 166.9.24.90</code></td>
           </tr>
           <tr>
             <td>US South</td>
@@ -604,8 +605,8 @@ If you have a firewall on the private network in your IBM Cloud infrastructure a
    - Allow all egress network traffic on TCP port 443.
    - Allow access to the IBM Cloud infrastructure IP range for the zone that your cluster is in for both the [**Front-end (public) network**](/docs/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#front-end-public-network) and [**Back-end (private) Network**](/docs/hardware-firewall-dedicated?topic=hardware-firewall-dedicated-ibm-cloud-ip-ranges#back-end-private-network). To find the zone of your cluster, run `ibmcloud ks cluster ls`.
 8. Optional: To send logging and metric data, set up firewall rules for your {{site.data.keyword.la_full_notm}} and {{site.data.keyword.mon_full_notm}} services.
-   *  [{{site.data.keyword.la_short}} private endpoints](/docs/log-analysis?topic=log-analysis-service-connection#ips_api)
-   *  [{{site.data.keyword.mon_short}} private endpoints](/docs/monitoring?topic=monitoring-endpoints)
+   *  [{{site.data.keyword.la_short}} private endpoints](/docs/log-analysis?topic=log-analysis-endpoints#endpoints_api_private)
+   *  [{{site.data.keyword.mon_short}} private endpoints](/docs/monitoring?topic=monitoring-endpoints#endpoints_monitoring)
 
 </br>
 
@@ -657,10 +658,10 @@ If you want to access services that run inside or outside {{site.data.keyword.cl
     2. From the output of the previous step, note all the unique network IDs (first three octets) of the **Public IP** for the worker nodes in your cluster. If you want to allow traffic from a private-only cluster, note the **Private IP** instead. In the following output, the unique network IDs are `169.xx.178` and `169.xx.210`.
         ```
         ID                                                  Public IP        Private IP     Machine Type        State    Status   Zone    Version   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.20.6   
-        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.20.6  
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.20.6   
-        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.20.6  
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w31   169.xx.178.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.20.7   
+        kube-dal10-crb2f60e9735254ac8b20b9c1e38b649a5-w34   169.xx.178.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal10   1.20.7  
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w32   169.xx.210.101   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.20.7   
+        kube-dal12-crb2f60e9735254ac8b20b9c1e38b649a5-w33   169.xx.210.102   10.xxx.xx.xxx   b3c.4x16.encrypted   normal   Ready    dal12   1.20.7  
         ```
         {: screen}
     3.  List the VLAN subnets for each unique network ID.

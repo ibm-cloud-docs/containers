@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Why does the cluster autoscaler add-on fail with the pod stuck in `Init` state?
 {: #ca_ts_secret}
@@ -142,4 +143,4 @@ To verify that the issue is a secret validation issue, get the logs from the `se
     ```
     {: pre}
 
-4. Update your `storage-secret-store` secret with the requried IAM permissions by [resetting your credentials](/docs/openshift?topic=openshift-cs_troubleshoot_storage#missing_permissions).
+4. Update your `storage-secret-store` secret with the requried IAM permissions by [resetting your credentials](/docs/containers?topic=containers-missing_permissions).

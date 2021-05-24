@@ -78,7 +78,7 @@ Kubernetes Service
             cs_users.md
 
         {: .topicgroup}
-        Managing the cluster lifecycle
+        Managing the cluster and worker node lifecycle
             cs_worker_add.md
             cs_cluster_scaling.md
             cs_cluster_update.md

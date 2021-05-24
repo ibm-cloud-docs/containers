@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # File storage: Why does my app fail when a non-root user owns the NFS file storage mount path?
 {: #nonroot}
@@ -102,17 +103,17 @@ content-type: troubleshoot
 {: tsSymptoms}
 After you [add NFS storage](/docs/containers?topic=containers-file_storage#file_app_volume_mount) to your deployment, the deployment of your container fails. When you retrieve the logs for your container, you might see errors such as the following. The pod fails and is stuck in a reload cycle.
 
-```
+```sh
 write-permission
 ```
 {: screen}
 
-```
+```sh
 do not have required permission
 ```
 {: screen}
 
-```
+```sh
 cannot create directory '/bitnami/mariadb/data': Permission denied
 ```
 {: screen}
@@ -131,13 +132,13 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
 
 **Before you begin**: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  Open the Dockerfile for your app and get the user ID (UID) and group ID (GID) from the user that you want to give writer permission on the volume mount path. In the example from a Jenkins Dockerfile, the information is:
+1. Open the Dockerfile for your app and get the user ID (UID) and group ID (GID) from the user that you want to give writer permission on the volume mount path. In the example from a Jenkins Dockerfile, the information is:
     - UID: `1000`
     - GID: `1000`
 
     **Example**:
 
-    ```
+    ```yaml
     FROM openjdk:8-jdk
 
     RUN apt-get update && apt-get install -y git curl && rm -rf /var/lib/apt/lists/*
@@ -155,7 +156,7 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
     ```
     {:screen}
 
-2.  Add persistent storage to your app by creating a persistent volume claim (PVC). This example uses the `ibmc-file-bronze` storage class. To review available storage classes, run `kubectl get storageclasses`.
+2. Add persistent storage to your app by creating a persistent volume claim (PVC). This example uses the `ibmc-file-bronze` storage class. To review available storage classes, run `kubectl get storageclasses`.
 
     ```yaml
     apiVersion: v1
@@ -175,7 +176,7 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
 
 3.  Create the PVC.
 
-    ```
+    ```sh
     kubectl apply -f mypvc.yaml
     ```
     {: pre}
@@ -235,20 +236,19 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
     {: codeblock}
 
 5.  Create the pod and mount the PVC to your pod.
-
-    ```
+    ```sh
     kubectl apply -f my-pod.yaml
     ```
     {: pre}
 
 6. Verify that the volume is successfully mounted to your pod. Note the pod name and **Containers/Mounts** path.
-   ```
+   ```sh
    kubectl describe pod <my-pod>
    ```
    {: pre}
 
    **Example output**:
-   ```
+   ```yaml
    Name:       mypod-123456789
    Namespace:	default
    ...
@@ -283,19 +283,19 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
    {: screen}
 
 7.  Log in to the pod by using the pod name that you previously noted.
-    ```
+    ```sh
     kubectl exec -it <my-pod-123456789> /bin/bash
     ```
     {: pre}
 
 8. Verify the permissions of your container's mount path. In the example, the mount path is `/var/jenkins_home`.
-   ```
+   ```sh
    ls -ln /var/jenkins_home
    ```
    {: pre}
 
    **Example output**:
-   ```
+   ```sh
    jenkins@mypod-123456789:/$ ls -ln /var/jenkins_home
    total 12
    -rw-r--r-- 1 1000 1000  102 Mar  9 19:58 copy_reference_file.log
@@ -305,5 +305,7 @@ When you include an [init container](https://kubernetes.io/docs/concepts/workloa
    {: screen}
 
    This output shows that the GID and UID from your Dockerfile (in this example, `1000` and `1000`) own the mount path inside the container.
+
+
 
 

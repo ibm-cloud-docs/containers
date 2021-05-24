@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-19"
+lastupdated: "2021-05-24"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -327,6 +328,7 @@ ibmcloud ks cluster addon disable vpc-block-csi-driver --cluster CLUSTER [-f]
 
 </br>
 
+
 ### `ibmcloud ks cluster addon enable`
 {: #cs_cluster_addon_enable}
 
@@ -504,6 +506,9 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 </dl>
 
 </br>
+
+
+
 
 ### `ibmcloud ks cluster addon ls`
 {: #cs_cluster_addons}
@@ -917,7 +922,7 @@ ibmcloud ks cluster create vpc-gen2 --name NAME --zone ZONE --vpc-id VPC_ID --su
 
 **Example**:
 ```sh
-ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.20.6 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
+ibmcloud ks cluster create vpc-gen2 --name mycluster --version 1.20.7 --zone us-south-1 --vpc-id a0123456-78b9-0c1d-23d4-567890123ef4 --subnet-id 1ab23c45-6789-0123-456d-789ef01gh234 --flavor bx2.4x16 --workers 3
 ```
 {: pre}
 
@@ -5060,7 +5065,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 <dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
 <dd>Required: The name or ID of the cluster.</dd>
 
-<dt><code>--lb-host <em>VPC_ALB_HOSTNAME</em> | <code>--ip <em>VPC_NLB_IP</em></code></dt>
+<dt><code>--lb-host <em>VPC_ALB_HOSTNAME</em></code> | <code>--ip <em>VPC_NLB_IP</em></code></dt>
 <dd>For VPC application load balancers, the load balancer hostname. To see load balancer hostnames, run `kubectl get svc -o wide`. For VPC network load balancers, the external IP addresses. To specify multiple IP addresses, use multiple `--ip` flags. To see load balancer IP addresses, run `kubectl get svc -o wide`.</dd>
 
 <dt><code>--dns-type <em>public</em></code></dt>
@@ -6270,7 +6275,7 @@ ibmcloud ks vpcs [--provider vpc-gen2] [--output json] [-q]
 
 **Command options**:
 <dl>
-<dt><code>--provider vpc-gen2</em></code></dt>
+<dt><code>--provider vpc-gen2</code></dt>
 <dd>The infrastructure provider type ID for the VPC worker node machine. `vpc-gen2` for VPC Generation 2 compute is supported.</dd>
 
 <dt><code>--output json</code></dt>

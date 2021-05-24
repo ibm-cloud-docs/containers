@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-21"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,8 +92,8 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
+  
+  
 
 # Portworx: Why does encryption fail with an invalid KMS endpoint?
 {: #px-kms-endpoint}
@@ -103,7 +104,7 @@ content-type: troubleshoot
 
 {: tsSymptoms}
 When you provision Portworx and set up encryption, you receive an error similar to the following:
-```
+```sh
 `kp.Error: correlation_id='673bb68a-be17-4720-9ae1-85baf109924e', msg='Unauthorized: The user does not have access to the specified resource'"`
 ```
 {: screen}
@@ -133,3 +134,6 @@ The endpoint that you entered in your Kubernetes secret is incorrect. If the KMS
 
 
 If you find information that you entered incorrectly or you must change the setup of your cluster, correct the information or the cluster setup.
+{: note}
+
+
