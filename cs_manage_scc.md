@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-25"
 
 keywords: kubernetes, iks
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -120,9 +121,16 @@ To start monitoring your resources, check out [Getting started with {{site.data.
 Review the following goals for {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
-*   **Ensure that clusters are accessible by using the private cloud service endpoint only.** You can [disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
-*   **Ensure that inbound traffic to the cluster through Ingress uses allowed TLS versions only.** The default TLS versions are 1.2 or 1.3. For more information, see [About Ingress](/docs/containers?topic=containers-ingress-about).
-*   **Ensure that the cluster has a logging service enabled.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
-*   **Ensure that the cluster has a monitoring service enabled.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
-*   **Ensure that the cluster and worker node versions are up to date.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
-*   **Ensure that the cluster can pull images from the private image repository that is provided by {{site.data.keyword.registrylong_notm}}.** For more information, see [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth).
+*  **Check whether Kubernetes Service clusters are accessible only by using private endpoints.** You can [disable the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#disable-public-se). For more information, see [Planning your cluster network setup](/docs/containers?topic=containers-plan_clusters).
+*  **Check whether Kubernetes Service Ingress is configured only with TLS v1.2 for all inbound traffic	IBM.** The default TLS versions are 1.2 or 1.3. For more information, see [About Ingress](/docs/containers?topic=containers-ingress-about).
+*  **Check whether Kubernetes Service clusters are enabled with IBM Log Analysis.** For more information, see [Choosing a logging solution](/docs/containers?topic=containers-health#logging_overview).
+*  **Check whether Kubernetes Service clusters are enabled with IBM Cloud Monitoring.** For more information, see [Choosing a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics).
+*  **Check whether Kubernetes Service version is up-to-date.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
+*  **Check whether Kubernetes Service worker nodes are updated to the latest image to ensure patching of vulnerabilities.** For more information, see [Version information and update actions](/docs/containers?topic=containers-cs_versions).
+*  **Check whether Kubernetes Service cluster has image pull secrets enabled** For more information, see [Understanding how to authorize your cluster to pull images from a private registry](/docs/containers?topic=containers-registry#cluster_registry_auth).
+*  **Check whether Kubernetes Service access is managed only by IAM access groups.**
+*  **Check whether Kubernetes Service has at least # service IDs with the IAM manager role.**
+*  **Check whether Kubernetes Service has at least # users with the IAM manager role.**
+*  **Check whether Kubernetes Service has no more than # service IDs with the IAM administrator role.**
+*  **Check whether Kubernetes Service has no more than # users with the IAM administrator role.**
+*  **Check whether Kubernetes Service is configured with role-based access control (RBAC).**
