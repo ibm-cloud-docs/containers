@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
- 
+
 
 
 # Kubernetes Ingress annotations
@@ -901,7 +902,7 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
      </thead>
      <tbody>
      <tr><td>`defaultBackendService`</td><td>Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.</td></tr>
-     <tr><td>`defaultCertificate`</td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [`ibmcloud ks ingress secret create` command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, that secret is applied instead of this default secret.</td></tr>
+     <tr><td>`defaultCertificate`</td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [`ibmcloud ks ingress secret create` command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.</td></tr>
      <tr><td>`enableSslPassthrough`</td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
      <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
      <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>

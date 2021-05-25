@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-19"
+lastupdated: "2021-05-25"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -146,7 +147,7 @@ Review the following important differences between the {{site.data.keyword.conta
 |Annotation class| Only [custom {{site.data.keyword.containerlong_notm}} annotations](/docs/containers?topic=containers-ingress_annotation) (`ingress.bluemix.net/<annotation>`) are supported. | Only [Kubernetes NGINX annotations](/docs/containers?topic=containers-comm-ingress-annotations#annotations){: external} (`nginx.ingress.kubernetes.io/<annotation>`) are supported.|
 |Annotation application to services| Within the annotation, you can specify the app service name that you want to apply the annotation to. | Annotations are always applied to all service paths in the resource, and you cannot specify service names within the annotations.|
 |Protocols| HTTP/2 and gRPC protocols are not supported.|HTTP/2 and gRPC protocols are supported.|
-|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and cannot access secrets in any other namespaces.|
+|TLS secrets| The ALB can access a TLS secret in the `default` namespace, in the `ibm-cert-store` namespace, or in the same namespace where you deploy the Ingress resource.| The ALB can access a TLS secret in the same namespace where you deploy the Ingress resource only, and cannot access secrets in any other namespaces. Alternatively, the ALB can access a secret in another namespace if you set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy) for all registered subdomains. |
 {: caption="Differences between Ingress images"}
 
 <br />
@@ -195,7 +196,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
           Ingress Secret:         mycluster-<hash>-0000
           ```
           {: screen}
-      2. If you want to use TLS and your apps are deployed in a namespace other than `default`, you must re-create the secret in the namespace where your apps exist. To find the CRN for the default Ingress secret, run `ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default`. For more information, see [Managing TLS certificates and secrets](#manage_certs).
+      2. If you want to use TLS and your apps are deployed in a namespace other than `default`, you must re-create the secret in the namespace where your apps exist. To find the CRN for the default Ingress secret, run `ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default`. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy). For more information, see [Managing TLS certificates and secrets](#manage_certs).
           ```
           ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
           ```
@@ -565,6 +566,9 @@ To use TLS termination, re-create your TLS secrets.
 
 In the Kubernetes Ingress implementation, the ALB cannot access secrets that are in a different namespace than the Ingress resource. If you use the default Ingress secret and your Ingress resources are deployed in namespaces other than `default`, or if you import a secret from {{site.data.keyword.cloudcerts_long_notm}} and your Ingress resources are deployed in namespaces other than `ibm-cert-store`, you must re-create the secret in those namespaces. For more information, see [Managing TLS certificates and secrets](#manage_certs).
 
+Want to specify a default secret to apply to any subdomain? Instead of following these steps to copy the secret to each namespace where you have apps, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
+{: tip}
+
 1. Get the CRN of the Ingress secret for your default Ingress subdomain. To get the name of the default secret, run `ibmcloud ks cluster get -c <cluster> | grep Ingress`.
   ```
   ibmcloud ks ingress secret get -c <cluster> --name <secret_name> --namespace default
@@ -920,7 +924,7 @@ The TLS certificate is stored as a Kubernetes secret in the `default` namespace.
   ```
   {: pre}
 
-3. Copy the secret to other namespaces. In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces.
+3. Copy the secret to other namespaces. In the Kubernetes Ingress implementation, ALBs can access TLS secrets only in the same namespace that the Ingress resource is deployed to. If your Ingress resources are deployed in namespaces other than `default`, you must create a secret for the default TLS certificate in those namespaces. Alternatively, you can set the secret as the `defaultCertificate` in the [`ibm-ingress-deploy-config` configmap](/docs/containers?topic=containers-comm-ingress-annotations#comm-customize-deploy).
   ```
   ibmcloud ks ingress secret create --cluster <cluster_name_or_ID> --cert-crn <CRN> --name <secret_name> --namespace <namespace>
   ```
