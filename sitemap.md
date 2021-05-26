@@ -2512,6 +2512,10 @@ subcollection: containers
 * [Feedback and questions](/docs/containers?topic=containers-get-help#feedback-qs)
 * [Contacting support](/docs/containers?topic=containers-get-help#help-support)
 
+[Running tests with the Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool)
+* [Prerequisites](/docs/containers?topic=containers-debug-tool#debug-tool-prereqs)
+* [Enabling the Diagnostics and Debug Tool add-on](/docs/containers?topic=containers-debug-tool#debug-tool-enable)
+
 
 ## Clusters and masters
 {: #sitemap_clusters_and_masters}
