@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-20"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks
 
@@ -256,7 +256,7 @@ Expose your app to public network traffic by setting up a Kubernetes `LoadBalanc
   <tr>
     <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-zone`</td>
     <td>Optional: Annotation to specify a VPC zone that your cluster is attached to. The VPC NLB is deployed to the same subnet in that zone that your worker nodes are connected to. Because the VPC NLB is single-zone, only worker nodes in your cluster in this zone are configured to receive traffic.</li></ul>
-    To see zones, run `ibmcloud ks zone ls --provider vpc-gen2`.<p class="note">If you later change this annotation to a different zone, the VPC NLB is not moved to the new zone.</br></br>If you do not specify this annotation or the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet` annotation, the VPC NLB is deployed to the most optimal zone. For example, the VPC NLB is deployed only to zones in which worker nodes exist and are in the `Ready` state.</p></td>
+    To see zones, run `ibmcloud ks zone ls --provider vpc-gen2`.<p class="note">If you later change this annotation to a different zone, the VPC NLB is not moved to the new zone.</br></br>If you do not specify this annotation or the `service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets` annotation, the VPC NLB is deployed to the most optimal zone. For example, the VPC NLB is deployed only to zones in which worker nodes exist and are in the `Ready` state.</p></td>
   </tr>
   <tr>
     <td>`selector`</td>
@@ -495,7 +495,7 @@ Do not confuse the Application Load Balancer for VPC with {{site.data.keyword.co
     </td>
   </tr>
   <tr>
-    <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnet`</td>
+    <td>`service.kubernetes.io/ibm-load-balancer-cloud-provider-vpc-subnets`</td>
     <td>Kubernetes version 1.18 or later: Annotation to specify one or more subnets that the VPC ALB service deploys to. If specified, this annotation takes precedence over the `service.kubernetes.io/ibm-load-balancer-cloud-provider-zone` annotation. Note that you can specify a different subnet in the same VPC than the subnets that your cluster is attached to. In this case, even though the VPC ALB deploys to a different subnet in the same VPC, the VPC ALB can still route traffic to your worker nodes on the cluster subnets. To see subnets in all resource groups, run `ibmcloud ks subnets --provider vpc-gen2 --vpc-id <vpc> --zone <zone>`.</td>
   </tr>
   <tr>
