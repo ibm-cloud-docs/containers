@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, nginx, nlb, help
 
@@ -101,7 +101,7 @@ content-type: troubleshoot
 As you use {{site.data.keyword.containerlong}}, consider these techniques for general load balancer troubleshooting and debugging.
 {: shortdesc}
 
-While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) to run tests and gather pertinent information from your cluster.
+While you troubleshoot, you can use the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool) to run tests and gather pertinent information from your cluster.
 {: tip}
 
 ## Classic clusters: Cannot connect to an app via a network load balancer (NLB) service

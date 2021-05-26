@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, nginx, ingress controller, help
 
@@ -507,7 +507,7 @@ Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}
 ### Step 1: Check your app deployment
 {: #app-debug-ingress}
 
-Before you debug Ingress, first check out [Debugging app deployments](/docs/containers?topic=containers-cs_troubleshoot_app#debug_apps).
+Before you debug Ingress, first check out [Debugging app deployments](/docs/containers?topic=containers-debug_apps).
 {: shortdesc}
 
 Ingress issues are often caused by underlying issues in your app deployment or in the `ClusterIP` service that exposes your app. For example, your app label and service selector might not match, or your app and service target ports might not match.
