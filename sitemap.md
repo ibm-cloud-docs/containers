@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-05-25"
+lastupdated: "2021-05-26"
 
 keywords: containers
 subcollection: containers
@@ -1601,6 +1601,7 @@ subcollection: containers
   * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable)
   * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)
   * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)
+  * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
   * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_create)
   * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_rotate)
   * [`ibmcloud ks cluster ca status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_status)
@@ -1732,7 +1733,6 @@ subcollection: containers
   * [`ibmcloud ks vlan ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlans)
   * [`ibmcloud ks vlan spanning get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get)
 * [`vpcs` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vpcs)
-* [`addon-versions` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
 * [`flavors` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_machine_types)
 * [`messages` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_messages)
 * [locations command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_supported-locations)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -508,8 +508,6 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 </br>
 
 
-
-
 ### `ibmcloud ks cluster addon ls`
 {: #cs_cluster_addons}
 
@@ -535,6 +533,42 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
+
+### `ibmcloud ks cluster addon versions`
+{: #cs_addon_versions}
+
+View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon versions [--addon ADD-ON_NAME] [--output json] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+
+**Minimum required permissions**: None
+
+**Command options**:
+<dl>
+<dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+<dd>Optional: Specify an add-on name such as <code>istio</code> to filter versions for.</dd>
+
+<dt><code>--output json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks cluster addon versions --addon istio
+  ```
+  {: pre}
 
 
 
@@ -6293,45 +6327,6 @@ ibmcloud ks vpcs
 
 <br />
 
-
-## `addon-versions` command
-{: #cs_addon_versions}
-
-View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.
-{: shortdesc}
-
-```sh
-ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--output json] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-**Minimum required permissions**: None
-
-**Command options**:
-<dl>
-<dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
-<dd>Optional: Specify an add-on name such as <code>istio</code> to filter versions for.</dd>
-
-<dt><code>--output json</code></dt>
-<dd>Optional: Prints the command output in JSON format.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks addon-versions --addon istio
-  ```
-  {: pre}
-
-<br />
-
 ## `flavors` command
 {: #cs_machine_types}
 
@@ -6922,8 +6917,6 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
-
-
 
 
 
