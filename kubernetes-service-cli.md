@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -129,7 +129,7 @@ Disable a managed add-on in an existing cluster. This command must be combined w
 {: #cs_cluster_addon_disable_alb-oauth-proxy}
 
 
-Disable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+Disable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-debug-tool) in a cluster.
 {: shortdesc}
 
 ```sh
@@ -338,7 +338,7 @@ Enable a managed add-on in an existing cluster. This command must be combined wi
 #### `ibmcloud ks cluster addon enable alb-oauth-proxy`
 {: #cs_cluster_addon_enable_alb-oauth-proxy}
 
-Enable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
+Enable the add-on for the [ALB OAuth Proxy](/docs/containers?topic=containers-debug-tool) in a cluster. When your ALBs run the Kubernetes Ingress image, you can use the ALB OAuth proxy to enforce authentication for your apps by configuring Ingress with {{site.data.keyword.appid_full_notm}}.
 {: shortdesc}
 
 ```sh
@@ -370,7 +370,7 @@ ibmcloud ks cluster addon enable alb-oauth-proxy --cluster CLUSTER [--version VE
 #### `ibmcloud ks cluster addon enable debug-tool`
 {: #cs_cluster_addon_enable_debug}
 
-Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-cs_troubleshoot#debug_utility) in a cluster.
+Enable the add-on for the [{{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool](/docs/containers?topic=containers-debug-tool) in a cluster.
 {: shortdesc}
 
 ```sh
@@ -508,8 +508,6 @@ ibmcloud ks cluster addon enable vpc-block-csi-driver --cluster CLUSTER [--versi
 </br>
 
 
-
-
 ### `ibmcloud ks cluster addon ls`
 {: #cs_cluster_addons}
 
@@ -535,6 +533,42 @@ ibmcloud ks cluster addon ls --cluster CLUSTER
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
 </dl>
+
+### `ibmcloud ks cluster addon versions`
+{: #cs_addon_versions}
+
+View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.
+{: shortdesc}
+
+```sh
+ibmcloud ks cluster addon versions [--addon ADD-ON_NAME] [--output json] [-q]
+```
+{: pre}
+
+**Supported infrastructure provider**:
+  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
+
+**Minimum required permissions**: None
+
+**Command options**:
+<dl>
+<dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
+<dd>Optional: Specify an add-on name such as <code>istio</code> to filter versions for.</dd>
+
+<dt><code>--output json</code></dt>
+<dd>Optional: Prints the command output in JSON format.</dd>
+
+<dt><code>-q</code></dt>
+<dd>Optional: Do not show the message of the day or update reminders.</dd>
+</dl>
+
+**Example**:
+
+  ```
+  ibmcloud ks cluster addon versions --addon istio
+  ```
+  {: pre}
 
 
 
@@ -2301,7 +2335,7 @@ You can also use this command to update the Kubernetes version of the worker nod
 
 * **Multiple worker nodes are replaced concurrently**: If you replace multiple worker nodes at the same time, they are deleted and replaced concurrently, not one by one. Make sure that you have enough capacity in your cluster to reschedule your workloads before you replace worker nodes.
 * **Node-level customizations are not preserved**: Any custom labels or taints that you applied at the individual worker node level are not applied to the replacement worker node. Instead, apply [labels](/docs/containers?topic=containers-add_workers#worker_pool_labels) or [taints](#worker_pool_taint) at the worker pool level so that the replacement worker node gets these attributes.
-* **Automatic rebalancing**: A replacement worker node is not created if the worker pool does not have [automatic rebalancing enabled](/docs/containers?topic=containers-cs_troubleshoot_clusters#auto-rebalance-off).</li></ul>
+* **Automatic rebalancing**: A replacement worker node is not created if the worker pool does not have [automatic rebalancing enabled](/docs/containers?topic=containers-auto-rebalance-off).</li></ul>
 
 Before you begin, make sure that your cluster has enough other worker nodes so that your pods can be rescheduled and continue to run.
 
@@ -6293,45 +6327,6 @@ ibmcloud ks vpcs
 
 <br />
 
-
-## `addon-versions` command
-{: #cs_addon_versions}
-
-View a list of supported versions for managed add-ons in {{site.data.keyword.containerlong_notm}}.
-{: shortdesc}
-
-```sh
-ibmcloud ks addon-versions [--addon ADD-ON_NAME] [--output json] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-  * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-**Minimum required permissions**: None
-
-**Command options**:
-<dl>
-<dt><code>--addon <em>ADD-ON_NAME</em></code></dt>
-<dd>Optional: Specify an add-on name such as <code>istio</code> to filter versions for.</dd>
-
-<dt><code>--output json</code></dt>
-<dd>Optional: Prints the command output in JSON format.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-</dl>
-
-**Example**:
-
-  ```
-  ibmcloud ks addon-versions --addon istio
-  ```
-  {: pre}
-
-<br />
-
 ## `flavors` command
 {: #cs_machine_types}
 
@@ -6922,8 +6917,6 @@ ibmcloud ks storage volume ls [--cluster CLUSTER_ID] [--provider PROVIDER] [--zo
 ibmcloud ks storage volume ls --cluster aa1111aa11aaaaa11aa1
 ```
 {: pre}
-
-
 
 
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-25"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -127,15 +127,15 @@ The debug pod is deployed with an interactive shell so that you can access the w
   ```
   {: pre}
 
-2. Create a debug pod that has host access. When the pod is created, the pod's interactive shell is automatically opened.
+2. Create a debug pod that has host access. When the pod is created, the pod's interactive shell is automatically opened. If the `kubectl debug node` command fails, continue to option 2.
   ```sh
-  kubectl debug node/<NODE_NAME>
+  kubectl debug node/<NODE_NAME> --image=icr.io/armada-master/alpine:latest -it
   ```
   {: pre}
 
-3. Run debug commands to help you gather information and troubleshoot issues. Commands that you might use to debug, such as `ip`, `ifconfig`, `nc`, `tcpdump`, `ping`, `ps`, and `curl`, are already available in the shell. You can also install other tools, such as `mtr`, by running `yum install <tool>`.
+3. Run debug commands to help you gather information and troubleshoot issues. Commands that you might use to debug, such as `ip`, `ifconfig`, `nc`, `ping`, and `ps`, are already available in the shell. You can also install other tools, such as `mtr`, `tcpdump`, and `curl`, by running `apk add <tool>`.
 
-If the `kubectl debug node` command fails, continue to option 2.
+<br />
 
 ## Option 2: `kubectl exec`
 {: #kubectl-exec}
@@ -167,7 +167,7 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
     containers:
     - args: ["-c", "apk add tcpdump mtr curl; sleep 1d"]
       command: ["/bin/sh"]
-      image: alpine:latest
+      image: icr.io/armada-master/alpine:latest
       imagePullPolicy: IfNotPresent
       name: debug
       resources: {}
@@ -192,15 +192,21 @@ If you are unable to use the `kubectl debug node` command, you can create an Alp
   ```
   {: pre}
 
-4. Log in to the debug pod. The pod's interactive shell is automatically opened.
+4. Log in to the debug pod. The pod's interactive shell is automatically opened. If the `kubectl exec` command fails, continue to option 3.
   ```sh
   kubectl exec -it debug-${NODE} -- sh
   ```
   {: pre}
 
-5. Run debug commands to help you gather information and troubleshoot issues. Commands that you might use to debug, such as `ip`, `ifconfig`, `nc`, `tcpdump`, `ping`, `ps`, `mtr`, and `curl`, are already available in the shell. You can also install other tools by running `apk add <tool>`; for example, to add `dig`, run `apk add bind-tools`.
+5. Run debug commands to help you gather information and troubleshoot issues. Commands that you might use to debug, such as `ip`, `ifconfig`, `nc`, `ping`, and `ps`, are already available in the shell. You can also install other tools, such as `dig`, `tcpdump`, `mtr`, and `curl`, by running `apk add <tool>`. For example, to add `dig`, run `apk add bind-tools`.
 
-If the `kubectl exec` command fails, continue to option 3.
+6. Delete the host access pod that you created for debugging.
+  ```
+  kubectl delete pod debug-${NODE}
+  ```
+  {: pre}
+
+<br />
 
 ## Option 3: Create a pod with root SSH access
 {: #pod-ssh}
@@ -233,7 +239,7 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
      hostPID: true
      hostIPC: true
      containers:
-     - image: alpine:latest
+     - image: icr.io/armada-master/alpine:latest
        env:
        - name: SSH_PUBLIC_KEY
          value: "<ssh-rsa AAA...ZZZ user@ibm.com>"
@@ -288,29 +294,29 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
   * **Public network (classic clusters that are connected to a public VLAN only)**:
     1. [Install and configure the Calico CLI, and set the context for your cluster to run Calico commands](/docs/openshift?topic=openshift-network_policies#cli_install).
     2. Create a Calico global network policy that is named `ssh-open` to allow inbound SSH traffic on port 22.
-      ```
-      calicoctl apply [-c <path_to_calicoctl_cfg>/calicoctl.cfg] -f - <<EOF
-      apiVersion: projectcalico.org/v3
-      kind: GlobalNetworkPolicy
-      metadata:
-        name: ssh-open
-      spec:
-        selector: ibm.role == 'worker_public'
-        ingress:
-        - action: Allow
-          protocol: TCP
-          destination:
-            ports:
-            - 22
-        - action: Allow
-          protocol: UDP
-          destination:
-            ports:
-            - 22
-        order: 1500
-      EOF
-      ```
-      {: pre}
+       ```
+       calicoctl apply [-c <path_to_calicoctl_cfg>/calicoctl.cfg] -f - <<EOF
+       apiVersion: projectcalico.org/v3
+       kind: GlobalNetworkPolicy
+       metadata:
+         name: ssh-open
+       spec:
+         selector: ibm.role == 'worker_public'
+         ingress:
+         - action: Allow
+           protocol: TCP
+           destination:
+             ports:
+             - 22
+         - action: Allow
+           protocol: UDP
+           destination:
+             ports:
+             - 22
+         order: 1500
+       EOF
+       ```
+       {: pre}
     3. Get the public IP address of your worker node.
       ```sh
       kubectl get nodes -o wide
@@ -322,7 +328,7 @@ Allowing root SSH access is a security risk. Only allow SSH access when it is re
       ```
       {: pre}
 
-6. Run debug commands to help you gather information and troubleshoot issues, such as `ip`, `ifconfig`, `nc`, `tcpdump`, `ping`, `ps`, and `curl`.
+6. Run debug commands to help you gather information and troubleshoot issues, such as `ip`, `ifconfig`, `nc`, `tcpdump`, `ping`, `ps`, and `curl`. You can also install other tools, such as `mtr`, by running `yum install <tool>`.
 
 7. After you finish debugging, clean up resources to disable SSH access.
   1. Delete the SSH enablement pod.

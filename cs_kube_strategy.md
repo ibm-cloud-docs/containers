@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, containers
 
@@ -137,9 +137,9 @@ With {{site.data.keyword.cloud_notm}}, you have flexibility to create Kubernetes
 
 Great! You're already in our public cloud documentation. Keep reading for more strategy ideas, or hit the ground running by [creating a cluster now](/docs/containers?topic=containers-getting-started).
 
-**Interested in an on-premises cloud?**
+**Want to run workloads in both on-premises and off-premises clouds?**
 
-Explore the [{{site.data.keyword.cloud_notm}} Private documentation](https://www.ibm.com/docs/en/cloud-private/3.2.x){: external}. If you already have significant investments in IBM technology such as WebSphere Application Server and Liberty, you can optimize your {{site.data.keyword.cloud_notm}} Private modernization strategy with various tools.
+Explore [{{site.data.keyword.satellitelong_notm}}](/docs/satellite?topic=satellite-about) to extend the flexibility and scalability of {{site.data.keyword.cloud_notm}} into your on-premises, edge, or other cloud provider environments.
 
 ### Can I automate my infrastructure deployments?
 {: #infra_packaging}
