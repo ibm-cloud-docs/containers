@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -92,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Archived Kubernetes version changelogs
 {: #changelog_archive}
 
@@ -1292,7 +1292,7 @@ The following table shows the changes that are included in the master fix pack `
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration to minimize [cluster service DNS resolution failures when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck). Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
+| CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration to minimize [cluster service DNS resolution failures when CoreDNS pods are restarted](/docs/containers?topic=containers-coredns_lameduck). Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | etcd | v3.3.15 | v3.3.17 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.17){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, and [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}. |
 | Gateway-enabled cluster controller | 844 | 924 | Updated image for [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}, and [CVE-2019-16276](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-16276){: external}. |
 | GPU device plug-in and installer | de13f2a | 9cd3df7 | Updated image for [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}. |
@@ -1679,7 +1679,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-debug_clusters).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>
@@ -2126,7 +2126,7 @@ The following table shows the changes that are included in the master fix pack `
 
 | Component | Previous | Current | Description |
 | --------- | -------- | ------- | ----------- |
-| CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration to minimize [cluster service DNS resolution failures when CoreDNS pods are restarted](/docs/containers?topic=containers-cs_troubleshoot_network#coredns_lameduck). Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
+| CoreDNS configuration | N/A | N/A | Changed the default CoreDNS configuration to minimize [cluster service DNS resolution failures when CoreDNS pods are restarted](/docs/containers?topic=containers-coredns_lameduck). Existing CoreDNS configurations are unchanged. For more information about changing your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
 | etcd | v3.3.15 | v3.3.17 | See the [etcd release notes](https://github.com/etcd-io/etcd/releases/v3.3.17){: external}. Update resolves [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, and [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}. |
 | GPU device plug-in and installer | de13f2a | 9cd3df7 | Updated image for [CVE-2019-5094](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-5094){: external}. |
 | {{site.data.keyword.cloud_notm}} File Storage plug-in and monitor | 349 | 350 | Added the ability to [scale down the plug-in replicas to zero](/docs/containers?topic=containers-file_storage#file_scaledown_plugin), to conserve cluster resources if you do not need file storage. Updated image for [CVE-2019-1547](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1547){: external}, [CVE-2019-1549](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1549){: external}, and [CVE-2019-1563](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2019-1563){: external}. |
@@ -2499,7 +2499,7 @@ The following table shows the changes that are included in the master fix pack 1
 <td>Cluster health</td>
 <td>N/A</td>
 <td>N/A</td>
-<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-cs_troubleshoot#debug_clusters).</td>
+<td>Cluster health shows `Warning` state if a cluster control plane operation failed or was canceled. For more information, see [Debugging clusters](/docs/containers?topic=containers-debug_clusters).</td>
 </tr>
 <tr>
 <td>GPU device plug-in and installer</td>

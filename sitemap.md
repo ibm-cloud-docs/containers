@@ -2708,6 +2708,8 @@ subcollection: containers
 
 [Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails)
 
+[VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb)
+
 [Why does no Ingress subdomain exist after cluster creation?](/docs/containers?topic=containers-ingress_subdomain)
 
 [Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit)
@@ -2755,7 +2757,12 @@ subcollection: containers
 [File storage: Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage)
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage){: external}
+
+
+## Block Storage
+{: #sitemap_block_storage}
+
+* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
@@ -2764,7 +2771,12 @@ subcollection: containers
 [Block storage: Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
 
 [Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage){: external}
+
+
+## Object Storage
+{: #sitemap_object_storage}
+
+* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
@@ -2786,7 +2798,12 @@ subcollection: containers
 [Object storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
 
 [Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage){: external}
+
+
+## Portworx
+{: #sitemap_portworx}
+
+* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)

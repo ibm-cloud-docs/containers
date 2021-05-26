@@ -386,7 +386,7 @@ Set up logging and monitoring to help you troubleshoot issues and improve the he
 2. **Audit logging**: [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_full_notm}}](/docs/containers?topic=containers-health-audit)
 3. **Monitoring**: [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
 
-</br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health).
+</br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
 
 
 <br />
@@ -412,7 +412,7 @@ Plan and add highly available persistent storage based on your app requirements,
 2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage_planning).
 3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage_planning#non_persistent_overview), [single-zone persistent](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage), or [multizone persistent](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) storage.
 
-</br>Need help? Check out [Troubleshooting persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage).
+</br>Need help? Check out [Troubleshooting persistent storage](/docs/containers?topic=containers-debug_storage).
 
 <br />
 

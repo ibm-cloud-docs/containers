@@ -338,7 +338,7 @@ Kubernetes Service
             ts-ingress/ts-ingress-status.md
             ts-ingress/ts-ingress-debug.md
             ts-ingress/ts-ingress-app.md
-            ts-ingress/ts-ingress-iks-vpc-app.md
+            ts-ingress/ts-ingress-vpc-app.md
             ts-ingress/ts-ingress-iks-no-subdomain-create.md
             ts-ingress/ts-ingress-subdomain-dupe-name.md
             ts-ingress/ts-ingress-no-secret.md
@@ -361,19 +361,19 @@ Kubernetes Service
             ts-storage/ts-storage-file-nonroot.md
             ts-storage/ts-storage-file-readonly.md
             ts-storage/ts-storage-feedback.md
-            
+
         {: .topicgroup}
         Block Storage
-            [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage)
+            [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage)
             ts-storage/ts-storage-block-app-pvc.md
             ts-storage/ts-storage-block-mount-wrong-fs.md
             ts-storage/ts-storage-block-read-only.md
             ts-storage/ts-storage-block-throttling.md
-            
-            
+
+
         {: .topicgroup}
         Object Storage
-            [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage)
+            [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage)
             ts-storage/ts-storage-object-access-bucket.md
             ts-storage/ts-storage-object-helm-fails.md
             ts-storage/ts-storage-object-nonroot.md
@@ -385,10 +385,10 @@ Kubernetes Service
             ts-storage/ts-storage-object-pvc-pending.md
             ts-storage/ts-storage-object-pvc-pod-fail-secret.md
             ts-storage/ts-storage-object-transport-ep.md
-            
+
         {: .topicgroup}
         Portworx
-            [Debugging persistent storage failures](https://cloud.ibm.com/docs/openshift?topic=openshift-debug_storage)
+            [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage)
             ts-storage/ts-storage-px-debug.md
             ts-storage/ts-storage-px-encryption-fails.md
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-25"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -352,7 +352,7 @@ The following steps show you how to expose your apps with the Kubernetes Ingress
   ```
   {: pre}
 
-Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.
+Having trouble connecting to your app through Ingress? Try [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug). You can check the health and status of your Ingress components by running `ibmcloud ks ingress status -c <cluster_name_or_ID>`.
 {: tip}
 
 <br />

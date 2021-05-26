@@ -381,7 +381,7 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
   1. [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
   2. If you expose your app by using [Ingress](#dev_expose), you can set up [logging for requests that are proxied by your ALBs](/docs/containers?topic=containers-ingress_health).
 
-</br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_troubleshoot_health#cs_troubleshoot_health).
+</br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
 
 <br />
 
@@ -435,7 +435,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
       * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_private).
       * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).
 
-</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-cs_troubleshoot_debug_ingress) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
+</br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
 
 <br />
 
@@ -446,7 +446,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage_planning).
 3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage_planning#non_persistent_overview), [single-zone persistent](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage), or [multizone persistent](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) storage.
 
-</br>Need help? Check out [Troubleshooting persistent storage](/docs/containers?topic=containers-cs_troubleshoot_storage).
+</br>Need help? Check out [Troubleshooting persistent storage](/docs/containers?topic=containers-debug_storage).
 
 <br />
 
