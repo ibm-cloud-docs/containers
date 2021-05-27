@@ -1465,7 +1465,7 @@ subcollection: containers
   * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
   * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-* [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help)
+* [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help_sup)
   * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
