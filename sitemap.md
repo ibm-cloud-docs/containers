@@ -2804,8 +2804,8 @@ subcollection: containers
 [Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
 
 
-## Portworx
-{: #sitemap_portworx}
+## Portworx Storage
+{: #sitemap_portworx_storage}
 
 * [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
