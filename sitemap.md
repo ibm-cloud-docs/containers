@@ -1462,7 +1462,7 @@ subcollection: containers
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
   * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
-  * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
+  * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster-px)
   * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
 * [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help_sup)
