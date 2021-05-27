@@ -105,7 +105,7 @@ Review the following information to verify your Portworx installation and get st
 - [Mounting the volume to your app](#px-mount-pvc)
 
 ## Verifying your Portworx installation
-{: #px-verify-installation}
+{: #px-verify-installation-px}
 
 Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
 {: shortdesc}
