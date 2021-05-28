@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks, containers
 
@@ -335,7 +335,7 @@ Create a cluster with infrastructure, network, and availability setups that are 
     3. [Choose the scope of user access to cluster instances, Kubernetes namespace, or resource groups](/docs/containers?topic=containers-users#resource_groups).
   2. Allow users to create apps or audit your cluster activity by [assigning cluster access](/docs/containers?topic=containers-users#platform). To see specific permissions and actions that you can grant users, see the [user access permissions reference](/docs/containers?topic=containers-access_reference).
 
-</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-debug_clusters) and [Troubleshooting worker nodes](/docs/containers?topic=containers-debug_worker_nodes.
+</br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-debug_clusters) and [Troubleshooting worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 
 <br />
 
@@ -431,7 +431,7 @@ Enhance cluster capabilities by integrating various external services and catalo
   * [Adding services by using Helm](/docs/containers?topic=containers-helm)
   * [Adding services by using {{site.data.keyword.cloud_notm}} service binding](/docs/containers?topic=containers-service-binding)
 
-</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_worker_nodes.
+</br>Need help? Check out [Troubleshooting apps and integrations](/docs/containers?topic=containers-debug_worker_nodes).
 
 <br />
 

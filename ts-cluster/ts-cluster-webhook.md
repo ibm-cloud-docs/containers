@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks
 
@@ -203,7 +203,7 @@ Identify and restore the resource that causes the broken webhook.
         {: pre}
 6.  Retry the cluster master operation, such as updating the cluster.
 7.  If you still see the error, you might have worker node or network connectivity issues.
-    *   [Worker node troubleshooting](/docs/containers?topic=containers-debug_worker_nodes.
+    *   [Worker node troubleshooting](/docs/containers?topic=containers-debug_worker_nodes).
     *   Make sure that the webhook can connect to the Kubernetes API server in the cluster master. For example, if you use Calico network policies, security groups, or some other type of firewall, set up your [classic](/docs/containers?topic=containers-firewall) or [VPC](/docs/containers?topic=containers-vpc-firewall) cluster with the appropriate access.
     *   If the webhook is managed by an add-on that you installed, uninstall the add-on. Common add-ons that cause webhook issues include the following:
         * [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec)
