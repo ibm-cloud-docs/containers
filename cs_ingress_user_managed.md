@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, nginx, iks multiple ingress controllers, byo controller
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Bringing your own Ingress controller
 {: #ingress-user_managed}
@@ -389,5 +390,3 @@ In classic clusters, bringing your own Ingress controller is supported only for 
   https://<load_balancer_subdomain>/<app_path>
   ```
   {: codeblock}
-
-
