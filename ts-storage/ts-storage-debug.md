@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -285,7 +285,7 @@ Review the options to debug persistent storage and find the root causes for fail
 
    4. If a more recent version is available, install this version. For instructions, see [Updating the {{site.data.keyword.cloud_notm}} Block Storage plug-in](/docs/containers?topic=containers-block_storage#update_block) and [Updating the {{site.data.keyword.cos_full_notm}} plug-in](/docs/containers?topic=containers-object_storage#update_cos_plugin).
 
- ## Portworx
+## Portworx
 {: #ts-portworx-helm}
 
    1. Find the [latest Helm chart version](https://github.com/IBM/charts/tree/master/community/portworx){: external} that is available.

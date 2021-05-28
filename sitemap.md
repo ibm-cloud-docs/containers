@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-05-28"
 
 keywords: containers
 subcollection: containers
@@ -1461,11 +1461,11 @@ subcollection: containers
 * [Setting up disaster recovery with Portworx](/docs/containers?topic=containers-portworx#px-dr)
 * [Exploring other Portworx features](/docs/containers?topic=containers-portworx#features)
 * [Cleaning up your Portworx volumes and cluster](/docs/containers?topic=containers-portworx#portworx_cleanup)
-  * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc)
-  * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster)
+  * [Removing Portworx volumes from apps](/docs/containers?topic=containers-portworx#remove_pvc_apps_volumes)
+  * [Removing a worker node from your Portworx cluster or the entire Portworx cluster](/docs/containers?topic=containers-portworx#remove_storage_node_cluster-px)
   * [Removing the Portworx daemon set](/docs/containers?topic=containers-portworx#remove_px_daemonset)
   * [Removing Portworx from your cluster](/docs/containers?topic=containers-portworx#remove_portworx)
-* [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help)
+* [Getting help and support](/docs/containers?topic=containers-portworx#portworx_help_sup)
   * [Gathering logs](/docs/containers?topic=containers-portworx#portworx_logs)
 * [Limitations](/docs/containers?topic=containers-portworx#portworx_limitations)
 
@@ -2744,6 +2744,7 @@ subcollection: containers
 * [Restarting your app pod](/docs/containers?topic=containers-debug_storage#ts-restart-app-pod)
 * [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage#verify_driver_pod_running_status)
 * [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage#check_pvc_provision)
+* [Portworx](/docs/containers?topic=containers-debug_storage#ts-portworx-helm)
 
 [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions)
 
@@ -2804,8 +2805,8 @@ subcollection: containers
 [Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
 
 
-## Portworx
-{: #sitemap_portworx}
+## Portworx Storage
+{: #sitemap_portworx_storage}
 
 * [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 

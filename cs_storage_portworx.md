@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks,
 
@@ -106,7 +106,7 @@ subcollection: containers
 
 
 ## About Portworx
-{: about-portworx}
+{: #about-portworx}
 
 Review frequently asked questions to learn more about Portworx and how Portworx provides highly available persistent storage management for your containerized apps.
 {: shortdesc}
@@ -1276,6 +1276,8 @@ If a cluster that you want to back up with PX-Backup does not have Portworx Ente
 
 ### Backing up and restoring cluster data with PX-Backup
 {: #px-backup-and-restore}
+
+
 To back up data from your cluster or to restore data to your cluster, refer to the [PX-Backup documentation](https://backup.docs.portworx.com/use-px-backup/backup-restore/){: external}.
 {: shortdesc}
 
@@ -1348,7 +1350,7 @@ Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_c
 {: shortdesc}
 
 ### Removing Portworx volumes from apps
-{: #remove_pvc}
+{: #remove_pvc_apps_volumes}
 
 When you added storage from your Portworx cluster to your app, you have three main components: the Kubernetes persistent volume claim (PVC) that requested the storage, the Kubernetes persistent volume (PV) that is mounted to your pod and described in the PVC, and the Portworx volume that blocks space on the physical disks of your Portworx cluster. To remove storage from your app, you must remove all components.
 {: shortdesc}
@@ -1444,7 +1446,7 @@ When you added storage from your Portworx cluster to your app, you have three ma
    {: pre}
 
 ### Removing a worker node from your Portworx cluster or the entire Portworx cluster
-{: #remove_storage_node_cluster}
+{: #remove_storage_node_cluster-px}
 
 You can exclude worker nodes from your Portworx cluster or remove the entire Portworx cluster if you do not want to use Portworx anymore.
 {: shortdesc}
@@ -1557,7 +1559,7 @@ To stop billing for Portworx, you must remove the Portworx Helm installation fro
 
 <br />
 ## Getting help and support
-{: #portworx_help}
+{: #portworx_help_sup}
 
 If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`. You can also [gather logging information](#portworx_logs) before opening a support ticket.
 
@@ -1613,5 +1615,8 @@ Review the following Portworx limitations.
 | The Portworx experimental `InitializerConfiguration` feature is not supported. | {{site.data.keyword.containerlong_notm}} does not support the [Portworx experimental `InitializerConfiguration` admission controller](https://docs.portworx.com/portworx-install-with-kubernetes/storage-operations/hyperconvergence/#initializer-experimental-feature-in-stork-v1-1). |
 {: summary="This table contains information on limitations for Portworx on {{site.data.keyword.containerlong_notm}} clusters. Columns are read from left to right. In the first column is the type of limitation and in the second column is the description of the limitation."}
 {: caption="Portworx limitations"}
+
+
+
 
 

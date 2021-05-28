@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-20"
+lastupdated: "2021-05-26"
 
 keywords: autoscaler, add-on, autoscaler changelog
 
@@ -109,8 +109,8 @@ Version `1.0.1` of {{site.data.keyword.block_storage_is_short}} add-on is deprec
 
 | Cluster autoscaler add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
-| 1.0.2 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15.0 - < 1.20.0</li></ul> |
-| 1.0.1 | | Kubernetes 1.15.0 - < 1.20.0</li></ul> |
+| 1.0.2 | <img src="images/icon-checkmark-confirm.svg" width="32" alt="Supported" style="width:32px;" /> | Kubernetes 1.15.0 < 1.21.0</li></ul> |
+| 1.0.1 | | Kubernetes 1.15.0 < 1.20.0</li></ul> |
 {: summary="The rows are read from left to right. The first column is the cluster autoscaler add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the cluster autoscaler version is supported for."}
 
 ## Changelog for 1.0.2, released 08 March 2021
@@ -127,7 +127,7 @@ ibmcloud ks addon-versions
 
 | Patch version | Image tags | Release date | Supported Kubernetes versions | Description |
 | --- | --- | --- | --- | --- |
-| `1.0.2_267` | <ul>`1.17.4-3`</li><li>`1.18.3-3`</li><li>`1.19.1-3`</li><li>`1.20.0-3`</li></ul> | 10 May 2021 | 1.17 - <1.21.0</li></ul> | Includes a bux fix for the `worker replace` command on VPC clusters that caused worker creation to fail. |
+| `1.0.2_267` | <ul>`1.17.4-3`</li><li>`1.18.3-3`</li><li>`1.19.1-3`</li><li>`1.20.0-3`</li></ul> | 10 May 2021 | 1.17 <1.21.0 | Includes a bux fix for the `worker replace` command on VPC clusters that caused worker creation to fail. |
 | `1.0.2_256` | <ul>`1.17.4-2`</li><li>`1.18.3-2`</li><li>`1.19.1-2`</li><li>`1.20.0-2`</li></ul> | 19 April 2021 | 1.17 - 1.20</li></ul> | Includes fixes for [CVE-2021-27919](https://nvd.nist.gov/vuln/detail/CVE-2021-27919){: external} and [CVE-2021-27918](https://nvd.nist.gov/vuln/detail/CVE-2021-27918){: external}. |
 | `1.0.2_249` | <ul><li>`1.16.7-1`</li><li>`1.17.4-1`</li><li>`1.18.3-1`</li><li>`1.19.1-1`</li><li>`1.20.0-1`</li></ul> | 01 April 2021 | 1.17 - 1.20</li></ul> | <ul><li>Includes fixes for [CVE-2021-3114](https://nvd.nist.gov/vuln/detail/CVE-2021-3114){: external} and [CVE-2021-3115](https://nvd.nist.gov/vuln/detail/CVE-2021-3115){: external}.</li><li>Removes the `init` container. Prior to this update, the cluster autoscaler pods would remain in the `initContainer` state if the API key that is provided is missing or malformed. This update removes the `init` container so that if the API key is missing or malformed, the cluster autoscaler pod fails.</li></ul>.  |
 | `1.0.2_224` | <ul><li>`1.16.7-0`</li><li>`1.17.4-0`</li><li>`1.18.3-0`</li><li>`1.19.1-0`</li><li>`1.20.0-0`</li></ul> | 09 March 2021 | 1.17 - 1.20</li></ul> | Adds support for Kubernetes version 1.20. |

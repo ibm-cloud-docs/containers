@@ -387,7 +387,7 @@ Kubernetes Service
             ts-storage/ts-storage-object-transport-ep.md
 
         {: .topicgroup}
-        Portworx
+        Portworx Storage
             [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage)
             ts-storage/ts-storage-px-debug.md
             ts-storage/ts-storage-px-encryption-fails.md

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-05-26"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -352,7 +352,6 @@ The following table shows the actions that you must take before you update the K
 
 | Type | Description|
 | --- | --- |
-| **Unavailable**: Select cluster add-ons | Before you update your cluster, check that you do not need the [cluster autoscaler](/docs/containers?topic=containers-ca_changelog) add-on, which is not supported in Kubernetes 1.20.|
 | **Unsupported:** Open access to the Kubernetes Dashboard metrics scraper | A Kubernetes network policy is added to protect access to the Kubernetes Dashboard metrics scraper. If a pod requires access to the dashboard metrics scraper, deploy the pod in a namespace that has the `dashboard-metrics-scraper-policy: allow` label. For more information, see [Controlling traffic with network policies](/docs/containers?topic=containers-network_policies). |
 | Pod exec probe timeout handling | [Pod exec probes now honor the `timeoutSeconds` field](https://kubernetes.io/blog/2020/12/08/kubernetes-1-20-release-announcement/#exec-probe-timeout-handling){: external}. If an exec probe does not set the `timeoutSeconds` field, the default of `1` second is used. If the default value is not sufficient for your app, update the pod exec probe.|
 | Resolve non-deterministic behavior of owner references | Kubernetes garbage collector is updated to resolve non-deterministic behavior of owner references. Before you update your cluster, review the [Kubernetes community recommendation](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.20.md#urgent-upgrade-notes){: external} that you run the [kubectl-check-ownerreferences](https://github.com/kubernetes-sigs/kubectl-check-ownerreferences){: external} tool to locate existing objects with invalid owner references. |

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-05-27"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -105,7 +105,7 @@ Review the following information to verify your Portworx installation and get st
 - [Mounting the volume to your app](#px-mount-pvc)
 
 ## Verifying your Portworx installation
-{: #px-verify-installation}
+{: #px-verify-installation-px}
 
 Verify that your Portworx installation completed successfully and that all your local disks were recognized and added to the Portworx storage layer.
 {: shortdesc}
@@ -472,7 +472,7 @@ To access the storage from your app, you must mount the PVC to your app.
 
 
 ## Cleaning up your Portworx volumes and cluster
-{: #portworx_cleanup}
+{: #portworx_cleanup_volumes}
 
 Remove a [Portworx volume](#remove_pvc), a [storage node](#remove_storage_node_cluster), or the [entire Portworx cluster](#remove_storage_node_cluster) if you do not need it anymore.
 {: shortdesc}
@@ -588,6 +588,6 @@ Removing your Portworx cluster removes all the data from your Portworx cluster. 
 <br />
 
 ## Getting help and support
-{: #portworx_help}
+{: #portworx_help_and_support}
 
 If you run into an issue with using Portworx, you can open an issue in the [Portworx Service Portal](https://pure1.purestorage.com/support){: external}. You can also submit a request by sending an e-mail to `support@purestorage.com`. If you do not have an account on the Portworx Service Portal, send an e-mail to `support@purestorage.com`.
