@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks
 
@@ -92,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Configuring pod security policies
 {: #psp}
@@ -123,7 +123,7 @@ When you as a user create a pod directly and not by using a controller such as a
 
 When you create a pod by using a resource controller such as a deployment, Kubernetes validates the pod's service account credentials against the pod security policies that the service account is authorized to use. If no policy supports the pod security requirements, the controller succeeds, but the pod is not created.
 
-For common error messages, see [Pods fail to deploy because of a pod security policy](/docs/containers?topic=containers-cs_psp).
+For common error messages, see [Pods fail to deploy because of a pod security policy](/docs/containers?topic=containers-psp).
 
 **Why can I still create privileged pods when I am not part of the `privileged-psp-user` cluster role binding?**
 

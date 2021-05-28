@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-27"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks, local persistent storage
 
@@ -92,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Getting started with Portworx
 {: #getting-started-with-portworx}
@@ -100,7 +100,7 @@ subcollection: containers
 Review the following information to verify your Portworx installation and get started with adding highly available local persistent storage to your containerized apps.
 {: shortdesc}
 
-- [Verifying your Portworx installation](#px-verify-installation)
+- [Verifying your Portworx installation](#px-verify-installation-px)
 - [Creating a Portworx volume](#px-add-storage)
 - [Mounting the volume to your app](#px-mount-pvc)
 
