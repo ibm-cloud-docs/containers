@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-05-28"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -142,7 +143,7 @@ Use an `IstioOperator` (IOP) to create a custom ingress gateway deployment and p
    spec:
      profile: empty
      hub: icr.io/ext/istio
-     # tag: 1.9.4
+     # tag: 1.9.5
      components:
        ingressGateways:
          - name: custom-ingressgateway
@@ -398,7 +399,7 @@ Note the following considerations:
 Manually update and control the managed Istio version of custom ingress gateways.
 {: shortdesc}
 
-{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.9.4 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
+{{site.data.keyword.cloud_notm}} keeps all your Istio components up-to-date by automatically rolling out patch updates to the most recent version of Istio that is supported by {{site.data.keyword.containerlong_notm}}. For example, when patch version 1.9.5 is released, all ingress gateway pods are automatically updated to this latest patch version. Patch versions are completed by using the rolling update strategy to avoid downtime for your apps. However, you might want to prevent automatic updates of custom gateway pods, such as if you want to test for any potential regressions with the latest patch version.
 
 To manage updates for your custom ingress gateways, you might use the following rollout strategy:
 1. [Create a custom ingress gateway IOPs](#custom-ingress-gateway-public). In the `tag` field, specify a patch version that is the same or earlier than the control plane version. You can find the control plane version by running `istioctl version`.
@@ -430,7 +431,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.9.4 # Force the gateway to a specific managed Istio version
+  # tag: 1.9.5 # Force the gateway to a specific managed Istio version
   components:
     ingressGateways:
       - name: custom-ingressgateway
@@ -500,7 +501,7 @@ metadata:
 spec:
   profile: empty
   hub: icr.io/ext/istio
-  # tag: 1.9.4 # Force the Gateway to a specific version
+  # tag: 1.9.5 # Force the Gateway to a specific version
   components:
     egressGateways:
       - name: custom-egressgateway
