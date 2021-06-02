@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -108,7 +108,7 @@ The Ingress application load balancer (ALB) is a layer 7 load balancer which imp
 Ingress consists of three components:
 *   Ingress resources
 *   Application load balancers (ALBs)
-*   A multizone load balancer (MZLB).A load balancer to handle incoming requests across zones. For classic clusters, this component is the multizone load balancer (MZLB) that {{site.data.keyword.containerlong_notm}} creates for you. For VPC clusters, this component is the VPC load balancer that is created for you in your VPC.
+*   A multizone load balancer (MZLB). A load balancer to handle incoming requests across zones. For classic clusters, this component is the multizone load balancer (MZLB) that {{site.data.keyword.containerlong_notm}} creates for you. For VPC clusters, this component is the VPC load balancer that is created for you in your VPC.
 {: shortdesc}
 
 ### Ingress resource
@@ -157,7 +157,7 @@ Do not delete the services that expose your ALBs on public or private IP address
 ### Multizone load balancer (MZLB) or Load Balancer for VPC
 {: #mzlb}
 
-Depending on whether you have a classic or VPC cluster, a Cloudflare multizone load balancer (MZLB) or a Load Balancer for VPC health checks your ALBs.A Cloudflare multizone load balancer (MZLB) health checks your ALBs.
+Depending on whether you have a classic or VPC cluster, a Cloudflare multizone load balancer (MZLB) or a Load Balancer for VPC health checks your ALBs. A Cloudflare multizone load balancer (MZLB) health checks your ALBs.
 {: shortdesc}
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters: Multizone load balancer (MZLB)**

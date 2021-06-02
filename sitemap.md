@@ -1840,7 +1840,6 @@ subcollection: containers
   * [Version 0.34.1](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
-* [Deprecated: {{site.data.keyword.containerlong_notm}} Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#alb_changelog)
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)

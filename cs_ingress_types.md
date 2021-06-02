@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-02"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -103,7 +103,7 @@ subcollection: containers
 
 **Clusters created before 01 December 2020**:
 * Existing clusters with ALBs that run the custom IBM Ingress image continue to operate as-is.
-* Support for the custom IBM Ingress image ended on 01 June 2021.
+* Support for the custom IBM Ingress image ended on 02 June 2021.
 * You must move to the new Kubernetes Ingress by migrating any existing Ingress setups. Your existing ALBs and other Ingress resources are not automatically migrated to the new Kubernetes Ingress image.
 * You can easily migrate to Kubernetes Ingress by using the [migration tool](/docs/containers?topic=containers-ingress-types#alb-type-migration) that is developed and supported by IBM Cloud Kubernetes Service.
 * Any ALBs with the unsupported image continue to run, but are not supported by IBM.
@@ -1088,7 +1088,7 @@ Choose the image type and image version for your ALBs, and keep the image versio
 
 **Clusters created before 01 December 2020**:
 * Existing clusters with ALBs that run the custom IBM Ingress image continue to operate as-is.
-* Support for the custom IBM Ingress image ended on 01 June 2021.
+* Support for the custom IBM Ingress image ended on 02 June 2021.
 * You must move to the new Kubernetes Ingress by migrating any existing Ingress setups. Your existing ALBs and other Ingress resources are not automatically migrated to the new Kubernetes Ingress image.
 * You can easily migrate to Kubernetes Ingress by using the [migration tool](/docs/containers?topic=containers-ingress-types#alb-type-migration) that is developed and supported by IBM Cloud Kubernetes Service.
 * Any ALBs with the unsupported image continue to run, but are not supported by IBM.
