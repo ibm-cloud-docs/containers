@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-18"
+lastupdated: "2021-06-02"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -94,26 +95,4 @@ content-type: troubleshoot
   
   
 
-# VPC: Why doesn't replacing a worker node create a worker node?
-{: #auto-rebalance-off}
-
-**Infrastructure provider**: <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-{: tsSymptoms}
-When you [replace a worker node](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cli_worker_replace) or [update a VPC worker node](/docs/containers?topic=containers-update#vpc_worker_node), a worker node is not automatically added back to your cluster.
-
-{: tsCauses}
-By default, your worker pools are set to automatically rebalance when you replace a worker node. However, you might have disabled automatic rebalancing by manually removing a worker node, such as in the following scenario.
-
-1.  You have a worker pool that automatically rebalances by default.
-2.  You have a troublesome worker node in the worker pool that you removed individually, such as with the `ibmcloud ks worker rm` command.
-3.  Now, automatic rebalancing is disabled for your worker pool, and is not reset unless you try to rebalance or resize the worker pool.
-4.  You try to replace a worker node with the `ibmcloud ks worker replace` command or update a VPC worker node with the `ibmcloud ks worker replace --update` command. The worker node is removed, but another worker node is not added back to your worker pool.
-
-You might also have issued the `remove` command shortly after the `replace` command. If the `remove` command is processed before the `replace` command, the worker pool automatic rebalancing is still disabled, so your worker node is not replaced.
-{: note}
-
-{: tsResolve}
-To enable automatical rebalancing, [rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) or [resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) your worker pool. Now, when you replace a worker node, another worker node is created for you.
-
-
+{[pg-ts-worker/ts-worker-autorebalance.md]}

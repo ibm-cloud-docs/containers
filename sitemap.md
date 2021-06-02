@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-01"
+lastupdated: "2021-06-02"
 
 keywords: containers
 subcollection: containers
@@ -2409,35 +2409,6 @@ subcollection: containers
 {: #sitemap_clusters_and_masters}
 
 
-[Debugging clusters](/docs/containers?topic=containers-debug_clusters)
-
-[Reviewing master health](/docs/containers?topic=containers-debug_master)
-* [Reviewing master health, status, and states](/docs/containers?topic=containers-debug_master#review-master-health)
-* [Understanding the impact of a master outage](/docs/containers?topic=containers-debug_master#review-master-outage)
-
-[Debugging common CLI issues with clusters](/docs/containers?topic=containers-ts_clis)
-* [Firewall prevents running CLI commands](/docs/containers?topic=containers-ts_clis#ts_firewall_clis)
-* [`kubectl` commands do not work](/docs/containers?topic=containers-ts_clis#kubectl_fails)
-* [`kubectl` commands time out](/docs/containers?topic=containers-ts_clis#exec_logs_fail)
-
-[Why can't I create or delete clusters?](/docs/containers?topic=containers-cluster_infra_errors)
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-cluster_infra_errors#cs_credentials)
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-cluster_infra_errors#orphaned)
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-cluster_infra_errors#vpe-ts)
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-cluster_infra_errors#cs_totp)
-
-[VPC: Why is no VPC available when I create a cluster in the console?](/docs/containers?topic=containers-ts_no_vpc)
-
-[Why can't the cluster pull images from {{site.data.keyword.registrylong_notm}} during creation?](/docs/containers?topic=containers-ts_image_pull_create)
-
-[Why do cluster operations fail due to a broken webhook?](/docs/containers?topic=containers-webhooks_update)
-
-[Why is my Portieris cluster image security enforcement installation canceled?](/docs/containers?topic=containers-portieris_enable)
-
-[Why does my cluster stay in a pending state?](/docs/containers?topic=containers-cs_cluster_pending)
-
-[Why can't I view or work with my cluster?](/docs/containers?topic=containers-cs_cluster_access)
-
 [Classic: Why can't I access resources in my cluster?](/docs/containers?topic=containers-cs_firewall)
 
 
@@ -2445,63 +2416,10 @@ subcollection: containers
 {: #sitemap_worker_nodes}
 
 
-[Debugging worker nodes](/docs/containers?topic=containers-debug_worker_nodes)
-* [Step 1: Get the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-state)
-* [Step 2: Review the worker node state](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-state)
-* [Step 3: Get the details for each worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-get-details)
-* [Step 4: Review the infrastructure provider for the worker node](/docs/containers?topic=containers-debug_worker_nodes#worker-debug-rev-infra)
-
-[Debugging worker nodes with Kubernetes API](/docs/containers?topic=containers-debug-kube-nodes)
-
-[Common issues with worker nodes](/docs/containers?topic=containers-common_worker_nodes_issues)
-* [Account prohibited from ordering](/docs/containers?topic=containers-common_worker_nodes_issues#order-prohibit)
-* [Could not place order](/docs/containers?topic=containers-common_worker_nodes_issues#order-not-placed)
-* [Could not obtain network VLAN](/docs/containers?topic=containers-common_worker_nodes_issues#no-network-vlan)
-* [Location invalid](/docs/containers?topic=containers-common_worker_nodes_issues#location-invalid)
-* [Permissions error](/docs/containers?topic=containers-common_worker_nodes_issues#permissions-error)
-* [Firewall error](/docs/containers?topic=containers-common_worker_nodes_issues#firewall-error)
-* [Hard reboot](/docs/containers?topic=containers-common_worker_nodes_issues#hard-reboot)
-* [Instance cannot be found](/docs/containers?topic=containers-common_worker_nodes_issues#instance-not-found)
-
-[Why can't I create or delete worker nodes?](/docs/containers?topic=containers-worker_infra_errors)
-* [Unable to create or delete worker nodes due to permission errors](/docs/containers?topic=containers-worker_infra_errors#cs_credentials)
-* [Unable to create or delete worker nodes due to incorrect account error](/docs/containers?topic=containers-worker_infra_errors#orphaned)
-* [Unable to create or delete worker nodes due to endpoints error](/docs/containers?topic=containers-worker_infra_errors#vpe-ts)
-* [Unable to create or delete worker nodes due to paid account or one time password error](/docs/containers?topic=containers-worker_infra_errors#cs_totp)
-
-[VPC: Why doesn't replacing a worker node create a worker node?](/docs/containers?topic=containers-auto-rebalance-off)
-
-[Classic: Why is the bare metal instance ID inconsistent with worker records?](/docs/containers?topic=containers-bm_machine_id)
-
-[After deleting all worker nodes, why don't my pods start on new worker nodes?](/docs/containers?topic=containers-zero_nodes_calico_failure)
-
-[After a worker node updates or reloads, why do duplicate nodes and pods appear?](/docs/containers?topic=containers-cs_duplicate_nodes)
-
-[Classic: Why can't I add worker nodes with an invalid VLAN ID?](/docs/containers?topic=containers-suspended)
-
-[Classic: Why do I see a timeout error when I try to log in to a pod on a new worker node?](/docs/containers?topic=containers-cs_nodes_duplicate_ip)
-
-[Why can't I SSH into my worker node?](/docs/containers?topic=containers-cs_ssh_worker)
-* [Option 1: `kubectl debug`](/docs/containers?topic=containers-cs_ssh_worker#oc-debug)
-* [Option 2: `kubectl exec`](/docs/containers?topic=containers-cs_ssh_worker#kubectl-exec)
-* [Option 3: Create a pod with root SSH access](/docs/containers?topic=containers-cs_ssh_worker#pod-ssh)
-
 
 ## Cluster autoscaler
 {: #sitemap_cluster_autoscaler}
 
-
-[Debugging the cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler)
-* [Step 1: Check the version](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-version)
-* [Step 2: Check the configuration](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-config)
-* [Step 3: Review the cluster autoscaler status](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-status)
-* [Step 4: Check the cluster autoscaler pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod)
-* [Step 5: Search the pod logs](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-logs)
-* [Step 5: Restart the pod](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-pod-restart)
-* [Step 6: Disable and reenable](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-disable)
-* [Step 8: Check if the issue is resolved](/docs/containers?topic=containers-debug_cluster_autoscaler#ca-debug-more)
-
-[Why does the cluster autoscaler add-on fail with the pod stuck in `Init` state?](/docs/containers?topic=containers-ca_ts_secret)
 
 
 ## Cluster network
@@ -2510,12 +2428,6 @@ subcollection: containers
 
 [Why does DNS resolution fail when CoreDNS pods are restarted?](/docs/containers?topic=containers-coredns_lameduck)
 
-[Why can't I establish VPN connectivity with the strongSwan Helm chart?](/docs/containers?topic=containers-cs_vpn_fails)
-
-[Why can't I install a new strongSwan Helm chart release?](/docs/containers?topic=containers-cs_strongswan_release)
-
-[Why does strongSwan VPN connectivity fail after I add or delete worker nodes?](/docs/containers?topic=containers-cs_vpn_fails_worker_add)
-
 
 ## Logging and monitoring
 {: #sitemap_logging_and_monitoring_}
@@ -2523,43 +2435,19 @@ subcollection: containers
 
 [Why doesn't the Kubernetes dashboard display utilization graphs?](/docs/containers?topic=containers-cs_dashboard_graphs)
 
-[Why are my log lines so long?](/docs/containers?topic=containers-long_lines)
-
 
 ## Apps and services
 {: #sitemap_apps_and_services}
 
 
-[Debugging app deployments](/docs/containers?topic=containers-debug_apps)
-
-[Why do images fail to pull from registry with `ImagePullBackOff` or authorization errors?](/docs/containers?topic=containers-ts-app-image-pull)
-* [Troubleshooting image pull secrets that use API keys](/docs/containers?topic=containers-ts-app-image-pull#img-pull-api-key)
-* [Deprecated: Troubleshooting image pull secrets that use tokens](/docs/containers?topic=containers-ts-app-image-pull#img-pull-token)
-
-[Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start)
-
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp)
 
-[Why do pods remain in pending state?](/docs/containers?topic=containers-ts-app-pod-pending)
-
-[Why do pods repeatedly fail to restart or are unexpectedly removed?](/docs/containers?topic=containers-ts-app-pod-fail)
-* [Fixing container resource limits](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-resource-limits)
-* [Fixing pod replacement by higher priority pods](/docs/containers?topic=containers-ts-app-pod-fail#pod-fail-higher-priority)
-
 [Why does binding a service to a cluster result in a same name error?](/docs/containers?topic=containers-ts-app-svc-bind-name)
-
-[Why does binding a service to a cluster results in service not found error?](/docs/containers?topic=containers-ts-app-svc-bind-not-found)
-
-[Why does binding a service to a cluster results in service does not support service keys error?](/docs/containers?topic=containers-ts-app-svc-key)
-
-[Why can't I install a Helm chart with updated configuration values?](/docs/containers?topic=containers-ts-app-helm-install)
 
 
 ## Managed add-ons
 {: #sitemap_managed_add-ons}
 
-
-[Debugging cluster add-ons](/docs/containers?topic=containers-debug_addons)
 
 [Debugging Istio](/docs/containers?topic=containers-istio_debug_tool)
 
@@ -2570,25 +2458,10 @@ subcollection: containers
 {: #sitemap_load_balancers}
 
 
-[Classic clusters: Why can't my app connect via a network load balancer (NLB) service?](/docs/containers?topic=containers-cs_loadbalancer_fails)
-
-[Classic clusters: Why can't I deploy a load balancer?](/docs/containers?topic=containers-cs_subnet_limit_lb)
-
-[Classic clusters: Why does source IP preservation fail when using tainted nodes?](/docs/containers?topic=containers-cs_source_ip_fails_lb)
-
-[VPC clusters: Why can't my app connect via load balancer?](/docs/containers?topic=containers-vpc_ts_lb)
-
-[VPC clusters: Why does a Kubernetes `LoadBalancer` service fail with no IPs?](/docs/containers?topic=containers-vpc_no_lb)
-
 
 ## Ingress
 {: #sitemap_ingress}
 
-
-[Checking the status of Ingress components](/docs/containers?topic=containers-ingress-status)
-* [Getting the status and message](/docs/containers?topic=containers-ingress-status#check_status)
-* [Ingress statuses](/docs/containers?topic=containers-ingress-status#ingress_status)
-* [Ingress messages](/docs/containers?topic=containers-ingress-status#ingress_message)
 
 [Debugging Ingress](/docs/containers?topic=containers-ingress-debug)
 * [Step 1: Check your app deployment](/docs/containers?topic=containers-ingress-debug#app-debug-ingress)
@@ -2598,17 +2471,7 @@ subcollection: containers
 * [Step 5: Check your domain mappings and Ingress resource configuration](/docs/containers?topic=containers-ingress-debug#ts_ingress_config)
 * [Removing an ALB from DNS for debugging](/docs/containers?topic=containers-ingress-debug#one_alb)
 
-[Classic clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-cs_ingress_fails)
-
-[VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb)
-
 [Why does no Ingress subdomain exist after cluster creation?](/docs/containers?topic=containers-ingress_subdomain)
-
-[Why does no Ingress subdomain exist after I create clusters of the same or similar name?](/docs/containers?topic=containers-cs_rate_limit)
-
-[Why does no Ingress secret exist after cluster creation?](/docs/containers?topic=containers-ingress_secret)
-
-[Why isn't the Ingress secret expiration date updated?](/docs/containers?topic=containers-sync_cert_dates)
 
 [Why does ALB secret creation or deletion fail?](/docs/containers?topic=containers-cs_albsecret_fails)
 
@@ -2627,43 +2490,11 @@ subcollection: containers
 {: #sitemap_file_storage}
 
 
-[Debugging persistent storage failures](/docs/containers?topic=containers-debug_storage)
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage#check-pod-success-deploy)
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage#ts-restart-app-pod)
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage#verify_driver_pod_running_status)
-* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage#check_pvc_provision)
-* [Portworx](/docs/containers?topic=containers-debug_storage#ts-portworx-helm)
-
-[What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions)
-
-[File storage and block storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending)
-
-[File storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures)
-
-[File storage: Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root)
-
-[File storage: Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot)
-
-[File storage: Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot)
-* [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
-
-[File storage: Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
-
-[Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage)
-
 
 ## Block Storage
 {: #sitemap_block_storage}
 
 * [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
-
-[Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
-
-[Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
-
-[Block storage: Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
-
-[Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
 
 
 ## Object Storage
@@ -2671,39 +2502,11 @@ subcollection: containers
 
 * [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
-[Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
-
-[Object storage: Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails)
-
-[Object storage: Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access)
-* [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
-
-[Object Storage: Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted)
-
-[Object storage: Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error)
-
-[Object storage: Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails)
-
-[Object storage: Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure)
-
-[Object storage: Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure)
-
-[Object storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
-
-[Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
-
 
 ## Portworx Storage
 {: #sitemap_portworx_storage}
 
 * [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
-
-[Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
-* [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
-* [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-debug-portworx#px-verify-cluster)
-* [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-debug-portworx#px-support)
-
-[Portworx: Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint)
 
 
 ## Release notes

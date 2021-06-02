@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-06-02"
 
 keywords: kubernetes, iks
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,20 +92,6 @@ content-type: troubleshoot
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
- 
-
-# Why don't my containers start?
-{: #ts-app-container-start}
-
-**Infrastructure provider**:
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-{: tsSymptoms}
-The pods deploy successfully to clusters, but the containers do not start.
-
-{: tsCauses}
-Containers might not start when the registry quota is reached.
-
-{: tsResolve}
-[Free up storage in {{site.data.keyword.registrylong_notm}}.](/docs/Registry?topic=Registry-registry_quota#registry_quota_freeup)
+  
+  
+{[pg-ts-app/ts-app-container-start.md]}
