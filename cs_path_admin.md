@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-02"
 
 keywords: kubernetes, iks, containers
 
@@ -448,6 +448,6 @@ Manage your cluster and worker nodes through each phase of the cluster lifecycle
   * [Fluentd and Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * **Removing**: [Remove clusters and clean up related resources](/docs/containers?topic=containers-remove).
 
-</br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-debug_clusters), [worker nodes](/docs/containers?topic=containers-debug_worker_nodes, or the [cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler).
+</br>Need help? Check out troubleshooting [clusters and masters](/docs/containers?topic=containers-debug_clusters), [worker nodes](/docs/containers?topic=containers-debug_worker_nodes), or the [cluster autoscaler](/docs/containers?topic=containers-debug_cluster_autoscaler).
 
 
