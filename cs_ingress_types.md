@@ -1106,9 +1106,6 @@ ibmcloud ks ingress alb versions
 
 Example output:
 ```
-IBM Cloud Ingress: 'auth' version
-{[iks-ingress-auth]}
-
 Kubernetes Ingress versions
 0.45.0_1228_iks (default)
 0.35.0_1182_iks
