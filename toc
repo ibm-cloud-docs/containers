@@ -178,7 +178,6 @@ Kubernetes Service
             cs_ingress_types.md
             cs_ingress_comm_annotations.md
             cs_ingress_user_managed.md
-            cs_troubleshoot_debug_ingress.md
 
     {: .topicgroup}
     Storing data on persistent storage
