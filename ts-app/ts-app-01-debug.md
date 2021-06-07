@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-03"
 
 keywords: kubernetes, iks
 
@@ -171,5 +171,4 @@ Before you begin, ensure you have the [**Writer** or **Manager** {{site.data.key
       curl <host_name>.<domain>
       ```
       {: pre}
-
 

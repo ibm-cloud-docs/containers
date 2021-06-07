@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, containers
 
@@ -377,9 +377,7 @@ In a test environment, deliberately create various non-ideal scenarios, such as 
 2. **Monitoring**:
   1. Open a [Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard) on your local system to view information about your app resources.
   2. [Choose a monitoring solution](/docs/containers?topic=containers-health-monitor#view_metrics), such as {{site.data.keyword.mon_full}}, to gain operational visibility into the performance and health of your apps.
-3. **Logging**:
-  1. [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
-  2. If you expose your app by using [Ingress](#dev_expose), you can set up [logging for requests that are proxied by your ALBs](/docs/containers?topic=containers-ingress_health).
+3. **Logging**: [Choose a logging solution](/docs/containers?topic=containers-health#logging_overview), such as {{site.data.keyword.la_full}}, to monitor container logs.
 
 </br>Need help? Check out [Troubleshooting logging and monitoring](/docs/containers?topic=containers-cs_dashboard_graphs).
 
@@ -431,9 +429,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
         2. [Register a DNS subdomain](/docs/containers?topic=containers-loadbalancer_hostname#loadbalancer_hostname) for the NLB.
     * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Set up a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas).
 
-  * Ingress:
-      * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_private).
-      * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC clusters: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress#ingress_expose_public) or the [private network](/docs/containers?topic=containers-ingress#ingress_expose_vpc_private).
+  * Ingress: Configure Ingress for the [public network](/docs/containers?topic=containers-ingress-types#alb-comm-create) or the [private network](/docs/containers?topic=containers-ingress-types#alb-comm-create-private).
 
 </br>Need help? Check out [Troubleshooting Ingress](/docs/containers?topic=containers-ingress-debug) and [Troubleshooting load balancers](/docs/containers?topic=containers-cs_loadbalancer_fails).
 

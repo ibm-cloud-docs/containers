@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -163,7 +163,7 @@ The Ingress Message provides details of what operation is in progress or informa
 |`Load balancer service for ALB or router is not ready` |<ul><li>VPC clusters: The VPC load balancer that routes requests to the apps that your ALBs expose either might still be creating or did not correctly deploy to your VPC. For troubleshooting information, see [VPC clusters: Why can't my app connect via Ingress?](/docs/containers?topic=containers-vpc_ts_alb).</li><li>Classic clusters: The load balancer service that exposes your ALB did not correctly deploy to your cluster. For troubleshooting information, see [Classic clusters: Why does the ALB not deploy in a zone?](/docs/containers?topic=containers-cs_subnet_limit).</li></ul>|
 |`No workers found in this zone` | ALB pods cannot deploy to a zone because no worker nodes match the pod affinity requirements. To ensure that you have the minimum required worker nodes per zone, see [Why do ALB pods not deploy to worker nodes?](/docs/containers?topic=containers-alb-pod-affinity).|
 |`One or more ALBs are unhealthy` |The external IP address for one or more of your ALBs was reported as unhealthy. For troubleshooting information, see [Ping the ALB subdomain and public IP addresses](/docs/containers?topic=containers-ingress-debug#ping).|
-|`Pending update or enable operation for ALB in progress` |Your ALB is currently updating to a new version, or your ALB that was previously disabled is enabling. For information about updating ALBs, see [Updating ALBs](/docs/containers?topic=containers-ingress#alb-update). For information about enabling ALBs, see the [`ibmcloud ks ingress alb enable` CLI command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure).|
+|`Pending update or enable operation for ALB in progress` |Your ALB is currently updating to a new version, or your ALB that was previously disabled is enabling. For information about updating ALBs, see [Updating ALBs](/docs/containers?topic=containers-ingress-types#alb-update). For information about enabling ALBs, see the [`ibmcloud ks ingress alb enable` CLI command reference](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_configure).|
 |`Registering Ingress subdomain` |The default **Ingress Subdomain** for your cluster is currently being created. The Ingress subdomain and secret creation follows a process that might take more than 15 minutes to complete. For troubleshooting information, see [Why does no Ingress subdomain exist after cluster creation?](/docs/openshift?topic=openshift-ingress_subdomain).|
 |`The expiration dates reported by Ingress secrets are out of sync across namespaces.` | To resynchronize the expiration dates, [regenerate the secrets for your Ingress subdomain certificate](/docs/containers?topic=containers-sync_cert_dates).|
 {: caption="Ingress messages"}

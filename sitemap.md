@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-03"
+lastupdated: "2021-06-07"
 
 keywords: containers
 subcollection: containers
@@ -1682,6 +1682,7 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.7_1542, released 7 June 2021](/docs/containers?topic=containers-changelog#1207_1542)
   * [Changelog for worker node fix pack 1.20.7_1541, released 24 May 2021](/docs/containers?topic=containers-changelog#1207_1541)
   * [Changelog for master fix pack 1.20.7_1540, released 24 May 2021](/docs/containers?topic=containers-changelog#1207_1540)
   * [Changelog for worker node fix pack 1.20.6_1539, released 10 May 2021](/docs/containers?topic=containers-changelog#1206_1539)
@@ -1697,6 +1698,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.11_1549, released 7 June 2021](/docs/containers?topic=containers-changelog#11911_1549)
   * [Changelog for worker node fix pack 1.19.11_1548, released 24 May 2021](/docs/containers?topic=containers-changelog#11911_1548)
   * [Changelog for master fix pack 1.19.11_1547, released 24 May 2021](/docs/containers?topic=containers-changelog#11911_1547)
   * [Changelog for worker node fix pack 1.19.10_1546, released 10 May 2021](/docs/containers?topic=containers-changelog#11910_1546)
@@ -1727,6 +1729,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog#11819_1554)
   * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1553)
   * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1552)
   * [Changelog for worker node fix pack 1.18.18_1551, released 10 May 2021](/docs/containers?topic=containers-changelog#11818_1551)
@@ -1771,6 +1774,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021](/docs/containers?topic=containers-changelog#11717_1565)
   * [Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021](/docs/containers?topic=containers-changelog#11717_1564)
   * [Changelog for master fix pack 1.17.17_1563, released 24 May 2021](/docs/containers?topic=containers-changelog#11717_1563)
   * [Changelog for worker node fix pack 1.17.17_1562, released 10 May 2021](/docs/containers?topic=containers-changelog#11717_1562)
@@ -2634,6 +2638,7 @@ subcollection: containers
 * [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage#verify_driver_pod_running_status)
 * [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage#check_pvc_provision)
 * [Portworx](/docs/containers?topic=containers-debug_storage#ts-portworx-helm)
+* [OpenShift Container Storage](/docs/containers?topic=containers-debug_storage#ts-ocs-debug)
 
 [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions)
 
@@ -2656,7 +2661,6 @@ subcollection: containers
 ## Block Storage
 {: #sitemap_block_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
@@ -2670,7 +2674,6 @@ subcollection: containers
 ## Object Storage
 {: #sitemap_object_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
@@ -2697,7 +2700,6 @@ subcollection: containers
 ## Portworx Storage
 {: #sitemap_portworx_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
