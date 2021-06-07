@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-03"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,6 +110,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 07 June 2021 | <ul><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.20.7_1542](/docs/containers?topic=containers-changelog#1207_1542), [1.19.11_1549](/docs/containers?topic=containers-changelog#11911_1549), [1.18.19_1554](/docs/containers?topic=containers-changelog#11819_1554), and [1.17.17_1565](/docs/containers?topic=containers-changelog#11717_1565).</li></ul>|
 | 03 June 2021 | **{{site.data.keyword.cos_full_notm}} plug-in**: Version `2.0.8` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog). |
 | 02 June 2021 | **End of support for custom IBM Ingress image:** The custom {{site.data.keyword.containerlong_notm}} Ingress image is unsupported. In clusters that were created before 01 December 2020, [migrate any ALBs that continue to run the custom IBM Ingress image to the Kubernetes Ingress image](/docs/containers?topic=containers-ingress-types). Not ready to switch your ALBs to the Kubernetes Ingress image yet? The custom {{site.data.keyword.containerlong_notm}} Ingress image is available as an [open source project](https://github.com/IBM-Cloud/iks-ingress-controller/){: external}. However, this project is not officially supported by {{site.data.keyword.cloud_notm}}, and you are responsible for deploying, managing, and maintaining the Ingress controllers in your cluster.|
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
