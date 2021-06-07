@@ -129,10 +129,10 @@ These components include:
 ## Kubernetes API server and etcd
 {: #apiserver}
 
-The Kubernetes API server and etcd data store are the most sensitive components that run in your Kubernetes master. If an unauthorized user or system gets access to your Kubernetes API server, the user or system can change settings, manipulate, or take control of your cluster, which puts your cluster at risk for malicious attacks.
+The Kubernetes API server and etcd data store are the most sensitive components that run in your Kubernetes master. You want to prevent unauthorized access to these components because they set and store the configurations for all of the resources that run in your cluster, including some security settings of your applications.
 {: shortdesc}
 
-To protect your Kubernetes API server and etcd data store, you must secure and limit the access to your Kubernetes API server for both human users and Kubernetes service accounts.
+Kubernetes provides security controls and limits access to protect these components and reduce the risk of cyber attacks.
 
 **How is access to my Kubernetes API server granted?**
 

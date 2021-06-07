@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -632,7 +632,7 @@ To launch and use the {{site.data.keyword.cloud-shell_notm}}:
 After you create your cluster, the Kubernetes web terminal allows you to use the {{site.data.keyword.cloud_notm}} CLI to manage your cluster directly from your web browser.
 {: shortdesc}
 
-The Kubernetes web terminal is deprecated. This add-on provides quick access for testing your cluster. Do not use it for production workloads. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell). Keep in mind that to use the {{site.data.keyword.cloud-shell_notm}}, you must set the Kubernetes context for your {{site.data.keyword.cloud-shell_notm}} session by running `ibmcloud ks cluster config`.
+The Kubernetes web terminal is deprecated and becomes unsupported 1 July 2021. This add-on provides quick access for testing your cluster. Do not use it for production workloads. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](#cloud-shell). Keep in mind that to use the {{site.data.keyword.cloud-shell_notm}}, you must set the Kubernetes context for your {{site.data.keyword.cloud-shell_notm}} session by running `ibmcloud ks cluster config`.
 {: deprecated}
 
 If you use the cluster dashboard in the {{site.data.keyword.cloud_notm}} console to manage your clusters but want to quickly make more advanced configuration changes, you can now run CLI commands directly from your web browser in the Kubernetes web terminal. The Kubernetes Terminal is enabled with the base [{{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started){: external}, the {{site.data.keyword.containerlong_notm}} plug-in, and the {{site.data.keyword.registrylong_notm}} plug-in. Additionally, the terminal context is already set to the cluster that you are working with so that you can run Kubernetes `kubectl` commands to work with your cluster.
