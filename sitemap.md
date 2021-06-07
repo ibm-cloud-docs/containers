@@ -2661,7 +2661,6 @@ subcollection: containers
 ## Block Storage
 {: #sitemap_block_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
@@ -2675,7 +2674,6 @@ subcollection: containers
 ## Object Storage
 {: #sitemap_object_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
@@ -2702,7 +2700,6 @@ subcollection: containers
 ## Portworx Storage
 {: #sitemap_portworx_storage}
 
-* [Debugging persistent storage failures](https://cloud.ibm.com/docs/containers?topic=containers-debug_storage){: external}
 
 [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
