@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, helm
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
- 
+
 
 # Supported IBM Cloud and third-party integrations
 {: #supported_integrations}
@@ -105,7 +106,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 |Service|Category|Description|Classic|VPC|
 |----|----|----|----|--- |
 |{{site.data.keyword.cloudaccesstrailfull_notm}}|Cluster activity logs|Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/activity-tracker?topic=activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
-|{{site.data.keyword.appid_full_notm}}|Authentication|Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|{{site.data.keyword.appid_full_notm}}|Authentication|Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-comm-ingress-annotations#app-id).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloud_notm}} Classic Block Storage|Block storage|[{{site.data.keyword.cloud_notm}} Block Storage](/docs/BlockStorage?topic=BlockStorage-getting-started#getting-started) is persistent, high-performance iSCSI storage that you can add to your apps by using Kubernetes persistent volumes (PVs). Use block storage to deploy stateful apps in a single zone or as high-performance storage for single pods. For more information about how to provision block storage in your cluster, see [Storing data on {{site.data.keyword.cloud_notm}} Block Storage](/docs/containers?topic=containers-block_storage#block_storage)|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||
 |{{site.data.keyword.block_storage_is_short}}|Block storage|[{{site.data.keyword.block_storage_is_short}}](/docs/vpc?topic=vpc-creating-block-storage) provides hypervisor-mounted, high-performance data storage for your virtual server instances that you provision within a VPC cluster. For more information about how to provision VPC Block Storage in your cluster, see [Storing data on {{site.data.keyword.block_storage_is_short}}](/docs/containers?topic=containers-vpc-block)||<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloudcerts_full_notm}}|TLS certificates|You can use [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-getting-started#getting-started){:external} to store and manage SSL certificates for your apps. For more information, see [Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates](https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
@@ -190,7 +191,7 @@ Want a comprehensive view of how to integrate {{site.data.keyword.cloud_notm}} s
 
 |Service|Description|Classic|VPC|
 |----|----|----|----|
-|{{site.data.keyword.appid_full_notm}}|Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|{{site.data.keyword.appid_full_notm}}|Add a level of security to your apps with [{{site.data.keyword.appid_short}}](/docs/appid?topic=appid-getting-started) by requiring users to sign in. To authenticate web or API HTTP/HTTPS requests to your app, you can integrate {{site.data.keyword.appid_short_notm}} with your Ingress service by using the [{{site.data.keyword.appid_short_notm}} authentication Ingress annotation](/docs/containers?topic=containers-comm-ingress-annotations#app-id).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Aqua Security|As a supplement to [Vulnerability Advisor](/docs/va?topic=va-va_index){: external}, you can use [Aqua Security](https://www.aquasec.com/){:external} to improve the security of container deployments by reducing what your app is allowed to do. For more information, see [Securing container deployments on {{site.data.keyword.cloud_notm}} with Aqua Security](https://blog.aquasec.com/securing-container-deployments-on-bluemix-with-aqua-security){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloudcerts_full}}|You can use [{{site.data.keyword.cloudcerts_long}}](/docs/certificate-manager?topic=certificate-manager-getting-started#getting-started){:external} to store and manage SSL certificates for your apps. For more information, see [Use {{site.data.keyword.cloudcerts_long_notm}} with {{site.data.keyword.containerlong_notm}} to deploy custom domain TLS Certificates](https://www.ibm.com/cloud/blog/announcements/use-ibm-cloud-certificate-manager-ibm-cloud-container-service-deploy-custom-domain-tls-certificates){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.datashield_full_notm}}|You can use [{{site.data.keyword.datashield_short}}](/docs/data-shield?topic=data-shield-getting-started#getting-started){:external} to encrypt your data memory. {{site.data.keyword.datashield_short}} is integrated with Intel® Software Guard Extensions (SGX) and Fortanix® technology so that your {{site.data.keyword.cloud_notm}} container workload code and data are protected in use. The app code and data run in CPU-hardened enclaves, which are trusted areas of memory on the worker node that protect critical aspects of the app, which helps to keep the code and data confidential and unmodified.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />||

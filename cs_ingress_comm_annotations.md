@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -117,7 +117,7 @@ Kubernetes NGINX annotations are always applied to all service paths in the reso
 Add a server port to the client request before the request is forwarded to your back-end app.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#add-host-port):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/add-host-port: "enabled=true serviceName=app1"
@@ -132,7 +132,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 Route incoming requests to your apps with a private ALB.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#alb-id):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/alb-id: "private_ALB_ID"
@@ -152,7 +152,7 @@ kubernetes.io/ingress.class: "private-iks-k8s-nginx"
 Configure Ingress with [{{site.data.keyword.appid_full_notm}}](https://cloud.ibm.com/catalog/services/app-id){: external} to enforce authentication for your apps.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#appid-auth):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/appid-auth: "bindSecret=bind_secret namespace=default requestType=web serviceName=app1 idToken=true"
@@ -167,7 +167,7 @@ Kubernetes Ingress field: See [Adding {{site.data.keyword.appid_short_notm}} aut
 Set the maximum size of the body that the client can send as part of a request.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotations](/docs/containers?topic=containers-ingress_annotation#client-max-body-size):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 
 ```
 ingress.bluemix.net/client-max-body-size: "serviceName=app1 size=200m"
@@ -194,7 +194,7 @@ proxy-body-size: 200m
 Disable or enable the storage of response data on the ALB while the data is sent to the client.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-buffering):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=app1"
@@ -214,7 +214,7 @@ nginx.ingress.kubernetes.io/proxy-buffering: "on"
 Set the time that the ALB waits to connect to and read from the back-end app before the back-end app is considered unavailable.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotations](/docs/containers?topic=containers-ingress_annotation#proxy-connect-timeout):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 
 ```
 ingress.bluemix.net/proxy-connect-timeout: "serviceName=app1 timeout=62s"
@@ -242,7 +242,7 @@ nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 Indicate custom actions that the ALB can take for specific HTTP errors.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotations](/docs/containers?topic=containers-ingress_annotation#custom-errors):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 
 ```
 ingress.bluemix.net/custom-errors: "serviceName=app1 httpError=401 errorActionName=/errorAction401"
@@ -265,12 +265,12 @@ Change the default ports for HTTP (port 80) and HTTPS (port 443) network traffic
 {: shortdesc}
 
 Previous {{site.data.keyword.containerlong_notm}} Ingress fields:
-* Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#custom-port):
+* Ingress resource annotation:
     ```
     ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
     ```
     {: screen}
-* `ibm-cloud-provider-ingress-cm` configmap [field](/docs/containers?topic=containers-ingress_annotation#custom-port):
+* `ibm-cloud-provider-ingress-cm` configmap field:
     ```
     public-ports: "80;443;9443"
     ```
@@ -291,7 +291,7 @@ Kubernetes Ingress fields:
 Add header information to a client request before forwarding the request to your back-end app.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-add-headers):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-add-headers: |
@@ -318,7 +318,7 @@ For the `custom-headers` configmap requirements, see [this example](https://gith
 Add header information to a client response before sending it to the client.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-add-headers):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/response-add-headers: |
@@ -341,7 +341,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 Add path definitions to external services, such as services hosted in IBM Cloud.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-external-service):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-external-service: "path=/path external-svc=https:myexternal_service host=ingress_subdomain"
@@ -356,7 +356,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 Convert insecure HTTP client requests to HTTPS.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#redirect-to-https):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/redirect-to-https: "True"
@@ -382,7 +382,7 @@ Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
 Set the browser to access the domain only by using HTTPS.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#hsts):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/hsts: enabled=true maxAge=31536000 includeSubdomains=true
@@ -403,7 +403,7 @@ Kubernetes Ingress fields: HSTS is enabled by default.
 Set the maximum number of requests that can be served through one keepalive connection.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#keepalive-requests):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/keepalive-requests: "serviceName=app1 requests=100"
@@ -425,7 +425,7 @@ The default value for `keep-alive-requests` in Kubernetes Ingress is `100`, whic
 Set the maximum time that a keepalive connection stays open between the client and the ALB proxy server.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#keepalive-timeout):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/keepalive-timeout: "serviceName=app1 timeout=60s"
@@ -445,7 +445,7 @@ keep-alive: 60
 Set the maximum number and size of buffers that read large client request headers.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#large-client-header-buffers):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/large-client-header-buffers: "number=4 size=8k"
@@ -465,7 +465,7 @@ large-client-header-buffers: 4 8k
 Modify the way the ALB matches the request URI against the app path.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#location-modifier):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/location-modifier: "modifier='~' serviceName=app1"
@@ -487,7 +487,7 @@ For more info, see [this blog](https://kubernetes.github.io/ingress-nginx/user-g
 Add a custom location block configuration for a service.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#location-snippets):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/location-snippets: |
@@ -511,7 +511,7 @@ nginx.ingress.kubernetes.io/configuration-snippet: |
 Configure mutual authentication for the ALB.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#mutual-auth):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/mutual-auth: "secretName=mysecret port=9080 serviceName=app1"
@@ -537,7 +537,7 @@ Note that mutual authentication cannot be applied to custom ports and must be ap
 Configure the size of the proxy buffer that reads the first part of the response.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-buffer-size):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-buffer-size: "serviceName=app1 size=8k"
@@ -557,7 +557,7 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 Configure the number and size of proxy buffers for the ALB.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-buffers):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-buffers: "serviceName=app1 number=4 size=8k"
@@ -578,7 +578,7 @@ nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
 Configure the size of proxy buffers that can be busy.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-busy-buffers-size):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=app1 size=8k"
@@ -593,7 +593,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure proxying ex
 Set when the ALB can pass a request to the next upstream server.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#proxy-next-upstream-config):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-next-upstream-config: "serviceName=app1 retries=3 timeout=50s http_502=true non_idempotent=true"
@@ -621,7 +621,7 @@ Kubernetes Ingress fields:
 Limit the request processing rate and number of connections per a defined key for all or specific services.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotations](/docs/containers?topic=containers-ingress_annotation#global-rate-limit):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 
 ```
 ingress.bluemix.net/global-rate-limit: "key=location rate=10r/s conn=75"
@@ -637,7 +637,7 @@ Kubernetes Ingress field: No directly equivalent annotation exists, but several 
 Remove header information that is included in the client response from the back-end end app before the response is sent to the client.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#response-remove-headers):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/response-remove-headers: |
@@ -655,7 +655,7 @@ Kubernetes Ingress field: No equivalent annotation exists. Configure response he
 Route incoming network traffic on an ALB domain path to a different path that your back-end app listens on.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#rewrite-path):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/rewrite-path: "serviceName=app1 rewrite=/newpath
@@ -675,7 +675,7 @@ nginx.ingress.kubernetes.io/rewrite-target: /newpath
 Add a custom server block configuration.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#server-snippets):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/server-snippets: |
@@ -703,7 +703,7 @@ nginx.ingress.kubernetes.io/server-snippet: |
 Always route incoming network traffic to the same upstream server by using a sticky cookie.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#sticky-cookie-services):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/sticky-cookie-services: "serviceName=app1 path=/app1 name=cookie_name1 expires=48h secure httponly"
@@ -730,7 +730,7 @@ The Kubernetes Ingress controller adds the `Secure` and `HttpOnly` attributes to
 Allow SSL services support to encrypt traffic to your upstream apps that require HTTPS.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#ssl-services):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/ssl-services: ssl-service=app1 ssl-secret=app1-ssl-secret proxy-ssl-verify-depth=5 proxy-ssl-name=proxy-ssl-name=mydomain.com
@@ -754,7 +754,7 @@ nginx.ingress.kubernetes.io/proxy-ssl-verify: true
 Access an app via a non-standard TCP port.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#tcp-ports):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=8080"
@@ -793,7 +793,7 @@ Kubernetes Ingress fields:
 Set the amount of time during which the ALB can attempt to connect to the server.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#upstream-fail-timeout):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/upstream-fail-timeout: "serviceName=app1 fail-timeout=10s"
@@ -808,7 +808,7 @@ Kubernetes Ingress field: Currently, no configuration option for the Kubernetes 
 Set the maximum number of requests that can be served through one keepalive connection.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#keepalive-requests):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/keepalive-requests: "serviceName=app1 requests=32”
@@ -828,7 +828,7 @@ upstream-keepalive-requests: 32
 Set the maximum time that a keepalive connection stays open between the ALB proxy server and your app's upstream server.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#upstream-keepalive-timeout):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/keepalive-timeout: "serviceName=app1 timeout=32s"
@@ -848,7 +848,7 @@ upstream-keepalive-timeout: 32
 Set the maximum number of unsuccessful attempts to communicate with the server.
 {: shortdesc}
 
-Previous {{site.data.keyword.containerlong_notm}} Ingress resource [annotation](/docs/containers?topic=containers-ingress_annotation#upstream-max-fails):
+Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/upstream-max-fails: "serviceName=app1 max-fails=2"
@@ -1303,7 +1303,7 @@ To edit the configmap to enable SSL protocols and ciphers:
 ## Sending your custom certificate to legacy clients
 {: #default_server_cert}
 
-If you have legacy devices that do not support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress#public_inside_3), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
+If you have legacy devices that do not support Server Name Indication (SNI) and you use a [custom TLS certificate in your Ingress resources](/docs/containers?topic=containers-ingress-types#alb-comm-create), you must edit the ALB's server settings to use your custom TLS certificate and custom TLS secret.
 {: shortdesc}
 
 When you create a classic cluster, a Let's Encrypt certificate is generated for the default Ingress secret that IBM provides. If you create a custom secret in your cluster and specify this custom secret for TLS termination in your Ingress resources, the Ingress ALB sends the certificate for your custom secret to the client instead of the default Let's Encrypt certificate. However, if a client does not support SNI, the Ingress ALB defaults to the Let's Encrypt certificate because the default secret is listed in the ALB's default server settings. To send your custom certificate to devices that do not support SNI, complete the following steps to change the ALB's default server settings to your custom secret.
