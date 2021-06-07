@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-07"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -297,5 +297,73 @@ Review the options to debug persistent storage and find the root causes for fail
       {: pre}
 
    3. If a more recent version is available, install this version. For instructions, see [Updating Portworx in your cluster](/docs/containers?topic=containers-portworx#update_portworx).
+
+
+## OpenShift Container Storage 
+{: #ts-ocs-debug}
+
+Describe your OCS resources and review the command outputs for any error messages.
+{: shortdesc}
+
+1. List the name of your OCS cluster. 
+    ```sh
+    kubectl get ocscluster
+    ```
+    {: pre}
+    **Example output**:
+    ```
+    NAME             AGE
+    ocscluster-vpc   71d
+    ```
+    {: screen}
+
+1. Describe the storage cluster and review the `Events` section of the output for any error messages. 
+    ```sh
+    kubectl describe ocscluster <ocscluster-name>
+    ```
+    {:pre}
+
+2. List the OCS pods in the `kube-system` namespace and verify that they are `Running.`
+    ```sh
+    kubectl get pods -n kube-system
+    ```
+    {: pre}
+    **Example output**
+    ```
+    NAME                                                   READY   STATUS    RESTARTS   AGE
+    ibm-keepalived-watcher-5g2gs                           1/1     Running   0          7d21h
+    ibm-keepalived-watcher-8l4ld                           1/1     Running   0          7d21h
+    ibm-keepalived-watcher-mhkh5                           1/1     Running   0          7d21h
+    ibm-master-proxy-static-10.240.128.10                  2/2     Running   0          71d
+    ibm-master-proxy-static-10.240.128.11                  2/2     Running   0          71d
+    ibm-master-proxy-static-10.240.128.12                  2/2     Running   0          71d
+    ibm-ocs-operator-controller-manager-55667f4d68-md4zb   1/1     Running   8          15d
+    ibm-vpc-block-csi-controller-0                         4/4     Running   0          48d
+    ibm-vpc-block-csi-node-6gnwv                           3/3     Running   0          48d
+    ibm-vpc-block-csi-node-j2h62                           3/3     Running   0          48d
+    ibm-vpc-block-csi-node-xpwpf                           3/3     Running   0          48d
+    vpn-5b8694cdb-pll6z 
+    ```
+    {: screen}
+
+4. Describe the `ibm-ocs-operator-controller-manager` pod and review the `Events` section in the output for any error messages.
+    ```sh
+    kubectl describe pod <ibm-ocs-operator-controller-manager-a1a1a1a> -n kube-system
+    ```
+    {: pre}
+
+5. Review the logs of the `ibm-ocs-operator-controller-manager`.
+    ```sh
+    kubectl logs <ibm-ocs-operator-controller-manager-a1a1a1a> -n kube-system
+    ```
+    {: pre}
+
+6. Describe NooBaa and review the `Events` section of the output for any error messages.
+    ```sh
+    kubectl describe noobaa -n openshift-storage
+    ```
+    {: pre}
+
+
 
 
