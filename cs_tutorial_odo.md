@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, odo
 
@@ -82,6 +82,7 @@ completion-time: 10m
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -123,7 +124,7 @@ This tutorial is intended for software developers who have some familiarity with
 ## Prerequisites
 {: #odo-prereqs}
 
-* [Install the {{site.data.keyword.cloud_notm}} CLI ](/docs/cli?topic=cli-getting-started).
+* [Install the {{site.data.keyword.cloud_notm}} CLI](/docs/cli?topic=cli-getting-started).
 * [Install the `odo` CLI](https://docs.openshift.com/container-platform/4.6/cli_reference/developer_cli_odo/installing-odo.html){: external}.
 * [Create](/docs/containers?topic=containers-getting-started) or identify an existing Kubernetes cluster to use. In the CLI, you can list clusters by running `ibmcloud ks cluster ls`.
 
