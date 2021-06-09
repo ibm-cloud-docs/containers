@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-08"
+lastupdated: "2021-06-09"
 
 keywords: containers
 subcollection: containers
@@ -2632,13 +2632,12 @@ subcollection: containers
 {: #sitemap_file_storage}
 
 
-[Debugging persistent storage failures](/docs/containers?topic=containers-debug_storage)
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage#check-pod-success-deploy)
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage#ts-restart-app-pod)
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage#verify_driver_pod_running_status)
-* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage#check_pvc_provision)
-* [Portworx](/docs/containers?topic=containers-debug_storage#ts-portworx-helm)
-* [OpenShift Container Storage](/docs/containers?topic=containers-debug_storage#ts-ocs-debug)
+[Debugging {{site.data.keyword.filestorage_full_notm}} failures](/docs/containers?topic=containers-debug_storage_file)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_driver_plugin)
+* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_cli)
 
 [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions)
 
@@ -2662,6 +2661,14 @@ subcollection: containers
 {: #sitemap_block_storage}
 
 
+[Debugging {{site.data.keyword.blockstorageshort}} failures](/docs/containers?topic=containers-debug_storage_block)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver_plugin)
+* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_cli)
+* [Checking and updating the {{site.data.keyword.blockstorageshort}} driver](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver)
+
 [Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
 [Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
@@ -2674,6 +2681,14 @@ subcollection: containers
 ## Object Storage
 {: #sitemap_object_storage}
 
+
+[Debugging {{site.data.keyword.cos_full_notm}} failures](/docs/containers?topic=containers-debug_storage_cos)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_driver_plugin)
+* [Checking whether your PVC is successfully provisioned](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
+* [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
 
 [Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
@@ -2700,6 +2715,13 @@ subcollection: containers
 ## Portworx Storage
 {: #sitemap_portworx_storage}
 
+
+[Debugging Portworx failures](/docs/containers?topic=containers-debug_storage_px)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_restart)
+* [Verifying that the Portworx storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_driver_plugin)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_cli)
+* [Updating Helm charts](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_helm)
 
 [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
