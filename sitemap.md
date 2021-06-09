@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-09"
 
 keywords: containers
 subcollection: containers
@@ -775,7 +775,7 @@ subcollection: containers
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
   * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
   * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
-* [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
@@ -818,7 +818,7 @@ subcollection: containers
 * [Customizing NodeLocal DNS cache](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize)
   * [Editing the `node-local-dns` configmap for general configuration updates](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_configmap)
   * [Editing the `node-local-dns-config` configmap to extend with stub domains or upstream servers](/docs/containers?topic=containers-cluster_dns#dns_nodelocal_customize_stub_upstream)
-* [Setting up zone-aware DNS (beta)](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
+* [Setting up zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware)
   * [Deploying and enabling zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_deploy)
   * [Disabling and deleting zone-aware DNS](/docs/containers?topic=containers-cluster_dns#dns_zone_aware_delete)
 
@@ -1651,6 +1651,9 @@ subcollection: containers
 * [Release history](/docs/containers?topic=containers-cs_versions#release-history)
 * [Release lifecycle](/docs/containers?topic=containers-cs_versions#release_lifecycle)
 * [Preparing to update](/docs/containers?topic=containers-cs_versions#prep-up)
+* [Version 1.21](/docs/containers?topic=containers-cs_versions#cs_v121)
+  * [Update before master](/docs/containers?topic=containers-cs_versions#121_before)
+  * [Update after master](/docs/containers?topic=containers-cs_versions#121_after)
 * [Version 1.20](/docs/containers?topic=containers-cs_versions#cs_v120)
   * [Update before master](/docs/containers?topic=containers-cs_versions#120_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#120_after)
@@ -1658,7 +1661,7 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#119_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#119_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#119_after_worker)
-* [Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
+* [Deprecated: Version 1.18](/docs/containers?topic=containers-cs_versions#cs_v118)
   * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#118_after_worker)
@@ -1681,6 +1684,9 @@ subcollection: containers
 
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
+* [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
+  * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
   * [Changelog for worker node fix pack 1.20.7_1542, released 7 June 2021](/docs/containers?topic=containers-changelog#1207_1542)
   * [Changelog for worker node fix pack 1.20.7_1541, released 24 May 2021](/docs/containers?topic=containers-changelog#1207_1541)
@@ -1728,7 +1734,7 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525_worker)
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
-* [Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+* [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
   * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog#11819_1554)
   * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1553)
   * [Changelog for master fix pack 1.18.19_1552, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1552)
@@ -1829,7 +1835,7 @@ subcollection: containers
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
 * [Running the worker node CIS Kubernetes benchmark](/docs/containers?topic=containers-cis-benchmark#cis-worker-test)
-* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
+* [Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15)
   * [Section 1: Master node security configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-1)
   * [Section 2: Etcd node configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-2)
   * [Section 3: Control plane configuration](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-15-3)
@@ -2632,13 +2638,12 @@ subcollection: containers
 {: #sitemap_file_storage}
 
 
-[Debugging persistent storage failures](/docs/containers?topic=containers-debug_storage)
-* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage#check-pod-success-deploy)
-* [Restarting your app pod](/docs/containers?topic=containers-debug_storage#ts-restart-app-pod)
-* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage#verify_driver_pod_running_status)
-* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage#check_pvc_provision)
-* [Portworx](/docs/containers?topic=containers-debug_storage#ts-portworx-helm)
-* [OpenShift Container Storage](/docs/containers?topic=containers-debug_storage#ts-ocs-debug)
+[Debugging {{site.data.keyword.filestorage_full_notm}} failures](/docs/containers?topic=containers-debug_storage_file)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_driver_plugin)
+* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_file#debug_storage_file_cli)
 
 [What permissions do I need to manage storage and create PVCs?](/docs/containers?topic=containers-missing_permissions)
 
@@ -2662,6 +2667,14 @@ subcollection: containers
 {: #sitemap_block_storage}
 
 
+[Debugging {{site.data.keyword.blockstorageshort}} failures](/docs/containers?topic=containers-debug_storage_block)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver_plugin)
+* [Checking whether your PVC is successfully provisioned.](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_cli)
+* [Checking and updating the {{site.data.keyword.blockstorageshort}} driver](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver)
+
 [Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
 [Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
@@ -2674,6 +2687,14 @@ subcollection: containers
 ## Object Storage
 {: #sitemap_object_storage}
 
+
+[Debugging {{site.data.keyword.cos_full_notm}} failures](/docs/containers?topic=containers-debug_storage_cos)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_restart)
+* [Verifying that the storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_driver_plugin)
+* [Checking whether your PVC is successfully provisioned](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_pvc)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
+* [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
 
 [Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
@@ -2700,6 +2721,13 @@ subcollection: containers
 ## Portworx Storage
 {: #sitemap_portworx_storage}
 
+
+[Debugging Portworx failures](/docs/containers?topic=containers-debug_storage_px)
+* [Checking whether the pod that mounts your storage instance is successfully deployed](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_deploy)
+* [Restarting your app pod](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_restart)
+* [Verifying that the Portworx storage driver and plug-in pods show a status of **Running**](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_driver_plugin)
+* [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_cli)
+* [Updating Helm charts](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_helm)
 
 [Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)

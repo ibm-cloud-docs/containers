@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-01"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, subnets, ips, vlans, networking
 
@@ -171,7 +171,7 @@ Worker node communication to the Kubernetes master is established differently ba
 * Kubernetes version 1.20 or later: Worker node communication to the Kubernetes master is established over the [VPC virtual private endpoint (VPE)](/docs/containers?topic=containers-vpc-subnets#vpc_basics_vpe). If the public cloud service endpoint is also enabled, worker-to-master traffic is established half over the public endpoint and half over the VPE for protection from potential outages of the public or private network.
 * Kubernetes version 1.19 or earlier: Worker node communication to the Kubernetes master is established over the private cloud service endpoint. If the public cloud service endpoint is also enabled, worker-to-master traffic is established half over the public endpoint and half over the private endpoint for protection from potential outages of the public or private network.
 
-To secure communication over public and private cloud service endpoints or VPEs, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and worker nodes when the cluster is created. Worker nodes securely talk to the master through TLS certificates, and the master talks to workers through the OpenVPN connection.
+To secure communication over public and private cloud service endpoints or VPEs, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) connection between the Kubernetes master and worker nodes when the cluster is created. Worker nodes securely talk to the master through TLS certificates, and the master talks to workers through the OpenVPN connection.
 
 **User-to-master communication**
 
@@ -406,7 +406,7 @@ When VRF is enabled, any system that is connected to any of the private VLANs in
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> A communication channel must be set up so that worker nodes can establish a connection to the Kubernetes master. You can allow your worker nodes and Kubernetes master to communicate by enabling the public cloud service endpoint only, public and private cloud service endpoints, or the private cloud service endpoint only.
 {: shortdesc}
 
-To secure communication over public and private cloud service endpoints, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created. Workers securely talk to the master through TLS certificates, and the master talks to workers through the OpenVPN connection.
+To secure communication over public and private cloud service endpoints, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) connection between the Kubernetes master and the worker node when the cluster is created. Workers securely talk to the master through TLS certificates, and the master talks to workers through the OpenVPN connection.
 
 **Public service endpoint only**
 

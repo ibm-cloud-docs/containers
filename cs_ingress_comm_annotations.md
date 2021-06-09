@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -811,7 +811,7 @@ Set the maximum number of requests that can be served through one keepalive conn
 Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
-ingress.bluemix.net/keepalive-requests: "serviceName=app1 requests=32”
+ingress.bluemix.net/upstream-keepalive: "serviceName=app1 requests=32”
 ```
 {: screen}
 
@@ -831,7 +831,7 @@ Set the maximum time that a keepalive connection stays open between the ALB prox
 Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
-ingress.bluemix.net/keepalive-timeout: "serviceName=app1 timeout=32s"
+ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=app1 timeout=32s"
 ```
 {: screen}
 

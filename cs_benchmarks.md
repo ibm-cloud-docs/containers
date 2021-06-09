@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, containers
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -210,10 +211,10 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
 <br />
 
-## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.20
+## Benchmark 1.5 results for Kubernetes versions 1.18 - 1.21
 {: #cis-benchmark-15}
 
-Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.20. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
+Review how {{site.data.keyword.containerlong_notm}} complies with the version 1.5 CIS Kubernetes benchmark for clusters that run Kubernetes versions 1.18 - 1.21. For help understanding the benchmark, see [Using the benchmark](#cis-benchmark-use).
 {: shortdesc}
 
 * [Section 1: Master node security configuration](#cis-benchmark-15-1)
@@ -521,7 +522,7 @@ Review the following explanations and possible remediation actions that you can 
 | 1.2.1 | Your cluster uses RBAC to control access to the cluster, but allows anonymous discovery, which is considered reasonable per [CIS Kubernetes Benchmark](https://www.cisecurity.org/benchmark/kubernetes/){: external}. |
 | 1.2.10 | {{site.data.keyword.containerlong_notm}} does not enable the [`EventRateLimit`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#eventratelimit){: external} admission controller because the admission controller is a Kubernetes alpha feature. |
 | 1.2.12 | {{site.data.keyword.containerlong_notm}} does not enable the [`AlwaysPullImages`](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#alwayspullimages){: external} admission controller because this setting overrides the `imagePullPolicy` of a container and might impact performance. |
-| 1.2.21 | {{site.data.keyword.containerlong_notm}} enables profiling for cluster administrator troubleshooting purposes. |
+| 1.2.21 | {{site.data.keyword.containerlong_notm}} enables [profiling](https://kubernetes.io/docs/reference/command-line-tools-reference/kube-apiserver/){: external} for cluster administrator troubleshooting purposes. |
 | 1.2.22 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
 | 1.2.23 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
 | 1.2.24 | You can optionally [enable Kubernetes API server auditing](/docs/containers?topic=containers-health-audit). |
@@ -537,8 +538,8 @@ Review the following explanations and possible remediation actions that you can 
 | 4.2.12 | {{site.data.keyword.containerlong_notm}} rotates certificates on every worker node reload or update that you choose to perform. |
 | 5.1.2 | {{site.data.keyword.containerlong_notm}} deploys some system components that might have their Kubernetes secret access further restricted. |
 | 5.1.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that might have their Kubernetes resource access further restricted. |
-| 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set `automountServiceAccountToken: false` for each default service account. |
-| 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set `automountServiceAccountToken: false`.  |
+| 5.1.5 | {{site.data.keyword.containerlong_notm}} does not set [`automountServiceAccountToken: false`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external} for each default service account. |
+| 5.1.6 | {{site.data.keyword.containerlong_notm}} deploys some system components that could set [`automountServiceAccountToken: false`](https://kubernetes.io/docs/tasks/configure-pod-container/configure-service-account/#use-the-default-service-account-to-access-the-api-server){: external}.  |
 | 5.2.1 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.2 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
 | 5.2.3 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
@@ -550,9 +551,9 @@ Review the following explanations and possible remediation actions that you can 
 | 5.2.9 | You can optionally configure [pod security policies](/docs/containers?topic=containers-psp). |
 | 5.3.2 | {{site.data.keyword.containerlong_notm}} has a set of [default Calico and Kubernetes network policies defined](/docs/containers?topic=containers-network_policies#default_policy), and you can optionally [add your own network policies](/docs/containers?topic=containers-network_policies#adding_network_policies).  |
 | 5.4.2 | You can optionally [enable a Kubernetes Key Management Service (KMS) provider](/docs/containers?topic=containers-encryption#kms). |
-| 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec). |
+| 5.5.1 | You can optionally enable enforcing image security by using a project such as [Portieris](/docs/containers?topic=containers-images#portieris-image-sec). |
 | 5.6.2 | {{site.data.keyword.containerlong_notm}} does not annotate all pods with [`seccomp` profiles](https://kubernetes.io/docs/concepts/policy/pod-security-policy/#seccomp){: external}. |
-| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a pod or container `securityContext`. |
+| 5.6.3 | {{site.data.keyword.containerlong_notm}} deploys some system components that do not set a [pod or container `securityContext`](https://kubernetes.io/docs/tasks/configure-pod-container/security-context/){: external}. |
 | 5.6.4 | {{site.data.keyword.containerlong_notm}} deploys some Kubernetes resources to the default namespace. |
 {: summary="The rows are read from left to right. The first column is the section number for the benchmark recommendation. The second column contains the description of why the benchmark recommendation is not met and possible remediation actions."}
 {: caption="Explanation and remediation for benchmark results" caption-side="top"}

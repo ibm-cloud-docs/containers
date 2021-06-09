@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, containers
 
@@ -162,7 +162,7 @@ The following image shows the default cluster security settings that address aut
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
           
-          <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.  </li></ul></td>
+          <li><strong>OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later):</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.  </li></ul></td>
     </tr>
     <tr>
     <td>Continuous monitoring by IBM Site Reliability Engineers (SREs)</td>
@@ -177,32 +177,21 @@ The following image shows the default cluster security settings that address aut
       <td>To use {{site.data.keyword.containerlong_notm}}, you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components.<p class="tip">Need to revoke existing certificates and create new certificates for your cluster? Check out [Rotating CA certificates in your cluster](#cert-rotate).</p></td>
     </tr>
     <tr>
-      <td>OpenVPN connectivity to worker nodes</td>
-      <td>Although Kubernetes secures the communication between the master and worker nodes by using the <code>https</code> protocol, no authentication is provided on the worker node by default. To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created.</td>
+      <td>OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) connectivity to worker nodes</td>
+      <td>Although Kubernetes secures the communication between the master and worker nodes by using the <code>https</code> protocol, no authentication is provided on the worker node by default. To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN or Konnectivity connection between the Kubernetes master and the worker node when the cluster is created.</td>
     </tr>
     <tr>
       <td>Fine-grained access control</td>
       <td>As the account administrator you can [grant access to other users for {{site.data.keyword.containerlong_notm}}](/docs/containers?topic=containers-users#users) by using {{site.data.keyword.cloud_notm}} Identity and Access Management (IAM). {{site.data.keyword.cloud_notm}} IAM provides secure authentication with the {{site.data.keyword.cloud_notm}} platform, {{site.data.keyword.containerlong_notm}}, and all the resources in your account. Setting up proper user roles and permissions is key to limit who can access your resources and to limit the damage that a user can do when legitimate permissions are misused. </br></br>You can select from the following pre-defined user roles that determine the set of actions that the user can perform: <ul><li><strong>platform access roles:</strong> Determine the cluster and worker node management-related actions that a user can perform in {{site.data.keyword.containerlong_notm}}.  </li><li><strong>Service access roles:</strong> Determine the [Kubernetes RBAC role](https://kubernetes.io/docs/reference/access-authn-authz/rbac/) that is assigned to the user and the actions that a user can run against the Kubernetes API server. With RBAC roles, users can create Kubernetes resources, such as creating app deployments, adding namespaces, or setting up configmaps.  For more information about the corresponding RBAC roles that are assigned to a user and associated permissions, see [{{site.data.keyword.cloud_notm}} IAM service access roles](/docs/containers?topic=containers-access_reference#service). </li><li><strong>Classic infrastructure:</strong> Enables access to your classic {{site.data.keyword.cloud_notm}} infrastructure resources. Example actions that are permitted by classic infrastructure roles are viewing the details of cluster worker node machines or editing networking and storage resources.</li>
   <li><strong>VPC infrastructure:</strong> Enables access to VPC infrastructure resources. Example actions that are permitted by VPC infrastructure roles are creating a VPC, adding subnets, changing floating IP addresses, and creating VPC Block Storage instances. </li></ul> </br> For more information about access control in a cluster, see [Assigning cluster access](/docs/openshift?topic=openshift-users).</td>
     </tr>
+  <tr>
+    <td>Pod access via service account token</td>
+    <td>For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}.</td>
+  </tr>
     <tr>
       <td>Admission controllers</td>  
-      <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine whether a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC roles. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the following [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) in the given order in the Kubernetes master, which cannot be changed by the user: <ul>
-      <li>`NamespaceLifecycle`</li>
-      <li>`LimitRanger`</li>
-      <li>`ServiceAccount`</li>
-      <li>`DefaultStorageClass`</li>
-      <li>`Initializers` (Kubernetes 1.13 or earlier)</li>
-      <li>`MutatingAdmissionWebhook`</li>
-      <li>`ValidatingAdmissionWebhook`</li>
-      <li>`ResourceQuota`</li>
-      <li>[`PodSecurityPolicy`](/docs/containers?topic=containers-psp#ibm_psp)</li>
-      <li>`DefaultTolerationSeconds`</li>
-      <li>`StorageObjectInUseProtection`</li>
-      <li>`PersistentVolumeClaimResize`</li>
-      <li>[`Priority`](/docs/containers?topic=containers-pod_priority) (Kubernetes 1.11 or later)</li>
-      <li>`NodeRestriction` (Kubernetes 1.14 or later)</li>
-      <li>`TaintNodesByCondition` (Kubernetes 1.14 or later)</li></ul>
+      <td>Admission controllers are implemented for specific features in Kubernetes and {{site.data.keyword.containerlong_notm}}. With admission controllers, you can set up policies in your cluster that determine whether a particular action in the cluster is allowed or not. In the policy, you can specify conditions when a user cannot perform an action, even if this action is part of the general permissions that you assigned the user by using RBAC roles. Therefore, admission controllers can provide an extra layer of security for your cluster before an API request is processed by the Kubernetes API server. </br></br> When you create a cluster, {{site.data.keyword.containerlong_notm}} automatically installs the default [Kubernetes admission controllers ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/) in a particular order in the Kubernetes master, which cannot be changed by the user. Review the order of default admission controllers by cluster version in the [`kube-apiserver` component reference information](/docs/containers?topic=containers-service-settings#kube-apiserver).
 </br>
       You can [install your own admission controllers in the cluster ![External link icon](../icons/launch-glyph.svg "External link icon")](https://kubernetes.io/docs/reference/access-authn-authz/extensible-admission-controllers/#admission-webhooks) or choose from the optional admission controllers that {{site.data.keyword.containerlong_notm}} provides: <ul><li><strong>[Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec):</strong> Use this admission controller to block container deployments from unsigned images.</li></ul></br><p class="note">If you manually installed admission controllers and you do not want to use them anymore, make sure to remove them entirely. If admission controllers are not entirely removed, they might block all actions that you want to perform on the cluster.</p></td>
     </tr>
@@ -373,7 +362,7 @@ To protect your network and limit the range of damage that a user can do when ac
 All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions:
 - **NodePort**: The [Kubernetes NodePort range](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport){: external} is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 - **IBM monitoring ports**: By default, IBM opens a few ports on your cluster so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master.
-Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
+Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
 
 **What is network segmentation and how can I set it up for a cluster?**
 
