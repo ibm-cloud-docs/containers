@@ -162,7 +162,7 @@ The following image shows the default cluster security settings that address aut
           <li><strong>kube-scheduler:</strong> Decides where to deploy pods, considering the capacity and performance needs, hardware and software policy constraints, anti-affinity specifications, and workload requirements. If no worker node can be found that matches the requirements, the pod is not deployed in the cluster.</li>
           <li><strong>kube-controller-manager:</strong> Responsible for monitoring replica sets, and creating corresponding pods to achieve the specified state.</li>
           
-          <li><strong>OpenVPN:</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.  </li></ul></td>
+          <li><strong>OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later):</strong> {{site.data.keyword.containerlong_notm}}-specific component to provide secured network connectivity for all Kubernetes master to worker node communication. The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports <code>apiserver proxy</code> requests to your pods and services, and <code>kubectl top</code>, <code>exec</code>, <code>attach</code>, and <code>logs</code> requests to the kubelet. The connection from the worker nodes to the master is automatically secured with TLS certificates.  </li></ul></td>
     </tr>
     <tr>
     <td>Continuous monitoring by IBM Site Reliability Engineers (SREs)</td>
@@ -177,8 +177,8 @@ The following image shows the default cluster security settings that address aut
       <td>To use {{site.data.keyword.containerlong_notm}}, you must authenticate with the service by using your credentials. When you are authenticated, {{site.data.keyword.containerlong_notm}} generates TLS certificates that encrypt the communication to and from the Kubernetes API server and etcd data store to ensure a secure end-to-end communication between the worker nodes and the Kubernetes master. These certificates are never shared across clusters or across Kubernetes master components.<p class="tip">Need to revoke existing certificates and create new certificates for your cluster? Check out [Rotating CA certificates in your cluster](#cert-rotate).</p></td>
     </tr>
     <tr>
-      <td>OpenVPN connectivity to worker nodes</td>
-      <td>Although Kubernetes secures the communication between the master and worker nodes by using the <code>https</code> protocol, no authentication is provided on the worker node by default. To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN connection between the Kubernetes master and the worker node when the cluster is created.</td>
+      <td>OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) connectivity to worker nodes</td>
+      <td>Although Kubernetes secures the communication between the master and worker nodes by using the <code>https</code> protocol, no authentication is provided on the worker node by default. To secure this communication, {{site.data.keyword.containerlong_notm}} automatically sets up an OpenVPN or Konnectivity connection between the Kubernetes master and the worker node when the cluster is created.</td>
     </tr>
     <tr>
       <td>Fine-grained access control</td>
@@ -362,7 +362,7 @@ To protect your network and limit the range of damage that a user can do when ac
 All containers are protected by [predefined Calico network policy settings](/docs/containers?topic=containers-network_policies#default_policy) that are configured on every worker node during cluster creation. By default, all outbound network traffic is allowed for all worker nodes. Inbound network traffic is blocked with the following exceptions:
 - **NodePort**: The [Kubernetes NodePort range](https://kubernetes.io/docs/concepts/services-networking/service/#nodeport){: external} is opened by default so that you can expose apps with [NodePort services](/docs/containers?topic=containers-nodeport). To block inbound network traffic on NodePorts in your cluster, see [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress).
 - **IBM monitoring ports**: By default, IBM opens a few ports on your cluster so that network traffic can be monitored by IBM and for IBM to automatically install security updates for the Kubernetes master.
-Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
+Access from the Kubernetes master to the worker node's kubelet is secured by an OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) tunnel. For more information, see the [{{site.data.keyword.containerlong_notm}} architecture](/docs/containers?topic=containers-service-arch).
 
 **What is network segmentation and how can I set it up for a cluster?**
 

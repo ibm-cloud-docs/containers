@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, docker, containers
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -91,7 +92,7 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 
 # Architecture and dependencies of the service
 {: #service-arch}
@@ -155,8 +156,8 @@ The following table describes the components of the Kubernetes master.
 <td>The Kubernetes API server serves as the main entry point for all cluster management requests from the worker node to the Kubernetes master. The Kubernetes API server validates and processes requests that change the state of Kubernetes resources, such as pods or services, and stores this state in etcd.</td>
 </tr>
 <tr>
-<td>`openvpn-server`</td>
-<td>The OpenVPN server works with the OpenVPN client to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
+<td>`openvpn-server` (Kubernetes version 1.20 or earlier) or `konnectivity-server` (Kubernetes version 1.21 or later)</td>
+<td>The OpenVPN or Konnectivity server works with the OpenVPN client or Konnectivity agent to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
 </tr>
 <tr>
 <td>`etcd`</td>
@@ -200,9 +201,9 @@ The following table describes the components of a worker node.
     <td>The `ibm-master-proxy` forwards requests from the worker node to the IP addresses of the highly available master replicas. In single zone clusters, the master has three replicas on separate hosts with one master IP address and domain name. For clusters that are in a multizone-capable zone, the master has three replicas that are spread across zones. As such, each master has its own IP address that is registered with DNS, with one domain name for the entire cluster master.</td>
     </tr>
     <tr>
-    <td>`openvpn-client`</td>
+    <td>`openvpn-client` (Kubernetes version 1.20 or earlier) or `konnectivity-agent` (Kubernetes version 1.21 or later)</td>
     <td>`kube-system`</td>
-    <td>The OpenVPN client works with the OpenVPN server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
+    <td>The OpenVPN client or Konnectivity agent works with the OpenVPN or Konnectivity server to securely connect the master to the worker node. This connection supports `apiserver proxy` calls to your pods and services, and `kubectl exec`, `attach`, and `logs` calls to the kubelet.</td>
     </tr>
     <tr>
     <td>`kubelet`</td>
