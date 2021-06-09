@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-09"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -146,12 +146,12 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.20.7
+*   Latest: 1.21.1
 *   Default: 1.20.7
-*   Other: 1.18.19, 1.19.11
+*   Other: 1.19.11
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.17.17
+*   Deprecated: 1.17.17, 1.18.19
 *   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16
 
 <br>
@@ -198,6 +198,12 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
 <tbody>
 <tr>
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td>[1.21](#cs_v121)</td>
+  <td>09 Jun 2021</td>
+  <td>Jun 2022 `†`</td>
+</tr>
+<tr>
+  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.20](#cs_v120)</td>
   <td>16 Feb 2021</td>
   <td>Feb 2022 `†`</td>
@@ -206,13 +212,13 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
   <td>[1.19](#cs_v119)</td>
   <td>13 Oct 2020</td>
-  <td>Oct 2021 `†`</td>
+  <td>31 Dec 2021 `†`</td>
 </tr>
 <tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
+  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.18](#cs_v118)</td>
   <td>11 May 2020</td>
-  <td>Aug 2021 `†`</td>
+  <td>01 Sep 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
@@ -329,12 +335,51 @@ This information summarizes updates that are likely to have impact on deployed a
 
 -  Version 1.20 [preparation actions](#cs_v120).
 -  Version 1.19 [preparation actions](#cs_v119).
--  Version 1.18 [preparation actions](#cs_v118).
+-  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
 -  **Deprecated**: Version 1.17 [preparation actions](#cs_v117).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
 
+## Version 1.21
+{: #cs_v121}
+
+<p>{{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.21 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
+
+Review changes that you might need to make when you update from the previous Kubernetes version to 1.21.
+{: shortdesc}
+
+### Update before master
+{: #121_before}
+
+The following table shows the actions that you must take before you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported**: Kubernetes REST API `export` query parameter removed | The `export` query parameter is removed from the Kubernetes REST API and now returns a `400` error status response. If you use this query parameter, remove it from your API requests. |
+| **Unsupported**: Kubernetes external IP services | The Kubernetes [DenyServiceExternalIPs admission controller](https://kubernetes.io/docs/reference/access-authn-authz/admission-controllers/#denyserviceexternalips){: external} is enabled, which prevents creating or updating Kubernetes external IP services. If you use Kubernetes external IP services, migrate to a supported service type. For more information, see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6428013){: external}. |
+| OpenVPN replaced by Konnectivity | [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external} replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster. If your apps rely on the OpenVPN implementation of Kubernetes master to worker node communication, update them to support [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external}. |
+| Pod access via service account token | For clusters that run Kubernetes 1.21 and later, the service account tokens that pods use to communicate with the Kubernetes API server are time-limited, automatically refreshed, scoped to a particular audience of users (the pod), and invalidated after the pod is deleted. To continue communicating with the API server, you must design your apps to read the refreshed token value on a regular basis, such as every minute. For more information, see [Bound Service Account Tokens](https://github.com/kubernetes/enhancements/blob/master/keps/sig-auth/1205-bound-service-account-tokens/README.md){: external}. |
+{: caption="Changes to make before you update the master to Kubernetes 1.21" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+### Update after master
+{: #121_after}
+
+The following table shows the actions that you must take after you update the Kubernetes master.
+{: shortdesc}
+
+| Type | Description|
+| --- | --- |
+| **Unsupported:** `kubect alpha debug` removed | The `kubectl alpha debug` command is removed. Instead, use the `kubectl debug` command. |
+| **Unsupported:** `kubectl run` removed deprecated flags | The `kubectl run` command removes the following deprecated flags: `--generator`, `--replicas`, `--service-generator`, `--service-overrides` and `--schedule`. If your scripts use `kubectl run` to create resources other than pods, such as deployments, or if your scripts use the removed flags, update the scripts to use the `kubectl create` or `kubectl apply` commands instead. |
+| `kubectl get` removes `managedFields` by default  | Now, the `kubectl get` command omits `managedFields` in the `-o json` or `-o yaml` output by default. If you use `kubectl get` to retrieve `managedFields` by using `-o json` or `-o yaml` output, update your `kubectl get` calls to include the `--show-managed-fields=true` flag.  |
+| **Unsupported**: Select `kubelet` metrics | The following cAdvisor `kubelet` metrics are removed: `/stats/container`, `/stats/<pod_name>/<container_name>`, and `/stats/<namespace>/<pod_name>/<pod_uid>/<container_name>`. Stop using these metrics. |
+{: caption="Changes to make after you update the master to Kubernetes 1.21" caption-side="top"}
+{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
+
+<br />
 
 ## Version 1.20
 {: #cs_v120}
@@ -432,13 +477,16 @@ The following table shows the actions that you must take after you update your w
 
 <br />
 
-## Version 1.18
+## Deprecated: Version 1.18
 {: #cs_v118}
 
 <p><img src="images/certified_kubernetes_1x18.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.18 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.18 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
 
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.18.
 {: shortdesc}
+
+Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](#cs_v119) as soon as possible.
+{: deprecated}
 
 ### Update before master
 {: #118_before}
@@ -497,7 +545,7 @@ The following table shows the actions that you must take after you update your w
 Review changes that you might need to make when you update from the previous Kubernetes version to 1.17.
 {: shortdesc}
 
-Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](#cs_v118) as soon as possible.
+Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](#cs_v118) and then [version 1.19](#cs_v119) as soon as possible.
 {: deprecated}
 
 ### Update before master
