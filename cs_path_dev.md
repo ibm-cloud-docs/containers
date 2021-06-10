@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-10"
 
 keywords: kubernetes, iks, containers
 
@@ -442,7 +442,7 @@ Publicly expose an app in your cluster to the internet or privately expose an ap
 2. **Requirements**: Determine your [requirements for a storage solution](/docs/containers?topic=containers-storage_planning).
 3. **Choose a solution**: Using your storage requirements, choose a storage solution by comparing [non-persistent](/docs/containers?topic=containers-storage_planning#non_persistent_overview), [single-zone persistent](/docs/containers?topic=containers-storage_planning#single_zone_persistent_storage), or [multizone persistent](/docs/containers?topic=containers-storage_planning#persistent_storage_overview) storage.
 
-</br>Need help? Check out [Troubleshooting persistent storage](/docs/containers?topic=containers-debug_storage).
+</br>Need help? Check out the troubleshooting page for your persistent storage solution.
 
 <br />
 

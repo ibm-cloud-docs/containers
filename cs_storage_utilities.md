@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-06-10"
 
 keywords: kubernetes, iks
 
@@ -1318,7 +1318,7 @@ When an alert is triggered, review the alert details in {{site.data.keyword.mon_
 {: shortdesc}
 
 
-* [Troubleshooting persistent storage volumes](/docs/containers?topic=containers-debug_storage).
+* [Troubleshooting persistent storage volumes](/docs/containers?topic=containers-debug_storage_file).
 * [Troubleshooting worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).
 * [Troubleshooting apps](/docs/containers?topic=containers-debug_apps).
 * [Troubleshooting clusters](/docs/containers?topic=containers-debug_clusters).

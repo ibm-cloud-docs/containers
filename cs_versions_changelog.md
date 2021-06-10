@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-06-10"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -156,7 +156,7 @@ The following table shows the changes that are included in the master fix pack p
 | Konnectivity server | N/A | v0.0.19e_201_iks | [Konnectivity](https://kubernetes.io/docs/tasks/extend-kubernetes/setup-konnectivity/){: external} replaces OpenVPN as the network proxy that is used to secure the communication of the Kubernetes API server master to worker nodes in the cluster. See the [Konnectivity release notes](https://github.com/kubernetes-sigs/apiserver-network-proxy/releases/tag/v0.0.19){: external}. |
 | Kubernetes | v1.20.7 | v1.21.1 | See the [Kubernetes release notes](https://github.com/kubernetes/kubernetes/releases/tag/v1.21.1){: external}. |
 | Kubernetes admission controllers configuration | N/A | N/A | Added `DenyServiceExternalIPs` to the `--enable-admission-plugins` option for the cluster's [Kubernetes API server](/docs/containers?topic=containers-service-settings#kube-apiserver). The update resolves CVE-2020-8554 (see the [IBM security bulletin](https://www.ibm.com/support/pages/node/6428013){: external}). |
-| Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](https://cloud.ibm.com/docs/containers?topic=containers-service-settings#feature-gates){: external}. |
+| Kubernetes configuration | N/A | N/A | Updated the [feature gate configuration](/docs/containers?topic=containers-service-settings#feature-gates). |
 | Kubernetes add-on resizer | 1.8.12 | 1.8.13 | See the [Kubernetes add-on resizer release notes](https://github.com/kubernetes/autoscaler/releases/tag/addon-resizer-1.8.13){: external}. |
 | Kubernetes Dashboard | v2.1.0 | v2.2.0 | See the [Kubernetes Dashboard release notes](https://github.com/kubernetes/dashboard/releases/tag/v2.2.0){: external}. |
 | Pause container image | 3.2 | 3.5 | See the [pause container image release notes](https://github.com/kubernetes/kubernetes/blob/master/build/pause/CHANGELOG.md){: external}. |
