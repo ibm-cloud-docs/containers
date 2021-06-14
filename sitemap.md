@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-10"
+lastupdated: "2021-06-14"
 
 keywords: containers
 subcollection: containers
@@ -493,6 +493,7 @@ subcollection: containers
 * [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
 * [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca#ca_update_worker_node_pool)
 * [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
   * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
