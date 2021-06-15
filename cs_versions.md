@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-06-15"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -102,9 +102,10 @@ Review information about supported Kubernetes versions for {{site.data.keyword.c
 {: shortdesc}
 
 For more information about the Kubernetes project versions, see the Kubernetes changelog.
-* [Kubernetes 1.20 release notes](https://kubernetes.io/releases/notes/){: external}
+* [Kubernetes 1.21 release notes](https://kubernetes.io/releases/notes/){: external}
+* [Kubernetes 1.20 release notes](https://v1-20.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes 1.19 release notes](https://v1-19.docs.kubernetes.io/docs/setup/release/notes/){: external}
-* [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
+* **Deprecated**: [Kubernetes 1.18 release notes](https://v1-18.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * **Deprecated**: [Kubernetes 1.17 release notes](https://v1-17.docs.kubernetes.io/docs/setup/release/notes/){: external}
 * [Kubernetes changelogs](https://github.com/kubernetes/kubernetes/tree/master/CHANGELOG){: external}
 

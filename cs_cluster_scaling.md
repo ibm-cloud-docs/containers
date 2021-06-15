@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-21"
+lastupdated: "2021-06-15"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -209,7 +209,7 @@ During a scale-up, the cluster autoscaler balances nodes across zones, with a pe
 ### Why can't I resize or rebalance my worker pool?
 {: #scalable-practices-resize}
 
-When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool. Don't use the `ibmcloud ks worker rm` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool.
+When the cluster autoscaler is enabled for a worker pool, you cannot [resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) your worker pools. You must [edit the configmap](#ca_cm) to change the worker pool minimum or maximum sizes, or disable cluster autoscaling for that worker pool. Don't use the `ibmcloud ks worker rm` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_rm) to remove individual worker nodes from your worker pool, which can unbalance the worker pool. For more information, see [Resizing or rebalancing autoscaled worker pools](#ca_update_worker_node_pool).
 {: shortdesc}
 
 Further, if you do not disable the worker pools before you disable the `cluster-autoscaler` add-on, the worker pools cannot be resized manually. Reinstall the cluster autoscaler, [edit the configmap](#ca_cm) to disable the worker pool, and try again.
@@ -233,7 +233,7 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
 2.  [Create a standard cluster](/docs/containers?topic=containers-clusters).
 3.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 4.  Confirm that your {{site.data.keyword.cloud_notm}} Identity and Access Management credentials are stored in the cluster. The cluster autoscaler uses this secret to authenticate credentials. If the secret is missing, [create it by resetting credentials](/docs/containers?topic=containers-missing_permissions).
-    ```
+    ```sh
     kubectl get secrets -n kube-system | grep storage-secret-store
     ```
     {: pre}
@@ -241,7 +241,7 @@ The cluster autoscaler add-on is not supported for baremetal worker nodes.
     * Create a [VPC](/docs/containers?topic=containers-add_workers#vpc_pools) or [classic](/docs/containers?topic=containers-add_workers#classic_pools) worker pool other than the `default` worker pool with the label that you want to use with the workloads to run on the autoscaled worker pool.
     * [Add the label to an existing worker pool](/docs/containers?topic=containers-add_workers#worker_pool_labels) other than the `default` worker pool.
 6.  Confirm that your worker pool has the necessary labels for autoscaling. In the output, you see the required `ibm-cloud.kubernetes.io/worker-pool-id` label and the label that you previously created for node affinity. If you do not see these labels, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool), and then [add your label for node affinity](/docs/containers?topic=containers-add_workers#worker_pool_labels).
-  ```
+  ```sh
   ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> | grep Labels
   ```
   {: pre}
@@ -758,6 +758,42 @@ The cluster autoscaler has two types of updates.
   ibmcloud ks cluster addon ls --cluster <cluster_name>
   ```
   {: pre}
+
+## Rebalancing or resizing autoscaled worker pools
+{: #ca_update_worker_node_pool}
+
+Before you can rebalance or resize your worker pool, you must remove the worker pool from the autoscaler configmap to disable autoscaling.
+{: shortdesc}
+
+1. Edit `iks-ca-configmap` and disable the worker pool that you want to resize or rebalance by removing it from the `workerPoolsConfigStatus` section.
+  ```sh
+  kubectl edit cm -n kube-system iks-ca-configmap
+  ```
+  {: pre}
+
+  **Example `workerPoolsConfigStatus` section with no worker pools enabled**
+  ```yaml
+  workerPoolsConfigStatus: '{}'
+  ```
+  {: screen}
+
+3. Save the `iks-ca-configmap`.
+
+4. [Resize](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_pool_resize) or [rebalance](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_rebalance) your worker pool.
+
+5. **Optional** [Update your VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node).
+
+6. Add the worker pool to the `iks-ca-configmap`.
+  ```sh
+  kubectl edit cm -n kube-system iks-ca-configmap
+  ```
+  {: pre}
+
+  **Example**
+  ```yaml
+  workerPoolsConfigStatus: '{"name": "<worker_pool>","minSize": 1,"maxSize": 3,"enabled":true}'
+  ```
+  {: screen}
 
 
 ## Upgrading a cluster autoscaler Helm chart release

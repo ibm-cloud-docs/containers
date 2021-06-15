@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-27"
+lastupdated: "2021-06-15"
 
 keywords: kubernetes, iks, calico, egress, rules
 
@@ -217,7 +217,7 @@ To view, manage, and add Calico policies, install and configure the Calico CLI.
           {: pre}
 
     * **Windows**:
-      1. [Download the Calico CLI](https://github.com/projectcalico/calicoctl/releases){: external}. Save the file as `calicoctl.exe` in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later.
+      1. [Download the Calico CLI](https://github.com/projectcalico/calicoctl/releases){: external}. When you save the file, rename it to `calicoctl.exe` and save it in the same directory as the {{site.data.keyword.cloud_notm}} CLI. This setup saves you some file path changes when you run commands later.
 
       2. Set the `KUBECONFIG` environment variable to the appropriate configuration file.
           * Kubernetes version 1.19 and later: Set the environment variable to the configuration file for your cluster.

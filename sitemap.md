@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-10"
+lastupdated: "2021-06-15"
 
 keywords: containers
 subcollection: containers
@@ -493,6 +493,7 @@ subcollection: containers
 * [Deploying apps to your autoscaled worker pools](/docs/containers?topic=containers-ca#ca_limit_pool)
 * [Scaling up worker nodes before the worker pool has insufficient resources](/docs/containers?topic=containers-ca#ca_scaleup)
 * [Updating the cluster autoscaler add-on](/docs/containers?topic=containers-ca#ca_addon_up)
+* [Rebalancing or resizing autoscaled worker pools](/docs/containers?topic=containers-ca#ca_update_worker_node_pool)
 * [Upgrading a cluster autoscaler Helm chart release](/docs/containers?topic=containers-ca#ca_helm_up)
   * [Prerequisites](/docs/containers?topic=containers-ca#ca_helm_up_prereqs)
   * [Upgrading the cluster autoscaler release version](/docs/containers?topic=containers-ca#ca_helm_up_general)
@@ -1063,6 +1064,8 @@ subcollection: containers
   * [Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#nlb_vpc)
   * [Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#lb_vpc)
 * [Setting up a Network Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb)
+  * [Setting up a public VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_pub)
+  * [Setting up a private VPC NLB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv)
   * [Registering a DNS record and TLS certificate](/docs/containers?topic=containers-vpc-lbaas#vpc_nlb_dns)
 * [Setting up an Application Load Balancer for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_ks_vpc_lb)
   * [Setting up a public or private VPC ALB](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_alb_pub_priv)
