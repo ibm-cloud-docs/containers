@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-14"
+lastupdated: "2021-06-15"
 
 keywords: kubernetes, iks, node scaling, ca, autoscaler
 
@@ -784,7 +784,6 @@ Before you can rebalance or resize your worker pool, you must remove the worker 
 5. **Optional** [Update your VPC worker nodes](/docs/containers?topic=containers-update#vpc_worker_node).
 
 6. Add the worker pool to the `iks-ca-configmap`.
-  2. Edit `iks-ca-configmap` and disable the worker pool that you want to update by removing it from the `workerPoolsConfigStatus` section.
   ```sh
   kubectl edit cm -n kube-system iks-ca-configmap
   ```
