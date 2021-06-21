@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-06-21"
 
 keywords: kubernetes, iks
 
@@ -109,7 +109,7 @@ Refer to the following tables for a summary of changes for each version of the [
 Review the following changes for 1.0 versions of the CLI plug-in.
 {: shortdesc}
 
-
+<li>Adds the following updates for add-on commands:<ul><li>Adds the `ibmcloud ks cluster addon get` command to view the details of an installed add-on.</li><li>Adds the `ibmcloud ks cluster addon options` command to view optional installation settings for an add-on.</li><li>Adds the `--param` flag to specify an optional installation setting for the `ibmcloud ks cluster addon enable openshift-container-storage` command.</li></ul></li>
 
 |Version|Release date|Changes|
 |-------|------------|-------|
