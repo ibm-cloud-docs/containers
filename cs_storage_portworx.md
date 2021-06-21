@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-06-21"
 
 keywords: kubernetes, iks,
 
@@ -158,6 +158,12 @@ You can also choose to use only a subset of worker nodes for your Portworx stora
 
 
 
+### Can I install Portworx in a private cluster?
+{: #about-px-private}
+Yes. To install Portworx in a private cluster, your {{site.data.keyword.cloud_notm}} account must be set up with [Virtual Routing and Forwarding (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) and access to private cloud service endpoints for {{site.data.keyword.cloud_notm}} services. To install Portworx that doesn't have VRF or access to private CSEs, you must create a rule in the default security group to allow inbound and outbound traffic for the following IP addresses: `166.9.24.81`, `166.9.22.100`, `166.9.20.178`. For more information on updating security groups, see [Updating the default security group](/docs/vpc?topic=vpc-updating-the-default-security-group#updating-the-default-security-group).
+
+
+
 ### What's next?
 {: #about-px-next}
 
@@ -170,6 +176,11 @@ All set? Let's start with [creating a cluster with an SDS worker pool of at leas
 
 Before you create your cluster and install Portworx, review the following planning steps.
 {: shortdesc}
+
+**Minimum required permissions**: 
+* **Administrator** and **VirtualServerConsoleAdmin** for the VPC service.
+* **Manager** and **Administrator** for the {{site.data.keyword.registrylong_notm}} service.
+* **Operator** and **Manager** for the Kubernetes service.
 
 1. Review the [Portworx limitations](#portworx_limitations).
 2. Create a [multizone cluster](/docs/containers?topic=containers-clusters).

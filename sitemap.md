@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-18"
+lastupdated: "2021-06-21"
 
 keywords: containers
 subcollection: containers
@@ -1324,6 +1324,7 @@ subcollection: containers
   * [What if I want to run Portworx in a classic cluster with non-SDS worker nodes?](/docs/containers?topic=containers-portworx#about-px-non-sds)
   * [How can I make sure that my data is stored highly available?](/docs/containers?topic=containers-portworx#about-px-ha)
   * [What volume topology offers the best performance for my pods?](/docs/containers?topic=containers-portworx#about-px-topology)
+  * [Can I install Portworx in a private cluster?](/docs/containers?topic=containers-portworx#about-px-private)
   * [What's next?](/docs/containers?topic=containers-portworx#about-px-next)
 * [Planning your Portworx setup](/docs/containers?topic=containers-portworx#portworx_planning)
 * [Creating raw, unformatted, and unmounted block storage for VPC and non-SDS classic worker nodes](/docs/containers?topic=containers-portworx#create_block_storage)
@@ -1467,7 +1468,9 @@ subcollection: containers
 * [`cluster` commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cluster)
   * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_disable)
   * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_enable)
+  * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_get)
   * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)
+  * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_options)
   * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
   * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_create)
   * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_rotate)
@@ -1848,9 +1851,10 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.45.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
+  * [Version 0.47.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
+  * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
   * [Version 0.35.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
-  * [Version 0.34.1](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
+  * [Version 0.34.1 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
