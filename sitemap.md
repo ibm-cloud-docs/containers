@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-18"
+lastupdated: "2021-06-21"
 
 keywords: containers
 subcollection: containers
@@ -1848,9 +1848,10 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.45.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
+  * [Version 0.47.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
+  * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
   * [Version 0.35.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
-  * [Version 0.34.1](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
+  * [Version 0.34.1 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)
   * [Version 0.33.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_33_0)
   * [Version 0.32.0 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_32_0)
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
