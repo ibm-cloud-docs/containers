@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-21"
+lastupdated: "2021-06-22"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,6 +110,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 22 June 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.1_1521](/docs/containers?topic=containers-changelog#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-changelog#11717_1566).|
 | 21 June 2021 | <ul><li>**Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for the release of version 0.47.0 of the Kubernetes Ingress image.</li><li>**New! The `addon options` command is now available**: For more information, see [addon options](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_options)</li></ul> |
 | 17 June 2021 | <ul><li>On 05 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 05 July. After the migration, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</li><li>**ALB OAuth Proxy**: Updated the version changelog for the [ALB OAuth Proxy add-on](/docs/containers?topic=containers-alb-oauth-proxy-changelog) add-on.</li></ul> |
 | 15 June 2021 | **New! Private VPC NLB**: You can now create [private Network Load Balancers for VPC](/docs/containers?topic=containers-vpc-lbaas#setup_vpc_nlb_priv) to expose apps in clusters that run Kubernetes version 1.19 and later. |
