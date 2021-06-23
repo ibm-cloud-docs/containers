@@ -540,7 +540,7 @@ ibmcloud ks get --addon ADDON --cluster CLUSTER [--output OUTPUT] [-q]
 <dd>Optional: Do not show the message of the day or update reminders.</dd>
 </dl>
 
-</br></staging cli-addon>
+</br>
 
 ### `ibmcloud ks cluster addon ls`
 {: #cs_cluster_addons}
@@ -600,7 +600,7 @@ ibmcloud ks cluster addon options --addon ADDON [--output OUTPUT] [-q] [--versio
 <dd>Optional: Specify an add-on version to display options for. If no version is specified, the default version's options are displayed. To list available add-on versions, run `ibmcloud ks cluster addon versions`.</dd>
 </dl>
 
-</br></staging cli-addon>
+</br>
 
 ### `ibmcloud ks cluster addon versions`
 {: #cs_addon_versions}
