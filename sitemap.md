@@ -856,8 +856,8 @@ subcollection: containers
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
-  * [Understanding the Kubernetes API audit configuration](/docs/containers?topic=containers-health-audit#api-server-config)
   * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
+  * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
   * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
   * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
   * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
