@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-22"
+lastupdated: "2021-06-23"
 
 keywords: containers
 subcollection: containers
@@ -856,8 +856,8 @@ subcollection: containers
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
-  * [Understanding the Kubernetes API audit configuration](/docs/containers?topic=containers-health-audit#api-server-config)
   * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
+  * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
   * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
   * [Managing API server log forwarding](/docs/containers?topic=containers-health-audit#audit-api-server-manage)
   * [Taking a snapshot of API server logs](/docs/containers?topic=containers-health-audit#audit-api-server-snapshot)
@@ -1918,6 +1918,7 @@ subcollection: containers
   * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
+* [Changelog for 1.0.3, released 23 June 2021](/docs/containers?topic=containers-ca_changelog#0103_ca_addon)
 * [Changelog for 1.0.2, released 08 March 2021](/docs/containers?topic=containers-ca_changelog#0102_ca_addon)
 * [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)
 
@@ -2695,6 +2696,8 @@ subcollection: containers
 [Block storage: Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
 
 [Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
+
+[{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts)
 
 
 ## Object Storage
