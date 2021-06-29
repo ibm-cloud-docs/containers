@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-25"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,6 +110,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 28 June 2021 | **Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.21.2_1522](/docs/containers?topic=containers-changelog#1212_1522), [1.20.8_1544](/docs/containers?topic=containers-changelog#1208_1544), [1.19.12_1551](/docs/containers?topic=containers-changelog#11912_1551), [1.18.20_1556](/docs/containers?topic=containers-changelog#11820_1556), and [1.17.17_1567](/docs/containers?topic=containers-changelog#1117_1567). |
 | 24 June 2021 | **CLI changelog**: Updated the {{site.data.keyword.containerlong_notm}} CLI plug-in changelog page for the [release of version 1.0.295](/docs/containers?topic=containers-cs_cli_changelog#10). |
 | 23 June 2021 | **Cluster autoscaler add-on**: [Version `1.0.3`](/docs/containers?topic=containers-ca_changelog) of the cluster autoscaler add-on is available. |
 | 22 June 2021 | <ul><li>**{{site.data.keyword.cos_full_notm}} plug-in**: Version `2.1.2` of the {{site.data.keyword.cos_full_notm}} plug-in is released. Update your clusters to use the latest version. For more information, see the [{{site.data.keyword.cos_full_notm}} plug-in changelog](/docs/containers?topic=containers-cos_plugin_changelog)</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.1_1521](/docs/containers?topic=containers-changelog#1211_1521), [1.20.7_1543](/docs/containers?topic=containers-changelog#1207_1543), [1.19.11_1550](/docs/containers?topic=containers-changelog#11911_1550), [1.18.19_1555](/docs/containers?topic=containers-changelog#11819_1555) and [1.17.17_1566](/docs/containers?topic=containers-changelog#11717_1566)</li></ul>.|
