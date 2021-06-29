@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -182,7 +182,7 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
   3. From the **Access policies** tab, confirm that you [have the required permissions to create clusters](/docs/containers?topic=containers-access_reference#cluster_create_permissions).
   <p class="tip">Make sure that your account administrator does not assign you the **Administrator** platform access role at the same time as scoping the access policy to a namespace.</p>
 
-4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#resource_groups).
+4. If your account uses multiple resource groups, figure out your account's strategy for [managing resource groups](/docs/containers?topic=containers-users#access-overview#resource_groups).
   * The cluster is created in the resource group that you target when you log in to {{site.data.keyword.cloud_notm}}. If you do not target a resource group, the default resource group is automatically targeted. Free clusters are created in the `default` resource group.
   * If you want to create a cluster in a different resource group than the default, you need at least the **Viewer** role for the resource group. If you do not have any role for the resource group, your cluster is created in the default resource group.
   * You cannot change a cluster's resource group.
@@ -203,9 +203,9 @@ Prepare your {{site.data.keyword.cloud_notm}} account for {{site.data.keyword.co
 
   * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters only, Non-VRF and non-service endpoint accounts**: If you do not set up your account to use VRF and service endpoints, you can create only classic clusters that use VLAN spanning to communicate with each other on the public and private network. Note that you cannot create gateway-enabled clusters.
     * To use the public cloud service endpoint only (run internet-facing workloads):
-      1. Enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+      1. Enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
     * To use a gateway appliance (extend your on-premises data center):
-      1. Enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-users#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
+      1. Enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning) for your IBM Cloud infrastructure account so that your worker nodes can communicate with each other on the private network. To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_vlan_spanning_get).
       2. Configure a gateway appliance to connect your cluster to the on-premises network. For example, you might choose to set up a [Virtual Router Appliance](/docs/virtual-router-appliance?topic=virtual-router-appliance-about-the-vra) or a [Fortigate Security Appliance](/docs/vmwaresolutions/services?topic=vmwaresolutions-fsa_considerations) to act as your firewall to allow required network traffic and to block unwanted network traffic.
       3. [Open up the required private IP addresses and ports](/docs/containers?topic=containers-firewall#firewall_outbound) for each region so that the master and the worker nodes can communicate and for the {{site.data.keyword.cloud_notm}} services that you plan to use.
 
@@ -267,7 +267,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 4. Configure the **Location** details for your cluster.
    1. Select the **Resource group** that you want to create your cluster in.
       * A cluster can be created in only one resource group, and after the cluster is created, you cannot change its resource group.
-      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
    2.  Select a **Geography** to create the cluster in, such as **North America**. The geography helps filter the **Availability** and **Metro** values that you can select.
    3.  Select the **Availability** that you want for your cluster, **Single zone** or **Multizone**. In a multizone cluster, the Kubernetes master is deployed in a multizone-capable zone and three replicas of your master are spread across zones.
    4. Enter the **Metro** and **Worker zones** details, depending on the availability that you selected for your cluster.
@@ -325,7 +325,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
    2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
    3. To create clusters in a resource group other than default, target that resource group.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
 
       ```
       ibmcloud target -g <resource_group_name>
@@ -530,7 +530,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
    3. To create clusters in a resource group other than default, target that resource group.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
 
       ```
       ibmcloud target -g <resource_group_name>
@@ -736,7 +736,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 6. Configure the **Location** details for your cluster.
    1. Select the **Resource group** that you want to create your cluster in.
       * A cluster can be created in only one resource group, and after the cluster is created, you cannot change its resource group.
-      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#platform) for the resource group.
+      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
    2. Select the zones to create your cluster in.
       * The zones are filtered based on the VPC that you selected, and include the VPC subnets that you previously created.
       * To create a [single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone), select one zone only. If you select only one zone, you can [add zones to your cluster](/docs/containers?topic=containers-add_workers#add_zone) after the cluster is created.

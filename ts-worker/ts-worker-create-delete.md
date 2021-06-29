@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks
 
@@ -156,7 +156,7 @@ The cluster could not be configured with the registry. Make sure that you have t
 {: screen}
 
 {: tsCauses}
-The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-users#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-users#credentials).
+The infrastructure credentials that are set for the region and resource group are missing the appropriate [infrastructure permissions](/docs/containers?topic=containers-access_reference#infra). The user's infrastructure permissions are most commonly stored as an [API key](/docs/containers?topic=containers-users#api_key) for the region and resource group. More rarely, if you use a [different {{site.data.keyword.cloud_notm}} account type](/docs/containers?topic=containers-access-creds#understand_infra), you might have [set infrastructure credentials manually](/docs/containers?topic=containers-access-creds#credentials).
 
 {: tsResolve}
 The account owner must set up the infrastructure account credentials properly. The credentials depend on what type of infrastructure account you are using.
@@ -206,7 +206,7 @@ Before you begin, [Log in to your account. If applicable, target the appropriate
 
         For console and CLI commands to assign these permissions, see [Classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra).
         {: tip}
-    2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
+    2.  Make sure that the [infrastructure credentials owner for the API key or the manually-set account has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions).
     3.  If necessary, you can change the [API key](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) or [manually-set](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set) infrastructure credentials owner for the region and resource group.
 3.  Test that the changed permissions permit authorized users to perform infrastructure operations for the cluster.
     1.  For example, you might try to a delete a worker node.
@@ -377,7 +377,7 @@ The {{site.data.keyword.cloud_notm}} account owner or an account administrator m
 4. Select **None**, and click **Update**.
 
 **To use TOTP MFA and create an infrastructure API key for {{site.data.keyword.containerlong_notm}}:**
-1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-users#owner_permissions).
+1. From the [{{site.data.keyword.cloud_notm}}](https://cloud.ibm.com/){: external} console, select **Manage** > **Access (IAM)** > **Users** and click the name of the account owner. **Note**: If you do not use the account owner's credentials, first [ensure that the user whose credentials you use has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions).
 2. In the **API Keys** section, find or create a classic infrastructure API key.
 3. Use the infrastructure API key to set the infrastructure API credentials for {{site.data.keyword.containerlong_notm}}. Repeat this command for each region where you create clusters.
     ```

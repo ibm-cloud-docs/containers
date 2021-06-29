@@ -412,36 +412,6 @@ subcollection: containers
   * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
-[Assigning cluster access](/docs/containers?topic=containers-users)
-* [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
-* [Understanding access policies and roles](/docs/containers?topic=containers-users#access_policies)
-  * [Pick the right access policy and role for your users](/docs/containers?topic=containers-users#access_roles)
-  * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#iam_individuals_groups)
-  * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
-* [Setting up the API key to enable access to the infrastructure portfolio and other services](/docs/containers?topic=containers-users#api_key_setup)
-  * [Setting up the API key in most cases](/docs/containers?topic=containers-users#api_key_most_cases)
-  * [Understanding other options than the API key](/docs/containers?topic=containers-users#api_key_other)
-  * [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about)
-  * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
-  * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
-  * [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-users#default_account)
-  * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-users#credentials)
-* [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform)
-  * [Example use cases and roles](/docs/containers?topic=containers-users#example-iam)
-  * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-  * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
-* [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding-assign)
-  * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
-  * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
-  * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
-* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-users#infra_access)
-  * [Assigning infrastructure access through the console](/docs/containers?topic=containers-users#infra_console)
-  * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-users#infra_cli)
-* [Removing user permissions](/docs/containers?topic=containers-users#removing)
-  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
-  * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
-  * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
-
 
 ## Managing the cluster and worker node lifecycle
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
@@ -614,6 +584,48 @@ subcollection: containers
 * [Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
 
 * [Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+
+
+## Managing access control
+{: #sitemap_managing_access_control}
+
+
+[Understanding access control for clusters](/docs/containers?topic=containers-access-overview)
+* [Access control checklist](/docs/containers?topic=containers-access-overview#access-checklist)
+  * [{{site.data.keyword.cloud_notm}} access control](/docs/containers?topic=containers-access-overview#access-checklist-iam)
+  * [Other types of access control](/docs/containers?topic=containers-access-overview#access-checklist-other)
+* [Understanding IAM access policies and roles](/docs/containers?topic=containers-access-overview#access_policies)
+  * [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
+  * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
+  * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
+
+[Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds)
+* [Setting up the API key in most cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
+* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
+* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
+* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
+* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
+* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
+* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
+  * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
+  * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
+
+[Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users)
+* [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
+* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
+* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+* [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
+* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
+* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
+* [Removing user permissions](/docs/containers?topic=containers-users#removing)
+  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
+  * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
+  * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+
+[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity)
+* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
+* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-api)
 
 
 ## Securing cluster workloads

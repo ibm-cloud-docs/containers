@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-25"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -109,7 +109,7 @@ You exposed your app by creating an Ingress resource for your app in your cluste
 {: tsResolve}
 The steps in the following sections can help you debug your Ingress setup.
 
-Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users#platform) for {{site.data.keyword.containerlong_notm}}:
+Before you begin, ensure you have the following [{{site.data.keyword.cloud_notm}} IAM access policies](/docs/containers?topic=containers-users) for {{site.data.keyword.containerlong_notm}}:
   - **Editor** or **Administrator** platform access role for the cluster
   - **Writer** or **Manager** service access role
 
