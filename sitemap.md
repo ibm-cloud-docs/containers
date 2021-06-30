@@ -623,10 +623,6 @@ subcollection: containers
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
 
-[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity)
-* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
-* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-api)
-
 
 ## Securing cluster workloads
 {: #sitemap_securing_cluster_workloads}
