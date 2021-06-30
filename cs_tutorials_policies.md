@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks
 
@@ -132,8 +132,8 @@ This tutorial is intended for software developers and network administrators who
 - [Target your CLI to the cluster](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure).
 - [Install and configure the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install).
 - Ensure that you have the following {{site.data.keyword.cloud_notm}} IAM access policies for {{site.data.keyword.containerlong_notm}}:
-    - [Any platform access role](/docs/containers?topic=containers-users#platform)
-    - [The **Writer** or **Manager** service access role](/docs/containers?topic=containers-users#platform)
+    - [Any platform access role](/docs/containers?topic=containers-users)
+    - [The **Writer** or **Manager** service access role](/docs/containers?topic=containers-users)
 
 <br />
 

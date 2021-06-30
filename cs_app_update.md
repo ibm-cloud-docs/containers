@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-14"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks
 
@@ -77,6 +77,7 @@ subcollection: containers
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -125,7 +126,7 @@ Want to scale your worker nodes instead of your pods? Check out the [cluster aut
 
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+- Make sure that you are assigned a [service access role](/docs/containers?topic=containers-users) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 Steps:
 
@@ -183,7 +184,7 @@ Want to prevent downtime during your rolling update? Be sure to specify a [readi
 Before you begin:
 *   [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 *   Create a [deployment](/docs/containers?topic=containers-deploy_app#app_cli).
-*   Make sure that you have a [service access role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
+*   Make sure that you have a [service access role](/docs/containers?topic=containers-users) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources in the namespace.
 
 To manage rolling updates to your apps:
 1.  To make sure that your deployments are marked as ready only when the container is running and ready to service requests, add [liveness and readiness probes to your deployment](/docs/containers?topic=containers-app#probe).
@@ -332,7 +333,7 @@ To see a list of supported integrations and steps for setting up a continuous de
 When you use a [version control system such as Git](/docs/containers?topic=containers-plan_deploy#deploy_organize), configuration management projects such as [`kustomize`](/docs/containers?topic=containers-app#kustomize), or continuous delivery tools such as [Razee](https://razee.io/){: external} in your cluster, you can deploy your app configuration files quickly from cluster to cluster. Sometimes you have only a few deployments that you tested in a cluster and prefer to copy these deployments and redeploy in another cluster. For example, you might use a free, classic infrastructure Kubernetes cluster for a proof of concept that you did not manage in Git. Now, you are ready to take this proof of concept and deploy it to a standard cluster that runs {{site.data.keyword.openshiftshort}} or on VPC infrastructure.
 {: shortdesc}
 
-Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users#platform) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
+Before you begin, you need two clusters and the **Manager** [service access role](/docs/containers?topic=containers-users) for all namespaces in both clusters so that you can copy all the resources from one cluster and deploy them to another.
 
 1.  [Target](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) the cluster that you want to copy resources from, such as a free cluster.
 2.  List all the configuration files in your cluster and verify that you want to copy these configurations.

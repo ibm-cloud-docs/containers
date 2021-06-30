@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-24"
+lastupdated: "2021-06-30"
 
 keywords: containers
 subcollection: containers
@@ -412,36 +412,6 @@ subcollection: containers
   * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
 
-[Assigning cluster access](/docs/containers?topic=containers-users)
-* [Setting up access to your cluster](/docs/containers?topic=containers-users#access-checklist)
-* [Understanding access policies and roles](/docs/containers?topic=containers-users#access_policies)
-  * [Pick the right access policy and role for your users](/docs/containers?topic=containers-users#access_roles)
-  * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#iam_individuals_groups)
-  * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-users#resource_groups)
-* [Setting up the API key to enable access to the infrastructure portfolio and other services](/docs/containers?topic=containers-users#api_key_setup)
-  * [Setting up the API key in most cases](/docs/containers?topic=containers-users#api_key_most_cases)
-  * [Understanding other options than the API key](/docs/containers?topic=containers-users#api_key_other)
-  * [Understanding how the API key works](/docs/containers?topic=containers-users#api_key_about)
-  * [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-users#owner_permissions)
-  * [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-users#understand_infra)
-  * [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-users#default_account)
-  * [Accessing a different classic infrastructure account](/docs/containers?topic=containers-users#credentials)
-* [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#platform)
-  * [Example use cases and roles](/docs/containers?topic=containers-users#example-iam)
-  * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
-  * [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
-* [Assigning RBAC permissions](/docs/containers?topic=containers-users#role-binding-assign)
-  * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
-  * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
-  * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
-* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-users#infra_access)
-  * [Assigning infrastructure access through the console](/docs/containers?topic=containers-users#infra_console)
-  * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-users#infra_cli)
-* [Removing user permissions](/docs/containers?topic=containers-users#removing)
-  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
-  * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
-  * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
-
 
 ## Managing the cluster and worker node lifecycle
 {: #sitemap_managing_the_cluster_and_worker_node_lifecycle}
@@ -614,6 +584,48 @@ subcollection: containers
 * [Dependencies to other {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-service-arch#dependencies-ibmcloud)
 
 * [Dependencies to 3rd party services](/docs/containers?topic=containers-service-arch#dependencies-3rd-party)
+
+
+## Managing access control
+{: #sitemap_managing_access_control}
+
+
+[Understanding access control for clusters](/docs/containers?topic=containers-access-overview)
+* [Access control checklist](/docs/containers?topic=containers-access-overview#access-checklist)
+  * [{{site.data.keyword.cloud_notm}} access control](/docs/containers?topic=containers-access-overview#access-checklist-iam)
+  * [Other types of access control](/docs/containers?topic=containers-access-overview#access-checklist-other)
+* [Understanding IAM access policies and roles](/docs/containers?topic=containers-access-overview#access_policies)
+  * [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles)
+  * [Assign access roles to individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups)
+  * [Scope user access to cluster instances, namespaces, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups)
+
+[Setting up API key credentials so the service can access the infrastructure and other cloud services](/docs/containers?topic=containers-access-creds)
+* [Setting up the API key in most cases](/docs/containers?topic=containers-access-creds#api_key_most_cases)
+* [Understanding other options than the API key](/docs/containers?topic=containers-access-creds#api_key_other)
+* [Understanding how the API key works](/docs/containers?topic=containers-access-creds#api_key_about)
+* [Ensuring that the API key or infrastructure credentials owner has the correct permissions](/docs/containers?topic=containers-access-creds#owner_permissions)
+* [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra)
+* [Accessing the infrastructure portfolio with your {{site.data.keyword.cloud_notm}} Pay-As-You-Go or Subscription account](/docs/containers?topic=containers-access-creds#default_account)
+* [Accessing a different classic infrastructure account](/docs/containers?topic=containers-access-creds#credentials)
+* [Customizing classic infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access)
+  * [Assigning infrastructure access through the console](/docs/containers?topic=containers-access-creds#infra_console)
+  * [Assigning infrastructure access through the CLI](/docs/containers?topic=containers-access-creds#infra_cli)
+
+[Controlling user access with {{site.data.keyword.cloud_notm}} IAM and Kubernetes RBAC](/docs/containers?topic=containers-users)
+* [Example cluster use cases and IAM roles](/docs/containers?topic=containers-users#example-iam)
+* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the console](/docs/containers?topic=containers-users#add_users)
+* [Assigning {{site.data.keyword.cloud_notm}} IAM roles with the CLI](/docs/containers?topic=containers-users#add_users_cli)
+* [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
+* [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
+* [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
+* [Removing user permissions](/docs/containers?topic=containers-users#removing)
+  * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
+  * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
+  * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+
+[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity)
+* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
+* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-api)
 
 
 ## Securing cluster workloads
@@ -856,6 +868,7 @@ subcollection: containers
 
 [Reviewing service, API server, and worker node logs](/docs/containers?topic=containers-health-audit)
 * [Kubernetes API server audit logs](/docs/containers?topic=containers-health-audit#audit-api-server)
+  * [Considerations and prerequisites](/docs/containers?topic=containers-health-audit#prereqs-apiserver-logs)
   * [Forwarding Kubernetes API audit logs to {{site.data.keyword.la_short}}](/docs/containers?topic=containers-health-audit#audit-api-server-la)
   * [Forwarding Kubernetes API audit logs to a resource in the {{site.data.keyword.cloud_notm}} private network](/docs/containers?topic=containers-health-audit#audit-api-server-priv)
   * [Forwarding Kubernetes API audit logs to an external server](/docs/containers?topic=containers-health-audit#audit-api-server-external)
@@ -1691,10 +1704,12 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for master fix pack 1.21.2_1522, released 28 June 2021](/docs/containers?topic=containers-changelog#1212_1522)
   * [Changelog for worker node fix pack 1.21.1_1521, released 22 June 2021](/docs/containers?topic=containers-changelog#1211_1521)
   * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
   * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for master fix pack 1.20.8_1544, released 28 June 2021](/docs/containers?topic=containers-changelog#1208_1544)
   * [Changelog for worker node fix pack 1.20.7_1543, released 22 June 2021](/docs/containers?topic=containers-changelog#1207_1543)
   * [Changelog for worker node fix pack 1.20.7_1542, released 7 June 2021](/docs/containers?topic=containers-changelog#1207_1542)
   * [Changelog for worker node fix pack 1.20.7_1541, released 24 May 2021](/docs/containers?topic=containers-changelog#1207_1541)
@@ -1712,6 +1727,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for master fix pack 1.19.12_1551, released 28 June 2021](/docs/containers?topic=containers-changelog#11912_1551)
   * [Changelog for worker node fix pack 1.19.11_1550, released 22 June 2021](/docs/containers?topic=containers-changelog#11911_1550)
   * [Changelog for worker node fix pack 1.19.11_1549, released 7 June 2021](/docs/containers?topic=containers-changelog#11911_1549)
   * [Changelog for worker node fix pack 1.19.11_1548, released 24 May 2021](/docs/containers?topic=containers-changelog#11911_1548)
@@ -1744,6 +1760,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for master fix pack 1.18.20_1556, released 28 June 2021](/docs/containers?topic=containers-changelog#11820_1556)
   * [Changelog for worker node fix pack 1.18.19_1555, released 22 June 2021](/docs/containers?topic=containers-changelog#11819_1555)
   * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog#11819_1554)
   * [Changelog for worker node fix pack 1.18.19_1553, released 24 May 2021](/docs/containers?topic=containers-changelog#11819_1553)
@@ -1790,6 +1807,7 @@ subcollection: containers
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
 * [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
+  * [Changelog for master fix pack 1.17.17_1567, released 28 June 2021](/docs/containers?topic=containers-changelog#11717_1567)
   * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog#11717_1565)
   * [Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021](/docs/containers?topic=containers-changelog#11717_1565)
   * [Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021](/docs/containers?topic=containers-changelog#11717_1564)

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -135,7 +135,7 @@ Also, if you used the same cluster name repeatedly, you might have a rate limiti
 2. [Assign the following IAM permissions](/docs/containers?topic=containers-users#add_users) to the user or functional user who sets the API key.
   * The **Administrator** or **Editor** platform access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
   * The **Manager** service access role for {{site.data.keyword.cloudcerts_short}} in **All resource groups**
-3. The user must [reset the API key for the region and resource group](/docs/containers?topic=containers-users#api_key_most_cases).
+3. The user must [reset the API key for the region and resource group](/docs/containers?topic=containers-access-creds#api_key_most_cases).
 
   When the API key is reset, the previous API key that was used for the region and resource group is deleted. Before you reset the API key, check whether you have other services that use the existing API key, such as a [key management service (KMS) provider](/docs/containers?topic=containers-encryption#keyprotect).
   {: important}

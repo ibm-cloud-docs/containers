@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-23"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, logmet, logs, metrics, audit, events
 
@@ -105,13 +105,18 @@ Forward audit logs for {{site.data.keyword.containerlong_notm}}, the Kubernetes 
 To monitor user-initiated, Kubernetes administrative activity made within your cluster, you can collect and forward audit events that are passed through your Kubernetes API server to {{site.data.keyword.la_full_notm}} or an external server. Although the Kubernetes API server for your cluster is enabled for auditing by default, no auditing data is available until you set up log forwarding.
 {: shortdesc}
 
-Before you set up the Kubernetes API audit configuration, review the following information.
+### Considerations and prerequisites
+{: #prereqs-apiserver-logs}
+
+Before you set up a Kubernetes API audit configuration, review the following information.
+{: shortdesc}
+
 * To see how the audit webhook collects logs, check out the {{site.data.keyword.containerlong_notm}} [`kube-audit` policy](https://github.com/IBM-Cloud/kube-samples/blob/master/kube-audit/kube-audit-policy.yaml){: external}.
   You cannot modify the default policy or apply your own custom policy.
   {: note}
 * For Kubernetes audit logs and verbosity, see the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/){: external}.
 * Only one audit webhook can be created in a cluster.
-* You must have the  [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#platform) for the {{site.data.keyword.containerlong_notm}} cluster.
+* You must have the  [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the {{site.data.keyword.containerlong_notm}} cluster.
 
 To get started, follow the instructions to send Kubernetes API audit logs [to {{site.data.keyword.la_full_notm}}](#audit-api-server-la), [to a resource in the {{site.data.keyword.cloud_notm}} private network](#audit-api-server-priv), or [to an external server](#audit-api-server-external).
 
@@ -123,7 +128,7 @@ To forward audit logs to {{site.data.keyword.la_full_notm}}, you can create a Ku
 
 The Kubernetes audit system in your cluster consists of an audit webhook, a log collection service and webserver app, and a logging agent. The webhook collects the Kubernetes API server events from your cluster master. The log collection service is a Kubernetes `ClusterIP` service that is created from an image from the public {{site.data.keyword.cloud_notm}} registry. This service exposes a simple `node.js` HTTP webserver app that is exposed only on the private network. The webserver app parses the log data from the audit webhook and creates each log as a unique JSON line. Finally, the logging agent forwards the logs from the webserver app to {{site.data.keyword.la_full_notm}}, where you can view the logs.
 
-Before you begin, ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/account?topic=account-userroles) for {{site.data.keyword.la_full_notm}}.
+**Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs) and that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/account?topic=account-userroles) for {{site.data.keyword.la_full_notm}}.
 
 1. Target the global container registry for public {{site.data.keyword.cloud_notm}} images.
   ```
@@ -252,6 +257,8 @@ After you set up the audit webhook in your cluster, you can monitor version upda
 Forward audit logs to a resource other than {{site.data.keyword.la_short}} that is outside of your cluster and accessible in the {{site.data.keyword.cloud_notm}} private network.
 {: shortdesc}
 
+**Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs).
+
 1. Create a configuration file that is named `kube-audit-remote-private-ip.yaml`. This configuration file creates an endpoint and service for the IP address of the resource that your cluster sends logs to through the {{site.data.keyword.cloud_notm}} private network. Do not include a selector in the service.
    ```yaml
    apiVersion: v1
@@ -333,7 +340,7 @@ To audit any events that are passed through your Kubernetes API server, you can 
 
 For example, you might [use Logstash with Kubernetes](https://kubernetes.io/docs/tasks/debug-application-cluster/audit/#use-logstash-to-collect-and-distribute-audit-events-from-webhook-backend){: external} to collect audit events. To see how Fluentd is used, see [Understanding log forwarding to an external server](/docs/containers?topic=containers-health#logging).
 
-Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
+**Before you begin**: Ensure that you reviewed the [considerations and prerequisites](#prereqs-apiserver-logs). Note that [log filters](/docs/containers?topic=containers-health#filter-logs) are not supported.
 
 1. Set up the webhook. If you do not provide any information in the flags, a default configuration is used.
 

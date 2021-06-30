@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-06-29"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl
 
@@ -267,7 +267,7 @@ All `kubectl` commands that are available in Kubernetes 1.20.7 are supported for
 Before you can run `kubectl` commands:
 * [Install the required CLIs](#cs_cli_install).
 * [Create a cluster](/docs/containers?topic=containers-clusters#clusters_cli_steps).
-* Make sure that you have a [service access role](/docs/containers?topic=containers-users#platform) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service access role but no platform access role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform access role to list clusters.
+* Make sure that you have a [service access role](/docs/containers?topic=containers-users) that grants the appropriate Kubernetes RBAC role so that you can work with Kubernetes resources. If you have only a service access role but no platform access role, you need the cluster admin to give you the cluster name and ID, or the **Viewer** platform access role to list clusters.
 
 To run `kubectl` commands to manage your cluster:
 
@@ -282,7 +282,7 @@ To run `kubectl` commands to manage your cluster:
 
 2.  Select an {{site.data.keyword.cloud_notm}} account. If you are assigned to multiple {{site.data.keyword.cloud_notm}} organizations, select the organization where the cluster was created. Clusters are specific to an organization, but are independent from an {{site.data.keyword.cloud_notm}} space. Therefore, you are not required to select a space.
 
-3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users#platform) to the resource group.
+3.  To create and work with clusters in a resource group other than the default, target that resource group. To see the resource group that each cluster belongs to, run `ibmcloud ks cluster ls`. **Note**: You must have [**Viewer** access](/docs/containers?topic=containers-users) to the resource group.
     ```
     ibmcloud target -g <resource_group_name>
     ```
