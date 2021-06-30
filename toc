@@ -99,7 +99,6 @@ Kubernetes Service
             cs_access_overview.md
             cs_access_apikey.md
             cs_access_iam_rbac.md
-            cs_access_pod_identity.md
 
         {: .topicgroup}
         Securing cluster workloads
