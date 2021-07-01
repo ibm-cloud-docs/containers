@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-01"
 
 keywords: containers
 subcollection: containers
@@ -1299,6 +1299,7 @@ subcollection: containers
   * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
   * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
   * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
+* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
@@ -2712,6 +2713,8 @@ subcollection: containers
 [Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts)
+
+[Block storage: Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc)
 
 
 ## Object Storage
