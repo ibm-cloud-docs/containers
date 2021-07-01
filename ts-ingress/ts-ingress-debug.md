@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -257,7 +257,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Cloudflare's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and [the IP addresses in step 7 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).<p class="important">On 05 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 05 July. After the migration, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
+  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Cloudflare's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and [the IP addresses in step 7 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).<p class="important">As of 07 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 05 July. After the migration, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
   * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC**: If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
@@ -272,6 +272,12 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
         * If you don't have a firewall or your firewall does not block the pings and the pings still timeout, [check the status of your ALB pods](#check_pods).
 
     * Multizone clusters only: You can use the MZLB health check to determine the status of your ALB IPs (classic) or hostname (VPC). For more information about the MZLB, see [Multizone load balancer (MZLB)](/docs/containers?topic=containers-ingress-about#ingress_components). The following HTTP cURL command uses the `albhealth` host, which is configured by {{site.data.keyword.containerlong_notm}} to return the `healthy` or `unhealthy` status for an ALB IP.
+        ```
+        curl -X GET http://<ALB_IP>/ -H "Host: albhealth.<ingress_subdomain>"
+        ```
+        {: pre}
+
+        Example command:
         ```
         curl -X GET http://169.62.196.238/ -H "Host: albhealth.mycluster-<hash>-0000.us-south.containers.appdomain.cloud"
         ```
