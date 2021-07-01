@@ -2678,16 +2678,16 @@ subcollection: containers
 
 [File storage and block storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending)
 
-[File storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures)
+[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures)
 
-[File storage: Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root)
+[Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root)
 
-[File storage: Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot)
+[Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot)
 
-[File storage: Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot)
+[Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot)
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
-[File storage: Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
+[Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage)
 
@@ -2704,17 +2704,17 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_cli)
 * [Checking and updating the {{site.data.keyword.blockstorageshort}} driver](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver)
 
-[Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
+[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
-[Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
+[Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
 
-[Block storage: Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
+[Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
 
-[Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
+[Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts)
 
-[Block storage: Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc)
+[Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc)
 
 
 ## Object Storage
@@ -2729,26 +2729,26 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
 * [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
 
-[Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
+[Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
-[Object storage: Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails)
+[Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails)
 
-[Object storage: Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access)
+[Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access)
 * [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
 
-[Object Storage: Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted)
+[Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted)
 
-[Object storage: Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error)
+[Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error)
 
-[Object storage: Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails)
+[Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails)
 
-[Object storage: Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure)
+[Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure)
 
-[Object storage: Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure)
+[Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure)
 
-[Object storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
+[Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
 
-[Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
+[Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
 
 
 ## Portworx Storage
@@ -2762,12 +2762,12 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_cli)
 * [Updating Helm charts](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_helm)
 
-[Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
+[Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
 * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-debug-portworx#px-verify-cluster)
 * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-debug-portworx#px-support)
 
-[Portworx: Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint)
+[Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint)
 
 
 ## Release notes

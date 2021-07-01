@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Object Storage: Why is the transport endpoint not connected?
+# Why is the transport endpoint not connected?
 {: cos_transport_ts_connect}
 
 **Infrastructure provider**:

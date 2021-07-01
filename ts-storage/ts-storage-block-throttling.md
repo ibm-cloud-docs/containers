@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?
+# Why does the Block storage plug-in Helm chart give CPU throttling warnings?
 {: #block_helm_cpu}
 
 **Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
