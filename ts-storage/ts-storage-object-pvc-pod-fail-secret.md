@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-01"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -123,7 +123,7 @@ Example error message for a pod creation failure:
 The Kubernetes secret that you created is not referenced correctly in your deployment yaml or is not set to the `ibm/ibmc-s3fs` type.
 
 {: tsResolve}
-This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users) for all namespaces.
+This task requires [**Writer** or **Manager** {{site.data.keyword.cloud_notm}} IAM service access role](/docs/containers?topic=containers-users#checking-perms) for all namespaces.
 
 1. List the secrets in your cluster and review the secret type. The secret must show `ibm/ibmc-s3fs` as the **Type**.
    ```sh

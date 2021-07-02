@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, containers
 
@@ -333,7 +333,7 @@ Create a cluster with infrastructure, network, and availability setups that are 
     1. [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles).
     2. [Understand access roles for individual or groups of users in {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-access-overview#iam_individuals_groups).
     3. [Choose the scope of user access to cluster instances, Kubernetes namespace, or resource groups](/docs/containers?topic=containers-access-overview#resource_groups).
-  2. Allow users to create apps or audit your cluster activity by [assigning cluster access](/docs/containers?topic=containers-users). To see specific permissions and actions that you can grant users, see the [user access permissions reference](/docs/containers?topic=containers-access_reference).
+  2. Allow users to create apps or audit your cluster activity by [assigning cluster access](/docs/containers?topic=containers-users#checking-perms). To see specific permissions and actions that you can grant users, see the [user access permissions reference](/docs/containers?topic=containers-access_reference).
 
 </br>Need help? Check out [Troubleshooting clusters and masters](/docs/containers?topic=containers-debug_clusters) and [Troubleshooting worker nodes](/docs/containers?topic=containers-debug_worker_nodes).
 

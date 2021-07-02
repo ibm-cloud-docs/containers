@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -397,54 +397,7 @@ Grant users access to your {{site.data.keyword.containerlong_notm}} clusters by 
 
 4.  If you assigned only service access roles to users, the users must [launch the Kubernetes dashboard from the CLI](/docs/containers?topic=containers-deploy_app#db_cli) instead of the {{site.data.keyword.cloud_notm}} console. Otherwise, [give the users the platform **Viewer** role](#add_users_cli_platform).
 
-5.  **Optional**: After a couple minutes, verify that the user is added to the corresponding [RBAC role binding or cluster role binding](/docs/containers?topic=containers-access-overview#role-binding). Note that you must be a cluster administrator (**Manager** service access role in all namespaces) to check role bindings and cluster role bindings. Users are not added to a role binding if they have a higher permission. For example, if users have a cluster role and are in a cluster role binding, they are not added to each individual namespace role binding as well.
-
-    *   Reader:
-        ```
-        kubectl get rolebinding ibm-view -o yaml -n <namespace>
-        ```
-        {: pre}
-    *   Writer:
-        ```
-        kubectl get rolebinding ibm-edit -o yaml -n <namespace>
-        ```
-        {: pre}
-    *   Manager, scoped to a namespace:
-        ```
-        kubectl get rolebinding ibm-operate -o yaml -n <namespace>
-        ```
-        {: pre}
-    *   Manager, all namespaces:
-        ```
-        kubectl get clusterrolebinding ibm-admin -o yaml
-        ```
-        {: pre}
-
-    **Example output**: You get the following example output if you assign user `user@email.com` and access group `team1` the **Reader** service access role, and then run `kubectl get rolebinding ibm-view -o yaml -n default`.
-
-    ```
-    apiVersion: rbac.authorization.k8s.io/v1
-    kind: RoleBinding
-    metadata:
-      creationTimestamp: 2018-05-23T14:34:24Z
-      name: ibm-view
-      namespace: default
-      resourceVersion: "8192510"
-      selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/default/rolebindings/ibm-view
-      uid: 63f62887-5e96-11e8-8a75-b229c11ba64a
-    roleRef:
-      apiGroup: rbac.authorization.k8s.io
-      kind: ClusterRole
-      name: view
-    subjects:
-    - apiGroup: rbac.authorization.k8s.io
-      kind: User
-      name: IAM#user@email.com
-    - apiGroup: rbac.authorization.k8s.io
-      kind: group
-      name: team1
-    ```
-    {: screen}
+5.  **Optional**: After a couple minutes, verify that the user is added to the corresponding [RBAC role binding or cluster role binding](#checking-rbac). 
 
 <br />
 
@@ -806,6 +759,187 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 3.  Follow up with users that have the `admin` cluster role. Ask them to [refresh their cluster configuration](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) and test the action, such as `kubectl top pods`.
 
 <br />
+
+
+## Checking user permissions
+{: #checking-perms}
+
+Before you complete a task, you might want to check that you have the appropriate permissions in {{site.data.keyword.cloud}} Identity and Access Management (IAM).
+{: shortdesc}
+
+### Checking IAM platform and service access roles
+{: #checking-iam}
+
+Check your access policies that are assigned by IAM platform and service access roles.
+{: shortdesc}
+
+**From the UI**:
+1.  Log in to the [{{site.data.keyword.cloud_notm}} IAM console](https://cloud.ibm.com/iam){: external}.
+2.  From the navigation menu, click the **Users** tab.
+3.  In the table, click the user with the tag `self` for yourself or the user that you want to check.
+4.  Click the **Access policies** tab.
+5.  Review the **Resource attributes** column for a short description of the access. Click the number tag to view all the allowed actions for the role.
+
+    Service access roles are synchronized with Kubernetes RBAC roles within your cluster. If you have a service access role, you might want to [verify your RBAC role](#checking-rbac), too.
+    {: tip}
+
+6.  To review what the roles and allowed actions permit, see the following topics.
+    *   [IAM roles and actions](/docs/account?topic=account-iam-service-roles-actions)
+    *   [{{site.data.keyword.containerlong_notm}} user access permissions](/docs/containers?topic=containers-access_reference)
+7.  To change or assign new access policies, see [Assigning {{site.data.keyword.containerlong_notm}} roles](#add_users).
+
+<br>
+
+**From the CLI**:
+
+1.  Log in to your {{site.data.keyword.cloud_notm}} account. If you have a federated ID, include the `--sso` flag.
+    ```
+    ibmcloud login -r [--sso]
+    ```
+    {: pre}
+2.  Find the **User ID** of the user whose permissions you want to check.
+    ```
+    ibmcloud account users
+    ```
+    {: pre}
+3.  Check the IAM access policies of the user.
+    ```
+    ibmcloud iam user-policies <user_id>
+    ```
+    {: pre}
+
+    Service access roles are synchronized with Kubernetes RBAC roles within your cluster. If you have a service access role, you might want to [verify your RBAC role](#checking-rbac), too.
+    {: tip}
+
+4.  To review what the roles and allowed actions permit, see the following topics.
+    *   [IAM roles and actions](/docs/account?topic=account-iam-service-roles-actions)
+    *   [{{site.data.keyword.containerlong_notm}} user access permissions](/docs/containers?topic=containers-access_reference)
+5.  To change or assign new access policies, see [Assigning {{site.data.keyword.containerlong_notm}} roles](#add_users_cli).
+
+### Checking RBAC roles
+{: #checking-rbac}
+
+Verify your custom RBAC or synchronized IAM service access to RBAC roles in your {{site.data.keyword.containerlong_notm}} cluster.
+{: shortdesc} 
+
+**From the UI**:
+1.  Log in to the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+2.  Click the cluster with the RBAC roles that you want to check.
+3.  Click the **Kubernetes Dashboard**. 
+    
+    If you have a private network only cluster, you might not be able to open the dashboard unless you are on a VPN. See [Accessing clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#access_private_se).
+    {: note}
+
+4.  From the **Cluster** section, review the **Cluster Role Bindings**, **Cluster Roles**, **Role Bindings**, and **Roles**.
+
+<br>
+
+**From the CLI**:
+
+1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2.  Check that the user is added to the RBAC role. Users are not added to a role binding if they have a higher permission. For example, if users have a cluster role and are in a cluster role binding, they are not added to each individual namespace role binding as well.
+
+    You must be a cluster administrator (**Manager** service access role in all namespaces) to check role bindings and cluster role bindings.
+    {: note}
+
+    *   Reader:
+        ```
+        kubectl get rolebinding ibm-view -o yaml -n <namespace>
+        ```
+        {: pre}
+    *   Writer:
+        ```
+        kubectl get rolebinding ibm-edit -o yaml -n <namespace>
+        ```
+        {: pre}
+    *   Manager, scoped to a namespace:
+        ```
+        kubectl get rolebinding ibm-operate -o yaml -n <namespace>
+        ```
+        {: pre}
+    *   Manager, all namespaces:
+        ```
+        kubectl get clusterrolebinding ibm-admin -o yaml
+        ```
+        {: pre}
+
+    **Example output**: If you assign user `user@email.com` and access group `team1` the **Reader** service access role, and then run `kubectl get rolebinding ibm-view -o yaml -n default`, you get the following example output.
+
+    ```
+    apiVersion: rbac.authorization.k8s.io/v1
+    kind: RoleBinding
+    metadata:
+      creationTimestamp: 2018-05-23T14:34:24Z
+      name: ibm-view
+      namespace: default
+      resourceVersion: "8192510"
+      selfLink: /apis/rbac.authorization.k8s.io/v1/namespaces/default/rolebindings/ibm-view
+      uid: 63f62887-5e96-11e8-8a75-b229c11ba64a
+    roleRef:
+      apiGroup: rbac.authorization.k8s.io
+      kind: ClusterRole
+      name: view
+    subjects:
+    - apiGroup: rbac.authorization.k8s.io
+      kind: User
+      name: IAM#user@email.com
+    - apiGroup: rbac.authorization.k8s.io
+      kind: group
+      name: team1
+    ```
+    {: screen}
+
+### Checking infrastructure roles
+{: #checking-infra}
+
+<img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Check your {{site.data.keyword.cloud_notm}} classic infrastructure roles. For more information, see [Understanding access to the infrastructure portfolio](/docs/containers?topic=containers-access-creds#understand_infra).
+{: shortdesc}
+
+<img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC infrastructure permissions are managed with [IAM platform and service access roles](#checking-iam).
+{: note}
+
+If you are an adminstrator for the region and resource group, you might want to [check if the user's credentials are used for infrastructure permissions](#removing_check_infra), especially before removing the user.
+{: tip}
+
+**From the UI**:
+1.  Log in to the [{{site.data.keyword.cloud_notm}} IAM console](https://cloud.ibm.com/iam){: external}.
+2.  From the navigation menu, click the **Users** tab.
+3.  In the table, click the user with the tag `self` for yourself or the user that you want to check.
+4.  Click the **Classic infrastructure** tab.
+5.  Review each of the classic infrastructure tabs.
+    1.  **Permissions**: Expand the categories to review the permissions that the user has.
+    2.  **Devices**: Review the devices that the user has permissions to. A common issue is when a user has administrator permissions but the `Enable future access` was not checked so whenever a new device is ordered, the user cannot administer the device.
+    3.  **VPN subnets**: The subnets permission is important if the user must administer the subnets for the cluster.
+6.  To review what the roles and allowed actions permit, see the following topics.
+    *   [Account classic infrastructure permissions](/docs/account?topic=account-infrapermission)
+    *   [{{site.data.keyword.containerlong_notm}} classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
+7.  To change or assign new access policies, see [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
+
+<br>
+
+**From the CLI**:
+
+1.  Log in to your {{site.data.keyword.cloud_notm}} account. If you have a federated ID, include the `--sso` flag.
+    ```
+    ibmcloud login -r [--sso]
+    ```
+    {: pre}
+2.  List the users in your classic infrastructure account and note the **id** of the user whose credentials are set manually or by the API key.
+    ```
+    {[icsl]} user list
+    ```
+    {: pre}
+3.  List the current classic infrastructure permissions that the user has.
+    ```
+    {[icsl]} user permissions <user_id>
+    ```
+    {: pre}
+4.  To review what the roles and allowed actions permit, see the following topics.
+    *   [Account classic infrastructure permissions](/docs/account?topic=account-infrapermission)
+    *   [{{site.data.keyword.containerlong_notm}} classic infrastructure roles](/docs/containers?topic=containers-access_reference#infra)
+5.  To change or assign new access policies, see [Customizing infrastructure permissions](/docs/containers?topic=containers-access-creds#infra_access).
+
+
 
 ## Removing user permissions
 {: #removing}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, upgrade, version
 
@@ -153,7 +153,7 @@ The following diagram shows the process that you can take to update your master.
 ### Steps to update the cluster master
 {: #master-steps}
 
-Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users).
+Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 To update the Kubernetes master _major_ or _minor_ version:
 
@@ -234,7 +234,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes version changelog](/docs/containers?topic=containers-changelog).
 - Consider [adding more worker nodes](/docs/containers?topic=containers-add_workers) so that your cluster has enough capacity to rescheduling your workloads during the update.
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 ### Updating classic worker nodes in the CLI with a configmap
 {: #worker-up-configmap}
@@ -451,7 +451,7 @@ Updates to worker nodes can cause downtime for your apps and services. Your work
 - [Update the master](#master). The worker node version cannot be higher than the API server version that runs in your Kubernetes master.
 - Make any changes that are marked with _Update after master_ in the [Kubernetes version preparation guide](/docs/containers?topic=containers-cs_versions).
 - If you want to apply a patch update, review the [Kubernetes clusters](/docs/containers?topic=containers-changelog) version changelog.
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 ### Updating VPC worker nodes in the CLI
 {: #vpc_worker_cli}
@@ -504,7 +504,7 @@ You can update the flavors, or machine types, of your worker nodes by adding new
 Before you begin:
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 - If you store data on your worker node, the data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
-- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users).
+- Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 To update flavors:
 
@@ -661,7 +661,7 @@ When you create a logging configuration for a source in your cluster to forward 
 As of 14 November 2019, a Fluentd component is created for your cluster only if you [create a logging configuration to forward logs to a syslog server](/docs/containers?topic=containers-health#configuring). If no logging configurations for syslog exist in your cluster, the Fluentd component is removed automatically. If you do not forward logs to syslog and want to ensure that the Fluentd component is removed from your cluster, automatic updates to Fluentd must be enabled.
 {: important}
 
-You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the cluster.
+You can manage automatic updates of the Fluentd component in the following ways. **Note**: To run the following commands, you must have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 
 * Check whether automatic updates are enabled by running the `ibmcloud ks logging autoupdate get --cluster <cluster_name_or_ID>` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_get).
 * Disable automatic updates by running the `ibmcloud ks logging autoupdate disable` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_log_autoupdate_disable).
@@ -714,7 +714,7 @@ Review the following image to see how your cluster setup changes when you move f
 <img src="images/cs_cluster_migrate.png" alt="Update your cluster from stand-alone worker nodes to worker pools" width="600" style="width:600px; border-style: none"/>
 
 Before you begin:
-- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the cluster.
+- Ensure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 To update stand-alone worker nodes to worker pools:

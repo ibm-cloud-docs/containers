@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, hardware, flavor, machine type, vm, bm
 
@@ -203,9 +203,6 @@ With VMs, you get greater flexibility, quicker provisioning times, and more auto
 **Do I want to use shared or dedicated hardware?**
 
 When you create a standard classic cluster, you must choose whether you want the underlying hardware to be shared by multiple {{site.data.keyword.IBM_notm}} customers (multi tenancy) or to be dedicated to you only (single tenancy). VPC standard clusters can be provisioned on shared infrastructure (multi tenancy) only.
-
-**Classic infrastructure only**: To achieve HIPAA and PCI compliance for your environment, make sure to use dedicated virtual or [bare metal](#bm) machines for your worker nodes, not shared virtual machines. With dedicated virtual or bare metal machines, all compute resources are dedicated exclusively to you, and you can control the isolation and resource consumption of your workloads.
-{: important}
 
 * **In a multi-tenant, shared hardware setup**: Physical resources, such as CPU and memory, are shared across all virtual machines that are deployed to the same physical hardware. To ensure that every virtual machine can run independently, a virtual machine monitor, also referred to as the hypervisor, segments the physical resources into isolated entities and allocates them as dedicated resources to a virtual machine (hypervisor isolation).
 * **In a single-tenant, dedicated hardware setup**: All physical resources are dedicated to you only. You can deploy multiple worker nodes as virtual machines on the same physical host. Similar to the multi-tenant setup, the hypervisor assures that every worker node gets its share of the available physical resources.

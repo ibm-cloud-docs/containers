@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks
 
@@ -116,7 +116,7 @@ When you run `ibmcloud`, `kubectl`, or `calicoctl` commands from the CLI, they f
 You might have corporate network policies that prevent access from your local system to public endpoints via proxies or firewalls.
 
 {: tsResolve}
-[Allow TCP access for the CLI commands to work](/docs/containers?topic=containers-firewall#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the cluster.
+[Allow TCP access for the CLI commands to work](/docs/containers?topic=containers-firewall#firewall_bx). This task requires the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 
 <br />
 

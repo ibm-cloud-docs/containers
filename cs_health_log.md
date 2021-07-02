@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, logmet, logs, metrics, recovery, auto-recovery
 
@@ -362,7 +362,7 @@ The following table shows the different options that you have when you configure
 ### Forwarding logs to your own server over the `udp` or `tcp` protocols
 {: #enable-forwarding-udp-tcp}
 
-1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users).
+1. Ensure that you have the [**Editor** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms).
 
 2. For the cluster where the log source is located: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
@@ -388,7 +388,7 @@ The following table shows the different options that you have when you configure
 The following steps are general instructions. Prior to using the container in a production environment, be sure that any security requirements that you need, are met.
 {: tip}
 
-1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users):
+1. Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
     * **Editor** or **Administrator** platform access role for the cluster
     * **Writer** or **Manager** service access role for the `kube-system` namespace
 
@@ -553,7 +553,7 @@ Because Kubernetes API Server logs are automatically streamed, they're also auto
 **Before you begin**
 
 * [Provision an instance](/docs/cloud-object-storage/basics?topic=cloud-object-storage-gs-dev) of {{site.data.keyword.cos_short}} from the {{site.data.keyword.cloud_notm}} catalog.
-* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the cluster.
+* Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
 
 **Creating a snapshot**
 
