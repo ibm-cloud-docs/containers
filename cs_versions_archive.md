@@ -140,7 +140,7 @@ The following table shows the changes that are included in the master fix pack p
 {: caption="Changes since version 1.17.17_1563" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021
-{: #11717_1565}
+{: #11717_1566}
 
 The following table shows the changes that are included in the worker node fix pack `1.17.17_1566`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
 {: shortdesc}

@@ -1912,7 +1912,7 @@ subcollection: containers
 * [Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-changelog_archive#117_changelog)
   * [Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021](/docs/containers?topic=containers-changelog_archive#11717_1567_worker)
   * [Changelog for master fix pack 1.17.17_1567, released 28 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1567)
-  * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1565)
+  * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1566)
   * [Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1565)
   * [Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11717_1564)
   * [Changelog for master fix pack 1.17.17_1563, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11717_1563)
@@ -2782,7 +2782,7 @@ subcollection: containers
 
 [Release notes](/docs/containers?topic=containers-iks-release)
 
-* [June 2021](/docs/containers?topic=containers-iks-release#jun21)
+* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
 
 * [June 2021](/docs/containers?topic=containers-iks-release#jun21)
 

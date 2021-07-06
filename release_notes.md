@@ -105,12 +105,12 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
 
-## June 2021
-{: #jun21}
+## July 2021
+{: #jul21}
 
 | Date | Description |
 | ---- | ----------- |
-| 06 July 2021 |<ul><li> **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1523](/docs/containers?topic=containers-changelog#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-changelog_archive#1117_1567_worker).</li></ul> |
+| 06 July 2021 |<ul><li> **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1523](/docs/containers?topic=containers-changelog#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-changelog_archive#11717_1567_worker).</li></ul> |
 | 02 July 2021 | **Unsupported Kubernetes version 1.17**: To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in July 2021"}
