@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-01"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -968,11 +968,8 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 ## Customizing the Ingress class
 {: #-custom-ingress-class}
 
-An Ingress class associates a class name with an Ingress controller type.
+An Ingress class associates a class name with an Ingress controller type. Use the `IngressClass` resource to customize Ingress classes.
 {: shortdesc}
-
-* **Kubernetes 1.18 or later**: Use the `IngressClass` resource to customize Ingress classes.
-* **Kubernetes 1.17 or earlier**: Use the `kubernetes.io/ingress.class` annotation to customize Ingress classes.
 
 For more information, see [Customizing the Ingress class](/docs/containers?topic=containers-ingress-types#ingress-class).
 

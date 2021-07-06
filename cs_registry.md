@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -268,9 +268,6 @@ New {{site.data.keyword.containerlong_notm}} clusters store an API key in [image
     all-icr-io           kubernetes.io/dockerconfigjson        1         16d
     ```
     {: screen}
-
-    To maintain backwards compatibility, your Kubernetes version 1.15 - 1.17 clusters have a separate image pull secret for each {{site.data.keyword.registrylong_notm}} region. However, you can copy and refer to only the `all-icr-io` image pull secret, which has credentials to the public and private `icr.io` registry domains for all regions.
-    {: note}
 
 4.  Update your [container deployments](/docs/containers?topic=containers-app#image) to pull images from the `icr.io` domain name.
 5.  Optional: If you have a firewall, make sure you [allow outbound network traffic to the registry subnets](/docs/containers?topic=containers-firewall#firewall_outbound) for the domains that you use.

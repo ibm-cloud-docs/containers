@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-15"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -152,8 +152,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 *   Other: 1.19.11
 
 **Deprecated and unsupported Kubernetes versions**:
-*   Deprecated: 1.17.17, 1.18.19
-*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16
+*   Deprecated: 1.18.19
+*   Unsupported: 1.5, 1.7, 1.8, 1.9, 1.10, 1.11, 1.12, 1.13, 1.14, 1.15, 1.16, 1.17
 
 <br>
 
@@ -222,10 +222,10 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td>01 Sep 2021 `†`</td>
 </tr>
   <tr>
-  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
+  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
   <td>[1.17](#cs_v117)</td>
   <td>10 Feb 2020</td>
-  <td>02 Jul 2021 `†`</td>
+  <td>02 Jul 2021</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
@@ -337,7 +337,6 @@ This information summarizes updates that are likely to have impact on deployed a
 -  Version 1.20 [preparation actions](#cs_v120).
 -  Version 1.19 [preparation actions](#cs_v119).
 -  **Deprecated**: Version 1.18 [preparation actions](#cs_v118).
--  **Deprecated**: Version 1.17 [preparation actions](#cs_v117).
 -  [Archive](#k8s_version_archive) of unsupported versions.
 
 <br />
@@ -538,75 +537,27 @@ The following table shows the actions that you must take after you update your w
 
 <br />
 
-## Deprecated: Version 1.17
-{: #cs_v117}
-
-<p><img src="images/certified_kubernetes_1x17.png" style="padding-right: 10px;" align="left" alt="This badge indicates Kubernetes version 1.17 certification for {{site.data.keyword.containerlong_notm}}."/> {{site.data.keyword.containerlong_notm}} is a Certified Kubernetes product for version 1.17 under the CNCF Kubernetes Software Conformance Certification program. _Kubernetes® is a registered trademark of The Linux Foundation in the United States and other countries, and is used pursuant to a license from The Linux Foundation._</p>
-
-Review changes that you might need to make when you update from the previous Kubernetes version to 1.17.
-{: shortdesc}
-
-Kubernetes version 1.17 is deprecated, with a tentative unsupported date of 2 July 2021. Update your cluster to at least [version 1.18](#cs_v118) and then [version 1.19](#cs_v119) as soon as possible.
-{: deprecated}
-
-### Update before master
-{: #117_before}
-
-The following table shows the actions that you must take before you update the Kubernetes master.
-{: shortdesc}
-
-| Type | Description |
-| ---- | ----------- |
-| Add-ons and plug-ins | For each add-on and plug-in that you installed in your cluster, check for any impacts that might be caused by updating the cluster version. For instructions, see [Steps to update the cluster master](/docs/containers?topic=containers-update#master-steps) and refer to the add-on and plug-in documentation. |
-| **Unsupported:** CoreDNS `federations` plug-in | CoreDNS version 1.7 and later no longer support the `federations` plug-in. If you customized your CoreDNS configuration to use this plug-in, you must remove the plug-in and any related configurations before updating. For more information about updating your CoreDNS configuration, see [Customizing the cluster DNS provider](/docs/containers?topic=containers-cluster_dns#dns_customize). |
-| **Unsupported:** Select CoreDNS metrics | CoreDNS version 1.7 and later [metrics changed](https://coredns.io/2020/06/15/coredns-1.7.0-release/#metric-changes){: external}. If you rely on these changed metrics, update accordingly. For example, you might update a Prometheus query of CoreDNS metrics to handle both the old and new metrics. |
-| **Gateway-enabled clusters only**: Public traffic is blocked on node ports | If you have a gateway-enabled cluster and use a public node port to expose your app, public traffic on the node port is now blocked by default. Instead, use a [load balancer service](/docs/containers?topic=containers-loadbalancer-qs) or [create a preDNAT Calico policy](/docs/containers?topic=containers-policy_tutorial) with an order number that is lower than `1800` and with a selector `ibm.role == 'worker_public'` so that public traffic is explicitly allowed to the node port. |
-| Removed Kubernetes built-in cluster roles | Kubernetes built-in `system:csi-external-provisioner` and `system:csi-external-attacher` cluster roles are removed. Update any role or cluster role bindings that rely on these built-in cluster roles to use different cluster roles. |
-| **Unsupported:** Select Kubernetes API server metrics | The following Kubernetes API service metrics available via the `/metrics` endpoint are unsupported and removed. If you use any of these [removed and deprecated Kubernetes metrics](https://github.com/kubernetes/kubernetes/blob/master/CHANGELOG/CHANGELOG-1.14.md#removed-and-deprecated-metrics){: external}, change to the available replacement metric.<ul><li>`apiserver_request_count`</li><li>`apiserver_request_latencies`</li><li> `apiserver_request_latencies_summary`</li><li>`apiserver_dropped_requests`</li><li>`etcd_request_latencies_summary`</li><li>`apiserver_storage_transformation_latencies_microseconds`</li><li>`apiserver_storage_data_key_generation_latencies_microseconds`</li><li>`apiserver_storage_transformation_failures_total`</li><li>`rest_client_request_latency_seconds`</li></ul> |
-{: caption="Changes to make before you update the master to Kubernetes 1.17" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-
-### Update after master
-{: #117_after}
-
-The following table shows the actions that you must take after you update the Kubernetes master.
-{: shortdesc}
-
-| Type | Description |
-| ---- | ----------- |
-| Kubernetes configuration | The OpenID Connect configuration for the cluster's Kubernetes API server now uses the {{site.data.keyword.iamlong}} (IAM) `iam.cloud.ibm.com` endpoint. As a result, you must refresh the cluster's Kubernetes configuration by using the [`ibmcloud ks cluster config` command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_config) after you update the master to Kubernetes version 1.17. If you continue to use an old Kubernetes configuration, you see an error message similar to the following: `You must be logged in to the server (Unauthorized).` |
-| **Unsupported:** `kubectl` commands `--include-uninitialized` flag | The `kubectl` command `--include-uninitialized` flag is no longer supported. If your scripts rely on this flag, update them by removing the flag. |
-{: caption="Changes to make after you update the master to Kubernetes 1.17" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-### Update after worker nodes
-{: #117_after_worker}
-
-The following table shows the actions that you must take after you update your worker nodes.
-{: shortdesc}
-
-| Type | Description |
-| ---- | ----------- |
-| **Unsupported or changed:** Select Kubernetes `kube-proxy` metrics | Select Kubernetes kube-proxy metrics available via the `/metrics` endpoint are unsupported or are changed. Update your `kube-proxy` metrics usage accordingly.<ul><li>**Removed**: The `kubeproxy_sync_proxy_rules_latency_microseconds` metric is removed.</li><li>**Changed**: The `sync_proxy_rules_last_timestamp_seconds` metric now updates only when services or endpoints change. To monitor for `iptables` update failures, use the `sync_proxy_rules_iptables_restore_failures_total` metric instead.</li></ul> |
-{: caption="Changes to make after you update the worker nodes to Kubernetes 1.17" caption-side="top"}
-{: summary="The rows are read from left to right. The type of update action is in the first column, and a description of the update action type is in the second column."}
-
-<br />
-
 ## Archive
 {: #k8s_version_archive}
 
 Find an overview of Kubernetes versions that are unsupported in {{site.data.keyword.containerlong_notm}}.
 {: shortdesc}
 
+### Version 1.17 (Unsupported)
+{: #cs_v117}
+
+As of 2 July 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.17](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.17 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+{: shortdesc}
+
+[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to the deprecated [Kubernetes 1.18](#cs_v118) version, and then to a supported version such as [Kubernetes 1.19](#cs_v119).
+
 ### Version 1.16 (Unsupported)
 {: #cs_v116}
 
-As of 31 January 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.16](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.16 clusters cannot receive security updates or support unless they are updated to the next most recent version.
+As of 31 January 2021, {{site.data.keyword.containerlong_notm}} clusters that run [Kubernetes version 1.16](/docs/containers?topic=containers-changelog_archive) are unsupported. Version 1.15 clusters cannot receive security updates or support.
 {: shortdesc}
 
-[Review the potential impact](/docs/containers?topic=containers-cs_versions#cs_versions) of each Kubernetes version update, and then [update your clusters](/docs/containers?topic=containers-update#update) immediately to at least [Kubernetes 1.17](#cs_v117).
+To continue running your apps in {{site.data.keyword.containerlong_notm}}, [create a new cluster](/docs/containers?topic=containers-clusters#clusters) and [copy your deployments](/docs/containers?topic=containers-update_app#copy_apps_cluster) from the unsupported cluster to the new cluster.
 
 ### Version 1.15 (Unsupported)
 {: #cs_v115}

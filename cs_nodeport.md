@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, app access
 
@@ -134,10 +134,6 @@ You can expose your app as a Kubernetes NodePort service for free or standard cl
 
 Because worker nodes in VPC clusters do not have a public IP address, you can access an app through a NodePort only if you are connected to your private VPC network, such as through a VPN connection. To access an app from the internet, you must use a [VPC load balancer](/docs/containers?topic=containers-vpc-lbaas) or [Ingress](/docs/containers?topic=containers-ingress-about) service instead.
 {: note}
-
-**Gateway-enabled clusters that run Kubernetes version 1.17 only**: If you have a gateway-enabled cluster and use a public node port to expose your app, public traffic on the node port is blocked by default in Kubernetes version 1.17. Instead, use a [load balancer service](/docs/containers?topic=containers-loadbalancer-qs) or [create a preDNAT Calico policy](/docs/containers?topic=containers-policy_tutorial) with an order number that is lower than `1800` and with a selector `ibm.role == 'worker_public'` so that public traffic is explicitly allowed to the node port.
-{: note}
-
 
 If you do not already have an app ready, you can use a Kubernetes example app called [Guestbook](https://github.com/kubernetes/examples/blob/master/guestbook/all-in-one/guestbook-all-in-one.yaml){: external}.
 

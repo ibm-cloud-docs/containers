@@ -984,12 +984,10 @@ By storing custom TLS certificates in {{site.data.keyword.cloudcerts_long_notm}}
 An Ingress class associates a class name with an Ingress controller type.
 {: shortdesc}
 
-Depending on your cluster version, an Ingress class can be specified in one of the following ways:
-* **Kubernetes 1.18 or later**: An [`IngressClass` resource](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class){: external} associates a class name with an Ingress controller type. When you create Ingress resources to define routing for your apps, you specify the class name in the `spec.ingressClassName` field to apply the Ingress resource to the Ingress controllers that are associated with that class. Note that because the deprecated `kubernetes.io/ingress.class` annotation is still usable in Kubernetes 1.18 and later, classes that are specified in Ingress resources are applied in the following ways:
-  * If a class is specified either in the `spec.ingressClassName` field or in the deprecated `kubernetes.io/ingress.class` annotation, the class is applied.
-  * If both the `spec.ingressClassName` field and the `kubernetes.io/ingress.class` annotation and specified, the class in the annotation is used.
-  * If neither the `spec.ingressClassName` field nor the `kubernetes.io/ingress.class` annotation are specified, the default class is applied.
-* **Kubernetes 1.17 or earlier**: When you create Ingress resources to define routing for your apps, you specify the class name in the `kubernetes.io/ingress.class` annotation to apply the Ingress resource to the Ingress controllers that are associated with that class.
+An [`IngressClass` resource](https://kubernetes.io/docs/concepts/services-networking/ingress/#ingress-class){: external} associates a class name with an Ingress controller type. When you create Ingress resources to define routing for your apps, you specify the class name in the `spec.ingressClassName` field to apply the Ingress resource to the Ingress controllers that are associated with that class. Note that because the deprecated `kubernetes.io/ingress.class` annotation is still usable in Kubernetes 1.18 and later, classes that are specified in Ingress resources are applied in the following ways:
+* If a class is specified either in the `spec.ingressClassName` field or in the deprecated `kubernetes.io/ingress.class` annotation, the class is applied.
+* If both the `spec.ingressClassName` field and the `kubernetes.io/ingress.class`annotation are specified, the class in the annotation is used.
+* If neither the `spec.ingressClassName` field nor the `kubernetes.io/ingress.class`annotation are specified, the default class is applied.
 
 ### Default Ingress classes for public and private ALBs
 {: #ingress-class-default}

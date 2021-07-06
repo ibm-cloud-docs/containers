@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, coredns, kubedns, dns
 
@@ -314,7 +314,7 @@ The following steps update DNS pods that run on particular worker nodes. You can
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.17.1+IKS   true
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.20.7+IKS   true
       ```
       {: screen}
    2. Verify that the DNS caching agent pod is running on the worker node.
@@ -360,7 +360,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
       Example output:
       ```
       NAME          STATUS                      ROLES    AGE   VERSION       NODE-LOCAL-DNS-ENABLED
-      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.17.1+IKS   
+      10.xxx.xx.xxx Ready,SchedulingDisabled    <none>   28h   v1.20.7+IKS   
       ```
       {: screen}
    2. Verify that the pod is no longer running on the node where DNS cache is disabled. The output shows no pods.
@@ -384,7 +384,7 @@ You can disable the `NodeLocal` DNS cache for one or more worker nodes.
 You can customize the `NodeLocal` DNS cache by editing either of the two configmaps. 
 {: shortdesc}
 
-* [**`node-local-dns` configmap**](#dns_nodelocal_customize_configmap): In Kubernetes 1.17 or later, customize the `NodeLocal` DNS cache configuration.
+* [**`node-local-dns` configmap**](#dns_nodelocal_customize_configmap): Customize the `NodeLocal` DNS cache configuration.
 * [**`node-local-dns-config` configmap**](#dns_nodelocal_customize_stub_upstream): Extend the `NodeLocal` DNS cache configuration by customizing stub domains or upstream DNS servers to resolve services that point to external hosts. 
 
 `NodeLocal` DNS caching relies on CoreDNS to maintain the cache of DNS resolutions. Keep applicable `NodeLocal` DNS cache and CoreDNS configurations such as stub domains the same to maintain DNS resolution consistency.
