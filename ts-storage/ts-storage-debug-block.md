@@ -2,9 +2,9 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-07-01"
 
-keywords: file, debug, help
+keywords: block, debug, help
 
 subcollection: containers
 content-type: troubleshoot

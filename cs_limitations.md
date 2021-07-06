@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-07"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy, http2, quota
 
@@ -199,7 +199,6 @@ Keep in mind that the [service](#tech_limits) limitations also apply.
 | -------- | ----------- |
 | Encryption | The secondary disks of your worker nodes are encrypted at rest by default by the [underlying VPC infrastructure provider](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption). However, you cannot [bring your own encryption to the underlying virtual server instances](/docs/vpc?topic=vpc-creating-instances-byok).|
 | Location | VPC clusters are available only in [select multizone metro locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc). |
-| Versions | VPC clusters must run Kubernetes version 1.17 or later. |
 | Virtual Private Cloud | See [Limitations](/docs/vpc?topic=vpc-limitations) and [Quotas](/docs/vpc?topic=vpc-quotas). |
 | v2 API | VPC clusters use the [{{site.data.keyword.containerlong_notm}} v2 API](/docs/containers?topic=containers-cs_api_install#api_about). The v2 API is currently under development, with only a limited number of API operations currently available. You can run certain v1 API operations against the VPC cluster, such as `GET /v1/clusters` or `ibmcloud ks cluster ls`, but not all the information that a Classic cluster has is returned or you might experience unexpected results. For supported VPC v2 operations, see the [CLI reference topic for VPC commands](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli). |
 | Worker node flavors | Only certain flavors are available for worker node [virtual machines](/docs/containers?topic=containers-planning_worker_nodes#vm). Bare metal machines are not supported.|

@@ -4,7 +4,7 @@ copyright:
   years: 2014, 2021
 lastupdated: "2021-07-01"
 
-keywords: kubernetes, iks, help, network, connectivity
+keywords: block, debug, help
 
 subcollection: containers
 content-type: troubleshoot
@@ -95,56 +95,55 @@ content-type: troubleshoot
   
   
 
-# Why does the Block storage plug-in Helm chart give CPU throttling warnings?
-{: #block_helm_cpu}
+# Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?
+{: #block_not_attached_vpc}
 
-**Infrastructure provider**: <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
+**Infrastructure provider**:
+* <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
 
 {: tsSymptoms}
-When you install the Block storage Helm chart, the installation gives a warning similar to the following:
-
+When you edit a {{site.data.keyword.block_storage_is_short}} and update the `spec.resources.requests.storage` section to expand your volume, you see the following error:
 ```sh
-Message: 50% throttling of CPU in namespace kube-system for container ibmcloud-block-storage-driver-container in pod ibmcloud-block-storage-driver-1abab.
+Volume not attached
 ```
 {: screen}
 
 {: tsCauses}
-The default Block storage plug-in resource requests are not sufficient. The Block storage plug-in and driver are installed with the following default resource request and limit values.
-
-```yaml
-plugin:
-  resources:
-    requests:
-      memory: 100Mi
-      cpu: 50m
-    limits:
-      memory: 300Mi
-      cpu: 300m
-driver:
-  resources:
-    requests:
-      memory: 50Mi
-      cpu: 25m
-    limits:
-      memory: 200Mi
-      cpu: 100m
-```
-{: codeblock}
+You tried to expand the volume size of an existing {{site.data.keyword.block_storage_is_short}} PVC that is not mounted by a pod. Only volumes mounted by app pods can be expanded.
 
 {: tsResolve}
-Remove and reinstall the Helm chart with increased resource requests and limits.
+Verify that your PVC supports volume expansion, then create an app pod that uses your PVC.
 
-1. Remove the Helm chart.
+1. Describe your existing PVC. Verify that `allowVolumeExpansion` is set to `true`.
    ```sh
-   helm uninstall <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace>
+   kubectl describe pvc <pvc-name>
    ```
    {: pre}
 
-2. Reinstall the Helm chart and increase the resource requests and limits by using the `--set` flag when running `helm install`. The following example command sets the `plugin.resources.requests.memory` value to `200Mi` and the `plugin.resources.requests.cpu` value to `100m`. You can pass multiple values by using the `--set` flag for each value that you want to pass.
+1. Create an app pod that uses your PVC and deploy it to your cluster.
 
-   ```sh
-   helm install <release_name> iks-charts/ibmcloud-block-storage-plugin -n <namespace> --set plugin.resources.requests.memory=200Mi --set plugin.resources.requests.cpu=100m
-   ```
-   {: pre}
+1. Edit the PVC and increase the value in the `spec.resources.requests.storage` field.
+    ```sh
+    kubectl edit pvc <pvc-name>
+    ```
+    {: pre}
+
+1. Get the details of your PVC and make a note of the PV name.
+    ```sh
+    kubectl get pvc <pvc-name>
+    ```
+    {: pre}
+
+1. Describe your PV and make a note of the volume ID
+    ```sh
+    kubectl describe PV
+    ```
+    {: pre}
+
+1. Get the details of your {{site.data.keyword.block_storage_is_short}} volume and verify the capacity.
+    ```sh
+    ibmcloud is vol <volume-ID>
+    ```
+    {: pre}
 
 

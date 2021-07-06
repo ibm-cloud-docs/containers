@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Object Storage: Why does my app pod fail with an `Operation not permitted` error?
+# Why does my app pod fail with an `Operation not permitted` error?
 {: #cos_operation_not_permitted}
 
 **Infrastructure provider**:

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Object storage: Why does my PVC remain in a pending state?
+# Why does my PVC remain in a pending state?
 {: #cos_pvc_pending}
 
 **Infrastructure provider**:

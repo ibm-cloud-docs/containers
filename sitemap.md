@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-06"
 
 keywords: containers
 subcollection: containers
@@ -618,6 +618,10 @@ subcollection: containers
 * [Understanding RBAC permissions](/docs/containers?topic=containers-users#understand-rbac)
 * [Creating custom RBAC permissions for users, groups, or service accounts](/docs/containers?topic=containers-users#rbac)
 * [Extending existing permissions by aggregating cluster roles](/docs/containers?topic=containers-users#rbac_aggregate)
+* [Checking user permissions](/docs/containers?topic=containers-users#checking-perms)
+  * [Checking IAM platform and service access roles](/docs/containers?topic=containers-users#checking-iam)
+  * [Checking RBAC roles](/docs/containers?topic=containers-users#checking-rbac)
+  * [Checking infrastructure roles](/docs/containers?topic=containers-users#checking-infra)
 * [Removing user permissions](/docs/containers?topic=containers-users#removing)
   * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
@@ -1299,6 +1303,7 @@ subcollection: containers
   * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
   * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
   * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
+* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
@@ -1680,11 +1685,8 @@ subcollection: containers
   * [Update before master](/docs/containers?topic=containers-cs_versions#118_before)
   * [Update after master](/docs/containers?topic=containers-cs_versions#118_after)
   * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#118_after_worker)
-* [Deprecated: Version 1.17](/docs/containers?topic=containers-cs_versions#cs_v117)
-  * [Update before master](/docs/containers?topic=containers-cs_versions#117_before)
-  * [Update after master](/docs/containers?topic=containers-cs_versions#117_after)
-  * [Update after worker nodes](/docs/containers?topic=containers-cs_versions#117_after_worker)
 * [Archive](/docs/containers?topic=containers-cs_versions#k8s_version_archive)
+  * [Version 1.17 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v117)
   * [Version 1.16 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v116)
   * [Version 1.15 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v115)
   * [Version 1.14 (Unsupported)](/docs/containers?topic=containers-cs_versions#cs_v114)
@@ -1700,11 +1702,13 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for worker node fix pack 1.21.2_1523, released 6 July 2021](/docs/containers?topic=containers-changelog#1212_1523)
   * [Changelog for master fix pack 1.21.2_1522, released 28 June 2021](/docs/containers?topic=containers-changelog#1212_1522)
   * [Changelog for worker node fix pack 1.21.1_1521, released 22 June 2021](/docs/containers?topic=containers-changelog#1211_1521)
   * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
   * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.8_1545, released 6 July 2021](/docs/containers?topic=containers-changelog#1208_1545)
   * [Changelog for master fix pack 1.20.8_1544, released 28 June 2021](/docs/containers?topic=containers-changelog#1208_1544)
   * [Changelog for worker node fix pack 1.20.7_1543, released 22 June 2021](/docs/containers?topic=containers-changelog#1207_1543)
   * [Changelog for worker node fix pack 1.20.7_1542, released 7 June 2021](/docs/containers?topic=containers-changelog#1207_1542)
@@ -1723,6 +1727,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.12_1552, released 6 July 2021](/docs/containers?topic=containers-changelog#11912_1552)
   * [Changelog for master fix pack 1.19.12_1551, released 28 June 2021](/docs/containers?topic=containers-changelog#11912_1551)
   * [Changelog for worker node fix pack 1.19.11_1550, released 22 June 2021](/docs/containers?topic=containers-changelog#11911_1550)
   * [Changelog for worker node fix pack 1.19.11_1549, released 7 June 2021](/docs/containers?topic=containers-changelog#11911_1549)
@@ -1756,6 +1761,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.20_1557, released 6 July 2021](/docs/containers?topic=containers-changelog#11820_1557)
   * [Changelog for master fix pack 1.18.20_1556, released 28 June 2021](/docs/containers?topic=containers-changelog#11820_1556)
   * [Changelog for worker node fix pack 1.18.19_1555, released 22 June 2021](/docs/containers?topic=containers-changelog#11819_1555)
   * [Changelog for worker node fix pack 1.18.19_1554, released 7 June 2021](/docs/containers?topic=containers-changelog#11819_1554)
@@ -1802,60 +1808,6 @@ subcollection: containers
   * [Changelog for worker node fix pack 1.18.3_1515, released 8 June 2020](/docs/containers?topic=containers-changelog#1183_1515)
   * [Changelog for 1.18.3_1514, released 26 May 2020](/docs/containers?topic=containers-changelog#1183_1514)
   * [Changelog for 1.18.2_1512, released 11 May 2020](/docs/containers?topic=containers-changelog#1182_1512)
-* [Deprecated: Version 1.17 changelog](/docs/containers?topic=containers-changelog#117_changelog)
-  * [Changelog for master fix pack 1.17.17_1567, released 28 June 2021](/docs/containers?topic=containers-changelog#11717_1567)
-  * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog#11717_1565)
-  * [Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021](/docs/containers?topic=containers-changelog#11717_1565)
-  * [Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021](/docs/containers?topic=containers-changelog#11717_1564)
-  * [Changelog for master fix pack 1.17.17_1563, released 24 May 2021](/docs/containers?topic=containers-changelog#11717_1563)
-  * [Changelog for worker node fix pack 1.17.17_1562, released 10 May 2021](/docs/containers?topic=containers-changelog#11717_1562)
-  * [Changelog for master fix pack 1.17.17_1560, released 27 April 2021](/docs/containers?topic=containers-changelog#11717_1560)
-  * [Changelog for worker node fix pack 1.17.17_1561, released 26 April 2021](/docs/containers?topic=containers-changelog#11717_1561)
-  * [Changelog for worker node fix pack 1.17.17_1559, released 12 April 2021](/docs/containers?topic=containers-changelog#11717_1559)
-  * [Changelog for master fix pack 1.17.17_1557, released 30 March 2021](/docs/containers?topic=containers-changelog#11717_1557)
-  * [Changelog for worker node fix pack 1.17.17_1558, released 29 March 2021](/docs/containers?topic=containers-changelog#11717_1558)
-  * [Changelog for worker node fix pack 1.17.17_1556, released 12 March 2021](/docs/containers?topic=containers-changelog#11717_1556)
-  * [Changelog for worker node fix pack 1.17.17_1555, released 1 March 2021](/docs/containers?topic=containers-changelog#11717_1555_worker)
-  * [Changelog for master fix pack 1.17.17_1555, released 22 February 2021](/docs/containers?topic=containers-changelog#11717_1555)
-  * [Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021](/docs/containers?topic=containers-changelog#11717_1553)
-  * [Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021](/docs/containers?topic=containers-changelog#11717_1552)
-  * [Changelog for master fix pack 1.17.17_1551, released 19 January 2021](/docs/containers?topic=containers-changelog#11717_1551_master)
-  * [Changelog for worker node fix pack 1.17.17_1551, released 18 January 2021](/docs/containers?topic=containers-changelog#11717_1551)
-  * [Changelog for master fix pack 1.17.16_1550, released 6 January 2021](/docs/containers?topic=containers-changelog#11716_1550)
-  * [Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020](/docs/containers?topic=containers-changelog#11715_1549)
-  * [Changelog for master fix pack 1.17.15_1548, released 14 December 2020](/docs/containers?topic=containers-changelog#11715_1548)
-  * [Changelog for worker node fix pack 1.17.14_1548, released 11 December 2020](/docs/containers?topic=containers-changelog#11714_1548)
-  * [Changelog for worker node fix pack 1.17.14_1546, released 7 December 2020](/docs/containers?topic=containers-changelog#11714_1546)
-  * [Changelog for worker node fix pack 1.17.14_1545, released 23 November 2020](/docs/containers?topic=containers-changelog#11714_1545_worker)
-  * [Changelog for master fix pack 1.17.14_1545, released 16 November 2020](/docs/containers?topic=containers-changelog#11714_1545)
-  * [Changelog for worker node fix pack 1.17.13_1544, released 9 November 2020](/docs/containers?topic=containers-changelog#11713_1544)
-  * [Changelog for worker node fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog#11713_1543_worker)
-  * [Changelog for master fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog#11713_1543)
-  * [Changelog for worker node fix pack 1.17.12_1542, released 12 October 2020](/docs/containers?topic=containers-changelog#11712_1542)
-  * [Changelog for worker node fix pack 1.17.12_1541, released 28 September 2020](/docs/containers?topic=containers-changelog#11712_1541)
-  * [Changelog for master fix pack 1.17.12_1540, released 21 September 2020](/docs/containers?topic=containers-changelog#11712_1540)
-  * [Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020](/docs/containers?topic=containers-changelog#11711_1539)
-  * [Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020](/docs/containers?topic=containers-changelog#11711_1538)
-  * [Changelog for master fix pack 1.17.11_1537, released 18 August 2020](/docs/containers?topic=containers-changelog#11711_1537_master)
-  * [Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020](/docs/containers?topic=containers-changelog#11711_1537)
-  * [Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020](/docs/containers?topic=containers-changelog#1179_1535)
-  * [Changelog for master fix pack 1.17.9_1534, released 24 July 2020](/docs/containers?topic=containers-changelog#1179_1534)
-  * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1533)
-  * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog#1179_1532)
-  * [Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020](/docs/containers?topic=containers-changelog#1177_1530)
-  * [Changelog for 1.17.7_1529, released 22 June 2020](/docs/containers?topic=containers-changelog#1177_1529)
-  * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog#1176_1527)
-  * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog#1176_1526)
-  * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog#1175_1524)
-  * [Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020](/docs/containers?topic=containers-changelog#1175_1523)
-  * [Changelog for master fix pack 1.17.5_1522, released 23 April 2020](/docs/containers?topic=containers-changelog#1175_1522)
-  * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog#1174_1521_master)
-  * [Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020](/docs/containers?topic=containers-changelog#1174_1521)
-  * [Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020](/docs/containers?topic=containers-changelog#1174_1520)
-  * [Changelog for 1.17.4_1519, released 16 March 2020](/docs/containers?topic=containers-changelog#1174_1519)
-  * [Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020](/docs/containers?topic=containers-changelog#1173_1518)
-  * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog#1173_1516)
-  * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog#1172_1515)
 
 [CIS Kubernetes Benchmark](/docs/containers?topic=containers-cis-benchmark)
 * [Using the benchmark](/docs/containers?topic=containers-cis-benchmark#cis-benchmark-use)
@@ -1957,6 +1909,61 @@ subcollection: containers
 * [Version 1.0.0](/docs/containers?topic=containers-alb-oauth-proxy-changelog#1_0_0)
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
+* [Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-changelog_archive#117_changelog)
+  * [Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021](/docs/containers?topic=containers-changelog_archive#11717_1567_worker)
+  * [Changelog for master fix pack 1.17.17_1567, released 28 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1567)
+  * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1566)
+  * [Changelog for worker node fix pack 1.17.17_1565, released 7 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1565)
+  * [Changelog for worker node fix pack 1.17.17_1564, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11717_1564)
+  * [Changelog for master fix pack 1.17.17_1563, released 24 May 2021](/docs/containers?topic=containers-changelog_archive#11717_1563)
+  * [Changelog for worker node fix pack 1.17.17_1562, released 10 May 2021](/docs/containers?topic=containers-changelog_archive#11717_1562)
+  * [Changelog for master fix pack 1.17.17_1560, released 27 April 2021](/docs/containers?topic=containers-changelog_archive#11717_1560)
+  * [Changelog for worker node fix pack 1.17.17_1561, released 26 April 2021](/docs/containers?topic=containers-changelog_archive#11717_1561)
+  * [Changelog for worker node fix pack 1.17.17_1559, released 12 April 2021](/docs/containers?topic=containers-changelog_archive#11717_1559)
+  * [Changelog for master fix pack 1.17.17_1557, released 30 March 2021](/docs/containers?topic=containers-changelog_archive#11717_1557)
+  * [Changelog for worker node fix pack 1.17.17_1558, released 29 March 2021](/docs/containers?topic=containers-changelog_archive#11717_1558)
+  * [Changelog for worker node fix pack 1.17.17_1556, released 12 March 2021](/docs/containers?topic=containers-changelog_archive#11717_1556)
+  * [Changelog for worker node fix pack 1.17.17_1555, released 1 March 2021](/docs/containers?topic=containers-changelog_archive#11717_1555_worker)
+  * [Changelog for master fix pack 1.17.17_1555, released 22 February 2021](/docs/containers?topic=containers-changelog_archive#11717_1555)
+  * [Changelog for worker node fix pack 1.17.17_1553, released 15 February 2021](/docs/containers?topic=containers-changelog_archive#11717_1553)
+  * [Changelog for worker node fix pack 1.17.17_1552, released 1 February 2021](/docs/containers?topic=containers-changelog_archive#11717_1552)
+  * [Changelog for master fix pack 1.17.17_1551, released 19 January 2021](/docs/containers?topic=containers-changelog_archive#11717_1551_master)
+  * [Changelog for worker node fix pack 1.17.17_1551, released 18 January 2021](/docs/containers?topic=containers-changelog_archive#11717_1551)
+  * [Changelog for master fix pack 1.17.16_1550, released 6 January 2021](/docs/containers?topic=containers-changelog_archive#11716_1550)
+  * [Changelog for worker node fix pack 1.17.15_1549, released 21 December 2020](/docs/containers?topic=containers-changelog_archive#11715_1549)
+  * [Changelog for master fix pack 1.17.15_1548, released 14 December 2020](/docs/containers?topic=containers-changelog_archive#11715_1548)
+  * [Changelog for worker node fix pack 1.17.14_1548, released 11 December 2020](/docs/containers?topic=containers-changelog_archive#11714_1548)
+  * [Changelog for worker node fix pack 1.17.14_1546, released 7 December 2020](/docs/containers?topic=containers-changelog_archive#11714_1546)
+  * [Changelog for worker node fix pack 1.17.14_1545, released 23 November 2020](/docs/containers?topic=containers-changelog_archive#11714_1545_worker)
+  * [Changelog for master fix pack 1.17.14_1545, released 16 November 2020](/docs/containers?topic=containers-changelog_archive#11714_1545)
+  * [Changelog for worker node fix pack 1.17.13_1544, released 9 November 2020](/docs/containers?topic=containers-changelog_archive#11713_1544)
+  * [Changelog for worker node fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog_archive#11713_1543_worker)
+  * [Changelog for master fix pack 1.17.13_1543, released 26 October 2020](/docs/containers?topic=containers-changelog_archive#11713_1543)
+  * [Changelog for worker node fix pack 1.17.12_1542, released 12 October 2020](/docs/containers?topic=containers-changelog_archive#11712_1542)
+  * [Changelog for worker node fix pack 1.17.12_1541, released 28 September 2020](/docs/containers?topic=containers-changelog_archive#11712_1541)
+  * [Changelog for master fix pack 1.17.12_1540, released 21 September 2020](/docs/containers?topic=containers-changelog_archive#11712_1540)
+  * [Changelog for worker node fix pack 1.17.11_1539, released 14 September 2020](/docs/containers?topic=containers-changelog_archive#11711_1539)
+  * [Changelog for worker node fix pack 1.17.11_1538, released 31 August 2020](/docs/containers?topic=containers-changelog_archive#11711_1538)
+  * [Changelog for master fix pack 1.17.11_1537, released 18 August 2020](/docs/containers?topic=containers-changelog_archive#11711_1537_master)
+  * [Changelog for worker node fix pack 1.17.11_1537, released 17 August 2020](/docs/containers?topic=containers-changelog_archive#11711_1537)
+  * [Changelog for worker node fix pack 1.17.9_1535, released 3 August 2020](/docs/containers?topic=containers-changelog_archive#1179_1535)
+  * [Changelog for master fix pack 1.17.9_1534, released 24 July 2020](/docs/containers?topic=containers-changelog_archive#1179_1534)
+  * [Changelog for master fix pack 1.17.9_1533, released 20 July 2020](/docs/containers?topic=containers-changelog_archive#1179_1533)
+  * [Changelog for worker node fix pack 1.17.9_1532, released 20 July 2020](/docs/containers?topic=containers-changelog_archive#1179_1532)
+  * [Changelog for worker node fix pack 1.17.7_1530, released 6 July 2020](/docs/containers?topic=containers-changelog_archive#1177_1530)
+  * [Changelog for 1.17.7_1529, released 22 June 2020](/docs/containers?topic=containers-changelog_archive#1177_1529)
+  * [Changelog for worker node fix pack 1.17.6_1527, released 8 June 2020](/docs/containers?topic=containers-changelog_archive#1176_1527)
+  * [Changelog for 1.17.6_1526, released 26 May 2020](/docs/containers?topic=containers-changelog_archive#1176_1526)
+  * [Changelog for worker node fix pack 1.17.5_1524, released 11 May 2020](/docs/containers?topic=containers-changelog_archive#1175_1524)
+  * [Changelog for worker node fix pack 1.17.5_1523, released 27 April 2020](/docs/containers?topic=containers-changelog_archive#1175_1523)
+  * [Changelog for master fix pack 1.17.5_1522, released 23 April 2020](/docs/containers?topic=containers-changelog_archive#1175_1522)
+  * [Changelog for master fix pack 1.17.4_1521, released 17 April 2020](/docs/containers?topic=containers-changelog_archive#1174_1521_master)
+  * [Changelog for worker node fix pack 1.17.4_1521, released 13 April 2020](/docs/containers?topic=containers-changelog_archive#1174_1521)
+  * [Changelog for worker node fix pack 1.17.4_1520, released 30 March 2020](/docs/containers?topic=containers-changelog_archive#1174_1520)
+  * [Changelog for 1.17.4_1519, released 16 March 2020](/docs/containers?topic=containers-changelog_archive#1174_1519)
+  * [Changelog for worker node fix pack 1.17.3_1518, released 2 March 2020](/docs/containers?topic=containers-changelog_archive#1173_1518)
+  * [Changelog for fix pack 1.17.3_1516, released 17 February 2020](/docs/containers?topic=containers-changelog_archive#1173_1516)
+  * [Changelog for 1.17.2_1515, released 10 February 2020](/docs/containers?topic=containers-changelog_archive#1172_1515)
 * [Version 1.16 changelog (unsupported as of 31 January 2021)](/docs/containers?topic=containers-changelog_archive#116_changelog)
   * [Changelog for master fix pack 1.16.15_1557, released 19 January 2021](/docs/containers?topic=containers-changelog_archive#11615_1557_master)
   * [Changelog for worker node fix pack 1.16.15_1557, released 18 January 2021](/docs/containers?topic=containers-changelog_archive#11615_1557)
@@ -2677,16 +2684,16 @@ subcollection: containers
 
 [File storage and block storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-file_pvc_pending)
 
-[File storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures)
+[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-file_app_failures)
 
-[File storage: Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root)
+[Why does my app fail with a group ID error for NFS file storage permissions?](/docs/containers?topic=containers-root)
 
-[File storage: Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot)
+[Why does my app fail when a non-root user owns the NFS file storage mount path?](/docs/containers?topic=containers-nonroot)
 
-[File storage: Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot)
+[Why can't I add non-root user access to persistent storage?](/docs/containers?topic=containers-cs_storage_nonroot)
 * [Verifying the read and write permissions for the non-root user](/docs/containers?topic=containers-cs_storage_nonroot#verify-rw-permissions)
 
-[File storage: Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
+[Why are the file systems for worker nodes changed to read-only?](/docs/containers?topic=containers-readonly_nodes)
 
 [Storage: Feedback, questions, and support](/docs/containers?topic=containers-getting_help_storage)
 
@@ -2703,15 +2710,17 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_cli)
 * [Checking and updating the {{site.data.keyword.blockstorageshort}} driver](/docs/containers?topic=containers-debug_storage_block#debug_storage_block_driver)
 
-[Block Storage: Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
+[Why can't my app access or write to PVCs?](/docs/containers?topic=containers-block_app_failures)
 
-[Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
+[Why does mounting existing block storage to a pod fail with the wrong file system?](/docs/containers?topic=containers-block_filesystem)
 
-[Block storage: Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
+[Why does block storage change to read-only?](/docs/containers?topic=containers-readonly_block)
 
-[Block storage: Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
+[Why does the Block storage plug-in Helm chart give CPU throttling warnings?](/docs/containers?topic=containers-block_helm_cpu)
 
 [{{site.data.keyword.block_storage_is_short}} PVC creation fails after API key reset](/docs/containers?topic=containers-vpc-block-api-key-reset-ts)
+
+[Why do I get a `Volume not attached` error when trying to expand a {{site.data.keyword.block_storage_is_short}} volume?](/docs/containers?topic=containers-block_not_attached_vpc)
 
 
 ## Object Storage
@@ -2726,26 +2735,26 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_cli)
 * [Checking and updating the {{site.data.keyword.cos_short}} plug-in](/docs/containers?topic=containers-debug_storage_cos#debug_storage_cos_plugin)
 
-[Object storage: Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
+[Why can't my PVC access an existing bucket?](/docs/containers?topic=containers-cos_access_bucket_fails)
 
-[Object storage: Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails)
+[Why does installing the Object storage `ibmc` Helm plug-in fail?](/docs/containers?topic=containers-cos_helm_fails)
 
-[Object storage: Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access)
+[Why can't non-root users access files?](/docs/containers?topic=containers-cos_nonroot_access)
 * [Verifying that the permissions for your files are updated](/docs/containers?topic=containers-cos_nonroot_access#verifying_file_permission_update)
 
-[Object Storage: Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted)
+[Why does my app pod fail with an `Operation not permitted` error?](/docs/containers?topic=containers-cos_operation_not_permitted)
 
-[Object storage: Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error)
+[Why can't the ownership of the mount path be changed?](/docs/containers?topic=containers-cos_mountpath_error)
 
-[Object storage: Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails)
+[Why does installing the Object storage plug-in fail?](/docs/containers?topic=containers-cos_plugin_fails)
 
-[Object storage: Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure)
+[Why do I see wrong credentials or access denied messages when I create a PVC?](/docs/containers?topic=containers-cred_failure)
 
-[Object storage: Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure)
+[Why do I see wrong s3fs or IAM API endpoints when I create a PVC?](/docs/containers?topic=containers-cos_api_endpoint_failure)
 
-[Object storage: Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
+[Why does my PVC remain in a pending state?](/docs/containers?topic=containers-cos_pvc_pending)
 
-[Object storage: Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
+[Why does PVC or pod creation fail due to not finding the Kubernetes secret?](/docs/containers?topic=containers-cos_secret_access_fails)
 
 
 ## Portworx Storage
@@ -2759,12 +2768,12 @@ subcollection: containers
 * [Checking and updating the kubectl CLI version](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_cli)
 * [Updating Helm charts](/docs/containers?topic=containers-debug_storage_px#debug_storage_px_helm)
 
-[Portworx: Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
+[Debugging your Portworx installation](/docs/containers?topic=containers-debug-portworx)
 * [Step 1: Verifying the {{site.data.keyword.cloud_notm}} catalog information](/docs/containers?topic=containers-debug-portworx#px-verify-catalog)
 * [Step 2: Verifying the cluster setup](/docs/containers?topic=containers-debug-portworx#px-verify-cluster)
 * [Step 3: Reach out to Portworx and IBM](/docs/containers?topic=containers-debug-portworx#px-support)
 
-[Portworx: Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint)
+[Why does encryption fail with an invalid KMS endpoint?](/docs/containers?topic=containers-px-kms-endpoint)
 
 
 ## Release notes
@@ -2772,6 +2781,8 @@ subcollection: containers
 
 
 [Release notes](/docs/containers?topic=containers-iks-release)
+
+* [July 2021](/docs/containers?topic=containers-iks-release#jul21)
 
 * [June 2021](/docs/containers?topic=containers-iks-release#jun21)
 

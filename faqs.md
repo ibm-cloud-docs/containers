@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, compliance, security standards, faq, kubernetes pricing, kubernetes service pricing, ibm cloud kubernetes service pricing, iks pricing, kubernetes charges, kubernetes service charges, ibm cloud kubernetes service charges, iks charges, kubernetes price, kubernetes service price, ibm cloud kubernetes service price, iks price, kubernetes billing, kubernetes service billing, ibm cloud kubernetes service billing, iks billing, kubernetes costs, kubernetes service costs, ibm cloud kubernetes service costs, iks costs
 
@@ -201,7 +201,7 @@ For more information about the components of your cluster and how you can meet s
 {{site.data.keyword.containerlong_notm}} uses {{site.data.keyword.iamshort}} (IAM) to grant access to cluster resources through IAM platform access roles and Kubernetes role-based access control (RBAC) policies through IAM service access roles. For more information about types of access policies, see [Pick the right access policy and role for your users](/docs/containers?topic=containers-access-overview#access_roles).
 {: shortdesc}
 
-The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users).
+The access policies that you assign users vary depending on what you want your users to be able to do. You can find more information about what roles authorize which types of actions on the [User access reference page](/docs/containers?topic=containers-access_reference) or in the following table's links. For steps to assign policies, see [Granting users access to your cluster through {{site.data.keyword.cloud_notm}} IAM](/docs/containers?topic=containers-users#checking-perms).
 
 | Use case | Example roles and scope |
 | --- | --- |
@@ -297,9 +297,6 @@ To view detailed system requirements, you can run a [software product compatibil
 - International Standard on Assurance Engagements 3402 (ISAE 3402), Assurance Reports on Controls at a Service Organization
 - International Organization for Standardization (ISO 27001, ISO 27017, ISO 27018)
 - Payment Card Industry Data Security Standard (PCI DSS)
-
-**Classic infrastructure only**: To achieve HIPAA and PCI compliance for your environment, make sure to use [dedicated virtual](/docs/containers?topic=containers-planning_worker_nodes#vm) or [bare metal](/docs/containers?topic=containers-planning_worker_nodes#bm) classic infrastructure machines for your worker nodes, not shared virtual machines. With dedicated virtual or bare metal machines, all compute resources are dedicated exclusively to you, and you can control the isolation and resource consumption of your workloads.
-{: important}
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC infrastructure**: {{site.data.keyword.containerlong_notm}} implements controls commensurate with the following security standards:
 - EU-US Privacy Shield and Swiss-US Privacy Shield Framework

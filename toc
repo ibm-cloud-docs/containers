@@ -371,6 +371,7 @@ Kubernetes Service
             ts-storage/ts-storage-block-read-only.md
             ts-storage/ts-storage-block-throttling.md
             ts-storage/ts-storage-vpc-block-api-key.md
+            ts-storage/ts-storage-block-not-attached.md
 
 
         {: .topicgroup}

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-01"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks
 
@@ -102,7 +102,7 @@ With {{site.data.keyword.cloud}}, you can plan for, estimate, review, and modify
 ## Understanding costs by component
 {: #costs-for-clusters}
 
-With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure compute, networking, and storage resources with platform services such as {{site.data.keyword.watson}} AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges) and billed in various increments such as monthly or hourly.
+With {{site.data.keyword.containerlong_notm}} clusters, you can use IBM Cloud infrastructure compute, networking, and storage resources with platform services such as {{site.data.keyword.watson}} AI or Compose Database-as-a-Service. Each resource might entail its own charges that can be [fixed, metered, tiered, or reserved](/docs/billing-usage?topic=billing-usage-charges#charges) and billed by various incremental rates such as monthly or hourly.
 {: shortdesc}
 
 Monthly resources are billed based on the first of the month for usage in the preceding month. If you order a monthly resource in the middle of the month, you are charged a prorated amount for that month. However, if you cancel a resource in the middle of the month, you are still charged the full amount for the monthly resource.
@@ -123,8 +123,12 @@ Worker nodes begin to incur charges after successfully complete the `provisionin
 
 **Virtual machines** feature greater flexibility, quicker provisioning times, and more automatic scalability features than bare metal, at a more cost-effective price than bare-metal. However, VMs have a performance trade-off when compared to bare metal specs, such as networking Gbps, RAM and memory thresholds, and storage options. Keep in mind these factors that impact your VM costs.
 * **Shared vs. dedicated**: If you share the underlying hardware of the VM, the cost is lower than dedicated hardware, but the physical resources are not dedicated to your VM. VPC clusters are available only as **shared**.
-* **Hourly billing only**: Hourly offers more flexibility to order and cancel VMs quickly.
-* **Tiered hours per month**: The [pricing](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external} is billed hourly in [graduated tiered](/docs/billing-usage?topic=billing-usage-charges#graduated_tier). As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 0 - 150 hours, 151 - 290 hours, 291 - 540 hours, and 541+ hours.
+* **Hourly billing only**: Hourly billing offers more flexibility to order and cancel VMs quickly. You are charged an hourly rate that is metered for only the time that that the worker node is provisioned. The time is not rounded up or down to the nearest hour, but is metered in minutes and charged at the hourly rate. For example, if your worker node is provisioned for 90 minutes, you are charged the hourly rate for 1.5 hours, not 2 hours.
+* **Tiered hours per month**: The [pricing](https://cloud.ibm.com/kubernetes/catalog/about#pricing){: external} is billed hourly in [graduated tiered](/docs/billing-usage?topic=billing-usage-charges#graduated_tier). As your VM remains ordered for a tier of hours within a billing month, the hourly rate that you are charged lowers. The tiers of hours are as follows: 
+    * 0 - 150 hours
+    * 151 - 290 hours
+    * 291 - 540 hours
+    * 541+ hours
 
 **Physical machines, or bare metal, (not available for VPC clusters)** yield high-performance benefits for workloads such as data, GPU, and AI. Additionally, all the hardware resources are dedicated to your workloads, so you don't have "noisy neighbors". Keep in mind these factors that impact your bare metal costs.
 * **Monthly billing only**: All bare metals are charged monthly.
@@ -147,7 +151,7 @@ Bandwidth refers to the public data transfer of inbound and outbound network tra
 
 Review the following factors that impact public bandwidth charges:
 * **Location**: As with worker nodes, charges vary depending on the zone that your resources are deployed in.
-* **Pay-As-You-Go for VM**: Because VMs are billed hourly, your VM worker node machines have a Pay-As-You-Go allocation of outbound networking based on GB usage.
+* **Pay-As-You-Go for VM**: Because VMs are billed at an hourly rate, your VM worker node machines have a Pay-As-You-Go allocation of outbound networking based on GB usage.
 * **Included bandwidth and tiered packages for BM**: Bare metal worker nodes might come with a certain allocation of outbound networking per month that varies by geography: 20 TB for North America and Europe, or 5 TB for Asia Pacific and South America. After you exceed your included bandwidth, you are charged according to a tiered usage scheme for your geography. If you exceed a tier allotment, you might also be charged a standard data transfer fee. For more information, see [Bandwidth packages](https://www.ibm.com/cloud/bandwidth){: external}.
 
 <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: For more information about how internet data transfer works in your Virtual Private Cloud, see [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
@@ -169,7 +173,7 @@ When you create a multizone cluster or add zones to a single zone cluster, you m
 {: shortdesc}
 
 The type of load balancer that is automatically created varies depending on the type of cluster. For more information, see [Multizone load balancer (MZLB) or Load Balancer for VPC](/docs/containers?topic=containers-ingress-about#mzlb).
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: A Cloudflare MZLB is automatically created for each multizone cluster. You can view the hourly cost in the pricing summary when you create the cluster.
+* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**: A Cloudflare MZLB is automatically created for each multizone cluster. You can view the hourly rate in the pricing summary when you create the cluster.
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC clusters**: A Load Balancer for VPC is automatically created in your VPC for your cluster. For cost information, see [Pricing for Load Balancer for VPC](https://www.ibm.com/cloud/vpc/pricing){: external}.
 
 
@@ -177,7 +181,7 @@ The type of load balancer that is automatically created varies depending on the 
 ### Storage
 {: #persistent_storage}
 
-When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly plans that you can choose from.
+When you provision storage, you can choose the storage type and storage class that is right for your use case. Charges vary depending on the type of storage, the location, and the specs of the storage instance. Some storage solutions, such as file and block storage offer hourly and monthly rates that you can choose from.
 {: shortdesc}
 
 To choose the right storage solution, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning). For more information, see:
@@ -215,7 +219,7 @@ For a table that describes the pricing uplift by region, see [Regional pricing f
 
 **Sustained usage discounts**
 
-For virtual server instances that are billed hourly, discounted prices depend on how long the instance runs during the billing month. For more information, expand the **Sustained usage discounts on {{site.data.keyword.cloud_notm}} {{site.data.keyword.vsi_is_short}}** section on the [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external} page.
+For virtual server instances that are billed at an hourly rate, discounted prices depend on how long the instance runs during the billing month. For more information, expand the **Sustained usage discounts on {{site.data.keyword.cloud_notm}} {{site.data.keyword.vsi_is_short}}** section on the [Pricing for VPC](https://www.ibm.com/cloud/vpc/pricing){: external} page.
 
 ## Estimating costs
 {: #costs-estimate}

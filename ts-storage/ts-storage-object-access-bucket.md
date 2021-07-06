@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Object storage: Why can't my PVC access an existing bucket?
+# Why can't my PVC access an existing bucket?
 {: #cos_access_bucket_fails}
 
 **Infrastructure provider**:

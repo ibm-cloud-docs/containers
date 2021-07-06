@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-02"
 
 keywords: kubernetes, iks, affinity, taint
 
@@ -116,7 +116,7 @@ Using a gateway-enabled cluster? See [Isolating networking workloads to edge nod
 
 Before you begin:
 
-* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users):
+* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
   * Any platform access role for the cluster
   * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
@@ -257,7 +257,7 @@ Using a gateway-enabled cluster? See [Isolating networking workloads to edge nod
 {: tip}
 
 Before you begin:
-- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role for all namespaces](/docs/containers?topic=containers-users).
+- Ensure you that have the [**Manager** {{site.data.keyword.cloud_notm}} IAM service access role for all namespaces](/docs/containers?topic=containers-users#checking-perms).
 - [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To prevent other workloads from running on edge worker nodes:
@@ -323,7 +323,7 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 
 **Before you begin**:
 
-* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users) for {{site.data.keyword.containerlong_notm}}:
+* Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}:
   * Any platform access role for the cluster
   * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)

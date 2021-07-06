@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, encrypt, security, kms, root key, crk
 
@@ -196,8 +196,6 @@ To use the additional {{site.data.keyword.keymanagementserviceshort}} features:
 Enable a Kubernetes [key management service (KMS) provider](https://kubernetes.io/docs/tasks/administer-cluster/kms-provider/){: external} such as [{{site.data.keyword.keymanagementserviceshort}}](/docs/key-protect?topic=key-protect-getting-started-tutorial){: external} to encrypt the Kubernetes secrets and etcd component of your Kubernetes master.
 {: shortdesc}
 
-**Clusters that run version 1.17**: To rotate your encryption key, repeat the [CLI](#kms_cli) or [console](#kms_ui) steps to enable KMS provider encryption with a new root key ID. The new root key is added to the cluster configuration along with the previous root key so that existing encrypted data is still protected. To encrypt your existing secrets with the new root key, you must rewrite the secrets. When you rotate a root key, you cannot reuse a previous root key for the same cluster.
-{: note}
 
 ### Prerequisites
 {: #kms_prereqs}
@@ -212,7 +210,7 @@ Before you enable a key management service (KMS) provider in your cluster, creat
     {: tip}
 
 3.  Make sure that you have the correct permissions to enable KMS in your cluster.
-    * Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users) for the cluster.
+    * Ensure that you have the [**Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/containers?topic=containers-users#checking-perms) for the cluster.
     * The API key that is set for the region and resource group that your cluster is in must be authorized to use the KMS provider. For example, to create an instance and root key, you need at least the **Editor** platform and **Writer** service access roles for {{site.data.keyword.keymanagementserviceshort}} or for {{site.data.keyword.hscrypto}}. Or, if you plan to use an existing KMS instance and root key, you need at least the **Viewer** platform and **Reader** service access roles for {{site.data.keyword.keymanagementserviceshort}} or for {{site.data.keyword.hscrypto}}. For more information on granting access in IAM to the KMS provider, see the [{{site.data.keyword.keymanagementserviceshort}} user access documentation](/docs/key-protect?topic=key-protect-manage-access) or [{{site.data.keyword.hscrypto}} user access documentation](/docs/hs-crypto?topic=hs-crypto-manage-access#platform-mgmt-roles). To check the API key owner whose credentials are stored for the region and resource group that your cluster is in, run `ibmcloud ks api-key info -c <cluster_name_or_ID>`.
 
     **For clusters that run Kubernetes 1.18.8_1525 or later**: An additional **Reader** [service-to-service authorization policy](/docs/account?topic=account-serviceauth) between {{site.data.keyword.containerlong_notm}} and {{site.data.keyword.keymanagementserviceshort}} is automatically created for your cluster, if the policy does not already exist. Without this policy, your cluster cannot use all the [{{site.data.keyword.keymanagementserviceshort}} features](#kms-keyprotect-features).
@@ -270,14 +268,6 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 
     After the KMS provider is enabled in the cluster, data in `etcd` and new secrets that are created in the cluster are automatically encrypted by using your root key.
     {: note}
-
-6.  **Clusters that run version 1.17**: To encrypt existing secrets with the root key, rewrite the secrets.
-    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-    2.  With `cluster-admin` access, rewrite the secrets.
-        ```
-        kubectl get secrets --all-namespaces -o json | kubectl replace -f -
-        ```
-        {: pre}
 7.  Optional: [Verify that your secrets are encrypted](#verify_kms).
 
 <p class="important">Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. When you rotate a root key, you cannot reuse a previous root key for the same cluster.<br><br>Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.</p>
@@ -308,14 +298,6 @@ You can enable a KMS provider or update the instance or root key that encrypts s
 
     After the KMS provider is enabled in the cluster, data in `etcd` and new secrets that are created in the cluster are automatically encrypted by using your root key.
     {: note}
-
-6.  **Clusters that run version 1.17**: To encrypt existing secrets with the root key, rewrite the secrets.
-    1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-    2.  With `cluster-admin` access, rewrite the secrets.
-        ```
-        kubectl get secrets --all-namespaces -o json | kubectl replace -f -
-        ```
-        {: pre}
 7.  Optional: [Verify that your secrets are encrypted](#verify_kms).
 
 <p class="important">Do not delete root keys in your KMS instance, even if you rotate to use a new key. If you delete a root key that a cluster uses, the cluster becomes unusable, loses all its data, and cannot be recovered. When you rotate a root key, you cannot reuse a previous root key for the same cluster.<br><br>Similarly, if you disable a root key, operations that rely on reading secrets fail. Unlike deleting a root key, however, you can reenable a disabled key to make your cluster usable again.</p>

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Object storage: Why can't the ownership of the mount path be changed?
+# Why can't the ownership of the mount path be changed?
 {: #cos_mountpath_error}
 
 **Infrastructure provider**:

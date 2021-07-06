@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-21"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -115,7 +115,7 @@ ibmcloud ks ingress alb versions
 ```
 {: pre}
 
-The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.47.0_1341_iks` indicates the most recent build of the `0.47.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
+The Kubernetes Ingress version follows the format `<community_version>_<ibm_build>_iks`. The IBM build number indicates the most recent build of the Kubernetes Ingress NGINX release that {{site.data.keyword.containerlong_notm}} released. For example, the version `0.47.0_1376_iks` indicates the most recent build of the `0.47.0` Ingress NGINX version. {{site.data.keyword.containerlong_notm}} might release builds of the community image version to address vulnerabilities.
 
 When automatic updates are enabled for ALBs, your ALBs are updated to the most recent build of the version that is marked as `default`. If you want to use a version other than the default, you must [disable automatic updates](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_alb_autoupdate_disable). Typically, the latest version becomes the default version one month after the latest version is released by the Kubernetes community. Actual availability and release dates of versions are subject to change and depend on various factors, such as community updates, security patches, and technology changes between versions.
 
@@ -127,6 +127,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 0.47.0_1376_iks | 06 Jul 2021 | Updates to address [CVE-2019-20633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-20633){: external}.|
 | 0.47.0_1341_iks | 21 Jun 2021 | Version 0.47.0 is now the default version for all ALBs that run the Kubernetes Ingress image. |
 {: summary="The rows are read from left to right. The first column is the build of the image version. The second column is the build release date. The third column contains a brief description of the change made in the version build."}
 {: caption="Build changelog for version 0.47.0 of the Kubernetes Ingress image" caption-side="top"}
@@ -139,6 +140,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 0.45.0_1375_iks | 06 Jul 2021 | Updates to address [CVE-2019-20633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-20633){: external}.|
 | 0.45.0_1329_iks | 21 Jun 2021 | Updates to address [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22898){: external}, [CVE-2021-22897](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22897){: external}, [CVE-2021-22901](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22901){: external}, [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-33194){: external}, and [CVE-2021-31525](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-31525){: external}.|
 | - | 25 May 2021 | Due to a [regression in the community Kubernetes Ingress NGINX code](https://github.com/kubernetes/ingress-nginx/issues/6931){: external}, trailing slashes (`/`) are removed from subdomains during TLS redirects. |
 | 0.45.0_1228_iks | 23 Apr 2021 | Version 0.45.0 is now the default version for all ALBs that run the Kubernetes Ingress image. |
@@ -153,6 +155,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 
 |Version build|Release date|Changes|
 |-------------|------------|-------|
+| 0.35.0_1374_iks | 06 Jul 2021 | Updates to address [CVE-2019-20633](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2019-20633){: external}.|
 | 0.35.0_1330_iks | 21 Jun 2021 | Updates to address [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22898){: external}, [CVE-2021-22897](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22897){: external}, [CVE-2021-22901](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-22901){: external}, [CVE-2021-33194](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-33194){: external}, and [CVE-2021-31525](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-31525){: external}.|
 | 0.35.0_1182_iks | 19 Apr 2021 | Updates to address [CVE-2021-20305](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-20305){: external}, [CVE-2021-28851](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-28851){: external}, and [CVE-2021-28852](https://cve.mitre.org/cgi-bin/cvename.cgi?name=2021-28852){: external}.|
 |0.35.0_1155_iks|12 Apr 2021|Fixes OpenSSL vulnerabilities for [CVE-2021-3449](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3449){: external} and [CVE-2021-3450](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3450){: external}.|

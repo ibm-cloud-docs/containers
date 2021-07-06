@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -267,7 +267,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 4. Configure the **Location** details for your cluster.
    1. Select the **Resource group** that you want to create your cluster in.
       * A cluster can be created in only one resource group, and after the cluster is created, you cannot change its resource group.
-      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
+      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#checking-perms) for the resource group.
    2.  Select a **Geography** to create the cluster in, such as **North America**. The geography helps filter the **Availability** and **Metro** values that you can select.
    3.  Select the **Availability** that you want for your cluster, **Single zone** or **Multizone**. In a multizone cluster, the Kubernetes master is deployed in a multizone-capable zone and three replicas of your master are spread across zones.
    4. Enter the **Metro** and **Worker zones** details, depending on the availability that you selected for your cluster.
@@ -325,7 +325,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
    2. If you have multiple {{site.data.keyword.cloud_notm}} accounts, select the account where you want to create your Kubernetes cluster.
    3. To create clusters in a resource group other than default, target that resource group.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
+      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#checking-perms) for the resource group.
 
       ```
       ibmcloud target -g <resource_group_name>
@@ -530,7 +530,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 
    3. To create clusters in a resource group other than default, target that resource group.
       * A cluster can be created in only one resource group, and after the cluster is created, you can't change its resource group.
-      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
+      * You must have at least the [**Viewer** role](/docs/containers?topic=containers-users#checking-perms) for the resource group.
 
       ```
       ibmcloud target -g <resource_group_name>
@@ -730,13 +730,13 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
 4. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click **Create cluster**.
 5. Configure your cluster environment.
    1. Select the **Standard** cluster plan.
-   2. From the Kubernetes drop-down list, select the version that you want to use in your cluster. You must choose **Kubernetes 1.17 or later**.
+   2. From the Kubernetes drop-down list, select the version that you want to use in your cluster.
    3. Select **VPC** infrastructure.
    4. From the **Virtual private cloud** drop-down menu, select the VPC that you created earlier.
 6. Configure the **Location** details for your cluster.
    1. Select the **Resource group** that you want to create your cluster in.
       * A cluster can be created in only one resource group, and after the cluster is created, you cannot change its resource group.
-      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users) for the resource group.
+      * To create clusters in a resource group other than the default, you must have at least the [**Viewer** role](/docs/containers?topic=containers-users#checking-perms) for the resource group.
    2. Select the zones to create your cluster in.
       * The zones are filtered based on the VPC that you selected, and include the VPC subnets that you previously created.
       * To create a [single zone cluster](/docs/containers?topic=containers-ha_clusters#single_zone), select one zone only. If you select only one zone, you can [add zones to your cluster](/docs/containers?topic=containers-add_workers#add_zone) after the cluster is created.
@@ -828,7 +828,7 @@ Your cluster is ready for your workloads! You might also want to [add a tag to y
     </tr>
     <tr>
     <td><code>--version <em>&lt;major.minor.patch&gt;</em></code></td>
-    <td>The Kubernetes version for the cluster master node. Note that VPC clusters are supported for Kubernetes versions 1.17 and later only. To see available versions, run <code>ibmcloud ks versions</code>.</td>
+    <td>The Kubernetes version for the cluster master node. To see available versions, run <code>ibmcloud ks versions</code>.</td>
     </tr>
     <tr>
     <td><code>--workers <em>&lt;number&gt;</em></code></td>

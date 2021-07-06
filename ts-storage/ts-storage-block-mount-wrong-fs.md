@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-02"
+lastupdated: "2021-07-01"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -95,7 +95,7 @@ content-type: troubleshoot
   
   
 
-# Block storage: Why does mounting existing block storage to a pod fail with the wrong file system?
+# Why does mounting existing block storage to a pod fail with the wrong file system?
 {: #block_filesystem}
 
 **Infrastructure provider**:

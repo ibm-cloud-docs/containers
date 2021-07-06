@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-09"
+lastupdated: "2021-07-06"
 
 keywords: kubernetes, iks
 
@@ -201,10 +201,6 @@ Review the feature gates that are applied to all master and worker node componen
 | 1.20 | <ul><li><code>AllowInsecureBackendProxy=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 | 1.19 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li><li><code>SCTPSupport=false</code></li><li><code>ServiceAppProtocol=false</code></li></ul>|
 | 1.18 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul>|
-| 1.17 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li><li><code>AllowInsecureBackendProxy=false</code></li></ul> | 
-| 1.16 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
-| 1.15 | <ul><li><code>RuntimeClass=false</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul> | 
-| 1.14 | <ul><li><code>RuntimeClass=false</code></li><li><code>SupportNodePidsLimit=true</code></li><li><code>CustomCPUCFSQuotaPeriod=true</code></li></ul>|
 {: caption="Overview of feature gates" caption-side="top"}
 {: summary="The rows are read from left to right. The version is in the first column, with the default feature gates in the second column."}
 
