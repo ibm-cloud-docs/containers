@@ -1485,6 +1485,7 @@ subcollection: containers
   * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_get)
   * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addons)
   * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_options)
+  * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_addon_update)
   * [`ibmcloud ks cluster addon versions`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_addon_versions)
   * [`ibmcloud ks cluster ca create`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_create)
   * [`ibmcloud ks cluster ca rotate`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_ca_rotate)
