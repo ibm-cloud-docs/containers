@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-08"
+lastupdated: "2021-07-09"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,6 +110,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
+| 09 July 2021 | {{site.data.keyword.block_storage_is_short}} add-on**: [Version `3.0.1`](/docs/containers?topic=containers-vpc_bs_changelog) of the {{site.data.keyword.block_storage_is_short}} add-on is available. |
 | 06 July 2021 |<ul><li> **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1523](/docs/containers?topic=containers-changelog#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-changelog_archive#11717_1567_worker).</li></ul> |
 | 02 July 2021 | **Unsupported Kubernetes version 1.17**: To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
