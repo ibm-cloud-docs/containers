@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-02"
+lastupdated: "2021-07-12"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -222,7 +222,7 @@ You can customize a set of Istio configuration options by editing the `managed-i
     <th>Description</th>
     </thead>
     <tbody>
-    <tr><td>`istio-components-pilot-requests-cpu`</td><td>`"500m"`</td><td>Configure the CPU request in millicpu for the `istiod` component pod.<p class="important">Use caution when changing this value. Setting this value too low might prevent the control plane from workering properly, and setting this value too high might prevent the `istiod` pod from being scheduled.</p></td></tr>
+    <tr><td>`istio-components-pilot-requests-cpu`</td><td>`"500m"`</td><td>Configure the CPU request in millicpu for the `istiod` component pod.<p class="important">Use caution when changing this value. Setting this value too low might prevent the control plane from working properly, and setting this value too high might prevent the `istiod` pod from being scheduled.</p></td></tr>
     <tr><td>`istio-global-logging-level`</td><td>`"default:info"`</td><td>Define the scope of logs and the level of log messages for control plane components. A scope represents a functional area within a control plane component and each scope supports specific log information levels. The `default` logging scope, which is for non-categorized log messages, is applied to all components in the control plane at the basic `info` level.</br></br>To specify log levels for individual component scopes, enter a comma-separated list of scopes and levels, such as `"<scope>:<level>,<scope>:<level>"`. For a list of the scopes for each control plane component and the information level of log messages, see the [Istio component logging documentation ![External link icon](../icons/launch-glyph.svg "External link icon")](https://istio.io/latest/docs/ops/diagnostic-tools/component-logging/).<p class="tip">To change the log level of the data plane, use the `istioctl proxy-config log <pod> --level <level>` command.</p></td></tr>
     <tr><td>`istio-global-outboundTrafficPolicy-mode`</td><td>`"ALLOW_ANY"`</td><td>By default, all outbound traffic from the service mesh is permitted. To block outbound traffic from the service mesh to any host that is not defined in the service registry or that does not have a `ServiceEntry` within the service mesh, set to `REGISTRY_ONLY`.</td></tr>
     <tr><td>`istio-egressgateway-public-1-enabled`</td><td>`"true"`</td><td>To disable the default Istio egress gateway, set to `"false"`. For example, you might [create a custom egress gateway](/docs/containers?topic=containers-istio-custom-gateway#custom-egress-gateway) instead.</td></tr>    
