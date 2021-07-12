@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-30"
+lastupdated: "2021-07-12"
 
 keywords: kubernetes, iks
 
@@ -111,6 +111,7 @@ Review the following changes for 1.0 versions of the CLI plug-in.
 
 |Version|Release date|Changes|
 |-------|------------|-------|
+| 1.0.300 | 12 Jul 2021 |<ul><li>Updates the help text in various languages.</li></ul>|
 | 1.0.295 | 24 Jun 2021 | <ul><li>Removes the unsupported {{site.data.keyword.containerlong_notm}} Ingress image version from the output of `ibmcloud ks alb version ls`.</li><li>Adds the following updates for add-on commands:<ul><li>Adds the `ibmcloud ks cluster addon get` command to view the details of an installed add-on.</li><li>Adds the `ibmcloud ks cluster addon options` command to view optional installation settings for an add-on.</li><li>Adds the `--param` flag to specify an optional installation setting for the `ibmcloud ks cluster addon enable openshift-container-storage` command.</li></ul></li><li>Updates the help text in various languages.</li></ul> |
 | 1.0.275 | 26 May 2021 | <ul><li>The `--region` flag is now required for the `ibmcloud ks api-key reset`, `ibmcloud ks credential get`, and `ibmcloud ks credential set` commands.</li><li>Adds the `ibmcloud ks cluster addon versions` command to list the Kubernetes versions that are supported for each add-on version, and deprecates the `ibmcloud ks addon-versions` command.</li><li>The `ibmcloud ks image-security disable` and `ibmcloud ks image-security enable` commands are now generally available.</li><li>The IAM token that is used for your CLI session is now refreshed 5 minutes before expiration to keep the session active.</li><li>Updates the help text in various languages.</li></ul> |
 | 1.0.258 | 26 Apr 2021 | <ul><li>Adds the `--ip` flag to the `ibmcloud ks nlb-dns create vpc-gen2` and `ibmcloud ks nlb-dns rm vpc-gen2` commands to support DNS records for Network Load Balancers for VPC.</li><li>Adds the `--dns-type` flag to `ibmcloud ks nlb-dns create` commands to specify the DNS provider type for the subdomain registration. Currently, only `public` DNS is supported.</li><li>Adds a warning that the `--region` flag is planned to be required for the `ibmcloud ks api-key reset`, `ibmcloud ks credential get`, and `ibmcloud ks credential set` commands as of 10 May 2021. The region is already required by the API. Currently in the CLI, the region defaults to the targeted region if the `--region` flag is not used.</li><li>In the output of the `ibmcloud ks addon-versions` command, changes the `Min. OpenShift version` column to `Supported Openshift Range`.</li><li>When `--output json` is specified for the `ibmcloud ks storage attachment get` or `ibmcloud ks storage attachment ls` commands, fixes the output so that a volume table is not printed after the JSON output.</li><li>Fixes a `golang` vulnerability for [CVE-2020-28852](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2020-28852){: external}.</li><li>Updates the help text in various languages.</li></ul> |
