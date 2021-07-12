@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-17"
+lastupdated: "2021-07-12"
 
 keywords: kubernetes, iks, help
 
@@ -78,6 +78,7 @@ content-type: troubleshoot
 {:swift: data-hd-programlang="swift"}
 {:table: .aria-labeledby="caption"}
 {:term: .term}
+{:terraform: .ph data-hd-interface='terraform'}
 {:tip: .tip}
 {:tooling-url: data-tooling-url-placeholder='tooling-url'}
 {:troubleshoot: data-hd-content-type='troubleshoot'}
@@ -106,7 +107,7 @@ To further troubleshoot the [managed Istio add-on](/docs/containers?topic=contai
 
 1. Ensure that your Istio components all run the same verion of managed Istio. Whenever the Istio add-on is updated to a new patch or minor version, the Istio control plane is automatically updated, but you must [manually update your data plane components](/docs/containers?topic=containers-istio#update_client_sidecar), including the `istioctl` client and the Istio sidecars for your app.
 
-2. Check your Istio configurations by using the `istioctl analyze` CLI command. For more information about the command, including available command optons and examples, see the [Istio open-source documentation](https://istio.io/latest/docs/reference/commands/istioctl/#istioctl-analyze){: external}.
+2. Check your Istio configurations by using the `istioctl analyze` CLI command. For more information about the command, including available command options and examples, see the [Istio open-source documentation](https://istio.io/latest/docs/reference/commands/istioctl/#istioctl-analyze){: external}.
 
 3. Use the {{site.data.keyword.containerlong_notm}} Diagnostics and Debug Tool to run Istio tests and gather pertinent information about the Istio add-on in your cluster. To use the debug tool, you can enable the add-on in your cluster.
     1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
