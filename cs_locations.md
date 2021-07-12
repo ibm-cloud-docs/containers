@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-06-29"
+lastupdated: "2021-07-12"
 
 keywords: kubernetes, iks, mzr, szr, multizone, multi az
 
@@ -171,13 +171,11 @@ The following image is used as an example to explain how {{site.data.keyword.con
 | Europe | Germany | Frankfurt | fra02, fra04, fra05 | EU Central (`eu-central`, `eu-de`) |
 | Europe | Italy | Milan | mil01 | EU Central (`eu-central`, `eu-de`) |
 | Europe | The Netherlands | Amsterdam | ams03 | EU Central (`eu-central`, `eu-de`) |
-| Europe | Norway | Oslo | osl01`†` | EU Central (`eu-central`, `eu-de`) |
 | Europe | United Kingdom | London | lon02`*`, lon04, lon05`*`, lon06 | UK South (`uk-south`, `eu-gb`) |
 | North America | Canada | Montreal | mon01 | US East (`us-east`) |
 | North America | Canada | Toronto | tor01 | US East (`us-east`) |
 | North America | Mexico | Mexico City | mex01 | US South (`us-south`) |
 | North America | United States | Dallas | dal10, dal12, dal13 | US South (`us-south`) |
-| North America | United States | Houston | hou02`‡` | US South (`us-south`) |
 | North America | United States | San Jose | sjc03, sjc04 | US South (`us-south`) |
 | North America | United States | Washington, D.C. | wdc04, wdc06, wdc07 | US East (`us-east`) |
 | South America | Brazil | São Paulo | sao01 | US South (`us-south`) |
@@ -187,10 +185,15 @@ The following image is used as an example to explain how {{site.data.keyword.con
 `*` lon05 replaces lon02. New clusters must use lon05, which supports highly available masters that are spread across zones.
 {: note}
 
-`†` Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
+<br>
+
+**Deprecated data centers**
+<br>
+
+Oslo (osl01) is deprecated and becomes unsupported later this year. To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `osl01` clusters by **1 August 2021**. Before the unsupported date, you are blocked from adding new worker nodes and clusters starting on **1 July 2021**. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure).
 {: deprecated}
 
-`‡` Houston (hou02) is deprecated and becomes unsupported later this year. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure). To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `hou02` clusters by **1 August 2021**. Houston supports free clusters that are created in US South, and is not available for standard, production clusters.
+Houston (hou02) is deprecated and becomes unsupported later this year. For more information, see [Data center closures in 2021](/docs/get-support?topic=get-support-dc-closure). To prevent any interruption of service, [redeploy all of your cluster workloads](/docs/containers?topic=containers-update_app#copy_apps_cluster) to a [supported data center](/docs/containers?topic=containers-regions-and-zones#zones-mz) and remove your `hou02` clusters by **1 August 2021**. Houston supports free clusters that are created in US South, and is not available for standard, production clusters.
 {: deprecated}
 
 ### VPC multizone regions
@@ -361,7 +364,7 @@ To switch regions, use the `ibmcloud ks init` [command](/docs/containers?topic=c
 | --- | --- | --- |
 | AP North (standard clusters only) | Tokyo | che01, hkg02, seo01, sng01, **tok02, tok04, tok05** |
 | AP South | Sydney | **syd01, syd04, syd05** |
-| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, osl01, par01 |
+| EU Central | Frankfurt | ams03, **fra02, fra04, fra05**, mil01, par01 |
 | UK South | London | lon02, **lon04, lon05, lon06** |
 | US East (standard clusters only) | Washington DC | mon01, tor01, **wdc04, wdc06, wdc07** |
 | US South | Dallas | **dal10, dal12, dal13**, mex01, sjc03, sjc04, sao01 |
