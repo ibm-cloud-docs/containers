@@ -124,7 +124,7 @@ Set up the managed Istio add-on in your cluster.
   Example output:
   ```
   Name            Version     Health State   Health Status
-  istio           1.10.2       normal         Addon Ready
+  istio           1.9.5       normal         Addon Ready
   ```
   {: screen}
 
@@ -160,13 +160,13 @@ The BookInfo app is also already exposed on a public IP address by an Istio Gate
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.2 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.5 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.10.2
+    cd istio-1.9.5
     ```
     {: pre}
 
