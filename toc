@@ -324,6 +324,7 @@ Kubernetes Service
         Managed add-ons
             ts-addons/ts-addon-debug.md
             ts-addons/ts-addon-istio-debug.md
+            ts-addons/ts-addon-istio-gateway-affinity.md
             ts-addons/ts-addon-istio-missing.md
 
         {: .topicgroup}
