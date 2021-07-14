@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-12"
+lastupdated: "2021-07-14"
 
 keywords: containers
 subcollection: containers
@@ -1014,7 +1014,7 @@ subcollection: containers
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
 
-[Managing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)
+[Managing and exposing apps in the service mesh](/docs/containers?topic=containers-istio-mesh)
 * [Trying out the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#istio_bookinfo)
   * [Setting up the BookInfo sample app](/docs/containers?topic=containers-istio-mesh#bookinfo_setup)
   * [Publicly accessing BookInfo](/docs/containers?topic=containers-istio-mesh#istio_access_bookinfo)
@@ -1831,6 +1831,8 @@ subcollection: containers
 * [Fluentd for logging changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#fluentd_changelog)
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
+* [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
+  * [Changelog for 1.10.2, released 13 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
@@ -2608,6 +2610,10 @@ subcollection: containers
 [Debugging cluster add-ons](/docs/containers?topic=containers-debug_addons)
 
 [Debugging Istio](/docs/containers?topic=containers-istio_debug_tool)
+
+[Why are the `ibm-cloud-provider-ip` pods for the Istio ingress gateway stuck in `pending`?](/docs/containers?topic=containers-istio_gateway_affinity)
+* [Moving the `istio-ingressgateway` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-gateway-pod)
+* [Moving the `ibm-cloud-provider-ip` pod](/docs/containers?topic=containers-istio_gateway_affinity#move-ip-pod)
 
 [Why are Istio components missing?](/docs/containers?topic=containers-istio_control_plane)
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-07-14"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -109,6 +109,7 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 | Istio add-on version | Supported? | Kubernetes version support |
 | -------------------- | -----------|--------------------------- |
+| 1.10 | <img src="images/icon-checkmark-confirm.svg" align="left" width="32" style="width:32px;" alt="Supported"/> | 1.18, 1.19, 1.20, 1.21 |
 | 1.9 | <img src="images/icon-checkmark-confirm.svg" align="left" width="32" style="width:32px;" alt="Supported"/> | 1.17, 1.18, 1.19, 1.20 |
 | 1.8 | <img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="Deprecated"/> `†`| 1.17, 1.18, 1.19 |
 | 1.7 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
@@ -120,6 +121,21 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 `†` Version 1.8.6 is the final update for version 1.8, which becomes unsupported on 01 July 2021.
 {: note}
+
+## Version 1.10
+{: #v110}
+
+### Changelog for 1.10.2, released 13 July 2021
+{: #1102}
+
+The following table shows the changes that are included in version 1.10.2 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.9.5 | 1.10.2 | <ul><li>See the Istio release notes for [Istio 1.10.0](https://istio.io/latest/news/releases/1.10.x/announcing-1.10/){:external}, [Istio 1.10.1](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.1/){:external}, and [Istio 1.10.2](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.2/){:external}.</li><li>The API version of the `IstioOperator` (IOP) custom resource definition is updated from `v1beta1` to `v1`. Although this update does not impact existing custom IOP resources, you can optionally back up your IOP resources before upgrading to Istio version 1.10.</li><li>The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources).</li><li>In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` configmap.</li><li>Resolves [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}, [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}, and [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.9.5" caption-side="top"}
 
 ## Version 1.9
 {: #v19}
@@ -258,7 +274,7 @@ The following table shows the changes that are included in version 1.8.0 of the 
 
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.7.5 | 1.8.0 | <ul><li>See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){:external}.</li><li>If you created a custom `IstioOperator` resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8.</li><li>All `istio-monitoring` support is removed, and in the `managed-istio-custom` configmap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).</li></ul> |
+| 1.7.5 | 1.8.0 | <ul><li>See the Istio release notes for [Istio 1.8](https://istio.io/latest/news/releases/1.8.x/announcing-1.8/){:external}.</li><li>If you created a custom `IstioOperator` (IOP) resource, remove the `revision` field from the resource before you update your add-on to version 1.8 so that the custom gateways use version 1.8 of `istiod`. After you update your Istio add-on, update the tag for any custom gateways to 1.8.</li><li>All `istio-monitoring` support is removed, and in the `managed-istio-custom` configmap, the `istio-monitoring-components` and `istio-kiali-dashboard-viewOnlyMode` options are unsupported. To use monitoring with Istio, you must install the Kiali, Prometheus, Jaeger, and Grafana components separately from the Istio add-on. For more information, see the [Istio documentation](https://istio.io/latest/docs/ops/integrations/){: external}.</li><li>The `istio-meshConfig-enableTracing` and `istio-egressgateway-public-1-enabled` optional settings are added to the [`managed-istio-custom` configmap resource](/docs/containers?topic=containers-istio#customize).</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.7.5" caption-side="top"}
 
