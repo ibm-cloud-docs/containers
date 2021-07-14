@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-13"
+lastupdated: "2021-07-14"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -92,10 +92,9 @@ subcollection: containers
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
- 
 
 
-# Managing apps in the service mesh
+# Managing and exposing apps in the service mesh
 {: #istio-mesh}
 
 After you [install the Istio add-on](/docs/containers?topic=containers-istio#istio_install) in your cluster, you can deploy your apps into the Istio service mesh by setting up Envoy proxy sidecar injection and exposing your apps with a subdomain.
@@ -126,13 +125,13 @@ The deployment YAMLs for each of these microservices are modified so that Envoy 
 1. Install BookInfo in your cluster.
   1. Download the latest Istio package for your operating system, which includes the configuration files for the BookInfo app.
     ```
-    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.9.5 sh -
+    curl -L https://istio.io/downloadIstio | ISTIO_VERSION=1.10.2 sh -
     ```
     {: pre}
 
   2. Navigate to the Istio package directory.
     ```
-    cd istio-1.9.5
+    cd istio-1.10.2
     ```
     {: pre}
   3. Label the `default` namespace for automatic sidecar injection.
@@ -485,7 +484,7 @@ Do not enable sidecar injection for the `kube-system`, `ibm-system,` or `ibm-ope
 
 2. Navigate to the Istio package directory.
   ```
-  cd istio-1.9.5
+  cd istio-1.10.2
   ```
   {: pre}
 
@@ -561,15 +560,7 @@ By default, one public Istio load balancer, `istio-ingressgateway`, is enabled i
   ```
   {: pre}
 
-2. Check or add your cluster's zones in the `istio-ingressgateway-zone` fields.
-  * If you initially installed the Istio add-on at version 1.5 or later, verify that all of your cluster zones are included in the `istio-ingressgateway-zone` fields.
-  * If you initially installed the Istio add-on at version 1.4 and updated to version 1.5 or later, add your cluster's zones to the configmap.
-      1. Get the zones that your worker nodes are deployed to.
-        ```
-        ibmcloud ks cluster get -c <cluster_name_or_ID> | grep Zones
-        ```
-        {: pre}
-      2. Add the zones to the `istio-ingressgateway-zone` fields.
+2. Verify that all of your cluster zones are included in the `istio-ingressgateway-zone` fields.
 
    Example for a classic, multizone cluster in Dallas:
    ```yaml
@@ -770,6 +761,12 @@ To publicly expose apps:
   ```
   {: codeblock}
 
+Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
+{: tip}
+
+Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
+{: tip}
+
 </br>
 
 ### Exposing the Istio ingress gateway with DNS with TLS termination
@@ -935,6 +932,9 @@ The certificates for the NLB DNS host secret expires every 90 days. The secret i
 {: note}
 
 Looking for even more fine-grained control over routing? To create rules that are applied after the load balancer routes traffic to each microservice, such as rules for sending traffic to different versions of one microservice, you can create and apply [`DestinationRules`](https://istio.io/latest/docs/reference/config/networking/destination-rule/){: external}.
+{: tip}
+
+Need to debug ingress or egress setups? Make sure that the `istio-global-proxy-accessLogFile` option in the [`managed-istio-custom` configmap](/docs/containers?topic=containers-istio#customize) is set to `"/dev/stdout"`. Envoy proxies print access information to their standard output, which you can view by running `kubectl logs` commands for the Envoy containers. If you notice that the `ibm-cloud-provider-ip` pod for a gateway is stuck in `pending`, see [this troubleshooting topic](/docs/containers?topic=containers-istio_gateway_affinity).
 {: tip}
 
 <br />
