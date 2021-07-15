@@ -1303,6 +1303,8 @@ subcollection: containers
   * [Storing your custom PVC settings in a Kubernetes secret](/docs/containers?topic=containers-vpc-block#vpc-block-storageclass-secret)
   * [Enabling every user to customize the default PVC settings](/docs/containers?topic=containers-vpc-block#customize-with-secret)
   * [Enforcing base64 encoding for the {{site.data.keyword.keymanagementserviceshort}} root key CRN](/docs/containers?topic=containers-vpc-block#static-secret)
+* [Setting up volume expansion](/docs/containers?topic=containers-vpc-block#vpc-block-volume-expand)
+  * [Expanding existing volumes](/docs/containers?topic=containers-vpc-block#expanding-existing-volumes)
 * [Backing up and restoring data](/docs/containers?topic=containers-vpc-block#vpc-block-backup-restore)
 * [Storage class reference](/docs/containers?topic=containers-vpc-block#vpc-block-reference)
 * [Removing persistent storage from a cluster](/docs/containers?topic=containers-vpc-block#cleanup)
@@ -1891,6 +1893,7 @@ subcollection: containers
 * [Changelog for 1.0.1, released 15 August 2020](/docs/containers?topic=containers-ca_changelog#0101_ca_addon)
 
 [{{site.data.keyword.block_storage_is_short}} add-on changelog](/docs/containers?topic=containers-vpc_bs_changelog)
+* [Changelog for version 3.0.1](/docs/containers?topic=containers-vpc_bs_changelog#0301_is_block)
 * [Changelog for version 3.0.0](/docs/containers?topic=containers-vpc_bs_changelog#0300_is_block)
 * [Changelog for version 2.0.3](/docs/containers?topic=containers-vpc_bs_changelog#0203_is_block)
 
