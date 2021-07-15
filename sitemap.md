@@ -2591,7 +2591,7 @@ subcollection: containers
 * [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
 * [Fixing IP address issues](/docs/containers?topic=containers-ts-app-container-start#calico-ips)
   * [Step 1: Releasing individual IP addresses](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
-  * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
+  * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#releasing-individual-ips)
 
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp)
 
