@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-15"
+lastupdated: "2021-07-16"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,8 +110,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 15 July 2021 | **{{site.data.keyword.block_storage_is_short}} add-on**: Version 3.0.1, which adds beta support for volume expansion, is now available. Version 2.0.3 becomes unsupported on 26 July 2021, and version 3.0.0 is deprecated and becomes unsupported on or after 26 August 2021. If you have a deprecated or unsupported version of the add-on installed in your cluster, update the add-on to [version 3.0.1](/docs/containers?topic=containers-vpc_bs_changelog). To update the add-on in your cluster, see [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/openshift?topic=openshift-vpc-block#vpc-addon-update). |
-| 13 July 2021 | **Istio add-on changelog**: [Version 1.10.2](/docs/containers?topic=containers-istio-changelog#v110) of the Istio managed add-on is released. |
+| 15 July 2021 | <ul><li>**Istio add-on changelog**: [Version 1.10.2](/docs/containers?topic=containers-istio-changelog#v110) of the Istio managed add-on is released.</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: Version 3.0.1, which adds beta support for volume expansion, is now available. Version 2.0.3 becomes unsupported on 26 July 2021, and version 3.0.0 is deprecated and becomes unsupported on or after 26 August 2021. If you have a deprecated or unsupported version of the add-on installed in your cluster, update the add-on to [version 3.0.1](/docs/containers?topic=containers-vpc_bs_changelog). To update the add-on in your cluster, see [Updating the {{site.data.keyword.block_storage_is_short}} add-on](/docs/openshift?topic=openshift-vpc-block#vpc-addon-update).</li></ul> |
 | 12 July 2021|  **Snapshots**: Before updating to Kubernetes version `1.20` or `1.21`, snapshot CRDs must be changed to version `v1beta1`. For more information, see the [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#121_before).  |
 | 06 July 2021 |<ul><li> **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1376_iks`, `0.45.0_1375_iks`, and `0.35.0_1374_iks`.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1523](/docs/containers?topic=containers-changelog#1212_1523), [1.20.8_1545](/docs/containers?topic=containers-changelog#1208_1545), [1.19.12_1552](/docs/containers?topic=containers-changelog#11912_1552), [1.18.20_1557](/docs/containers?topic=containers-changelog#11820_1557), and [1.17.17_1567](/docs/containers?topic=containers-changelog_archive#11717_1567_worker).</li></ul> |
 | 02 July 2021 | **Unsupported Kubernetes version 1.17**: To continue receiving important security updates and support, you must [update the cluster to a supported version](/docs/containers?topic=containers-cs_versions#prep-up) immediately. |

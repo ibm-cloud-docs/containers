@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-15"
+lastupdated: "2021-07-16"
 
 keywords: containers
 subcollection: containers
@@ -1834,13 +1834,13 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
-  * [Changelog for 1.10.2, released 13 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
+  * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
   * [Changelog for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
   * [Changelog for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
-* [Version 1.8 (deprecated)](/docs/containers?topic=containers-istio-changelog#v18)
+* [Version 1.8 (unsupported)](/docs/containers?topic=containers-istio-changelog#v18)
   * [Changelog for 1.8.6, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#186)
   * [Changelog for 1.8.5, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#185)
   * [Changelog for 1.8.4, released 23 March 2021](/docs/containers?topic=containers-istio-changelog#184)
