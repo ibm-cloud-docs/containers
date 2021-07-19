@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-16"
+lastupdated: "2021-07-19"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -218,7 +218,7 @@ Dates that are marked with a dagger (`†`) are tentative and subject to change.
   <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
   <td>[1.18](#cs_v118)</td>
   <td>11 May 2020</td>
-  <td>01 Sep 2021 `†`</td>
+  <td>30 Sep 2021 `†`</td>
 </tr>
   <tr>
   <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
