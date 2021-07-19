@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-07-12"
+lastupdated: "2021-07-19"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -109,6 +109,19 @@ Looking for the changelogs of supported versions? See [Kubernetes version change
 
 Version 1.16 is unsupported. You can review the following archive of 1.16 changelogs.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021
+{: #1171_1568}
+
+The following table shows the changes that are included in the worker node fix pack `1.17.17_1568`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with kernel package updates. |
+| Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.17.17_1567" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021
 {: #11717_1567_worker}
