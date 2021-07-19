@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-07-12"
+lastupdated: "2021-07-19"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -121,6 +121,19 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.21 changelog.
 {: shortdesc}
 
+### Changelog for worker node fix pack 1.21.2_1524, released 19 July 2021
+{: #1212_1524}
+
+The following table shows the changes that are included in the worker node fix pack `1.21.2_1524`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with kernel package updates. |
+| Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.21.2_1523" caption-side="top"}
+
 ### Changelog for worker node fix pack 1.21.2_1523, released 6 July 2021
 {: #1212_1523}
 
@@ -220,6 +233,19 @@ The following table shows the changes that are included in the master fix pack p
 
 Review the version 1.20 changelog.
 {: shortdesc}
+
+### Changelog for worker node fix pack 1.20.8_1546, released 19 July 2021
+{: #1208_1546}
+
+The following table shows the changes that are included in the worker node fix pack `1.20.8_1546`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with kernel package updates. |
+| Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.20.8_1545" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.20.8_1545, released 6 July 2021
 {: #1208_1545}
@@ -523,6 +549,19 @@ The following table shows the changes that are included in the version updates f
 
 Review the version 1.19 changelog.
 {: shortdesc} 
+
+### Changelog for worker node fix pack 1.19.12_1553, released 19 July 2021
+{: #11912_1553}
+
+The following table shows the changes that are included in the worker node fix pack `1.19.12_1553`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with kernel package updates. |
+| Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.19.12_1552" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.19.12_1552, released 6 July 2021
 {: #11912_1552}
@@ -1074,6 +1113,19 @@ Review the version 1.18 changelog.
 
 Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 {: deprecated}
+
+### Changelog for worker node fix pack 1.18.29_1558, released 19 July 2021
+{: #11829_1558}
+
+The following table shows the changes that are included in the worker node fix pack `1.18.29_1558`. Worker node patch updates can be applied by updating, reloading (in classic infrastructure), or replacing (in VPC infrastructure) the worker node.
+{: shortdesc}
+
+| Component | Previous | Current | Description |
+| --------- | -------- | ------- | ----------- |
+| Ubuntu 16.04 packages | N/A | N/A | Updated worker node images with kernel package updates. |
+| Ubuntu 18.04 packages | N/A | N/A| Updated worker node images with kernel package updates. | 
+{: summary="The rows are read from left to right. The first column is the changed component. The second column is the previous version number of the component. The third column is the current version number of the component. The fourth column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.18.20_1557" caption-side="top"}
 
 ### Changelog for worker node fix pack 1.18.20_1557, released 6 July 2021
 {: #11820_1557}

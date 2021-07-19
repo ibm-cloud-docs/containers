@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-24"
+lastupdated: "2021-07-14"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, kubectl, api
 
@@ -421,6 +421,8 @@ When you use the API for automation, be sure to rely on the responses from the A
 
 <br />
 
+
+
 ## Working with your cluster by using the Kubernetes API
 {: #kube_api}
 
@@ -603,6 +605,7 @@ The following instructions require public network access in your cluster to conn
    {: screen}
 
 6. Review the [Kubernetes API documentation](https://kubernetes.io/docs/reference/kubernetes-api/){: external} to find a list of supported APIs for the latest Kubernetes version. Make sure to use the API documentation that matches the Kubernetes version of your cluster. If you do not use the latest Kubernetes version, append your version at the end of the URL. For example, to access the API documentation for version 1.12, add `v1.12`.
+
 
 
 ## Refreshing {{site.data.keyword.cloud_notm}} IAM access tokens and obtaining new refresh tokens with the API

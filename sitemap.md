@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-14"
+lastupdated: "2021-07-19"
 
 keywords: containers
 subcollection: containers
@@ -635,10 +635,13 @@ subcollection: containers
 [Protecting sensitive information in your cluster](/docs/containers?topic=containers-encryption)
 * [Overview of cluster encryption](/docs/containers?topic=containers-encryption#encrypt_ov)
 * [Understanding Key Management Service (KMS) providers](/docs/containers?topic=containers-encryption#kms)
+  * [Available KMS providers](/docs/containers?topic=containers-encryption#kms-providers)
+  * [Controlling encryption](/docs/containers?topic=containers-encryption#kms-encrypt-control)
+  * [Features and limitations of KMS providers](/docs/containers?topic=containers-encryption#kms-keyprotect-features)
 * [Encrypting the Kubernetes master's local disk and secrets by using a KMS provider](/docs/containers?topic=containers-encryption#keyprotect)
   * [Prerequisites](/docs/containers?topic=containers-encryption#kms_prereqs)
-  * [Enabling KMS encryption through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
-  * [Enabling KMS encryption through the console](/docs/containers?topic=containers-encryption#kms_ui)
+  * [Enabling KMS encryption for the cluster through the CLI](/docs/containers?topic=containers-encryption#kms_cli)
+  * [Enabling KMS encryption for the cluster through the console](/docs/containers?topic=containers-encryption#kms_ui)
   * [Rotating the root key for your cluster](/docs/containers?topic=containers-encryption#kms_rotate)
 * [Verifying secret encryption](/docs/containers?topic=containers-encryption#verify_kms)
 * [Encrypting data in classic clusters by using IBM Cloud Data Shield](/docs/containers?topic=containers-encryption#datashield)
@@ -1702,12 +1705,14 @@ subcollection: containers
 [Kubernetes version changelog](/docs/containers?topic=containers-changelog)
 * [Overview](/docs/containers?topic=containers-changelog#changelog_overview)
 * [Version 1.21 changelog](/docs/containers?topic=containers-changelog#121_changelog)
+  * [Changelog for worker node fix pack 1.21.2_1524, released 19 July 2021](/docs/containers?topic=containers-changelog#1212_1524)
   * [Changelog for worker node fix pack 1.21.2_1523, released 6 July 2021](/docs/containers?topic=containers-changelog#1212_1523)
   * [Changelog for master fix pack 1.21.2_1522, released 28 June 2021](/docs/containers?topic=containers-changelog#1212_1522)
   * [Changelog for worker node fix pack 1.21.1_1521, released 22 June 2021](/docs/containers?topic=containers-changelog#1211_1521)
   * [Changelog for worker node fix pack 1.21.1_1520, released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1520)
   * [Changelog for master fix pack 1.21.1_1519 released 9 June 2021](/docs/containers?topic=containers-changelog#1211_1519)
 * [Version 1.20 changelog](/docs/containers?topic=containers-changelog#120_changelog)
+  * [Changelog for worker node fix pack 1.20.8_1546, released 19 July 2021](/docs/containers?topic=containers-changelog#1208_1546)
   * [Changelog for worker node fix pack 1.20.8_1545, released 6 July 2021](/docs/containers?topic=containers-changelog#1208_1545)
   * [Changelog for master fix pack 1.20.8_1544, released 28 June 2021](/docs/containers?topic=containers-changelog#1208_1544)
   * [Changelog for worker node fix pack 1.20.7_1543, released 22 June 2021](/docs/containers?topic=containers-changelog#1207_1543)
@@ -1727,6 +1732,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.20.4_1530, released 22 February 2021](/docs/containers?topic=containers-changelog#1204_1530)
   * [Changelog for 1.20.2_1528 (master) and 1.20.2_1527 (worker node), released 17 February 2021](/docs/containers?topic=containers-changelog#1202_1528)
 * [Version 1.19 changelog](/docs/containers?topic=containers-changelog#119_changelog)
+  * [Changelog for worker node fix pack 1.19.12_1553, released 19 July 2021](/docs/containers?topic=containers-changelog#11912_1553)
   * [Changelog for worker node fix pack 1.19.12_1552, released 6 July 2021](/docs/containers?topic=containers-changelog#11912_1552)
   * [Changelog for master fix pack 1.19.12_1551, released 28 June 2021](/docs/containers?topic=containers-changelog#11912_1551)
   * [Changelog for worker node fix pack 1.19.11_1550, released 22 June 2021](/docs/containers?topic=containers-changelog#11911_1550)
@@ -1761,6 +1767,7 @@ subcollection: containers
   * [Changelog for master fix pack 1.19.3_1525, released 26 October 2020](/docs/containers?topic=containers-changelog#1193_1525)
   * [Changelog for 1.19.2_1524, released 13 October 2020](/docs/containers?topic=containers-changelog#1192_1524)
 * [Deprecated: Version 1.18 changelog](/docs/containers?topic=containers-changelog#118_changelog)
+  * [Changelog for worker node fix pack 1.18.29_1558, released 19 July 2021](/docs/containers?topic=containers-changelog#11829_1558)
   * [Changelog for worker node fix pack 1.18.20_1557, released 6 July 2021](/docs/containers?topic=containers-changelog#11820_1557)
   * [Changelog for master fix pack 1.18.20_1556, released 28 June 2021](/docs/containers?topic=containers-changelog#11820_1556)
   * [Changelog for worker node fix pack 1.18.19_1555, released 22 June 2021](/docs/containers?topic=containers-changelog#11819_1555)
@@ -1832,13 +1839,13 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
-  * [Changelog for 1.10.2, released 13 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
+  * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
   * [Changelog for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
   * [Changelog for 1.9.2, released 1 April 2021](/docs/containers?topic=containers-istio-changelog#192)
-* [Version 1.8 (deprecated)](/docs/containers?topic=containers-istio-changelog#v18)
+* [Version 1.8 (unsupported)](/docs/containers?topic=containers-istio-changelog#v18)
   * [Changelog for 1.8.6, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#186)
   * [Changelog for 1.8.5, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#185)
   * [Changelog for 1.8.4, released 23 March 2021](/docs/containers?topic=containers-istio-changelog#184)
@@ -1912,6 +1919,7 @@ subcollection: containers
 
 [Archived Kubernetes version changelogs](/docs/containers?topic=containers-changelog_archive)
 * [Version 1.17 changelog (unsupported as of 2 July 2021)](/docs/containers?topic=containers-changelog_archive#117_changelog)
+  * [Changelog for worker node fix pack 1.17.17_1568, released 19 July 2021](/docs/containers?topic=containers-changelog_archive#1171_1568)
   * [Changelog for worker node fix pack 1.17.17_1567, released 6 July 2021](/docs/containers?topic=containers-changelog_archive#11717_1567_worker)
   * [Changelog for master fix pack 1.17.17_1567, released 28 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1567)
   * [Changelog for worker node fix pack 1.17.17_1566, released 22 June 2021](/docs/containers?topic=containers-changelog_archive#11717_1566)
@@ -2585,6 +2593,10 @@ subcollection: containers
 * [Deprecated: Troubleshooting image pull secrets that use tokens](/docs/containers?topic=containers-ts-app-image-pull#img-pull-token)
 
 [Why don't my containers start?](/docs/containers?topic=containers-ts-app-container-start)
+* [Fixing registry quota issues](/docs/containers?topic=containers-ts-app-container-start#regitry-quota)
+* [Fixing IP address issues](/docs/containers?topic=containers-ts-app-container-start#calico-ips)
+  * [Step 1: Releasing individual IP addresses](/docs/containers?topic=containers-ts-app-container-start#individual-ips)
+  * [Step 2: Releasing IP address blocks](/docs/containers?topic=containers-ts-app-container-start#releasing-individual-ips)
 
 [Why do my pods fail to deploy after applying a pod security policy?](/docs/containers?topic=containers-ts-app-psp)
 
