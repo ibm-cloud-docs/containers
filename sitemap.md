@@ -1011,9 +1011,9 @@ subcollection: containers
   * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor)
   * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio#update_client_sidecar)
 * [Uninstalling Istio](/docs/containers?topic=containers-istio#istio_uninstall)
-  * [Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
-  * [Uninstalling the Istio add-on from the console](/docs/containers?topic=containers-istio#istio_uninstall_ui)
-  * [Uninstalling managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
+  * [Step 1: Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
+  * [Step 2: Uninstalling the Istion add-on](/docs/containers?topic=containers-istio#istio_uninstall_addon)
+  * [Step 3: Remove the Istio operator](/docs/containers?topic=containers-istio#istio_uninstall_operator)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
 
