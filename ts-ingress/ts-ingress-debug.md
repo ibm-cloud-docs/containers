@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-21"
+lastupdated: "2021-07-22"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -234,7 +234,7 @@ Start by checking for error messages in the Ingress resource deployment events a
 ## Step 4: Ping the ALB subdomain and public IP addresses
 {: #ping}
 
-Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Cloudflare multizone load balancer can access your ALBs to health check them.
+Check the availability of your Ingress subdomain and ALBs' public IP addresses. Additionally, ensure that the Akamai multizone load balancer can access your ALBs to health check them.
 {: shortdesc}
 
 1. Get the IP addresses (classic) or hostname (VPC) that your public ALBs are listening on.
@@ -257,7 +257,7 @@ Check the availability of your Ingress subdomain and ALBs' public IP addresses. 
     * If a public ALB has no IP address (classic) or hostname (VPC), see [Ingress ALB does not deploy in a zone](/docs/containers?topic=containers-cs_subnet_limit).
 
 2. Verify that your ALB IP addresses are reachable by the ALB health check.
-  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Cloudflare's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Cloudflare's IPv4 IP addresses](https://www.cloudflare.com/ips/){: external} on port 80 and [the IP addresses in step 7 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
+  * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic**: If you use Calico pre-DNAT network policies or another custom firewall to block incoming traffic to your cluster, you must allow inbound access on port 80 from the Kubernetes control plane and Akamai's IPv4 IP addresses to the IP addresses of your ALBs so that the Kubernetes control plane can check the health of your ALBs. For example, if you use Calico policies, [create a Calico pre-DNAT policy](/docs/containers?topic=containers-policy_tutorial#lesson3) to allow inbound access to your ALB IP addresses from [Akamai's source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} on port 80 and [the IP addresses in step 7 of the Updating IAM firewalls section](/docs/containers?topic=containers-firewall#iam_allowlist).<p class="important">From 07 to 31 July 2021, the DNS provider is changed from Cloudflare to Akamai for all `containers.appdomain.cloud`, `containers.mybluemix.net`, and `containers.cloud.ibm.com` domains for all clusters in {{site.data.keyword.containerlong_notm}}. If you currently allow inbound traffic to your classic cluster from the Cloudflare source IP addresses, you must also allow inbound traffic from the [Akamai source IP addresses](https://github.com/IBM-Cloud/kube-samples/tree/master/akamai/gtm-liveness-test){: external} before 07 July. After the migration completes on 31 July, you can remove the Cloudflare IP address rules. For more information, see the [announcement](https://cloud.ibm.com/notifications?selected=1621697674798){: external}.</p>
   * <img src="../images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC**: If you set up [VPC security groups](/docs/containers?topic=containers-vpc-network-policy#security_groups) or [VPC access control lists (ACLs)](/docs/containers?topic=containers-vpc-network-policy#acls) to secure your cluster network, ensure that you create the rules to allow the necessary traffic from the Kubernetes control plane IP addresses. Alternatively, to allow the inbound traffic for ALB healthchecks, you can create one rule to allow all incoming traffic on port 80.
 
 3. Check the health of your ALB IPs (classic) or hostname (VPC).
@@ -458,9 +458,9 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     ```
     {: screen}
 
-5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Cloudflare server. Note that the DNS registration might take a few minutes to update.
+5. Verify that the ALB IP address is removed from the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
     ```
-    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
+    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
     ```
     {: pre}
 
@@ -498,9 +498,9 @@ For example, say you have a multizone cluster in 2 zones, and the 2 public ALBs 
     ```
     {: pre}
 
-10. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Cloudflare server. Note that the DNS registration might take a few minutes to update.
+10. Verify that the ALB IP address has been restored in the DNS registration for your domain by checking the Akamai server. Note that the DNS registration might take a few minutes to update.
     ```
-    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.cloudflare.com
+    host mycluster-<hash>-0000.us-south.containers.appdomain.cloud ada.ns.Akamai.com
     ```
     {: pre}
 
