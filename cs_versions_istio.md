@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-16"
+lastupdated: "2021-07-22"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -137,7 +137,17 @@ The following table shows the changes that are included in version 1.10.2 of the
 ## Version 1.9
 {: #v19}
 
+### Changelog for 1.9.6, released 22 July 2021
+{: #196}
 
+The following table shows the changes that are included in version 1.9.6 of the managed Istio add-on.
+{: shortdesc}
+
+| Previous | Current | Description |
+| -------- | ------- | ----------- |
+| 1.9.5 | 1.9.6 | <ul><li>See the Istio release notes for [Istio 1.9.6](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.6/){:external}.</li><li>Resolves [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}, [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}, and [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.</li></ul> |
+{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
+{: caption="Changes since version 1.9.5" caption-side="top"}
 
 ### Changelog for 1.9.5, released 27 May 2021
 {: #195}

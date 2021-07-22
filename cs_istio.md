@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-14"
+lastupdated: "2021-07-21"
 
 keywords: kubernetes, iks, envoy, sidecar, mesh, bookinfo
 
@@ -424,7 +424,7 @@ For example, the patch version of your add-on might be updated automatically by 
 If you're finished working with Istio, you can clean up the Istio resources in your cluster by uninstalling the Istio add-ons.
 {: shortdesc}
 
-### Managing resources before uninstallation
+### Step 1: Managing resources before uninstallation
 {: #uninstall_resources}
 
 Review the following optional steps for saving or deleting custom Istio resources before you uninstall Istio.
@@ -456,24 +456,15 @@ Review the following optional steps for saving or deleting custom Istio resource
   ```
   {: pre}
 
-4. Remove the Istio operator.
-  * Version 1.10 or later: Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
-    ```
-    kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
-    kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
-    kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
-    kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
-    ```
-    {: pre}
-  * Version 1.9 or earlier: Delete the Istio operator pod's CSV.
-    ```
-    kubectl delete clusterserviceversion -n ibm-operators -l addon.name=istio --ignore-not-found=true
-    ```
-    {: pre}
-
 </br>
 
-### Uninstalling the Istio add-on from the console
+### Step 2: Uninstalling the Istion add-on
+{: #istio_uninstall_addon}
+
+Uninstall the add-on from the consle or CLI.
+{: shortdesc}
+
+#### Uninstalling the Istio add-on from the console
 {: #istio_uninstall_ui}
 
 1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to remove the Istio add-on.
@@ -486,8 +477,7 @@ Review the following optional steps for saving or deleting custom Istio resource
 
 5. On the Managed Istio card, verify that the add-on you uninstalled is no longer listed.
 
-</br>
-### Uninstalling managed Istio add-ons from the CLI
+#### Uninstalling managed Istio add-ons from the CLI
 {: #istio_uninstall_cli}
 
 If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras` add-ons, skip steps 1 and 2.
@@ -518,6 +508,27 @@ If you did not install the deprecated `istio-sample-bookinfo` and `istio-extras`
   {: pre}
 
 </br>
+
+### Step 3: Remove the Istio operator
+{: #istio_uninstall_operator}
+
+After the add-on is completely uninstalled, you can remove the Istio operator.
+{: shortdesc}
+
+**Version 1.10 or later**: Delete the Istio operator deployment, service account, cluster role binding, and cluster role.
+```
+kubectl delete deployment -n ibm-operators addon-istio-operator --ignore-not-found=true
+kubectl delete serviceaccount -n ibm-operators addon-istio-operator --ignore-not-found=true
+kubectl delete clusterrolebinding addon-istio-operator --ignore-not-found=true
+kubectl delete clusterrole addon-istio-operator --ignore-not-found=true
+```
+{: pre}
+
+**Version 1.9 or earlier**: Delete the Istio operator pod's CSV.
+```
+kubectl delete clusterserviceversion -n ibm-operators -l addon.name=istio --ignore-not-found=true
+```
+{: pre}
 
 ### Uninstalling other Istio installations in your cluster
 {: #istio_uninstall_other}

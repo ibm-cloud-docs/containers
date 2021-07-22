@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-19"
+lastupdated: "2021-07-22"
 
 keywords: containers
 subcollection: containers
@@ -1011,9 +1011,9 @@ subcollection: containers
   * [Updating the minor version of the Istio add-on](/docs/containers?topic=containers-istio#istio_minor)
   * [Updating the `istioctl` client and sidecars](/docs/containers?topic=containers-istio#update_client_sidecar)
 * [Uninstalling Istio](/docs/containers?topic=containers-istio#istio_uninstall)
-  * [Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
-  * [Uninstalling the Istio add-on from the console](/docs/containers?topic=containers-istio#istio_uninstall_ui)
-  * [Uninstalling managed Istio add-ons from the CLI](/docs/containers?topic=containers-istio#istio_uninstall_cli)
+  * [Step 1: Managing resources before uninstallation](/docs/containers?topic=containers-istio#uninstall_resources)
+  * [Step 2: Uninstalling the Istion add-on](/docs/containers?topic=containers-istio#istio_uninstall_addon)
+  * [Step 3: Remove the Istio operator](/docs/containers?topic=containers-istio#istio_uninstall_operator)
   * [Uninstalling other Istio installations in your cluster](/docs/containers?topic=containers-istio#istio_uninstall_other)
 * [Troubleshooting](/docs/containers?topic=containers-istio#istio-ts)
 
@@ -1437,6 +1437,12 @@ subcollection: containers
 * [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
 
 [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding)
+* [About service binding](/docs/containers?topic=containers-service-binding#svc-bind-about)
+  * [What types of services can I bind to my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-types)
+  * [What is {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-what)
+  * [I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-existing)
+  * [What if I want to use service credentials that use the private cloud service endpoint?](/docs/containers?topic=containers-service-binding#svc-bind-private-cse)
+  * [Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-which)
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
   * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
@@ -1841,6 +1847,7 @@ subcollection: containers
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+  * [Changelog for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
   * [Changelog for 1.9.3, released 29 April 2021](/docs/containers?topic=containers-istio-changelog#193)
