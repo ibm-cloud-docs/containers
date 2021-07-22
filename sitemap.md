@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-21"
+lastupdated: "2021-07-22"
 
 keywords: containers
 subcollection: containers
@@ -1437,6 +1437,12 @@ subcollection: containers
 * [Installing Helm v3 in your cluster](/docs/containers?topic=containers-helm#install_v3)
 
 [Adding services by using IBM Cloud service binding](/docs/containers?topic=containers-service-binding)
+* [About service binding](/docs/containers?topic=containers-service-binding#svc-bind-about)
+  * [What types of services can I bind to my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-types)
+  * [What is {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-what)
+  * [I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-existing)
+  * [What if I want to use service credentials that use the private cloud service endpoint?](/docs/containers?topic=containers-service-binding#svc-bind-private-cse)
+  * [Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-which)
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
   * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
