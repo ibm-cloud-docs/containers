@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-26"
+lastupdated: "2021-07-23"
 
 keywords: kubernetes, iks
 
@@ -136,7 +136,7 @@ If you previously installed the debug tool by using Helm, first uninstall the `i
 ## Enabling the Diagnostics and Debug Tool add-on
 {: #debug-tool-enable}
 
-1. In your [cluster dashboard](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
+1. In the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, click the name of the cluster where you want to install the debug tool add-on.
 
 2. Click the **Add-ons** tab.
 

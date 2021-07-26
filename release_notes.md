@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-22"
+lastupdated: "2021-07-26"
 
 keywords: kubernetes, iks, release notes
 
@@ -110,7 +110,8 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 22 July 2021 | **Istio add-on changelog**: [Version 1.9.6](/docs/containers?topic=containers-istio-changelog#v196) of the Istio managed add-on is released. |
+| 26 July 2021 | <ul><li>For centralized management of all your secrets across clusters and injection at application runtime, try [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets).</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.21.3_1525](/docs/containers?topic=containers-changelog#1213_1525), [1.20.9_1547](/docs/containers?topic=containers-changelog#1209_1547), [1.19.13_1554](/docs/containers?topic=containers-changelog#11913_1554), and [1.18.20_1559](/docs/containers?topic=containers-changelog#11820_1559).</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: [Version `3.0.1`](/docs/containers?topic=containers-vpc_bs_changelog) of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li></ul> |
+| 22 July 2021 | **Istio add-on changelog**: [Version 1.9.6](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released. |
 | 19 July 2021 | **Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.2_1524](/docs/containers?topic=containers-changelog#1212_1524), [1.20.8_1546](/docs/containers?topic=containers-changelog#1208_1546), [1.19.12_1553](/docs/containers?topic=containers-changelog#11912_1553), [1.18.20_1558](/docs/containers?topic=containers-changelog#11820_1558), and [1.17.17_1568](/docs/containers?topic=containers-changelog_archive#1171_1568).
 | 15 July 2021 | <ul><li>**Istio add-on changelog**: [Version 1.10.2](/docs/containers?topic=containers-istio-changelog#v110) of the Istio managed add-on is released.</li><li> |
 | 12 July 2021|  **Snapshots**: Before updating to Kubernetes version `1.20` or `1.21`, snapshot CRDs must be changed to version `v1beta1`. For more information, see the [Kubernetes version information and update actions](/docs/containers?topic=containers-cs_versions#121_before).  |
