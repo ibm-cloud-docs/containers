@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-19"
+lastupdated: "2021-07-26"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -146,7 +146,7 @@ To continue receiving important security patch updates, make sure that your clus
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 **Supported Kubernetes versions**:
-*   Latest: 1.21.1
+*   Latest: 1.21.3
 *   Default: 1.20.7
 *   Other: 1.19.11
 
