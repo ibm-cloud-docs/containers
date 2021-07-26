@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-05-28"
+lastupdated: "2021-07-26"
 
 keywords: kubernetes, iks, node.js, js, java, .net, go, flask, react, python, swift, rails, ruby, spring boot, angular
 
@@ -426,6 +426,9 @@ Secrets provide sensitive configuration information such as passwords for your d
 The following example shows how you can reference values from your secret as environment variables in the container spec section of your deployment YAML. You can also mount the secret as a volume. By referencing values from your secret, you can decouple this configuration information from your deployment to keep your containerized app portable.
 * [Help me decide whether to use a Kubernetes `ConfigMap` or `Secret` object for variables](/docs/containers?topic=containers-plan_deploy#variables).
 * To create a secret, see the [Kubernetes documentation](https://kubernetes.io/docs/concepts/configuration/secret/).
+
+For centralized management of all your secrets across clusters and injection at application runtime, try [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets).
+{: tip}
 
 ```yaml
 apiVersion: apps/v1
