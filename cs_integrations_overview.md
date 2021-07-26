@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-12"
+lastupdated: "2021-07-26"
 
 keywords: kubernetes, iks, helm
 
@@ -167,7 +167,7 @@ You can use various {{site.data.keyword.IBM}}, {{site.data.keyword.cloud}}, and 
 
 |Service|Description|Classic|VPC|
 |----|----|----|----|
-|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/coscale){:external}. For more information, see [Monitoring {{site.data.keyword.containerlong_notm}} with CoScale](https://www.ibm.com/blogs/cloud-archive/2017/06/monitoring-ibm-bluemix-container-service-coscale/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
+|CoScale|Monitor worker nodes, containers, replica sets, replication controllers, and services with [CoScale](https://newrelic.com/blog/nerd-life/coscale){:external}. For more information, see [Monitoring {{site.data.keyword.containerlong_notm}} with CoScale](https://www.ibm.com/blogs/cloud-archive/2017/06/monitoring-ibm-bluemix-container-service-coscale/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |Datadog|Monitor your cluster and view infrastructure and application performance metrics with [Datadog](https://www.datadoghq.com/){:external}. For more information, see [Monitoring {{site.data.keyword.containerlong_notm}} with Datadog](https://www.ibm.com/blogs/cloud-archive/2017/07/monitoring-ibm-bluemix-container-service-datadog/){:external}.|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.cloudaccesstrailfull_notm}}|Monitor the administrative activity that is made in your cluster by analyzing logs through Grafana. For more information about the service, see the [Activity Tracker](/docs/activity-tracker?topic=activity-tracker-getting-started) documentation. For more information about the types of events that you can track, see [Activity Tracker events](/docs/containers?topic=containers-at_events).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
 |{{site.data.keyword.la_full_notm}}|Add log management capabilities to your cluster by deploying a {{site.data.keyword.la_short}} agent to your worker nodes to manage logs from your pod containers. For more information, see [Managing Kubernetes cluster logs with {{site.data.keyword.la_full_notm}}](/docs/log-analysis?topic=log-analysis-kube#kube).|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|<img src="images/confirm.svg" width="32" alt="Feature available" style="width:32px;" />|
