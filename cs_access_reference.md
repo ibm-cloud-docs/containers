@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-02"
+lastupdated: "2021-07-27"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -236,7 +236,6 @@ The following table shows the permissions granted by each {{site.data.keyword.cl
 | Disable an existing health check monitor for a subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-disable) | [`PUT /v1/clusters/{idOrName}/health`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/UpdateNlbDNSHealthMonitor) |
 | Enable a health check monitor that you configured. | [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-enable) | [`PUT /v1/clusters/{idOrName}/health`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/UpdateNlbDNSHealthMonitor) |
 | List the health check monitor settings for each NLB subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-ls) | [`GET /v1/health/clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitors) |
-| List the health check status of each IP address that is registered with an NLB subdomain in a cluster. | [`ibmcloud ks nlb-dns monitor status`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-monitor-status) | [`GET /v1/health/clusters/{idOrName}/status`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-health-monitor/ListNlbDNSHealthMonitorStatus) |
 | Add one NLB IP address to an existing NLB subdomain. | [`ibmcloud ks nlb-dns add`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-add) | [`PUT /v1/clusters/{idOrName}/add`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/UpdateDNSWithIP) |
 | Create a DNS subdomain to register an NLB IP address. | [`ibmcloud ks nlb-dns create classic`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-create) | [`POST /v1/clusters/{idOrName}/register`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/RegisterDNSWithIP) |
 | List NLB subdomains and either the NLB IP addresses (classic clusters) or the load balancer hostnames (VPC clusters) that are registered with the DNS provider for each NLB subdomain. | [`ibmcloud ks nlb-dns ls`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_nlb-dns-ls) | <ul><li>Classic: [`GET /v1/clusters/{idOrName}/list`](https://containers.cloud.ibm.com/global/swagger-global-api/#/nlb-dns/ListNLBIPsForSubdomain)</li><li>VPC: [`GET /v2/nlb-dns/getNlbDNSList`](https://containers.cloud.ibm.com/global/swagger-global-api/#/v2/GetNlbDNSList)</li></ul> |
