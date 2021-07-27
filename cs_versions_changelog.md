@@ -2,7 +2,7 @@
 
 copyright:
  years: 2014, 2021
-lastupdated: "2021-07-26"
+lastupdated: "2021-07-27"
 
 keywords: kubernetes, iks, versions, update, upgrade, BOM, bill of materials, versions, patch
 
@@ -121,7 +121,7 @@ Some changelogs are for _worker node fix packs_, and apply only to worker nodes.
 Review the version 1.21 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.21.3_1525, released 26 July 2021
+### Changelog for master fix pack 1.21.3_1525, released 27 July 2021
 {: #1213_1525}
 
 The following table shows the changes that are included in the master fix pack patch update `1.21.3_1525`. Master patch updates are applied automatically.
@@ -256,7 +256,7 @@ The following table shows the changes that are included in the master fix pack p
 Review the version 1.20 changelog.
 {: shortdesc}
 
-### Changelog for master fix pack 1.20.9_1547, released 26 July 2021
+### Changelog for master fix pack 1.20.9_1547, released 27 July 2021
 {: #1209_1547}
 
 The following table shows the changes that are included in the master fix pack patch update `1.20.9_1547`. Master patch updates are applied automatically.
@@ -592,7 +592,7 @@ The following table shows the changes that are included in the version updates f
 Review the version 1.19 changelog.
 {: shortdesc} 
 
-### Changelog for master fix pack 1.19.13_1554, released 26 July 2021
+### Changelog for master fix pack 1.19.13_1554, released 27 July 2021
 {: #11913_1554}
 
 The following table shows the changes that are included in the master fix pack patch update `1.19.13_1554`. Master patch updates are applied automatically.
@@ -1176,7 +1176,7 @@ Review the version 1.18 changelog.
 Kubernetes version 1.18 is deprecated, with a tentative unsupported date of 1 September 2021. Update your cluster to at least [version 1.19](/docs/containers?topic=containers-cs_versions#cs_v119) as soon as possible.
 {: deprecated}
 
-### Changelog for master fix pack 1.18.20_1559, released 26 July 2021
+### Changelog for master fix pack 1.18.20_1559, released 27 July 2021
 {: #11820_1559}
 
 The following table shows the changes that are included in the master fix pack patch update `1.18.20_1559`. Master patch updates are applied automatically.
