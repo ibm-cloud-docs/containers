@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-07"
+lastupdated: "2021-07-27"
 
 keywords: kubernetes, iks, ibmcloud, ic, ks, ibmcloud ks, ibmcloud oc, oc
 
@@ -5162,7 +5162,7 @@ ibmcloud ks nlb-dns create classic --cluster CLUSTER --ip NLB_IP [--ip NLB2_IP -
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
 <dt><code>--dns-type public</code></dt>
-<dd>The subdomain type. Currently, only `public` is supported.</dd>
+<dd>The DNS provider type for subdomain registration. Currently, only `public` is supported.</dd>
 
 <dt><code>--type public</code></dt>
 <dd>The subdomain type. Currently, only `public` is supported.</dd>
@@ -5214,7 +5214,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 <dd>The Kubernetes namespace where you want to create the Kubernetes secret that holds the SSL certificate information for the NLB. If you do not specify a namespace, the secret is automatically created in the <code>default</code> namespace.</dd>
 
 <dt><code>--type <em>(public|private)</em></code></dt>
-<dd>The VPC load balancer type. For VPC application load balancers, both values are supported. For VPC network load balancers, only `public` is supported.</dd>
+<dd>The VPC load balancer type.</dd>
 
 <dt><code>--output json</code></dt>
 <dd>Optional: Prints the command output in JSON format.</dd>
@@ -5225,7 +5225,7 @@ ibmcloud ks nlb-dns create vpc-gen2 --cluster CLUSTER (--lb-host VPC_ALB_HOSTNAM
 
 **Example**:
 ```sh
-ibmcloud ks nlb-dns create vpc-gen2 --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud
+ibmcloud ks nlb-dns create vpc-gen2 --cluster mycluster --lb-host 1234abcd-us-south.lb.appdomain.cloud --type public
 ```
 {: pre}
 
@@ -5497,44 +5497,6 @@ ibmcloud ks nlb-dns monitor ls --cluster CLUSTER [--output json] [-q]
 **Example**:
 ```sh
 ibmcloud ks nlb-dns monitor ls --cluster mycluster
-```
-{: pre}
-
-</br>
-
-### `ibmcloud ks nlb-dns monitor status`
-{: #cs_nlb-dns-monitor-status}
-
-List the health check status for the IPs behind NLB subdomains in a cluster.
-{: shortdesc}
-
-```sh
-ibmcloud ks nlb-dns monitor status --cluster CLUSTER [--nlb-host SUBDOMAIN] [--output json] [-q]
-```
-{: pre}
-
-**Supported infrastructure provider**: <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-
-**Minimum required permissions**: **Editor** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>--nlb-host <em>SUBDOMAIN</em></code></dt>
-<dd>Include this flag to view the status for only one subdomain. To list subdomains, run <code>ibmcloud ks nlb-dns ls --cluster CLUSTER</code>.</dd>
-
-<dt><code>--output json</code></dt>
-<dd>Optional: Prints the command output in JSON format.</dd>
-
-<dt><code>-q</code></dt>
-<dd>Optional: Do not show the message of the day or update reminders.</dd>
-</dl>
-
-**Example**:
-```sh
-ibmcloud ks nlb-dns monitor status --cluster mycluster
 ```
 {: pre}
 

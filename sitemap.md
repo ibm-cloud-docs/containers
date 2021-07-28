@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-07-27"
+lastupdated: "2021-07-28"
 
 keywords: containers
 subcollection: containers
@@ -626,6 +626,12 @@ subcollection: containers
   * [Checking if the user's credentials are used for infrastructure permissions](/docs/containers?topic=containers-users#removing_check_infra)
   * [Removing a user from your account](/docs/containers?topic=containers-users#remove_user)
   * [Removing specific permissions](/docs/containers?topic=containers-users#remove_permissions)
+
+[Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles](/docs/containers?topic=containers-pod-iam-identity)
+* [Prerequisites](/docs/containers?topic=containers-pod-iam-identity#iam-identity-prereqs)
+* [Creating an IAM trusted profile for your cluster in the API](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-api)
+* [Creating an IAM trusted profile for your cluster in the UI](/docs/containers?topic=containers-pod-iam-identity#iam-identity-create-ui)
+* [Configure your application pods to authenticate with {{site.data.keyword.cloud_notm}} services](/docs/containers?topic=containers-pod-iam-identity#iam-identity-pod)
 
 
 ## Securing cluster workloads
@@ -1445,6 +1451,7 @@ subcollection: containers
   * [I already have an {{site.data.keyword.cloud_notm}} service. Can I still use {{site.data.keyword.cloud_notm}} service binding?](/docs/containers?topic=containers-service-binding#svc-bind-existing)
   * [What if I want to use service credentials that use the private cloud service endpoint?](/docs/containers?topic=containers-service-binding#svc-bind-private-cse)
   * [Can I use all {{site.data.keyword.cloud_notm}} services in my cluster?](/docs/containers?topic=containers-service-binding#svc-bind-which)
+  * [Can I bind multiple {{site.data.keyword.cloud_notm}} services to multiple clusters at once?](/docs/containers?topic=containers-service-binding#svc-bind-trusted-profile)
 * [Adding IBM Cloud services to clusters](/docs/containers?topic=containers-service-binding#bind-services)
 * [Accessing service credentials from your apps](/docs/containers?topic=containers-service-binding#adding_app)
   * [Mounting the secret as a volume to your pod](/docs/containers?topic=containers-service-binding#mount_secret)
@@ -1601,7 +1608,6 @@ subcollection: containers
   * [`ibmcloud ks nlb-dns monitor enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-enable)
   * [`ibmcloud ks nlb-dns monitor get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-get)
   * [`ibmcloud ks nlb-dns monitor ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-ls)
-  * [`ibmcloud ks nlb-dns monitor status`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-status)
   * [`ibmcloud ks nlb-dns replace`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-replace)
   * [`ibmcloud ks nlb-dns rm classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm)
   * [`ibmcloud ks nlb-dns rm vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-rm-vpc-gen2)
