@@ -2720,7 +2720,7 @@ subcollection: containers
 
 [Why does a connection via WebSocket close after 60 seconds?](/docs/containers?topic=containers-cs_ingress_websocket)
 
-[Ingress health checks fail on Akamai Global Loab Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm)
+[Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations](/docs/containers?topic=containers-cs_ingress_health_check_ctm)
 
 
 ## File Storage

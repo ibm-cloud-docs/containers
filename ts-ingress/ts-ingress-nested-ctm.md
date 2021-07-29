@@ -109,12 +109,11 @@ content-type: troubleshoot
   
   
 
-# Ingress health checks fail on Akamai Global Loab Balancer (GLB) configurations
+# Ingress health checks fail on Akamai Global Load Balancer (GLB) configurations
 {: #cs_ingress_health_check_ctm}
 
 **Supported infrastructure provider**:
   * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-  * <img src="../images/icon-satellite.svg" alt="{{site.data.keyword.satelliteshort}} infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Satellite
 
 {: tsSymptoms}
 When you try to include Ingress subdomains that have health checks enabled in your Akamai Global Traffic Managment (GTM) configuration, the health checks fail.
