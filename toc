@@ -353,7 +353,6 @@ Kubernetes Service
             ts-ingress/ts-ingress-alb-subnet.md
             ts-ingress/ts-ingress-websocket.md
             ts-ingress/ts-ingress-nested-ctm.md
-            ts-ingress/ts-ingress-operator-degraded.md
 
         {: .topicgroup}
         File Storage
