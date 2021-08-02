@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-29"
+lastupdated: "2021-08-02"
 
 keywords: kubernetes, iks, release notes
 
@@ -119,12 +119,20 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
 
+## August 2021
+{: #aug21}
+
+| Date | Description |
+| ---- | ----------- |
+| 02 August 2021 | <ul><li>**Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.3_1526](/docs/containers?topic=containers-changelog#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-changelog#11820_1560).</li> |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in August 2021"}
+
 ## July 2021
 {: #jul21}
 
 | Date | Description |
-| ---- | ----------- |<ff-template>
-| XX July 2021 | **New! Create a cluster with a template**: No longer do you have to manually specify the networking and worker node details to create a cluster, or enable security integrations such as logging and monitoring after creation. Instead, you try out the **technical preview** to create a multizone cluster with nine worker nodes and encryption, logging, and monitoring already enabled. For more information, see [Automating cluster creation with {{site.data.keyword.bpfull_notm}} templates](/docs/containers?topic=containers-templates).|</ff-tempalte>
+| ---- | ----------- |
 | 27 July 2021 | <ul><li>**New! IAM trusted profile support**: Link your cluster to a trusted profile in IAM so that the pods in your cluster can authenticate with IAM to use other {{site.data.keyword.cloud_notm}} services.</li><li>**Master versions**: Master fix pack update changelog documentation is available for Kubernetes version [1.21.3_1525](/docs/containers?topic=containers-changelog#1213_1525), [1.20.9_1547](/docs/containers?topic=containers-changelog#1209_1547), [1.19.13_1554](/docs/containers?topic=containers-changelog#11913_1554), and [1.18.20_1559](/docs/containers?topic=containers-changelog#11820_1559). |
 | 26 July 2021 | <ul><li>For centralized management of all your secrets across clusters and injection at application runtime, try [{{site.data.keyword.secrets-manager_full_notm}}](/docs/secrets-manager?topic=secrets-manager-tutorial-kubernetes-secrets).</li><li>**{{site.data.keyword.block_storage_is_short}} add-on**: [Version `3.0.1`](/docs/containers?topic=containers-vpc_bs_changelog) of the {{site.data.keyword.block_storage_is_short}} add-on is available.</li></ul> |
 | 22 July 2021 | **Istio add-on changelog**: [Version 1.9.6](/docs/containers?topic=containers-istio-changelog#196) of the Istio managed add-on is released. |
