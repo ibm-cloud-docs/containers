@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-29"
+lastupdated: "2021-08-02"
 
 keywords: kubernetes, iks, release notes
 
@@ -118,6 +118,15 @@ Use the release notes to learn about the latest changes to the {{site.data.keywo
 
 Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, security bulletins, or maintenance notifications? See [{{site.data.keyword.cloud_notm}} status](https://cloud.ibm.com/status?selected=status){: external}.
 {: note}
+
+## August 2021
+{: #aug21}
+
+| Date | Description |
+| ---- | ----------- |
+| 02 August 2021 | **Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported. |
+{: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
+{: caption="Documentation updates in August 2021"}
 
 ## July 2021
 {: #jul21}
