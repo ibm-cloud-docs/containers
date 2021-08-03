@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-02"
+lastupdated: "2021-08-03"
 
 keywords: containers
 subcollection: containers
@@ -53,7 +53,6 @@ subcollection: containers
 {:node: .ph data-hd-programlang='node'}
 {:note .note}
 {:note: .note}
-{:note:.deprecated}
 {:objectc data-hd-programlang="objectc"}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:org_name: data-hd-keyref="org_name"}
