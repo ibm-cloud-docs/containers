@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-02"
+lastupdated: "2021-08-03"
 
 keywords: kubernetes, iks, release notes
 
@@ -124,7 +124,7 @@ Looking for {{site.data.keyword.cloud_notm}} status, platform announcements, sec
 
 | Date | Description |
 | ---- | ----------- |
-| 02 August 2021 | <ul><li>**Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.3_1526](/docs/containers?topic=containers-changelog#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-changelog#11820_1560).</li> |
+| 02 August 2021 | <ul><li>**Ingress changelogs**: Updated the [Ingress ALB changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog) for versions `0.47.0_1434_iks` and `0.45.0_1435_iks`. Version `0.35.0` is now unsupported.</li><li>**Worker node versions**: Worker node fix pack update changelog documentation is available for Kubernetes version [1.21.3_1526](/docs/containers?topic=containers-changelog#1213_1526), [1.20.9_1548](/docs/containers?topic=containers-changelog#1209_1548), [1.19.13_1555](/docs/containers?topic=containers-changelog#11913_1555), and [1.18.20_1560](/docs/containers?topic=containers-changelog#11820_1560).</li></ul> |
 {: summary="The table shows release notes. Rows are to be read from the left to right, with the date in column one, the title of the feature in column two and a description in column three."}
 {: caption="Documentation updates in August 2021"}
 
