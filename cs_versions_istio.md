@@ -138,6 +138,8 @@ Review the supported versions of {{site.data.keyword.containerlong_notm}}. In th
 
 ## Changelog for 1.10.3, released 5 August 2021
 {: #1103}
+
+
 The following table shows the changes that are included in version 1.10.3 of the managed Istio add-on.
 {: shortdesc}
 | Previous | Current | Description |
