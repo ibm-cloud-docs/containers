@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-29"
+lastupdated: "2021-08-05"
 
 keywords: kubernetes, iks, nginx, ingress controller
 
@@ -19,6 +19,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -52,11 +53,10 @@ subcollection: containers
 {:navgroup: .navgroup}
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
-{:note .note}
 {:note: .note}
 {:note:.deprecated}
-{:objectc data-hd-programlang="objectc"}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -140,7 +140,7 @@ ingress.bluemix.net/add-host-port: "enabled=true serviceName=app1"
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){:external} or as an `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){:external}.
+Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [server snippet annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external} or as an `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#proxy-set-headers){: external}.
 
 
 ### ALB ID
@@ -190,7 +190,7 @@ ingress.bluemix.net/client-max-body-size: "serviceName=app1 size=200m"
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-max-body-size){: external}:
 
 ```
 nginx.ingress.kubernetes.io/proxy-body-size: 8m
@@ -217,7 +217,7 @@ ingress.bluemix.net/proxy-buffering: "enabled=false serviceName=app1"
 ```
 {: screen}
 
-Kubernetes Ingress field: Disabled by default. To enable, set the Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){:external}:
+Kubernetes Ingress field: Disabled by default. To enable, set the Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}:
 
 ```
 nginx.ingress.kubernetes.io/proxy-buffering: "on"
@@ -241,7 +241,7 @@ ingress.bluemix.net/proxy-read-timeout: "serviceName=app1 timeout=62s"
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){:external}:
+Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){: external}:
 
 ```
 nginx.ingress.kubernetes.io/proxy-connect-timeout: 62
@@ -272,7 +272,7 @@ ingress.bluemix.net/custom-error-actions: |
 ```
 {: screen}
 
-Kubernetes Ingress field: See the [`custom-http-errors` documentation](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){:external}.
+Kubernetes Ingress field: See the [`custom-http-errors` documentation](https://kubernetes.github.io/ingress-nginx/examples/customization/custom-errors/){: external}.
 
 
 ### Custom HTTP and HTTPS ports
@@ -326,7 +326,7 @@ proxy-set-headers: "ingress-nginx/custom-headers"
 ```
 {: screen}
 
-For the `custom-headers` configmap requirements, see [this example](https://github.com/kubernetes/ingress-nginx/blob/master/docs/examples/customization/custom-headers/custom-headers.yaml){:external}.
+For the `custom-headers` configmap requirements, see [this example](https://github.com/kubernetes/ingress-nginx/blob/main/docs/examples/customization/custom-headers/custom-headers.yaml){: external}.
 
 
 ### Custom response header
@@ -343,7 +343,7 @@ ingress.bluemix.net/response-add-headers: |
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}:
 
 ```
 nginx.ingress.kubernetes.io/configuration-snippet: |
@@ -364,7 +364,7 @@ ingress.bluemix.net/proxy-external-service: "path=/path external-svc=https:myext
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){:external} or replace proxying with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){:external}.
+Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} or replace proxying with a [permanent redirect to external services](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#permanent-redirect){: external}.
 
 
 ### HTTP redirects to HTTPS
@@ -381,12 +381,12 @@ ingress.bluemix.net/redirect-to-https: "True"
 
 Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
 
-* `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){:external}:
+* `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#server-side-https-enforcement-through-redirect){: external}:
     ```
     ssl-redirect: "false"
     ```
     {: screen}
-* Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-side-https-enforcement-through-redirect){:external}:
+* Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-side-https-enforcement-through-redirect){: external}:
     ```
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
     ```
@@ -406,8 +406,8 @@ ingress.bluemix.net/hsts: enabled=true maxAge=31536000 includeSubdomains=true
 {: screen}
 
 Kubernetes Ingress fields: HSTS is enabled by default.
-* To add max age and subdomain granularity, see [this NGINX blog](https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/){:external}.
-* To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){:external}:
+* To add max age and subdomain granularity, see [this NGINX blog](https://www.nginx.com/blog/http-strict-transport-security-hsts-and-nginx/){: external}.
+* To disable, set the `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#hsts){: external}:
     ```
     hsts: false
     ```
@@ -426,7 +426,7 @@ ingress.bluemix.net/keepalive-requests: "serviceName=app1 requests=100"
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive-requests){:external}:
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive-requests){: external}:
 
 ```
 keep-alive-requests: 100
@@ -449,7 +449,7 @@ ingress.bluemix.net/keepalive-timeout: "serviceName=app1 timeout=60s"
 {: screen}
 
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive){:external}:
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#keep-alive){: external}:
 
 ```
 keep-alive: 60
@@ -468,7 +468,7 @@ ingress.bluemix.net/large-client-header-buffers: "number=4 size=8k"
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#large-client-header-buffers){:external}:
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#large-client-header-buffers){: external}:
 
 ```
 large-client-header-buffers: 4 8k
@@ -488,7 +488,7 @@ ingress.bluemix.net/location-modifier: "modifier='~' serviceName=app1"
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#use-regex){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#use-regex){: external}:
 
 ```
 nginx.ingress.kubernetes.io/use-regex: "true"
@@ -513,7 +513,7 @@ ingress.bluemix.net/location-snippets: |
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}:
 
 ```
 nginx.ingress.kubernetes.io/configuration-snippet: |
@@ -534,7 +534,7 @@ ingress.bluemix.net/mutual-auth: "secretName=mysecret port=9080 serviceName=app1
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#client-certificate-authentication){:external}:
+Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#client-certificate-authentication){: external}:
 
 ```
 nginx.ingress.kubernetes.io/auth-tls-verify-client: "on"
@@ -560,7 +560,7 @@ ingress.bluemix.net/proxy-buffer-size: "serviceName=app1 size=8k"
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffer-size){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffer-size){: external}:
 
 ```
 nginx.ingress.kubernetes.io/proxy-buffer-size: "8k"
@@ -580,7 +580,7 @@ ingress.bluemix.net/proxy-buffers: "serviceName=app1 number=4 size=8k"
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffering){:external}:
+Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#proxy-buffering){: external}:
 
 ```
 nginx.ingress.kubernetes.io/proxy-buffers-number: "4"
@@ -601,7 +601,7 @@ ingress.bluemix.net/proxy-busy-buffers-size: "serviceName=app1 size=8k"
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){:external}. For more info, see the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_busy_buffers_size){: external}.
+Kubernetes Ingress field: No equivalent annotation exists. Configure proxying external services in a [location snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external}. For more info, see the [NGINX docs](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_busy_buffers_size){: external}.
 
 
 ### Proxy next upstream
@@ -617,13 +617,13 @@ ingress.bluemix.net/proxy-next-upstream-config: "serviceName=app1 retries=3 time
 {: screen}
 
 Kubernetes Ingress fields:
-* Global setting: `ibm-k8s-controller-config` configmap [fields](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream){:external}:
+* Global setting: `ibm-k8s-controller-config` configmap [fields](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_next_upstream){: external}:
     ```
     retry-non-idempotent: true
     proxy-next-upstream: error timeout http_500
     ```
     {: screen}
-* Per-resource setting: Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){:external}:
+* Per-resource setting: Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){: external}:
     ```
     nginx.ingress.kubernetes.io/proxy-next-upstream: http_500
     nginx.ingress.kubernetes.io/proxy-next-upstream-timeout: 50
@@ -663,7 +663,7 @@ ingress.bluemix.net/response-remove-headers: |
 ```
 {: screen}
 
-Kubernetes Ingress field: No equivalent annotation exists. Configure response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){:external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){:external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` configmap.
+Kubernetes Ingress field: No equivalent annotation exists. Configure response header removal in a [location snippet](https://github.com/openresty/headers-more-nginx-module#more_clear_headers){: external}, or use the [`proxy_hide_header` field](http://nginx.org/en/docs/http/ngx_http_proxy_module.html#proxy_hide_header){: external} as a [configuration snippet](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#configuration-snippet){: external} in the `ibm-k8s-controller-config` configmap.
 
 
 ### Rewrite paths
@@ -678,7 +678,7 @@ ingress.bluemix.net/rewrite-path: "serviceName=app1 rewrite=/newpath
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#rewrite){: external}:
 
 ```
 nginx.ingress.kubernetes.io/rewrite-target: /newpath
@@ -702,7 +702,7 @@ ingress.bluemix.net/server-snippets: |
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){:external}:
+Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-snippet){: external}:
 
 ```
 nginx.ingress.kubernetes.io/server-snippet: |
@@ -726,7 +726,7 @@ ingress.bluemix.net/sticky-cookie-services: "serviceName=app1 path=/app1 name=co
 ```
 {: screen}
 
-Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#session-affinity){:external}:
+Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#session-affinity){: external}:
 
 ```
 nginx.ingress.kubernetes.io/affinity: "cookie"
@@ -753,7 +753,7 @@ ingress.bluemix.net/ssl-services: ssl-service=app1 ssl-secret=app1-ssl-secret pr
 ```
 {: screen}
 
-Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){:external}:
+Kubernetes Ingress resource [backend protocol annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-protocol){: external} and [backend certificate authentication annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#backend-certificate-authentication){: external}:
 
 ```
 nginx.ingress.kubernetes.io/backend-protocol: "HTTPS"
@@ -778,7 +778,7 @@ ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=80
 {: screen}
 
 Kubernetes Ingress fields:
-1.  Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){:external}.
+1.  Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
     ```yaml
     apiVersion: v1
     kind: ConfigMap
@@ -831,7 +831,7 @@ ingress.bluemix.net/upstream-keepalive: "serviceName=app1 requests=32”
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){:external}:
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-requests){: external}:
 
 ```
 upstream-keepalive-requests: 32
@@ -851,7 +851,7 @@ ingress.bluemix.net/upstream-keepalive-timeout: "serviceName=app1 timeout=32s"
 ```
 {: screen}
 
-Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-timeout){:external}:
+Kubernetes `ibm-k8s-controller-config` configmap [field](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/configmap/#upstream-keepalive-timeout){: external}:
 
 ```
 upstream-keepalive-timeout: 32

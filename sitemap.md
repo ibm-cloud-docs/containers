@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-03"
+lastupdated: "2021-08-05"
 
 keywords: containers
 subcollection: containers
@@ -18,6 +18,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -52,7 +53,9 @@ subcollection: containers
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
+{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -78,6 +81,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:space_name: data-hd-keyref="space_name"}
 {:step: data-tutorial-type='step'}
+{:step: data-tutorial-type='step'} 
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
 {:swift: #swift .ph data-hd-programlang='swift'}
@@ -1871,6 +1875,7 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
+* [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
   * [Changelog for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
