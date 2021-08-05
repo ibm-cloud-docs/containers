@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-04"
+lastupdated: "2021-08-05"
 
 keywords: kubernetes, iks, nginx, ingress controller, fluentd
 
@@ -19,6 +19,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -53,7 +54,9 @@ subcollection: containers
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
+{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -79,6 +82,7 @@ subcollection: containers
 {:shortdesc: .shortdesc}
 {:space_name: data-hd-keyref="space_name"}
 {:step: data-tutorial-type='step'}
+{:step: data-tutorial-type='step'} 
 {:subsection: outputclass="subsection"}
 {:support: data-reuse='support'}
 {:swift: #swift .ph data-hd-programlang='swift'}
@@ -132,7 +136,7 @@ When automatic updates are enabled for ALBs, your ALBs are updated to the most r
 ### Version 0.47.0 (default)
 {: #0_47_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0470){: external}. Refer to the following table for a summary of changes for each build of version 0.47.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0470){: external}. Refer to the following table for a summary of changes for each build of version 0.47.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|
@@ -146,7 +150,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 ### Version 0.45.0
 {: #0_45_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0450){: external}. Refer to the following table for a summary of changes for each build of version 0.45.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0450){: external}. Refer to the following table for a summary of changes for each build of version 0.45.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|
@@ -162,9 +166,9 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 {: #0_35_0}
 
 Kubernetes Ingress controller version 0.35.0 is no longer supported.
-{:important}
+{: important}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0350){: external}. Refer to the following table for a summary of changes for each build of version 0.35.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0350){: external}. Refer to the following table for a summary of changes for each build of version 0.35.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|
@@ -185,7 +189,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 ### Version 0.34.1 (unsupported)
 {: #0_34_1}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0341){: external}. Refer to the following table for a summary of changes for each build of version 0.34.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community Kubernetes changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0341){: external}. Refer to the following table for a summary of changes for each build of version 0.34.1 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|
@@ -205,7 +209,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 ### Version 0.33.0 (unsupported)
 {: #0_33_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0330){: external}. Refer to the following table for a summary of changes for each build of version 0.33.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0330){: external}. Refer to the following table for a summary of changes for each build of version 0.33.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|
@@ -224,7 +228,7 @@ For the community changes for this version of the Kubernetes Ingress image, see 
 ### Version 0.32.0 (unsupported)
 {: #0_32_0}
 
-For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/master/Changelog.md#0320){: external}. Refer to the following table for a summary of changes for each build of version 0.32.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
+For the community changes for this version of the Kubernetes Ingress image, see the [community changelog for `ingress-nginx`](https://github.com/kubernetes/ingress-nginx/blob/main/Changelog.md#0320){: external}. Refer to the following table for a summary of changes for each build of version 0.32.0 of the Kubernetes Ingress image that {{site.data.keyword.containerlong_notm}} releases.
 {: shortdesc}
 
 |Version build|Release date|Changes|

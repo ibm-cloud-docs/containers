@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-29"
+lastupdated: "2021-08-05"
 
 keywords: kubernetes, iks, clusters, worker nodes, worker pools
 
@@ -19,6 +19,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -52,11 +53,10 @@ subcollection: containers
 {:navgroup: .navgroup}
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
-{:note .note}
 {:note: .note}
 {:note:.deprecated}
-{:objectc data-hd-programlang="objectc"}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -140,10 +140,10 @@ ibmcloud ks cluster create classic --name my_cluster
 
 <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic clusters**:
 *  Classic cluster, shared virtual machine:
-   ```
-   ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
-   ```
-   {: pre}
+      ```
+      ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor b3c.4x16 --hardware shared --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
+      ```
+      {: pre}
 *  Classic cluster, bare metal:
    ```
    ibmcloud ks cluster create classic --name my_cluster --zone dal10 --flavor mb2c.4x32 --hardware dedicated --workers 3 --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID>
@@ -359,7 +359,7 @@ Want to try out a free cluster first? See [Creating a free classic cluster](/doc
 4. Review the worker node flavors that are available in that zone. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in classic clusters can be created as virtual machines on shared or dedicated infrastructure, or as bare metal machines that are dedicated to you. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by [adding a worker pool](/docs/containers?topic=containers-add_workers#add_pool).
 
    Before you create a bare metal machine, be sure that you want to provision one. Bare metal machines are billed monthly. If you order a bare metal machine by mistake, you are charged for the entire month, even if you cancel the machine immediately.  
-   {:tip}
+   {: tip}
 
    ```
    ibmcloud ks flavors --zone <zone>
@@ -563,7 +563,7 @@ When you enable a gateway on a classic cluster, the cluster is created with a `c
 4. Review the compute worker node flavors that are available in that zone. The flavor determines the amount of virtual CPU, memory, and disk space that is set up in each worker node and made available to your apps. Worker nodes in classic clusters can be created as virtual machines on shared or dedicated infrastructure, or as bare metal machines that are dedicated to you. For more information, see [Planning your worker node setup](/docs/containers?topic=containers-planning_worker_nodes). After you create your cluster, you can add different flavors by [adding a worker pool](/docs/containers?topic=containers-add_workers#add_pool). Note that the gateway worker nodes are created with the `u3c.2x4` flavor by default. If you want to change the isolation and flavor of the gateway worker nodes after you create your cluster, you can [create a new gateway worker pool](/docs/containers?topic=containers-add_workers#gateway_replace) to replace the gateway worker pool that is created by default.
 
    Before you create a bare metal machine, be sure that you want to provision one. Bare metal machines are billed monthly. If you order a bare metal machine by mistake, you are charged for the entire month, even if you cancel the machine immediately.
-   {:tip}
+   {: tip}
 
    ```
    ibmcloud ks flavors --zone <zone>
