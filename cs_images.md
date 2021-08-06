@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-30"
+lastupdated: "2021-08-06"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -19,6 +19,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -52,11 +53,10 @@ subcollection: containers
 {:navgroup: .navgroup}
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
-{:note .note}
 {:note: .note}
 {:note:.deprecated}
-{:objectc data-hd-programlang="objectc"}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -129,8 +129,8 @@ Before you begin:
 
 To deploy a container into the **default** namespace of your cluster:
 
-1.  Create a deployment configuration file that is named `<deployment>.yaml`.
-2.  Define the deployment and the image to use from your namespace in {{site.data.keyword.registrylong_notm}}.
+1. Create a deployment configuration file that is named `<deployment>.yaml`.
+2. Define the deployment and the image to use from your namespace in {{site.data.keyword.registrylong_notm}}.
 
     ```yaml
     apiVersion: apps/v1
@@ -180,13 +180,13 @@ To deploy a container into the **default** namespace of your cluster:
     <tr>
     <td><code>image: <em>&lt;region&gt;</em>.icr.io/<em>&lt;namespace&gt;</em>/<em>&lt;image&gt;</em>:<em>&lt;tag&gt;</em></code></td>
     <td>Replace the image URL variables with the information for your image:
-      <ul><li>**`<region>`**: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run `ibmcloud cr api`.</li>
-      <li>**`<namespace>`**: The registry namespace. To get your namespace information, run `ibmcloud cr namespace-list`.</li>
-      <li>**`<image>:<tag>`**: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run `ibmcloud cr images`.</li></ul></td>
+        <ul><li><strong><code>&lt;region&gt;</code></strong>: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run <code>ibmcloud cr api</code>.</li>
+        <li><strong><code>&lt;namespace&gt;</code></strong>: The registry namespace. To get your namespace information, run <code>ibmcloud cr namespace-list</code>.</li>
+        <li><strong><code>&lt;image&gt;:<tag></code></strong>: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run <code>ibmcloud cr images</code>.</li></ul></td>
     </tr>
     </tbody></table>
 
-3.  Create the deployment in your cluster.
+3. Create the deployment in your cluster.
 
     ```
     kubectl apply -f <deployment>.yaml
@@ -207,8 +207,8 @@ Before you begin:
 
 Steps:
 
-1.  Create a pod configuration file that is named `mypod.yaml`.
-2.  Define the pod and the image pull secret to access images in {{site.data.keyword.registrylong_notm}}.
+1. Create a pod configuration file that is named `mypod.yaml`.
+2. Define the pod and the image pull secret to access images in {{site.data.keyword.registrylong_notm}}.
 
     To access a private image:
     ```yaml
@@ -270,8 +270,8 @@ Steps:
     </tr>
     </tbody></table>
 
-3.  Save your changes.
-4.  Create the deployment in your cluster.
+3. Save your changes.
+4. Create the deployment in your cluster.
     ```
     kubectl apply -f mypod.yaml
     ```
@@ -305,9 +305,9 @@ When you add an image to a namespace, the image is automatically scanned by Vuln
 You can build containers from trusted images that are signed and stored in {{site.data.keyword.registrylong_notm}}, and prevent deployments from unsigned or vulnerable images.
 {: shortdesc}
 
-1.  [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
-2.  To enforce a policy so that only signed images can be used to build containers in your cluster, [install the open source Portieris project](#portieris-image-sec).
-3.  Cluster users can deploy apps that are built from trusted images.
+1. [Sign images for trusted content](/docs/Registry?topic=Registry-registry_trustedcontent#registry_trustedcontent). After you set up trust for your images, you can manage trusted content and signers that can push images to your registry.
+2. To enforce a policy so that only signed images can be used to build containers in your cluster, [install the open source Portieris project](#portieris-image-sec).
+3. Cluster users can deploy apps that are built from trusted images.
     1. [Deploy to the `default` Kubernetes namespace](/docs/containers?topic=containers-images#namespace).
     2. [Deploy to a different Kubernetes namespace, or from a different {{site.data.keyword.cloud_notm}} region or account](/docs/containers?topic=containers-registry#other).
 
@@ -335,8 +335,8 @@ For more information, see the [Portieris documentation](https://github.com/IBM/p
 * [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-disable)
 
 **Console**:
-1.  From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select your cluster.
-2.  From the **Overview** tab, in the **Summary** pane, find the **Image security enforcement** field and click **Enable** or **Disable**.
+1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select your cluster.
+2. From the **Overview** tab, in the **Summary** pane, find the **Image security enforcement** field and click **Enable** or **Disable**.
 
 ### Default image policies
 {: #portieris-default-policies}
@@ -351,12 +351,13 @@ When you enable image security enforcement, {{site.data.keyword.containerlong_no
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L66){: external}.
+1. List the image policies that apply globally to the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L66){: external}.
     ```
     kubectl get ClusterImagePolicy
     ```
     {: pre}
-2.  List the image policies that apply to particular namespaces within the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L14){: external}.
+
+2. List the image policies that apply to particular namespaces within the cluster. For an example configuration, see the [Portieris policy documentation](https://github.com/IBM/portieris/blob/master/helm/portieris/templates/policies.yaml#L14){: external}.
     ```
     kubectl get ImagePolicy --all-namespaces
     ```
@@ -395,8 +396,8 @@ Before you begin:
 
 To deploy a container into the **default** namespace of your cluster, create a configuration file.
 
-1.  Create a deployment configuration file that is named `mydeployment.yaml`.
-2.  Define the deployment and the image that you want to use from your namespace in {{site.data.keyword.registrylong_notm}}.
+1. Create a deployment configuration file that is named `mydeployment.yaml`.
+2. Define the deployment and the image that you want to use from your namespace in {{site.data.keyword.registrylong_notm}}.
 
     To use a private image from a namespace in {{site.data.keyword.registrylong_notm}}:
 
@@ -423,7 +424,7 @@ To deploy a container into the **default** namespace of your cluster, create a c
 
     **Tip:** To retrieve your namespace information, run `ibmcloud cr namespace-list`.
 
-3.  Create the deployment in your cluster.
+3. Create the deployment in your cluster.
 
     ```
     kubectl apply -f mydeployment.yaml
@@ -444,40 +445,40 @@ You can copy the image pull secret with registry token credentials that is autom
 {: shortdesc}
 
 1. List available namespaces in your cluster.
-   ```
-   kubectl get namespaces
-   ```
-   {: pre}
+    ```
+    kubectl get namespaces
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   default          Active    79d
-   ibm-cert-store   Active    79d
-   ibm-system       Active    79d
-   istio-system     Active    34d
-   kube-public      Active    79d
-   kube-system      Active    79d
-   ```
-   {: screen}
+    Example output:
+    ```
+    default          Active    79d
+    ibm-cert-store   Active    79d
+    ibm-system       Active    79d
+    istio-system     Active    34d
+    kube-public      Active    79d
+    kube-system      Active    79d
+    ```
+    {: screen}
 
 2. Optional: Create a namespace in your cluster.
-   ```
-   kubectl create namespace <namespace_name>
-   ```
-   {: pre}
+    ```
+    kubectl create namespace <namespace_name>
+    ```
+    {: pre}
 
 3. Copy the image pull secrets from the `default` namespace to the namespace of your choice. The new image pull secrets are named `bluemix-<namespace_name>-secret-regional` and `bluemix-<namespace_name>-secret-international`.
-   ```
-   kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
-   ```
-   {: pre}
+    ```
+    kubectl get secret bluemix-default-secret-regional -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+    ```
+    {: pre}
 
-   ```
-   kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
-   ```
-   {: pre}
+    ```
+    kubectl get secret bluemix-default-secret-international -o yaml | sed 's/default/<namespace_name>/g' | kubectl -n <namespace_name> create -f -
+    ```
+    {: pre}
 
-4.  Verify that the secrets are created successfully.
+4. Verify that the secrets are created successfully.
     ```
     kubectl get secrets --namespace <namespace_name>
     ```
@@ -495,15 +496,15 @@ To access images in other {{site.data.keyword.cloud_notm}} regions or accounts, 
 Tokens that authorize access to `registry.<region>.bluemix.net` domains are deprecated. You can no longer create new tokens. Instead, create cluster image pull secrets that use [API key credentials](/docs/containers?topic=containers-registry#imagePullSecret_migrate_api_key) to pull images from the `icr.io` registry domains.
 {: deprecated}
 
-1.  List tokens in your {{site.data.keyword.cloud_notm}} account.
+1. List tokens in your {{site.data.keyword.cloud_notm}} account.
 
     ```
     ibmcloud cr token-list
     ```
     {: pre}
 
-2.  Note the token ID that you want to use.
-3.  Retrieve the value for your token. Replace <em>&lt;token_ID&gt;</em> with the ID of the token that you retrieved in the previous step.
+2. Note the token ID that you want to use.
+3. Retrieve the value for your token. Replace <em>&lt;token_ID&gt;</em> with the ID of the token that you retrieved in the previous step.
 
     ```
     ibmcloud cr token-get <token_id>
@@ -512,7 +513,7 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
 
     Your token value is displayed in the **Token** field of your CLI output.
 
-4.  Create the Kubernetes secret to store your token information.
+4. Create the Kubernetes secret to store your token information.
 
     ```
     kubectl --namespace <kubernetes_namespace> create secret docker-registry <secret_name>  --docker-server=<registry_URL> --docker-username=token --docker-password=<token_value> --docker-email=<docker_email>
@@ -553,13 +554,13 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     </tr>
     </tbody></table>
 
-5.  Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the namespace where you created the image pull secret.
+5. Verify that the secret was created successfully. Replace <em>&lt;kubernetes_namespace&gt;</em> with the namespace where you created the image pull secret.
 
     ```
     kubectl get secrets --namespace <kubernetes_namespace>
     ```
     {: pre}
 
-6.  [Deploy a container by using the image pull secret](/docs/containers?topic=containers-images#pod_imagePullSecret) in your namespace.
+6. [Deploy a container by using the image pull secret](/docs/containers?topic=containers-images#pod_imagePullSecret) in your namespace.
 
 
