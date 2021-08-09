@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-06"
+lastupdated: "2021-08-09"
 
 keywords: kubernetes, iks, registry, pull secret, secrets
 
@@ -54,7 +54,6 @@ subcollection: containers
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -331,8 +330,8 @@ For more information, see the [Portieris documentation](https://github.com/IBM/p
 {: shortdesc}
 
 **CLI**: See the following commands.
-* [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-enable)
-* [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs-image-security-disable)
+* [`ibmcloud ks cluster image-security enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-enable)
+* [`ibmcloud ks cluster image-security disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs-image-security-disable)
 
 **Console**:
 1. From the [Kubernetes clusters console](https://cloud.ibm.com/kubernetes/clusters){: external}, select your cluster.
