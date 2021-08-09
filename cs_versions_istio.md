@@ -143,7 +143,7 @@ The following table shows the changes that are included in version 1.10.3 of the
 {: shortdesc}
 | Previous | Current | Description |
 | -------- | ------- | ----------- |
-| 1.10.2 | 1.10.3 | <ul><li>See the Istio release notes for [Istio 1.10.3](https://istio.io/news/releases/1.10.x/announcing-1.10.3/){:external}.</li><li>Resolves [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}, [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}, and [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}.</li></ul> |
+| 1.10.2 | 1.10.3 | <ul><li>See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){:external}.</li><li>Resolves [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}, [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}, and [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}.</li></ul> |
 {: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
 {: caption="Changes since version 1.10.3" caption-side="top"}
 
