@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-07-29"
+lastupdated: "2021-08-09"
 
 keywords: kubernetes, iks, versions, update, upgrade
 
@@ -19,6 +19,7 @@ subcollection: containers
 {:app_name: data-hd-keyref="app_name"}
 {:app_secret: data-hd-keyref="app_secret"}
 {:app_url: data-hd-keyref="app_url"}
+{:audio: .audio}
 {:authenticated-content: .authenticated-content}
 {:beta: .beta}
 {:c#: .ph data-hd-programlang='c#'}
@@ -52,11 +53,9 @@ subcollection: containers
 {:navgroup: .navgroup}
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
-{:note .note}
 {:note: .note}
-{:note:.deprecated}
-{:objectc data-hd-programlang="objectc"}
 {:objectc: .ph data-hd-programlang='Objective C'}
+{:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
 {:php: .ph data-hd-programlang='PHP'}
 {:php: data-hd-programlang="php"}
@@ -144,8 +143,8 @@ Your Kubernetes cluster has three types of updates: major, minor, and patch. As 
   <dt>Patch updates (x.x.4_1510)</dt>
     <dd>Changes across patches are documented in the [Version changelog](/docs/containers?topic=containers-changelog). Master patches are applied automatically, but you initiate worker node patches updates. Worker nodes can also run patch versions that are greater than the masters. As updates become available, you are notified when you view information about the master and worker nodes in the {{site.data.keyword.cloud_notm}} console or CLI, such as with the following commands: `ibmcloud ks cluster ls`, `cluster get`, `worker ls`, or `worker get`.<br>
     Patches can be for worker nodes, masters, or both.
-    <ul><li>**Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_update) or the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload) to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</li>
-    <li>**Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.</li></ul></dd>
+    <ul><li>**Worker node patches**: Check monthly to see whether an update is available, and use the `ibmcloud ks worker update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_update) or the `ibmcloud ks worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload) to apply these security and operating system patches. During an update or reload, your worker node machine is reimaged, and data is deleted if not [stored outside the worker node](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).</li>
+    <li>**Master patches**: Master patches are applied automatically over the course of several days, so a master patch version might show up as available before it is applied to your master. The update automation also skips clusters that are in an unhealthy state or have operations currently in progress. Occasionally, IBM might disable automatic updates for a specific master fix pack, as noted in the changelog, such as a patch that is only needed if a master is updated from one minor version to another. In any of these cases, you can choose to safely use the `ibmcloud ks cluster master update` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_update) yourself without waiting for the update automation to apply.</li></ul></dd>
 </dl>
 
 ## Kubernetes versions
@@ -195,125 +194,15 @@ The following table records {{site.data.keyword.containerlong_notm}} version rel
 Dates that are marked with a dagger (`†`) are tentative and subject to change.
 {: important}
 
-<table summary="This table shows the release history for {{site.data.keyword.containerlong_notm}}.">
-<caption>Release history for {{site.data.keyword.containerlong_notm}}.</caption>
-<col width="20%" align="center">
-<col width="20%">
-<col width="30%">
-<col width="30%">
-<thead>
-<tr>
-<th>Supported?</th>
-<th>Version</th>
-<th>{{site.data.keyword.containerlong_notm}}<br>release date</th>
-<th>{{site.data.keyword.containerlong_notm}}<br>unsupported date</th>
-</tr>
-</thead>
-<tbody>
-<tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
-  <td>[1.21](#cs_v121)</td>
-  <td>09 Jun 2021</td>
-  <td>Jun 2022 `†`</td>
-</tr>
-<tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
-  <td>[1.20](#cs_v120)</td>
-  <td>16 Feb 2021</td>
-  <td>Feb 2022 `†`</td>
-</tr>
-<tr>
-  <td><img src="images/checkmark-filled.png" align="left" width="32" style="width:32px;" alt="This version is supported."/></td>
-  <td>[1.19](#cs_v119)</td>
-  <td>13 Oct 2020</td>
-  <td>31 Dec 2021 `†`</td>
-</tr>
-<tr>
-  <td><img src="images/warning-filled.png" align="left" width="32" style="width:32px;" alt="This version is deprecated."/></td>
-  <td>[1.18](#cs_v118)</td>
-  <td>11 May 2020</td>
-  <td>30 Sep 2021 `†`</td>
-</tr>
-  <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.17](#cs_v117)</td>
-  <td>10 Feb 2020</td>
-  <td>02 Jul 2021</td>
-</tr>
-  <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.16](#cs_v116)</td>
-  <td>04 Nov 2019</td>
-  <td>31 Jan 2021</td>
-</tr>
-  <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.15](#cs_v115)</td>
-  <td>05 Aug 2019</td>
-  <td>22 Sep 2020</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.14](#cs_v114)</td>
-  <td>07 May 2019</td>
-  <td>31 May 2020</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.13](#cs_v113)</td>
-  <td>05 Feb 2019</td>
-  <td>22 Feb 2020</td>
-</tr>
-  <tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.12](#cs_v112)</td>
-  <td>07 Nov 2018</td>
-  <td>03 Nov 2019</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.11](#cs_v111)</td>
-  <td>14 Aug 2018</td>
-  <td>20 Jul 2019</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.10](#cs_v110)</td>
-  <td>01 May 2018</td>
-  <td>16 May 2019</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.9](#cs_v19)</td>
-  <td>08 Feb 2018</td>
-  <td>27 Dec 2018</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.8](#cs_v18)</td>
-  <td>08 Nov 2017</td>
-  <td>22 Sep 2018</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.7](#cs_v17)</td>
-  <td>19 Sep 2017</td>
-  <td>21 Jun 2018</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>1.6</td>
-  <td>N/A</td>
-  <td>N/A</td>
-</tr>
-<tr>
-  <td><img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="This version is unsupported."/></td>
-  <td>[1.5](#cs_v1-5)</td>
-  <td>23 May 2017</td>
-  <td>04 Apr 2018</td>
-</tr>
-</tbody>
-</table>
+|  Version | Supported? | {{site.data.keyword.containerlong_notm}}<br>release date | {{site.data.keyword.containerlong_notm}}<br>unsupported date |
+|------|------|----------|----------|
+| [1.21](#cs_v121) | Yes | 09 Jun 2021 | Jun 2022 `†` |
+| [1.20](#cs_v120) | Yes | 16 Feb 2021 | Feb 2022 `†` |
+| [1.19](#cs_v119) | Yes | 13 Oct 2020 | 31 Dec 2021 `†` |
+| [1.18](#cs_v118) | Deprecated | 09 Jun 2021 | 30 Sep 2021 `†` |
+{: caption="Release history for {{site.data.keyword.containerlong_notm}}" caption-side="top"}
+
+Earlier versions of {{site.data.keyword.containerlong_notm}} are [unsupported](#k8s_version_archive).
 
 ## Release lifecycle
 {: #release_lifecycle}
@@ -337,7 +226,7 @@ Estimated days and versions are provided for general understanding. Actual avail
 7.  Version `n` is unsupported. Unsupported clusters are not provided with security and patch updates and are not supported by {{site.data.keyword.cloud_notm}} Support. Although your cluster and apps might continue to run for a time, you can no longer create, reload, or take other corrective actions on your cluster master or worker nodes when an issue occurs. You can still delete the cluster or worker nodes, or update the cluster to the next version. Review the potential impacts and immediately [update the cluster](/docs/containers?topic=containers-update#update) to continue receiving important security updates and support.
 8. The cluster master runs two or more versions behind the oldest supported version. You cannot update the cluster. Delete the cluster, and create a new one.
 
-If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as 1.17 to 1.18 and then update to the latest version, 1.19. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
+If you wait until your cluster is two or more minor versions behind the oldest supported version, you cannot update the cluster. Instead, [create a new cluster](/docs/containers?topic=containers-clusters#clusters), [deploy your apps](/docs/containers?topic=containers-app#app) to the new cluster, and [delete](/docs/containers?topic=containers-remove) the unsupported cluster.<br><br>To avoid this issue, update deprecated clusters to a supported version less than two ahead of the current version, such as `1.19` or `1.20` and then update to the latest version, 1.21. If the worker nodes run a version two or more behind the master, you might see your pods fail by entering a state such as `MatchNodeSelector`, `CrashLoopBackOff`, or `ContainerCreating` until you update the worker nodes to the same version as the master. After you update from a deprecated to a supported version, your cluster can resume normal operations and continue receiving support.<br><br>You can find out whether your cluster is **unsupported** by reviewing the **State** field in the output of the `ibmcloud ks cluster ls` command or in the [{{site.data.keyword.containerlong_notm}} console](https://cloud.ibm.com/kubernetes/clusters){: external}.
 {: important}
 
 <br />

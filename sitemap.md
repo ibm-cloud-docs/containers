@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-06"
+lastupdated: "2021-08-09"
 
 keywords: containers
 subcollection: containers
@@ -53,7 +53,6 @@ subcollection: containers
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -1865,7 +1864,7 @@ subcollection: containers
 
 [Ingress ALB and Fluentd version changelog](/docs/containers?topic=containers-cluster-add-ons-changelog)
 * [Kubernetes Ingress image changelog](/docs/containers?topic=containers-cluster-add-ons-changelog#kube_ingress_changelog)
-  * [Version 0.47.0 (default)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
+  * [Version 0.47.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_47_0)
   * [Version 0.45.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_45_0)
   * [Version 0.35.0](/docs/containers?topic=containers-cluster-add-ons-changelog#0_35_0)
   * [Version 0.34.1 (unsupported)](/docs/containers?topic=containers-cluster-add-ons-changelog#0_34_1)

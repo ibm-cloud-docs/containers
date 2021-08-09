@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-05"
+lastupdated: "2021-08-09"
 
 keywords: kubernetes, iks, help, network, connectivity
 
@@ -55,7 +55,6 @@ content-type: troubleshoot
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -151,7 +150,7 @@ The zone that you selected might not have enough infrastructure capacity to prov
 To resolve, try one of the following options:
 * Infrastructure resource availability in zones can fluctuate often. Wait a few minutes and try again.
 * For a single zone cluster, create the cluster in a different zone. For a multizone cluster, add a zone to the cluster.
-* Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the `ibmcloud ks zone network-set` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli<opens</li>
+* Specify a different pair of public and private VLANs for your worker nodes in your IBM Cloud infrastructure account. For worker nodes that are in a worker pool, you can use the `ibmcloud ks zone network-set` [command](/docs/containers?topic=containers-kubernetes-service-cli<opens</li>
 * Contact your IBM Cloud infrastructure account manager to verify that you do not exceed an account limit, such as a global quota.
 * Open an [IBM Cloud infrastructure support case](/docs/containers?topic=containers-get-help).
 
@@ -169,7 +168,7 @@ Could not obtain network VLAN with ID: <vlan-id>
 
 Your worker node could not be provisioned because the selected VLAN ID could not be found for one of the following reasons:
 * You might have specified the VLAN number instead of the VLAN ID. The VLAN number is 3 or 4 digits long, whereas the VLAN ID is 7 digits long. To retrieve the VLAN ID, run `ibmcloud ks vlan ls --zone <zone>`.
-* The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. To list available VLAN IDs for your account, run `ibmcloud ks vlan ls --zone <zone>` . To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_set).
+* The VLAN ID might not be associated with the IBM Cloud infrastructure account that you use. To list available VLAN IDs for your account, run `ibmcloud ks vlan ls --zone <zone>` . To change the IBM Cloud infrastructure account, see [`ibmcloud ks credential set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_set).
 
 ## Location invalid
 {: #location-invalid}
@@ -223,7 +222,7 @@ If you have a firewall, [configure your firewall settings to allow outgoing traf
 Check whether your cluster does not have a public IP by running `ibmcloud ks worker ls --cluster <mycluster>`. If no public IP is listed, then your cluster has only private VLANs.
   * If you want the cluster to have only private VLANs, set up your [VLAN connection](/docs/containers?topic=containers-plan_clusters#private_clusters) and your [firewall](/docs/containers?topic=containers-firewall#firewall_outbound).</li>
   * If you created the cluster with only the private cloud service endpoint before you enabled your account for [VRF](/docs/account?topic=account-vrf-service-endpoint#vrf) and [service endpoints](/docs/account?topic=account-vrf-service-endpoint#service-endpoint), your workers cannot connect to the master. Try [setting up the public cloud service endpoint](/docs/containers?topic=containers-cs_network_cluster#set-up-public-se) so that you can use your cluster until your support cases are processed to update your account. If you still want a private cloud service endpoint only cluster after your account is updated, you can then disable the public cloud service endpoint.
-  * If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.
+  * If you want the cluster to have a public IP, [add new worker nodes](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_add) with both public and private VLANs.
 
 ## Hard reboot
 {: #hard-reboot}
@@ -237,7 +236,7 @@ The worker did not respond to the soft reboot request. A hard reboot might be ne
 
 **Description and resolution**:
 
-Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker reload` [command](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_worker_reload).
+Although you issued a reboot on your worker node, the worker node is unresponsive. You can rerun the [reboot command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot) with the `--hard` flag to power off the worker node, or run the `worker reload` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reload).
 
 ## Instance cannot be found
 {: #instance-not-found}
@@ -271,5 +270,5 @@ As the **user**, follow these steps:
 
 As the **account owner**, follow these steps:
 1.  Review the [required classic permissions in IBM Cloud infrastructure](/docs/containers?topic=containers-access-creds#infra_access) to perform the action that previously failed. For the VPC infrastructure provider, the API key owner must have the **Administrator** platform access role.
-2.  Fix the permissions of the API key owner or create a new API key by using the [`ibmcloud ks api-key reset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_api_key_reset) command.
-3.  If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-cli-plugin-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.
+2.  Fix the permissions of the API key owner or create a new API key by using the [`ibmcloud ks api-key reset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_api_key_reset) command.
+3.  If you or another account admin manually set IBM Cloud infrastructure credentials in your account, run [`ibmcloud ks credential unset --region <region>`](/docs/containers?topic=containers-kubernetes-service-cli#cs_credentials_unset) to remove the credentials from your account.
