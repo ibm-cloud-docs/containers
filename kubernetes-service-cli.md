@@ -124,7 +124,7 @@ Looking for `ibmcloud cr` commands? See the [{{site.data.keyword.registrylong_no
 The following image depicts the structure and grouping of the `ibmcloud ks` commands.
 {: shortdesc}
 
-![Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in](images/cs_cli_ref_imagemap.png)
+![Image of the structure and groupings of commands in {{site.data.keyword.containerlong_notm}} plug-in](images/cs_cli_ref_imagemap.svg)
 
 ## `cluster` commands
 {: #cluster}
@@ -435,35 +435,6 @@ ibmcloud ks cluster addon enable istio --cluster CLUSTER [--version VERSION]
 
 <dt><code>--version <em>VERSION</em></code></dt>
 <dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed. Note that Istio version 1.3 is supported only in Kubernetes version 1.15 and earlier clusters, and Istio versions 1.4 and later are supported only in Kubernetes version 1.16 and later clusters.</dd>
-</dl>
-
-#### `ibmcloud ks cluster addon enable kube-terminal`
-{: #cs_cluster_addon_enable_kube-terminal}
-
-Enable the [Kubernetes web terminal](/docs/containers?topic=containers-cs_cli_install#cli_web) add-on to use the Kubernetes web terminal in the {{site.data.keyword.containerlong_notm}} cluster console.
-{: shortdesc}
-
-The Kubernetes web terminal add-on is deprecated and becomes unsupported 1 July 2021. Instead, use the [{{site.data.keyword.cloud-shell_notm}}](/docs/containers?topic=containers-cs_cli_install#cloud-shell).
-{: deprecated}
-
-```sh
-ibmcloud ks cluster addon enable kube-terminal --cluster CLUSTER [--version VERSION]
-```
-{: pre}
-
-**Supported infrastructure provider**:
-* <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
-* <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> VPC
-
-**Minimum required permissions**: **Administrator** platform access role for the cluster in {{site.data.keyword.containerlong_notm}}
-
-**Command options**:
-<dl>
-<dt><code>-c, --cluster <em>CLUSTER</em></code></dt>
-<dd>Required: The name or ID of the cluster.</dd>
-
-<dt><code>--version <em>VERSION</em></code></dt>
-<dd>Optional: Specify the version of the add-on to install. If no version is specified, the default version is installed.</dd>
 </dl>
 
 #### `ibmcloud ks cluster addon enable static-route`
