@@ -121,14 +121,14 @@ View information for patch and minor version updates to the [managed Istio add-o
 Review the supported versions of {{site.data.keyword.containerlong_notm}}. In the CLI, you can run `ibmcloud ks versions`.
 
 | Istio add-on version | Supported? | Kubernetes version support |
-| -------------------- | -----------|--------------------------- |
-| 1.10 | <img src="images/icon-checkmark-confirm.svg" align="left" width="32" style="width:32px;" alt="Supported"/> | 1.18, 1.19, 1.20, 1.21 |
-| 1.9 | <img src="images/icon-checkmark-confirm.svg" align="left" width="32" style="width:32px;" alt="Supported"/> | 1.17, 1.18, 1.19, 1.20 |
-| 1.8 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
-| 1.7 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
-| 1.6 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
-| 1.5 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
-| 1.4 | <img src="images/close-filled.png" align="left" width="32" style="width:32px;" alt="Unsupported"/> | - |
+| --- | --- | --- |
+| 1.10 | Yes | 1.18, 1.19, 1.20, 1.21 |
+| 1.9 | Yes| 1.17, 1.18, 1.19, 1.20 |
+| 1.8 | No | - |
+| 1.7 | No | - |
+| 1.6 | No | - |
+| 1.5 | No | - |
+| 1.4 | No| - |
 {: summary="The rows are read from left to right. The first column is the Istio add-on version. The second column is the version's supported state. The third column is the Kubernetes version of your cluster that the Istio version is supported for."}
 {: caption="Supported Istio versions" caption-side="top"}
 
@@ -143,11 +143,15 @@ The following table shows the changes that are included in version 1.10.3 of the
 {: shortdesc}
 
 
-| Previous | Current | Description |
-| -------- | ------- | ----------- |
-| 1.10.2 | 1.10.3 | See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){:external}. Resolves [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}, [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}, and [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}. |
-{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
-{: caption="Changes since version 1.10.3" caption-side="top"}
+**Previous version**: 1.10.2
+**Current version**: 1.10.3 
+**Updates in this version:**
+- See the Istio release notes for [Istio 1.10.3](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.3/.){:external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-22898](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22898){: external}
+    - [CVE-2021-22924](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22924){: external}
+    - [CVE-2021-22925](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-22925){: external}
+
 
 ### Changelog for 1.10.2, released 15 July 2021
 {: #1102}
@@ -155,15 +159,35 @@ The following table shows the changes that are included in version 1.10.3 of the
 The following table shows the changes that are included in version 1.10.2 of the managed Istio add-on.
 {: shortdesc}
 
-| Previous | Current | Description |
-| -------- | ------- | ----------- |
-| 1.9.5 | 1.10.2 | See the Istio release notes for [Istio 1.10.0](https://istio.io/latest/news/releases/1.10.x/announcing-1.10/){: external}, [Istio 1.10.1](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.1/){: external}, and [Istio 1.10.2](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.2/){: external}. The API version of the `IstioOperator` (IOP) custom resource definition is updated from `v1beta1` to `v1`. Although this update does not impact existing custom IOP resources, you can optionally back up your IOP resources before upgrading to Istio version 1.10. The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources). In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` configmap. Resolves [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}, [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}, and [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.  |
-{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
-{: caption="Changes since version 1.9.5" caption-side="top"}
+**Previous version**: 1.9.5
+**Current version**: 1.10.2 
+**Updates in this version**
+- See the Istio release notes for:
+    - [Istio 1.10.0](https://istio.io/latest/news/releases/1.10.x/announcing-1.10/){: external}
+    - [Istio 1.10.1](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.1/){: external}
+    - [Istio 1.10.2](https://istio.io/latest/news/releases/1.10.x/announcing-1.10.2/){: external}. 
+- The API version of the `IstioOperator` (IOP) custom resource definition is updated from `v1beta1` to `v1`. Although this update does not impact existing custom IOP resources, you can optionally back up your IOP resources before upgrading to Istio version 1.10. 
+- The `IstioOperator` deployment is now created by the Istio add-on instead of the Operator Lifecycle Manager (OLM). If you choose to uninstall the add-on, steps are included to uninstall the [deployment resources for the operator](/docs/containers?topic=containers-istio#uninstall_resources). 
+- In multizone clusters, the zone labels for default Istio ingress gateways are now sorted in reverse order to improve resiliency. This change does not affect any ingress gateways that are already enabled and assigned a zone label in the `managed-istio-custom` configmap. 
+- Resolves the following CVEs:
+    - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
+    - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
+    - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. 
 
 ## Version 1.9
 {: #v19}
 
+## Changelog for 1.9.7, released 12 August 2021
+{: #197}
+
+
+The following table shows the changes that are included in version 1.9.7 of the managed Istio add-on.
+{: shortdesc}
+
+**Previous version**: 1.9.6
+**Current version**: 1.9.7
+**Updates in this version:**
+See the Istio release notes for [Istio 1.9.6](https://istio.io/news/releases/1.9.x/announcing-1.9.7/){:external}.
 
 
 ### Changelog for 1.9.6, released 22 July 2021
@@ -172,11 +196,14 @@ The following table shows the changes that are included in version 1.10.2 of the
 The following table shows the changes that are included in version 1.9.6 of the managed Istio add-on.
 {: shortdesc}
 
-| Previous | Current | Description |
-| -------- | ------- | ----------- |
-| 1.9.5 | 1.9.6 | See the Istio release notes for [Istio 1.9.6](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.6/){: external}. Resolves [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}, [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}, and [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}. |
-{: summary="The rows are read from left to right. The first column is the previous version number of the component. The second column is the current version number of the component. The third column contains a brief description of the change made to the component."}
-{: caption="Changes since version 1.9.5" caption-side="top"}
+**Previous version**: 1.9.5
+**Current version**: 1.9.6
+**Updates in this version**
+- See the Istio release notes for [Istio 1.9.6](https://istio.io/latest/news/releases/1.9.x/announcing-1.9.6/){: external}. 
+- Resolves the following CVEs:
+    - [CVE-2021-3520](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3520){: external}.
+    - [CVE-2018-16869](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2018-16869){: external}.
+    - [CVE-2021-3580](https://cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2021-3580){: external}.
 
 ### Changelog for 1.9.5, released 27 May 2021
 {: #195}

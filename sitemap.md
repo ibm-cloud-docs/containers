@@ -1878,6 +1878,7 @@ subcollection: containers
 * [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
+* [Changelog for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
   * [Changelog for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
