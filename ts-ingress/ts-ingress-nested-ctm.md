@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-05"
+lastupdated: "2021-08-11"
 
 keywords: kubernetes, iks, help, network, dns, health check
 
@@ -55,7 +55,6 @@ content-type: troubleshoot
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -115,14 +114,17 @@ content-type: troubleshoot
 **Supported infrastructure provider**:
 * <img src="../images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> Classic
 
-{: tsSymptoms}
 When you try to include Ingress subdomains that have health checks enabled in your Akamai Global Traffic Managment (GTM) configuration, the health checks fail.
+{: tsSymptoms}
 
-{: tsCauses}
+
 Akamai Global Traffic Managment (GTM) configurations do not support nested subdomains.
+{: tsCauses}
 
-{: tsResolve}
+
 Disable the default health check for the Ingress subdomain. For more information see the `nlb-dns monitor disable` [command reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_nlb-dns-monitor-disable).
+{: tsResolve}
+
 ```sh
 ibmcloud ks nlb-dns monitor disable --cluster CLUSTER --nlb-host SUBDOMAIN 
 ```
