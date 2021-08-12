@@ -183,7 +183,7 @@ To deploy a container into the **default** namespace of your cluster:
     <td>Replace the image URL variables with the information for your image:
         <ul><li><strong><code>&lt;region&gt;</code></strong>: The regional {{site.data.keyword.registrylong_notm}} API endpoint for the registry domain. To list the domain for the region that you are logged in to, run <code>ibmcloud cr api</code>.</li>
         <li><strong><code>&lt;namespace&gt;</code></strong>: The registry namespace. To get your namespace information, run <code>ibmcloud cr namespace-list</code>.</li>
-        <li><strong><code>&lt;image&gt;:<tag></code></strong>: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run <code>ibmcloud cr images</code>.</li></ul></td>
+        <li><strong><code>&lt;image&gt;:&lt;tag&gt;</code></strong>: The image and tag that you want to use for your container. To list the images that are available in your registry namespace, run <code>ibmcloud cr images</code>.</li></ul></td>
     </tr>
     </tbody></table>
 
@@ -563,5 +563,6 @@ Tokens that authorize access to `registry.<region>.bluemix.net` domains are depr
     {: pre}
 
 6. [Deploy a container by using the image pull secret](/docs/containers?topic=containers-images#pod_imagePullSecret) in your namespace.
+
 
 
