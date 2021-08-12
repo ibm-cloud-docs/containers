@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-12"
 
 keywords: kubernetes, iks, istio, add-on
 
@@ -54,6 +54,7 @@ subcollection: containers
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
+{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -187,7 +188,7 @@ The following table shows the changes that are included in version 1.9.7 of the 
 **Previous version**: 1.9.6
 **Current version**: 1.9.7
 **Updates in this version:**
-See the Istio release notes for [Istio 1.9.6](https://istio.io/news/releases/1.9.x/announcing-1.9.7/){:external}.
+See the Istio release notes for [Istio 1.9.7](https://istio.io/news/releases/1.9.x/announcing-1.9.7/){:external}.
 
 
 ### Changelog for 1.9.6, released 22 July 2021
