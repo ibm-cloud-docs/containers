@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-05"
+lastupdated: "2021-08-12"
 
 keywords: kubernetes, iks
 
@@ -105,7 +105,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-  
+
+ 
   
 
 # Storing data on classic IBM Cloud {{site.data.keyword.filestorage_short}}

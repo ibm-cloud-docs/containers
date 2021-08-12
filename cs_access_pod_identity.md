@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-05"
+lastupdated: "2021-08-12"
 
 keywords: kubernetes, iks, infrastructure, rbac, policy
 
@@ -105,7 +105,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-  
+
+ 
   
 
 # Authorizing pods in your cluster to {{site.data.keyword.cloud_notm}} services with IAM trusted profiles
