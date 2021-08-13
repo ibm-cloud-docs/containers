@@ -2,7 +2,7 @@
 
 copyright:
   years: 2017, 2021
-lastupdated: "2021-08-12"
+lastupdated: "2021-08-13"
 
 keywords: containers
 subcollection: containers
@@ -702,8 +702,13 @@ subcollection: containers
 * [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
 
 [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies)
+  * [Kubernetes network policies](/docs/containers?topic=containers-network_policies#kubernetes-network-policies)
+  * [Calico network policies](/docs/containers?topic=containers-network_policies#calico-network-policies)
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
 * [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
+* [Installing the Calico CLI, `calicoctl`, according to your operating system.](/docs/containers?topic=containers-network_policies#installing-the-calico-cli,-`calicoctl`,-according-to-your-operating-system.)
+  * [Linux and OS X](/docs/containers?topic=containers-network_policies#linux-and-os-x)
+  * [Windows](/docs/containers?topic=containers-network_policies#windows)
 * [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
 * [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
 * [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
@@ -1876,10 +1881,10 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
-* [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
+  * [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
-* [Changelog for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
+  * [Changelog for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
   * [Changelog for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
