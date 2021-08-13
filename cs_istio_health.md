@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
+  
 
- 
- 
 
 
 # Observing Istio traffic
@@ -166,43 +164,45 @@ The ControlZ dashboard accesses the Istio component ports to provide an interact
 {: #controlz}
 
 1. Get the pod name for the Istio component that you want to inspect. You can inspect the component pods for `istio-citadel`, `istio-galley`, `istio-pilot`, `istio-policy`, and `istio-telemetry`.
-  ```
-  kubectl get pods -n istio-system | grep istio
-  ```
-  {: pre}
+    ```
+    kubectl get pods -n istio-system | grep istio
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                                      READY   STATUS    RESTARTS   AGE
-  istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
-  istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
-  istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
-  istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
-  istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
-  istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
-  istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
-  istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
-  istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                                      READY   STATUS    RESTARTS   AGE
+    istio-citadel-869c7f9498-wtldz            1/1     Running   0          2m
+    istio-egressgateway-69bb5d4585-qxxbp      1/1     Running   0          2m
+    istio-galley-75d7b5bdb9-c9d9n             1/1     Running   0          2m
+    istio-ingressgateway-5c8764db74-gh8xg     1/1     Running   0          2m
+    istio-pilot-55fd7d886f-vv6fb              2/2     Running   0          2m
+    istio-policy-6bb6f6ddb9-s4c8t             2/2     Running   0          2m
+    istio-sidecar-injector-7d9845dbb7-r8nq5   1/1     Running   0          2m
+    istio-telemetry-7695b4c4d4-tlvn8          2/2     Running   0          2m
+    istio-tracing-55bbf55878-z4rd2            1/1     Running   0          2m
+    ```
+    {: screen}
 
 2. Access the ControlZ dashboard for that component.
-  ```
-  istioctl dashboard controlz <component_pod_name>.istio-system
-  ```
-  {: pre}
+    ```
+    istioctl dashboard controlz <component_pod_name>.istio-system
+    ```
+    {: pre}
 
 ### Envoy
 {: #envoy}
 
 1. Get the name of the app pod where you want to inspect the Envoy sidecar container.
-  ```
-  kubectl get pods -n <namespace>
-  ```
-  {: pre}
+    ```
+    kubectl get pods -n <namespace>
+    ```
+    {: pre}
 
 2. Access the Envoy dashboard for that pod.
-  ```
-  istioctl dashboard envoy <pod-name>.<namespace>
-  ```
-  {: pre}
+    ```
+    istioctl dashboard envoy <pod-name>.<namespace>
+    ```
+    {: pre}
+
+

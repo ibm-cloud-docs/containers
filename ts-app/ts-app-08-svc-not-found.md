@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Why does binding a service to a cluster results in service not found error?
 {: #ts-app-svc-bind-not-found}
 
@@ -138,22 +138,22 @@ In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platf
 {: tsResolve}
 
 1. Log in to {{site.data.keyword.cloud_notm}}.
-   ```
-   ibmcloud login
-   ```
-   {: pre}
+    ```
+    ibmcloud login
+    ```
+    {: pre}
 
 2. Target the org and the space where the service instance is provisioned.
-   ```
-   ibmcloud target -o <org> -s <space>
-   ```
-   {: pre}
+    ```
+    ibmcloud target -o <org> -s <space>
+    ```
+    {: pre}
 
 3. Verify that you are in the right space by listing your service instances.
-   ```
-   ibmcloud service list
-   ```
-   {: pre}
+    ```
+    ibmcloud service list
+    ```
+    {: pre}
 
 4. Try binding the service again. If you get the same error, then contact the account administrator and verify that you have sufficient permissions to bind services (see the following account admin steps).
 
@@ -168,17 +168,19 @@ In addition, you must have the {{site.data.keyword.cloud_notm}} IAM Editor platf
 4. Wait a few minutes, then let the user try to bind the service again.
 
 5. If this does not resolve the problem, then the {{site.data.keyword.cloud_notm}} IAM permissions are out of sync and you cannot resolve the issue yourself. [Contact IBM support](/docs/get-support?topic=get-support-using-avatar) by opening a support case. Make sure to provide the cluster ID, the user ID, and the service instance ID.
-   1. Retrieve the cluster ID.
-      ```
-      ibmcloud ks cluster ls
-      ```
-      {: pre}
+    1. Retrieve the cluster ID.
+        ```
+        ibmcloud ks cluster ls
+        ```
+        {: pre}
 
-   2. Retrieve the service instance ID.
-      ```
-      ibmcloud service show <service_name> --guid
-      ```
-      {: pre}
+    2. Retrieve the service instance ID.
+        ```
+        ibmcloud service show <service_name> --guid
+        ```
+        {: pre}
+
+
 
 
 

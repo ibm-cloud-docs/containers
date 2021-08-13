@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Understanding high availability and disaster recovery for {{site.data.keyword.containerlong_notm}}
 {: #ha}
@@ -214,5 +212,7 @@ In a stateful app, data plays an important role to keep your app up and running.
 {: shortdesc}
 
 See [Planning highly available data](/docs/containers?topic=containers-storage_planning#persistent_storage_overview).
+
+
 
 

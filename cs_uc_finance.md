@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Financial services use cases for {{site.data.keyword.cloud_notm}}
 {: #cs_uc_finance}
@@ -267,5 +265,7 @@ Security first: With bare metal for {{site.data.keyword.containerlong_notm}}, th
 * In parallel, the provider implemented simple time-boxed iterations to get a handle on the existing technical debt.
 * With the number of transactions they process, they can scale their operations exponentially.
 * At the same time, new fraud analysis with {{site.data.keyword.watson}} increased the speed of detection and prevention, reducing fraud 4 times more than the region’s average.
+
+
 
 

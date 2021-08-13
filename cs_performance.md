@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Tuning performance
 {: #kernel}
@@ -135,8 +133,8 @@ To optimize your worker nodes, consider the following information.
 * **Temporary modifications**: If you log in to a pod or use some other process to modify a worker node setting, the modifications are temporary. Worker node lifecycle operations, such as autorecovery, reloading, updating, or replacing a worker node, change any modifications back to the default settings.
 * **Persistent modifications**: For modifications to persist across worker node lifecycle operations, create a daemon set that uses an init container. For more information, see [Modifying default worker node settings to optimize performance](#worker).
 
-   Modifications to the operating system are not supported. If you modify the default settings, you are responsible for debugging and resolving the issues that might occur.
-   {: important}
+    Modifications to the operating system are not supported. If you modify the default settings, you are responsible for debugging and resolving the issues that might occur.
+    {: important}
 
 ### Hardware changes
 {: #worker-default-hw}
@@ -223,6 +221,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: pre}
 
 <br />
+
 To revert your worker nodes' `sysctl` parameters to the default values set by {{site.data.keyword.containerlong_notm}}:
 
 1. Delete the daemon set. The `initContainers` that applied the custom settings are removed.
@@ -286,7 +285,7 @@ The metrics provider pod also has a `nanny` container that scales the `metrics-s
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  Open the `metrics-server` configmap YAML.
+1. Open the `metrics-server` configmap YAML.
     ```
     kubectl edit configmap metrics-server-config -n kube-system
     ```
@@ -316,7 +315,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: screen}
 
-2.  Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value is set to `4Mi`.
+2. Add the `memoryPerNode` field to the configmap in the `data.NannyConfiguration` section. The default value is set to `4Mi`.
     ```yaml
     apiVersion: v1
     data:
@@ -329,11 +328,11 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-3.  Save and close the file. Your changes are applied automatically.
+3. Save and close the file. Your changes are applied automatically.
 
-4.  Monitor the metrics provider pods.
-  * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers are now stable but metrics are often not available or are incomplete, continue to the next step to tune the `cpuPerNode` setting.
-  * If you see an error message similar to the following, or if the horizontal pod autoscaler is not scaling correctly, continue to the next step to tune the `cpuPerNode` setting.
+4. Monitor the metrics provider pods.
+    * If containers continue to be restarted due to an `OOMKilled` error message, repeat these steps and increase the `memoryPerNode` size until the pod is stable. If the containers are now stable but metrics are often not available or are incomplete, continue to the next step to tune the `cpuPerNode` setting.
+    * If you see an error message similar to the following, or if the horizontal pod autoscaler is not scaling correctly, continue to the next step to tune the `cpuPerNode` setting.
     ```
     unable to get metrics for resource cpu: unable to fetch metrics from resource metrics API: the server is currently unable to handle the request (get pods.metrics.k8s.io)
     ```
@@ -359,7 +358,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     {: codeblock}
 
 7. Monitor the metrics provider pods for at least an hour. It can take several minutes for the metrics server to start collecting metrics.
-  * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
+    * If metrics continue to be unavailable or incomplete, repeat these steps and increase the `cpuPerNode` size until the metrics are stable. If the load on a specific worker node is very high, the metrics provider might timeout waiting for metrics from that worker node, and continue to report unknown values for that worker node. Note that due to the timing of requests relative to other processing that occur in the `metrics-server`, you might not be able to get metrics for all of your pods all of the time.
 
 Want to tune more settings? Check out the [Kubernetes Add-on resizer configuration docs](https://github.com/kubernetes/autoscaler/tree/master/addon-resizer#addon-resizer-configuration){: external} for more ideas.
 {: tip}
@@ -387,7 +386,7 @@ You can reboot the worker node and the huge pages configuration persists. Howeve
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  Create a `hugepages-ds.yaml` configuration file to enable huge pages. The following sample YAML uses a daemon set to run the pod on every worker node in your cluster. You can set the allocation of huge pages that are available on the worker node by using the `vm.nr_hugepages` parameter. This example allocates 512 pages at 2 MB per page, for 1 GB of total RAM allocated exclusively for huge pages.
+1. Create a `hugepages-ds.yaml` configuration file to enable huge pages. The following sample YAML uses a daemon set to run the pod on every worker node in your cluster. You can set the allocation of huge pages that are available on the worker node by using the `vm.nr_hugepages` parameter. This example allocates 512 pages at 2 MB per page, for 1 GB of total RAM allocated exclusively for huge pages.
 
     Want to enable huge pages only for certain worker nodes, such as a worker pool that you use for RAM-intensive apps? [Label](/docs/containers?topic=containers-add_workers#worker_pool_labels) and [taint](/docs/containers?topic=containers-kubernetes-service-cli#worker_pool_taint) your worker pool, and then add [affinity rules](https://kubernetes.io/docs/concepts/scheduling-eviction/assign-pod-node/){: external} to the daemon set so that the pods are deployed only to the worker nodes in the worker pool that you specify.
     {: tip}
@@ -446,28 +445,32 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: codeblock}
 
-2.  Apply the file that you previously created.
+2. Apply the file that you previously created.
     ```
     kubectl apply -f hugepages-ds.yaml
     ```
     {: pre}
-3.  Verify that the pods are **Running**.
+
+3. Verify that the pods are **Running**.
     ```
     kubectl get pods
     ```
     {: pre}
-4.  Restart the kubelet that runs on each worker node by rebooting the worker nodes. Do **not** reload the worker node to restart the kubelet. Reloading the worker node before the kubelet picks up on the huge pages enablement causes the enablement to fail.
-    1.  List the worker nodes in your cluster.
+
+4. Restart the kubelet that runs on each worker node by rebooting the worker nodes. Do **not** reload the worker node to restart the kubelet. Reloading the worker node before the kubelet picks up on the huge pages enablement causes the enablement to fail.
+    1. List the worker nodes in your cluster.
         ```
         ibmcloud ks worker ls -c <cluster_name_or_ID>
         ```
         {: pre}
-    2.  Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` flags, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
+
+    2. Reboot the worker nodes. You can reboot multiple worker nodes by including multiple `-w` flags, but make sure to leave enough worker nodes running at the same time for your apps to avoid an outage.
         ```
         ibmcloud ks worker reboot -c <cluster_name_or_ID> -w <worker1_ID> -w <worker2_ID>
         ```
         {: pre}
-5.  Create a `hugepages-test.yaml` test pod that mounts huge pages as a volume and uses resource limits and requests to set how much of the huge pages resources that the pod uses. **Note**: If you used labels, taints, and affinity rules to enable huge pages on select worker nodes only, include these same rules in your test pod.
+
+5. Create a `hugepages-test.yaml` test pod that mounts huge pages as a volume and uses resource limits and requests to set how much of the huge pages resources that the pod uses. **Note**: If you used labels, taints, and affinity rules to enable huge pages on select worker nodes only, include these same rules in your test pod.
     ```yaml
     apiVersion: v1
     kind: Pod
@@ -495,23 +498,27 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
           medium: HugePages-2Mi
     ```
     {: codeblock}
-6.  Apply the pod file that you previously created.
+
+6. Apply the pod file that you previously created.
     ```
     kubectl apply -f hugepages-pod.yaml
     ```
     {: pre}
-7.  Verify that your pod uses the huge pages resources.
-    1.  Check that your pod is **Running**. The pod does not run if no worker nodes with huge pages are available.
+
+7. Verify that your pod uses the huge pages resources.
+    1. Check that your pod is **Running**. The pod does not run if no worker nodes with huge pages are available.
         ```
         kubectl get pods
         ```
         {: pre}
-    2.  Log in to the pod.
+
+    2. Log in to the pod.
         ```
         kubectl exec -it <pod> /bin/sh
         ```
         {: pre}
-    3.  Verify that your pod can view the sizes of the huge pages.
+
+    3. Verify that your pod can view the sizes of the huge pages.
         ```
         ls /sys/kernel/mm/hugepages
         ```
@@ -522,16 +529,19 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
         hugepages-1048576kB  hugepages-2048kB
         ```
         {: screen}
-8.  Optional: Remove the enablement daemon set. Keep in mind that you must re-create the daemon set if you need to update, reload, replace, or add worker nodes with huge pages later.
+
+8. Optional: Remove the enablement daemon set. Keep in mind that you must re-create the daemon set if you need to update, reload, replace, or add worker nodes with huge pages later.
     ```
     kubectl -n kube-system delete daemonset hugepages-enablement
     ```
     {: pre}
-9.  Repeat these steps whenever you update, reload, replace, or add worker nodes.
+
+9. Repeat these steps whenever you update, reload, replace, or add worker nodes.
 
 To troubleshoot worker nodes with huge pages, you can only reboot the worker node. The huge pages configuration does not persist across any other worker node life cycle operation, such as updating, reloading, replacing, or adding worker nodes. To remove the huge pages configuration from your cluster, you can update, reload, or replace all the worker nodes.
 
 <br />
+
 
 
 ## Changing the Calico maximum transmission unit (MTU)
@@ -606,10 +616,10 @@ spec:
 ```
 {: codeblock}
 1. Edit the `calico-config` configmap resource.
-  ```
-  kubectl edit cm calico-config -n kube-system
-  ```
-  {: pre}
+    ```
+    kubectl edit cm calico-config -n kube-system
+    ```
+    {: pre}
 
 2. In the `data` section, add a `calico_mtu_override: "<new_MTU>"` field and specify the new MTU value for Calico. Note that the quotation marks (`"`) around the new MTU value are required.
 
@@ -666,28 +676,28 @@ spec:
     {: codeblock}
 
 3. Apply the MTU changes to your cluster master by refreshing the master API server. It might take several minutes for the master to refresh.
-  ```
-  ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster master refresh --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 4. Verify that the master refresh is completed. When the refresh is complete, the **Master Status** changes to `Ready`.
-  ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 5. In the `data` section of the output, verify that the `veth_mtu` field shows the new MTU value for Calico that you specified in step 2.
-  ```
-  kubectl get cm -n kube-system calico-config -o yaml
-  ```
-  {: pre}
+    ```
+    kubectl get cm -n kube-system calico-config -o yaml
+    ```
+    {: pre}
 
-  Example output:
-  ```yaml
-  apiVersion: v1
-  data:
-    ...
+    Example output:
+    ```yaml
+    apiVersion: v1
+    data:
+        ...
     etcd_ca: /calico-secrets/etcd-ca
     etcd_cert: /calico-secrets/etcd-cert
     etcd_endpoints: https://172.20.0.1:2041
@@ -696,8 +706,8 @@ spec:
     veth_mtu: "8980"
   kind: ConfigMap
   ...
-  ```
-  {: screen}
+    ```
+    {: screen}
 
 6. Apply the MTU changes to your worker nodes by [rebooting all worker nodes in your cluster](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_reboot).
 
@@ -719,16 +729,16 @@ If you must use `hostPorts`, do not disable the port map plug-in.
 To disable the port map plug-in:
 
 1. Edit the `calico-config` configmap resource.
-  ```
-  kubectl edit cm calico-config -n kube-system
-  ```
-  {: pre}
+    ```
+    kubectl edit cm calico-config -n kube-system
+    ```
+    {: pre}
 
 2. In the `data.cni_network_config.plugins` section after the `kubernetes` plug-in, remove the `portmap` plug-in section. After you remove the `portmap` section, the configuration looks like the following:
-  ```yaml
-  apiVersion: v1
-  data:
-    calico_backend: bird
+    ```yaml
+    apiVersion: v1
+    data:
+        calico_backend: bird
     cni_network_config: |-
       {
         "name": "k8s-pod-network",
@@ -759,14 +769,16 @@ To disable the port map plug-in:
       }
     etcd_ca: /calico-secrets/etcd-ca
     ...
-  ```
-  {: codeblock}
+    ```
+    {: codeblock}
 
-  Changing any other settings for the Calico plug-in in this configmap is not supported.
-  {: important}
+    Changing any other settings for the Calico plug-in in this configmap is not supported.
+    {: important}
 
 3. Apply the change to your cluster by restarting all `calico-node` pods.
     ```
     kubectl rollout restart daemonset -n kube-system calico-node
     ```
     {: pre}
+
+

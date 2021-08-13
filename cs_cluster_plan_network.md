@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Planning your cluster network setup   
 {: #plan_clusters}
@@ -279,8 +277,8 @@ Note that a public gateway is not required on your subnets to allow inbound netw
 
 <p>
 <figure>
- <img src="images/vpc_no_pgw.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC cluster that runs internet-facing app workloads"/>
- <figcaption>Network setup for a VPC cluster that runs internet-facing app workloads</figcaption>
+    <img src="images/vpc_no_pgw.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC cluster that runs internet-facing app workloads"/>
+    <figcaption>Network setup for a VPC cluster that runs internet-facing app workloads</figcaption>
 </figure>
 </p>
 
@@ -314,8 +312,8 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <p>
 <figure>
- <img src="images/cs_org_ov_vpc.png" width="850" style="width:850px; border-style: none" alt="Network setup for a cluster that allows limited, secure public access"/>
- <figcaption>Network setup for a VPC cluster that allows limited, secure public access</figcaption>
+    <img src="images/cs_org_ov_vpc.png" width="850" style="width:850px; border-style: none" alt="Network setup for a cluster that allows limited, secure public access"/>
+    <figcaption>Network setup for a VPC cluster that allows limited, secure public access</figcaption>
 </figure>
 </p>
 
@@ -352,8 +350,8 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <p>
 <figure>
- <img src="images/vpc_extend.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC cluster that extends an on-prem data center"/>
- <figcaption>Network setup for a VPC cluster that extends an on-prem data center</figcaption>
+    <img src="images/vpc_extend.png" width="850" style="width:850px; border-style: none" alt="Network setup for a VPC cluster that extends an on-prem data center"/>
+    <figcaption>Network setup for a VPC cluster that extends an on-prem data center</figcaption>
 </figure>
 </p>
 
@@ -518,8 +516,8 @@ For example, if your worker nodes are connected to a private VLAN only, but you 
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_internet.png" alt="Architecture image for a cluster that runs internet-facing workloads"/>
- <figcaption>Network setup for a cluster that runs internet-facing workloads</figcaption>
+    <img src="images/cs_clusters_planning_internet.png" alt="Architecture image for a cluster that runs internet-facing workloads"/>
+    <figcaption>Network setup for a cluster that runs internet-facing workloads</figcaption>
 </figure>
 </p>
 
@@ -566,8 +564,8 @@ Keep your compute workloads private and allow limited public connectivity to you
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_classic_gateway.png" alt="Architecture image for a cluster that uses a gateway for secure public access"/>
- <figcaption>Network setup for a cluster that uses a gateway for secure public access</figcaption>
+    <img src="images/cs_clusters_planning_classic_gateway.png" alt="Architecture image for a cluster that uses a gateway for secure public access"/>
+    <figcaption>Network setup for a cluster that uses a gateway for secure public access</figcaption>
 </figure>
 </p>
 
@@ -603,8 +601,8 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_gateway.png" width="850" style="width:850px; border-style: none" alt="Architecture image for a cluster that uses a gateway appliance for secure public access"/>
- <figcaption>Network setup for a cluster that uses a gateway appliance for secure public access</figcaption>
+    <img src="images/cs_clusters_planning_gateway.png" width="850" style="width:850px; border-style: none" alt="Architecture image for a cluster that uses a gateway appliance for secure public access"/>
+    <figcaption>Network setup for a cluster that uses a gateway appliance for secure public access</figcaption>
 </figure>
 </p>
 
@@ -629,6 +627,7 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 <br />
 
 
+
 ### Scenario: Extend your on-premises data center to a classic cluster
 {: #private_clusters}
 
@@ -637,8 +636,8 @@ Ready to get started with a cluster for this scenario? After you plan your [high
 
 <p>
 <figure>
- <img src="images/cs_clusters_planning_extend.png" width="850" style="width:850px; border-style: none" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
- <figcaption>Network setup for a cluster that connects to an on-premises data center on the private network</figcaption>
+    <img src="images/cs_clusters_planning_extend.png" width="850" style="width:850px; border-style: none" alt="Architecture image for a cluster that connects to an on-premises data center on the private network"/>
+    <figcaption>Network setup for a cluster that connects to an on-premises data center on the private network</figcaption>
 </figure>
 </p>
 
@@ -661,6 +660,8 @@ Your worker nodes can automatically, securely communicate with other {{site.data
 To provide private access to an app in your cluster, you can create a private network load balancer (NLB) or Ingress application load balancer (ALB). These Kubernetes network services expose your app to the private network only so that any on-premises system with a connection to the subnet that the NLB IP is on can access the app.
 
 Ready to get started with a cluster for this scenario? After you plan your [high availability](/docs/containers?topic=containers-ha_clusters) and [worker node](/docs/containers?topic=containers-planning_worker_nodes) setups, see [Creating clusters](/docs/containers?topic=containers-clusters).
+
+
 
 
 

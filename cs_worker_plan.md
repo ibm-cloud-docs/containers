@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Planning your worker node setup
 {: #planning_worker_nodes}
@@ -174,13 +172,14 @@ Want to be sure that you always have enough worker nodes to cover your workload?
 When you create a worker pool, you choose the flavor, which describes the operating system along with the compute resources of the worker nodes. Supported operating systems are Ubuntu 18.04 x86_64, 16.04 x86_64 (deprecated). To update the version of the operating system that a worker node uses, such as from Ubuntu 16 to 18, you can [replace the flavor of the worker pool](/docs/containers?topic=containers-update#machine_type).
 
 You can also log in to your cluster to check the operating system of the worker nodes.
-1.  [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
-2.  List your worker nodes.
+1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
+2. List your worker nodes.
     ```
     kubectl get nodes
     ```
     {: pre}
-3.  Describe your worker node and check for the operating system label that IBM applies, or the **OS Image** and **Operating System** fields in the **System Info** section.
+
+3. Describe your worker node and check for the operating system label that IBM applies, or the **OS Image** and **Operating System** fields in the **System Info** section.
     ```
     kubectl describe node <node>
     ```
@@ -231,7 +230,7 @@ Some classic worker node flavors are available for only one type of tenancy setu
 
 Every VM comes with an attached disk for storage of information that the VM needs to run, such as OS file system, container runtime, and the `kubelet`.  Local storage on the worker node is for short-term processing only, and the storage disks are wiped when you delete, reload, replace, or update the worker node. For persistent storage solutions for your apps, see [Planning highly available persistent storage](/docs/containers?topic=containers-storage_planning#storage_planning).
 
- Additionally, classic and VPC infrastructure differ in the disk setup.
+    Additionally, classic and VPC infrastructure differ in the disk setup.
 
 * <img src="images/icon-classic.png" alt="Classic infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **Classic VMs**: Classic VMs have two attached disks. The primary storage disk has 25 GB for the OS file system, and the secondary storage disk has 100 GB for data such as the container runtime and the `kubelet`. For reliability, the primary and secondary storage volumes are local disks instead of storage area networking (SAN). Reliability benefits include higher throughput when serializing bytes to the local disk and reduced file system degradation due to network failures. The secondary disk is encrypted by default.
 * <img src="images/icon-vpc.png" alt="VPC infrastructure provider icon" width="15" style="width:15px; border-style: none"/> **VPC compute VMs**: VPC VMs have one primary disk that is a block storage volume that is attached via the network. The storage layer is not separated from the other networking layers, and both network and storage traffic are routed on the same network. To account for network latency, the storage disks have a maximum of up to 3000 IOPS. The primary storage disk is used for storing data such as the OS file system, container runtime, and `kubelet`, and is [encrypted by default](/docs/vpc?topic=vpc-block-storage-about#vpc-storage-encryption).
@@ -469,5 +468,7 @@ To review how much compute resources are currently used on your worker node, run
 {: tab-group="Worker Node"}
 
 <p class="note">Sample worker node values are provided for example only. Your actual usage might vary slightly.</p>
+
+
 
 

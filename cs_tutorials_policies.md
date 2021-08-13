@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-12"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -58,7 +58,6 @@ completion-time: 60m
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -109,9 +108,8 @@ completion-time: 60m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Using Calico network policies to block traffic
 {: #policy_tutorial}
@@ -371,22 +369,23 @@ The following image shows how traffic is permitted to the NLB but not to node po
 2. Apply the policy.
     - Linux:
 
-      ```
-      calicoctl apply -f filepath/deny-nodeports.yaml
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f filepath/deny-nodeports.yaml
+        ```
+        {: pre}
 
     - Windows and OS X:
 
-      ```
-      calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-  Example output:
-  ```
-  Successfully applied 1 'GlobalNetworkPolicy' resource(s)
-  ```
-  {: screen}
+        ```
+        calicoctl apply -f filepath/deny-nodeports.yaml --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
+
+    Example output:
+    ```
+    Successfully applied 1 'GlobalNetworkPolicy' resource(s)
+    ```
+    {: screen}
 
 3. Using the values from your cheat sheet, verify that you can't publicly access the worker node public IP address and node port.
     ```
@@ -435,6 +434,7 @@ The following image shows how traffic is permitted to the NLB but not to node po
         -no body in request-
     ```
     {: screen}
+
     In the `Request Information` section of the output, the source IP address is, for example, `client_address=1.1.1.1`. The source IP address is the public IP of the system that you're using to run curl. Otherwise, if you are connecting to the internet through a proxy or VPN, the proxy or VPN might be obscuring your system's actual IP address. In either case, the NLB sees your system's source IP address as the client IP address.
 
 6. Copy your system's source IP address (`client_address=1.1.1.1` in the previous step output) into your cheat sheet to use in later lessons.
@@ -491,17 +491,17 @@ First, in addition to the node ports, you must block all incoming traffic to the
 2. Apply the policy.
     - Linux:
 
-      ```
-      calicoctl apply -f filepath/deny-lb-port-80.yaml
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f filepath/deny-lb-port-80.yaml
+        ```
+        {: pre}
 
     - Windows and OS X:
 
-      ```
-      calicoctl apply -f filepath/deny-lb-port-80.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f filepath/deny-lb-port-80.yaml --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
 
 3. Using the value from your cheat sheet, verify that you now can't access the public NLB IP address. The connection times out because the Calico policy you created is blocking traffic to the NLB.
     ```
@@ -539,18 +539,19 @@ First, in addition to the node ports, you must block all incoming traffic to the
 5. Apply the policy.
     - Linux:
 
-      ```
-      calicoctl apply -f filepath/allowlist.yaml
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f filepath/allowlist.yaml
+        ```
+        {: pre}
 
     - Windows and OS X:
 
-      ```
-      calicoctl apply -f filepath/allowlist.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-  Your system's IP address is now allowed.
+        ```
+        calicoctl apply -f filepath/allowlist.yaml --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
+
+    Your system's IP address is now allowed.
 
 6. Using the value from your cheat sheet, verify that you now can access the public NLB IP address.
     ```
@@ -563,6 +564,7 @@ First, in addition to the node ports, you must block all incoming traffic to the
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
+
     The connection times out because that system's IP address isn't allowed.
 
 At this point, all traffic to the public node ports and NLB is blocked. Only traffic from your allowed system IP is allowed.
@@ -580,34 +582,36 @@ In this lesson, block traffic from your own system's source IP address. At the e
 
 1. Clean up the allowlist policies you created in the previous lesson.
     - Linux:
-      ```
-      calicoctl delete GlobalNetworkPolicy deny-lb-port-80
-      ```
-      {: pre}
-      ```
-      calicoctl delete GlobalNetworkPolicy allowlist
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy deny-lb-port-80
+        ```
+        {: pre}
+
+        ```
+        calicoctl delete GlobalNetworkPolicy allowlist
+        ```
+        {: pre}
 
     - Windows and OS X:
-      ```
-      calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-      ```
-      calicoctl delete GlobalNetworkPolicy allowlist --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy deny-lb-port-80 --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
+
+        ```
+        calicoctl delete GlobalNetworkPolicy allowlist --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
 
     Now, all incoming TCP and UDP traffic from any source IP to the NLB IP address and port is permitted again.
 
 2. To deny all incoming TCP and UDP traffic from your system's source IP address to the NLB IP address and port, create a low-order pre-DNAT policy called `blocklist.yaml` in a text editor. Using the values from your cheat sheet, replace `<loadbalancer_IP>` with the public IP address of the NLB and `<client_address>` with the public IP address of your system's source IP.
-  ```yaml
-  apiVersion: projectcalico.org/v3
-  kind: GlobalNetworkPolicy
-  metadata:
-    name: blocklist
-  spec:
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+        name: blocklist
+      spec:
     applyOnForward: true
     preDNAT: true
     ingress:
@@ -635,30 +639,32 @@ In this lesson, block traffic from your own system's source IP address. At the e
     order: 500
     types:
     - Ingress
-  ```
-  {: codeblock}
+    ```
+    {: codeblock}
 
 3. Apply the policy.
     - Linux:
 
-      ```
-      calicoctl apply -f filepath/blocklist.yaml
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f filepath/blocklist.yaml
+        ```
+        {: pre}
 
     - Windows and OS X:
 
-      ```
-      calicoctl apply -f filepath/blocklist.yaml --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
-  Your system's IP address is now blocked.
+        ```
+        calicoctl apply -f filepath/blocklist.yaml --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
+
+    Your system's IP address is now blocked.
 
 4. Using the value from your cheat sheet, verify from your system that you can't access the NLB IP because your system's IP is blocked.
     ```
     curl --connect-timeout 10 <loadbalancer_IP>:80
     ```
     {: pre}
+
     At this point, all traffic to the public node ports is blocked, and all traffic to the public NLB is allowed. Only traffic from your specific system IP to the NLB is blocked.
 
 Great work! You successfully controlled traffic into your app by using Calico Pre-DNAT policies to block source IPs.
@@ -673,12 +679,12 @@ In the previous lesson, you blocked traffic from your system IP to the NLB. In t
 In our example scenario, the PR firm you work for wants you to set up a logging trail for any unusual traffic that is continuously being denied by one of your network policies. To monitor the potential security threat, you set up logging to record every time that your blocklist policy denies an attempted action on the NLB IP.
 
 1. Create a Calico NetworkPolicy named `log-denied-packets`. This log policy uses the same selector as the `blocklist` policy, which adds this policy to the Calico Iptables rule chain. By using a lower-order number, such as `300`, you can ensure that this rule is added to the Iptables rule chain before the blocklist policy. Packets from your IP are logged by this policy before they try to match the `blocklist` policy rule and are denied.
-  ```yaml
-  apiVersion: projectcalico.org/v3
-  kind: GlobalNetworkPolicy
-  metadata:
-    name: log-denied-packets
-  spec:
+    ```yaml
+    apiVersion: projectcalico.org/v3
+    kind: GlobalNetworkPolicy
+    metadata:
+        name: log-denied-packets
+      spec:
     applyOnForward: true
     preDNAT: true
     ingress:
@@ -706,66 +712,68 @@ In our example scenario, the PR firm you work for wants you to set up a logging 
     order: 300
     types:
     - Ingress
-  ```
-  {: codeblock}
+    ```
+    {: codeblock}
 
-2.  Apply the policy.
+2. Apply the policy.
     - Linux:
 
-      ```
-      calicoctl apply -f /log-denied-packets.yaml
-      ```
-      {: pre}
+        ```
+        calicoctl apply -f /log-denied-packets.yaml
+        ```
+        {: pre}
 
     - Windows and OS X:
 
-      ```
-      calicoctl apply -f /log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
-      ```
+        ```
+        calicoctl apply -f /log-denied-packets.yaml --config=<filepath>/calicoctl.cfg
+        ```
 
 3. Generate log entries by sending requests from your system IP to the NLB IP. These request packets are logged before they are denied.
-  ```
-  curl --connect-timeout 10 <loadbalancer_IP>:80
-  ```
-  {: pre}
+    ```
+    curl --connect-timeout 10 <loadbalancer_IP>:80
+    ```
+    {: pre}
 
 4. Check for log entries that are written to the `/var/log/syslog` path. The log entry looks similar to the following.
-  ```
-  Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
-  ```
-  {: screen}
+    ```
+    Sep 5 14:34:40 <worker_hostname> kernel: [158271.044316] calico-packet: IN=eth1 OUT= MAC=08:00:27:d5:4e:57:0a:00:27:00:00:00:08:00 SRC=192.XXX.XX.X DST=192.XXX.XX.XX LEN=60 TOS=0x00 PREC=0x00 TTL=64 ID=52866 DF PROTO=TCP SPT=42962 DPT=22 WINDOW=29200 RES=0x00 SYN URGP=0
+    ```
+    {: screen}
 
 Nice! You set up logging so that blocked traffic can be monitored more easily.
 
 If you want to clean up the blocklist and the log policies:
 1. Clean up the blocklist policy.
     - Linux:
-      ```
-      calicoctl delete GlobalNetworkPolicy blocklist
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy blocklist
+        ```
+        {: pre}
 
     - Windows and OS X:
-      ```
-      calicoctl delete GlobalNetworkPolicy blocklist --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy blocklist --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
 
 2. Clean up the log policy.
     - Linux:
-      ```
-      calicoctl delete GlobalNetworkPolicy log-denied-packets
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy log-denied-packets
+        ```
+        {: pre}
 
     - Windows and OS X:
-      ```
-      calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
-      ```
-      {: pre}
+        ```
+        calicoctl delete GlobalNetworkPolicy log-denied-packets --config=filepath/calicoctl.cfg
+        ```
+        {: pre}
 
 ## What's next?
 {: #whats_next}
 
 * Read more about [controlling traffic with network policies](/docs/containers?topic=containers-network_policies).
 * For more example Calico network policies that control traffic to and from your cluster, you can check out the [stars policy demo](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-demo/kubernetes-demo){: external} and the [advanced network policy](https://docs.projectcalico.org/security/tutorials/kubernetes-policy-advanced){: external}.
+
+

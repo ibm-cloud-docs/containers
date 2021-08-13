@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Overview of use cases
 {: #cs_uc_intro}
@@ -121,44 +119,46 @@ Various use cases show the strengths of {{site.data.keyword.containerlong_notm}}
 
 <table summary="The table shows the use cases. Rows are to be read from the left to right, with icons representing each industry in column one the description in column two.">
 <caption>Use cases</caption>
-  <thead>
-  <col width="25%">
-  <th>Industry</th>
-  <th>Use case</th>
-  </thead>
-  <tbody>
-    <tr>
+    <thead>
+    <col width="25%">
+    <th>Industry</th>
+    <th>Use case</th>
+    </thead>
+    <tbody>
+        <tr>
     <td align="center"><img src="images/finance.svg" alt="Icon of front and back of credit card"/><br>Financial services</td>
     <td><ul>
     <li>[Trim IT costs and accelerate regulatory compliance](/docs/containers?topic=containers-cs_uc_finance#uc_mortgage)</li>
     <li>[Streamline developer productivity to deploy AI tools to partners 4 times faster](/docs/containers?topic=containers-cs_uc_finance#uc_payment_tech)</li>
     </ul></td>
-     </tr>
-     <tr>
-     <td align="center"><img src="images/gov.svg" alt="Icon of government building with person inside"/><br>Government</td>
-     <td><ul>
+        </tr>
+        <tr>
+        <td align="center"><img src="images/gov.svg" alt="Icon of government building with person inside"/><br>Government</td>
+        <td><ul>
     <li>[Secure the exchange of data, connecting public and private organizations](/docs/containers?topic=containers-cs_uc_gov#uc_port)</li>
-     <li>[Improve collaboration velocity with community Developers, combining public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)</li></ul></td>
-      </tr>
+        <li>[Improve collaboration velocity with community Developers, combining public-private data](/docs/containers?topic=containers-cs_uc_gov#uc_data_mashup)</li></ul></td>
+        </tr>
     <tr>
-      <td align="center"><img src="images/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
-      <td><ul>
-     <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
-      <li>[Securely host sensitive data while you grow research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
-      </ul></td>
-      </tr>
-      <tr>
-         <td align="center"><img src="images/retail.svg" alt="Icon of shopping cart with currency symbol"/><br>Retail</td>
-         <td><ul>
+        <td align="center"><img src="images/health.svg" alt="Icon of medical bag"/><br>Healthcare</td>
+        <td><ul>
+        <li>[Migrate workloads from inefficient VMs to easily operated containers for patient systems](/docs/containers?topic=containers-cs_uc_health#uc_migrate)</li>
+        <li>[Securely host sensitive data while you grow research with partners](/docs/containers?topic=containers-cs_uc_health#uc_research)</li>
+        </ul></td>
+        </tr>
+        <tr>
+            <td align="center"><img src="images/retail.svg" alt="Icon of shopping cart with currency symbol"/><br>Retail</td>
+            <td><ul>
         <li>[Share data via APIs with global business partners to drive omni-channel sales](/docs/containers?topic=containers-cs_uc_retail#uc_data-share)</li>
-         <li>[Optimize inventory expenses with digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
+            <li>[Optimize inventory expenses with digital insights to sales behavior](/docs/containers?topic=containers-cs_uc_retail#uc_grocer)</li>
               </ul></td>
           </tr>
-      <tr>
-       <td align="center"><img src="images/transport.svg" alt="Icon of railroad car with containers"/><br>Transportation</td>
-           <td><ul>
+        <tr>
+        <td align="center"><img src="images/transport.svg" alt="Icon of railroad car with containers"/><br>Transportation</td>
+            <td><ul>
           <li>[Build and deploy HR site with AI in less than 3 weeks](/docs/containers?topic=containers-cs_uc_transport#uc_airline)</li>
-           <li>[Increase availability of worldwide systems for business partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
-      </tr>
-  </tbody>
-  </table>
+            <li>[Increase availability of worldwide systems for business partners](/docs/containers?topic=containers-cs_uc_transport#uc_shipping)</li></ul></td>
+        </tr>
+    </tbody>
+    </table>
+
+

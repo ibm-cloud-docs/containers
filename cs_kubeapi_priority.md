@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 # Setting Kubernetes API priority and fairness
 {: #kubeapi-priority}
 
@@ -130,13 +128,13 @@ You can create your own flow schema and priorities, but do not modify the defaul
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  List the flow schemas in your cluster.
+1. List the flow schemas in your cluster.
     ```
     kubectl get flowschemas
     ```
     {: pre} 
 
-2.  Review the details of a particular flow schema to understand the scope of the flow schema, including which resources can make prioritized API requests, what type of API requests can be made, and what objects the requests can modify.
+2. Review the details of a particular flow schema to understand the scope of the flow schema, including which resources can make prioritized API requests, what type of API requests can be made, and what objects the requests can modify.
     ```
     kubectl describe flowschema <flow-schema-name>
     ```
@@ -148,4 +146,6 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 * `ibm-system-service-accounts`
 * `ibm-operators-service-accounts`
 * `system-node-proxiers`
+
+
 

@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Why do pods remain in pending state?
 {: #ts-app-pod-pending}
 
@@ -140,49 +140,51 @@ kubectl get nodes
 If this cluster is an existing one, check your cluster capacity.
 
 
-1.  Set the proxy with the default port number.
+1. Set the proxy with the default port number.
 
-  ```
-  kubectl proxy
-  ```
-   {: pre}
+    ```
+    kubectl proxy
+    ```
+    {: pre}
 
-2.  Open the Kubernetes dashboard.
+2. Open the Kubernetes dashboard.
 
-  ```
-  http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
-  ```
-  {: pre}
+    ```
+    http://localhost:8001/api/v1/namespaces/kube-system/services/https:kubernetes-dashboard:/proxy/
+    ```
+    {: pre}
 
-3.  Check if you have enough capacity in your cluster to deploy your pod.
+3. Check if you have enough capacity in your cluster to deploy your pod.
 
-4.  If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
+4. If you don't have enough capacity in your cluster, resize your worker pool to add more nodes.
 
-    1.  Review the current sizes and flavors of your worker pools to decide which one to resize.
+    1. Review the current sizes and flavors of your worker pools to decide which one to resize.
 
         ```
         ibmcloud ks worker-pool ls
         ```
         {: pre}
 
-    2.  Resize your worker pools to add more nodes to each zone that the pool spans.
+    2. Resize your worker pools to add more nodes to each zone that the pool spans.
 
         ```
         ibmcloud ks worker-pool resize --worker-pool <worker_pool> --cluster <cluster_name_or_ID> --size-per-zone <workers_per_zone>
         ```
         {: pre}
 
-5.  Optional: Check your pod resource requests.
+5. Optional: Check your pod resource requests.
 
-    1.  Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
+    1. Confirm that the `resources.requests` values are not larger than the worker node's capacity. For example, if the pod request `cpu: 4000m`, or 4 cores, but the worker node size is only 2 cores, the pod cannot be deployed.
 
         ```
         kubectl get pod <pod_name> -o yaml
         ```
         {: pre}
 
-    2.  If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
+    2. If the request exceeds the available capacity, [add a new worker pool](/docs/containers?topic=containers-add_workers#add_pool) with worker nodes that can fulfill the request.
 
-6.  If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.
+6. If your pods still stay in a **pending** state after the worker node is fully deployed, review the [Kubernetes documentation](https://kubernetes.io/docs/tasks/debug-application-cluster/debug-pod-replication-controller/#my-pod-stays-pending){: external} to further troubleshoot the pending state of your pod.
+
+
 
 

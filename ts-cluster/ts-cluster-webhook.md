@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Why do cluster operations fail due to a broken webhook?
 {: #webhooks_update}
 
@@ -139,7 +139,7 @@ Potential causes for broken webhooks include:
 Identify and restore the resource that causes the broken webhook.
 {: tsResolve}
 
-1.  Create a test pod to get an error that identifies the broken webhook. The error message might have the name of the broken webhook.
+1. Create a test pod to get an error that identifies the broken webhook. The error message might have the name of the broken webhook.
     ```
     kubectl run webhook-test --generator=run-pod/v1 --image pause:latest
     ```
@@ -151,7 +151,7 @@ Identify and restore the resource that causes the broken webhook.
     ```
     {: screen}
 
-2.  Get the name of the broken webhook.
+2. Get the name of the broken webhook.
     *   If the error message has a broken webhook, replace `trust.hooks.securityenforcement.admission.cloud.ibm.com` with the broken webhook that you previously identified.
         ```
         kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations -o jsonpath='{.items[?(@.webhooks[*].name=="trust.hooks.securityenforcement.admission.cloud.ibm.com")].metadata.name}{"\n"}'
@@ -169,8 +169,8 @@ Identify and restore the resource that causes the broken webhook.
         kubectl get mutatingwebhookconfigurations,validatingwebhookconfigurations
         ```
         {: pre}  
-         
-3.  Review the service and location details of the mutating or validating webhook configuration in the `clientConfig` section in the output of the following command. Replace `image-admission-config` with the name that you previously identified. If the webhook exists outside the cluster, contact the cluster owner to check the webhook status.
+            
+3. Review the service and location details of the mutating or validating webhook configuration in the `clientConfig` section in the output of the following command. Replace `image-admission-config` with the name that you previously identified. If the webhook exists outside the cluster, contact the cluster owner to check the webhook status.
     ```
     kubectl get mutatingwebhookconfiguration image-admission-config -o yaml
     ```
@@ -183,7 +183,7 @@ Identify and restore the resource that causes the broken webhook.
 
     Example output:
     ```
-      clientConfig:
+        clientConfig:
         caBundle: <redacted>
         service:
             name: <name>
@@ -192,7 +192,8 @@ Identify and restore the resource that causes the broken webhook.
             port: 443
     ```
     {: screen}
-4.  **Optional**: Back up the webhooks, especially if you do not know how to reinstall the webhook.
+
+4. **Optional**: Back up the webhooks, especially if you do not know how to reinstall the webhook.
     ```
     kubectl get mutatingwebhookconfiguration <name> -o yaml > mutatingwebhook-backup.yaml
     ```
@@ -202,38 +203,46 @@ Identify and restore the resource that causes the broken webhook.
     kubectl get validatingwebhookconfiguration <name> -o yaml > validatingwebhook-backup.yaml
     ```
     {: pre}
-5.  Check the status of the related service and pods for the webhook.
-    1.  Check the service **Type**, **Selector**, and **Endpoint** fields.
+
+5. Check the status of the related service and pods for the webhook.
+    1. Check the service **Type**, **Selector**, and **Endpoint** fields.
         ```
         kubectl describe service -n <namespace> <service_name>
         ```
         {: pre}
-    2.  If the service type is **ClusterIP**, check that the pod for OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) is in a **Running** status so that the webhook can connect securely to the Kubernetes API in the cluster master. If the pod is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot.
-      * Kubernetes version 1.21 or later: Check the Konnectivity agent pods.
+
+    2. If the service type is **ClusterIP**, check that the pod for OpenVPN (Kubernetes version 1.20 or earlier) or Konnectivity (Kubernetes version 1.21 or later) is in a **Running** status so that the webhook can connect securely to the Kubernetes API in the cluster master. If the pod is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot.
+        * Kubernetes version 1.21 or later: Check the Konnectivity agent pods.
         ```
         kubectl describe pods -n kube-system -l app=konnectivity-agent
         ```
         {: pre}
-      * Kubernetes version 1.20 or earlier: Check the OpenVPN client pods.
+
+        * Kubernetes version 1.20 or earlier: Check the OpenVPN client pods.
         ```
         kubectl describe pods -n kube-system -l app=vpn
         ```
         {: pre}
-    3.  If the service does not have an endpoint, check the health of the backing resources, such as a deployment or pod. If the resource is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot. For more information, see [Debugging app deployments](/docs/containers?topic=containers-debug_apps).
+
+    3. If the service does not have an endpoint, check the health of the backing resources, such as a deployment or pod. If the resource is not healthy, check the pod events, logs, worker node health, and other components to troubleshoot. For more information, see [Debugging app deployments](/docs/containers?topic=containers-debug_apps).
         ```
         kubectl get all -n my-service-namespace -l <key=value>
         ```
         {: pre}
-    4.  If the service does not have any backing resources, or if troubleshooting the pods does not resolve the issue, remove the webhook.
+
+    4. If the service does not have any backing resources, or if troubleshooting the pods does not resolve the issue, remove the webhook.
         ```
         kubectl delete mutatingwebhook <name>
         ```
         {: pre}
-6.  Retry the cluster master operation, such as updating the cluster.
-7.  If you still see the error, you might have worker node or network connectivity issues.
+
+6. Retry the cluster master operation, such as updating the cluster.
+7. If you still see the error, you might have worker node or network connectivity issues.
     *   [Worker node troubleshooting](/docs/containers?topic=containers-debug_worker_nodes).
     *   Make sure that the webhook can connect to the Kubernetes API server in the cluster master. For example, if you use Calico network policies, security groups, or some other type of firewall, set up your [classic](/docs/containers?topic=containers-firewall) or [VPC](/docs/containers?topic=containers-vpc-firewall) cluster with the appropriate access.
     *   If the webhook is managed by an add-on that you installed, uninstall the add-on. Common add-ons that cause webhook issues include the following:
         * [Portieris](/docs/openshift?topic=openshift-images#portieris-image-sec)
         * [Istio](/docs/containers?topic=containers-istio#istio_uninstall).
-8.  Re-create the webhook or reinstall the add-on.
+8. Re-create the webhook or reinstall the add-on.
+
+

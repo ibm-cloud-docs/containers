@@ -9,7 +9,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -104,12 +103,13 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Site map
 {: #cs_sitemap}
+
+
 
 
 
@@ -703,13 +703,8 @@ subcollection: containers
 * [Isolating ALB proxy workloads to edge nodes in classic gateway-enabled clusters](/docs/containers?topic=containers-edge#edge_gateway)
 
 [Classic: Controlling traffic with network policies](/docs/containers?topic=containers-network_policies)
-  * [Kubernetes network policies](/docs/containers?topic=containers-network_policies#kubernetes-network-policies)
-  * [Calico network policies](/docs/containers?topic=containers-network_policies#calico-network-policies)
 * [Default Calico and Kubernetes network policies](/docs/containers?topic=containers-network_policies#default_policy)
 * [Installing and configuring the Calico CLI](/docs/containers?topic=containers-network_policies#cli_install)
-* [Installing the Calico CLI, `calicoctl`, according to your operating system.](/docs/containers?topic=containers-network_policies#cli_install-calicoctl)
-  * [Linux and OS X](/docs/containers?topic=containers-network_policies#cli_install-calicoctl-linux-osx)
-  * [Windows](/docs/containers?topic=containers-network_policies#cli_install-calicoctl-windows)
 * [Viewing network policies](/docs/containers?topic=containers-network_policies#view_policies)
 * [Adding network policies](/docs/containers?topic=containers-network_policies#adding_network_policies)
 * [Controlling inbound traffic to NLB or NodePort services](/docs/containers?topic=containers-network_policies#block_ingress)
@@ -1518,8 +1513,8 @@ subcollection: containers
 [{{site.data.keyword.containerlong_notm}} CLI](/docs/containers?topic=containers-kubernetes-service-cli)
 * [`cluster` commands](/docs/containers?topic=containers-kubernetes-service-cli#cluster)
   * [`ibmcloud ks cluster addon disable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_disable)
-  * [`ibmcloud ks cluster addon enable`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
-  * [`ibmcloud ks cluster addon get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
+  * [<code>ibmcloud ks cluster addon enable</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_enable)
+  * [<code>ibmcloud ks cluster addon get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_get)
   * [`ibmcloud ks cluster addon ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addons)
   * [`ibmcloud ks cluster addon options`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_options)
   * [`ibmcloud ks cluster addon update`](/docs/containers?topic=containers-kubernetes-service-cli#cs_cluster_addon_update)
@@ -1563,7 +1558,7 @@ subcollection: containers
 * [`worker-pool` commands](/docs/containers?topic=containers-kubernetes-service-cli#worker-pool)
   * [`ibmcloud ks worker-pool create classic`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create)
   * [`ibmcloud ks worker-pool create vpc-gen2`](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2)
-  * [`ibmcloud ks worker-pool get`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
+  * [<code>ibmcloud ks worker-pool get</code>](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_get)
   * [`ibmcloud ks worker-pool label rm`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_rm)
   * [`ibmcloud ks worker-pool label set`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set)
   * [`ibmcloud ks worker-pool ls`](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pools)
@@ -1683,7 +1678,7 @@ subcollection: containers
 * [Logging commands](/docs/containers?topic=containers-observability_cli#logging-commands)
   * [`ibmcloud ob logging agent discover`](/docs/containers?topic=containers-observability_cli#logging_agent_discover)
   * [`ibmcloud ob logging config create`](/docs/containers?topic=containers-observability_cli#logging_config_create)
-  * [`ibmcloud ob logging config delete`](/docs/containers?topic=containers-observability_cli#logging_config_delete)
+  * [<code>ibmcloud ob logging config delete</code>](/docs/containers?topic=containers-observability_cli#logging_config_delete)
   * [`ibmcloud ob logging config list`](/docs/containers?topic=containers-observability_cli#logging_config_list)
   * [`ibmcloud ob logging config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#logging_config_enable)
   * [`ibmcloud ob logging config replace`](/docs/containers?topic=containers-observability_cli#logging_config_replace)
@@ -1691,7 +1686,7 @@ subcollection: containers
 * [Monitoring commands](/docs/containers?topic=containers-observability_cli#monitoring-commands)
   * [`ibmcloud ob monitoring agent discover`](/docs/containers?topic=containers-observability_cli#monitoring_agent_discover)
   * [`ibmcloud ob monitoring config create`](/docs/containers?topic=containers-observability_cli#monitoring_config_create)
-  * [`ibmcloud ob monitoring config delete`](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
+  * [<code>ibmcloud ob monitoring config delete</code>](/docs/containers?topic=containers-observability_cli#monitoring_config_delete)
   * [`ibmcloud ob monitoring config list`](/docs/containers?topic=containers-observability_cli#monitoring_config_list)
   * [`ibmcloud ob monitoring config enable public-endpoint|private-endpoint`](/docs/containers?topic=containers-observability_cli#monitoring_config_enable)
   * [`ibmcloud ob monitoring config replace`](/docs/containers?topic=containers-observability_cli#monitoring_config_replace)
@@ -1882,10 +1877,10 @@ subcollection: containers
 
 [Istio add-on version changelog](/docs/containers?topic=containers-istio-changelog)
 * [Version 1.10](/docs/containers?topic=containers-istio-changelog#v110)
-  * [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
+* [Changelog for 1.10.3, released 5 August 2021](/docs/containers?topic=containers-istio-changelog#1103)
   * [Changelog for 1.10.2, released 15 July 2021](/docs/containers?topic=containers-istio-changelog#1102)
 * [Version 1.9](/docs/containers?topic=containers-istio-changelog#v19)
-  * [Changelog for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
+* [Changelog for 1.9.7, released 12 August 2021](/docs/containers?topic=containers-istio-changelog#197)
   * [Changelog for 1.9.6, released 22 July 2021](/docs/containers?topic=containers-istio-changelog#196)
   * [Changelog for 1.9.5, released 27 May 2021](/docs/containers?topic=containers-istio-changelog#195)
   * [Changelog for 1.9.4, released 17 May 2021](/docs/containers?topic=containers-istio-changelog#194)
@@ -1929,14 +1924,14 @@ subcollection: containers
   * [Changelog for 1.5.6, released 23 June 2020](/docs/containers?topic=containers-istio-changelog#156)
   * [Changelog for 1.5, released 19 May 2020](/docs/containers?topic=containers-istio-changelog#15)
 * [Version 1.4 (unsupported)](/docs/containers?topic=containers-istio-changelog#v14)
-* [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
-* [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
-* [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
-* [Changelog for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
-* [Changelog for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
-* [Changelog for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
-* [Changelog for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
-* [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
+  * [Changelog for 1.4.9, released 18 May 2020](/docs/containers?topic=containers-istio-changelog#149)
+  * [Changelog for 1.4.8, released 30 April 2020](/docs/containers?topic=containers-istio-changelog#148)
+  * [Changelog for 1.4.7, released 01 April 2020](/docs/containers?topic=containers-istio-changelog#147)
+  * [Changelog for 1.4.6, released 09 March 2020](/docs/containers?topic=containers-istio-changelog#146)
+  * [Changelog for 1.4.5, released 21 February 2020](/docs/containers?topic=containers-istio-changelog#145)
+  * [Changelog for 1.4.4, released 14 February 2020](/docs/containers?topic=containers-istio-changelog#144)
+  * [Changelog for 1.4.3, released 16 January 2020](/docs/containers?topic=containers-istio-changelog#143)
+  * [Changelog for 1.4.2, released 16 December 2020](/docs/containers?topic=containers-istio-changelog#142)
 
 [Cluster autoscaler add-on changelog](/docs/containers?topic=containers-ca_changelog)
 * [Changelog for 1.0.3, released 23 June 2021](/docs/containers?topic=containers-ca_changelog#0103_ca_addon)

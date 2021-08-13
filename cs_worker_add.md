@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Adding worker nodes and zones to clusters
 {: #add_workers}
@@ -183,62 +181,63 @@ To resize the worker pool, change the number of worker nodes that the worker poo
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 1. Retrieve the **VPC ID** and **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. You can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone locations](/docs/containers?topic=containers-regions-and-zones#zones-vpc) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls --provider vpc-gen2`.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ...
-   VPC ID:        <VPC_ID>
-   ...
-   Worker Zones: us-south-1, us-south-2, us-south-3
-   ```
-   {: screen}
+    Example output:
+    ```
+    ...
+    VPC ID:        <VPC_ID>
+    ...
+    Worker Zones: us-south-1, us-south-2, us-south-3
+    ```
+    {: screen}
 
 2. For each zone, note the ID of VPC subnet that you want to use for the worker pool. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256.
-   ```
-   ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
+    ```
+    {: pre}
 
-3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
+3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#vm).
     ```
     ibmcloud ks flavors --zone <zone> --provider vpc-gen2
     ```
     {: pre}
+
 4. Create a worker pool. Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`. Include the `--vpc-id` option if the worker pool is the first in the cluster. For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cli_worker_pool_create_vpc_gen2). Note that the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
-   ```
-   ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes_min_1> [--label <key>=<value>] [--vpc-id]
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool create vpc-gen2 --name <name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_worker_nodes_min_1> [--label <key>=<value>] [--vpc-id]
+    ```
+    {: pre}
 
 5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-   ```
-   ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+    ```
+    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provisioning` to `normal`.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
-   kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
-   kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.20.7_1511   
-   ```
-   {: screen}
+    Example output:
+    ```
+    ID                                                     Primary IP     Flavor   State          Status                                        Zone       Version   
+    kube-<ID_string>-<cluster_name>-<pool_name>-00000002   10.xxx.xx.xxx   c2.2x4   provisioning   Infrastructure instance status is 'pending'   us-south-1   -   
+    kube-<ID_string>-<cluster_name>-<pool_name>-00000003   10.xxx.xx.xxx   c2.2x4   normal   Ready   us-south-1   1.20.7_1511   
+    ```
+    {: screen}
 
 ### Adding a zone to a worker pool
 {: #vpc_add_zone}
@@ -253,61 +252,62 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 **Before you begin**: Make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 1. Get the **Location** of your cluster, and note the existing **Worker Zones** and **VPC ID**.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ...
-   VPC ID:        <VPC_ID>
-   Workers:       3
-   Worker Zones:  us-south-1
-   ...
-   Location:      Dallas   
-   ```
-   {: screen}
+    Example output:
+    ```
+    ...
+    VPC ID:        <VPC_ID>
+    Workers:       3
+    Worker Zones:  us-south-1
+    ...
+    Location:      Dallas   
+    ```
+    {: screen}
 
 2. List available zones for your cluster's location to see what other zones you can add.
-   ```
-   ibmcloud ks zone ls --provider vpc-gen2 | grep <location>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks zone ls --provider vpc-gen2 | grep <location>
+    ```
+    {: pre}
 
 3. List available VPC subnets for each zone that you want to add. If you do not have a VPC subnet in the zone, [create a VPC subnet](/docs/vpc?topic=vpc-creating-a-vpc-using-cli#create-a-subnet-cli). VPC subnets provide IP addresses for your worker nodes and load balancer services in the cluster, so [create a VPC subnet with enough IP addresses](/docs/containers?topic=containers-vpc-subnets#vpc_basics_subnets), such as 256. You cannot change the number of IP addresses that a VPC subnet has later.
-   ```
-   ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks subnets --zone <zone> --provider vpc-gen2 --vpc-id <VPC_ID>
+    ```
+    {: pre}
 
 4. List the worker pools in your cluster and note their names.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 5. Add the zone to your worker pool. Repeat this step for each zone that you want to add to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones. Include the `--worker-pool` flag for each worker pool.
 
-   If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
-   {: tip}
-   ```
-   ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
-   ```
-   {: pre}
+    If you want to use different VPC subnets for different worker pools, repeat this command for each subnet and its corresponding worker pools. Any new worker nodes are added to the VPC subnets that you specify, but the VPC subnets for any existing worker nodes are not changed.
+    {: tip}
+
+    ```
+    ibmcloud ks zone add vpc-gen2 --zone <zone> --subnet-id <subnet_id> --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name>
+    ```
+    {: pre}
 
 6. Verify that the zone is added to your cluster. Look for the added zone in the **Worker Zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
-  ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  Workers:       9
-  Worker Zones:  us-south-1, us-south-2, us-south-3
-  ```
-  {: screen}
+    Example output:
+    ```
+    Workers:       9
+    Worker Zones:  us-south-1, us-south-2, us-south-3
+    ```
+    {: screen}
 
 <br />
 
@@ -329,25 +329,25 @@ If you have multiple worker pools in your cluster, add the zone to all of them s
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 1. Retrieve the **Worker Zones** of your cluster and choose the zone where you want to deploy the worker nodes in your worker pool. If you have a single zone cluster, you must use the zone that you see in the **Worker Zones** field. For multizone clusters, you can choose any of the existing **Worker Zones** of your cluster, or add one of the [multizone locations](/docs/containers?topic=containers-regions-and-zones#zones-mz) for the region that your cluster is in. You can list available zones by running `ibmcloud ks zone ls`.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12, dal13
-   ```
-   {: screen}
+    Example output:
+    ```
+    ...
+    Worker Zones: dal10, dal12, dal13
+    ```
+    {: screen}
 
 2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
-3.  For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
+3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
 
     ```
     ibmcloud ks flavors --zone <zone>
@@ -355,41 +355,41 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
     {: pre}
 
 4. Create a worker pool. For more options, see the [CLI documentation](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_create).  
-   * The minimum number of worker nodes per zone is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
-   * Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
-   * If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
-   * The new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
+    * The minimum number of worker nodes per zone is 1. For more information, see [What is the smallest size cluster that I can make?](/docs/containers?topic=containers-faqs#smallest_cluster).
+    * Include the `--label` option to automatically label worker nodes that are in the pool with the label `key=value`.
+    * If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`.
+    * The new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
 
-   ```
-   ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool create classic --name <pool_name> --cluster <cluster_name_or_ID> --flavor <flavor> --size-per-zone <number_of_workers_per_zone_min_1> [--label key=value]
+    ```
+    {: pre}
 
 5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy worker nodes in a zone, you must add the zones that you previously retrieved to the worker pool. If you want to spread your worker nodes across multiple zones, repeat this command for each zone.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ```
+    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the status changes from **provision_pending** to **normal**.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
-   kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
-   ```
-   {: screen}
+    Example output:
+    ```
+    ID                                                 Public IP        Private IP      Machine Type      State    Status  Zone    Version
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
+    kube-dal10-crb20b637238ea471f8d4a8b881aae4962-w8   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
+    ```
+    {: screen}
 
 <br />
 
@@ -411,66 +411,67 @@ Before you begin:
 To add a zone with worker nodes to your worker pool:
 
 1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
-   ```
-   ibmcloud ks zone ls
-   ```
-   {: pre}
+    ```
+    ibmcloud ks zone ls
+    ```
+    {: pre}
 
 2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. List the worker pools in your cluster and note their names.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 4. Add the zone to your worker pool. If you have multiple worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
     A private and a public VLAN must exist before you can add a zone to multiple worker pools. If you do not have a private and a public VLAN in that zone, add the zone to one worker pool first so that a private and a public VLAN is created for you. Then, you can add the zone to other worker pools by specifying the private and the public VLAN that was created for you.
     {: note}
 
-   If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
-   {: tip}
-   ```
-   ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name> [-w <pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-   ```
-   {: pre}
+    If you want to use different VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
+    {: tip}
+
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -w <pool_name> [-w <pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ```
+    {: pre}
 
 5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
-  ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  Name:                           mycluster
-  ID:                             df253b6025d64944ab99ed63bb4567b6
-  State:                          normal
-  Status:                         healthy cluster
-  Created:                        2018-09-28T15:43:15+0000
-  Location:                       dal10
-  Pod Subnet:                     172.30.0.0/16
-  Service Subnet:                 172.21.0.0/16
-  Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
-  Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
-  Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
-  Master Location:                Dallas
-  Master Status:                  Ready (21 hours ago)
-  Ingress Subdomain:              mycluster-<hash>-0000.us-south.containers.appdomain.cloud
-  Ingress Secret:                 mycluster-<hash>-0000
-  Workers:                        6
-  Worker Zones:                   dal10, dal12
-  Version:                        1.20.7_1524
-  Owner:                          owner@email.com
-  Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
-  Resource Group Name:            Default
-  ```
-  {: screen}
+    Example output:
+    ```
+    Name:                           mycluster
+    ID:                             df253b6025d64944ab99ed63bb4567b6
+    State:                          normal
+    Status:                         healthy cluster
+    Created:                        2018-09-28T15:43:15+0000
+    Location:                       dal10
+    Pod Subnet:                     172.30.0.0/16
+    Service Subnet:                 172.21.0.0/16
+    Master URL:                     https://c3.<region>.containers.cloud.ibm.com:30426
+    Public Service Endpoint URL:    https://c3.<region>.containers.cloud.ibm.com:30426
+    Private Service Endpoint URL:   https://c3-private.<region>.containers.cloud.ibm.com:31140
+    Master Location:                Dallas
+    Master Status:                  Ready (21 hours ago)
+    Ingress Subdomain:              mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+    Ingress Secret:                 mycluster-<hash>-0000
+    Workers:                        6
+    Worker Zones:                   dal10, dal12
+    Version:                        1.20.7_1524
+    Owner:                          owner@email.com
+    Resource Group ID:              a8a12accd63b437bbd6d58fb6a462ca7
+    Resource Group Name:            Default
+    ```
+    {: screen}
 
 <br />
 
@@ -500,61 +501,63 @@ Before you begin:
 To add a zone to your worker pool:
 
 1. List available zones and pick the zone that you want to add to your worker pool. The zone that you choose must be a multizone-capable zone.
-   ```
-   ibmcloud ks zone ls
-   ```
-   {: pre}
+    ```
+    ibmcloud ks zone ls
+    ```
+    {: pre}
 
 2. List available VLANs in that zone. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. List the worker pools in your cluster and note their names.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 4. Add the zone to your compute and gateway worker pools. Compute worker pools are connected to a private VLAN only, but gateway worker pools are connected to both a public and a private VLAN.
-  1. Add the zone to your compute worker pools. If you have multiple compute worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
+    1. Add the zone to your compute worker pools. If you have multiple compute worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
-      A private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other compute worker pools by specifying the private VLAN that was created for you.
-      {: note}
+        A private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a private VLAN in that zone, add the zone to one worker pool first so that a private VLAN is created for you. Then, you can add the zone to other compute worker pools by specifying the private VLAN that was created for you.
+        {: note}
 
-     If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLAN that you specify, but the VLAN for any existing worker nodes are not changed.
-     {: tip}
-     ```
-     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p compute [-p <compute_pool2_name>] --private-vlan <private_VLAN_ID> --private-only
-     ```
-     {: pre}
+        If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLAN that you specify, but the VLAN for any existing worker nodes are not changed.
+        {: tip}
 
-  2. Add the zone to your gateway worker pools. If you have multiple gateway worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
+        ```
+        ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p compute [-p <compute_pool2_name>] --private-vlan <private_VLAN_ID> --private-only
+        ```
+        {: pre}
 
-      A public VLAN and private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a public VLAN and private VLAN in that zone, add the zone to one worker pool first so that public and private VLANs are created for you. Then, you can add the zone to other compute worker pools by specifying the public VLAN and private VLAN that was created for you.
-      {: note}
+    2. Add the zone to your gateway worker pools. If you have multiple gateway worker pools, add the zone to all your worker pools so that your cluster is balanced in all zones.
 
-     If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
-     {: tip}
-     ```
-     ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p gateway [-p <gateway_pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-     ```
-     {: pre}
+        A public VLAN and private VLAN must exist before you can add a zone to multiple compute worker pools. If you do not have a public VLAN and private VLAN in that zone, add the zone to one worker pool first so that public and private VLANs are created for you. Then, you can add the zone to other compute worker pools by specifying the public VLAN and private VLAN that was created for you.
+        {: note}
+
+        If you want to use different private VLANs for different worker pools, repeat this command for each VLAN and its corresponding worker pools. Any new worker nodes are added to the VLANs that you specify, but the VLANs for any existing worker nodes are not changed.
+        {: tip}
+
+        ```
+        ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> -p gateway [-p <gateway_pool2_name>] --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+        ```
+        {: pre}
 
 5. Verify that the zone is added to your cluster. Look for the added zone in the **Worker zones** field of the output. Note that the total number of workers in the **Workers** field has increased as new worker nodes are provisioned in the added zone.
-  ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  ...
-  Worker Zones:                   dal10, dal12
-  ...
-  ```
-  {: screen}
+    Example output:
+    ```
+    ...
+    Worker Zones:                   dal10, dal12
+    ...
+    ```
+    {: screen}
 
 ### Creating a new compute worker pool
 {: #gateway_compute}
@@ -565,61 +568,61 @@ To add a zone to your worker pool:
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 1. Retrieve all of the existing **Worker Zones** of your cluster.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12
-   ```
-   {: screen}
+    Example output:
+    ```
+    ...
+    Worker Zones: dal10, dal12
+    ```
+    {: screen}
 
 2. For each zone, list available private VLANs. Note the private VLAN that you want to use. If you do not have a private VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-   ```
-   ibmcloud ks flavors --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks flavors --zone <zone>
+    ```
+    {: pre}
 
 4. Create a worker pool. Ensure that you include the `--labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker` option to create a worker pool with compute functionality. If you provision a bare metal worker pool or dedicated VM, specify `--hardware dedicated`. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
-   ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels node-role.kubernetes.io/compute=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+    ```
+    {: pre}
 
 5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy compute worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --private-only
-  ```
-  {: pre}
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --private-only
+    ```
+    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
-   ```
-   {: screen}
+    Example output:
+    ```
+    ID                                                     Public IP     Private IP      Machine Type      State    Status  Zone    Version
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000001f7   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-compute-000004ea   -             10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
+    ```
+    {: screen}
 
 ### Creating a new gateway worker pool
 {: #gateway_replace}
@@ -630,67 +633,67 @@ Before you begin, make sure that you have the [**Operator** or **Administrator**
 Before you begin, make sure that you have the [**Operator** or **Administrator** {{site.data.keyword.cloud_notm}} IAM platform access role](/docs/openshift?topic=openshift-users).
 
 1. Retrieve all of the existing **Worker Zones** of your cluster.
-   ```
-   ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ...
-   Worker Zones: dal10, dal12
-   ```
-   {: screen}
+    Example output:
+    ```
+    ...
+    Worker Zones: dal10, dal12
+    ```
+    {: screen}
 
 2. For each zone, list available private and public VLANs. Note the private and the public VLAN that you want to use. If you do not have a private or a public VLAN, the VLAN is automatically created for you when you add a zone to your worker pool.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. For each zone, review the [available flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-   ```
-   ibmcloud ks flavors --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks flavors --zone <zone>
+    ```
+    {: pre}
 
 4. Create a worker pool. Ensure that you include the `--labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway` option of following command to create a worker pool with gateway functionality. If you provision a bare metal or dedicated VM worker pool, specify `--hardware dedicated`. Note that when you add worker nodes to your cluster, the new worker nodes run the same `major.minor` version as the cluster master, but the latest worker node patch of that `major.minor` version.
-   ```
-   ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool create classic --cluster <cluster_name_or_ID> --name <pool_name> --flavor <flavor> --size-per-zone <number_of_workers_per_zone> --labels dedicated=gateway,node-role.kubernetes.io/gateway=true,ibm-cloud.kubernetes.io/private-cluster-role=gateway
+    ```
+    {: pre}
 
 5. Verify that the worker pool is created.
-   ```
-   ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 6. By default, adding a worker pool creates a pool with no zones. To deploy gateway worker nodes, you must add the zones that you retrieved in step 1 to the worker pool. Repeat this command for each zone.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool <pool_name> --private-vlan <private_VLAN_ID> --public-vlan <public_VLAN_ID>
+    ```
+    {: pre}
 
 7. Verify that worker nodes provision in the zone that you added. Your worker nodes are ready when the **State** changes from `provision_pending` to `normal`.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <pool_name>
+    ```
+    {: pre}
 
-   Example output:
-   ```
-   ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
-   kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
-   ```
-   {: screen}
+    Example output:
+    ```
+    ID                                                     Public IP        Private IP      Machine Type      State    Status  Zone    Version
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000001f7   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal10   1.20.7
+    kube-blrs3b1d0p0p2f7haq0g-mycluster-gateway-000004ea   169.xx.xxx.xxx   10.xxx.xx.xxx   b3c.4x16          provision_pending   Ready   dal12   1.20.7
+    ```
+    {: screen}
 
 8. Optional: If you created a gateway worker pool to replace the default `gateway` worker pool, delete the `gateway` worker pool.
-  ```
-  ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks worker-pool rm --worker-pool gateway --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 <br />
 
@@ -734,58 +737,58 @@ If you have an existing virtual or bare metal server that meets all of these req
 
 1. [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure) Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio. `--network` downloads the Calico network configuration file for your cluster.
 
-  ```
-  ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
+    ```
+    {: pre}
 
 2. List the worker nodes for your cluster and note the **ID** of any worker node.
-  ```
-  ibmcloud ks worker ls -c <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks worker ls -c <cluster_name_or_ID>
+    ```
+    {: pre}
 
 3. Get the **Private VLAN** and **Zone** for that worker node ID.
-  ```
-  ibmcloud ks worker get -w <worker_node_ID> -c <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks worker get -w <worker_node_ID> -c <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  ...
-  Private VLAN:   2625667
-  ...
-  Zone:           dal10
-  ```
-  {: screen}
+    Example output:
+    ```
+    ...
+    Private VLAN:   2625667
+    ...
+    Zone:           dal10
+    ```
+    {: screen}
 
 4. Using the zone for the worker node, get the **Router** for the private VLAN ID.
-  ```
-  ibmcloud ks ks vlans --zone <zone>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks ks vlans --zone <zone>
+    ```
+    {: pre}
 
-  In this example output, the router for private VLAN `2625667` is `bcr01a.dal10`.
-  ```
-  ID        Name   Number   Type      Router         Supports Virtual Workers
-  2625667          1813     private   bcr01a.dal10   true
-  2650233          1488     public    fcr03a.dal10   true
-  ```
-  {: screen}
+    In this example output, the router for private VLAN `2625667` is `bcr01a.dal10`.
+    ```
+    ID        Name   Number   Type      Router         Supports Virtual Workers
+    2625667          1813     private   bcr01a.dal10   true
+    2650233          1488     public    fcr03a.dal10   true
+    ```
+    {: screen}
 
 5. Use the {{site.data.keyword.cloud_notm}} console to create a [virtual server](https://cloud.ibm.com/gen1/infrastructure/provision/vs) or a [bare metal server](https://cloud.ibm.com/gen1/infrastructure/provision/bm). The following options and values are required for a virtual or bare metal server that can be attached to a gateway-enabled cluster, but for the other options you can select whichever values you prefer. For example, you can choose any type of virtual or bare metal server as long as the following options and values are selected.
-  * For **Location**, select the same zone that you found in step 2.
-  * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you do not have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
-  * For **Image**, select CentOS 7.x, Red Hat 7.x, or Ubuntu 18.04.
-  * Select private-only networking.
-    * Virtual: For **Uplink port speeds**, select a **Private only** option.
-    * Bare metal: For **Interface**, select **Private**.
-  * Virtual only: For **Private security group**, select at least **allow_outbound** and **allow_ssh**.
-  * For **Private VLAN**, select the router that you found in step 4. Note that the options are formatted like `dal10.bcr01a.1813`.
+    * For **Location**, select the same zone that you found in step 2.
+    * For **SSH keys**, select the name of an SSH key that you stored in {{site.data.keyword.cloud_notm}}. An SSH key is required for your cluster to access the VSI. If you do not have an SSH key stored in {{site.data.keyword.cloud_notm}}, click **Add key**.
+    * For **Image**, select CentOS 7.x, Red Hat 7.x, or Ubuntu 18.04.
+    * Select private-only networking.
+        * Virtual: For **Uplink port speeds**, select a **Private only** option.
+        * Bare metal: For **Interface**, select **Private**.
+    * Virtual only: For **Private security group**, select at least **allow_outbound** and **allow_ssh**.
+    * For **Private VLAN**, select the router that you found in step 4. Note that the options are formatted like `dal10.bcr01a.1813`.
 
-  To further customize your server, see the [virtual server documentation](/docs/virtual-servers?topic=virtual-servers-getting-started-tutorial) or [bare metal server documentation](/docs/bare-metal?topic=bare-metal-about-bm).
-  {: tip}
+    To further customize your server, see the [virtual server documentation](/docs/virtual-servers?topic=virtual-servers-getting-started-tutorial) or [bare metal server documentation](/docs/bare-metal?topic=bare-metal-about-bm).
+    {: tip}
 
 6. To add multiple server instances to your cluster network, repeat step 5. Ensure that you specify the same SSH key and operating system image for each server instance.
 
@@ -793,29 +796,30 @@ If you have an existing virtual or bare metal server that meets all of these req
 
 8. Get the server instance's **private_ip** address.
     * Virtual:
-      ```
-      ibmcloud sl vs list
-      ```
-      {: pre}
+        ```
+        ibmcloud sl vs list
+        ```
+        {: pre}
 
-      Example output:
-      ```
-      id         hostname                                                 domain        cpu   memory   public_ip        private_ip      datacenter   action
-      91639324   myvsi                                                    example.com   4     4096     -                10.XXX.XX.XX    dal10
-      ```
-      {: screen}
+        Example output:
+        ```
+        id         hostname                                                 domain        cpu   memory   public_ip        private_ip      datacenter   action
+        91639324   myvsi                                                    example.com   4     4096     -                10.XXX.XX.XX    dal10
+        ```
+        {: screen}
+
     * Bare metal:
-      ```
-      ibmcloud sl hardware list
-      ```
-      {: pre}
+        ```
+        ibmcloud sl hardware list
+        ```
+        {: pre}
 
-      Example output:
-      ```
-      id        hostname      domain      public_ip   private_ip     datacenter   status
-      1624411   baremetal01   ibm.cloud   -           10.XXX.XX.XX   dal10        ACTIVE
-      ```
-      {: screen}
+        Example output:
+        ```
+        id        hostname      domain      public_ip   private_ip     datacenter   status
+        1624411   baremetal01   ibm.cloud   -           10.XXX.XX.XX   dal10        ACTIVE
+        ```
+        {: screen}
 
 
 ### Step 2: Create the config map for the server instance connection
@@ -825,118 +829,120 @@ Create an `ibm-external-compute-config` config map that provides the necessary i
 {: shortdesc}
 
 1. Create an inventory file and add the server instance private IP address that you found in the previous step. Your cluster uses this inventory file to establish a connection to the server instance.
-  1. Create a file that contains the following line and name the file `inventory`. If you want to add multiple server instances to your cluster network, specify each server instance IP address in a different line.
+    1. Create a file that contains the following line and name the file `inventory`. If you want to add multiple server instances to your cluster network, specify each server instance IP address in a different line.
     ```
     <server_private_IP>:22 ansible_user=root ansible_connection=ssh
     ```
     {: codeblock}
-  2. Export the file as an `INVENTORY` environment variable.
+
+    2. Export the file as an `INVENTORY` environment variable.
     ```
     export INVENTORY=./inventory
     ```
     {: pre}
 
 2. Create a Kubernetes secret that is named `ibm-external-compute-pk` in the `kube-system` namespace. This secret stores the private key of the SSH key that you used for the virtual or bare metal server.
-  ```
-  kubectl create secret -n kube-system generic ibm-external-compute-pk --from-file=./id_rsa
-  ```
-  {: pre}
+    ```
+    kubectl create secret -n kube-system generic ibm-external-compute-pk --from-file=./id_rsa
+    ```
+    {: pre}
 
 3. Set the {{site.data.keyword.registrylong_notm}} domain for the zone that your virtual or bare metal server is deployed in. In subsequent steps, you create a manifest file for a Kubernetes job. When the job runs to add the server instance to your cluster network, container images are pulled from this {{site.data.keyword.registrylong_notm}} domain to configure the server instance.
-  ```
-  export REPO_NAME=<registry_domain>
-  ```
-  {: pre}
+    ```
+    export REPO_NAME=<registry_domain>
+    ```
+    {: pre}
 
-  <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registrylong_notm}} domain in Column 2.">
-  <caption>{{site.data.keyword.registrylong_notm}} domains</caption>
-  <thead>
-  <th>Zone</th>
-  <th>{{site.data.keyword.registrylong_notm}} domain</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>syd01, syd04, syd05</td>
-  <td>`au.icr.io`</td>
-  </tr>
-  <tr>
-  <td>ams03, fra02, fra04, fra05, par01, mil01, osl01</td>
-  <td>`de.icr.io`</td>
-  </tr>
-  <tr>
-  <td>che01, hkg02, seo01, sng01, tok02, tok04, tok05</td>
-  <td>`jp.icr.io`</td>
-  </tr>
-  <tr>
-  <td>lon04, lon05, lon06</td>
-  <td>`uk.icr.io`</td>
-  </tr>
-  <tr>
-  <td>dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07</td>
-  <td>`us.icr.io`</td>
-  </tr>
-  </tbody></table>
+    <table summary="A table that lists zones in Column 1 and the corresponding in {{site.data.keyword.registrylong_notm}} domain in Column 2.">
+    <caption>{{site.data.keyword.registrylong_notm}} domains</caption>
+    <thead>
+    <th>Zone</th>
+    <th>{{site.data.keyword.registrylong_notm}} domain</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>syd01, syd04, syd05</td>
+    <td><code>au.icr.io</code></td>
+    </tr>
+    <tr>
+    <td>ams03, fra02, fra04, fra05, par01, mil01, osl01</td>
+    <td><code>de.icr.io</code></td>
+    </tr>
+    <tr>
+    <td>che01, hkg02, seo01, sng01, tok02, tok04, tok05</td>
+    <td><code>jp.icr.io</code></td>
+    </tr>
+    <tr>
+    <td>lon04, lon05, lon06</td>
+    <td><code>uk.icr.io</code></td>
+    </tr>
+    <tr>
+    <td>dal10, dal12, dal13, mex01, mon01, sao01, sjc03, sjc04, tor01, wdc04, wdc06, wdc07</td>
+    <td><code>us.icr.io</code></td>
+    </tr>
+    </tbody></table>
 
 4. Set the namespace in your cluster where you want the Kubernetes job to create a headless Kubernetes service. This service provides a DNS entry for the server instance's hostname so that the workloads in your cluster can access the server instance.
-  ```
-  export SERVICE_K8S_NS=<namespace>
-  ```
-  {: pre}
+    ```
+    export SERVICE_K8S_NS=<namespace>
+    ```
+    {: pre}
 
 5. When the virtual or bare metal server instance accesses services in your cluster, you can configure the cluster DNS provider to resolve the services' DNS hostnames.
-  * To enable DNS resolution, set the `CLUSTERDNS_SETUP` environment variable as `true`.
+    * To enable DNS resolution, set the `CLUSTERDNS_SETUP` environment variable as `true`.
     ```
     export CLUSTERDNS_SETUP=true
     ```
     {: pre}
-  * Otherwise, set the `CLUSTERDNS_SETUP` environment variable as `false`.
+
+    * Otherwise, set the `CLUSTERDNS_SETUP` environment variable as `false`.
     ```
     export CLUSTERDNS_SETUP=false
     ```
     {: pre}
 
 6. Create the `ibm-external-compute-config` config map, which provides the necessary information to access and configure the connection to the server instance. This config map provides the server IP address, {{site.data.keyword.registrylong_notm}} domain, Kubernetes service namespace, and DNS resolution option that you set in the previous steps.
-  ```
-  kubectl create configmap -n kube-system ibm-external-compute-config --from-file="inventory=$INVENTORY" --from-literal="repo_name=$REPO_NAME" --from-literal="service_k8s_ns=$SERVICE_K8S_NS" --from-literal="clusterdns_setup=$CLUSTERDNS_SETUP"
-  ```
-  {: pre}
+    ```
+    kubectl create configmap -n kube-system ibm-external-compute-config --from-file="inventory=$INVENTORY" --from-literal="repo_name=$REPO_NAME" --from-literal="service_k8s_ns=$SERVICE_K8S_NS" --from-literal="clusterdns_setup=$CLUSTERDNS_SETUP"
+    ```
+    {: pre}
 
 7. Verify that the config map is created with the correct values.
-  ```
-  kubectl describe configmap ibm-external-compute-config -n kube-system
-  ```
-  {: pre}
+    ```
+    kubectl describe configmap ibm-external-compute-config -n kube-system
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  Name:         ibm-external-compute-config
-  Namespace:    kube-system
-  Labels:       <none>
-  Annotations:  <none>
+    Example output:
+    ```
+    Name:         ibm-external-compute-config
+    Namespace:    kube-system
+    Labels:       <none>
+    Annotations:  <none>
 
-  Data
-  ====
-  repo_name:
-  ----
-  us.icr.io
-  service_k8s_ns:
-  ----
-  default
-  inventory:
-  ----
-  10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
-  clusterdns_setup:
-  ----
-  true
-  Events:  <none>
-  ```
-  {: screen}
+    Data
+    ====
+    repo_name:
+    ----
+    us.icr.io
+    service_k8s_ns:
+    ----
+    default
+    inventory:
+    ----
+    10.XXX.XX.XX:22 ansible_user=root ansible_connection=ssh
+    clusterdns_setup:
+    ----
+    true
+    Events:  <none>
+    ```
+    {: screen}
 
 8. Copy the `all-icr-io` image pull secret from the `default` namespace to the `kube-system` namespace. This secret is required so that the Kubernetes job can access the necessary images from the `kube-system` namespace.
-  ```
-  kubectl get secret all-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/all-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
-  ```
-  {: pre}
+    ```
+    kubectl get secret all-icr-io -n default -o yaml | sed -e 's/namespace: default/namespace: kube-system/' -e 's/all-icr-io/ibm-external-compute-image-pull/' | kubectl create -f -
+    ```
+    {: pre}
 
 
 ### Step 3: Create the server instance connection job
@@ -946,80 +952,80 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
 {: shortdesc}
 
 1. Clone the `IBM-Cloud/kube-samples` repository.
-  ```
-  git clone https://github.com/IBM-Cloud/kube-samples.git
-  ```
-  {: pre}
+    ```
+    git clone https://github.com/IBM-Cloud/kube-samples.git
+    ```
+    {: pre}
 
 2. Navigate to the `gateway-clusters` directory.
-  ```
-  cd <filepath>/IBM-Cloud/kube-samples/gateway-clusters
-  ```
-  {: pre}
+    ```
+    cd <filepath>/IBM-Cloud/kube-samples/gateway-clusters
+    ```
+    {: pre}
 
 3. Create the manifest in the `kube-system` namespace. When you create the manifest, the Kubernetes job starts to run automatically.
-  ```
-  kubectl create -f ibm-external-compute-job.yaml
-  ```
-  {: pre}
+    ```
+    kubectl create -f ibm-external-compute-job.yaml
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  serviceaccount/ibm-external-compute-job created
-  clusterrole.rbac.authorization.k8s.io/ibm-external-compute-job created
-  clusterrolebinding.rbac.authorization.k8s.io/ibm-external-compute-job created
-  job.batch/ibm-external-compute-job created
-  ```
-  {: screen}
+    Example output:
+    ```
+    serviceaccount/ibm-external-compute-job created
+    clusterrole.rbac.authorization.k8s.io/ibm-external-compute-job created
+    clusterrolebinding.rbac.authorization.k8s.io/ibm-external-compute-job created
+    job.batch/ibm-external-compute-job created
+    ```
+    {: screen}
 
 4. Verify that the pod that is created by the job is `Running`.
-  ```
-  kubectl get pod -n kube-system | grep ibm-external-compute-job
-  ```
-  {: pre}
+    ```
+    kubectl get pod -n kube-system | grep ibm-external-compute-job
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                                                  READY     STATUS    RESTARTS   AGE
-  ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                                                  READY     STATUS    RESTARTS   AGE
+    ibm-external-compute-job-6lz8j                        1/1       Running   0          2m
+    ```
+    {: screen}
 
 5. Verify that the job is completed.
-  ```
-  kubectl get job -n kube-system ibm-external-compute-job
-  ```
-  {: pre}
+    ```
+    kubectl get job -n kube-system ibm-external-compute-job
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAME                       COMPLETIONS   DURATION   AGE
-  ibm-external-compute-job   1/1           20m        20m
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAME                       COMPLETIONS   DURATION   AGE
+    ibm-external-compute-job   1/1           20m        20m
+    ```
+    {: screen}
 
 6. Test the connection from your server instance to your cluster's pods.
-  1. Find the private IP address of one of your app pods in your cluster. In the output, look for the **IP:** field.
+    1. Find the private IP address of one of your app pods in your cluster. In the output, look for the **IP:** field.
     ```
     kubectl describe pod <pod_name>
     ```
     {: pre}
 
-  2. Log in to your server instance. For example, you might use SSH to access a VSI.
+    2. Log in to your server instance. For example, you might use SSH to access a VSI.
 
-  3. Ping the private IP address of the pod from the server instance.
+    3. Ping the private IP address of the pod from the server instance.
     ```
     ping <pod_private_IP>
     ```
     {: pre}
 
-  4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
+    4. Optional: If you enabled DNS resolution for the server instance by setting `CLUSTERDNS_SETUP=true`, you can also ping the hostname of the services.
     ```
     ping <service_hostname>
     ```
     {: pre}
 
-  5. Optional: While you are logged in to your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
+    5. Optional: While you are logged in to your server instance, you can also view the `/etc/ibm-external-compute-provision.yml` file that is created on the server instance. This file contains information about the connection that you set up between your gateway-enabled cluster and your server instance.
     ```
     cat /etc/ibm-external-compute-provision.yml
     ```
@@ -1029,36 +1035,36 @@ Create a manifest file to mount the `ibm-external-compute-config` config map and
     ```
     start_time: "Tue Dec 17 15:19:23 UTC 2019"
     config:
-      kubernetes_version: 1.20.7
-      pod_name: ibm-external-compute-job-wk9xc
-      image_url: us.icr.io/armada-master/stranger:v1.0.0
-      prepare_host: True
-      configure_gateway: True
-      calico_node_version: v3.8.4
-      ibm_gateway_controller_version: 1027
-      service_k8s_ns: default
-      repo_name: us.icr.io
-      clusterdns_setup: True
-      etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
-      etcd_port: 28649
+        kubernetes_version: 1.20.7
+        pod_name: ibm-external-compute-job-wk9xc
+        image_url: us.icr.io/armada-master/stranger:v1.0.0
+        prepare_host: True
+        configure_gateway: True
+        calico_node_version: v3.8.4
+        ibm_gateway_controller_version: 1027
+        service_k8s_ns: default
+        repo_name: us.icr.io
+        clusterdns_setup: True
+        etcd_private_host: c1.private.containers.mycluster.cloud.ibm.com
+        etcd_port: 28649
     end_time: "Tue Dec 17 15:21:12 UTC 2019"
     ```
     {: screen}
 
 7. Test the connection from your cluster's pods to your server instance. To use ping, the `allow_all` security group or another security group that allows the ICMP protocol must be enabled on the server instance.
-  1. Get the IP address for your server.
+    1. Get the IP address for your server.
     ```
     kubectl get ep -n <namespace> <server_hostname>
     ```
     {: pre}
 
-  2. Log in to a pod in your cluster.
+    2. Log in to a pod in your cluster.
     ```
     kubectl exec <pod_name> -it bash
     ```
     {: pre}
 
-  3. Ping the private IP address of the server instance from the pod.
+    3. Ping the private IP address of the server instance from the pod.
     ```
     ping <server_IP>
     ```
@@ -1071,16 +1077,16 @@ Every time that your cluster master is updated, including both minor version upd
 {: shortdesc}
 
 1. Delete the existing server connection job.
-  ```
-  kubectl delete job -n kube-system ibm-external-compute-job
-  ```
-  {: pre}
+    ```
+    kubectl delete job -n kube-system ibm-external-compute-job
+    ```
+    {: pre}
 
 2. Verify that the server connection pod is removed. When the pod is successfully removed, no output is returned.
-  ```
-  kubectl get pod -n kube-system | grep ibm-external-compute-job
-  ```
-  {: pre}
+    ```
+    kubectl get pod -n kube-system | grep ibm-external-compute-job
+    ```
+    {: pre}
 
 3. Re-deploy the server connection job by following the steps in [Create the server instance connection job](#vsi_3). Ensure that you use the latest version of the `ibm-external-compute-job.yaml` manifest file from the `IBM-Cloud/kube-samples/gateway-clusters` repository.
 
@@ -1095,12 +1101,12 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
 1. Log in to your server instance. For example, you might use SSH to access a VSI.
 
 2. Find the Calico node name for the server instance.
-  ```
-  cat /var/lib/calico/nodename
-  ```
-  {: pre}
+    ```
+    cat /var/lib/calico/nodename
+    ```
+    {: pre}
 
-3.  Stop the `calico-node`, `calico-node-label`, `create-host-endpoint`, and `create-workload-endpoint` services on the server instance.
+3. Stop the `calico-node`, `calico-node-label`, `create-host-endpoint`, and `create-workload-endpoint` services on the server instance.
     ```
     systemctl stop calico-node.service calico-node-label.service create-workload-endpoint.service create-host-endpoint.service
     ```
@@ -1109,22 +1115,22 @@ Before you begin: [Install and configure the Calico CLI.](/docs/containers?topic
 4. Log out of your server instance.
 
 5. Set the context for your cluster. Include the `--admin` and `--network` options with the `ibmcloud ks cluster config` command. `--admin` downloads the keys to access your infrastructure portfolio. `--network` downloads the Calico network configuration file for your cluster and allows you to run `calicoctl` commands.
-  ```
-  ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster config --cluster <cluster_name_or_ID> --admin --network
+    ```
+    {: pre}
 
 6. Using the Calico node name that you found in step 2, remove the server instance from your cluster's private pod network.
-  ```
-  calicoctl delete node <node_name>
-  ```
-  {: pre}
+    ```
+    calicoctl delete node <node_name>
+    ```
+    {: pre}
 
 7. Remove the service that was created for the server instance. Replace `<namespace>` with the namespace that you selected for the service and `<service_name>` with the name of the service. The service name is identical to the hostname of the server instance.
-  ```
-  kubectl delete service -n <namespace> <service_name>
-  ```
-  {: pre}
+    ```
+    kubectl delete service -n <namespace> <service_name>
+    ```
+    {: pre}
 
 <br />
 
@@ -1140,34 +1146,34 @@ If you have a cluster that was created after worker pools were introduced, you c
 {: note}
 
 1. List available zones and pick the zone where you want to add worker nodes.
-   ```
-   ibmcloud ks zone ls
-   ```
-   {: pre}
+    ```
+    ibmcloud ks zone ls
+    ```
+    {: pre}
 
 2. List available VLANs in that zone and note their ID.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. List available flavors in that zone.
-   ```
-   ibmcloud ks flavors --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks flavors --zone <zone>
+    ```
+    {: pre}
 
 4. Add stand-alone worker nodes to the cluster. For bare metal flavors, specify `dedicated`.
-   ```
-   ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --flavor <flavor> --hardware <shared_or_dedicated>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker add --cluster <cluster_name_or_ID> --workers <number_of_worker_nodes> --public-vlan <public_VLAN_ID> --private-vlan <private_VLAN_ID> --flavor <flavor> --hardware <shared_or_dedicated>
+    ```
+    {: pre}
 
 5. Verify that the worker nodes are created.
-   ```
-   ibmcloud ks worker ls --cluster <cluster_name_or_ID>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks worker ls --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 <br />
 
@@ -1195,30 +1201,30 @@ Before you begin, [create a worker pool](/docs/containers?topic=containers-add_w
 
 3. Create a daemon set to install the drivers and platform software on your SGX-capable worker nodes.
 
-  ```
-  kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/install_sgx/deployment_install_sgx_iks.yaml
-  ```
-  {: codeblock}
+    ```
+    kubectl create -f https://raw.githubusercontent.com/ibm-cloud-security/data-shield-reference-apps/master/scripts/sgx-driver-psw/install_sgx/deployment_install_sgx_iks.yaml
+    ```
+    {: codeblock}
 
 4. Verify that the drivers and platform software were installed by running the following command to check for a pod that begins with `sgx-installer`.
 
-  ```
-  kubectl get pods
-  ```
-  {: codeblock}
+    ```
+    kubectl get pods
+    ```
+    {: codeblock}
 
 5. Get the logs for your `sgx-installer` pod to verify that you see the messages `SGX driver installed` and `PSW installed`.
 
-  ```
-  kubectl logs <name_of_SGX_installer_pod>
-  ```
+    ```
+    kubectl logs <name_of_SGX_installer_pod>
+    ```
 
 6. Now that the drivers and platform software are installed, remove the daemon set.
 
-  ```
-  kubectl delete daemonset sgx-installer
-  ```
-  {: codeblock}
+    ```
+    kubectl delete daemonset sgx-installer
+    ```
+    {: codeblock}
 
 Now, you can develop your confidential computing app to use the enclave for sensitive data.
 
@@ -1249,7 +1255,7 @@ Choose among the following options:
 
 | Adding tags to clusters with the console. |
 |:-----------------|
-| <p><ol><li>Log in to the [**{{site.data.keyword.cloud_notm}} clusters** console](https://cloud.ibm.com/kubernetes/clusters){: external}.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the **Edit tags** pencil icon.<p class="note">If your cluster does not have any existing tags, you do not have an **Edit tags** pencil icon. Instead, use the [resource list](/docs/account?topic=account-tag) or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as `costctr:1234`.</li></ol></p> |
+| <p><ol><li>Log in to the [<strong>{{site.data.keyword.cloud_notm}} clusters</strong> console](https://cloud.ibm.com/kubernetes/clusters){: external}.</li><li>Select a cluster with existing tags.</li><li>Next to the cluster name and status, click the <strong>Edit tags</strong> pencil icon.<p class="note">If your cluster does not have any existing tags, you do not have an <strong>Edit tags</strong> pencil icon. Instead, use the [resource list](/docs/account?topic=account-tag) or CLI.</p></li><li>Enter the tag that you want to add to your cluster. To assign a key-value pair, use a colon such as <code>costctr:1234</code>.</li></ol></p> |
 {: caption="Adding tags to clusters with the console." caption-side="top"}
 {: #tags-1}
 {: tab-title="Console"}
@@ -1258,7 +1264,7 @@ Choose among the following options:
 
 | Adding tags to clusters with the CLI. |
 |:-----------------|
-| <p><ol><li>Log in to the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login).<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li>[Tag your cluster](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach). Replace the `--resource-name` with the name of your cluster. To list available clusters, run `ibmcloud ks cluster ls`. If you want to check your existing tags so as not to duplicate any, run `ibmcloud resource tags`.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the `--resource-id` flag.</p></li></ol></p> |
+| <p><ol><li>Log in to the [{{site.data.keyword.cloud_notm}} CLI](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_cli#ibmcloud_login).<pre class="pre"><code>ibmcloud login [--sso]</code></pre></li><li>[Tag your cluster](/docs/cli/reference/ibmcloud?topic=cli-ibmcloud_commands_resource#ibmcloud_resource_tag_attach). Replace the <code>--resource-name</code> with the name of your cluster. To list available clusters, run <code>ibmcloud ks cluster ls</code>. If you want to check your existing tags so as not to duplicate any, run <code>ibmcloud resource tags</code>.<pre class="pre"><code>ibmcloud resource tag-attach --resource-name <cluster_name> --tag-names &lt;tag1,tag2&gt;</code></pre><p class="note">If you have more than one resource of the same name in your {{site.data.keyword.cloud_notm}} account, the error message lists the resource CRNs and details, and instructs you to try again with the <code>--resource-id</code> flag.</p></li></ol></p> |
 {: caption="Adding tags to clusters with the CLI." caption-side="top"}
 {: #tags-2}
 {: tab-title="CLI"}
@@ -1278,7 +1284,7 @@ Do not include personal information in your labels. Learn more about [securing y
 
 Before you begin: [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
-1.  List the worker pools in your cluster.
+1. List the worker pools in your cluster.
     ```
     ibmcloud ks worker-pool ls --cluster <cluster_name_or_ID>
     ```
@@ -1294,6 +1300,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
 
     You can also rename an existing label by assigning the same key a new value. However, do not modify the worker pool or worker node labels that are provided by default because these labels are required for worker pools to function properly. Modify only custom labels that you previously added.
     {: important}
+
     ```
     ibmcloud ks worker-pool label set <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --label <key=value>
     ```
@@ -1305,19 +1312,21 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ```
     {: pre}
 
-4.  Verify that the worker pool and worker node have the `key=value` label that you assigned.
+4. Verify that the worker pool and worker node have the `key=value` label that you assigned.
     *   To check worker pools:
         ```
         ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
         ```
         {: pre}
+
     *   To check worker nodes:
-        1.  List the worker nodes in the worker pool and note the **Private IP**.
+        1. List the worker nodes in the worker pool and note the **Private IP**.
             ```
             ibmcloud ks worker ls --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
             ```
             {: pre}
-        2.  Review the **Labels** field of the output.
+
+        2. Review the **Labels** field of the output.
             ```
             kubectl describe node <worker_node_private_IP>
             ```
@@ -1326,19 +1335,19 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
             Example output for an added label (`app=test`):
             ```
             Labels:   app=test
-                      arch=amd64
-                      ...
+arch=amd64
+...
             ```
             {: screen}
 
             Example output for a removed label (the `app=test` label is gone):
             ```
             Labels:   arch=amd64
-                      ...
+...
             ```
             {: screen}            
 
-5.  **Optional**: To remove an individual label from a worker pool, you can run the `ibmcloud ks worker-pool label set` command with only the custom labels that you want to keep. To remove all custom labels from a worker pool, you can run the `ibmcloud ks worker-pool label rm` command.
+5. **Optional**: To remove an individual label from a worker pool, you can run the `ibmcloud ks worker-pool label set` command with only the custom labels that you want to keep. To remove all custom labels from a worker pool, you can run the `ibmcloud ks worker-pool label rm` command.
 
     Do not remove the worker pool and worker node labels that are provided by default because these labels are required for worker pools to function properly. Remove only custom labels that you previously added.
     {: important}
@@ -1354,6 +1363,7 @@ Before you begin: [Log in to your account. If applicable, target the appropriate
     ibmcloud ks worker-pool label rm <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
+
 After you label your worker pool, you can use the [label in your app deployments](/docs/containers?topic=containers-app#label) so that your workloads run on only these worker nodes, or [taints](https://kubernetes.io/docs/concepts/scheduling-eviction/taint-and-toleration/){: external} to prevent deployments from running on these worker nodes.
 
 <br />
@@ -1365,6 +1375,8 @@ Critical components, such as `containerd`, `kubelet`, `kube-proxy`, and `calico`
 {: shortdesc}
 
 You can [configure health checks for your worker node and enable Autorecovery](/docs/containers?topic=containers-health-monitor#autorecovery). If Autorecovery detects an unhealthy worker node based on the configured checks, Autorecovery triggers a corrective action like an OS reload on the worker node. For more information about how Autorecovery works, see the [Autorecovery blog](https://www.ibm.com/cloud/blog/autorecovery-utilizes-consistent-hashing-high-availability){: external}.
+
+
 
 
 

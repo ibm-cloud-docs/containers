@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # {{site.data.keyword.at_full_notm}} events
 {: #at_events}
@@ -449,5 +447,7 @@ The following table shows the {{site.data.keyword.at_short}} location where your
 {: #atlocationvpc}
 {: tab-title="Locations for VPC clusters"}
 {: tab-group="at-locations"}
+
+
 
 

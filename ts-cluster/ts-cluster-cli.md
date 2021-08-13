@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-11"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -106,7 +106,7 @@ content-type: troubleshoot
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
   
-  
+
 # Debugging common CLI issues with clusters
 {: #ts_clis}
 {: troubleshoot}
@@ -186,10 +186,10 @@ If you have multiple clusters at different Kubernetes versions or different cont
 If you run commands such as `kubectl exec`, `kubectl attach`, `kubectl proxy`, `kubectl port-forward`, or `kubectl logs`, you see the following message.
 {: tsSymptoms}
 
-  ```
-  <workerIP>:10250: getsockopt: connection timed out
-  ```
-  {: screen}
+    ```
+    <workerIP>:10250: getsockopt: connection timed out
+    ```
+    {: screen}
 
 
 Kubernetes version 1.20 or earlier: The OpenVPN connection between the master node and worker nodes is not functioning properly.
@@ -197,12 +197,15 @@ Kubernetes version 1.20 or earlier: The OpenVPN connection between the master no
 
 1. In classic clusters, if you have multiple VLANs for your cluster, multiple subnets on the same VLAN, or a multizone classic cluster, you must enable a [Virtual Router Function (VRF)](/docs/account?topic=account-vrf-service-endpoint#vrf) for your IBM Cloud infrastructure account so your worker nodes can communicate with each other on the private network. To enable VRF, see [Enabling VRF](/docs/account?topic=account-vrf-service-endpoint#vrf). To check whether a VRF is already enabled, use the `ibmcloud account show` command. If you cannot or do not want to enable VRF, enable [VLAN spanning](/docs/vlans?topic=vlans-vlan-spanning#vlan-spanning). To perform this action, you need the **Network > Manage Network VLAN Spanning** [infrastructure permission](/docs/containers?topic=containers-access-creds#infra_access), or you can request the account owner to enable it. To check whether VLAN spanning is already enabled, use the `ibmcloud ks vlan spanning get --region <region>` [command](/docs/containers?topic=containers-kubernetes-service-cli#cs_vlan_spanning_get).
 2. Restart the OpenVPN client pod.
-  ```
-  kubectl delete pod -n kube-system -l app=vpn
-  ```
-  {: pre}
+    ```
+    kubectl delete pod -n kube-system -l app=vpn
+    ```
+    {: pre}
+
 3. If you still see the same error message, then the worker node that the VPN pod is on might be unhealthy. To restart the VPN pod and reschedule it to a different worker node, [cordon, drain, and reboot the worker node](/docs/openshift?topic=openshift-kubernetes-service-cli#cs_worker_reboot) that the VPN pod is on.
 
 <br />
+
+
 
 

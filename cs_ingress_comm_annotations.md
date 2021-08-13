@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,8 +104,7 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
+  
 
 
 
@@ -237,6 +235,7 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 ingress.bluemix.net/proxy-connect-timeout: "serviceName=app1 timeout=62s"
 ```
 {: screen}
+
 ```
 ingress.bluemix.net/proxy-read-timeout: "serviceName=app1 timeout=62s"
 ```
@@ -248,6 +247,7 @@ Kubernetes Ingress resource [annotations](https://kubernetes.github.io/ingress-n
 nginx.ingress.kubernetes.io/proxy-connect-timeout: 62
 ```
 {: screen}
+
 ```
 nginx.ingress.kubernetes.io/proxy-read-timeout: 62
 ```
@@ -265,11 +265,12 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotations:
 ingress.bluemix.net/custom-errors: "serviceName=app1 httpError=401 errorActionName=/errorAction401"
 ```
 {: screen}
+
 ```
 ingress.bluemix.net/custom-error-actions: |
-  errorActionName=/errorAction401
-  proxy_pass http://example.com/forbidden.html;
-  <EOS>
+    errorActionName=/errorAction401
+    proxy_pass http://example.com/forbidden.html;
+    <EOS>
 ```
 {: screen}
 
@@ -287,6 +288,7 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress fields:
     ingress.bluemix.net/custom-port: "protocol=http port=8080;protocol=https port=8443"
     ```
     {: screen}
+
 * `ibm-cloud-provider-ingress-cm` configmap field:
     ```
     public-ports: "80;443;9443"
@@ -300,6 +302,7 @@ Kubernetes Ingress fields:
     httpsPort=8443
     ```
     {: screen}
+
 2. [Modify each ALB service](#comm-customize-deploy) to add the ports.
 
 
@@ -312,11 +315,11 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/proxy-add-headers: |
-  serviceName=app1 {
-  X-Different-Name “true”;
-  x-request-start “t=${sec}”;
-  x-using-nginx “true”
-  }
+    serviceName=app1 {
+    X-Different-Name “true”;
+    x-request-start “t=${sec}”;
+    x-using-nginx “true”
+    }
 ```
 {: screen}
 
@@ -339,8 +342,8 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/response-add-headers: |
-  serviceName=<myservice1> {
-  <header1>:<value1>;
+    serviceName=<myservice1> {
+    <header1>:<value1>;
 ```
 {: screen}
 
@@ -348,7 +351,7 @@ Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-ng
 
 ```
 nginx.ingress.kubernetes.io/configuration-snippet: |
-  more_set_headers "Request-Id: $req_id";
+    more_set_headers "Request-Id: $req_id";
 ```
 {: screen}
 
@@ -387,6 +390,7 @@ Kubernetes Ingress fields: HTTP redirects to HTTPS by default. To disable:
     ssl-redirect: "false"
     ```
     {: screen}
+
 * Ingress resource [annotation](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#server-side-https-enforcement-through-redirect){: external}:
     ```
     nginx.ingress.kubernetes.io/ssl-redirect: "false"
@@ -508,9 +512,9 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/location-snippets: |
-  serviceName=app1
-  more_set_headers "Request-Id: $req_id";
-  <EOS>
+    serviceName=app1
+    more_set_headers "Request-Id: $req_id";
+    <EOS>
 ```
 {: screen}
 
@@ -518,7 +522,7 @@ Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-ng
 
 ```
 nginx.ingress.kubernetes.io/configuration-snippet: |
-  more_set_headers "Request-Id: $req_id";
+    more_set_headers "Request-Id: $req_id";
 ```
 {: screen}
 
@@ -624,6 +628,7 @@ Kubernetes Ingress fields:
     proxy-next-upstream: error timeout http_500
     ```
     {: screen}
+
 * Per-resource setting: Ingress resource [annotations](https://kubernetes.github.io/ingress-nginx/user-guide/nginx-configuration/annotations/#custom-timeouts){: external}:
     ```
     nginx.ingress.kubernetes.io/proxy-next-upstream: http_500
@@ -658,9 +663,9 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/response-remove-headers: |
-      serviceName=app1 {
-      "header1";
-      }
+        serviceName=app1 {
+        "header1";
+        }
 ```
 {: screen}
 
@@ -696,10 +701,10 @@ Previous {{site.data.keyword.containerlong_notm}} Ingress resource annotation:
 
 ```
 ingress.bluemix.net/server-snippets: |
-  location = /health {
-  return 200 'Healthy';
-  add_header Content-Type text/plain;
-  }
+    location = /health {
+    return 200 'Healthy';
+    add_header Content-Type text/plain;
+    }
 ```
 {: screen}
 
@@ -707,10 +712,10 @@ Kubernetes Ingress resource [annotation](https://kubernetes.github.io/ingress-ng
 
 ```
 nginx.ingress.kubernetes.io/server-snippet: |
-  location = /health {
-  return 200 'Healthy';
-  add_header Content-Type text/plain;
-  }
+    location = /health {
+    return 200 'Healthy';
+    add_header Content-Type text/plain;
+    }
 ```
 {: screen}
 
@@ -735,7 +740,7 @@ nginx.ingress.kubernetes.io/session-cookie-name: "cookie_name1"
 nginx.ingress.kubernetes.io/session-cookie-expires: "172800"
 nginx.ingress.kubernetes.io/session-cookie-max-age: "172800"
 nginx.ingress.kubernetes.io/configuration-snippet: |
-  more_set_headers "Set-Cookie: HttpOnly";
+    more_set_headers "Set-Cookie: HttpOnly";
 ```
 {: screen}
 
@@ -779,7 +784,7 @@ ingress.bluemix.net/tcp-ports: "serviceName=app1 ingressPort=9000 servicePort=80
 {: screen}
 
 Kubernetes Ingress fields:
-1.  Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
+1. Create a `tcp-services` configmap to specify your TCP port, such as the following example ports. For the requirements of the `tcp-services` configmap, see [this blog](https://kubernetes.github.io/ingress-nginx/user-guide/exposing-tcp-udp-services/){: external}.
     ```yaml
     apiVersion: v1
     kind: ConfigMap
@@ -792,16 +797,16 @@ Kubernetes Ingress fields:
     {: codeblock}
 
 2. Create the configmap in the `kube-system` namespace.
-  ```
-  kubectl apply -f tcp-services.yaml -n kube-system
-  ```
-  {: pre}
+    ```
+    kubectl apply -f tcp-services.yaml -n kube-system
+    ```
+    {: pre}
 
 3. Specify the `tcp-services` configmap as a field in the [`ibm-ingress-deploy-config` configmap](#comm-customize-deploy).
-  ```
-  "tcpServicesConfig":"kube-system/tcp-services"
-  ```
-  {: screen}
+    ```
+    "tcpServicesConfig":"kube-system/tcp-services"
+    ```
+    {: screen}
 
 4. [Modify each ALB service](#comm-customize-deploy) to add the ports.
 
@@ -883,12 +888,13 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 {: shortdesc}
 
 1. Get the names of the services that expose each ALB.
-  * Classic clusters:
+    * Classic clusters:
     ```
     kubectl get svc -n kube-system | grep alb
     ```
     {: pre}
-  * VPC clusters: In the output, look for a service name that is formatted such as `public-crc204dl7w0qf6n6sp7tug`.
+
+    * VPC clusters: In the output, look for a service name that is formatted such as `public-crc204dl7w0qf6n6sp7tug`.
     ```
     kubectl get svc -n kube-system | grep LoadBalancer
     ```
@@ -896,64 +902,64 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
 
 2. Create a configmap to customize the Ingress deployment.
 
-  1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and do not need to specify all of the settings.
-     ```yaml
-     apiVersion: v1
-     kind: ConfigMap
-     metadata:
-       name: ibm-ingress-deploy-config
-       namespace: kube-system
-     data:
-       <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-       <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
-       ...
-     ```
-     {: screen}
+    1. Create a YAML file for an `ibm-ingress-deploy-config` configmap. For each ALB ID, you can specify one or more of the following optional settings. Note that you can specify only the settings that you want to configure, and do not need to specify all of the settings.
+        ```yaml
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: ibm-ingress-deploy-config
+          namespace: kube-system
+        data:
+          <alb1-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+          <alb2-id>: '{"defaultBackendService":"<service_name>", "defaultCertificate":"<namespace>/<secret_name>", "enableSslPassthrough":"<true|false>", "httpPort":"<port>", "httpsPort":"<port>", "ingressClass":"<class>", "replicas":<number_of_replicas>, "tcpServicesConfig":"<kube-system/tcp-services>"}'
+          ...
+        ```
+        {: screen}
 
-     <table summary="The columns are read from left to right. The first column has the parameter of the configmap. The second column describes the parameter.">
-     <caption>Understanding this configmap's components</caption>
-     <col width="25%">
-     <thead>
-     <th>Parameter</th>
-     <th>Description</th>
-     </thead>
-     <tbody>
-     <tr><td>`defaultBackendService`</td><td>Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a `404` message. You might use this service to configure custom error pages or for testing connections.</td></tr>
-     <tr><td>`defaultCertificate`</td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format `secret_namespace/secret_name`. To create a secret, you can run the [`ibmcloud ks ingress secret create` command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the `spec.tls` section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.</td></tr>
-     <tr><td>`enableSslPassthrough`</td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
-     <tr><td>`httpPort`, `httpsPort`</td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
-     <tr><td>`ingressClass`</td><td>If you specified a class other than `public-iks-k8s-nginx` or `private-iks-k8s-nginx` in your Ingress resource, specify the class.</td></tr>
-     <tr><td>`replicas`</td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).</td></tr>
-     <tr><td>`tcpServicesConfig`</td><td>Specify a configmap and the namespace that the configmap is in, such as [`kube-system/tcp-services`](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
-     </tbody>
-     </table>
+        <table summary="The columns are read from left to right. The first column has the parameter of the configmap. The second column describes the parameter.">
+        <caption>Understanding this configmap's components</caption>
+        <col width="25%">
+        <thead>
+        <th>Parameter</th>
+        <th>Description</th>
+        </thead>
+        <tbody>
+        <tr><td><code>defaultBackendService</code></td><td>Specify the name of an optional default service to receive requests when no host is configured or no matching host is found. This service replaces the IBM-provided default service that generates a <code>404</code> message. You might use this service to configure custom error pages or for testing connections.</td></tr>
+        <tr><td><code>defaultCertificate</code></td><td>A secret for a default TLS certificate to apply to any subdomain that is configured with Ingress ALBs in the format <code>secret_namespace/secret_name</code>. To create a secret, you can run the [<code>ibmcloud ks ingress secret create</code> command](/docs/containers?topic=containers-ingress-types#manage_certs). If a secret for a different TLS certificate is specified in the <code>spec.tls</code> section of an Ingress resource, and that secret exists in the same namespace as the Ingress resource, then that secret is applied instead of this default secret.</td></tr>
+        <tr><td><code>enableSslPassthrough</code></td><td>Enable SSL passthrough for the ALB. The TLS connection is not terminated and passes through untouched.</td></tr>
+        <tr><td><code>httpPort</code>, <code>httpsPort</code></td><td>Expose non-default ports for the Ingress ALB by adding the HTTP or HTTPS ports that you want to open.</td></tr>
+        <tr><td><code>ingressClass</code></td><td>If you specified a class other than <code>public-iks-k8s-nginx</code> or <code>private-iks-k8s-nginx</code> in your Ingress resource, specify the class.</td></tr>
+        <tr><td><code>replicas</code></td><td>By default, each ALB has 2 replicas. Scale up your ALB processing capabilities by increasing the number of ALB pods. For more information, see [Increasing the number of ALB pod replicas](/docs/containers?topic=containers-ingress-types#scale_albs).</td></tr>
+        <tr><td><code>tcpServicesConfig</code></td><td>Specify a configmap and the namespace that the configmap is in, such as [<code>kube-system/tcp-services</code>](#tcp-ports), that contains information about accessing your app service through a non-standard TCP port.</td></tr>
+        </tbody>
+        </table>
 
-  2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
+    2. Create the `ibm-ingress-deploy-config` configmap in your cluster.
     ```
     kubectl create -f ibm-ingress-deploy-config.yaml
     ```
     {: pre}
 
-  3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
+    3. To pick up the changes, update your ALBs. Note that it might take up to 5 minutes for the changes to be applied to your ALBs.
     ```
     ibmcloud ks ingress alb update -c <cluster_name_or_ID>
     ```
     {: pre}
 
 3. If you specified non-standard HTTP, HTTPS, or TCP ports, you must open the ports on each ALB service.
-  1. For each ALB service that you found in step 1, edit the YAML file.
+    1. For each ALB service that you found in step 1, edit the YAML file.
     ```
     kubectl edit svc -n kube-system <alb_svc_name>
     ```
     {: pre}
 
-  2. In the `spec.ports` section, add the ports that you want to open.
-      * By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, do not remove them from this file. Any port that is not specified is closed.
-      * Do not specify a `nodePort`. After you add the port and apply the changes, a `nodePort` is automatically assigned.
+    2. In the `spec.ports` section, add the ports that you want to open.
+        * By default, ports 80 and 443 are open. If you want to keep 80 and 443 open, do not remove them from this file. Any port that is not specified is closed.
+        * Do not specify a `nodePort`. After you add the port and apply the changes, a `nodePort` is automatically assigned.
 
-      Example:
-      ```
-      ...
+        Example:
+        ```
+        ...
         ports:
         - name: port-80
           nodePort: 32632
@@ -970,10 +976,10 @@ Customize the deployment for ALBs that run the Kubernetes Ingress image by creat
           protocol: TCP
           targetPort: <port>
       ...
-      ```
-      {: screen}
+        ```
+        {: screen}
 
-  3. Save and close the file. Your changes are applied automatically.
+    3. Save and close the file. Your changes are applied automatically.
 
 4. If you use {{site.data.keyword.blockchainfull}}, you must [re-establish connectivity between the {{site.data.keyword.blockchain}} management console and your cluster](/docs/blockchain?topic=blockchain-ibp-console-manage-console#ibp-console-refresh).
 
@@ -997,149 +1003,154 @@ Enforce authentication for your apps by configuring Ingress with [{{site.data.ke
 
 1. Choose an existing or create a new {{site.data.keyword.appid_short_notm}} instance.
 
-  <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
-  * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
-  * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
-      1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
-      2. Choose the same region that your cluster is deployed in.
-      3. Click **Create**.
+    <p class="note">An {{site.data.keyword.appid_short_notm}} instance can be used in only one namespace in your cluster. If you want to configure {{site.data.keyword.appid_short_notm}} for Ingress resources in multiple namespaces, repeat the steps in this section to specify a unique {{site.data.keyword.appid_short_notm}} instance for the Ingress resources in each namespace.</p>
+    * To use an existing instance, ensure that the service instance name contains only **lowercase** alphanumeric characters or hyphens (`-`), and doesn't contain spaces. To change the name, select **Rename service** from the more options menu on your service instance details page.
+    * To provision a [new {{site.data.keyword.appid_short_notm}} instance](https://cloud.ibm.com/catalog/services/app-id):
+        1. Replace the auto-filled **Service name** with your own unique name for the service instance. The service instance name must contain only lowercase alphanumeric characters or hyphens (`-`), and can't contain spaces.
+        2. Choose the same region that your cluster is deployed in.
+        3. Click **Create**.
 
 2. Add redirect URLs for your app. A redirect URL is the callback endpoint of your app. To prevent phishing attacks, {{site.data.keyword.appid_full_notm}} validates the request URL against the allowlist of redirect URLs.
-  1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Manage Authentication**.
-  2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
-  3. In the **Authentication settings** tab, add redirect URLs for your app in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
+    1. In the {{site.data.keyword.appid_short_notm}} management console, navigate to **Manage Authentication**.
+    2. In the **Identity providers** tab, make sure that you have an Identity Provider selected. If no Identity Provider is selected, the user will not be authenticated but will be issued an access token for anonymous access to the app.
+    3. In the **Authentication settings** tab, add redirect URLs for your app in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/callback`. Note that all letters in the service instance name must specified as lowercase.
 
     If you use the [{{site.data.keyword.appid_full_notm}} logout function](/docs/appid?topic=appid-cd-sso#cd-sso-log-out), you must append `/sign_out` to your domain in the format `https://<hostname>/oauth2-<App_ID_service_instance_name>/sign_out` and include this URL in the redirect URLs list.
     {: note}
 
 3. Bind the {{site.data.keyword.appid_short_notm}} service instance to your cluster. The command creates a service key for the service instance, or you can include the `--key` flag to use existing service key credentials. Be sure to bind the service instance to the same namespace that your Ingress resources exist in. Note that all letters in the service instance name must specified as lowercase.
-  ```
-  ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <App_ID_service_instance_name> [--key <service_instance_key>]
-  ```
-  {: pre}
-  When the service is successfully bound to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
-  ```
-  ibmcloud ks cluster service bind --cluster mycluster --namespace mynamespace --service appid1
-  Binding service instance to namespace...
-  OK
-  Namespace:    mynamespace
-  Secret name:  binding-<service_instance_name>
-  ```
-  {: screen}
+    ```
+    ibmcloud ks cluster service bind --cluster <cluster_name_or_ID> --namespace <namespace> --service <App_ID_service_instance_name> [--key <service_instance_key>]
+    ```
+    {: pre}
+
+    When the service is successfully bound to your cluster, a cluster secret is created that holds the credentials of your service instance. Example CLI output:
+    ```
+    ibmcloud ks cluster service bind --cluster mycluster --namespace mynamespace --service appid1
+    Binding service instance to namespace...
+    OK
+    Namespace:    mynamespace
+    Secret name:  binding-<service_instance_name>
+    ```
+    {: screen}
 
 4. Enable the ALB OAuth Proxy add-on in your cluster. This add-on creates and manages the following Kubernetes resources: an OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} service instance, a secret that contains the configuration of the OAuth2-Proxy deployment, and an Ingress resource that configures ALBs to route incoming requests to the OAuth2-Proxy deployment for your {{site.data.keyword.appid_short_notm}} instance. The name of each of these resources begins with `oauth2-`.
     1. Enable the `alb-oauth-proxy` add-on.
-      ```
-      ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
+        ```
+        ibmcloud ks cluster addon enable alb-oauth-proxy --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
+
     2. Verify that the ALB OAuth Proxy add-on has a status of `Addon Ready`.
-      ```
-      ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
-      ```
-      {: pre}
+        ```
+        ibmcloud ks cluster addon ls --cluster <cluster_name_or_ID>
+        ```
+        {: pre}
 
 5. In the Ingress resources for apps where you want to add {{site.data.keyword.appid_short_notm}} authentication, add the following annotations to the `metadata.annotations` section.
-  1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
-     ```yaml
-     ...
-     annotations:
-       nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace_of_Ingress_resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
-     ...
-     ```
-     {: codeblock}
+    1. Add the following `auth-url` annotation. This annotation specifies the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}. Note that all letters in the service instance name must be specified as lowercase.
+        ```yaml
+        ...
+        annotations:
+        nginx.ingress.kubernetes.io/auth-url: https://oauth2-<App_ID_service_instance_name>.<namespace_of_Ingress_resource>.svc.cluster.local/oauth2-<App_ID_service_instance_name>/auth
+      ...
+        ```
+        {: codeblock}
 
-  2. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
-     * To send only the `ID Token`, add the `nginx.ingress.kubernetes.io/auth-response-headers: Authorization` annotation.
-     * To send only the `Access Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
-       ```yaml
-       ...
-       annotations:
-         nginx.ingress.kubernetes.io/configuration-snippet: |
-           auth_request_set $access_token $upstream_http_x_auth_request_access_token;
-           access_by_lua_block {
-             if ngx.var.access_token ~= "" then
-               ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token)
-             end
-           }
-       ...
-       ```
-       {: codeblock}
-     * To send the `Access Token` and the `ID Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
-       ```yaml
-       ...
-       annotations:
-         nginx.ingress.kubernetes.io/configuration-snippet: |
-           auth_request_set $access_token $upstream_http_x_auth_request_access_token;
-           auth_request_set $id_token $upstream_http_authorization;
-           access_by_lua_block {
-             if ngx.var.id_token ~= "" and ngx.var.access_token ~= "" then
-               ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token .. " " .. ngx.var.id_token:match("%s*Bearer%s*(.*)"))
-             end
-           }
-       ...
-       ```
-       {: codeblock}
-  3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
-    * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
-    * If you do not specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
+    2. Choose which tokens to send in the `Authorization` header to your app. For more information about ID and access tokens, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-tokens){: external}.
+        * To send only the `ID Token`, add the `nginx.ingress.kubernetes.io/auth-response-headers: Authorization` annotation.
+        * To send only the `Access Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
+        ```yaml
+        ...
+        annotations:
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+            auth_request_set $access_token $upstream_http_x_auth_request_access_token;
+            access_by_lua_block {
+                if ngx.var.access_token ~= "" then
+                ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token)
+                end
+            }
+        ...
+        ```
+        {: codeblock}
+
+        * To send the `Access Token` and the `ID Token`, add the following information to the `access_by_lua_block{}` in the `configuration-snippet` annotation.
+        ```yaml
+        ...
+        annotations:
+            nginx.ingress.kubernetes.io/configuration-snippet: |
+            auth_request_set $access_token $upstream_http_x_auth_request_access_token;
+            auth_request_set $id_token $upstream_http_authorization;
+            access_by_lua_block {
+                if ngx.var.id_token ~= "" and ngx.var.access_token ~= "" then
+                ngx.req.set_header("Authorization", "Bearer " .. ngx.var.access_token .. " " .. ngx.var.id_token:match("%s*Bearer%s*(.*)"))
+                end
+            }
+        ...
+        ```
+        {: codeblock}
+
+    3. Optional: If your app supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy) in addition to or instead of the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy), add the `nginx.ingress.kubernetes.io/auth-signin: https://$host/oauth2-<App_ID_service_instance_name>/start?rd=$escaped_request_uri` annotation. Note that all letters in the service instance name must specified as lowercase.
+        * If you specify this annotation, and the authentication for a client fails, the client is redirected to the URL of the OAuth2-Proxy for your {{site.data.keyword.appid_short_notm}} instance. This OAuth2-Proxy, which acts as the OIDC Relying Party (RP) for {{site.data.keyword.appid_short_notm}}, redirects the client to your {{site.data.keyword.appid_short_notm}} login page for authentication.
+        * If you do not specify this annotation, a client must authenticate with a valid bearer token. If the authentication for a client fails, the client's request is rejected with a `401 Unauthorized` error message.
 
 6. Re-apply your Ingress resources to enforce {{site.data.keyword.appid_short_notm}} authentication. After an Ingress resource with the appropriate annotations is re-applied, the ALB OAuth Proxy add-on deploys an OAuth2-Proxy deployment, creates a service for the deployment, and creates a separate Ingress resource to configure routing for the OAuth2-Proxy deployment messages. Do not delete these add-on resources.
-  ```
-  kubectl apply -f <app_ingress_resource>.yaml -n namespace
-  ```
-  {: pre}
+    ```
+    kubectl apply -f <app_ingress_resource>.yaml -n namespace
+    ```
+    {: pre}
 
 7. Verify that {{site.data.keyword.appid_short_notm}} authentication is enforced for your apps.
-  * If your apps supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy): Access your app's URL in a web browser. If {{site.data.keyword.appid_short_notm}} is correctly applied, you are redirected to an {{site.data.keyword.appid_short_notm}} authentication log-in page.
-  * If your apps supports the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy): Specify your `Bearer` access token in the Authorization header of requests to the apps. To get your access token, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-obtain-tokens). If {{site.data.keyword.appid_short_notm}} is correctly applied, the request is successfully authenticated and is routed to your app. If you send requests to your apps without an access token in the Authorization header, or if the access token is not accepted by {{site.data.keyword.appid_short_notm}}, then the request is rejected.
+    * If your apps supports the [web app strategy](/docs/appid?topic=appid-key-concepts#term-web-strategy): Access your app's URL in a web browser. If {{site.data.keyword.appid_short_notm}} is correctly applied, you are redirected to an {{site.data.keyword.appid_short_notm}} authentication log-in page.
+    * If your apps supports the [API strategy](/docs/appid?topic=appid-key-concepts#term-api-strategy): Specify your `Bearer` access token in the Authorization header of requests to the apps. To get your access token, see the [{{site.data.keyword.appid_short_notm}} documentation](/docs/appid?topic=appid-obtain-tokens). If {{site.data.keyword.appid_short_notm}} is correctly applied, the request is successfully authenticated and is routed to your app. If you send requests to your apps without an access token in the Authorization header, or if the access token is not accepted by {{site.data.keyword.appid_short_notm}}, then the request is rejected.
 
 8. Optional: You can customize the default behavior of the OAuth2-Proxy by creating a Kubernetes ConfigMap.
     1. Create a ConfigMap YAML file that specifies values for the OAuth2-Proxy settings that you want to change.
-       ```yaml
-       apiVersion: v1
-       kind: ConfigMap
-       metadata:
-         name: oauth2-<App_ID_service_instance_name>
-         namespace: <ingress_resource_namespace>
-       data:
-         auth_logging: <true|false>
-         # Log all authentication attempts.
-         auth_logging_format:
-         # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#auth-log-format
-         cookie_domains:
-         # A list of optional domains to force cookies to. The longest domain that matches the request’s host is used. If there is no match for the request’s host, the shortest domain is used. Example: sub.domain.com,example.com
-         cookie_expire: "168h0m0s"
-         # Expiration timeframe for cookies. Default: "168h0m0s".
-         cookie_samesite: ""
-         # SameSite attribute for cookies. Supported values: "lax", "strict", "none", or "".
-         email_domains: ""
-         # Authenticate IDs that use the specified email domain. To authenticate IDs that use any email domain, use "*". Default: "". Example: example.com,example2.com
-         pass_access_token: <true|false>
-         # Pass the OAuth access token to the backend app via the X-Forwarded-Access-Token header.
-         request_logging: <true|false>
-         # Log all requests to the backend app.
-         request_logging_format:
-         # Format for request logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#request-log-format
-         scope:
-         # Scope of the OAuth authentication. For more info, see https://oauth.net/2/scope/
-         set_authorization_header: <true|false>
-         # Set the Authorization Bearer response header when the app responds to the Ingress ALB, such when using the NGINX auth_request mode.
-         set_xauthrequest: <true|false>
-         # Set X-Auth-Request-User, X-Auth-Request-Email, and X-Auth-Request-Preferred-Username response headers when the app responds to the Ingress ALB, such as when using the NGINX auth_request mode.
-         standard_logging: <true|false>
-         # Log standard runtime information.
-         standard_logging_format:
-         # Format for standard logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#standard-log-format
-         tls_secret_name:
-         # The name of a secret that contains the server-side TLS certificate and key to enable TLS between the OAuth2-Proxy and the Ingress ALB. By default, the TLS secret defined in your Ingress resources is used.
-       ```
-       {: codeblock}
+        ```yaml
+        apiVersion: v1
+        kind: ConfigMap
+        metadata:
+          name: oauth2-<App_ID_service_instance_name>
+          namespace: <ingress_resource_namespace>
+        data:
+          auth_logging: <true|false>
+          # Log all authentication attempts.
+          auth_logging_format:
+          # Format for authentication logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#auth-log-format
+          cookie_domains:
+          # A list of optional domains to force cookies to. The longest domain that matches the request’s host is used. If there is no match for the request’s host, the shortest domain is used. Example: sub.domain.com,example.com
+          cookie_expire: "168h0m0s"
+          # Expiration timeframe for cookies. Default: "168h0m0s".
+          cookie_samesite: ""
+          # SameSite attribute for cookies. Supported values: "lax", "strict", "none", or "".
+          email_domains: ""
+          # Authenticate IDs that use the specified email domain. To authenticate IDs that use any email domain, use "*". Default: "". Example: example.com,example2.com
+          pass_access_token: <true|false>
+          # Pass the OAuth access token to the backend app via the X-Forwarded-Access-Token header.
+          request_logging: <true|false>
+          # Log all requests to the backend app.
+          request_logging_format:
+          # Format for request logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#request-log-format
+          scope:
+          # Scope of the OAuth authentication. For more info, see https://oauth.net/2/scope/
+          set_authorization_header: <true|false>
+          # Set the Authorization Bearer response header when the app responds to the Ingress ALB, such when using the NGINX auth_request mode.
+          set_xauthrequest: <true|false>
+          # Set X-Auth-Request-User, X-Auth-Request-Email, and X-Auth-Request-Preferred-Username response headers when the app responds to the Ingress ALB, such as when using the NGINX auth_request mode.
+          standard_logging: <true|false>
+          # Log standard runtime information.
+          standard_logging_format:
+          # Format for standard logs. For more info, see https://oauth2-proxy.github.io/oauth2-proxy/configuration#standard-log-format
+          tls_secret_name:
+          # The name of a secret that contains the server-side TLS certificate and key to enable TLS between the OAuth2-Proxy and the Ingress ALB. By default, the TLS secret defined in your Ingress resources is used.
+        ```
+        {: codeblock}
+
     2. Apply the ConfigMap resource to your add-on. Your changes are applied automatically.
-      ```
-      kubectl apply -f oauth2-<App_ID_service_instance_name>.yaml
-      ```
-      {: pre}
+        ```
+        kubectl apply -f oauth2-<App_ID_service_instance_name>.yaml
+        ```
+        {: pre}
 
 For the list of changes for each ALB OAuth Proxy add-on version, see the [{{site.data.keyword.cloud_notm}} ALB OAuth Proxy add-on changelog](/docs/containers?topic=containers-alb-oauth-proxy-changelog).
 {: tip}
@@ -1161,22 +1172,22 @@ By default, the source IP addresses of client requests are not preserved by the 
 The PROXY protocol enables load balancers to pass client connection information that is contained in headers on the client request, including the client IP address, the proxy server IP address, and both port numbers, to ALBs.
 
 1. Enable the PROXY protocol. For more information about this command's parameters, see the [CLI reference](/docs/containers?topic=containers-kubernetes-service-cli#cs_ingress_lb_proxy-protocol_enable).<p class="important">After you run this command, new load balancers are created with the updated PROXY protocol configuration. Two unused IP addresses for each load balancer must be available in each subnet during the load balancer recreation. After these load balancers are created, the existing ALB load balancers are deleted. This load balancer recreation process might cause service disruptions.</p>
-  ```
-  ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR> --header-timeout <timeout>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks ingress lb proxy-protocol enable --cluster <cluster_name_or_ID> --cidr <subnet_CIDR> --header-timeout <timeout>
+    ```
+    {: pre}
 
 2. Confirm that the PROXY protocol is enabled for the load balancers that expose ALBs in your cluster.
-  ```
-  ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks ingress lb get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 3. To later disable the PROXY protocol, you can run the following command:
-  ```
-  ibmcloud ks ingress lb proxy-protocol disable --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks ingress lb proxy-protocol disable --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
 ### Changing the `externalTrafficPolicy` in classic clusters
 {: #preserve_source_ip_classic}
@@ -1216,6 +1227,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
             service "public-cr18e61e63c6e94b658596ca93d087eed9-alb1" edited
             ```
             {: screen}
+
     * To set up source IP preservation for all public ALBs in your cluster, run the following command:
         ```
         kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Local"}}'; done
@@ -1261,6 +1273,7 @@ To enable source IP preservation, edit the load balancer service that exposes an
         kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^public" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
         ```
         {: pre}
+
     * To revert source IP preservation for your private ALBs:
         ```
         kubectl get svc -n kube-system | grep alb | awk '{print $1}' | grep "^private" | while read alb; do kubectl patch svc $alb -n kube-system -p '{"spec":{"externalTrafficPolicy":"Cluster"}}'; done
@@ -1291,26 +1304,26 @@ To edit the configmap to enable SSL protocols and ciphers:
 
 2. Add the SSL protocols and ciphers. Format ciphers according to the [OpenSSL library cipher list format](https://www.openssl.org/docs/man1.0.2/man1/ciphers.html){: external}.
 
-   ```yaml
-   apiVersion: v1
-   data:
-     ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2 TLSv1.3"
-     ssl-ciphers: "HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20"
-   kind: ConfigMap
-   metadata:
-     name: ibm-cloud-provider-ingress-cm
-     namespace: kube-system
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    data:
+      ssl-protocols: "TLSv1 TLSv1.1 TLSv1.2 TLSv1.3"
+      ssl-ciphers: "HIGH:!aNULL:!MD5:!CAMELLIA:!AESCCM:!ECDH+CHACHA20"
+    kind: ConfigMap
+    metadata:
+      name: ibm-cloud-provider-ingress-cm
+      namespace: kube-system
+    ```
+    {: codeblock}
 
 3. Save the configuration file.
 
 4. Verify that the configmap changes were applied. The changes are applied to your ALBs automatically.
 
-   ```
-   kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
-   ```
-   {: pre}
+    ```
+    kubectl get cm ibm-cloud-provider-ingress-cm -n kube-system -o yaml
+    ```
+    {: pre}
 
 <br />
 
@@ -1329,25 +1342,25 @@ When you create a classic cluster, a Let's Encrypt certificate is generated for 
     {: pre}
 
 2. In the `spec.tls` section, change the value of the `hosts.secretName` setting to the name of your custom secret that contains your custom certificate.
-   Example:
-   ```yaml
-   spec:
-     rules:
-     ...
-     tls:
-     - hosts:
-       - invalid.mycluster-<hash>-0000.us-south.containers.appdomain.cloud
-       secretName: <custom_secret_name>
-   ```
-   {: codeblock}
+    Example:
+    ```yaml
+    spec:
+        rules:
+        ...
+        tls:
+        - hosts:
+        - invalid.mycluster-<hash>-0000.us-south.containers.appdomain.cloud
+        secretName: <custom_secret_name>
+    ```
+    {: codeblock}
 
 3. Save the resource file.
 
 4. Verify that the resource now points to your custom secret name. The changes are applied to your ALBs automatically.
-   ```
-   kubectl get ingress alb-default-server -n kube-system -o yaml
-   ```
-   {: pre}
+    ```
+    kubectl get ingress alb-default-server -n kube-system -o yaml
+    ```
+    {: pre}
 
 <br />
 
@@ -1375,24 +1388,24 @@ By default, the Ingress ALB logs each request as it arrives. If you have an envi
     * Time interval: Add the `flush` field and set it to how often the ALB should write to the log file. For example, if the default value of `5m` is used, the ALB writes buffer contents to the log file once every 5 minutes.
     * Time interval or buffer size: When both `flush` and `buffer` are set, the ALB writes buffer content to the log file based on whichever threshold parameter is met first.
 
-  ```yaml
-  apiVersion: v1
-  kind: ConfigMap
-  data:
-    access-log-params: "buffer=100KB, flush=5m"
-  metadata:
+    ```yaml
+    apiVersion: v1
+    kind: ConfigMap
+    data:
+        access-log-params: "buffer=100KB, flush=5m"
+      metadata:
     name: ibm-k8s-controller-config
     ...
-  ```
-  {: codeblock}
+    ```
+    {: codeblock}
 
 3. Save and close the configuration file. The changes are applied to your ALBs automatically.
 
 4. Verify that the logs for an ALB now contain buffered content that is written according to the memory size or time interval you set.
-   ```
-   kubectl logs -n kube-system <ALB_ID> -c nginx-ingress
-   ```
-   {: pre}
+    ```
+    kubectl logs -n kube-system <ALB_ID> -c nginx-ingress
+    ```
+    {: pre}
 
 ### Changing the number or duration of keepalive connections
 {: #keepalive_time}
@@ -1409,25 +1422,25 @@ Keepalive connections can have a major impact on performance by reducing the CPU
 2. Change the values of `keep-alive-requests` and `keep-alive`.
     * `keep-alive-requests`: The number of keepalive client connections that can stay open to the Ingress ALB. The default is `100`.
     * `keep-alive`: The timeout, in seconds, during which the keepalive client connection stays open to the Ingress ALB. The default is `75`.
-   ```yaml
-   apiVersion: v1
-   data:
-     keep-alive-requests: 100
-     keep-alive: 75
-   kind: ConfigMap
-   metadata:
-     name: ibm-k8s-controller-config
-     ...
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    data:
+      keep-alive-requests: 100
+      keep-alive: 75
+    kind: ConfigMap
+    metadata:
+      name: ibm-k8s-controller-config
+      ...
+    ```
+    {: codeblock}
 
 3. Save and close the configuration file. The changes are applied to your ALBs automatically.
 
 4. Verify that the configmap changes were applied.
-   ```
-   kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
-   ```
-   {: pre}
+    ```
+    kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
+    ```
+    {: pre}
 
 ### Changing the number of simultaneous connections or worker processes
 {: #worker_processes_connections}
@@ -1448,25 +1461,25 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 2. Change the value of `max-worker-connections` or `worker-processes`.
 
-   ```yaml
-   apiVersion: v1
-   data:
-     max-worker-connections: 16384
-     worker-processes: "auto"
-   kind: ConfigMap
-   metadata:
-     name: ibm-k8s-controller-config
-     ...
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    data:
+      max-worker-connections: 16384
+      worker-processes: "auto"
+    kind: ConfigMap
+    metadata:
+      name: ibm-k8s-controller-config
+      ...
+    ```
+    {: codeblock}
 
 3. Save the configuration file. The changes are applied to your ALBs automatically.
 
 4. Verify that the configmap changes were applied.
-   ```
-   kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
-   ```
-   {: pre}
+    ```
+    kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
+    ```
+    {: pre}
 
 ### Changing the number of open files for worker processes
 {: #max-worker-files}
@@ -1484,27 +1497,29 @@ Each ALB has NGINX worker processes that process the client connections and comm
 
 2. Change the value of `max-worker-open-files`.
 
-   ```yaml
-   apiVersion: v1
-   data:
-     max-worker-open-files: 0
-   kind: ConfigMap
-   metadata:
-     name: ibm-k8s-controller-config
-     ...
-   ```
-   {: codeblock}
+    ```yaml
+    apiVersion: v1
+    data:
+      max-worker-open-files: 0
+    kind: ConfigMap
+    metadata:
+      name: ibm-k8s-controller-config
+      ...
+    ```
+    {: codeblock}
 
 3. Save the configuration file. The changes are applied to your ALBs automatically.
 
 4. Verify that the configmap changes were applied.
-   ```
-   kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
-   ```
-   {: pre}
+    ```
+    kubectl get cm ibm-k8s-controller-config -n kube-system -o yaml
+    ```
+    {: pre}
 
 ### Tuning kernel performance
 {: #ingress_kernel}
 
 To optimize performance of your Ingress ALBs, you can also [change the Linux kernel `sysctl` parameters on worker nodes](/docs/containers?topic=containers-kernel). Worker nodes are automatically provisioned with optimized kernel tuning, so change these settings only if you have specific performance optimization requirements.
 {: shortdesc}
+
+

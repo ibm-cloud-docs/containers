@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Setting pod priority
 {: #pod_priority}
@@ -137,9 +135,9 @@ To understand how pod priority and Kubernetes scheduler work together, consider 
 _Figure: Pod priority scenarios_
 <img src="images/pod-priority.png" width="500" alt="Pod priority scenarios" style="width:500px; border-style: none"/>
 
-1.  Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
-2.  Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
-3.  Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The Kubernetes scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the Kubernetes scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the Kubernetes scheduler schedules the medium priority pod.
+1. Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node with room for all three pods, and schedules them in order of priority, with the highest priority pod scheduled first.
+2. Three pods with high, medium, and low priority are pending scheduling. The Kubernetes scheduler finds an available worker node, but the worker node has only enough resources to support the high and medium priority pods. The low-priority pod is not scheduled and it remains in pending.
+3. Two pods with high and medium priority are pending scheduling. A third pod with low priority exists on an available worker node. However, the worker node does not have enough resources to schedule any of the pending pods. The Kubernetes scheduler preempts, or removes, the low-priority pod, which returns the pod to a pending state. Then, the Kubernetes scheduler tries to schedule the high priority pod. However, the worker node does not have enough resources to schedule the high priority pod, and instead, the Kubernetes scheduler schedules the medium priority pod.
 
 **For more information**: See the Kubernetes documentation on [pod priority and preemption](https://kubernetes.io/docs/concepts/scheduling-eviction/pod-priority-preemption/){: external}.
 
@@ -190,23 +188,23 @@ Before you begin:
 
 To use a priority class:
 
-1.  Optional: Use an existing priority class as a template for the new class.
+1. Optional: Use an existing priority class as a template for the new class.
 
-    1.  List existing priority classes.
+    1. List existing priority classes.
 
         ```
         kubectl get priorityclasses
         ```
         {: pre}
 
-    2.  Choose the priority class that you want to copy and create a local YAML file.
+    2. Choose the priority class that you want to copy and create a local YAML file.
 
         ```
         kubectl get priorityclass <priority_class> -o yaml > Downloads/priorityclass.yaml
         ```
         {: pre}
 
-2.  Make your priority class YAML file.
+2. Make your priority class YAML file.
 
     ```yaml
     apiVersion: scheduling.k8s.io/v1alpha1
@@ -223,8 +221,8 @@ To use a priority class:
     <caption>Understanding the YAML file components</caption>
     <col width="25%">
     <thead>
-      <th>Component</th>
-      <th>Description</th>
+        <th>Component</th>
+        <th>Description</th>
     </thead>
     <tbody>
     <tr>
@@ -237,22 +235,22 @@ To use a priority class:
     </tr>
     <tr>
     <td><code>globalDefault</code></td>
-    <td>Optional: Set the field to `true` to make this priority class the global default that is applied to every pod that is scheduled without a `priorityClassName` value. Only one priority class in your cluster can be set as the global default. If there is no global default, pods with no `priorityClassName` specified have a priority of zero (`0`).</br></br>
-    The [default priority classes](#default_priority_class) do not set a `globalDefault`. If you created other priority classes in your cluster, you can check to make sure that they do not set a `globalDefault` by running `kubectl describe priorityclass <name>`.</td>
+    <td>Optional: Set the field to <code>true</code> to make this priority class the global default that is applied to every pod that is scheduled without a <code>priorityClassName</code> value. Only one priority class in your cluster can be set as the global default. If there is no global default, pods with no <code>priorityClassName</code> specified have a priority of zero (<code>0</code>).</br></br>
+    The [default priority classes](#default_priority_class) do not set a <code>globalDefault</code>. If you created other priority classes in your cluster, you can check to make sure that they do not set a <code>globalDefault</code> by running <code>kubectl describe priorityclass <name></code>.</td>
     </tr>
     <tr>
     <td><code>description</code></td>
-    <td>Optional: Tell users why to use this priority class. Enclose the string in quotations (`""`).</td>
+    <td>Optional: Tell users why to use this priority class. Enclose the string in quotations (<code>""</code>).</td>
     </tr></tbody></table>
 
-3.  Create the priority class in your cluster.
+3. Create the priority class in your cluster.
 
     ```
     kubectl apply -f filepath/priorityclass.yaml
     ```
     {: pre}
 
-4.  Verify that the priority class is created.
+4. Verify that the priority class is created.
 
     ```
     kubectl get priorityclasses
@@ -274,30 +272,30 @@ Before you begin:
 
 To assign priority to your pods:
 
-1.  Check the importance of other deployed pods so that you can choose the right priority class for your pods in relation to what already is deployed.
+1. Check the importance of other deployed pods so that you can choose the right priority class for your pods in relation to what already is deployed.
 
-    1.  View the priority classes that other pods in the namespace use.
+    1. View the priority classes that other pods in the namespace use.
 
         ```
         kubectl get pods -n <namespace> -o custom-columns=NAME:.metadata.name,PRIORITY:.spec.priorityClassName
         ```
         {: pre}
 
-    2.  Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
+    2. Get the details of the priority class and note the **value** number. Pods with higher numbers are prioritized before pods with lower numbers. Repeat this step for each priority class that you want to review.
 
         ```
         kubectl describe priorityclass <priorityclass_name>
         ```
         {: pre}
 
-2.  Get the priority class that you want to use, or [create your own priority class](#create_priority_class).
+2. Get the priority class that you want to use, or [create your own priority class](#create_priority_class).
 
     ```
     kubectl get priorityclasses
     ```
     {: pre}
 
-3.  In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
+3. In your pod spec, add the `priorityClassName` field with the name of the priority class that you retrieved in the previous step.
 
     ```yaml
     apiVersion: apps/v1
@@ -323,11 +321,13 @@ To assign priority to your pods:
     ```
     {: codeblock}
 
-4.  Create your prioritized pods in the namespace that you want to deploy them to.
+4. Create your prioritized pods in the namespace that you want to deploy them to.
 
     ```
     kubectl apply -f filepath/pod-deployment.yaml
     ```
     {: pre}
+
+
 
 

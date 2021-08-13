@@ -2,7 +2,7 @@
 
 copyright:
   years: 2014, 2021
-lastupdated: "2021-08-12"
+lastupdated: "2021-08-13"
 
 keywords: kubernetes, iks
 
@@ -58,7 +58,6 @@ completion-time: 30m
 {:new_window: target="_blank"}
 {:node: .ph data-hd-programlang='node'}
 {:note: .note}
-{:note:.deprecated}
 {:objectc: .ph data-hd-programlang='Objective C'}
 {:objectc: data-hd-programlang="objectc"}
 {:org_name: data-hd-keyref="org_name"}
@@ -109,9 +108,8 @@ completion-time: 30m
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Migrating an app from Cloud Foundry to a cluster
 {: #cf_tutorial}
@@ -161,10 +159,10 @@ Get your code ready to go. Don't have any code yet? You can download starter cod
 
 1. Create a directory that is named `cf-py` and navigate into it. In this directory, you save all the files that are required to build the Docker image and to run your app.
 
-  ```
-  mkdir cf-py && cd cf-py
-  ```
-  {: pre}
+    ```
+    mkdir cf-py && cd cf-py
+    ```
+    {: pre}
 
 2. Copy the app code and all related files into the directory. You can use your own app code or download boilerplate from the catalog. This tutorial uses the Python Flask boilerplate. However, you can use the same basic steps with a Node.js, Java, or [Kitura](https://github.com/IBM-Cloud/Kitura-Starter) app.
 
@@ -197,81 +195,81 @@ Create a Dockerfile that includes your app code and the necessary configurations
 
 1. In the `cf-py` directory that you created in the previous lesson, create a `Dockerfile`, which is the basis for creating a container image. You can create the Dockerfile by using your preferred CLI editor or a text editor on your computer. The following example shows how to create a Dockerfile file with the nano editor.
 
-  ```
-  nano Dockerfile
-  ```
-  {: pre}
+    ```
+    nano Dockerfile
+    ```
+    {: pre}
 
 2. Copy the following script into the Dockerfile. This Dockerfile applies specifically to a Python app. If you are using another type of code, your Dockerfile must include a different base image and might require other fields to be defined.
 
-  ```
-  #Use the Python image from DockerHub as a base image
-  FROM python:3-slim
+    ```
+    #Use the Python image from DockerHub as a base image
+    FROM python:3-slim
 
-  #Expose the port for your python app
-  EXPOSE 5000
+    #Expose the port for your python app
+    EXPOSE 5000
 
-  #Copy all app files from the current directory into the app
-  #directory in your container. Set the app directory
-  #as the working directory
-  WORKDIR /cf-py/
-  COPY .  .
+    #Copy all app files from the current directory into the app
+    #directory in your container. Set the app directory
+    #as the working directory
+    WORKDIR /cf-py/
+    COPY .  .
 
-  #Install any requirements that are defined
-  RUN pip install --no-cache-dir -r requirements.txt
+    #Install any requirements that are defined
+    RUN pip install --no-cache-dir -r requirements.txt
 
-  #Update the openssl package
-  RUN apt-get update && apt-get install -y \
-  openssl
+    #Update the openssl package
+    RUN apt-get update && apt-get install -y \
+    openssl
 
-  #Start the app.
-  CMD ["python", "welcome.py"]
-  ```
-  {: codeblock}
+    #Start the app.
+    CMD ["python", "welcome.py"]
+    ```
+    {: codeblock}
 
 3. Save your changes in the nano editor by pressing `ctrl + o`. Confirm your changes by pressing `enter`. Exit the nano editor by pressing `ctrl + x`.
 
 4. Build a Docker image that includes your app code and push it to your private registry.
 
-  ```
-  ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
-  ```
-  {: pre}
+    ```
+    ibmcloud cr build -t <region>.icr.io/namespace/cf-py .
+    ```
+    {: pre}
 
-  <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
-  <caption>Understanding this command's components</caption>
-  <col width="15%">
-  <thead>
-  <th>Parameter</th>
-  <th>Description</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td>Parameter</td>
-  <td>Description</td>
-  </tr>
-  <tr>
-  <td><code>build</code></td>
-  <td>The build command.</td>
-  </tr>
-  <tr>
-  <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
-  <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it.</td>
-  </tr>
-  <tr>
-  <td><code>.</code></td>
-  <td>The location of the Dockerfile. If you are running the build command from the directory that includes the Dockerfile, enter a period (.). Otherwise, use the relative path to the Dockerfile.</td>
-  </tr>
-  </tbody>
-  </table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the command. The second column describes the parameter.">
+    <caption>Understanding this command's components</caption>
+    <col width="15%">
+    <thead>
+    <th>Parameter</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td>Parameter</td>
+    <td>Description</td>
+    </tr>
+    <tr>
+    <td><code>build</code></td>
+    <td>The build command.</td>
+    </tr>
+    <tr>
+    <td><code>-t registry.&lt;region&gt;.bluemix.net/namespace/cf-py</code></td>
+    <td>Your private registry path, which includes your unique namespace and the name of the image. For this example, the same name is used for the image as the app directory, but you can choose any name for the image in your private registry. If you are unsure what your namespace is, run the <code>ibmcloud cr namespaces</code> command to find it.</td>
+    </tr>
+    <tr>
+    <td><code>.</code></td>
+    <td>The location of the Dockerfile. If you are running the build command from the directory that includes the Dockerfile, enter a period (.). Otherwise, use the relative path to the Dockerfile.</td>
+    </tr>
+    </tbody>
+    </table>
 
-  The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
+    The image is created in your private registry. You can run the `ibmcloud cr images` command to verify that the image was created.
 
-  ```
-  REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
-  us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
-  ```
-  {: screen}
+    ```
+    REPOSITORY                       NAMESPACE   TAG      DIGEST         CREATED         SIZE     VULNERABILITY STATUS   
+    us.icr.io/namespace/cf-py        namespace   latest   cb03170b2cb2   3 minutes ago   271 MB   OK
+    ```
+    {: screen}
 
 
 <br />
@@ -286,12 +284,12 @@ Deploy your app as a container in a Kubernetes cluster.
 
 1. Create a configuration YAML file that is named `cf-py.yaml` and update `<registry_namespace>` with the name of your private image registry. This configuration file defines a container deployment from the image that you created in the previous lesson and a service to expose the app to the public.
 
-  ```
-  apiVersion: apps/v1
-  kind: Deployment
-  metadata:
-    labels:
-      app: cf-py
+    ```
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+        labels:
+          app: cf-py
     name: cf-py
     namespace: default
   spec:
@@ -321,41 +319,41 @@ Deploy your app as a container in a Kubernetes cluster.
     ports:
      - port: 5000
        nodePort: 30872
-  ```
-  {: codeblock}
+    ```
+    {: codeblock}
 
-  <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
-  <caption>Understanding the YAML file components</caption>
-  <col width="15%">
-  <thead>
-  <th>Parameter</th>
-  <th>Description</th>
-  </thead>
-  <tbody>
-  <tr>
-  <td><code>image</code></td>
-  <td>In `us.icr.io/<registry_namespace>/cf-py:latest`, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the `ibmcloud cr namespaces` command to find it.</td>
-  </tr>
-  <tr>
-  <td><code>nodePort</code></td>
-  <td>Expose your app by creating a Kubernetes service of type NodePort. NodePorts are in the range of 30000 - 32767. You use this port to test your app in a browser later.</td>
-  </tr>
-  </tbody></table>
+    <table summary="The columns are read from left to right. The first column has the parameter of the YAML file. The second column describes the parameter.">
+    <caption>Understanding the YAML file components</caption>
+    <col width="15%">
+    <thead>
+    <th>Parameter</th>
+    <th>Description</th>
+    </thead>
+    <tbody>
+    <tr>
+    <td><code>image</code></td>
+    <td>In <code>us.icr.io/<registry_namespace>/cf-py:latest</code>, replace &lt;registry_namespace&gt; with the namespace of your private image registry. If you are unsure what your namespace is, run the <code>ibmcloud cr namespaces</code> command to find it.</td>
+    </tr>
+    <tr>
+    <td><code>nodePort</code></td>
+    <td>Expose your app by creating a Kubernetes service of type NodePort. NodePorts are in the range of 30000 - 32767. You use this port to test your app in a browser later.</td>
+    </tr>
+    </tbody></table>
 
 2. Apply the configuration file to create the deployment and the service in your cluster.
 
-  ```
-  kubectl apply -f <filepath>/cf-py.yaml
-  ```
-  {: pre}
+    ```
+    kubectl apply -f <filepath>/cf-py.yaml
+    ```
+    {: pre}
 
-  Output:
+    Output:
 
-  ```
-  deployment "cf-py" configured
-  service "cf-py-nodeport" configured
-  ```
-  {: screen}
+    ```
+    deployment "cf-py" configured
+    service "cf-py-nodeport" configured
+    ```
+    {: screen}
 
 3. Now that all the deployment work is done, you can test your app in a browser. Get the details to form the URL.
 
@@ -378,7 +376,7 @@ Deploy your app as a container in a Kubernetes cluster.
 
     <img src="images/python_flask.png" alt="A screen capture of the deployed boilerplate Python Flask app." />
 
-5.  [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
+5. [Launch the Kubernetes dashboard](/docs/containers?topic=containers-deploy_app#cli_dashboard).
 
     If you select your cluster in the [{{site.data.keyword.cloud_notm}} console](https://cloud.ibm.com/), you can use the **Kubernetes Dashboard** button to launch your dashboard with one click.
     {: tip}
@@ -386,3 +384,5 @@ Deploy your app as a container in a Kubernetes cluster.
 6. In the **Workloads** tab, you can see the resources that you created.
 
 Good job! Your app is deployed in a container!
+
+

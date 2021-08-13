@@ -10,7 +10,6 @@ subcollection: containers
 
 ---
 
-
 {:DomainName: data-hd-keyref="APPDomain"}
 {:DomainName: data-hd-keyref="DomainName"}
 {:android: data-hd-operatingsystem="android"}
@@ -105,9 +104,8 @@ subcollection: containers
 {:user_ID: data-hd-keyref="user_ID"}
 {:vbnet: .ph data-hd-programlang='vb.net'}
 {:video: .video}
-
- 
   
+
 
 # Classic: Restricting network traffic to edge worker nodes
 {: #edge}
@@ -132,117 +130,120 @@ Using a gateway-enabled cluster? See [Isolating networking workloads to edge nod
 Before you begin:
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms):
-  * Any platform access role for the cluster
-  * **Writer** or **Manager** service access role for all namespaces
+    * Any platform access role for the cluster
+    * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To create an edge node worker pool:
 
 1. [Create a worker pool](/docs/containers?topic=containers-add_workers#add_pool) that spans all zones in your cluster and has at least two workers per zone if you use NLBs or 3 or more workers per zone if you use ALBs. In the `ibmcloud ks worker-pool create` command, include the `--label dedicated=edge` flag to label all worker nodes in the pool. All worker nodes in this pool, including any worker nodes that you add later, are labeled as edge nodes.
 
-  <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).</p>
+    <p class="tip">If you want to use an existing worker pool, the pool must span all zones in your cluster and have at least two worker nodes per zone. You can label the worker pool with `dedicated=edge` by using the [`ibmcloud ks worker-pool label set` command](/docs/containers?topic=containers-kubernetes-service-cli#cs_worker_pool_label_set).</p>
 
-  <p class="important">To ensure that ALB pods are always scheduled to edge worker nodes if they are present and not scheduled to non-edge worker nodes, you must create or use an existing worker pool that has at least three edge worker nodes per zone. During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. However, ALB pods have anti-affinity rules that do not permit a pod to deploy to a worker node where another ALB pod already exists. If you have only two edge nodes per zone, both ALB pod replicas already exist on those edge nodes, so the new ALB pod must be scheduled on a non-edge worker node. When three edge nodes are present in a zone, the new ALB pod can be scheduled to the third edge node. Then, the old ALB pod is removed.</p>
+    <p class="important">To ensure that ALB pods are always scheduled to edge worker nodes if they are present and not scheduled to non-edge worker nodes, you must create or use an existing worker pool that has at least three edge worker nodes per zone. During the update of an ALB pod, a new ALB pod rolls out to replace an existing ALB pod. However, ALB pods have anti-affinity rules that do not permit a pod to deploy to a worker node where another ALB pod already exists. If you have only two edge nodes per zone, both ALB pod replicas already exist on those edge nodes, so the new ALB pod must be scheduled on a non-edge worker node. When three edge nodes are present in a zone, the new ALB pod can be scheduled to the third edge node. Then, the old ALB pod is removed.</p>
 
 2. Verify that the worker pool and worker nodes have the `dedicated=edge` label.
     * To check the worker pool:
-      ```
-      ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
-      ```
-      {: pre}
+        ```
+        ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
+        ```
+        {: pre}
 
     * To check individual worker nodes, review the **Labels** field of the output of the following command.
-      ```
-      kubectl describe node <worker_node_private_IP>
-      ```
-      {: pre}
+        ```
+        kubectl describe node <worker_node_private_IP>
+        ```
+        {: pre}
 
 3. Retrieve all existing NLBs and ALBs in the cluster.
-  ```
-  kubectl get services --all-namespaces | grep LoadBalancer
-  ```
-  {: pre}
+    ```
+    kubectl get services --all-namespaces | grep LoadBalancer
+    ```
+    {: pre}
 
-  In the output, note the **Namespace** and **Name** of each load balancer service. For example, the following output shows four load balancer services: one public NLB in the `default` namespace, and one private and two public ALBs in the `kube-system` namespace.
-  ```
-  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
-  default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                11m
-  kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
-  ```
-  {: screen}
+    In the output, note the **Namespace** and **Name** of each load balancer service. For example, the following output shows four load balancer services: one public NLB in the `default` namespace, and one private and two public ALBs in the `kube-system` namespace.
+    ```
+    NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
+    default       webserver-lb                                     LoadBalancer   172.21.190.18    169.46.17.2     80:30597/TCP                                11m
+    kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.185.94.150   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
+    kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.48.228.78   80:30286/TCP,443:31363/TCP                  25d
+    kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb2   LoadBalancer   172.21.229.73    169.46.17.6     80:31104/TCP,443:31138/TCP                  25d
+    ```
+    {: screen}
 
 4. Using the output from the previous step, run the following command for each NLB and ALB. This command redeploys the NLB or ALB to an edge worker node.You can deploy both public and private NLBs and ALBs to the edge worker nodes.
 
-  ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
-  ```
-  {: pre}
+    ```
+    kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  service "webserver-lb" configured
-  ```
-  {: screen}
+    Example output:
+    ```
+    service "webserver-lb" configured
+    ```
+    {: screen}
 
 5. To verify that networking workloads are restricted to edge nodes, confirm that NLB and ALB pods are scheduled onto the edge nodes and are not scheduled onto non-edge nodes.
 
-  * NLB pods:
-    1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
-      ```
-      kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
-      ```
-      {: pre}
+    * NLB pods:
+        1. Confirm that the NLB pods are deployed to edge nodes. Search for the external IP address of the load balancer service that is listed in the output of step 3. Replace the periods (`.`) with hyphens (`-`). Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
+        ```
+        kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
+        ```
+        {: pre}
 
-      Example output:
-      ```
-      ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
-      ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
-      ```
-      {: screen}
+        Example output:
+        ```
+        ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
+        ibm-system                 ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-2z64r                 5m (0%)       0 (0%)      10Mi (0%)        0 (0%)
+        ```
+        {: screen}
+
     2. Confirm that no NLB pods are deployed to non-edge nodes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
-      ```
-      kubectl describe nodes -l dedicated!=edge | grep "169-46-17-2"
-      ```
-      {: pre}
-      * If the NLB pods are correctly deployed to edge nodes, no NLB pods are returned. Your NLBs are successfully rescheduled onto only edge worker nodes.
-      * If NLB pods are returned, continue to the next step.
+        ```
+        kubectl describe nodes -l dedicated!=edge | grep "169-46-17-2"
+        ```
+        {: pre}
 
-  * ALB pods:
-    1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
-      ```
-      kubectl describe nodes -l dedicated=edge | grep alb
-      ```
-      {: pre}
+        * If the NLB pods are correctly deployed to edge nodes, no NLB pods are returned. Your NLBs are successfully rescheduled onto only edge worker nodes.
+        * If NLB pods are returned, continue to the next step.
 
-      Example output for a cluster with two zones in which one default private and two default public ALBs are enabled:
-      ```
-      kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-7p9q6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-kvs9f    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb2-57df7c7b5b-tp6xw    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb2-57df7c7b5b-z5p2v    0 (0%)        0 (0%)      0 (0%)           0 (0%)
-      ```
-      {: screen}
+    * ALB pods:
+        1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
+        ```
+        kubectl describe nodes -l dedicated=edge | grep alb
+        ```
+        {: pre}
+
+        Example output for a cluster with two zones in which one default private and two default public ALBs are enabled:
+        ```
+        kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-27pv4    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        kube-system                private-crdf253b6025d64944ab99ed63bb4567b6-alb1-d5dd478db-7p9q6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-s77z6    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb1-5ff8cdff89-kvs9f    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb2-57df7c7b5b-tp6xw    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        kube-system                public-crdf253b6025d64944ab99ed63bb4567b6-alb2-57df7c7b5b-z5p2v    0 (0%)        0 (0%)      0 (0%)           0 (0%)
+        ```
+        {: screen}
 
     2. Confirm that no ALB pods are deployed to non-edge nodes.
-      ```
-      kubectl describe nodes -l dedicated!=edge | grep alb
-      ```
-      {: pre}
-      * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
-      * If ALB pods are returned, continue to the next step.
+        ```
+        kubectl describe nodes -l dedicated!=edge | grep alb
+        ```
+        {: pre}
+
+        * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
+        * If ALB pods are returned, continue to the next step.
 
 6. If NLB or ALB pods are still deployed to non-edge nodes, you can delete the pods so that they redeploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
-  1. Delete a pod. Example for if one of the `webserver-lb` NLB pods did not schedule to an edge node:
+    1. Delete a pod. Example for if one of the `webserver-lb` NLB pods did not schedule to an edge node:
     ```
     kubectl delete pod ibm-cloud-provider-ip-169-46-17-2-76fcb4965d-wz6dg
     ```
     {: pre}
 
-  2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
+    2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes. Example for the `webserver-lb` NLB that has an external IP address of `169.46.17.2`:
     ```
     kubectl describe nodes -l dedicated=edge | grep "169-46-17-2"
     ```
@@ -279,38 +280,38 @@ Before you begin:
 
 1. Apply a taint to the worker nodes with the `dedicated=edge` label. The taint prevents pods from running on the worker node and removes pods that do not have the `dedicated=edge` label from the worker node. The pods that are removed are redeployed to other worker nodes with capacity.
 
-  To apply a taint to all existing and future worker nodes in a worker pool:
-  ```
-  ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoExecute
-  ```
-  {: pre}
+    To apply a taint to all existing and future worker nodes in a worker pool:
+    ```
+    ibmcloud ks worker-pool taint set -c <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID> --taint dedicated=edge:NoExecute
+    ```
+    {: pre}
 
-  To apply a taint to individual worker nodes:
-  ```
-  kubectl taint node -l dedicated=edge dedicated=edge:NoExecute
-  ```
-  {: pre}
+    To apply a taint to individual worker nodes:
+    ```
+    kubectl taint node -l dedicated=edge dedicated=edge:NoExecute
+    ```
+    {: pre}
 
-  Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
+    Now, only pods with the `dedicated=edge` toleration are deployed to your edge worker nodes.
 
 2. Verify that your edge nodes are tainted.
-  ```
-  kubectl describe nodes -l dedicated=edge | egrep "Taints|Hostname"
-  ```
-  {: pre}
+    ```
+    kubectl describe nodes -l dedicated=edge | egrep "Taints|Hostname"
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  Taints:             dedicated=edge:NoExecute
-    Hostname:    10.176.48.83
-  Taints:             dedicated=edge:NoExecute
-    Hostname:    10.184.58.7
-  ```
-  {: screen}
+    Example output:
+    ```
+    Taints:             dedicated=edge:NoExecute
+        Hostname:    10.176.48.83
+    Taints:             dedicated=edge:NoExecute
+        Hostname:    10.184.58.7
+    ```
+    {: screen}
 
 3. If you choose to [enable source IP preservation for an NLB 1.0 service](/docs/containers?topic=containers-loadbalancer#lb_source_ip), ensure that app pods are scheduled onto the edge worker nodes by [adding edge node affinity to app pods](/docs/containers?topic=containers-loadbalancer#lb_edge_nodes). App pods must be scheduled onto edge nodes to receive incoming requests.
 
-4.  Optional: You can remove a taint from the worker nodes.
+4. Optional: You can remove a taint from the worker nodes.
 
     To remove all taints from all worker nodes in a worker pool:
     ```
@@ -339,90 +340,90 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
 **Before you begin**:
 
 * Ensure that you have the following [{{site.data.keyword.cloud_notm}} IAM roles](/docs/containers?topic=containers-users#checking-perms) for {{site.data.keyword.containerlong_notm}}:
-  * Any platform access role for the cluster
-  * **Writer** or **Manager** service access role for all namespaces
+    * Any platform access role for the cluster
+    * **Writer** or **Manager** service access role for all namespaces
 * [Log in to your account. If applicable, target the appropriate resource group. Set the context for your cluster.](/docs/containers?topic=containers-cs_cli_install#cs_cli_configure)
 
 </br>To create an edge node worker pool in a gateway-enabled classic cluster:
 
 1. Retrieve all of the **Worker Zones** that your existing worker nodes are connected to.
-  ```
-  ibmcloud ks cluster get --cluster <cluster_name_or_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks cluster get --cluster <cluster_name_or_ID>
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  ...
-  Worker Zones:                   dal10, dal12
-  ```
-  {: screen}
+    Example output:
+    ```
+    ...
+    Worker Zones:                   dal10, dal12
+    ```
+    {: screen}
 
 2. For each zone, list available private VLANs. Note the private VLAN ID that you want to use.
-   ```
-   ibmcloud ks vlan ls --zone <zone>
-   ```
-   {: pre}
+    ```
+    ibmcloud ks vlan ls --zone <zone>
+    ```
+    {: pre}
 
 3. For each zone, review the available [flavors for worker nodes](/docs/containers?topic=containers-planning_worker_nodes#planning_worker_nodes).
-  ```
-  ibmcloud ks flavors --zone <zone>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks flavors --zone <zone>
+    ```
+    {: pre}
 
 4. Create a worker pool for your edge worker nodes. Your worker pool includes the machine type, the number of worker nodes that you want to have, and the edge labels that you want to add to the worker nodes. When you create the worker pool, your worker nodes are not yet provisioned. Continue with the next step to add worker nodes to your edge worker pool.
-  ```
-  ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
-  ```
-  {: pre}
+    ```
+    ibmcloud ks worker pool create classic --cluster <cluster_name_or_ID> --name edge --flavor <flavor> --size-per-zone 2 --labels dedicated=edge,node-role.kubernetes.io/edge=true,ibm-cloud.kubernetes.io/private-cluster-role=worker
+    ```
+    {: pre}
 
 5. Deploy worker nodes in the `edge` worker pool by adding the zones that you previously retrieved to the worker pool. Repeat this command for each zone. All worker nodes in this `edge` pool are connected to a private VLAN only.
-  ```
-  ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge --private-vlan <private_VLAN_ID>
-  ```
-  {: pre}
+    ```
+    ibmcloud ks zone add classic --zone <zone> --cluster <cluster_name_or_ID> --worker-pool edge --private-vlan <private_VLAN_ID>
+    ```
+    {: pre}
 
 6. Verify that the worker pool and worker nodes are provisioned and have the `dedicated=edge` label.
-  * To check the worker pool:
+    * To check the worker pool:
     ```
     ibmcloud ks worker-pool get --cluster <cluster_name_or_ID> --worker-pool <worker_pool_name_or_ID>
     ```
     {: pre}
 
-  * To check individual worker nodes, review the **Labels** field of the output of the following command. Your edge nodes are ready when the **Status** is `Ready`.
+    * To check individual worker nodes, review the **Labels** field of the output of the following command. Your edge nodes are ready when the **Status** is `Ready`.
     ```
     kubectl describe node <worker_node_private_IP>
     ```
     {: pre}
 
 7. Retrieve all existing ALBs in the cluster. In the output, note the **Namespace** and **Name** of each ALB.
-  ```
-  kubectl get services --all-namespaces | grep alb
-  ```
-  {: pre}
+    ```
+    kubectl get services --all-namespaces | grep alb
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
-  kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.xxx.xx.xxx   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
-  kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.xx.xxx.xx   80:30286/TCP,443:31363/TCP                  25d
-  ```
-  {: screen}
+    Example output:
+    ```
+    NAMESPACE     NAME                                             TYPE           CLUSTER-IP       EXTERNAL-IP     PORT(S)                                     AGE
+    kube-system   private-crdf253b6025d64944ab99ed63bb4567b6-alb1  LoadBalancer   172.21.158.78    10.xxx.xx.xxx   80:31015/TCP,443:31401/TCP,9443:32352/TCP   25d
+    kube-system   public-crdf253b6025d64944ab99ed63bb4567b6-alb1   LoadBalancer   172.21.84.248    169.xx.xxx.xx   80:30286/TCP,443:31363/TCP                  25d
+    ```
+    {: screen}
 
 8. Using the output from the previous step, run the following command for each ALB. This command redeploys the ALB to an edge worker node.
-  ```
-  kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
-  ```
-  {: pre}
+    ```
+    kubectl get service -n <namespace> <service_name> -o yaml | kubectl apply -f -
+    ```
+    {: pre}
 
-  Example output:
-  ```
-  service "private-crdf253b6025d64944ab99ed63bb4567b6-alb1" configured
-  ```
-  {: screen}
+    Example output:
+    ```
+    service "private-crdf253b6025d64944ab99ed63bb4567b6-alb1" configured
+    ```
+    {: screen}
 
 9. Verify that ALB pods are scheduled onto edge nodes and are not scheduled onto compute nodes.
-  1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
+    1. Confirm that all ALB pods are deployed to edge nodes. Each public and private ALB that is enabled in your cluster has two pods.
     ```
     kubectl describe nodes -l dedicated=edge | grep alb
     ```
@@ -437,27 +438,30 @@ If you use Ingress ALBs to expose your apps, requests to the path for your app a
     ```
     {: screen}
 
-  2. Confirm that no ALB pods are deployed to non-edge nodes.
+    2. Confirm that no ALB pods are deployed to non-edge nodes.
     ```
     kubectl describe nodes -l dedicated!=edge | grep alb
     ```
     {: pre}
+
     * If the ALB pods are correctly deployed to edge nodes, no ALB pods are returned. Your ALBs are successfully rescheduled onto only edge worker nodes.
     * If ALB pods are returned, continue to the next step.
 
 10. If ALB pods are still deployed to non-edge nodes, you can delete the pods so that they redeploy to edge nodes. **Important**: Delete only one pod at a time, and verify that the pod is rescheduled onto an edge node before you delete other pods.
-  1. Delete a pod.
+    1. Delete a pod.
     ```
     kubectl delete pod <pod_name>
     ```
     {: pre}
 
-  2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes.
+    2. Verify that the pod is rescheduled onto an edge worker node. Rescheduling is automatic, but might take a few minutes.
     ```
     kubectl describe nodes -l dedicated=edge | grep "<pod_name>"
     ```
     {: pre}
 
 </br>You labeled worker nodes in a worker pool with `dedicated=edge` and redeployed all of the existing ALBs to the edge nodes. All subsequent ALBs that are enabled in or added to the cluster are also deployed to an edge node in your edge worker pool.
+
+
 
 
