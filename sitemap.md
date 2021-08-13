@@ -426,6 +426,7 @@ subcollection: containers
   * [Accessing classic clusters through the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#classic_private_se)
   * [Creating an allowlist for the private cloud service endpoint](/docs/containers?topic=containers-access_cluster#private-se-allowlist)
 * [Accessing the cluster master via admission controllers and webhooks](/docs/containers?topic=containers-access_cluster#access_webhooks)
+* [Accessing private clusters by using the Wireguard VPN](/docs/containers?topic=containers-access_cluster#access_vpn_containers)
 
 
 ## Managing the cluster and worker node lifecycle
